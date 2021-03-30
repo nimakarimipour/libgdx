@@ -36,6 +36,10 @@ autoFixMode {
     maximumRound = 20
 }
 
+diagnoseMode {
+    fixPath = "/tmp/NullAwayFix/diagnose.json"
+}
+
 annotationEditor {
     remove = ["org.checkerframework.checker.nullness.qual.Nullable", "org.checkerframework.checker.nullness.qual.NonNull"]
     subProjects = ["caffeine"]
