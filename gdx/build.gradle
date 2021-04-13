@@ -14,36 +14,13 @@
  * limitations under the License.
  ******************************************************************************/
 
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'edu.ucr.cs.riple:NullAwayAutoFixer:1.0-SNAPSHOT'
-    }
-}
 
 plugins {
     id("net.ltgt.errorprone") version "0.6"
 }
 
 apply plugin: "java"
-apply plugin: 'edu.ucr.cs.riple.plugin'
 
-autoFixMode {
-    fixPath = "/tmp/NullAwayFix"
-    maximumRound = 20
-}
-
-diagnoseMode {
-    fixPath = "/tmp/NullAwayFix/diagnose.json"
-}
-
-annotationEditor {
-    remove = ["org.checkerframework.checker.nullness.qual.Nullable", "org.checkerframework.checker.nullness.qual.NonNull"]
-    subProjects = ["caffeine"]
-}
 
 
 repositories {
