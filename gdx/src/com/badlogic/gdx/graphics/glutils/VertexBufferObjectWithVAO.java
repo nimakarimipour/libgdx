@@ -3,7 +3,6 @@ package com.badlogic.gdx.graphics.glutils;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.IntArray;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -33,262 +33,260 @@ import com.badlogic.gdx.utils.IntArray;
  * @author mzechner, Dave Clayton <contact@redskyforge.com>, Nate Austin <nate.austin gmail>
  */
 public class VertexBufferObjectWithVAO implements VertexData {
-	final static IntBuffer tmpHandle = BufferUtils.newIntBuffer(1);
 
-	final VertexAttributes attributes;
-	final FloatBuffer buffer;
-	final ByteBuffer byteBuffer;
-	final boolean ownsBuffer;
-	int bufferHandle;
-	final boolean isStatic;
-	final int usage;
-	boolean isDirty = false;
-	boolean isBound = false;
-	int vaoHandle = -1;
-	IntArray cachedLocations = new IntArray();
+    final static IntBuffer tmpHandle = BufferUtils.newIntBuffer(1);
 
+    final VertexAttributes attributes;
 
-	/**
-	 * Constructs a new interleaved VertexBufferObjectWithVAO.
-	 *
-	 * @param isStatic    whether the vertex data is static.
-	 * @param numVertices the maximum number of vertices
-	 * @param attributes  the {@link com.badlogic.gdx.graphics.VertexAttribute}s.
-	 */
-	public VertexBufferObjectWithVAO (boolean isStatic, int numVertices, VertexAttribute... attributes) {
-		this(isStatic, numVertices, new VertexAttributes(attributes));
-	}
+    final FloatBuffer buffer;
 
-	/**
-	 * Constructs a new interleaved VertexBufferObjectWithVAO.
-	 *
-	 * @param isStatic    whether the vertex data is static.
-	 * @param numVertices the maximum number of vertices
-	 * @param attributes  the {@link VertexAttributes}.
-	 */
-	public VertexBufferObjectWithVAO (boolean isStatic, int numVertices, VertexAttributes attributes) {
-		this.isStatic = isStatic;
-		this.attributes = attributes;
+    final ByteBuffer byteBuffer;
 
-		byteBuffer = BufferUtils.newUnsafeByteBuffer(this.attributes.vertexSize * numVertices);
-		buffer = byteBuffer.asFloatBuffer();
-		ownsBuffer = true;
-		buffer.flip();
-		byteBuffer.flip();
-		bufferHandle = Gdx.gl20.glGenBuffer();
-		usage = isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW;
-		createVAO();
-	}
+    final boolean ownsBuffer;
 
-	public VertexBufferObjectWithVAO (boolean isStatic, ByteBuffer unmanagedBuffer, VertexAttributes attributes) {
-		this.isStatic = isStatic;
-		this.attributes = attributes;
+    int bufferHandle;
 
-		byteBuffer = unmanagedBuffer;
-		ownsBuffer = false;
-		buffer = byteBuffer.asFloatBuffer();
-		buffer.flip();
-		byteBuffer.flip();
-		bufferHandle = Gdx.gl20.glGenBuffer();
-		usage = isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW;
-		createVAO();
-	}
+    final boolean isStatic;
 
-	@Override
-	public VertexAttributes getAttributes () {
-		return attributes;
-	}
+    final int usage;
 
-	@Override
-	public int getNumVertices () {
-		return buffer.limit() * 4 / attributes.vertexSize;
-	}
+    boolean isDirty = false;
 
-	@Override
-	public int getNumMaxVertices () {
-		return byteBuffer.capacity() / attributes.vertexSize;
-	}
+    boolean isBound = false;
 
-	@Override
-	public FloatBuffer getBuffer () {
-		isDirty = true;
-		return buffer;
-	}
+    int vaoHandle = -1;
 
-	private void bufferChanged () {
-		if (isBound) {
-			Gdx.gl20.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
-			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
-			isDirty = false;
-		}
-	}
+    IntArray cachedLocations = new IntArray();
 
-	@Override
-	public void setVertices (float[] vertices, int offset, int count) {
-		isDirty = true;
-		BufferUtils.copy(vertices, byteBuffer, count, offset);
-		buffer.position(0);
-		buffer.limit(count);
-		bufferChanged();
-	}
+    /**
+     * Constructs a new interleaved VertexBufferObjectWithVAO.
+     *
+     * @param isStatic    whether the vertex data is static.
+     * @param numVertices the maximum number of vertices
+     * @param attributes  the {@link com.badlogic.gdx.graphics.VertexAttribute}s.
+     */
+    public VertexBufferObjectWithVAO(boolean isStatic, int numVertices, VertexAttribute... attributes) {
+        this(isStatic, numVertices, new VertexAttributes(attributes));
+    }
 
-	@Override
-	public void updateVertices (int targetOffset, float[] vertices, int sourceOffset, int count) {
-		isDirty = true;
-		final int pos = byteBuffer.position();
-		byteBuffer.position(targetOffset * 4);
-		BufferUtils.copy(vertices, sourceOffset, count, byteBuffer);
-		byteBuffer.position(pos);
-		buffer.position(0);
-		bufferChanged();
-	}
+    /**
+     * Constructs a new interleaved VertexBufferObjectWithVAO.
+     *
+     * @param isStatic    whether the vertex data is static.
+     * @param numVertices the maximum number of vertices
+     * @param attributes  the {@link VertexAttributes}.
+     */
+    public VertexBufferObjectWithVAO(boolean isStatic, int numVertices, VertexAttributes attributes) {
+        this.isStatic = isStatic;
+        this.attributes = attributes;
+        byteBuffer = BufferUtils.newUnsafeByteBuffer(this.attributes.vertexSize * numVertices);
+        buffer = byteBuffer.asFloatBuffer();
+        ownsBuffer = true;
+        buffer.flip();
+        byteBuffer.flip();
+        bufferHandle = Gdx.gl20.glGenBuffer();
+        usage = isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW;
+        createVAO();
+    }
 
-	/**
-	 * Binds this VertexBufferObject for rendering via glDrawArrays or glDrawElements
-	 *
-	 * @param shader the shader
-	 */
-	@Override
-	public void bind (ShaderProgram shader) {
-		bind(shader, null);
-	}
+    public VertexBufferObjectWithVAO(boolean isStatic, ByteBuffer unmanagedBuffer, VertexAttributes attributes) {
+        this.isStatic = isStatic;
+        this.attributes = attributes;
+        byteBuffer = unmanagedBuffer;
+        ownsBuffer = false;
+        buffer = byteBuffer.asFloatBuffer();
+        buffer.flip();
+        byteBuffer.flip();
+        bufferHandle = Gdx.gl20.glGenBuffer();
+        usage = isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW;
+        createVAO();
+    }
 
-	@Override
-	public void bind (ShaderProgram shader, int[] locations) {
-		GL30 gl = Gdx.gl30;
+    @Override
+    public VertexAttributes getAttributes() {
+        return attributes;
+    }
 
-		gl.glBindVertexArray(vaoHandle);
+    @Override
+    public int getNumVertices() {
+        return buffer.limit() * 4 / attributes.vertexSize;
+    }
 
-		bindAttributes(shader, locations);
+    @Override
+    public int getNumMaxVertices() {
+        return byteBuffer.capacity() / attributes.vertexSize;
+    }
 
-		//if our data has changed upload it:
-		bindData(gl);
+    @Override
+    public FloatBuffer getBuffer() {
+        isDirty = true;
+        return buffer;
+    }
 
-		isBound = true;
-	}
+    private void bufferChanged() {
+        if (isBound) {
+            Gdx.gl20.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
+            Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
+            isDirty = false;
+        }
+    }
 
-	private void bindAttributes (ShaderProgram shader, int[] locations) {
-		boolean stillValid = this.cachedLocations.size != 0;
-		final int numAttributes = attributes.size();
+    @Override
+    public void setVertices(float[] vertices, int offset, int count) {
+        isDirty = true;
+        BufferUtils.copy(vertices, byteBuffer, count, offset);
+        buffer.position(0);
+        buffer.limit(count);
+        bufferChanged();
+    }
 
-		if (stillValid) {
-			if (locations == null) {
-				for (int i = 0; stillValid && i < numAttributes; i++) {
-					VertexAttribute attribute = attributes.get(i);
-					int location = shader.getAttributeLocation(attribute.alias);
-					stillValid = location == this.cachedLocations.get(i);
-				}
-			} else {
-				stillValid = locations.length == this.cachedLocations.size;
-				for (int i = 0; stillValid && i < numAttributes; i++) {
-					stillValid = locations[i] == this.cachedLocations.get(i);
-				}
-			}
-		}
+    @Override
+    public void updateVertices(int targetOffset, float[] vertices, int sourceOffset, int count) {
+        isDirty = true;
+        final int pos = byteBuffer.position();
+        byteBuffer.position(targetOffset * 4);
+        BufferUtils.copy(vertices, sourceOffset, count, byteBuffer);
+        byteBuffer.position(pos);
+        buffer.position(0);
+        bufferChanged();
+    }
 
-		if (!stillValid) {
-			Gdx.gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
-			unbindAttributes(shader);
-			this.cachedLocations.clear();
+    /**
+     * Binds this VertexBufferObject for rendering via glDrawArrays or glDrawElements
+     *
+     * @param shader the shader
+     */
+    @Override
+    public void bind(ShaderProgram shader) {
+        bind(shader, null);
+    }
 
-			for (int i = 0; i < numAttributes; i++) {
-				VertexAttribute attribute = attributes.get(i);
-				if (locations == null) {
-					this.cachedLocations.add(shader.getAttributeLocation(attribute.alias));
-				} else {
-					this.cachedLocations.add(locations[i]);
-				}
+    @Override
+    public void bind(ShaderProgram shader, @Nullable() int[] locations) {
+        GL30 gl = Gdx.gl30;
+        gl.glBindVertexArray(vaoHandle);
+        bindAttributes(shader, locations);
+        // if our data has changed upload it:
+        bindData(gl);
+        isBound = true;
+    }
 
-				int location = this.cachedLocations.get(i);
-				if (location < 0) {
-					continue;
-				}
+    private void bindAttributes(ShaderProgram shader, @Nullable() int[] locations) {
+        boolean stillValid = this.cachedLocations.size != 0;
+        final int numAttributes = attributes.size();
+        if (stillValid) {
+            if (locations == null) {
+                for (int i = 0; stillValid && i < numAttributes; i++) {
+                    VertexAttribute attribute = attributes.get(i);
+                    int location = shader.getAttributeLocation(attribute.alias);
+                    stillValid = location == this.cachedLocations.get(i);
+                }
+            } else {
+                stillValid = locations.length == this.cachedLocations.size;
+                for (int i = 0; stillValid && i < numAttributes; i++) {
+                    stillValid = locations[i] == this.cachedLocations.get(i);
+                }
+            }
+        }
+        if (!stillValid) {
+            Gdx.gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
+            unbindAttributes(shader);
+            this.cachedLocations.clear();
+            for (int i = 0; i < numAttributes; i++) {
+                VertexAttribute attribute = attributes.get(i);
+                if (locations == null) {
+                    this.cachedLocations.add(shader.getAttributeLocation(attribute.alias));
+                } else {
+                    this.cachedLocations.add(locations[i]);
+                }
+                int location = this.cachedLocations.get(i);
+                if (location < 0) {
+                    continue;
+                }
+                shader.enableVertexAttribute(location);
+                shader.setVertexAttribute(location, attribute.numComponents, attribute.type, attribute.normalized, attributes.vertexSize, attribute.offset);
+            }
+        }
+    }
 
-				shader.enableVertexAttribute(location);
-				shader.setVertexAttribute(location, attribute.numComponents, attribute.type, attribute.normalized, attributes.vertexSize, attribute.offset);
-			}
-		}
-	}
+    private void unbindAttributes(ShaderProgram shaderProgram) {
+        if (cachedLocations.size == 0) {
+            return;
+        }
+        int numAttributes = attributes.size();
+        for (int i = 0; i < numAttributes; i++) {
+            int location = cachedLocations.get(i);
+            if (location < 0) {
+                continue;
+            }
+            shaderProgram.disableVertexAttribute(location);
+        }
+    }
 
-	private void unbindAttributes (ShaderProgram shaderProgram) {
-		if (cachedLocations.size == 0) {
-			return;
-		}
-		int numAttributes = attributes.size();
-		for (int i = 0; i < numAttributes; i++) {
-			int location = cachedLocations.get(i);
-			if (location < 0) {
-				continue;
-			}
-			shaderProgram.disableVertexAttribute(location);
-		}
-	}
+    private void bindData(GL20 gl) {
+        if (isDirty) {
+            gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
+            byteBuffer.limit(buffer.limit() * 4);
+            gl.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
+            isDirty = false;
+        }
+    }
 
-	private void bindData (GL20 gl) {
-		if (isDirty) {
-			gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
-			byteBuffer.limit(buffer.limit() * 4);
-			gl.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
-			isDirty = false;
-		}
-	}
+    /**
+     * Unbinds this VertexBufferObject.
+     *
+     * @param shader the shader
+     */
+    @Override
+    public void unbind(final ShaderProgram shader) {
+        unbind(shader, null);
+    }
 
-	/**
-	 * Unbinds this VertexBufferObject.
-	 *
-	 * @param shader the shader
-	 */
-	@Override
-	public void unbind (final ShaderProgram shader) {
-		unbind(shader, null);
-	}
+    @Override
+    public void unbind(final ShaderProgram shader, @Nullable() final int[] locations) {
+        GL30 gl = Gdx.gl30;
+        gl.glBindVertexArray(0);
+        isBound = false;
+    }
 
-	@Override
-	public void unbind (final ShaderProgram shader, final int[] locations) {
-		GL30 gl = Gdx.gl30;
-		gl.glBindVertexArray(0);
-		isBound = false;
-	}
+    /**
+     * Invalidates the VertexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss.
+     */
+    @Override
+    public void invalidate() {
+        bufferHandle = Gdx.gl30.glGenBuffer();
+        createVAO();
+        isDirty = true;
+    }
 
-	/**
-	 * Invalidates the VertexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss.
-	 */
-	@Override
-	public void invalidate () {
-		bufferHandle = Gdx.gl30.glGenBuffer();
-		createVAO();
-		isDirty = true;
-	}
+    /**
+     * Disposes of all resources this VertexBufferObject uses.
+     */
+    @Override
+    public void dispose() {
+        GL30 gl = Gdx.gl30;
+        gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, 0);
+        gl.glDeleteBuffer(bufferHandle);
+        bufferHandle = 0;
+        if (ownsBuffer) {
+            BufferUtils.disposeUnsafeByteBuffer(byteBuffer);
+        }
+        deleteVAO();
+    }
 
-	/**
-	 * Disposes of all resources this VertexBufferObject uses.
-	 */
-	@Override
-	public void dispose () {
-		GL30 gl = Gdx.gl30;
+    private void createVAO() {
+        tmpHandle.clear();
+        Gdx.gl30.glGenVertexArrays(1, tmpHandle);
+        vaoHandle = tmpHandle.get();
+    }
 
-		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, 0);
-		gl.glDeleteBuffer(bufferHandle);
-		bufferHandle = 0;
-		if (ownsBuffer) {
-			BufferUtils.disposeUnsafeByteBuffer(byteBuffer);
-		}
-		deleteVAO();
-	}
-
-	private void createVAO () {
-		tmpHandle.clear();
-		Gdx.gl30.glGenVertexArrays(1, tmpHandle);
-		vaoHandle = tmpHandle.get();
-	}
-
-	private void deleteVAO () {
-		if (vaoHandle != -1) {
-			tmpHandle.clear();
-			tmpHandle.put(vaoHandle);
-			tmpHandle.flip();
-			Gdx.gl30.glDeleteVertexArrays(1, tmpHandle);
-			vaoHandle = -1;
-		}
-	}
+    private void deleteVAO() {
+        if (vaoHandle != -1) {
+            tmpHandle.clear();
+            tmpHandle.put(vaoHandle);
+            tmpHandle.flip();
+            Gdx.gl30.glDeleteVertexArrays(1, tmpHandle);
+            vaoHandle = -1;
+        }
+    }
 }

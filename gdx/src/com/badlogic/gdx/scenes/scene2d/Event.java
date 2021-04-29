@@ -1,26 +1,30 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.scenes.scene2d;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
-/** The base class for all events.
+/**
+ * The base class for all events.
  * <p>
  * By default an event will "bubble" up through an actor's parent's handlers (see {@link #setBubbles(boolean)}).
  * <p>
@@ -33,109 +37,151 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  * {@link #cancel()}.)
  *
  * @see InputEvent
- * @see Actor#fire(Event) */
+ * @see Actor#fire(Event)
+ */
 public class Event implements Poolable {
-	private Stage stage;
-	private Actor targetActor;
-	private Actor listenerActor;
-	private boolean capture; // true means event occurred during the capture phase
-	private boolean bubbles = true; // true means propagate to target's parents
-	private boolean handled; // true means the event was handled (the stage will eat the input)
-	private boolean stopped; // true means event propagation was stopped
-	private boolean cancelled; // true means propagation was stopped and any action that this event would cause should not happen
 
-	/** Marks this event as handled. This does not affect event propagation inside scene2d, but causes the {@link Stage}
-	 * {@link InputProcessor} methods to return true, which will eat the event so it is not passed on to the application under the
-	 * stage. */
-	public void handle () {
-		handled = true;
-	}
+    @Nullable()
+    private Stage stage;
 
-	/** Marks this event cancelled. This {@link #handle() handles} the event and {@link #stop() stops} the event propagation. It
-	 * also cancels any default action that would have been taken by the code that fired the event. Eg, if the event is for a
-	 * checkbox being checked, cancelling the event could uncheck the checkbox. */
-	public void cancel () {
-		cancelled = true;
-		stopped = true;
-		handled = true;
-	}
+    @Nullable()
+    private Actor targetActor;
 
-	/** Marks this event has being stopped. This halts event propagation. Any other listeners on the {@link #getListenerActor()
-	 * listener actor} are notified, but after that no other listeners are notified. */
-	public void stop () {
-		stopped = true;
-	}
+    @Nullable()
+    private Actor listenerActor;
 
-	public void reset () {
-		stage = null;
-		targetActor = null;
-		listenerActor = null;
-		capture = false;
-		bubbles = true;
-		handled = false;
-		stopped = false;
-		cancelled = false;
-	}
+    // true means event occurred during the capture phase
+    private boolean capture;
 
-	/** Returns the actor that the event originated from. */
-	public Actor getTarget () {
-		return targetActor;
-	}
+    // true means propagate to target's parents
+    private boolean bubbles = true;
 
-	public void setTarget (Actor targetActor) {
-		this.targetActor = targetActor;
-	}
+    // true means the event was handled (the stage will eat the input)
+    private boolean handled;
 
-	/** Returns the actor that this listener is attached to. */
-	public Actor getListenerActor () {
-		return listenerActor;
-	}
+    // true means event propagation was stopped
+    private boolean stopped;
 
-	public void setListenerActor (Actor listenerActor) {
-		this.listenerActor = listenerActor;
-	}
+    // true means propagation was stopped and any action that this event would cause should not happen
+    private boolean cancelled;
 
-	public boolean getBubbles () {
-		return bubbles;
-	}
+    /**
+     * Marks this event as handled. This does not affect event propagation inside scene2d, but causes the {@link Stage}
+     * {@link InputProcessor} methods to return true, which will eat the event so it is not passed on to the application under the
+     * stage.
+     */
+    public void handle() {
+        handled = true;
+    }
 
-	/** If true, after the event is fired on the target actor, it will also be fired on each of the parent actors, all the way to
-	 * the root. */
-	public void setBubbles (boolean bubbles) {
-		this.bubbles = bubbles;
-	}
+    /**
+     * Marks this event cancelled. This {@link #handle() handles} the event and {@link #stop() stops} the event propagation. It
+     * also cancels any default action that would have been taken by the code that fired the event. Eg, if the event is for a
+     * checkbox being checked, cancelling the event could uncheck the checkbox.
+     */
+    public void cancel() {
+        cancelled = true;
+        stopped = true;
+        handled = true;
+    }
 
-	/** {@link #handle()} */
-	public boolean isHandled () {
-		return handled;
-	}
+    /**
+     * Marks this event has being stopped. This halts event propagation. Any other listeners on the {@link #getListenerActor()
+     * listener actor} are notified, but after that no other listeners are notified.
+     */
+    public void stop() {
+        stopped = true;
+    }
 
-	/** @see #stop() */
-	public boolean isStopped () {
-		return stopped;
-	}
+    public void reset() {
+        stage = null;
+        targetActor = null;
+        listenerActor = null;
+        capture = false;
+        bubbles = true;
+        handled = false;
+        stopped = false;
+        cancelled = false;
+    }
 
-	/** @see #cancel() */
-	public boolean isCancelled () {
-		return cancelled;
-	}
+    /**
+     * Returns the actor that the event originated from.
+     */
+    public Actor getTarget() {
+        return targetActor;
+    }
 
-	public void setCapture (boolean capture) {
-		this.capture = capture;
-	}
+    @Initializer()
+    public void setTarget(Actor targetActor) {
+        this.targetActor = targetActor;
+    }
 
-	/** If true, the event was fired during the capture phase.
-	 * @see Actor#fire(Event) */
-	public boolean isCapture () {
-		return capture;
-	}
+    /**
+     * Returns the actor that this listener is attached to.
+     */
+    public Actor getListenerActor() {
+        return listenerActor;
+    }
 
-	public void setStage (Stage stage) {
-		this.stage = stage;
-	}
+    @Initializer()
+    public void setListenerActor(Actor listenerActor) {
+        this.listenerActor = listenerActor;
+    }
 
-	/** The stage for the actor the event was fired on. */
-	public Stage getStage () {
-		return stage;
-	}
+    public boolean getBubbles() {
+        return bubbles;
+    }
+
+    /**
+     * If true, after the event is fired on the target actor, it will also be fired on each of the parent actors, all the way to
+     * the root.
+     */
+    public void setBubbles(boolean bubbles) {
+        this.bubbles = bubbles;
+    }
+
+    /**
+     * {@link #handle()}
+     */
+    public boolean isHandled() {
+        return handled;
+    }
+
+    /**
+     * @see #stop()
+     */
+    public boolean isStopped() {
+        return stopped;
+    }
+
+    /**
+     * @see #cancel()
+     */
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCapture(boolean capture) {
+        this.capture = capture;
+    }
+
+    /**
+     * If true, the event was fired during the capture phase.
+     * @see Actor#fire(Event)
+     */
+    public boolean isCapture() {
+        return capture;
+    }
+
+    @Initializer()
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    /**
+     * The stage for the actor the event was fired on.
+     */
+    public Stage getStage() {
+        return stage;
+    }
 }

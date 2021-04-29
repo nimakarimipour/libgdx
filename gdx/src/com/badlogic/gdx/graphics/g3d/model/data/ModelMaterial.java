@@ -1,41 +1,56 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class ModelMaterial {
-	public enum MaterialType {
-		Lambert, Phong
-	}
 
-	public String id;
+    public enum MaterialType {
 
-	public MaterialType type;
+        Lambert, Phong
+    }
 
-	public Color ambient;
-	public Color diffuse;
-	public Color specular;
-	public Color emissive;
-	public Color reflection;
+    public String id;
 
-	public float shininess;
-	public float opacity = 1.f;
+    @Nullable()
+    public MaterialType type;
 
-	public Array<ModelTexture> textures;
+    @Nullable()
+    public Color ambient;
+
+    @Nullable()
+    public Color diffuse;
+
+    @Nullable()
+    public Color specular;
+
+    @Nullable()
+    public Color emissive;
+
+    @Nullable()
+    public Color reflection;
+
+    public float shininess;
+
+    public float opacity = 1.f;
+
+    public Array<ModelTexture> textures;
 }

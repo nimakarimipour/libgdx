@@ -1,118 +1,132 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.scenes.scene2d.utils;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.Initializer;
 
-/** Drawable that stores the size information but doesn't draw anything.
- * @author Nathan Sweet */
+/**
+ * Drawable that stores the size information but doesn't draw anything.
+ * @author Nathan Sweet
+ */
 public class BaseDrawable implements Drawable {
-	private @Null String name;
-	private float leftWidth, rightWidth, topHeight, bottomHeight, minWidth, minHeight;
 
-	public BaseDrawable () {
-	}
+    @Null
+    private String name;
 
-	/** Creates a new empty drawable with the same sizing information as the specified drawable. */
-	public BaseDrawable (Drawable drawable) {
-		if (drawable instanceof BaseDrawable) name = ((BaseDrawable)drawable).getName();
-		leftWidth = drawable.getLeftWidth();
-		rightWidth = drawable.getRightWidth();
-		topHeight = drawable.getTopHeight();
-		bottomHeight = drawable.getBottomHeight();
-		minWidth = drawable.getMinWidth();
-		minHeight = drawable.getMinHeight();
-	}
+    private float leftWidth, rightWidth, topHeight, bottomHeight, minWidth, minHeight;
 
-	public void draw (Batch batch, float x, float y, float width, float height) {
-	}
+    public BaseDrawable() {
+    }
 
-	public float getLeftWidth () {
-		return leftWidth;
-	}
+    /**
+     * Creates a new empty drawable with the same sizing information as the specified drawable.
+     */
+    public BaseDrawable(Drawable drawable) {
+        if (drawable instanceof BaseDrawable)
+            name = ((BaseDrawable) drawable).getName();
+        leftWidth = drawable.getLeftWidth();
+        rightWidth = drawable.getRightWidth();
+        topHeight = drawable.getTopHeight();
+        bottomHeight = drawable.getBottomHeight();
+        minWidth = drawable.getMinWidth();
+        minHeight = drawable.getMinHeight();
+    }
 
-	public void setLeftWidth (float leftWidth) {
-		this.leftWidth = leftWidth;
-	}
+    public void draw(Batch batch, float x, float y, float width, float height) {
+    }
 
-	public float getRightWidth () {
-		return rightWidth;
-	}
+    public float getLeftWidth() {
+        return leftWidth;
+    }
 
-	public void setRightWidth (float rightWidth) {
-		this.rightWidth = rightWidth;
-	}
+    public void setLeftWidth(float leftWidth) {
+        this.leftWidth = leftWidth;
+    }
 
-	public float getTopHeight () {
-		return topHeight;
-	}
+    public float getRightWidth() {
+        return rightWidth;
+    }
 
-	public void setTopHeight (float topHeight) {
-		this.topHeight = topHeight;
-	}
+    public void setRightWidth(float rightWidth) {
+        this.rightWidth = rightWidth;
+    }
 
-	public float getBottomHeight () {
-		return bottomHeight;
-	}
+    public float getTopHeight() {
+        return topHeight;
+    }
 
-	public void setBottomHeight (float bottomHeight) {
-		this.bottomHeight = bottomHeight;
-	}
+    public void setTopHeight(float topHeight) {
+        this.topHeight = topHeight;
+    }
 
-	public void setPadding (float topHeight, float leftWidth, float bottomHeight, float rightWidth) {
-		setTopHeight(topHeight);
-		setLeftWidth(leftWidth);
-		setBottomHeight(bottomHeight);
-		setRightWidth(rightWidth);
-	}
+    public float getBottomHeight() {
+        return bottomHeight;
+    }
 
-	public float getMinWidth () {
-		return minWidth;
-	}
+    public void setBottomHeight(float bottomHeight) {
+        this.bottomHeight = bottomHeight;
+    }
 
-	public void setMinWidth (float minWidth) {
-		this.minWidth = minWidth;
-	}
+    public void setPadding(float topHeight, float leftWidth, float bottomHeight, float rightWidth) {
+        setTopHeight(topHeight);
+        setLeftWidth(leftWidth);
+        setBottomHeight(bottomHeight);
+        setRightWidth(rightWidth);
+    }
 
-	public float getMinHeight () {
-		return minHeight;
-	}
+    public float getMinWidth() {
+        return minWidth;
+    }
 
-	public void setMinHeight (float minHeight) {
-		this.minHeight = minHeight;
-	}
+    public void setMinWidth(float minWidth) {
+        this.minWidth = minWidth;
+    }
 
-	public void setMinSize (float minWidth, float minHeight) {
-		setMinWidth(minWidth);
-		setMinHeight(minHeight);
-	}
+    public float getMinHeight() {
+        return minHeight;
+    }
 
-	public @Null String getName () {
-		return name;
-	}
+    public void setMinHeight(float minHeight) {
+        this.minHeight = minHeight;
+    }
 
-	public void setName (@Null String name) {
-		this.name = name;
-	}
+    public void setMinSize(float minWidth, float minHeight) {
+        setMinWidth(minWidth);
+        setMinHeight(minHeight);
+    }
 
-	public @Null String toString () {
-		if (name == null) return ClassReflection.getSimpleName(getClass());
-		return name;
-	}
+    @Null
+    public String getName() {
+        return name;
+    }
+
+    @Initializer()
+    public void setName(@Null String name) {
+        this.name = name;
+    }
+
+    @Null
+    public String toString() {
+        if (name == null)
+            return ClassReflection.getSimpleName(getClass());
+        return name;
+    }
 }
