@@ -58,15 +58,13 @@ test {
 }
 
 tasks.withType(JavaCompile) {
-    // remove the if condition if you want to run NullAway on test code
     if (!name.toLowerCase().contains("test")) {
-        //options.errorprone.disableWarningsInGeneratedCode = true
         options.errorprone.errorproneArgs += ["-XepDisableAllChecks",
                                               "-Xep:NullAway:ERROR",
                                               "-XepOpt:NullAway:AnnotatedPackages=com.badlogic.gdx",
+                                              "-XepOpt:NullAway:CustomNullableAnnotation=com.badlogic.gdx.utils.Null",
                                               "-XepOpt:NullAway:AutoFix=true",
                                               "-XepDisableAllWarnings"]
-//        "-XepOpt:NullAway:FixAnnotations=androidx.annotation.NonNull,androidx.annotation.Nullable",
         options.compilerArgs << "-Xmaxerrs" << "100000"
 
     }
