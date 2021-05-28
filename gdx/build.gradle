@@ -62,7 +62,7 @@ tasks.withType(JavaCompile) {
         options.errorprone.errorproneArgs += ["-XepDisableAllChecks",
                                               "-Xep:NullAway:ERROR",
                                               "-XepOpt:NullAway:AnnotatedPackages=com.badlogic.gdx",
-                                              "-XepOpt:NullAway:CustomNullableAnnotation=com.badlogic.gdx.utils.Null",
+//                                              "-XepOpt:NullAway:CustomNullableAnnotation=com.badlogic.gdx.utils.Null",
                                               "-XepOpt:NullAway:AutoFix=true",
                                               "-XepDisableAllWarnings"]
         options.compilerArgs << "-Xmaxerrs" << "100000"
