@@ -1,19 +1,20 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.graphics.g3d.particles;
 
 import com.badlogic.gdx.assets.AssetManager;
@@ -24,69 +25,90 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.Initializer;
 
-/** It's the base class of every {@link ParticleController} component. A component duty is to participate in one or some events
+/**
+ * It's the base class of every {@link ParticleController} component. A component duty is to participate in one or some events
  * during the simulation. (i.e it can handle the particles emission or modify particle properties, etc.).
- * @author inferno */
+ * @author inferno
+ */
 public abstract class ParticleControllerComponent implements Disposable, Json.Serializable, ResourceData.Configurable {
-	protected static final Vector3 TMP_V1 = new Vector3(), TMP_V2 = new Vector3(), TMP_V3 = new Vector3(), TMP_V4 = new Vector3(),
-		TMP_V5 = new Vector3(), TMP_V6 = new Vector3();
-	protected static final Quaternion TMP_Q = new Quaternion(), TMP_Q2 = new Quaternion();
-	protected static final Matrix3 TMP_M3 = new Matrix3();
-	protected static final Matrix4 TMP_M4 = new Matrix4();
-	protected ParticleController controller;
 
-	/** Called to initialize new emitted particles. */
-	public void activateParticles (int startIndex, int count) {
-	};
+    protected static final Vector3 TMP_V1 = new Vector3(), TMP_V2 = new Vector3(), TMP_V3 = new Vector3(), TMP_V4 = new Vector3(), TMP_V5 = new Vector3(), TMP_V6 = new Vector3();
 
-	/** Called to notify which particles have been killed. */
-	public void killParticles (int startIndex, int count) {
-	};
+    protected static final Quaternion TMP_Q = new Quaternion(), TMP_Q2 = new Quaternion();
 
-	/** Called to execute the component behavior. */
-	public void update () {
-	};
+    protected static final Matrix3 TMP_M3 = new Matrix3();
 
-	/** Called once during intialization */
-	public void init () {
-	};
+    protected static final Matrix4 TMP_M4 = new Matrix4();
 
-	/** Called at the start of the simulation. */
-	public void start () {
-	};
+    protected ParticleController controller;
 
-	/** Called at the end of the simulation. */
-	public void end () {
-	};
+    /**
+     * Called to initialize new emitted particles.
+     */
+    public void activateParticles(int startIndex, int count) {
+    }
 
-	public void dispose () {
-	}
+    /**
+     * Called to notify which particles have been killed.
+     */
+    public void killParticles(int startIndex, int count) {
+    }
 
-	public abstract ParticleControllerComponent copy ();
+    /**
+     * Called to execute the component behavior.
+     */
+    public void update() {
+    }
 
-	/** Called during initialization to allocate additional particles channels */
-	public void allocateChannels () {
-	}
+    /**
+     * Called once during intialization
+     */
+    public void init() {
+    }
 
-	public void set (ParticleController particleController) {
-		controller = particleController;
-	}
+    /**
+     * Called at the start of the simulation.
+     */
+    public void start() {
+    }
 
-	@Override
-	public void save (AssetManager manager, ResourceData data) {
-	}
+    /**
+     * Called at the end of the simulation.
+     */
+    public void end() {
+    }
 
-	@Override
-	public void load (AssetManager manager, ResourceData data) {
-	}
+    public void dispose() {
+    }
 
-	@Override
-	public void write (Json json) {
-	}
+    public abstract ParticleControllerComponent copy();
 
-	@Override
-	public void read (Json json, JsonValue jsonData) {
-	}
+    /**
+     * Called during initialization to allocate additional particles channels
+     */
+    public void allocateChannels() {
+    }
 
+    @Initializer()
+    public void set(ParticleController particleController) {
+        controller = particleController;
+    }
+
+    @Override
+    public void save(AssetManager manager, ResourceData data) {
+    }
+
+    @Override
+    public void load(AssetManager manager, ResourceData data) {
+    }
+
+    @Override
+    public void write(Json json) {
+    }
+
+    @Override
+    public void read(Json json, JsonValue jsonData) {
+    }
 }

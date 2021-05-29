@@ -1,19 +1,20 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.graphics.g3d.particles.influencers;
 
 import com.badlogic.gdx.assets.AssetManager;
@@ -27,264 +28,298 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-/** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
- * @author Inferno */
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
+
+/**
+ * It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
+ * @author Inferno
+ */
 public abstract class RegionInfluencer extends Influencer {
 
-	/** Assigns the first region of {@link RegionInfluencer#regions} to the particles. */
-	public static class Single extends RegionInfluencer {
-		public Single () {
-		}
+    /**
+     * Assigns the first region of {@link RegionInfluencer#regions} to the particles.
+     */
+    public static class Single extends RegionInfluencer {
 
-		public Single (Single regionInfluencer) {
-			super(regionInfluencer);
-		}
+        public Single() {
+        }
 
-		public Single (TextureRegion textureRegion) {
-			super(textureRegion);
-		}
+        public Single(Single regionInfluencer) {
+            super(regionInfluencer);
+        }
 
-		public Single (Texture texture) {
-			super(texture);
-		}
+        public Single(TextureRegion textureRegion) {
+            super(textureRegion);
+        }
 
-		@Override
-		public void init () {
-			AspectTextureRegion region = regions.items[0];
-			for (int i = 0, c = controller.emitter.maxParticleCount * regionChannel.strideSize; i < c; i += regionChannel.strideSize) {
-				regionChannel.data[i + ParticleChannels.UOffset] = region.u;
-				regionChannel.data[i + ParticleChannels.VOffset] = region.v;
-				regionChannel.data[i + ParticleChannels.U2Offset] = region.u2;
-				regionChannel.data[i + ParticleChannels.V2Offset] = region.v2;
-				regionChannel.data[i + ParticleChannels.HalfWidthOffset] = 0.5f;
-				regionChannel.data[i + ParticleChannels.HalfHeightOffset] = region.halfInvAspectRatio;
-			}
-		}
+        public Single(Texture texture) {
+            super(texture);
+        }
 
-		@Override
-		public Single copy () {
-			return new Single(this);
-		}
-	}
+        @Override
+        public void init() {
+            AspectTextureRegion region = regions.items[0];
+            for (int i = 0, c = controller.emitter.maxParticleCount * regionChannel.strideSize; i < c; i += regionChannel.strideSize) {
+                regionChannel.data[i + ParticleChannels.UOffset] = region.u;
+                regionChannel.data[i + ParticleChannels.VOffset] = region.v;
+                regionChannel.data[i + ParticleChannels.U2Offset] = region.u2;
+                regionChannel.data[i + ParticleChannels.V2Offset] = region.v2;
+                regionChannel.data[i + ParticleChannels.HalfWidthOffset] = 0.5f;
+                regionChannel.data[i + ParticleChannels.HalfHeightOffset] = region.halfInvAspectRatio;
+            }
+        }
 
-	/** Assigns a random region of {@link RegionInfluencer#regions} to the particles. */
-	public static class Random extends RegionInfluencer {
-		public Random () {
-		}
+        @Override
+        public Single copy() {
+            return new Single(this);
+        }
+    }
 
-		public Random (Random regionInfluencer) {
-			super(regionInfluencer);
-		}
+    /**
+     * Assigns a random region of {@link RegionInfluencer#regions} to the particles.
+     */
+    public static class Random extends RegionInfluencer {
 
-		public Random (TextureRegion textureRegion) {
-			super(textureRegion);
-		}
+        public Random() {
+        }
 
-		public Random (Texture texture) {
-			super(texture);
-		}
+        public Random(Random regionInfluencer) {
+            super(regionInfluencer);
+        }
 
-		@Override
-		public void activateParticles (int startIndex, int count) {
-			for (int i = startIndex * regionChannel.strideSize, c = i + count * regionChannel.strideSize; i < c; i += regionChannel.strideSize) {
-				AspectTextureRegion region = regions.random();
-				regionChannel.data[i + ParticleChannels.UOffset] = region.u;
-				regionChannel.data[i + ParticleChannels.VOffset] = region.v;
-				regionChannel.data[i + ParticleChannels.U2Offset] = region.u2;
-				regionChannel.data[i + ParticleChannels.V2Offset] = region.v2;
-				regionChannel.data[i + ParticleChannels.HalfWidthOffset] = 0.5f;
-				regionChannel.data[i + ParticleChannels.HalfHeightOffset] = region.halfInvAspectRatio;
-			}
-		}
+        public Random(TextureRegion textureRegion) {
+            super(textureRegion);
+        }
 
-		@Override
-		public Random copy () {
-			return new Random(this);
-		}
-	}
+        public Random(Texture texture) {
+            super(texture);
+        }
 
-	/** Assigns a region to the particles using the particle life percent to calculate the current index in the
-	 * {@link RegionInfluencer#regions} array. */
-	public static class Animated extends RegionInfluencer {
-		FloatChannel lifeChannel;
+        @Override
+        public void activateParticles(int startIndex, int count) {
+            for (int i = startIndex * regionChannel.strideSize, c = i + count * regionChannel.strideSize; i < c; i += regionChannel.strideSize) {
+                AspectTextureRegion region = regions.random();
+                regionChannel.data[i + ParticleChannels.UOffset] = region.u;
+                regionChannel.data[i + ParticleChannels.VOffset] = region.v;
+                regionChannel.data[i + ParticleChannels.U2Offset] = region.u2;
+                regionChannel.data[i + ParticleChannels.V2Offset] = region.v2;
+                regionChannel.data[i + ParticleChannels.HalfWidthOffset] = 0.5f;
+                regionChannel.data[i + ParticleChannels.HalfHeightOffset] = region.halfInvAspectRatio;
+            }
+        }
 
-		public Animated () {
-		}
+        @Override
+        public Random copy() {
+            return new Random(this);
+        }
+    }
 
-		public Animated (Animated regionInfluencer) {
-			super(regionInfluencer);
-		}
+    /**
+     * Assigns a region to the particles using the particle life percent to calculate the current index in the
+     * {@link RegionInfluencer#regions} array.
+     */
+    public static class Animated extends RegionInfluencer {
 
-		public Animated (TextureRegion textureRegion) {
-			super(textureRegion);
-		}
+        @Nullable()
+        FloatChannel lifeChannel;
 
-		public Animated (Texture texture) {
-			super(texture);
-		}
+        public Animated() {
+        }
 
-		@Override
-		public void allocateChannels () {
-			super.allocateChannels();
-			lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
-		}
+        public Animated(Animated regionInfluencer) {
+            super(regionInfluencer);
+        }
 
-		@Override
-		public void update () {
-			for (int i = 0, l = ParticleChannels.LifePercentOffset, c = controller.particles.size * regionChannel.strideSize; i < c; i += regionChannel.strideSize, l += lifeChannel.strideSize) {
-				AspectTextureRegion region = regions.get((int)(lifeChannel.data[l] * (regions.size - 1)));
-				regionChannel.data[i + ParticleChannels.UOffset] = region.u;
-				regionChannel.data[i + ParticleChannels.VOffset] = region.v;
-				regionChannel.data[i + ParticleChannels.U2Offset] = region.u2;
-				regionChannel.data[i + ParticleChannels.V2Offset] = region.v2;
-				regionChannel.data[i + ParticleChannels.HalfWidthOffset] = 0.5f;
-				regionChannel.data[i + ParticleChannels.HalfHeightOffset] = region.halfInvAspectRatio;
-			}
-		}
+        public Animated(TextureRegion textureRegion) {
+            super(textureRegion);
+        }
 
-		@Override
-		public Animated copy () {
-			return new Animated(this);
-		}
-	}
+        public Animated(Texture texture) {
+            super(texture);
+        }
 
-	/** It's a class used internally by the {@link RegionInfluencer} to represent a texture region. It contains the uv coordinates
-	 * of the region and the region inverse aspect ratio. */
-	public static class AspectTextureRegion {
-		public float u, v, u2, v2;
-		public float halfInvAspectRatio;
-		public String imageName;
+        @Override
+        public void allocateChannels() {
+            super.allocateChannels();
+            lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
+        }
 
-		public AspectTextureRegion () {
-		}
+        @Override
+        public void update() {
+            for (int i = 0, l = ParticleChannels.LifePercentOffset, c = controller.particles.size * regionChannel.strideSize; i < c; i += regionChannel.strideSize, l += lifeChannel.strideSize) {
+                AspectTextureRegion region = regions.get((int) (lifeChannel.data[l] * (regions.size - 1)));
+                regionChannel.data[i + ParticleChannels.UOffset] = region.u;
+                regionChannel.data[i + ParticleChannels.VOffset] = region.v;
+                regionChannel.data[i + ParticleChannels.U2Offset] = region.u2;
+                regionChannel.data[i + ParticleChannels.V2Offset] = region.v2;
+                regionChannel.data[i + ParticleChannels.HalfWidthOffset] = 0.5f;
+                regionChannel.data[i + ParticleChannels.HalfHeightOffset] = region.halfInvAspectRatio;
+            }
+        }
 
-		public AspectTextureRegion (AspectTextureRegion aspectTextureRegion) {
-			set(aspectTextureRegion);
-		}
+        @Override
+        public Animated copy() {
+            return new Animated(this);
+        }
+    }
 
-		public AspectTextureRegion (TextureRegion region) {
-			set(region);
-		}
+    /**
+     * It's a class used internally by the {@link RegionInfluencer} to represent a texture region. It contains the uv coordinates
+     * of the region and the region inverse aspect ratio.
+     */
+    public static class AspectTextureRegion {
 
-		public void set (TextureRegion region) {
-			this.u = region.getU();
-			this.v = region.getV();
-			this.u2 = region.getU2();
-			this.v2 = region.getV2();
-			this.halfInvAspectRatio = 0.5f * ((float)region.getRegionHeight() / region.getRegionWidth());
-			if (region instanceof TextureAtlas.AtlasRegion) {
-				this.imageName = ((TextureAtlas.AtlasRegion) region).name;
-			}
-		}
+        public float u, v, u2, v2;
 
-		public void set (AspectTextureRegion aspectTextureRegion) {
-			u = aspectTextureRegion.u;
-			v = aspectTextureRegion.v;
-			u2 = aspectTextureRegion.u2;
-			v2 = aspectTextureRegion.v2;
-			halfInvAspectRatio = aspectTextureRegion.halfInvAspectRatio;
-			imageName = aspectTextureRegion.imageName;
-		}
-		public void updateUV(TextureAtlas atlas) {
-			if (imageName == null) {
-				return;
-			}
-			TextureAtlas.AtlasRegion region = atlas.findRegion(imageName);
-			this.u = region.getU();
-			this.v = region.getV();
-			this.u2 = region.getU2();
-			this.v2 = region.getV2();
-			this.halfInvAspectRatio = 0.5f * ((float)region.getRegionHeight() / region.getRegionWidth());
-		}
-	}
+        public float halfInvAspectRatio;
 
-	public Array<AspectTextureRegion> regions;
-	FloatChannel regionChannel;
-	public String atlasName;
+        public String imageName;
 
-	public RegionInfluencer (int regionsCount) {
-		this.regions = new Array<AspectTextureRegion>(false, regionsCount, AspectTextureRegion.class);
-	}
+        public AspectTextureRegion() {
+        }
 
-	public RegionInfluencer () {
-		this(1);
-		AspectTextureRegion aspectRegion = new AspectTextureRegion();
-		aspectRegion.u = aspectRegion.v = 0;
-		aspectRegion.u2 = aspectRegion.v2 = 1;
-		aspectRegion.halfInvAspectRatio = 0.5f;
-		regions.add(aspectRegion);
-	}
+        public AspectTextureRegion(AspectTextureRegion aspectTextureRegion) {
+            set(aspectTextureRegion);
+        }
 
-	/** All the regions must be defined on the same Texture */
-	public RegionInfluencer (TextureRegion... regions) {
-		setAtlasName(null);
-		this.regions = new Array<AspectTextureRegion>(false, regions.length, AspectTextureRegion.class);
-		add(regions);
-	}
+        public AspectTextureRegion(TextureRegion region) {
+            set(region);
+        }
 
-	public RegionInfluencer (Texture texture) {
-		this(new TextureRegion(texture));
-	}
+        public void set(TextureRegion region) {
+            this.u = region.getU();
+            this.v = region.getV();
+            this.u2 = region.getU2();
+            this.v2 = region.getV2();
+            this.halfInvAspectRatio = 0.5f * ((float) region.getRegionHeight() / region.getRegionWidth());
+            if (region instanceof TextureAtlas.AtlasRegion) {
+                this.imageName = ((TextureAtlas.AtlasRegion) region).name;
+            }
+        }
 
-	public RegionInfluencer (RegionInfluencer regionInfluencer) {
-		this(regionInfluencer.regions.size);
-		regions.ensureCapacity(regionInfluencer.regions.size);
-		for (int i = 0; i < regionInfluencer.regions.size; ++i) {
-			regions.add(new AspectTextureRegion((AspectTextureRegion)regionInfluencer.regions.get(i)));
-		}
-	}
-	public void setAtlasName (String atlasName) {
-		this.atlasName = atlasName;
-	}
-	public void add (TextureRegion... regions) {
-		this.regions.ensureCapacity(regions.length);
-		for (TextureRegion region : regions) {
-			this.regions.add(new AspectTextureRegion(region));
-		}
-	}
+        @Initializer()
+        public void set(AspectTextureRegion aspectTextureRegion) {
+            u = aspectTextureRegion.u;
+            v = aspectTextureRegion.v;
+            u2 = aspectTextureRegion.u2;
+            v2 = aspectTextureRegion.v2;
+            halfInvAspectRatio = aspectTextureRegion.halfInvAspectRatio;
+            imageName = aspectTextureRegion.imageName;
+        }
 
-	public void clear () {
-		atlasName = null;
-		regions.clear();
-	}
-	private final static String ASSET_DATA = "atlasAssetData";
-	@Override
-	public void load (AssetManager manager, ResourceData resources) {
-		super.load(manager, resources);
-		SaveData data = resources.getSaveData(ASSET_DATA);
-		if (data == null) {
-			return;
-		}
-		TextureAtlas atlas;
-		atlas = (TextureAtlas) manager.get(data.loadAsset());
-		for (AspectTextureRegion atr : regions) {
-			atr.updateUV(atlas);
-		}
-	}
-	@Override
-	public void save (AssetManager manager, ResourceData resources) {
-		super.save(manager, resources);
-		if (atlasName != null) {
-			SaveData data = resources.getSaveData(ASSET_DATA);
-			if (data == null) {
-				data = resources.createSaveData(ASSET_DATA);
-                        }
-			data.saveAsset(atlasName, TextureAtlas.class);
-		}
-	}
-	@Override
-	public void allocateChannels () {
-		regionChannel = controller.particles.addChannel(ParticleChannels.TextureRegion);
-	}
+        public void updateUV(TextureAtlas atlas) {
+            if (imageName == null) {
+                return;
+            }
+            TextureAtlas.AtlasRegion region = atlas.findRegion(imageName);
+            this.u = region.getU();
+            this.v = region.getV();
+            this.u2 = region.getU2();
+            this.v2 = region.getV2();
+            this.halfInvAspectRatio = 0.5f * ((float) region.getRegionHeight() / region.getRegionWidth());
+        }
+    }
 
-	@Override
-	public void write (Json json) {
-		json.writeValue("regions", regions, Array.class, AspectTextureRegion.class);
-	}
+    public Array<AspectTextureRegion> regions;
 
-	@Override
-	public void read (Json json, JsonValue jsonData) {
-		regions.clear();
-		regions.addAll(json.readValue("regions", Array.class, AspectTextureRegion.class, jsonData));
-	}
+    FloatChannel regionChannel;
+
+    @Nullable()
+    public String atlasName;
+
+    public RegionInfluencer(int regionsCount) {
+        this.regions = new Array<AspectTextureRegion>(false, regionsCount, AspectTextureRegion.class);
+    }
+
+    public RegionInfluencer() {
+        this(1);
+        AspectTextureRegion aspectRegion = new AspectTextureRegion();
+        aspectRegion.u = aspectRegion.v = 0;
+        aspectRegion.u2 = aspectRegion.v2 = 1;
+        aspectRegion.halfInvAspectRatio = 0.5f;
+        regions.add(aspectRegion);
+    }
+
+    /**
+     * All the regions must be defined on the same Texture
+     */
+    public RegionInfluencer(TextureRegion... regions) {
+        setAtlasName(null);
+        this.regions = new Array<AspectTextureRegion>(false, regions.length, AspectTextureRegion.class);
+        add(regions);
+    }
+
+    public RegionInfluencer(Texture texture) {
+        this(new TextureRegion(texture));
+    }
+
+    public RegionInfluencer(RegionInfluencer regionInfluencer) {
+        this(regionInfluencer.regions.size);
+        regions.ensureCapacity(regionInfluencer.regions.size);
+        for (int i = 0; i < regionInfluencer.regions.size; ++i) {
+            regions.add(new AspectTextureRegion((AspectTextureRegion) regionInfluencer.regions.get(i)));
+        }
+    }
+
+    @Initializer()
+    public void setAtlasName(@Nullable() String atlasName) {
+        this.atlasName = atlasName;
+    }
+
+    public void add(TextureRegion... regions) {
+        this.regions.ensureCapacity(regions.length);
+        for (TextureRegion region : regions) {
+            this.regions.add(new AspectTextureRegion(region));
+        }
+    }
+
+    public void clear() {
+        atlasName = null;
+        regions.clear();
+    }
+
+    private final static String ASSET_DATA = "atlasAssetData";
+
+    @Override
+    public void load(AssetManager manager, ResourceData resources) {
+        super.load(manager, resources);
+        SaveData data = resources.getSaveData(ASSET_DATA);
+        if (data == null) {
+            return;
+        }
+        TextureAtlas atlas;
+        atlas = (TextureAtlas) manager.get(data.loadAsset());
+        for (AspectTextureRegion atr : regions) {
+            atr.updateUV(atlas);
+        }
+    }
+
+    @Override
+    public void save(AssetManager manager, ResourceData resources) {
+        super.save(manager, resources);
+        if (atlasName != null) {
+            SaveData data = resources.getSaveData(ASSET_DATA);
+            if (data == null) {
+                data = resources.createSaveData(ASSET_DATA);
+            }
+            data.saveAsset(atlasName, TextureAtlas.class);
+        }
+    }
+
+    @Override
+    public void allocateChannels() {
+        regionChannel = controller.particles.addChannel(ParticleChannels.TextureRegion);
+    }
+
+    @Override
+    public void write(Json json) {
+        json.writeValue("regions", regions, Array.class, AspectTextureRegion.class);
+    }
+
+    @Override
+    public void read(Json json, JsonValue jsonData) {
+        regions.clear();
+        regions.addAll(json.readValue("regions", Array.class, AspectTextureRegion.class, jsonData));
+    }
 }
