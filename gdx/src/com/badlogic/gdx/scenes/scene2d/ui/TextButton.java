@@ -23,9 +23,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** A button with a child {@link Label} to display text.
  * @author Nathan Sweet */
+
 public class TextButton extends Button {
 	private Label label;
 	private TextButtonStyle style;
@@ -49,6 +50,7 @@ public class TextButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Initializer
 	public void setStyle (ButtonStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		if (!(style instanceof TextButtonStyle)) throw new IllegalArgumentException("style must be a TextButtonStyle.");

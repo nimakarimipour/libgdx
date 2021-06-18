@@ -29,7 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** A container that contains two widgets and is divided either horizontally or vertically. The user may resize the widgets. The
  * child widgets are always sized to fill their side of the SplitPane.
  * <p>
@@ -43,6 +43,7 @@ import com.badlogic.gdx.utils.Null;
  * are sized depending on the SplitPane size and the {@link #setSplitAmount(float) split position}.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class SplitPane extends WidgetGroup {
 	SplitPaneStyle style;
 	private @Null Actor firstWidget, secondWidget;
@@ -208,6 +209,7 @@ public class SplitPane extends WidgetGroup {
 		return vertical;
 	}
 
+	@Initializer
 	private void calculateHorizBoundsAndPositions () {
 		Drawable handle = style.handle;
 

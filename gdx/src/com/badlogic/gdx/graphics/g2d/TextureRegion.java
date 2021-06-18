@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g2d;
 import javax.annotation.Nullable;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Initializer;
 
 public class TextureRegion {
 	
@@ -86,6 +87,7 @@ public class TextureRegion {
 		regionHeight = Math.abs(height);
 	}
 
+	@Initializer
 	public void setRegion (float u, float v, float u2, float v2) {
 		int texWidth = texture.getWidth(), texHeight = texture.getHeight();
 		regionWidth = Math.round(Math.abs(u2 - u) * texWidth);

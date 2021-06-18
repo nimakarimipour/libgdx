@@ -24,7 +24,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
-
+import com.badlogic.gdx.Initializer;
 /** {@link AssetLoader} for {@link I18NBundle} instances. The I18NBundle is loaded asynchronously.
  * <p>
  * Notice that you can't load two bundles with the same base name and different locale or encoding using the same {@link AssetManager}.
@@ -42,6 +42,7 @@ import com.badlogic.gdx.utils.I18NBundle;
  * <li>If you want to load the English bundle without replacing the Italian bundle you should use another asset manager.
  * </ul>
  * @author davebaol */
+
 public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBundleLoader.I18NBundleParameter> {
 
 	public I18NBundleLoader (FileHandleResolver resolver) {
@@ -51,6 +52,7 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 	I18NBundle bundle;
 
 	@Override
+	@Initializer
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
 		this.bundle = null;
 		Locale locale;

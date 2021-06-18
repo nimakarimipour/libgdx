@@ -47,7 +47,7 @@ import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Method;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
-
+import com.badlogic.gdx.Initializer;
 /** A skin stores resources for UI widgets to use (texture regions, ninepatches, fonts, colors, etc). Resources are named and can
  * be looked up by name and type. Resources can be described in JSON. Skin provides useful conversions, such as allowing access to
  * regions in the atlas as ninepatches, sprites, drawables, etc. The get* methods return an instance of the object in the skin.
@@ -55,6 +55,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
  * <p>
  * See the <a href="https://github.com/libgdx/libgdx/wiki/Skin">documentation</a> for more.
  * @author Nathan Sweet */
+
 public class Skin implements Disposable {
 	ObjectMap<Class, ObjectMap<String, Object>> resources = new ObjectMap();
 	TextureAtlas atlas;
@@ -448,6 +449,7 @@ public class Skin implements Disposable {
 	}
 
 	/** Disposes the {@link TextureAtlas} and all {@link Disposable} resources in the skin. */
+	@Initializer
 	public void dispose () {
 		if (atlas != null) atlas.dispose();
 		for (ObjectMap<String, Object> entry : resources.values()) {

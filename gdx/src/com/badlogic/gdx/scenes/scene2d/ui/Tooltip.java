@@ -24,9 +24,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** A listener that shows a tooltip actor when the mouse is over another actor.
  * @author Nathan Sweet */
+
 public class Tooltip<T extends Actor> extends InputListener {
 	static Vector2 tmp = new Vector2();
 
@@ -94,6 +95,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		return true;
 	}
 
+	@Initializer
 	private void setContainerPosition (Actor actor, float x, float y) {
 		this.targetActor = actor;
 		Stage stage = actor.getStage();

@@ -21,9 +21,10 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
-
+import com.badlogic.gdx.Initializer;
 /** Encapsulate the formulas to spawn a particle on a mesh shape.
  * @author Inferno */
+
 public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 	private float[] vertices;
 	private short[] indices;
@@ -38,6 +39,7 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 	}
 
 	@Override
+	@Initializer
 	public void setMesh (Mesh mesh, Model model) {
 		super.setMesh(mesh, model);
 		vertexSize = mesh.getVertexSize() / 4;
@@ -55,6 +57,7 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 	}
 
 	@Override
+	@Initializer
 	public void spawnAux (Vector3 vector, float percent) {
 		if (indices == null) {
 			// Triangles

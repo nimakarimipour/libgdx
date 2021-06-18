@@ -15,6 +15,8 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+import com.badlogic.gdx.Initializer;
+
 
 /** Indicates an error during serialization due to misconfiguration or during deserialization due to invalid input data.
  * @author Nathan Sweet */
@@ -49,6 +51,7 @@ public class SerializationException extends RuntimeException {
 		return causedBy(cause, type);
 	}
 
+	@Initializer
 	public String getMessage () {
 		if (trace == null) return super.getMessage();
 		StringBuilder sb = new StringBuilder(512);

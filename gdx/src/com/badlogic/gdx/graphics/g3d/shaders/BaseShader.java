@@ -36,9 +36,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.IntIntMap;
-
+import com.badlogic.gdx.Initializer;
 /** @author Xoppa A BaseShader is a wrapper around a ShaderProgram that keeps track of the uniform and attribute locations. It does
  *         not manage the ShaderPogram, you are still responsible for disposing the ShaderProgram. */
+
 public abstract class BaseShader implements Shader {
 	public interface Validator {
 		/** @return True if the input is valid for the renderable, false otherwise. */
@@ -162,6 +163,7 @@ public abstract class BaseShader implements Shader {
 	}
 
 	/** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
+	@Initializer
 	public void init (final ShaderProgram program, final Renderable renderable) {
 		if (locations != null) throw new GdxRuntimeException("Already initialized");
 		if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
@@ -201,6 +203,7 @@ public abstract class BaseShader implements Shader {
 	}
 
 	@Override
+	@Initializer
 	public void begin (Camera camera, RenderContext context) {
 		this.camera = camera;
 		this.context = context;
@@ -233,6 +236,7 @@ public abstract class BaseShader implements Shader {
 		render(renderable, combinedAttributes);
 	}
 
+	@Initializer
 	public void render (Renderable renderable, final Attributes combinedAttributes) {
 		for (int u, i = 0; i < localUniforms.size; ++i)
 			if (setters.get(u = localUniforms.get(i)) != null) setters.get(u).set(this, u, renderable, combinedAttributes);

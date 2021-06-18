@@ -22,7 +22,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
-
+import com.badlogic.gdx.Initializer;
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
  * JsonValue children are a linked list. Iteration of arrays or objects is easily done using a for loop, either with the enhanced
@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
  * </pre>
  * 
  * @author Nathan Sweet */
+
 public class JsonValue implements Iterable<JsonValue> {
 	private ValueType type;
 
@@ -862,6 +863,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param name May be null. */
+	@Initializer
 	public void setName (String name) {
 		this.name = name;
 	}
@@ -912,6 +914,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Sets the next sibling of this value. Does not change the parent {@link #size()}.
 	 * @param next May be null. */
+	@Initializer
 	public void setNext (JsonValue next) {
 		this.next = next;
 	}
@@ -924,6 +927,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Sets the next sibling of this value. Does not change the parent {@link #size()}.
 	 * @param prev May be null. */
+	@Initializer
 	public void setPrev (JsonValue prev) {
 		this.prev = prev;
 	}
@@ -935,6 +939,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param stringValue May be null if the string representation is the string value of the double (eg, no leading zeros). */
+	@Initializer
 	public void set (double value, String stringValue) {
 		doubleValue = value;
 		longValue = (long)value;
@@ -1022,6 +1027,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** Returns a human readable string representing the path from the root of the JSON object graph to this value. */
+	@Initializer
 	public String trace () {
 		if (parent == null) {
 			if (type == ValueType.array) return "[]";
@@ -1220,6 +1226,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			return entry != null;
 		}
 
+		@Initializer
 		public JsonValue next () {
 			current = entry;
 			if (current == null) throw new NoSuchElementException();

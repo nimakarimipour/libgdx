@@ -26,11 +26,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
-
+import com.badlogic.gdx.Initializer;
 /** A text label, with optional word wrapping.
  * <p>
  * The preferred size of the label is determined by the actual text bounds, unless {@link #setWrap(boolean) word wrap} is enabled.
  * @author Nathan Sweet */
+
 public class Label extends Widget {
 	static private final Color tempColor = new Color();
 	static private final GlyphLayout prefSizeLayout = new GlyphLayout();
@@ -150,6 +151,7 @@ public class Label extends Widget {
 		if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
 	}
 
+	@Initializer
 	private void computePrefSize () {
 		prefSizeInvalid = false;
 		GlyphLayout prefSizeLayout = Label.prefSizeLayout;
@@ -165,6 +167,7 @@ public class Label extends Widget {
 		prefSize.set(prefSizeLayout.width, prefSizeLayout.height);
 	}
 
+	@Initializer
 	public void layout () {
 		BitmapFont font = cache.getFont();
 		float oldScaleX = font.getScaleX();

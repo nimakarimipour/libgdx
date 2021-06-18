@@ -29,7 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A button is a {@link Table} with a checked state and additional {@link ButtonStyle style} fields for pressed, unpressed, and
  * checked. Each time a button is clicked, the checked state is toggled. Being a table, a button can contain any other actors.<br>
  * <br>
@@ -41,6 +41,7 @@ import com.badlogic.gdx.utils.Pools;
  * <p>
  * The preferred size of the button is determined by the background and the button contents.
  * @author Nathan Sweet */
+
 public class Button extends Table implements Disableable {
 	private ButtonStyle style;
 	boolean isChecked, isDisabled;
@@ -164,6 +165,7 @@ public class Button extends Table implements Disableable {
 		this.programmaticChangeEvents = programmaticChangeEvents;
 	}
 
+	@Initializer
 	public void setStyle (ButtonStyle style) {
 		if (style == null) throw new IllegalArgumentException("style cannot be null.");
 		this.style = style;

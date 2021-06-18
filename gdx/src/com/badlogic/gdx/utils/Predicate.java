@@ -17,9 +17,10 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Iterator;
-
+import com.badlogic.gdx.Initializer;
 /** Interface used to select items within an iterator against a predicate.
  * @author Xoppa */
+
 public interface Predicate<T> {
 
 	/** @return true if the item matches the criteria and should be included in the iterator's items */
@@ -44,6 +45,7 @@ public interface Predicate<T> {
 			set(iterable.iterator(), predicate);
 		}
 
+		@Initializer
 		public void set (final Iterator<T> iterator, final Predicate<T> predicate) {
 			this.iterator = iterator;
 			this.predicate = predicate;
@@ -92,6 +94,7 @@ public interface Predicate<T> {
 			set(iterable, predicate);
 		}
 
+		@Initializer
 		public void set (Iterable<T> iterable, Predicate<T> predicate) {
 			this.iterable = iterable;
 			this.predicate = predicate;

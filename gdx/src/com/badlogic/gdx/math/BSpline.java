@@ -17,8 +17,9 @@
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Array;
-
+import com.badlogic.gdx.Initializer;
 /** @author Xoppa */
+
 public class BSpline<T extends Vector<T>> implements Path<T> {
 	private final static float d6 = 1f / 6f;
 
@@ -182,6 +183,7 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 		set(controlPoints, degree, continuous);
 	}
 
+	@Initializer
 	public BSpline set (final T[] controlPoints, final int degree, final boolean continuous) {
 		if (tmp == null) tmp = controlPoints[0].cpy();
 		if (tmp2 == null) tmp2 = controlPoints[0].cpy();

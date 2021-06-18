@@ -26,9 +26,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-
+import com.badlogic.gdx.Initializer;
 /** Keeps track of an application's tooltips.
  * @author Nathan Sweet */
+
 public class TooltipManager {
 	static private TooltipManager instance;
 	static private Files files;
@@ -92,6 +93,7 @@ public class TooltipManager {
 		}
 	}
 
+	@Initializer
 	public void enter (Tooltip tooltip) {
 		showTooltip = tooltip;
 		showTask.cancel();

@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-
+import com.badlogic.gdx.Initializer;
 /** A MeshPart is composed of a subset of vertices of a {@link Mesh}, along with the primitive type. The vertices subset is
  * described by an offset and size. When the mesh is indexed (which is when {@link Mesh#getNumIndices()} > 0), then the
  * {@link #offset} represents the offset in the indices array and {@link #size} represents the number of indices. When the mesh
@@ -41,6 +41,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
  * The {@link Mesh} referenced by the {@link #mesh} member must outlive the MeshPart. When the mesh is disposed, the MeshPart is
  * unusable.
  * @author badlogic, Xoppa */
+
 public class MeshPart {
 	/** Unique id within model, may be null. Will be ignored by {@link #equals(MeshPart)} **/
 	public String id;
@@ -90,6 +91,7 @@ public class MeshPart {
 	/** Set this MeshPart to be a copy of the other MeshPart
 	 * @param other The MeshPart from which to copy the values
 	 * @return this MeshPart, for chaining */
+	@Initializer
 	public MeshPart set (final MeshPart other) {
 		this.id = other.id;
 		this.mesh = other.mesh;

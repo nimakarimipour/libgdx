@@ -26,7 +26,7 @@ import java.io.Reader;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
-
+import com.badlogic.gdx.Initializer;
 /** Lightweight XML parser. Supports a subset of XML features: elements, attributes, text, predefined entities, CDATA, mixed
  * content. Namespaces are parsed as part of the element or attribute name. Prologs and doctypes are ignored. Only 8-bit character
  * encodings are supported. Input is assumed to be well formed.<br>
@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
  * The default behavior is to parse the XML into a DOM. Extends this class and override methods to perform event driven parsing.
  * When this is done, the parse methods will return null.
  * @author Nathan Sweet */
+
 public class XmlReader {
 	private final Array<Element> elements = new Array(8);
 	private Element root, current;
@@ -416,6 +417,7 @@ public class XmlReader {
 
 	// line 209 "XmlReader.rl"
 
+	@Initializer
 	protected void open (String name) {
 		Element child = new Element(name, current);
 		Element parent = current;
@@ -443,6 +445,7 @@ public class XmlReader {
 		current.setText(existing != null ? existing + text : text);
 	}
 
+	@Initializer
 	protected void close () {
 		root = elements.pop();
 		current = elements.size > 0 ? elements.peek() : null;
@@ -537,6 +540,7 @@ public class XmlReader {
 			return toString("");
 		}
 
+		@Initializer
 		public String toString (String indent) {
 			StringBuilder buffer = new StringBuilder(128);
 			buffer.append(indent);

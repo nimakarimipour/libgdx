@@ -40,7 +40,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-
+import com.badlogic.gdx.Initializer;
 /** Renders bitmap fonts. The font consists of 2 files: an image file or {@link TextureRegion} containing the glyphs and a file in
  * the AngleCode BMFont text format that describes where each glyph is on the image.
  * <p>
@@ -54,6 +54,7 @@ import com.badlogic.gdx.utils.StreamUtils;
  * The code was originally based on Matthias Mann's TWL BitmapFont class. Thanks for sharing, Matthias! :)
  * @author Nathan Sweet
  * @author Matthias Mann */
+
 public class BitmapFont implements Disposable {
 	static private final int LOG2_PAGE_SIZE = 9;
 	static private final int PAGE_SIZE = 1 << LOG2_PAGE_SIZE;
@@ -403,6 +404,7 @@ public class BitmapFont implements Disposable {
 		/** The index to the texture page that holds this glyph. */
 		public int page = 0;
 
+		@Initializer
 		public int getKerning (char ch) {
 			if (kerning != null) {
 				byte[] page = kerning[ch >>> LOG2_PAGE_SIZE];
@@ -485,6 +487,7 @@ public class BitmapFont implements Disposable {
 			load(fontFile, flip);
 		}
 
+		@Initializer
 		public void load (FileHandle fontFile, boolean flip) {
 			if (imagePaths != null) throw new IllegalStateException("Already loaded.");
 
@@ -808,6 +811,7 @@ public class BitmapFont implements Disposable {
 		}
 
 		/** Returns true if the font has the glyph, or if the font has a {@link #missingGlyph}. */
+		@Initializer
 		public boolean hasGlyph (char ch) {
 			if (missingGlyph != null) return true;
 			return getGlyph(ch) != null;
@@ -877,6 +881,7 @@ public class BitmapFont implements Disposable {
 			return 0;
 		}
 
+		@Initializer
 		public boolean isBreakChar (char c) {
 			if (breakChars == null) return false;
 			for (char br : breakChars)

@@ -212,6 +212,7 @@ public interface Net {
 
 		/** Sets the URL of the HTTP request.
 		 * @param url The URL to set. */
+		@Initializer
 		public void setUrl (String url) {
 			this.url = url;
 		}
@@ -227,12 +228,14 @@ public interface Net {
 		 * @param content A string encoded in the corresponding Content-Encoding set in the headers, with the data to send with the
 		 *           HTTP request. For example, in case of HTTP GET, the content is used as the query string of the GET while on a
 		 *           HTTP POST it is used to send the POST data. */
+		@Initializer
 		public void setContent (String content) {
 			this.content = content;
 		}
 
 		/** Sets the content as a stream to be used for a POST for example, to transmit custom data.
 		 * @param contentStream The stream with the content data. */
+		@Initializer
 		public void setContent (InputStream contentStream, long contentLength) {
 			this.contentStream = contentStream;
 			this.contentLength = contentLength;

@@ -24,9 +24,10 @@ import com.badlogic.gdx.graphics.g3d.particles.values.PointSpawnShapeValue;
 import com.badlogic.gdx.graphics.g3d.particles.values.SpawnShapeValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import com.badlogic.gdx.Initializer;
 /** It's an {@link Influencer} which controls where the particles will be spawned.
  * @author Inferno */
+
 public class SpawnInfluencer extends Influencer {
 
 	public SpawnShapeValue spawnShapeValue;
@@ -51,6 +52,7 @@ public class SpawnInfluencer extends Influencer {
 	}
 
 	@Override
+	@Initializer
 	public void allocateChannels () {
 		positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);

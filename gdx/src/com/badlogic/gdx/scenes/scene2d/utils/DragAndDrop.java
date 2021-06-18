@@ -26,9 +26,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
-
+import com.badlogic.gdx.Initializer;
 /** Manages drag and drop operations through registered drag sources and drop targets.
  * @author Nathan Sweet */
+
 public class DragAndDrop {
 	static final Vector2 tmpVector = new Vector2();
 
@@ -218,6 +219,7 @@ public class DragAndDrop {
 		this.touchOffsetY = touchOffsetY;
 	}
 
+	@Initializer
 	public boolean isDragging () {
 		return payload != null;
 	}

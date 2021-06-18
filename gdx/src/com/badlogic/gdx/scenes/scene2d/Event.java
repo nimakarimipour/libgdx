@@ -19,7 +19,7 @@ package com.badlogic.gdx.scenes.scene2d;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
-
+import com.badlogic.gdx.Initializer;
 /** The base class for all events.
  * <p>
  * By default an event will "bubble" up through an actor's parent's handlers (see {@link #setBubbles(boolean)}).
@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  *
  * @see InputEvent
  * @see Actor#fire(Event) */
+
 public class Event implements Poolable {
 	private Stage stage;
 	private Actor targetActor;
@@ -82,6 +83,7 @@ public class Event implements Poolable {
 		return targetActor;
 	}
 
+	@Initializer
 	public void setTarget (Actor targetActor) {
 		this.targetActor = targetActor;
 	}
@@ -91,6 +93,7 @@ public class Event implements Poolable {
 		return listenerActor;
 	}
 
+	@Initializer
 	public void setListenerActor (Actor listenerActor) {
 		this.listenerActor = listenerActor;
 	}
@@ -130,6 +133,7 @@ public class Event implements Poolable {
 		return capture;
 	}
 
+	@Initializer
 	public void setStage (Stage stage) {
 		this.stage = stage;
 	}

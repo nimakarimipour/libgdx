@@ -35,7 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** A group that scrolls a child widget using scrollbars and/or mouse or touch dragging.
  * <p>
  * The widget is sized to its preferred size. If the widget's preferred width or height is less than the size of this scroll pane,
@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.Null;
  * scroll pane is typically sized by ignoring the preferred size in one or both directions.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class ScrollPane extends WidgetGroup {
 	private ScrollPaneStyle style;
 	private Actor widget;
@@ -365,6 +366,7 @@ public class ScrollPane extends WidgetGroup {
 		}
 	}
 
+	@Initializer
 	public void layout () {
 		Drawable bg = style.background, hScrollKnob = style.hScrollKnob, vScrollKnob = style.vScrollKnob;
 		float bgLeftWidth = 0, bgRightWidth = 0, bgTopHeight = 0, bgBottomHeight = 0;

@@ -47,7 +47,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
+import com.badlogic.gdx.Initializer;
 /** A 2D scene graph containing hierarchies of {@link Actor actors}. Stage handles the viewport and distributes input events.
  * <p>
  * {@link #setViewport(Viewport)} controls the coordinates used within the stage and sets up the camera used to convert between
@@ -63,6 +63,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * callbacks and handlers.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class Stage extends InputAdapter implements Disposable {
 	/** True if any actor has ever had debug enabled. */
 	static boolean debug;
@@ -754,6 +755,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Calculates window scissor coordinates from local coordinates using the batch's current transformation matrix.
 	 * @see ScissorStack#calculateScissors(Camera, float, float, float, float, Matrix4, Rectangle, Rectangle) */
+	@Initializer
 	public void calculateScissors (Rectangle localRect, Rectangle scissorRect) {
 		Matrix4 transformMatrix;
 		if (debugShapes != null && debugShapes.isDrawing())

@@ -15,6 +15,8 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+import com.badlogic.gdx.Initializer;
+
 
 /** A simple linked list that pools its nodes.
  * @author mzechner */
@@ -43,6 +45,7 @@ public class PooledLinkedList<T> {
 	}
 
 	/** Adds the specified object to the end of the list regardless of iteration status */
+	@Initializer
 	public void add (T object) {
 		Item<T> item = pool.obtain();
 		item.payload = object;
@@ -86,6 +89,7 @@ public class PooledLinkedList<T> {
 	}
 
 	/** Starts iterating over the list's items from the head of the list */
+	@Initializer
 	public void iter () {
 		iter = head;
 	}

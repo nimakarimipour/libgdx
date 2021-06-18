@@ -20,12 +20,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
-
+import com.badlogic.gdx.Initializer;
 /** A button with a child {@link Image} to display an image. This is useful when the button must be larger than the image and the
  * image centered on the button. If the image is the size of the button, a {@link Button} without any children can be used, where
  * the {@link Button.ButtonStyle#up}, {@link Button.ButtonStyle#down}, and {@link Button.ButtonStyle#checked} nine patches define
  * the image.
  * @author Nathan Sweet */
+
 public class ImageButton extends Button {
 	private final Image image;
 	private ImageButtonStyle style;
@@ -61,6 +62,7 @@ public class ImageButton extends Button {
 		this(new ImageButtonStyle(null, null, null, imageUp, imageDown, imageChecked));
 	}
 
+	@Initializer
 	public void setStyle (ButtonStyle style) {
 		if (!(style instanceof ImageButtonStyle)) throw new IllegalArgumentException("style must be an ImageButtonStyle.");
 		this.style = (ImageButtonStyle)style;

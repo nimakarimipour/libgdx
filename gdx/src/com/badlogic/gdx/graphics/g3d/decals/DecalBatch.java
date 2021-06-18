@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SortedIntList;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * Renderer for {@link Decal} objects.
  * </p>
@@ -47,6 +47,7 @@ import com.badlogic.gdx.utils.SortedIntList;
  * While it shouldn't be necessary to change strategies, if you have to do so, do it before calling {@link #add(Decal)}, and if
  * you already did, call {@link #flush()} first.
  * </p> */
+
 public class DecalBatch implements Disposable {
 	private static final int DEFAULT_SIZE = 1000;
 	private float[] vertices;
@@ -85,6 +86,7 @@ public class DecalBatch implements Disposable {
 	/** Initializes the batch with the given amount of decal objects the buffer is able to hold when full.
 	 * 
 	 * @param size Maximum size of decal objects to hold in memory */
+	@Initializer
 	public void initialize (int size) {
 		vertices = new float[size * Decal.SIZE];
 
@@ -118,6 +120,7 @@ public class DecalBatch implements Disposable {
 	/** Add a decal to the batch, marking it for later rendering
 	 * 
 	 * @param decal Decal to add for rendering */
+	@Initializer
 	public void add (Decal decal) {
 		int groupIndex = groupStrategy.decideGroup(decal);
 		Array<Decal> targetGroup = groupList.get(groupIndex);

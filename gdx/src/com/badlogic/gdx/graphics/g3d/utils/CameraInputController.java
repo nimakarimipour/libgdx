@@ -25,6 +25,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.Initializer;
 
 public class CameraInputController extends GestureDetector {
 	/** The button for rotating the camera. */
@@ -105,6 +106,7 @@ public class CameraInputController extends GestureDetector {
 		}
 
 		@Override
+		@Initializer
 		public boolean zoom (float initialDistance, float distance) {
 			float newZoom = distance - initialDistance;
 			float amount = newZoom - previousZoom;

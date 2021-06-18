@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.OrderedMap;
-
+import com.badlogic.gdx.Initializer;
 /** Packs {@link Pixmap pixmaps} into one or more {@link Page pages} to generate an atlas of pixmap instances. Provides means to
  * directly convert the pixmap atlas to a {@link TextureAtlas}. The packer supports padding and border pixel duplication,
  * specified during construction. The packer supports incremental inserts and updates of TextureAtlases generated with this class.
@@ -98,6 +98,7 @@ import com.badlogic.gdx.utils.OrderedMap;
  * @author mzechner
  * @author Nathan Sweet
  * @author Rob Rendell */
+
 public class PixmapPacker implements Disposable {
 	boolean packToTexture;
 	boolean disposed;
@@ -496,6 +497,7 @@ public class PixmapPacker implements Disposable {
 		/** Creates the texture if it has not been created, else reuploads the entire page pixmap to the texture if the pixmap has
 		 * changed since this method was last called.
 		 * @return true if the texture was created or reuploaded. */
+		@Initializer
 		public boolean updateTexture (TextureFilter minFilter, TextureFilter magFilter, boolean useMipMaps) {
 			if (texture != null) {
 				if (!dirty) return false;
@@ -532,6 +534,7 @@ public class PixmapPacker implements Disposable {
 	static public class GuillotineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
 
+		@Initializer
 		public void sort (Array<Pixmap> pixmaps) {
 			if (comparator == null) {
 				comparator = new Comparator<Pixmap>() {
@@ -636,6 +639,7 @@ public class PixmapPacker implements Disposable {
 	static public class SkylineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
 
+		@Initializer
 		public void sort (Array<Pixmap> images) {
 			if (comparator == null) {
 				comparator = new Comparator<Pixmap>() {

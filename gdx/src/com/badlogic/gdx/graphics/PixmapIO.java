@@ -35,10 +35,11 @@ import com.badlogic.gdx.utils.ByteArray;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-
+import com.badlogic.gdx.Initializer;
 /** Writes Pixmaps to various formats.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class PixmapIO {
 	/** Writes the {@link Pixmap} to the given file using a custom compression scheme. First three integers define the width, height
 	 * and format, remaining bytes are zlib compressed pixels. To be able to load the Pixmap to a Texture, use ".cim" as the file
@@ -228,6 +229,7 @@ public class PixmapIO {
 		}
 
 		/** Writes the pixmap to the stream without closing the stream. */
+		@Initializer
 		public void write (OutputStream output, Pixmap pixmap) throws IOException {
 			DeflaterOutputStream deflaterOutput = new DeflaterOutputStream(buffer, deflater);
 			DataOutputStream dataOutput = new DataOutputStream(output);

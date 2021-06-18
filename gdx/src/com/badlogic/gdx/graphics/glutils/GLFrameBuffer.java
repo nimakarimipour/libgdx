@@ -33,7 +33,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /**
  * <p>
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover most FBO uses. It will
@@ -51,6 +51,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * </p>
  *
  * @author mzechner, realitix */
+
 public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	/** the frame buffers **/
 	protected final static Map<Application, Array<GLFrameBuffer>> buffers = new HashMap<Application, Array<GLFrameBuffer>>();
@@ -109,6 +110,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	/** Override this method in a derived class to attach the backing texture to the GL framebuffer object. */
 	protected abstract void attachFrameBufferColorTexture (T texture);
 
+	@Initializer
 	protected void build () {
 		GL20 gl = Gdx.gl20;
 
@@ -492,18 +494,21 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 			return this;
 		}
 
+		@Initializer
 		public GLFrameBufferBuilder<U> addDepthRenderBuffer (int internalFormat) {
 			depthRenderBufferSpec = new FrameBufferRenderBufferAttachmentSpec(internalFormat);
 			hasDepthRenderBuffer = true;
 			return this;
 		}
 
+		@Initializer
 		public GLFrameBufferBuilder<U> addStencilRenderBuffer (int internalFormat) {
 			stencilRenderBufferSpec = new FrameBufferRenderBufferAttachmentSpec(internalFormat);
 			hasStencilRenderBuffer = true;
 			return this;
 		}
 
+		@Initializer
 		public GLFrameBufferBuilder<U> addStencilDepthPackedRenderBuffer (int internalFormat) {
 			packedStencilDepthRenderBufferSpec = new FrameBufferRenderBufferAttachmentSpec(internalFormat);
 			hasPackedStencilDepthRenderBuffer = true;

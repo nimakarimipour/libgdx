@@ -20,9 +20,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.NumberUtils;
-
+import com.badlogic.gdx.Initializer;
 /** @author Stefan Bachmann
  * @author Nathan Sweet */
+
 public class PolygonSprite {
 	PolygonRegion region;
 	private float x, y;
@@ -321,6 +322,7 @@ public class PolygonSprite {
 		return color;
 	}
 
+	@Initializer
 	public void setRegion (PolygonRegion region) {
 		this.region = region;
 

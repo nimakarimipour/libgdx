@@ -26,11 +26,12 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import com.badlogic.gdx.Initializer;
 /** It's the base class for any kind of influencer which operates on angular velocity and acceleration of the particles. All the
  * classes that will inherit this base class can and should be used only as sub-influencer of an instance of
  * {@link DynamicsInfluencer} .
  * @author Inferno */
+
 public abstract class DynamicsModifier extends Influencer {
 	protected static final Vector3 TMP_V1 = new Vector3(), TMP_V2 = new Vector3(), TMP_V3 = new Vector3();
 	protected static final Quaternion TMP_Q = new Quaternion();
@@ -46,6 +47,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);
 			accellerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
@@ -88,6 +90,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			ParticleChannels.Interpolation.id = controller.particleChannels.newId();
@@ -140,6 +143,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			ParticleChannels.Interpolation4.id = controller.particleChannels.newId();
@@ -194,6 +198,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			rotationalVelocity2dChannel = controller.particles.addChannel(ParticleChannels.AngularVelocity2D);
@@ -226,6 +231,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);
@@ -301,6 +307,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			accelerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
@@ -350,6 +357,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			directionalVelocityChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
@@ -400,6 +408,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			directionalVelocityChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
@@ -455,6 +464,7 @@ public abstract class DynamicsModifier extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			accelerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
@@ -492,6 +502,7 @@ public abstract class DynamicsModifier extends Influencer {
 	}
 
 	@Override
+	@Initializer
 	public void allocateChannels () {
 		lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 	}

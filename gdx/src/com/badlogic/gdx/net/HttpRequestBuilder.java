@@ -23,7 +23,7 @@ import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A builder for {@link HttpRequest}s.
  * 
  * Make sure to call {@link #newRequest()} first, then set the request up and obtain it via {@link #build()} when you are done.
@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.Pools;
  * It also offers a few utility methods to deal with content encoding and HTTP headers.
  * 
  * @author Daniel Holderbaum */
+
 public class HttpRequestBuilder {
 
 	/** Will be added as a prefix to each URL when {@link #url(String)} is called. Empty by default. */
@@ -45,6 +46,7 @@ public class HttpRequestBuilder {
 	private HttpRequest httpRequest;
 
 	/** Initializes the builder and sets it up to build a new {@link HttpRequest} . */
+	@Initializer
 	public HttpRequestBuilder newRequest () {
 		if (httpRequest != null) {
 			throw new IllegalStateException("A new request has already been started. Call HttpRequestBuilder.build() first.");

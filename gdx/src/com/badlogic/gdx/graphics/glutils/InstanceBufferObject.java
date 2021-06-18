@@ -26,13 +26,14 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-
+import com.badlogic.gdx.Initializer;
 /**
  * Modification of the {@link VertexBufferObject} class.
  * Sets the glVertexAttribDivisor for every {@link VertexAttribute} automatically.
  *
  * @author mrdlink
  */
+
 public class InstanceBufferObject implements InstanceData {
 
 	private VertexAttributes attributes;
@@ -88,6 +89,7 @@ public class InstanceBufferObject implements InstanceData {
 	 * @param ownsBuffer
 	 * @param value
 	 */
+	@Initializer
 	protected void setBuffer (Buffer data, boolean ownsBuffer, VertexAttributes value) {
 		if (isBound)
 			throw new GdxRuntimeException("Cannot change attributes while VBO is bound");

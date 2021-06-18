@@ -30,13 +30,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** ModelCache tries to combine multiple render calls into a single render call by merging them where possible. Can be used for
  * multiple type of models (e.g. varying vertex attributes or materials), the ModelCache will combine where possible. Can be used
  * dynamically (e.g. every frame) or statically (e.g. to combine part of scenery). Be aware that any combined vertices are
  * directly transformed, therefore the resulting {@link Renderable#worldTransform} might not be suitable for sorting anymore (such
  * as the default sorter of ModelBatch does).
  * @author Xoppa */
+
 public class ModelCache implements Disposable, RenderableProvider {
 	/** Allows to reuse one or more meshes while avoiding creating new objects. Depending on the implementation it might add memory
 	 * optimizations as well. Call the {@link #obtain(VertexAttributes, int, int)} method to obtain a mesh which can at minimum the
@@ -214,6 +215,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 	 * cache is not valid until the call to {@link #end()} is made. Use one of the add methods (e.g. {@link #add(Renderable)} or
 	 * {@link #add(RenderableProvider)}) to add renderables to the cache.
 	 * @param camera The {@link Camera} that will passed to the {@link RenderableSorter} */
+	@Initializer
 	public void begin (Camera camera) {
 		if (building) throw new GdxRuntimeException("Call end() after calling begin()");
 		building = true;

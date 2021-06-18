@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.NumberUtils;
-
+import com.badlogic.gdx.Initializer;
 /** Holds the geometry, color, and texture information for drawing 2D sprites using {@link Batch}. A Sprite has a position and a
  * size given as width and height. The position is relative to the origin of the coordinate system specified via
  * {@link Batch#begin()} and the respective matrices. A Sprite is always rectangular and its position (x, y) are located in the
@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.NumberUtils;
  * position.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class Sprite extends TextureRegion {
 	static final int VERTEX_SIZE = 2 + 1 + 2;
 	static final int SPRITE_SIZE = 4 * VERTEX_SIZE;
@@ -544,6 +545,7 @@ public class Sprite extends TextureRegion {
 	 * recomputed.
 	 * 
 	 * @return the bounding Rectangle */
+	@Initializer
 	public Rectangle getBoundingRectangle () {
 		final float[] vertices = getVertices();
 

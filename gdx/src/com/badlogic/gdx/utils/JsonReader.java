@@ -27,12 +27,13 @@ import java.io.Reader;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonValue.ValueType;
-
+import com.badlogic.gdx.Initializer;
 /** Lightweight JSON parser.<br>
  * <br>
  * The default behavior is to parse the JSON into a DOM containing {@link JsonValue} objects. Extend this class and override
  * methods to perform event driven parsing. When this is done, the parse methods will return null.
  * @author Nathan Sweet */
+
 public class JsonReader implements BaseJsonReader {
 	public JsonValue parse (String json) {
 		char[] data = json.toCharArray();
@@ -679,6 +680,7 @@ public class JsonReader implements BaseJsonReader {
 	}
 
 	/** @param name May be null. */
+	@Initializer
 	protected void startObject (@Null String name) {
 		JsonValue value = new JsonValue(ValueType.object);
 		if (current != null) addChild(name, value);
@@ -694,6 +696,7 @@ public class JsonReader implements BaseJsonReader {
 		current = value;
 	}
 
+	@Initializer
 	protected void pop () {
 		root = elements.pop();
 		if (current.size > 0) lastChild.pop();

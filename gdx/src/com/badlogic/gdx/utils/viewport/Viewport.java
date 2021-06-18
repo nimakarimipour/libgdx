@@ -27,10 +27,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
-
+import com.badlogic.gdx.Initializer;
 /** Manages a {@link Camera} and determines how world coordinates are mapped to and from the screen.
  * @author Daniel Holderbaum
  * @author Nathan Sweet */
+
 public abstract class Viewport {
 	private Camera camera;
 	private float worldWidth, worldHeight;
@@ -69,6 +70,7 @@ public abstract class Viewport {
 	/** Transforms the specified screen coordinate to world coordinates.
 	 * @return The vector that was passed in, transformed to world coordinates.
 	 * @see Camera#unproject(Vector3) */
+	@Initializer
 	public Vector2 unproject (Vector2 screenCoords) {
 		tmp.set(screenCoords.x, screenCoords.y, 1);
 		camera.unproject(tmp, screenX, screenY, screenWidth, screenHeight);

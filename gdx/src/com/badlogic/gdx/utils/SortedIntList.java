@@ -15,6 +15,8 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+import com.badlogic.gdx.Initializer;
+
 
 /** A sorted double linked list which uses ints for indexing
  * 
@@ -35,6 +37,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * @param index Index of the element
 	 * @param value Element to insert
 	 * @return Element replaced by newly inserted element, null if nothing was replaced */
+	@Initializer
 	public @Null E insert (int index, E value) {
 		if (first != null) {
 			Node<E> c = first;
@@ -129,6 +132,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 		}
 
 		@Override
+		@Initializer
 		public Node<E> next () {
 			previousPosition = position;
 			position = position.n;

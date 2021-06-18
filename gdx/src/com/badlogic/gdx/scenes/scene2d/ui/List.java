@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
  * {@link ChangeEvent} is fired when the list selection changes.
@@ -44,6 +44,7 @@ import com.badlogic.gdx.utils.Pools;
  * The preferred size of the list is determined by the text bounds of the items and the size of the {@link ListStyle#selection}.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class List<T> extends Widget implements Cullable {
 	ListStyle style;
 	final Array<T> items = new Array();
@@ -171,6 +172,7 @@ public class List<T> extends Widget implements Cullable {
 		return style;
 	}
 
+	@Initializer
 	public void layout () {
 		BitmapFont font = style.font;
 		Drawable selectedDrawable = style.selection;

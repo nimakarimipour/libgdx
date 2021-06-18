@@ -14,19 +14,21 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
-
+import com.badlogic.gdx.Initializer;
 /** Provides methods to sort arrays of objects. Sorting requires working memory and this class allows that memory to be reused to
  * avoid allocation. The sorting is otherwise identical to the Arrays.sort methods (uses timsort).<br>
  * <br>
  * Note that sorting primitive arrays with the Arrays.sort methods does not allocate memory (unless sorting large arrays of char,
  * short, or byte).
  * @author Nathan Sweet */
+
 public class Sort {
 	static private Sort instance;
 
 	private TimSort timSort;
 	private ComparableTimSort comparableTimSort;
 
+	@Initializer
 	public <T extends Comparable> void sort (Array<T> a) {
 		if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();
 		comparableTimSort.doSort(a.items, 0, a.size);
@@ -44,6 +46,7 @@ public class Sort {
 		comparableTimSort.doSort(a, fromIndex, toIndex);
 	}
 
+	@Initializer
 	public <T> void sort (Array<T> a, Comparator<? super T> c) {
 		if (timSort == null) timSort = new TimSort();
 		timSort.doSort(a.items, c, 0, a.size);

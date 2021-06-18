@@ -17,8 +17,9 @@
 package com.badlogic.gdx.maps.tiled;
 
 import com.badlogic.gdx.maps.MapLayer;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Layer for a TiledMap */
+
 public class TiledMapTileLayer extends MapLayer {
 
 	private int width;
@@ -104,6 +105,7 @@ public class TiledMapTileLayer extends MapLayer {
 		 * 
 		 * @param tile the {@link TiledMapTile} to use for this cell. 
 		 * @return this, for method chaining */
+		@Initializer
 		public Cell setTile (TiledMapTile tile) {
 			this.tile = tile;
 			return this;

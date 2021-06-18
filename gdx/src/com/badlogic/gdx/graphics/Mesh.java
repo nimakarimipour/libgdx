@@ -44,7 +44,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * A Mesh holds vertices composed of attributes specified by a {@link VertexAttributes} instance. The vertices are held either in
  * VRAM in form of vertex buffer objects or in RAM in form of vertex arrays. The former variant is more performant and is
@@ -66,6 +66,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * </p>
  *
  * @author mzechner, Dave Clayton <contact@redskyforge.com>, Xoppa */
+
 public class Mesh implements Disposable {
 	public enum VertexDataType {
 		VertexArray, VertexBufferObject, VertexBufferObjectSubData, VertexBufferObjectWithVAO
@@ -507,6 +508,7 @@ public class Mesh implements Disposable {
 	 *
 	 * @param shader the shader (does not bind the shader)
 	 * @param locations array containing the attribute locations. */
+	@Initializer
 	public void bind (final ShaderProgram shader, final int[] locations) {
 		vertices.bind(shader, locations);
 		if (instances != null && instances.getNumInstances() > 0) instances.bind(shader, locations);

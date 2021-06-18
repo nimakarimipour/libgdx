@@ -46,12 +46,13 @@ import com.badlogic.gdx.utils.IntIntMap;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.ShortArray;
-
+import com.badlogic.gdx.Initializer;
 /** Class to construct a mesh, optionally splitting it into one or more mesh parts. Before you can call any other method you must
  * call {@link #begin(VertexAttributes)} or {@link #begin(VertexAttributes, int)}. To use mesh parts you must call
  * {@link #part(String, int)} before you start building the part. The MeshPart itself is only valid after the call to
  * {@link #end()}.
  * @author Xoppa */
+
 public class MeshBuilder implements MeshPartBuilder {
 	/** maximum number of vertices mesh builder can hold (64k) */
 	public static final int MAX_VERTICES = 1 << 16;
@@ -157,6 +158,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	/** Begin building a mesh */
+	@Initializer
 	public void begin (final VertexAttributes attributes, int primitiveType) {
 		if (this.attributes != null) throw new RuntimeException("Call end() first");
 		this.attributes = attributes;
@@ -218,6 +220,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	 * @param id The id (name) of the part
 	 * @param primitiveType e.g. {@link GL20#GL_TRIANGLES} or {@link GL20#GL_LINES}
 	 * @param meshPart The part to receive the result */
+	@Initializer
 	public MeshPart part (final String id, final int primitiveType, MeshPart meshPart) {
 		if (this.attributes == null) throw new RuntimeException("Call begin() first");
 		endpart();

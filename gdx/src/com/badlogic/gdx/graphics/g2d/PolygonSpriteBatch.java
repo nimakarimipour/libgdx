@@ -30,7 +30,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
-
+import com.badlogic.gdx.Initializer;
 /** A PolygonSpriteBatch is used to draw 2D polygons that reference a texture (region). The class will batch the drawing commands
  * and optimize them for processing by the GPU.
  * <p>
@@ -55,6 +55,7 @@ import com.badlogic.gdx.math.Matrix4;
  * @author mzechner
  * @author Stefan Bachmann
  * @author Nathan Sweet */
+
 public class PolygonSpriteBatch implements PolygonBatch {
 	private Mesh mesh;
 
@@ -148,6 +149,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
+	@Initializer
 	public void begin () {
 		if (drawing) throw new IllegalStateException("PolygonSpriteBatch.end must be called before begin.");
 		renderCalls = 0;
@@ -203,6 +205,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
+	@Initializer
 	public void draw (PolygonRegion region, float x, float y) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 

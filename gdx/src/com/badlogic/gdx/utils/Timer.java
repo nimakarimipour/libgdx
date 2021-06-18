@@ -20,9 +20,10 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
-
+import com.badlogic.gdx.Initializer;
 /** Executes tasks in the future on the main loop thread.
  * @author Nathan Sweet */
+
 public class Timer {
 	// TimerThread access is synchronized using threadLock.
 	// Timer access is synchronized using the Timer instance.
@@ -234,6 +235,7 @@ public class Timer {
 		 * }
 		 * </pre>
 		 */
+		@Initializer
 		public boolean isScheduled () {
 			return timer != null;
 		}

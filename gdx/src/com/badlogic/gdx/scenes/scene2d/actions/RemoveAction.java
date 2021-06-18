@@ -18,9 +18,10 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
+import com.badlogic.gdx.Initializer;
 /** Removes an action from an actor.
  * @author Nathan Sweet */
+
 public class RemoveAction extends Action {
 	private Action action;
 
@@ -33,6 +34,7 @@ public class RemoveAction extends Action {
 		return action;
 	}
 
+	@Initializer
 	public void setAction (Action action) {
 		this.action = action;
 	}

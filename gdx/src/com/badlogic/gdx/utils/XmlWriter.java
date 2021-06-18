@@ -18,8 +18,9 @@ package com.badlogic.gdx.utils;
 
 import java.io.IOException;
 import java.io.Writer;
-
+import com.badlogic.gdx.Initializer;
 //@off
+
 /**
  * Builder style API for emitting XML. <pre>
  * StringWriter writer = new StringWriter();
@@ -58,6 +59,7 @@ public class XmlWriter extends Writer {
 			writer.write('\t');
 	}
 
+	@Initializer
 	public XmlWriter element (String name) throws IOException {
 		if (startElementContent()) writer.write('\n');
 		indent();

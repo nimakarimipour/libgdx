@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 /** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
  * @author Inferno */
+import com.badlogic.gdx.Initializer;
 public abstract class RegionInfluencer extends Influencer {
 
 	/** Assigns the first region of {@link RegionInfluencer#regions} to the particles. */
@@ -124,6 +125,7 @@ public abstract class RegionInfluencer extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
@@ -177,6 +179,7 @@ public abstract class RegionInfluencer extends Influencer {
 			}
 		}
 
+		@Initializer
 		public void set (AspectTextureRegion aspectTextureRegion) {
 			u = aspectTextureRegion.u;
 			v = aspectTextureRegion.v;
@@ -233,6 +236,7 @@ public abstract class RegionInfluencer extends Influencer {
 			regions.add(new AspectTextureRegion((AspectTextureRegion)regionInfluencer.regions.get(i)));
 		}
 	}
+	@Initializer
 	public void setAtlasName (String atlasName) {
 		this.atlasName = atlasName;
 	}
@@ -273,6 +277,7 @@ public abstract class RegionInfluencer extends Influencer {
 		}
 	}
 	@Override
+	@Initializer
 	public void allocateChannels () {
 		regionChannel = controller.particles.addChannel(ParticleChannels.TextureRegion);
 	}

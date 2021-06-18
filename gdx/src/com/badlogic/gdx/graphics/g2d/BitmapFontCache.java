@@ -26,12 +26,13 @@ import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** Caches glyph geometry for a BitmapFont, providing a fast way to render static text. This saves needing to compute the glyph
  * geometry each frame.
  * @author Nathan Sweet
  * @author davebaol
  * @author Alexander Dorokhov */
+
 public class BitmapFontCache {
 	static private final Color tempColor = new Color(1, 1, 1, 1);
 
@@ -383,6 +384,7 @@ public class BitmapFontCache {
 		currentTint = Color.WHITE_FLOAT_BITS; // Cached glyphs have changed, reset the current tint.
 	}
 
+	@Initializer
 	private void addGlyph (Glyph glyph, float x, float y, float color) {
 		final float scaleX = font.data.scaleX, scaleY = font.data.scaleY;
 		x += glyph.xoffset * scaleX;

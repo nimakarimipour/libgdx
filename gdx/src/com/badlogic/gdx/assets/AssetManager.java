@@ -62,9 +62,10 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.badlogic.gdx.utils.async.ThreadUtils;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
-
+import com.badlogic.gdx.Initializer;
 /** Loads and stores assets like textures, bitmapfonts, tile maps, sounds, music and so on.
  * @author mzechner */
+
 public class AssetManager implements Disposable {
 	final ObjectMap<Class, ObjectMap<String, RefCountedContainer>> assets = new ObjectMap();
 	final ObjectMap<String, Class> assetTypes = new ObjectMap();
@@ -609,6 +610,7 @@ public class AssetManager implements Disposable {
 
 	/** Handles a runtime/loading error in {@link #update()} by optionally invoking the {@link AssetErrorListener}.
 	 * @param t */
+	@Initializer
 	private void handleTaskError (Throwable t) {
 		log.error("Error loading asset.", t);
 

@@ -30,8 +30,9 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A text input field with multiple lines. */
+
 public class TextArea extends TextField {
 	/** Array storing lines breaks positions **/
 	IntArray linesBreak;
@@ -65,6 +66,7 @@ public class TextArea extends TextField {
 		super(text, style);
 	}
 
+	@Initializer
 	protected void initialize () {
 		super.initialize();
 		writeEnters = true;

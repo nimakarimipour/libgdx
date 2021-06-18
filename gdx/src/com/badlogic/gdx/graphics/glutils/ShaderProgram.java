@@ -37,7 +37,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectIntMap;
 import com.badlogic.gdx.utils.ObjectMap;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * A shader program encapsulates a vertex and fragment shader pair linked to form a shader program.
  * </p>
@@ -62,6 +62,7 @@ import com.badlogic.gdx.utils.ObjectMap;
  * </p>
  * 
  * @author mzechner */
+
 public class ShaderProgram implements Disposable {
 	/** default name for position attributes **/
 	public static final String POSITION_ATTRIBUTE = "a_position";
@@ -807,6 +808,7 @@ public class ShaderProgram implements Disposable {
 	IntBuffer params = BufferUtils.newIntBuffer(1);
 	IntBuffer type = BufferUtils.newIntBuffer(1);
 
+	@Initializer
 	private void fetchUniforms () {
 		params.clear();
 		Gdx.gl20.glGetProgramiv(program, GL20.GL_ACTIVE_UNIFORMS, params);
@@ -827,6 +829,7 @@ public class ShaderProgram implements Disposable {
 		}
 	}
 
+	@Initializer
 	private void fetchAttributes () {
 		params.clear();
 		Gdx.gl20.glGetProgramiv(program, GL20.GL_ACTIVE_ATTRIBUTES, params);

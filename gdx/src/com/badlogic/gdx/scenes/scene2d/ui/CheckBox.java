@@ -23,9 +23,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
-
+import com.badlogic.gdx.Initializer;
 /** A checkbox is a button that contains an image indicating the checked or unchecked state and a label.
  * @author Nathan Sweet */
+
 public class CheckBox extends TextButton {
 	private Image image;
 	private Cell imageCell;
@@ -49,6 +50,7 @@ public class CheckBox extends TextButton {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Initializer
 	public void setStyle (ButtonStyle style) {
 		if (!(style instanceof CheckBoxStyle)) throw new IllegalArgumentException("style must be a CheckBoxStyle.");
 		this.style = (CheckBoxStyle)style;

@@ -36,10 +36,11 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** This is a custom shader to render the particles. Usually is not required, because the {@link DefaultShader} will be used
  * instead. This shader will be used when dealing with billboards using GPU mode or point sprites.
  * @author inferno */
+
 public class ParticleShader extends BaseShader {
 	public enum ParticleType {
 		Billboard, Point
@@ -304,6 +305,7 @@ public class ParticleShader extends BaseShader {
 
 	Material currentMaterial;
 
+	@Initializer
 	protected void bindMaterial (final Renderable renderable) {
 		if (currentMaterial == renderable.material) return;
 

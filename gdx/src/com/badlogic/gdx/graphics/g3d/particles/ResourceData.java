@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
-
+import com.badlogic.gdx.Initializer;
 /** This class handles the assets and configurations required by a given resource when de/serialized. It's handy when a given
  * object or one of its members requires some assets to be loaded to work properly after being deserialized. To save the assets,
  * the object should implement the {@link Configurable} interface and obtain a {@link SaveData} object to store every required
@@ -38,6 +38,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
  * , while the global {@link SaveData} instances can be accessed in any order because require a unique {@link String} and are
  * stored in an {@link ObjectMap}.
  * @author Inferno */
+
 public class ResourceData<T> implements Json.Serializable {
 
 	/** This interface must be implemented by any class requiring additional assets to be loaded/saved */
@@ -217,6 +218,7 @@ public class ResourceData<T> implements Json.Serializable {
 	}
 
 	@Override
+	@Initializer
 	public void read (Json json, JsonValue jsonData) {
 		uniqueData = json.readValue("unique", ObjectMap.class, jsonData);
 		for (Entry<String, SaveData> entry : uniqueData.entries()) {

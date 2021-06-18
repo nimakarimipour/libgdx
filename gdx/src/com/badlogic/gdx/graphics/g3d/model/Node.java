@@ -24,10 +24,11 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** A node is part of a hierarchy of Nodes in a {@link Model}. A Node encodes a transform relative to its parents. A Node can have
  * child nodes. Optionally a node can specify a {@link MeshPart} and a {@link Material} to be applied to the mesh part.
  * @author badlogic */
+
 public class Node {
 	/** the id, may be null, FIXME is this unique? **/
 	public String id;
@@ -248,6 +249,7 @@ public class Node {
 	}
 
 	/** @return Whether (true) is this Node is a child node of another node or not (false). */
+	@Initializer
 	public boolean hasParent () {
 		return parent != null;
 	}
@@ -271,6 +273,7 @@ public class Node {
 	 * 
 	 * Override this method in your custom Node class to copy any additional fields you've added.
 	 * @return This Node for chaining */
+	@Initializer
 	protected Node set (Node other) {
 		detach();
 		id = other.id;

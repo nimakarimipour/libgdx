@@ -24,14 +24,16 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ModelInstanceParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** A {@link ParticleControllerRenderer} which will render the {@link ParticleController} of each particle.
  * @author Inferno */
+
 @SuppressWarnings("rawtypes")
 public class ParticleControllerControllerRenderer extends ParticleControllerRenderer {
 	ObjectChannel<ParticleController> controllerChannel;
 
 	@Override
+	@Initializer
 	public void init () {
 		controllerChannel = controller.particles.getChannel(ParticleChannels.ParticleController);
 		if (controllerChannel == null)

@@ -20,13 +20,15 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** Base class for an action that wraps another action.
  * @author Nathan Sweet */
+
 abstract public class DelegateAction extends Action {
 	protected Action action;
 
 	/** Sets the wrapped action. */
+	@Initializer
 	public void setAction (Action action) {
 		this.action = action;
 	}

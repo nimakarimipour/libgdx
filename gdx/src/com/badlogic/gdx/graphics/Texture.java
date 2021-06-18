@@ -31,7 +31,7 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
  * A Texture can be managed. If the OpenGL context is lost all managed textures get invalidated. This happens when a user switches
@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * <p>
  * A Texture must be disposed when it is no longer used
  * @author badlogicgames@gmail.com */
+
 public class Texture extends GLTexture {
 	private static AssetManager assetManager;
 	final static Map<Application, Array<Texture>> managedTextures = new HashMap<Application, Array<Texture>>();
@@ -148,6 +149,7 @@ public class Texture extends GLTexture {
 		if (data.isManaged()) addManagedTexture(Gdx.app, this);
 	}
 
+	@Initializer
 	public void load (TextureData data) {
 		if (this.data != null && data.isManaged() != this.data.isManaged())
 			throw new GdxRuntimeException("New data must have the same managed status as the old data");

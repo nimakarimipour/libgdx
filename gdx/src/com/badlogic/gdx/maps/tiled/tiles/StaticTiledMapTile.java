@@ -20,8 +20,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Represents a non changing {@link TiledMapTile} (can be cached) */
+
 public class StaticTiledMapTile implements TiledMapTile {
 
 	private int id;
@@ -59,6 +60,7 @@ public class StaticTiledMapTile implements TiledMapTile {
 	}
 
 	@Override
+	@Initializer
 	public MapProperties getProperties () {
 		if (properties == null) {
 			properties = new MapProperties();

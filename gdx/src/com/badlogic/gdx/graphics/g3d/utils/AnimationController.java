@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** Class to control one or more {@link Animation}s on a {@link ModelInstance}. Use the
  * {@link #setAnimation(String, int, float, AnimationListener)} method to change the current animation. Use the
  * {@link #animate(String, int, float, AnimationListener, float)} method to start an animation, optionally blending onto the
@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.Pool;
  * affect the same {@link Node}s).
  * 
  * @author Xoppa */
+
 public class AnimationController extends BaseAnimationController {
 
 	/** Listener that will be informed when an animation is looped or completed.
@@ -269,6 +270,7 @@ public class AnimationController extends BaseAnimationController {
 	}
 
 	/** Set the active animation, replacing any current animation. */
+	@Initializer
 	protected AnimationDesc setAnimation (final AnimationDesc anim) {
 		if (current == null)
 			current = anim;

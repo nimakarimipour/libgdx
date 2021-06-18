@@ -31,7 +31,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** Batches {@link Renderable} instances, fetches {@link Shader}s for them, sorts them and then renders them. Fetching the shaders
  * is done using a {@link ShaderProvider}, which defaults to {@link DefaultShaderProvider}. Sorting the renderables is done using
  * a {@link RenderableSorter}, which default to {@link DefaultRenderableSorter}.
@@ -41,6 +41,7 @@ import com.badlogic.gdx.utils.Pool;
  * To provide multiple {@link Renderable}s at once a {@link RenderableProvider} can be used, e.g. a {@link ModelInstance}.
  * 
  * @author xoppa, badlogic */
+
 public class ModelBatch implements Disposable {
 	protected static class RenderablePool extends FlushablePool<Renderable> {
 		@Override
@@ -156,6 +157,7 @@ public class ModelBatch implements Disposable {
 	/** Change the camera in between {@link #begin(Camera)} and {@link #end()}. This causes the batch to be flushed. Can only be
 	 * called after the call to {@link #begin(Camera)} and before the call to {@link #end()}.
 	 * @param cam The new camera to use. */
+	@Initializer
 	public void setCamera (final Camera cam) {
 		if (camera == null) throw new GdxRuntimeException("Call begin() first.");
 		if (renderables.size > 0) flush();

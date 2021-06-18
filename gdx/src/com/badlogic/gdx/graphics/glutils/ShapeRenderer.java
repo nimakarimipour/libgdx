@@ -25,7 +25,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
-
+import com.badlogic.gdx.Initializer;
 /** Renders points, lines, shape outlines and filled shapes.
  * <p>
  * By default a 2D orthographic projection with the origin in the lower left corner is used and units are specified in screen
@@ -75,6 +75,7 @@ import com.badlogic.gdx.utils.Disposable;
  * @author mzechner
  * @author stbachmann
  * @author Nathan Sweet */
+
 public class ShapeRenderer implements Disposable {
 	/** Shape types to be used with {@link #begin(ShapeType)}.
 	 * @author mzechner, stbachmann */
@@ -556,6 +557,7 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Draws a line using a rotated rectangle, where with one edge is centered at x1, y1 and the opposite edge centered at x2, y2. */
+	@Initializer
 	public void rectLine (float x1, float y1, float x2, float y2, float width) {
 		check(ShapeType.Line, ShapeType.Filled, 8);
 		float colorBits = color.toFloatBits();

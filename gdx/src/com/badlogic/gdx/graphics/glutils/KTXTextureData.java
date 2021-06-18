@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.glutils.ETC1.ETC1Data;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-
+import com.badlogic.gdx.Initializer;
 /** A KTXTextureData holds the data from a KTX (or zipped KTX file, aka ZKTX). That is to say an OpenGL ready texture data. The KTX
  * file format is just a thin wrapper around OpenGL textures and therefore is compatible with most OpenGL texture capabilities
  * like texture compression, cubemapping, mipmapping, etc.
@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.StreamUtils;
  * For example, KTXTextureData can be used for {@link Texture} or {@link Cubemap}.
  * 
  * @author Vincent Bousquet */
+
 public class KTXTextureData implements TextureData, CubemapData {
 
 	// The file we are loading
@@ -70,6 +71,7 @@ public class KTXTextureData implements TextureData, CubemapData {
 	}
 
 	@Override
+	@Initializer
 	public void prepare () {
 		if (compressedData != null) throw new GdxRuntimeException("Already prepared");
 		if (file == null) throw new GdxRuntimeException("Need a file to load from");

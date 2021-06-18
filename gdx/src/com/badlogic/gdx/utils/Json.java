@@ -39,10 +39,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
+import com.badlogic.gdx.Initializer;
 /** Reads/writes Java objects to/from JSON, automatically. See the wiki for usage:
  * https://github.com/libgdx/libgdx/wiki/Reading-and-writing-JSON
  * @author Nathan Sweet */
+
 public class Json {
 	static private final boolean debug = false;
 
@@ -139,6 +140,7 @@ public class Json {
 
 	/** Sets the serializer to use when the type being deserialized is not known (null).
 	 * @param defaultSerializer May be null. */
+	@Initializer
 	public void setDefaultSerializer (Serializer defaultSerializer) {
 		this.defaultSerializer = defaultSerializer;
 	}
@@ -278,6 +280,7 @@ public class Json {
 	}
 
 	/** Sets the writer where JSON output will be written. This is only necessary when not using the toJson methods. */
+	@Initializer
 	public void setWriter (Writer writer) {
 		if (!(writer instanceof JsonWriter)) writer = new JsonWriter(writer);
 		this.writer = (JsonWriter)writer;

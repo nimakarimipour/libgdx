@@ -22,10 +22,11 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ArrayMap;
-
+import com.badlogic.gdx.Initializer;
 /** A combination of {@link MeshPart} and {@link Material}, used to represent a {@link Node}'s graphical properties. A NodePart is
  * the smallest visible part of a {@link Model}, each NodePart implies a render call.
  * @author badlogic, Xoppa */
+
 public class NodePart {
 	/** The MeshPart (shape) to render. Must not be null. */
 	public MeshPart meshPart;
@@ -71,6 +72,7 @@ public class NodePart {
 		return new NodePart().set(this);
 	}
 
+	@Initializer
 	protected NodePart set (NodePart other) {
 		meshPart = new MeshPart(other.meshPart);
 		material = other.material;

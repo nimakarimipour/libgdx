@@ -34,7 +34,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A group that sizes and positions children using table constraints.
  * <p>
  * Children added with {@link #add(Actor...)} (and similar methods returning a {@link Cell}) are laid out in rows and columns.
@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.Pools;
  * <p>
  * The preferred and minimum sizes are that of the children laid out in columns and rows.
  * @author Nathan Sweet */
+
 public class Table extends WidgetGroup {
 	static public Color debugTableColor = new Color(0, 0, 1, 1);
 	static public Color debugCellColor = new Color(1, 0, 0, 1);
@@ -778,6 +779,7 @@ public class Table extends WidgetGroup {
 		return array;
 	}
 
+	@Initializer
 	private void computeSize () {
 		sizeInvalid = false;
 
@@ -1202,6 +1204,7 @@ public class Table extends WidgetGroup {
 		}
 	}
 
+	@Initializer
 	private void clearDebugRects () {
 		if (debugRects == null) debugRects = new Array();
 		DebugRect.pool.freeAll(debugRects);

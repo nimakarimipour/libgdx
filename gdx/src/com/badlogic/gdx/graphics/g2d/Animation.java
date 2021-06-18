@@ -19,7 +19,7 @@ package com.badlogic.gdx.graphics.g2d;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * An Animation stores a list of objects representing an animated sequence, e.g. for running or jumping. Each
  * object in the Animation is called a key frame, and multiple key frames make up the animation.
@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.reflect.ArrayReflection;
  * <p><code>Animation&lt;TextureRegion&gt; myAnimation = new Animation&lt;TextureRegion&gt;(...);</code>
  * 
  * @author mzechner */
+
 public class Animation<T> {
 	
 	/** Defines possible playback modes for an {@link Animation}. */
@@ -198,6 +199,7 @@ public class Animation<T> {
 
 	/** Sets duration a frame will be displayed.
 	 * @param frameDuration in seconds */
+	@Initializer
 	public void setFrameDuration (float frameDuration) {
 		this.frameDuration = frameDuration;
 		this.animationDuration = keyFrames.length * frameDuration;

@@ -26,9 +26,10 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** The base class of all the {@link ParticleValue} values which spawn a particle on a mesh shape.
  * @author Inferno */
+
 public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 	public static class Triangle {
 		float x1, y1, z1, x2, y2, z2, x3, y3, z3;
@@ -77,6 +78,7 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 		setMesh(spawnShapeValue.mesh, spawnShapeValue.model);
 	}
 
+	@Initializer
 	public void setMesh (Mesh mesh, Model model) {
 		if (mesh.getVertexAttribute(Usage.Position) == null)
 			throw new GdxRuntimeException("Mesh vertices must have Usage.Position");

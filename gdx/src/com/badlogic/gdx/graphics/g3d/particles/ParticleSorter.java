@@ -21,9 +21,10 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRende
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-
+import com.badlogic.gdx.Initializer;
 /** This class is used by particle batches to sort the particles before rendering.
  * @author Inferno */
+
 public abstract class ParticleSorter {
 	static final Vector3 TMP_V1 = new Vector3();
 
@@ -150,6 +151,7 @@ public abstract class ParticleSorter {
 	 *         generated, this is an absolute offset considering a BIG output array). */
 	public abstract <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData);
 
+	@Initializer
 	public void setCamera (Camera camera) {
 		this.camera = camera;
 	}

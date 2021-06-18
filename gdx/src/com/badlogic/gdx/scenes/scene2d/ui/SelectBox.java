@@ -43,7 +43,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A select box (aka a drop-down list) allows a user to choose one of a number of values from a list. When inactive, the selected
  * value is displayed. When activated, it shows the list of values that may be selected.
  * <p>
@@ -53,6 +53,7 @@ import com.badlogic.gdx.utils.Pools;
  * {@link SelectBoxStyle#background}.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class SelectBox<T> extends Widget implements Disableable {
 	static final Vector2 temp = new Vector2();
 
@@ -177,6 +178,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 		return items;
 	}
 
+	@Initializer
 	public void layout () {
 		Drawable bg = style.background;
 		BitmapFont font = style.font;

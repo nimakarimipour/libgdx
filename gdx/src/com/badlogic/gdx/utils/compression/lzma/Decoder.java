@@ -20,6 +20,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.utils.compression.lz.OutWindow;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeDecoder;
+import com.badlogic.gdx.Initializer;
 
 public class Decoder {
 	class LenDecoder {
@@ -95,6 +96,7 @@ public class Decoder {
 		int m_NumPosBits;
 		int m_PosMask;
 
+		@Initializer
 		public void Create (int numPosBits, int numPrevBits) {
 			if (m_Coders != null && m_NumPrevBits == numPrevBits && m_NumPosBits == numPosBits) return;
 			m_NumPosBits = numPosBits;

@@ -31,7 +31,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
-
+import com.badlogic.gdx.Initializer;
 /** A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
  * 
  * It requires a map-level property called 'atlas' with its value being the relative path to the TextureAtlas. The atlas must have
@@ -40,6 +40,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
  * 
  * @author Justin Shapcott
  * @author Manuel Bua */
+
 public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasTiledMapLoaderParameters> {
 
 	public static class AtlasTiledMapLoaderParameters extends BaseTmxMapLoader.Parameters {
@@ -106,6 +107,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 		return load(fileName, new AtlasTiledMapLoaderParameters());
 	}
 
+	@Initializer
 	public TiledMap load (String fileName, AtlasTiledMapLoaderParameters parameter) {
 		FileHandle tmxFile = resolve(fileName);
 

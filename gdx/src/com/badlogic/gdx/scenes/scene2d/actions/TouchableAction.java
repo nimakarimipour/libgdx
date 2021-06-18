@@ -19,9 +19,10 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-
+import com.badlogic.gdx.Initializer;
 /** Sets the actor's {@link Actor#setTouchable(Touchable) touchability}.
  * @author Nathan Sweet */
+
 public class TouchableAction extends Action {
 	private Touchable touchable;
 
@@ -34,6 +35,7 @@ public class TouchableAction extends Action {
 		return touchable;
 	}
 
+	@Initializer
 	public void setTouchable (Touchable touchable) {
 		this.touchable = touchable;
 	}

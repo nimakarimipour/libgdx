@@ -17,7 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
-
+import com.badlogic.gdx.Initializer;
 /** An array that allows modification during iteration. Guarantees that array entries provided by {@link #begin()} between indexes
  * 0 and {@link #size} at the time begin was called will not be modified until {@link #end()} is called. If modification of the
  * SnapshotArray occurs between begin/end, the backing array is copied prior to the modification, ensuring that the backing array
@@ -40,6 +40,7 @@ import java.util.Comparator;
  * </pre>
  * 
  * @author Nathan Sweet */
+
 public class SnapshotArray<T> extends Array<T> {
 	private T[] snapshot, recycled;
 	private int snapshots;
@@ -77,6 +78,7 @@ public class SnapshotArray<T> extends Array<T> {
 	}
 
 	/** Returns the backing array, which is guaranteed to not be modified before {@link #end()}. */
+	@Initializer
 	public T[] begin () {
 		modified();
 		snapshot = items;

@@ -23,9 +23,10 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import com.badlogic.gdx.Initializer;
 /** It's an {@link Influencer} which controls particles color and transparency.
  * @author Inferno */
+
 public abstract class ColorInfluencer extends Influencer {
 
 	/** It's an {@link Influencer} which assigns a random color when a particle is activated. */
@@ -33,6 +34,7 @@ public abstract class ColorInfluencer extends Influencer {
 		FloatChannel colorChannel;
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 		}
@@ -77,6 +79,7 @@ public abstract class ColorInfluencer extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			super.allocateChannels();
 			// Hack this allows to share the channel descriptor structure but using a different id temporary
@@ -133,6 +136,7 @@ public abstract class ColorInfluencer extends Influencer {
 	FloatChannel colorChannel;
 
 	@Override
+	@Initializer
 	public void allocateChannels () {
 		colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 	}

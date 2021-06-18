@@ -25,7 +25,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** A Renderable contains all information about a single render instruction (typically a draw call).</p>
  * 
  * It defines what (the shape), how (the material) and where (the transform) should be rendered by which shader.</p>
@@ -62,6 +62,7 @@ import com.badlogic.gdx.utils.Pool;
  * use that shader instead of the default shader. Therefor, to assure the default shader is used, the {@link #shader} member must
  * be set to null.</p>
  * @author badlogic, xoppa */
+
 public class Renderable {
 	/** Used to specify the transformations (like translation, scale and rotation) to apply to the shape. In other words: it is used
 	 * to transform the vertices from model space into world space. **/
@@ -87,6 +88,7 @@ public class Renderable {
 	/** User definable value, may be null. */
 	public Object userData;
 
+	@Initializer
 	public Renderable set (Renderable renderable) {
 		worldTransform.set(renderable.worldTransform);
 		material = renderable.material;

@@ -3,6 +3,7 @@
 package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
+import com.badlogic.gdx.Initializer;
 
 public class OutWindow {
 	byte[] _buffer;
@@ -11,6 +12,7 @@ public class OutWindow {
 	int _streamPos;
 	java.io.OutputStream _stream;
 
+	@Initializer
 	public void Create (int windowSize) {
 		if (_buffer == null || _windowSize != windowSize) _buffer = new byte[windowSize];
 		_windowSize = windowSize;
@@ -18,6 +20,7 @@ public class OutWindow {
 		_streamPos = 0;
 	}
 
+	@Initializer
 	public void SetStream (java.io.OutputStream stream) throws IOException {
 		ReleaseStream();
 		_stream = stream;

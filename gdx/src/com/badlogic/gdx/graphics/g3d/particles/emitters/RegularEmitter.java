@@ -23,9 +23,10 @@ import com.badlogic.gdx.graphics.g3d.particles.values.RangedNumericValue;
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import com.badlogic.gdx.Initializer;
 /** It's a generic use {@link Emitter} which fits most of the particles simulation scenarios.
  * @author Inferno */
+
 public class RegularEmitter extends Emitter implements Json.Serializable {
 
 	/** Possible emission modes. Emission mode does not affect already emitted particles. */
@@ -102,6 +103,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		durationTimer = duration;
 	}
 
+	@Initializer
 	public void activateParticles (int startIndex, int count) {
 		int currentTotaLife = life + (int)(lifeDiff * lifeValue.getScale(percent)), currentLife = currentTotaLife;
 		int offsetTime = (int)(lifeOffset + lifeOffsetDiff * lifeOffsetValue.getScale(percent));

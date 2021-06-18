@@ -19,8 +19,9 @@ package com.badlogic.gdx.maps.tiled;
 import java.util.Iterator;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.IntMap;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Set of {@link TiledMapTile} instances used to compose a TiledMapLayer */
+
 public class TiledMapTileSet implements Iterable<TiledMapTile> {
 
 	private String name;
@@ -35,6 +36,7 @@ public class TiledMapTileSet implements Iterable<TiledMapTile> {
 	}
 
 	/** @param name new name for the tileset */
+	@Initializer
 	public void setName (String name) {
 		this.name = name;
 	}
