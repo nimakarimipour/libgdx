@@ -27,6 +27,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class ParticleEmitter {
 	static private final int UPDATE_SCALE = 1 << 0;
@@ -152,6 +154,7 @@ public class ParticleEmitter {
 		spawnHeightValue.setAlwaysActive(true);
 	}
 
+	@Initializer
 	public void setMaxParticleCount (int maxParticleCount) {
 		this.maxParticleCount = maxParticleCount;
 		active = new boolean[maxParticleCount];
@@ -394,6 +397,7 @@ public class ParticleEmitter {
 		return particles;
 	}
 
+	@Initializer
 	private void activateParticle (int index) {
 		Sprite sprite = null;
 		switch (spriteMode) {
@@ -955,6 +959,7 @@ public class ParticleEmitter {
 	}
 
 	/** Returns the bounding box for all active particles. z axis will always be zero. */
+	@Initializer
 	public BoundingBox getBoundingBox () {
 		if (bounds == null) bounds = new BoundingBox();
 
@@ -973,6 +978,7 @@ public class ParticleEmitter {
 		return bounds;
 	}
 
+	@Initializer
 	protected RangedNumericValue[] getXSizeValues () {
 		if (xSizeValues == null) {
 			xSizeValues = new RangedNumericValue[3];
@@ -983,6 +989,7 @@ public class ParticleEmitter {
 		return xSizeValues;
 	}
 
+	@Initializer
 	protected RangedNumericValue[] getYSizeValues () {
 		if (ySizeValues == null) {
 			ySizeValues = new RangedNumericValue[3];
@@ -993,6 +1000,7 @@ public class ParticleEmitter {
 		return ySizeValues;
 	}
 
+	@Initializer
 	protected RangedNumericValue[] getMotionValues () {
 		if (motionValues == null) {
 			motionValues = new RangedNumericValue[3];

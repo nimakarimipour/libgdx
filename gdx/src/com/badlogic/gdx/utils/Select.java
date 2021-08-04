@@ -17,7 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
-
+import javax.annotation.Nullable;
 /** This class is for selecting a ranked element (kth ordered statistic) from an unordered list in faster time than sorting the
  * whole array. Typical applications include finding the nearest enemy unit(s), and other operations which are likely to run as
  * often as every x frames. Certain values of k will result in a partial sorting of the Array.
@@ -30,8 +30,11 @@ import java.util.Comparator;
  * single-pass for k=min and k=max, and Hoare's quickselect for values in between.
  * </p>
  * @author Jon Renner */
+
 public class Select {
+	@Nullable
 	private static Select instance;
+	@Nullable
 	private QuickSelect quickSelect;
 
 	/** Provided for convenience */

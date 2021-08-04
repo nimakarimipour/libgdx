@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Sort;
-
+import javax.annotation.Nullable;
 /** <p>
  * Minimalistic grouping strategy useful for orthogonal scenes where the camera faces the negative z axis. Handles enabling and
  * disabling of blending and uses world-z only front to back sorting for transparent decals.
@@ -66,6 +66,7 @@ import com.badlogic.gdx.utils.Sort;
  * </tr>
  * </table>
  * </p> */
+
 public class SimpleOrthoGroupStrategy implements GroupStrategy {
 	private Comparator comparator = new Comparator();
 	private static final int GROUP_OPAQUE = 0;
@@ -115,7 +116,7 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 		}
 	}
 
-	@Override
+	@Override	@Nullable
 	public ShaderProgram getGroupShader (int group) {
 		return null;
 	}

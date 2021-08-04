@@ -41,9 +41,10 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** This class is used to draw particles as point sprites.
  * @author Inferno */
+
 public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteControllerRenderData> {
 	private static boolean pointSpritesEnabled = false;
 	protected static final Vector3 TMP_V1 = new Vector3();
@@ -89,6 +90,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 	}
 
 	@Override
+	@Initializer
 	protected void allocParticlesData (int capacity) {
 		vertices = new float[capacity * CPU_VERTEX_SIZE];
 		if (renderable.meshPart.mesh != null) renderable.meshPart.mesh.dispose();

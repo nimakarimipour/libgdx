@@ -17,9 +17,10 @@
 package com.badlogic.gdx.utils.reflect;
 
 import java.lang.reflect.Modifier;
-
+import javax.annotation.Nullable;
 /** Utilities for Class reflection.
  * @author nexsoftware */
+
 public final class ClassReflection {
 
 	/** Returns the Class object associated with the class or interface with the supplied string name. */
@@ -32,7 +33,7 @@ public final class ClassReflection {
 	}
 
 	/** Returns the simple name of the underlying class as supplied in the source code. */
-	static public String getSimpleName (Class c) {
+	static public String getSimpleName (@Nullable Class c) {
 		return c.getSimpleName();
 	}
 
@@ -246,6 +247,7 @@ public final class ClassReflection {
 
 	/** Returns an {@link Annotation} object reflecting the annotation provided, or null if this class doesn't have such an
 	 * annotation. This is a convenience function if the caller knows already which annotation type he's looking for. */
+	@Nullable
 	static public Annotation getAnnotation (Class c, Class<? extends java.lang.annotation.Annotation> annotationType) {
 		java.lang.annotation.Annotation annotation = c.getAnnotation(annotationType);
 		if (annotation != null) return new Annotation(annotation);
@@ -265,6 +267,7 @@ public final class ClassReflection {
 
 	/** Returns an {@link Annotation} object reflecting the annotation provided, or null if this class doesn't have such an
 	 * annotation. This is a convenience function if the caller knows already which annotation type he's looking for. */
+	@Nullable
 	static public Annotation getDeclaredAnnotation (Class c, Class<? extends java.lang.annotation.Annotation> annotationType) {
 		java.lang.annotation.Annotation[] annotations = c.getDeclaredAnnotations();
 		for (java.lang.annotation.Annotation annotation : annotations) {

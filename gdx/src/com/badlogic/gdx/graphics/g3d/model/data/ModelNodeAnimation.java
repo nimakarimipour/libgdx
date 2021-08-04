@@ -19,9 +19,11 @@ package com.badlogic.gdx.graphics.g3d.model.data;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class ModelNodeAnimation {
 	/** the id of the node animated by this animation FIXME should be nodeId **/
+	@Nullable
 	public String nodeId;
 	/** the keyframes, defining the translation of a node for a specific timestamp **/
 	public Array<ModelNodeKeyframe<Vector3>> translation;

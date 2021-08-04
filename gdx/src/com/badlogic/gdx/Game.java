@@ -27,6 +27,7 @@ public abstract class Game implements ApplicationListener {
 	protected Screen screen;
 
 	@Override
+	@Initializer
 	public void dispose () {
 		if (screen != null) screen.hide();
 	}

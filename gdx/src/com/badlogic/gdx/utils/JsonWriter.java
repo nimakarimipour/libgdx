@@ -21,12 +21,16 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
-
+import com.badlogic.gdx.Initializer;
 /** Builder style API for emitting JSON.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class JsonWriter extends Writer {
 	final Writer writer;
 	private final Array<JsonObject> stack = new Array();
+	@Nullable
 	private JsonObject current;
 	private boolean named;
 	private OutputType outputType = OutputType.json;
@@ -51,6 +55,7 @@ public class JsonWriter extends Writer {
 		this.quoteLongValues = quoteLongValues;
 	}
 
+	@Initializer
 	public JsonWriter name (String name) throws IOException {
 		if (current == null || current.array) throw new IllegalStateException("Current item must be an object.");
 		if (!current.needsComma)
@@ -75,7 +80,7 @@ public class JsonWriter extends Writer {
 		return this;
 	}
 
-	public JsonWriter value (Object value) throws IOException {
+	public JsonWriter value (@Nullable Object value) throws IOException {
 		if (quoteLongValues
 			&& (value instanceof Long || value instanceof Double || value instanceof BigDecimal || value instanceof BigInteger)) {
 			value = value.toString();

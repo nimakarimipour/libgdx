@@ -20,9 +20,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
-
+import com.badlogic.gdx.Initializer;
 /** Drawable for a {@link Sprite}.
  * @author Nathan Sweet */
+
 public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
 	private Sprite sprite;
 
@@ -39,6 +40,7 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
 		setSprite(drawable.sprite);
 	}
 
+	@Initializer
 	public void draw (Batch batch, float x, float y, float width, float height) {
 		Color spriteColor = sprite.getColor();
 		float oldColor = spriteColor.toFloatBits();

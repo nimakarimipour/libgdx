@@ -22,11 +22,12 @@ import java.net.Socket;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.InputProcessor;
-
+import javax.annotation.Nullable;
 /** Sends all inputs from touch, key, accelerometer and compass to a {@link RemoteInput} at the given ip/port. Instantiate this and
  * call sendUpdate() periodically.
  * 
  * @author mzechner */
+
 public class RemoteSender implements InputProcessor {
 	private DataOutputStream out;
 	private boolean connected = false;

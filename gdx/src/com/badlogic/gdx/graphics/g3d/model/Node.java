@@ -24,10 +24,13 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** A node is part of a hierarchy of Nodes in a {@link Model}. A Node encodes a transform relative to its parents. A Node can have
  * child nodes. Optionally a node can specify a {@link MeshPart} and a {@link Material} to be applied to the mesh part.
  * @author badlogic */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Node {
 	/** the id, may be null, FIXME is this unique? **/
 	public String id;
@@ -51,6 +54,7 @@ public class Node {
 
 	public Array<NodePart> parts = new Array<NodePart>(2);
 
+	@Nullable
 	protected Node parent;
 	private final Array<Node> children = new Array<Node>(2);
 
@@ -243,11 +247,13 @@ public class Node {
 	}
 
 	/** @return The parent node that holds this node as child node, may be null. */
+	@Nullable
 	public Node getParent () {
 		return parent;
 	}
 
 	/** @return Whether (true) is this Node is a child node of another node or not (false). */
+	@Initializer
 	public boolean hasParent () {
 		return parent != null;
 	}
@@ -271,6 +277,7 @@ public class Node {
 	 * 
 	 * Override this method in your custom Node class to copy any additional fields you've added.
 	 * @return This Node for chaining */
+	@Initializer
 	protected Node set (Node other) {
 		detach();
 		id = other.id;
@@ -295,7 +302,7 @@ public class Node {
 	/** Helper method to recursive fetch a node from an array
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
-	public static Node getNode (final Array<Node> nodes, final String id, boolean recursive, boolean ignoreCase) {
+	public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
 		final int n = nodes.size;
 		Node node;
 		if (ignoreCase) {

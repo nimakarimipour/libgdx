@@ -19,8 +19,9 @@ package com.badlogic.gdx.maps.tiled;
 import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
-
+import javax.annotation.Nullable;
 /** @brief Collection of {@link TiledMapTileSet} */
+
 public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
 
 	private Array<TiledMapTileSet> tilesets;
@@ -66,6 +67,7 @@ public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
 
 	/** @param id id of the {@link TiledMapTile} to get.
 	 * @return tile with matching id, null if it doesn't exist */
+	@Nullable
 	public TiledMapTile getTile (int id) {
 		// The purpose of backward iteration here is to maintain backwards compatibility
 		// with maps created with earlier versions of a shared tileset.  The assumption

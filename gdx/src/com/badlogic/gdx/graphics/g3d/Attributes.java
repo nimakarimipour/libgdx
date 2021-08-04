@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, Comparable<Attributes> {
 	protected long mask;

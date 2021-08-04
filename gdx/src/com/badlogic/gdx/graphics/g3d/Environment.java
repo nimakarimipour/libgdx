@@ -26,10 +26,12 @@ import com.badlogic.gdx.graphics.g3d.environment.ShadowMap;
 import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 public class Environment extends Attributes {
 
 	/** Shadow map used to render shadows */
+	@Nullable
 	public ShadowMap shadowMap;
 
 	public Environment () {

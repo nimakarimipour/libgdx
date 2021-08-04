@@ -21,9 +21,10 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import com.badlogic.gdx.graphics.GL20;
-
+import javax.annotation.Nullable;
 /** @author Daniel Holderbaum
  * @author Jan Polák */
+
 public class GL20Interceptor extends GLInterceptor implements GL20 {
 
 	protected final GL20 gl20;
@@ -417,7 +418,7 @@ public class GL20Interceptor extends GLInterceptor implements GL20 {
 	}
 
 	@Override
-	public void glBufferData (int target, int size, Buffer data, int usage) {
+	public void glBufferData (int target, int size, @Nullable Buffer data, int usage) {
 		calls++;
 		gl20.glBufferData(target, size, data, usage);
 		check();

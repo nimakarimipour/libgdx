@@ -13,10 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
-
+import javax.annotation.Nullable;
 /** A group with a single child that sizes and positions the child using constraints. This provides layout similar to a
  * {@link Table} with a single cell but is more lightweight.
  * @author Nathan Sweet */
+
 public class Container<T extends Actor> extends WidgetGroup {
 	private @Null T actor;
 	private Value minWidth = Value.minWidth, minHeight = Value.minHeight;
@@ -153,7 +154,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		if (actor instanceof Layout) ((Layout)actor).validate();
 	}
 
-	public void setCullingArea (Rectangle cullingArea) {
+	public void setCullingArea (@Nullable Rectangle cullingArea) {
 		super.setCullingArea(cullingArea);
 		if (fillX == 1 && fillY == 1 && actor instanceof Cullable) ((Cullable)actor).setCullingArea(cullingArea);
 	}

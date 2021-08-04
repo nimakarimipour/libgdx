@@ -27,11 +27,12 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.badlogic.gdx.utils.async.AsyncResult;
 import com.badlogic.gdx.utils.async.AsyncTask;
-
+import javax.annotation.Nullable;
 /** Responsible for loading an asset through an {@link AssetLoader} based on an {@link AssetDescriptor}.
  * Please don't forget to update the overriding emu file on GWT backend when changing this file!
  * 
  * @author mzechner */
+
 class AssetLoadingTask implements AsyncTask<Void> {
 	AssetManager manager;
 	final AssetDescriptor assetDesc;
@@ -41,7 +42,9 @@ class AssetLoadingTask implements AsyncTask<Void> {
 
 	volatile boolean asyncDone;
 	volatile boolean dependenciesLoaded;
+	@Nullable
 	volatile Array<AssetDescriptor> dependencies;
+	@Nullable
 	volatile AsyncResult<Void> depsFuture;
 	volatile AsyncResult<Void> loadFuture;
 	volatile Object asset;

@@ -41,11 +41,12 @@ import java.io.InputStreamReader;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
-
+import javax.annotation.Nullable;
 /** Loads images from texture atlases created by TexturePacker.<br>
  * <br>
  * A TextureAtlas must be disposed to free up the resources consumed by the backing textures.
  * @author Nathan Sweet */
+
 public class TextureAtlas implements Disposable {
 	static final String[] tuple = new String[4];
 

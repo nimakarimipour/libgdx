@@ -33,9 +33,10 @@ import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-
+import javax.annotation.Nullable;
 /** loads {@link PolygonRegion PolygonRegions} using a {@link com.badlogic.gdx.graphics.g2d.PolygonRegionLoader}
  * @author dermetfan */
+
 public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, PolygonRegionParameters> {
 
 	public static class PolygonRegionParameters extends AssetLoaderParameters<PolygonRegion> {
@@ -76,6 +77,7 @@ public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, P
 	 * given file with the same name and the first found extension in {@link PolygonRegionParameters#textureExtensions
 	 * params.textureExtensions} will be used. If no suitable file is found, the returned Array will be empty. */
 	@Override
+	@Nullable
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, PolygonRegionParameters params) {
 		if (params == null) params = defaultParameters;
 		String image = null;

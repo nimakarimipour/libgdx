@@ -20,15 +20,19 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
-
+import com.badlogic.gdx.Initializer;
 /** Executes tasks in the future on the main loop thread.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Timer {
 	// TimerThread access is synchronized using threadLock.
 	// Timer access is synchronized using the Timer instance.
 	// Task access is synchronized using the Task instance.
 
 	static final Object threadLock = new Object();
+	@Nullable
 	static TimerThread thread;
 
 	/** Timer instance singleton for general application wide usage. Static methods on {@link Timer} make convenient use of this
@@ -194,6 +198,7 @@ public class Timer {
 		final Application app;
 		long executeTimeMillis, intervalMillis;
 		int repeatCount;
+		@Nullable
 		volatile Timer timer;
 
 		public Task () {
@@ -234,6 +239,7 @@ public class Timer {
 		 * }
 		 * </pre>
 		 */
+		@Initializer
 		public boolean isScheduled () {
 			return timer != null;
 		}
@@ -292,6 +298,7 @@ public class Timer {
 			dispose();
 		}
 
+		@Initializer
 		public void resume () {
 			synchronized (threadLock) {
 				long delayMillis = System.nanoTime() / 1000000 - pauseTimeMillis;

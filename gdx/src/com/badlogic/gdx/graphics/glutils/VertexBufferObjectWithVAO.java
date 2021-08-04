@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.IntArray;
-
+import javax.annotation.Nullable;
 /**
  * <p>
  * A {@link VertexData} implementation that uses vertex buffer objects and vertex array objects.
@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.IntArray;
  * Code adapted from {@link VertexBufferObject}.
  * @author mzechner, Dave Clayton <contact@redskyforge.com>, Nate Austin <nate.austin gmail>
  */
+
 public class VertexBufferObjectWithVAO implements VertexData {
 	final static IntBuffer tmpHandle = BufferUtils.newIntBuffer(1);
 
@@ -154,7 +155,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	}
 
 	@Override
-	public void bind (ShaderProgram shader, int[] locations) {
+	public void bind (ShaderProgram shader, @Nullable int[] locations) {
 		GL30 gl = Gdx.gl30;
 
 		gl.glBindVertexArray(vaoHandle);
@@ -167,7 +168,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		isBound = true;
 	}
 
-	private void bindAttributes (ShaderProgram shader, int[] locations) {
+	private void bindAttributes (ShaderProgram shader, @Nullable int[] locations) {
 		boolean stillValid = this.cachedLocations.size != 0;
 		final int numAttributes = attributes.size();
 
@@ -244,7 +245,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	}
 
 	@Override
-	public void unbind (final ShaderProgram shader, final int[] locations) {
+	public void unbind (final ShaderProgram shader, @Nullable final int[] locations) {
 		GL30 gl = Gdx.gl30;
 		gl.glBindVertexArray(0);
 		isBound = false;

@@ -24,8 +24,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.ByteBuffer;
-
+import javax.annotation.Nullable;
 /** Provides utility methods to copy streams. */
+
 public final class StreamUtils {
 	public static final int DEFAULT_BUFFER_SIZE = 4096;
 	public static final byte[] EMPTY_BYTES = new byte[0];
@@ -118,7 +119,7 @@ public final class StreamUtils {
 	}
 
 	/** Close and ignore all errors. */
-	public static void closeQuietly (Closeable c) {
+	public static void closeQuietly (@Nullable Closeable c) {
 		if (c != null) {
 			try {
 				c.close();

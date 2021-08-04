@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-
+import javax.annotation.Nullable;
 /** An unordered map where the keys are objects and the values are unboxed floats. Null keys are not allowed. No allocation is
  * done except when growing the table size.
  * <p>
@@ -38,6 +38,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+
 public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 	public int size;
 
