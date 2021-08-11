@@ -26,12 +26,15 @@ import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** Caches glyph geometry for a BitmapFont, providing a fast way to render static text. This saves needing to compute the glyph
  * geometry each frame.
  * @author Nathan Sweet
  * @author davebaol
  * @author Alexander Dorokhov */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class BitmapFontCache {
 	static private final Color tempColor = new Color(1, 1, 1, 1);
 
@@ -383,6 +386,7 @@ public class BitmapFontCache {
 		currentTint = Color.WHITE_FLOAT_BITS; // Cached glyphs have changed, reset the current tint.
 	}
 
+	@Initializer
 	private void addGlyph (Glyph glyph, float x, float y, float color) {
 		final float scaleX = font.data.scaleX, scaleY = font.data.scaleY;
 		x += glyph.xoffset * scaleX;
@@ -498,7 +502,7 @@ public class BitmapFontCache {
 	 *           string.
 	 * @return The glyph layout for the cached string (the layout's height is the distance from y to the baseline). */
 	public GlyphLayout addText (CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
-		boolean wrap, String truncate) {
+		boolean wrap, @Nullable String truncate) {
 		GlyphLayout layout = Pools.obtain(GlyphLayout.class);
 		pooledLayouts.add(layout);
 		layout.setText(font, str, start, end, color, targetWidth, halign, wrap, truncate);

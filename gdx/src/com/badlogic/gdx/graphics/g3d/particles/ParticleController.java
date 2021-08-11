@@ -30,10 +30,13 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
-
+import com.badlogic.gdx.Initializer;
 /** Base class of all the particle controllers. Encapsulate the generic structure of a controller and methods to update the
  * particles simulation.
  * @author Inferno */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class ParticleController implements Json.Serializable, ResourceData.Configurable {
 
 	/** the default time step used to update the simulation */
@@ -151,6 +154,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 
 	/** Initialize the controller. All the sub systems will be initialized and binded to the controller. Must be called before any
 	 * other method. */
+	@Initializer
 	public void init () {
 		bind();
 		if (particles != null) {
@@ -264,6 +268,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** Updates the bounding box using the position channel. */
+	@Initializer
 	protected void calculateBoundingBox () {
 		boundingBox.clr();
 		FloatChannel positionChannel = particles.getChannel(ParticleChannels.Position);
@@ -285,6 +290,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** @return the influencer having the given type. */
+	@Nullable
 	public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
 		int index = findIndex(influencerClass);
 		return index > -1 ? (K)influencers.get(index) : null;

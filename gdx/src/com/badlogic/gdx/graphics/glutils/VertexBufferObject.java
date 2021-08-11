@@ -26,7 +26,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * A {@link VertexData} implementation based on OpenGL vertex buffer objects.
  * <p>
@@ -38,6 +38,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
  * 
  * @author mzechner, Dave Clayton <contact@redskyforge.com> */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class VertexBufferObject implements VertexData {
 	private VertexAttributes attributes;
 	private FloatBuffer buffer;
@@ -103,6 +106,7 @@ public class VertexBufferObject implements VertexData {
 	 * @param data
 	 * @param ownsBuffer
 	 * @param value */
+	@Initializer
 	protected void setBuffer (Buffer data, boolean ownsBuffer, VertexAttributes value) {
 		if (isBound) throw new GdxRuntimeException("Cannot change attributes while VBO is bound");
 		if (this.ownsBuffer && byteBuffer != null)
@@ -169,7 +173,7 @@ public class VertexBufferObject implements VertexData {
 	}
 
 	@Override
-	public void bind (ShaderProgram shader, int[] locations) {
+	public void bind (ShaderProgram shader, @Nullable int[] locations) {
 		final GL20 gl = Gdx.gl20;
 
 		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
@@ -214,7 +218,7 @@ public class VertexBufferObject implements VertexData {
 	}
 
 	@Override
-	public void unbind (final ShaderProgram shader, final int[] locations) {
+	public void unbind (final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 		final int numAttributes = attributes.size();
 		if (locations == null) {

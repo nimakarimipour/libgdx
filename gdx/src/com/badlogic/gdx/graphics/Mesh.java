@@ -44,7 +44,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * A Mesh holds vertices composed of attributes specified by a {@link VertexAttributes} instance. The vertices are held either in
  * VRAM in form of vertex buffer objects or in RAM in form of vertex arrays. The former variant is more performant and is
@@ -66,6 +66,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * </p>
  *
  * @author mzechner, Dave Clayton <contact@redskyforge.com>, Xoppa */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Mesh implements Disposable {
 	public enum VertexDataType {
 		VertexArray, VertexBufferObject, VertexBufferObjectSubData, VertexBufferObjectWithVAO
@@ -507,6 +510,7 @@ public class Mesh implements Disposable {
 	 *
 	 * @param shader the shader (does not bind the shader)
 	 * @param locations array containing the attribute locations. */
+	@Initializer
 	public void bind (final ShaderProgram shader, final int[] locations) {
 		vertices.bind(shader, locations);
 		if (instances != null && instances.getNumInstances() > 0) instances.bind(shader, locations);
@@ -763,7 +767,7 @@ public class Mesh implements Disposable {
 	 * @param offset the start of the part.
 	 * @param count the size of the part.
 	 * @return the value specified by out. */
-	public BoundingBox extendBoundingBox (final BoundingBox out, int offset, int count, final Matrix4 transform) {
+	public BoundingBox extendBoundingBox (final BoundingBox out, int offset, int count, @Nullable final Matrix4 transform) {
 		final int numIndices = getNumIndices();
 		final int numVertices = getNumVertices();
 		final int max = numIndices == 0 ? numVertices : numIndices;
@@ -841,7 +845,7 @@ public class Mesh implements Disposable {
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
 	public float calculateRadiusSquared (final float centerX, final float centerY, final float centerZ, int offset, int count,
-		final Matrix4 transform) {
+		@Nullable final Matrix4 transform) {
 		int numIndices = getNumIndices();
 		if (offset < 0 || count < 1 || offset + count > numIndices) throw new GdxRuntimeException("Not enough indices");
 
@@ -894,7 +898,7 @@ public class Mesh implements Disposable {
 	 * @param count the amount of indices the part contains.
 	 * @return the radius of the bounding sphere. */
 	public float calculateRadius (final float centerX, final float centerY, final float centerZ, int offset, int count,
-		final Matrix4 transform) {
+		@Nullable final Matrix4 transform) {
 		return (float)Math.sqrt(calculateRadiusSquared(centerX, centerY, centerZ, offset, count, transform));
 	}
 
@@ -1149,7 +1153,7 @@ public class Mesh implements Disposable {
 	 * @param removeDuplicates whether to remove duplicate vertices if possible. Only the vertices specified by usage are checked.
 	 * @param usage which attributes (if available) to copy
 	 * @return the copy of this mesh */
-	public Mesh copy (boolean isStatic, boolean removeDuplicates, final int[] usage) {
+	public Mesh copy (boolean isStatic, boolean removeDuplicates, @Nullable final int[] usage) {
 		// TODO move this to a copy constructor?
 		// TODO duplicate the buffers without double copying the data if possible.
 		// TODO perhaps move this code to JNI if it turns out being too slow.

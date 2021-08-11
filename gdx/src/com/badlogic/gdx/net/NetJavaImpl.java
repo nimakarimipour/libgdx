@@ -42,10 +42,11 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StreamUtils;
 import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.badlogic.gdx.utils.async.AsyncTask;
-
+import javax.annotation.Nullable;
 /** Implements part of the {@link Net} API using {@link HttpURLConnection}, to be easily reused between the Android and Desktop
  * backends.
  * @author acoppes */
+
 public class NetJavaImpl {
 
 	static class HttpClientResponse implements HttpResponse {
@@ -273,6 +274,7 @@ public class NetJavaImpl {
 		listeners.put(httpRequest, httpResponseListener);
 	}
 
+	@Nullable
 	synchronized HttpResponseListener getFromListeners (HttpRequest httpRequest) {
 		HttpResponseListener httpResponseListener = listeners.get(httpRequest);
 		return httpResponseListener;

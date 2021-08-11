@@ -18,6 +18,8 @@ package com.badlogic.gdx.graphics.g3d.utils;
 
 import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class TextureDescriptor<T extends GLTexture> implements Comparable<TextureDescriptor<T>> {
 	public T texture = null;
@@ -28,19 +30,20 @@ public class TextureDescriptor<T extends GLTexture> implements Comparable<Textur
 
 	// TODO add other values, see http://www.opengl.org/sdk/docs/man/xhtml/glTexParameter.xml
 
-	public TextureDescriptor (final T texture, final Texture.TextureFilter minFilter, final Texture.TextureFilter magFilter,
+	public TextureDescriptor (final T texture, @Nullable final Texture.TextureFilter minFilter, final Texture.TextureFilter magFilter,
 		final Texture.TextureWrap uWrap, final Texture.TextureWrap vWrap) {
 		set(texture, minFilter, magFilter, uWrap, vWrap);
 	}
 
-	public TextureDescriptor (final T texture) {
+	public TextureDescriptor (@Nullable final T texture) {
 		this(texture, null, null, null, null);
 	}
 
 	public TextureDescriptor () {
 	}
 
-	public void set (final T texture, final Texture.TextureFilter minFilter, final Texture.TextureFilter magFilter,
+	@Initializer
+	public void set (final T texture, @Nullable final Texture.TextureFilter minFilter, final Texture.TextureFilter magFilter,
 		final Texture.TextureWrap uWrap, final Texture.TextureWrap vWrap) {
 		this.texture = texture;
 		this.minFilter = minFilter;
@@ -49,6 +52,7 @@ public class TextureDescriptor<T extends GLTexture> implements Comparable<Textur
 		this.vWrap = vWrap;
 	}
 
+	@Initializer
 	public <V extends T> void set (final TextureDescriptor<V> other) {
 		texture = other.texture;
 		minFilter = other.minFilter;

@@ -21,9 +21,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
-
+import javax.annotation.Nullable;
 /** Executes a number of actions at the same time.
  * @author Nathan Sweet */
+
 public class ParallelAction extends Action {
 	Array<Action> actions = new Array(4);
 	private boolean complete;
@@ -96,7 +97,7 @@ public class ParallelAction extends Action {
 		if (actor != null) action.setActor(actor);
 	}
 
-	public void setActor (Actor actor) {
+	public void setActor (@Nullable Actor actor) {
 		Array<Action> actions = this.actions;
 		for (int i = 0, n = actions.size; i < n; i++)
 			actions.get(i).setActor(actor);

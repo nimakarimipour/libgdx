@@ -3,6 +3,8 @@
 package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class InWindow {
 	public byte[] _bufferBase; // pointer to buffer with data
@@ -56,6 +58,7 @@ public class InWindow {
 		_bufferBase = null;
 	}
 
+	@Initializer
 	public void Create (int keepSizeBefore, int keepSizeAfter, int keepSizeReserv) {
 		_keepSizeBefore = keepSizeBefore;
 		_keepSizeAfter = keepSizeAfter;
@@ -76,6 +79,7 @@ public class InWindow {
 		_stream = null;
 	}
 
+	@Initializer
 	public void Init () throws IOException {
 		_bufferOffset = 0;
 		_pos = 0;

@@ -12,6 +12,9 @@
  */
 
 package com.badlogic.gdx.utils;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
+
 
 /** This is a near duplicate of {@link TimSort}, modified for use with arrays of objects that implement {@link Comparable}, instead
  * of using explicit comparators.
@@ -369,6 +372,7 @@ class ComparableTimSort {
 	 * 
 	 * @param i stack index of the first of the two runs to merge */
 	@SuppressWarnings("unchecked")
+	@Initializer
 	private void mergeAt (int i) {
 		if (DEBUG) assert stackSize >= 2;
 		if (DEBUG) assert i >= 0;

@@ -30,7 +30,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** Helper class to create {@link Model}s from code. To start building use the {@link #begin()} method, when finished building use
  * the {@link #end()} method. The end method returns the model just build. Building cannot be nested, only one model (per
  * ModelBuilder) can be build at the time. The same ModelBuilder can be used to build multiple models sequential. Use the
@@ -38,10 +38,15 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * {@link #part(String, int, VertexAttributes, Material)} method will return a {@link MeshPartBuilder} which can be used to build
  * the node part.
  * @author Xoppa */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class ModelBuilder {
 	/** The model currently being build */
+	@Nullable
 	private Model model;
 	/** The node currently being build */
+	@Nullable
 	private Node node;
 	/** The mesh builders created between begin and end */
 	private Array<MeshBuilder> builders = new Array<MeshBuilder>();
@@ -58,6 +63,7 @@ public class ModelBuilder {
 	}
 
 	/** Begin building a new model */
+	@Initializer
 	public void begin () {
 		if (model != null) throw new GdxRuntimeException("Call end() first");
 		node = null;
@@ -88,6 +94,7 @@ public class ModelBuilder {
 	}
 
 	/** Adds the {@link Node} to the model and sets it active for building. Use any of the part(...) method to add a NodePart. */
+	@Initializer
 	protected Node node (final Node node) {
 		if (model == null) throw new GdxRuntimeException("Call begin() first");
 

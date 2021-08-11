@@ -18,17 +18,19 @@ package com.badlogic.gdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
-
+import javax.annotation.Nullable;
 /** Manages a group of buttons to enforce a minimum and maximum number of checked buttons. This enables "radio button"
  * functionality and more. A button may only be in one group at a time.
  * <p>
  * The {@link #canCheck(Button, boolean)} method can be overridden to control if a button check or uncheck is allowed.
  * @author Nathan Sweet */
+
 public class ButtonGroup<T extends Button> {
 	private final Array<T> buttons = new Array();
 	private Array<T> checkedButtons = new Array(1);
 	private int minCheckCount, maxCheckCount = 1;
 	private boolean uncheckLast = true;
+	@Nullable
 	private T lastChecked;
 
 	public ButtonGroup () {

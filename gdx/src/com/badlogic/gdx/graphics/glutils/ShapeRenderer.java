@@ -25,7 +25,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
-
+import com.badlogic.gdx.Initializer;
 /** Renders points, lines, shape outlines and filled shapes.
  * <p>
  * By default a 2D orthographic projection with the origin in the lower left corner is used and units are specified in screen
@@ -75,6 +75,9 @@ import com.badlogic.gdx.utils.Disposable;
  * @author mzechner
  * @author stbachmann
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class ShapeRenderer implements Disposable {
 	/** Shape types to be used with {@link #begin(ShapeType)}.
 	 * @author mzechner, stbachmann */
@@ -99,6 +102,7 @@ public class ShapeRenderer implements Disposable {
 	private final Matrix4 combinedMatrix = new Matrix4();
 	private final Vector2 tmp = new Vector2();
 	private final Color color = new Color(1, 1, 1, 1);
+	@Nullable
 	private ShapeType shapeType;
 	private boolean autoShapeType;
 	private float defaultRectLineWidth = 0.75f;
@@ -111,7 +115,7 @@ public class ShapeRenderer implements Disposable {
 		this(maxVertices, null);
 	}
 
-	public ShapeRenderer (int maxVertices, ShaderProgram defaultShader) {
+	public ShapeRenderer (int maxVertices, @Nullable ShaderProgram defaultShader) {
 		if (defaultShader == null) {
 			renderer = new ImmediateModeRenderer20(maxVertices, false, true, 0);
 		} else {
@@ -556,6 +560,7 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Draws a line using a rotated rectangle, where with one edge is centered at x1, y1 and the opposite edge centered at x2, y2. */
+	@Initializer
 	public void rectLine (float x1, float y1, float x2, float y2, float width) {
 		check(ShapeType.Line, ShapeType.Filled, 8);
 		float colorBits = color.toFloatBits();
@@ -1166,7 +1171,7 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** @param other May be null. */
-	private void check (ShapeType preferred, ShapeType other, int newVertices) {
+	private void check (ShapeType preferred, @Nullable ShapeType other, int newVertices) {
 		if (shapeType == null) throw new IllegalStateException("begin must be called first.");
 
 		if (shapeType != preferred && shapeType != other) {
@@ -1206,6 +1211,7 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Returns the current shape type. */
+	@Nullable
 	public ShapeType getCurrentType () {
 		return shapeType;
 	}
