@@ -24,8 +24,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.TimeUtils;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Represents a changing {@link TiledMapTile}. */
+
 public class AnimatedTiledMapTile implements TiledMapTile {
 
 	private static long lastTiledMapRenderTime = 0;
@@ -132,6 +133,7 @@ public class AnimatedTiledMapTile implements TiledMapTile {
 	}
 
 	@Override
+	@Initializer
 	public MapProperties getProperties () {
 		if (properties == null) {
 			properties = new MapProperties();
@@ -140,6 +142,7 @@ public class AnimatedTiledMapTile implements TiledMapTile {
 	}
 
 	@Override
+	@Initializer
 	public MapObjects getObjects() {
 		if (objects == null) {
 			objects = new MapObjects();

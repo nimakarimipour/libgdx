@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** <p>
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover most FBO uses. It will
  * automatically create a cubemap for the color attachment and a renderbuffer for the depth buffer. You can get a hold of the
@@ -59,6 +59,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * </p>
  *
  * @author realitix */
+
 public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 
 	/** the zero-based index of the active side **/
@@ -162,6 +163,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 	}
 
 	/** Get the currently bound side. */
+	@Nullable
 	public Cubemap.CubemapSide getSide () {
 		return currentSide < 0 ? null : cubemapSides [currentSide];
 	}

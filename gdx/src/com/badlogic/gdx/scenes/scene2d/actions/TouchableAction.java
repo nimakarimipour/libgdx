@@ -19,10 +19,12 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-
+import javax.annotation.Nullable;
 /** Sets the actor's {@link Actor#setTouchable(Touchable) touchability}.
  * @author Nathan Sweet */
+
 public class TouchableAction extends Action {
+	@Nullable
 	private Touchable touchable;
 
 	public boolean act (float delta) {

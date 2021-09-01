@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-
+import javax.annotation.Nullable;
 /** An unordered map where the keys are unboxed longs and values are objects. No allocation is done except when growing the table
  * size.
  * <p>
@@ -38,12 +38,14 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+
 public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 	public int size;
 
 	long[] keyTable;
 	V[] valueTable;
 
+	@Nullable
 	V zeroValue;
 	boolean hasZeroValue;
 
@@ -65,9 +67,21 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 	 * hash. */
 	protected int mask;
 
-	private Entries entries1, entries2;
-	private Values values1, values2;
-	private Keys keys1, keys2;
+	@Nullable
+	private Entries entries2;
+	@Nullable
+	private Entries entries1;
+	
+	@Nullable
+	private Values values2;
+	@Nullable
+	private Values values1;
+	
+	@Nullable
+	private Keys keys2;
+
+@Nullable
+private Keys keys1;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public LongMap () {
@@ -188,6 +202,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		return i >= 0 ? valueTable[i] : null;
 	}
 
+	@Nullable
 	public V get (long key, @Null V defaultValue) {
 		if (key == 0) return hasZeroValue ? zeroValue : defaultValue;
 		int i = locateKey(key);

@@ -22,15 +22,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ShortArray;
-
+import javax.annotation.Nullable;
 /**
  * Renders polygon filled with a repeating TextureRegion with specified density
  * Without causing an additional flush or render call
  *
  * @author Avetis Zakharyan
  */
+
 public class RepeatablePolygonSprite {
 
+    @Nullable
     private TextureRegion region;
     private float density;
 

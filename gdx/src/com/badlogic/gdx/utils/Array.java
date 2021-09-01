@@ -23,10 +23,11 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
-
+import javax.annotation.Nullable;
 /** A resizable, ordered or unordered array of objects. If unordered, this class avoids a memory copy when removing elements (the
  * last element is moved to the removed element's position).
  * @author Nathan Sweet */
+
 public class Array<T> implements Iterable<T> {
 	/** Provides direct access to the underlying array. If the Array's generic type is not Object, this field may only be accessed
 	 * if the {@link Array#Array(boolean, int, Class)} constructor was used. */
@@ -667,9 +668,11 @@ public class Array<T> implements Iterable<T> {
 	static public class ArrayIterable<T> implements Iterable<T> {
 		private final Array<T> array;
 		private final boolean allowRemove;
-		private ArrayIterator iterator1, iterator2;
+		private ArrayIterator iterator2;
 
 // java.io.StringWriter lastAcquire = new java.io.StringWriter();
+private ArrayIterator iterator1;
+
 
 		public ArrayIterable (Array<T> array) {
 			this(array, true);

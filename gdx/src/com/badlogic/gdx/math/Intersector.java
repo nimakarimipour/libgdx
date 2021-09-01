@@ -24,11 +24,12 @@ import com.badlogic.gdx.utils.FloatArray;
 
 import java.util.Arrays;
 import java.util.List;
-
+import javax.annotation.Nullable;
 /** Class offering various static methods for intersection testing between different geometric objects.
  * @author badlogicgames@gmail.com
  * @author jan.stria
  * @author Nathan Sweet */
+
 public final class Intersector {
 	private Intersector () {
 	}
@@ -1060,7 +1061,7 @@ public final class Intersector {
 
 	/** @param intersection May be null. */
 	public static boolean intersectSegments (float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4,
-		Vector2 intersection) {
+		@Nullable Vector2 intersection) {
 		float d = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
 		if (d == 0) return false;
 
@@ -1131,7 +1132,7 @@ public final class Intersector {
 	 * @param p2 The second polygon.
 	 * @param mtv A Minimum Translation Vector to fill in the case of a collision, or null (optional).
 	 * @return Whether polygons overlap. */
-	public static boolean overlapConvexPolygons (Polygon p1, Polygon p2, MinimumTranslationVector mtv) {
+	public static boolean overlapConvexPolygons (Polygon p1, Polygon p2, @Nullable MinimumTranslationVector mtv) {
 		return overlapConvexPolygons(p1.getTransformedVertices(), p2.getTransformedVertices(), mtv);
 	}
 

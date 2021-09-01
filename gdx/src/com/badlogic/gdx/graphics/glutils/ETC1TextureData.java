@@ -24,9 +24,12 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.ETC1.ETC1Data;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class ETC1TextureData implements TextureData {
 	FileHandle file;
+	@Nullable
 	ETC1Data data;
 	boolean useMipMaps;
 	int width = 0;
@@ -58,6 +61,7 @@ public class ETC1TextureData implements TextureData {
 	}
 
 	@Override
+	@Initializer
 	public void prepare () {
 		if (isPrepared) throw new GdxRuntimeException("Already prepared");
 		if (file == null && data == null) throw new GdxRuntimeException("Can only load once from ETC1Data");

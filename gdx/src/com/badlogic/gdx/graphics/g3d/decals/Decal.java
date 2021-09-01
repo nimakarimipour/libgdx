@@ -23,13 +23,16 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.NumberUtils;
-
+import com.badlogic.gdx.Initializer;
 /** <p/>
  * Represents a sprite in 3d space. Typical 3d transformations such as translation, rotation and scaling are supported. The
  * position includes a z component other than setting the depth no manual layering has to be performed, correct overlay is
  * guaranteed by using the depth buffer.
  * <p/>
  * Decals are handled by the {@link DecalBatch}. */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Decal {
 	// 3(x,y,z) + 1(color) + 2(u,v)
 	/** Size of a decal vertex in floats */
@@ -52,6 +55,7 @@ public class Decal {
 
 	/** The transformation offset can be used to change the pivot point for rotation and scaling. By default the pivot is the middle
 	 * of the decal. */
+	@Nullable
 	public Vector2 transformationOffset = null;
 	protected Vector2 dimensions = new Vector2();
 
@@ -527,6 +531,7 @@ public class Decal {
 	}
 
 	/** Re-applies the uv coordinates from the material's texture region to the uv components of the vertices array */
+	@Initializer
 	protected void updateUVs () {
 		TextureRegion tr = material.textureRegion;
 		// left top

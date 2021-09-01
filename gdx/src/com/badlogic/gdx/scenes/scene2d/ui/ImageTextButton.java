@@ -25,12 +25,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
-
+import javax.annotation.Nullable;
 /** A button with a child {@link Image} and {@link Label}.
  * @see ImageButton
  * @see TextButton
  * @see Button
  * @author Nathan Sweet */
+
 public class ImageTextButton extends Button {
 	private final Image image;
 	private Label label;
@@ -147,6 +148,7 @@ public class ImageTextButton extends Button {
 		return image;
 	}
 
+	@Nullable
 	public Cell getImageCell () {
 		return getCell(image);
 	}
@@ -160,6 +162,7 @@ public class ImageTextButton extends Button {
 		return label;
 	}
 
+	@Nullable
 	public Cell getLabelCell () {
 		return getCell(label);
 	}

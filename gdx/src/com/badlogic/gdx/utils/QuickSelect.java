@@ -17,11 +17,12 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
-
+import com.badlogic.gdx.Initializer;
 /** Implementation of Tony Hoare's quickselect algorithm. Running time is generally O(n), but worst case is O(n^2) Pivot choice is
  * median of three method, providing better performance than a random pivot for partially sorted data.
  * http://en.wikipedia.org/wiki/Quickselect
  * @author Jon Renner */
+
 public class QuickSelect<T> {
 	private T[] array;
 	private Comparator<? super T> comp;
@@ -63,6 +64,7 @@ public class QuickSelect<T> {
 	}
 
 	/** Median of Three has the potential to outperform a random pivot, especially for partially sorted arrays */
+	@Initializer
 	private int medianOfThreePivot (int leftIdx, int rightIdx) {
 		T left = array[leftIdx];
 		int midIdx = (leftIdx + rightIdx) / 2;

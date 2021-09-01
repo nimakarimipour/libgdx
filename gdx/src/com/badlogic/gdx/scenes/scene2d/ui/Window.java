@@ -31,12 +31,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** A table that can be dragged and act as a modal window. The top padding is used as the window's title height.
  * <p>
  * The preferred size of a window is the preferred size of the title text and the children as laid out by the table. After adding
  * children to the window, it can be convenient to call {@link #pack()} to size the window to the size of the children.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Window extends Table {
 	static private final Vector2 tmpPosition = new Vector2();
 	static private final Vector2 tmpSize = new Vector2();
@@ -194,6 +197,7 @@ public class Window extends Table {
 		});
 	}
 
+	@Initializer
 	public void setStyle (WindowStyle style) {
 		if (style == null) throw new IllegalArgumentException("style cannot be null.");
 		this.style = style;
@@ -340,6 +344,7 @@ public class Window extends Table {
 	 * @author Nathan Sweet */
 	static public class WindowStyle {
 		public @Null Drawable background;
+		@Nullable
 		public BitmapFont titleFont;
 		public @Null Color titleFontColor = new Color(1, 1, 1, 1);
 		public @Null Drawable stageBackground;

@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * Minimalistic grouping strategy that splits decals into opaque and transparent ones enabling and disabling blending as needed.
  * Opaque decals are rendered first (decal color is ignored in opacity check).<br/>
@@ -78,6 +78,7 @@ import com.badlogic.gdx.utils.Pool;
  * </tr>
  * </table>
  * </p> */
+
 public class CameraGroupStrategy implements GroupStrategy, Disposable {
 	private static final int GROUP_OPAQUE = 0;
 	private static final int GROUP_BLEND = 1;
@@ -163,6 +164,7 @@ public class CameraGroupStrategy implements GroupStrategy, Disposable {
 	}
 
 	@Override
+	@Initializer
 	public void beforeGroups () {
 		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
 		shader.bind();

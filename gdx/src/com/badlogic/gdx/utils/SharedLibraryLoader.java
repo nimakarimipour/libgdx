@@ -28,11 +28,12 @@ import java.util.UUID;
 import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
+import com.badlogic.gdx.Initializer;
 /** Loads shared libraries from a natives jar file (desktop) or arm folders (Android). For desktop projects, have the natives jar
  * in the classpath, for Android projects put the shared libraries in the libs/armeabi and libs/armeabi-v7a folders.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class SharedLibraryLoader {
 	static public boolean isWindows = System.getProperty("os.name").contains("Windows");
 	static public boolean isLinux = System.getProperty("os.name").contains("Linux");
@@ -122,6 +123,7 @@ public class SharedLibraryLoader {
 		}
 	}
 
+	@Initializer
 	private InputStream readFile (String path) {
 		if (nativesJar == null) {
 			InputStream input = SharedLibraryLoader.class.getResourceAsStream("/" + path);

@@ -18,8 +18,9 @@ package com.badlogic.gdx.maps.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
-
+import javax.annotation.Nullable;
 /** @brief Represents a map object containing a texture (region) */
+
 public class TextureMapObject extends MapObject {
 
 	private float x = 0.0f;
@@ -29,6 +30,7 @@ public class TextureMapObject extends MapObject {
 	private float scaleX = 1.0f;
 	private float scaleY = 1.0f;
 	private float rotation = 0.0f;
+	@Nullable
 	private TextureRegion textureRegion = null;
 
 	/** @return x axis coordinate */
@@ -119,7 +121,7 @@ public class TextureMapObject extends MapObject {
 	/** Creates texture map object with the given region
 	 * 
 	 * @param textureRegion the {@link TextureRegion} to use. */
-	public TextureMapObject (TextureRegion textureRegion) {
+	public TextureMapObject (@Nullable TextureRegion textureRegion) {
 		super();
 		this.textureRegion = textureRegion;
 	}

@@ -31,9 +31,12 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StreamUtils;
-
+import com.badlogic.gdx.Initializer;
 /** See <a href="http://www.badlogicgames.com/wordpress/?p=1255">http://www.badlogicgames.com/wordpress/?p=1255</a>
  * @author mzechner */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class ParticleEffect implements Disposable {
 	private final Array<ParticleEmitter> emitters;
 	private BoundingBox bounds;
@@ -132,6 +135,7 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Returns the emitter with the specified name, or null. */
+	@Nullable
 	public ParticleEmitter findEmitter (String name) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
@@ -165,7 +169,7 @@ public class ParticleEffect implements Disposable {
 		load(effectFile, atlas, null);
 	}
 
-	public void load (FileHandle effectFile, TextureAtlas atlas, String atlasPrefix) {
+	public void load (FileHandle effectFile, TextureAtlas atlas, @Nullable String atlasPrefix) {
 		loadEmitters(effectFile);
 		loadEmitterImages(atlas, atlasPrefix);
 	}
@@ -192,7 +196,7 @@ public class ParticleEffect implements Disposable {
 		loadEmitterImages(atlas, null);
 	}
 
-	public void loadEmitterImages (TextureAtlas atlas, String atlasPrefix) {
+	public void loadEmitterImages (TextureAtlas atlas, @Nullable String atlasPrefix) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
 			if (emitter.getImagePaths().size == 0) continue;
@@ -254,6 +258,7 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Returns the bounding box for all active particles. z axis will always be zero. */
+	@Initializer
 	public BoundingBox getBoundingBox () {
 		if (bounds == null) bounds = new BoundingBox();
 

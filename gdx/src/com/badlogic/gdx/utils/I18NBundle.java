@@ -26,7 +26,7 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 
 import com.badlogic.gdx.files.FileHandle;
-
+import com.badlogic.gdx.Initializer;
 /** A {@code I18NBundle} provides {@code Locale}-specific resources loaded from property files. A bundle contains a number of named
  * resources, whose names and values are {@code Strings}. A bundle may have a parent bundle, and when a resource is not found in a
  * bundle, the parent bundle is searched for the resource. If the fallback mechanism reaches the base bundle and still can't find
@@ -63,6 +63,9 @@ import com.badlogic.gdx.files.FileHandle;
  * @see PropertiesUtils
  * 
  * @author davebaol */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class I18NBundle {
 
 	private static final String DEFAULT_ENCODING = "UTF-8";
@@ -74,6 +77,7 @@ public class I18NBundle {
 	private static boolean exceptionOnMissingKey = true;
 
 	/** The parent of this {@code I18NBundle} that is used if this bundle doesn't include the requested resource. */
+	@Nullable
 	private I18NBundle parent;
 
 	/** The locale for this bundle. */
@@ -287,13 +291,15 @@ public class I18NBundle {
 	 *           (except for the base bundle)
 	 * @return a <code>Locale</code> for the fallback search, or <code>null</code> if no further fallback search is needed.
 	 * @exception NullPointerException if <code>locale</code> is <code>null</code> */
+	@Nullable
 	private static Locale getFallbackLocale (Locale locale) {
 		Locale defaultLocale = Locale.getDefault();
 		return locale.equals(defaultLocale) ? null : defaultLocale;
 	}
 
+	@Nullable
 	private static I18NBundle loadBundleChain (FileHandle baseFileHandle, String encoding, List<Locale> candidateLocales,
-		int candidateIndex, I18NBundle baseBundle) {
+		int candidateIndex, @Nullable I18NBundle baseBundle) {
 		Locale targetLocale = candidateLocales.get(candidateIndex);
 		I18NBundle parent = null;
 		if (candidateIndex != candidateLocales.size() - 1) {
@@ -314,6 +320,7 @@ public class I18NBundle {
 	}
 
 	// Tries to load the bundle for the given locale.
+	@Nullable
 	private static I18NBundle loadBundle (FileHandle baseFileHandle, String encoding, Locale targetLocale) {
 		I18NBundle bundle = null;
 		Reader reader = null;
@@ -357,6 +364,7 @@ public class I18NBundle {
 	 * @throws IOException if an error occurred when reading from the input stream. */
 	// NOTE:
 	// This method can't be private otherwise GWT can't access it from loadBundle()
+	@Initializer
 	protected void load (Reader reader) throws IOException {
 		properties = new ObjectMap<String, String>();
 		PropertiesUtils.load(properties, reader);
@@ -414,6 +422,7 @@ public class I18NBundle {
 	/** Sets the bundle locale. This method is private because a bundle can't change the locale during its life.
 	 * 
 	 * @param locale */
+	@Initializer
 	private void setLocale (Locale locale) {
 		this.locale = locale;
 		this.formatter = new TextFormatter(locale, !simpleFormatter);

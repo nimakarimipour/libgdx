@@ -8,33 +8,85 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value.Fixed;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
-
+import com.badlogic.gdx.Initializer;
 /** A cell for a {@link Table}.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Cell<T extends Actor> implements Poolable {
 	static private final Float zerof = 0f, onef = 1f;
 	static private final Integer zeroi = 0, onei = 1;
 	static private final Integer centeri = onei, topi = Align.top, bottomi = Align.bottom, lefti = Align.left,
 		righti = Align.right;
 
+	@Nullable
 	static private Files files;
+	@Nullable
 	static private Cell defaults;
 
-	Value minWidth, minHeight;
-	Value prefWidth, prefHeight;
-	Value maxWidth, maxHeight;
-	Value spaceTop, spaceLeft, spaceBottom, spaceRight;
-	Value padTop, padLeft, padBottom, padRight;
-	Float fillX, fillY;
+	@Nullable
+	Value minHeight;
+	@Nullable
+	Value minWidth;
+	
+	@Nullable
+	Value prefHeight;
+	@Nullable
+	Value prefWidth;
+	
+	@Nullable
+	Value maxHeight;
+	@Nullable
+	Value maxWidth;
+	
+	@Nullable
+	Value spaceRight;
+	@Nullable
+	Value spaceBottom;
+	
+	@Nullable
+	Value spaceLeft;
+	
+	@Nullable
+	Value spaceTop;
+	
+	@Nullable
+	Value padRight;
+	@Nullable
+	Value padBottom;
+	
+	@Nullable
+	Value padLeft;
+	
+	@Nullable
+	Value padTop;
+	
+	@Nullable
+	Float fillY;
+	@Nullable
+	Float fillX;
+	
+	@Nullable
 	Integer align;
-	Integer expandX, expandY;
+	@Nullable
+	Integer expandY;
+	@Nullable
+	Integer expandX;
+	
+	@Nullable
 	Integer colspan;
-	Boolean uniformX, uniformY;
+	@Nullable
+	Boolean uniformY;
+
+@Nullable
+Boolean uniformX;
 
 	@Null Actor actor;
 	float actorX, actorY;
 	float actorWidth, actorHeight;
 
+	@Nullable
 	private Table table;
 	boolean endRow;
 	int column, row;
@@ -888,6 +940,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return computedPadRight;
 	}
 
+	@Initializer
 	public void row () {
 		table.row();
 	}
@@ -931,6 +984,7 @@ public class Cell<T extends Actor> implements Poolable {
 		set(defaults());
 	}
 
+	@Initializer
 	void set (Cell cell) {
 		minWidth = cell.minWidth;
 		minHeight = cell.minHeight;

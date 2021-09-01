@@ -17,6 +17,8 @@
 package com.badlogic.gdx.utils.compression.rangecoder;
 
 import java.io.IOException;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class Encoder {
 	static final int kTopMask = ~((1 << 24) - 1);
@@ -55,6 +57,7 @@ public class Encoder {
 			ShiftLow();
 	}
 
+	@Initializer
 	public void FlushStream () throws IOException {
 		Stream.flush();
 	}

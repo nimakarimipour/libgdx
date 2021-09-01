@@ -24,10 +24,13 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
-
+import com.badlogic.gdx.Initializer;
 /** It's a set of particles controllers. It can be updated, rendered, transformed which means the changes will be applied on all
  * the particles controllers.
  * @author inferno */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class ParticleEffect implements Disposable, ResourceData.Configurable {
 	private Array<ParticleController> controllers;
 	private BoundingBox bounds;
@@ -135,6 +138,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 	}
 
 	/** Returns the controller with the specified name, or null. */
+	@Nullable
 	public ParticleController findController (String name) {
 		for (int i = 0, n = controllers.size; i < n; i++) {
 			ParticleController emitter = controllers.get(i);
@@ -150,6 +154,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 	}
 
 	/** @return the merged bounding box of all controllers. */
+	@Initializer
 	public BoundingBox getBoundingBox () {
 		if (bounds == null) bounds = new BoundingBox();
 

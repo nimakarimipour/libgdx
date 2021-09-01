@@ -19,9 +19,10 @@ package com.badlogic.gdx.graphics;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-
+import javax.annotation.Nullable;
 /** Interface wrapping all the methods of OpenGL ES 2.0
  * @author mzechner */
+
 public interface GL20 {
 	public static final int GL_ES_VERSION_2_0 = 1;
 	public static final int GL_DEPTH_BUFFER_BIT = 0x00000100;
@@ -416,7 +417,7 @@ public interface GL20 {
 	public void glStencilOp (int fail, int zfail, int zpass);
 
 	public void glTexImage2D (int target, int level, int internalformat, int width, int height, int border, int format, int type,
-		Buffer pixels);
+		@Nullable Buffer pixels);
 
 	public void glTexParameterf (int target, int pname, float param);
 
@@ -443,7 +444,7 @@ public interface GL20 {
 
 	public void glBlendFuncSeparate (int srcRGB, int dstRGB, int srcAlpha, int dstAlpha);
 
-	public void glBufferData (int target, int size, Buffer data, int usage);
+	public void glBufferData (int target, int size, @Nullable Buffer data, int usage);
 
 	public void glBufferSubData (int target, int offset, int size, Buffer data);
 

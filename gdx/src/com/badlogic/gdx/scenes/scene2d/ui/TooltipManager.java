@@ -26,11 +26,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-
+import javax.annotation.Nullable;
 /** Keeps track of an application's tooltips.
  * @author Nathan Sweet */
+
 public class TooltipManager {
+	@Nullable
 	static private TooltipManager instance;
+	@Nullable
 	static private Files files;
 
 	/** Seconds from when an actor is hovered to when the tooltip is shown. Default is 2. Call {@link #hideAll()} after changing to
@@ -61,6 +64,7 @@ public class TooltipManager {
 		}
 	};
 
+	@Nullable
 	Tooltip showTooltip;
 	final Task showTask = new Task() {
 		public void run () {

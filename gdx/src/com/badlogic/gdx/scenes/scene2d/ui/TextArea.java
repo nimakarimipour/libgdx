@@ -30,13 +30,17 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A text input field with multiple lines. */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class TextArea extends TextField {
 	/** Array storing lines breaks positions **/
 	IntArray linesBreak;
 
 	/** Last text processed. This attribute is used to avoid unnecessary computations while calculating offsets **/
+	@Nullable
 	private String lastText;
 
 	/** Current line for the cursor **/
@@ -65,6 +69,7 @@ public class TextArea extends TextField {
 		super(text, style);
 	}
 
+	@Initializer
 	protected void initialize () {
 		super.initialize();
 		writeEnters = true;

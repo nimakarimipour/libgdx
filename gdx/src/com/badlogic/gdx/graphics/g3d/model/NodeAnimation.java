@@ -20,10 +20,11 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-
+import javax.annotation.Nullable;
 /** A NodeAnimation defines keyframes for a {@link Node} in a {@link Model}. The keyframes are given as a translation vector, a
  * rotation quaternion and a scale vector. Keyframes are interpolated linearly for now. Keytimes are given in seconds.
  * @author badlogic, Xoppa */
+
 public class NodeAnimation {
 	/** the Node affected by this animation **/
 	public Node node;

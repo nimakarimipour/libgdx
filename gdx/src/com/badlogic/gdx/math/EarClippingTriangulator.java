@@ -19,7 +19,7 @@ package com.badlogic.gdx.math;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.ShortArray;
-
+import com.badlogic.gdx.Initializer;
 /** A simple implementation of the ear cutting algorithm to triangulate simple polygons without holes. For more information:
  * <ul>
  * <li><a href="http://cgm.cs.mcgill.ca/~godfried/teaching/cg-projects/97/Ian/algorithm2.html">http://cgm.cs.mcgill.ca/~godfried/
@@ -39,6 +39,9 @@ import com.badlogic.gdx.utils.ShortArray;
  * @author Eric Spitz
  * @author Thomas ten Cate (bugfixes, optimizations)
  * @author Nathan Sweet (rewrite, return indices, no allocation, optimizations) */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class EarClippingTriangulator {
 	static private final int CONCAVE = -1;
 	static private final int CONVEX = 1;
@@ -185,6 +188,7 @@ public class EarClippingTriangulator {
 		return true;
 	}
 
+	@Initializer
 	private void cutEarTip (int earTipIndex) {
 		short[] indices = this.indices;
 		ShortArray triangles = this.triangles;

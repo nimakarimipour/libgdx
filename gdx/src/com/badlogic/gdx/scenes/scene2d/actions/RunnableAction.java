@@ -18,11 +18,15 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** An action that runs a {@link Runnable}. Alternatively, the {@link #run()} method can be overridden instead of setting a
  * runnable.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class RunnableAction extends Action {
+	@Nullable
 	private Runnable runnable;
 	private boolean ran;
 
@@ -35,6 +39,7 @@ public class RunnableAction extends Action {
 	}
 
 	/** Called to run the runnable. */
+	@Initializer
 	public void run () {
 		Pool pool = getPool();
 		setPool(null); // Ensure this action can't be returned to the pool inside the runnable.

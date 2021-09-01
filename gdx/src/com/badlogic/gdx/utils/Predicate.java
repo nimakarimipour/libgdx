@@ -17,9 +17,12 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Iterator;
-
+import com.badlogic.gdx.Initializer;
 /** Interface used to select items within an iterator against a predicate.
  * @author Xoppa */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public interface Predicate<T> {
 
 	/** @return true if the item matches the criteria and should be included in the iterator's items */
@@ -30,6 +33,7 @@ public interface Predicate<T> {
 		public Predicate<T> predicate;
 		public boolean end = false;
 		public boolean peeked = false;
+		@Nullable
 		public T next = null;
 
 		public PredicateIterator (final Iterable<T> iterable, final Predicate<T> predicate) {
@@ -44,6 +48,7 @@ public interface Predicate<T> {
 			set(iterable.iterator(), predicate);
 		}
 
+		@Initializer
 		public void set (final Iterator<T> iterator, final Predicate<T> predicate) {
 			this.iterator = iterator;
 			this.predicate = predicate;
@@ -68,6 +73,7 @@ public interface Predicate<T> {
 		}
 
 		@Override
+		@Nullable
 		public T next () {
 			if (next == null && !hasNext()) return null;
 			final T result = next;
@@ -77,6 +83,7 @@ public interface Predicate<T> {
 		}
 
 		@Override
+		@Initializer
 		public void remove () {
 			if (peeked) throw new GdxRuntimeException("Cannot remove between a call to hasNext() and next().");
 			iterator.remove();
@@ -86,12 +93,14 @@ public interface Predicate<T> {
 	public static class PredicateIterable<T> implements Iterable<T> {
 		public Iterable<T> iterable;
 		public Predicate<T> predicate;
+		@Nullable
 		public PredicateIterator<T> iterator = null;
 
 		public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
 			set(iterable, predicate);
 		}
 
+		@Initializer
 		public void set (Iterable<T> iterable, Predicate<T> predicate) {
 			this.iterable = iterable;
 			this.predicate = predicate;
@@ -102,6 +111,7 @@ public interface Predicate<T> {
 		 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called. Use
 		 * the {@link Predicate.PredicateIterator} constructor for nested or multithreaded iteration. */
 		@Override
+		@Initializer
 		public Iterator<T> iterator () {
 			if (Collections.allocateIterators) return new PredicateIterator<T>(iterable.iterator(), predicate);
 			if (iterator == null)

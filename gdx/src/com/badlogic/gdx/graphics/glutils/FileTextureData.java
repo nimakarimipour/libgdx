@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 public class FileTextureData implements TextureData {
 
@@ -31,6 +32,7 @@ public class FileTextureData implements TextureData {
 	int width = 0;
 	int height = 0;
 	Format format;
+	@Nullable
 	Pixmap pixmap;
 	boolean useMipMaps;
 	boolean isPrepared = false;

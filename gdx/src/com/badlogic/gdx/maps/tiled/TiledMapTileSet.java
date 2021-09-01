@@ -19,10 +19,12 @@ package com.badlogic.gdx.maps.tiled;
 import java.util.Iterator;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.IntMap;
-
+import javax.annotation.Nullable;
 /** @brief Set of {@link TiledMapTile} instances used to compose a TiledMapLayer */
+
 public class TiledMapTileSet implements Iterable<TiledMapTile> {
 
+	@Nullable
 	private String name;
 
 	private IntMap<TiledMapTile> tiles;

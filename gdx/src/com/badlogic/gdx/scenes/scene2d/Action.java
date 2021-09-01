@@ -21,14 +21,19 @@ import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
-
+import com.badlogic.gdx.Initializer;
 /** Actions attach to an {@link Actor} and perform some task, often over time.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 abstract public class Action implements Poolable {
 	/** The actor this action is attached to, or null if it is not attached. */
+	@Nullable
 	protected Actor actor;
 
 	/** The actor this action targets, or null if a target has not been set. */
+	@Nullable
 	protected Actor target;
 
 	private @Null Pool pool;
@@ -53,7 +58,8 @@ abstract public class Action implements Poolable {
 	 * This method is not typically a good place for an action subclass to query the actor's state because the action may not be
 	 * executed for some time, eg it may be {@link DelayAction delayed}. The actor's state is best queried in the first call to
 	 * {@link #act(float)}. For a {@link TemporalAction}, use TemporalAction#begin(). */
-	public void setActor (Actor actor) {
+	@Initializer
+	public void setActor (@Nullable Actor actor) {
 		this.actor = actor;
 		if (target == null) setTarget(actor);
 		if (actor == null) {

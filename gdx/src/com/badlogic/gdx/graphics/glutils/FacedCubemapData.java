@@ -14,10 +14,11 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** A FacedCubemapData holds a cubemap data definition based on a {@link TextureData} per face.
  * 
  * @author Vincent Nousquet */
+
 public class FacedCubemapData implements CubemapData {
 
 	protected final TextureData[] data = new TextureData[6];
@@ -71,7 +72,7 @@ public class FacedCubemapData implements CubemapData {
 	}
 
 	/** Construct a Cubemap with the specified {@link TextureData}'s for the sides */
-	public FacedCubemapData (TextureData positiveX, TextureData negativeX, TextureData positiveY, TextureData negativeY,
+	public FacedCubemapData (@Nullable TextureData positiveX, TextureData negativeX, TextureData positiveY, TextureData negativeY,
 		TextureData positiveZ, TextureData negativeZ) {
 		data[0] = positiveX;
 		data[1] = negativeX;

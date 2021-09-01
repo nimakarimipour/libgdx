@@ -35,7 +35,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
-
+import javax.annotation.Nullable;
 /** 2D scene graph node. An actor has a position, rectangular size, origin, scale, rotation, Z index, and color. The position
  * corresponds to the unrotated, unscaled bottom left corner of the actor. The position is relative to the actor's parent. The
  * origin is relative to the position and is used for scale and rotation.
@@ -54,6 +54,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
  * or pinch.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class Actor {
 	private @Null Stage stage;
 	@Null Group parent;
@@ -247,7 +248,7 @@ public class Actor {
 		return true;
 	}
 
-	public boolean removeCaptureListener (EventListener listener) {
+	public boolean removeCaptureListener (@Nullable EventListener listener) {
 		if (listener == null) throw new IllegalArgumentException("listener cannot be null.");
 		return captureListeners.removeValue(listener, true);
 	}
@@ -303,7 +304,7 @@ public class Actor {
 
 	/** Called by the framework when this actor or any ascendant is added to a group that is in the stage.
 	 * @param stage May be null if the actor or any ascendant is no longer in a stage. */
-	protected void setStage (Stage stage) {
+	protected void setStage (@Nullable Stage stage) {
 		this.stage = stage;
 	}
 

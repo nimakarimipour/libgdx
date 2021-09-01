@@ -30,7 +30,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
-
+import com.badlogic.gdx.Initializer;
 /** A PolygonSpriteBatch is used to draw 2D polygons that reference a texture (region). The class will batch the drawing commands
  * and optimize them for processing by the GPU.
  * <p>
@@ -55,12 +55,16 @@ import com.badlogic.gdx.math.Matrix4;
  * @author mzechner
  * @author Stefan Bachmann
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class PolygonSpriteBatch implements PolygonBatch {
 	private Mesh mesh;
 
 	private final float[] vertices;
 	private final short[] triangles;
 	private int vertexIndex, triangleIndex;
+	@Nullable
 	private Texture lastTexture;
 	private float invTexWidth = 0, invTexHeight = 0;
 	private boolean drawing;
@@ -107,7 +111,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	/** Constructs a PolygonSpriteBatch with the specified shader, size vertices and size * 2 triangles.
 	 * @param size The max number of vertices and number of triangles in a single batch. Max of 32767.
 	 * @see #PolygonSpriteBatch(int, int, ShaderProgram) */
-	public PolygonSpriteBatch (int size, ShaderProgram defaultShader) {
+	public PolygonSpriteBatch (int size, @Nullable ShaderProgram defaultShader) {
 		this(size, size * 2, defaultShader);
 	}
 
@@ -121,7 +125,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	 * @param maxTriangles The max number of triangles in a single batch.
 	 * @param defaultShader The default shader to use. This is not owned by the PolygonSpriteBatch and must be disposed separately.
 	 *           May be null to use the default shader. */
-	public PolygonSpriteBatch (int maxVertices, int maxTriangles, ShaderProgram defaultShader) {
+	public PolygonSpriteBatch (int maxVertices, int maxTriangles, @Nullable ShaderProgram defaultShader) {
 		// 32767 is max vertex index.
 		if (maxVertices > 32767)
 			throw new IllegalArgumentException("Can't have more than 32767 vertices per batch: " + maxVertices);
@@ -148,6 +152,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
+	@Initializer
 	public void begin () {
 		if (drawing) throw new IllegalStateException("PolygonSpriteBatch.end must be called before begin.");
 		renderCalls = 0;
@@ -203,6 +208,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
+	@Initializer
 	public void draw (PolygonRegion region, float x, float y) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 

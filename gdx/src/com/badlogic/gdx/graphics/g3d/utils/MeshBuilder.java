@@ -46,12 +46,15 @@ import com.badlogic.gdx.utils.IntIntMap;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.ShortArray;
-
+import com.badlogic.gdx.Initializer;
 /** Class to construct a mesh, optionally splitting it into one or more mesh parts. Before you can call any other method you must
  * call {@link #begin(VertexAttributes)} or {@link #begin(VertexAttributes, int)}. To use mesh parts you must call
  * {@link #part(String, int)} before you start building the part. The MeshPart itself is only valid after the call to
  * {@link #end()}.
  * @author Xoppa */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class MeshBuilder implements MeshPartBuilder {
 	/** maximum number of vertices mesh builder can hold (64k) */
 	public static final int MAX_VERTICES = 1 << 16;
@@ -99,6 +102,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	/** The offset within an vertex to texture coordinates, or -1 if not available */
 	private int uvOffset;
 	/** The meshpart currently being created */
+	@Nullable
 	private MeshPart part;
 	/** The parts created between begin and end */
 	private Array<MeshPart> parts = new Array<MeshPart>();
@@ -157,6 +161,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	/** Begin building a mesh */
+	@Initializer
 	public void begin (final VertexAttributes attributes, int primitiveType) {
 		if (this.attributes != null) throw new RuntimeException("Call end() first");
 		this.attributes = attributes;
@@ -218,6 +223,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	 * @param id The id (name) of the part
 	 * @param primitiveType e.g. {@link GL20#GL_TRIANGLES} or {@link GL20#GL_LINES}
 	 * @param meshPart The part to receive the result */
+	@Initializer
 	public MeshPart part (final String id, final int primitiveType, MeshPart meshPart) {
 		if (this.attributes == null) throw new RuntimeException("Call begin() first");
 		endpart();
@@ -353,7 +359,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	@Override
-	public void setColor (final Color color) {
+	public void setColor (@Nullable final Color color) {
 		this.color.set(!(hasColor = (color != null)) ? Color.WHITE : color);
 	}
 
@@ -367,7 +373,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	@Override
-	public void setUVRange (TextureRegion region) {
+	public void setUVRange (@Nullable TextureRegion region) {
 		if (region == null) {
 			hasUVTransform = false;
 			uOffset = vOffset = 0f;
@@ -384,7 +390,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	@Override
-	public void setVertexTransform (Matrix4 transform) {
+	public void setVertexTransform (@Nullable Matrix4 transform) {
 		vertexTransformationEnabled = transform != null;
 		if (vertexTransformationEnabled) {
 			positionTransform.set(transform);
@@ -764,6 +770,7 @@ public class MeshBuilder implements MeshPartBuilder {
 		addMesh(tmpVertices.items, tmpIndices.items, 0, numIndices);
 	}
 
+	@Nullable
 	private static IntIntMap indicesMap = null;
 
 	@Override

@@ -56,6 +56,7 @@ import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.Initializer;
 
 public abstract class BatchTiledMapRenderer implements TiledMapRenderer, Disposable {
 	static protected final int NUM_VERTICES = 20;
@@ -134,6 +135,7 @@ public abstract class BatchTiledMapRenderer implements TiledMapRenderer, Disposa
 	}
 
 	@Override
+	@Initializer
 	public void render () {
 		beginRender();
 		for (MapLayer layer : map.getLayers()) {

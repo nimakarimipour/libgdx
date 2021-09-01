@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Scaling;
-
+import com.badlogic.gdx.Initializer;
 /** A viewport that scales the world using {@link Scaling}.
  * <p>
  * {@link Scaling#fit} keeps the aspect ratio by scaling the world up to fit the screen, adding black bars (letterboxing) for the
@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Scaling;
  * may be off screen).
  * @author Daniel Holderbaum
  * @author Nathan Sweet */
+
 public class ScalingViewport extends Viewport {
 	private Scaling scaling;
 
@@ -50,6 +51,7 @@ public class ScalingViewport extends Viewport {
 		setCamera(camera);
 	}
 
+	@Initializer
 	public void update (int screenWidth, int screenHeight, boolean centerCamera) {
 		Vector2 scaled = scaling.apply(getWorldWidth(), getWorldHeight(), screenWidth, screenHeight);
 		int viewportWidth = Math.round(scaled.x);

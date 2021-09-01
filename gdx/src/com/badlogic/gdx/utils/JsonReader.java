@@ -27,12 +27,15 @@ import java.io.Reader;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonValue.ValueType;
-
+import com.badlogic.gdx.Initializer;
 /** Lightweight JSON parser.<br>
  * <br>
  * The default behavior is to parse the JSON into a DOM containing {@link JsonValue} objects. Extend this class and override
  * methods to perform event driven parsing. When this is done, the parse methods will return null.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class JsonReader implements BaseJsonReader {
 	public JsonValue parse (String json) {
 		char[] data = json.toCharArray();
@@ -655,7 +658,11 @@ public class JsonReader implements BaseJsonReader {
 
 	private final Array<JsonValue> elements = new Array(8);
 	private final Array<JsonValue> lastChild = new Array(8);
-	private JsonValue root, current;
+	@Nullable
+	private JsonValue current;
+
+@Nullable
+private JsonValue root;
 
 	/** @param name May be null. */
 	private void addChild (@Null String name, JsonValue child) {
@@ -679,6 +686,7 @@ public class JsonReader implements BaseJsonReader {
 	}
 
 	/** @param name May be null. */
+	@Initializer
 	protected void startObject (@Null String name) {
 		JsonValue value = new JsonValue(ValueType.object);
 		if (current != null) addChild(name, value);
@@ -694,25 +702,26 @@ public class JsonReader implements BaseJsonReader {
 		current = value;
 	}
 
+	@Initializer
 	protected void pop () {
 		root = elements.pop();
 		if (current.size > 0) lastChild.pop();
 		current = elements.size > 0 ? elements.peek() : null;
 	}
 
-	protected void string (String name, String value) {
+	protected void string (@Nullable String name, String value) {
 		addChild(name, new JsonValue(value));
 	}
 
-	protected void number (String name, double value, String stringValue) {
+	protected void number (@Nullable String name, double value, String stringValue) {
 		addChild(name, new JsonValue(value, stringValue));
 	}
 
-	protected void number (String name, long value, String stringValue) {
+	protected void number (@Nullable String name, long value, String stringValue) {
 		addChild(name, new JsonValue(value, stringValue));
 	}
 
-	protected void bool (String name, boolean value) {
+	protected void bool (@Nullable String name, boolean value) {
 		addChild(name, new JsonValue(value));
 	}
 

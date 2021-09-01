@@ -20,12 +20,13 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
-
+import com.badlogic.gdx.Initializer;
 /** Abstract base class for asset loaders.
  * @author mzechner
  * 
  * @param <T> the class of the asset the loader supports
  * @param <P> the class of the loading parameters the loader supports. */
+
 public abstract class AssetLoader<T, P extends AssetLoaderParameters<T>> {
 	/** {@link FileHandleResolver} used to map from plain asset names to {@link FileHandle} instances **/
 	private FileHandleResolver resolver;
@@ -38,6 +39,7 @@ public abstract class AssetLoader<T, P extends AssetLoaderParameters<T>> {
 
 	/** @param fileName file name to resolve
 	 * @return handle to the file, as resolved by the {@link FileHandleResolver} set on the loader */
+	@Initializer
 	public FileHandle resolve (String fileName) {
 		return resolver.resolve(fileName);
 	}

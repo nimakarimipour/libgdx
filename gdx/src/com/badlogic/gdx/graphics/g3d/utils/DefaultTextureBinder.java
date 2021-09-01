@@ -23,10 +23,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** Class that you assign a range of texture units and binds textures for you within that range. It does some basic usage tracking
  * to avoid unnecessary bind calls.
  * @author xoppa */
+import javax.annotation.Nullable;
+
 public final class DefaultTextureBinder implements TextureBinder {
 	public final static int ROUNDROBIN = 0;
 	public final static int LRU = 1;
@@ -152,6 +154,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		return currentTexture;
 	}
 
+	@Initializer
 	private final int bindTextureLRU (final GLTexture texture) {
 		int i;
 		for (i = 0; i < count; i++) {

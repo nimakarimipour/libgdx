@@ -18,6 +18,7 @@ package com.badlogic.gdx.maps.tiled;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
+import javax.annotation.Nullable;
 
 public class TiledMapImageLayer extends MapLayer {
 
@@ -26,7 +27,7 @@ public class TiledMapImageLayer extends MapLayer {
 	private float x;
 	private float y;
 
-	public TiledMapImageLayer (TextureRegion region, float x, float y) {
+	public TiledMapImageLayer (@Nullable TextureRegion region, float x, float y) {
 		this.region = region;
 		this.x = x;
 		this.y = y;

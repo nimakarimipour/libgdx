@@ -15,7 +15,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Arrays;
 import java.util.Comparator;
-
+import com.badlogic.gdx.Initializer;
 /** A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when running on partially sorted
  * arrays, while offering performance comparable to a traditional mergesort when run on random arrays. Like all proper mergesorts,
  * this sort is stable and runs O(n log n) time (worst case). In the worst case, this sort requires temporary storage space for
@@ -37,6 +37,9 @@ import java.util.Comparator;
  * While the API to this class consists solely of static methods, it is (privately) instantiable; a TimSort instance holds the
  * state of an ongoing sort, assuming the input array is large enough to warrant the full-blown TimSort. Small arrays are sorted
  * in place, using a binary insertion sort. */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 class TimSort<T> {
 	/** This is the minimum sized sequence that will be merged. Shorter sequences will be lengthened by calling binarySort. If the
 	 * entire array is less than this length, no merges will be performed.
@@ -51,9 +54,11 @@ class TimSort<T> {
 	private static final int MIN_MERGE = 32;
 
 	/** The array being sorted. */
+	@Nullable
 	private T[] a;
 
 	/** The comparator for this sort. */
+	@Nullable
 	private Comparator<? super T> c;
 
 	/** When we get into galloping mode, we stay there until both runs win less often than MIN_GALLOP consecutive times. */
@@ -401,6 +406,7 @@ class TimSort<T> {
 	 * words, i must be equal to stackSize-2 or stackSize-3.
 	 * 
 	 * @param i stack index of the first of the two runs to merge */
+	@Initializer
 	private void mergeAt (int i) {
 		if (DEBUG) assert stackSize >= 2;
 		if (DEBUG) assert i >= 0;

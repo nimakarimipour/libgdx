@@ -29,16 +29,20 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.utils.Array;
-
+import javax.annotation.Nullable;
 /** {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link CubemapParameter} to
  * {@link AssetManager#load(String, Class, AssetLoaderParameters)} allows one to specify parameters as can be passed to the
  * various Cubemap constructors, e.g. filtering and so on.
  * @author mzechner, Vincent Bousquet */
+
 public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
 	static public class CubemapLoaderInfo {
+		@Nullable
 		String filename;
+		@Nullable
 		CubemapData data;
+		@Nullable
 		Cubemap cubemap;
 	};
 
@@ -71,7 +75,7 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		if (!info.data.isPrepared()) info.data.prepare();
 	}
 
-	@Override
+	@Override	@Nullable
 	public Cubemap loadSync (AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
 		if (info == null) return null;
 		Cubemap cubemap = info.cubemap;
@@ -87,17 +91,20 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		return cubemap;
 	}
 
-	@Override
+	@Override	@Nullable
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, CubemapParameter parameter) {
 		return null;
 	}
 
 	static public class CubemapParameter extends AssetLoaderParameters<Cubemap> {
 		/** the format of the final Texture. Uses the source images format if null **/
+		@Nullable
 		public Format format = null;
 		/** The texture to put the {@link TextureData} in, optional. **/
+		@Nullable
 		public Cubemap cubemap = null;
 		/** CubemapData for textures created on the fly, optional. When set, all format and genMipMaps are ignored */
+		@Nullable
 		public CubemapData cubemapData = null;
 		public TextureFilter minFilter = TextureFilter.Nearest;
 		public TextureFilter magFilter = TextureFilter.Nearest;

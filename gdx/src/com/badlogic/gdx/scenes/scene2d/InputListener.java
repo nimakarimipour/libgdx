@@ -18,7 +18,7 @@ package com.badlogic.gdx.scenes.scene2d;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Null;
-
+import javax.annotation.Nullable;
 /** EventListener for low-level input events. Unpacks {@link InputEvent}s and calls the appropriate method. By default the methods
  * here do nothing with the event. Users are expected to override the methods they are interested in, like this:
  * 
@@ -35,6 +35,7 @@ import com.badlogic.gdx.utils.Null;
  * });
  * </pre>
  */
+
 public class InputListener implements EventListener {
 	static private final Vector2 tmpCoords = new Vector2();
 
@@ -135,7 +136,7 @@ public class InputListener implements EventListener {
 	}
 
 	/** Called when a key goes down. When true is returned, the event is {@link Event#handle() handled}. */
-	public boolean keyDown (InputEvent event, int keycode) {
+	public boolean keyDown (@Nullable InputEvent event, int keycode) {
 		return false;
 	}
 

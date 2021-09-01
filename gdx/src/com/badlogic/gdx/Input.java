@@ -17,7 +17,7 @@
 package com.badlogic.gdx;
 
 import com.badlogic.gdx.utils.ObjectIntMap;
-
+import javax.annotation.Nullable;
 /** <p>
  * Interface to the input facilities. This allows polling the state of the keyboard, the touch screen and the accelerometer. On
  * some backends (desktop, gwt, etc) the touch screen is replaced by mouse input. The accelerometer is of course not available on
@@ -41,6 +41,7 @@ import com.badlogic.gdx.utils.ObjectIntMap;
  * </p>
  * 
  * @author mzechner */
+
 public interface Input {
 	/** Callback interface for {@link Input#getTextInput(TextInputListener, String, String, String)}
 	 * 
@@ -245,6 +246,7 @@ public interface Input {
 
 		/** @return a human readable representation of the keycode. The returned value can be used in
 		 *         {@link Input.Keys#valueOf(String)} */
+		@Nullable
 		public static String toString (int keycode) {
 			if (keycode < 0) throw new IllegalArgumentException("keycode cannot be negative, keycode: " + keycode);
 			if (keycode > MAX_KEYCODE) throw new IllegalArgumentException("keycode cannot be greater than 255, keycode: " + keycode);
@@ -537,6 +539,7 @@ public interface Input {
 			}
 		}
 
+		@Nullable
 		private static ObjectIntMap<String> keyNames;
 
 		/** @param keyname the keyname returned by the {@link Keys#toString(int)} method

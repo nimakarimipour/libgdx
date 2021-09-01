@@ -23,9 +23,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** A button with a child {@link Label} to display text.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class TextButton extends Button {
 	private Label label;
 	private TextButtonStyle style;
@@ -49,6 +52,7 @@ public class TextButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Initializer
 	public void setStyle (ButtonStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		if (!(style instanceof TextButtonStyle)) throw new IllegalArgumentException("style must be a TextButtonStyle.");
@@ -107,6 +111,7 @@ public class TextButton extends Button {
 		return label;
 	}
 
+	@Nullable
 	public Cell<Label> getLabelCell () {
 		return getCell(label);
 	}
@@ -131,6 +136,7 @@ public class TextButton extends Button {
 	/** The style for a text button, see {@link TextButton}.
 	 * @author Nathan Sweet */
 	static public class TextButtonStyle extends ButtonStyle {
+		@Nullable
 		public BitmapFont font;
 		public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
 		public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor, checkedFocusedFontColor;

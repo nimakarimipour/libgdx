@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.Initializer;
 
 public class Material extends Attributes {
 	private static int counter = 0;
@@ -75,6 +76,7 @@ public class Material extends Attributes {
 	}
 	
 	@Override
+	@Initializer
 	public int hashCode () {
 		return super.hashCode() + 3 * id.hashCode();
 	}

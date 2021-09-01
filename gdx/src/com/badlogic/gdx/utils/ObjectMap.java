@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-
+import javax.annotation.Nullable;
 /** An unordered map where the keys and values are objects. Null keys are not allowed. No allocation is done except when growing
  * the table size.
  * <p>
@@ -38,6 +38,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+
 public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	static final Object dummy = new Object();
 
@@ -64,9 +65,18 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	 * hash. */
 	protected int mask;
 
-	Entries entries1, entries2;
-	Values values1, values2;
-	Keys keys1, keys2;
+	Entries entries2;
+	@Nullable
+	Entries entries1;
+	
+	Values values2;
+	@Nullable
+	Values values1;
+	
+	Keys keys2;
+
+@Nullable
+Keys keys1;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectMap () {
@@ -173,12 +183,13 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	}
 
 	/** Returns the value for the specified key, or null if the key is not in the map. */
-	public @Null <T extends K> V get (T key) {
+	public @Null <T extends K> V get (@Nullable T key) {
 		int i = locateKey(key);
 		return i < 0 ? null : valueTable[i];
 	}
 
 	/** Returns the value for the specified key, or the default value if the key is not in the map. */
+	@Nullable
 	public V get (K key, @Null V defaultValue) {
 		int i = locateKey(key);
 		return i < 0 ? defaultValue : valueTable[i];

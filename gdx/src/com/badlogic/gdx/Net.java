@@ -33,7 +33,7 @@ import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
-
+import javax.annotation.Nullable;
 /** Provides methods to perform networking operations, such as simple HTTP get and post requests, and TCP server/client socket
  * communication.</p>
  * 
@@ -53,6 +53,7 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  * @author mzechner
  * @author noblemaster
  * @author arielsan */
+
 public interface Net {
 
 	/** HTTP response interface with methods to get the response data as a byte[], a {@link String} or an {@link InputStream}. */
@@ -186,12 +187,16 @@ public interface Net {
 	 * </pre> */
 	public static class HttpRequest implements Poolable {
 
+		@Nullable
 		private String httpMethod;
+		@Nullable
 		private String url;
 		private Map<String, String> headers;
 		private int timeOut = 0;
 
+		@Nullable
 		private String content;
+		@Nullable
 		private InputStream contentStream;
 		private long contentLength;
 
@@ -315,6 +320,7 @@ public interface Net {
 		}
 
 		@Override
+		@Initializer
 		public void reset () {
 			httpMethod = null;
 			url = null;

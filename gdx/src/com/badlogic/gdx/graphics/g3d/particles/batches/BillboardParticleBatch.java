@@ -43,9 +43,12 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** This class is used to render billboard particles.
  * @author Inferno */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class BillboardParticleBatch extends BufferedParticleBatch<BillboardControllerRenderData> {
 	protected static final Vector3 TMP_V1 = new Vector3(), TMP_V2 = new Vector3(), TMP_V3 = new Vector3(), TMP_V4 = new Vector3(),
 		TMP_V5 = new Vector3(), TMP_V6 = new Vector3();
@@ -110,6 +113,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 
 		boolean useGPU;
+		@Nullable
 		AlignMode mode;
 	}
 
@@ -121,6 +125,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	private VertexAttributes currentAttributes;
 	protected boolean useGPU = false;
 	protected AlignMode mode = AlignMode.Screen;
+	@Nullable
 	protected Texture texture;
 	protected BlendingAttribute blendingAttribute;
 	protected DepthTestAttribute depthTestAttribute;
@@ -132,7 +137,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	 * @param capacity Max particle displayed
 	 * @param blendingAttribute Blending attribute used by the batch
 	 * @param depthTestAttribute DepthTest attribute used by the batch */
-	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity, BlendingAttribute blendingAttribute,
+	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity, @Nullable BlendingAttribute blendingAttribute,
 		DepthTestAttribute depthTestAttribute) {
 		super(BillboardControllerRenderData.class);
 		renderables = new Array<Renderable>();
@@ -164,6 +169,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	}
 
 	@Override
+	@Initializer
 	public void allocParticlesData (int capacity) {
 		vertices = new float[currentVertexSize * 4 * capacity];
 		allocRenderables(capacity);
@@ -208,6 +214,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		return shader;
 	}
 
+	@Initializer
 	private void allocShader () {
 		Renderable newRenderable = allocRenderable();
 		shader = newRenderable.shader = getShader(newRenderable);
@@ -224,6 +231,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	}
 
 	/** Sets vertex attributes and size */
+	@Initializer
 	public void setVertexData () {
 		if (useGPU) {
 			currentAttributes = GPU_ATTRIBUTES;

@@ -17,7 +17,7 @@
 package com.badlogic.gdx.math;
 
 import java.io.Serializable;
-
+import javax.annotation.Nullable;
 /** Encapsulates a <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column major</a> 4 by 4 matrix. Like
  * the {@link Vector3} class it allows the chaining of methods by returning a reference to itself. For example:
  * 
@@ -26,6 +26,7 @@ import java.io.Serializable;
  * </pre>
  * 
  * @author badlogicgames@gmail.com */
+
 public class Matrix4 implements Serializable {
 	private static final long serialVersionUID = -2717655254359579617L;
 	/** XX: Typically the unrotated X component for scaling, also the cosine of the angle when rotated on the Y and/or Z axis. On
@@ -93,7 +94,7 @@ public class Matrix4 implements Serializable {
 
 	/** Constructs a matrix from the given matrix.
 	 * @param matrix The matrix to copy. (This matrix is not modified) */
-	public Matrix4 (Matrix4 matrix) {
+	public Matrix4 (@Nullable Matrix4 matrix) {
 		set(matrix);
 	}
 

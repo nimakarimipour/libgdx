@@ -20,9 +20,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.utils.Null;
-
+import javax.annotation.Nullable;
 /** Listener for {@link FocusEvent}.
  * @author Nathan Sweet */
+
 abstract public class FocusListener implements EventListener {
 	public boolean handle (Event event) {
 		if (!(event instanceof FocusEvent)) return false;
@@ -50,7 +51,9 @@ abstract public class FocusListener implements EventListener {
 	 * @author Nathan Sweet */
 	static public class FocusEvent extends Event {
 		private boolean focused;
+		@Nullable
 		private Type type;
+		@Nullable
 		private Actor relatedActor;
 
 		public void reset () {

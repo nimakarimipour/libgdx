@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Attribute;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.NumberUtils;
+import javax.annotation.Nullable;
 
 public class BlendingAttribute extends Attribute {
 	public final static String Alias = "blended";
@@ -68,7 +69,7 @@ public class BlendingAttribute extends Attribute {
 		this(true, opacity);
 	}
 
-	public BlendingAttribute (final BlendingAttribute copyFrom) {
+	public BlendingAttribute (@Nullable final BlendingAttribute copyFrom) {
 		this(copyFrom == null || copyFrom.blended, copyFrom == null ? GL20.GL_SRC_ALPHA : copyFrom.sourceFunction,
 			copyFrom == null ? GL20.GL_ONE_MINUS_SRC_ALPHA : copyFrom.destFunction, copyFrom == null ? 1.f : copyFrom.opacity);
 	}

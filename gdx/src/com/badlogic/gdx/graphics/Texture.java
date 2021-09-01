@@ -31,7 +31,7 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
  * A Texture can be managed. If the OpenGL context is lost all managed textures get invalidated. This happens when a user switches
@@ -45,7 +45,11 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * <p>
  * A Texture must be disposed when it is no longer used
  * @author badlogicgames@gmail.com */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Texture extends GLTexture {
+	@Nullable
 	private static AssetManager assetManager;
 	final static Map<Application, Array<Texture>> managedTextures = new HashMap<Application, Array<Texture>>();
 
@@ -118,7 +122,7 @@ public class Texture extends GLTexture {
 		this(file, null, useMipMaps);
 	}
 
-	public Texture (FileHandle file, Format format, boolean useMipMaps) {
+	public Texture (FileHandle file, @Nullable Format format, boolean useMipMaps) {
 		this(TextureData.Factory.loadFromFile(file, format, useMipMaps));
 	}
 
@@ -179,6 +183,7 @@ public class Texture extends GLTexture {
 	 * @param pixmap The Pixmap
 	 * @param x The x coordinate in pixels
 	 * @param y The y coordinate in pixels */
+	@Initializer
 	public void draw (Pixmap pixmap, int x, int y) {
 		if (data.isManaged()) throw new GdxRuntimeException("can't draw to a managed texture");
 

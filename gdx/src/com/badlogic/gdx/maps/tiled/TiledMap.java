@@ -21,10 +21,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Represents a tiled map, adds the concept of tiles and tilesets.
  * 
  * @see Map */
+
 public class TiledMap extends Map {
 	private TiledMapTileSets tilesets;
 	private Array<? extends Disposable> ownedResources;
@@ -47,6 +48,7 @@ public class TiledMap extends Map {
 	}
 
 	@Override
+	@Initializer
 	public void dispose () {
 		if (ownedResources != null) {
 			for (Disposable resource : ownedResources) {

@@ -28,7 +28,7 @@ import com.badlogic.gdx.Input.TextInputListener;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntSet;
-
+import com.badlogic.gdx.Initializer;
 /** <p>
  * An {@link Input} implementation that receives touch, key, accelerometer and compass events from a remote Android device. Just
  * instantiate it and specify the port it should listen on for incoming connections (default 8190). Then store the new RemoteInput
@@ -46,6 +46,9 @@ import com.badlogic.gdx.utils.IntSet;
  * </p>
  * 
  * @author mzechner */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class RemoteInput implements Runnable, Input {
 	public interface RemoteInputListener {
 		void onConnected ();
@@ -80,12 +83,13 @@ public class RemoteInput implements Runnable, Input {
 		TouchEvent touchEvent;
 		KeyEvent keyEvent;
 
-		public EventTrigger (TouchEvent touchEvent, KeyEvent keyEvent) {
+		public EventTrigger (@Nullable TouchEvent touchEvent, KeyEvent keyEvent) {
 			this.touchEvent = touchEvent;
 			this.keyEvent = keyEvent;
 		}
 
 		@Override
+		@Initializer
 		public void run () {
 			justTouched = false;
 			if (keyJustPressed) {
@@ -207,6 +211,7 @@ public class RemoteInput implements Runnable, Input {
 	int[] touchY = new int[MAX_TOUCHES];
 	boolean isTouched[] = new boolean[MAX_TOUCHES];
 	boolean justTouched = false;
+	@Nullable
 	InputProcessor processor = null;
 	private final int port;
 	public final String[] ips;
@@ -223,7 +228,7 @@ public class RemoteInput implements Runnable, Input {
 		this(port, null);
 	}
 
-	public RemoteInput (int port, RemoteInputListener listener) {
+	public RemoteInput (int port, @Nullable RemoteInputListener listener) {
 		this.listener = listener;
 		try {
 			this.port = port;

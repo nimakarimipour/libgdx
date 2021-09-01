@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-
+import javax.annotation.Nullable;
 /** An unordered map where the keys and values are unboxed ints. No allocation is done except when growing the table size.
  * <p>
  * This class performs fast contains and remove (typically O(1), worst case O(n) but that is rare in practice). Add may be
@@ -37,6 +37,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+
 public class IntIntMap implements Iterable<IntIntMap.Entry> {
 	public int size;
 
@@ -64,9 +65,18 @@ public class IntIntMap implements Iterable<IntIntMap.Entry> {
 	 * hash. */
 	protected int mask;
 
-	private Entries entries1, entries2;
-	private Values values1, values2;
-	private Keys keys1, keys2;
+	private Entries entries2;
+	@Nullable
+	private Entries entries1;
+	
+	private Values values2;
+	@Nullable
+	private Values values1;
+	
+	private Keys keys2;
+
+@Nullable
+private Keys keys1;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public IntIntMap () {

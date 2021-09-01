@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
+import javax.annotation.Nullable;
 
 public class TextureAttribute extends Attribute {
 	public final static String DiffuseAlias = "diffuseTexture";
@@ -46,7 +47,7 @@ public class TextureAttribute extends Attribute {
 		return (mask & Mask) != 0;
 	}
 
-	public static TextureAttribute createDiffuse (final Texture texture) {
+	public static TextureAttribute createDiffuse (@Nullable final Texture texture) {
 		return new TextureAttribute(Diffuse, texture);
 	}
 

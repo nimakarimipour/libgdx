@@ -18,9 +18,10 @@ package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** Implementation of the Bezier curve.
  * @author Xoppa */
+
 public class Bezier<T extends Vector<T>> implements Path<T> {
 	// TODO implement Serializable
 
@@ -138,6 +139,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 		return set(points, 0, points.length);
 	}
 
+	@Initializer
 	public Bezier set (final T[] points, final int offset, final int length) {
 		if (length < 2 || length > 4)
 			throw new GdxRuntimeException("Only first, second and third degree Bezier curves are supported.");

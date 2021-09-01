@@ -54,7 +54,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
-
+import javax.annotation.Nullable;
 /** A model represents a 3D assets. It stores a hierarchy of nodes. A node has a transform and optionally a graphical part in form
  * of a {@link MeshPart} and {@link Material}. Mesh parts reference subsets of vertices in one of the meshes of the model.
  * Animations can be applied to nodes, to modify their transform (translation, rotation, scale) over time.</p>
@@ -67,6 +67,7 @@ import com.badlogic.gdx.utils.ObjectMap;
  * A model is created from {@link ModelData}, which in turn is loaded by a {@link ModelLoader}.
  * 
  * @author badlogic, xoppa */
+
 public class Model implements Disposable {
 	/** the materials of the model, used by nodes that have a graphical representation FIXME not sure if superfluous, allows
 	 * modification of materials without having to traverse the nodes **/
@@ -399,6 +400,7 @@ public class Model implements Disposable {
 	/** @param id The ID of the animation to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
+	@Nullable
 	public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
@@ -421,6 +423,7 @@ public class Model implements Disposable {
 	/** @param id The ID of the material to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
+	@Nullable
 	public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;

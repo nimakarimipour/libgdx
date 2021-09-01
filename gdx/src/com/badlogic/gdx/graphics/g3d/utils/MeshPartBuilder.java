@@ -27,6 +27,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 public interface MeshPartBuilder {
 	/** @return The {@link MeshPart} currently building. */
@@ -223,7 +224,7 @@ public interface MeshPartBuilder {
 			return this;
 		}
 
-		public VertexInfo set (final VertexInfo other) {
+		public VertexInfo set (@Nullable final VertexInfo other) {
 			if (other == null) return set(null, null, null, null);
 			hasPosition = other.hasPosition;
 			position.set(other.position);

@@ -34,10 +34,12 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
  * @author Xoppa */
+
 public class Cubemap extends GLTexture {
+	@Nullable
 	private static AssetManager assetManager;
 	final static Map<Application, Array<Cubemap>> managedCubemaps = new HashMap<Application, Array<Cubemap>>();
 
@@ -135,7 +137,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Construct a Cubemap with the specified {@link TextureData}'s for the sides */
-	public Cubemap (TextureData positiveX, TextureData negativeX, TextureData positiveY, TextureData negativeY,
+	public Cubemap (@Nullable TextureData positiveX, TextureData negativeX, TextureData positiveY, TextureData negativeY,
 		TextureData positiveZ, TextureData negativeZ) {
 		super(GL20.GL_TEXTURE_CUBE_MAP);
 		minFilter = TextureFilter.Nearest;

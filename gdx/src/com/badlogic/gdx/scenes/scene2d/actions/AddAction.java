@@ -18,10 +18,14 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
+import com.badlogic.gdx.Initializer;
 /** Adds an action to an actor.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class AddAction extends Action {
+	@Nullable
 	private Action action;
 
 	public boolean act (float delta) {
@@ -37,6 +41,7 @@ public class AddAction extends Action {
 		this.action = action;
 	}
 
+	@Initializer
 	public void restart () {
 		if (action != null) action.restart();
 	}

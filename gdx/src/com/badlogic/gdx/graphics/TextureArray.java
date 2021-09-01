@@ -27,10 +27,11 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import com.badlogic.gdx.Initializer;
 /**
  * Open GLES wrapper for TextureArray
  * @author Tomski */
+
 public class TextureArray extends GLTexture {
 
 	final static Map<Application, Array<TextureArray>> managedTextureArrays = new HashMap<Application, Array<TextureArray>>();
@@ -91,6 +92,7 @@ public class TextureArray extends GLTexture {
 	}
 
 	@Override
+	@Initializer
 	public int getWidth () {
 		return data.getWidth();
 	}

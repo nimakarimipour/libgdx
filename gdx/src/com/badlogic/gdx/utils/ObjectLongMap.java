@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-
+import javax.annotation.Nullable;
 /** An unordered map where the keys are objects and the values are unboxed longs. Null keys are not allowed. No allocation is done
  * except when growing the table size.
  * <p>
@@ -38,6 +38,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+
 public class ObjectLongMap<K> implements Iterable<ObjectLongMap.Entry<K>> {
 	public int size;
 
@@ -62,9 +63,21 @@ public class ObjectLongMap<K> implements Iterable<ObjectLongMap.Entry<K>> {
 	 * hash. */
 	protected int mask;
 
-	Entries entries1, entries2;
-	Values values1, values2;
-	Keys keys1, keys2;
+	@Nullable
+	Entries entries2;
+	@Nullable
+	Entries entries1;
+	
+	@Nullable
+	Values values2;
+	@Nullable
+	Values values1;
+	
+	@Nullable
+	Keys keys2;
+
+@Nullable
+Keys keys1;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectLongMap () {
@@ -450,6 +463,7 @@ public class ObjectLongMap<K> implements Iterable<ObjectLongMap.Entry<K>> {
 	}
 
 	static public class Entry<K> {
+		@Nullable
 		public K key;
 		public long value;
 

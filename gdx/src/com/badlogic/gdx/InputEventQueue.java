@@ -53,6 +53,7 @@ public class InputEventQueue implements InputProcessor {
 		return processor;
 	}
 
+	@Initializer
 	public void drain () {
 		synchronized (this) {
 			if (processor == null) {
