@@ -22,11 +22,12 @@ import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-
+import javax.annotation.Nullable;
 /** A {@link MapObject} with a {@link TiledMapTile}. Can be both {@link StaticTiledMapTile} or {@link AnimatedTiledMapTile}. For
  * compatibility reasons, this extends {@link TextureMapObject}. Use {@link TiledMapTile#getTextureRegion()} instead of
  * {@link #getTextureRegion()}.
  * @author Daniel Holderbaum */
+
 public class TiledMapTileMapObject extends TextureMapObject {
 
 	private boolean flipHorizontally;

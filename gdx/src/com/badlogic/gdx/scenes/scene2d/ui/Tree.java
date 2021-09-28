@@ -34,7 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Selection;
 import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** A tree widget where each node has an icon, actor, and child nodes.
  * <p>
  * The preferred size of the tree is determined by the preferred size of the actors for the expanded nodes.
@@ -43,6 +43,9 @@ import com.badlogic.gdx.utils.Null;
  * @param <N> The type of nodes in the tree.
  * @param <V> The type of values for each node.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Tree<N extends Node, V> extends WidgetGroup {
 	static private final Vector2 tmp = new Vector2();
 
@@ -52,7 +55,9 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	float ySpacing = 4, iconSpacingLeft = 2, iconSpacingRight = 2, paddingLeft, paddingRight, indentSpacing;
 	private float prefWidth, prefHeight;
 	private boolean sizeInvalid = true;
+	@Nullable
 	private N foundNode, overNode;
+	@Nullable
 	N rangeStart;
 	private ClickListener clickListener;
 
@@ -137,6 +142,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		});
 	}
 
+	@Initializer
 	public void setStyle (TreeStyle style) {
 		this.style = style;
 
@@ -346,6 +352,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	 * {@link TreeStyle#minusOver} on the desktop if the node is the {@link #getOverNode() over node}, the mouse is left of
 	 * <code>iconX</code>, and clicking would expand the node.
 	 * @param iconX The X coordinate of the over node's icon. */
+	@Initializer
 	protected Drawable getExpandIcon (N node, float iconX) {
 		boolean over = false;
 		if (node == overNode //
@@ -575,12 +582,15 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	 * @author Nathan Sweet */
 	static abstract public class Node<N extends Node, V, A extends Actor> {
 		A actor;
+		@Nullable
 		N parent;
 		final Array<N> children = new Array(0);
 		boolean selectable = true;
 		boolean expanded;
+		@Nullable
 		Drawable icon;
 		float height;
+		@Nullable
 		V value;
 
 		public Node (A actor) {

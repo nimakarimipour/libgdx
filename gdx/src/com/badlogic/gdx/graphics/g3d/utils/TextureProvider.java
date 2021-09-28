@@ -21,9 +21,10 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.model.data.ModelData;
-
+import javax.annotation.Nullable;
 /** Used by {@link Model} to load textures from {@link ModelData}.
  * @author badlogic */
+
 public interface TextureProvider {
 	public Texture load (String fileName);
 

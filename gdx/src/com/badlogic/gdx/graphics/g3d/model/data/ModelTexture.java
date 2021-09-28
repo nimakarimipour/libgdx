@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.math.Vector2;
+import javax.annotation.Nullable;
 
 public class ModelTexture {
 	public final static int USAGE_UNKNOWN = 0;
@@ -31,9 +32,12 @@ public class ModelTexture {
 	public final static int USAGE_TRANSPARENCY = 9;
 	public final static int USAGE_REFLECTION = 10;
 
+	@Nullable
 	public String id;
 	public String fileName;
+	@Nullable
 	public Vector2 uvTranslation;
+	@Nullable
 	public Vector2 uvScaling;
 	public int usage;
 }

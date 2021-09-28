@@ -28,7 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** An on-screen joystick. The movement area of the joystick is circular, centered on the touchpad, and its size determined by the
  * smaller touchpad dimension.
  * <p>
@@ -37,6 +37,9 @@ import com.badlogic.gdx.utils.Pools;
  * {@link ChangeEvent} is fired when the touchpad knob is moved. Cancelling the event will move the knob to where it was
  * previously.
  * @author Josh Street */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Touchpad extends Widget {
 	private TouchpadStyle style;
 	boolean touched;
@@ -130,12 +133,14 @@ public class Touchpad extends Widget {
 		return style;
 	}
 
+	@Nullable
 	public Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.getTouchable() != Touchable.enabled) return null;
 		if (!isVisible()) return null;
 		return touchBounds.contains(x, y) ? this : null;
 	}
 
+	@Initializer
 	public void layout () {
 		// Recalc pad and deadzone bounds
 		float halfWidth = getWidth() / 2;

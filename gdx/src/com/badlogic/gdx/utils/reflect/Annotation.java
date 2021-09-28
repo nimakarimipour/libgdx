@@ -1,4 +1,6 @@
 package com.badlogic.gdx.utils.reflect;
+import javax.annotation.Nullable;
+
 
 /** Provides information about, and access to, an annotation of a field, class or interface.
  * @author dludwig */
@@ -11,6 +13,7 @@ public final class Annotation {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Nullable
 	public <T extends java.lang.annotation.Annotation> T getAnnotation (Class<T> annotationType) {
 		if (annotation.annotationType().equals(annotationType)) {
 			return (T) annotation;

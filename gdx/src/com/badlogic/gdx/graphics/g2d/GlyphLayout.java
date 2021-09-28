@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
-
+import javax.annotation.Nullable;
 /** Stores {@link GlyphRun runs} of glyphs for a piece of text. The text may contain newlines and color markup tags.
  * <p>
  * Where wrapping occurs is determined by {@link BitmapFontData#getWrapIndex(Array, int)}. Additionally, when
@@ -42,6 +42,7 @@ import com.badlogic.gdx.utils.Pools;
  * @author Nathan Sweet
  * @author davebaol
  * @author Alexander Dorokhov */
+
 public class GlyphLayout implements Poolable {
 	static private final Pool<GlyphRun> glyphRunPool = Pools.get(GlyphRun.class);
 	static private final Pool<Color> colorPool = Pools.get(Color.class);
@@ -360,6 +361,7 @@ public class GlyphLayout implements Poolable {
 
 	/** Breaks a run into two runs at the specified wrapIndex.
 	 * @return May be null if second run is all whitespace. */
+	@Nullable
 	private GlyphRun wrap (BitmapFontData fontData, GlyphRun first, int wrapIndex, int widthIndex) {
 		Array<Glyph> glyphs2 = first.glyphs; // Starts with all the glyphs.
 		int glyphCount = first.glyphs.size;

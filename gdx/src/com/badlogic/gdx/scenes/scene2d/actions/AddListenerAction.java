@@ -19,10 +19,14 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
-
+import com.badlogic.gdx.Initializer;
 /** Adds a listener to an actor.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class AddListenerAction extends Action {
+	@Nullable
 	private EventListener listener;
 	private boolean capture;
 
@@ -34,10 +38,12 @@ public class AddListenerAction extends Action {
 		return true;
 	}
 
+	@Nullable
 	public EventListener getListener () {
 		return listener;
 	}
 
+	@Initializer
 	public void setListener (EventListener listener) {
 		this.listener = listener;
 	}

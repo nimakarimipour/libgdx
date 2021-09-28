@@ -20,10 +20,11 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
-
+import javax.annotation.Nullable;
 /** A resizable, ordered array of objects with efficient add and remove at the beginning and end. Values in the backing array may
  * wrap back to the beginning, making add and remove at the beginning and end O(1) (unless the backing array needs to resize when
  * adding). Deque functionality is provided via {@link #removeLast()} and {@link #addFirst(Object)}. */
+
 public class Queue<T> implements Iterable<T> {
 	/** Contains the values in the queue. Head and tail indices go in a circle around this array, wrapping at the end. */
 	protected T[] values;
@@ -38,6 +39,7 @@ public class Queue<T> implements Iterable<T> {
 	/** Number of elements in the queue. */
 	public int size = 0;
 
+	@Nullable
 	private QueueIterable iterable;
 
 	/** Creates a new Queue which can hold 16 values without needing to resize backing array. */

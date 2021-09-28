@@ -31,8 +31,9 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
-
+import javax.annotation.Nullable;
 /** @brief synchronous loader for TMX maps created with the Tiled tool */
+
 public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 
 	public static class Parameters extends BaseTmxMapLoader.Parameters {
@@ -159,7 +160,7 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 	@Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet,	Element element,
 		Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
 
 		MapProperties props = tileSet.getProperties();
 		if (image != null) {

@@ -19,8 +19,9 @@ package com.badlogic.gdx.maps.tiled;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
-
+import javax.annotation.Nullable;
 /** @brief Generalises the concept of tile in a TiledMap */
+
 public interface TiledMapTile {
 
 	public enum BlendMode {

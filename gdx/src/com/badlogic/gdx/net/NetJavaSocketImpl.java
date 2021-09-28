@@ -25,10 +25,11 @@ import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** Socket implementation using java.net.Socket.
  * 
  * @author noblemaster */
+
 public class NetJavaSocketImpl implements Socket {
 
 	/** Our socket or null for disposed, aka closed. */

@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** This class will load each contained TextureData to the chosen mipmap level.
  *  All the mipmap levels must be defined and cannot be null. */
+
 public class MipMapTextureData implements TextureData{
 	TextureData[] mips;
 	

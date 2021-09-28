@@ -26,13 +26,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.SnapshotArray;
-
+import javax.annotation.Nullable;
 /** 2D scene graph node that may contain other actors.
  * <p>
  * Actors have a z-order equal to the order they were inserted into the group. Actors inserted later will be drawn on top of
  * actors added earlier. Touch events that hit more than one actor are distributed to topmost actors first.
  * @author mzechner
  * @author Nathan Sweet */
+
 public class Group extends Actor implements Cullable {
 	static private final Vector2 tmp = new Vector2();
 
@@ -384,7 +385,7 @@ public class Group extends Actor implements Cullable {
 		return null;
 	}
 
-	protected void setStage (Stage stage) {
+	protected void setStage (@Nullable Stage stage) {
 		super.setStage(stage);
 		Actor[] childrenArray = children.items;
 		for (int i = 0, n = children.size; i < n; i++)

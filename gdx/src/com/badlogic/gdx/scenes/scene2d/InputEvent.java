@@ -19,9 +19,12 @@ package com.badlogic.gdx.scenes.scene2d;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** Event for actor input: touch, mouse, touch/mouse actor enter/exit, mouse scroll, and keyboard events.
  * @see InputListener */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class InputEvent extends Event {
 	private Type type;
 	private float stageX, stageY, scrollAmountX, scrollAmountY;
@@ -61,6 +64,7 @@ public class InputEvent extends Event {
 		return type;
 	}
 
+	@Initializer
 	public void setType (Type type) {
 		this.type = type;
 	}

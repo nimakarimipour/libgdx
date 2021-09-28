@@ -15,12 +15,14 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.assets;
+import javax.annotation.Nullable;
+
 
 public class RefCountedContainer {
 	Object object;
 	int refCount = 1;
 
-	public RefCountedContainer (Object object) {
+	public RefCountedContainer (@Nullable Object object) {
 		if (object == null) throw new IllegalArgumentException("Object must not be null");
 		this.object = object;
 	}

@@ -47,12 +47,15 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 public class DefaultShader extends BaseShader {
 	public static class Config {
 		/** The uber vertex shader to use, null to use the default vertex shader. */
+		@Nullable
 		public String vertexShader = null;
 		/** The uber fragment shader to use, null to use the default fragment shader. */
+		@Nullable
 		public String fragmentShader = null;
 		/** The number of directional lights to use */
 		public int numDirectionalLights = 2;
@@ -388,6 +391,7 @@ public class DefaultShader extends BaseShader {
 		};
 	}
 
+	@Nullable
 	private static String defaultVertexShader = null;
 
 	public static String getDefaultVertexShader () {
@@ -396,6 +400,7 @@ public class DefaultShader extends BaseShader {
 		return defaultVertexShader;
 	}
 
+	@Nullable
 	private static String defaultFragmentShader = null;
 
 	public static String getDefaultFragmentShader () {
@@ -497,6 +502,7 @@ public class DefaultShader extends BaseShader {
 	protected final SpotLight spotLights[];
 
 	/** The renderable used to create this shader, invalid after the call to init */
+	@Nullable
 	private Renderable renderable;
 	/** The attributes that this shader supports */
 	protected final long attributesMask;

@@ -23,11 +23,15 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
-
+import com.badlogic.gdx.Initializer;
 /** {@link AssetLoader} to load {@link Sound} instances.
  * @author mzechner */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.SoundParameter> {
 
+	@Nullable
 	private Sound sound;
 
 	public SoundLoader (FileHandleResolver resolver) {
@@ -39,23 +43,25 @@ public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.Soun
 	 * 
 	 * @return the currently loaded {@link Sound}, otherwise {@code null} if
 	 *         no {@link Sound} has been loaded yet. */
+	@Nullable
 	protected Sound getLoadedSound () {
 		return sound;
 	}
 	
 	@Override
+	@Initializer
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, SoundParameter parameter) {
 		sound = Gdx.audio.newSound(file);
 	}
 
-	@Override
+	@Override	@Nullable
 	public Sound loadSync (AssetManager manager, String fileName, FileHandle file, SoundParameter parameter) {
 		Sound sound = this.sound;
 		this.sound = null;
 		return sound;
 	}
 
-	@Override
+	@Override	@Nullable
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, SoundParameter parameter) {
 		return null;
 	}

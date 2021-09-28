@@ -23,9 +23,12 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import com.badlogic.gdx.Initializer;
 /** It's an {@link Influencer} which controls particles color and transparency.
  * @author Inferno */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public abstract class ColorInfluencer extends Influencer {
 
 	/** It's an {@link Influencer} which assigns a random color when a particle is activated. */
@@ -33,6 +36,7 @@ public abstract class ColorInfluencer extends Influencer {
 		FloatChannel colorChannel;
 
 		@Override
+		@Initializer
 		public void allocateChannels () {
 			colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 		}
@@ -86,6 +90,7 @@ public abstract class ColorInfluencer extends Influencer {
 		}
 
 		@Override
+		@Initializer
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex * colorChannel.strideSize, a = startIndex * alphaInterpolationChannel.strideSize, l = startIndex
 				* lifeChannel.strideSize + ParticleChannels.LifePercentOffset, c = i + count * colorChannel.strideSize; i < c; i += colorChannel.strideSize, a += alphaInterpolationChannel.strideSize, l += lifeChannel.strideSize) {
@@ -133,6 +138,7 @@ public abstract class ColorInfluencer extends Influencer {
 	FloatChannel colorChannel;
 
 	@Override
+	@Initializer
 	public void allocateChannels () {
 		colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 	}

@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.graphics.VertexAttribute;
+import javax.annotation.Nullable;
 
 public class ModelMesh {
 	public String id;

@@ -40,6 +40,8 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoader.Parameters> {
 
@@ -58,6 +60,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		super(resolver);
 	}
 
+	@Initializer
 	public TiledMap load (String fileName) {
 		try {
 			FileHandle tideFile = resolve(fileName);

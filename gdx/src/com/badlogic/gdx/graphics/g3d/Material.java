@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class Material extends Attributes {
 	private static int counter = 0;

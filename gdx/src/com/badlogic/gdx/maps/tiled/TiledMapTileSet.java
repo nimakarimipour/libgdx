@@ -19,10 +19,14 @@ package com.badlogic.gdx.maps.tiled;
 import java.util.Iterator;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.IntMap;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Set of {@link TiledMapTile} instances used to compose a TiledMapLayer */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class TiledMapTileSet implements Iterable<TiledMapTile> {
 
+	@Nullable
 	private String name;
 
 	private IntMap<TiledMapTile> tiles;
@@ -30,12 +34,14 @@ public class TiledMapTileSet implements Iterable<TiledMapTile> {
 	private MapProperties properties;
 
 	/** @return tileset's name */
+	@Nullable
 	public String getName () {
 		return name;
 	}
 
 	/** @param name new name for the tileset */
-	public void setName (String name) {
+	@Initializer
+	public void setName (@Nullable String name) {
 		this.name = name;
 	}
 
@@ -54,6 +60,7 @@ public class TiledMapTileSet implements Iterable<TiledMapTile> {
 	 * 
 	 * @param id the id of the {@link TiledMapTile} to retrieve.
 	 * @return tile matching id, null if it doesn't exist */
+	@Nullable
 	public TiledMapTile getTile (int id) {
 		return tiles.get(id);
 	}

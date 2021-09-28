@@ -31,7 +31,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
-
+import com.badlogic.gdx.Initializer;
 /** A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
  * 
  * It requires a map-level property called 'atlas' with its value being the relative path to the TextureAtlas. The atlas must have
@@ -40,6 +40,9 @@ import com.badlogic.gdx.utils.XmlReader.Element;
  * 
  * @author Justin Shapcott
  * @author Manuel Bua */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasTiledMapLoaderParameters> {
 
 	public static class AtlasTiledMapLoaderParameters extends BaseTmxMapLoader.Parameters {
@@ -106,6 +109,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 		return load(fileName, new AtlasTiledMapLoaderParameters());
 	}
 
+	@Initializer
 	public TiledMap load (String fileName, AtlasTiledMapLoaderParameters parameter) {
 		FileHandle tmxFile = resolve(fileName);
 
@@ -154,7 +158,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	@Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
 		Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
 
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;

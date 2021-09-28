@@ -21,11 +21,12 @@ import java.nio.FloatBuffer;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.IntIntMap;
-
+import javax.annotation.Nullable;
 /** A VertexData instance holds vertices for rendering with OpenGL. It is implemented as either a {@link VertexArray} or a
  * {@link VertexBufferObject}. Only the later supports OpenGL ES 2.0.
  * 
  * @author mzechner */
+
 public interface VertexData extends Disposable {
 	/** @return the number of vertices this VertexData stores */
 	public int getNumVertices ();

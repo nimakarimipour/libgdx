@@ -17,9 +17,13 @@
 package com.badlogic.gdx.maps;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** Map layer containing a set of objects and properties */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class MapLayer {
+	@Nullable
 	private String name = "";
 	private float opacity = 1.0f;
 	private boolean visible = true;
@@ -33,12 +37,13 @@ public class MapLayer {
 	private MapProperties properties = new MapProperties();
 
 	/** @return layer's name */
+	@Nullable
 	public String getName () {
 		return name;
 	}
 
 	/** @param name new name for the layer */
-	public void setName (String name) {
+	public void setName (@Nullable String name) {
 		this.name = name;
 	}
 
@@ -122,6 +127,7 @@ public class MapLayer {
 		return properties;
 	}
 
+	@Initializer
 	protected void calculateRenderOffsets () {
 		if (parent != null) {
 			parent.calculateRenderOffsets();

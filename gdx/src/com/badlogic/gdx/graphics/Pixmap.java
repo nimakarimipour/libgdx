@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
+import javax.annotation.Nullable;
 /**
  * <p>
  * A Pixmap represents an image in memory. It has a width and height expressed in pixels as well as a {@link Format} specifying
@@ -39,6 +39,7 @@ import java.nio.ByteBuffer;
  * A Pixmap stores its data in native heap memory. It is mandatory to call {@link Pixmap#dispose()} when the pixmap is no longer
  * needed, otherwise memory leaks will result
  * @author badlogicgames@gmail.com */
+
 public class Pixmap implements Disposable {
 	/** Different pixel formats.
 	 * 

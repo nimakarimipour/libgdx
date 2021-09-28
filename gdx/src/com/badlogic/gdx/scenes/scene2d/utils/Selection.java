@@ -9,10 +9,11 @@ import com.badlogic.gdx.utils.OrderedSet;
 import com.badlogic.gdx.utils.Pools;
 
 import java.util.Iterator;
-
+import javax.annotation.Nullable;
 /** Manages selected objects. Optionally fires a {@link ChangeEvent} on an actor. Selection changes can be vetoed via
  * {@link ChangeEvent#cancel()}.
  * @author Nathan Sweet */
+
 public class Selection<T> implements Disableable, Iterable<T> {
 	private @Null Actor actor;
 	final OrderedSet<T> selected = new OrderedSet();
@@ -101,7 +102,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Sets the selection to only the specified item. */
-	public void set (T item) {
+	public void set (@Nullable T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (selected.size == 1 && selected.first() == item) return;
 		snapshot();

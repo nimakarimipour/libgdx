@@ -20,9 +20,10 @@ import java.io.Serializable;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
-
+import javax.annotation.Nullable;
 /** Encapsulates a 3D vector. Allows chaining operations by returning a reference to itself in all modification methods.
  * @author badlogicgames@gmail.com */
+
 public class Vector3 implements Serializable, Vector<Vector3> {
 	private static final long serialVersionUID = 3840054589595372522L;
 
@@ -87,7 +88,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	}
 
 	@Override
-	public Vector3 set (final Vector3 vector) {
+	public Vector3 set (@Nullable final Vector3 vector) {
 		return this.set(vector.x, vector.y, vector.z);
 	}
 

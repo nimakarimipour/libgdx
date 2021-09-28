@@ -23,9 +23,10 @@ import java.nio.LongBuffer;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
-
+import javax.annotation.Nullable;
 /** @author Daniel Holderbaum
- * @author Jan Polák */
+ * @author Jan Pol?k */
+
 public class GL30Interceptor extends GLInterceptor implements GL30 {
 
 	protected final GL30 gl30;
@@ -419,7 +420,7 @@ public class GL30Interceptor extends GLInterceptor implements GL30 {
 	}
 
 	@Override
-	public void glBufferData (int target, int size, Buffer data, int usage) {
+	public void glBufferData (int target, int size, @Nullable Buffer data, int usage) {
 		calls++;
 		gl30.glBufferData(target, size, data, usage);
 		check();
@@ -1239,7 +1240,7 @@ public class GL30Interceptor extends GLInterceptor implements GL30 {
 
 	@Override
 	public void glTexImage3D (int target, int level, int internalformat, int width, int height, int depth, int border, int format,
-		int type, Buffer pixels) {
+		int type, @Nullable Buffer pixels) {
 		calls++;
 		gl30.glTexImage3D(target, level, internalformat, width, height, depth, border, format, type, pixels);
 		check();

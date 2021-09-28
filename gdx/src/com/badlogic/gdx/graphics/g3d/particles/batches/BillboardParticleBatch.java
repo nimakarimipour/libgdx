@@ -43,9 +43,12 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-
+import com.badlogic.gdx.Initializer;
 /** This class is used to render billboard particles.
  * @author Inferno */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class BillboardParticleBatch extends BufferedParticleBatch<BillboardControllerRenderData> {
 	protected static final Vector3 TMP_V1 = new Vector3(), TMP_V2 = new Vector3(), TMP_V3 = new Vector3(), TMP_V4 = new Vector3(),
 		TMP_V5 = new Vector3(), TMP_V6 = new Vector3();
@@ -104,12 +107,13 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		public Config () {
 		}
 
-		public Config (boolean useGPU, AlignMode mode) {
+		public Config (boolean useGPU, @Nullable AlignMode mode) {
 			this.useGPU = useGPU;
 			this.mode = mode;
 		}
 
 		boolean useGPU;
+		@Nullable
 		AlignMode mode;
 	}
 
@@ -120,9 +124,12 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	private int currentVertexSize = 0;
 	private VertexAttributes currentAttributes;
 	protected boolean useGPU = false;
+	@Nullable
 	protected AlignMode mode = AlignMode.Screen;
 	protected Texture texture;
+	@Nullable
 	protected BlendingAttribute blendingAttribute;
+	@Nullable
 	protected DepthTestAttribute depthTestAttribute;
 	Shader shader;
 
@@ -132,8 +139,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	 * @param capacity Max particle displayed
 	 * @param blendingAttribute Blending attribute used by the batch
 	 * @param depthTestAttribute DepthTest attribute used by the batch */
-	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity, BlendingAttribute blendingAttribute,
-		DepthTestAttribute depthTestAttribute) {
+	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity, @Nullable BlendingAttribute blendingAttribute,
+		@Nullable DepthTestAttribute depthTestAttribute) {
 		super(BillboardControllerRenderData.class);
 		renderables = new Array<Renderable>();
 		renderablePool = new RenderablePool();
@@ -164,6 +171,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	}
 
 	@Override
+	@Initializer
 	public void allocParticlesData (int capacity) {
 		vertices = new float[currentVertexSize * 4 * capacity];
 		allocRenderables(capacity);
@@ -208,6 +216,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		return shader;
 	}
 
+	@Initializer
 	private void allocShader () {
 		Renderable newRenderable = allocRenderable();
 		shader = newRenderable.shader = getShader(newRenderable);
@@ -224,6 +233,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	}
 
 	/** Sets vertex attributes and size */
+	@Initializer
 	public void setVertexData () {
 		if (useGPU) {
 			currentAttributes = GPU_ATTRIBUTES;
@@ -247,7 +257,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	}
 
 	/** Sets the current align mode. It will reallocate internal data, use only when necessary. */
-	public void setAlignMode (AlignMode mode) {
+	public void setAlignMode (@Nullable AlignMode mode) {
 		if (mode != this.mode) {
 			this.mode = mode;
 			if (useGPU) {
@@ -257,6 +267,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
+	@Nullable
 	public AlignMode getAlignMode () {
 		return mode;
 	}
@@ -274,6 +285,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		return useGPU;
 	}
 
+	@Initializer
 	public void setTexture (Texture texture) {
 		renderablePool.freeAll(renderables);
 		renderables.clear();

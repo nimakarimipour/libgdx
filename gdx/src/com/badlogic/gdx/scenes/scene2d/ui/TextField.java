@@ -45,7 +45,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-
+import com.badlogic.gdx.Initializer;
 /** A single-line text input field.
  * <p>
  * The preferred height of a text field is the height of the {@link TextFieldStyle#font} and {@link TextFieldStyle#background}.
@@ -62,6 +62,9 @@ import com.badlogic.gdx.utils.Timer.Task;
  * implementation will bring up the default IME.
  * @author mzechner
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class TextField extends Widget implements Disableable {
 	static protected final char BACKSPACE = 8;
 	static protected final char CARRIAGE_RETURN = '\r';
@@ -85,6 +88,7 @@ public class TextField extends Widget implements Disableable {
 	protected final FloatArray glyphPositions = new FloatArray();
 
 	TextFieldStyle style;
+	@Nullable
 	private String messageText;
 	protected CharSequence displayText;
 	Clipboard clipboard;
@@ -100,6 +104,7 @@ public class TextField extends Widget implements Disableable {
 	long lastChangeTime;
 
 	boolean passwordMode;
+	@Nullable
 	private StringBuilder passwordBuffer;
 	private char passwordCharacter = BULLET;
 
@@ -141,6 +146,7 @@ public class TextField extends Widget implements Disableable {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Initializer
 	protected void initialize () {
 		addListener(inputListener = createInputListener());
 	}
@@ -229,6 +235,7 @@ public class TextField extends Widget implements Disableable {
 		return style;
 	}
 
+	@Initializer
 	protected void calculateOffsets () {
 		float visibleWidth = getWidth();
 		Drawable background = getBackgroundDrawable();
@@ -382,6 +389,7 @@ public class TextField extends Widget implements Disableable {
 		font.draw(batch, displayText, x + textOffset, y, visibleTextStart, visibleTextEnd, 0, Align.left, false);
 	}
 
+	@Initializer
 	protected void drawMessageText (Batch batch, BitmapFont font, float x, float y, float maxWidth) {
 		font.draw(batch, messageText, x, y, 0, messageText.length(), maxWidth, textHAlign, false, "...");
 	}
@@ -392,6 +400,7 @@ public class TextField extends Widget implements Disableable {
 			y - textHeight - font.getDescent(), cursorPatch.getMinWidth(), textHeight);
 	}
 
+	@Initializer
 	void updateDisplayText () {
 		BitmapFont font = style.font;
 		BitmapFontData data = font.getData();

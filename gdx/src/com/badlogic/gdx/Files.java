@@ -18,10 +18,11 @@ package com.badlogic.gdx;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** Provides standard access to the filesystem, classpath, Android app storage (internal and external), and Android assets directory.
  * @author mzechner
  * @author Nathan Sweet */
+
 public interface Files {
 	/** Indicates how to resolve a path to a file.
 	 * @author mzechner

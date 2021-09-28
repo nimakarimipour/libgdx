@@ -17,9 +17,11 @@
 package com.badlogic.gdx.maps;
 
 import com.badlogic.gdx.graphics.Color;
-
+import javax.annotation.Nullable;
 /** Generic Map entity with basic attributes like name, opacity, color */
+
 public class MapObject {
+	@Nullable
 	private String name = "";
 	private float opacity = 1.0f;
 	private boolean visible = true;
@@ -27,12 +29,13 @@ public class MapObject {
 	private Color color = Color.WHITE.cpy();
 
 	/** @return object's name */
+	@Nullable
 	public String getName () {
 		return name;
 	}
 
 	/** @param name new name for the object */
-	public void setName (String name) {
+	public void setName (@Nullable String name) {
 		this.name = name;
 	}
 
