@@ -59,6 +59,7 @@ public class MipMapTextureData implements TextureData{
 	}
 
 	@Override
+	@Nullable
 	public Format getFormat () {
 		return mips[0].getFormat();
 	}

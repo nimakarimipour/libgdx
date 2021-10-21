@@ -31,6 +31,7 @@ public class DelaunayTriangulator {
 	static private final int INCOMPLETE = 2;
 
 	private final IntArray quicksortStack = new IntArray();
+	@Nullable
 	private float[] sortedPoints;
 	private final ShortArray triangles = new ShortArray(false, 16);
 	private final ShortArray originalIndices = new ShortArray(false, 0);

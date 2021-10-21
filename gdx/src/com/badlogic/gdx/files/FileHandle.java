@@ -53,6 +53,7 @@ import javax.annotation.Nullable;
  * 
  * @author mzechner
  * @author Nathan Sweet */
+import com.badlogic.gdx.Initializer;
 
 public class FileHandle {
 	protected File file;
@@ -64,6 +65,7 @@ public class FileHandle {
 	/** Creates a new absolute FileHandle for the file name. Use this for tools on the desktop that don't need any of the backends.
 	 * Do not use this constructor in case you write something cross-platform. Use the {@link Files} interface instead.
 	 * @param fileName the filename. */
+	@Initializer
 	public FileHandle (String fileName) {
 		this.file = new File(fileName);
 		this.type = FileType.Absolute;

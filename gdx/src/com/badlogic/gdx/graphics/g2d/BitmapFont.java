@@ -143,7 +143,7 @@ public class BitmapFont implements Disposable {
 	 * pages, either let the Font read the images themselves (by specifying null as the TextureRegion), or by specifying each page
 	 * manually with the TextureRegion[] constructor.
 	 * @param integer If true, rendering positions will be at integer values to avoid filtering artifacts. */
-	public BitmapFont (BitmapFontData data, TextureRegion region, boolean integer) {
+	public BitmapFont (BitmapFontData data, @Nullable TextureRegion region, boolean integer) {
 		this(data, region != null ? Array.with(region) : null, integer);
 	}
 
@@ -151,7 +151,7 @@ public class BitmapFont implements Disposable {
 	 * is null or empty, the image path(s) will be read from the BitmapFontData. The dispose() method will not dispose the texture
 	 * of the region(s) if the regions array is != null and not empty.
 	 * @param integer If true, rendering positions will be at integer values to avoid filtering artifacts. */
-	public BitmapFont (BitmapFontData data, Array<TextureRegion> pageRegions, boolean integer) {
+	public BitmapFont (BitmapFontData data, @Nullable Array<TextureRegion> pageRegions, boolean integer) {
 		this.flipped = data.flipped;
 		this.data = data;
 		this.integer = integer;
@@ -221,7 +221,7 @@ public class BitmapFont implements Disposable {
 
 	/** Draws text at the specified position.
 	 * @see BitmapFontCache#addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	public GlyphLayout draw (Batch batch, CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
+	public GlyphLayout draw (Batch batch, @Nullable CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
 		boolean wrap, String truncate) {
 		cache.clear();
 		GlyphLayout layout = cache.addText(str, x, y, start, end, targetWidth, halign, wrap, truncate);
@@ -400,6 +400,7 @@ public class BitmapFont implements Disposable {
 		public float u, v, u2, v2;
 		public int xoffset, yoffset;
 		public int xadvance;
+		@Nullable
 		public byte[][] kerning;
 		public boolean fixedWidth;
 
@@ -440,6 +441,7 @@ public class BitmapFont implements Disposable {
 		public String name;
 		/** An array of the image paths, for multiple texture pages. */
 		public String[] imagePaths;
+		@Nullable
 		public FileHandle fontFile;
 		public boolean flipped;
 		public float padTop, padRight, padBottom, padLeft;
@@ -483,6 +485,7 @@ public class BitmapFont implements Disposable {
 		public BitmapFontData () {
 		}
 
+		@Initializer
 		public BitmapFontData (FileHandle fontFile, boolean flip) {
 			this.fontFile = fontFile;
 			this.flipped = flip;
@@ -822,6 +825,7 @@ public class BitmapFont implements Disposable {
 		/** Returns the glyph for the specified character, or null if no such glyph exists. Note that
 		 * {@link #getGlyphs(GlyphRun, CharSequence, int, int, Glyph)} should be be used to shape a string of characters into a list
 		 * of glyphs. */
+		@Nullable
 		public Glyph getGlyph (char ch) {
 			Glyph[] page = glyphs[ch / PAGE_SIZE];
 			if (page != null) return page[ch & PAGE_SIZE - 1];
@@ -832,7 +836,7 @@ public class BitmapFont implements Disposable {
 		 * @param str Characters to convert to glyphs. Will not contain newline or color tags. May contain "[[" for an escaped left
 		 *           square bracket.
 		 * @param lastGlyph The glyph immediately before this run, or null if this is run is the first on a line of text. */
-		public void getGlyphs (GlyphRun run, CharSequence str, int start, int end, Glyph lastGlyph) {
+		public void getGlyphs (GlyphRun run, CharSequence str, int start, int end, @Nullable Glyph lastGlyph) {
 			int max = end - start;
 			if (max == 0) return;
 			boolean markupEnabled = this.markupEnabled;
@@ -912,6 +916,7 @@ public class BitmapFont implements Disposable {
 			return imagePaths;
 		}
 
+		@Nullable
 		public FileHandle getFontFile () {
 			return fontFile;
 		}

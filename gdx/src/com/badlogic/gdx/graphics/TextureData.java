@@ -75,6 +75,7 @@ public interface TextureData {
 	public int getHeight ();
 
 	/** @return the {@link Format} of the pixel data */
+	@Nullable
 	public Format getFormat ();
 
 	/** @return whether to generate mipmaps or not. */

@@ -46,6 +46,7 @@ public class Slider extends ProgressBar {
 	int draggingPointer = -1;
 	boolean mouseOver;
 	private Interpolation visualInterpolationInverse = Interpolation.linear;
+	@Nullable
 	private float[] snapValues;
 	private float threshold;
 
@@ -131,6 +132,7 @@ public class Slider extends ProgressBar {
 		return style.knob;
 	}
 
+	@Nullable
 	protected Drawable getKnobBeforeDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
@@ -139,6 +141,7 @@ public class Slider extends ProgressBar {
 		return style.knobBefore;
 	}
 
+	@Nullable
 	protected Drawable getKnobAfterDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;

@@ -70,6 +70,7 @@ public class ParticleEmitter {
 	private Particle[] particles;
 	private int minParticleCount, maxParticleCount = 4;
 	private float x, y;
+	@Nullable
 	private String name;
 	private Array<String> imagePaths;
 	private int activeCount;
@@ -105,6 +106,7 @@ public class ParticleEmitter {
 		load(reader);
 	}
 
+	@Initializer
 	public ParticleEmitter (ParticleEmitter emitter) {
 		sprites = new Array<Sprite>(emitter.sprites);
 		name = emitter.name;
@@ -389,7 +391,7 @@ public class ParticleEmitter {
 		if (spriteMode == SpriteMode.animated) updateFlags |= UPDATE_SPRITE;
 	}
 
-	protected Particle newParticle (Sprite sprite) {
+	protected Particle newParticle (@Nullable Sprite sprite) {
 		return new Particle(sprite);
 	}
 
@@ -739,6 +741,7 @@ public class ParticleEmitter {
 		return spriteMode;
 	}
 
+	@Nullable
 	public String getName () {
 		return name;
 	}
@@ -1242,7 +1245,7 @@ public class ParticleEmitter {
 		protected float[] tint;
 		protected int frame;
 
-		public Particle (Sprite sprite) {
+		public Particle (@Nullable Sprite sprite) {
 			super(sprite);
 		}
 	}

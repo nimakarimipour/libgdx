@@ -58,7 +58,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	}
 
 	@Override
-	public ModelData loadModelData (FileHandle fileHandle, ModelLoader.ModelParameters parameters) {
+	public ModelData loadModelData (FileHandle fileHandle, @Nullable ModelLoader.ModelParameters parameters) {
 		return parseModel(fileHandle);
 	}
 

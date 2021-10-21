@@ -78,6 +78,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 		setTimeStep(DEFAULT_TIME_STEP);
 	}
 
+	@Initializer
 	public ParticleController (String name, Emitter emitter, ParticleControllerRenderer<?, ?> renderer, Influencer... influencers) {
 		this();
 		this.name = name;

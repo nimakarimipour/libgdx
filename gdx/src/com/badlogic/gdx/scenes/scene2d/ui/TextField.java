@@ -1105,6 +1105,7 @@ public class TextField extends Widget implements Disableable {
 		public TextFieldStyle () {
 		}
 
+		@Initializer
 		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,
 			@Null Drawable background) {
 			this.font = font;

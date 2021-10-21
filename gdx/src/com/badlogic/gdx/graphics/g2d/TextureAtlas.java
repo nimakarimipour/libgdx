@@ -46,6 +46,7 @@ import javax.annotation.Nullable;
  * <br>
  * A TextureAtlas must be disposed to free up the resources consumed by the backing textures.
  * @author Nathan Sweet */
+import com.badlogic.gdx.Initializer;
 
 public class TextureAtlas implements Disposable {
 	static final String[] tuple = new String[4];
@@ -56,6 +57,7 @@ public class TextureAtlas implements Disposable {
 	public static class TextureAtlasData {
 		public static class Page {
 			public final FileHandle textureFile;
+			@Nullable
 			public Texture texture;
 			public final float width, height;
 			public final boolean useMipMaps;
@@ -65,6 +67,7 @@ public class TextureAtlas implements Disposable {
 			public final TextureWrap uWrap;
 			public final TextureWrap vWrap;
 
+			@Initializer
 			public Page (FileHandle handle, float width, float height, boolean useMipMaps, Format format, TextureFilter minFilter,
 				TextureFilter magFilter, TextureWrap uWrap, TextureWrap vWrap) {
 				this.width = width;
@@ -80,6 +83,7 @@ public class TextureAtlas implements Disposable {
 		}
 
 		public static class Region {
+			@Nullable
 			public Page page;
 			public int index;
 			public String name;
@@ -94,7 +98,9 @@ public class TextureAtlas implements Disposable {
 			public int width;
 			public int height;
 			public boolean flip;
+			@Nullable
 			public int[] splits;
+			@Nullable
 			public int[] pads;
 		}
 
@@ -320,6 +326,7 @@ public class TextureAtlas implements Disposable {
 	/** Returns the first region found with the specified name and index. This method uses string comparison to find the region, so
 	 * the result should be cached rather than calling this method multiple times.
 	 * @return The region, or null. */
+	@Nullable
 	public AtlasRegion findRegion (String name, int index) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
@@ -355,6 +362,7 @@ public class TextureAtlas implements Disposable {
 	 * packed, the sprite is automatically positioned as if whitespace had not been stripped. This method uses string comparison to
 	 * find the region and constructs a new sprite, so the result should be cached rather than calling this method multiple times.
 	 * @return The sprite, or null. */
+	@Nullable
 	public Sprite createSprite (String name) {
 		for (int i = 0, n = regions.size; i < n; i++)
 			if (regions.get(i).name.equals(name)) return newSprite(regions.get(i));
@@ -365,6 +373,7 @@ public class TextureAtlas implements Disposable {
 	 * region and constructs a new sprite, so the result should be cached rather than calling this method multiple times.
 	 * @return The sprite, or null.
 	 * @see #createSprite(String) */
+	@Nullable
 	public Sprite createSprite (String name, int index) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
@@ -405,6 +414,7 @@ public class TextureAtlas implements Disposable {
 	 * ninepatch splits. This method uses string comparison to find the region and constructs a new ninepatch, so the result should
 	 * be cached rather than calling this method multiple times.
 	 * @return The ninepatch, or null. */
+	@Nullable
 	public NinePatch createPatch (String name) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
@@ -507,12 +517,14 @@ public class TextureAtlas implements Disposable {
 		public int degrees;
 
 		/** The ninepatch splits, or null if not a ninepatch. Has 4 elements: left, right, top, bottom. */
+		@Nullable
 		public int[] splits;
 
 		/** The ninepatch pads, or null if not a ninepatch or the has no padding. Has 4 elements: left, right, top, bottom. */
+		@Nullable
 		public int[] pads;
 
-		public AtlasRegion (Texture texture, int x, int y, int width, int height) {
+		public AtlasRegion (@Nullable Texture texture, int x, int y, int width, int height) {
 			super(texture, x, y, width, height);
 			originalWidth = width;
 			originalHeight = height;
@@ -520,6 +532,7 @@ public class TextureAtlas implements Disposable {
 			packedHeight = height;
 		}
 
+		@Initializer
 		public AtlasRegion (AtlasRegion region) {
 			setRegion(region);
 			index = region.index;

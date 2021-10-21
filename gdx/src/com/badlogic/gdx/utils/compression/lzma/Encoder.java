@@ -337,6 +337,7 @@ public class Encoder {
 
 	long nowPos64;
 	boolean _finished;
+	@Nullable
 	java.io.InputStream _inStream;
 
 	int _matchFinderType = EMatchFinderTypeBT4;
@@ -1128,7 +1129,7 @@ public class Encoder {
 	boolean[] finished = new boolean[1];
 
 	public void Code (java.io.InputStream inStream, java.io.OutputStream outStream, long inSize, long outSize,
-		ICodeProgress progress) throws IOException {
+		@Nullable ICodeProgress progress) throws IOException {
 		_needReleaseMFStream = false;
 		try {
 			SetStreams(inStream, outStream, inSize, outSize);

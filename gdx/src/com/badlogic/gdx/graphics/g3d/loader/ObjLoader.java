@@ -99,7 +99,7 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 
 	@Override
 	@Nullable
-	public ModelData loadModelData (FileHandle file, ObjLoaderParameters parameters) {
+	public ModelData loadModelData (FileHandle file, @Nullable ObjLoaderParameters parameters) {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 

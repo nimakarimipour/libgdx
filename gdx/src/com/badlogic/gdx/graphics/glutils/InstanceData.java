@@ -107,7 +107,7 @@ public interface InstanceData extends Disposable {
 	 *
 	 * @param locations array containing the attribute locations.
 	 */
-	public void bind (ShaderProgram shader, int[] locations);
+	public void bind (ShaderProgram shader, @Nullable int[] locations);
 
 	/**
 	 * Unbinds this InstanceData.
@@ -119,7 +119,7 @@ public interface InstanceData extends Disposable {
 	 *
 	 * @param locations array containing the attribute locations.
 	 */
-	public void unbind (ShaderProgram shader, int[] locations);
+	public void unbind (ShaderProgram shader, @Nullable int[] locations);
 
 	/**
 	 * Invalidates the InstanceData if applicable. Use this in case of a context loss.

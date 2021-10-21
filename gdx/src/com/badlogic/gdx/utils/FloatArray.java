@@ -19,10 +19,11 @@ package com.badlogic.gdx.utils;
 import java.util.Arrays;
 
 import com.badlogic.gdx.math.MathUtils;
-
+import javax.annotation.Nullable;
 /** A resizable, ordered or unordered float array. Avoids the boxing that occurs with ArrayList<Float>. If unordered, this class
  * avoids a memory copy when removing elements (the last element is moved to the removed element's position).
  * @author Nathan Sweet */
+
 public class FloatArray {
 	public float[] items;
 	public int size;

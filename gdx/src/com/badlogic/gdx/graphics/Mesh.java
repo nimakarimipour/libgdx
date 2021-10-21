@@ -511,7 +511,7 @@ public class Mesh implements Disposable {
 	 * @param shader the shader (does not bind the shader)
 	 * @param locations array containing the attribute locations. */
 	@Initializer
-	public void bind (final ShaderProgram shader, final int[] locations) {
+	public void bind (final ShaderProgram shader, @Nullable final int[] locations) {
 		vertices.bind(shader, locations);
 		if (instances != null && instances.getNumInstances() > 0) instances.bind(shader, locations);
 		if (indices.getNumIndices() > 0) indices.bind();
@@ -530,7 +530,7 @@ public class Mesh implements Disposable {
 	 *
 	 * @param shader the shader (does not unbind the shader)
 	 * @param locations array containing the attribute locations. */
-	public void unbind (final ShaderProgram shader, final int[] locations) {
+	public void unbind (final ShaderProgram shader, @Nullable final int[] locations) {
 		vertices.unbind(shader, locations);
 		if (instances != null && instances.getNumInstances() > 0) instances.unbind(shader, locations);
 		if (indices.getNumIndices() > 0) indices.unbind();

@@ -58,7 +58,7 @@ abstract public class Action implements Poolable {
 	 * executed for some time, eg it may be {@link DelayAction delayed}. The actor's state is best queried in the first call to
 	 * {@link #act(float)}. For a {@link TemporalAction}, use TemporalAction#begin(). */
 	@Initializer
-	public void setActor (Actor actor) {
+	public void setActor (@Nullable Actor actor) {
 		this.actor = actor;
 		if (target == null) setTarget(actor);
 		if (actor == null) {

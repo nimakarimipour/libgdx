@@ -156,6 +156,7 @@ public class PixmapPacker implements Disposable {
 
 	/** Inserts the pixmap without a name. It cannot be looked up by name.
 	 * @see #pack(String, Pixmap) */
+	@Nullable
 	public synchronized Rectangle pack (Pixmap image) {
 		return pack(null, image);
 	}
@@ -166,7 +167,8 @@ public class PixmapPacker implements Disposable {
 	 * @return Rectangle describing the area the pixmap was rendered to.
 	 * @throws GdxRuntimeException in case the image did not fit due to the page size being too small or providing a duplicate
 	 *            name. */
-	public synchronized Rectangle pack (String name, Pixmap image) {
+	@Nullable
+	public synchronized Rectangle pack (@Nullable String name, Pixmap image) {
 		if (disposed) return null;
 		if (name != null && getRect(name) != null)
 			throw new GdxRuntimeException("Pixmap has already been packed with name: " + name);
@@ -297,6 +299,7 @@ public class PixmapPacker implements Disposable {
 
 	/** @param name the name of the image
 	 * @return the rectangle for the image in the page it's stored in or null */
+	@Nullable
 	public synchronized Rectangle getRect (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
@@ -307,6 +310,7 @@ public class PixmapPacker implements Disposable {
 
 	/** @param name the name of the image
 	 * @return the page the image is stored in or null */
+	@Nullable
 	public synchronized Page getPage (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
@@ -574,6 +578,7 @@ public class PixmapPacker implements Disposable {
 			return page;
 		}
 
+		@Nullable
 		private Node insert (Node node, Rectangle rect) {
 			if (!node.full && node.leftChild != null && node.rightChild != null) {
 				Node newNode = insert(node.leftChild, rect);
@@ -729,6 +734,7 @@ public class PixmapPacker implements Disposable {
 		this.transparentColor.set(color);
 	}
 
+	@Nullable
 	private int[] getSplits (Pixmap raster) {
 
 		int startX = getSplitPoint(raster, 1, 0, true, true);
@@ -762,7 +768,8 @@ public class PixmapPacker implements Disposable {
 		return new int[] {startX, endX, startY, endY};
 	}
 
-	private int[] getPads (Pixmap raster, int[] splits) {
+	@Nullable
+	private int[] getPads (Pixmap raster, @Nullable int[] splits) {
 
 		int bottom = raster.getHeight() - 1;
 		int right = raster.getWidth() - 1;
@@ -853,7 +860,9 @@ public class PixmapPacker implements Disposable {
 	}
 
 	public static class PixmapPackerRectangle extends Rectangle {
+		@Nullable
 		int[] splits;
+		@Nullable
 		int[] pads;
 		int offsetX, offsetY;
 		int originalWidth, originalHeight;

@@ -46,6 +46,7 @@ class AssetLoadingTask implements AsyncTask<Void> {
 	volatile Array<AssetDescriptor> dependencies;
 	@Nullable
 	volatile AsyncResult<Void> depsFuture;
+	@Nullable
 	volatile AsyncResult<Void> loadFuture;
 	@Nullable
 	volatile Object asset;

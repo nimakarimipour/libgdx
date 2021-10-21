@@ -187,7 +187,7 @@ public class JsonWriter extends Writer {
 		static private Pattern minimalNamePattern = Pattern.compile("^[^\":,}/ ][^:]*$");
 		static private Pattern minimalValuePattern = Pattern.compile("^[^\":,{\\[\\]/ ][^}\\],]*$");
 
-		public String quoteValue (Object value) {
+		public String quoteValue (@Nullable Object value) {
 			if (value == null) return "null";
 			String string = value.toString();
 			if (value instanceof Number || value instanceof Boolean) return string;

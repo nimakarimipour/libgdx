@@ -81,6 +81,7 @@ public class SpriteCache implements Disposable {
 	private final Matrix4 combinedMatrix = new Matrix4();
 	private final ShaderProgram shader;
 
+	@Nullable
 	private Cache currentCache;
 	private final Array<Texture> textures = new Array(8);
 	private final IntArray counts = new IntArray(8);
@@ -88,6 +89,7 @@ public class SpriteCache implements Disposable {
 	private final Color color = new Color(1, 1, 1, 1);
 	private float colorPacked = Color.WHITE_FLOAT_BITS;
 
+	@Nullable
 	private ShaderProgram customShader = null;
 
 	/** Number of render calls since the last {@link #begin()}. **/
@@ -1022,6 +1024,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Returns the custom shader, or null if the default shader is being used. */
+	@Nullable
 	public ShaderProgram getCustomShader () {
 		return customShader;
 	}

@@ -351,6 +351,7 @@ public class Window extends Table {
 		public WindowStyle () {
 		}
 
+		@Initializer
 		public WindowStyle (BitmapFont titleFont, Color titleFontColor, @Null Drawable background) {
 			this.titleFont = titleFont;
 			this.titleFontColor.set(titleFontColor);

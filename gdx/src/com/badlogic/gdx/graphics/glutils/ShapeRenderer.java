@@ -126,7 +126,7 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Sets the color to be used by the next shapes drawn. */
-	public void setColor (Color color) {
+	public void setColor (@Nullable Color color) {
 		this.color.set(color);
 	}
 

@@ -579,6 +579,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 		public SelectBoxStyle () {
 		}
 
+		@Initializer
 		public SelectBoxStyle (BitmapFont font, Color fontColor, @Null Drawable background, ScrollPaneStyle scrollStyle,
 			ListStyle listStyle) {
 			this.font = font;

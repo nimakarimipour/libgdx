@@ -35,7 +35,7 @@ public class Material extends Attributes {
 	}
 
 	/** Create a material with the specified attributes */
-	public Material (final Attribute... attributes) {
+	public Material (@Nullable final Attribute... attributes) {
 		this();
 		set(attributes);
 	}

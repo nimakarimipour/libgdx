@@ -148,6 +148,7 @@ public class TextButton extends Button {
 			this.font = font;
 		}
 
+		@Initializer
 		public TextButtonStyle (TextButtonStyle style) {
 			super(style);
 			font = style.font;

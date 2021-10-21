@@ -11,6 +11,7 @@ public class OutWindow {
 	int _pos;
 	int _windowSize = 0;
 	int _streamPos;
+	@Nullable
 	java.io.OutputStream _stream;
 
 	@Initializer

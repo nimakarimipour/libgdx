@@ -101,7 +101,7 @@ public class Sprite extends TextureRegion {
 	}
 
 	/** Creates a sprite that is a copy in every way of the specified sprite. */
-	public Sprite (Sprite sprite) {
+	public Sprite (@Nullable Sprite sprite) {
 		set(sprite);
 	}
 

@@ -116,7 +116,7 @@ public final class ClassReflection {
 
 	/** Returns a {@link Constructor} that represents the public constructor for the supplied class which takes the supplied
 	 * parameter types. */
-	static public Constructor getConstructor (Class c, Class... parameterTypes) throws ReflectionException {
+	static public Constructor getConstructor (Class c, @Nullable Class... parameterTypes) throws ReflectionException {
 		try {
 			return new Constructor(c.getConstructor(parameterTypes));
 		} catch (SecurityException e) {
@@ -129,7 +129,7 @@ public final class ClassReflection {
 
 	/** Returns a {@link Constructor} that represents the constructor for the supplied class which takes the supplied parameter
 	 * types. */
-	static public Constructor getDeclaredConstructor (Class c, Class... parameterTypes) throws ReflectionException {
+	static public Constructor getDeclaredConstructor (Class c, @Nullable Class... parameterTypes) throws ReflectionException {
 		try {
 			return new Constructor(c.getDeclaredConstructor(parameterTypes));
 		} catch (SecurityException e) {

@@ -136,7 +136,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	}
 
 	/** Returns the old value associated with the specified key, or null. */
-	public @Null V put (K key, @Null V value) {
+	public @Null V put (@Nullable K key, @Null V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];

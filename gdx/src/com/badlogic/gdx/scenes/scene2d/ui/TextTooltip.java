@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 /** A tooltip that shows a label.
  * @author Nathan Sweet */
+import com.badlogic.gdx.Initializer;
 
 public class TextTooltip extends Tooltip<Label> {
 	public TextTooltip (@Null String text, Skin skin) {
@@ -84,6 +85,7 @@ public class TextTooltip extends Tooltip<Label> {
 			this.background = background;
 		}
 
+		@Initializer
 		public TextTooltipStyle (TextTooltipStyle style) {
 			label = new LabelStyle(style.label);
 			background = style.background;

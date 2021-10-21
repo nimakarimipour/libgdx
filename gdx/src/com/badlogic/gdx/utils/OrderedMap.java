@@ -71,7 +71,7 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 	}
 
 	@Nullable
-	public V put (K key, @Nullable V value) {
+	public V put (@Nullable K key, @Nullable V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];

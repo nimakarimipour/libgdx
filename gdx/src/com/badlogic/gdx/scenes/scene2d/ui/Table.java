@@ -58,6 +58,7 @@ public class Table extends WidgetGroup {
 			return new Cell();
 		}
 	};
+	@Nullable
 	static private float[] columnWeightedWidth, rowWeightedHeight;
 
 	private int columns, rows;
@@ -66,6 +67,7 @@ public class Table extends WidgetGroup {
 	private final Array<Cell> cells = new Array(4);
 	private final Cell cellDefaults;
 	private final Array<Cell> columnDefaults = new Array(2);
+	@Nullable
 	private Cell rowDefaults;
 
 	private boolean sizeInvalid = true;
@@ -370,6 +372,7 @@ public class Table extends WidgetGroup {
 
 	/** Indicates that subsequent cells should be added to a new row and returns the cell values that will be used as the defaults
 	 * for all cells in the new row. */
+	@Nullable
 	public Cell row () {
 		if (cells.size > 0) {
 			if (!implicitEndRow) {
@@ -775,7 +778,7 @@ public class Table extends WidgetGroup {
 		return columnPrefWidth[columnIndex];
 	}
 
-	private float[] ensureSize (float[] array, int size) {
+	private float[] ensureSize (@Nullable float[] array, int size) {
 		if (array == null || array.length < size) return new float[size];
 		Arrays.fill(array, 0, size, 0);
 		return array;
@@ -1274,6 +1277,7 @@ public class Table extends WidgetGroup {
 	/** @author Nathan Sweet */
 	static public class DebugRect extends Rectangle {
 		static Pool<DebugRect> pool = Pools.get(DebugRect.class);
+		@Nullable
 		Color color;
 	}
 

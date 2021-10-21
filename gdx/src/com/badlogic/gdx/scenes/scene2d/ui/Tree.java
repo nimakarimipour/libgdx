@@ -593,6 +593,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		@Nullable
 		V value;
 
+		@Initializer
 		public Node (A actor) {
 			if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 			this.actor = actor;
@@ -886,6 +887,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		public TreeStyle () {
 		}
 
+		@Initializer
 		public TreeStyle (Drawable plus, Drawable minus, @Null Drawable selection) {
 			this.plus = plus;
 			this.minus = minus;

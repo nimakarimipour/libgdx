@@ -144,12 +144,12 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, final String... rootNodeIds) {
+	public ModelInstance (@Nullable final Model model, @Nullable final String... rootNodeIds) {
 		this(model, null, rootNodeIds);
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, final Matrix4 transform, final String... rootNodeIds) {
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, @Nullable final String... rootNodeIds) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
 		if (rootNodeIds == null)

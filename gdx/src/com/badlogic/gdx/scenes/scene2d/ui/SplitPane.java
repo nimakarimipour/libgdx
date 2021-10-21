@@ -416,6 +416,7 @@ public class SplitPane extends WidgetGroup {
 		public SplitPaneStyle () {
 		}
 
+		@Initializer
 		public SplitPaneStyle (Drawable handle) {
 			this.handle = handle;
 		}

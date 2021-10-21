@@ -36,13 +36,14 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 	private Protocol protocol;
 
 	/** Our server or null for disposed, aka closed. */
+	@Nullable
 	private java.net.ServerSocket server;
 
 	public NetJavaServerSocketImpl (Protocol protocol, int port, ServerSocketHints hints) {
 		this(protocol, null, port, hints);
 	}
 	
-	public NetJavaServerSocketImpl (Protocol protocol, String hostname, int port, ServerSocketHints hints) {
+	public NetJavaServerSocketImpl (Protocol protocol, @Nullable String hostname, int port, ServerSocketHints hints) {
 		this.protocol = protocol;
 
 		// create the server socket

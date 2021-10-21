@@ -65,6 +65,7 @@ public class ResourceData<T> implements Json.Serializable {
 			loadIndex = 0;
 		}
 
+		@Initializer
 		public SaveData (ResourceData resources) {
 			data = new ObjectMap<String, Object>();
 			assets = new IntArray();
@@ -129,6 +130,7 @@ public class ResourceData<T> implements Json.Serializable {
 		}
 
 		@Override
+		@Initializer
 		public void read (Json json, JsonValue jsonData) {
 			filename = json.readValue("filename", String.class, jsonData);
 			String className = json.readValue("type", String.class, jsonData);

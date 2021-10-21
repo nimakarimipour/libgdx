@@ -42,6 +42,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 	/** The textures currently exclusive bound */
 	private final GLTexture[] textures;
 	/** Texture units ordered from most to least recently used */
+	@Nullable
 	private int [] unitsLRU;
 	/** The method of binding to use */
 	private final int method;

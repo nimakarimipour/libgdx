@@ -43,7 +43,7 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends
 
 	/** Directly load the raw model data on the calling thread. */
 	@Nullable
-	public abstract ModelData loadModelData (final FileHandle fileHandle, P parameters);
+	public abstract ModelData loadModelData (final FileHandle fileHandle, @Nullable P parameters);
 
 	/** Directly load the raw model data on the calling thread. */
 	@Nullable

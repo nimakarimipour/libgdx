@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 public class ConvexHull {
 	private final IntArray quicksortStack = new IntArray();
+	@Nullable
 	private float[] sortedPoints;
 	private final FloatArray hull = new FloatArray();
 	private final IntArray indices = new IntArray();

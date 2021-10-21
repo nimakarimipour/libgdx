@@ -60,7 +60,7 @@ abstract public class DelegateAction extends Action {
 		action = null;
 	}
 
-	public void setActor (Actor actor) {
+	public void setActor (@Nullable Actor actor) {
 		if (action != null) action.setActor(actor);
 		super.setActor(actor);
 	}

@@ -33,6 +33,7 @@ import com.badlogic.gdx.Initializer;
  * @author davebaol
  * @author Alexander Dorokhov */
 import javax.annotation.Nullable;
+import javax.annotation.Nullable;
 
 public class BitmapFontCache {
 	static private final Color tempColor = new Color(1, 1, 1, 1);
@@ -500,7 +501,7 @@ public class BitmapFontCache {
 	 * @param truncate If not null, the text will be truncated within targetWidth with this string appended. May be an empty
 	 *           string.
 	 * @return The glyph layout for the cached string (the layout's height is the distance from y to the baseline). */
-	public GlyphLayout addText (CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
+	public GlyphLayout addText (@Nullable CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
 		boolean wrap, @Nullable String truncate) {
 		GlyphLayout layout = Pools.obtain(GlyphLayout.class);
 		pooledLayouts.add(layout);

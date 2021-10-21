@@ -30,8 +30,10 @@ import javax.annotation.Nullable;
  * The min size is set to the ninepatch total size by default. It could be set to the left+right and top+bottom, excluding the
  * middle size, to allow the drawable to be sized down as small as possible.
  * @author Nathan Sweet */
+import com.badlogic.gdx.Initializer;
 
 public class NinePatchDrawable extends BaseDrawable implements TransformDrawable {
+	@Nullable
 	private NinePatch patch;
 
 	/** Creates an uninitialized NinePatchDrawable. The ninepatch must be {@link #setPatch(NinePatch) set} before use. */
@@ -42,6 +44,7 @@ public class NinePatchDrawable extends BaseDrawable implements TransformDrawable
 		setPatch(patch);
 	}
 
+	@Initializer
 	public NinePatchDrawable (NinePatchDrawable drawable) {
 		super(drawable);
 		this.patch = drawable.patch;
@@ -70,6 +73,7 @@ public class NinePatchDrawable extends BaseDrawable implements TransformDrawable
 		}
 	}
 
+	@Nullable
 	public NinePatch getPatch () {
 		return patch;
 	}

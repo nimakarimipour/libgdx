@@ -113,7 +113,7 @@ public class SnapshotArray<T> extends Array<T> {
 			resize(items.length);
 	}
 
-	public void set (int index, T value) {
+	public void set (int index, @Nullable T value) {
 		modified();
 		super.set(index, value);
 	}

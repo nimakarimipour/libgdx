@@ -58,7 +58,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 	private ReadonlyIterable<VertexAttribute> iterable;
 
 	/** Constructor, sets the vertex attributes in a specific order */
-	public VertexAttributes (VertexAttribute... attributes) {
+	public VertexAttributes (@Nullable VertexAttribute... attributes) {
 		if (attributes.length == 0) throw new IllegalArgumentException("attributes must be >= 1");
 
 		VertexAttribute[] list = new VertexAttribute[attributes.length];

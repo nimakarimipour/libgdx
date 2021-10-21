@@ -173,6 +173,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 
 	public static class Node<E> {
 		/** Node previous to this */
+		@Nullable
 		protected Node<E> p;
 		/** Node next to this */
 		@Nullable

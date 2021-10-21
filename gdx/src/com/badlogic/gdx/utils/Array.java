@@ -36,7 +36,9 @@ public class Array<T> implements Iterable<T> {
 	public int size;
 	public boolean ordered;
 
+	@Nullable
 	private ArrayIterable iterable;
+	@Nullable
 	private Predicate.PredicateIterable<T> predicateIterable;
 
 	/** Creates an ordered array with a capacity of 16. */
@@ -97,7 +99,7 @@ public class Array<T> implements Iterable<T> {
 		System.arraycopy(array, start, items, 0, size);
 	}
 
-	public void add (T value) {
+	public void add (@Nullable T value) {
 		T[] items = this.items;
 		if (size == items.length) items = resize(Math.max(8, (int)(size * 1.75f)));
 		items[size++] = value;
@@ -157,7 +159,7 @@ public class Array<T> implements Iterable<T> {
 		return items[index];
 	}
 
-	public void set (int index, T value) {
+	public void set (int index, @Nullable T value) {
 		if (index >= size) throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
 		items[index] = value;
 	}

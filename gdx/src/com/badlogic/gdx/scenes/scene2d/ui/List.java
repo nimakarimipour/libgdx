@@ -445,6 +445,7 @@ public class List<T> extends Widget implements Cullable {
 		public ListStyle () {
 		}
 
+		@Initializer
 		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
 			this.font = font;
 			this.fontColorSelected.set(fontColorSelected);

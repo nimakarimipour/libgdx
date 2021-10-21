@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 
 public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 	private float[] vertices;
+	@Nullable
 	private short[] indices;
 	private int positionOffset, vertexSize, vertexCount, triangleCount;
 
