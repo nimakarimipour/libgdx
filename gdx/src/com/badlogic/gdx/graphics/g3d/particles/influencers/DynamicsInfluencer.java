@@ -25,9 +25,12 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import com.badlogic.gdx.Initializer;
 /** It's an {@link Influencer} which controls the particles dynamics (movement, rotations).
  * @author Inferno */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class DynamicsInfluencer extends Influencer {
 	public Array<DynamicsModifier> velocities;
 	private FloatChannel accellerationChannel, positionChannel, previousPositionChannel, rotationChannel, angularVelocityChannel;
@@ -49,6 +52,7 @@ public class DynamicsInfluencer extends Influencer {
 	}
 
 	@Override
+	@Initializer
 	public void allocateChannels () {
 		for (int k = 0; k < velocities.size; ++k) {
 			velocities.items[k].allocateChannels();

@@ -17,7 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
-
+import javax.annotation.Nullable;
 /** An array that queues removal during iteration until the iteration has completed. Queues any removals done after
  * {@link #begin()} is called to occur once {@link #end()} is called. This can allow code out of your control to remove items
  * without affecting iteration. Between begin and end, most mutator methods will throw IllegalStateException. Only
@@ -29,6 +29,7 @@ import java.util.Comparator;
  * Code using this class must not rely on items being removed immediately. Consider using {@link SnapshotArray} if this is a
  * problem.
  * @author Nathan Sweet */
+
 public class DelayedRemovalArray<T> extends Array<T> {
 	private int iterating;
 	private IntArray remove = new IntArray(0);
@@ -102,7 +103,7 @@ public class DelayedRemovalArray<T> extends Array<T> {
 		remove.add(index);
 	}
 
-	public boolean removeValue (T value, boolean identity) {
+	public boolean removeValue (@Nullable T value, boolean identity) {
 		if (iterating > 0) {
 			int index = indexOf(value, identity);
 			if (index == -1) return false;
@@ -136,7 +137,7 @@ public class DelayedRemovalArray<T> extends Array<T> {
 		super.clear();
 	}
 
-	public void set (int index, T value) {
+	public void set (int index, @Nullable T value) {
 		if (iterating > 0) throw new IllegalStateException("Invalid between begin/end.");
 		super.set(index, value);
 	}

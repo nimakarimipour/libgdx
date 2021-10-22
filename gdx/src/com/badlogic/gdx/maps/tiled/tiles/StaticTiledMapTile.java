@@ -20,8 +20,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Represents a non changing {@link TiledMapTile} (can be cached) */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class StaticTiledMapTile implements TiledMapTile {
 
 	private int id;
@@ -30,6 +33,7 @@ public class StaticTiledMapTile implements TiledMapTile {
 
 	private MapProperties properties;
 
+	@Nullable
 	private MapObjects objects;
 
 	private TextureRegion textureRegion;
@@ -59,6 +63,7 @@ public class StaticTiledMapTile implements TiledMapTile {
 	}
 
 	@Override
+	@Initializer
 	public MapProperties getProperties () {
 		if (properties == null) {
 			properties = new MapProperties();
@@ -114,6 +119,7 @@ public class StaticTiledMapTile implements TiledMapTile {
 	/** Copy constructor
 	 * 
 	 * @param copy the StaticTiledMapTile to copy. */
+	@Initializer
 	public StaticTiledMapTile (StaticTiledMapTile copy) {
 		if (copy.properties != null) {
 			getProperties().putAll(copy.properties);

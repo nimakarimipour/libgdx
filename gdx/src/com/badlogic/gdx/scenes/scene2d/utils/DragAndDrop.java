@@ -26,16 +26,23 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
-
+import com.badlogic.gdx.Initializer;
 /** Manages drag and drop operations through registered drag sources and drop targets.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class DragAndDrop {
 	static final Vector2 tmpVector = new Vector2();
 
+	@Nullable
 	Source dragSource;
+	@Nullable
 	Payload payload;
+	@Nullable
 	Actor dragActor;
 	boolean removeDragActor;
+	@Nullable
 	Target target;
 	boolean isValidTarget;
 	final Array<Target> targets = new Array();
@@ -181,6 +188,7 @@ public class DragAndDrop {
 	}
 
 	/** Removes all targets and sources. */
+	@Initializer
 	public void clear () {
 		targets.clear();
 		for (Entry<Source, DragListener> entry : sourceListeners.entries())
@@ -206,6 +214,7 @@ public class DragAndDrop {
 		this.button = button;
 	}
 
+	@Initializer
 	public void setDragActorPosition (float dragActorX, float dragActorY) {
 		this.dragActorX = dragActorX;
 		this.dragActorY = dragActorY;
@@ -218,6 +227,7 @@ public class DragAndDrop {
 		this.touchOffsetY = touchOffsetY;
 	}
 
+	@Initializer
 	public boolean isDragging () {
 		return payload != null;
 	}

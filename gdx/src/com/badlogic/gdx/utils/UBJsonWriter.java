@@ -20,13 +20,17 @@ import java.io.Closeable;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
+import com.badlogic.gdx.Initializer;
 /** Builder style API for emitting UBJSON.
  * @author Justin Shapcott */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class UBJsonWriter implements Closeable {
 
 	final DataOutputStream out;
 
+	@Nullable
 	private JsonObject current;
 	private boolean named;
 	private final Array<JsonObject> stack = new Array();
@@ -78,6 +82,7 @@ public class UBJsonWriter implements Closeable {
 
 	/** Appends a name for the next object, array, or value.
 	 * @return this writer, for chaining */
+	@Initializer
 	public UBJsonWriter name (String name) throws IOException {
 		if (current == null || current.array) throw new IllegalStateException("Current item must be an object.");
 		byte[] bytes = name.getBytes("UTF-8");

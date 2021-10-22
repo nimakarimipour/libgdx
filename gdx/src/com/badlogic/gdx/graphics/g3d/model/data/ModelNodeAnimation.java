@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.model.data;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class ModelNodeAnimation {
 	/** the id of the node animated by this animation FIXME should be nodeId **/

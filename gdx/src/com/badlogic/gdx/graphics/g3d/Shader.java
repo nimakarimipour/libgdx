@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
-
+import javax.annotation.Nullable;
 /** Interface which is used to render one or more {@link Renderable}s.</p>
  * 
  * A Shader is responsible for the actual rendering of an {@link Renderable}. Typically, when using OpenGL ES 2.0 or higher, it
@@ -51,6 +51,7 @@ import com.badlogic.gdx.utils.Disposable;
  * of the Shader. When the shader is no longer needed, it must disposed using the {@link Disposable#dispose()} method. This, for
  * example, disposed (unloads for memory) the used {@link ShaderProgram}.</p>
  * @author Xoppa */
+
 public interface Shader extends Disposable {
 	/** Initializes the Shader, must be called before the Shader can be used. This typically compiles a {@link ShaderProgram},
 	 * fetches uniform locations and performs other preparations for usage of the Shader. */

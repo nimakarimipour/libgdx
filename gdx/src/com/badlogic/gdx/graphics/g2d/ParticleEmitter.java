@@ -27,6 +27,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class ParticleEmitter {
 	static private final int UPDATE_SCALE = 1 << 0;
@@ -68,6 +70,7 @@ public class ParticleEmitter {
 	private Particle[] particles;
 	private int minParticleCount, maxParticleCount = 4;
 	private float x, y;
+	@Nullable
 	private String name;
 	private Array<String> imagePaths;
 	private int activeCount;
@@ -103,6 +106,7 @@ public class ParticleEmitter {
 		load(reader);
 	}
 
+	@Initializer
 	public ParticleEmitter (ParticleEmitter emitter) {
 		sprites = new Array<Sprite>(emitter.sprites);
 		name = emitter.name;
@@ -152,6 +156,7 @@ public class ParticleEmitter {
 		spawnHeightValue.setAlwaysActive(true);
 	}
 
+	@Initializer
 	public void setMaxParticleCount (int maxParticleCount) {
 		this.maxParticleCount = maxParticleCount;
 		active = new boolean[maxParticleCount];
@@ -386,7 +391,7 @@ public class ParticleEmitter {
 		if (spriteMode == SpriteMode.animated) updateFlags |= UPDATE_SPRITE;
 	}
 
-	protected Particle newParticle (Sprite sprite) {
+	protected Particle newParticle (@Nullable Sprite sprite) {
 		return new Particle(sprite);
 	}
 
@@ -394,6 +399,7 @@ public class ParticleEmitter {
 		return particles;
 	}
 
+	@Initializer
 	private void activateParticle (int index) {
 		Sprite sprite = null;
 		switch (spriteMode) {
@@ -735,6 +741,7 @@ public class ParticleEmitter {
 		return spriteMode;
 	}
 
+	@Nullable
 	public String getName () {
 		return name;
 	}
@@ -955,6 +962,7 @@ public class ParticleEmitter {
 	}
 
 	/** Returns the bounding box for all active particles. z axis will always be zero. */
+	@Initializer
 	public BoundingBox getBoundingBox () {
 		if (bounds == null) bounds = new BoundingBox();
 
@@ -973,6 +981,7 @@ public class ParticleEmitter {
 		return bounds;
 	}
 
+	@Initializer
 	protected RangedNumericValue[] getXSizeValues () {
 		if (xSizeValues == null) {
 			xSizeValues = new RangedNumericValue[3];
@@ -983,6 +992,7 @@ public class ParticleEmitter {
 		return xSizeValues;
 	}
 
+	@Initializer
 	protected RangedNumericValue[] getYSizeValues () {
 		if (ySizeValues == null) {
 			ySizeValues = new RangedNumericValue[3];
@@ -993,6 +1003,7 @@ public class ParticleEmitter {
 		return ySizeValues;
 	}
 
+	@Initializer
 	protected RangedNumericValue[] getMotionValues () {
 		if (motionValues == null) {
 			motionValues = new RangedNumericValue[3];
@@ -1231,10 +1242,11 @@ public class ParticleEmitter {
 		protected float transparency, transparencyDiff;
 		protected float wind, windDiff;
 		protected float gravity, gravityDiff;
+		@Nullable
 		protected float[] tint;
 		protected int frame;
 
-		public Particle (Sprite sprite) {
+		public Particle (@Nullable Sprite sprite) {
 			super(sprite);
 		}
 	}

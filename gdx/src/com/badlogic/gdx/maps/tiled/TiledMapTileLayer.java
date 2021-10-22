@@ -17,8 +17,11 @@
 package com.badlogic.gdx.maps.tiled;
 
 import com.badlogic.gdx.maps.MapLayer;
-
+import com.badlogic.gdx.Initializer;
 /** @brief Layer for a TiledMap */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class TiledMapTileLayer extends MapLayer {
 
 	private int width;
@@ -67,6 +70,7 @@ public class TiledMapTileLayer extends MapLayer {
 	/** @param x X coordinate
 	 * @param y Y coordinate
 	 * @return {@link Cell} at (x, y) */
+	@Nullable
 	public Cell getCell (int x, int y) {
 		if (x < 0 || x >= width) return null;
 		if (y < 0 || y >= height) return null;
@@ -104,6 +108,7 @@ public class TiledMapTileLayer extends MapLayer {
 		 * 
 		 * @param tile the {@link TiledMapTile} to use for this cell. 
 		 * @return this, for method chaining */
+		@Initializer
 		public Cell setTile (TiledMapTile tile) {
 			this.tile = tile;
 			return this;

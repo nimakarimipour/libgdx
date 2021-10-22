@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** A 3x3 grid of texture regions. Any of the regions may be omitted. Padding may be set as a hint on how to inset content on top
  * of the ninepatch (by default the eight "edge" textures of the ninepatch define the padding). When drawn, the four corner
  * patches will not be scaled, the interior patch will be scaled in both directions, and the middle patch for each edge will be
@@ -30,6 +30,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * Note this class does not accept ".9.png" textures that include the metadata border pixels describing the splits (and padding)
  * for the ninepatch. That information is either passed to a constructor or defined implicitly by the size of the individual patch
  * textures. {@link TextureAtlas} is one way to generate a postprocessed ninepatch texture regions from ".9.png" files. */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class NinePatch {
 	static public final int TOP_LEFT = 0;
 	static public final int TOP_CENTER = 1;
@@ -44,6 +47,7 @@ public class NinePatch {
 
 	static private final Color tmpDrawColor = new Color();
 
+	@Nullable
 	private Texture texture;
 	private int bottomLeft, bottomCenter, bottomRight;
 	private int middleLeft, middleCenter, middleRight;
@@ -175,6 +179,7 @@ public class NinePatch {
 		this(ninePatch, ninePatch.color);
 	}
 
+	@Initializer
 	public NinePatch (NinePatch ninePatch, Color color) {
 		texture = ninePatch.texture;
 
@@ -520,6 +525,7 @@ public class NinePatch {
 		if (padBottom != -1) padBottom *= scaleY;
 	}
 
+	@Nullable
 	public Texture getTexture () {
 		return texture;
 	}

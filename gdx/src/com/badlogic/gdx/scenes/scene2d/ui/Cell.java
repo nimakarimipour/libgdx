@@ -8,27 +8,35 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value.Fixed;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
-
+import com.badlogic.gdx.Initializer;
 /** A cell for a {@link Table}.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Cell<T extends Actor> implements Poolable {
 	static private final Float zerof = 0f, onef = 1f;
 	static private final Integer zeroi = 0, onei = 1;
 	static private final Integer centeri = onei, topi = Align.top, bottomi = Align.bottom, lefti = Align.left,
 		righti = Align.right;
 
+	@Nullable
 	static private Files files;
+	@Nullable
 	static private Cell defaults;
 
 	Value minWidth, minHeight;
 	Value prefWidth, prefHeight;
 	Value maxWidth, maxHeight;
+	@Nullable
 	Value spaceTop, spaceLeft, spaceBottom, spaceRight;
+	@Nullable
 	Value padTop, padLeft, padBottom, padRight;
 	Float fillX, fillY;
 	Integer align;
 	Integer expandX, expandY;
 	Integer colspan;
+	@Nullable
 	Boolean uniformX, uniformY;
 
 	@Null Actor actor;
@@ -47,6 +55,7 @@ public class Cell<T extends Actor> implements Poolable {
 		if (defaults != null) set(defaults);
 	}
 
+	@Initializer
 	public void setTable (Table table) {
 		this.table = table;
 	}
@@ -931,7 +940,8 @@ public class Cell<T extends Actor> implements Poolable {
 		set(defaults());
 	}
 
-	void set (Cell cell) {
+	@Initializer
+	void set (@Nullable Cell cell) {
 		minWidth = cell.minWidth;
 		minHeight = cell.minHeight;
 		prefWidth = cell.prefWidth;
@@ -988,6 +998,7 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Returns the defaults to use for all cells. This can be used to avoid needing to set the same defaults for every table (eg,
 	 * for spacing). */
+	@Nullable
 	static public Cell defaults () {
 		if (files == null || files != Gdx.files) {
 			files = Gdx.files;

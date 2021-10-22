@@ -33,7 +33,7 @@ import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
-
+import javax.annotation.Nullable;
 /** Provides methods to perform networking operations, such as simple HTTP get and post requests, and TCP server/client socket
  * communication.</p>
  * 
@@ -53,6 +53,7 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  * @author mzechner
  * @author noblemaster
  * @author arielsan */
+
 public interface Net {
 
 	/** HTTP response interface with methods to get the response data as a byte[], a {@link String} or an {@link InputStream}. */
@@ -186,12 +187,16 @@ public interface Net {
 	 * </pre> */
 	public static class HttpRequest implements Poolable {
 
+		@Nullable
 		private String httpMethod;
+		@Nullable
 		private String url;
 		private Map<String, String> headers;
 		private int timeOut = 0;
 
+		@Nullable
 		private String content;
+		@Nullable
 		private InputStream contentStream;
 		private long contentLength;
 
@@ -205,6 +210,7 @@ public interface Net {
 
 		/** Creates a new HTTP request with the specified HTTP method, see {@link HttpMethods}.
 		 * @param httpMethod This is the HTTP method for the request, see {@link HttpMethods} */
+		@Initializer
 		public HttpRequest (String httpMethod) {
 			this();
 			this.httpMethod = httpMethod;
@@ -212,6 +218,7 @@ public interface Net {
 
 		/** Sets the URL of the HTTP request.
 		 * @param url The URL to set. */
+		@Initializer
 		public void setUrl (String url) {
 			this.url = url;
 		}
@@ -233,6 +240,7 @@ public interface Net {
 
 		/** Sets the content as a stream to be used for a POST for example, to transmit custom data.
 		 * @param contentStream The stream with the content data. */
+		@Initializer
 		public void setContent (InputStream contentStream, long contentLength) {
 			this.contentStream = contentStream;
 			this.contentLength = contentLength;
@@ -275,21 +283,25 @@ public interface Net {
 		}
 
 		/** Returns the HTTP method of the HttpRequest. */
+		@Nullable
 		public String getMethod () {
 			return httpMethod;
 		}
 
 		/** Returns the URL of the HTTP request. */
+		@Nullable
 		public String getUrl () {
 			return url;
 		}
 
 		/** Returns the content string to be used for the HTTP request. */
+		@Nullable
 		public String getContent () {
 			return content;
 		}
 
 		/** Returns the content stream. */
+		@Nullable
 		public InputStream getContentStream () {
 			return contentStream;
 		}
@@ -315,6 +327,7 @@ public interface Net {
 		}
 
 		@Override
+		@Initializer
 		public void reset () {
 			httpMethod = null;
 			url = null;

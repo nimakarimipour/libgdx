@@ -20,13 +20,14 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.nio.FloatBuffer;
-
+import javax.annotation.Nullable;
 /**
  * A InstanceData instance holds instance data for rendering with OpenGL. It is implemented as either a {@link InstanceBufferObject} or a
  * {@link InstanceBufferObjectSubData}. Both require Open GL 3.3+.
  *
  * @author mrdlink
  */
+
 public interface InstanceData extends Disposable {
 
 	/**

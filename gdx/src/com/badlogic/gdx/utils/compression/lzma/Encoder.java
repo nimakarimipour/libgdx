@@ -20,6 +20,8 @@ import java.io.IOException;
 
 import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 public class Encoder {
 	public static final int EMatchFinderTypeBT2 = 0;
@@ -132,6 +134,7 @@ public class Encoder {
 		int m_NumPosBits;
 		int m_PosMask;
 
+		@Initializer
 		public void Create (int numPosBits, int numPrevBits) {
 			if (m_Coders != null && m_NumPrevBits == numPrevBits && m_NumPosBits == numPosBits) return;
 			m_NumPosBits = numPosBits;
@@ -334,6 +337,7 @@ public class Encoder {
 
 	long nowPos64;
 	boolean _finished;
+	@Nullable
 	java.io.InputStream _inStream;
 
 	int _matchFinderType = EMatchFinderTypeBT4;
@@ -1098,6 +1102,7 @@ public class Encoder {
 		ReleaseOutStream();
 	}
 
+	@Initializer
 	void SetStreams (java.io.InputStream inStream, java.io.OutputStream outStream, long inSize, long outSize) {
 		_inStream = inStream;
 		_finished = false;
@@ -1124,7 +1129,7 @@ public class Encoder {
 	boolean[] finished = new boolean[1];
 
 	public void Code (java.io.InputStream inStream, java.io.OutputStream outStream, long inSize, long outSize,
-		ICodeProgress progress) throws IOException {
+		@Nullable ICodeProgress progress) throws IOException {
 		_needReleaseMFStream = false;
 		try {
 			SetStreams(inStream, outStream, inSize, outSize);

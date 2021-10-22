@@ -17,8 +17,9 @@
 package com.badlogic.gdx.maps;
 
 import com.badlogic.gdx.graphics.Color;
-
+import javax.annotation.Nullable;
 /** Generic Map entity with basic attributes like name, opacity, color */
+
 public class MapObject {
 	private String name = "";
 	private float opacity = 1.0f;

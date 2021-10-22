@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
-
+import javax.annotation.Nullable;
 /** A relatively lightweight class which can be used to render basic shapes which don't need a node structure and alike. Can be
  * used for batching both static and dynamic shapes which share the same {@link Material} and transformation {@link Matrix4}
  * within the world. Use {@link ModelBatch} to render the `ShapeCache`. Must be disposed when no longer needed to release native
@@ -54,6 +54,7 @@ import com.badlogic.gdx.utils.Pool;
  * </pre>
  * 
  * @author realitix */
+
 public class ShapeCache implements Disposable, RenderableProvider {
 
 	/** Builder used to update the mesh */

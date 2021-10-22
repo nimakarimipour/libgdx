@@ -19,11 +19,13 @@ package com.badlogic.gdx.math;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.ShortArray;
-
+import javax.annotation.Nullable;
 /** Computes the convex hull of a set of points using the monotone chain convex hull algorithm (aka Andrew's algorithm).
  * @author Nathan Sweet */
+
 public class ConvexHull {
 	private final IntArray quicksortStack = new IntArray();
+	@Nullable
 	private float[] sortedPoints;
 	private final FloatArray hull = new FloatArray();
 	private final IntArray indices = new IntArray();

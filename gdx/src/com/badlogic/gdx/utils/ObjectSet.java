@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
-
+import javax.annotation.Nullable;
 /** An unordered set where the keys are objects. Null keys are not allowed. No allocation is done except when growing the table
  * size.
  * <p>
@@ -38,6 +38,7 @@ import com.badlogic.gdx.math.MathUtils;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+
 public class ObjectSet<T> implements Iterable<T> {
 	public int size;
 

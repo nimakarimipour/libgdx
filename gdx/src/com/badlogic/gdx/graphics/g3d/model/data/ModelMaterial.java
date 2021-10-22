@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class ModelMaterial {
 	public enum MaterialType {
@@ -26,12 +27,18 @@ public class ModelMaterial {
 
 	public String id;
 
+	@Nullable
 	public MaterialType type;
 
+	@Nullable
 	public Color ambient;
+	@Nullable
 	public Color diffuse;
+	@Nullable
 	public Color specular;
+	@Nullable
 	public Color emissive;
+	@Nullable
 	public Color reflection;
 
 	public float shininess;

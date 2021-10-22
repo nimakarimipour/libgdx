@@ -26,22 +26,24 @@ import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** Server socket implementation using java.net.ServerSocket.
  * 
  * @author noblemaster */
+
 public class NetJavaServerSocketImpl implements ServerSocket {
 
 	private Protocol protocol;
 
 	/** Our server or null for disposed, aka closed. */
+	@Nullable
 	private java.net.ServerSocket server;
 
 	public NetJavaServerSocketImpl (Protocol protocol, int port, ServerSocketHints hints) {
 		this(protocol, null, port, hints);
 	}
 	
-	public NetJavaServerSocketImpl (Protocol protocol, String hostname, int port, ServerSocketHints hints) {
+	public NetJavaServerSocketImpl (Protocol protocol, @Nullable String hostname, int port, ServerSocketHints hints) {
 		this.protocol = protocol;
 
 		// create the server socket

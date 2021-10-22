@@ -28,7 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A slider is a horizontal indicator that allows a user to set a value. The slider has a range (min, max) and a stepping between
  * each value the slider represents.
  * <p>
@@ -38,11 +38,15 @@ import com.badlogic.gdx.utils.Pools;
  * width is 140, a relatively arbitrary size. These parameters are reversed for a vertical progress bar.
  * @author mzechner
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class Slider extends ProgressBar {
 	int button = -1;
 	int draggingPointer = -1;
 	boolean mouseOver;
 	private Interpolation visualInterpolationInverse = Interpolation.linear;
+	@Nullable
 	private float[] snapValues;
 	private float threshold;
 
@@ -128,6 +132,7 @@ public class Slider extends ProgressBar {
 		return style.knob;
 	}
 
+	@Nullable
 	protected Drawable getKnobBeforeDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
@@ -136,6 +141,7 @@ public class Slider extends ProgressBar {
 		return style.knobBefore;
 	}
 
+	@Nullable
 	protected Drawable getKnobAfterDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
@@ -179,6 +185,7 @@ public class Slider extends ProgressBar {
 	}
 
 	/** Returns a snapped value. */
+	@Initializer
 	protected float snap (float value) {
 		if (snapValues == null || snapValues.length == 0) return value;
 		float bestDiff = -1, bestValue = 0;

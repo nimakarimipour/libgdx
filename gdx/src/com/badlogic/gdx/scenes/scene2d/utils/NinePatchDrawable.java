@@ -20,7 +20,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.utils.Null;
-
+import com.badlogic.gdx.Initializer;
 /** Drawable for a {@link NinePatch}.
  * <p>
  * The drawable sizes are set when the ninepatch is set, but they are separate values. Eg, {@link Drawable#getLeftWidth()} could
@@ -30,6 +30,9 @@ import com.badlogic.gdx.utils.Null;
  * The min size is set to the ninepatch total size by default. It could be set to the left+right and top+bottom, excluding the
  * middle size, to allow the drawable to be sized down as small as possible.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class NinePatchDrawable extends BaseDrawable implements TransformDrawable {
 	private NinePatch patch;
 
@@ -37,10 +40,11 @@ public class NinePatchDrawable extends BaseDrawable implements TransformDrawable
 	public NinePatchDrawable () {
 	}
 
-	public NinePatchDrawable (NinePatch patch) {
+	public NinePatchDrawable (@Nullable NinePatch patch) {
 		setPatch(patch);
 	}
 
+	@Initializer
 	public NinePatchDrawable (NinePatchDrawable drawable) {
 		super(drawable);
 		this.patch = drawable.patch;
@@ -57,7 +61,7 @@ public class NinePatchDrawable extends BaseDrawable implements TransformDrawable
 
 	/** Sets this drawable's ninepatch and set the min width, min height, top height, right width, bottom height, and left width to
 	 * the patch's padding. */
-	public void setPatch (NinePatch patch) {
+	public void setPatch (@Nullable NinePatch patch) {
 		this.patch = patch;
 		if (patch != null) {
 			setMinWidth(patch.getTotalWidth());

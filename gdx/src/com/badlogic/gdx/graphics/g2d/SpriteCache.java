@@ -37,7 +37,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.NumberUtils;
-
+import com.badlogic.gdx.Initializer;
 /** Draws 2D images, optimized for geometry that does not change. Sprites and/or textures are cached and given an ID, which can
  * later be used for drawing. The size, color, and texture region for each cached image cannot be modified. This information is
  * stored in video memory and does not have to be sent to the GPU each time it is drawn.<br>
@@ -66,6 +66,9 @@ import com.badlogic.gdx.utils.NumberUtils;
  * <br>
  * SpriteCache must be disposed once it is no longer needed.
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class SpriteCache implements Disposable {
 	static private final float[] tempVertices = new float[VERTEX_SIZE * 6];
 
@@ -78,6 +81,7 @@ public class SpriteCache implements Disposable {
 	private final Matrix4 combinedMatrix = new Matrix4();
 	private final ShaderProgram shader;
 
+	@Nullable
 	private Cache currentCache;
 	private final Array<Texture> textures = new Array(8);
 	private final IntArray counts = new IntArray(8);
@@ -85,6 +89,7 @@ public class SpriteCache implements Disposable {
 	private final Color color = new Color(1, 1, 1, 1);
 	private float colorPacked = Color.WHITE_FLOAT_BITS;
 
+	@Nullable
 	private ShaderProgram customShader = null;
 
 	/** Number of render calls since the last {@link #begin()}. **/
@@ -246,6 +251,7 @@ public class SpriteCache implements Disposable {
 	/** Adds the specified vertices to the cache. Each vertex should have 5 elements, one for each of the attributes: x, y, color,
 	 * u, and v. If indexed geometry is used, each image should be specified as 4 vertices, otherwise each image should be
 	 * specified as 6 vertices. */
+	@Initializer
 	public void add (Texture texture, float[] vertices, int offset, int length) {
 		if (currentCache == null) throw new IllegalStateException("beginCache must be called before add.");
 
@@ -1018,6 +1024,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Returns the custom shader, or null if the default shader is being used. */
+	@Nullable
 	public ShaderProgram getCustomShader () {
 		return customShader;
 	}

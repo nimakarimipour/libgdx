@@ -28,9 +28,10 @@ import java.io.Writer;
 import java.util.Date;
 
 import com.badlogic.gdx.utils.ObjectMap.Entry;
-
+import javax.annotation.Nullable;
 /** {@code PropertiesUtils} is a helper class that allows you to load and store key/value pairs of an
  * {@code ObjectMap<String,String>} with the same line-oriented syntax supported by {@code java.util.Properties}. */
+
 public final class PropertiesUtils {
 
 	private static final int NONE = 0, SLASH = 1, UNICODE = 2, CONTINUE = 3, KEY_DONE = 4, IGNORE = 5;
@@ -252,7 +253,7 @@ public final class PropertiesUtils {
 		writer.flush();
 	}
 
-	private static void dumpString (StringBuilder outBuffer, String string, boolean escapeSpace, boolean escapeUnicode) {
+	private static void dumpString (StringBuilder outBuffer, @Nullable String string, boolean escapeSpace, boolean escapeUnicode) {
 		int len = string.length();
 		for (int i = 0; i < len; i++) {
 			char ch = string.charAt(i);

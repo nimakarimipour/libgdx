@@ -19,9 +19,10 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import javax.annotation.Nullable;
 /** A value which has a defined minimum and maximum upper and lower bounds. Defines the variations of the value on a time line.
  * @author Inferno */
+
 public class ScaledNumericValue extends RangedNumericValue {
 	private float[] scaling = {1};
 	public float[] timeline = {0};

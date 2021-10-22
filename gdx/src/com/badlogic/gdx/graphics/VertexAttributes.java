@@ -22,11 +22,14 @@ import java.util.NoSuchElementException;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Collections;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import com.badlogic.gdx.Initializer;
 /** Instances of this class specify the vertex attributes of a mesh. VertexAttributes are used by {@link Mesh} instances to define
  * its vertex structure. Vertex attributes have an order. The order is specified by the order they are added to this class.
  * 
  * @author mzechner, Xoppa */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public final class VertexAttributes implements Iterable<VertexAttribute>, Comparable<VertexAttributes> {
 	/** The usage of a vertex attribute.
 	 * 
@@ -55,7 +58,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 	private ReadonlyIterable<VertexAttribute> iterable;
 
 	/** Constructor, sets the vertex attributes in a specific order */
-	public VertexAttributes (VertexAttribute... attributes) {
+	public VertexAttributes (@Nullable VertexAttribute... attributes) {
 		if (attributes.length == 0) throw new IllegalArgumentException("attributes must be >= 1");
 
 		VertexAttribute[] list = new VertexAttribute[attributes.length];
@@ -190,6 +193,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 
 	/** @see Collections#allocateIterators */
 	@Override
+	@Initializer
 	public Iterator<VertexAttribute> iterator () {
 		if (iterable == null) iterable = new ReadonlyIterable<VertexAttribute>(attributes);
 		return iterable.iterator();
@@ -240,8 +244,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 			this.array = array;
 		}
 
-		@Override
-		public Iterator<T> iterator () {
+		@Override				public Iterator<T> iterator () {
 			if (Collections.allocateIterators) return new ReadonlyIterator(array);
 			if (iterator1 == null) {
 				iterator1 = new ReadonlyIterator(array);

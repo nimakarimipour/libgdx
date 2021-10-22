@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-
+import com.badlogic.gdx.Initializer;
 /** An unordered map where the keys are unboxed ints and values are objects. No allocation is done except when growing the table
  * size.
  * <p>
@@ -38,12 +38,16 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	public int size;
 
 	int[] keyTable;
 	V[] valueTable;
 
+	@Nullable
 	V zeroValue;
 	boolean hasZeroValue;
 
@@ -99,6 +103,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	}
 
 	/** Creates a new map identical to the specified map. */
+	@Initializer
 	public IntMap (IntMap<? extends V> map) {
 		this((int)(map.keyTable.length * map.loadFactor), map.loadFactor);
 		System.arraycopy(map.keyTable, 0, keyTable, 0, map.keyTable.length);
@@ -189,6 +194,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		return i >= 0 ? valueTable[i] : null;
 	}
 
+	@Nullable
 	public V get (int key, @Null V defaultValue) {
 		if (key == 0) return hasZeroValue ? zeroValue : defaultValue;
 		int i = locateKey(key);

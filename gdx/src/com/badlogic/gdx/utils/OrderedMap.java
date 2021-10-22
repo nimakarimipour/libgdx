@@ -17,7 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.NoSuchElementException;
-
+import javax.annotation.Nullable;
 /** An {@link ObjectMap} that also stores keys in an {@link Array} using the insertion order. Null keys are not allowed. No
  * allocation is done except when growing the table size.
  * <p>
@@ -40,6 +40,7 @@ import java.util.NoSuchElementException;
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Nathan Sweet
  * @author Tommy Ettinger */
+
 public class OrderedMap<K, V> extends ObjectMap<K, V> {
 	final Array<K> keys;
 
@@ -69,7 +70,8 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		keys = new Array(map.keys);
 	}
 
-	public V put (K key, V value) {
+	@Nullable
+	public V put (K key, @Nullable V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];
@@ -93,11 +95,13 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		}
 	}
 
+	@Nullable
 	public V remove (K key) {
 		keys.removeValue(key, false);
 		return super.remove(key);
 	}
 
+	@Nullable
 	public V removeIndex (int index) {
 		return super.remove(keys.removeIndex(index));
 	}
@@ -322,6 +326,7 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 			hasNext = map.size > 0;
 		}
 
+		@Nullable
 		public V next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");

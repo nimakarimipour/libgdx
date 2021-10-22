@@ -28,11 +28,14 @@ import java.util.UUID;
 import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
+import com.badlogic.gdx.Initializer;
 /** Loads shared libraries from a natives jar file (desktop) or arm folders (Android). For desktop projects, have the natives jar
  * in the classpath, for Android projects put the shared libraries in the libs/armeabi and libs/armeabi-v7a folders.
  * @author mzechner
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class SharedLibraryLoader {
 	static public boolean isWindows = System.getProperty("os.name").contains("Windows");
 	static public boolean isLinux = System.getProperty("os.name").contains("Linux");
@@ -63,6 +66,7 @@ public class SharedLibraryLoader {
 
 	static private final HashSet<String> loadedLibraries = new HashSet();
 
+	@Nullable
 	private String nativesJar;
 
 	public SharedLibraryLoader () {
@@ -70,6 +74,7 @@ public class SharedLibraryLoader {
 
 	/** Fetches the natives from the given natives jar file. Used for testing a shared lib on the fly.
 	 * @param nativesJar */
+	@Initializer
 	public SharedLibraryLoader (String nativesJar) {
 		this.nativesJar = nativesJar;
 	}

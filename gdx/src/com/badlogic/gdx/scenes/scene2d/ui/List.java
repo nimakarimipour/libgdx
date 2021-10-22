@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-
+import com.badlogic.gdx.Initializer;
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
  * {@link ChangeEvent} is fired when the list selection changes.
@@ -44,10 +44,14 @@ import com.badlogic.gdx.utils.Pools;
  * The preferred size of the list is determined by the text bounds of the items and the size of the {@link ListStyle#selection}.
  * @author mzechner
  * @author Nathan Sweet */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class List<T> extends Widget implements Cullable {
 	ListStyle style;
 	final Array<T> items = new Array();
 	ArraySelection<T> selection = new ArraySelection(items);
+	@Nullable
 	private Rectangle cullingArea;
 	private float prefWidth, prefHeight;
 	float itemHeight;
@@ -171,6 +175,7 @@ public class List<T> extends Widget implements Cullable {
 		return style;
 	}
 
+	@Initializer
 	public void layout () {
 		BitmapFont font = style.font;
 		Drawable selectedDrawable = style.selection;
@@ -306,11 +311,13 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** @return May be null. */
+	@Nullable
 	public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
+	@Nullable
 	public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
@@ -406,6 +413,7 @@ public class List<T> extends Widget implements Cullable {
 
 	/** @return May be null.
 	 * @see #setCullingArea(Rectangle) */
+	@Nullable
 	public Rectangle getCullingArea () {
 		return cullingArea;
 	}
@@ -437,6 +445,7 @@ public class List<T> extends Widget implements Cullable {
 		public ListStyle () {
 		}
 
+		@Initializer
 		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
 			this.font = font;
 			this.fontColorSelected.set(fontColorSelected);

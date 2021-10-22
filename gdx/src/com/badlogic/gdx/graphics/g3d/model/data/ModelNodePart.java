@@ -20,10 +20,15 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.IntArray;
+import javax.annotation.Nullable;
 
 public class ModelNodePart {
+	@Nullable
 	public String materialId;
+	@Nullable
 	public String meshPartId;
+	@Nullable
 	public ArrayMap<String, Matrix4> bones;
+	@Nullable
 	public int uvMapping[][];
 }

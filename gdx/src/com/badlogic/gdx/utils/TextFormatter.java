@@ -18,10 +18,11 @@ package com.badlogic.gdx.utils;
 
 import java.text.MessageFormat;
 import java.util.Locale;
-
+import com.badlogic.gdx.Initializer;
 /** {@code TextFormatter} is used by {@link I18NBundle} to perform argument replacement.
  * 
  * @author davebaol */
+
 class TextFormatter {
 
 	private MessageFormat messageFormat;
@@ -56,6 +57,7 @@ class TextFormatter {
 	 * @param args the arguments
 	 * @return the formatted pattern
 	 * @exception IllegalArgumentException if the pattern is invalid */
+	@Initializer
 	public String format (String pattern, Object... args) {
 		if (messageFormat != null) {
 			messageFormat.applyPattern(replaceEscapeChars(pattern));

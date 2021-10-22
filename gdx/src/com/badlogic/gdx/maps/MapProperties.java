@@ -21,9 +21,10 @@ import java.util.Iterator;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ObjectMap;
-
+import javax.annotation.Nullable;
 /** @brief Set of string indexed values representing map elements' properties, allowing to retrieve, modify and add properties to
  *        the set. */
+
 public class MapProperties {
 
 	private ObjectMap<String, Object> properties;
@@ -41,6 +42,7 @@ public class MapProperties {
 
 	/** @param key property name
 	 * @return the value for that property if it exists, otherwise, null */
+	@Nullable
 	public Object get (String key) {
 		return properties.get(key);
 	}

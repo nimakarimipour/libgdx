@@ -15,10 +15,14 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
+
 
 /** Encapsulates a 2D polygon defined by it's vertices relative to an origin point (default of 0, 0). */
 public class Polygon implements Shape2D {
 	private float[] localVertices;
+	@Nullable
 	private float[] worldVertices;
 	private float x, y;
 	private float originX, originY;
@@ -168,6 +172,7 @@ public class Polygon implements Shape2D {
 	 * Note the returned Rectangle is cached in this polygon, and will be reused if this Polygon is changed.
 	 * 
 	 * @return this polygon's bounding box {@link Rectangle} */
+	@Initializer
 	public Rectangle getBoundingRectangle () {
 		float[] vertices = getTransformedVertices();
 

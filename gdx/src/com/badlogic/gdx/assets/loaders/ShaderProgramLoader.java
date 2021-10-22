@@ -23,7 +23,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+import javax.annotation.Nullable;
 /** {@link AssetLoader} for {@link ShaderProgram} instances loaded from text files. If the file suffix is ".vert", it is assumed
  * to be a vertex shader, and a fragment shader is found using the same file name with a ".frag" suffix. And vice versa if the
  * file suffix is ".frag". These default suffixes can be changed in the ShaderProgramLoader constructor.
@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * The above default behavior for finding the files can be overridden by explicitly setting the file names in a
  * {@link ShaderProgramParameter}. The parameter can also be used to prepend code to the programs.
  * @author cypherdare */
+
 public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, ShaderProgramLoader.ShaderProgramParameter> {
 
 	private String vertexFileSuffix = ".vert";
@@ -50,6 +51,7 @@ public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, 
 	}
 
 	@Override
+	@Nullable
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, ShaderProgramParameter parameter) {
 		return null;
 	}
@@ -91,17 +93,21 @@ public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, 
 	static public class ShaderProgramParameter extends AssetLoaderParameters<ShaderProgram> {
 		/** File name to be used for the vertex program instead of the default determined by the file name used to submit this asset
 		 * to AssetManager. */
+		@Nullable
 		public String vertexFile;
 		/** File name to be used for the fragment program instead of the default determined by the file name used to submit this
 		 * asset to AssetManager. */
+		@Nullable
 		public String fragmentFile;
 		/** Whether to log (at the error level) the shader's log if it fails to compile. Default true. */
 		public boolean logOnCompileFailure = true;
 		/** Code that is always added to the vertex shader code. This is added as-is, and you should include a newline (`\n`) if
 		 * needed. {@linkplain ShaderProgram#prependVertexCode} is placed before this code. */
+		@Nullable
 		public String prependVertexCode;
 		/** Code that is always added to the fragment shader code. This is added as-is, and you should include a newline (`\n`) if
 		 * needed. {@linkplain ShaderProgram#prependFragmentCode} is placed before this code. */
+		@Nullable
 		public String prependFragmentCode;
 	}
 }

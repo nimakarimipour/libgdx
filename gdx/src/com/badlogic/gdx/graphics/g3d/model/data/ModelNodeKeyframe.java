@@ -15,6 +15,8 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.graphics.g3d.model.data;
+import javax.annotation.Nullable;
+
 
 public class ModelNodeKeyframe<T> {
 	/** the timestamp of the keyframe in seconds **/

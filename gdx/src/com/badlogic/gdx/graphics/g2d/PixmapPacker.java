@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.OrderedMap;
-
+import com.badlogic.gdx.Initializer;
 /** Packs {@link Pixmap pixmaps} into one or more {@link Page pages} to generate an atlas of pixmap instances. Provides means to
  * directly convert the pixmap atlas to a {@link TextureAtlas}. The packer supports padding and border pixel duplication,
  * specified during construction. The packer supports incremental inserts and updates of TextureAtlases generated with this class.
@@ -98,6 +98,9 @@ import com.badlogic.gdx.utils.OrderedMap;
  * @author mzechner
  * @author Nathan Sweet
  * @author Rob Rendell */
+import javax.annotation.Nullable;
+import javax.annotation.Nullable;
+
 public class PixmapPacker implements Disposable {
 	boolean packToTexture;
 	boolean disposed;
@@ -163,7 +166,7 @@ public class PixmapPacker implements Disposable {
 	 * @return Rectangle describing the area the pixmap was rendered to.
 	 * @throws GdxRuntimeException in case the image did not fit due to the page size being too small or providing a duplicate
 	 *            name. */
-	public synchronized Rectangle pack (String name, Pixmap image) {
+	public synchronized Rectangle pack (@Nullable String name, Pixmap image) {
 		if (disposed) return null;
 		if (name != null && getRect(name) != null)
 			throw new GdxRuntimeException("Pixmap has already been packed with name: " + name);
@@ -304,6 +307,7 @@ public class PixmapPacker implements Disposable {
 
 	/** @param name the name of the image
 	 * @return the page the image is stored in or null */
+	@Nullable
 	public synchronized Page getPage (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
@@ -496,6 +500,7 @@ public class PixmapPacker implements Disposable {
 		/** Creates the texture if it has not been created, else reuploads the entire page pixmap to the texture if the pixmap has
 		 * changed since this method was last called.
 		 * @return true if the texture was created or reuploaded. */
+		@Initializer
 		public boolean updateTexture (TextureFilter minFilter, TextureFilter magFilter, boolean useMipMaps) {
 			if (texture != null) {
 				if (!dirty) return false;
@@ -532,6 +537,7 @@ public class PixmapPacker implements Disposable {
 	static public class GuillotineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
 
+		@Initializer
 		public void sort (Array<Pixmap> pixmaps) {
 			if (comparator == null) {
 				comparator = new Comparator<Pixmap>() {
@@ -569,6 +575,7 @@ public class PixmapPacker implements Disposable {
 			return page;
 		}
 
+		@Nullable
 		private Node insert (Node node, Rectangle rect) {
 			if (!node.full && node.leftChild != null && node.rightChild != null) {
 				Node newNode = insert(node.leftChild, rect);
@@ -612,6 +619,7 @@ public class PixmapPacker implements Disposable {
 
 		static final class Node {
 			public Node leftChild;
+			@Nullable
 			public Node rightChild;
 			public final Rectangle rect = new Rectangle();
 			public boolean full;
@@ -636,6 +644,7 @@ public class PixmapPacker implements Disposable {
 	static public class SkylineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
 
+		@Initializer
 		public void sort (Array<Pixmap> images) {
 			if (comparator == null) {
 				comparator = new Comparator<Pixmap>() {
@@ -756,7 +765,7 @@ public class PixmapPacker implements Disposable {
 		return new int[] {startX, endX, startY, endY};
 	}
 
-	private int[] getPads (Pixmap raster, int[] splits) {
+	private int[] getPads (Pixmap raster, @Nullable int[] splits) {
 
 		int bottom = raster.getHeight() - 1;
 		int right = raster.getWidth() - 1;
@@ -847,6 +856,7 @@ public class PixmapPacker implements Disposable {
 	}
 
 	public static class PixmapPackerRectangle extends Rectangle {
+		@Nullable
 		int[] splits;
 		int[] pads;
 		int offsetX, offsetY;
