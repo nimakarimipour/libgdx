@@ -44,7 +44,7 @@ dependencies {
     compileOnly project(":extensions:gdx-jnigen")
     testCompile libraries.junit
 
-    annotationProcessor "edu.ucr.cs.riple:nullaway:0.7.12-SNAPSHOT"
+    annotationProcessor "ucr.uber.nullaway:nullaway:0.9.3-SNAPSHOT"
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
     errorprone "com.google.errorprone:error_prone_core:2.3.2"
@@ -62,6 +62,7 @@ tasks.withType(JavaCompile) {
         options.errorprone.errorproneArgs += ["-XepDisableAllChecks",
                                               "-Xep:NullAway:ERROR",
                                               "-XepOpt:NullAway:AnnotatedPackages=com.badlogic.gdx",
+                                              "-XepOpt:NullAway:AutoFixOutPutDirectory=/tmp/NullAwayFix",
                                               "-XepOpt:NullAway:CustomNullableAnnotation=com.badlogic.gdx.utils.Null",
                                               "-XepOpt:NullAway:AutoFix=true",
                                               "-XepDisableAllWarnings"]
