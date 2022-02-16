@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.graphics.g3d.utils;
+import javax.annotation.Nullable;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -223,7 +224,7 @@ public interface MeshPartBuilder {
 			return this;
 		}
 
-		public VertexInfo set (final VertexInfo other) {
+		public VertexInfo set (@Nullable final VertexInfo other) {
 			if (other == null) return set(null, null, null, null);
 			hasPosition = other.hasPosition;
 			position.set(other.position);
