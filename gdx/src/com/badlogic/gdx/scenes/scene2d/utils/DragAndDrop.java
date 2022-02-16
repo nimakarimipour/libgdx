@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.scenes.scene2d.utils;
+import javax.annotation.Nullable;
 
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
@@ -33,6 +34,7 @@ public class DragAndDrop {
 	static final Vector2 tmpVector = new Vector2();
 
 	Source dragSource;
+	@Nullable
 	Payload payload;
 	Actor dragActor;
 	boolean removeDragActor;
