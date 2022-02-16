@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.graphics.glutils;
+import javax.annotation.Nullable;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -28,11 +29,11 @@ public class PixmapTextureData implements TextureData {
 	final boolean disposePixmap;
 	final boolean managed;
 
-	public PixmapTextureData (Pixmap pixmap, Format format, boolean useMipMaps, boolean disposePixmap) {
+	public PixmapTextureData (Pixmap pixmap, @Nullable Format format, boolean useMipMaps, boolean disposePixmap) {
 		this(pixmap, format, useMipMaps, disposePixmap, false);
 	}
 
-	public PixmapTextureData (Pixmap pixmap, Format format, boolean useMipMaps, boolean disposePixmap, boolean managed) {
+	public PixmapTextureData (Pixmap pixmap, @Nullable Format format, boolean useMipMaps, boolean disposePixmap, boolean managed) {
 		this.pixmap = pixmap;
 		this.format = format == null ? pixmap.getFormat() : format;
 		this.useMipMaps = useMipMaps;
