@@ -44,7 +44,8 @@ dependencies {
     compileOnly project(":extensions:gdx-jnigen")
     testCompile libraries.junit
 
-    annotationProcessor "ucr.uber.nullaway:nullaway:0.9.3-SNAPSHOT"
+    annotationProcessor "com.uber.nullaway:nullaway:0.9.6-SNAPSHOT"
+    annotationProcessor "edu.ucr.cs.riple.nullawayannotator:css:1.1.1-LOCAL"
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
     errorprone "com.google.errorprone:error_prone_core:2.3.2"
@@ -61,10 +62,9 @@ tasks.withType(JavaCompile) {
     if (!name.toLowerCase().contains("test")) {
         options.errorprone.errorproneArgs += ["-XepDisableAllChecks",
                                               "-Xep:NullAway:ERROR",
+                                              "-Xep:CSS:ERROR",
                                               "-XepOpt:NullAway:AnnotatedPackages=com.badlogic.gdx",
-                                              "-XepOpt:NullAway:AutoFixOutPutDirectory=/tmp/NullAwayFix",
                                               "-XepOpt:NullAway:CustomNullableAnnotation=com.badlogic.gdx.utils.Null",
-                                              "-XepOpt:NullAway:AutoFix=true",
                                               "-XepDisableAllWarnings"]
         options.compilerArgs << "-Xmaxerrs" << "100000"
 
