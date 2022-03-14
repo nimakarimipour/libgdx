@@ -67,6 +67,8 @@ tasks.withType(JavaCompile) {
                                               "-XepOpt:NullAway:FixSerializationConfigPath=/tmp/NullAwayFix/config.xml",
                                               "-Xep:CSS:ERROR",
                                               "-XepOpt:NullAway:CustomNullableAnnotation=com.badlogic.gdx.utils.Null",
+                                              "-XepOpt:NullAway:SerializeFixMetadata=true",
+                                              "-XepOpt:NullAway:FixSerializationConfigPath=/tmp/NullAwayFix/config.xml",
                                               "-XepDisableAllWarnings"]
         options.compilerArgs << "-Xmaxerrs" << "100000"
 
