@@ -62,11 +62,12 @@ tasks.withType(JavaCompile) {
     if (!name.toLowerCase().contains("test")) {
         options.errorprone.errorproneArgs += ["-XepDisableAllChecks",
                                               "-Xep:NullAway:ERROR",
-                                              "-Xep:CSS:ERROR",
                                               "-XepOpt:NullAway:AnnotatedPackages=com.badlogic.gdx",
                                               "-XepOpt:NullAway:CustomNullableAnnotation=com.badlogic.gdx.utils.Null",
                                               "-XepOpt:NullAway:SerializeFixMetadata=true",
                                               "-XepOpt:NullAway:FixSerializationConfigPath=/tmp/NullAwayFix/config.xml",
+                                              "-Xep:CSS:ERROR",
+                                              "-XepOpt:CSS:ConfigPath=/tmp/NullAwayFix/css.xml",
                                               "-XepDisableAllWarnings"]
         options.compilerArgs << "-Xmaxerrs" << "100000"
 
