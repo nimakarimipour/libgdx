@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.graphics.g3d.particles;
+import javax.annotation.Nullable;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -187,6 +188,7 @@ public class ParticleShader extends BaseShader {
 	}
 
 	/** The renderable used to create this shader, invalid after the call to init */
+	@Nullable
 	private Renderable renderable;
 	private long materialMask;
 	private long vertexMask;
