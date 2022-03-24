@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+import javax.annotation.Nullable;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.IntSet.IntSetIterator;
@@ -133,7 +134,7 @@ public class Json {
 	/** Sets the name of the JSON field to store the Java class name or class tag when required to avoid ambiguity during
 	 * deserialization. Set to null to never output this information, but be warned that deserialization may fail. Default is
 	 * "class". */
-	public void setTypeName (String typeName) {
+	public void setTypeName (@Nullable String typeName) {
 		this.typeName = typeName;
 	}
 
