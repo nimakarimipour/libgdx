@@ -70,7 +70,6 @@ tasks.withType(JavaCompile) {
                                               "-XepOpt:CSS:ConfigPath=/tmp/NullAwayFix/css.xml",
                                               "-XepDisableAllWarnings"]
         options.compilerArgs << "-Xmaxerrs" << "100000"
-
     }
 }
 
