@@ -1,66 +1,90 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.maps.tiled;
 
+import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 
-/** @brief Generalises the concept of tile in a TiledMap */
+/**
+ * @brief Generalises the concept of tile in a TiledMap
+ */
 public interface TiledMapTile {
 
-	public enum BlendMode {
-		NONE, ALPHA
-	}
+    public enum BlendMode {
 
-	public int getId ();
+        NONE, ALPHA
+    }
 
-	public void setId (int id);
+    public int getId();
 
-	/** @return the {@link BlendMode} to use for rendering the tile */
-	public BlendMode getBlendMode ();
+    public void setId(int id);
 
-	/** Sets the {@link BlendMode} to use for rendering the tile
-	 * 
-	 * @param blendMode the blend mode to use for rendering the tile */
-	public void setBlendMode (BlendMode blendMode);
+    /**
+     * @return the {@link BlendMode} to use for rendering the tile
+     */
+    public BlendMode getBlendMode();
 
-	/** @return texture region used to render the tile */
-	public TextureRegion getTextureRegion ();
+    /**
+     * Sets the {@link BlendMode} to use for rendering the tile
+     *
+     * @param blendMode the blend mode to use for rendering the tile
+     */
+    public void setBlendMode(BlendMode blendMode);
 
-	/** Sets the texture region used to render the tile */
-	public void setTextureRegion(TextureRegion textureRegion);
+    /**
+     * @return texture region used to render the tile
+     */
+    public TextureRegion getTextureRegion();
 
-	/** @return the amount to offset the x position when rendering the tile */
-	public float getOffsetX();
+    /**
+     * Sets the texture region used to render the tile
+     */
+    public void setTextureRegion(TextureRegion textureRegion);
 
-	/** Set the amount to offset the x position when rendering the tile */
-	public void setOffsetX(float offsetX);
+    /**
+     * @return the amount to offset the x position when rendering the tile
+     */
+    public float getOffsetX();
 
-	/** @return the amount to offset the y position when rendering the tile */
-	public float getOffsetY();
+    /**
+     * Set the amount to offset the x position when rendering the tile
+     */
+    public void setOffsetX(float offsetX);
 
-	/** Set the amount to offset the y position when rendering the tile */
-	public void setOffsetY(float offsetY);
+    /**
+     * @return the amount to offset the y position when rendering the tile
+     */
+    public float getOffsetY();
 
-	/** @return tile's properties set */
-	public MapProperties getProperties ();
+    /**
+     * Set the amount to offset the y position when rendering the tile
+     */
+    public void setOffsetY(float offsetY);
 
-	/** @return collection of objects contained in the tile */
-	public MapObjects getObjects();
+    /**
+     * @return tile's properties set
+     */
+    public MapProperties getProperties();
 
+    /**
+     * @return collection of objects contained in the tile
+     */
+    public MapObjects getObjects();
 }
