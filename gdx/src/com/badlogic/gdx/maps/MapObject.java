@@ -1,73 +1,102 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.maps;
 
+import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 
-/** Generic Map entity with basic attributes like name, opacity, color */
+/**
+ * Generic Map entity with basic attributes like name, opacity, color
+ */
 public class MapObject {
-	private String name = "";
-	private float opacity = 1.0f;
-	private boolean visible = true;
-	private MapProperties properties = new MapProperties();
-	private Color color = Color.WHITE.cpy();
 
-	/** @return object's name */
-	public String getName () {
-		return name;
-	}
+    @Nullable
+    private String name = "";
 
-	/** @param name new name for the object */
-	public void setName (String name) {
-		this.name = name;
-	}
+    private float opacity = 1.0f;
 
-	/** @return object's color */
-	public Color getColor () {
-		return color;
-	}
+    private boolean visible = true;
 
-	/** @param color new color for the object */
-	public void setColor (Color color) {
-		this.color = color;
-	}
+    private MapProperties properties = new MapProperties();
 
-	/** @return object's opacity */
-	public float getOpacity () {
-		return opacity;
-	}
+    private Color color = Color.WHITE.cpy();
 
-	/** @param opacity new opacity value for the object */
-	public void setOpacity (float opacity) {
-		this.opacity = opacity;
-	}
+    /**
+     * @return object's name
+     */
+    @Nullable
+    public String getName() {
+        return name;
+    }
 
-	/** @return whether the object is visible or not */
-	public boolean isVisible () {
-		return visible;
-	}
+    /**
+     * @param name new name for the object
+     */
+    public void setName(@Nullable String name) {
+        this.name = name;
+    }
 
-	/** @param visible toggles object's visibility */
-	public void setVisible (boolean visible) {
-		this.visible = visible;
-	}
+    /**
+     * @return object's color
+     */
+    public Color getColor() {
+        return color;
+    }
 
-	/** @return object's properties set */
-	public MapProperties getProperties () {
-		return properties;
-	}
+    /**
+     * @param color new color for the object
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * @return object's opacity
+     */
+    public float getOpacity() {
+        return opacity;
+    }
+
+    /**
+     * @param opacity new opacity value for the object
+     */
+    public void setOpacity(float opacity) {
+        this.opacity = opacity;
+    }
+
+    /**
+     * @return whether the object is visible or not
+     */
+    public boolean isVisible() {
+        return visible;
+    }
+
+    /**
+     * @param visible toggles object's visibility
+     */
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    /**
+     * @return object's properties set
+     */
+    public MapProperties getProperties() {
+        return properties;
+    }
 }
