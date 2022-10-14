@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 apply plugin: "java"
+apply plugin: "net.ltgt.errorprone"
 
 if(JavaVersion.current().isJava9Compatible()) {
 	compileJava {
@@ -41,6 +42,17 @@ jar {
 dependencies {
 	testImplementation libraries.junit
 	api "com.badlogicgames.gdx:gdx-jnigen-loader:2.3.1"
+
+	annotationProcessor "com.uber.nullaway:nullaway:0.10.2"
+	annotationProcessor "edu.ucr.cs.riple.checkers:ExhaustiveFixSerializer:1.0-SNAPSHOT"
+
+	// Optional, some source of nullability annotations.
+	// Not required on Android if you use the support
+	// library nullability annotations.
+	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+
+	errorprone "com.google.errorprone:error_prone_core:2.16"
+	errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
 }
 
 test {
@@ -75,5 +87,17 @@ jnigen {
 	robovm {
 		extraLib("libs/ObjectAL.xcframework/ios-arm64_armv7/libObjectAL.a", "device")
 		extraLib("libs/ObjectAL.xcframework/ios-arm64_x86_64-simulator/libObjectAL.a", "simulator")
+	}
+}
+
+import net.ltgt.gradle.errorprone.CheckSeverity
+
+tasks.withType(JavaCompile) {
+	// remove the if condition if you want to run NullAway on test code
+	if (!name.toLowerCase().contains("test")) {
+		options.errorprone {
+			check("NullAway", CheckSeverity.ERROR)
+			option("NullAway:AnnotatedPackages", "com.uber")
+		}
 	}
 }
