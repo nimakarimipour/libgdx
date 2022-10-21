@@ -103,7 +103,7 @@ tasks.withType(JavaCompile) {
 			option("NullAway:AnnotatedPackages", "com.badlogic")
 			option("NullAway:SerializeFixMetadata", "true")
 			option("NullAway:FixSerializationConfigPath", "/tmp/NullAwayFix/config.xml")
-			check("TypeAnnotatorScanner", CheckSeverity.OFF)
+			check("TypeAnnotatorScanner", CheckSeverity.ERROR)
 			option("TypeAnnotatorScanner:ConfigPath", "/tmp/NullAwayFix/scanner.xml")
 		}
 	}
