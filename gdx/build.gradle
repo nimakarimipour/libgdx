@@ -96,12 +96,14 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 tasks.withType(JavaCompile) {
 	// remove the if condition if you want to run NullAway on test code
 	if (!name.toLowerCase().contains("test")) {
+		options.errorprone.disableAllChecks = true
+		options.errorprone.disableAllWarnings = true
 		options.errorprone {
 			check("NullAway", CheckSeverity.ERROR)
 			option("NullAway:AnnotatedPackages", "com.badlogic")
 			option("NullAway:SerializeFixMetadata", "true")
 			option("NullAway:FixSerializationConfigPath", "/tmp/NullAwayFix/config.xml")
-			check("TypeAnnotatorScanner", CheckSeverity.ERROR)
+			check("TypeAnnotatorScanner", CheckSeverity.OFF)
 			option("TypeAnnotatorScanner:ConfigPath", "/tmp/NullAwayFix/scanner.xml")
 		}
 	}
