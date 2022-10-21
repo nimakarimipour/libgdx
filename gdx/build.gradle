@@ -45,6 +45,7 @@ dependencies {
 
 	annotationProcessor "com.uber.nullaway:nullaway:0.10.2"
 	annotationProcessor "edu.ucr.cs.riple.checkers:ExhaustiveFixSerializer:1.0-SNAPSHOT"
+	annotationProcessor "edu.ucr.cs.riple.nullawayannotator:type-annotator-scanner:1.3.4-SNAPSHOT"
 
 	// Optional, some source of nullability annotations.
 	// Not required on Android if you use the support
@@ -97,7 +98,13 @@ tasks.withType(JavaCompile) {
 	if (!name.toLowerCase().contains("test")) {
 		options.errorprone {
 			check("NullAway", CheckSeverity.ERROR)
-			option("NullAway:AnnotatedPackages", "com.uber")
+			option("NullAway:AnnotatedPackages", "com.badlogic")
+			option("NullAway:SerializeFixMetadata", "true")
+			option("NullAway:FixSerializationConfigPath", "/tmp/NullAwayFix/config.xml")
+			check("TypeAnnotatorScanner", CheckSeverity.ERROR)
+			option("TypeAnnotatorScanner:ConfigPath", "/tmp/NullAwayFix/scanner.xml")
 		}
 	}
+	options.compilerArgs << "-Xmaxerrs" << "100000"
+	options.compilerArgs << "-Xmaxwarns" << "100000"
 }
