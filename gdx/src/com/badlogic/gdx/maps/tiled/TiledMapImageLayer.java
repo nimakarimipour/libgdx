@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.maps.tiled;
 
 import javax.annotation.Nullable;
@@ -23,41 +24,40 @@ import com.badlogic.gdx.maps.MapLayer;
 
 public class TiledMapImageLayer extends MapLayer {
 
-    @Nullable
-    private TextureRegion region;
+	@Nullable private TextureRegion region;
 
-    private float x;
+	private float x;
 
-    private float y;
+	private float y;
 
-    public TiledMapImageLayer(@Nullable TextureRegion region, float x, float y) {
-        this.region = region;
-        this.x = x;
-        this.y = y;
-    }
+	public TiledMapImageLayer (@Nullable TextureRegion region, float x, float y) {
+		this.region = region;
+		this.x = x;
+		this.y = y;
+	}
 
-    @Nullable
-    public TextureRegion getTextureRegion() {
-        return region;
-    }
+	@Nullable
+	public TextureRegion getTextureRegion () {
+		return region;
+	}
 
-    public void setTextureRegion(TextureRegion region) {
-        this.region = region;
-    }
+	public void setTextureRegion (TextureRegion region) {
+		this.region = region;
+	}
 
-    public float getX() {
-        return x;
-    }
+	public float getX () {
+		return x;
+	}
 
-    public void setX(float x) {
-        this.x = x;
-    }
+	public void setX (float x) {
+		this.x = x;
+	}
 
-    public float getY() {
-        return y;
-    }
+	public float getY () {
+		return y;
+	}
 
-    public void setY(float y) {
-        this.y = y;
-    }
+	public void setY (float y) {
+		this.y = y;
+	}
 }

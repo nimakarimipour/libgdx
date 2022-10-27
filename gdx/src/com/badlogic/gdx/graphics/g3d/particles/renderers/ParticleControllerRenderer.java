@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.particles.renderers;
 
 import javax.annotation.Nullable;
@@ -22,45 +23,42 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 
-/**
- * It's a {@link ParticleControllerComponent} which determines how the particles are rendered. It's the base class of every
+/** It's a {@link ParticleControllerComponent} which determines how the particles are rendered. It's the base class of every
  * particle renderer.
- * @author Inferno
- */
-public abstract class ParticleControllerRenderer<D extends ParticleControllerRenderData, T extends ParticleBatch<D>> extends ParticleControllerComponent {
+ * @author Inferno */
+public abstract class ParticleControllerRenderer<D extends ParticleControllerRenderData, T extends ParticleBatch<D>>
+	extends ParticleControllerComponent {
 
-    @Nullable
-    protected T batch;
+	@Nullable protected T batch;
 
-    protected D renderData;
+	protected D renderData;
 
-    protected ParticleControllerRenderer() {
-    }
+	protected ParticleControllerRenderer () {
+	}
 
-    protected ParticleControllerRenderer(D renderData) {
-        this.renderData = renderData;
-    }
+	protected ParticleControllerRenderer (D renderData) {
+		this.renderData = renderData;
+	}
 
-    @Override
-    public void update() {
-        batch.draw(renderData);
-    }
+	@Override
+	public void update () {
+		batch.draw(renderData);
+	}
 
-    @SuppressWarnings("unchecked")
-    public boolean setBatch(@Nullable ParticleBatch<?> batch) {
-        if (isCompatible(batch)) {
-            this.batch = (T) batch;
-            return true;
-        }
-        return false;
-    }
+	@SuppressWarnings("unchecked")
+	public boolean setBatch (@Nullable ParticleBatch<?> batch) {
+		if (isCompatible(batch)) {
+			this.batch = (T)batch;
+			return true;
+		}
+		return false;
+	}
 
-    public abstract boolean isCompatible(@Nullable ParticleBatch<?> batch);
+	public abstract boolean isCompatible (@Nullable ParticleBatch<?> batch);
 
-    @Override
-    public void set(ParticleController particleController) {
-        super.set(particleController);
-        if (renderData != null)
-            renderData.controller = controller;
-    }
+	@Override
+	public void set (ParticleController particleController) {
+		super.set(particleController);
+		if (renderData != null) renderData.controller = controller;
+	}
 }

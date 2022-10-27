@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d;
 
 import javax.annotation.Nullable;
@@ -25,8 +26,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
-/**
- * A Renderable contains all information about a single render instruction (typically a draw call).
+/** A Renderable contains all information about a single render instruction (typically a draw call).
  * </p>
  *
  * It defines what (the shape), how (the material) and where (the transform) should be rendered by which shader.
@@ -70,66 +70,48 @@ import com.badlogic.gdx.utils.Pool;
  * use that shader instead of the default shader. Therefor, to assure the default shader is used, the {@link #shader} member must
  * be set to null.
  * </p>
- * @author badlogic, xoppa
- */
+ * @author badlogic, xoppa */
 public class Renderable {
 
-    /**
-     * Used to specify the transformations (like translation, scale and rotation) to apply to the shape. In other words: it is
-     * used to transform the vertices from model space into world space. *
-     */
-    public final Matrix4 worldTransform = new Matrix4();
+	/** Used to specify the transformations (like translation, scale and rotation) to apply to the shape. In other words: it is
+	 * used to transform the vertices from model space into world space. * */
+	public final Matrix4 worldTransform = new Matrix4();
 
-    /**
-     * The {@link MeshPart} that contains the shape to render *
-     */
-    public final MeshPart meshPart = new MeshPart();
+	/** The {@link MeshPart} that contains the shape to render * */
+	public final MeshPart meshPart = new MeshPart();
 
-    /**
-     * The {@link Material} to be applied to the shape (part of the mesh), must not be null.
-     * @see #environment *
-     */
-    public Material material;
+	/** The {@link Material} to be applied to the shape (part of the mesh), must not be null.
+	 * @see #environment * */
+	public Material material;
 
-    /**
-     * The {@link Environment} to be used to render this Renderable, may be null. When specified it will be combined by the shader
-     * with the {@link #material}. When both the material and environment contain an attribute of the same type, the attribute of
-     * the material will be used. *
-     */
-    @Nullable
-    public Environment environment;
+	/** The {@link Environment} to be used to render this Renderable, may be null. When specified it will be combined by the shader
+	 * with the {@link #material}. When both the material and environment contain an attribute of the same type, the attribute of
+	 * the material will be used. * */
+	@Nullable public Environment environment;
 
-    /**
-     * The bone transformations used for skinning, or null if not applicable. When specified and the mesh contains one or more
-     * {@link com.badlogic.gdx.graphics.VertexAttributes.Usage#BoneWeight} vertex attributes, then the BoneWeight index is used as
-     * index in the array. If the array isn't large enough then the identity matrix is used. Each BoneWeight weight is used to
-     * combine multiple bones into a single transformation matrix, which is used to transform the vertex to model space. In other
-     * words: the bone transformation is applied prior to the {@link #worldTransform}.
-     */
-    @Nullable
-    public Matrix4[] bones;
+	/** The bone transformations used for skinning, or null if not applicable. When specified and the mesh contains one or more
+	 * {@link com.badlogic.gdx.graphics.VertexAttributes.Usage#BoneWeight} vertex attributes, then the BoneWeight index is used as
+	 * index in the array. If the array isn't large enough then the identity matrix is used. Each BoneWeight weight is used to
+	 * combine multiple bones into a single transformation matrix, which is used to transform the vertex to model space. In other
+	 * words: the bone transformation is applied prior to the {@link #worldTransform}. */
+	@Nullable public Matrix4[] bones;
 
-    /**
-     * The {@link Shader} to be used to render this Renderable using a {@link ModelBatch}, may be null. It is not guaranteed that
-     * the shader will be used, the used {@link ShaderProvider} is responsible for actually choosing the correct shader to use. *
-     */
-    @Nullable
-    public Shader shader;
+	/** The {@link Shader} to be used to render this Renderable using a {@link ModelBatch}, may be null. It is not guaranteed that
+	 * the shader will be used, the used {@link ShaderProvider} is responsible for actually choosing the correct shader to use.
+	 * * */
+	@Nullable public Shader shader;
 
-    /**
-     * User definable value, may be null.
-     */
-    @Nullable
-    public Object userData;
+	/** User definable value, may be null. */
+	@Nullable public Object userData;
 
-    public Renderable set(Renderable renderable) {
-        worldTransform.set(renderable.worldTransform);
-        material = renderable.material;
-        meshPart.set(renderable.meshPart);
-        bones = renderable.bones;
-        environment = renderable.environment;
-        shader = renderable.shader;
-        userData = renderable.userData;
-        return this;
-    }
+	public Renderable set (Renderable renderable) {
+		worldTransform.set(renderable.worldTransform);
+		material = renderable.material;
+		meshPart.set(renderable.meshPart);
+		bones = renderable.bones;
+		environment = renderable.environment;
+		shader = renderable.shader;
+		userData = renderable.userData;
+		return this;
+	}
 }

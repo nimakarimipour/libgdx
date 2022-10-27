@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.assets.loaders;
 
 import javax.annotation.Nullable;
@@ -31,104 +32,89 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The texture is then created on the
+/** {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link CubemapParameter} to
  * {@link AssetManager#load(String, Class, AssetLoaderParameters)} allows one to specify parameters as can be passed to the
  * various Cubemap constructors, e.g. filtering and so on.
- * @author mzechner, Vincent Bousquet
- */
+ * @author mzechner, Vincent Bousquet */
 public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
 
-    static public class CubemapLoaderInfo {
+	static public class CubemapLoaderInfo {
 
-        @Nullable
-        String filename;
+		@Nullable String filename;
 
-        CubemapData data;
+		CubemapData data;
 
-        @Nullable
-        Cubemap cubemap;
-    }
+		@Nullable Cubemap cubemap;
+	}
 
-    CubemapLoaderInfo info = new CubemapLoaderInfo();
+	CubemapLoaderInfo info = new CubemapLoaderInfo();
 
-    public CubemapLoader(FileHandleResolver resolver) {
-        super(resolver);
-    }
+	public CubemapLoader (FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-    @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
-        info.filename = fileName;
-        if (parameter == null || parameter.cubemapData == null) {
-            Format format = null;
-            boolean genMipMaps = false;
-            info.cubemap = null;
-            if (parameter != null) {
-                format = parameter.format;
-                info.cubemap = parameter.cubemap;
-            }
-            if (fileName.contains(".ktx") || fileName.contains(".zktx")) {
-                info.data = new KTXTextureData(file, genMipMaps);
-            }
-        } else {
-            info.data = parameter.cubemapData;
-            info.cubemap = parameter.cubemap;
-        }
-        if (!info.data.isPrepared())
-            info.data.prepare();
-    }
+	@Override
+	public void loadAsync (AssetManager manager, String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
+		info.filename = fileName;
+		if (parameter == null || parameter.cubemapData == null) {
+			Format format = null;
+			boolean genMipMaps = false;
+			info.cubemap = null;
+			if (parameter != null) {
+				format = parameter.format;
+				info.cubemap = parameter.cubemap;
+			}
+			if (fileName.contains(".ktx") || fileName.contains(".zktx")) {
+				info.data = new KTXTextureData(file, genMipMaps);
+			}
+		} else {
+			info.data = parameter.cubemapData;
+			info.cubemap = parameter.cubemap;
+		}
+		if (!info.data.isPrepared()) info.data.prepare();
+	}
 
-    @Override
-    @Nullable
-    public Cubemap loadSync(AssetManager manager, String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
-        if (info == null)
-            return null;
-        Cubemap cubemap = info.cubemap;
-        if (cubemap != null) {
-            cubemap.load(info.data);
-        } else {
-            cubemap = new Cubemap(info.data);
-        }
-        if (parameter != null) {
-            cubemap.setFilter(parameter.minFilter, parameter.magFilter);
-            cubemap.setWrap(parameter.wrapU, parameter.wrapV);
-        }
-        return cubemap;
-    }
+	@Override
+	@Nullable
+	public Cubemap loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
+		if (info == null) return null;
+		Cubemap cubemap = info.cubemap;
+		if (cubemap != null) {
+			cubemap.load(info.data);
+		} else {
+			cubemap = new Cubemap(info.data);
+		}
+		if (parameter != null) {
+			cubemap.setFilter(parameter.minFilter, parameter.magFilter);
+			cubemap.setWrap(parameter.wrapU, parameter.wrapV);
+		}
+		return cubemap;
+	}
 
-    @Override
-    @Nullable
-    public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
-        return null;
-    }
+	@Override
+	@Nullable
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
+		return null;
+	}
 
-    static public class CubemapParameter extends AssetLoaderParameters<Cubemap> {
+	static public class CubemapParameter extends AssetLoaderParameters<Cubemap> {
 
-        /**
-         * the format of the final Texture. Uses the source images format if null *
-         */
-        @Nullable
-        public Format format = null;
+		/** the format of the final Texture. Uses the source images format if null * */
+		@Nullable public Format format = null;
 
-        /**
-         * The texture to put the {@link TextureData} in, optional. *
-         */
-        @Nullable
-        public Cubemap cubemap = null;
+		/** The texture to put the {@link TextureData} in, optional. * */
+		@Nullable public Cubemap cubemap = null;
 
-        /**
-         * CubemapData for textures created on the fly, optional. When set, all format and genMipMaps are ignored
-         */
-        @Nullable
-        public CubemapData cubemapData = null;
+		/** CubemapData for textures created on the fly, optional. When set, all format and genMipMaps are ignored */
+		@Nullable public CubemapData cubemapData = null;
 
-        public TextureFilter minFilter = TextureFilter.Nearest;
+		public TextureFilter minFilter = TextureFilter.Nearest;
 
-        public TextureFilter magFilter = TextureFilter.Nearest;
+		public TextureFilter magFilter = TextureFilter.Nearest;
 
-        public TextureWrap wrapU = TextureWrap.ClampToEdge;
+		public TextureWrap wrapU = TextureWrap.ClampToEdge;
 
-        public TextureWrap wrapV = TextureWrap.ClampToEdge;
-    }
+		public TextureWrap wrapV = TextureWrap.ClampToEdge;
+	}
 }

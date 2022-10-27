@@ -15,21 +15,19 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.assets;
 
 import javax.annotation.Nullable;
 
 public class AssetLoaderParameters<T> {
 
-    /**
-     * Callback interface that will be invoked when the {@link AssetManager} loaded an asset.
-     * @author mzechner
-     */
-    public interface LoadedCallback {
+	/** Callback interface that will be invoked when the {@link AssetManager} loaded an asset.
+	 * @author mzechner */
+	public interface LoadedCallback {
 
-        public void finishedLoading(AssetManager assetManager, String fileName, Class type);
-    }
+		public void finishedLoading (AssetManager assetManager, String fileName, Class type);
+	}
 
-    @Nullable
-    public LoadedCallback loadedCallback;
+	@Nullable public LoadedCallback loadedCallback;
 }

@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.utils;
 
 import javax.annotation.Nullable;
@@ -25,26 +26,26 @@ import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 
 public class DefaultShaderProvider extends BaseShaderProvider {
 
-    public final DefaultShader.Config config;
+	public final DefaultShader.Config config;
 
-    public DefaultShaderProvider(@Nullable final DefaultShader.Config config) {
-        this.config = (config == null) ? new DefaultShader.Config() : config;
-    }
+	public DefaultShaderProvider (@Nullable final DefaultShader.Config config) {
+		this.config = (config == null) ? new DefaultShader.Config() : config;
+	}
 
-    public DefaultShaderProvider(final String vertexShader, final String fragmentShader) {
-        this(new DefaultShader.Config(vertexShader, fragmentShader));
-    }
+	public DefaultShaderProvider (final String vertexShader, final String fragmentShader) {
+		this(new DefaultShader.Config(vertexShader, fragmentShader));
+	}
 
-    public DefaultShaderProvider(final FileHandle vertexShader, final FileHandle fragmentShader) {
-        this(vertexShader.readString(), fragmentShader.readString());
-    }
+	public DefaultShaderProvider (final FileHandle vertexShader, final FileHandle fragmentShader) {
+		this(vertexShader.readString(), fragmentShader.readString());
+	}
 
-    public DefaultShaderProvider() {
-        this(null);
-    }
+	public DefaultShaderProvider () {
+		this(null);
+	}
 
-    @Override
-    protected Shader createShader(final Renderable renderable) {
-        return new DefaultShader(renderable, config);
-    }
+	@Override
+	protected Shader createShader (final Renderable renderable) {
+		return new DefaultShader(renderable, config);
+	}
 }

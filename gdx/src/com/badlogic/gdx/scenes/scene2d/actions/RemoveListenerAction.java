@@ -15,50 +15,48 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 
-/**
- * Removes a listener from an actor.
- * @author Nathan Sweet
- */
+/** Removes a listener from an actor.
+ * @author Nathan Sweet */
 public class RemoveListenerAction extends Action {
 
-    @Nullable
-    private EventListener listener;
+	@Nullable private EventListener listener;
 
-    private boolean capture;
+	private boolean capture;
 
-    public boolean act(float delta) {
-        if (capture)
-            target.removeCaptureListener(listener);
-        else
-            target.removeListener(listener);
-        return true;
-    }
+	public boolean act (float delta) {
+		if (capture)
+			target.removeCaptureListener(listener);
+		else
+			target.removeListener(listener);
+		return true;
+	}
 
-    @Nullable
-    public EventListener getListener() {
-        return listener;
-    }
+	@Nullable
+	public EventListener getListener () {
+		return listener;
+	}
 
-    public void setListener(EventListener listener) {
-        this.listener = listener;
-    }
+	public void setListener (EventListener listener) {
+		this.listener = listener;
+	}
 
-    public boolean getCapture() {
-        return capture;
-    }
+	public boolean getCapture () {
+		return capture;
+	}
 
-    public void setCapture(boolean capture) {
-        this.capture = capture;
-    }
+	public void setCapture (boolean capture) {
+		this.capture = capture;
+	}
 
-    public void reset() {
-        super.reset();
-        listener = null;
-    }
+	public void reset () {
+		super.reset();
+		listener = null;
+	}
 }

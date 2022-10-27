@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.maps.tiled.tiles;
 
 import javax.annotation.Nullable;
@@ -23,113 +24,105 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 
-/**
- * @brief Represents a non changing {@link TiledMapTile} (can be cached)
- */
+/** @brief Represents a non changing {@link TiledMapTile} (can be cached) */
 public class StaticTiledMapTile implements TiledMapTile {
 
-    private int id;
+	private int id;
 
-    private BlendMode blendMode = BlendMode.ALPHA;
+	private BlendMode blendMode = BlendMode.ALPHA;
 
-    @Nullable
-    private MapProperties properties;
+	@Nullable private MapProperties properties;
 
-    @Nullable
-    private MapObjects objects;
+	@Nullable private MapObjects objects;
 
-    private TextureRegion textureRegion;
+	private TextureRegion textureRegion;
 
-    private float offsetX;
+	private float offsetX;
 
-    private float offsetY;
+	private float offsetY;
 
-    @Override
-    public int getId() {
-        return id;
-    }
+	@Override
+	public int getId () {
+		return id;
+	}
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
+	@Override
+	public void setId (int id) {
+		this.id = id;
+	}
 
-    @Override
-    public BlendMode getBlendMode() {
-        return blendMode;
-    }
+	@Override
+	public BlendMode getBlendMode () {
+		return blendMode;
+	}
 
-    @Override
-    public void setBlendMode(BlendMode blendMode) {
-        this.blendMode = blendMode;
-    }
+	@Override
+	public void setBlendMode (BlendMode blendMode) {
+		this.blendMode = blendMode;
+	}
 
-    @Override
-    public MapProperties getProperties() {
-        if (properties == null) {
-            properties = new MapProperties();
-        }
-        return properties;
-    }
+	@Override
+	public MapProperties getProperties () {
+		if (properties == null) {
+			properties = new MapProperties();
+		}
+		return properties;
+	}
 
-    @Override
-    public MapObjects getObjects() {
-        if (objects == null) {
-            objects = new MapObjects();
-        }
-        return objects;
-    }
+	@Override
+	public MapObjects getObjects () {
+		if (objects == null) {
+			objects = new MapObjects();
+		}
+		return objects;
+	}
 
-    @Override
-    public TextureRegion getTextureRegion() {
-        return textureRegion;
-    }
+	@Override
+	public TextureRegion getTextureRegion () {
+		return textureRegion;
+	}
 
-    @Override
-    public void setTextureRegion(TextureRegion textureRegion) {
-        this.textureRegion = textureRegion;
-    }
+	@Override
+	public void setTextureRegion (TextureRegion textureRegion) {
+		this.textureRegion = textureRegion;
+	}
 
-    @Override
-    public float getOffsetX() {
-        return offsetX;
-    }
+	@Override
+	public float getOffsetX () {
+		return offsetX;
+	}
 
-    @Override
-    public void setOffsetX(float offsetX) {
-        this.offsetX = offsetX;
-    }
+	@Override
+	public void setOffsetX (float offsetX) {
+		this.offsetX = offsetX;
+	}
 
-    @Override
-    public float getOffsetY() {
-        return offsetY;
-    }
+	@Override
+	public float getOffsetY () {
+		return offsetY;
+	}
 
-    @Override
-    public void setOffsetY(float offsetY) {
-        this.offsetY = offsetY;
-    }
+	@Override
+	public void setOffsetY (float offsetY) {
+		this.offsetY = offsetY;
+	}
 
-    /**
-     * Creates a static tile with the given region
-     *
-     * @param textureRegion the {@link TextureRegion} to use.
-     */
-    public StaticTiledMapTile(TextureRegion textureRegion) {
-        this.textureRegion = textureRegion;
-    }
+	/** Creates a static tile with the given region
+	 *
+	 * @param textureRegion the {@link TextureRegion} to use. */
+	public StaticTiledMapTile (TextureRegion textureRegion) {
+		this.textureRegion = textureRegion;
+	}
 
-    /**
-     * Copy constructor
-     *
-     * @param copy the StaticTiledMapTile to copy.
-     */
-    public StaticTiledMapTile(StaticTiledMapTile copy) {
-        if (copy.properties != null) {
-            getProperties().putAll(copy.properties);
-        }
-        this.objects = copy.objects;
-        this.textureRegion = copy.textureRegion;
-        this.id = copy.id;
-    }
+	/** Copy constructor
+	 *
+	 * @param copy the StaticTiledMapTile to copy. */
+	public StaticTiledMapTile (StaticTiledMapTile copy) {
+		if (copy.properties != null) {
+			getProperties().putAll(copy.properties);
+		}
+		this.objects = copy.objects;
+		this.textureRegion = copy.textureRegion;
+		this.id = copy.id;
+	}
 }

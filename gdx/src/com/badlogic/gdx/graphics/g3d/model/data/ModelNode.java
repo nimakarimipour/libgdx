@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import javax.annotation.Nullable;
@@ -23,24 +24,17 @@ import com.badlogic.gdx.math.Vector3;
 
 public class ModelNode {
 
-    @Nullable
-    public String id;
+	@Nullable public String id;
 
-    @Nullable
-    public Vector3 translation;
+	@Nullable public Vector3 translation;
 
-    @Nullable
-    public Quaternion rotation;
+	@Nullable public Quaternion rotation;
 
-    @Nullable
-    public Vector3 scale;
+	@Nullable public Vector3 scale;
 
-    @Nullable
-    public String meshId;
+	@Nullable public String meshId;
 
-    @Nullable
-    public ModelNodePart[] parts;
+	@Nullable public ModelNodePart[] parts;
 
-    @Nullable
-    public ModelNode[] children;
+	@Nullable public ModelNode[] children;
 }

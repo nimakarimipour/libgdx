@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.assets.loaders;
 
 import javax.annotation.Nullable;
@@ -29,109 +30,91 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * {@link AssetLoader} for {@link Texture} instances. The pixel data is loaded asynchronously. The texture is then created on the
+/** {@link AssetLoader} for {@link Texture} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link TextureParameter} to
  * {@link AssetManager#load(String, Class, AssetLoaderParameters)} allows one to specify parameters as can be passed to the
  * various Texture constructors, e.g. filtering, whether to generate mipmaps and so on.
- * @author mzechner
- */
+ * @author mzechner */
 public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoader.TextureParameter> {
 
-    static public class TextureLoaderInfo {
+	static public class TextureLoaderInfo {
 
-        @Nullable
-        String filename;
+		@Nullable String filename;
 
-        @Nullable
-        TextureData data;
+		@Nullable TextureData data;
 
-        @Nullable
-        Texture texture;
-    }
+		@Nullable Texture texture;
+	}
 
-    TextureLoaderInfo info = new TextureLoaderInfo();
+	TextureLoaderInfo info = new TextureLoaderInfo();
 
-    public TextureLoader(FileHandleResolver resolver) {
-        super(resolver);
-    }
+	public TextureLoader (FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-    @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file, @Nullable TextureParameter parameter) {
-        info.filename = fileName;
-        if (parameter == null || parameter.textureData == null) {
-            Format format = null;
-            boolean genMipMaps = false;
-            info.texture = null;
-            if (parameter != null) {
-                format = parameter.format;
-                genMipMaps = parameter.genMipMaps;
-                info.texture = parameter.texture;
-            }
-            info.data = TextureData.Factory.loadFromFile(file, format, genMipMaps);
-        } else {
-            info.data = parameter.textureData;
-            info.texture = parameter.texture;
-        }
-        if (!info.data.isPrepared())
-            info.data.prepare();
-    }
+	@Override
+	public void loadAsync (AssetManager manager, String fileName, FileHandle file, @Nullable TextureParameter parameter) {
+		info.filename = fileName;
+		if (parameter == null || parameter.textureData == null) {
+			Format format = null;
+			boolean genMipMaps = false;
+			info.texture = null;
+			if (parameter != null) {
+				format = parameter.format;
+				genMipMaps = parameter.genMipMaps;
+				info.texture = parameter.texture;
+			}
+			info.data = TextureData.Factory.loadFromFile(file, format, genMipMaps);
+		} else {
+			info.data = parameter.textureData;
+			info.texture = parameter.texture;
+		}
+		if (!info.data.isPrepared()) info.data.prepare();
+	}
 
-    @Override
-    @Nullable
-    public Texture loadSync(AssetManager manager, String fileName, FileHandle file, @Nullable TextureParameter parameter) {
-        if (info == null)
-            return null;
-        Texture texture = info.texture;
-        if (texture != null) {
-            texture.load(info.data);
-        } else {
-            texture = new Texture(info.data);
-        }
-        if (parameter != null) {
-            texture.setFilter(parameter.minFilter, parameter.magFilter);
-            texture.setWrap(parameter.wrapU, parameter.wrapV);
-        }
-        return texture;
-    }
+	@Override
+	@Nullable
+	public Texture loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable TextureParameter parameter) {
+		if (info == null) return null;
+		Texture texture = info.texture;
+		if (texture != null) {
+			texture.load(info.data);
+		} else {
+			texture = new Texture(info.data);
+		}
+		if (parameter != null) {
+			texture.setFilter(parameter.minFilter, parameter.magFilter);
+			texture.setWrap(parameter.wrapU, parameter.wrapV);
+		}
+		return texture;
+	}
 
-    @Override
-    @Nullable
-    public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, @Nullable TextureParameter parameter) {
-        return null;
-    }
+	@Override
+	@Nullable
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable TextureParameter parameter) {
+		return null;
+	}
 
-    static public class TextureParameter extends AssetLoaderParameters<Texture> {
+	static public class TextureParameter extends AssetLoaderParameters<Texture> {
 
-        /**
-         * the format of the final Texture. Uses the source images format if null *
-         */
-        @Nullable
-        public Format format = null;
+		/** the format of the final Texture. Uses the source images format if null * */
+		@Nullable public Format format = null;
 
-        /**
-         * whether to generate mipmaps *
-         */
-        public boolean genMipMaps = false;
+		/** whether to generate mipmaps * */
+		public boolean genMipMaps = false;
 
-        /**
-         * The texture to put the {@link TextureData} in, optional. *
-         */
-        @Nullable
-        public Texture texture = null;
+		/** The texture to put the {@link TextureData} in, optional. * */
+		@Nullable public Texture texture = null;
 
-        /**
-         * TextureData for textures created on the fly, optional. When set, all format and genMipMaps are ignored
-         */
-        @Nullable
-        public TextureData textureData = null;
+		/** TextureData for textures created on the fly, optional. When set, all format and genMipMaps are ignored */
+		@Nullable public TextureData textureData = null;
 
-        public TextureFilter minFilter = TextureFilter.Nearest;
+		public TextureFilter minFilter = TextureFilter.Nearest;
 
-        public TextureFilter magFilter = TextureFilter.Nearest;
+		public TextureFilter magFilter = TextureFilter.Nearest;
 
-        public TextureWrap wrapU = TextureWrap.ClampToEdge;
+		public TextureWrap wrapU = TextureWrap.ClampToEdge;
 
-        public TextureWrap wrapV = TextureWrap.ClampToEdge;
-    }
+		public TextureWrap wrapV = TextureWrap.ClampToEdge;
+	}
 }

@@ -15,63 +15,57 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
-import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Null;
 
-/**
- * Sets the alpha for an actor's color (or a specified color), from the current alpha to the new alpha. Note this action
+/** Sets the alpha for an actor's color (or a specified color), from the current alpha to the new alpha. Note this action
  * transitions from the alpha at the time the action starts to the specified alpha.
- * @author Nathan Sweet
- */
+ * @author Nathan Sweet */
 public class AlphaAction extends TemporalAction {
 
-    private float start, end;
+	private float start, end;
 
-    @Null
-    private Color color;
+	@Null private Color color;
 
-    protected void begin() {
-        if (color == null)
-            color = target.getColor();
-        start = color.a;
-    }
+	protected void begin () {
+		if (color == null) color = target.getColor();
+		start = color.a;
+	}
 
-    protected void update(float percent) {
-        if (percent == 0)
-            color.a = start;
-        else if (percent == 1)
-            color.a = end;
-        else
-            color.a = start + (end - start) * percent;
-    }
+	protected void update (float percent) {
+		if (percent == 0)
+			color.a = start;
+		else if (percent == 1)
+			color.a = end;
+		else
+			color.a = start + (end - start) * percent;
+	}
 
-    public void reset() {
-        super.reset();
-        color = null;
-    }
+	public void reset () {
+		super.reset();
+		color = null;
+	}
 
-    @Null
-    public Color getColor() {
-        return color;
-    }
+	@Null
+	public Color getColor () {
+		return color;
+	}
 
-    /**
-     * Sets the color to modify. If null (the default), the {@link #getActor() actor's} {@link Actor#getColor() color} will be
-     * used.
-     */
-    public void setColor(@Null Color color) {
-        this.color = color;
-    }
+	/** Sets the color to modify. If null (the default), the {@link #getActor() actor's} {@link Actor#getColor() color} will be
+	 * used. */
+	public void setColor (@Null Color color) {
+		this.color = color;
+	}
 
-    public float getAlpha() {
-        return end;
-    }
+	public float getAlpha () {
+		return end;
+	}
 
-    public void setAlpha(float alpha) {
-        this.end = alpha;
-    }
+	public void setAlpha (float alpha) {
+		this.end = alpha;
+	}
 }

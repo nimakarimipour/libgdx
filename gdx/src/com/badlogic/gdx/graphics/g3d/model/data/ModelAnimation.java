@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import javax.annotation.Nullable;
@@ -22,8 +23,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class ModelAnimation {
 
-    @Nullable
-    public String id;
+	@Nullable public String id;
 
-    public Array<ModelNodeAnimation> nodeAnimations = new Array<ModelNodeAnimation>();
+	public Array<ModelNodeAnimation> nodeAnimations = new Array<ModelNodeAnimation>();
 }
