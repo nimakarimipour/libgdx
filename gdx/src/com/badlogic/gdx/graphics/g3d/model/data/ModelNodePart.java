@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.math.Matrix4;
@@ -22,15 +23,11 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 public class ModelNodePart {
 
-    @SuppressWarnings("NullAway.Init")
-    public String materialId;
+	@SuppressWarnings("NullAway.Init") public String materialId;
 
-    @SuppressWarnings("NullAway.Init")
-    public String meshPartId;
+	@SuppressWarnings("NullAway.Init") public String meshPartId;
 
-    @SuppressWarnings("NullAway.Init")
-    public ArrayMap<String, Matrix4> bones;
+	@SuppressWarnings("NullAway.Init") public ArrayMap<String, Matrix4> bones;
 
-    @SuppressWarnings("NullAway.Init")
-    public int[][] uvMapping;
+	@SuppressWarnings("NullAway.Init") public int[][] uvMapping;
 }

@@ -15,45 +15,35 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 
-/**
- * Environment class holding references to the {@link Application}, {@link Graphics}, {@link Audio}, {@link Files} and
+/** Environment class holding references to the {@link Application}, {@link Graphics}, {@link Audio}, {@link Files} and
  * {@link Input} instances. The references are held in public static fields which allows static access to all sub systems. Do not
  * use Graphics in a thread that is not the rendering thread.
  * <p>
  * This is normally a design faux pas but in this case is better than the alternatives.
- * @author mzechner
- */
+ * @author mzechner */
 public class Gdx {
 
-    @SuppressWarnings("NullAway.Init")
-    public static Application app;
+	@SuppressWarnings("NullAway.Init") public static Application app;
 
-    @SuppressWarnings("NullAway.Init")
-    public static Graphics graphics;
+	@SuppressWarnings("NullAway.Init") public static Graphics graphics;
 
-    @SuppressWarnings("NullAway.Init")
-    public static Audio audio;
+	@SuppressWarnings("NullAway.Init") public static Audio audio;
 
-    @SuppressWarnings("NullAway.Init")
-    public static Input input;
+	@SuppressWarnings("NullAway.Init") public static Input input;
 
-    @SuppressWarnings("NullAway.Init")
-    public static Files files;
+	@SuppressWarnings("NullAway.Init") public static Files files;
 
-    @SuppressWarnings("NullAway.Init")
-    public static Net net;
+	@SuppressWarnings("NullAway.Init") public static Net net;
 
-    @SuppressWarnings("NullAway.Init")
-    public static GL20 gl;
+	@SuppressWarnings("NullAway.Init") public static GL20 gl;
 
-    @SuppressWarnings("NullAway.Init")
-    public static GL20 gl20;
+	@SuppressWarnings("NullAway.Init") public static GL20 gl20;
 
-    @SuppressWarnings("NullAway.Init")
-    public static GL30 gl30;
+	@SuppressWarnings("NullAway.Init") public static GL30 gl30;
 }

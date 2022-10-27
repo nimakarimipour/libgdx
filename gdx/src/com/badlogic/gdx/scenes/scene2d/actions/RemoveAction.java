@@ -15,36 +15,34 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.NullUnmarked;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-/**
- * Removes an action from an actor.
- * @author Nathan Sweet
- */
+/** Removes an action from an actor.
+ * @author Nathan Sweet */
 public class RemoveAction extends Action {
 
-    @SuppressWarnings("NullAway.Init")
-    private Action action;
+	@SuppressWarnings("NullAway.Init") private Action action;
 
-    public boolean act(float delta) {
-        target.removeAction(action);
-        return true;
-    }
+	public boolean act (float delta) {
+		target.removeAction(action);
+		return true;
+	}
 
-    public Action getAction() {
-        return action;
-    }
+	public Action getAction () {
+		return action;
+	}
 
-    public void setAction(Action action) {
-        this.action = action;
-    }
+	public void setAction (Action action) {
+		this.action = action;
+	}
 
-    @NullUnmarked
-    public void reset() {
-        super.reset();
-        action = null;
-    }
+	@NullUnmarked
+	public void reset () {
+		super.reset();
+		action = null;
+	}
 }

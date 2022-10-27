@@ -15,14 +15,14 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.utils.Array;
 
 public class ModelAnimation {
 
-    @SuppressWarnings("NullAway.Init")
-    public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 
-    public Array<ModelNodeAnimation> nodeAnimations = new Array<ModelNodeAnimation>();
+	public Array<ModelNodeAnimation> nodeAnimations = new Array<ModelNodeAnimation>();
 }

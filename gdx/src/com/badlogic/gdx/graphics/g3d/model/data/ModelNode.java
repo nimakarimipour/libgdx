@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.math.Quaternion;
@@ -22,24 +23,17 @@ import com.badlogic.gdx.math.Vector3;
 
 public class ModelNode {
 
-    @SuppressWarnings("NullAway.Init")
-    public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 
-    @SuppressWarnings("NullAway.Init")
-    public Vector3 translation;
+	@SuppressWarnings("NullAway.Init") public Vector3 translation;
 
-    @SuppressWarnings("NullAway.Init")
-    public Quaternion rotation;
+	@SuppressWarnings("NullAway.Init") public Quaternion rotation;
 
-    @SuppressWarnings("NullAway.Init")
-    public Vector3 scale;
+	@SuppressWarnings("NullAway.Init") public Vector3 scale;
 
-    @SuppressWarnings("NullAway.Init")
-    public String meshId;
+	@SuppressWarnings("NullAway.Init") public String meshId;
 
-    @SuppressWarnings("NullAway.Init")
-    public ModelNodePart[] parts;
+	@SuppressWarnings("NullAway.Init") public ModelNodePart[] parts;
 
-    @SuppressWarnings("NullAway.Init")
-    public ModelNode[] children;
+	@SuppressWarnings("NullAway.Init") public ModelNode[] children;
 }

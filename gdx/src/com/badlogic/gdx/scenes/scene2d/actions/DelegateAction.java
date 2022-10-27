@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.NullUnmarked;
@@ -22,64 +23,56 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Pool;
 
-/**
- * Base class for an action that wraps another action.
- * @author Nathan Sweet
- */
+/** Base class for an action that wraps another action.
+ * @author Nathan Sweet */
 abstract public class DelegateAction extends Action {
 
-    @SuppressWarnings("NullAway.Init")
-    protected Action action;
+	@SuppressWarnings("NullAway.Init") protected Action action;
 
-    /**
-     * Sets the wrapped action.
-     */
-    public void setAction(Action action) {
-        this.action = action;
-    }
+	/** Sets the wrapped action. */
+	public void setAction (Action action) {
+		this.action = action;
+	}
 
-    public Action getAction() {
-        return action;
-    }
+	public Action getAction () {
+		return action;
+	}
 
-    abstract protected boolean delegate(float delta);
+	abstract protected boolean delegate (float delta);
 
-    @NullUnmarked
-    public final boolean act(float delta) {
-        Pool pool = getPool();
-        // Ensure this action can't be returned to the pool inside the delegate action.
-        setPool(null);
-        try {
-            return delegate(delta);
-        } finally {
-            setPool(pool);
-        }
-    }
+	@NullUnmarked
+	public final boolean act (float delta) {
+		Pool pool = getPool();
+		// Ensure this action can't be returned to the pool inside the delegate action.
+		setPool(null);
+		try {
+			return delegate(delta);
+		} finally {
+			setPool(pool);
+		}
+	}
 
-    public void restart() {
-        if (action != null)
-            action.restart();
-    }
+	public void restart () {
+		if (action != null) action.restart();
+	}
 
-    @NullUnmarked
-    public void reset() {
-        super.reset();
-        action = null;
-    }
+	@NullUnmarked
+	public void reset () {
+		super.reset();
+		action = null;
+	}
 
-    public void setActor(Actor actor) {
-        if (action != null)
-            action.setActor(actor);
-        super.setActor(actor);
-    }
+	public void setActor (Actor actor) {
+		if (action != null) action.setActor(actor);
+		super.setActor(actor);
+	}
 
-    public void setTarget(Actor target) {
-        if (action != null)
-            action.setTarget(target);
-        super.setTarget(target);
-    }
+	public void setTarget (Actor target) {
+		if (action != null) action.setTarget(target);
+		super.setTarget(target);
+	}
 
-    public String toString() {
-        return super.toString() + (action == null ? "" : "(" + action + ")");
-    }
+	public String toString () {
+		return super.toString() + (action == null ? "" : "(" + action + ")");
+	}
 }

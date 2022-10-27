@@ -15,62 +15,58 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.NullUnmarked;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Pool;
 
-/**
- * An action that runs a {@link Runnable}. Alternatively, the {@link #run()} method can be overridden instead of setting a
+/** An action that runs a {@link Runnable}. Alternatively, the {@link #run()} method can be overridden instead of setting a
  * runnable.
- * @author Nathan Sweet
- */
+ * @author Nathan Sweet */
 public class RunnableAction extends Action {
 
-    @SuppressWarnings("NullAway.Init")
-    private Runnable runnable;
+	@SuppressWarnings("NullAway.Init") private Runnable runnable;
 
-    private boolean ran;
+	private boolean ran;
 
-    public boolean act(float delta) {
-        if (!ran) {
-            ran = true;
-            run();
-        }
-        return true;
-    }
+	public boolean act (float delta) {
+		if (!ran) {
+			ran = true;
+			run();
+		}
+		return true;
+	}
 
-    /**
-     * Called to run the runnable.
-     */
-    @NullUnmarked
-    public void run() {
-        Pool pool = getPool();
-        // Ensure this action can't be returned to the pool inside the runnable.
-        setPool(null);
-        try {
-            runnable.run();
-        } finally {
-            setPool(pool);
-        }
-    }
+	/** Called to run the runnable. */
+	@NullUnmarked
+	public void run () {
+		Pool pool = getPool();
+		// Ensure this action can't be returned to the pool inside the runnable.
+		setPool(null);
+		try {
+			runnable.run();
+		} finally {
+			setPool(pool);
+		}
+	}
 
-    public void restart() {
-        ran = false;
-    }
+	public void restart () {
+		ran = false;
+	}
 
-    @NullUnmarked
-    public void reset() {
-        super.reset();
-        runnable = null;
-    }
+	@NullUnmarked
+	public void reset () {
+		super.reset();
+		runnable = null;
+	}
 
-    public Runnable getRunnable() {
-        return runnable;
-    }
+	public Runnable getRunnable () {
+		return runnable;
+	}
 
-    public void setRunnable(Runnable runnable) {
-        this.runnable = runnable;
-    }
+	public void setRunnable (Runnable runnable) {
+		this.runnable = runnable;
+	}
 }

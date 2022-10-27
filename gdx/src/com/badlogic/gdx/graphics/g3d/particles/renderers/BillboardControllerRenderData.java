@@ -15,16 +15,14 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.particles.renderers;
 
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.FloatChannel;
 
-/**
- * Render data used by billboard particle batches
- * @author Inferno
- */
+/** Render data used by billboard particle batches
+ * @author Inferno */
 public class BillboardControllerRenderData extends ParticleControllerRenderData {
 
-    @SuppressWarnings("NullAway.Init")
-    public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
+	@SuppressWarnings("NullAway.Init") public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
 }

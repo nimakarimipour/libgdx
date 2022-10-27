@@ -15,41 +15,38 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.NullUnmarked;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-/**
- * Adds an action to an actor.
- * @author Nathan Sweet
- */
+/** Adds an action to an actor.
+ * @author Nathan Sweet */
 public class AddAction extends Action {
 
-    @SuppressWarnings("NullAway.Init")
-    private Action action;
+	@SuppressWarnings("NullAway.Init") private Action action;
 
-    public boolean act(float delta) {
-        target.addAction(action);
-        return true;
-    }
+	public boolean act (float delta) {
+		target.addAction(action);
+		return true;
+	}
 
-    public Action getAction() {
-        return action;
-    }
+	public Action getAction () {
+		return action;
+	}
 
-    public void setAction(Action action) {
-        this.action = action;
-    }
+	public void setAction (Action action) {
+		this.action = action;
+	}
 
-    public void restart() {
-        if (action != null)
-            action.restart();
-    }
+	public void restart () {
+		if (action != null) action.restart();
+	}
 
-    @NullUnmarked
-    public void reset() {
-        super.reset();
-        action = null;
-    }
+	@NullUnmarked
+	public void reset () {
+		super.reset();
+		action = null;
+	}
 }

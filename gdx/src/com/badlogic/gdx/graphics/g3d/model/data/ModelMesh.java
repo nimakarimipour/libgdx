@@ -15,21 +15,18 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.graphics.VertexAttribute;
 
 public class ModelMesh {
 
-    @SuppressWarnings("NullAway.Init")
-    public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 
-    @SuppressWarnings("NullAway.Init")
-    public VertexAttribute[] attributes;
+	@SuppressWarnings("NullAway.Init") public VertexAttribute[] attributes;
 
-    @SuppressWarnings("NullAway.Init")
-    public float[] vertices;
+	@SuppressWarnings("NullAway.Init") public float[] vertices;
 
-    @SuppressWarnings("NullAway.Init")
-    public ModelMeshPart[] parts;
+	@SuppressWarnings("NullAway.Init") public ModelMeshPart[] parts;
 }

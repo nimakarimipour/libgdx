@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.graphics.Color;
@@ -22,36 +23,28 @@ import com.badlogic.gdx.utils.Array;
 
 public class ModelMaterial {
 
-    public enum MaterialType {
+	public enum MaterialType {
 
-        Lambert, Phong
-    }
+		Lambert, Phong
+	}
 
-    @SuppressWarnings("NullAway.Init")
-    public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 
-    @SuppressWarnings("NullAway.Init")
-    public MaterialType type;
+	@SuppressWarnings("NullAway.Init") public MaterialType type;
 
-    @SuppressWarnings("NullAway.Init")
-    public Color ambient;
+	@SuppressWarnings("NullAway.Init") public Color ambient;
 
-    @SuppressWarnings("NullAway.Init")
-    public Color diffuse;
+	@SuppressWarnings("NullAway.Init") public Color diffuse;
 
-    @SuppressWarnings("NullAway.Init")
-    public Color specular;
+	@SuppressWarnings("NullAway.Init") public Color specular;
 
-    @SuppressWarnings("NullAway.Init")
-    public Color emissive;
+	@SuppressWarnings("NullAway.Init") public Color emissive;
 
-    @SuppressWarnings("NullAway.Init")
-    public Color reflection;
+	@SuppressWarnings("NullAway.Init") public Color reflection;
 
-    public float shininess;
+	public float shininess;
 
-    public float opacity = 1.f;
+	public float opacity = 1.f;
 
-    @SuppressWarnings("NullAway.Init")
-    public Array<ModelTexture> textures;
+	@SuppressWarnings("NullAway.Init") public Array<ModelTexture> textures;
 }
