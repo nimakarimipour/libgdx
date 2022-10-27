@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -297,6 +298,7 @@ public class ParallelArray {
      * @return the channel with the same id as the one in the descriptor
      */
     @SuppressWarnings("unchecked")
+    @NullUnmarked
     public <T extends Channel> T getChannel(ChannelDescriptor descriptor) {
         for (Channel array : arrays) {
             if (array.id == descriptor.id)

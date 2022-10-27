@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -47,6 +48,7 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
         setSprite(drawable.sprite);
     }
 
+    @NullUnmarked
     public void draw(Batch batch, float x, float y, float width, float height) {
         Color spriteColor = sprite.getColor();
         float oldColor = spriteColor.toFloatBits();
@@ -58,6 +60,7 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
         sprite.setPackedColor(oldColor);
     }
 
+    @NullUnmarked
     public void draw(Batch batch, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY, float rotation) {
         Color spriteColor = sprite.getColor();
         float oldColor = spriteColor.toFloatBits();
@@ -70,6 +73,7 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
         sprite.setPackedColor(oldColor);
     }
 
+    @NullUnmarked
     public void setSprite(@Nullable Sprite sprite) {
         this.sprite = sprite;
         setMinWidth(sprite.getWidth());

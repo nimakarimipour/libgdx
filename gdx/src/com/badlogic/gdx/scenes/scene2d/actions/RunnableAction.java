@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.actions;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Pool;
@@ -44,6 +45,7 @@ public class RunnableAction extends Action {
     /**
      * Called to run the runnable.
      */
+    @NullUnmarked
     public void run() {
         Pool pool = getPool();
         // Ensure this action can't be returned to the pool inside the runnable.

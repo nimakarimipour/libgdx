@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Constructor;
@@ -39,6 +40,7 @@ public class ReflectionPool<T> extends Pool<T> {
         this(type, initialCapacity, Integer.MAX_VALUE);
     }
 
+    @NullUnmarked
     public ReflectionPool(Class<T> type, int initialCapacity, int max) {
         super(initialCapacity, max);
         constructor = findConstructor(type);

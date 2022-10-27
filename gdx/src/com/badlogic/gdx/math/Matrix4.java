@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.math;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 
@@ -199,6 +200,7 @@ public class Matrix4 implements Serializable {
      * @param matrix The matrix that is to be copied. (The given matrix is not modified)
      * @return This matrix for the purpose of chaining methods together.
      */
+    @NullUnmarked
     public Matrix4 set(@Nullable Matrix4 matrix) {
         return set(matrix.val);
     }

@@ -108,6 +108,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
      */
     protected boolean isMRT;
 
+    @SuppressWarnings("NullAway.Init")
     protected GLFrameBufferBuilder<? extends GLFrameBuffer<T>> bufferBuilder;
 
     GLFrameBuffer() {
@@ -491,10 +492,13 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 
         protected Array<FrameBufferTextureAttachmentSpec> textureAttachmentSpecs = new Array<FrameBufferTextureAttachmentSpec>();
 
+        @SuppressWarnings("NullAway.Init")
         protected FrameBufferRenderBufferAttachmentSpec stencilRenderBufferSpec;
 
+        @SuppressWarnings("NullAway.Init")
         protected FrameBufferRenderBufferAttachmentSpec depthRenderBufferSpec;
 
+        @SuppressWarnings("NullAway.Init")
         protected FrameBufferRenderBufferAttachmentSpec packedStencilDepthRenderBufferSpec;
 
         protected boolean hasStencilRenderBuffer;

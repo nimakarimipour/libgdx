@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.utils.NumberUtils;
 
@@ -149,6 +150,7 @@ public class Color {
      *
      * @param color the Color
      */
+    @NullUnmarked
     public Color set(@Nullable Color color) {
         this.r = color.r;
         this.g = color.g;

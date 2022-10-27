@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -83,6 +84,7 @@ public class MeshBuilder implements MeshPartBuilder {
     /**
      * The vertex attributes of the resulting mesh
      */
+    @SuppressWarnings("NullAway.Init")
     private VertexAttributes attributes;
 
     /**
@@ -332,6 +334,7 @@ public class MeshBuilder implements MeshPartBuilder {
      * @param mesh The mesh to receive the built vertices and indices, must have the same attributes and must be big enough to hold
      *           the data, any existing data will be overwritten.
      */
+    @NullUnmarked
     public Mesh end(Mesh mesh) {
         endpart();
         if (attributes == null)
@@ -664,6 +667,7 @@ public class MeshBuilder implements MeshPartBuilder {
     private final Vector3 tmpNormal = new Vector3();
 
     @Override
+    @NullUnmarked
     public short vertex(@Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
         if (vindex > MAX_INDEX)
             throw new GdxRuntimeException("Too many vertices used");

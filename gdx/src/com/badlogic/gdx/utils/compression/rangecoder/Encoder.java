@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils.compression.rangecoder;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 
@@ -63,10 +64,12 @@ public class Encoder {
         for (int i = 0; i < 5; i++) ShiftLow();
     }
 
+    @NullUnmarked
     public void FlushStream() throws IOException {
         Stream.flush();
     }
 
+    @NullUnmarked
     public void ShiftLow() throws IOException {
         int LowHi = (int) (Low >>> 32);
         if (LowHi != 0 || Low < 0xFF000000L) {

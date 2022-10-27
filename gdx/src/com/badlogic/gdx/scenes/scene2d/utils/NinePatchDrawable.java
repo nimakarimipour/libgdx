@@ -35,6 +35,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
  */
 public class NinePatchDrawable extends BaseDrawable implements TransformDrawable {
 
+    @SuppressWarnings("NullAway.Init")
     private NinePatch patch;
 
     /**

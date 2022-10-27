@@ -955,8 +955,10 @@ public class SpriteCache implements Disposable {
 
         int textureCount;
 
+        @SuppressWarnings("NullAway.Init")
         Texture[] textures;
 
+        @SuppressWarnings("NullAway.Init")
         int[] counts;
 
         public Cache(int id, int offset) {

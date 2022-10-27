@@ -1,5 +1,6 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.utils.Null;
 public class Container<T extends Actor> extends WidgetGroup {
 
     @Null
+    @SuppressWarnings("NullAway.Init")
     private T actor;
 
     private Value minWidth = Value.minWidth, minHeight = Value.minHeight;
@@ -191,6 +193,7 @@ public class Container<T extends Actor> extends WidgetGroup {
     /**
      * @param actor May be null.
      */
+    @NullUnmarked
     public void setActor(@Null @Nullable T actor) {
         if (actor == this)
             throw new IllegalArgumentException("actor cannot be the Container.");
@@ -256,6 +259,7 @@ public class Container<T extends Actor> extends WidgetGroup {
         return true;
     }
 
+    @NullUnmarked
     public boolean removeActor(Actor actor, boolean unfocus) {
         if (actor == null)
             throw new IllegalArgumentException("actor cannot be null.");
@@ -265,6 +269,7 @@ public class Container<T extends Actor> extends WidgetGroup {
         return super.removeActor(actor, unfocus);
     }
 
+    @NullUnmarked
     public Actor removeActorAt(int index, boolean unfocus) {
         Actor actor = super.removeActorAt(index, unfocus);
         if (actor == this.actor)

@@ -48,6 +48,7 @@ public class VerticalGroup extends WidgetGroup {
     private boolean sizeInvalid = true;
 
     // column height, column width, ...
+    @SuppressWarnings("NullAway.Init")
     private FloatArray columnSizes;
 
     private int align = Align.top, columnAlign;

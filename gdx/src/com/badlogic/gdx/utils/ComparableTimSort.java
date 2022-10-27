@@ -12,6 +12,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 
 /**
@@ -42,6 +43,7 @@ class ComparableTimSort {
     /**
      * The array being sorted.
      */
+    @SuppressWarnings("NullAway.Init")
     private Object[] a;
 
     /**
@@ -97,6 +99,7 @@ class ComparableTimSort {
         runLen = new int[40];
     }
 
+    @NullUnmarked
     public void doSort(Object[] a, int lo, int hi) {
         stackSize = 0;
         rangeCheck(a.length, lo, hi);

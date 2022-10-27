@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.decals;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
@@ -30,11 +31,13 @@ public abstract class PluggableGroupStrategy implements GroupStrategy {
     private IntMap<GroupPlug> plugs = new IntMap<GroupPlug>();
 
     @Override
+    @NullUnmarked
     public void beforeGroup(int group, Array<Decal> contents) {
         plugs.get(group).beforeGroup(contents);
     }
 
     @Override
+    @NullUnmarked
     public void afterGroup(int group) {
         plugs.get(group).afterGroup();
     }

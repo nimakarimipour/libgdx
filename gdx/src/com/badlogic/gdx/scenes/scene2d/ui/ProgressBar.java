@@ -47,6 +47,7 @@ import com.badlogic.gdx.utils.Pools;
  */
 public class ProgressBar extends Widget implements Disableable {
 
+    @SuppressWarnings("NullAway.Init")
     private ProgressBarStyle style;
 
     float min, max, stepSize;

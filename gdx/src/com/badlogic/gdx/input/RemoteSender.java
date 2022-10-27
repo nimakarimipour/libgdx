@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.input;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -32,6 +33,7 @@ import com.badlogic.gdx.InputProcessor;
  */
 public class RemoteSender implements InputProcessor {
 
+    @SuppressWarnings("NullAway.Init")
     private DataOutputStream out;
 
     private boolean connected = false;
@@ -70,6 +72,7 @@ public class RemoteSender implements InputProcessor {
         }
     }
 
+    @NullUnmarked
     public void sendUpdate() {
         synchronized (this) {
             if (!connected)

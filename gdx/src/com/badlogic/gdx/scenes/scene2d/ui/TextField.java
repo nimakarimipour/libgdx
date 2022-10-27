@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -90,6 +91,7 @@ public class TextField extends Widget implements Disableable {
 
     static public float keyRepeatTime = 0.1f;
 
+    @SuppressWarnings("NullAway.Init")
     protected String text;
 
     protected int cursor, selectionStart;
@@ -102,14 +104,18 @@ public class TextField extends Widget implements Disableable {
 
     protected final FloatArray glyphPositions = new FloatArray();
 
+    @SuppressWarnings("NullAway.Init")
     TextFieldStyle style;
 
+    @SuppressWarnings("NullAway.Init")
     private String messageText;
 
+    @SuppressWarnings("NullAway.Init")
     protected CharSequence displayText;
 
     Clipboard clipboard;
 
+    @SuppressWarnings("NullAway.Init")
     InputListener inputListener;
 
     @Null
@@ -343,6 +349,7 @@ public class TextField extends Widget implements Disableable {
     }
 
     @Null
+    @NullUnmarked
     protected Drawable getBackgroundDrawable() {
         if (disabled && style.disabledBackground != null)
             return style.disabledBackground;
@@ -351,6 +358,7 @@ public class TextField extends Widget implements Disableable {
         return style.background;
     }
 
+    @NullUnmarked
     public void draw(Batch batch, float parentAlpha) {
         boolean focused = hasKeyboardFocus();
         if (focused != this.focused || (focused && !blinkTask.isScheduled())) {
@@ -1219,6 +1227,7 @@ public class TextField extends Widget implements Disableable {
      */
     static public class TextFieldStyle {
 
+        @SuppressWarnings("NullAway.Init")
         public BitmapFont font;
 
         @Nullable

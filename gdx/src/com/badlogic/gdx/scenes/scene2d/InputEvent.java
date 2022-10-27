@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.Null;
  */
 public class InputEvent extends Event {
 
+    @SuppressWarnings("NullAway.Init")
     private Type type;
 
     private float stageX, stageY, scrollAmountX, scrollAmountY;

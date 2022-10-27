@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 
 /**
@@ -66,6 +67,7 @@ public class PooledLinkedList<T> {
     /**
      * Adds the specified object to the end of the list regardless of iteration status
      */
+    @NullUnmarked
     public void add(T object) {
         Item<T> item = pool.obtain();
         item.payload = object;
@@ -156,6 +158,7 @@ public class PooledLinkedList<T> {
     /**
      * Removes the current list item based on the iterator position.
      */
+    @NullUnmarked
     public void remove() {
         if (curr == null)
             return;
@@ -189,6 +192,7 @@ public class PooledLinkedList<T> {
      */
     @Null
     @Nullable
+    @NullUnmarked
     public T removeLast() {
         if (tail == null) {
             return null;

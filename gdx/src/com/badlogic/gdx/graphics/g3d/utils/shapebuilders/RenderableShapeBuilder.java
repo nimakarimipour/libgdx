@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils.shapebuilders;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Mesh;
@@ -45,6 +46,7 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
         }
 
         @Override
+        @NullUnmarked
         public Renderable obtain() {
             Renderable renderable = super.obtain();
             renderable.environment = null;
@@ -56,8 +58,10 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
         }
     }
 
+    @SuppressWarnings("NullAway.Init")
     private static short[] indices;
 
+    @SuppressWarnings("NullAway.Init")
     private static float[] vertices;
 
     private final static RenderablePool renderablesPool = new RenderablePool();

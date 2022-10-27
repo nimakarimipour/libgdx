@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import com.badlogic.gdx.graphics.Color;
@@ -81,16 +82,20 @@ public class Table extends WidgetGroup {
 
     private boolean sizeInvalid = true;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] columnMinWidth, rowMinHeight;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] columnPrefWidth, rowPrefHeight;
 
     private float tableMinWidth, tableMinHeight;
 
     private float tablePrefWidth, tablePrefHeight;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] columnWidth, rowHeight;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] expandWidth, expandHeight;
 
     Value padTop = backgroundTop, padLeft = backgroundLeft, padBottom = backgroundBottom, padRight = backgroundRight;
@@ -99,6 +104,7 @@ public class Table extends WidgetGroup {
 
     Debug debug = Debug.none;
 
+    @SuppressWarnings("NullAway.Init")
     Array<DebugRect> debugRects;
 
     @Null
@@ -497,6 +503,7 @@ public class Table extends WidgetGroup {
      * Returns the cell for the specified actor in this table, or null.
      */
     @Null
+    @NullUnmarked
     public <T extends Actor> Cell<T> getCell(T actor) {
         if (actor == null)
             throw new IllegalArgumentException("actor cannot be null.");
@@ -953,6 +960,7 @@ public class Table extends WidgetGroup {
         return array;
     }
 
+    @NullUnmarked
     private void computeSize() {
         sizeInvalid = false;
         Object[] cells = this.cells.items;
@@ -1118,6 +1126,7 @@ public class Table extends WidgetGroup {
      * Positions and sizes children of the table using the cell associated with each child. The values given are the position
      * within the parent and size of the table.
      */
+    @NullUnmarked
     public void layout() {
         if (sizeInvalid)
             computeSize();

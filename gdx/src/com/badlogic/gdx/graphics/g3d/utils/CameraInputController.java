@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -173,6 +174,7 @@ public class CameraInputController extends GestureDetector {
         }
 
         @Override
+        @NullUnmarked
         public boolean zoom(float initialDistance, float distance) {
             float newZoom = distance - initialDistance;
             float amount = newZoom - previousZoom;

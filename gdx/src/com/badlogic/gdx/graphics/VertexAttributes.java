@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -78,6 +79,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
     /**
      * Constructor, sets the vertex attributes in a specific order
      */
+    @NullUnmarked
     public VertexAttributes(@Nullable VertexAttribute... attributes) {
         if (attributes.length == 0)
             throw new IllegalArgumentException("attributes must be >= 1");
@@ -110,6 +112,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
      * Returns the first VertexAttribute for the given usage.
      * @param usage The usage of the VertexAttribute to find.
      */
+    @NullUnmarked
     public VertexAttribute findByUsage(int usage) {
         int len = size();
         for (int i = 0; i < len; i++) if (get(i).usage == usage)
@@ -290,6 +293,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 
         private final T[] array;
 
+        @SuppressWarnings("NullAway.Init")
         private ReadonlyIterator iterator1, iterator2;
 
         public ReadonlyIterable(T[] array) {

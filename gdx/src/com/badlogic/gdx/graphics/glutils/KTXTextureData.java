@@ -1,5 +1,6 @@
 package com.badlogic.gdx.graphics.glutils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -348,6 +349,7 @@ public class KTXTextureData implements TextureData, CubemapData {
     }
 
     @Nullable
+    @NullUnmarked
     public ByteBuffer getData(int requestedLevel, int requestedFace) {
         int pos = imagePos;
         for (int level = 0; level < numberOfMipmapLevels; level++) {

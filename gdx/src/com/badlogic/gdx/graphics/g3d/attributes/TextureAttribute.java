@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.attributes;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -160,6 +161,7 @@ public class TextureAttribute extends Attribute {
         this(type, textureDescription, offsetU, offsetV, scaleU, scaleV, 0);
     }
 
+    @NullUnmarked
     public TextureAttribute(final long type, @Nullable final Texture texture) {
         this(type);
         textureDescription.texture = texture;

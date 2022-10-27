@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Files;
@@ -92,6 +93,7 @@ public class Timer {
      * Schedules a task to occur once after the specified delay and then a number of additional times at the specified interval.
      * @param repeatCount If negative, the task will repeat forever.
      */
+    @NullUnmarked
     public Task scheduleTask(Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
         synchronized (threadLock) {
             synchronized (this) {

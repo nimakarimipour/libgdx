@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.decals;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -55,12 +56,15 @@ public class DecalBatch implements Disposable {
 
     private static final int DEFAULT_SIZE = 1000;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] vertices;
 
+    @SuppressWarnings("NullAway.Init")
     private Mesh mesh;
 
     private final SortedIntList<Array<Decal>> groupList = new SortedIntList<Array<Decal>>();
 
+    @SuppressWarnings("NullAway.Init")
     private GroupStrategy groupStrategy;
 
     private final Pool<Array<Decal>> groupPool = new Pool<Array<Decal>>(16) {
@@ -222,6 +226,7 @@ public class DecalBatch implements Disposable {
      * Frees up memory by dropping the buffer and underlying resources. If the batch is needed again after disposing it can be
      * {@link #initialize(int) initialized} again.
      */
+    @NullUnmarked
     public void dispose() {
         clear();
         vertices = null;

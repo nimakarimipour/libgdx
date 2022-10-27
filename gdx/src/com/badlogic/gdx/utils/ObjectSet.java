@@ -70,6 +70,7 @@ public class ObjectSet<T> implements Iterable<T> {
      */
     protected int mask;
 
+    @SuppressWarnings("NullAway.Init")
     private transient ObjectSetIterator iterator1, iterator2;
 
     /**

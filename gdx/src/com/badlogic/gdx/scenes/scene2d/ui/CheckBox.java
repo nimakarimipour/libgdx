@@ -36,6 +36,7 @@ public class CheckBox extends TextButton {
 
     private Cell imageCell;
 
+    @SuppressWarnings("NullAway.Init")
     private CheckBoxStyle style;
 
     public CheckBox(@Null String text, Skin skin) {

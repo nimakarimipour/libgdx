@@ -28,6 +28,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.ObjectChannel;
  */
 public class ModelInstanceControllerRenderData extends ParticleControllerRenderData {
 
+    @SuppressWarnings("NullAway.Init")
     public ObjectChannel<ModelInstance> modelInstanceChannel;
 
     @Nullable

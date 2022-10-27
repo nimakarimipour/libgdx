@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -98,6 +99,7 @@ public class TextureAtlas implements Disposable {
     /**
      * Adds the textures and regions from the specified texture atlas data.
      */
+    @NullUnmarked
     public void load(TextureAtlasData data) {
         textures.ensureCapacity(data.pages.size);
         for (Page page : data.pages) {
@@ -165,6 +167,7 @@ public class TextureAtlas implements Disposable {
      * result should be cached rather than calling this method multiple times.
      */
     @Null
+    @NullUnmarked
     public AtlasRegion findRegion(String name) {
         for (int i = 0, n = regions.size; i < n; i++) if (regions.get(i).name.equals(name))
             return regions.get(i);
@@ -330,6 +333,7 @@ public class TextureAtlas implements Disposable {
             load(packFile, imagesDir, flip);
         }
 
+        @NullUnmarked
         public void load(FileHandle packFile, FileHandle imagesDir, boolean flip) {
             final String[] entry = new String[5];
             // Size needed to avoid collisions.
@@ -584,6 +588,7 @@ public class TextureAtlas implements Disposable {
              * May be null if this page isn't associated with a file. In that case, {@link #texture} must be set.
              */
             @Null
+            @SuppressWarnings("NullAway.Init")
             public FileHandle textureFile;
 
             /**
@@ -631,6 +636,7 @@ public class TextureAtlas implements Disposable {
             public String[] names;
 
             @Null
+            @SuppressWarnings("NullAway.Init")
             public int[][] values;
 
             public boolean flip;
@@ -666,6 +672,7 @@ public class TextureAtlas implements Disposable {
          * If the name ends with an underscore followed by only numbers, that part is excluded: underscores denote special
          * instructions to the texture packer.
          */
+        @SuppressWarnings("NullAway.Init")
         public String name;
 
         /**
@@ -723,8 +730,10 @@ public class TextureAtlas implements Disposable {
          * Values for name/value pairs other than the fields provided on this class, each entry corresponding to {@link #names}.
          */
         @Null
+        @SuppressWarnings("NullAway.Init")
         public int[][] values;
 
+        @NullUnmarked
         public AtlasRegion(@Nullable Texture texture, int x, int y, int width, int height) {
             super(texture, x, y, width, height);
             originalWidth = width;

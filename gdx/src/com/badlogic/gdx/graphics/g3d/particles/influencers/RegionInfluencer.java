@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.influencers;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -145,6 +146,7 @@ public abstract class RegionInfluencer extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void update() {
             for (int i = 0, l = ParticleChannels.LifePercentOffset, c = controller.particles.size * regionChannel.strideSize; i < c; i += regionChannel.strideSize, l += lifeChannel.strideSize) {
                 AspectTextureRegion region = regions.get((int) (lifeChannel.data[l] * (regions.size - 1)));
@@ -222,6 +224,7 @@ public abstract class RegionInfluencer extends Influencer {
 
     public Array<AspectTextureRegion> regions;
 
+    @SuppressWarnings("NullAway.Init")
     FloatChannel regionChannel;
 
     @Nullable

@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
@@ -63,8 +64,10 @@ public abstract class ParticleSorter {
      */
     public static class Distance extends ParticleSorter {
 
+        @SuppressWarnings("NullAway.Init")
         private float[] distances;
 
+        @SuppressWarnings("NullAway.Init")
         private int[] particleIndices, particleOffsets;
 
         private int currentSize = 0;
@@ -80,6 +83,7 @@ public abstract class ParticleSorter {
         }
 
         @Override
+        @NullUnmarked
         public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
             float[] val = camera.view.val;
             float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];

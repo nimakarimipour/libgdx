@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
@@ -107,6 +108,7 @@ public class ButtonGroup<T extends Button> {
      * from within this method.
      * @return True if the new state should be allowed.
      */
+    @NullUnmarked
     protected boolean canCheck(T button, boolean newState) {
         if (button.isChecked == newState)
             return false;

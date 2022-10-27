@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils.compression.rangecoder;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 
@@ -34,12 +35,14 @@ public class Decoder {
 
     int Code;
 
+    @SuppressWarnings("NullAway.Init")
     java.io.InputStream Stream;
 
     public final void SetStream(java.io.InputStream stream) {
         Stream = stream;
     }
 
+    @NullUnmarked
     public final void ReleaseStream() {
         Stream = null;
     }

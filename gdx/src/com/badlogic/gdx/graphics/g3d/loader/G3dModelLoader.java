@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.loader;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
@@ -82,6 +83,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
         return model;
     }
 
+    @NullUnmarked
     protected void parseMeshes(ModelData model, JsonValue json) {
         JsonValue meshes = json.get("meshes");
         if (meshes != null) {

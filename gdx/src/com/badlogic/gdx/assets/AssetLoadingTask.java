@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.assets;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.assets.loaders.AsynchronousAssetLoader;
@@ -130,6 +131,7 @@ class AssetLoadingTask implements AsyncTask<Void> {
             asset = syncLoader.load(manager, assetDesc.fileName, resolve(loader, assetDesc), assetDesc.params);
     }
 
+    @NullUnmarked
     private void handleAsyncLoader() {
         AsynchronousAssetLoader asyncLoader = (AsynchronousAssetLoader) loader;
         if (!dependenciesLoaded) {

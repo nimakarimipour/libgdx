@@ -116,12 +116,14 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
     private Array<Renderable> renderables;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] vertices;
 
     private short[] indices;
 
     private int currentVertexSize = 0;
 
+    @SuppressWarnings("NullAway.Init")
     private VertexAttributes currentAttributes;
 
     protected boolean useGPU = false;
@@ -129,6 +131,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
     @Nullable
     protected AlignMode mode = AlignMode.Screen;
 
+    @SuppressWarnings("NullAway.Init")
     protected Texture texture;
 
     @Nullable

@@ -24,6 +24,7 @@ public class ModelMeshPart {
     @Nullable
     public String id;
 
+    @SuppressWarnings("NullAway.Init")
     public short[] indices;
 
     public int primitiveType;

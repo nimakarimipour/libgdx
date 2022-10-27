@@ -31,5 +31,6 @@ public class ModelMesh {
     @Nullable
     public float[] vertices;
 
+    @SuppressWarnings("NullAway.Init")
     public ModelMeshPart[] parts;
 }

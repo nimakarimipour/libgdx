@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -1023,6 +1024,7 @@ public class Stage extends InputAdapter implements Disposable {
      */
     public static final class TouchFocus implements Poolable {
 
+        @SuppressWarnings("NullAway.Init")
         EventListener listener;
 
         @Nullable
@@ -1030,6 +1032,7 @@ public class Stage extends InputAdapter implements Disposable {
 
         int pointer, button;
 
+        @NullUnmarked
         public void reset() {
             listenerActor = null;
             listener = null;

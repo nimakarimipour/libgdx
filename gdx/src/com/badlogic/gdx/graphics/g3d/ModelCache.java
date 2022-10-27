@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Comparator;
 import com.badlogic.gdx.graphics.Camera;
@@ -259,6 +260,7 @@ public class ModelCache implements Disposable, RenderableProvider {
         meshPool.flush();
     }
 
+    @NullUnmarked
     private Renderable obtainRenderable(Material material, int primitiveType) {
         Renderable result = renderablesPool.obtain();
         result.bones = null;

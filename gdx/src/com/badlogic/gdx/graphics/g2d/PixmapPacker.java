@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -389,6 +390,7 @@ public class PixmapPacker implements Disposable {
      * the rendering thread. This method must be called on the rendering thread. After calling this method, disposing the packer
      * will no longer dispose the page pixmaps.
      */
+    @NullUnmarked
     public synchronized void updateTextureAtlas(TextureAtlas atlas, TextureFilter minFilter, TextureFilter magFilter, boolean useMipMaps, boolean useIndexes) {
         updatePageTextures(minFilter, magFilter, useMipMaps);
         for (Page page : pages) {
@@ -532,6 +534,7 @@ public class PixmapPacker implements Disposable {
          * Returns the texture for this page, or null if the texture has not been created.
          * @see #updateTexture(TextureFilter, TextureFilter, boolean)
          */
+        @NullUnmarked
         public Texture getTexture() {
             return texture;
         }
@@ -600,6 +603,7 @@ public class PixmapPacker implements Disposable {
             pixmaps.sort(comparator);
         }
 
+        @NullUnmarked
         public Page pack(PixmapPacker packer, @Nullable String name, Rectangle rect) {
             GuillotinePage page;
             if (packer.pages.size == 0) {

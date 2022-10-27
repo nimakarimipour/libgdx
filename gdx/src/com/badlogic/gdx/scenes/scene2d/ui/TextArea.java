@@ -41,6 +41,7 @@ public class TextArea extends TextField {
     /**
      * Array storing lines breaks positions *
      */
+    @SuppressWarnings("NullAway.Init")
     IntArray linesBreak;
 
     /**

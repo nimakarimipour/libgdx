@@ -1,5 +1,6 @@
 package com.badlogic.gdx.maps.tiled;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
@@ -72,6 +73,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 
     protected XmlReader xml = new XmlReader();
 
+    @SuppressWarnings("NullAway.Init")
     protected Element root;
 
     protected boolean convertObjectToTileSpace;
@@ -86,6 +88,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 
     protected int mapHeightInPixels;
 
+    @SuppressWarnings("NullAway.Init")
     protected TiledMap map;
 
     public BaseTmxMapLoader(FileHandleResolver resolver) {
@@ -312,6 +315,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
         loadObject(map, tile.getObjects(), element, tile.getTextureRegion().getRegionHeight());
     }
 
+    @NullUnmarked
     protected void loadObject(TiledMap map, MapObjects objects, Element element, float heightInPixels) {
         if (element.getName().equals("object")) {
             MapObject object = null;

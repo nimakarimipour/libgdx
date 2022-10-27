@@ -58,8 +58,10 @@ import com.badlogic.gdx.utils.StreamUtils;
  */
 public class FileHandle {
 
+    @SuppressWarnings("NullAway.Init")
     protected File file;
 
+    @SuppressWarnings("NullAway.Init")
     protected FileType type;
 
     protected FileHandle() {

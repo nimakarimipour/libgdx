@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.values;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
@@ -79,6 +80,7 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
     }
 
     @Override
+    @NullUnmarked
     public void load(ParticleValue value) {
         super.load(value);
         MeshSpawnShapeValue spawnShapeValue = (MeshSpawnShapeValue) value;

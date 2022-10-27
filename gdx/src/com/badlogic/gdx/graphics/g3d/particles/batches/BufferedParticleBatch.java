@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.batches;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
@@ -35,6 +36,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 
     protected ParticleSorter sorter;
 
+    @SuppressWarnings("NullAway.Init")
     protected Camera camera;
 
     protected BufferedParticleBatch(Class<T> type) {
@@ -57,6 +59,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 
     /**
      */
+    @NullUnmarked
     public void end() {
         if (bufferedParticlesCount > 0) {
             ensureCapacity(bufferedParticlesCount);

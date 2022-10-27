@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
@@ -67,6 +68,7 @@ public class ResourceData<T> implements Json.Serializable {
 
         private int loadIndex;
 
+        @SuppressWarnings("NullAway.Init")
         protected ResourceData resources;
 
         public SaveData() {
@@ -125,13 +127,16 @@ public class ResourceData<T> implements Json.Serializable {
      */
     public static class AssetData<T> implements Json.Serializable {
 
+        @SuppressWarnings("NullAway.Init")
         public String filename;
 
+        @SuppressWarnings("NullAway.Init")
         public Class<T> type;
 
         public AssetData() {
         }
 
+        @NullUnmarked
         public AssetData(@Nullable String filename, Class<T> type) {
             this.filename = filename;
             this.type = type;

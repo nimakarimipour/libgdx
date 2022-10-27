@@ -49,6 +49,7 @@ import com.badlogic.gdx.utils.Null;
  */
 public class SplitPane extends WidgetGroup {
 
+    @SuppressWarnings("NullAway.Init")
     SplitPaneStyle style;
 
     @Null
@@ -447,6 +448,7 @@ public class SplitPane extends WidgetGroup {
      */
     static public class SplitPaneStyle {
 
+        @SuppressWarnings("NullAway.Init")
         public Drawable handle;
 
         public SplitPaneStyle() {

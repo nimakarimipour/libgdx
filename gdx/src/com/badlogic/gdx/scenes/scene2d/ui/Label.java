@@ -40,6 +40,7 @@ public class Label extends Widget {
 
     static private final GlyphLayout prefSizeLayout = new GlyphLayout();
 
+    @SuppressWarnings("NullAway.Init")
     private LabelStyle style;
 
     private final GlyphLayout layout = new GlyphLayout();
@@ -50,6 +51,7 @@ public class Label extends Widget {
 
     private int intValue = Integer.MIN_VALUE;
 
+    @SuppressWarnings("NullAway.Init")
     private BitmapFontCache cache;
 
     private int labelAlign = Align.left;
@@ -424,6 +426,7 @@ public class Label extends Widget {
      */
     static public class LabelStyle {
 
+        @SuppressWarnings("NullAway.Init")
         public BitmapFont font;
 
         @Null

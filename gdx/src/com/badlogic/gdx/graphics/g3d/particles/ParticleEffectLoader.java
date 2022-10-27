@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import com.badlogic.gdx.Gdx;
@@ -107,6 +108,7 @@ public class ParticleEffectLoader extends AsynchronousAssetLoader<ParticleEffect
     }
 
     @Override
+    @NullUnmarked
     public ParticleEffect loadSync(AssetManager manager, String fileName, FileHandle file, @Nullable ParticleEffectLoadParameter parameter) {
         ResourceData<ParticleEffect> effectData = null;
         synchronized (items) {

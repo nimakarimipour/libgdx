@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -570,6 +571,7 @@ public class Skin implements Disposable {
                 return fieldName.equals(parentFieldName);
             }
 
+            @NullUnmarked
             public void readFields(Object object, JsonValue jsonMap) {
                 if (jsonMap.has(parentFieldName)) {
                     String parentName = readValue(parentFieldName, String.class, jsonMap);

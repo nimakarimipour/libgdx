@@ -31,8 +31,10 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  */
 public class ParticleControllerFinalizerInfluencer extends Influencer {
 
+    @SuppressWarnings("NullAway.Init")
     FloatChannel positionChannel, scaleChannel, rotationChannel;
 
+    @SuppressWarnings("NullAway.Init")
     ObjectChannel<ParticleController> controllerChannel;
 
     boolean hasScale, hasRotation;

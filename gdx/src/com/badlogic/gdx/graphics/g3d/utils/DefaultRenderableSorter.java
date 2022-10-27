@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Comparator;
 import com.badlogic.gdx.graphics.Camera;
@@ -52,6 +53,7 @@ public class DefaultRenderableSorter implements RenderableSorter, Comparator<Ren
     }
 
     @Override
+    @NullUnmarked
     public int compare(final Renderable o1, final Renderable o2) {
         final boolean b1 = o1.material.has(BlendingAttribute.Type) && ((BlendingAttribute) o1.material.get(BlendingAttribute.Type)).blended;
         final boolean b2 = o2.material.has(BlendingAttribute.Type) && ((BlendingAttribute) o2.material.get(BlendingAttribute.Type)).blended;

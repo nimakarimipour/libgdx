@@ -42,6 +42,7 @@ public class ActorGestureListener implements EventListener {
     @Nullable
     InputEvent event;
 
+    @SuppressWarnings("NullAway.Init")
     Actor actor, touchDownTarget;
 
     /**

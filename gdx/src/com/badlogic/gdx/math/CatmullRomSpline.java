@@ -109,16 +109,20 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
         return out;
     }
 
+    @SuppressWarnings("NullAway.Init")
     public T[] controlPoints;
 
     public boolean continuous;
 
     public int spanCount;
 
+    @SuppressWarnings("NullAway.Init")
     private T tmp;
 
+    @SuppressWarnings("NullAway.Init")
     private T tmp2;
 
+    @SuppressWarnings("NullAway.Init")
     private T tmp3;
 
     public CatmullRomSpline() {

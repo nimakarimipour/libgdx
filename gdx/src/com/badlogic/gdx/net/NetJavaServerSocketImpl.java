@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.net;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.net.InetSocketAddress;
 import com.badlogic.gdx.Net.Protocol;
@@ -76,6 +77,7 @@ public class NetJavaServerSocketImpl implements ServerSocket {
     }
 
     @Override
+    @NullUnmarked
     public Socket accept(SocketHints hints) {
         try {
             return new NetJavaSocketImpl(server.accept(), hints);

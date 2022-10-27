@@ -51,8 +51,10 @@ public class EarClippingTriangulator {
 
     private final ShortArray indicesArray = new ShortArray();
 
+    @SuppressWarnings("NullAway.Init")
     private short[] indices;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] vertices;
 
     private int vertexCount;

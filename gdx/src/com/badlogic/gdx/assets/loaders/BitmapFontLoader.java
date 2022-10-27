@@ -45,6 +45,7 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
         super(resolver);
     }
 
+    @SuppressWarnings("NullAway.Init")
     BitmapFontData data;
 
     @Override

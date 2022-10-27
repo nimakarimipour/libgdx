@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.glutils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cubemap;
@@ -174,6 +175,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
      * Bind the side, making it active to render on. Should be called in between a call to {@link #begin()} and {@link #end()}.
      * @param side The side to bind
      */
+    @NullUnmarked
     protected void bindSide(@Nullable final Cubemap.CubemapSide side) {
         Gdx.gl20.glFramebufferTexture2D(GL20.GL_FRAMEBUFFER, GL20.GL_COLOR_ATTACHMENT0, side.glEnum, getColorBufferTexture().getTextureObjectHandle(), 0);
     }

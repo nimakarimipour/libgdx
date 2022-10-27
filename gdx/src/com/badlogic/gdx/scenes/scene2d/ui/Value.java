@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
@@ -32,6 +33,7 @@ abstract public class Value {
     /**
      * Calls {@link #get(Actor)} with null.
      */
+    @NullUnmarked
     public float get() {
         return get(null);
     }

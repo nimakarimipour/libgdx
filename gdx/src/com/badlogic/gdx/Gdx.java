@@ -31,22 +31,30 @@ import com.badlogic.gdx.graphics.GL30;
  */
 public class Gdx {
 
+    @SuppressWarnings("NullAway.Init")
     public static Application app;
 
+    @SuppressWarnings("NullAway.Init")
     public static Graphics graphics;
 
+    @SuppressWarnings("NullAway.Init")
     public static Audio audio;
 
+    @SuppressWarnings("NullAway.Init")
     public static Input input;
 
+    @SuppressWarnings("NullAway.Init")
     public static Files files;
 
     @Nullable
     public static Net net;
 
+    @SuppressWarnings("NullAway.Init")
     public static GL20 gl;
 
+    @SuppressWarnings("NullAway.Init")
     public static GL20 gl20;
 
+    @SuppressWarnings("NullAway.Init")
     public static GL30 gl30;
 }

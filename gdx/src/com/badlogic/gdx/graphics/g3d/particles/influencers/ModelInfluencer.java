@@ -127,6 +127,7 @@ public abstract class ModelInfluencer extends Influencer {
 
     public Array<Model> models;
 
+    @SuppressWarnings("NullAway.Init")
     ObjectChannel<ModelInstance> modelChannel;
 
     public ModelInfluencer() {

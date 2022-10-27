@@ -28,6 +28,7 @@ public class DecalMaterial {
 
     public static final int NO_BLEND = -1;
 
+    @SuppressWarnings("NullAway.Init")
     protected TextureRegion textureRegion;
 
     protected int srcBlendFactor;

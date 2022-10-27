@@ -1,12 +1,14 @@
 // LZ.InWindow
 package com.badlogic.gdx.utils.compression.lz;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class InWindow {
 
     // pointer to buffer with data
+    @SuppressWarnings("NullAway.Init")
     public byte[] _bufferBase;
 
     @Nullable
@@ -48,6 +50,7 @@ public class InWindow {
         _bufferOffset -= offset;
     }
 
+    @NullUnmarked
     public void ReadBlock() throws IOException {
         if (_streamEndWasReached)
             return;
@@ -70,6 +73,7 @@ public class InWindow {
         }
     }
 
+    @NullUnmarked
     void Free() {
         _bufferBase = null;
     }

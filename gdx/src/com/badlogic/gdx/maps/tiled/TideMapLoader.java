@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.maps.tiled;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
@@ -107,6 +108,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
      * @param imageResolver the {@link ImageResolver}
      * @return the {@link TiledMap}
      */
+    @NullUnmarked
     private TiledMap loadMap(@Nullable Element root, FileHandle tmxFile, ImageResolver imageResolver) {
         TiledMap map = new TiledMap();
         Element properties = root.getChildByName("Properties");
@@ -191,6 +193,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
         }
     }
 
+    @NullUnmarked
     private void loadLayer(TiledMap map, Element element) {
         if (element.getName().equals("Layer")) {
             String id = element.getAttribute("Id");
@@ -259,6 +262,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
         }
     }
 
+    @NullUnmarked
     private void loadProperties(MapProperties properties, Element element) {
         if (element.getName().equals("Properties")) {
             for (Element property : element.getChildrenByName("Property")) {

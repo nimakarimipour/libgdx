@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -54,6 +55,7 @@ public class Tooltip<T extends Actor> extends InputListener {
     /**
      * @param contents May be null.
      */
+    @NullUnmarked
     public Tooltip(@Null @Nullable T contents, @Nullable TooltipManager manager) {
         this.manager = manager;
         container = new Container(contents) {

@@ -34,6 +34,7 @@ public class ImageButton extends Button {
 
     private final Image image;
 
+    @SuppressWarnings("NullAway.Init")
     private ImageButtonStyle style;
 
     public ImageButton(Skin skin) {

@@ -43,6 +43,7 @@ import com.badlogic.gdx.utils.Pools;
  */
 public class Touchpad extends Widget {
 
+    @SuppressWarnings("NullAway.Init")
     private TouchpadStyle style;
 
     boolean touched;

@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.actions;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,6 +33,7 @@ public class AlphaAction extends TemporalAction {
     private float start, end;
 
     @Null
+    @SuppressWarnings("NullAway.Init")
     private Color color;
 
     protected void begin() {
@@ -49,6 +51,7 @@ public class AlphaAction extends TemporalAction {
             color.a = start + (end - start) * percent;
     }
 
+    @NullUnmarked
     public void reset() {
         super.reset();
         color = null;

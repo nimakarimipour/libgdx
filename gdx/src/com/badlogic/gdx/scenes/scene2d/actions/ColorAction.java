@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.actions;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,6 +33,7 @@ public class ColorAction extends TemporalAction {
     private float startR, startG, startB, startA;
 
     @Null
+    @SuppressWarnings("NullAway.Init")
     private Color color;
 
     private final Color end = new Color();
@@ -59,6 +61,7 @@ public class ColorAction extends TemporalAction {
         }
     }
 
+    @NullUnmarked
     public void reset() {
         super.reset();
         color = null;

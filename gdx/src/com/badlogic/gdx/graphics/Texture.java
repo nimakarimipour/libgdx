@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
@@ -120,6 +121,7 @@ public class Texture extends GLTexture {
         }
     }
 
+    @SuppressWarnings("NullAway.Init")
     TextureData data;
 
     public Texture(String internalPath) {
@@ -154,6 +156,7 @@ public class Texture extends GLTexture {
         this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
     }
 
+    @NullUnmarked
     public Texture(@Nullable TextureData data) {
         this(GL20.GL_TEXTURE_2D, Gdx.gl.glGenTexture(), data);
     }
@@ -355,6 +358,7 @@ public class Texture extends GLTexture {
     /**
      * @return the number of managed textures currently loaded
      */
+    @NullUnmarked
     public static int getNumManagedTextures() {
         return managedTextures.get(Gdx.app).size;
     }

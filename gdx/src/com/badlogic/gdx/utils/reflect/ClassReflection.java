@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils.reflect;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.lang.reflect.Modifier;
 
@@ -55,6 +56,7 @@ public final class ClassReflection {
      * Determines if the class or interface represented by first Class parameter is either the same as, or is a superclass or
      * superinterface of, the class or interface represented by the second Class parameter.
      */
+    @NullUnmarked
     static public boolean isAssignableFrom(Class c1, @Nullable Class c2) {
         return c1.isAssignableFrom(c2);
     }

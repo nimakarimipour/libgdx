@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -51,6 +52,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
     static private final Vector2 tmp = new Vector2();
 
+    @SuppressWarnings("NullAway.Init")
     TreeStyle style;
 
     final Array<N> rootNodes = new Array();
@@ -102,6 +104,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
     private void initialize() {
         addListener(clickListener = new ClickListener() {
 
+            @NullUnmarked
             public void clicked(InputEvent event, float x, float y) {
                 N node = getNodeAt(y);
                 if (node == null)
@@ -687,6 +690,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
      */
     static abstract public class Node<N extends Node, V, A extends Actor> {
 
+        @SuppressWarnings("NullAway.Init")
         A actor;
 
         @Nullable
@@ -1057,6 +1061,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
      */
     static public class TreeStyle {
 
+        @SuppressWarnings("NullAway.Init")
         public Drawable plus, minus;
 
         @Null

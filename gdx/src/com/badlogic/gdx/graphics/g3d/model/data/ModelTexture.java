@@ -47,6 +47,7 @@ public class ModelTexture {
     @Nullable
     public String id;
 
+    @SuppressWarnings("NullAway.Init")
     public String fileName;
 
     @Nullable

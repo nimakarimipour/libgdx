@@ -27,7 +27,9 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
  */
 public abstract class ParticleControllerRenderData {
 
+    @SuppressWarnings("NullAway.Init")
     public ParticleController controller;
 
+    @SuppressWarnings("NullAway.Init")
     public FloatChannel positionChannel;
 }

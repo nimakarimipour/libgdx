@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.assets.loaders;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
@@ -45,6 +46,7 @@ public class TextureAtlasLoader extends SynchronousAssetLoader<TextureAtlas, Tex
     TextureAtlasData data;
 
     @Override
+    @NullUnmarked
     public TextureAtlas load(AssetManager assetManager, String fileName, FileHandle file, @Nullable TextureAtlasParameter parameter) {
         for (Page page : data.getPages()) {
             Texture texture = assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);

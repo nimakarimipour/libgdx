@@ -33,6 +33,7 @@ public class Animation {
     /**
      * the unique id of the animation *
      */
+    @SuppressWarnings("NullAway.Init")
     public String id;
 
     /**

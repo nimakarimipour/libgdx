@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.loader;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -476,6 +477,7 @@ class MtlLoader {
             reset();
         }
 
+        @NullUnmarked
         public ModelMaterial build() {
             ModelMaterial mat = new ModelMaterial();
             mat.id = materialName;

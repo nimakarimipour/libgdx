@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.nio.IntBuffer;
 import com.badlogic.gdx.Gdx;
@@ -186,6 +187,7 @@ public final class DefaultTextureBinder implements TextureBinder {
         return currentTexture;
     }
 
+    @NullUnmarked
     private final int bindTextureLRU(final GLTexture texture) {
         int i;
         for (i = 0; i < count; i++) {

@@ -35,11 +35,13 @@ public class NodePart {
     /**
      * The MeshPart (shape) to render. Must not be null.
      */
+    @SuppressWarnings("NullAway.Init")
     public MeshPart meshPart;
 
     /**
      * The Material used to render the {@link #meshPart}. Must not be null.
      */
+    @SuppressWarnings("NullAway.Init")
     public Material material;
 
     /**

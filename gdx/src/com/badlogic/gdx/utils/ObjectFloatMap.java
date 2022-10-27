@@ -72,10 +72,13 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
      */
     protected int mask;
 
+    @SuppressWarnings("NullAway.Init")
     transient Entries entries1, entries2;
 
+    @SuppressWarnings("NullAway.Init")
     transient Values values1, values2;
 
+    @SuppressWarnings("NullAway.Init")
     transient Keys keys1, keys2;
 
     /**

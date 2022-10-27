@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
@@ -95,6 +96,7 @@ public class DragAndDrop {
                 }
             }
 
+            @NullUnmarked
             public void drag(InputEvent event, float x, float y, int pointer) {
                 if (payload == null)
                     return;
@@ -172,6 +174,7 @@ public class DragAndDrop {
                 actor.setPosition(actorX, actorY);
             }
 
+            @NullUnmarked
             public void dragStop(InputEvent event, float x, float y, int pointer) {
                 if (pointer != activePointer)
                     return;

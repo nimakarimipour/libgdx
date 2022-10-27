@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -879,6 +880,7 @@ public class SpriteBatch implements Batch {
     }
 
     @Override
+    @NullUnmarked
     public void flush() {
         if (idx == 0)
             return;
@@ -1002,6 +1004,7 @@ public class SpriteBatch implements Batch {
         }
     }
 
+    @NullUnmarked
     protected void switchTexture(@Nullable Texture texture) {
         flush();
         lastTexture = texture;

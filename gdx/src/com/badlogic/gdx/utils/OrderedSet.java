@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.NoSuchElementException;
 
@@ -161,6 +162,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
         return items;
     }
 
+    @NullUnmarked
     public OrderedSetIterator<T> iterator() {
         if (Collections.allocateIterators)
             return new OrderedSetIterator(this);

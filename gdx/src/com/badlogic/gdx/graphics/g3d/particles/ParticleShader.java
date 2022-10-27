@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -283,6 +284,7 @@ public class ParticleShader extends BaseShader {
     }
 
     @Override
+    @NullUnmarked
     public void init() {
         final ShaderProgram program = this.program;
         this.program = null;

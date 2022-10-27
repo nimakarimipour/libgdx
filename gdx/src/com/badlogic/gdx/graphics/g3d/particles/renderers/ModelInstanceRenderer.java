@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.renderers;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
@@ -61,6 +62,7 @@ public class ModelInstanceRenderer extends ParticleControllerRenderer<ModelInsta
     }
 
     @Override
+    @NullUnmarked
     public void update() {
         for (int i = 0, positionOffset = 0, c = controller.particles.size; i < c; ++i, positionOffset += renderData.positionChannel.strideSize) {
             ModelInstance instance = renderData.modelInstanceChannel.data[i];

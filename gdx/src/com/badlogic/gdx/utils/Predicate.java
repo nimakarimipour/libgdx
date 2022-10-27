@@ -33,8 +33,10 @@ public interface Predicate<T> {
 
     public class PredicateIterator<T> implements Iterator<T> {
 
+        @SuppressWarnings("NullAway.Init")
         public Iterator<T> iterator;
 
+        @SuppressWarnings("NullAway.Init")
         public Predicate<T> predicate;
 
         public boolean end = false;
@@ -102,8 +104,10 @@ public interface Predicate<T> {
 
     public static class PredicateIterable<T> implements Iterable<T> {
 
+        @SuppressWarnings("NullAway.Init")
         public Iterable<T> iterable;
 
+        @SuppressWarnings("NullAway.Init")
         public Predicate<T> predicate;
 
         @Nullable

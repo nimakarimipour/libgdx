@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils.compression.lzma;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import com.badlogic.gdx.utils.compression.ICodeProgress;
@@ -135,6 +136,7 @@ public class Encoder {
             }
         }
 
+        @SuppressWarnings("NullAway.Init")
         Encoder2[] m_Coders;
 
         int m_NumPrevBits;
@@ -1163,6 +1165,7 @@ public class Encoder {
         return true;
     }
 
+    @NullUnmarked
     public boolean SetMatchFinder(int matchFinderIndex) {
         if (matchFinderIndex < 0 || matchFinderIndex > 2)
             return false;

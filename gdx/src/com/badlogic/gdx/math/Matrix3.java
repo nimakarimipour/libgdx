@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.math;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -364,6 +365,7 @@ public class Matrix3 implements Serializable {
      * @param mat The matrix whose top left corner will be copied. This matrix will not be modified.
      * @return This matrix for the purpose of chaining operations.
      */
+    @NullUnmarked
     public Matrix3 set(@Nullable Matrix4 mat) {
         float[] val = this.val;
         val[M00] = mat.val[Matrix4.M00];

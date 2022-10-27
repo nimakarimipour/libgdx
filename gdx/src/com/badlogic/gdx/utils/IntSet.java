@@ -70,6 +70,7 @@ public class IntSet {
      */
     protected int mask;
 
+    @SuppressWarnings("NullAway.Init")
     private transient IntSetIterator iterator1, iterator2;
 
     /**

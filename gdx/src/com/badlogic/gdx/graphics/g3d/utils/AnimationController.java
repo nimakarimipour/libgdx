@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.model.Animation;
@@ -76,6 +77,7 @@ public class AnimationController extends BaseAnimationController {
         /**
          * The animation to be applied.
          */
+        @SuppressWarnings("NullAway.Init")
         public Animation animation;
 
         /**
@@ -212,6 +214,7 @@ public class AnimationController extends BaseAnimationController {
         super(target);
     }
 
+    @NullUnmarked
     private AnimationDesc obtain(final Animation anim, float offset, float duration, int loopCount, float speed, @Nullable final AnimationListener listener) {
         if (anim == null)
             return null;
@@ -226,6 +229,7 @@ public class AnimationController extends BaseAnimationController {
         return result;
     }
 
+    @NullUnmarked
     private AnimationDesc obtain(final String id, float offset, float duration, int loopCount, float speed, @Nullable final AnimationListener listener) {
         if (id == null)
             return null;

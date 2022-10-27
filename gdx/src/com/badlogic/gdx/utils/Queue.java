@@ -556,6 +556,7 @@ public class Queue<T> implements Iterable<T> {
 
         private final boolean allowRemove;
 
+        @SuppressWarnings("NullAway.Init")
         private QueueIterator iterator1, iterator2;
 
         // java.io.StringWriter lastAcquire = new java.io.StringWriter();

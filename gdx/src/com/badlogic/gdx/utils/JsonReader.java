@@ -20,6 +20,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,6 +90,7 @@ public class JsonReader implements BaseJsonReader {
         }
     }
 
+    @NullUnmarked
     public JsonValue parse(char[] data, int offset, int length) {
         int cs, p = offset, pe = length, eof = pe, top = 0;
         int[] stack = new int[4];
@@ -703,6 +705,7 @@ public class JsonReader implements BaseJsonReader {
         current = value;
     }
 
+    @NullUnmarked
     protected void pop() {
         root = elements.pop();
         if (current.size > 0)

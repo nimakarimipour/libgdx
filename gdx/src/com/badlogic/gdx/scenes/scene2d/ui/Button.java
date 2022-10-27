@@ -47,6 +47,7 @@ import com.badlogic.gdx.utils.Pools;
  */
 public class Button extends Table implements Disableable {
 
+    @SuppressWarnings("NullAway.Init")
     private ButtonStyle style;
 
     boolean isChecked, isDisabled;

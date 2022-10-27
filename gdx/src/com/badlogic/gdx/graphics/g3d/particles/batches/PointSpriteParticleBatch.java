@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.batches;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -69,6 +70,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
         pointSpritesEnabled = true;
     }
 
+    @SuppressWarnings("NullAway.Init")
     private float[] vertices;
 
     Renderable renderable;
@@ -91,6 +93,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
         this(capacity, shaderConfig, null, null);
     }
 
+    @NullUnmarked
     public PointSpriteParticleBatch(int capacity, ParticleShader.Config shaderConfig, @Nullable BlendingAttribute blendingAttribute, @Nullable DepthTestAttribute depthTestAttribute) {
         super(PointSpriteControllerRenderData.class);
         if (!pointSpritesEnabled)
@@ -138,6 +141,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
     }
 
     @Override
+    @NullUnmarked
     protected void flush(int[] offsets) {
         int tp = 0;
         for (PointSpriteControllerRenderData data : renderData) {

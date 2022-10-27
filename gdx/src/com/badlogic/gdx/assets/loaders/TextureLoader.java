@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.assets.loaders;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
@@ -57,6 +58,7 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
     }
 
     @Override
+    @NullUnmarked
     public void loadAsync(AssetManager manager, String fileName, FileHandle file, @Nullable TextureParameter parameter) {
         info.filename = fileName;
         if (parameter == null || parameter.textureData == null) {
@@ -79,6 +81,7 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 
     @Override
     @Nullable
+    @NullUnmarked
     public Texture loadSync(AssetManager manager, String fileName, FileHandle file, @Nullable TextureParameter parameter) {
         if (info == null)
             return null;

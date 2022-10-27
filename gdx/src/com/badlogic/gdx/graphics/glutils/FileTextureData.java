@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.glutils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -80,6 +81,7 @@ public class FileTextureData implements TextureData {
 
     @Override
     @Nullable
+    @NullUnmarked
     public Pixmap consumePixmap() {
         if (!isPrepared)
             throw new GdxRuntimeException("Call prepare() before calling getPixmap()");

@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.actions;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -41,6 +42,7 @@ public class AfterAction extends DelegateAction {
         waitForActions.clear();
     }
 
+    @NullUnmarked
     protected boolean delegate(float delta) {
         Array<Action> currentActions = target.getActions();
         if (currentActions.size == 1)

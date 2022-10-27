@@ -34,6 +34,7 @@ public class TextButton extends Button {
 
     private Label label;
 
+    @SuppressWarnings("NullAway.Init")
     private TextButtonStyle style;
 
     public TextButton(@Null String text, Skin skin) {
@@ -161,6 +162,7 @@ public class TextButton extends Button {
      */
     static public class TextButtonStyle extends ButtonStyle {
 
+        @SuppressWarnings("NullAway.Init")
         public BitmapFont font;
 
         @Null

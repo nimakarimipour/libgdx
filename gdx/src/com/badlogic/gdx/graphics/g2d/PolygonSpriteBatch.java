@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import static com.badlogic.gdx.graphics.g2d.Sprite.*;
 import com.badlogic.gdx.Gdx;
@@ -1095,6 +1096,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
     }
 
     @Override
+    @NullUnmarked
     public void flush() {
         if (vertexIndex == 0)
             return;
@@ -1213,6 +1215,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
         }
     }
 
+    @NullUnmarked
     private void switchTexture(@Nullable Texture texture) {
         flush();
         lastTexture = texture;

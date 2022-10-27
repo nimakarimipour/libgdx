@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -100,18 +101,21 @@ public class ParticleEmitter {
 
     private SpriteMode spriteMode = SpriteMode.single;
 
+    @SuppressWarnings("NullAway.Init")
     private Particle[] particles;
 
     private int minParticleCount, maxParticleCount = 4;
 
     private float x, y;
 
+    @SuppressWarnings("NullAway.Init")
     private String name;
 
     private Array<String> imagePaths;
 
     private int activeCount;
 
+    @SuppressWarnings("NullAway.Init")
     private boolean[] active;
 
     private boolean firstUpdate;
@@ -453,6 +457,7 @@ public class ParticleEmitter {
         return particles;
     }
 
+    @NullUnmarked
     private void activateParticle(int index) {
         Sprite sprite = null;
         switch(spriteMode) {
@@ -724,6 +729,7 @@ public class ParticleEmitter {
         this.y = y;
     }
 
+    @NullUnmarked
     public void setSprites(Array<Sprite> sprites) {
         this.sprites = sprites;
         if (sprites.size == 0)
@@ -1313,6 +1319,7 @@ public class ParticleEmitter {
 
         protected float gravity, gravityDiff;
 
+        @SuppressWarnings("NullAway.Init")
         protected float[] tint;
 
         protected int frame;

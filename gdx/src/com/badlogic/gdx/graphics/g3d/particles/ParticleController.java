@@ -48,11 +48,13 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
     /**
      * Name of the controller
      */
+    @SuppressWarnings("NullAway.Init")
     public String name;
 
     /**
      * Controls the emission of the particles
      */
+    @SuppressWarnings("NullAway.Init")
     public Emitter emitter;
 
     /**
@@ -63,13 +65,16 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
     /**
      * Controls the graphical representation of the particles
      */
+    @SuppressWarnings("NullAway.Init")
     public ParticleControllerRenderer<?, ?> renderer;
 
     /**
      * Particles components
      */
+    @SuppressWarnings("NullAway.Init")
     public ParallelArray particles;
 
+    @SuppressWarnings("NullAway.Init")
     public ParticleChannels particleChannels;
 
     /**
@@ -85,6 +90,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
     /**
      * Not used by the simulation, it should represent the bounding box containing all the particles
      */
+    @SuppressWarnings("NullAway.Init")
     protected BoundingBox boundingBox;
 
     /**

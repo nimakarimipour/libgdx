@@ -32,6 +32,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureRegionDrawable extends BaseDrawable implements TransformDrawable {
 
+    @SuppressWarnings("NullAway.Init")
     private TextureRegion region;
 
     /**

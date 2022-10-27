@@ -48,6 +48,7 @@ public class HorizontalGroup extends WidgetGroup {
     private boolean sizeInvalid = true;
 
     // row width, row height, ...
+    @SuppressWarnings("NullAway.Init")
     private FloatArray rowSizes;
 
     private int align = Align.left, rowAlign;

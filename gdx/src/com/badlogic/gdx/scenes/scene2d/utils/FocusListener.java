@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -29,6 +30,7 @@ import com.badlogic.gdx.utils.Null;
  */
 abstract public class FocusListener implements EventListener {
 
+    @NullUnmarked
     public boolean handle(Event event) {
         if (!(event instanceof FocusEvent))
             return false;

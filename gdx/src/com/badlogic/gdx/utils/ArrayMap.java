@@ -43,10 +43,13 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
     public boolean ordered;
 
+    @SuppressWarnings("NullAway.Init")
     private transient Entries entries1, entries2;
 
+    @SuppressWarnings("NullAway.Init")
     private transient Values values1, values2;
 
+    @SuppressWarnings("NullAway.Init")
     private transient Keys keys1, keys2;
 
     /**

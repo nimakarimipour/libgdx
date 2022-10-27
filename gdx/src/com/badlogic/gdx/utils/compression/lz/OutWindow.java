@@ -1,11 +1,13 @@
 // LZ.OutWindow
 package com.badlogic.gdx.utils.compression.lz;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class OutWindow {
 
+    @SuppressWarnings("NullAway.Init")
     byte[] _buffer;
 
     int _pos;
@@ -42,6 +44,7 @@ public class OutWindow {
         }
     }
 
+    @NullUnmarked
     public void Flush() throws IOException {
         int size = _pos - _streamPos;
         if (size == 0)

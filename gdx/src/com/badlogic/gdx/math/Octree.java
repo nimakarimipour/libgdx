@@ -170,6 +170,7 @@ public class Octree<T> {
         boolean leaf;
 
         // May be null when leaf is true.
+        @SuppressWarnings("NullAway.Init")
         private Octree.OctreeNode[] children;
 
         private final Array<T> geometries = new Array<T>(Math.min(16, maxItemsPerNode));

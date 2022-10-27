@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.shaders;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -726,6 +727,7 @@ public class DefaultShader extends BaseShader {
         this(renderable, config, new ShaderProgram(prefix + vertexShader, prefix + fragmentShader));
     }
 
+    @NullUnmarked
     public DefaultShader(final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
         final Attributes attributes = combineAttributes(renderable);
         this.config = config;
@@ -786,6 +788,7 @@ public class DefaultShader extends BaseShader {
     }
 
     @Override
+    @NullUnmarked
     public void init() {
         final ShaderProgram program = this.program;
         this.program = null;

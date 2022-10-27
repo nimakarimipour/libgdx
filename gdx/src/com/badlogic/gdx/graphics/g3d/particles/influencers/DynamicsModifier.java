@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.influencers;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.FloatChannel;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
@@ -60,6 +61,7 @@ public abstract class DynamicsModifier extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void update() {
             for (int i = 0, accelOffset = 0, c = i + controller.particles.size * rotationChannel.strideSize; i < c; i += rotationChannel.strideSize, accelOffset += accellerationChannel.strideSize) {
                 Vector3 axisZ = TMP_V1.set(accellerationChannel.data[accelOffset + ParticleChannels.XOffset], accellerationChannel.data[accelOffset + ParticleChannels.YOffset], accellerationChannel.data[accelOffset + ParticleChannels.ZOffset]).nor(), axisY = TMP_V2.set(TMP_V1).crs(Vector3.Y).nor().crs(TMP_V1).nor(), axisX = TMP_V3.set(axisY).crs(axisZ).nor();
@@ -79,6 +81,7 @@ public abstract class DynamicsModifier extends Influencer {
 
     public static abstract class Strength extends DynamicsModifier {
 
+        @SuppressWarnings("NullAway.Init")
         protected FloatChannel strengthChannel;
 
         public ScaledNumericValue strengthValue;
@@ -128,6 +131,7 @@ public abstract class DynamicsModifier extends Influencer {
 
     public static abstract class Angular extends Strength {
 
+        @SuppressWarnings("NullAway.Init")
         protected FloatChannel angularChannel;
 
         /**
@@ -216,6 +220,7 @@ public abstract class DynamicsModifier extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void update() {
             for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize; i < c; s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize, l += lifeChannel.strideSize) {
                 rotationalVelocity2dChannel.data[i] += strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset] + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset] * strengthValue.getScale(lifeChannel.data[l]);
@@ -248,6 +253,7 @@ public abstract class DynamicsModifier extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void update() {
             // Matrix3 I_t = defined by the shape, it's the inertia tensor
             // Vector3 r = position vector
@@ -289,8 +295,10 @@ public abstract class DynamicsModifier extends Influencer {
 
     public static class CentripetalAcceleration extends Strength {
 
+        @SuppressWarnings("NullAway.Init")
         FloatChannel accelerationChannel;
 
+        @SuppressWarnings("NullAway.Init")
         FloatChannel positionChannel;
 
         public CentripetalAcceleration() {
@@ -351,6 +359,7 @@ public abstract class DynamicsModifier extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void update() {
             for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, a = 0, c = i + controller.particles.size * directionalVelocityChannel.strideSize; i < c; s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize, a += angularChannel.strideSize, l += lifeChannel.strideSize) {
                 float lifePercent = lifeChannel.data[l], strength = strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset] + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset] * strengthValue.getScale(lifePercent), phi = angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset] + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset] * phiValue.getScale(lifePercent), theta = angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset] + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset] * thetaValue.getScale(lifePercent);
@@ -392,6 +401,7 @@ public abstract class DynamicsModifier extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void update() {
             for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, a = 0, positionOffset = 0, c = i + controller.particles.size * directionalVelocityChannel.strideSize; i < c; s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize, a += angularChannel.strideSize, l += lifeChannel.strideSize, positionOffset += positionChannel.strideSize) {
                 float lifePercent = lifeChannel.data[l], strength = strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset] + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset] * strengthValue.getScale(lifePercent), phi = angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset] + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset] * phiValue.getScale(lifePercent), theta = angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset] + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset] * thetaValue.getScale(lifePercent);
@@ -436,6 +446,7 @@ public abstract class DynamicsModifier extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void update() {
             int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
             for (int i = 0, c = controller.particles.size; i < c; ++i, strengthOffset += strengthChannel.strideSize, forceOffset += accelerationChannel.strideSize, lifeOffset += lifeChannel.strideSize) {
@@ -455,6 +466,7 @@ public abstract class DynamicsModifier extends Influencer {
 
     public boolean isGlobal = false;
 
+    @SuppressWarnings("NullAway.Init")
     protected FloatChannel lifeChannel;
 
     public DynamicsModifier() {

@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.IntSet.IntSetIterator;
@@ -50,6 +51,7 @@ public class Json {
 
     static private final boolean debug = false;
 
+    @SuppressWarnings("NullAway.Init")
     private JsonWriter writer;
 
     @Nullable
@@ -342,6 +344,7 @@ public class Json {
      * @param knownType May be null if the type is unknown.
      * @param elementType May be null if the type is unknown.
      */
+    @NullUnmarked
     public void toJson(@Null Object object, @Null @Nullable Class knownType, @Null @Nullable Class elementType, Writer writer) {
         setWriter(writer);
         try {
@@ -1082,6 +1085,7 @@ public class Json {
      * @return May be null.
      */
     @Null
+    @NullUnmarked
     public <T> T readValue(String name, @Null Class<T> type, @Nullable T defaultValue, JsonValue jsonMap) {
         JsonValue jsonValue = jsonMap.get(name);
         if (jsonValue == null)
@@ -1137,6 +1141,7 @@ public class Json {
      * @return May be null.
      */
     @Null
+    @NullUnmarked
     public <T> T readValue(@Null @Nullable Class<T> type, @Null @Nullable Class elementType, @Nullable JsonValue jsonData) {
         if (jsonData == null)
             return null;

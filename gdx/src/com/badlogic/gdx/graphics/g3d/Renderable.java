@@ -89,6 +89,7 @@ public class Renderable {
      * The {@link Material} to be applied to the shape (part of the mesh), must not be null.
      * @see #environment *
      */
+    @SuppressWarnings("NullAway.Init")
     public Material material;
 
     /**

@@ -28,8 +28,10 @@ import java.util.Comparator;
  */
 public class QuickSelect<T> {
 
+    @SuppressWarnings("NullAway.Init")
     private T[] array;
 
+    @SuppressWarnings("NullAway.Init")
     private Comparator<? super T> comp;
 
     public int select(T[] items, Comparator<T> comp, int n, int size) {

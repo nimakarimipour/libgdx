@@ -68,6 +68,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 
     private EmissionMode emissionMode;
 
+    @SuppressWarnings("NullAway.Init")
     private FloatChannel lifeChannel;
 
     public RegularEmitter() {

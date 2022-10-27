@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import static com.badlogic.gdx.utils.Align.*;
 import com.badlogic.gdx.Gdx;
@@ -309,6 +310,7 @@ public class Actor {
         return captureListeners;
     }
 
+    @NullUnmarked
     public void addAction(@Nullable Action action) {
         action.setActor(this);
         actions.add(action);
@@ -434,6 +436,7 @@ public class Actor {
      * Returns the parent actor, or null if not in a group.
      */
     @Null
+    @NullUnmarked
     public Group getParent() {
         return parent;
     }

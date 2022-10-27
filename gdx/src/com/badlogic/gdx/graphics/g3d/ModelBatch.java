@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
@@ -54,6 +55,7 @@ public class ModelBatch implements Disposable {
         }
 
         @Override
+        @NullUnmarked
         public Renderable obtain() {
             Renderable renderable = super.obtain();
             renderable.environment = null;
@@ -219,6 +221,7 @@ public class ModelBatch implements Disposable {
      * values. Use {@link #setCamera(Camera)}, if you need to change the camera.
      * @return The current camera being used or null if called outside {@link #begin(Camera)} and {@link #end()}.
      */
+    @NullUnmarked
     public Camera getCamera() {
         return camera;
     }
@@ -258,6 +261,7 @@ public class ModelBatch implements Disposable {
      * Flushes the batch, causing all {@link Renderable}s in the batch to be rendered. Can only be called after the call to
      * {@link #begin(Camera)} and before the call to {@link #end()}.
      */
+    @NullUnmarked
     public void flush() {
         sorter.sort(camera, renderables);
         Shader currentShader = null;

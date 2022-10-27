@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.model.data;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.utils.Array;
@@ -42,6 +43,7 @@ public class ModelData {
 
     public final Array<ModelAnimation> animations = new Array<ModelAnimation>();
 
+    @NullUnmarked
     public void addMesh(ModelMesh mesh) {
         for (ModelMesh other : meshes) {
             if (other.id.equals(mesh.id)) {

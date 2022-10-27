@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.model.Animation;
@@ -299,6 +300,7 @@ public class BaseAnimationController {
     /**
      * Helper method to apply one animation to either an objectmap for blending or directly to the bones.
      */
+    @NullUnmarked
     protected static void applyAnimation(@Nullable final ObjectMap<Node, Transform> out, @Nullable final Pool<Transform> pool, final float alpha, final Animation animation, final float time) {
         if (out == null) {
             for (final NodeAnimation nodeAnim : animation.nodeAnimations) applyNodeAnimationDirectly(nodeAnim, time);

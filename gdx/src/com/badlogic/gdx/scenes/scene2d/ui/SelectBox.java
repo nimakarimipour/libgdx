@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import com.badlogic.gdx.Input.Keys;
@@ -60,6 +61,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 
     static final Vector2 temp = new Vector2();
 
+    @SuppressWarnings("NullAway.Init")
     SelectBoxStyle style;
 
     final Array<T> items = new Array();
@@ -551,6 +553,7 @@ public class SelectBox<T> extends Widget implements Disableable {
                     return false;
                 }
 
+                @NullUnmarked
                 public boolean keyDown(@Nullable InputEvent event, int keycode) {
                     switch(keycode) {
                         case Keys.NUMPAD_ENTER:
@@ -684,6 +687,7 @@ public class SelectBox<T> extends Widget implements Disableable {
      */
     static public class SelectBoxStyle {
 
+        @SuppressWarnings("NullAway.Init")
         public BitmapFont font;
 
         public Color fontColor = new Color(1, 1, 1, 1);
@@ -696,8 +700,10 @@ public class SelectBox<T> extends Widget implements Disableable {
         @Nullable
         public Drawable background;
 
+        @SuppressWarnings("NullAway.Init")
         public ScrollPaneStyle scrollStyle;
 
+        @SuppressWarnings("NullAway.Init")
         public ListStyle listStyle;
 
         @Null

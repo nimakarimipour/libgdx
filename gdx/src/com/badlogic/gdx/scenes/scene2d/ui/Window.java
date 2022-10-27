@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -49,6 +50,7 @@ public class Window extends Table {
 
     static private final int MOVE = 1 << 5;
 
+    @SuppressWarnings("NullAway.Init")
     private WindowStyle style;
 
     boolean isMovable = true, isModal, isResizable;
@@ -77,6 +79,7 @@ public class Window extends Table {
         setSkin(skin);
     }
 
+    @NullUnmarked
     public Window(String title, WindowStyle style) {
         if (title == null)
             throw new IllegalArgumentException("title cannot be null.");
@@ -149,6 +152,7 @@ public class Window extends Table {
                 dragging = false;
             }
 
+            @NullUnmarked
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 if (!dragging)
                     return;
@@ -227,6 +231,7 @@ public class Window extends Table {
         return new Label(text, style);
     }
 
+    @NullUnmarked
     public void setStyle(WindowStyle style) {
         if (style == null)
             throw new IllegalArgumentException("style cannot be null.");
@@ -292,6 +297,7 @@ public class Window extends Table {
         super.draw(batch, parentAlpha);
     }
 
+    @NullUnmarked
     protected void drawStageBackground(Batch batch, float parentAlpha, float x, float y, float width, float height) {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);

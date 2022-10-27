@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.GL20;
@@ -141,6 +142,7 @@ public class Model implements Disposable {
         calculateTransforms();
     }
 
+    @NullUnmarked
     protected void loadAnimations(Iterable<ModelAnimation> modelAnimations) {
         for (final ModelAnimation anim : modelAnimations) {
             Animation animation = new Animation();
@@ -255,6 +257,7 @@ public class Model implements Disposable {
         }
     }
 
+    @NullUnmarked
     protected void convertMesh(ModelMesh modelMesh) {
         int numIndices = 0;
         for (ModelMeshPart part : modelMesh.parts) {

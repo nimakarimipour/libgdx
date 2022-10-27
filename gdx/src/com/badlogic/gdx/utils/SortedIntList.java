@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 
 /**
@@ -168,6 +169,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 
         @Override
         @Nullable
+        @NullUnmarked
         public Node<E> next() {
             previousPosition = position;
             position = position.n;
@@ -175,6 +177,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
         }
 
         @Override
+        @NullUnmarked
         public void remove() {
             // the contract specifies to remove the last returned element, if nothing was returned yet assumably do nothing
             if (previousPosition != null) {
@@ -216,6 +219,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
         /**
          * Value held
          */
+        @SuppressWarnings("NullAway.Init")
         public E value;
 
         /**

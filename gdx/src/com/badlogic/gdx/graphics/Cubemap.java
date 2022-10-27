@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
@@ -341,6 +342,7 @@ public class Cubemap extends GLTexture {
     /**
      * @return the number of managed cubemaps currently loaded
      */
+    @NullUnmarked
     public static int getNumManagedCubemaps() {
         return managedCubemaps.get(Gdx.app).size;
     }

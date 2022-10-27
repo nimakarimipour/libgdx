@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.net;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -109,6 +110,7 @@ public class NetJavaSocketImpl implements Socket {
     }
 
     @Override
+    @NullUnmarked
     public void dispose() {
         if (socket != null) {
             try {

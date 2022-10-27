@@ -42,6 +42,7 @@ public abstract class ParticleControllerComponent implements Disposable, Json.Se
 
     protected static final Matrix4 TMP_M4 = new Matrix4();
 
+    @SuppressWarnings("NullAway.Init")
     protected ParticleController controller;
 
     /**

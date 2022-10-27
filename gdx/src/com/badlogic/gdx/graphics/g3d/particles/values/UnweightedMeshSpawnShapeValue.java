@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.values;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
@@ -64,6 +65,7 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
     }
 
     @Override
+    @NullUnmarked
     public void spawnAux(Vector3 vector, float percent) {
         if (indices == null) {
             // Triangles

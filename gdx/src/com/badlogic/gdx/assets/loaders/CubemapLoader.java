@@ -45,6 +45,7 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
         @Nullable
         String filename;
 
+        @SuppressWarnings("NullAway.Init")
         CubemapData data;
 
         @Nullable

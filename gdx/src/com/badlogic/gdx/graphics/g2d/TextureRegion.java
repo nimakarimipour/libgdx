@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -28,6 +29,7 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class TextureRegion {
 
+    @SuppressWarnings("NullAway.Init")
     Texture texture;
 
     float u, v;
@@ -134,6 +136,7 @@ public class TextureRegion {
     /**
      * Sets the texture and coordinates to the specified region.
      */
+    @NullUnmarked
     public void setRegion(@Nullable TextureRegion region) {
         texture = region.texture;
         setRegion(region.u, region.v, region.u2, region.v2);

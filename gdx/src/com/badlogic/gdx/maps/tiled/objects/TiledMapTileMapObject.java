@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.maps.tiled.objects;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -40,6 +41,7 @@ public class TiledMapTileMapObject extends TextureMapObject {
     @Nullable
     private TiledMapTile tile;
 
+    @NullUnmarked
     public TiledMapTileMapObject(@Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
         this.flipHorizontally = flipHorizontally;
         this.flipVertically = flipVertically;

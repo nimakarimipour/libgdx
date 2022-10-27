@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.net;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.InputStream;
 import java.util.Map;
@@ -51,6 +52,7 @@ public class HttpRequestBuilder {
      */
     public static Json json = new Json();
 
+    @SuppressWarnings("NullAway.Init")
     private HttpRequest httpRequest;
 
     /**
@@ -177,6 +179,7 @@ public class HttpRequestBuilder {
      * Returns the {@link HttpRequest} that has been setup by this builder so far. After using the request, it should be returned
      * to the pool via {@code Pools.free(request)}.
      */
+    @NullUnmarked
     public HttpRequest build() {
         validate();
         HttpRequest request = httpRequest;

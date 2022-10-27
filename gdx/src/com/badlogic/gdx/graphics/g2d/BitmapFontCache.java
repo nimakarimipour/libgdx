@@ -70,6 +70,7 @@ public class BitmapFontCache {
      * For each page, an array with a value for each glyph from that page, where the value is the index of the character in the
      * full text being cached.
      */
+    @SuppressWarnings("NullAway.Init")
     private IntArray[] pageGlyphIndices;
 
     /**

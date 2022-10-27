@@ -28,6 +28,7 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class PolygonSprite {
 
+    @SuppressWarnings("NullAway.Init")
     PolygonRegion region;
 
     private float x, y;
@@ -40,6 +41,7 @@ public class PolygonSprite {
 
     private float originX, originY;
 
+    @SuppressWarnings("NullAway.Init")
     private float[] vertices;
 
     private boolean dirty;

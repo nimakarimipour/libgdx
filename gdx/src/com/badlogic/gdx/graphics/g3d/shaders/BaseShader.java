@@ -122,6 +122,7 @@ public abstract class BaseShader implements Shader {
 
     private final Array<Setter> setters = new Array<Setter>();
 
+    @SuppressWarnings("NullAway.Init")
     private int[] locations;
 
     private final IntArray globalUniforms = new IntArray();
@@ -130,10 +131,13 @@ public abstract class BaseShader implements Shader {
 
     private final IntIntMap attributes = new IntIntMap();
 
+    @SuppressWarnings("NullAway.Init")
     public ShaderProgram program;
 
+    @SuppressWarnings("NullAway.Init")
     public RenderContext context;
 
+    @SuppressWarnings("NullAway.Init")
     public Camera camera;
 
     @Nullable

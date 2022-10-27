@@ -34,8 +34,10 @@ public abstract class SimpleInfluencer extends Influencer {
 
     public ScaledNumericValue value;
 
+    @SuppressWarnings("NullAway.Init")
     FloatChannel valueChannel, interpolationChannel, lifeChannel;
 
+    @SuppressWarnings("NullAway.Init")
     ChannelDescriptor valueChannelDescriptor;
 
     public SimpleInfluencer() {

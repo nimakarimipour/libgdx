@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.Writer;
@@ -44,17 +45,20 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
  */
 public class JsonValue implements Iterable<JsonValue> {
 
+    @SuppressWarnings("NullAway.Init")
     private ValueType type;
 
     /**
      * May be null.
      */
+    @SuppressWarnings("NullAway.Init")
     private String stringValue;
 
     private double doubleValue;
 
     private long longValue;
 
+    @SuppressWarnings("NullAway.Init")
     public String name;
 
     /**
@@ -266,6 +270,7 @@ public class JsonValue implements Iterable<JsonValue> {
      * @throws IllegalStateException if this an array or object.
      */
     @Null
+    @NullUnmarked
     public String asString() {
         switch(type) {
             case stringValue:
@@ -1079,6 +1084,7 @@ public class JsonValue implements Iterable<JsonValue> {
     /**
      * @param name May be null.
      */
+    @NullUnmarked
     public void setName(@Null @Nullable String name) {
         this.name = name;
     }
@@ -1176,6 +1182,7 @@ public class JsonValue implements Iterable<JsonValue> {
     /**
      * @param value May be null.
      */
+    @NullUnmarked
     public void set(@Null @Nullable String value) {
         stringValue = value;
         type = value == null ? ValueType.nullValue : ValueType.stringValue;
@@ -1184,6 +1191,7 @@ public class JsonValue implements Iterable<JsonValue> {
     /**
      * @param stringValue May be null if the string representation is the string value of the double (eg, no leading zeros).
      */
+    @NullUnmarked
     public void set(double value, @Null @Nullable String stringValue) {
         doubleValue = value;
         longValue = (long) value;
@@ -1194,6 +1202,7 @@ public class JsonValue implements Iterable<JsonValue> {
     /**
      * @param stringValue May be null if the string representation is the string value of the long (eg, no leading zeros).
      */
+    @NullUnmarked
     public void set(long value, @Null @Nullable String stringValue) {
         longValue = value;
         doubleValue = value;
@@ -1504,6 +1513,7 @@ public class JsonValue implements Iterable<JsonValue> {
             return current;
         }
 
+        @NullUnmarked
         public void remove() {
             if (current.prev == null) {
                 child = current.next;
@@ -1535,6 +1545,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
     static public class PrettyPrintSettings {
 
+        @SuppressWarnings("NullAway.Init")
         public OutputType outputType;
 
         /**

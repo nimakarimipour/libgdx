@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.particles.influencers;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.FloatChannel;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
@@ -46,6 +47,7 @@ public abstract class ColorInfluencer extends Influencer {
         }
 
         @Override
+        @NullUnmarked
         public void activateParticles(int startIndex, int count) {
             for (int i = startIndex * colorChannel.strideSize, c = i + count * colorChannel.strideSize; i < c; i += colorChannel.strideSize) {
                 colorChannel.data[i + ParticleChannels.RedOffset] = MathUtils.random();
@@ -66,8 +68,10 @@ public abstract class ColorInfluencer extends Influencer {
      */
     public static class Single extends ColorInfluencer {
 
+        @SuppressWarnings("NullAway.Init")
         FloatChannel alphaInterpolationChannel;
 
+        @SuppressWarnings("NullAway.Init")
         FloatChannel lifeChannel;
 
         public ScaledNumericValue alphaValue;
@@ -138,6 +142,7 @@ public abstract class ColorInfluencer extends Influencer {
         }
     }
 
+    @SuppressWarnings("NullAway.Init")
     FloatChannel colorChannel;
 
     @Override

@@ -36,10 +36,13 @@ import java.nio.FloatBuffer;
  */
 public class InstanceBufferObject implements InstanceData {
 
+    @SuppressWarnings("NullAway.Init")
     private VertexAttributes attributes;
 
+    @SuppressWarnings("NullAway.Init")
     private FloatBuffer buffer;
 
+    @SuppressWarnings("NullAway.Init")
     private ByteBuffer byteBuffer;
 
     private boolean ownsBuffer;

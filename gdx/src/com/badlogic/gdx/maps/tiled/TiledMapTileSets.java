@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.maps.tiled;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 import com.badlogic.gdx.utils.Array;
@@ -47,6 +48,7 @@ public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
      * @param name Name of the {@link TiledMapTileSet} to retrieve.
      * @return tileset with matching name, null if it doesn't exist
      */
+    @NullUnmarked
     public TiledMapTileSet getTileSet(String name) {
         for (TiledMapTileSet tileset : tilesets) {
             if (name.equals(tileset.getName())) {

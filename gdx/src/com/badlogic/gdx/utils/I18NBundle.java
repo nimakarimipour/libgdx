@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.Reader;
@@ -90,6 +91,7 @@ public class I18NBundle {
     /**
      * The properties for this bundle.
      */
+    @SuppressWarnings("NullAway.Init")
     private ObjectMap<String, String> properties;
 
     /**
@@ -187,6 +189,7 @@ public class I18NBundle {
         return createBundleImpl(baseFileHandle, locale, encoding);
     }
 
+    @NullUnmarked
     private static I18NBundle createBundleImpl(FileHandle baseFileHandle, Locale locale, String encoding) {
         if (baseFileHandle == null || locale == null || encoding == null)
             throw new NullPointerException();
@@ -485,6 +488,7 @@ public class I18NBundle {
      * @exception MissingResourceException if no string for the given key can be found
      * @return the string for the given key formatted with the given arguments
      */
+    @NullUnmarked
     public String format(String key, Object... args) {
         return formatter.format(get(key), args);
     }

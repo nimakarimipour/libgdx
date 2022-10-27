@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -134,6 +135,7 @@ public class Slider extends ProgressBar {
     }
 
     @Null
+    @NullUnmarked
     protected Drawable getBackgroundDrawable() {
         SliderStyle style = (SliderStyle) super.getStyle();
         if (disabled && style.disabledBackground != null)

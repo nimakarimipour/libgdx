@@ -539,6 +539,7 @@ public class BitmapFont implements Disposable {
         /**
          * An array of the image paths, for multiple texture pages.
          */
+        @SuppressWarnings("NullAway.Init")
         public String[] imagePaths;
 
         @Nullable

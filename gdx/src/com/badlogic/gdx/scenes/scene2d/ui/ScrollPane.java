@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -564,6 +565,7 @@ public class ScrollPane extends WidgetGroup {
         }
     }
 
+    @NullUnmarked
     private void updateActorPosition() {
         // Calculate the actor's position depending on the scroll state and available actor area.
         float x = actorArea.x - (scrollX ? (int) visualAmountX : 0);

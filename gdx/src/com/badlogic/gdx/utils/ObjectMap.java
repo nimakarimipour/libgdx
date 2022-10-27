@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -74,10 +75,13 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
      */
     protected int mask;
 
+    @SuppressWarnings("NullAway.Init")
     transient Entries entries1, entries2;
 
+    @SuppressWarnings("NullAway.Init")
     transient Values values1, values2;
 
+    @SuppressWarnings("NullAway.Init")
     transient Keys keys1, keys2;
 
     /**
@@ -213,6 +217,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
      * Returns the value for the specified key, or null if the key is not in the map.
      */
     @Null
+    @NullUnmarked
     public <T extends K> V get(T key) {
         int i = locateKey(key);
         return i < 0 ? null : valueTable[i];
@@ -567,9 +572,11 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
     static public class Entry<K, V> {
 
+        @SuppressWarnings("NullAway.Init")
         public K key;
 
         @Null
+        @SuppressWarnings("NullAway.Init")
         public V value;
 
         public String toString() {

@@ -43,10 +43,13 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  */
 public class VertexBufferObject implements VertexData {
 
+    @SuppressWarnings("NullAway.Init")
     private VertexAttributes attributes;
 
+    @SuppressWarnings("NullAway.Init")
     private FloatBuffer buffer;
 
+    @SuppressWarnings("NullAway.Init")
     private ByteBuffer byteBuffer;
 
     private boolean ownsBuffer;

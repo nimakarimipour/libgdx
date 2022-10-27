@@ -50,6 +50,7 @@ import com.badlogic.gdx.utils.Pools;
  */
 public class List<T> extends Widget implements Cullable {
 
+    @SuppressWarnings("NullAway.Init")
     ListStyle style;
 
     final Array<T> items = new Array();
@@ -499,12 +500,14 @@ public class List<T> extends Widget implements Cullable {
      */
     static public class ListStyle {
 
+        @SuppressWarnings("NullAway.Init")
         public BitmapFont font;
 
         public Color fontColorSelected = new Color(1, 1, 1, 1);
 
         public Color fontColorUnselected = new Color(1, 1, 1, 1);
 
+        @SuppressWarnings("NullAway.Init")
         public Drawable selection;
 
         @Null

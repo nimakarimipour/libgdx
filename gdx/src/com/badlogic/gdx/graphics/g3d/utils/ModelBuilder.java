@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -121,6 +122,7 @@ public class ModelBuilder {
      * Add a node to the model. Use any of the part(...) method to add a NodePart.
      * @return The node being created.
      */
+    @NullUnmarked
     public Node node() {
         final Node node = new Node();
         node(node);
@@ -156,6 +158,7 @@ public class ModelBuilder {
      * disposed. The resources the Material might contain are not managed, use {@link #manage(Disposable)} to add those to the
      * model.
      */
+    @NullUnmarked
     public void part(final MeshPart meshpart, final Material material) {
         if (node == null)
             node();

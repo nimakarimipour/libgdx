@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.math;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -114,6 +115,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
     }
 
     @Override
+    @NullUnmarked
     public Vector3 set(@Nullable final Vector3 vector) {
         return this.set(vector.x, vector.y, vector.z);
     }

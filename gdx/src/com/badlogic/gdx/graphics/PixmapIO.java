@@ -211,6 +211,7 @@ public class PixmapIO {
 
         private final Deflater deflater;
 
+        @SuppressWarnings("NullAway.Init")
         private ByteArray lineOutBytes, curLineBytes, prevLineBytes;
 
         private boolean flipY = true;

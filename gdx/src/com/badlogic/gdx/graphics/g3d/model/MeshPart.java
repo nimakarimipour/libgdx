@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.model;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
@@ -76,6 +77,7 @@ public class MeshPart {
     /**
      * The Mesh the part references, also stored in {@link Model} *
      */
+    @SuppressWarnings("NullAway.Init")
     public Mesh mesh;
 
     /**
@@ -148,6 +150,7 @@ public class MeshPart {
      * Set this MeshPart to given values, does not {@link #update()} the bounding box values.
      * @return this MeshPart, for chaining.
      */
+    @NullUnmarked
     public MeshPart set(final String id, @Nullable final Mesh mesh, final int offset, final int size, final int type) {
         this.id = id;
         this.mesh = mesh;

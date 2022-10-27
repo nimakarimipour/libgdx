@@ -33,6 +33,7 @@ public class NodeAnimation {
     /**
      * the Node affected by this animation *
      */
+    @SuppressWarnings("NullAway.Init")
     public Node node;
 
     /**

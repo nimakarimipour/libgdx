@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.model.Animation;
 import com.badlogic.gdx.graphics.g3d.model.Node;
@@ -162,6 +163,7 @@ public class ModelInstance implements RenderableProvider {
      * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
      * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform.
      */
+    @NullUnmarked
     public ModelInstance(final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive, boolean parentTransform, boolean mergeTransform, boolean shareKeyframes) {
         this.model = model;
         this.transform = transform == null ? new Matrix4() : transform;
@@ -318,6 +320,7 @@ public class ModelInstance implements RenderableProvider {
      * Makes sure that each {@link NodePart} of the {@link Node} and its sub-nodes, doesn't reference a node outside this node
      * tree and that all materials are listed in the {@link #materials} array.
      */
+    @NullUnmarked
     private void invalidate(Node node) {
         for (int i = 0, n = node.parts.size; i < n; ++i) {
             NodePart part = node.parts.get(i);
@@ -384,6 +387,7 @@ public class ModelInstance implements RenderableProvider {
      * @param sourceAnim The source animation {@link Animation}
      * @param shareKeyframes Shallow copy of {@link NodeKeyframe}'s if it's true, otherwise make a deep copy.
      */
+    @NullUnmarked
     public void copyAnimation(Animation sourceAnim, boolean shareKeyframes) {
         Animation animation = new Animation();
         animation.id = sourceAnim.id;

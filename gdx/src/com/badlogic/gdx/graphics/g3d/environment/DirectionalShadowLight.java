@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.g3d.environment;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -116,6 +117,7 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
     }
 
     @Override
+    @NullUnmarked
     public void dispose() {
         if (fbo != null)
             fbo.dispose();

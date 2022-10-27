@@ -96,6 +96,7 @@ public class Decoder {
             }
         }
 
+        @SuppressWarnings("NullAway.Init")
         Decoder2[] m_Coders;
 
         int m_NumPrevBits;

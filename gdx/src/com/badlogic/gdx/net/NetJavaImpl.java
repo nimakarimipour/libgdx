@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.net;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -156,6 +157,7 @@ public class NetJavaImpl {
         tasks = new ObjectMap<HttpRequest, Future<?>>();
     }
 
+    @NullUnmarked
     public void sendHttpRequest(final HttpRequest httpRequest, final HttpResponseListener httpResponseListener) {
         if (httpRequest.getUrl() == null) {
             httpResponseListener.failed(new GdxRuntimeException("can't process a HTTP request without URL set"));

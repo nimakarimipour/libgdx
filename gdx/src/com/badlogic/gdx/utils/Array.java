@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -621,6 +622,7 @@ public class Array<T> implements Iterable<T> {
      * Returns a random item from the array, or null if the array is empty.
      */
     @Null
+    @NullUnmarked
     public T random() {
         if (size == 0)
             return null;
@@ -811,6 +813,7 @@ public class Array<T> implements Iterable<T> {
 
         private final boolean allowRemove;
 
+        @SuppressWarnings("NullAway.Init")
         private ArrayIterator iterator1, iterator2;
 
         // java.io.StringWriter lastAcquire = new java.io.StringWriter();

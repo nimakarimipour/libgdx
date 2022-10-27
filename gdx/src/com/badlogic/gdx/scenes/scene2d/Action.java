@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.scenes.scene2d;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
@@ -39,6 +40,7 @@ abstract public class Action implements Poolable {
     /**
      * The actor this action targets, or null if a target has not been set.
      */
+    @SuppressWarnings("NullAway.Init")
     protected Actor target;
 
     @Null
@@ -71,6 +73,7 @@ abstract public class Action implements Poolable {
      * executed for some time, eg it may be {@link DelayAction delayed}. The actor's state is best queried in the first call to
      * {@link #act(float)}. For a {@link TemporalAction}, use TemporalAction#begin().
      */
+    @NullUnmarked
     public void setActor(@Nullable Actor actor) {
         this.actor = actor;
         if (target == null)
@@ -114,6 +117,7 @@ abstract public class Action implements Poolable {
      * <p>
      * If a subclass has optional state, it must override this method, call super, and reset the optional state.
      */
+    @NullUnmarked
     public void reset() {
         actor = null;
         target = null;

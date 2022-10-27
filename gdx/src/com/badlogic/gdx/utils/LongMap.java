@@ -77,10 +77,13 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
      */
     protected int mask;
 
+    @SuppressWarnings("NullAway.Init")
     private transient Entries entries1, entries2;
 
+    @SuppressWarnings("NullAway.Init")
     private transient Values values1, values2;
 
+    @SuppressWarnings("NullAway.Init")
     private transient Keys keys1, keys2;
 
     /**

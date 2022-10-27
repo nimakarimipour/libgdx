@@ -17,6 +17,7 @@
  */
 package com.badlogic.gdx.graphics.glutils;
 
+import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -32,6 +33,7 @@ public class ETC1TextureData implements TextureData {
     @Nullable
     FileHandle file;
 
+    @SuppressWarnings("NullAway.Init")
     ETC1Data data;
 
     boolean useMipMaps;
@@ -81,6 +83,7 @@ public class ETC1TextureData implements TextureData {
     }
 
     @Override
+    @NullUnmarked
     public void consumeCustomData(int target) {
         if (!isPrepared)
             throw new GdxRuntimeException("Call prepare() before calling consumeCompressedData()");
