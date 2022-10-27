@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import javax.annotation.Nullable;
@@ -23,36 +24,28 @@ import com.badlogic.gdx.utils.Array;
 
 public class ModelMaterial {
 
-    public enum MaterialType {
+	public enum MaterialType {
 
-        Lambert, Phong
-    }
+		Lambert, Phong
+	}
 
-    @SuppressWarnings("NullAway.Init")
-    public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 
-    @Nullable
-    public MaterialType type;
+	@Nullable public MaterialType type;
 
-    @Nullable
-    public Color ambient;
+	@Nullable public Color ambient;
 
-    @Nullable
-    public Color diffuse;
+	@Nullable public Color diffuse;
 
-    @Nullable
-    public Color specular;
+	@Nullable public Color specular;
 
-    @Nullable
-    public Color emissive;
+	@Nullable public Color emissive;
 
-    @Nullable
-    public Color reflection;
+	@Nullable public Color reflection;
 
-    public float shininess;
+	public float shininess;
 
-    public float opacity = 1.f;
+	public float opacity = 1.f;
 
-    @Nullable
-    public Array<ModelTexture> textures;
+	@Nullable public Array<ModelTexture> textures;
 }

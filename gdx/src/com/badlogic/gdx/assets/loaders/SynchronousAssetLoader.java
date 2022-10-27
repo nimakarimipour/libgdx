@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.assets.loaders;
 
 import javax.annotation.Nullable;
@@ -24,9 +25,9 @@ import com.badlogic.gdx.files.FileHandle;
 
 public abstract class SynchronousAssetLoader<T, P extends AssetLoaderParameters<T>> extends AssetLoader<T, P> {
 
-    public SynchronousAssetLoader(FileHandleResolver resolver) {
-        super(resolver);
-    }
+	public SynchronousAssetLoader (FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-    public abstract T load(AssetManager assetManager, String fileName, FileHandle file, @Nullable P parameter);
+	public abstract T load (AssetManager assetManager, String fileName, FileHandle file, @Nullable P parameter);
 }

@@ -15,41 +15,38 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-/**
- * Adds an action to an actor.
- * @author Nathan Sweet
- */
+/** Adds an action to an actor.
+ * @author Nathan Sweet */
 public class AddAction extends Action {
 
-    @Nullable
-    private Action action;
+	@Nullable private Action action;
 
-    public boolean act(float delta) {
-        target.addAction(action);
-        return true;
-    }
+	public boolean act (float delta) {
+		target.addAction(action);
+		return true;
+	}
 
-    @Nullable
-    public Action getAction() {
-        return action;
-    }
+	@Nullable
+	public Action getAction () {
+		return action;
+	}
 
-    public void setAction(Action action) {
-        this.action = action;
-    }
+	public void setAction (Action action) {
+		this.action = action;
+	}
 
-    public void restart() {
-        if (action != null)
-            action.restart();
-    }
+	public void restart () {
+		if (action != null) action.restart();
+	}
 
-    public void reset() {
-        super.reset();
-        action = null;
-    }
+	public void reset () {
+		super.reset();
+		action = null;
+	}
 }

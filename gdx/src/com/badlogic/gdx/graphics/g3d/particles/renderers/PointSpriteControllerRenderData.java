@@ -15,17 +15,15 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.particles.renderers;
 
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.FloatChannel;
 
-/**
- * Render data used by point sprites batches
- * @author Inferno
- */
+/** Render data used by point sprites batches
+ * @author Inferno */
 public class PointSpriteControllerRenderData extends ParticleControllerRenderData {
 
-    @Nullable
-    public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
+	@Nullable public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
 }

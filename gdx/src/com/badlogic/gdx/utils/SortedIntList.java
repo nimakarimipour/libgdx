@@ -15,233 +15,199 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.NullUnmarked;
 import javax.annotation.Nullable;
 
-/**
- * A sorted double linked list which uses ints for indexing
+/** A sorted double linked list which uses ints for indexing
  *
- * @param <E>
- */
+ * @param <E> */
 public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 
-    // avoid allocating nodes
-    private NodePool<E> nodePool = new NodePool<E>();
+	// avoid allocating nodes
+	private NodePool<E> nodePool = new NodePool<E>();
 
-    @Nullable
-    private transient Iterator iterator;
+	@Nullable private transient Iterator iterator;
 
-    int size = 0;
+	int size = 0;
 
-    @Nullable
-    Node<E> first;
+	@Nullable Node<E> first;
 
-    /**
-     * Creates an ascending list
-     */
-    public SortedIntList() {
-    }
+	/** Creates an ascending list */
+	public SortedIntList () {
+	}
 
-    /**
-     * Inserts an element into the list at the given index
-     *
-     * @param index Index of the element
-     * @param value Element to insert
-     * @return Element replaced by newly inserted element, null if nothing was replaced
-     */
-    @Null
-    @Nullable
-    public E insert(int index, E value) {
-        if (first != null) {
-            Node<E> c = first;
-            // iterate to the right until we can't move any further because the next number is bigger than index
-            while (c.n != null && c.n.index <= index) {
-                c = c.n;
-            }
-            // add one to the right
-            if (index > c.index) {
-                c.n = nodePool.obtain(c, c.n, value, index);
-                if (c.n.n != null) {
-                    c.n.n.p = c.n;
-                }
-                size++;
-            } else // the new element is smaller than every other element
-            if (index < c.index) {
-                Node<E> newFirst = nodePool.obtain(null, first, value, index);
-                first.p = newFirst;
-                first = newFirst;
-                size++;
-            } else // that element already exists so swap the value
-            {
-                c.value = value;
-            }
-        } else {
-            first = nodePool.obtain(null, null, value, index);
-            size++;
-        }
-        return null;
-    }
+	/** Inserts an element into the list at the given index
+	 *
+	 * @param index Index of the element
+	 * @param value Element to insert
+	 * @return Element replaced by newly inserted element, null if nothing was replaced */
+	@Null
+	@Nullable
+	public E insert (int index, E value) {
+		if (first != null) {
+			Node<E> c = first;
+			// iterate to the right until we can't move any further because the next number is bigger than index
+			while (c.n != null && c.n.index <= index) {
+				c = c.n;
+			}
+			// add one to the right
+			if (index > c.index) {
+				c.n = nodePool.obtain(c, c.n, value, index);
+				if (c.n.n != null) {
+					c.n.n.p = c.n;
+				}
+				size++;
+			} else // the new element is smaller than every other element
+			if (index < c.index) {
+				Node<E> newFirst = nodePool.obtain(null, first, value, index);
+				first.p = newFirst;
+				first = newFirst;
+				size++;
+			} else // that element already exists so swap the value
+			{
+				c.value = value;
+			}
+		} else {
+			first = nodePool.obtain(null, null, value, index);
+			size++;
+		}
+		return null;
+	}
 
-    /**
-     * Retrieves an element at a given index
-     *
-     * @param index Index of the element to retrieve
-     * @return Matching element, null otherwise
-     */
-    @Nullable
-    public E get(int index) {
-        E match = null;
-        if (first != null) {
-            Node<E> c = first;
-            while (c.n != null && c.index < index) {
-                c = c.n;
-            }
-            if (c.index == index) {
-                match = c.value;
-            }
-        }
-        return match;
-    }
+	/** Retrieves an element at a given index
+	 *
+	 * @param index Index of the element to retrieve
+	 * @return Matching element, null otherwise */
+	@Nullable
+	public E get (int index) {
+		E match = null;
+		if (first != null) {
+			Node<E> c = first;
+			while (c.n != null && c.index < index) {
+				c = c.n;
+			}
+			if (c.index == index) {
+				match = c.value;
+			}
+		}
+		return match;
+	}
 
-    /**
-     * Clears list
-     */
-    public void clear() {
-        for (; first != null; first = first.n) {
-            nodePool.free(first);
-        }
-        size = 0;
-    }
+	/** Clears list */
+	public void clear () {
+		for (; first != null; first = first.n) {
+			nodePool.free(first);
+		}
+		size = 0;
+	}
 
-    /**
-     * @return size of list equal to elements contained in it
-     */
-    public int size() {
-        return size;
-    }
+	/** @return size of list equal to elements contained in it */
+	public int size () {
+		return size;
+	}
 
-    /**
-     * Returns true if the list has one or more items.
-     */
-    public boolean notEmpty() {
-        return size > 0;
-    }
+	/** Returns true if the list has one or more items. */
+	public boolean notEmpty () {
+		return size > 0;
+	}
 
-    /**
-     * Returns true if the list is empty.
-     */
-    public boolean isEmpty() {
-        return size == 0;
-    }
+	/** Returns true if the list is empty. */
+	public boolean isEmpty () {
+		return size == 0;
+	}
 
-    /**
-     * Returns an iterator to traverse the list.
-     * <p>
-     * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
-     * Use the {@link Iterator} constructor for nested or multithreaded iteration.
-     */
-    public java.util.Iterator<Node<E>> iterator() {
-        if (Collections.allocateIterators)
-            return new Iterator();
-        if (iterator == null)
-            return iterator = new Iterator();
-        return iterator.reset();
-    }
+	/** Returns an iterator to traverse the list.
+	 * <p>
+	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
+	 * Use the {@link Iterator} constructor for nested or multithreaded iteration. */
+	public java.util.Iterator<Node<E>> iterator () {
+		if (Collections.allocateIterators) return new Iterator();
+		if (iterator == null) return iterator = new Iterator();
+		return iterator.reset();
+	}
 
-    public class Iterator implements java.util.Iterator<Node<E>> {
+	public class Iterator implements java.util.Iterator<Node<E>> {
 
-        @Nullable
-        private Node<E> position;
+		@Nullable private Node<E> position;
 
-        @Nullable
-        private Node<E> previousPosition;
+		@Nullable private Node<E> previousPosition;
 
-        public Iterator() {
-            reset();
-        }
+		public Iterator () {
+			reset();
+		}
 
-        @Override
-        public boolean hasNext() {
-            return position != null;
-        }
+		@Override
+		public boolean hasNext () {
+			return position != null;
+		}
 
-        @Override
-        @Nullable
-        @NullUnmarked
-        public Node<E> next() {
-            previousPosition = position;
-            position = position.n;
-            return previousPosition;
-        }
+		@Override
+		@Nullable
+		@NullUnmarked
+		public Node<E> next () {
+			previousPosition = position;
+			position = position.n;
+			return previousPosition;
+		}
 
-        @Override
-        @NullUnmarked
-        public void remove() {
-            // the contract specifies to remove the last returned element, if nothing was returned yet assumably do nothing
-            if (previousPosition != null) {
-                // if we are at the second element set it as the first element
-                if (previousPosition == first) {
-                    first = position;
-                } else // else remove last returned element by changing the chain
-                {
-                    previousPosition.p.n = position;
-                    if (position != null) {
-                        position.p = previousPosition.p;
-                    }
-                }
-                size--;
-            }
-        }
+		@Override
+		@NullUnmarked
+		public void remove () {
+			// the contract specifies to remove the last returned element, if nothing was returned yet assumably do nothing
+			if (previousPosition != null) {
+				// if we are at the second element set it as the first element
+				if (previousPosition == first) {
+					first = position;
+				} else // else remove last returned element by changing the chain
+				{
+					previousPosition.p.n = position;
+					if (position != null) {
+						position.p = previousPosition.p;
+					}
+				}
+				size--;
+			}
+		}
 
-        public Iterator reset() {
-            position = first;
-            previousPosition = null;
-            return this;
-        }
-    }
+		public Iterator reset () {
+			position = first;
+			previousPosition = null;
+			return this;
+		}
+	}
 
-    public static class Node<E> {
+	public static class Node<E> {
 
-        /**
-         * Node previous to this
-         */
-        @Nullable
-        protected Node<E> p;
+		/** Node previous to this */
+		@Nullable protected Node<E> p;
 
-        /**
-         * Node next to this
-         */
-        @Nullable
-        protected Node<E> n;
+		/** Node next to this */
+		@Nullable protected Node<E> n;
 
-        /**
-         * Value held
-         */
-        @SuppressWarnings("NullAway.Init")
-        public E value;
+		/** Value held */
+		@SuppressWarnings("NullAway.Init") public E value;
 
-        /**
-         * Index value in list
-         */
-        public int index;
-    }
+		/** Index value in list */
+		public int index;
+	}
 
-    static class NodePool<E> extends Pool<Node<E>> {
+	static class NodePool<E> extends Pool<Node<E>> {
 
-        @Override
-        protected Node<E> newObject() {
-            return new Node<E>();
-        }
+		@Override
+		protected Node<E> newObject () {
+			return new Node<E>();
+		}
 
-        public Node<E> obtain(@Nullable Node<E> p, @Nullable Node<E> n, E value, int index) {
-            Node<E> newNode = super.obtain();
-            newNode.p = p;
-            newNode.n = n;
-            newNode.value = value;
-            newNode.index = index;
-            return newNode;
-        }
-    }
+		public Node<E> obtain (@Nullable Node<E> p, @Nullable Node<E> n, E value, int index) {
+			Node<E> newNode = super.obtain();
+			newNode.p = p;
+			newNode.n = n;
+			newNode.value = value;
+			newNode.index = index;
+			return newNode;
+		}
+	}
 }

@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import javax.annotation.Nullable;
@@ -22,15 +23,11 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 
 public class ModelMesh {
 
-    @Nullable
-    public String id;
+	@Nullable public String id;
 
-    @Nullable
-    public VertexAttribute[] attributes;
+	@Nullable public VertexAttribute[] attributes;
 
-    @Nullable
-    public float[] vertices;
+	@Nullable public float[] vertices;
 
-    @SuppressWarnings("NullAway.Init")
-    public ModelMeshPart[] parts;
+	@SuppressWarnings("NullAway.Init") public ModelMeshPart[] parts;
 }

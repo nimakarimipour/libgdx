@@ -15,88 +15,68 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.maps;
 
 import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.Color;
 
-/**
- * Generic Map entity with basic attributes like name, opacity, color
- */
+/** Generic Map entity with basic attributes like name, opacity, color */
 public class MapObject {
 
-    @Nullable
-    private String name = "";
+	@Nullable private String name = "";
 
-    private float opacity = 1.0f;
+	private float opacity = 1.0f;
 
-    private boolean visible = true;
+	private boolean visible = true;
 
-    private MapProperties properties = new MapProperties();
+	private MapProperties properties = new MapProperties();
 
-    private Color color = Color.WHITE.cpy();
+	private Color color = Color.WHITE.cpy();
 
-    /**
-     * @return object's name
-     */
-    @Nullable
-    public String getName() {
-        return name;
-    }
+	/** @return object's name */
+	@Nullable
+	public String getName () {
+		return name;
+	}
 
-    /**
-     * @param name new name for the object
-     */
-    public void setName(@Nullable String name) {
-        this.name = name;
-    }
+	/** @param name new name for the object */
+	public void setName (@Nullable String name) {
+		this.name = name;
+	}
 
-    /**
-     * @return object's color
-     */
-    public Color getColor() {
-        return color;
-    }
+	/** @return object's color */
+	public Color getColor () {
+		return color;
+	}
 
-    /**
-     * @param color new color for the object
-     */
-    public void setColor(Color color) {
-        this.color = color;
-    }
+	/** @param color new color for the object */
+	public void setColor (Color color) {
+		this.color = color;
+	}
 
-    /**
-     * @return object's opacity
-     */
-    public float getOpacity() {
-        return opacity;
-    }
+	/** @return object's opacity */
+	public float getOpacity () {
+		return opacity;
+	}
 
-    /**
-     * @param opacity new opacity value for the object
-     */
-    public void setOpacity(float opacity) {
-        this.opacity = opacity;
-    }
+	/** @param opacity new opacity value for the object */
+	public void setOpacity (float opacity) {
+		this.opacity = opacity;
+	}
 
-    /**
-     * @return whether the object is visible or not
-     */
-    public boolean isVisible() {
-        return visible;
-    }
+	/** @return whether the object is visible or not */
+	public boolean isVisible () {
+		return visible;
+	}
 
-    /**
-     * @param visible toggles object's visibility
-     */
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
+	/** @param visible toggles object's visibility */
+	public void setVisible (boolean visible) {
+		this.visible = visible;
+	}
 
-    /**
-     * @return object's properties set
-     */
-    public MapProperties getProperties() {
-        return properties;
-    }
+	/** @return object's properties set */
+	public MapProperties getProperties () {
+		return properties;
+	}
 }

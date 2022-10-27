@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import javax.annotation.Nullable;
@@ -22,26 +23,23 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
-/**
- * Sets the actor's {@link Actor#setTouchable(Touchable) touchability}.
- * @author Nathan Sweet
- */
+/** Sets the actor's {@link Actor#setTouchable(Touchable) touchability}.
+ * @author Nathan Sweet */
 public class TouchableAction extends Action {
 
-    @Nullable
-    private Touchable touchable;
+	@Nullable private Touchable touchable;
 
-    public boolean act(float delta) {
-        target.setTouchable(touchable);
-        return true;
-    }
+	public boolean act (float delta) {
+		target.setTouchable(touchable);
+		return true;
+	}
 
-    @Nullable
-    public Touchable getTouchable() {
-        return touchable;
-    }
+	@Nullable
+	public Touchable getTouchable () {
+		return touchable;
+	}
 
-    public void setTouchable(Touchable touchable) {
-        this.touchable = touchable;
-    }
+	public void setTouchable (Touchable touchable) {
+		this.touchable = touchable;
+	}
 }

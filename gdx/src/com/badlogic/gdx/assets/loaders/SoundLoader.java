@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.assets.loaders;
 
 import javax.annotation.Nullable;
@@ -26,48 +27,43 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * {@link AssetLoader} to load {@link Sound} instances.
- * @author mzechner
- */
+/** {@link AssetLoader} to load {@link Sound} instances.
+ * @author mzechner */
 public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.SoundParameter> {
 
-    @Nullable
-    private Sound sound;
+	@Nullable private Sound sound;
 
-    public SoundLoader(FileHandleResolver resolver) {
-        super(resolver);
-    }
+	public SoundLoader (FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-    /**
-     * Returns the {@link Sound} instance currently loaded by this {@link SoundLoader}.
-     *
-     * @return the currently loaded {@link Sound}, otherwise {@code null} if no {@link Sound} has been loaded yet.
-     */
-    @Nullable
-    protected Sound getLoadedSound() {
-        return sound;
-    }
+	/** Returns the {@link Sound} instance currently loaded by this {@link SoundLoader}.
+	 *
+	 * @return the currently loaded {@link Sound}, otherwise {@code null} if no {@link Sound} has been loaded yet. */
+	@Nullable
+	protected Sound getLoadedSound () {
+		return sound;
+	}
 
-    @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file, @Nullable SoundParameter parameter) {
-        sound = Gdx.audio.newSound(file);
-    }
+	@Override
+	public void loadAsync (AssetManager manager, String fileName, FileHandle file, @Nullable SoundParameter parameter) {
+		sound = Gdx.audio.newSound(file);
+	}
 
-    @Override
-    @Nullable
-    public Sound loadSync(AssetManager manager, String fileName, FileHandle file, @Nullable SoundParameter parameter) {
-        Sound sound = this.sound;
-        this.sound = null;
-        return sound;
-    }
+	@Override
+	@Nullable
+	public Sound loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable SoundParameter parameter) {
+		Sound sound = this.sound;
+		this.sound = null;
+		return sound;
+	}
 
-    @Override
-    @Nullable
-    public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, @Nullable SoundParameter parameter) {
-        return null;
-    }
+	@Override
+	@Nullable
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable SoundParameter parameter) {
+		return null;
+	}
 
-    static public class SoundParameter extends AssetLoaderParameters<Sound> {
-    }
+	static public class SoundParameter extends AssetLoaderParameters<Sound> {
+	}
 }

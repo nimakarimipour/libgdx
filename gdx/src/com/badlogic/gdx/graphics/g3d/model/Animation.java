@@ -15,34 +15,25 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model;
 
-import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * An Animation has an id and a list of {@link NodeAnimation} instances. Each NodeAnimation animates a single {@link Node} in the
+/** An Animation has an id and a list of {@link NodeAnimation} instances. Each NodeAnimation animates a single {@link Node} in the
  * {@link Model}. Every {@link NodeAnimation} is assumed to have the same amount of keyframes, at the same timestamps, as all
  * other node animations for faster keyframe searches.
  *
- * @author badlogic
- */
+ * @author badlogic */
 public class Animation {
 
-    /**
-     * the unique id of the animation *
-     */
-    @SuppressWarnings("NullAway.Init")
-    public String id;
+	/** the unique id of the animation * */
+	@SuppressWarnings("NullAway.Init") public String id;
 
-    /**
-     * the duration in seconds *
-     */
-    public float duration;
+	/** the duration in seconds * */
+	public float duration;
 
-    /**
-     * the animation curves for individual nodes *
-     */
-    public Array<NodeAnimation> nodeAnimations = new Array<NodeAnimation>();
+	/** the animation curves for individual nodes * */
+	public Array<NodeAnimation> nodeAnimations = new Array<NodeAnimation>();
 }

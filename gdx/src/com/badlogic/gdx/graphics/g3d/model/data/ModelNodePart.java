@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import javax.annotation.Nullable;
@@ -23,15 +24,11 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 public class ModelNodePart {
 
-    @Nullable
-    public String materialId;
+	@Nullable public String materialId;
 
-    @Nullable
-    public String meshPartId;
+	@Nullable public String meshPartId;
 
-    @Nullable
-    public ArrayMap<String, Matrix4> bones;
+	@Nullable public ArrayMap<String, Matrix4> bones;
 
-    @Nullable
-    public int[][] uvMapping;
+	@Nullable public int[][] uvMapping;
 }

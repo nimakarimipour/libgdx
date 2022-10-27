@@ -15,6 +15,7 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.assets.loaders;
 
 import javax.annotation.Nullable;
@@ -26,8 +27,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 
-/**
- * {@link AssetLoader} for {@link I18NBundle} instances. The I18NBundle is loaded asynchronously.
+/** {@link AssetLoader} for {@link I18NBundle} instances. The I18NBundle is loaded asynchronously.
  * <p>
  * Notice that you can't load two bundles with the same base name and different locale or encoding using the same
  * {@link AssetManager}. For example, if you try to load the 2 bundles below
@@ -43,69 +43,65 @@ import com.badlogic.gdx.utils.I18NBundle;
  * <li>If you want to load the English bundle so to replace the Italian bundle you have to unload the Italian bundle first.
  * <li>If you want to load the English bundle without replacing the Italian bundle you should use another asset manager.
  * </ul>
- * @author davebaol
- */
+ * @author davebaol */
 public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBundleLoader.I18NBundleParameter> {
 
-    public I18NBundleLoader(FileHandleResolver resolver) {
-        super(resolver);
-    }
+	public I18NBundleLoader (FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-    @Nullable
-    I18NBundle bundle;
+	@Nullable I18NBundle bundle;
 
-    @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
-        this.bundle = null;
-        Locale locale;
-        String encoding;
-        if (parameter == null) {
-            locale = Locale.getDefault();
-            encoding = null;
-        } else {
-            locale = parameter.locale == null ? Locale.getDefault() : parameter.locale;
-            encoding = parameter.encoding;
-        }
-        if (encoding == null) {
-            this.bundle = I18NBundle.createBundle(file, locale);
-        } else {
-            this.bundle = I18NBundle.createBundle(file, locale, encoding);
-        }
-    }
+	@Override
+	public void loadAsync (AssetManager manager, String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
+		this.bundle = null;
+		Locale locale;
+		String encoding;
+		if (parameter == null) {
+			locale = Locale.getDefault();
+			encoding = null;
+		} else {
+			locale = parameter.locale == null ? Locale.getDefault() : parameter.locale;
+			encoding = parameter.encoding;
+		}
+		if (encoding == null) {
+			this.bundle = I18NBundle.createBundle(file, locale);
+		} else {
+			this.bundle = I18NBundle.createBundle(file, locale, encoding);
+		}
+	}
 
-    @Override
-    @Nullable
-    public I18NBundle loadSync(AssetManager manager, String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
-        I18NBundle bundle = this.bundle;
-        this.bundle = null;
-        return bundle;
-    }
+	@Override
+	@Nullable
+	public I18NBundle loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
+		I18NBundle bundle = this.bundle;
+		this.bundle = null;
+		return bundle;
+	}
 
-    @Override
-    @Nullable
-    public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
-        return null;
-    }
+	@Override
+	@Nullable
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
+		return null;
+	}
 
-    static public class I18NBundleParameter extends AssetLoaderParameters<I18NBundle> {
+	static public class I18NBundleParameter extends AssetLoaderParameters<I18NBundle> {
 
-        @Nullable
-        public final Locale locale;
+		@Nullable public final Locale locale;
 
-        @Nullable
-        public final String encoding;
+		@Nullable public final String encoding;
 
-        public I18NBundleParameter() {
-            this(null, null);
-        }
+		public I18NBundleParameter () {
+			this(null, null);
+		}
 
-        public I18NBundleParameter(Locale locale) {
-            this(locale, null);
-        }
+		public I18NBundleParameter (Locale locale) {
+			this(locale, null);
+		}
 
-        public I18NBundleParameter(@Nullable Locale locale, @Nullable String encoding) {
-            this.locale = locale;
-            this.encoding = encoding;
-        }
-    }
+		public I18NBundleParameter (@Nullable Locale locale, @Nullable String encoding) {
+			this.locale = locale;
+			this.encoding = encoding;
+		}
+	}
 }

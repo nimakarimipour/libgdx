@@ -15,36 +15,34 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import javax.annotation.Nullable;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-/**
- * Removes an action from an actor.
- * @author Nathan Sweet
- */
+/** Removes an action from an actor.
+ * @author Nathan Sweet */
 public class RemoveAction extends Action {
 
-    @Nullable
-    private Action action;
+	@Nullable private Action action;
 
-    public boolean act(float delta) {
-        target.removeAction(action);
-        return true;
-    }
+	public boolean act (float delta) {
+		target.removeAction(action);
+		return true;
+	}
 
-    @Nullable
-    public Action getAction() {
-        return action;
-    }
+	@Nullable
+	public Action getAction () {
+		return action;
+	}
 
-    public void setAction(Action action) {
-        this.action = action;
-    }
+	public void setAction (Action action) {
+		this.action = action;
+	}
 
-    public void reset() {
-        super.reset();
-        action = null;
-    }
+	public void reset () {
+		super.reset();
+		action = null;
+	}
 }

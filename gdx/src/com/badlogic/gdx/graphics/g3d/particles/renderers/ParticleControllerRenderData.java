@@ -15,21 +15,17 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.particles.renderers;
 
-import javax.annotation.Nullable;
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.FloatChannel;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 
-/**
- * Render data used by particle controller renderer
- * @author Inferno
- */
+/** Render data used by particle controller renderer
+ * @author Inferno */
 public abstract class ParticleControllerRenderData {
 
-    @SuppressWarnings("NullAway.Init")
-    public ParticleController controller;
+	@SuppressWarnings("NullAway.Init") public ParticleController controller;
 
-    @SuppressWarnings("NullAway.Init")
-    public FloatChannel positionChannel;
+	@SuppressWarnings("NullAway.Init") public FloatChannel positionChannel;
 }

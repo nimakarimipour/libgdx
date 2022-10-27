@@ -15,17 +15,16 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import javax.annotation.Nullable;
 
 public class ModelMeshPart {
 
-    @Nullable
-    public String id;
+	@Nullable public String id;
 
-    @SuppressWarnings("NullAway.Init")
-    public short[] indices;
+	@SuppressWarnings("NullAway.Init") public short[] indices;
 
-    public int primitiveType;
+	public int primitiveType;
 }

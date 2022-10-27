@@ -15,18 +15,16 @@
  *  limitations under the License.
  * ****************************************************************************
  */
+
 package com.badlogic.gdx.assets.loaders;
 
-import javax.annotation.Nullable;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 
-/**
- * Interface for classes the can map a file name to a {@link FileHandle}. Used to allow the {@link AssetManager} to load
+/** Interface for classes the can map a file name to a {@link FileHandle}. Used to allow the {@link AssetManager} to load
  * resources from anywhere or implement caching strategies.
- * @author mzechner
- */
+ * @author mzechner */
 public interface FileHandleResolver {
 
-    public FileHandle resolve(String fileName);
+	public FileHandle resolve (String fileName);
 }
