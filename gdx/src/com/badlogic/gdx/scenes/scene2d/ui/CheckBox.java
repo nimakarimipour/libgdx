@@ -1,21 +1,23 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
+/**
+ * ****************************************************************************
+ *  Copyright 2011 See AUTHORS file.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.NullUnmarked;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -24,102 +26,118 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
 
-/** A checkbox is a button that contains an image indicating the checked or unchecked state and a label.
- * @author Nathan Sweet */
+/**
+ * A checkbox is a button that contains an image indicating the checked or unchecked state and a label.
+ * @author Nathan Sweet
+ */
 public class CheckBox extends TextButton {
-	private Image image;
-	private Cell imageCell;
-	private CheckBoxStyle style;
 
-	public CheckBox (@Null String text, Skin skin) {
-		this(text, skin.get(CheckBoxStyle.class));
-	}
+    private Image image;
 
-	public CheckBox (@Null String text, Skin skin, String styleName) {
-		this(text, skin.get(styleName, CheckBoxStyle.class));
-	}
+    private Cell imageCell;
 
-	public CheckBox (@Null String text, CheckBoxStyle style) {
-		super(text, style);
+    @SuppressWarnings("NullAway.Init")
+    private CheckBoxStyle style;
 
-		Label label = getLabel();
-		label.setAlignment(Align.left);
+    public CheckBox(@Null String text, Skin skin) {
+        this(text, skin.get(CheckBoxStyle.class));
+    }
 
-		image = newImage();
-		image.setDrawable(style.checkboxOff);
+    public CheckBox(@Null String text, Skin skin, String styleName) {
+        this(text, skin.get(styleName, CheckBoxStyle.class));
+    }
 
-		clearChildren();
-		imageCell = add(image);
-		add(label);
-		setSize(getPrefWidth(), getPrefHeight());
-	}
+    public CheckBox(@Null String text, CheckBoxStyle style) {
+        super(text, style);
+        Label label = getLabel();
+        label.setAlignment(Align.left);
+        image = newImage();
+        image.setDrawable(style.checkboxOff);
+        clearChildren();
+        imageCell = add(image);
+        add(label);
+        setSize(getPrefWidth(), getPrefHeight());
+    }
 
-	protected Image newImage () {
-		return new Image((Drawable)null, Scaling.none);
-	}
+    @NullUnmarked
+    protected Image newImage() {
+        return new Image((Drawable) null, Scaling.none);
+    }
 
-	public void setStyle (ButtonStyle style) {
-		if (!(style instanceof CheckBoxStyle)) throw new IllegalArgumentException("style must be a CheckBoxStyle.");
-		this.style = (CheckBoxStyle)style;
-		super.setStyle(style);
-	}
+    public void setStyle(ButtonStyle style) {
+        if (!(style instanceof CheckBoxStyle))
+            throw new IllegalArgumentException("style must be a CheckBoxStyle.");
+        this.style = (CheckBoxStyle) style;
+        super.setStyle(style);
+    }
 
-	/** Returns the checkbox's style. Modifying the returned style may not have an effect until {@link #setStyle(ButtonStyle)} is
-	 * called. */
-	public CheckBoxStyle getStyle () {
-		return style;
-	}
+    /**
+     * Returns the checkbox's style. Modifying the returned style may not have an effect until {@link #setStyle(ButtonStyle)} is
+     * called.
+     */
+    public CheckBoxStyle getStyle() {
+        return style;
+    }
 
-	public void draw (Batch batch, float parentAlpha) {
-		image.setDrawable(getImageDrawable());
-		super.draw(batch, parentAlpha);
-	}
+    public void draw(Batch batch, float parentAlpha) {
+        image.setDrawable(getImageDrawable());
+        super.draw(batch, parentAlpha);
+    }
 
-	protected @Null Drawable getImageDrawable () {
-		if (isDisabled()) {
-			if (isChecked && style.checkboxOnDisabled != null) return style.checkboxOnDisabled;
-			return style.checkboxOffDisabled;
-		}
-		boolean over = isOver() && !isDisabled();
-		if (isChecked && style.checkboxOn != null)
-			return over && style.checkboxOnOver != null ? style.checkboxOnOver : style.checkboxOn;
-		if (over && style.checkboxOver != null) return style.checkboxOver;
-		return style.checkboxOff;
-	}
+    @Null
+    protected Drawable getImageDrawable() {
+        if (isDisabled()) {
+            if (isChecked && style.checkboxOnDisabled != null)
+                return style.checkboxOnDisabled;
+            return style.checkboxOffDisabled;
+        }
+        boolean over = isOver() && !isDisabled();
+        if (isChecked && style.checkboxOn != null)
+            return over && style.checkboxOnOver != null ? style.checkboxOnOver : style.checkboxOn;
+        if (over && style.checkboxOver != null)
+            return style.checkboxOver;
+        return style.checkboxOff;
+    }
 
-	public Image getImage () {
-		return image;
-	}
+    public Image getImage() {
+        return image;
+    }
 
-	public Cell getImageCell () {
-		return imageCell;
-	}
+    public Cell getImageCell() {
+        return imageCell;
+    }
 
-	/** The style for a select box, see {@link CheckBox}.
-	 * @author Nathan Sweet */
-	static public class CheckBoxStyle extends TextButtonStyle {
-		public Drawable checkboxOn, checkboxOff;
-		public @Null Drawable checkboxOnOver, checkboxOver, checkboxOnDisabled, checkboxOffDisabled;
+    /**
+     * The style for a select box, see {@link CheckBox}.
+     * @author Nathan Sweet
+     */
+    static public class CheckBoxStyle extends TextButtonStyle {
 
-		public CheckBoxStyle () {
-		}
+        @SuppressWarnings("NullAway.Init")
+        public Drawable checkboxOn, checkboxOff;
 
-		public CheckBoxStyle (Drawable checkboxOff, Drawable checkboxOn, BitmapFont font, @Null Color fontColor) {
-			this.checkboxOff = checkboxOff;
-			this.checkboxOn = checkboxOn;
-			this.font = font;
-			this.fontColor = fontColor;
-		}
+        @Null
+        @SuppressWarnings("NullAway.Init")
+        public Drawable checkboxOnOver, checkboxOver, checkboxOnDisabled, checkboxOffDisabled;
 
-		public CheckBoxStyle (CheckBoxStyle style) {
-			super(style);
-			checkboxOff = style.checkboxOff;
-			checkboxOn = style.checkboxOn;
+        public CheckBoxStyle() {
+        }
 
-			checkboxOnOver = style.checkboxOnOver;
-			checkboxOver = style.checkboxOver;
-			checkboxOnDisabled = style.checkboxOnDisabled;
-			checkboxOffDisabled = style.checkboxOffDisabled;
-		}
-	}
+        public CheckBoxStyle(Drawable checkboxOff, Drawable checkboxOn, BitmapFont font, @Null Color fontColor) {
+            this.checkboxOff = checkboxOff;
+            this.checkboxOn = checkboxOn;
+            this.font = font;
+            this.fontColor = fontColor;
+        }
+
+        public CheckBoxStyle(CheckBoxStyle style) {
+            super(style);
+            checkboxOff = style.checkboxOff;
+            checkboxOn = style.checkboxOn;
+            checkboxOnOver = style.checkboxOnOver;
+            checkboxOver = style.checkboxOver;
+            checkboxOnDisabled = style.checkboxOnDisabled;
+            checkboxOffDisabled = style.checkboxOffDisabled;
+        }
+    }
 }
