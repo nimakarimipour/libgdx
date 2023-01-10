@@ -14,6 +14,8 @@
   "REDIRECT_BUILD_OUTPUT_TO_STDERR": false,
   "EXHAUSTIVE_SEARCH": false,
   "OUTER_LOOP": true,
+  "CACHE_IMPACT_ACTIVATION": true,
+  "PARALLEL_PROCESSING": true,
   "CONFIG_PATHS": [
     {
       "NULLAWAY": "/tmp/NullAwayFix/nullaway.xml",
