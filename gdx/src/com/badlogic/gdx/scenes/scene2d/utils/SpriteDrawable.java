@@ -20,11 +20,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
+import javax.annotation.Nullable;
 
 /** Drawable for a {@link Sprite}.
  * @author Nathan Sweet */
 public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
-	private Sprite sprite;
+	@Nullable private Sprite sprite;
 
 	/** Creates an uninitialized SpriteDrawable. The sprite must be set before use. */
 	public SpriteDrawable () {
@@ -68,13 +69,13 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
 		sprite.setPackedColor(oldColor);
 	}
 
-	public void setSprite (Sprite sprite) {
+	public void setSprite (@Nullable Sprite sprite) {
 		this.sprite = sprite;
 		setMinWidth(sprite.getWidth());
 		setMinHeight(sprite.getHeight());
 	}
 
-	public Sprite getSprite () {
+	@Nullable public Sprite getSprite () {
 		return sprite;
 	}
 

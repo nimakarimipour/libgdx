@@ -18,6 +18,7 @@ package com.badlogic.gdx;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
+import javax.annotation.Nullable;
 
 /** Environment class holding references to the {@link Application}, {@link Graphics}, {@link Audio}, {@link Files} and
  * {@link Input} instances. The references are held in public static fields which allows static access to all sub systems. Do not
@@ -31,7 +32,7 @@ public class Gdx {
 	public static Audio audio;
 	public static Input input;
 	public static Files files;
-	public static Net net;
+	@Nullable public static Net net;
 
 	public static GL20 gl;
 	public static GL20 gl20;

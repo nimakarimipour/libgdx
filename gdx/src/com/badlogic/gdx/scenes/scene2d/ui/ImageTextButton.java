@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
+import javax.annotation.Nullable;
 
 /** A button with a child {@link Image} and {@link Label}.
  * @see ImageButton
@@ -94,7 +95,7 @@ public class ImageTextButton extends Button {
 	}
 
 	/** Returns the appropriate image drawable from the style based on the current button state. */
-	protected @Null Drawable getImageDrawable () {
+	@Nullable protected @Null Drawable getImageDrawable () {
 		if (isDisabled() && style.imageDisabled != null) return style.imageDisabled;
 		if (isPressed()) {
 			if (isChecked() && style.imageCheckedDown != null) return style.imageCheckedDown;
@@ -121,7 +122,7 @@ public class ImageTextButton extends Button {
 	}
 
 	/** Returns the appropriate label font color from the style based on the current button state. */
-	protected @Null Color getFontColor () {
+	@Nullable protected @Null Color getFontColor () {
 		if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
 		if (isPressed()) {
 			if (isChecked() && style.checkedDownFontColor != null) return style.checkedDownFontColor;
@@ -192,8 +193,8 @@ public class ImageTextButton extends Button {
 	/** The style for an image text button, see {@link ImageTextButton}.
 	 * @author Nathan Sweet */
 	static public class ImageTextButtonStyle extends TextButtonStyle {
-		public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
-		public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
+		@Nullable public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
+		@Nullable public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
 		public ImageTextButtonStyle () {
 		}

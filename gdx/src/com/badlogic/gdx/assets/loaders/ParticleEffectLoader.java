@@ -23,6 +23,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** {@link AssetLoader} to load {@link ParticleEffect} instances. Passing a {@link ParticleEffectParameter} to
  * {@link AssetManager#load(String, Class, AssetLoaderParameters)} allows to specify an atlas file or an image directory to be
@@ -33,7 +34,7 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 	}
 
 	@Override
-	public ParticleEffect load (AssetManager am, String fileName, FileHandle file, ParticleEffectParameter param) {
+	public ParticleEffect load (AssetManager am, String fileName, FileHandle file, @Nullable ParticleEffectParameter param) {
 		ParticleEffect effect = new ParticleEffect();
 		if (param != null && param.atlasFile != null)
 			effect.load(file, am.get(param.atlasFile, TextureAtlas.class), param.atlasPrefix);
@@ -44,8 +45,8 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 		return effect;
 	}
 
-	@Override
-	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, ParticleEffectParameter param) {
+	@Nullable @Override
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable ParticleEffectParameter param) {
 		Array<AssetDescriptor> deps = null;
 		if (param != null && param.atlasFile != null) {
 			deps = new Array();
@@ -58,10 +59,10 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 	 * necessary for the {@link ParticleEffect}. */
 	public static class ParticleEffectParameter extends AssetLoaderParameters<ParticleEffect> {
 		/** Atlas file name. */
-		public String atlasFile;
+		@Nullable public String atlasFile;
 		/** Optional prefix to image names **/
-		public String atlasPrefix;
+		@Nullable public String atlasPrefix;
 		/** Image directory. */
-		public FileHandle imagesDir;
+		@Nullable public FileHandle imagesDir;
 	}
 }

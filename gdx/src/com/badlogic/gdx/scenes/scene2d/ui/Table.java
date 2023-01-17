@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** A group that sizes and positions children using table constraints.
  * <p>
@@ -55,7 +56,7 @@ public class Table extends WidgetGroup {
 			return new Cell();
 		}
 	};
-	static private float[] columnWeightedWidth, rowWeightedHeight;
+	@Nullable static private float[] columnWeightedWidth, rowWeightedHeight;
 
 	private int columns, rows;
 	private boolean implicitEndRow;
@@ -63,7 +64,7 @@ public class Table extends WidgetGroup {
 	private final Array<Cell> cells = new Array(4);
 	private final Cell cellDefaults;
 	private final Array<Cell> columnDefaults = new Array(2);
-	private Cell rowDefaults;
+	@Nullable private Cell rowDefaults;
 
 	private boolean sizeInvalid = true;
 	private float[] columnMinWidth, rowMinHeight;
@@ -79,9 +80,9 @@ public class Table extends WidgetGroup {
 	Debug debug = Debug.none;
 	Array<DebugRect> debugRects;
 
-	@Null Drawable background;
+	@Nullable @Null Drawable background;
 	private boolean clip;
-	private @Null Skin skin;
+	@Nullable private @Null Skin skin;
 	boolean round = true;
 
 	public Table () {
@@ -89,7 +90,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Creates a table with a skin, which is required to use {@link #add(CharSequence)} or {@link #add(CharSequence, String)}. */
-	public Table (@Null Skin skin) {
+	public Table (@Nullable @Null Skin skin) {
 		this.skin = skin;
 
 		cellDefaults = obtainCell();
@@ -145,7 +146,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** @param background May be null to clear the background. */
-	public void setBackground (@Null Drawable background) {
+	public void setBackground (@Nullable @Null Drawable background) {
 		if (this.background == background) return;
 		float padTopOld = getPadTop(), padLeftOld = getPadLeft(), padBottomOld = getPadBottom(), padRightOld = getPadRight();
 		this.background = background; // The default pad values use the background's padding.
@@ -168,11 +169,11 @@ public class Table extends WidgetGroup {
 		return this;
 	}
 
-	public @Null Drawable getBackground () {
+	@Nullable public @Null Drawable getBackground () {
 		return background;
 	}
 
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
@@ -209,7 +210,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Adds a new cell to the table with the specified actor. */
-	public <T extends Actor> Cell<T> add (@Null T actor) {
+	public <T extends Actor> Cell<T> add (@Nullable @Null T actor) {
 		Cell<T> cell = obtainCell();
 		cell.actor = actor;
 
@@ -367,7 +368,7 @@ public class Table extends WidgetGroup {
 
 	/** Indicates that subsequent cells should be added to a new row and returns the cell values that will be used as the defaults
 	 * for all cells in the new row. */
-	public Cell row () {
+	@Nullable public Cell row () {
 		if (cells.size > 0) {
 			if (!implicitEndRow) {
 				if (cells.peek().endRow) return rowDefaults; // Row was already ended.
@@ -772,7 +773,7 @@ public class Table extends WidgetGroup {
 		return columnPrefWidth[columnIndex];
 	}
 
-	private float[] ensureSize (float[] array, int size) {
+	private float[] ensureSize (@Nullable float[] array, int size) {
 		if (array == null || array.length < size) return new float[size];
 		Arrays.fill(array, 0, size, 0);
 		return array;
@@ -1264,14 +1265,14 @@ public class Table extends WidgetGroup {
 	}
 
 	/** @return The skin that was passed to this table in its constructor, or null if none was given. */
-	public @Null Skin getSkin () {
+	@Nullable public @Null Skin getSkin () {
 		return skin;
 	}
 
 	/** @author Nathan Sweet */
 	static public class DebugRect extends Rectangle {
 		static Pool<DebugRect> pool = Pools.get(DebugRect.class);
-		Color color;
+		@Nullable Color color;
 	}
 
 	/** @author Nathan Sweet */
@@ -1282,7 +1283,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the top padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundTop = new Value() {
-		public float get (@Null Actor context) {
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getTopHeight();
 		}
@@ -1291,7 +1292,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the left padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundLeft = new Value() {
-		public float get (@Null Actor context) {
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getLeftWidth();
 		}
@@ -1300,7 +1301,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the bottom padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundBottom = new Value() {
-		public float get (@Null Actor context) {
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getBottomHeight();
 		}
@@ -1309,7 +1310,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the right padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundRight = new Value() {
-		public float get (@Null Actor context) {
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getRightWidth();
 		}

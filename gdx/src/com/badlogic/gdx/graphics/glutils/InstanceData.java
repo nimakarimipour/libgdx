@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.nio.FloatBuffer;
+import javax.annotation.Nullable;
 
 /** A InstanceData instance holds instance data for rendering with OpenGL. It is implemented as either a
  * {@link InstanceBufferObject} or a {@link InstanceBufferObjectSubData}. Both require Open GL 3.3+.
@@ -84,7 +85,7 @@ public interface InstanceData extends Disposable {
 	/** Binds this InstanceData for rendering via glDrawArraysInstanced or glDrawElementsInstanced.
 	 *
 	 * @param locations array containing the attribute locations. */
-	public void bind (ShaderProgram shader, int[] locations);
+	public void bind (ShaderProgram shader, @Nullable int[] locations);
 
 	/** Unbinds this InstanceData. */
 	public void unbind (ShaderProgram shader);
@@ -92,7 +93,7 @@ public interface InstanceData extends Disposable {
 	/** Unbinds this InstanceData.
 	 *
 	 * @param locations array containing the attribute locations. */
-	public void unbind (ShaderProgram shader, int[] locations);
+	public void unbind (ShaderProgram shader, @Nullable int[] locations);
 
 	/** Invalidates the InstanceData if applicable. Use this in case of a context loss. */
 	public void invalidate ();

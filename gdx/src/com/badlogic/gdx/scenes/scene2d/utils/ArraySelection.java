@@ -4,19 +4,20 @@ package com.badlogic.gdx.scenes.scene2d.utils;
 import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** A selection that supports range selection by knowing about the array of items being selected.
  * @author Nathan Sweet */
 public class ArraySelection<T> extends Selection<T> {
 	private Array<T> array;
 	private boolean rangeSelect = true;
-	private T rangeStart;
+	@Nullable private T rangeStart;
 
 	public ArraySelection (Array<T> array) {
 		this.array = array;
 	}
 
-	public void choose (T item) {
+	public void choose (@Nullable T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (isDisabled) return;
 

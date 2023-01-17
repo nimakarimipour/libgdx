@@ -20,6 +20,7 @@ import java.io.Closeable;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import javax.annotation.Nullable;
 
 /** Builder style API for emitting UBJSON.
  * @author Justin Shapcott */
@@ -27,7 +28,7 @@ public class UBJsonWriter implements Closeable {
 
 	final DataOutputStream out;
 
-	private JsonObject current;
+	@Nullable private JsonObject current;
 	private boolean named;
 	private final Array<JsonObject> stack = new Array();
 
