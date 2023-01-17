@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+
 import javax.annotation.Nullable;
 
 /** A simple linked list that pools its nodes.
@@ -99,7 +100,8 @@ public class PooledLinkedList<T> {
 	/** Gets the next item in the list
 	 * 
 	 * @return the next item in the list or null if there are no more items */
-	@Nullable public @Null T next () {
+	@Nullable
+	public @Null T next () {
 		if (iter == null) return null;
 
 		T payload = iter.payload;
@@ -111,7 +113,8 @@ public class PooledLinkedList<T> {
 	/** Gets the previous item in the list
 	 * 
 	 * @return the previous item in the list or null if there are no more items */
-	@Nullable public @Null T previous () {
+	@Nullable
+	public @Null T previous () {
 		if (iter == null) return null;
 
 		T payload = iter.payload;
@@ -155,7 +158,8 @@ public class PooledLinkedList<T> {
 	}
 
 	/** Removes the tail of the list regardless of iteration status */
-	@Nullable public @Null T removeLast () {
+	@Nullable
+	public @Null T removeLast () {
 		if (tail == null) {
 			return null;
 		}

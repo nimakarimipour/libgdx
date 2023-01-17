@@ -95,7 +95,8 @@ public class ImageTextButton extends Button {
 	}
 
 	/** Returns the appropriate image drawable from the style based on the current button state. */
-	@Nullable protected @Null Drawable getImageDrawable () {
+	@Nullable
+	protected @Null Drawable getImageDrawable () {
 		if (isDisabled() && style.imageDisabled != null) return style.imageDisabled;
 		if (isPressed()) {
 			if (isChecked() && style.imageCheckedDown != null) return style.imageCheckedDown;
@@ -122,7 +123,8 @@ public class ImageTextButton extends Button {
 	}
 
 	/** Returns the appropriate label font color from the style based on the current button state. */
-	@Nullable protected @Null Color getFontColor () {
+	@Nullable
+	protected @Null Color getFontColor () {
 		if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
 		if (isPressed()) {
 			if (isChecked() && style.checkedDownFontColor != null) return style.checkedDownFontColor;

@@ -137,7 +137,8 @@ public class FloatTextureData implements TextureData {
 		return true;
 	}
 
-	@Nullable public FloatBuffer getBuffer () {
+	@Nullable
+	public FloatBuffer getBuffer () {
 		return buffer;
 	}
 }

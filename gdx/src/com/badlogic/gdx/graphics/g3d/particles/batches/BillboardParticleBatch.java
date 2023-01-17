@@ -260,7 +260,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
-	@Nullable public AlignMode getAlignMode () {
+	@Nullable
+	public AlignMode getAlignMode () {
 		return mode;
 	}
 
@@ -292,7 +293,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		return texture;
 	}
 
-	@Nullable public BlendingAttribute getBlendingAttribute () {
+	@Nullable
+	public BlendingAttribute getBlendingAttribute () {
 		return blendingAttribute;
 	}
 

@@ -90,8 +90,10 @@ public class TextField extends Widget implements Disableable {
 	protected CharSequence displayText;
 	Clipboard clipboard;
 	InputListener inputListener;
-	@Nullable @Null TextFieldListener listener;
-	@Nullable @Null TextFieldFilter filter;
+	@Nullable
+	@Null TextFieldListener listener;
+	@Nullable
+	@Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
 	boolean focusTraversal = true, onlyFontChars = true, disabled;
 	private int textHAlign = Align.left;
@@ -294,7 +296,8 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
 		return style.background;
@@ -540,7 +543,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return May be null. */
-	@Nullable private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
+	@Nullable
+	private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
 		Vector2 currentCoords, boolean up) {
 		for (int i = 0, n = actors.size; i < n; i++) {
 			Actor actor = actors.get(i);
@@ -578,7 +582,8 @@ public class TextField extends Widget implements Disableable {
 		this.filter = filter;
 	}
 
-	@Nullable public @Null TextFieldFilter getTextFieldFilter () {
+	@Nullable
+	public @Null TextFieldFilter getTextFieldFilter () {
 		return filter;
 	}
 

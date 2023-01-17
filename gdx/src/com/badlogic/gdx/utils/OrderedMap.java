@@ -70,7 +70,8 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		keys = new Array(map.keys);
 	}
 
-	@Nullable public V put (@Nullable K key, @Nullable V value) {
+	@Nullable
+	public V put (@Nullable K key, @Nullable V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];
@@ -94,12 +95,14 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		}
 	}
 
-	@Nullable public V remove (K key) {
+	@Nullable
+	public V remove (K key) {
 		keys.removeValue(key, false);
 		return super.remove(key);
 	}
 
-	@Nullable public V removeIndex (int index) {
+	@Nullable
+	public V removeIndex (int index) {
 		return super.remove(keys.removeIndex(index));
 	}
 

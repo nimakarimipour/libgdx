@@ -38,7 +38,8 @@ public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.Musi
 	/** Returns the {@link Music} instance currently loaded by this {@link MusicLoader}.
 	 * 
 	 * @return the currently loaded {@link Music}, otherwise {@code null} if no {@link Music} has been loaded yet. */
-	@Nullable protected Music getLoadedMusic () {
+	@Nullable
+	protected Music getLoadedMusic () {
 		return music;
 	}
 
@@ -47,14 +48,16 @@ public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.Musi
 		music = Gdx.audio.newMusic(file);
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Music loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
 		Music music = this.music;
 		this.music = null;
 		return music;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable MusicParameter parameter) {
 		return null;
 	}

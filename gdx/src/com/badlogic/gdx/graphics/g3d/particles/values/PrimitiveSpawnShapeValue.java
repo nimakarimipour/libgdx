@@ -19,7 +19,6 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** The base class of all the {@link SpawnShapeValue} values which spawn the particles on a geometric primitive.
  * @author Inferno */

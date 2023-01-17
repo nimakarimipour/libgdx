@@ -19,7 +19,6 @@ package com.badlogic.gdx.utils;
 import java.io.InputStream;
 
 import com.badlogic.gdx.files.FileHandle;
-import javax.annotation.Nullable;
 
 public interface BaseJsonReader {
 	JsonValue parse (InputStream input);

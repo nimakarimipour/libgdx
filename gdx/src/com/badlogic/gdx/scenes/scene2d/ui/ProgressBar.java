@@ -231,17 +231,20 @@ public class ProgressBar extends Widget implements Disableable {
 		return style.background;
 	}
 
-	@Nullable protected @Null Drawable getKnobDrawable () {
+	@Nullable
+	protected @Null Drawable getKnobDrawable () {
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		return style.knob;
 	}
 
-	@Nullable protected Drawable getKnobBeforeDrawable () {
+	@Nullable
+	protected Drawable getKnobBeforeDrawable () {
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		return style.knobBefore;
 	}
 
-	@Nullable protected Drawable getKnobAfterDrawable () {
+	@Nullable
+	protected Drawable getKnobAfterDrawable () {
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		return style.knobAfter;
 	}

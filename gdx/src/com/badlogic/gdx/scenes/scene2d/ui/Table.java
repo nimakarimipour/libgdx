@@ -80,7 +80,8 @@ public class Table extends WidgetGroup {
 	Debug debug = Debug.none;
 	Array<DebugRect> debugRects;
 
-	@Nullable @Null Drawable background;
+	@Nullable
+	@Null Drawable background;
 	private boolean clip;
 	@Nullable private @Null Skin skin;
 	boolean round = true;
@@ -169,11 +170,13 @@ public class Table extends WidgetGroup {
 		return this;
 	}
 
-	@Nullable public @Null Drawable getBackground () {
+	@Nullable
+	public @Null Drawable getBackground () {
 		return background;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
@@ -368,7 +371,8 @@ public class Table extends WidgetGroup {
 
 	/** Indicates that subsequent cells should be added to a new row and returns the cell values that will be used as the defaults
 	 * for all cells in the new row. */
-	@Nullable public Cell row () {
+	@Nullable
+	public Cell row () {
 		if (cells.size > 0) {
 			if (!implicitEndRow) {
 				if (cells.peek().endRow) return rowDefaults; // Row was already ended.
@@ -1265,7 +1269,8 @@ public class Table extends WidgetGroup {
 	}
 
 	/** @return The skin that was passed to this table in its constructor, or null if none was given. */
-	@Nullable public @Null Skin getSkin () {
+	@Nullable
+	public @Null Skin getSkin () {
 		return skin;
 	}
 

@@ -78,7 +78,8 @@ public class ImageButton extends Button {
 	}
 
 	/** Returns the appropriate image drawable from the style based on the current button state. */
-	@Nullable protected @Null Drawable getImageDrawable () {
+	@Nullable
+	protected @Null Drawable getImageDrawable () {
 		if (isDisabled() && style.imageDisabled != null) return style.imageDisabled;
 		if (isPressed()) {
 			if (isChecked() && style.imageCheckedDown != null) return style.imageCheckedDown;
@@ -135,8 +136,8 @@ public class ImageButton extends Button {
 		public ImageButtonStyle () {
 		}
 
-		public ImageButtonStyle (@Nullable @Null Drawable up, @Nullable @Null Drawable down, @Nullable @Null Drawable checked, @Null Drawable imageUp,
-			@Nullable @Null Drawable imageDown, @Nullable @Null Drawable imageChecked) {
+		public ImageButtonStyle (@Nullable @Null Drawable up, @Nullable @Null Drawable down, @Nullable @Null Drawable checked,
+			@Null Drawable imageUp, @Nullable @Null Drawable imageDown, @Nullable @Null Drawable imageChecked) {
 			super(up, down, checked);
 			this.imageUp = imageUp;
 			this.imageDown = imageDown;

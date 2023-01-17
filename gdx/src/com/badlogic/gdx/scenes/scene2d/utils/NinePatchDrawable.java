@@ -19,7 +19,6 @@ package com.badlogic.gdx.scenes.scene2d.utils;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
-import javax.annotation.Nullable;
 
 /** Drawable for a {@link NinePatch}.
  * <p>
