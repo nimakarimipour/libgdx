@@ -71,7 +71,8 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		if (!info.data.isPrepared()) info.data.prepare();
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Cubemap loadSync (AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
 		if (info == null) return null;
 		Cubemap cubemap = info.cubemap;
@@ -87,7 +88,8 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		return cubemap;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, CubemapParameter parameter) {
 		return null;
 	}

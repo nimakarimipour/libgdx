@@ -112,7 +112,8 @@ abstract public class TemporalAction extends Action {
 		this.duration = duration;
 	}
 
-	@Nullable public @Null Interpolation getInterpolation () {
+	@Nullable
+	public @Null Interpolation getInterpolation () {
 		return interpolation;
 	}
 

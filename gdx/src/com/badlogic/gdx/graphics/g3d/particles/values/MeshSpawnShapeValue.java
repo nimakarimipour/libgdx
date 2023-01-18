@@ -26,7 +26,6 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import javax.annotation.Nullable;
 
 /** The base class of all the {@link ParticleValue} values which spawn a particle on a mesh shape.
  * @author Inferno */

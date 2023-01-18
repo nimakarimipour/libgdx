@@ -139,7 +139,8 @@ public final class Field {
 
 	/** Returns an {@link Annotation} object reflecting the annotation provided, or null of this field doesn't have such an
 	 * annotation. This is a convenience function if the caller knows already which annotation type he's looking for. */
-	@Nullable public Annotation getDeclaredAnnotation (Class<? extends java.lang.annotation.Annotation> annotationType) {
+	@Nullable
+	public Annotation getDeclaredAnnotation (Class<? extends java.lang.annotation.Annotation> annotationType) {
 		java.lang.annotation.Annotation[] annotations = field.getDeclaredAnnotations();
 		if (annotations == null) {
 			return null;

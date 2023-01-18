@@ -103,7 +103,8 @@ public class TextureMapObject extends MapObject {
 	}
 
 	/** @return region */
-	@Nullable public TextureRegion getTextureRegion () {
+	@Nullable
+	public TextureRegion getTextureRegion () {
 		return textureRegion;
 	}
 

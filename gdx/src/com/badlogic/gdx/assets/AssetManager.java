@@ -133,7 +133,8 @@ public class AssetManager implements Disposable {
 	/** @param fileName the asset file name
 	 * @return the asset
 	 * @throws GdxRuntimeException if the asset is not loaded */
-	@Nullable public synchronized <T> T get (String fileName) {
+	@Nullable
+	public synchronized <T> T get (String fileName) {
 		return get(fileName, true);
 	}
 
@@ -148,7 +149,8 @@ public class AssetManager implements Disposable {
 	/** @param fileName the asset file name
 	 * @param required true to throw GdxRuntimeException if the asset is not loaded, else null is returned
 	 * @return the asset or null if it is not loaded and required is false */
-	@Nullable public synchronized @Null <T> T get (String fileName, boolean required) {
+	@Nullable
+	public synchronized @Null <T> T get (String fileName, boolean required) {
 		Class<T> type = assetTypes.get(fileName);
 		if (type != null) {
 			ObjectMap<String, RefCountedContainer> assetsByType = assets.get(type);
@@ -328,7 +330,8 @@ public class AssetManager implements Disposable {
 	/** Returns the default loader for the given type.
 	 * @param type The type of the loader to get
 	 * @return The loader capable of loading the type, or null if none exists */
-	@Nullable public <T> AssetLoader getLoader (final Class<T> type) {
+	@Nullable
+	public <T> AssetLoader getLoader (final Class<T> type) {
 		return getLoader(type, null);
 	}
 
@@ -337,7 +340,8 @@ public class AssetManager implements Disposable {
 	 * @param type The type of the loader to get
 	 * @param fileName The filename of the asset to get a loader for, or null to get the default loader
 	 * @return The loader capable of loading the type and filename, or null if none exists */
-	@Nullable public <T> AssetLoader getLoader (final Class<T> type, @Nullable final String fileName) {
+	@Nullable
+	public <T> AssetLoader getLoader (final Class<T> type, @Nullable final String fileName) {
 		ObjectMap<String, AssetLoader> loaders = this.loaders.get(type);
 		if (loaders == null || loaders.size < 1) return null;
 		if (fileName == null) return loaders.get("");

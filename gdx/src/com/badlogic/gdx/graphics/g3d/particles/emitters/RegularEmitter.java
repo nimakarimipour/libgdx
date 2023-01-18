@@ -23,7 +23,6 @@ import com.badlogic.gdx.graphics.g3d.particles.values.RangedNumericValue;
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** It's a generic use {@link Emitter} which fits most of the particles simulation scenarios.
  * @author Inferno */

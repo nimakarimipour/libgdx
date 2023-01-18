@@ -532,7 +532,8 @@ public class RemoteInput implements Runnable, Input {
 		this.processor = processor;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public InputProcessor getInputProcessor () {
 		return this.processor;
 	}

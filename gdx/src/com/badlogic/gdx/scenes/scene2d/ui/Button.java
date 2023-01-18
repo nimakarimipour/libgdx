@@ -179,7 +179,8 @@ public class Button extends Table implements Disableable {
 	}
 
 	/** @return May be null. */
-	@Nullable public @Null ButtonGroup getButtonGroup () {
+	@Nullable
+	public @Null ButtonGroup getButtonGroup () {
 		return buttonGroup;
 	}
 

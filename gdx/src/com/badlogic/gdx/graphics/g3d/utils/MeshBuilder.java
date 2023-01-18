@@ -156,7 +156,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	/** Begin building a mesh */
-	@Initializer public void begin (final VertexAttributes attributes, int primitiveType) {
+	@Initializer
+	public void begin (final VertexAttributes attributes, int primitiveType) {
 		if (this.attributes != null) throw new RuntimeException("Call end() first");
 		this.attributes = attributes;
 		this.vertices.clear();
@@ -334,7 +335,8 @@ public class MeshBuilder implements MeshPartBuilder {
 		return attributes;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public MeshPart getMeshPart () {
 		return part;
 	}

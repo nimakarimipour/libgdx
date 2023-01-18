@@ -43,7 +43,8 @@ public abstract class ParticleSorter {
 			}
 		}
 
-		@Nullable @Override
+		@Nullable
+		@Override
 		public <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData) {
 			return indices;
 		}
@@ -149,7 +150,8 @@ public abstract class ParticleSorter {
 
 	/** @return an array of offsets where each particle should be put in the resulting mesh (also if more than one mesh will be
 	 *         generated, this is an absolute offset considering a BIG output array). */
-	@Nullable public abstract <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData);
+	@Nullable
+	public abstract <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData);
 
 	public void setCamera (Camera camera) {
 		this.camera = camera;

@@ -29,7 +29,8 @@ public class AddAction extends Action {
 		return true;
 	}
 
-	@Nullable public Action getAction () {
+	@Nullable
+	public Action getAction () {
 		return action;
 	}
 

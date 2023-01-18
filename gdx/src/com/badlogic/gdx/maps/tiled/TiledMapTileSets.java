@@ -67,7 +67,8 @@ public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
 
 	/** @param id id of the {@link TiledMapTile} to get.
 	 * @return tile with matching id, null if it doesn't exist */
-	@Nullable public TiledMapTile getTile (int id) {
+	@Nullable
+	public TiledMapTile getTile (int id) {
 		// The purpose of backward iteration here is to maintain backwards compatibility
 		// with maps created with earlier versions of a shared tileset. The assumption
 		// is that the tilesets are in order of ascending firstgid, and by backward
