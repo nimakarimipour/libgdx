@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
+import javax.annotation.Nullable;
 
 /** {@link AssetLoader} for {@link Skin} instances. All {@link Texture} and {@link BitmapFont} instances will be loaded as
  * dependencies. Passing a {@link SkinParameter} allows the exact name of the texture associated with the skin to be specified.
@@ -84,8 +85,8 @@ public class SkinLoader extends AsynchronousAssetLoader<Skin, SkinLoader.SkinPar
 	}
 
 	static public class SkinParameter extends AssetLoaderParameters<Skin> {
-		public final String textureAtlasPath;
-		public final ObjectMap<String, Object> resources;
+		@Nullable public final String textureAtlasPath;
+		@Nullable public final ObjectMap<String, Object> resources;
 
 		public SkinParameter () {
 			this(null, null);
@@ -99,7 +100,7 @@ public class SkinLoader extends AsynchronousAssetLoader<Skin, SkinLoader.SkinPar
 			this(textureAtlasPath, null);
 		}
 
-		public SkinParameter (String textureAtlasPath, ObjectMap<String, Object> resources) {
+		public SkinParameter (@Nullable String textureAtlasPath, @Nullable ObjectMap<String, Object> resources) {
 			this.textureAtlasPath = textureAtlasPath;
 			this.resources = resources;
 		}

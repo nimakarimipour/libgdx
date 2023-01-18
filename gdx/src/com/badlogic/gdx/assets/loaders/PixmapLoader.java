@@ -22,6 +22,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** {@link AssetLoader} for {@link Pixmap} instances. The Pixmap is loaded asynchronously.
  * @author mzechner */
@@ -30,7 +31,7 @@ public class PixmapLoader extends AsynchronousAssetLoader<Pixmap, PixmapLoader.P
 		super(resolver);
 	}
 
-	Pixmap pixmap;
+	@Nullable Pixmap pixmap;
 
 	@Override
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, PixmapParameter parameter) {
@@ -38,14 +39,14 @@ public class PixmapLoader extends AsynchronousAssetLoader<Pixmap, PixmapLoader.P
 		pixmap = new Pixmap(file);
 	}
 
-	@Override
+	@Nullable @Override
 	public Pixmap loadSync (AssetManager manager, String fileName, FileHandle file, PixmapParameter parameter) {
 		Pixmap pixmap = this.pixmap;
 		this.pixmap = null;
 		return pixmap;
 	}
 
-	@Override
+	@Nullable @Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, PixmapParameter parameter) {
 		return null;
 	}

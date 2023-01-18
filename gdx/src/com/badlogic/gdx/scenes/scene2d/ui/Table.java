@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** A group that sizes and positions children using table constraints.
  * <p>
@@ -55,7 +56,7 @@ public class Table extends WidgetGroup {
 			return new Cell();
 		}
 	};
-	static private float[] columnWeightedWidth, rowWeightedHeight;
+	@Nullable static private float[] columnWeightedWidth, rowWeightedHeight;
 
 	private int columns, rows;
 	private boolean implicitEndRow;
@@ -81,7 +82,7 @@ public class Table extends WidgetGroup {
 
 	@Null Drawable background;
 	private boolean clip;
-	private @Null Skin skin;
+	@Nullable private @Null Skin skin;
 	boolean round = true;
 
 	public Table () {
@@ -89,7 +90,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Creates a table with a skin, which is required to use {@link #add(CharSequence)} or {@link #add(CharSequence, String)}. */
-	public Table (@Null Skin skin) {
+	public Table (@Nullable @Null Skin skin) {
 		this.skin = skin;
 
 		cellDefaults = obtainCell();
@@ -172,7 +173,7 @@ public class Table extends WidgetGroup {
 		return background;
 	}
 
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
@@ -209,7 +210,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Adds a new cell to the table with the specified actor. */
-	public <T extends Actor> Cell<T> add (@Null T actor) {
+	public <T extends Actor> Cell<T> add (@Nullable @Null T actor) {
 		Cell<T> cell = obtainCell();
 		cell.actor = actor;
 
@@ -772,7 +773,7 @@ public class Table extends WidgetGroup {
 		return columnPrefWidth[columnIndex];
 	}
 
-	private float[] ensureSize (float[] array, int size) {
+	private float[] ensureSize (@Nullable float[] array, int size) {
 		if (array == null || array.length < size) return new float[size];
 		Arrays.fill(array, 0, size, 0);
 		return array;
@@ -1264,14 +1265,14 @@ public class Table extends WidgetGroup {
 	}
 
 	/** @return The skin that was passed to this table in its constructor, or null if none was given. */
-	public @Null Skin getSkin () {
+	@Nullable public @Null Skin getSkin () {
 		return skin;
 	}
 
 	/** @author Nathan Sweet */
 	static public class DebugRect extends Rectangle {
 		static Pool<DebugRect> pool = Pools.get(DebugRect.class);
-		Color color;
+		@Nullable Color color;
 	}
 
 	/** @author Nathan Sweet */

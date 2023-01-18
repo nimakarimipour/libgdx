@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FlushablePool;
+import javax.annotation.Nullable;
 
 /** RenderableShapeBuilder builds various properties of a renderable.
  * @author realitix */

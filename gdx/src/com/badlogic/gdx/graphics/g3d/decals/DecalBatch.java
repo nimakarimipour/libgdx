@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SortedIntList;
+import javax.annotation.Nullable;
 
 /**
  * <p>

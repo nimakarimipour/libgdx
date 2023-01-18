@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** {@link AssetLoader} for {@link Texture} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link TextureParameter} to
@@ -34,9 +35,9 @@ import com.badlogic.gdx.utils.Array;
  * @author mzechner */
 public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoader.TextureParameter> {
 	static public class TextureLoaderInfo {
-		String filename;
+		@Nullable String filename;
 		TextureData data;
-		Texture texture;
+		@Nullable Texture texture;
 	};
 
 	TextureLoaderInfo info = new TextureLoaderInfo();
@@ -67,7 +68,7 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		if (!info.data.isPrepared()) info.data.prepare();
 	}
 
-	@Override
+	@Nullable @Override
 	public Texture loadSync (AssetManager manager, String fileName, FileHandle file, TextureParameter parameter) {
 		if (info == null) return null;
 		Texture texture = info.texture;
@@ -83,20 +84,20 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		return texture;
 	}
 
-	@Override
+	@Nullable @Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, TextureParameter parameter) {
 		return null;
 	}
 
 	static public class TextureParameter extends AssetLoaderParameters<Texture> {
 		/** the format of the final Texture. Uses the source images format if null **/
-		public Format format = null;
+		@Nullable public Format format = null;
 		/** whether to generate mipmaps **/
 		public boolean genMipMaps = false;
 		/** The texture to put the {@link TextureData} in, optional. **/
-		public Texture texture = null;
+		@Nullable public Texture texture = null;
 		/** TextureData for textures created on the fly, optional. When set, all format and genMipMaps are ignored */
-		public TextureData textureData = null;
+		@Nullable public TextureData textureData = null;
 		public TextureFilter minFilter = TextureFilter.Nearest;
 		public TextureFilter magFilter = TextureFilter.Nearest;
 		public TextureWrap wrapU = TextureWrap.ClampToEdge;

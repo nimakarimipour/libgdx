@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** A 3x3 grid of texture regions. Any of the regions may be omitted. Padding may be set as a hint on how to inset content on top
  * of the ninepatch (by default the eight "edge" textures of the ninepatch define the padding). When drawn, the four corner
@@ -44,7 +45,7 @@ public class NinePatch {
 
 	static private final Color tmpDrawColor = new Color();
 
-	private Texture texture;
+	@Nullable private Texture texture;
 	private int bottomLeft, bottomCenter, bottomRight;
 	private int middleLeft, middleCenter, middleRight;
 	private int topLeft, topCenter, topRight;
@@ -520,7 +521,7 @@ public class NinePatch {
 		if (padBottom != -1) padBottom *= scaleY;
 	}
 
-	public Texture getTexture () {
+	@Nullable public Texture getTexture () {
 		return texture;
 	}
 }

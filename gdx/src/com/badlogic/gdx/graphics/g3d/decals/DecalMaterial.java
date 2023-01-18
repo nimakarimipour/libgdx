@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d.decals;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import javax.annotation.Nullable;
 
 /** Material used by the {@link Decal} class */
 public class DecalMaterial {

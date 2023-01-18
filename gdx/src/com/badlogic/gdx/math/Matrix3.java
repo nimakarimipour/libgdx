@@ -19,6 +19,7 @@ package com.badlogic.gdx.math;
 import java.io.Serializable;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** A 3x3 <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column major</a> matrix; useful for 2D
  * transforms.
@@ -347,7 +348,7 @@ public class Matrix3 implements Serializable {
 	/** Sets this 3x3 matrix to the top left 3x3 corner of the provided 4x4 matrix.
 	 * @param mat The matrix whose top left corner will be copied. This matrix will not be modified.
 	 * @return This matrix for the purpose of chaining operations. */
-	public Matrix3 set (Matrix4 mat) {
+	public Matrix3 set (@Nullable Matrix4 mat) {
 		float[] val = this.val;
 		val[M00] = mat.val[Matrix4.M00];
 		val[M10] = mat.val[Matrix4.M10];

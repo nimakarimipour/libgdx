@@ -23,6 +23,7 @@ import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** A builder for {@link HttpRequest}s.
  * 

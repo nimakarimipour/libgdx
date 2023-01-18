@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
+import javax.annotation.Nullable;
 
 /** An unordered map where the keys are unboxed longs and values are objects. No allocation is done except when growing the table
  * size.
@@ -44,7 +45,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 	long[] keyTable;
 	V[] valueTable;
 
-	V zeroValue;
+	@Nullable V zeroValue;
 	boolean hasZeroValue;
 
 	private final float loadFactor;
@@ -136,7 +137,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		}
 	}
 
-	public @Null V put (long key, @Null V value) {
+	@Nullable public @Null V put (long key, @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
 			zeroValue = value;
@@ -182,7 +183,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		}
 	}
 
-	public @Null V get (long key) {
+	@Nullable public @Null V get (long key) {
 		if (key == 0) return hasZeroValue ? zeroValue : null;
 		int i = locateKey(key);
 		return i >= 0 ? valueTable[i] : null;
@@ -195,7 +196,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
-	public @Null V remove (long key) {
+	@Nullable public @Null V remove (long key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
 			hasZeroValue = false;
@@ -512,7 +513,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 
 	static public class Entry<V> {
 		public long key;
-		public @Null V value;
+		@Nullable public @Null V value;
 
 		public String toString () {
 			return key + "=" + value;

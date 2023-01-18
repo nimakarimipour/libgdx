@@ -17,6 +17,7 @@
 package com.badlogic.gdx.maps;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Map layer containing a set of objects and properties */
 public class MapLayer {
@@ -28,7 +29,7 @@ public class MapLayer {
 	private float renderOffsetX;
 	private float renderOffsetY;
 	private boolean renderOffsetDirty = true;
-	private MapLayer parent;
+	@Nullable private MapLayer parent;
 	private MapObjects objects = new MapObjects();
 	private MapProperties properties = new MapProperties();
 
@@ -92,7 +93,7 @@ public class MapLayer {
 	}
 
 	/** @return the layer's parent {@link MapLayer}, or null if the layer does not have a parent **/
-	public MapLayer getParent () {
+	@Nullable public MapLayer getParent () {
 		return parent;
 	}
 

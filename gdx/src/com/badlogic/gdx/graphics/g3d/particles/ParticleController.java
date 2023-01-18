@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /** Base class of all the particle controllers. Encapsulate the generic structure of a controller and methods to update the
  * particles simulation.
@@ -286,7 +287,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** @return the influencer having the given type. */
-	public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
+	@Nullable public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
 		int index = findIndex(influencerClass);
 		return index > -1 ? (K)influencers.get(index) : null;
 	}
