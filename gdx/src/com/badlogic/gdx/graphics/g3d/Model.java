@@ -116,7 +116,8 @@ public class Model implements Disposable {
 		calculateTransforms();
 	}
 
-	@NullUnmarked protected void loadAnimations (Iterable<ModelAnimation> modelAnimations) {
+	@NullUnmarked
+	protected void loadAnimations (Iterable<ModelAnimation> modelAnimations) {
 		for (final ModelAnimation anim : modelAnimations) {
 			Animation animation = new Animation();
 			animation.id = anim.id;
@@ -236,7 +237,8 @@ public class Model implements Disposable {
 		}
 	}
 
-	@NullUnmarked protected void convertMesh (ModelMesh modelMesh) {
+	@NullUnmarked
+	protected void convertMesh (ModelMesh modelMesh) {
 		int numIndices = 0;
 		for (ModelMeshPart part : modelMesh.parts) {
 			numIndices += part.indices.length;

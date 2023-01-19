@@ -67,7 +67,8 @@ public abstract class ParticleSorter {
 			}
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData) {
 			float[] val = camera.view.val;
 			float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];

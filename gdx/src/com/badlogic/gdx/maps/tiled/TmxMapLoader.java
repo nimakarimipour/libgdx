@@ -159,7 +159,8 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 		return fileHandles;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
 		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
 		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight,

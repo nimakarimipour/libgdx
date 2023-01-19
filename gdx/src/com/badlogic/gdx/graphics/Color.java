@@ -106,7 +106,8 @@ public class Color {
 	/** Sets this color to the given color.
 	 * 
 	 * @param color the Color */
-	@NullUnmarked public Color set (@Nullable Color color) {
+	@NullUnmarked
+	public Color set (@Nullable Color color) {
 		this.r = color.r;
 		this.g = color.g;
 		this.b = color.b;

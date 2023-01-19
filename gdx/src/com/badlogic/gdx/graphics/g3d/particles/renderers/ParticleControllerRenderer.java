@@ -37,7 +37,8 @@ public abstract class ParticleControllerRenderer<D extends ParticleControllerRen
 		this.renderData = renderData;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void update () {
 		batch.draw(renderData);
 	}

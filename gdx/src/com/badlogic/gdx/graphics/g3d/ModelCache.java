@@ -227,7 +227,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 		meshPool.flush();
 	}
 
-	@NullUnmarked private Renderable obtainRenderable (Material material, int primitiveType) {
+	@NullUnmarked
+	private Renderable obtainRenderable (Material material, int primitiveType) {
 		Renderable result = renderablesPool.obtain();
 		result.bones = null;
 		result.environment = null;

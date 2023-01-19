@@ -70,7 +70,8 @@ public class AnimationController extends BaseAnimationController {
 		/** The number of remaining loops, negative for continuous, zero if stopped. */
 		public int loopCount;
 
-		@NullUnmarked protected AnimationDesc () {
+		@NullUnmarked
+		protected AnimationDesc () {
 		}
 
 		/** @param delta delta time, must be positive.
@@ -142,7 +143,8 @@ public class AnimationController extends BaseAnimationController {
 		super(target);
 	}
 
-	@NullUnmarked private AnimationDesc obtain (final Animation anim, float offset, float duration, int loopCount, float speed,
+	@NullUnmarked
+	private AnimationDesc obtain (final Animation anim, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
 		if (anim == null) return null;
 		final AnimationDesc result = animationPool.obtain();
@@ -156,7 +158,8 @@ public class AnimationController extends BaseAnimationController {
 		return result;
 	}
 
-	@NullUnmarked private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
+	@NullUnmarked
+	private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
 		if (id == null) return null;
 		final Animation anim = target.getAnimation(id);

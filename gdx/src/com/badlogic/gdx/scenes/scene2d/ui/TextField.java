@@ -153,7 +153,8 @@ public class TextField extends Widget implements Disableable {
 		return new TextFieldClickListener();
 	}
 
-	@NullUnmarked protected int letterUnderCursor (float x) {
+	@NullUnmarked
+	protected int letterUnderCursor (float x) {
 		x -= textOffset + fontOffset - style.font.getData().cursorX - glyphPositions.get(visibleTextStart);
 		Drawable background = getBackgroundDrawable();
 		if (background != null) x -= style.background.getLeftWidth();
@@ -304,7 +305,8 @@ public class TextField extends Widget implements Disableable {
 		return style.background;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		boolean focused = hasKeyboardFocus();
 		if (focused != this.focused || (focused && !blinkTask.isScheduled())) {
 			this.focused = focused;
@@ -1101,7 +1103,8 @@ public class TextField extends Widget implements Disableable {
 		@Nullable public @Null BitmapFont messageFont;
 		@Nullable public @Null Color messageFontColor;
 
-		@NullUnmarked public TextFieldStyle () {
+		@NullUnmarked
+		public TextFieldStyle () {
 		}
 
 		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,

@@ -411,7 +411,8 @@ public class SplitPane extends WidgetGroup {
 	static public class SplitPaneStyle {
 		@SuppressWarnings("NullAway.Init") public Drawable handle;
 
-		@NullUnmarked public SplitPaneStyle () {
+		@NullUnmarked
+		public SplitPaneStyle () {
 		}
 
 		public SplitPaneStyle (Drawable handle) {

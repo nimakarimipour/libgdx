@@ -33,7 +33,8 @@ public class ModelData {
 	public final Array<ModelNode> nodes = new Array<ModelNode>();
 	public final Array<ModelAnimation> animations = new Array<ModelAnimation>();
 
-	@NullUnmarked public void addMesh (ModelMesh mesh) {
+	@NullUnmarked
+	public void addMesh (ModelMesh mesh) {
 		for (ModelMesh other : meshes) {
 			if (other.id.equals(mesh.id)) {
 				throw new GdxRuntimeException("Mesh with id '" + other.id + "' already in model");

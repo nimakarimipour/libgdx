@@ -37,7 +37,8 @@ public class AfterAction extends DelegateAction {
 		waitForActions.clear();
 	}
 
-	@NullUnmarked protected boolean delegate (float delta) {
+	@NullUnmarked
+	protected boolean delegate (float delta) {
 		Array<Action> currentActions = target.getActions();
 		if (currentActions.size == 1) waitForActions.clear();
 		for (int i = waitForActions.size - 1; i >= 0; i--) {

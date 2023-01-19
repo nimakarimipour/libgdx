@@ -88,7 +88,8 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		return this;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Vector3 set (@Nullable final Vector3 vector) {
 		return this.set(vector.x, vector.y, vector.z);
 	}

@@ -49,7 +49,8 @@ public class ModelBatch implements Disposable {
 			return new Renderable();
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public Renderable obtain () {
 			Renderable renderable = super.obtain();
 			renderable.environment = null;
@@ -171,7 +172,8 @@ public class ModelBatch implements Disposable {
 	/** Provides access to the current camera in between {@link #begin(Camera)} and {@link #end()}. Do not change the camera's
 	 * values. Use {@link #setCamera(Camera)}, if you need to change the camera.
 	 * @return The current camera being used or null if called outside {@link #begin(Camera)} and {@link #end()}. */
-	@NullUnmarked public Camera getCamera () {
+	@NullUnmarked
+	public Camera getCamera () {
 		return camera;
 	}
 
@@ -200,7 +202,8 @@ public class ModelBatch implements Disposable {
 
 	/** Flushes the batch, causing all {@link Renderable}s in the batch to be rendered. Can only be called after the call to
 	 * {@link #begin(Camera)} and before the call to {@link #end()}. */
-	@NullUnmarked public void flush () {
+	@NullUnmarked
+	public void flush () {
 		sorter.sort(camera, renderables);
 		Shader currentShader = null;
 		for (int i = 0; i < renderables.size; i++) {

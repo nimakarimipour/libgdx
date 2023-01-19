@@ -58,7 +58,8 @@ public class ResourceData<T> implements Json.Serializable {
 		private int loadIndex;
 		@SuppressWarnings("NullAway.Init") protected ResourceData resources;
 
-		@NullUnmarked public SaveData () {
+		@NullUnmarked
+		public SaveData () {
 			data = new ObjectMap<String, Object>();
 			assets = new IntArray();
 			loadIndex = 0;
@@ -113,7 +114,8 @@ public class ResourceData<T> implements Json.Serializable {
 		@SuppressWarnings("NullAway.Init") public String filename;
 		@SuppressWarnings("NullAway.Init") public Class<T> type;
 
-		@NullUnmarked public AssetData () {
+		@NullUnmarked
+		public AssetData () {
 		}
 
 		public AssetData (String filename, Class<T> type) {

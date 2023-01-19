@@ -80,7 +80,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return model;
 	}
 
-	@NullUnmarked protected void parseMeshes (ModelData model, JsonValue json) {
+	@NullUnmarked
+	protected void parseMeshes (ModelData model, JsonValue json) {
 		JsonValue meshes = json.get("meshes");
 		if (meshes != null) {
 

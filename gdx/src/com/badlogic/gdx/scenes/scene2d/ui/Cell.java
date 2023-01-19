@@ -906,7 +906,8 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Sets all constraint fields to null. */
-	@NullUnmarked void clear () {
+	@NullUnmarked
+	void clear () {
 		minWidth = null;
 		minHeight = null;
 		prefWidth = null;
@@ -932,7 +933,8 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Reset state so the cell can be reused, setting all constraints to their {@link #defaults() default} values. */
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		actor = null;
 		table = null;
 		endRow = false;
@@ -940,7 +942,8 @@ public class Cell<T extends Actor> implements Poolable {
 		set(defaults());
 	}
 
-	@NullUnmarked void set (@Nullable Cell cell) {
+	@NullUnmarked
+	void set (@Nullable Cell cell) {
 		minWidth = cell.minWidth;
 		minHeight = cell.minHeight;
 		prefWidth = cell.prefWidth;

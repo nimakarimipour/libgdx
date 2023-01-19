@@ -112,7 +112,8 @@ public class ParticleEffectLoader
 		json.toJson(data, parameter.file);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public ParticleEffect loadSync (AssetManager manager, String fileName, FileHandle file,
 		@Nullable ParticleEffectLoadParameter parameter) {
 		ResourceData<ParticleEffect> effectData = null;

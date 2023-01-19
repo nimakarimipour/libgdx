@@ -501,7 +501,8 @@ public class ScrollPane extends WidgetGroup {
 		}
 	}
 
-	@NullUnmarked private void updateActorPosition () {
+	@NullUnmarked
+	private void updateActorPosition () {
 		// Calculate the actor's position depending on the scroll state and available actor area.
 		float x = actorArea.x - (scrollX ? (int)visualAmountX : 0);
 		float y = actorArea.y - (int)(scrollY ? maxY - visualAmountY : maxY);

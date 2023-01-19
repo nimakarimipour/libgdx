@@ -238,7 +238,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	/** End building the mesh and returns the mesh
 	 * @param mesh The mesh to receive the built vertices and indices, must have the same attributes and must be big enough to hold
 	 *           the data, any existing data will be overwritten. */
-	@NullUnmarked public Mesh end (Mesh mesh) {
+	@NullUnmarked
+	public Mesh end (Mesh mesh) {
 		endpart();
 
 		if (attributes == null) throw new GdxRuntimeException("Call begin() first");
@@ -545,7 +546,8 @@ public class MeshBuilder implements MeshPartBuilder {
 
 	private final Vector3 tmpNormal = new Vector3();
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public short vertex (@Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
 		if (vindex > MAX_INDEX) throw new GdxRuntimeException("Too many vertices used");
 

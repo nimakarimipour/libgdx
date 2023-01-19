@@ -550,7 +550,8 @@ public class PixmapPacker implements Disposable {
 			pixmaps.sort(comparator);
 		}
 
-		@NullUnmarked public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
+		@NullUnmarked
+		public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
 			GuillotinePage page;
 			if (packer.pages.size == 0) {
 				// Add a page if empty.

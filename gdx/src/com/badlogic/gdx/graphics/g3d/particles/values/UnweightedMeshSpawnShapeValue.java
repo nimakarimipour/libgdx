@@ -56,7 +56,8 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 		mesh.getVertices(vertices);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void spawnAux (Vector3 vector, float percent) {
 		if (indices == null) {
 			// Triangles

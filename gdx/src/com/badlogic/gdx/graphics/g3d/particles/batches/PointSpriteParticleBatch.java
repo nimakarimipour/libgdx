@@ -134,7 +134,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		return blendingAttribute;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	protected void flush (int[] offsets) {
 		int tp = 0;
 		for (PointSpriteControllerRenderData data : renderData) {

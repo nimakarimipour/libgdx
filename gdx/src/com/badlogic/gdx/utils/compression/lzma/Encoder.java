@@ -1210,7 +1210,8 @@ public class Encoder {
 		return true;
 	}
 
-	@NullUnmarked public boolean SetMatchFinder (int matchFinderIndex) {
+	@NullUnmarked
+	public boolean SetMatchFinder (int matchFinderIndex) {
 		if (matchFinderIndex < 0 || matchFinderIndex > 2) return false;
 		int matchFinderIndexPrev = _matchFinderType;
 		_matchFinderType = matchFinderIndex;
