@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.ShortArray;
  * @author Avetis Zakharyan */
 public class RepeatablePolygonSprite {
 
-	private TextureRegion region;
+	@SuppressWarnings("NullAway.Init") private TextureRegion region;
 	private float density;
 
 	private boolean dirty = true;

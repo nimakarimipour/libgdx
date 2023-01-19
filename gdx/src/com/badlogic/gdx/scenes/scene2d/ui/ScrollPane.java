@@ -36,6 +36,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A group that scrolls a child actor using scrollbars and/or mouse or touch dragging.
  * <p>
@@ -500,7 +501,7 @@ public class ScrollPane extends WidgetGroup {
 		}
 	}
 
-	private void updateActorPosition () {
+	@NullUnmarked private void updateActorPosition () {
 		// Calculate the actor's position depending on the scroll state and available actor area.
 		float x = actorArea.x - (scrollX ? (int)visualAmountX : 0);
 		float y = actorArea.y - (int)(scrollY ? maxY - visualAmountY : maxY);

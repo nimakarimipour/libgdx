@@ -33,6 +33,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
  * @author Xoppa */
@@ -288,7 +289,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** @return the number of managed cubemaps currently loaded */
-	public static int getNumManagedCubemaps () {
+	@NullUnmarked public static int getNumManagedCubemaps () {
 		return managedCubemaps.get(Gdx.app).size;
 	}
 

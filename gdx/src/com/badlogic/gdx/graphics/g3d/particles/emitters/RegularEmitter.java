@@ -48,7 +48,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 	private boolean continuous;
 	private EmissionMode emissionMode;
 
-	private FloatChannel lifeChannel;
+	@SuppressWarnings("NullAway.Init") private FloatChannel lifeChannel;
 
 	public RegularEmitter () {
 		delayValue = new RangedNumericValue();

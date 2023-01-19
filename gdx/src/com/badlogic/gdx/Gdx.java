@@ -27,14 +27,14 @@ import javax.annotation.Nullable;
  * This is normally a design faux pas but in this case is better than the alternatives.
  * @author mzechner */
 public class Gdx {
-	public static Application app;
-	public static Graphics graphics;
-	public static Audio audio;
-	public static Input input;
-	public static Files files;
+	@SuppressWarnings("NullAway.Init") public static Application app;
+	@SuppressWarnings("NullAway.Init") public static Graphics graphics;
+	@SuppressWarnings("NullAway.Init") public static Audio audio;
+	@SuppressWarnings("NullAway.Init") public static Input input;
+	@SuppressWarnings("NullAway.Init") public static Files files;
 	@Nullable public static Net net;
 
-	public static GL20 gl;
-	public static GL20 gl20;
-	public static GL30 gl30;
+	@SuppressWarnings("NullAway.Init") public static GL20 gl;
+	@SuppressWarnings("NullAway.Init") public static GL20 gl20;
+	@SuppressWarnings("NullAway.Init") public static GL30 gl30;
 }

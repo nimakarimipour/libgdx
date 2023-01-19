@@ -19,6 +19,7 @@ package com.badlogic.gdx.scenes.scene2d;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** The base class for all events.
  * <p>
@@ -78,7 +79,7 @@ public class Event implements Poolable {
 	}
 
 	/** Returns the actor that the event originated from. */
-	public Actor getTarget () {
+	@NullUnmarked public Actor getTarget () {
 		return targetActor;
 	}
 
@@ -87,7 +88,7 @@ public class Event implements Poolable {
 	}
 
 	/** Returns the actor that this listener is attached to. */
-	public Actor getListenerActor () {
+	@NullUnmarked public Actor getListenerActor () {
 		return listenerActor;
 	}
 
@@ -135,7 +136,7 @@ public class Event implements Poolable {
 	}
 
 	/** The stage for the actor the event was fired on. */
-	public Stage getStage () {
+	@NullUnmarked public Stage getStage () {
 		return stage;
 	}
 }

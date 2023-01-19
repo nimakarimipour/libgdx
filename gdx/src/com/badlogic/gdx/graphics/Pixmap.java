@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -203,7 +204,7 @@ public class Pixmap implements Disposable {
 	 *
 	 * @param url http url to download the image from
 	 * @param responseListener the listener to call once the image is available as a {@link Pixmap} */
-	public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
+	@NullUnmarked public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
 		Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
 		request.setUrl(url);
 		Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {

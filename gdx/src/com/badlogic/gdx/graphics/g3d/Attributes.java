@@ -21,6 +21,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, Comparable<Attributes> {
 	protected long mask;
@@ -43,7 +44,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 
 	/** Example usage: ((BlendingAttribute)material.get(BlendingAttribute.ID)).sourceFunction;
 	 * @return The attribute (which can safely be cast) if any, otherwise null */
-	public final Attribute get (final long type) {
+	@NullUnmarked public final Attribute get (final long type) {
 		if (has(type)) for (int i = 0; i < attributes.size; i++)
 			if (attributes.get(i).type == type) return attributes.get(i);
 		return null;
@@ -122,7 +123,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 
 	/** Add an array of attributes to this material. If the material already contains an attribute of the same type it is
 	 * overwritten. */
-	public final void set (@Nullable final Attribute... attributes) {
+	@NullUnmarked public final void set (@Nullable final Attribute... attributes) {
 		for (final Attribute attr : attributes)
 			set(attr);
 	}

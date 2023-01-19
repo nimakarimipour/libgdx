@@ -157,7 +157,7 @@ public class Octree<T> {
 		int level;
 		final BoundingBox bounds = new BoundingBox();
 		boolean leaf;
-		private Octree.OctreeNode[] children; // May be null when leaf is true.
+		@SuppressWarnings("NullAway.Init") private Octree.OctreeNode[] children; // May be null when leaf is true.
 		private final Array<T> geometries = new Array<T>(Math.min(16, maxItemsPerNode));
 
 		private void split () {

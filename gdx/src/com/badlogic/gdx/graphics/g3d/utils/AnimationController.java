@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Class to control one or more {@link Animation}s on a {@link ModelInstance}. Use the
  * {@link #setAnimation(String, int, float, AnimationListener)} method to change the current animation. Use the
@@ -57,7 +58,7 @@ public class AnimationController extends BaseAnimationController {
 		/** Listener which will be informed when the animation is looped or ended. */
 		@Nullable public AnimationListener listener;
 		/** The animation to be applied. */
-		public Animation animation;
+		@SuppressWarnings("NullAway.Init") public Animation animation;
 		/** The speed at which to play the animation (can be negative), 1.0 for normal speed. */
 		public float speed;
 		/** The current animation time. */
@@ -69,7 +70,7 @@ public class AnimationController extends BaseAnimationController {
 		/** The number of remaining loops, negative for continuous, zero if stopped. */
 		public int loopCount;
 
-		protected AnimationDesc () {
+		@NullUnmarked protected AnimationDesc () {
 		}
 
 		/** @param delta delta time, must be positive.
@@ -141,7 +142,7 @@ public class AnimationController extends BaseAnimationController {
 		super(target);
 	}
 
-	private AnimationDesc obtain (final Animation anim, float offset, float duration, int loopCount, float speed,
+	@NullUnmarked private AnimationDesc obtain (final Animation anim, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
 		if (anim == null) return null;
 		final AnimationDesc result = animationPool.obtain();
@@ -155,7 +156,7 @@ public class AnimationController extends BaseAnimationController {
 		return result;
 	}
 
-	private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
+	@NullUnmarked private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
 		if (id == null) return null;
 		final Animation anim = target.getAnimation(id);

@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Executes an action only after all other actions on the actor at the time this action's target was set have finished.
  * @author Nathan Sweet */
@@ -36,7 +37,7 @@ public class AfterAction extends DelegateAction {
 		waitForActions.clear();
 	}
 
-	protected boolean delegate (float delta) {
+	@NullUnmarked protected boolean delegate (float delta) {
 		Array<Action> currentActions = target.getActions();
 		if (currentActions.size == 1) waitForActions.clear();
 		for (int i = waitForActions.size - 1; i >= 0; i--) {

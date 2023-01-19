@@ -90,7 +90,7 @@ public class Decoder {
 			}
 		}
 
-		Decoder2[] m_Coders;
+		@SuppressWarnings("NullAway.Init") Decoder2[] m_Coders;
 		int m_NumPrevBits;
 		int m_NumPosBits;
 		int m_PosMask;

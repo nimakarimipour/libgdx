@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** This class is used by particle batches to sort the particles before rendering.
  * @author Inferno */
@@ -52,8 +53,8 @@ public abstract class ParticleSorter {
 
 	/** This class will sort all the particles using the distance from camera. */
 	public static class Distance extends ParticleSorter {
-		private float[] distances;
-		private int[] particleIndices, particleOffsets;
+		@SuppressWarnings("NullAway.Init") private float[] distances;
+		@SuppressWarnings("NullAway.Init") private int[] particleIndices, particleOffsets;
 		private int currentSize = 0;
 
 		@Override
@@ -66,7 +67,7 @@ public abstract class ParticleSorter {
 			}
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData) {
 			float[] val = camera.view.val;
 			float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];

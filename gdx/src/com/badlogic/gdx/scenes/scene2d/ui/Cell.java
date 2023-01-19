@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A cell for a {@link Table}.
  * @author Nathan Sweet */
@@ -21,15 +22,15 @@ public class Cell<T extends Actor> implements Poolable {
 	@Nullable static private Files files;
 	@Nullable static private Cell defaults;
 
-	Value minWidth, minHeight;
-	Value prefWidth, prefHeight;
-	Value maxWidth, maxHeight;
-	Value spaceTop, spaceLeft, spaceBottom, spaceRight;
-	Value padTop, padLeft, padBottom, padRight;
+	@SuppressWarnings("NullAway.Init") Value minWidth, minHeight;
+	@SuppressWarnings("NullAway.Init") Value prefWidth, prefHeight;
+	@SuppressWarnings("NullAway.Init") Value maxWidth, maxHeight;
+	@SuppressWarnings("NullAway.Init") Value spaceTop, spaceLeft, spaceBottom, spaceRight;
+	@SuppressWarnings("NullAway.Init") Value padTop, padLeft, padBottom, padRight;
 	@Nullable Float fillX, fillY;
 	@Nullable Integer align;
-	Integer expandX, expandY;
-	Integer colspan;
+	@SuppressWarnings("NullAway.Init") Integer expandX, expandY;
+	@SuppressWarnings("NullAway.Init") Integer colspan;
 	@Nullable Boolean uniformX, uniformY;
 
 	@Nullable
@@ -37,7 +38,7 @@ public class Cell<T extends Actor> implements Poolable {
 	float actorX, actorY;
 	float actorWidth, actorHeight;
 
-	private Table table;
+	@SuppressWarnings("NullAway.Init") private Table table;
 	boolean endRow;
 	int column, row;
 	int cellAboveIndex;
@@ -905,7 +906,7 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Sets all constraint fields to null. */
-	void clear () {
+	@NullUnmarked void clear () {
 		minWidth = null;
 		minHeight = null;
 		prefWidth = null;
@@ -931,7 +932,7 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Reset state so the cell can be reused, setting all constraints to their {@link #defaults() default} values. */
-	public void reset () {
+	@NullUnmarked public void reset () {
 		actor = null;
 		table = null;
 		endRow = false;
@@ -939,7 +940,7 @@ public class Cell<T extends Actor> implements Poolable {
 		set(defaults());
 	}
 
-	void set (@Nullable Cell cell) {
+	@NullUnmarked void set (@Nullable Cell cell) {
 		minWidth = cell.minWidth;
 		minHeight = cell.minHeight;
 		prefWidth = cell.prefWidth;

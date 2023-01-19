@@ -31,6 +31,7 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A PolygonSpriteBatch is used to draw 2D polygons that reference a texture (region). The class will batch the drawing commands
  * and optimize them for processing by the GPU.
@@ -1196,7 +1197,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		vertexIndex = idx;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void flush () {
 		if (vertexIndex == 0) return;
 
@@ -1311,7 +1312,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		}
 	}
 
-	private void switchTexture (@Nullable Texture texture) {
+	@NullUnmarked private void switchTexture (@Nullable Texture texture) {
 		flush();
 		lastTexture = texture;
 		invTexWidth = 1.0f / texture.getWidth();

@@ -46,6 +46,7 @@ import com.badlogic.gdx.utils.IntIntMap;
 import com.badlogic.gdx.utils.ShortArray;
 import com.badlogic.gdx.Initializer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Class to construct a mesh, optionally splitting it into one or more mesh parts. Before you can call any other method you must
  * call {@link #begin(VertexAttributes)} or {@link #begin(VertexAttributes, int)}. To use mesh parts you must call
@@ -237,7 +238,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	/** End building the mesh and returns the mesh
 	 * @param mesh The mesh to receive the built vertices and indices, must have the same attributes and must be big enough to hold
 	 *           the data, any existing data will be overwritten. */
-	public Mesh end (Mesh mesh) {
+	@NullUnmarked public Mesh end (Mesh mesh) {
 		endpart();
 
 		if (attributes == null) throw new GdxRuntimeException("Call begin() first");
@@ -544,7 +545,7 @@ public class MeshBuilder implements MeshPartBuilder {
 
 	private final Vector3 tmpNormal = new Vector3();
 
-	@Override
+	@NullUnmarked @Override
 	public short vertex (@Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
 		if (vindex > MAX_INDEX) throw new GdxRuntimeException("Too many vertices used");
 

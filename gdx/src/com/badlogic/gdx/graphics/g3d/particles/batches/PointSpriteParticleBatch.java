@@ -42,6 +42,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** This class is used to draw particles as point sprites.
  * @author Inferno */
@@ -68,7 +69,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		pointSpritesEnabled = true;
 	}
 
-	private float[] vertices;
+	@SuppressWarnings("NullAway.Init") private float[] vertices;
 	Renderable renderable;
 	@Nullable protected BlendingAttribute blendingAttribute;
 	@Nullable protected DepthTestAttribute depthTestAttribute;
@@ -133,7 +134,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		return blendingAttribute;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void flush (int[] offsets) {
 		int tp = 0;
 		for (PointSpriteControllerRenderData data : renderData) {

@@ -48,6 +48,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Method;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A skin stores resources for UI widgets to use (texture regions, ninepatches, fonts, colors, etc). Resources are named and can
  * be looked up by name and type. Resources can be described in JSON. Skin provides useful conversions, such as allowing access to
@@ -478,7 +479,7 @@ public class Skin implements Disposable {
 				return fieldName.equals(parentFieldName);
 			}
 
-			public void readFields (Object object, JsonValue jsonMap) {
+			@NullUnmarked public void readFields (Object object, JsonValue jsonMap) {
 				if (jsonMap.has(parentFieldName)) {
 					String parentName = readValue(parentFieldName, String.class, jsonMap);
 					Class parentType = object.getClass();

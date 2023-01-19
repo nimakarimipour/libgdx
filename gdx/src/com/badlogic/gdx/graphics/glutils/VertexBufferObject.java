@@ -41,9 +41,9 @@ import javax.annotation.Nullable;
  *
  * @author mzechner, Dave Clayton <contact@redskyforge.com> */
 public class VertexBufferObject implements VertexData {
-	private VertexAttributes attributes;
-	private FloatBuffer buffer;
-	private ByteBuffer byteBuffer;
+	@SuppressWarnings("NullAway.Init") private VertexAttributes attributes;
+	@SuppressWarnings("NullAway.Init") private FloatBuffer buffer;
+	@SuppressWarnings("NullAway.Init") private ByteBuffer byteBuffer;
 	private boolean ownsBuffer;
 	private int bufferHandle;
 	private int usage;

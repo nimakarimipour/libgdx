@@ -25,7 +25,7 @@ public class ModelMaterial {
 		Lambert, Phong
 	}
 
-	public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 
 	@Nullable public MaterialType type;
 

@@ -26,6 +26,7 @@ import java.util.MissingResourceException;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.Initializer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A {@code I18NBundle} provides {@code Locale}-specific resources loaded from property files. A bundle contains a number of
  * named resources, whose names and values are {@code Strings}. A bundle may have a parent bundle, and when a resource is not
@@ -80,7 +81,7 @@ public class I18NBundle {
 	private Locale locale;
 
 	/** The properties for this bundle. */
-	private ObjectMap<String, String> properties;
+	@SuppressWarnings("NullAway.Init") private ObjectMap<String, String> properties;
 
 	/** The formatter used for argument replacement. */
 	private TextFormatter formatter;
@@ -418,7 +419,7 @@ public class I18NBundle {
 	/** Sets the bundle locale. This method is private because a bundle can't change the locale during its life.
 	 * 
 	 * @param locale */
-	@Initializer
+	@NullUnmarked @Initializer
 	private void setLocale (Locale locale) {
 		this.locale = locale;
 		this.formatter = new TextFormatter(locale, !simpleFormatter);

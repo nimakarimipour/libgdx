@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which controls particles color and transparency.
  * @author Inferno */
@@ -38,7 +39,7 @@ public abstract class ColorInfluencer extends Influencer {
 			colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex * colorChannel.strideSize,
 				c = i + count * colorChannel.strideSize; i < c; i += colorChannel.strideSize) {
@@ -57,12 +58,12 @@ public abstract class ColorInfluencer extends Influencer {
 
 	/** It's an {@link Influencer} which manages the particle color during its life time. */
 	public static class Single extends ColorInfluencer {
-		FloatChannel alphaInterpolationChannel;
-		FloatChannel lifeChannel;
+		@SuppressWarnings("NullAway.Init") FloatChannel alphaInterpolationChannel;
+		@SuppressWarnings("NullAway.Init") FloatChannel lifeChannel;
 		public ScaledNumericValue alphaValue;
 		public GradientColorValue colorValue;
 
-		public Single () {
+		@NullUnmarked public Single () {
 			colorValue = new GradientColorValue();
 			alphaValue = new ScaledNumericValue();
 			alphaValue.setHigh(1);
@@ -134,7 +135,7 @@ public abstract class ColorInfluencer extends Influencer {
 		}
 	}
 
-	FloatChannel colorChannel;
+	@SuppressWarnings("NullAway.Init") FloatChannel colorChannel;
 
 	@Override
 	public void allocateChannels () {

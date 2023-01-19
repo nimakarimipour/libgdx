@@ -38,6 +38,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.IntIntMap;
 import com.badlogic.gdx.Initializer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** @author Xoppa A BaseShader is a wrapper around a ShaderProgram that keeps track of the uniform and attribute locations. It
  *         does not manage the ShaderPogram, you are still responsible for disposing the ShaderProgram. */
@@ -111,8 +112,8 @@ public abstract class BaseShader implements Shader {
 	private final IntIntMap attributes = new IntIntMap();
 
 	public ShaderProgram program;
-	public RenderContext context;
-	public Camera camera;
+	@SuppressWarnings("NullAway.Init") public RenderContext context;
+	@SuppressWarnings("NullAway.Init") public Camera camera;
 	@Nullable private Mesh currentMesh;
 
 	/** Register an uniform which might be used by this shader. Only possible prior to the call to init().
@@ -165,7 +166,7 @@ public abstract class BaseShader implements Shader {
 	}
 
 	/** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
-	@Initializer
+	@NullUnmarked @Initializer
 	public void init (final ShaderProgram program, @Nullable final Renderable renderable) {
 		if (locations != null) throw new GdxRuntimeException("Already initialized");
 		if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
@@ -204,7 +205,7 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void begin (Camera camera, RenderContext context) {
 		this.camera = camera;
 		this.context = context;
@@ -256,7 +257,7 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void dispose () {
 		program = null;
 		uniforms.clear();
