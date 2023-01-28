@@ -22,7 +22,6 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceControllerRenderData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import javax.annotation.Nullable;
 
 /*** This class is used to render particles having a model instance channel.
  * @author Inferno */

@@ -53,7 +53,8 @@ public final class Colors {
 	 * @param color the color
 	 * @return the previous {@code color} associated with {@code name}, or {@code null} if there was no mapping for {@code name}
 	 *         . */
-	@Nullable public static Color put (String name, Color color) {
+	@Nullable
+	public static Color put (String name, Color color) {
 		return map.put(name, color);
 	}
 

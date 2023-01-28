@@ -75,7 +75,8 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
 		setMinHeight(sprite.getHeight());
 	}
 
-	@Nullable public Sprite getSprite () {
+	@Nullable
+	public Sprite getSprite () {
 		return sprite;
 	}
 

@@ -89,7 +89,8 @@ public class Actions {
 		return moveToAligned(x, y, alignment, duration, null);
 	}
 
-	static public MoveToAction moveToAligned (float x, float y, int alignment, float duration, @Nullable @Null Interpolation interpolation) {
+	static public MoveToAction moveToAligned (float x, float y, int alignment, float duration,
+		@Nullable @Null Interpolation interpolation) {
 		MoveToAction action = action(MoveToAction.class);
 		action.setPosition(x, y, alignment);
 		action.setDuration(duration);
@@ -174,7 +175,8 @@ public class Actions {
 		return scaleBy(amountX, amountY, duration, null);
 	}
 
-	static public ScaleByAction scaleBy (float amountX, float amountY, float duration, @Nullable @Null Interpolation interpolation) {
+	static public ScaleByAction scaleBy (float amountX, float amountY, float duration,
+		@Nullable @Null Interpolation interpolation) {
 		ScaleByAction action = action(ScaleByAction.class);
 		action.setAmount(amountX, amountY);
 		action.setDuration(duration);

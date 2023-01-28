@@ -168,7 +168,8 @@ public class Skin implements Disposable {
 
 	/** Returns a named resource of the specified type.
 	 * @return null if not found. */
-	@Nullable public @Null <T> T optional (String name, Class<T> type) {
+	@Nullable
+	public @Null <T> T optional (String name, Class<T> type) {
 		if (name == null) throw new IllegalArgumentException("name cannot be null.");
 		if (type == null) throw new IllegalArgumentException("type cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(type);
@@ -209,7 +210,8 @@ public class Skin implements Disposable {
 	}
 
 	/** @return an array with the {@link TextureRegion} that have an index != -1, or null if none are found. */
-	@Nullable public @Null Array<TextureRegion> getRegions (String regionName) {
+	@Nullable
+	public @Null Array<TextureRegion> getRegions (String regionName) {
 		Array<TextureRegion> regions = null;
 		int i = 0;
 		TextureRegion region = optional(regionName + "_" + (i++), TextureRegion.class);
@@ -334,7 +336,8 @@ public class Skin implements Disposable {
 
 	/** Returns the name of the specified style object, or null if it is not in the skin. This compares potentially every style
 	 * object in the skin of the same type as the specified style, which may be a somewhat expensive operation. */
-	@Nullable public @Null String find (Object resource) {
+	@Nullable
+	public @Null String find (Object resource) {
 		if (resource == null) throw new IllegalArgumentException("style cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(resource.getClass());
 		if (typeResources == null) return null;
@@ -444,7 +447,8 @@ public class Skin implements Disposable {
 	}
 
 	/** Returns the {@link TextureAtlas} passed to this skin constructor, or null. */
-	@Nullable public @Null TextureAtlas getAtlas () {
+	@Nullable
+	public @Null TextureAtlas getAtlas () {
 		return atlas;
 	}
 
@@ -618,7 +622,8 @@ public class Skin implements Disposable {
 		TextField.TextFieldStyle.class, TextTooltip.TextTooltipStyle.class, Touchpad.TouchpadStyle.class, Tree.TreeStyle.class,
 		Window.WindowStyle.class};
 
-	@Nullable static private @Null Method findMethod (Class type, String name) {
+	@Nullable
+	static private @Null Method findMethod (Class type, String name) {
 		Method[] methods = ClassReflection.getMethods(type);
 		for (int i = 0, n = methods.length; i < n; i++) {
 			Method method = methods[i];

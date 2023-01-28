@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+
 import javax.annotation.Nullable;
 
 /** Encapsulates a 2D polygon defined by it's vertices relative to an origin point (default of 0, 0). */

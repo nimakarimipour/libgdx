@@ -32,7 +32,8 @@ public class Cell<T extends Actor> implements Poolable {
 	Integer colspan;
 	@Nullable Boolean uniformX, uniformY;
 
-	@Nullable @Null Actor actor;
+	@Nullable
+	@Null Actor actor;
 	float actorX, actorY;
 	float actorWidth, actorHeight;
 
@@ -69,7 +70,8 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Returns the actor for this cell, or null. */
-	@Nullable public @Null T getActor () {
+	@Nullable
+	public @Null T getActor () {
 		return (T)actor;
 	}
 
@@ -832,15 +834,18 @@ public class Cell<T extends Actor> implements Poolable {
 		return padTop.get(actor) + padBottom.get(actor);
 	}
 
-	@Nullable public @Null Float getFillX () {
+	@Nullable
+	public @Null Float getFillX () {
 		return fillX;
 	}
 
-	@Nullable public @Null Float getFillY () {
+	@Nullable
+	public @Null Float getFillY () {
 		return fillY;
 	}
 
-	@Nullable public @Null Integer getAlign () {
+	@Nullable
+	public @Null Integer getAlign () {
 		return align;
 	}
 
@@ -856,11 +861,13 @@ public class Cell<T extends Actor> implements Poolable {
 		return colspan;
 	}
 
-	@Nullable public @Null Boolean getUniformX () {
+	@Nullable
+	public @Null Boolean getUniformX () {
 		return uniformX;
 	}
 
-	@Nullable public @Null Boolean getUniformY () {
+	@Nullable
+	public @Null Boolean getUniformY () {
 		return uniformY;
 	}
 
@@ -989,7 +996,8 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Returns the defaults to use for all cells. This can be used to avoid needing to set the same defaults for every table (eg,
 	 * for spacing). */
-	@Nullable static public Cell defaults () {
+	@Nullable
+	static public Cell defaults () {
 		if (files == null || files != Gdx.files) {
 			files = Gdx.files;
 			defaults = new Cell();

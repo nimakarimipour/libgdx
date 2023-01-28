@@ -19,7 +19,6 @@ package com.badlogic.gdx.utils;
 import com.badlogic.gdx.math.MathUtils;
 
 import java.util.Arrays;
-import javax.annotation.Nullable;
 
 /** A resizable, ordered or unordered int array. Avoids the boxing that occurs with ArrayList<Integer>. If unordered, this class
  * avoids a memory copy when removing elements (the last element is moved to the removed element's position).

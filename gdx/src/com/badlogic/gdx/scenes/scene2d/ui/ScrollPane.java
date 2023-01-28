@@ -645,7 +645,8 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** Returns the actor embedded in this scroll pane, or null. */
-	@Nullable public @Null Actor getActor () {
+	@Nullable
+	public @Null Actor getActor () {
 		return actor;
 	}
 
@@ -656,7 +657,8 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** @deprecated Use {@link #getActor()}. */
-	@Nullable @Deprecated
+	@Nullable
+	@Deprecated
 	public @Null Actor getWidget () {
 		return actor;
 	}
@@ -709,7 +711,8 @@ public class ScrollPane extends WidgetGroup {
 		return actor;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
 		if (touchable && getTouchable() == Touchable.enabled && isVisible()) {
 			if (scrollX && touchScrollH && hScrollBounds.contains(x, y)) return this;

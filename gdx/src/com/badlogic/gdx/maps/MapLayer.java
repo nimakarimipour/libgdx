@@ -34,7 +34,8 @@ public class MapLayer {
 	private MapProperties properties = new MapProperties();
 
 	/** @return layer's name */
-	@Nullable public String getName () {
+	@Nullable
+	public String getName () {
 		return name;
 	}
 
@@ -93,7 +94,8 @@ public class MapLayer {
 	}
 
 	/** @return the layer's parent {@link MapLayer}, or null if the layer does not have a parent **/
-	@Nullable public MapLayer getParent () {
+	@Nullable
+	public MapLayer getParent () {
 		return parent;
 	}
 
