@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.util.StringTokenizer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
+import javax.annotation.Nullable;
 
 public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> extends AsynchronousAssetLoader<TiledMap, P> {
 
@@ -70,7 +71,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	}
 
 	@Override
-	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle tmxFile, P parameter) {
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle tmxFile, @Nullable P parameter) {
 		this.root = xml.parse(tmxFile);
 
 		TextureLoader.TextureParameter textureParameter = new TextureLoader.TextureParameter();
@@ -92,7 +93,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	 * @param parameter
 	 * @param imageResolver
 	 * @return the {@link TiledMap} */
-	protected TiledMap loadTiledMap (FileHandle tmxFile, P parameter, ImageResolver imageResolver) {
+	protected TiledMap loadTiledMap (FileHandle tmxFile, @Nullable P parameter, ImageResolver imageResolver) {
 		this.map = new TiledMap();
 
 		if (parameter != null) {
@@ -428,7 +429,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	protected Object castProperty (String name, String value, String type) {
+	protected Object castProperty (@Nullable String name, String value, @Nullable String type) {
 		if (type == null) {
 			return value;
 		} else if (type.equals("int")) {
@@ -630,8 +631,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	}
 
 	protected abstract void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileset,
-		Element element, Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing,
-		int margin, String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image);
+		Element element, Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing,
+		int margin, @Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image);
 
 	protected void addTileProperties (TiledMapTile tile, Element tileElement) {
 		String terrain = tileElement.getAttribute("terrain", null);
@@ -661,7 +662,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	protected AnimatedTiledMapTile createAnimatedTile (TiledMapTileSet tileSet, TiledMapTile tile, Element tileElement,
+	@Nullable protected AnimatedTiledMapTile createAnimatedTile (TiledMapTileSet tileSet, TiledMapTile tile, Element tileElement,
 		int firstgid) {
 		Element animationElement = tileElement.getChildByName("animation");
 		if (animationElement != null) {

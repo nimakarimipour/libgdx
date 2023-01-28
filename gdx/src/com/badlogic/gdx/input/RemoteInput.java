@@ -26,6 +26,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -76,10 +77,10 @@ public class RemoteInput implements Runnable, Input {
 	}
 
 	class EventTrigger implements Runnable {
-		TouchEvent touchEvent;
-		KeyEvent keyEvent;
+		@Nullable TouchEvent touchEvent;
+		@Nullable KeyEvent keyEvent;
 
-		public EventTrigger (TouchEvent touchEvent, KeyEvent keyEvent) {
+		public EventTrigger (@Nullable TouchEvent touchEvent, @Nullable KeyEvent keyEvent) {
 			this.touchEvent = touchEvent;
 			this.keyEvent = keyEvent;
 		}
@@ -195,7 +196,7 @@ public class RemoteInput implements Runnable, Input {
 	private float remoteWidth = 0;
 	private float remoteHeight = 0;
 	private boolean connected = false;
-	private RemoteInputListener listener;
+	@Nullable private RemoteInputListener listener;
 	int keyCount = 0;
 	boolean[] keys = new boolean[256];
 	boolean keyJustPressed = false;
@@ -206,7 +207,7 @@ public class RemoteInput implements Runnable, Input {
 	int[] touchY = new int[MAX_TOUCHES];
 	boolean isTouched[] = new boolean[MAX_TOUCHES];
 	boolean justTouched = false;
-	InputProcessor processor = null;
+	@Nullable InputProcessor processor = null;
 	private final int port;
 	public final String[] ips;
 
@@ -222,7 +223,7 @@ public class RemoteInput implements Runnable, Input {
 		this(port, null);
 	}
 
-	public RemoteInput (int port, RemoteInputListener listener) {
+	public RemoteInput (int port, @Nullable RemoteInputListener listener) {
 		this.listener = listener;
 		try {
 			this.port = port;
@@ -531,7 +532,7 @@ public class RemoteInput implements Runnable, Input {
 		this.processor = processor;
 	}
 
-	@Override
+	@Nullable @Override
 	public InputProcessor getInputProcessor () {
 		return this.processor;
 	}

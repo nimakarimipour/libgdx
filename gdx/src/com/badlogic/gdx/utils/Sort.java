@@ -14,6 +14,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /** Provides methods to sort arrays of objects. Sorting requires working memory and this class allows that memory to be reused to
  * avoid allocation. The sorting is otherwise identical to the Arrays.sort methods (uses timsort).<br>
@@ -22,10 +23,10 @@ import java.util.Comparator;
  * short, or byte).
  * @author Nathan Sweet */
 public class Sort {
-	static private Sort instance;
+	@Nullable static private Sort instance;
 
-	private TimSort timSort;
-	private ComparableTimSort comparableTimSort;
+	@Nullable private TimSort timSort;
+	@Nullable private ComparableTimSort comparableTimSort;
 
 	public <T extends Comparable> void sort (Array<T> a) {
 		if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();

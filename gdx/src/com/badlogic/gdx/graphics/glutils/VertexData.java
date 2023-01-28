@@ -20,6 +20,7 @@ import java.nio.FloatBuffer;
 
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /** A VertexData instance holds vertices for rendering with OpenGL. It is implemented as either a {@link VertexArray} or a
  * {@link VertexBufferObject}. Only the later supports OpenGL ES 2.0.
@@ -62,14 +63,14 @@ public interface VertexData extends Disposable {
 
 	/** Binds this VertexData for rendering via glDrawArrays or glDrawElements.
 	 * @param locations array containing the attribute locations. */
-	public void bind (ShaderProgram shader, int[] locations);
+	public void bind (ShaderProgram shader, @Nullable int[] locations);
 
 	/** Unbinds this VertexData. */
 	public void unbind (ShaderProgram shader);
 
 	/** Unbinds this VertexData.
 	 * @param locations array containing the attribute locations. */
-	public void unbind (ShaderProgram shader, int[] locations);
+	public void unbind (ShaderProgram shader, @Nullable int[] locations);
 
 	/** Invalidates the VertexData if applicable. Use this in case of a context loss. */
 	public void invalidate ();

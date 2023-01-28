@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /** A listener that shows a tooltip actor when the mouse is over another actor.
  * @author Nathan Sweet */
@@ -33,7 +34,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 	private final TooltipManager manager;
 	final Container<T> container;
 	boolean instant, always, touchIndependent;
-	Actor targetActor;
+	@Nullable Actor targetActor;
 
 	/** @param contents May be null. */
 	public Tooltip (@Null T contents) {
@@ -41,7 +42,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 	}
 
 	/** @param contents May be null. */
-	public Tooltip (@Null T contents, TooltipManager manager) {
+	public Tooltip (@Nullable @Null T contents, @Nullable TooltipManager manager) {
 		this.manager = manager;
 
 		container = new Container(contents) {
@@ -122,7 +123,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		container.setOrigin(point.x, point.y);
 	}
 
-	public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
+	public void enter (InputEvent event, float x, float y, int pointer, @Nullable @Null Actor fromActor) {
 		if (pointer != -1) return;
 		if (touchIndependent && Gdx.input.isTouched()) return;
 		Actor actor = event.getListenerActor();
@@ -131,7 +132,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		manager.enter(this);
 	}
 
-	public void exit (InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
+	public void exit (InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {
 		if (toActor != null && toActor.isDescendantOf(event.getListenerActor())) return;
 		hide();
 	}

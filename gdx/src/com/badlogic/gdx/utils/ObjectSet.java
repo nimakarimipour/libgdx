@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
+import javax.annotation.Nullable;
 
 /** An unordered set where the keys are objects. Null keys are not allowed. No allocation is done except when growing the table
  * size.
@@ -117,7 +118,7 @@ public class ObjectSet<T> implements Iterable<T> {
 
 	/** Returns the index of the key if already present, else -(index + 1) for the next empty index. This can be overridden in this
 	 * pacakge to compare for equality differently than {@link Object#equals(Object)}. */
-	int locateKey (T key) {
+	int locateKey (@Nullable T key) {
 		if (key == null) throw new IllegalArgumentException("key cannot be null.");
 		T[] keyTable = this.keyTable;
 		for (int i = place(key);; i = i + 1 & mask) {
@@ -129,7 +130,7 @@ public class ObjectSet<T> implements Iterable<T> {
 
 	/** Returns true if the key was added to the set or false if it was already in the set. If this set already contains the key,
 	 * the call leaves the set unchanged and returns false. */
-	public boolean add (T key) {
+	public boolean add (@Nullable T key) {
 		int i = locateKey(key);
 		if (i >= 0) return false; // Existing key was found.
 		i = -(i + 1); // Empty space was found.
@@ -243,7 +244,7 @@ public class ObjectSet<T> implements Iterable<T> {
 		return locateKey(key) >= 0;
 	}
 
-	public @Null T get (T key) {
+	@Nullable public @Null T get (T key) {
 		int i = locateKey(key);
 		return i < 0 ? null : keyTable[i];
 	}

@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles.emitters;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** An {@link Emitter} is a {@link ParticleControllerComponent} which will handle the particles emission. It must update the
  * {@link Emitter#percent} to reflect the current percentage of the current emission cycle. It should consider

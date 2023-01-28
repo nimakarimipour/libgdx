@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.ChannelDescriptor;
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.ChannelInitializer;
 import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.FloatChannel;
+import javax.annotation.Nullable;
 
 /** This contains all the definitions of particle related channels and channel initializers. It is also used by the
  * {@link ParticleController} to handle temporary channels allocated by influencers.
@@ -35,7 +36,7 @@ public class ParticleChannels {
 
 	// Initializers
 	public static class TextureRegionInitializer implements ChannelInitializer<FloatChannel> {
-		private static TextureRegionInitializer instance;
+		@Nullable private static TextureRegionInitializer instance;
 
 		public static TextureRegionInitializer get () {
 			if (instance == null) instance = new TextureRegionInitializer();
@@ -56,7 +57,7 @@ public class ParticleChannels {
 	}
 
 	public static class ColorInitializer implements ChannelInitializer<FloatChannel> {
-		private static ColorInitializer instance;
+		@Nullable private static ColorInitializer instance;
 
 		public static ColorInitializer get () {
 			if (instance == null) instance = new ColorInitializer();
@@ -70,7 +71,7 @@ public class ParticleChannels {
 	}
 
 	public static class ScaleInitializer implements ChannelInitializer<FloatChannel> {
-		private static ScaleInitializer instance;
+		@Nullable private static ScaleInitializer instance;
 
 		public static ScaleInitializer get () {
 			if (instance == null) instance = new ScaleInitializer();
@@ -84,7 +85,7 @@ public class ParticleChannels {
 	}
 
 	public static class Rotation2dInitializer implements ChannelInitializer<FloatChannel> {
-		private static Rotation2dInitializer instance;
+		@Nullable private static Rotation2dInitializer instance;
 
 		public static Rotation2dInitializer get () {
 			if (instance == null) instance = new Rotation2dInitializer();
@@ -101,7 +102,7 @@ public class ParticleChannels {
 	}
 
 	public static class Rotation3dInitializer implements ChannelInitializer<FloatChannel> {
-		private static Rotation3dInitializer instance;
+		@Nullable private static Rotation3dInitializer instance;
 
 		public static Rotation3dInitializer get () {
 			if (instance == null) instance = new Rotation3dInitializer();

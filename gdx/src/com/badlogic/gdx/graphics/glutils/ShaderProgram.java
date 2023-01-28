@@ -37,6 +37,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectIntMap;
 import com.badlogic.gdx.utils.ObjectMap;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -109,7 +110,7 @@ public class ShaderProgram implements Disposable {
 	private final ObjectIntMap<String> uniformSizes = new ObjectIntMap<String>();
 
 	/** uniform names **/
-	private String[] uniformNames;
+	@Nullable private String[] uniformNames;
 
 	/** attribute lookup **/
 	private final ObjectIntMap<String> attributes = new ObjectIntMap<String>();
@@ -121,7 +122,7 @@ public class ShaderProgram implements Disposable {
 	private final ObjectIntMap<String> attributeSizes = new ObjectIntMap<String>();
 
 	/** attribute names **/
-	private String[] attributeNames;
+	@Nullable private String[] attributeNames;
 
 	/** program handle **/
 	private int program;
@@ -895,12 +896,12 @@ public class ShaderProgram implements Disposable {
 	}
 
 	/** @return the attributes */
-	public String[] getAttributes () {
+	@Nullable public String[] getAttributes () {
 		return attributeNames;
 	}
 
 	/** @return the uniforms */
-	public String[] getUniforms () {
+	@Nullable public String[] getUniforms () {
 		return uniformNames;
 	}
 
