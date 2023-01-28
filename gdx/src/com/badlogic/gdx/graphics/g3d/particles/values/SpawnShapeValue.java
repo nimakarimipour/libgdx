@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** Encapsulate the formulas to spawn a particle on a shape.
  * @author Inferno */

@@ -161,7 +161,8 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 	@Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
 		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image) {
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight,
+		@Nullable FileHandle image) {
 
 		MapProperties props = tileSet.getProperties();
 		if (image != null) {

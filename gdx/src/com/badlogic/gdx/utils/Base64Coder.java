@@ -30,7 +30,6 @@
 package com.badlogic.gdx.utils;
 
 import java.io.UnsupportedEncodingException;
-import javax.annotation.Nullable;
 
 public class Base64Coder {
 	public static class CharMap {

@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+
 import javax.annotation.Nullable;
 
 /** Indicates an error during serialization due to misconfiguration or during deserialization due to invalid input data.
@@ -50,7 +51,8 @@ public class SerializationException extends RuntimeException {
 		return causedBy(cause, type);
 	}
 
-	@Nullable public String getMessage () {
+	@Nullable
+	public String getMessage () {
 		if (trace == null) return super.getMessage();
 		StringBuilder sb = new StringBuilder(512);
 		sb.append(super.getMessage());

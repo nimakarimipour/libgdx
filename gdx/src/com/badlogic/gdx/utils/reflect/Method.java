@@ -134,7 +134,8 @@ public final class Method {
 
 	/** Returns an {@link Annotation} object reflecting the annotation provided, or null of this method doesn't have such an
 	 * annotation. This is a convenience function if the caller knows already which annotation type he's looking for. */
-	@Nullable public Annotation getDeclaredAnnotation (Class<? extends java.lang.annotation.Annotation> annotationType) {
+	@Nullable
+	public Annotation getDeclaredAnnotation (Class<? extends java.lang.annotation.Annotation> annotationType) {
 		java.lang.annotation.Annotation[] annotations = method.getDeclaredAnnotations();
 		if (annotations == null) {
 			return null;

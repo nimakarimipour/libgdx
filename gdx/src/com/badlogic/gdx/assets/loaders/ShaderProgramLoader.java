@@ -49,7 +49,8 @@ public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, 
 		this.fragmentFileSuffix = fragmentFileSuffix;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable ShaderProgramParameter parameter) {
 		return null;
 	}
@@ -59,7 +60,8 @@ public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, 
 	}
 
 	@Override
-	public ShaderProgram loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable ShaderProgramParameter parameter) {
+	public ShaderProgram loadSync (AssetManager manager, String fileName, FileHandle file,
+		@Nullable ShaderProgramParameter parameter) {
 		String vertFileName = null, fragFileName = null;
 		if (parameter != null) {
 			if (parameter.vertexFile != null) vertFileName = parameter.vertexFile;

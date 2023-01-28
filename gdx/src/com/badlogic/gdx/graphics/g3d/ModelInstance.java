@@ -170,7 +170,8 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final Array<String> rootNodeIds, boolean shareKeyframes) {
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final Array<String> rootNodeIds,
+		boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
 		copyNodes(model.nodes, rootNodeIds);
@@ -431,14 +432,16 @@ public class ModelInstance implements RenderableProvider {
 
 	/** @param id The ID of the animation to fetch (case sensitive).
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	@Nullable public Animation getAnimation (final String id) {
+	@Nullable
+	public Animation getAnimation (final String id) {
 		return getAnimation(id, false);
 	}
 
 	/** @param id The ID of the animation to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	@Nullable public Animation getAnimation (final String id, boolean ignoreCase) {
+	@Nullable
+	public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
 		if (ignoreCase) {
@@ -453,14 +456,16 @@ public class ModelInstance implements RenderableProvider {
 
 	/** @param id The ID of the material to fetch.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	@Nullable public Material getMaterial (final String id) {
+	@Nullable
+	public Material getMaterial (final String id) {
 		return getMaterial(id, true);
 	}
 
 	/** @param id The ID of the material to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	@Nullable public Material getMaterial (final String id, boolean ignoreCase) {
+	@Nullable
+	public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;
 		if (ignoreCase) {

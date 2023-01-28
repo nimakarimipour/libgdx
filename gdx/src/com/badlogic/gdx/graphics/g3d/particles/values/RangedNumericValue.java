@@ -19,7 +19,6 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** A value which has a defined minimum and maximum bounds.
  * @author Inferno */

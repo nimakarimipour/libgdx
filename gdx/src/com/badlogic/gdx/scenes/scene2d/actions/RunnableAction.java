@@ -55,7 +55,8 @@ public class RunnableAction extends Action {
 		runnable = null;
 	}
 
-	@Nullable public Runnable getRunnable () {
+	@Nullable
+	public Runnable getRunnable () {
 		return runnable;
 	}
 

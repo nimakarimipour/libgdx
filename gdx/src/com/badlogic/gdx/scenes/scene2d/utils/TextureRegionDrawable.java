@@ -23,7 +23,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import javax.annotation.Nullable;
 
 /** Drawable for a {@link TextureRegion}.
  * @author Nathan Sweet */

@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+
 import javax.annotation.Nullable;
 
 /** An unordered map that uses identity comparison for the object keys. Null keys are not allowed. No allocation is done except
