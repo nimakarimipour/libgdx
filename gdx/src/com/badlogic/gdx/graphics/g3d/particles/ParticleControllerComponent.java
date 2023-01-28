@@ -24,7 +24,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** It's the base class of every {@link ParticleController} component. A component duty is to participate in one or some events
  * during the simulation. (i.e it can handle the particles emission or modify particle properties, etc.).

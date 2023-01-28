@@ -123,7 +123,8 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, String fileName, FileHandle tmxFile, @Nullable AtlasTiledMapLoaderParameters parameter) {
+	public void loadAsync (AssetManager manager, String fileName, FileHandle tmxFile,
+		@Nullable AtlasTiledMapLoaderParameters parameter) {
 		FileHandle atlasHandle = getAtlasFileHandle(tmxFile);
 		this.atlasResolver = new AtlasResolver.AssetManagerAtlasResolver(manager, atlasHandle.path());
 
@@ -131,7 +132,8 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	}
 
 	@Override
-	public TiledMap loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable AtlasTiledMapLoaderParameters parameter) {
+	public TiledMap loadSync (AssetManager manager, String fileName, FileHandle file,
+		@Nullable AtlasTiledMapLoaderParameters parameter) {
 		if (parameter != null) {
 			setTextureFilters(parameter.textureMinFilter, parameter.textureMagFilter);
 		}
@@ -156,7 +158,8 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	@Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
 		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image) {
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight,
+		@Nullable FileHandle image) {
 
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;

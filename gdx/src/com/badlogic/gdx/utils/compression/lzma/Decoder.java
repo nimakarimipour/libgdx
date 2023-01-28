@@ -20,7 +20,6 @@ import java.io.IOException;
 
 import com.badlogic.gdx.utils.compression.lz.OutWindow;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeDecoder;
-import javax.annotation.Nullable;
 
 public class Decoder {
 	class LenDecoder {

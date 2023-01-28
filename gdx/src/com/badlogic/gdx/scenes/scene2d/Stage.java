@@ -212,7 +212,8 @@ public class Stage extends InputAdapter implements Disposable {
 		root.act(delta);
 	}
 
-	@Nullable private @Null Actor fireEnterAndExit (@Nullable @Null Actor overLast, int screenX, int screenY, int pointer) {
+	@Nullable
+	private @Null Actor fireEnterAndExit (@Nullable @Null Actor overLast, int screenX, int screenY, int pointer) {
 		// Find the actor under the point.
 		screenToStageCoordinates(tempCoords.set(screenX, screenY));
 		Actor over = hit(tempCoords.x, tempCoords.y, true);
@@ -661,7 +662,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Gets the actor that will receive key events.
 	 * @return May be null. */
-	@Nullable public @Null Actor getKeyboardFocus () {
+	@Nullable
+	public @Null Actor getKeyboardFocus () {
 		return keyboardFocus;
 	}
 
@@ -696,7 +698,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Gets the actor that will receive scroll events.
 	 * @return May be null. */
-	@Nullable public @Null Actor getScrollFocus () {
+	@Nullable
+	public @Null Actor getScrollFocus () {
 		return scrollFocus;
 	}
 
@@ -746,7 +749,8 @@ public class Stage extends InputAdapter implements Disposable {
 	 * {@link #screenToStageCoordinates(Vector2)}.
 	 * @param touchable If true, the hit detection will respect the {@link Actor#setTouchable(Touchable) touchability}.
 	 * @return May be null if no actor was hit. */
-	@Nullable public @Null Actor hit (float stageX, float stageY, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float stageX, float stageY, boolean touchable) {
 		root.parentToLocalCoordinates(tempCoords.set(stageX, stageY));
 		return root.hit(tempCoords.x, tempCoords.y, touchable);
 	}

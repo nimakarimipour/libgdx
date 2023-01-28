@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+
 import javax.annotation.Nullable;
 
 public class Polyline implements Shape2D {

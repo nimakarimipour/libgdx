@@ -31,7 +31,8 @@ public class TouchableAction extends Action {
 		return true;
 	}
 
-	@Nullable public Touchable getTouchable () {
+	@Nullable
+	public Touchable getTouchable () {
 		return touchable;
 	}
 

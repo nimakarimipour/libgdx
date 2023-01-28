@@ -252,22 +252,26 @@ public interface Net {
 		}
 
 		/** Returns the HTTP method of the HttpRequest. */
-		@Nullable public String getMethod () {
+		@Nullable
+		public String getMethod () {
 			return httpMethod;
 		}
 
 		/** Returns the URL of the HTTP request. */
-		@Nullable public String getUrl () {
+		@Nullable
+		public String getUrl () {
 			return url;
 		}
 
 		/** Returns the content string to be used for the HTTP request. */
-		@Nullable public String getContent () {
+		@Nullable
+		public String getContent () {
 			return content;
 		}
 
 		/** Returns the content stream. */
-		@Nullable public InputStream getContentStream () {
+		@Nullable
+		public InputStream getContentStream () {
 			return contentStream;
 		}
 

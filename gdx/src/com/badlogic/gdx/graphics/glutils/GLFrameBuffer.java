@@ -34,7 +34,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import javax.annotation.Nullable;
 
 /**
  * <p>

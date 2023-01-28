@@ -85,8 +85,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, shaderConfig, null, null);
 	}
 
-	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig, @Nullable BlendingAttribute blendingAttribute,
-		@Nullable DepthTestAttribute depthTestAttribute) {
+	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
+		@Nullable BlendingAttribute blendingAttribute, @Nullable DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
 
 		if (!pointSpritesEnabled) enablePointSprites();
@@ -128,7 +128,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		return attribute.textureDescription.texture;
 	}
 
-	@Nullable public BlendingAttribute getBlendingAttribute () {
+	@Nullable
+	public BlendingAttribute getBlendingAttribute () {
 		return blendingAttribute;
 	}
 

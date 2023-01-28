@@ -157,7 +157,8 @@ public class WidgetGroup extends Group implements Layout {
 
 	/** If this method is overridden, the super method or {@link #validate()} should be called to ensure the widget group is laid
 	 * out. */
-	@Nullable public Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public Actor hit (float x, float y, boolean touchable) {
 		validate();
 		return super.hit(x, y, touchable);
 	}

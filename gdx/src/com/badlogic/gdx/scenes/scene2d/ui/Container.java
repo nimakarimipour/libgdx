@@ -101,7 +101,8 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return this;
 	}
 
-	@Nullable public @Null Drawable getBackground () {
+	@Nullable
+	public @Null Drawable getBackground () {
 		return background;
 	}
 
@@ -739,7 +740,8 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return clip;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;

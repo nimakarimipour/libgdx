@@ -18,7 +18,6 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** Defines a variation of red, green and blue on a given time line.
  * @author Inferno */
