@@ -9,12 +9,13 @@ import com.badlogic.gdx.utils.OrderedSet;
 import com.badlogic.gdx.utils.Pools;
 
 import java.util.Iterator;
+import javax.annotation.Nullable;
 
 /** Manages selected objects. Optionally fires a {@link ChangeEvent} on an actor. Selection changes can be vetoed via
  * {@link ChangeEvent#cancel()}.
  * @author Nathan Sweet */
 public class Selection<T> implements Disableable, Iterable<T> {
-	private @Null Actor actor;
+	@Nullable private @Null Actor actor;
 	final OrderedSet<T> selected = new OrderedSet();
 	private final OrderedSet<T> old = new OrderedSet();
 	boolean isDisabled;
@@ -22,7 +23,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	boolean multiple;
 	boolean required;
 	private boolean programmaticChangeEvents = true;
-	@Null T lastSelected;
+	@Nullable @Null T lastSelected;
 
 	/** @param actor An actor to fire {@link ChangeEvent} on when the selection changes, or null. */
 	public void setActor (@Null Actor actor) {
@@ -82,7 +83,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Returns the first selected item, or null. */
-	public @Null T first () {
+	@Nullable public @Null T first () {
 		return selected.size == 0 ? null : selected.first();
 	}
 
@@ -101,7 +102,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Sets the selection to only the specified item. */
-	public void set (T item) {
+	public void set (@Nullable T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (selected.size == 1 && selected.first() == item) return;
 		snapshot();
@@ -238,7 +239,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Makes a best effort to return the last item selected, else returns an arbitrary item or null if the selection is empty. */
-	public @Null T getLastSelected () {
+	@Nullable public @Null T getLastSelected () {
 		if (lastSelected != null) {
 			return lastSelected;
 		} else if (selected.size > 0) {

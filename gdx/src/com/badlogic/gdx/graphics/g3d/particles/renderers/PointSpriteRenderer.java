@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRegionIni
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.PointSpriteParticleBatch;
+import javax.annotation.Nullable;
 
 /** A {@link ParticleControllerRenderer} which will render particles as point sprites to a {@link PointSpriteParticleBatch} .
  * @author Inferno */
@@ -32,7 +33,7 @@ public class PointSpriteRenderer extends ParticleControllerRenderer<PointSpriteC
 		super(new PointSpriteControllerRenderData());
 	}
 
-	public PointSpriteRenderer (PointSpriteParticleBatch batch) {
+	public PointSpriteRenderer (@Nullable PointSpriteParticleBatch batch) {
 		this();
 		setBatch(batch);
 	}
@@ -47,7 +48,7 @@ public class PointSpriteRenderer extends ParticleControllerRenderer<PointSpriteC
 	}
 
 	@Override
-	public boolean isCompatible (ParticleBatch<?> batch) {
+	public boolean isCompatible (@Nullable ParticleBatch<?> batch) {
 		return batch instanceof PointSpriteParticleBatch;
 	}
 

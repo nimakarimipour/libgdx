@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /** Interface which is used to render one or more {@link Renderable}s.
  * </p>

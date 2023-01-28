@@ -20,6 +20,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
+import javax.annotation.Nullable;
 
 /** Executes tasks in the future on the main loop thread.
  * @author Nathan Sweet */
@@ -29,7 +30,7 @@ public class Timer {
 	// Task access is synchronized using the Task instance.
 
 	static final Object threadLock = new Object();
-	static TimerThread thread;
+	@Nullable static TimerThread thread;
 
 	/** Timer instance singleton for general application wide usage. Static methods on {@link Timer} make convenient use of this
 	 * instance. */
@@ -194,7 +195,7 @@ public class Timer {
 		final Application app;
 		long executeTimeMillis, intervalMillis;
 		int repeatCount;
-		volatile Timer timer;
+		@Nullable volatile Timer timer;
 
 		public Task () {
 			app = Gdx.app; // Store which app to postRunnable (eg for multiple LwjglAWTCanvas).
@@ -250,7 +251,7 @@ public class Timer {
 		final Files files;
 		final Application app;
 		final Array<Timer> instances = new Array(1);
-		Timer instance;
+		@Nullable Timer instance;
 		long pauseTimeMillis;
 
 		public TimerThread () {
