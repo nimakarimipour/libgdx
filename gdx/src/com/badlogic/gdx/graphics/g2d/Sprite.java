@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import javax.annotation.Nullable;
 
 /** Holds the geometry, color, and texture information for drawing 2D sprites using {@link Batch}. A Sprite has a position and a
  * size given as width and height. The position is relative to the origin of the coordinate system specified via
@@ -43,7 +44,7 @@ public class Sprite extends TextureRegion {
 	private float rotation;
 	private float scaleX = 1, scaleY = 1;
 	private boolean dirty = true;
-	private Rectangle bounds;
+	@Nullable private Rectangle bounds;
 
 	/** Creates an uninitialized sprite. The sprite will need a texture region and bounds set before it can be drawn. */
 	public Sprite () {
@@ -97,12 +98,12 @@ public class Sprite extends TextureRegion {
 	}
 
 	/** Creates a sprite that is a copy in every way of the specified sprite. */
-	public Sprite (Sprite sprite) {
+	public Sprite (@Nullable Sprite sprite) {
 		set(sprite);
 	}
 
 	/** Make this sprite a copy in every way of the specified sprite */
-	public void set (Sprite sprite) {
+	public void set (@Nullable Sprite sprite) {
 		if (sprite == null) throw new IllegalArgumentException("sprite cannot be null.");
 		System.arraycopy(sprite.vertices, 0, vertices, 0, SPRITE_SIZE);
 		texture = sprite.texture;

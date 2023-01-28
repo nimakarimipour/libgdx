@@ -27,6 +27,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
+import javax.annotation.Nullable;
 
 /** Manages a {@link Camera} and determines how world coordinates are mapped to and from the screen.
  * @author Daniel Holderbaum

@@ -34,6 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Selection;
 import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /** A tree widget where each node has an icon, actor, and child nodes.
  * <p>
@@ -52,8 +53,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	float ySpacing = 4, iconSpacingLeft = 2, iconSpacingRight = 2, paddingLeft, paddingRight, indentSpacing;
 	private float prefWidth, prefHeight;
 	private boolean sizeInvalid = true;
-	private N foundNode, overNode;
-	N rangeStart;
+	@Nullable private N foundNode, overNode;
+	@Nullable N rangeStart;
 	private ClickListener clickListener;
 
 	public Tree (Skin skin) {
@@ -125,12 +126,12 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 				return false;
 			}
 
-			public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
+			public void enter (InputEvent event, float x, float y, int pointer, @Nullable Actor fromActor) {
 				super.enter(event, x, y, pointer, fromActor);
 				setOverNode(getNodeAt(y));
 			}
 
-			public void exit (InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
+			public void exit (InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {
 				super.exit(event, x, y, pointer, toActor);
 				if (toActor == null || !toActor.isDescendantOf(Tree.this)) setOverNode(null);
 			}
@@ -286,7 +287,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	/** Draws selection, icons, and expand icons.
 	 * @param parent null for the root nodes.
 	 * @return The Y position of the last visible actor for the nodes. */
-	protected float drawIcons (Batch batch, float r, float g, float b, float a, @Null N parent, Array<N> nodes, float indent,
+	protected float drawIcons (Batch batch, float r, float g, float b, float a, @Nullable @Null N parent, Array<N> nodes, float indent,
 		float plusMinusWidth) {
 
 		Rectangle cullingArea = getCullingArea();
@@ -365,7 +366,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** @return May be null. */
-	public @Null N getNodeAt (float y) {
+	@Nullable public @Null N getNodeAt (float y) {
 		foundNode = null;
 		getNodeAt(rootNodes, y, getHeight());
 		try {
@@ -408,12 +409,12 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** Returns the first selected node, or null. */
-	public @Null N getSelectedNode () {
+	@Nullable public @Null N getSelectedNode () {
 		return selection.first();
 	}
 
 	/** Returns the first selected value, or null. */
-	public @Null V getSelectedValue () {
+	@Nullable public @Null V getSelectedValue () {
 		N node = selection.first();
 		return node == null ? null : (V)node.getValue();
 	}
@@ -448,18 +449,18 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** @return May be null. */
-	public @Null N getOverNode () {
+	@Nullable public @Null N getOverNode () {
 		return overNode;
 	}
 
 	/** @return May be null. */
-	public @Null V getOverValue () {
+	@Nullable public @Null V getOverValue () {
 		if (overNode == null) return null;
 		return (V)overNode.getValue();
 	}
 
 	/** @param overNode May be null. */
-	public void setOverNode (@Null N overNode) {
+	public void setOverNode (@Nullable @Null N overNode) {
 		this.overNode = overNode;
 	}
 
@@ -534,12 +535,12 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** Returns the node with the specified value, or null. */
-	public @Null N findNode (V value) {
+	@Nullable public @Null N findNode (V value) {
 		if (value == null) throw new IllegalArgumentException("value cannot be null.");
 		return (N)findNode(rootNodes, value);
 	}
 
-	static @Null Node findNode (Array<? extends Node> nodes, Object value) {
+	@Nullable static @Null Node findNode (Array<? extends Node> nodes, Object value) {
 		for (int i = 0, n = nodes.size; i < n; i++) {
 			Node node = nodes.get(i);
 			if (value.equals(node.value)) return node;
@@ -587,13 +588,13 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	 * @author Nathan Sweet */
 	static abstract public class Node<N extends Node, V, A extends Actor> {
 		A actor;
-		N parent;
+		@Nullable N parent;
 		final Array<N> children = new Array(0);
 		boolean selectable = true;
 		boolean expanded;
-		Drawable icon;
+		@Nullable Drawable icon;
 		float height;
-		V value;
+		@Nullable V value;
 
 		public Node (A actor) {
 			if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
@@ -713,7 +714,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 		/** Returns the tree this node's actor is currently in, or null. The actor is only in the tree when all of its parent nodes
 		 * are expanded. */
-		public @Null Tree<N, V> getTree () {
+		@Nullable public @Null Tree<N, V> getTree () {
 			Group parent = actor.getParent();
 			if (parent instanceof Tree) return (Tree)parent;
 			return null;
@@ -767,7 +768,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		}
 
 		/** @return May be null. */
-		public @Null N getParent () {
+		@Nullable public @Null N getParent () {
 			return parent;
 		}
 
@@ -776,7 +777,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 			this.icon = icon;
 		}
 
-		public @Null V getValue () {
+		@Nullable public @Null V getValue () {
 			return value;
 		}
 
@@ -785,7 +786,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 			this.value = value;
 		}
 
-		public @Null Drawable getIcon () {
+		@Nullable public @Null Drawable getIcon () {
 			return icon;
 		}
 
@@ -800,7 +801,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		}
 
 		/** Returns this node or the child node with the specified value, or null. */
-		public @Null N findNode (V value) {
+		@Nullable public @Null N findNode (V value) {
 			if (value == null) throw new IllegalArgumentException("value cannot be null.");
 			if (value.equals(this.value)) return (N)this;
 			return (N)Tree.findNode(children, value);
@@ -882,8 +883,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	 * @author Nathan Sweet */
 	static public class TreeStyle {
 		public Drawable plus, minus;
-		public @Null Drawable plusOver, minusOver;
-		public @Null Drawable over, selection, background;
+		@Nullable public @Null Drawable plusOver, minusOver;
+		@Nullable public @Null Drawable over, selection, background;
 
 		public TreeStyle () {
 		}

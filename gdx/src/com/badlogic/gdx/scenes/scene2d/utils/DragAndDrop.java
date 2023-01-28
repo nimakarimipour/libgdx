@@ -26,17 +26,18 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
+import javax.annotation.Nullable;
 
 /** Manages drag and drop operations through registered drag sources and drop targets.
  * @author Nathan Sweet */
 public class DragAndDrop {
 	static final Vector2 tmpVector = new Vector2();
 
-	Source dragSource;
-	Payload payload;
-	Actor dragActor;
+	@Nullable Source dragSource;
+	@Nullable Payload payload;
+	@Nullable Actor dragActor;
 	boolean removeDragActor;
-	Target target;
+	@Nullable Target target;
 	boolean isValidTarget;
 	final Array<Target> targets = new Array(8);
 	final ObjectMap<Source, DragListener> sourceListeners = new ObjectMap(8);
@@ -229,17 +230,17 @@ public class DragAndDrop {
 	}
 
 	/** Returns the current drag actor, or null. */
-	public @Null Actor getDragActor () {
+	@Nullable public @Null Actor getDragActor () {
 		return dragActor;
 	}
 
 	/** Returns the current drag payload, or null. */
-	public @Null Payload getDragPayload () {
+	@Nullable public @Null Payload getDragPayload () {
 		return payload;
 	}
 
 	/** Returns the current drag source, or null. */
-	public @Null Source getDragSource () {
+	@Nullable public @Null Source getDragSource () {
 		return dragSource;
 	}
 
@@ -290,7 +291,7 @@ public class DragAndDrop {
 		/** Called when a drag for the source is stopped. The coordinates are in the source's local coordinate system.
 		 * @param payload null if dragStart returned null.
 		 * @param target null if not dropped on a valid target. */
-		public void dragStop (InputEvent event, float x, float y, int pointer, @Null Payload payload, @Null Target target) {
+		public void dragStop (InputEvent event, float x, float y, int pointer, @Null Payload payload, @Nullable @Null Target target) {
 		}
 
 		public Actor getActor () {
@@ -333,14 +334,14 @@ public class DragAndDrop {
 	 * target. Such actors will be added the stage automatically during the drag operation as necessary and they will only be
 	 * removed from the stage if they were added automatically. A source actor can be used as a payload drag actor. */
 	static public class Payload {
-		@Null Actor dragActor, validDragActor, invalidDragActor;
-		@Null Object object;
+		@Nullable @Null Actor dragActor, validDragActor, invalidDragActor;
+		@Nullable @Null Object object;
 
 		public void setDragActor (@Null Actor dragActor) {
 			this.dragActor = dragActor;
 		}
 
-		public @Null Actor getDragActor () {
+		@Nullable public @Null Actor getDragActor () {
 			return dragActor;
 		}
 
@@ -348,7 +349,7 @@ public class DragAndDrop {
 			this.validDragActor = validDragActor;
 		}
 
-		public @Null Actor getValidDragActor () {
+		@Nullable public @Null Actor getValidDragActor () {
 			return validDragActor;
 		}
 
@@ -356,11 +357,11 @@ public class DragAndDrop {
 			this.invalidDragActor = invalidDragActor;
 		}
 
-		public @Null Actor getInvalidDragActor () {
+		@Nullable public @Null Actor getInvalidDragActor () {
 			return invalidDragActor;
 		}
 
-		public @Null Object getObject () {
+		@Nullable public @Null Object getObject () {
 			return object;
 		}
 

@@ -19,13 +19,14 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** Executes an action only after all other actions on the actor at the time this action's target was set have finished.
  * @author Nathan Sweet */
 public class AfterAction extends DelegateAction {
 	private Array<Action> waitForActions = new Array(false, 4);
 
-	public void setTarget (Actor target) {
+	public void setTarget (@Nullable Actor target) {
 		if (target != null) waitForActions.addAll(target.getActions());
 		super.setTarget(target);
 	}

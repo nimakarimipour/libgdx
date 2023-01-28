@@ -32,6 +32,7 @@ import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+import javax.annotation.Nullable;
 
 /** loads {@link PolygonRegion PolygonRegions} using a {@link com.badlogic.gdx.graphics.g2d.PolygonRegionLoader}
  * @author dermetfan */
@@ -65,7 +66,7 @@ public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, P
 	}
 
 	@Override
-	public PolygonRegion load (AssetManager manager, String fileName, FileHandle file, PolygonRegionParameters parameter) {
+	public PolygonRegion load (AssetManager manager, String fileName, FileHandle file, @Nullable PolygonRegionParameters parameter) {
 		Texture texture = manager.get(manager.getDependencies(fileName).first());
 		return load(new TextureRegion(texture), file);
 	}
@@ -74,8 +75,8 @@ public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, P
 	 * {@link AssetDescriptor} for the file referenced on that line will be added to the returned Array. Otherwise a sibling of the
 	 * given file with the same name and the first found extension in {@link PolygonRegionParameters#textureExtensions
 	 * params.textureExtensions} will be used. If no suitable file is found, the returned Array will be empty. */
-	@Override
-	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, PolygonRegionParameters params) {
+	@Nullable @Override
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable PolygonRegionParameters params) {
 		if (params == null) params = defaultParameters;
 		String image = null;
 		try {

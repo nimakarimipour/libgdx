@@ -15,6 +15,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /** A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when running on partially sorted
  * arrays, while offering performance comparable to a traditional mergesort when run on random arrays. Like all proper mergesorts,
