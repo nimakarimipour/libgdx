@@ -30,14 +30,15 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** A text input field with multiple lines. */
 public class TextArea extends TextField {
 	/** Array storing lines breaks positions **/
-	IntArray linesBreak;
+	@Nullable IntArray linesBreak;
 
 	/** Last text processed. This attribute is used to avoid unnecessary computations while calculating offsets **/
-	private String lastText;
+	@Nullable private String lastText;
 
 	/** Current line for the cursor **/
 	int cursorLine;
@@ -217,7 +218,7 @@ public class TextArea extends TextField {
 		linesShowing = (int)Math.floor(availableHeight / font.getLineHeight());
 	}
 
-	protected float getTextY (BitmapFont font, @Null Drawable background) {
+	protected float getTextY (@Nullable BitmapFont font, @Nullable @Null Drawable background) {
 		float textY = getHeight();
 		if (background != null) {
 			textY = textY - background.getTopHeight();
@@ -226,7 +227,7 @@ public class TextArea extends TextField {
 		return textY;
 	}
 
-	protected void drawSelection (Drawable selection, Batch batch, BitmapFont font, float x, float y) {
+	protected void drawSelection (Drawable selection, Batch batch, @Nullable BitmapFont font, float x, float y) {
 		int i = firstLineShowing * 2;
 		float offsetY = 0;
 		int minIndex = Math.min(cursor, selectionStart);
@@ -415,7 +416,7 @@ public class TextArea extends TextField {
 			updateCurrentLine();
 		}
 
-		public boolean keyDown (InputEvent event, int keycode) {
+		public boolean keyDown (@Nullable InputEvent event, int keycode) {
 			boolean result = super.keyDown(event, keycode);
 			if (hasKeyboardFocus()) {
 				boolean repeat = false;

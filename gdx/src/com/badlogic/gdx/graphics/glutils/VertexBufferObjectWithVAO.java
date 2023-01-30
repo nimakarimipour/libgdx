@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.IntArray;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ import com.badlogic.gdx.utils.IntArray;
 public class VertexBufferObjectWithVAO implements VertexData {
 	final static IntBuffer tmpHandle = BufferUtils.newIntBuffer(1);
 
-	final VertexAttributes attributes;
+	@Nullable final VertexAttributes attributes;
 	final FloatBuffer buffer;
 	final ByteBuffer byteBuffer;
 	final boolean ownsBuffer;
@@ -61,7 +62,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	 * @param isStatic whether the vertex data is static.
 	 * @param numVertices the maximum number of vertices
 	 * @param attributes the {@link VertexAttributes}. */
-	public VertexBufferObjectWithVAO (boolean isStatic, int numVertices, VertexAttributes attributes) {
+	public VertexBufferObjectWithVAO (boolean isStatic, int numVertices, @Nullable VertexAttributes attributes) {
 		this.isStatic = isStatic;
 		this.attributes = attributes;
 
@@ -89,7 +90,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		createVAO();
 	}
 
-	@Override
+	@Nullable @Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}
@@ -119,7 +120,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	}
 
 	@Override
-	public void setVertices (float[] vertices, int offset, int count) {
+	public void setVertices (@Nullable float[] vertices, int offset, int count) {
 		isDirty = true;
 		BufferUtils.copy(vertices, byteBuffer, count, offset);
 		((Buffer)buffer).position(0);
@@ -147,7 +148,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	}
 
 	@Override
-	public void bind (ShaderProgram shader, int[] locations) {
+	public void bind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		GL30 gl = Gdx.gl30;
 
 		gl.glBindVertexArray(vaoHandle);
@@ -160,7 +161,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		isBound = true;
 	}
 
-	private void bindAttributes (ShaderProgram shader, int[] locations) {
+	private void bindAttributes (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		boolean stillValid = this.cachedLocations.size != 0;
 		final int numAttributes = attributes.size();
 
@@ -204,7 +205,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		}
 	}
 
-	private void unbindAttributes (ShaderProgram shaderProgram) {
+	private void unbindAttributes (@Nullable ShaderProgram shaderProgram) {
 		if (cachedLocations.size == 0) {
 			return;
 		}
@@ -236,7 +237,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	}
 
 	@Override
-	public void unbind (final ShaderProgram shader, final int[] locations) {
+	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		GL30 gl = Gdx.gl30;
 		gl.glBindVertexArray(0);
 		isBound = false;

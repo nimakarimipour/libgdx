@@ -3,14 +3,15 @@
 package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 public class BinTree extends InWindow {
 	int _cyclicBufferPos;
 	int _cyclicBufferSize = 0;
 	int _matchMaxLen;
 
-	int[] _son;
-	int[] _hash;
+	@Nullable int[] _son;
+	@Nullable int[] _hash;
 
 	int _cutValue = 0xFF;
 	int _hashMask;
@@ -273,7 +274,7 @@ public class BinTree extends InWindow {
 		} while (--num != 0);
 	}
 
-	void NormalizeLinks (int[] items, int numItems, int subValue) {
+	void NormalizeLinks (@Nullable int[] items, int numItems, int subValue) {
 		for (int i = 0; i < numItems; i++) {
 			int value = items[i];
 			if (value <= subValue)

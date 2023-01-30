@@ -18,6 +18,7 @@ package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Implementation of the Bezier curve.
  * @author Xoppa */
@@ -31,7 +32,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p1 The end point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T linear (final T out, final float t, final T p0, final T p1, final T tmp) {
+	public static <T extends Vector<T>> T linear (@Nullable final T out, final float t, final T p0, final T p1, @Nullable final T tmp) {
 		// B1(t) = p0 + (p1-p0)*t
 		return out.set(p0).scl(1f - t).add(tmp.set(p1).scl(t)); // Could just use lerp...
 	}
@@ -43,7 +44,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p1 The end point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T linear_derivative (final T out, final float t, final T p0, final T p1, final T tmp) {
+	public static <T extends Vector<T>> T linear_derivative (final T out, final float t, final T p0, final T p1, @Nullable final T tmp) {
 		// B1'(t) = p1-p0
 		return out.set(p1).sub(p0);
 	}
@@ -56,7 +57,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p2 The third bezier point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T quadratic (final T out, final float t, final T p0, final T p1, final T p2, final T tmp) {
+	public static <T extends Vector<T>> T quadratic (@Nullable final T out, final float t, final T p0, final T p1, final T p2, @Nullable final T tmp) {
 		// B2(t) = (1 - t) * (1 - t) * p0 + 2 * (1-t) * t * p1 + t*t*p2
 		final float dt = 1f - t;
 		return out.set(p0).scl(dt * dt).add(tmp.set(p1).scl(2 * dt * t)).add(tmp.set(p2).scl(t * t));
@@ -71,7 +72,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
 	public static <T extends Vector<T>> T quadratic_derivative (final T out, final float t, final T p0, final T p1, final T p2,
-		final T tmp) {
+		@Nullable final T tmp) {
 		// B2'(t) = 2 * (1 - t) * (p1 - p0) + 2 * t * (p2 - p1)
 		final float dt = 1f - t;
 		return out.set(p1).sub(p0).scl(2).scl(1 - t).add(tmp.set(p2).sub(p1).scl(t).scl(2));
@@ -86,8 +87,8 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p3 The fourth bezier point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T cubic (final T out, final float t, final T p0, final T p1, final T p2, final T p3,
-		final T tmp) {
+	public static <T extends Vector<T>> T cubic (@Nullable final T out, final float t, final T p0, final T p1, final T p2, final T p3,
+		@Nullable final T tmp) {
 		// B3(t) = (1-t) * (1-t) * (1-t) * p0 + 3 * (1-t) * (1-t) * t * p1 + 3 * (1-t) * t * t * p2 + t * t * t * p3
 		final float dt = 1f - t;
 		final float dt2 = dt * dt;
@@ -106,7 +107,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
 	public static <T extends Vector<T>> T cubic_derivative (final T out, final float t, final T p0, final T p1, final T p2,
-		final T p3, final T tmp) {
+		final T p3, @Nullable final T tmp) {
 		// B3'(t) = 3 * (1-t) * (1-t) * (p1 - p0) + 6 * (1 - t) * t * (p2 - p1) + 3 * t * t * (p3 - p2)
 		final float dt = 1f - t;
 		final float dt2 = dt * dt;
@@ -115,9 +116,9 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	}
 
 	public Array<T> points = new Array<T>();
-	private T tmp;
-	private T tmp2;
-	private T tmp3;
+	@Nullable private T tmp;
+	@Nullable private T tmp2;
+	@Nullable private T tmp3;
 
 	public Bezier () {
 	}
@@ -160,8 +161,8 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 		return this;
 	}
 
-	@Override
-	public T valueAt (final T out, final float t) {
+	@Nullable @Override
+	public T valueAt (@Nullable final T out, final float t) {
 		final int n = points.size;
 		if (n == 2)
 			linear(out, t, points.get(0), points.get(1), tmp);

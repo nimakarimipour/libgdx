@@ -28,6 +28,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** An instance of a {@link Model}, allows to specify global transform and modify the materials, as it has a copy of the model's
  * materials. Multiple instances can be created from the same Model, all sharing the meshes and textures of the Model. The Model
@@ -50,15 +51,15 @@ public class ModelInstance implements RenderableProvider {
 	/** animations of the model, modifying node transformations **/
 	public final Array<Animation> animations = new Array();
 	/** the {@link Model} this instances derives from **/
-	public final Model model;
+	@Nullable public final Model model;
 	/** the world transform **/
 	public Matrix4 transform;
 	/** user definable value, which is passed to the {@link Shader}. */
-	public Object userData;
+	@Nullable public Object userData;
 
 	/** Constructs a new ModelInstance with all nodes and materials of the given model.
 	 * @param model The {@link Model} to create an instance of. */
-	public ModelInstance (final Model model) {
+	public ModelInstance (@Nullable final Model model) {
 		this(model, (String[])null);
 	}
 
@@ -113,7 +114,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive True to recursively search the Model's node tree, false to only search for a root node
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	public ModelInstance (final Model model, final Matrix4 transform, final String nodeId, boolean recursive,
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
 		boolean parentTransform, boolean mergeTransform) {
 		this(model, transform, nodeId, recursive, parentTransform, mergeTransform, defaultShareKeyframes);
 	}
@@ -124,7 +125,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive True to recursively search the Model's node tree, false to only search for a root node
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	public ModelInstance (final Model model, final Matrix4 transform, final String nodeId, boolean recursive,
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
 		boolean parentTransform, boolean mergeTransform, boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
@@ -142,12 +143,12 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, final String... rootNodeIds) {
+	public ModelInstance (@Nullable final Model model, @Nullable final String... rootNodeIds) {
 		this(model, null, rootNodeIds);
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, final Matrix4 transform, final String... rootNodeIds) {
+	public ModelInstance (@Nullable final Model model, @Nullable final Matrix4 transform, @Nullable final String... rootNodeIds) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
 		if (rootNodeIds == null)
@@ -164,12 +165,12 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, final Matrix4 transform, final Array<String> rootNodeIds) {
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final Array<String> rootNodeIds) {
 		this(model, transform, rootNodeIds, defaultShareKeyframes);
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, final Matrix4 transform, final Array<String> rootNodeIds, boolean shareKeyframes) {
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final Array<String> rootNodeIds, boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
 		copyNodes(model.nodes, rootNodeIds);
@@ -430,14 +431,14 @@ public class ModelInstance implements RenderableProvider {
 
 	/** @param id The ID of the animation to fetch (case sensitive).
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	public Animation getAnimation (final String id) {
+	@Nullable public Animation getAnimation (final String id) {
 		return getAnimation(id, false);
 	}
 
 	/** @param id The ID of the animation to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	public Animation getAnimation (final String id, boolean ignoreCase) {
+	@Nullable public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
 		if (ignoreCase) {
@@ -452,14 +453,14 @@ public class ModelInstance implements RenderableProvider {
 
 	/** @param id The ID of the material to fetch.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	public Material getMaterial (final String id) {
+	@Nullable public Material getMaterial (final String id) {
 		return getMaterial(id, true);
 	}
 
 	/** @param id The ID of the material to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	public Material getMaterial (final String id, boolean ignoreCase) {
+	@Nullable public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;
 		if (ignoreCase) {
@@ -474,14 +475,14 @@ public class ModelInstance implements RenderableProvider {
 
 	/** @param id The ID of the node to fetch.
 	 * @return The {@link Node} with the specified id, or null if not found. */
-	public Node getNode (final String id) {
+	@Nullable public Node getNode (@Nullable final String id) {
 		return getNode(id, true);
 	}
 
 	/** @param id The ID of the node to fetch.
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The {@link Node} with the specified id, or null if not found. */
-	public Node getNode (final String id, boolean recursive) {
+	@Nullable public Node getNode (@Nullable final String id, boolean recursive) {
 		return getNode(id, recursive, false);
 	}
 
@@ -489,7 +490,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @param ignoreCase whether to use case sensitivity when comparing the node id.
 	 * @return The {@link Node} with the specified id, or null if not found. */
-	public Node getNode (final String id, boolean recursive, boolean ignoreCase) {
+	@Nullable public Node getNode (@Nullable final String id, boolean recursive, boolean ignoreCase) {
 		return Node.getNode(nodes, id, recursive, ignoreCase);
 	}
 }

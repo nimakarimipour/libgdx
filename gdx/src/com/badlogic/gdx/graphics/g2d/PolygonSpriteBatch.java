@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
+import javax.annotation.Nullable;
 
 /** A PolygonSpriteBatch is used to draw 2D polygons that reference a texture (region). The class will batch the drawing commands
  * and optimize them for processing by the GPU.
@@ -61,7 +62,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	private final float[] vertices;
 	private final short[] triangles;
 	private int vertexIndex, triangleIndex;
-	private Texture lastTexture;
+	@Nullable private Texture lastTexture;
 	private float invTexWidth = 0, invTexHeight = 0;
 	private boolean drawing;
 
@@ -76,7 +77,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	private int blendDstFuncAlpha = GL20.GL_ONE_MINUS_SRC_ALPHA;
 
 	private final ShaderProgram shader;
-	private ShaderProgram customShader;
+	@Nullable private ShaderProgram customShader;
 	private boolean ownsShader;
 
 	private final Color color = new Color(1, 1, 1, 1);
@@ -107,7 +108,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	/** Constructs a PolygonSpriteBatch with the specified shader, size vertices and size * 2 triangles.
 	 * @param size The max number of vertices and number of triangles in a single batch. Max of 32767.
 	 * @see #PolygonSpriteBatch(int, int, ShaderProgram) */
-	public PolygonSpriteBatch (int size, ShaderProgram defaultShader) {
+	public PolygonSpriteBatch (int size, @Nullable ShaderProgram defaultShader) {
 		this(size, size * 2, defaultShader);
 	}
 
@@ -121,7 +122,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	 * @param maxTriangles The max number of triangles in a single batch.
 	 * @param defaultShader The default shader to use. This is not owned by the PolygonSpriteBatch and must be disposed separately.
 	 *           May be null to use the default shader. */
-	public PolygonSpriteBatch (int maxVertices, int maxTriangles, ShaderProgram defaultShader) {
+	public PolygonSpriteBatch (int maxVertices, int maxTriangles, @Nullable ShaderProgram defaultShader) {
 		// 32767 is max vertex index.
 		if (maxVertices > 32767)
 			throw new IllegalArgumentException("Can't have more than 32767 vertices per batch: " + maxVertices);
@@ -332,7 +333,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
-	public void draw (Texture texture, float[] polygonVertices, int verticesOffset, int verticesCount, short[] polygonTriangles,
+	public void draw (@Nullable Texture texture, @Nullable float[] polygonVertices, int verticesOffset, int verticesCount, short[] polygonTriangles,
 		int trianglesOffset, int trianglesCount) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 
@@ -741,7 +742,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
-	public void draw (Texture texture, float[] spriteVertices, int offset, int count) {
+	public void draw (@Nullable Texture texture, float[] spriteVertices, int offset, int count) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 
 		final short[] triangles = this.triangles;
@@ -794,7 +795,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
-	public void draw (TextureRegion region, float x, float y, float width, float height) {
+	public void draw (@Nullable TextureRegion region, float x, float y, float width, float height) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 
 		final short[] triangles = this.triangles;
@@ -852,7 +853,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
-	public void draw (TextureRegion region, float x, float y, float originX, float originY, float width, float height,
+	public void draw (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width, float height,
 		float scaleX, float scaleY, float rotation) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 
@@ -1310,7 +1311,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		}
 	}
 
-	private void switchTexture (Texture texture) {
+	private void switchTexture (@Nullable Texture texture) {
 		flush();
 		lastTexture = texture;
 		invTexWidth = 1.0f / texture.getWidth();

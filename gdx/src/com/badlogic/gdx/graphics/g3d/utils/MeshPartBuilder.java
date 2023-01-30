@@ -27,16 +27,17 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 public interface MeshPartBuilder {
 	/** @return The {@link MeshPart} currently building. */
-	public MeshPart getMeshPart ();
+	@Nullable public MeshPart getMeshPart ();
 
 	/** @return The primitive type used for building, e.g. {@link GL20#GL_TRIANGLES} or {@link GL20#GL_LINES}. */
 	public int getPrimitiveType ();
 
 	/** @return The {@link VertexAttributes} available for building. */
-	public VertexAttributes getAttributes ();
+	@Nullable public VertexAttributes getAttributes ();
 
 	/** Set the color used to tint the vertex color, defaults to white. Only applicable for {@link Usage#ColorPacked} or
 	 * {@link Usage#ColorUnpacked}. */
@@ -212,7 +213,7 @@ public interface MeshPartBuilder {
 			uv.set(0, 0);
 		}
 
-		public VertexInfo set (Vector3 pos, Vector3 nor, Color col, Vector2 uv) {
+		public VertexInfo set (@Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
 			reset();
 			hasPosition = pos != null;
 			if (hasPosition) position.set(pos);
@@ -225,7 +226,7 @@ public interface MeshPartBuilder {
 			return this;
 		}
 
-		public VertexInfo set (final VertexInfo other) {
+		public VertexInfo set (@Nullable final VertexInfo other) {
 			if (other == null) return set(null, null, null, null);
 			hasPosition = other.hasPosition;
 			position.set(other.position);

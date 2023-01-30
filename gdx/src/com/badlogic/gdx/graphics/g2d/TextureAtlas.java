@@ -37,6 +37,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.StreamUtils;
+import javax.annotation.Nullable;
 
 /** Loads images from texture atlases created by TexturePacker.<br>
  * <br>
@@ -135,7 +136,7 @@ public class TextureAtlas implements Disposable {
 
 	/** Returns the first region found with the specified name. This method uses string comparison to find the region, so the
 	 * result should be cached rather than calling this method multiple times. */
-	public @Null AtlasRegion findRegion (String name) {
+	@Nullable public @Null AtlasRegion findRegion (String name) {
 		for (int i = 0, n = regions.size; i < n; i++)
 			if (regions.get(i).name.equals(name)) return regions.get(i);
 		return null;
@@ -143,7 +144,7 @@ public class TextureAtlas implements Disposable {
 
 	/** Returns the first region found with the specified name and index. This method uses string comparison to find the region, so
 	 * the result should be cached rather than calling this method multiple times. */
-	public @Null AtlasRegion findRegion (String name, int index) {
+	@Nullable public @Null AtlasRegion findRegion (String name, int index) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
 			if (!region.name.equals(name)) continue;
@@ -156,7 +157,7 @@ public class TextureAtlas implements Disposable {
 	/** Returns all regions with the specified name, ordered by smallest to largest {@link AtlasRegion#index index}. This method
 	 * uses string comparison to find the regions, so the result should be cached rather than calling this method multiple
 	 * times. */
-	public Array<AtlasRegion> findRegions (String name) {
+	public Array<AtlasRegion> findRegions (@Nullable String name) {
 		Array<AtlasRegion> matched = new Array(AtlasRegion.class);
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
@@ -179,7 +180,7 @@ public class TextureAtlas implements Disposable {
 	 * packed, the sprite is automatically positioned as if whitespace had not been stripped. This method uses string comparison to
 	 * find the region and constructs a new sprite, so the result should be cached rather than calling this method multiple
 	 * times. */
-	public @Null Sprite createSprite (String name) {
+	@Nullable public @Null Sprite createSprite (String name) {
 		for (int i = 0, n = regions.size; i < n; i++)
 			if (regions.get(i).name.equals(name)) return newSprite(regions.get(i));
 		return null;
@@ -188,7 +189,7 @@ public class TextureAtlas implements Disposable {
 	/** Returns the first region found with the specified name and index as a sprite. This method uses string comparison to find
 	 * the region and constructs a new sprite, so the result should be cached rather than calling this method multiple times.
 	 * @see #createSprite(String) */
-	public @Null Sprite createSprite (String name, int index) {
+	@Nullable public @Null Sprite createSprite (String name, int index) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
 			if (region.index != index) continue;
@@ -227,7 +228,7 @@ public class TextureAtlas implements Disposable {
 	/** Returns the first region found with the specified name as a {@link NinePatch}. The region must have been packed with
 	 * ninepatch splits. This method uses string comparison to find the region and constructs a new ninepatch, so the result should
 	 * be cached rather than calling this method multiple times. */
-	public @Null NinePatch createPatch (String name) {
+	@Nullable public @Null NinePatch createPatch (String name) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
 			if (region.name.equals(name)) {
@@ -480,9 +481,9 @@ public class TextureAtlas implements Disposable {
 
 		static public class Page {
 			/** May be null if this page isn't associated with a file. In that case, {@link #texture} must be set. */
-			public @Null FileHandle textureFile;
+			@Nullable public @Null FileHandle textureFile;
 			/** May be null if the texture is not yet loaded. */
-			public @Null Texture texture;
+			@Nullable public @Null Texture texture;
 			public float width, height;
 			public boolean useMipMaps;
 			public Format format = Format.RGBA8888;
@@ -492,19 +493,19 @@ public class TextureAtlas implements Disposable {
 		}
 
 		static public class Region {
-			public Page page;
-			public String name;
+			@Nullable public Page page;
+			@Nullable public String name;
 			public int left, top, width, height;
 			public float offsetX, offsetY;
 			public int originalWidth, originalHeight;
 			public int degrees;
 			public boolean rotate;
 			public int index = -1;
-			public @Null String[] names;
-			public @Null int[][] values;
+			@Nullable public @Null String[] names;
+			@Nullable public @Null int[][] values;
 			public boolean flip;
 
-			public @Null int[] findValue (String name) {
+			@Nullable public @Null int[] findValue (String name) {
 				if (names != null) {
 					for (int i = 0, n = names.length; i < n; i++)
 						if (name.equals(names[i])) return values[i];
@@ -526,7 +527,7 @@ public class TextureAtlas implements Disposable {
 		/** The name of the original image file, without the file's extension.<br>
 		 * If the name ends with an underscore followed by only numbers, that part is excluded: underscores denote special
 		 * instructions to the texture packer. */
-		public String name;
+		@Nullable public String name;
 
 		/** The offset from the left of the original image to the left of the packed image, after whitespace was removed for
 		 * packing. */
@@ -557,12 +558,12 @@ public class TextureAtlas implements Disposable {
 		public int degrees;
 
 		/** Names for name/value pairs other than the fields provided on this class, each entry corresponding to {@link #values}. */
-		public @Null String[] names;
+		@Nullable public @Null String[] names;
 
 		/** Values for name/value pairs other than the fields provided on this class, each entry corresponding to {@link #names}. */
-		public @Null int[][] values;
+		@Nullable public @Null int[][] values;
 
-		public AtlasRegion (Texture texture, int x, int y, int width, int height) {
+		public AtlasRegion (@Nullable Texture texture, int x, int y, int width, int height) {
 			super(texture, x, y, width, height);
 			originalWidth = width;
 			originalHeight = height;
@@ -615,7 +616,7 @@ public class TextureAtlas implements Disposable {
 			return rotate ? packedWidth : packedHeight;
 		}
 
-		public @Null int[] findValue (String name) {
+		@Nullable public @Null int[] findValue (String name) {
 			if (names != null) {
 				for (int i = 0, n = names.length; i < n; i++)
 					if (name.equals(names[i])) return values[i];
@@ -623,7 +624,7 @@ public class TextureAtlas implements Disposable {
 			return null;
 		}
 
-		public String toString () {
+		@Nullable public String toString () {
 			return name;
 		}
 	}
@@ -795,7 +796,7 @@ public class TextureAtlas implements Disposable {
 			return region;
 		}
 
-		public String toString () {
+		@Nullable public String toString () {
 			return region.toString();
 		}
 	}

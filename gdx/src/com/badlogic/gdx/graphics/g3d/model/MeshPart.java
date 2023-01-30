@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import javax.annotation.Nullable;
 
 /** A MeshPart is composed of a subset of vertices of a {@link Mesh}, along with the primitive type. The vertices subset is
  * described by an offset and size. When the mesh is indexed (which is when {@link Mesh#getNumIndices()} > 0), then the
@@ -45,7 +46,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
  * @author badlogic, Xoppa */
 public class MeshPart {
 	/** Unique id within model, may be null. Will be ignored by {@link #equals(MeshPart)} **/
-	public String id;
+	@Nullable public String id;
 	/** The primitive type, OpenGL constant e.g: {@link GL20#GL_TRIANGLES}, {@link GL20#GL_POINTS}, {@link GL20#GL_LINES},
 	 * {@link GL20#GL_LINE_STRIP}, {@link GL20#GL_TRIANGLE_STRIP} **/
 	public int primitiveType;
@@ -56,7 +57,7 @@ public class MeshPart {
 	 * {@link Mesh#getNumIndices()} > 0), this is the number of indices, otherwise it is the number of vertices. **/
 	public int size;
 	/** The Mesh the part references, also stored in {@link Model} **/
-	public Mesh mesh;
+	@Nullable public Mesh mesh;
 	/** The offset to the center of the bounding box of the shape, only valid after the call to {@link #update()}. **/
 	public final Vector3 center = new Vector3();
 	/** The location, relative to {@link #center}, of the corner of the axis aligned bounding box of the shape. Or, in other words:
@@ -85,14 +86,14 @@ public class MeshPart {
 
 	/** Construct a new MeshPart which is an exact copy of the provided MeshPart.
 	 * @param copyFrom The MeshPart to copy. */
-	public MeshPart (final MeshPart copyFrom) {
+	public MeshPart (@Nullable final MeshPart copyFrom) {
 		set(copyFrom);
 	}
 
 	/** Set this MeshPart to be a copy of the other MeshPart
 	 * @param other The MeshPart from which to copy the values
 	 * @return this MeshPart, for chaining */
-	public MeshPart set (final MeshPart other) {
+	public MeshPart set (@Nullable final MeshPart other) {
 		this.id = other.id;
 		this.mesh = other.mesh;
 		this.offset = other.offset;
@@ -106,7 +107,7 @@ public class MeshPart {
 
 	/** Set this MeshPart to given values, does not {@link #update()} the bounding box values.
 	 * @return this MeshPart, for chaining. */
-	public MeshPart set (final String id, final Mesh mesh, final int offset, final int size, final int type) {
+	public MeshPart set (final String id, @Nullable final Mesh mesh, final int offset, final int size, final int type) {
 		this.id = id;
 		this.mesh = mesh;
 		this.offset = offset;
@@ -149,7 +150,7 @@ public class MeshPart {
 	/** Renders the mesh part using the specified shader, must be called after {@link ShaderProgram#bind()}.
 	 * @param shader the shader to be used
 	 * @param autoBind overrides the autoBind member of the Mesh */
-	public void render (ShaderProgram shader, boolean autoBind) {
+	public void render (@Nullable ShaderProgram shader, boolean autoBind) {
 		mesh.render(shader, primitiveType, offset, size, autoBind);
 	}
 

@@ -43,6 +43,7 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** This class is used to render billboard particles.
  * @author Inferno */
@@ -104,27 +105,27 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		public Config () {
 		}
 
-		public Config (boolean useGPU, AlignMode mode) {
+		public Config (boolean useGPU, @Nullable AlignMode mode) {
 			this.useGPU = useGPU;
 			this.mode = mode;
 		}
 
 		boolean useGPU;
-		AlignMode mode;
+		@Nullable AlignMode mode;
 	}
 
 	private RenderablePool renderablePool;
 	private Array<Renderable> renderables;
-	private float[] vertices;
+	@Nullable private float[] vertices;
 	private short[] indices;
 	private int currentVertexSize = 0;
-	private VertexAttributes currentAttributes;
+	@Nullable private VertexAttributes currentAttributes;
 	protected boolean useGPU = false;
-	protected AlignMode mode = AlignMode.Screen;
-	protected Texture texture;
-	protected BlendingAttribute blendingAttribute;
-	protected DepthTestAttribute depthTestAttribute;
-	Shader shader;
+	@Nullable protected AlignMode mode = AlignMode.Screen;
+	@Nullable protected Texture texture;
+	@Nullable protected BlendingAttribute blendingAttribute;
+	@Nullable protected DepthTestAttribute depthTestAttribute;
+	@Nullable Shader shader;
 
 	/** Create a new BillboardParticleBatch
 	 * @param mode
@@ -132,8 +133,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	 * @param capacity Max particle displayed
 	 * @param blendingAttribute Blending attribute used by the batch
 	 * @param depthTestAttribute DepthTest attribute used by the batch */
-	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity, BlendingAttribute blendingAttribute,
-		DepthTestAttribute depthTestAttribute) {
+	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity, @Nullable BlendingAttribute blendingAttribute,
+		@Nullable DepthTestAttribute depthTestAttribute) {
 		super(BillboardControllerRenderData.class);
 		renderables = new Array<Renderable>();
 		renderablePool = new RenderablePool();
@@ -249,7 +250,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	}
 
 	/** Sets the current align mode. It will reallocate internal data, use only when necessary. */
-	public void setAlignMode (AlignMode mode) {
+	public void setAlignMode (@Nullable AlignMode mode) {
 		if (mode != this.mode) {
 			this.mode = mode;
 			if (useGPU) {
@@ -259,7 +260,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
-	public AlignMode getAlignMode () {
+	@Nullable public AlignMode getAlignMode () {
 		return mode;
 	}
 
@@ -276,7 +277,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		return useGPU;
 	}
 
-	public void setTexture (Texture texture) {
+	public void setTexture (@Nullable Texture texture) {
 		renderablePool.freeAll(renderables);
 		renderables.clear();
 		for (int i = 0, free = renderablePool.getFree(); i < free; ++i) {
@@ -287,11 +288,11 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		this.texture = texture;
 	}
 
-	public Texture getTexture () {
+	@Nullable public Texture getTexture () {
 		return texture;
 	}
 
-	public BlendingAttribute getBlendingAttribute () {
+	@Nullable public BlendingAttribute getBlendingAttribute () {
 		return blendingAttribute;
 	}
 
@@ -304,7 +305,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	// GPU
 	// Required + Color + Rotation
-	private static void putVertex (float[] vertices, int offset, float x, float y, float z, float u, float v, float scaleX,
+	private static void putVertex (@Nullable float[] vertices, int offset, float x, float y, float z, float u, float v, float scaleX,
 		float scaleY, float cosRotation, float sinRotation, float r, float g, float b, float a) {
 		// Position
 		vertices[offset + GPU_POSITION_OFFSET] = x;
@@ -340,7 +341,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	// CPU
 	// Required
-	private static void putVertex (float[] vertices, int offset, Vector3 p, float u, float v, float r, float g, float b, float a) {
+	private static void putVertex (@Nullable float[] vertices, int offset, Vector3 p, float u, float v, float r, float g, float b, float a) {
 		// Position
 		vertices[offset + CPU_POSITION_OFFSET] = p.x;
 		vertices[offset + CPU_POSITION_OFFSET + 1] = p.y;
@@ -355,7 +356,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		vertices[offset + CPU_COLOR_OFFSET + 3] = a;
 	}
 
-	private void fillVerticesGPU (int[] particlesOffset) {
+	private void fillVerticesGPU (@Nullable int[] particlesOffset) {
 		int tp = 0;
 		for (BillboardControllerRenderData data : renderData) {
 			FloatChannel scaleChannel = data.scaleChannel;
@@ -471,7 +472,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	 * -TMP_V1.z+TMP_V2.z+pz), u, v, r, g, b, a); } } } }
 	 */
 
-	private void fillVerticesToViewPointCPU (int[] particlesOffset) {
+	private void fillVerticesToViewPointCPU (@Nullable int[] particlesOffset) {
 		int tp = 0;
 		for (BillboardControllerRenderData data : renderData) {
 			FloatChannel scaleChannel = data.scaleChannel;
@@ -542,7 +543,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
-	private void fillVerticesToScreenCPU (int[] particlesOffset) {
+	private void fillVerticesToScreenCPU (@Nullable int[] particlesOffset) {
 		Vector3 look = TMP_V3.set(camera.direction).scl(-1), // normal
 			right = TMP_V4.set(camera.up).crs(look).nor(), // tangent
 			up = camera.up;
@@ -615,7 +616,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	}
 
 	@Override
-	protected void flush (int[] offsets) {
+	protected void flush (@Nullable int[] offsets) {
 
 		// fill vertices
 		if (useGPU) {

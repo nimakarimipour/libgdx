@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /** Open GLES wrapper for TextureArray
  * @author Tomski */
@@ -114,7 +115,7 @@ public class TextureArray extends GLTexture {
 		load(data);
 	}
 
-	private static void addManagedTexture (Application app, TextureArray texture) {
+	private static void addManagedTexture (@Nullable Application app, TextureArray texture) {
 		Array<TextureArray> managedTextureArray = managedTextureArrays.get(app);
 		if (managedTextureArray == null) managedTextureArray = new Array<TextureArray>();
 		managedTextureArray.add(texture);

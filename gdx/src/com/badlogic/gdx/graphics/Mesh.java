@@ -45,6 +45,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -81,7 +82,7 @@ public class Mesh implements Disposable {
 	boolean autoBind = true;
 	final boolean isVertexArray;
 
-	InstanceData instances;
+	@Nullable InstanceData instances;
 	boolean isInstanced = false;
 
 	protected Mesh (VertexData vertices, IndexData indices, boolean isVertexArray) {
@@ -114,7 +115,7 @@ public class Mesh implements Disposable {
 	 * @param maxIndices the maximum number of indices this mesh can hold
 	 * @param attributes the {@link VertexAttributes}. Each vertex attribute defines one property of a vertex such as position,
 	 *           normal or texture coordinate */
-	public Mesh (boolean isStatic, int maxVertices, int maxIndices, VertexAttributes attributes) {
+	public Mesh (boolean isStatic, int maxVertices, int maxIndices, @Nullable VertexAttributes attributes) {
 		vertices = makeVertexBuffer(isStatic, maxVertices, attributes);
 		indices = new IndexBufferObject(isStatic, maxIndices);
 		isVertexArray = false;
@@ -140,7 +141,7 @@ public class Mesh implements Disposable {
 		addManagedMesh(Gdx.app, this);
 	}
 
-	private VertexData makeVertexBuffer (boolean isStatic, int maxVertices, VertexAttributes vertexAttributes) {
+	private VertexData makeVertexBuffer (boolean isStatic, int maxVertices, @Nullable VertexAttributes vertexAttributes) {
 		if (Gdx.gl30 != null) {
 			return new VertexBufferObjectWithVAO(isStatic, maxVertices, vertexAttributes);
 		} else {
@@ -326,7 +327,7 @@ public class Mesh implements Disposable {
 	 * @param offset the offset into the vertices array
 	 * @param count the number of floats to use
 	 * @return the mesh for invocation chaining. */
-	public Mesh setVertices (float[] vertices, int offset, int count) {
+	public Mesh setVertices (@Nullable float[] vertices, int offset, int count) {
 		this.vertices.setVertices(vertices, offset, count);
 
 		return this;
@@ -378,7 +379,7 @@ public class Mesh implements Disposable {
 	 * @param count the amount of floats to copy
 	 * @param vertices the array to copy the vertices to
 	 * @param destOffset the offset (in floats) in the vertices array to start copying */
-	public float[] getVertices (int srcOffset, int count, float[] vertices, int destOffset) {
+	public float[] getVertices (int srcOffset, int count, @Nullable float[] vertices, int destOffset) {
 		// TODO: Perhaps this method should be vertexSize aware??
 		final int max = getNumVertices() * getVertexSize() / 4;
 		if (count == -1) {
@@ -447,7 +448,7 @@ public class Mesh implements Disposable {
 	 * @param count the total amount of indices to copy
 	 * @param indices the array to copy the indices to
 	 * @param destOffset the offset in the indices array to start copying */
-	public void getIndices (int srcOffset, int count, short[] indices, int destOffset) {
+	public void getIndices (int srcOffset, int count, @Nullable short[] indices, int destOffset) {
 		int max = getNumIndices();
 		if (count < 0) count = max - srcOffset;
 		if (srcOffset < 0 || srcOffset >= max || srcOffset + count > max) throw new IllegalArgumentException(
@@ -499,7 +500,7 @@ public class Mesh implements Disposable {
 	 * ES 2.0 and when auto-bind is disabled.
 	 *
 	 * @param shader the shader (does not bind the shader) */
-	public void bind (final ShaderProgram shader) {
+	public void bind (@Nullable final ShaderProgram shader) {
 		bind(shader, null);
 	}
 
@@ -508,7 +509,7 @@ public class Mesh implements Disposable {
 	 *
 	 * @param shader the shader (does not bind the shader)
 	 * @param locations array containing the attribute locations. */
-	public void bind (final ShaderProgram shader, final int[] locations) {
+	public void bind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		vertices.bind(shader, locations);
 		if (instances != null && instances.getNumInstances() > 0) instances.bind(shader, locations);
 		if (indices.getNumIndices() > 0) indices.bind();
@@ -518,7 +519,7 @@ public class Mesh implements Disposable {
 	 * ES 1.x and when auto-bind is disabled.
 	 *
 	 * @param shader the shader (does not unbind the shader) */
-	public void unbind (final ShaderProgram shader) {
+	public void unbind (@Nullable final ShaderProgram shader) {
 		unbind(shader, null);
 	}
 
@@ -527,7 +528,7 @@ public class Mesh implements Disposable {
 	 *
 	 * @param shader the shader (does not unbind the shader)
 	 * @param locations array containing the attribute locations. */
-	public void unbind (final ShaderProgram shader, final int[] locations) {
+	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		vertices.unbind(shader, locations);
 		if (instances != null && instances.getNumInstances() > 0) instances.unbind(shader, locations);
 		if (indices.getNumIndices() > 0) indices.unbind();
@@ -581,7 +582,7 @@ public class Mesh implements Disposable {
 	 * @param primitiveType the primitive type
 	 * @param offset the offset into the vertex or index buffer
 	 * @param count number of vertices or indices to use */
-	public void render (ShaderProgram shader, int primitiveType, int offset, int count) {
+	public void render (@Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
 		render(shader, primitiveType, offset, count, autoBind);
 	}
 
@@ -610,7 +611,7 @@ public class Mesh implements Disposable {
 	 * @param offset the offset into the vertex or index buffer
 	 * @param count number of vertices or indices to use
 	 * @param autoBind overrides the autoBind member of this Mesh */
-	public void render (ShaderProgram shader, int primitiveType, int offset, int count, boolean autoBind) {
+	public void render (@Nullable ShaderProgram shader, int primitiveType, int offset, int count, boolean autoBind) {
 		if (count == 0) return;
 
 		if (autoBind) bind(shader);
@@ -665,7 +666,7 @@ public class Mesh implements Disposable {
 	 *
 	 * @param usage the Usage.
 	 * @return the VertexAttribute or null if no attribute with that usage was found. */
-	public VertexAttribute getVertexAttribute (int usage) {
+	@Nullable public VertexAttribute getVertexAttribute (int usage) {
 		VertexAttributes attributes = vertices.getAttributes();
 		int len = attributes.size();
 		for (int i = 0; i < len; i++)
@@ -675,12 +676,12 @@ public class Mesh implements Disposable {
 	}
 
 	/** @return the vertex attributes of this Mesh */
-	public VertexAttributes getVertexAttributes () {
+	@Nullable public VertexAttributes getVertexAttributes () {
 		return vertices.getAttributes();
 	}
 
 	/** @return the backing FloatBuffer holding the vertices. Does not have to be a direct buffer on Android! */
-	public FloatBuffer getVerticesBuffer () {
+	@Nullable public FloatBuffer getVerticesBuffer () {
 		return vertices.getBuffer();
 	}
 
@@ -765,7 +766,7 @@ public class Mesh implements Disposable {
 	 * @param offset the start of the part.
 	 * @param count the size of the part.
 	 * @return the value specified by out. */
-	public BoundingBox extendBoundingBox (final BoundingBox out, int offset, int count, final Matrix4 transform) {
+	public BoundingBox extendBoundingBox (final BoundingBox out, int offset, int count, @Nullable final Matrix4 transform) {
 		final int numIndices = getNumIndices();
 		final int numVertices = getNumVertices();
 		final int max = numIndices == 0 ? numVertices : numIndices;
@@ -843,7 +844,7 @@ public class Mesh implements Disposable {
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
 	public float calculateRadiusSquared (final float centerX, final float centerY, final float centerZ, int offset, int count,
-		final Matrix4 transform) {
+		@Nullable final Matrix4 transform) {
 		int numIndices = getNumIndices();
 		if (offset < 0 || count < 1 || offset + count > numIndices) throw new GdxRuntimeException("Not enough indices");
 
@@ -896,7 +897,7 @@ public class Mesh implements Disposable {
 	 * @param count the amount of indices the part contains.
 	 * @return the radius of the bounding sphere. */
 	public float calculateRadius (final float centerX, final float centerY, final float centerZ, int offset, int count,
-		final Matrix4 transform) {
+		@Nullable final Matrix4 transform) {
 		return (float)Math.sqrt(calculateRadiusSquared(centerX, centerY, centerZ, offset, count, transform));
 	}
 
@@ -950,7 +951,7 @@ public class Mesh implements Disposable {
 		return indices.getBuffer();
 	}
 
-	private static void addManagedMesh (Application app, Mesh mesh) {
+	private static void addManagedMesh (@Nullable Application app, Mesh mesh) {
 		Array<Mesh> managedResources = meshes.get(app);
 		if (managedResources == null) managedResources = new Array<Mesh>();
 		managedResources.add(mesh);
@@ -1150,7 +1151,7 @@ public class Mesh implements Disposable {
 	 * @param removeDuplicates whether to remove duplicate vertices if possible. Only the vertices specified by usage are checked.
 	 * @param usage which attributes (if available) to copy
 	 * @return the copy of this mesh */
-	public Mesh copy (boolean isStatic, boolean removeDuplicates, final int[] usage) {
+	public Mesh copy (boolean isStatic, boolean removeDuplicates, @Nullable final int[] usage) {
 		// TODO move this to a copy constructor?
 		// TODO duplicate the buffers without double copying the data if possible.
 		// TODO perhaps move this code to JNI if it turns out being too slow.

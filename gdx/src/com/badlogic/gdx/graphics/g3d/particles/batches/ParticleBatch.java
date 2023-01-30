@@ -20,6 +20,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
+import javax.annotation.Nullable;
 
 /** Common interface to all the batches that render particles.
  * @author Inferno */
@@ -28,7 +29,7 @@ public interface ParticleBatch<T extends ParticleControllerRenderData> extends R
 	/** Must be called once before any drawing operation */
 	public void begin ();
 
-	public void draw (T controller);
+	public void draw (@Nullable T controller);
 
 	/** Must be called after all the drawing operations */
 	public void end ();

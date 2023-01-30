@@ -17,11 +17,12 @@
 package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class Material extends Attributes {
 	private static int counter = 0;
 
-	public String id;
+	@Nullable public String id;
 
 	/** Create an empty material */
 	public Material () {
@@ -29,12 +30,12 @@ public class Material extends Attributes {
 	}
 
 	/** Create an empty material */
-	public Material (final String id) {
+	public Material (@Nullable final String id) {
 		this.id = id;
 	}
 
 	/** Create a material with the specified attributes */
-	public Material (final Attribute... attributes) {
+	public Material (@Nullable final Attribute... attributes) {
 		this();
 		set(attributes);
 	}
@@ -63,7 +64,7 @@ public class Material extends Attributes {
 	}
 
 	/** Create a material which is an exact copy of the specified material */
-	public Material (final String id, final Material copyFrom) {
+	public Material (@Nullable final String id, final Material copyFrom) {
 		this(id);
 		for (Attribute attr : copyFrom)
 			set(attr.copy());

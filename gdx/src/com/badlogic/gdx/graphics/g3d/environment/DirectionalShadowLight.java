@@ -27,10 +27,11 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /** @author Xoppa */
 public class DirectionalShadowLight extends DirectionalLight implements ShadowMap, Disposable {
-	protected FrameBuffer fbo;
+	@Nullable protected FrameBuffer fbo;
 	protected Camera cam;
 	protected float halfDepth;
 	protected float halfHeight;
@@ -87,7 +88,7 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		fbo.end();
 	}
 
-	public FrameBuffer getFrameBuffer () {
+	@Nullable public FrameBuffer getFrameBuffer () {
 		return fbo;
 	}
 

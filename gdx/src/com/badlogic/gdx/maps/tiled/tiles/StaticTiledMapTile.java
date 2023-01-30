@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import javax.annotation.Nullable;
 
 /** @brief Represents a non changing {@link TiledMapTile} (can be cached) */
 public class StaticTiledMapTile implements TiledMapTile {
@@ -28,11 +29,11 @@ public class StaticTiledMapTile implements TiledMapTile {
 
 	private BlendMode blendMode = BlendMode.ALPHA;
 
-	private MapProperties properties;
+	@Nullable private MapProperties properties;
 
-	private MapObjects objects;
+	@Nullable private MapObjects objects;
 
-	private TextureRegion textureRegion;
+	@Nullable private TextureRegion textureRegion;
 
 	private float offsetX;
 
@@ -74,7 +75,7 @@ public class StaticTiledMapTile implements TiledMapTile {
 		return objects;
 	}
 
-	@Override
+	@Nullable @Override
 	public TextureRegion getTextureRegion () {
 		return textureRegion;
 	}
@@ -107,7 +108,7 @@ public class StaticTiledMapTile implements TiledMapTile {
 	/** Creates a static tile with the given region
 	 * 
 	 * @param textureRegion the {@link TextureRegion} to use. */
-	public StaticTiledMapTile (TextureRegion textureRegion) {
+	public StaticTiledMapTile (@Nullable TextureRegion textureRegion) {
 		this.textureRegion = textureRegion;
 	}
 

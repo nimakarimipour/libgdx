@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRende
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** This class is used by particle batches to sort the particles before rendering.
  * @author Inferno */
@@ -30,7 +31,7 @@ public abstract class ParticleSorter {
 	/** Using this class will not apply sorting */
 	public static class None extends ParticleSorter {
 		int currentCapacity = 0;
-		int[] indices;
+		@Nullable int[] indices;
 
 		@Override
 		public void ensureCapacity (int capacity) {
@@ -42,7 +43,7 @@ public abstract class ParticleSorter {
 			}
 		}
 
-		@Override
+		@Nullable @Override
 		public <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData) {
 			return indices;
 		}
@@ -50,8 +51,8 @@ public abstract class ParticleSorter {
 
 	/** This class will sort all the particles using the distance from camera. */
 	public static class Distance extends ParticleSorter {
-		private float[] distances;
-		private int[] particleIndices, particleOffsets;
+		@Nullable private float[] distances;
+		@Nullable private int[] particleIndices, particleOffsets;
 		private int currentSize = 0;
 
 		@Override
@@ -64,7 +65,7 @@ public abstract class ParticleSorter {
 			}
 		}
 
-		@Override
+		@Nullable @Override
 		public <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData) {
 			float[] val = camera.view.val;
 			float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
@@ -144,13 +145,13 @@ public abstract class ParticleSorter {
 		}
 	}
 
-	protected Camera camera;
+	@Nullable protected Camera camera;
 
 	/** @return an array of offsets where each particle should be put in the resulting mesh (also if more than one mesh will be
 	 *         generated, this is an absolute offset considering a BIG output array). */
-	public abstract <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData);
+	@Nullable public abstract <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData);
 
-	public void setCamera (Camera camera) {
+	public void setCamera (@Nullable Camera camera) {
 		this.camera = camera;
 	}
 

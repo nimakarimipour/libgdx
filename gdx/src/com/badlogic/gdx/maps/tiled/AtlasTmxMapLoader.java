@@ -31,6 +31,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
+import javax.annotation.Nullable;
 
 /** A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
  * 
@@ -49,7 +50,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 
 	protected interface AtlasResolver extends ImageResolver {
 
-		public TextureAtlas getAtlas ();
+		@Nullable public TextureAtlas getAtlas ();
 
 		public static class DirectAtlasResolver implements AtlasTmxMapLoader.AtlasResolver {
 			private final TextureAtlas atlas;
@@ -63,7 +64,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 				return atlas;
 			}
 
-			@Override
+			@Nullable @Override
 			public TextureRegion getImage (String name) {
 				return atlas.findRegion(name);
 			}
@@ -78,12 +79,12 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 				this.atlasName = atlasName;
 			}
 
-			@Override
+			@Nullable @Override
 			public TextureAtlas getAtlas () {
 				return assetManager.get(atlasName, TextureAtlas.class);
 			}
 
-			@Override
+			@Nullable @Override
 			public TextureRegion getImage (String name) {
 				return getAtlas().findRegion(name);
 			}
@@ -92,7 +93,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 
 	protected Array<Texture> trackedTextures = new Array<Texture>();
 
-	protected AtlasResolver atlasResolver;
+	@Nullable protected AtlasResolver atlasResolver;
 
 	public AtlasTmxMapLoader () {
 		super(new InternalFileHandleResolver());
@@ -122,15 +123,15 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, String fileName, FileHandle tmxFile, AtlasTiledMapLoaderParameters parameter) {
+	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle tmxFile, @Nullable AtlasTiledMapLoaderParameters parameter) {
 		FileHandle atlasHandle = getAtlasFileHandle(tmxFile);
 		this.atlasResolver = new AtlasResolver.AssetManagerAtlasResolver(manager, atlasHandle.path());
 
 		this.map = loadTiledMap(tmxFile, parameter, atlasResolver);
 	}
 
-	@Override
-	public TiledMap loadSync (AssetManager manager, String fileName, FileHandle file, AtlasTiledMapLoaderParameters parameter) {
+	@Nullable @Override
+	public TiledMap loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable AtlasTiledMapLoaderParameters parameter) {
 		if (parameter != null) {
 			setTextureFilters(parameter.textureMinFilter, parameter.textureMagFilter);
 		}
@@ -154,8 +155,8 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 
 	@Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
-		Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
+		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image) {
 
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;

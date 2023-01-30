@@ -19,6 +19,7 @@ package com.badlogic.gdx.maps.tiled;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
+import javax.annotation.Nullable;
 
 /** @brief Generalises the concept of tile in a TiledMap */
 public interface TiledMapTile {
@@ -40,7 +41,7 @@ public interface TiledMapTile {
 	public void setBlendMode (BlendMode blendMode);
 
 	/** @return texture region used to render the tile */
-	public TextureRegion getTextureRegion ();
+	@Nullable public TextureRegion getTextureRegion ();
 
 	/** Sets the texture region used to render the tile */
 	public void setTextureRegion (TextureRegion textureRegion);

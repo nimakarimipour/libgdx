@@ -35,6 +35,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /** 2D scene graph node. An actor has a position, rectangular size, origin, scale, rotation, Z index, and color. The position
  * corresponds to the unrotated, unscaled bottom left corner of the actor. The position is relative to the actor's parent. The
@@ -55,14 +56,14 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
  * @author mzechner
  * @author Nathan Sweet */
 public class Actor {
-	private @Null Stage stage;
-	@Null Group parent;
+	@Nullable private @Null Stage stage;
+	@Nullable @Null Group parent;
 	private final DelayedRemovalArray<EventListener> listeners = new DelayedRemovalArray(0);
 	private final DelayedRemovalArray<EventListener> captureListeners = new DelayedRemovalArray(0);
 	private final Array<Action> actions = new Array(0);
 
-	private @Null String name;
-	private Touchable touchable = Touchable.enabled;
+	@Nullable private @Null String name;
+	@Nullable private Touchable touchable = Touchable.enabled;
 	private boolean visible = true, debug;
 	float x, y;
 	float width, height;
@@ -70,7 +71,7 @@ public class Actor {
 	float scaleX = 1, scaleY = 1;
 	float rotation;
 	final Color color = new Color(1, 1, 1, 1);
-	private @Null Object userObject;
+	@Nullable private @Null Object userObject;
 
 	/** Draws the actor. The batch is configured to draw in the parent's coordinate system.
 	 * {@link Batch#draw(com.badlogic.gdx.graphics.g2d.TextureRegion, float, float, float, float, float, float, float, float, float)
@@ -205,7 +206,7 @@ public class Actor {
 	 * The default implementation returns this actor if the point is within this actor's bounds and this actor is visible.
 	 * @param touchable If true, hit detection will respect the {@link #setTouchable(Touchable) touchability}.
 	 * @see Touchable */
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.touchable != Touchable.enabled) return null;
 		if (!isVisible()) return null;
 		return x >= 0 && x < width && y >= 0 && y < height ? this : null;
@@ -221,7 +222,7 @@ public class Actor {
 	/** Add a listener to receive events that {@link #hit(float, float, boolean) hit} this actor. See {@link #fire(Event)}.
 	 * @see InputListener
 	 * @see ClickListener */
-	public boolean addListener (EventListener listener) {
+	public boolean addListener (@Nullable EventListener listener) {
 		if (listener == null) throw new IllegalArgumentException("listener cannot be null.");
 		if (!listeners.contains(listener, true)) {
 			listeners.add(listener);
@@ -230,7 +231,7 @@ public class Actor {
 		return false;
 	}
 
-	public boolean removeListener (EventListener listener) {
+	public boolean removeListener (@Nullable EventListener listener) {
 		if (listener == null) throw new IllegalArgumentException("listener cannot be null.");
 		return listeners.removeValue(listener, true);
 	}
@@ -241,13 +242,13 @@ public class Actor {
 
 	/** Adds a listener that is only notified during the capture phase.
 	 * @see #fire(Event) */
-	public boolean addCaptureListener (EventListener listener) {
+	public boolean addCaptureListener (@Nullable EventListener listener) {
 		if (listener == null) throw new IllegalArgumentException("listener cannot be null.");
 		if (!captureListeners.contains(listener, true)) captureListeners.add(listener);
 		return true;
 	}
 
-	public boolean removeCaptureListener (EventListener listener) {
+	public boolean removeCaptureListener (@Nullable EventListener listener) {
 		if (listener == null) throw new IllegalArgumentException("listener cannot be null.");
 		return captureListeners.removeValue(listener, true);
 	}
@@ -256,7 +257,7 @@ public class Actor {
 		return captureListeners;
 	}
 
-	public void addAction (Action action) {
+	public void addAction (@Nullable Action action) {
 		action.setActor(this);
 		actions.add(action);
 
@@ -264,7 +265,7 @@ public class Actor {
 	}
 
 	/** @param action May be null, in which case nothing is done. */
-	public void removeAction (@Null Action action) {
+	public void removeAction (@Nullable @Null Action action) {
 		if (action != null && actions.removeValue(action, true)) action.setActor(null);
 	}
 
@@ -297,18 +298,18 @@ public class Actor {
 	}
 
 	/** Returns the stage that this actor is currently in, or null if not in a stage. */
-	public @Null Stage getStage () {
+	@Nullable public @Null Stage getStage () {
 		return stage;
 	}
 
 	/** Called by the framework when this actor or any ascendant is added to a group that is in the stage.
 	 * @param stage May be null if the actor or any ascendant is no longer in a stage. */
-	protected void setStage (Stage stage) {
+	protected void setStage (@Nullable Stage stage) {
 		this.stage = stage;
 	}
 
 	/** Returns true if this actor is the same as or is the descendant of the specified actor. */
-	public boolean isDescendantOf (Actor actor) {
+	public boolean isDescendantOf (@Nullable Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		Actor parent = this;
 		do {
@@ -319,7 +320,7 @@ public class Actor {
 	}
 
 	/** Returns true if this actor is the same as or is the ascendant of the specified actor. */
-	public boolean isAscendantOf (Actor actor) {
+	public boolean isAscendantOf (@Nullable Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		do {
 			if (actor == this) return true;
@@ -330,7 +331,7 @@ public class Actor {
 
 	/** Returns this actor or the first ascendant of this actor that is assignable with the specified type, or null if none were
 	 * found. */
-	public @Null <T extends Actor> T firstAscendant (Class<T> type) {
+	@Nullable public @Null <T extends Actor> T firstAscendant (Class<T> type) {
 		if (type == null) throw new IllegalArgumentException("actor cannot be null.");
 		Actor actor = this;
 		do {
@@ -346,13 +347,13 @@ public class Actor {
 	}
 
 	/** Returns the parent actor, or null if not in a group. */
-	public @Null Group getParent () {
+	@Nullable public @Null Group getParent () {
 		return parent;
 	}
 
 	/** Called by the framework when an actor is added to or removed from a group.
 	 * @param parent May be null if the actor has been removed from the parent. */
-	protected void setParent (@Null Group parent) {
+	protected void setParent (@Nullable @Null Group parent) {
 		this.parent = parent;
 	}
 
@@ -361,12 +362,12 @@ public class Actor {
 		return touchable == Touchable.enabled;
 	}
 
-	public Touchable getTouchable () {
+	@Nullable public Touchable getTouchable () {
 		return touchable;
 	}
 
 	/** Determines how touch events are distributed to this actor. Default is {@link Touchable#enabled}. */
-	public void setTouchable (Touchable touchable) {
+	public void setTouchable (@Nullable Touchable touchable) {
 		this.touchable = touchable;
 	}
 
@@ -428,7 +429,7 @@ public class Actor {
 	}
 
 	/** Returns an application specific object for convenience, or null. */
-	public @Null Object getUserObject () {
+	@Nullable public @Null Object getUserObject () {
 		return userObject;
 	}
 
@@ -769,7 +770,7 @@ public class Actor {
 
 	/** @see #setName(String)
 	 * @return May be null. */
-	public @Null String getName () {
+	@Nullable public @Null String getName () {
 		return name;
 	}
 
@@ -936,7 +937,7 @@ public class Actor {
 
 	/** Converts coordinates for this actor to those of an ascendant. The ascendant is not required to be the immediate parent.
 	 * @throws IllegalArgumentException if the specified actor is not an ascendant of this actor. */
-	public Vector2 localToAscendantCoordinates (@Null Actor ascendant, Vector2 localCoords) {
+	public Vector2 localToAscendantCoordinates (@Nullable @Null Actor ascendant, Vector2 localCoords) {
 		Actor actor = this;
 		do {
 			actor.localToParentCoordinates(localCoords);

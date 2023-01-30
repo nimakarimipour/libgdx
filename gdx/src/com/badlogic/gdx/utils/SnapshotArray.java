@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /** An array that allows modification during iteration. Guarantees that array entries provided by {@link #begin()} between indexes
  * 0 and {@link #size} at the time begin was called will not be modified until {@link #end()} is called. If modification of the
@@ -41,7 +42,7 @@ import java.util.Comparator;
  * 
  * @author Nathan Sweet */
 public class SnapshotArray<T> extends Array<T> {
-	private T[] snapshot, recycled;
+	@Nullable private T[] snapshot, recycled;
 	private int snapshots;
 
 	public SnapshotArray () {
@@ -108,7 +109,7 @@ public class SnapshotArray<T> extends Array<T> {
 			resize(items.length);
 	}
 
-	public void set (int index, T value) {
+	public void set (int index, @Nullable T value) {
 		modified();
 		super.set(index, value);
 	}
@@ -128,7 +129,7 @@ public class SnapshotArray<T> extends Array<T> {
 		super.swap(first, second);
 	}
 
-	public boolean removeValue (T value, boolean identity) {
+	public boolean removeValue (@Nullable T value, boolean identity) {
 		modified();
 		return super.removeValue(value, identity);
 	}

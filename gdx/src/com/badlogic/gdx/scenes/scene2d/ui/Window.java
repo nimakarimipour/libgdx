@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /** A table that can be dragged and act as a modal window. The top padding is used as the window's title height.
  * <p>
@@ -42,7 +43,7 @@ public class Window extends Table {
 	static private final Vector2 tmpSize = new Vector2();
 	static private final int MOVE = 1 << 5;
 
-	private WindowStyle style;
+	@Nullable private WindowStyle style;
 	boolean isMovable = true, isModal, isResizable;
 	int resizeBorder = 8;
 	boolean keepWithinStage = true;
@@ -180,7 +181,7 @@ public class Window extends Table {
 				return isModal;
 			}
 
-			public boolean keyDown (InputEvent event, int keycode) {
+			public boolean keyDown (@Nullable InputEvent event, int keycode) {
 				return isModal;
 			}
 
@@ -209,7 +210,7 @@ public class Window extends Table {
 
 	/** Returns the window's style. Modifying the returned style may not have an effect until {@link #setStyle(WindowStyle)} is
 	 * called. */
-	public WindowStyle getStyle () {
+	@Nullable public WindowStyle getStyle () {
 		return style;
 	}
 
@@ -276,7 +277,7 @@ public class Window extends Table {
 		drawTitleTable = false; // Avoid drawing the title table again in drawChildren.
 	}
 
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
 		if (!isVisible()) return null;
 		Actor hit = super.hit(x, y, touchable);
 		if (hit == null && isModal && (!touchable || getTouchable() == Touchable.enabled)) return this;
@@ -343,10 +344,10 @@ public class Window extends Table {
 	/** The style for a window, see {@link Window}.
 	 * @author Nathan Sweet */
 	static public class WindowStyle {
-		public @Null Drawable background;
-		public BitmapFont titleFont;
+		@Nullable public @Null Drawable background;
+		@Nullable public BitmapFont titleFont;
 		public @Null Color titleFontColor = new Color(1, 1, 1, 1);
-		public @Null Drawable stageBackground;
+		@Nullable public @Null Drawable stageBackground;
 
 		public WindowStyle () {
 		}

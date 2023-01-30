@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, Comparable<Attributes> {
 	protected long mask;
@@ -42,7 +43,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 
 	/** Example usage: ((BlendingAttribute)material.get(BlendingAttribute.ID)).sourceFunction;
 	 * @return The attribute (which can safely be cast) if any, otherwise null */
-	public final Attribute get (final long type) {
+	@Nullable public final Attribute get (final long type) {
 		if (has(type)) for (int i = 0; i < attributes.size; i++)
 			if (attributes.get(i).type == type) return attributes.get(i);
 		return null;
@@ -50,7 +51,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 
 	/** Example usage: ((BlendingAttribute)material.get(BlendingAttribute.ID)).sourceFunction;
 	 * @return The attribute if any, otherwise null */
-	public final <T extends Attribute> T get (Class<T> clazz, final long type) {
+	@Nullable public final <T extends Attribute> T get (Class<T> clazz, final long type) {
 		return (T)get(type);
 	}
 
@@ -121,7 +122,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 
 	/** Add an array of attributes to this material. If the material already contains an attribute of the same type it is
 	 * overwritten. */
-	public final void set (final Attribute... attributes) {
+	public final void set (@Nullable final Attribute... attributes) {
 		for (final Attribute attr : attributes)
 			set(attr);
 	}
@@ -165,7 +166,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 	 * values of each attribute.
 	 * @param compareValues True to compare attribute values, false to only compare attribute types
 	 * @return True if this collection contains the same attributes (and optionally attribute values) as the other. */
-	public final boolean same (final Attributes other, boolean compareValues) {
+	public final boolean same (@Nullable final Attributes other, boolean compareValues) {
 		if (other == this) return true;
 		if ((other == null) || (mask != other.mask)) return false;
 		if (!compareValues) return true;
@@ -219,7 +220,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 	}
 
 	@Override
-	public int compareTo (Attributes other) {
+	public int compareTo (@Nullable Attributes other) {
 		if (other == this) return 0;
 		if (mask != other.mask) return mask < other.mask ? -1 : 1;
 		sort();

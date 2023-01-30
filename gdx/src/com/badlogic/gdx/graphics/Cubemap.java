@@ -32,11 +32,12 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
  * @author Xoppa */
 public class Cubemap extends GLTexture {
-	private static AssetManager assetManager;
+	@Nullable private static AssetManager assetManager;
 	final static Map<Application, Array<Cubemap>> managedCubemaps = new HashMap<Application, Array<Cubemap>>();
 
 	/** Enum to identify each side of a Cubemap */
@@ -86,10 +87,10 @@ public class Cubemap extends GLTexture {
 		}
 	}
 
-	protected CubemapData data;
+	@Nullable protected CubemapData data;
 
 	/** Construct a Cubemap based on the given CubemapData. */
-	public Cubemap (CubemapData data) {
+	public Cubemap (@Nullable CubemapData data) {
 		super(GL20.GL_TEXTURE_CUBE_MAP);
 		this.data = data;
 		load(data);
@@ -137,13 +138,13 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Construct a Cubemap with the specified {@link TextureData}'s for the sides */
-	public Cubemap (TextureData positiveX, TextureData negativeX, TextureData positiveY, TextureData negativeY,
-		TextureData positiveZ, TextureData negativeZ) {
+	public Cubemap (@Nullable TextureData positiveX, @Nullable TextureData negativeX, @Nullable TextureData positiveY, @Nullable TextureData negativeY,
+		@Nullable TextureData positiveZ, @Nullable TextureData negativeZ) {
 		this(new FacedCubemapData(positiveX, negativeX, positiveY, negativeY, positiveZ, negativeZ));
 	}
 
 	/** Sets the sides of this cubemap to the specified {@link CubemapData}. */
-	public void load (CubemapData data) {
+	public void load (@Nullable CubemapData data) {
 		if (!data.isPrepared()) data.prepare();
 		bind();
 		unsafeSetFilter(minFilter, magFilter, true);
@@ -153,7 +154,7 @@ public class Cubemap extends GLTexture {
 		Gdx.gl.glBindTexture(glTarget, 0);
 	}
 
-	public CubemapData getCubemapData () {
+	@Nullable public CubemapData getCubemapData () {
 		return data;
 	}
 
@@ -196,7 +197,7 @@ public class Cubemap extends GLTexture {
 		if (data.isManaged()) if (managedCubemaps.get(Gdx.app) != null) managedCubemaps.get(Gdx.app).removeValue(this, true);
 	}
 
-	private static void addManagedCubemap (Application app, Cubemap cubemap) {
+	private static void addManagedCubemap (@Nullable Application app, Cubemap cubemap) {
 		Array<Cubemap> managedCubemapArray = managedCubemaps.get(app);
 		if (managedCubemapArray == null) managedCubemapArray = new Array<Cubemap>();
 		managedCubemapArray.add(cubemap);
@@ -251,7 +252,7 @@ public class Cubemap extends GLTexture {
 					params.cubemap = cubemap; // special parameter which will ensure that the references stay the same.
 					params.loadedCallback = new LoadedCallback() {
 						@Override
-						public void finishedLoading (AssetManager assetManager, String fileName, Class type) {
+						public void finishedLoading (AssetManager assetManager, @Nullable String fileName, @Nullable Class type) {
 							assetManager.setReferenceCount(fileName, refCount);
 						}
 					};

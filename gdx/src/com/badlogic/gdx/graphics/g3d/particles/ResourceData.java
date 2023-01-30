@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
+import javax.annotation.Nullable;
 
 /** This class handles the assets and configurations required by a given resource when de/serialized. It's handy when a given
  * object or one of its members requires some assets to be loaded to work properly after being deserialized. To save the assets,
@@ -51,10 +52,10 @@ public class ResourceData<T> implements Json.Serializable {
 	 * of indices addressing a given {@link com.badlogic.gdx.graphics.g3d.particles.ResourceData.AssetData} in the
 	 * {@link ResourceData} */
 	public static class SaveData implements Json.Serializable {
-		ObjectMap<String, Object> data;
+		@Nullable ObjectMap<String, Object> data;
 		IntArray assets;
 		private int loadIndex;
-		protected ResourceData resources;
+		@Nullable protected ResourceData resources;
 
 		public SaveData () {
 			data = new ObjectMap<String, Object>();
@@ -69,7 +70,7 @@ public class ResourceData<T> implements Json.Serializable {
 			this.resources = resources;
 		}
 
-		public <K> void saveAsset (String filename, Class<K> type) {
+		public <K> void saveAsset (@Nullable String filename, Class<K> type) {
 			int i = resources.getAssetData(filename, type);
 			if (i == -1) {
 				resources.sharedAssets.add(new AssetData(filename, type));
@@ -82,13 +83,13 @@ public class ResourceData<T> implements Json.Serializable {
 			data.put(key, value);
 		}
 
-		public AssetDescriptor loadAsset () {
+		@Nullable public AssetDescriptor loadAsset () {
 			if (loadIndex == assets.size) return null;
 			AssetData data = (AssetData)resources.sharedAssets.get(assets.get(loadIndex++));
 			return new AssetDescriptor(data.filename, data.type);
 		}
 
-		public <K> K load (String key) {
+		@Nullable public <K> K load (String key) {
 			return (K)data.get(key);
 		}
 
@@ -107,13 +108,13 @@ public class ResourceData<T> implements Json.Serializable {
 
 	/** This class contains all the information related to a given asset */
 	public static class AssetData<T> implements Json.Serializable {
-		public String filename;
-		public Class<T> type;
+		@Nullable public String filename;
+		@Nullable public Class<T> type;
 
 		public AssetData () {
 		}
 
-		public AssetData (String filename, Class<T> type) {
+		public AssetData (@Nullable String filename, Class<T> type) {
 			this.filename = filename;
 			this.type = type;
 		}
@@ -138,15 +139,15 @@ public class ResourceData<T> implements Json.Serializable {
 
 	/** Unique data, can be used to save/load generic data which is not always loaded back after saving. Must be used to store data
 	 * which is uniquely addressable by a given string (i.e a system configuration). */
-	private ObjectMap<String, SaveData> uniqueData;
+	@Nullable private ObjectMap<String, SaveData> uniqueData;
 
 	/** Objects save data, must be loaded in the same saving order */
-	private Array<SaveData> data;
+	@Nullable private Array<SaveData> data;
 
 	/** Shared assets among all the configurable objects */
 	Array<AssetData> sharedAssets;
 	private int currentLoadIndex;
-	public T resource;
+	@Nullable public T resource;
 
 	public ResourceData () {
 		uniqueData = new ObjectMap<String, SaveData>();
@@ -160,7 +161,7 @@ public class ResourceData<T> implements Json.Serializable {
 		this.resource = resource;
 	}
 
-	<K> int getAssetData (String filename, Class<K> type) {
+	<K> int getAssetData (@Nullable String filename, Class<K> type) {
 		int i = 0;
 		for (AssetData data : sharedAssets) {
 			if (data.filename.equals(filename) && data.type.equals(type)) {
@@ -204,7 +205,7 @@ public class ResourceData<T> implements Json.Serializable {
 	}
 
 	/** @return the unique save data in the map */
-	public SaveData getSaveData (String key) {
+	@Nullable public SaveData getSaveData (String key) {
 		return uniqueData.get(key);
 	}
 

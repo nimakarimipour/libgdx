@@ -27,6 +27,7 @@ import java.io.Reader;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonValue.ValueType;
+import javax.annotation.Nullable;
 
 /** Lightweight JSON parser.<br>
  * <br>
@@ -34,12 +35,12 @@ import com.badlogic.gdx.utils.JsonValue.ValueType;
  * methods to perform event driven parsing. When this is done, the parse methods will return null.
  * @author Nathan Sweet */
 public class JsonReader implements BaseJsonReader {
-	public JsonValue parse (String json) {
+	@Nullable public JsonValue parse (String json) {
 		char[] data = json.toCharArray();
 		return parse(data, 0, data.length);
 	}
 
-	public JsonValue parse (Reader reader) {
+	@Nullable public JsonValue parse (Reader reader) {
 		char[] data = new char[1024];
 		int offset = 0;
 		try {
@@ -61,7 +62,7 @@ public class JsonReader implements BaseJsonReader {
 		return parse(data, 0, offset);
 	}
 
-	public JsonValue parse (InputStream input) {
+	@Nullable public JsonValue parse (InputStream input) {
 		Reader reader;
 		try {
 			reader = new InputStreamReader(input, "UTF-8");
@@ -71,7 +72,7 @@ public class JsonReader implements BaseJsonReader {
 		return parse(reader);
 	}
 
-	public JsonValue parse (FileHandle file) {
+	@Nullable public JsonValue parse (FileHandle file) {
 		Reader reader;
 		try {
 			reader = file.reader("UTF-8");
@@ -85,7 +86,7 @@ public class JsonReader implements BaseJsonReader {
 		}
 	}
 
-	public JsonValue parse (char[] data, int offset, int length) {
+	@Nullable public JsonValue parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length, eof = pe, top = 0;
 		int[] stack = new int[4];
 
@@ -661,10 +662,10 @@ public class JsonReader implements BaseJsonReader {
 
 	private final Array<JsonValue> elements = new Array(8);
 	private final Array<JsonValue> lastChild = new Array(8);
-	private JsonValue root, current;
+	@Nullable private JsonValue root, current;
 
 	/** @param name May be null. */
-	private void addChild (@Null String name, JsonValue child) {
+	private void addChild (@Nullable @Null String name, JsonValue child) {
 		child.setName(name);
 		if (current == null) {
 			current = child;
@@ -685,7 +686,7 @@ public class JsonReader implements BaseJsonReader {
 	}
 
 	/** @param name May be null. */
-	protected void startObject (@Null String name) {
+	protected void startObject (@Nullable @Null String name) {
 		JsonValue value = new JsonValue(ValueType.object);
 		if (current != null) addChild(name, value);
 		elements.add(value);
@@ -693,7 +694,7 @@ public class JsonReader implements BaseJsonReader {
 	}
 
 	/** @param name May be null. */
-	protected void startArray (@Null String name) {
+	protected void startArray (@Nullable @Null String name) {
 		JsonValue value = new JsonValue(ValueType.array);
 		if (current != null) addChild(name, value);
 		elements.add(value);
@@ -706,19 +707,19 @@ public class JsonReader implements BaseJsonReader {
 		current = elements.size > 0 ? elements.peek() : null;
 	}
 
-	protected void string (String name, String value) {
+	protected void string (@Nullable String name, @Nullable String value) {
 		addChild(name, new JsonValue(value));
 	}
 
-	protected void number (String name, double value, String stringValue) {
+	protected void number (@Nullable String name, double value, String stringValue) {
 		addChild(name, new JsonValue(value, stringValue));
 	}
 
-	protected void number (String name, long value, String stringValue) {
+	protected void number (@Nullable String name, long value, String stringValue) {
 		addChild(name, new JsonValue(value, stringValue));
 	}
 
-	protected void bool (String name, boolean value) {
+	protected void bool (@Nullable String name, boolean value) {
 		addChild(name, new JsonValue(value));
 	}
 

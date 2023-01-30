@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 public class DepthShader extends DefaultShader {
 	public static class Config extends DefaultShader.Config {
@@ -45,7 +46,7 @@ public class DepthShader extends DefaultShader {
 		}
 	}
 
-	private static String defaultVertexShader = null;
+	@Nullable private static String defaultVertexShader = null;
 
 	public final static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
@@ -53,7 +54,7 @@ public class DepthShader extends DefaultShader {
 		return defaultVertexShader;
 	}
 
-	private static String defaultFragmentShader = null;
+	@Nullable private static String defaultFragmentShader = null;
 
 	public final static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null)
@@ -109,7 +110,7 @@ public class DepthShader extends DefaultShader {
 	}
 
 	@Override
-	public void begin (Camera camera, RenderContext context) {
+	public void begin (@Nullable Camera camera, RenderContext context) {
 		super.begin(camera, context);
 		// Gdx.gl20.glEnable(GL20.GL_POLYGON_OFFSET_FILL);
 		// Gdx.gl20.glPolygonOffset(2.f, 100.f);

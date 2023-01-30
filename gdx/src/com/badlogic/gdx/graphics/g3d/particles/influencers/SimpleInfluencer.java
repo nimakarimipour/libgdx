@@ -22,15 +22,16 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** It's an {@link Influencer} which controls a generic channel of the particles. It handles the interpolation through time using
  * {@link ScaledNumericValue}.
  * @author Inferno */
 public abstract class SimpleInfluencer extends Influencer {
 
-	public ScaledNumericValue value;
-	FloatChannel valueChannel, interpolationChannel, lifeChannel;
-	ChannelDescriptor valueChannelDescriptor;
+	@Nullable public ScaledNumericValue value;
+	@Nullable FloatChannel valueChannel, interpolationChannel, lifeChannel;
+	@Nullable ChannelDescriptor valueChannelDescriptor;
 
 	public SimpleInfluencer () {
 		value = new ScaledNumericValue();

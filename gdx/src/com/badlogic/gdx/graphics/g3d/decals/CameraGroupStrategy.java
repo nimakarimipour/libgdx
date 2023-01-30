@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -130,7 +131,7 @@ public class CameraGroupStrategy implements GroupStrategy, Disposable {
 	}
 
 	@Override
-	public void beforeGroup (int group, Array<Decal> contents) {
+	public void beforeGroup (int group, @Nullable Array<Decal> contents) {
 		if (group == GROUP_BLEND) {
 			Gdx.gl.glEnable(GL20.GL_BLEND);
 			contents.sort(cameraSorter);

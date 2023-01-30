@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRegionIni
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
+import javax.annotation.Nullable;
 
 /** A {@link ParticleControllerRenderer} which will render particles as billboards to a {@link BillboardParticleBatch} .
  * @author Inferno */
@@ -33,7 +34,7 @@ public class BillboardRenderer extends ParticleControllerRenderer<BillboardContr
 		super(new BillboardControllerRenderData());
 	}
 
-	public BillboardRenderer (BillboardParticleBatch batch) {
+	public BillboardRenderer (@Nullable BillboardParticleBatch batch) {
 		this();
 		setBatch(batch);
 	}
@@ -53,7 +54,7 @@ public class BillboardRenderer extends ParticleControllerRenderer<BillboardContr
 	}
 
 	@Override
-	public boolean isCompatible (ParticleBatch<?> batch) {
+	public boolean isCompatible (@Nullable ParticleBatch<?> batch) {
 		return batch instanceof BillboardParticleBatch;
 	}
 

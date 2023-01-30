@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import javax.annotation.Nullable;
 
 /** Modification of the {@link VertexBufferObject} class. Sets the glVertexAttribDivisor for every {@link VertexAttribute}
  * automatically.
@@ -33,9 +34,9 @@ import java.nio.FloatBuffer;
  * @author mrdlink */
 public class InstanceBufferObject implements InstanceData {
 
-	private VertexAttributes attributes;
-	private FloatBuffer buffer;
-	private ByteBuffer byteBuffer;
+	@Nullable private VertexAttributes attributes;
+	@Nullable private FloatBuffer buffer;
+	@Nullable private ByteBuffer byteBuffer;
 	private boolean ownsBuffer;
 	private int bufferHandle;
 	private int usage;
@@ -58,7 +59,7 @@ public class InstanceBufferObject implements InstanceData {
 		setUsage(isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW);
 	}
 
-	@Override
+	@Nullable @Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}
@@ -73,7 +74,7 @@ public class InstanceBufferObject implements InstanceData {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}
 
-	@Override
+	@Nullable @Override
 	public FloatBuffer getBuffer () {
 		isDirty = true;
 		return buffer;
@@ -172,7 +173,7 @@ public class InstanceBufferObject implements InstanceData {
 	}
 
 	@Override
-	public void bind (ShaderProgram shader, int[] locations) {
+	public void bind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		final GL20 gl = Gdx.gl20;
 
 		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
@@ -221,7 +222,7 @@ public class InstanceBufferObject implements InstanceData {
 	}
 
 	@Override
-	public void unbind (final ShaderProgram shader, final int[] locations) {
+	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 		final int numAttributes = attributes.size();
 		if (locations == null) {

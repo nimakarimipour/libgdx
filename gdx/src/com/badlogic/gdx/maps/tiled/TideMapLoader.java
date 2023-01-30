@@ -40,6 +40,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
+import javax.annotation.Nullable;
 
 public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoader.Parameters> {
 
@@ -48,7 +49,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	}
 
 	private XmlReader xml = new XmlReader();
-	private Element root;
+	@Nullable private Element root;
 
 	public TideMapLoader () {
 		super(new InternalFileHandleResolver());
@@ -77,7 +78,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	}
 
 	@Override
-	public TiledMap load (AssetManager assetManager, String fileName, FileHandle tideFile, Parameters parameter) {
+	public TiledMap load (AssetManager assetManager, @Nullable String fileName, FileHandle tideFile, @Nullable Parameters parameter) {
 		try {
 			return loadMap(root, tideFile, new AssetManagerImageResolver(assetManager));
 		} catch (Exception e) {
@@ -86,7 +87,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	}
 
 	@Override
-	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle tmxFile, Parameters parameter) {
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle tmxFile, @Nullable Parameters parameter) {
 		Array<AssetDescriptor> dependencies = new Array<AssetDescriptor>();
 		try {
 			root = xml.parse(tmxFile);
@@ -104,7 +105,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	 * @param tmxFile the Filehandle of the tmx file
 	 * @param imageResolver the {@link ImageResolver}
 	 * @return the {@link TiledMap} */
-	private TiledMap loadMap (Element root, FileHandle tmxFile, ImageResolver imageResolver) {
+	private TiledMap loadMap (@Nullable Element root, FileHandle tmxFile, ImageResolver imageResolver) {
 		TiledMap map = new TiledMap();
 		Element properties = root.getChildByName("Properties");
 		if (properties != null) {
@@ -125,7 +126,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	 * @param root the root XML element
 	 * @return a list of filenames for images containing tiles
 	 * @throws IOException */
-	private Array<FileHandle> loadTileSheets (Element root, FileHandle tideFile) throws IOException {
+	private Array<FileHandle> loadTileSheets (@Nullable Element root, FileHandle tideFile) throws IOException {
 		Array<FileHandle> images = new Array<FileHandle>();
 		Element tilesheets = root.getChildByName("TileSheets");
 		for (Element tileset : tilesheets.getChildrenByName("TileSheet")) {
@@ -291,7 +292,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	private static FileHandle getRelativeFileHandle (FileHandle file, String path) {
+	private static FileHandle getRelativeFileHandle (FileHandle file, @Nullable String path) {
 		StringTokenizer tokenizer = new StringTokenizer(path, "\\/");
 		FileHandle result = file.parent();
 		while (tokenizer.hasMoreElements()) {

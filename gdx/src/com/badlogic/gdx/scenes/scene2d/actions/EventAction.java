@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /** Adds a listener to the actor for a specific event type and does not complete until {@link #handle(Event)} returns true.
  * @author JavadocMD
@@ -31,7 +32,7 @@ abstract public class EventAction<T extends Event> extends Action {
 		active = false;
 	}
 
-	public void setTarget (Actor newTarget) {
+	public void setTarget (@Nullable Actor newTarget) {
 		if (target != null) target.removeListener(listener);
 		super.setTarget(newTarget);
 		if (newTarget != null) newTarget.addListener(listener);

@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /** Base class of all the particle controllers. Encapsulate the generic structure of a controller and methods to update the
  * particles simulation.
@@ -40,20 +41,20 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	protected static final float DEFAULT_TIME_STEP = 1f / 60;
 
 	/** Name of the controller */
-	public String name;
+	@Nullable public String name;
 
 	/** Controls the emission of the particles */
-	public Emitter emitter;
+	@Nullable public Emitter emitter;
 
 	/** Update the properties of the particles */
 	public Array<Influencer> influencers;
 
 	/** Controls the graphical representation of the particles */
-	public ParticleControllerRenderer<?, ?> renderer;
+	@Nullable public ParticleControllerRenderer<?, ?> renderer;
 
 	/** Particles components */
-	public ParallelArray particles;
-	public ParticleChannels particleChannels;
+	@Nullable public ParallelArray particles;
+	@Nullable public ParticleChannels particleChannels;
 
 	/** Current transform of the controller DO NOT CHANGE MANUALLY */
 	public Matrix4 transform;
@@ -62,7 +63,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	public Vector3 scale;
 
 	/** Not used by the simulation, it should represent the bounding box containing all the particles */
-	protected BoundingBox boundingBox;
+	@Nullable protected BoundingBox boundingBox;
 
 	/** Time step, DO NOT CHANGE MANUALLY */
 	public float deltaTime, deltaTimeSqr;
@@ -166,7 +167,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 		renderer.init();
 	}
 
-	protected void allocateChannels (int maxParticleCount) {
+	protected void allocateChannels (@Nullable int maxParticleCount) {
 		particles = new ParallelArray(maxParticleCount);
 		// Alloc additional channels
 		emitter.allocateChannels();
@@ -286,7 +287,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** @return the influencer having the given type. */
-	public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
+	@Nullable public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
 		int index = findIndex(influencerClass);
 		return index > -1 ? (K)influencers.get(index) : null;
 	}

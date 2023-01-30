@@ -23,12 +23,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /** A button with a child {@link Label} to display text.
  * @author Nathan Sweet */
 public class TextButton extends Button {
 	private Label label;
-	private TextButtonStyle style;
+	@Nullable private TextButtonStyle style;
 
 	public TextButton (@Null String text, Skin skin) {
 		this(text, skin.get(TextButtonStyle.class));
@@ -68,12 +69,12 @@ public class TextButton extends Button {
 		}
 	}
 
-	public TextButtonStyle getStyle () {
+	@Nullable public TextButtonStyle getStyle () {
 		return style;
 	}
 
 	/** Returns the appropriate label font color from the style based on the current button state. */
-	protected @Null Color getFontColor () {
+	@Nullable protected @Null Color getFontColor () {
 		if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
 		if (isPressed()) {
 			if (isChecked() && style.checkedDownFontColor != null) return style.checkedDownFontColor;
@@ -111,7 +112,7 @@ public class TextButton extends Button {
 		return label;
 	}
 
-	public Cell<Label> getLabelCell () {
+	@Nullable public Cell<Label> getLabelCell () {
 		return getCell(label);
 	}
 
@@ -135,9 +136,9 @@ public class TextButton extends Button {
 	/** The style for a text button, see {@link TextButton}.
 	 * @author Nathan Sweet */
 	static public class TextButtonStyle extends ButtonStyle {
-		public BitmapFont font;
-		public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
-		public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor, checkedFocusedFontColor;
+		@Nullable public BitmapFont font;
+		@Nullable public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
+		@Nullable public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor, checkedFocusedFontColor;
 
 		public TextButtonStyle () {
 		}

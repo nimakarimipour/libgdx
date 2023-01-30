@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /** Detects tap, long press, fling, pan, zoom, and pinch gestures on an actor. If there is only a need to detect tap, use
  * {@link ClickListener}.
@@ -33,8 +34,8 @@ public class ActorGestureListener implements EventListener {
 	static final Vector2 tmpCoords = new Vector2(), tmpCoords2 = new Vector2();
 
 	private final GestureDetector detector;
-	InputEvent event;
-	Actor actor, touchDownTarget;
+	@Nullable InputEvent event;
+	@Nullable Actor actor, touchDownTarget;
 
 	/** @see GestureDetector#GestureDetector(com.badlogic.gdx.input.GestureDetector.GestureListener) */
 	public ActorGestureListener () {
@@ -141,7 +142,7 @@ public class ActorGestureListener implements EventListener {
 	public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 	}
 
-	public void tap (InputEvent event, float x, float y, int count, int button) {
+	public void tap (@Nullable InputEvent event, float x, float y, int count, int button) {
 	}
 
 	/** If true is returned, additional gestures will not be triggered. No event is provided because this event is triggered by
@@ -150,27 +151,27 @@ public class ActorGestureListener implements EventListener {
 		return false;
 	}
 
-	public void fling (InputEvent event, float velocityX, float velocityY, int button) {
+	public void fling (@Nullable InputEvent event, float velocityX, float velocityY, int button) {
 	}
 
 	/** The delta is the difference in stage coordinates since the last pan. */
-	public void pan (InputEvent event, float x, float y, float deltaX, float deltaY) {
+	public void pan (@Nullable InputEvent event, float x, float y, float deltaX, float deltaY) {
 	}
 
-	public void panStop (InputEvent event, float x, float y, int pointer, int button) {
+	public void panStop (@Nullable InputEvent event, float x, float y, int pointer, int button) {
 	}
 
-	public void zoom (InputEvent event, float initialDistance, float distance) {
+	public void zoom (@Nullable InputEvent event, float initialDistance, float distance) {
 	}
 
-	public void pinch (InputEvent event, Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+	public void pinch (@Nullable InputEvent event, Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
 	}
 
 	public GestureDetector getGestureDetector () {
 		return detector;
 	}
 
-	public @Null Actor getTouchDownTarget () {
+	@Nullable public @Null Actor getTouchDownTarget () {
 		return touchDownTarget;
 	}
 }

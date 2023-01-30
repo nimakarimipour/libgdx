@@ -41,6 +41,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** This class is used to draw particles as point sprites.
  * @author Inferno */
@@ -67,10 +68,10 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		pointSpritesEnabled = true;
 	}
 
-	private float[] vertices;
+	@Nullable private float[] vertices;
 	Renderable renderable;
-	protected BlendingAttribute blendingAttribute;
-	protected DepthTestAttribute depthTestAttribute;
+	@Nullable protected BlendingAttribute blendingAttribute;
+	@Nullable protected DepthTestAttribute depthTestAttribute;
 
 	public PointSpriteParticleBatch () {
 		this(1000);
@@ -84,8 +85,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, shaderConfig, null, null);
 	}
 
-	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig, BlendingAttribute blendingAttribute,
-		DepthTestAttribute depthTestAttribute) {
+	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig, @Nullable BlendingAttribute blendingAttribute,
+		@Nullable DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
 
 		if (!pointSpritesEnabled) enablePointSprites();
@@ -117,22 +118,22 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		renderable.material = new Material(blendingAttribute, depthTestAttribute, TextureAttribute.createDiffuse((Texture)null));
 	}
 
-	public void setTexture (Texture texture) {
+	public void setTexture (@Nullable Texture texture) {
 		TextureAttribute attribute = (TextureAttribute)renderable.material.get(TextureAttribute.Diffuse);
 		attribute.textureDescription.texture = texture;
 	}
 
-	public Texture getTexture () {
+	@Nullable public Texture getTexture () {
 		TextureAttribute attribute = (TextureAttribute)renderable.material.get(TextureAttribute.Diffuse);
 		return attribute.textureDescription.texture;
 	}
 
-	public BlendingAttribute getBlendingAttribute () {
+	@Nullable public BlendingAttribute getBlendingAttribute () {
 		return blendingAttribute;
 	}
 
 	@Override
-	protected void flush (int[] offsets) {
+	protected void flush (@Nullable int[] offsets) {
 		int tp = 0;
 		for (PointSpriteControllerRenderData data : renderData) {
 			FloatChannel scaleChannel = data.scaleChannel;

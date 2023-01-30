@@ -20,6 +20,7 @@ import java.nio.FloatBuffer;
 
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /** A VertexData instance holds vertices for rendering with OpenGL. It is implemented as either a {@link VertexArray} or a
  * {@link VertexBufferObject}. Only the later supports OpenGL ES 2.0.
@@ -33,7 +34,7 @@ public interface VertexData extends Disposable {
 	public int getNumMaxVertices ();
 
 	/** @return the {@link VertexAttributes} as specified during construction. */
-	public VertexAttributes getAttributes ();
+	@Nullable public VertexAttributes getAttributes ();
 
 	/** Sets the vertices of this VertexData, discarding the old vertex data. The count must equal the number of floats per vertex
 	 * times the number of vertices to be copied to this VertexData. The order of the vertex attributes must be the same as
@@ -43,7 +44,7 @@ public interface VertexData extends Disposable {
 	 * @param vertices the vertex data
 	 * @param offset the offset to start copying the data from
 	 * @param count the number of floats to copy */
-	public void setVertices (float[] vertices, int offset, int count);
+	public void setVertices (@Nullable float[] vertices, int offset, int count);
 
 	/** Update (a portion of) the vertices. Does not resize the backing buffer.
 	 * @param vertices the vertex data
@@ -55,21 +56,21 @@ public interface VertexData extends Disposable {
 	 * bind. If you need immediate uploading use {@link #setVertices(float[], int, int)}; Any modifications made to the Buffer
 	 * *after* the call to bind will not automatically be uploaded.
 	 * @return the underlying FloatBuffer holding the vertex data. */
-	public FloatBuffer getBuffer ();
+	@Nullable public FloatBuffer getBuffer ();
 
 	/** Binds this VertexData for rendering via glDrawArrays or glDrawElements. */
 	public void bind (ShaderProgram shader);
 
 	/** Binds this VertexData for rendering via glDrawArrays or glDrawElements.
 	 * @param locations array containing the attribute locations. */
-	public void bind (ShaderProgram shader, int[] locations);
+	public void bind (@Nullable ShaderProgram shader, @Nullable int[] locations);
 
 	/** Unbinds this VertexData. */
 	public void unbind (ShaderProgram shader);
 
 	/** Unbinds this VertexData.
 	 * @param locations array containing the attribute locations. */
-	public void unbind (ShaderProgram shader, int[] locations);
+	public void unbind (@Nullable ShaderProgram shader, @Nullable int[] locations);
 
 	/** Invalidates the VertexData if applicable. Use this in case of a context loss. */
 	public void invalidate ();

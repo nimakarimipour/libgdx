@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import com.badlogic.gdx.Files.FileType;
+import javax.annotation.Nullable;
 
 /** A FileHandle intended to be subclassed for the purpose of implementing {@link #read()} and/or {@link #write(boolean)}. Methods
  * that would manipulate the file instead throw UnsupportedOperationException.
@@ -43,7 +44,7 @@ public abstract class FileHandleStream extends FileHandle {
 		return true;
 	}
 
-	public FileHandle child (String name) {
+	public FileHandle child (@Nullable String name) {
 		throw new UnsupportedOperationException();
 	}
 

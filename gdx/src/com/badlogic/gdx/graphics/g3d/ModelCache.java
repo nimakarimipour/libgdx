@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** ModelCache tries to combine multiple render calls into a single render call by merging them where possible. Can be used for
  * multiple type of models (e.g. varying vertex attributes or materials), the ModelCache will combine where possible. Can be used
@@ -47,7 +48,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 		 * @param vertexCount the minimum amount vertices the mesh should be able to store
 		 * @param indexCount the minimum amount of indices the mesh should be able to store
 		 * @return the obtained Mesh, or null when no mesh could be obtained. */
-		Mesh obtain (VertexAttributes vertexAttributes, int vertexCount, int indexCount);
+		Mesh obtain (@Nullable VertexAttributes vertexAttributes, int vertexCount, int indexCount);
 
 		/** Releases all previously obtained {@link Mesh}es using the the {@link #obtain(VertexAttributes, int, int)} method. */
 		void flush ();
@@ -69,7 +70,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 		}
 
 		@Override
-		public Mesh obtain (VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
+		public Mesh obtain (@Nullable VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
 			for (int i = 0, n = freeMeshes.size; i < n; ++i) {
 				final Mesh mesh = freeMeshes.get(i);
 				if (mesh.getVertexAttributes().equals(vertexAttributes) && mesh.getMaxVertices() >= vertexCount
@@ -110,7 +111,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 		}
 
 		@Override
-		public Mesh obtain (VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
+		public Mesh obtain (@Nullable VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
 			for (int i = 0, n = freeMeshes.size; i < n; ++i) {
 				final Mesh mesh = freeMeshes.get(i);
 				if (mesh.getVertexAttributes().equals(vertexAttributes) && mesh.getMaxVertices() == vertexCount
@@ -141,7 +142,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 	 * @author Xoppa */
 	public static class Sorter implements RenderableSorter, Comparator<Renderable> {
 		@Override
-		public void sort (Camera camera, Array<Renderable> renderables) {
+		public void sort (@Nullable Camera camera, Array<Renderable> renderables) {
 			renderables.sort(this);
 		}
 
@@ -182,7 +183,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 	private boolean building;
 	private RenderableSorter sorter;
 	private MeshPool meshPool;
-	private Camera camera;
+	@Nullable private Camera camera;
 
 	/** Create a ModelCache using the default {@link Sorter} and the {@link SimpleMeshPool} implementation. This might not be the
 	 * most optimal implementation for you use-case, but should be good to start with. */
@@ -213,7 +214,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 	 * cache is not valid until the call to {@link #end()} is made. Use one of the add methods (e.g. {@link #add(Renderable)} or
 	 * {@link #add(RenderableProvider)}) to add renderables to the cache.
 	 * @param camera The {@link Camera} that will passed to the {@link RenderableSorter} */
-	public void begin (Camera camera) {
+	public void begin (@Nullable Camera camera) {
 		if (building) throw new GdxRuntimeException("Call end() after calling begin()");
 		building = true;
 
@@ -225,7 +226,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 		meshPool.flush();
 	}
 
-	private Renderable obtainRenderable (Material material, int primitiveType) {
+	private Renderable obtainRenderable (@Nullable Material material, int primitiveType) {
 		Renderable result = renderablesPool.obtain();
 		result.bones = null;
 		result.environment = null;

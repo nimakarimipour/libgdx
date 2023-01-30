@@ -21,13 +21,14 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 
 /** Builder style API for emitting JSON.
  * @author Nathan Sweet */
 public class JsonWriter extends Writer {
 	final Writer writer;
 	private final Array<JsonObject> stack = new Array();
-	private JsonObject current;
+	@Nullable private JsonObject current;
 	private boolean named;
 	private OutputType outputType = OutputType.json;
 	private boolean quoteLongValues = false;
@@ -75,7 +76,7 @@ public class JsonWriter extends Writer {
 		return this;
 	}
 
-	public JsonWriter value (Object value) throws IOException {
+	public JsonWriter value (@Nullable Object value) throws IOException {
 		if (quoteLongValues
 			&& (value instanceof Long || value instanceof Double || value instanceof BigDecimal || value instanceof BigInteger)) {
 			value = value.toString();
@@ -183,7 +184,7 @@ public class JsonWriter extends Writer {
 		static private Pattern minimalNamePattern = Pattern.compile("^[^\":,}/ ][^:]*$");
 		static private Pattern minimalValuePattern = Pattern.compile("^[^\":,{\\[\\]/ ][^}\\],]*$");
 
-		public String quoteValue (Object value) {
+		public String quoteValue (@Nullable Object value) {
 			if (value == null) return "null";
 			String string = value.toString();
 			if (value instanceof Number || value instanceof Boolean) return string;
@@ -198,7 +199,7 @@ public class JsonWriter extends Writer {
 			return '"' + buffer.replace('"', "\\\"").toString() + '"';
 		}
 
-		public String quoteName (String value) {
+		public String quoteName (@Nullable String value) {
 			StringBuilder buffer = new StringBuilder(value);
 			buffer.replace('\\', "\\\\").replace('\r', "\\r").replace('\n', "\\n").replace('\t', "\\t");
 			switch (this) {

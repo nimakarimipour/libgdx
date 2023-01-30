@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
 import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** It's an {@link Influencer} which controls which {@link Model} will be assigned to the particles as {@link ModelInstance}.
  * @author Inferno */
@@ -116,7 +117,7 @@ public abstract class ModelInfluencer extends Influencer {
 	}
 
 	public Array<Model> models;
-	ObjectChannel<ModelInstance> modelChannel;
+	@Nullable ObjectChannel<ModelInstance> modelChannel;
 
 	public ModelInfluencer () {
 		this.models = new Array<Model>(true, 1, Model.class);

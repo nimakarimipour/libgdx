@@ -18,6 +18,7 @@ package com.badlogic.gdx;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Provides standard access to the filesystem, classpath, Android app storage (internal and external), and Android assets
  * directory.
@@ -54,22 +55,22 @@ public interface Files {
 	 * @param type Determines how the path is resolved.
 	 * @throws GdxRuntimeException if the type is classpath or internal and the file does not exist.
 	 * @see FileType */
-	public FileHandle getFileHandle (String path, FileType type);
+	public FileHandle getFileHandle (String path, @Nullable FileType type);
 
 	/** Convenience method that returns a {@link FileType#Classpath} file handle. */
-	public FileHandle classpath (String path);
+	public FileHandle classpath (@Nullable String path);
 
 	/** Convenience method that returns a {@link FileType#Internal} file handle. */
-	public FileHandle internal (String path);
+	public FileHandle internal (@Nullable String path);
 
 	/** Convenience method that returns a {@link FileType#External} file handle. */
-	public FileHandle external (String path);
+	public FileHandle external (@Nullable String path);
 
 	/** Convenience method that returns a {@link FileType#Absolute} file handle. */
-	public FileHandle absolute (String path);
+	public FileHandle absolute (@Nullable String path);
 
 	/** Convenience method that returns a {@link FileType#Local} file handle. */
-	public FileHandle local (String path);
+	public FileHandle local (@Nullable String path);
 
 	/** Returns the external storage path directory. This is the app external storage on Android and the home directory of the
 	 * current user on the desktop. */

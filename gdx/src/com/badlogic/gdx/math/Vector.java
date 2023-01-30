@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import javax.annotation.Nullable;
 
 /** Encapsulates a general vector. Allows chaining operations by returning a reference to itself in all modification methods. See
  * {@link Vector2} and {@link Vector3} for specific implementations.
@@ -66,7 +67,7 @@ public interface Vector<T extends Vector<T>> {
 	/** Sets this vector from the given vector
 	 * @param v The vector
 	 * @return This vector for chaining */
-	T set (T v);
+	T set (@Nullable T v);
 
 	/** Subtracts the given vector from this vector.
 	 * @param v The vector
@@ -97,7 +98,7 @@ public interface Vector<T extends Vector<T>> {
 
 	/** @param v The other vector
 	 * @return the distance between this and the other vector */
-	float dst (T v);
+	float dst (@Nullable T v);
 
 	/** This method is faster than {@link Vector#dst(Vector)} because it avoids calculating a square root. It is useful for
 	 * comparisons, but not for getting accurate distances, as the return value is the square of the actual distance.

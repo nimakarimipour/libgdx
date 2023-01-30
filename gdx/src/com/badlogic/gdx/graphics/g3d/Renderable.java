@@ -22,6 +22,8 @@ import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 /** A Renderable contains all information about a single render instruction (typically a draw call).
  * </p>
@@ -76,24 +78,24 @@ public class Renderable {
 	public final MeshPart meshPart = new MeshPart();
 	/** The {@link Material} to be applied to the shape (part of the mesh), must not be null.
 	 * @see #environment **/
-	public Material material;
+	@Nullable public Material material;
 	/** The {@link Environment} to be used to render this Renderable, may be null. When specified it will be combined by the shader
 	 * with the {@link #material}. When both the material and environment contain an attribute of the same type, the attribute of
 	 * the material will be used. **/
-	public Environment environment;
+	@Nullable public Environment environment;
 	/** The bone transformations used for skinning, or null if not applicable. When specified and the mesh contains one or more
 	 * {@link com.badlogic.gdx.graphics.VertexAttributes.Usage#BoneWeight} vertex attributes, then the BoneWeight index is used as
 	 * index in the array. If the array isn't large enough then the identity matrix is used. Each BoneWeight weight is used to
 	 * combine multiple bones into a single transformation matrix, which is used to transform the vertex to model space. In other
 	 * words: the bone transformation is applied prior to the {@link #worldTransform}. */
-	public Matrix4 bones[];
+	@Nullable public Matrix4 bones[];
 	/** The {@link Shader} to be used to render this Renderable using a {@link ModelBatch}, may be null. It is not guaranteed that
 	 * the shader will be used, the used {@link ShaderProvider} is responsible for actually choosing the correct shader to use. **/
-	public Shader shader;
+	@Nullable public Shader shader;
 	/** User definable value, may be null. */
-	public Object userData;
+	@Nullable public Object userData;
 
-	public Renderable set (Renderable renderable) {
+	@Initializer public Renderable set (Renderable renderable) {
 		worldTransform.set(renderable.worldTransform);
 		material = renderable.material;
 		meshPart.set(renderable.meshPart);

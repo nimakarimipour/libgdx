@@ -18,16 +18,17 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** Defines a variation of red, green and blue on a given time line.
  * @author Inferno */
 public class GradientColorValue extends ParticleValue {
 	static private float[] temp = new float[3];
 
-	private float[] colors = {1, 1, 1};
-	public float[] timeline = {0};
+	@Nullable private float[] colors = {1, 1, 1};
+	@Nullable public float[] timeline = {0};
 
-	public float[] getTimeline () {
+	@Nullable public float[] getTimeline () {
 		return timeline;
 	}
 
@@ -35,7 +36,7 @@ public class GradientColorValue extends ParticleValue {
 		this.timeline = timeline;
 	}
 
-	public float[] getColors () {
+	@Nullable public float[] getColors () {
 		return colors;
 	}
 
@@ -92,7 +93,7 @@ public class GradientColorValue extends ParticleValue {
 		timeline = json.readValue("timeline", float[].class, jsonData);
 	}
 
-	public void load (GradientColorValue value) {
+	public void load (@Nullable GradientColorValue value) {
 		super.load(value);
 		colors = new float[value.colors.length];
 		System.arraycopy(value.colors, 0, colors, 0, colors.length);

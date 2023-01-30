@@ -23,6 +23,7 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
+import javax.annotation.Nullable;
 
 /** A resizable, ordered or unordered array of objects. If unordered, this class avoids a memory copy when removing elements (the
  * last element is moved to the removed element's position).
@@ -35,8 +36,8 @@ public class Array<T> implements Iterable<T> {
 	public int size;
 	public boolean ordered;
 
-	private ArrayIterable iterable;
-	private Predicate.PredicateIterable<T> predicateIterable;
+	@Nullable private ArrayIterable iterable;
+	@Nullable private Predicate.PredicateIterable<T> predicateIterable;
 
 	/** Creates an ordered array with a capacity of 16. */
 	public Array () {
@@ -96,7 +97,7 @@ public class Array<T> implements Iterable<T> {
 		System.arraycopy(array, start, items, 0, size);
 	}
 
-	public void add (T value) {
+	public void add (@Nullable T value) {
 		T[] items = this.items;
 		if (size == items.length) items = resize(Math.max(8, (int)(size * 1.75f)));
 		items[size++] = value;
@@ -129,7 +130,7 @@ public class Array<T> implements Iterable<T> {
 		size += 4;
 	}
 
-	public void addAll (Array<? extends T> array) {
+	public void addAll (@Nullable Array<? extends T> array) {
 		addAll(array.items, 0, array.size);
 	}
 
@@ -151,12 +152,12 @@ public class Array<T> implements Iterable<T> {
 		size = sizeNeeded;
 	}
 
-	public T get (int index) {
+	public T get (@Nullable int index) {
 		if (index >= size) throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
 		return items[index];
 	}
 
-	public void set (int index, T value) {
+	public void set (int index, @Nullable T value) {
 		if (index >= size) throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
 		items[index] = value;
 	}
@@ -195,7 +196,7 @@ public class Array<T> implements Iterable<T> {
 	/** Returns true if this array contains the specified value.
 	 * @param value May be null.
 	 * @param identity If true, == comparison will be used. If false, .equals() comparison will be used. */
-	public boolean contains (@Null T value, boolean identity) {
+	public boolean contains (@Nullable @Null T value, boolean identity) {
 		T[] items = this.items;
 		int i = size - 1;
 		if (identity || value == null) {
@@ -232,7 +233,7 @@ public class Array<T> implements Iterable<T> {
 	 * @param value May be null.
 	 * @param identity If true, == comparison will be used. If false, .equals() comparison will be used.
 	 * @return An index of first occurrence of value in array or -1 if no such value exists */
-	public int indexOf (@Null T value, boolean identity) {
+	public int indexOf (@Nullable @Null T value, boolean identity) {
 		T[] items = this.items;
 		if (identity || value == null) {
 			for (int i = 0, n = size; i < n; i++)
@@ -265,7 +266,7 @@ public class Array<T> implements Iterable<T> {
 	 * @param value May be null.
 	 * @param identity If true, == comparison will be used. If false, .equals() comparison will be used.
 	 * @return true if value was found and removed, false otherwise */
-	public boolean removeValue (@Null T value, boolean identity) {
+	public boolean removeValue (@Nullable @Null T value, boolean identity) {
 		T[] items = this.items;
 		if (identity || value == null) {
 			for (int i = 0, n = size; i < n; i++) {
@@ -513,7 +514,7 @@ public class Array<T> implements Iterable<T> {
 	}
 
 	/** Returns a random item from the array, or null if the array is empty. */
-	public @Null T random () {
+	@Nullable public @Null T random () {
 		if (size == 0) return null;
 		return items[MathUtils.random(0, size - 1)];
 	}
@@ -667,7 +668,7 @@ public class Array<T> implements Iterable<T> {
 	static public class ArrayIterable<T> implements Iterable<T> {
 		private final Array<T> array;
 		private final boolean allowRemove;
-		private ArrayIterator iterator1, iterator2;
+		@Nullable private ArrayIterator iterator1, iterator2;
 
 // java.io.StringWriter lastAcquire = new java.io.StringWriter();
 

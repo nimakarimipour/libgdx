@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.RangedNumericValue;
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** It's a generic use {@link Emitter} which fits most of the particles simulation scenarios.
  * @author Inferno */
@@ -39,16 +40,16 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		Disabled
 	}
 
-	public RangedNumericValue delayValue, durationValue;
-	public ScaledNumericValue lifeOffsetValue, lifeValue, emissionValue;
+	@Nullable public RangedNumericValue delayValue, durationValue;
+	@Nullable public ScaledNumericValue lifeOffsetValue, lifeValue, emissionValue;
 	protected int emission, emissionDiff, emissionDelta;
 	protected int lifeOffset, lifeOffsetDiff;
 	protected int life, lifeDiff;
 	protected float duration, delay, durationTimer, delayTimer;
-	private boolean continuous;
+	@Nullable private boolean continuous;
 	private EmissionMode emissionMode;
 
-	private FloatChannel lifeChannel;
+	@Nullable private FloatChannel lifeChannel;
 
 	public RegularEmitter () {
 		delayValue = new RangedNumericValue();
@@ -182,23 +183,23 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		controller.particles.size += count;
 	}
 
-	public ScaledNumericValue getLife () {
+	@Nullable public ScaledNumericValue getLife () {
 		return lifeValue;
 	}
 
-	public ScaledNumericValue getEmission () {
+	@Nullable public ScaledNumericValue getEmission () {
 		return emissionValue;
 	}
 
-	public RangedNumericValue getDuration () {
+	@Nullable public RangedNumericValue getDuration () {
 		return durationValue;
 	}
 
-	public RangedNumericValue getDelay () {
+	@Nullable public RangedNumericValue getDelay () {
 		return delayValue;
 	}
 
-	public ScaledNumericValue getLifeOffset () {
+	@Nullable public ScaledNumericValue getLifeOffset () {
 		return lifeOffsetValue;
 	}
 

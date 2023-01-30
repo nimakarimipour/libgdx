@@ -44,6 +44,8 @@ import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntIntMap;
 import com.badlogic.gdx.utils.ShortArray;
+import com.badlogic.gdx.Initializer;
+import javax.annotation.Nullable;
 
 /** Class to construct a mesh, optionally splitting it into one or more mesh parts. Before you can call any other method you must
  * call {@link #begin(VertexAttributes)} or {@link #begin(VertexAttributes, int)}. To use mesh parts you must call
@@ -67,7 +69,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	private final Color tempC1 = new Color();
 
 	/** The vertex attributes of the resulting mesh */
-	private VertexAttributes attributes;
+	@Nullable private VertexAttributes attributes;
 	/** The vertices to construct, no size checking is done */
 	private FloatArray vertices = new FloatArray();
 	/** The indices to construct, no size checking is done */
@@ -97,7 +99,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	/** The offset within an vertex to texture coordinates, or -1 if not available */
 	private int uvOffset;
 	/** The meshpart currently being created */
-	private MeshPart part;
+	@Nullable private MeshPart part;
 	/** The parts created between begin and end */
 	private Array<MeshPart> parts = new Array<MeshPart>();
 	/** The color used if no vertex color is specified. */
@@ -142,7 +144,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	/** Begin building a mesh. Call {@link #part(String, int)} to start a {@link MeshPart}. */
-	public void begin (final VertexAttributes attributes) {
+	public void begin (@Nullable final VertexAttributes attributes) {
 		begin(attributes, -1);
 	}
 
@@ -154,7 +156,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	/** Begin building a mesh */
-	public void begin (final VertexAttributes attributes, int primitiveType) {
+	@Initializer public void begin (@Nullable final VertexAttributes attributes, int primitiveType) {
 		if (this.attributes != null) throw new RuntimeException("Call end() first");
 		this.attributes = attributes;
 		this.vertices.clear();
@@ -327,12 +329,12 @@ public class MeshBuilder implements MeshPartBuilder {
 		return indices.items;
 	}
 
-	@Override
+	@Nullable @Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}
 
-	@Override
+	@Nullable @Override
 	public MeshPart getMeshPart () {
 		return part;
 	}
@@ -349,7 +351,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	@Override
-	public void setColor (final Color color) {
+	public void setColor (@Nullable final Color color) {
 		this.color.set(!(hasColor = (color != null)) ? Color.WHITE : color);
 	}
 
@@ -363,7 +365,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	@Override
-	public void setUVRange (TextureRegion region) {
+	public void setUVRange (@Nullable TextureRegion region) {
 		if (region == null) {
 			hasUVTransform = false;
 			uOffset = vOffset = 0f;
@@ -380,7 +382,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	@Override
-	public void setVertexTransform (Matrix4 transform) {
+	public void setVertexTransform (@Nullable Matrix4 transform) {
 		vertexTransformationEnabled = transform != null;
 		if (vertexTransformationEnabled) {
 			positionTransform.set(transform);
@@ -541,7 +543,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	private final Vector3 tmpNormal = new Vector3();
 
 	@Override
-	public short vertex (Vector3 pos, Vector3 nor, Color col, Vector2 uv) {
+	public short vertex (@Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
 		if (vindex > MAX_INDEX) throw new GdxRuntimeException("Too many vertices used");
 
 		vertex[posOffset] = pos.x;
@@ -741,7 +743,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	@Override
-	public void addMesh (Mesh mesh, int indexOffset, int numIndices) {
+	public void addMesh (@Nullable Mesh mesh, int indexOffset, int numIndices) {
 		if (!attributes.equals(mesh.getVertexAttributes())) throw new GdxRuntimeException("Vertex attributes do not match");
 		if (numIndices <= 0) return; // silently ignore an empty mesh part
 
@@ -760,7 +762,7 @@ public class MeshBuilder implements MeshPartBuilder {
 		addMesh(tmpVertices.items, tmpIndices.items, 0, numIndices);
 	}
 
-	private static IntIntMap indicesMap = null;
+	@Nullable private static IntIntMap indicesMap = null;
 
 	@Override
 	public void addMesh (float[] vertices, short[] indices, int indexOffset, int numIndices) {
