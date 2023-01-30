@@ -168,7 +168,8 @@ public class Skin implements Disposable {
 
 	/** Returns a named resource of the specified type.
 	 * @return null if not found. */
-	@Nullable public @Null <T> T optional (@Nullable String name, Class<T> type) {
+	@Nullable
+	public @Null <T> T optional (@Nullable String name, Class<T> type) {
 		if (name == null) throw new IllegalArgumentException("name cannot be null.");
 		if (type == null) throw new IllegalArgumentException("type cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(type);
@@ -183,7 +184,8 @@ public class Skin implements Disposable {
 	}
 
 	/** Returns the name to resource mapping for the specified type, or null if no resources of that type exist. */
-	@Nullable public @Null <T> ObjectMap<String, T> getAll (Class<T> type) {
+	@Nullable
+	public @Null <T> ObjectMap<String, T> getAll (Class<T> type) {
 		return (ObjectMap<String, T>)resources.get(type);
 	}
 
@@ -209,7 +211,8 @@ public class Skin implements Disposable {
 	}
 
 	/** @return an array with the {@link TextureRegion} that have an index != -1, or null if none are found. */
-	@Nullable public @Null Array<TextureRegion> getRegions (String regionName) {
+	@Nullable
+	public @Null Array<TextureRegion> getRegions (String regionName) {
 		Array<TextureRegion> regions = null;
 		int i = 0;
 		TextureRegion region = optional(regionName + "_" + (i++), TextureRegion.class);
@@ -334,7 +337,8 @@ public class Skin implements Disposable {
 
 	/** Returns the name of the specified style object, or null if it is not in the skin. This compares potentially every style
 	 * object in the skin of the same type as the specified style, which may be a somewhat expensive operation. */
-	@Nullable public @Null String find (Object resource) {
+	@Nullable
+	public @Null String find (Object resource) {
 		if (resource == null) throw new IllegalArgumentException("style cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(resource.getClass());
 		if (typeResources == null) return null;
@@ -444,7 +448,8 @@ public class Skin implements Disposable {
 	}
 
 	/** Returns the {@link TextureAtlas} passed to this skin constructor, or null. */
-	@Nullable public @Null TextureAtlas getAtlas () {
+	@Nullable
+	public @Null TextureAtlas getAtlas () {
 		return atlas;
 	}
 
@@ -463,7 +468,8 @@ public class Skin implements Disposable {
 		final Json json = new Json() {
 			static private final String parentFieldName = "parent";
 
-			@Nullable public <T> T readValue (@Nullable Class<T> type, @Nullable Class elementType, @Nullable JsonValue jsonData) {
+			@Nullable
+			public <T> T readValue (@Nullable Class<T> type, @Nullable Class elementType, @Nullable JsonValue jsonData) {
 				// If the JSON is a string but the type is not, look up the actual value by name.
 				if (jsonData != null && jsonData.isString() && !ClassReflection.isAssignableFrom(CharSequence.class, type))
 					return get(jsonData.asString(), type);
@@ -618,7 +624,8 @@ public class Skin implements Disposable {
 		TextField.TextFieldStyle.class, TextTooltip.TextTooltipStyle.class, Touchpad.TouchpadStyle.class, Tree.TreeStyle.class,
 		Window.WindowStyle.class};
 
-	@Nullable static private @Null Method findMethod (Class type, String name) {
+	@Nullable
+	static private @Null Method findMethod (Class type, String name) {
 		Method[] methods = ClassReflection.getMethods(type);
 		for (int i = 0, n = methods.length; i < n; i++) {
 			Method method = methods[i];

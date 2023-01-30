@@ -138,8 +138,8 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Construct a Cubemap with the specified {@link TextureData}'s for the sides */
-	public Cubemap (@Nullable TextureData positiveX, @Nullable TextureData negativeX, @Nullable TextureData positiveY, @Nullable TextureData negativeY,
-		@Nullable TextureData positiveZ, @Nullable TextureData negativeZ) {
+	public Cubemap (@Nullable TextureData positiveX, @Nullable TextureData negativeX, @Nullable TextureData positiveY,
+		@Nullable TextureData negativeY, @Nullable TextureData positiveZ, @Nullable TextureData negativeZ) {
 		this(new FacedCubemapData(positiveX, negativeX, positiveY, negativeY, positiveZ, negativeZ));
 	}
 
@@ -154,7 +154,8 @@ public class Cubemap extends GLTexture {
 		Gdx.gl.glBindTexture(glTarget, 0);
 	}
 
-	@Nullable public CubemapData getCubemapData () {
+	@Nullable
+	public CubemapData getCubemapData () {
 		return data;
 	}
 

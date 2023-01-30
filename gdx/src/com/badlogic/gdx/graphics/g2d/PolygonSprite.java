@@ -199,7 +199,8 @@ public class PolygonSprite {
 	}
 
 	/** Returns the packed vertices, colors, and texture coordinates for this sprite. */
-	@Nullable public float[] getVertices () {
+	@Nullable
+	public float[] getVertices () {
 		if (!dirty) return vertices;
 		dirty = false;
 
@@ -342,7 +343,8 @@ public class PolygonSprite {
 		dirty = true;
 	}
 
-	@Nullable public PolygonRegion getRegion () {
+	@Nullable
+	public PolygonRegion getRegion () {
 		return region;
 	}
 }

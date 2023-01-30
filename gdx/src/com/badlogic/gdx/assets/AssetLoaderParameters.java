@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.assets;
+
 import javax.annotation.Nullable;
 
 public class AssetLoaderParameters<T> {

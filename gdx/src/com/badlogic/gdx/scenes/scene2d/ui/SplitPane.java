@@ -142,7 +142,8 @@ public class SplitPane extends WidgetGroup {
 
 	/** Returns the split pane's style. Modifying the returned style may not have an effect until {@link #setStyle(SplitPaneStyle)}
 	 * is called. */
-	@Nullable public SplitPaneStyle getStyle () {
+	@Nullable
+	public SplitPaneStyle getStyle () {
 		return style;
 	}
 

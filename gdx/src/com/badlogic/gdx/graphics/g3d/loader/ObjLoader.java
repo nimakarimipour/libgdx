@@ -96,16 +96,19 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 	}
 
 	/** Directly load the model on the calling thread. The model with not be managed by an {@link AssetManager}. */
-	@Nullable public Model loadModel (final FileHandle fileHandle, boolean flipV) {
+	@Nullable
+	public Model loadModel (final FileHandle fileHandle, boolean flipV) {
 		return loadModel(fileHandle, new ObjLoaderParameters(flipV));
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public ModelData loadModelData (FileHandle file, @Nullable ObjLoaderParameters parameters) {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 
-	@Nullable protected ModelData loadModelData (FileHandle file, boolean flipV) {
+	@Nullable
+	protected ModelData loadModelData (FileHandle file, boolean flipV) {
 		if (logWarning)
 			Gdx.app.error("ObjLoader", "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
 		String line;

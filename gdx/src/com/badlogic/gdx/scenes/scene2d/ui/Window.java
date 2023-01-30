@@ -210,7 +210,8 @@ public class Window extends Table {
 
 	/** Returns the window's style. Modifying the returned style may not have an effect until {@link #setStyle(WindowStyle)} is
 	 * called. */
-	@Nullable public WindowStyle getStyle () {
+	@Nullable
+	public WindowStyle getStyle () {
 		return style;
 	}
 
@@ -277,7 +278,8 @@ public class Window extends Table {
 		drawTitleTable = false; // Avoid drawing the title table again in drawChildren.
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (!isVisible()) return null;
 		Actor hit = super.hit(x, y, touchable);
 		if (hit == null && isModal && (!touchable || getTouchable() == Touchable.enabled)) return this;

@@ -137,7 +137,8 @@ public class Octree<T> {
 		return result;
 	}
 
-	@Nullable public T rayCast (Ray ray, RayCastResult<T> result) {
+	@Nullable
+	public T rayCast (Ray ray, RayCastResult<T> result) {
 		result.distance = result.maxDistanceSq;
 		root.rayCast(ray, result);
 		return result.geometry;

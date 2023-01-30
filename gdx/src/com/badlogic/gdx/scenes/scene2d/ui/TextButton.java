@@ -69,12 +69,14 @@ public class TextButton extends Button {
 		}
 	}
 
-	@Nullable public TextButtonStyle getStyle () {
+	@Nullable
+	public TextButtonStyle getStyle () {
 		return style;
 	}
 
 	/** Returns the appropriate label font color from the style based on the current button state. */
-	@Nullable protected @Null Color getFontColor () {
+	@Nullable
+	protected @Null Color getFontColor () {
 		if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
 		if (isPressed()) {
 			if (isChecked() && style.checkedDownFontColor != null) return style.checkedDownFontColor;
@@ -112,7 +114,8 @@ public class TextButton extends Button {
 		return label;
 	}
 
-	@Nullable public Cell<Label> getLabelCell () {
+	@Nullable
+	public Cell<Label> getLabelCell () {
 		return getCell(label);
 	}
 

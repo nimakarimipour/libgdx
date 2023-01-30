@@ -22,7 +22,9 @@ import com.badlogic.gdx.files.FileHandle;
 import javax.annotation.Nullable;
 
 public interface BaseJsonReader {
-	@Nullable JsonValue parse (InputStream input);
+	@Nullable
+	JsonValue parse (InputStream input);
 
-	@Nullable JsonValue parse (FileHandle file);
+	@Nullable
+	JsonValue parse (FileHandle file);
 }

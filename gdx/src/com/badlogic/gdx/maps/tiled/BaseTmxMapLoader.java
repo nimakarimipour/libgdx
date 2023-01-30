@@ -429,7 +429,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@Nullable protected Object castProperty (@Nullable String name, @Nullable String value, @Nullable String type) {
+	@Nullable
+	protected Object castProperty (@Nullable String name, @Nullable String value, @Nullable String type) {
 		if (type == null) {
 			return value;
 		} else if (type.equals("int")) {
@@ -631,8 +632,9 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	}
 
 	protected abstract void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileset,
-		Element element, Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing,
-		int margin, @Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image);
+		Element element, Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight,
+		int spacing, int margin, @Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth,
+		int imageHeight, @Nullable FileHandle image);
 
 	protected void addTileProperties (TiledMapTile tile, Element tileElement) {
 		String terrain = tileElement.getAttribute("terrain", null);
@@ -662,7 +664,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@Nullable protected AnimatedTiledMapTile createAnimatedTile (TiledMapTileSet tileSet, TiledMapTile tile, Element tileElement,
+	@Nullable
+	protected AnimatedTiledMapTile createAnimatedTile (TiledMapTileSet tileSet, TiledMapTile tile, Element tileElement,
 		int firstgid) {
 		Element animationElement = tileElement.getChildByName("animation");
 		if (animationElement != null) {
@@ -680,8 +683,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		return null;
 	}
 
-	protected void addStaticTiledMapTile (TiledMapTileSet tileSet, @Nullable TextureRegion textureRegion, int tileId, float offsetX,
-		float offsetY) {
+	protected void addStaticTiledMapTile (TiledMapTileSet tileSet, @Nullable TextureRegion textureRegion, int tileId,
+		float offsetX, float offsetY) {
 		TiledMapTile tile = new StaticTiledMapTile(textureRegion);
 		tile.setId(tileId);
 		tile.setOffsetX(offsetX);

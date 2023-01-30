@@ -320,7 +320,8 @@ public class KTXTextureData implements TextureData, CubemapData {
 		return glInternalFormat;
 	}
 
-	@Nullable public ByteBuffer getData (int requestedLevel, int requestedFace) {
+	@Nullable
+	public ByteBuffer getData (int requestedLevel, int requestedFace) {
 		int pos = imagePos;
 		for (int level = 0; level < numberOfMipmapLevels; level++) {
 			int faceLodSize = compressedData.getInt(pos);

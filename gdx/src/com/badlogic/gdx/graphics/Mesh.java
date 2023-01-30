@@ -666,7 +666,8 @@ public class Mesh implements Disposable {
 	 *
 	 * @param usage the Usage.
 	 * @return the VertexAttribute or null if no attribute with that usage was found. */
-	@Nullable public VertexAttribute getVertexAttribute (int usage) {
+	@Nullable
+	public VertexAttribute getVertexAttribute (int usage) {
 		VertexAttributes attributes = vertices.getAttributes();
 		int len = attributes.size();
 		for (int i = 0; i < len; i++)
@@ -676,12 +677,14 @@ public class Mesh implements Disposable {
 	}
 
 	/** @return the vertex attributes of this Mesh */
-	@Nullable public VertexAttributes getVertexAttributes () {
+	@Nullable
+	public VertexAttributes getVertexAttributes () {
 		return vertices.getAttributes();
 	}
 
 	/** @return the backing FloatBuffer holding the vertices. Does not have to be a direct buffer on Android! */
-	@Nullable public FloatBuffer getVerticesBuffer () {
+	@Nullable
+	public FloatBuffer getVerticesBuffer () {
 		return vertices.getBuffer();
 	}
 

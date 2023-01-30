@@ -35,7 +35,8 @@ public interface InstanceData extends Disposable {
 	public int getNumMaxInstances ();
 
 	/** @return the {@link VertexAttributes} as specified during construction. */
-	@Nullable public VertexAttributes getAttributes ();
+	@Nullable
+	public VertexAttributes getAttributes ();
 
 	/** Sets the vertices of this InstanceData, discarding the old vertex data. The count must equal the number of floats per
 	 * vertex times the number of vertices to be copied to this VertexData. The order of the vertex attributes must be the same as
@@ -77,7 +78,8 @@ public interface InstanceData extends Disposable {
 	 * *after* the call to bind will not automatically be uploaded.
 	 *
 	 * @return the underlying FloatBuffer holding the vertex data. */
-	@Nullable public FloatBuffer getBuffer ();
+	@Nullable
+	public FloatBuffer getBuffer ();
 
 	/** Binds this InstanceData for rendering via glDrawArraysInstanced or glDrawElementsInstanced. */
 	public void bind (ShaderProgram shader);

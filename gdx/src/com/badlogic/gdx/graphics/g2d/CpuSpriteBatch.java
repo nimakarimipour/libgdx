@@ -265,8 +265,8 @@ public class CpuSpriteBatch extends SpriteBatch {
 		}
 	}
 
-	private void drawAdjusted (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width, float height,
-		float scaleX, float scaleY, float rotation) {
+	private void drawAdjusted (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width,
+		float height, float scaleX, float scaleY, float rotation) {
 		// v must be flipped
 		drawAdjustedUV(region.texture, x, y, originX, originY, width, height, scaleX, scaleY, rotation, region.u, region.v2,
 			region.u2, region.v, false, false);
@@ -285,8 +285,9 @@ public class CpuSpriteBatch extends SpriteBatch {
 		drawAdjustedUV(texture, x, y, originX, originY, width, height, scaleX, scaleY, rotation, u, v, u2, v2, flipX, flipY);
 	}
 
-	private void drawAdjustedUV (@Nullable Texture texture, float x, float y, float originX, float originY, float width, float height,
-		float scaleX, float scaleY, float rotation, float u, float v, float u2, float v2, boolean flipX, boolean flipY) {
+	private void drawAdjustedUV (@Nullable Texture texture, float x, float y, float originX, float originY, float width,
+		float height, float scaleX, float scaleY, float rotation, float u, float v, float u2, float v2, boolean flipX,
+		boolean flipY) {
 		if (!drawing) throw new IllegalStateException("CpuSpriteBatch.begin must be called before draw.");
 
 		if (texture != lastTexture)

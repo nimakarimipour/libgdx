@@ -123,13 +123,15 @@ public class FileHandle {
 		return path.substring(0, dotIndex);
 	}
 
-	@Nullable public FileType type () {
+	@Nullable
+	public FileType type () {
 		return type;
 	}
 
 	/** Returns a java.io.File that represents this file handle. Note the returned file will only be usable for
 	 * {@link FileType#Absolute} and {@link FileType#External} file handles. */
-	@Nullable public File file () {
+	@Nullable
+	public File file () {
 		if (type == FileType.External) return new File(Gdx.files.getExternalStoragePath(), file.getPath());
 		return file;
 	}

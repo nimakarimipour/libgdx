@@ -34,7 +34,8 @@ public interface VertexData extends Disposable {
 	public int getNumMaxVertices ();
 
 	/** @return the {@link VertexAttributes} as specified during construction. */
-	@Nullable public VertexAttributes getAttributes ();
+	@Nullable
+	public VertexAttributes getAttributes ();
 
 	/** Sets the vertices of this VertexData, discarding the old vertex data. The count must equal the number of floats per vertex
 	 * times the number of vertices to be copied to this VertexData. The order of the vertex attributes must be the same as
@@ -56,7 +57,8 @@ public interface VertexData extends Disposable {
 	 * bind. If you need immediate uploading use {@link #setVertices(float[], int, int)}; Any modifications made to the Buffer
 	 * *after* the call to bind will not automatically be uploaded.
 	 * @return the underlying FloatBuffer holding the vertex data. */
-	@Nullable public FloatBuffer getBuffer ();
+	@Nullable
+	public FloatBuffer getBuffer ();
 
 	/** Binds this VertexData for rendering via glDrawArrays or glDrawElements. */
 	public void bind (ShaderProgram shader);

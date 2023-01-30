@@ -105,7 +105,8 @@ public class Slider extends ProgressBar {
 
 	/** Returns the slider's style. Modifying the returned style may not have an effect until {@link #setStyle(ProgressBarStyle)}
 	 * is called. */
-	@Nullable public SliderStyle getStyle () {
+	@Nullable
+	public SliderStyle getStyle () {
 		return (SliderStyle)super.getStyle();
 	}
 
@@ -113,7 +114,8 @@ public class Slider extends ProgressBar {
 		return mouseOver;
 	}
 
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (isDragging() && style.backgroundDown != null) return style.backgroundDown;
@@ -121,7 +123,8 @@ public class Slider extends ProgressBar {
 		return style.background;
 	}
 
-	@Nullable protected @Null Drawable getKnobDrawable () {
+	@Nullable
+	protected @Null Drawable getKnobDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		if (isDragging() && style.knobDown != null) return style.knobDown;
@@ -129,7 +132,8 @@ public class Slider extends ProgressBar {
 		return style.knob;
 	}
 
-	@Nullable protected Drawable getKnobBeforeDrawable () {
+	@Nullable
+	protected Drawable getKnobBeforeDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		if (isDragging() && style.knobBeforeDown != null) return style.knobBeforeDown;
@@ -137,7 +141,8 @@ public class Slider extends ProgressBar {
 		return style.knobBefore;
 	}
 
-	@Nullable protected Drawable getKnobAfterDrawable () {
+	@Nullable
+	protected Drawable getKnobAfterDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		if (isDragging() && style.knobAfterDown != null) return style.knobAfterDown;

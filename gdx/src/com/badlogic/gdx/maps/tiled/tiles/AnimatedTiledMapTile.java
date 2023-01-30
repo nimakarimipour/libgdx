@@ -82,7 +82,8 @@ public class AnimatedTiledMapTile implements TiledMapTile {
 		return frameTiles[getCurrentFrameIndex()];
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public TextureRegion getTextureRegion () {
 		return getCurrentFrame().getTextureRegion();
 	}

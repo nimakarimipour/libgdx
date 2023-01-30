@@ -59,7 +59,8 @@ public class ScaledNumericValue extends RangedNumericValue {
 		this.highMax = highMax;
 	}
 
-	@Nullable public float[] getScaling () {
+	@Nullable
+	public float[] getScaling () {
 		return scaling;
 	}
 
@@ -67,7 +68,8 @@ public class ScaledNumericValue extends RangedNumericValue {
 		this.scaling = values;
 	}
 
-	@Nullable public float[] getTimeline () {
+	@Nullable
+	public float[] getTimeline () {
 		return timeline;
 	}
 

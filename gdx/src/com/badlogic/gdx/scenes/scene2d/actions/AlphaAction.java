@@ -47,7 +47,8 @@ public class AlphaAction extends TemporalAction {
 		color = null;
 	}
 
-	@Nullable public @Null Color getColor () {
+	@Nullable
+	public @Null Color getColor () {
 		return color;
 	}
 

@@ -125,7 +125,8 @@ public abstract class Viewport {
 		return worldCoords;
 	}
 
-	@Nullable public Camera getCamera () {
+	@Nullable
+	public Camera getCamera () {
 		return camera;
 	}
 

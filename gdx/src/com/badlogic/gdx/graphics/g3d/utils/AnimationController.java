@@ -141,7 +141,8 @@ public class AnimationController extends BaseAnimationController {
 		super(target);
 	}
 
-	@Nullable private AnimationDesc obtain (@Nullable final Animation anim, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	private AnimationDesc obtain (@Nullable final Animation anim, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
 		if (anim == null) return null;
 		final AnimationDesc result = animationPool.obtain();
@@ -155,7 +156,8 @@ public class AnimationController extends BaseAnimationController {
 		return result;
 	}
 
-	@Nullable private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
 		if (id == null) return null;
 		final Animation anim = target.getAnimation(id);
@@ -163,7 +165,8 @@ public class AnimationController extends BaseAnimationController {
 		return obtain(anim, offset, duration, loopCount, speed, listener);
 	}
 
-	@Nullable private AnimationDesc obtain (final AnimationDesc anim) {
+	@Nullable
+	private AnimationDesc obtain (final AnimationDesc anim) {
 		return obtain(anim.animation, anim.offset, anim.duration, anim.loopCount, anim.speed, anim.listener);
 	}
 
@@ -201,7 +204,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param id The ID of the {@link Animation} within the {@link ModelInstance}.
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc setAnimation (final String id) {
+	@Nullable
+	public AnimationDesc setAnimation (final String id) {
 		return setAnimation(id, 1, 1.0f, null);
 	}
 
@@ -211,7 +215,8 @@ public class AnimationController extends BaseAnimationController {
 	 *           loop the animation.
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc setAnimation (final String id, int loopCount) {
+	@Nullable
+	public AnimationDesc setAnimation (final String id, int loopCount) {
 		return setAnimation(id, loopCount, 1.0f, null);
 	}
 
@@ -220,7 +225,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param listener The {@link AnimationListener} which will be informed when the animation is looped or completed.
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc setAnimation (final String id, final AnimationListener listener) {
+	@Nullable
+	public AnimationDesc setAnimation (final String id, final AnimationListener listener) {
 		return setAnimation(id, 1, 1.0f, listener);
 	}
 
@@ -231,7 +237,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param listener The {@link AnimationListener} which will be informed when the animation is looped or completed.
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc setAnimation (final String id, int loopCount, final AnimationListener listener) {
+	@Nullable
+	public AnimationDesc setAnimation (final String id, int loopCount, final AnimationListener listener) {
 		return setAnimation(id, loopCount, 1.0f, listener);
 	}
 
@@ -245,7 +252,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param listener The {@link AnimationListener} which will be informed when the animation is looped or completed.
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc setAnimation (final String id, int loopCount, float speed, @Nullable final AnimationListener listener) {
+	@Nullable
+	public AnimationDesc setAnimation (final String id, int loopCount, float speed, @Nullable final AnimationListener listener) {
 		return setAnimation(id, 0f, -1f, loopCount, speed, listener);
 	}
 
@@ -261,19 +269,22 @@ public class AnimationController extends BaseAnimationController {
 	 * @param listener The {@link AnimationListener} which will be informed when the animation is looped or completed.
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc setAnimation (final String id, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	public AnimationDesc setAnimation (final String id, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
 		return setAnimation(obtain(id, offset, duration, loopCount, speed, listener));
 	}
 
 	/** Set the active animation, replacing any current animation. */
-	@Nullable protected AnimationDesc setAnimation (final Animation anim, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	protected AnimationDesc setAnimation (final Animation anim, float offset, float duration, int loopCount, float speed,
 		final AnimationListener listener) {
 		return setAnimation(obtain(anim, offset, duration, loopCount, speed, listener));
 	}
 
 	/** Set the active animation, replacing any current animation. */
-	@Nullable protected AnimationDesc setAnimation (@Nullable final AnimationDesc anim) {
+	@Nullable
+	protected AnimationDesc setAnimation (@Nullable final AnimationDesc anim) {
 		if (current == null)
 			current = anim;
 		else {
@@ -293,7 +304,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param transitionTime The time to transition the new animation on top of the currently playing animation (if any).
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc animate (final String id, float transitionTime) {
+	@Nullable
+	public AnimationDesc animate (final String id, float transitionTime) {
 		return animate(id, 1, 1.0f, null, transitionTime);
 	}
 
@@ -303,7 +315,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param transitionTime The time to transition the new animation on top of the currently playing animation (if any).
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc animate (final String id, final AnimationListener listener, float transitionTime) {
+	@Nullable
+	public AnimationDesc animate (final String id, final AnimationListener listener, float transitionTime) {
 		return animate(id, 1, 1.0f, listener, transitionTime);
 	}
 
@@ -315,7 +328,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param transitionTime The time to transition the new animation on top of the currently playing animation (if any).
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc animate (final String id, int loopCount, final AnimationListener listener, float transitionTime) {
+	@Nullable
+	public AnimationDesc animate (final String id, int loopCount, final AnimationListener listener, float transitionTime) {
 		return animate(id, loopCount, 1.0f, listener, transitionTime);
 	}
 
@@ -330,7 +344,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param transitionTime The time to transition the new animation on top of the currently playing animation (if any).
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc animate (final String id, int loopCount, float speed, @Nullable final AnimationListener listener,
+	@Nullable
+	public AnimationDesc animate (final String id, int loopCount, float speed, @Nullable final AnimationListener listener,
 		float transitionTime) {
 		return animate(id, 0f, -1f, loopCount, speed, listener, transitionTime);
 	}
@@ -348,19 +363,22 @@ public class AnimationController extends BaseAnimationController {
 	 * @param transitionTime The time to transition the new animation on top of the currently playing animation (if any).
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc animate (final String id, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	public AnimationDesc animate (final String id, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener, float transitionTime) {
 		return animate(obtain(id, offset, duration, loopCount, speed, listener), transitionTime);
 	}
 
 	/** Changes the current animation by blending the new on top of the old during the transition time. */
-	@Nullable protected AnimationDesc animate (final Animation anim, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	protected AnimationDesc animate (final Animation anim, float offset, float duration, int loopCount, float speed,
 		final AnimationListener listener, float transitionTime) {
 		return animate(obtain(anim, offset, duration, loopCount, speed, listener), transitionTime);
 	}
 
 	/** Changes the current animation by blending the new on top of the old during the transition time. */
-	@Nullable protected AnimationDesc animate (@Nullable final AnimationDesc anim, float transitionTime) {
+	@Nullable
+	protected AnimationDesc animate (@Nullable final AnimationDesc anim, float transitionTime) {
 		if (current == null || current.loopCount == 0)
 			current = anim;
 		else if (inAction)
@@ -394,7 +412,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @param transitionTime The time to transition the new animation on top of the currently playing animation (if any).
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc queue (final String id, int loopCount, float speed, final AnimationListener listener,
+	@Nullable
+	public AnimationDesc queue (final String id, int loopCount, float speed, final AnimationListener listener,
 		float transitionTime) {
 		return queue(id, 0f, -1f, loopCount, speed, listener, transitionTime);
 	}
@@ -413,19 +432,22 @@ public class AnimationController extends BaseAnimationController {
 	 * @param transitionTime The time to transition the new animation on top of the currently playing animation (if any).
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
-	@Nullable public AnimationDesc queue (final String id, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	public AnimationDesc queue (final String id, float offset, float duration, int loopCount, float speed,
 		final AnimationListener listener, float transitionTime) {
 		return queue(obtain(id, offset, duration, loopCount, speed, listener), transitionTime);
 	}
 
 	/** Queue an animation to be applied when the current is finished. If current is continuous it will be synced on next loop. */
-	@Nullable protected AnimationDesc queue (final Animation anim, float offset, float duration, int loopCount, float speed,
+	@Nullable
+	protected AnimationDesc queue (final Animation anim, float offset, float duration, int loopCount, float speed,
 		final AnimationListener listener, float transitionTime) {
 		return queue(obtain(anim, offset, duration, loopCount, speed, listener), transitionTime);
 	}
 
 	/** Queue an animation to be applied when the current is finished. If current is continuous it will be synced on next loop. */
-	@Nullable protected AnimationDesc queue (@Nullable final AnimationDesc anim, float transitionTime) {
+	@Nullable
+	protected AnimationDesc queue (@Nullable final AnimationDesc anim, float transitionTime) {
 		if (current == null || current.loopCount == 0)
 			animate(anim, transitionTime);
 		else {

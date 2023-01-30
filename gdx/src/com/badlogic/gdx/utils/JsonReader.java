@@ -35,12 +35,14 @@ import javax.annotation.Nullable;
  * methods to perform event driven parsing. When this is done, the parse methods will return null.
  * @author Nathan Sweet */
 public class JsonReader implements BaseJsonReader {
-	@Nullable public JsonValue parse (String json) {
+	@Nullable
+	public JsonValue parse (String json) {
 		char[] data = json.toCharArray();
 		return parse(data, 0, data.length);
 	}
 
-	@Nullable public JsonValue parse (Reader reader) {
+	@Nullable
+	public JsonValue parse (Reader reader) {
 		char[] data = new char[1024];
 		int offset = 0;
 		try {
@@ -62,7 +64,8 @@ public class JsonReader implements BaseJsonReader {
 		return parse(data, 0, offset);
 	}
 
-	@Nullable public JsonValue parse (InputStream input) {
+	@Nullable
+	public JsonValue parse (InputStream input) {
 		Reader reader;
 		try {
 			reader = new InputStreamReader(input, "UTF-8");
@@ -72,7 +75,8 @@ public class JsonReader implements BaseJsonReader {
 		return parse(reader);
 	}
 
-	@Nullable public JsonValue parse (FileHandle file) {
+	@Nullable
+	public JsonValue parse (FileHandle file) {
 		Reader reader;
 		try {
 			reader = file.reader("UTF-8");
@@ -86,7 +90,8 @@ public class JsonReader implements BaseJsonReader {
 		}
 	}
 
-	@Nullable public JsonValue parse (char[] data, int offset, int length) {
+	@Nullable
+	public JsonValue parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length, eof = pe, top = 0;
 		int[] stack = new int[4];
 

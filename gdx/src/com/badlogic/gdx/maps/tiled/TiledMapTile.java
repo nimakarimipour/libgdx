@@ -41,7 +41,8 @@ public interface TiledMapTile {
 	public void setBlendMode (BlendMode blendMode);
 
 	/** @return texture region used to render the tile */
-	@Nullable public TextureRegion getTextureRegion ();
+	@Nullable
+	public TextureRegion getTextureRegion ();
 
 	/** Sets the texture region used to render the tile */
 	public void setTextureRegion (TextureRegion textureRegion);

@@ -28,7 +28,8 @@ import javax.annotation.Nullable;
 public interface ImageResolver {
 	/** @param name
 	 * @return the Texture for the given image name or null. */
-	@Nullable public TextureRegion getImage (String name);
+	@Nullable
+	public TextureRegion getImage (String name);
 
 	public static class DirectImageResolver implements ImageResolver {
 		private final ObjectMap<String, Texture> images;
@@ -63,7 +64,8 @@ public interface ImageResolver {
 			this.atlas = atlas;
 		}
 
-		@Nullable @Override
+		@Nullable
+		@Override
 		public TextureRegion getImage (String name) {
 			return atlas.findRegion(name);
 		}

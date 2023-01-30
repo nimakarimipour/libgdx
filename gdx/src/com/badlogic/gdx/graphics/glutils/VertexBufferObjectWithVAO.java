@@ -90,7 +90,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		createVAO();
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}

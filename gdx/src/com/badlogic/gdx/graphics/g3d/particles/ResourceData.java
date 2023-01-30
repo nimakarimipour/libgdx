@@ -83,13 +83,15 @@ public class ResourceData<T> implements Json.Serializable {
 			data.put(key, value);
 		}
 
-		@Nullable public AssetDescriptor loadAsset () {
+		@Nullable
+		public AssetDescriptor loadAsset () {
 			if (loadIndex == assets.size) return null;
 			AssetData data = (AssetData)resources.sharedAssets.get(assets.get(loadIndex++));
 			return new AssetDescriptor(data.filename, data.type);
 		}
 
-		@Nullable public <K> K load (String key) {
+		@Nullable
+		public <K> K load (String key) {
 			return (K)data.get(key);
 		}
 
@@ -205,7 +207,8 @@ public class ResourceData<T> implements Json.Serializable {
 	}
 
 	/** @return the unique save data in the map */
-	@Nullable public SaveData getSaveData (String key) {
+	@Nullable
+	public SaveData getSaveData (String key) {
 		return uniqueData.get(key);
 	}
 

@@ -80,7 +80,8 @@ public class VertexBufferObject implements VertexData {
 		setUsage(usage);
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}
@@ -95,7 +96,8 @@ public class VertexBufferObject implements VertexData {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public FloatBuffer getBuffer () {
 		isDirty = true;
 		return buffer;

@@ -59,7 +59,8 @@ public class InstanceBufferObject implements InstanceData {
 		setUsage(isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW);
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}
@@ -74,7 +75,8 @@ public class InstanceBufferObject implements InstanceData {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public FloatBuffer getBuffer () {
 		isDirty = true;
 		return buffer;

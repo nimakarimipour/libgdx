@@ -121,7 +121,8 @@ public class TextureRegion {
 		setRegion(region.getRegionX() + x, region.getRegionY() + y, width, height);
 	}
 
-	@Nullable public Texture getTexture () {
+	@Nullable
+	public Texture getTexture () {
 		return texture;
 	}
 

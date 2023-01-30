@@ -77,7 +77,8 @@ public class ModelBatch implements Disposable {
 	 * @param context The {@link RenderContext} to use.
 	 * @param shaderProvider The {@link ShaderProvider} to use, will be disposed when this ModelBatch is disposed.
 	 * @param sorter The {@link RenderableSorter} to use. */
-	public ModelBatch (@Nullable final RenderContext context, @Nullable final ShaderProvider shaderProvider, @Nullable final RenderableSorter sorter) {
+	public ModelBatch (@Nullable final RenderContext context, @Nullable final ShaderProvider shaderProvider,
+		@Nullable final RenderableSorter sorter) {
 		this.sorter = (sorter == null) ? new DefaultRenderableSorter() : sorter;
 		this.ownContext = (context == null);
 		this.context = (context == null) ? new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.LRU, 1)) : context;
@@ -169,7 +170,8 @@ public class ModelBatch implements Disposable {
 	/** Provides access to the current camera in between {@link #begin(Camera)} and {@link #end()}. Do not change the camera's
 	 * values. Use {@link #setCamera(Camera)}, if you need to change the camera.
 	 * @return The current camera being used or null if called outside {@link #begin(Camera)} and {@link #end()}. */
-	@Nullable public Camera getCamera () {
+	@Nullable
+	public Camera getCamera () {
 		return camera;
 	}
 

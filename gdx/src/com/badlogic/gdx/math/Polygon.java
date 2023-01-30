@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+
 import javax.annotation.Nullable;
 
 /** Encapsulates a 2D polygon defined by it's vertices relative to an origin point (default of 0, 0). */
@@ -53,7 +54,8 @@ public class Polygon implements Shape2D {
 	 * as they are position within the world.
 	 * 
 	 * @return vertices scaled, rotated, and offset by the polygon position. */
-	@Nullable public float[] getTransformedVertices () {
+	@Nullable
+	public float[] getTransformedVertices () {
 		if (!dirty) return worldVertices;
 		dirty = false;
 

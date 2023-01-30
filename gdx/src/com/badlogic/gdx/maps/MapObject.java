@@ -28,7 +28,8 @@ public class MapObject {
 	private Color color = Color.WHITE.cpy();
 
 	/** @return object's name */
-	@Nullable public String getName () {
+	@Nullable
+	public String getName () {
 		return name;
 	}
 

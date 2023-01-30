@@ -81,7 +81,8 @@ public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
 		vector.set(radiusX * r * MathUtils.cos(t), radiusY * r * MathUtils.sin(t), radiusZ * z);
 	}
 
-	@Nullable public SpawnSide getSide () {
+	@Nullable
+	public SpawnSide getSide () {
 		return side;
 	}
 

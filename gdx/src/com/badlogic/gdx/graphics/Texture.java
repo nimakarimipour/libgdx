@@ -203,7 +203,8 @@ public class Texture extends GLTexture {
 		return 0;
 	}
 
-	@Nullable public TextureData getTextureData () {
+	@Nullable
+	public TextureData getTextureData () {
 		return data;
 	}
 

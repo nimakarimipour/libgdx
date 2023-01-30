@@ -45,7 +45,8 @@ public abstract class PluggableGroupStrategy implements GroupStrategy {
 	/** Remove a plug from the strategy
 	 * @param group Group to remove the plug from
 	 * @return removed plug, null if there was none for that group */
-	@Nullable public GroupPlug unPlug (int group) {
+	@Nullable
+	public GroupPlug unPlug (int group) {
 		return plugs.remove(group);
 	}
 }

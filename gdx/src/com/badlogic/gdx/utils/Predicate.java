@@ -68,7 +68,8 @@ public interface Predicate<T> {
 			return false;
 		}
 
-		@Nullable @Override
+		@Nullable
+		@Override
 		public T next () {
 			if (next == null && !hasNext()) return null;
 			final T result = next;

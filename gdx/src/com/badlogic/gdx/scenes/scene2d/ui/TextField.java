@@ -90,8 +90,10 @@ public class TextField extends Widget implements Disableable {
 	@Nullable protected CharSequence displayText;
 	Clipboard clipboard;
 	@Nullable InputListener inputListener;
-	@Nullable @Null TextFieldListener listener;
-	@Nullable @Null TextFieldFilter filter;
+	@Nullable
+	@Null TextFieldListener listener;
+	@Nullable
+	@Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
 	boolean focusTraversal = true, onlyFontChars = true, disabled;
 	private int textHAlign = Align.left;
@@ -226,7 +228,8 @@ public class TextField extends Widget implements Disableable {
 
 	/** Returns the text field's style. Modifying the returned style may not have an effect until {@link #setStyle(TextFieldStyle)}
 	 * is called. */
-	@Nullable public TextFieldStyle getStyle () {
+	@Nullable
+	public TextFieldStyle getStyle () {
 		return style;
 	}
 
@@ -294,7 +297,8 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
 		return style.background;
@@ -540,7 +544,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return May be null. */
-	@Nullable private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
+	@Nullable
+	private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
 		Vector2 currentCoords, boolean up) {
 		for (int i = 0, n = actors.size; i < n; i++) {
 			Actor actor = actors.get(i);
@@ -564,7 +569,8 @@ public class TextField extends Widget implements Disableable {
 		return best;
 	}
 
-	@Nullable public InputListener getDefaultInputListener () {
+	@Nullable
+	public InputListener getDefaultInputListener () {
 		return inputListener;
 	}
 
@@ -578,7 +584,8 @@ public class TextField extends Widget implements Disableable {
 		this.filter = filter;
 	}
 
-	@Nullable public @Null TextFieldFilter getTextFieldFilter () {
+	@Nullable
+	public @Null TextFieldFilter getTextFieldFilter () {
 		return filter;
 	}
 
@@ -588,7 +595,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return May be null. */
-	@Nullable public @Null String getMessageText () {
+	@Nullable
+	public @Null String getMessageText () {
 		return messageText;
 	}
 
@@ -621,7 +629,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return Never null, might be an empty string. */
-	@Nullable public String getText () {
+	@Nullable
+	public String getText () {
 		return text;
 	}
 

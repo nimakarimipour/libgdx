@@ -40,7 +40,8 @@ public class TextureAtlasLoader extends SynchronousAssetLoader<TextureAtlas, Tex
 	@Nullable TextureAtlasData data;
 
 	@Override
-	public TextureAtlas load (AssetManager assetManager, @Nullable String fileName, FileHandle file, @Nullable TextureAtlasParameter parameter) {
+	public TextureAtlas load (AssetManager assetManager, @Nullable String fileName, FileHandle file,
+		@Nullable TextureAtlasParameter parameter) {
 		for (Page page : data.getPages()) {
 			Texture texture = assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);
 			page.texture = texture;
@@ -52,7 +53,8 @@ public class TextureAtlasLoader extends SynchronousAssetLoader<TextureAtlas, Tex
 	}
 
 	@Override
-	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle atlasFile, @Nullable TextureAtlasParameter parameter) {
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle atlasFile,
+		@Nullable TextureAtlasParameter parameter) {
 		FileHandle imgDir = atlasFile.parent();
 
 		if (parameter != null)

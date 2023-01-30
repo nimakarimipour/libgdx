@@ -69,7 +69,8 @@ public class NinePatchDrawable extends BaseDrawable implements TransformDrawable
 		}
 	}
 
-	@Nullable public NinePatch getPatch () {
+	@Nullable
+	public NinePatch getPatch () {
 		return patch;
 	}
 

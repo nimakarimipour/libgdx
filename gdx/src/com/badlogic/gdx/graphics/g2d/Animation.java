@@ -164,7 +164,8 @@ public class Animation<T> {
 	/** Returns the keyframes[] array where all the frames of the animation are stored.
 	 * @return The keyframes[] field. This array is an Object[] if the animation was instantiated with an Array that was not
 	 *         type-aware. */
-	@Nullable public T[] getKeyFrames () {
+	@Nullable
+	public T[] getKeyFrames () {
 		return keyFrames;
 	}
 

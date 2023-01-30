@@ -39,15 +39,19 @@ public class PixmapLoader extends AsynchronousAssetLoader<Pixmap, PixmapLoader.P
 		pixmap = new Pixmap(file);
 	}
 
-	@Nullable @Override
-	public Pixmap loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable PixmapParameter parameter) {
+	@Nullable
+	@Override
+	public Pixmap loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
+		@Nullable PixmapParameter parameter) {
 		Pixmap pixmap = this.pixmap;
 		this.pixmap = null;
 		return pixmap;
 	}
 
-	@Nullable @Override
-	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file, @Nullable PixmapParameter parameter) {
+	@Nullable
+	@Override
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
+		@Nullable PixmapParameter parameter) {
 		return null;
 	}
 

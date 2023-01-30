@@ -65,15 +65,18 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		this.edges = edges;
 	}
 
-	@Nullable public ScaledNumericValue getSpawnWidth () {
+	@Nullable
+	public ScaledNumericValue getSpawnWidth () {
 		return spawnWidthValue;
 	}
 
-	@Nullable public ScaledNumericValue getSpawnHeight () {
+	@Nullable
+	public ScaledNumericValue getSpawnHeight () {
 		return spawnHeightValue;
 	}
 
-	@Nullable public ScaledNumericValue getSpawnDepth () {
+	@Nullable
+	public ScaledNumericValue getSpawnDepth () {
 		return spawnDepthValue;
 	}
 

@@ -87,7 +87,8 @@ public class ScissorStack {
 	}
 
 	/** @return null if there are no scissors. */
-	@Nullable @Null
+	@Nullable
+	@Null
 	public static Rectangle peekScissors () {
 		if (scissors.size == 0) return null;
 		return scissors.peek();

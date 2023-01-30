@@ -209,8 +209,8 @@ public class BitmapFont implements Disposable {
 
 	/** Draws text at the specified position.
 	 * @see BitmapFontCache#addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	public GlyphLayout draw (Batch batch, @Nullable CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
-		boolean wrap) {
+	public GlyphLayout draw (Batch batch, @Nullable CharSequence str, float x, float y, int start, int end, float targetWidth,
+		int halign, boolean wrap) {
 		cache.clear();
 		GlyphLayout layout = cache.addText(str, x, y, start, end, targetWidth, halign, wrap);
 		cache.draw(batch);
@@ -219,8 +219,8 @@ public class BitmapFont implements Disposable {
 
 	/** Draws text at the specified position.
 	 * @see BitmapFontCache#addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	public GlyphLayout draw (Batch batch, @Nullable CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
-		boolean wrap, String truncate) {
+	public GlyphLayout draw (Batch batch, @Nullable CharSequence str, float x, float y, int start, int end, float targetWidth,
+		int halign, boolean wrap, String truncate) {
 		cache.clear();
 		GlyphLayout layout = cache.addText(str, x, y, start, end, targetWidth, halign, wrap, truncate);
 		cache.draw(batch);
@@ -817,7 +817,8 @@ public class BitmapFont implements Disposable {
 		/** Returns the glyph for the specified character, or null if no such glyph exists. Note that
 		 * {@link #getGlyphs(GlyphRun, CharSequence, int, int, Glyph)} should be be used to shape a string of characters into a list
 		 * of glyphs. */
-		@Nullable public Glyph getGlyph (char ch) {
+		@Nullable
+		public Glyph getGlyph (char ch) {
 			Glyph[] page = glyphs[ch / PAGE_SIZE];
 			if (page != null) return page[ch & PAGE_SIZE - 1];
 			return null;
@@ -903,11 +904,13 @@ public class BitmapFont implements Disposable {
 			return imagePaths[index];
 		}
 
-		@Nullable public String[] getImagePaths () {
+		@Nullable
+		public String[] getImagePaths () {
 			return imagePaths;
 		}
 
-		@Nullable public FileHandle getFontFile () {
+		@Nullable
+		public FileHandle getFontFile () {
 			return fontFile;
 		}
 

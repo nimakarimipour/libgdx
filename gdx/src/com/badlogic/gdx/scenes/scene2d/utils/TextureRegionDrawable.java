@@ -64,7 +64,8 @@ public class TextureRegionDrawable extends BaseDrawable implements TransformDraw
 		}
 	}
 
-	@Nullable public TextureRegion getRegion () {
+	@Nullable
+	public TextureRegion getRegion () {
 		return region;
 	}
 

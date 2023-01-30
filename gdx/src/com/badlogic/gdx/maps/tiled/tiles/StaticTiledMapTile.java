@@ -75,7 +75,8 @@ public class StaticTiledMapTile implements TiledMapTile {
 		return objects;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public TextureRegion getTextureRegion () {
 		return textureRegion;
 	}

@@ -195,7 +195,8 @@ public class ParallelArray {
 	/** Adds and returns a channel described by the channel descriptor parameter. If a channel with the same id already exists, no
 	 * allocation is performed and that channel is returned. Otherwise a new channel is allocated and initialized with the
 	 * initializer. */
-	public <T extends Channel> T addChannel (@Nullable ChannelDescriptor channelDescriptor, @Nullable ChannelInitializer<T> initializer) {
+	public <T extends Channel> T addChannel (@Nullable ChannelDescriptor channelDescriptor,
+		@Nullable ChannelInitializer<T> initializer) {
 		T channel = getChannel(channelDescriptor);
 		if (channel == null) {
 			channel = allocateChannel(channelDescriptor);
@@ -254,7 +255,8 @@ public class ParallelArray {
 	}
 
 	/** @return the channel with the same id as the one in the descriptor */
-	@Nullable @SuppressWarnings("unchecked")
+	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T extends Channel> T getChannel (@Nullable ChannelDescriptor descriptor) {
 		for (Channel array : arrays) {
 			if (array.id == descriptor.id) return (T)array;

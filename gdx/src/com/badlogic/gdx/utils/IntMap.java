@@ -138,7 +138,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	@Nullable public @Null V put (int key, @Nullable @Null V value) {
+	@Nullable
+	public @Null V put (int key, @Nullable @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
 			zeroValue = value;
@@ -184,20 +185,23 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	@Nullable public V get (int key) {
+	@Nullable
+	public V get (int key) {
 		if (key == 0) return hasZeroValue ? zeroValue : null;
 		int i = locateKey(key);
 		return i >= 0 ? valueTable[i] : null;
 	}
 
-	@Nullable public V get (int key, @Null V defaultValue) {
+	@Nullable
+	public V get (int key, @Null V defaultValue) {
 		if (key == 0) return hasZeroValue ? zeroValue : defaultValue;
 		int i = locateKey(key);
 		return i >= 0 ? valueTable[i] : defaultValue;
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
-	@Nullable public @Null V remove (int key) {
+	@Nullable
+	public @Null V remove (int key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
 			hasZeroValue = false;
@@ -629,7 +633,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 			return hasNext;
 		}
 
-		@Nullable public @Null V next () {
+		@Nullable
+		public @Null V next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			V value;

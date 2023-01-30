@@ -391,7 +391,8 @@ public class ParticleEmitter {
 		return new Particle(sprite);
 	}
 
-	@Nullable protected Particle[] getParticles () {
+	@Nullable
+	protected Particle[] getParticles () {
 		return particles;
 	}
 
@@ -733,7 +734,8 @@ public class ParticleEmitter {
 		return spriteMode;
 	}
 
-	@Nullable public String getName () {
+	@Nullable
+	public String getName () {
 		return name;
 	}
 

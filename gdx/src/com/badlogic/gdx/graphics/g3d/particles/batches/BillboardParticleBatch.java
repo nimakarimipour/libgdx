@@ -260,7 +260,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
-	@Nullable public AlignMode getAlignMode () {
+	@Nullable
+	public AlignMode getAlignMode () {
 		return mode;
 	}
 
@@ -288,11 +289,13 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		this.texture = texture;
 	}
 
-	@Nullable public Texture getTexture () {
+	@Nullable
+	public Texture getTexture () {
 		return texture;
 	}
 
-	@Nullable public BlendingAttribute getBlendingAttribute () {
+	@Nullable
+	public BlendingAttribute getBlendingAttribute () {
 		return blendingAttribute;
 	}
 
@@ -305,8 +308,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	// GPU
 	// Required + Color + Rotation
-	private static void putVertex (@Nullable float[] vertices, int offset, float x, float y, float z, float u, float v, float scaleX,
-		float scaleY, float cosRotation, float sinRotation, float r, float g, float b, float a) {
+	private static void putVertex (@Nullable float[] vertices, int offset, float x, float y, float z, float u, float v,
+		float scaleX, float scaleY, float cosRotation, float sinRotation, float r, float g, float b, float a) {
 		// Position
 		vertices[offset + GPU_POSITION_OFFSET] = x;
 		vertices[offset + GPU_POSITION_OFFSET + 1] = y;
@@ -341,7 +344,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	// CPU
 	// Required
-	private static void putVertex (@Nullable float[] vertices, int offset, Vector3 p, float u, float v, float r, float g, float b, float a) {
+	private static void putVertex (@Nullable float[] vertices, int offset, Vector3 p, float u, float v, float r, float g, float b,
+		float a) {
 		// Position
 		vertices[offset + CPU_POSITION_OFFSET] = p.x;
 		vertices[offset + CPU_POSITION_OFFSET + 1] = p.y;

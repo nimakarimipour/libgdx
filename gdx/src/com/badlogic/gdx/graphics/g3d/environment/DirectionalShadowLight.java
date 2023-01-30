@@ -88,7 +88,8 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		fbo.end();
 	}
 
-	@Nullable public FrameBuffer getFrameBuffer () {
+	@Nullable
+	public FrameBuffer getFrameBuffer () {
 		return fbo;
 	}
 

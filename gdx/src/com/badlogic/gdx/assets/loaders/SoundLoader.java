@@ -38,7 +38,8 @@ public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.Soun
 	/** Returns the {@link Sound} instance currently loaded by this {@link SoundLoader}.
 	 * 
 	 * @return the currently loaded {@link Sound}, otherwise {@code null} if no {@link Sound} has been loaded yet. */
-	@Nullable protected Sound getLoadedSound () {
+	@Nullable
+	protected Sound getLoadedSound () {
 		return sound;
 	}
 
@@ -47,15 +48,18 @@ public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.Soun
 		sound = Gdx.audio.newSound(file);
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Sound loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable SoundParameter parameter) {
 		Sound sound = this.sound;
 		this.sound = null;
 		return sound;
 	}
 
-	@Nullable @Override
-	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file, @Nullable SoundParameter parameter) {
+	@Nullable
+	@Override
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
+		@Nullable SoundParameter parameter) {
 		return null;
 	}
 

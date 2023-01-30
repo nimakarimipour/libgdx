@@ -174,17 +174,20 @@ public class Button extends Table implements Disableable {
 
 	/** Returns the button's style. Modifying the returned style may not have an effect until {@link #setStyle(ButtonStyle)} is
 	 * called. */
-	@Nullable public ButtonStyle getStyle () {
+	@Nullable
+	public ButtonStyle getStyle () {
 		return style;
 	}
 
 	/** @return May be null. */
-	@Nullable public @Null ButtonGroup getButtonGroup () {
+	@Nullable
+	public @Null ButtonGroup getButtonGroup () {
 		return buttonGroup;
 	}
 
 	/** Returns appropriate background drawable from the style based on the current button state. */
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		if (isDisabled() && style.disabled != null) return style.disabled;
 		if (isPressed()) {
 			if (isChecked() && style.checkedDown != null) return style.checkedDown;

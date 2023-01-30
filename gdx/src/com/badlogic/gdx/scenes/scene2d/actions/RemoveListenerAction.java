@@ -34,7 +34,8 @@ public class RemoveListenerAction extends Action {
 		return true;
 	}
 
-	@Nullable public EventListener getListener () {
+	@Nullable
+	public EventListener getListener () {
 		return listener;
 	}
 
