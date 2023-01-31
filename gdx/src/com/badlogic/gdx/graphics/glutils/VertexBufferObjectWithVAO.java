@@ -63,7 +63,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	 * @param isStatic whether the vertex data is static.
 	 * @param numVertices the maximum number of vertices
 	 * @param attributes the {@link VertexAttributes}. */
-	@NullUnmarked public VertexBufferObjectWithVAO (boolean isStatic, int numVertices, @Nullable VertexAttributes attributes) {
+	@NullUnmarked
+	public VertexBufferObjectWithVAO (boolean isStatic, int numVertices, @Nullable VertexAttributes attributes) {
 		this.isStatic = isStatic;
 		this.attributes = attributes;
 
@@ -77,7 +78,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		createVAO();
 	}
 
-	@NullUnmarked public VertexBufferObjectWithVAO (boolean isStatic, ByteBuffer unmanagedBuffer, VertexAttributes attributes) {
+	@NullUnmarked
+	public VertexBufferObjectWithVAO (boolean isStatic, ByteBuffer unmanagedBuffer, VertexAttributes attributes) {
 		this.isStatic = isStatic;
 		this.attributes = attributes;
 
@@ -97,12 +99,14 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		return attributes;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int getNumVertices () {
 		return buffer.limit() * 4 / attributes.vertexSize;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int getNumMaxVertices () {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}
@@ -113,7 +117,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		return buffer;
 	}
 
-	@NullUnmarked private void bufferChanged () {
+	@NullUnmarked
+	private void bufferChanged () {
 		if (isBound) {
 			Gdx.gl20.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
 			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
@@ -149,7 +154,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		bind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		GL30 gl = Gdx.gl30;
 
@@ -163,7 +169,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		isBound = true;
 	}
 
-	@NullUnmarked private void bindAttributes (@Nullable ShaderProgram shader, @Nullable int[] locations) {
+	@NullUnmarked
+	private void bindAttributes (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		boolean stillValid = this.cachedLocations.size != 0;
 		final int numAttributes = attributes.size();
 
@@ -207,7 +214,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		}
 	}
 
-	@NullUnmarked private void unbindAttributes (@Nullable ShaderProgram shaderProgram) {
+	@NullUnmarked
+	private void unbindAttributes (@Nullable ShaderProgram shaderProgram) {
 		if (cachedLocations.size == 0) {
 			return;
 		}
@@ -238,7 +246,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		unbind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		GL30 gl = Gdx.gl30;
 		gl.glBindVertexArray(0);
@@ -246,7 +255,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	}
 
 	/** Invalidates the VertexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void invalidate () {
 		bufferHandle = Gdx.gl30.glGenBuffer();
 		createVAO();
@@ -254,7 +264,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	}
 
 	/** Disposes of all resources this VertexBufferObject uses. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		GL30 gl = Gdx.gl30;
 
@@ -267,13 +278,15 @@ public class VertexBufferObjectWithVAO implements VertexData {
 		deleteVAO();
 	}
 
-	@NullUnmarked private void createVAO () {
+	@NullUnmarked
+	private void createVAO () {
 		((Buffer)tmpHandle).clear();
 		Gdx.gl30.glGenVertexArrays(1, tmpHandle);
 		vaoHandle = tmpHandle.get();
 	}
 
-	@NullUnmarked private void deleteVAO () {
+	@NullUnmarked
+	private void deleteVAO () {
 		if (vaoHandle != -1) {
 			((Buffer)tmpHandle).clear();
 			tmpHandle.put(vaoHandle);

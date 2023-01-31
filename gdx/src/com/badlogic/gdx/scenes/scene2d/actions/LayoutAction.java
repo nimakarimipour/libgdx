@@ -34,7 +34,8 @@ public class LayoutAction extends Action {
 		super.setTarget(actor);
 	}
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		((Layout)target).setLayoutEnabled(enabled);
 		return true;
 	}

@@ -51,7 +51,8 @@ public class TextureArray extends GLTexture {
 		this(TextureArrayData.Factory.loadFromFiles(format, useMipMaps, files));
 	}
 
-	@NullUnmarked public TextureArray (TextureArrayData data) {
+	@NullUnmarked
+	public TextureArray (TextureArrayData data) {
 		super(GL30.GL_TEXTURE_2D_ARRAY, Gdx.gl.glGenTexture());
 
 		if (Gdx.gl30 == null) {
@@ -63,7 +64,8 @@ public class TextureArray extends GLTexture {
 		if (data.isManaged()) addManagedTexture(Gdx.app, this);
 	}
 
-	@NullUnmarked private static FileHandle[] getInternalHandles (String... internalPaths) {
+	@NullUnmarked
+	private static FileHandle[] getInternalHandles (String... internalPaths) {
 		FileHandle[] handles = new FileHandle[internalPaths.length];
 		for (int i = 0; i < internalPaths.length; i++) {
 			handles[i] = Gdx.files.internal(internalPaths[i]);
@@ -71,7 +73,8 @@ public class TextureArray extends GLTexture {
 		return handles;
 	}
 
-	@NullUnmarked private void load (TextureArrayData data) {
+	@NullUnmarked
+	private void load (TextureArrayData data) {
 		if (this.data != null && data.isManaged() != this.data.isManaged())
 			throw new GdxRuntimeException("New data must have the same managed status as the old data");
 		this.data = data;
@@ -109,7 +112,8 @@ public class TextureArray extends GLTexture {
 		return data.isManaged();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	protected void reload () {
 		if (!isManaged()) throw new GdxRuntimeException("Tried to reload an unmanaged TextureArray");
 		glHandle = Gdx.gl.glGenTexture();
@@ -151,7 +155,8 @@ public class TextureArray extends GLTexture {
 	}
 
 	/** @return the number of managed TextureArrays currently loaded */
-	@NullUnmarked public static int getNumManagedTextureArrays () {
+	@NullUnmarked
+	public static int getNumManagedTextureArrays () {
 		return managedTextureArrays.get(Gdx.app).size;
 	}
 

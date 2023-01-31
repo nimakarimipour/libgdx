@@ -8,7 +8,8 @@ import javax.annotation.Nullable;
 import com.badlogic.gdx.NullUnmarked;
 
 public class AbsoluteFileHandleResolver implements FileHandleResolver {
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public FileHandle resolve (@Nullable String fileName) {
 		return Gdx.files.absolute(fileName);
 	}

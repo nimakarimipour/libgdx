@@ -166,7 +166,8 @@ public class Model implements Disposable {
 
 	private ObjectMap<NodePart, ArrayMap<String, Matrix4>> nodePartBones = new ObjectMap<NodePart, ArrayMap<String, Matrix4>>();
 
-	@NullUnmarked protected void loadNodes (Iterable<ModelNode> modelNodes) {
+	@NullUnmarked
+	protected void loadNodes (Iterable<ModelNode> modelNodes) {
 		nodePartBones.clear();
 		for (ModelNode node : modelNodes) {
 			nodes.add(loadNode(node));
@@ -236,7 +237,8 @@ public class Model implements Disposable {
 		}
 	}
 
-	@NullUnmarked protected void convertMesh (ModelMesh modelMesh) {
+	@NullUnmarked
+	protected void convertMesh (ModelMesh modelMesh) {
 		int numIndices = 0;
 		for (ModelMeshPart part : modelMesh.parts) {
 			numIndices += part.indices.length;
@@ -276,7 +278,8 @@ public class Model implements Disposable {
 		}
 	}
 
-	@NullUnmarked protected Material convertMaterial (ModelMaterial mtl, TextureProvider textureProvider) {
+	@NullUnmarked
+	protected Material convertMaterial (ModelMaterial mtl, TextureProvider textureProvider) {
 		Material result = new Material();
 		result.id = mtl.id;
 		if (mtl.ambient != null) result.set(new ColorAttribute(ColorAttribute.Ambient, mtl.ambient));
@@ -407,7 +410,8 @@ public class Model implements Disposable {
 	/** @param id The ID of the animation to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
@@ -431,7 +435,8 @@ public class Model implements Disposable {
 	/** @param id The ID of the material to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;

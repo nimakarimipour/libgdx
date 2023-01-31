@@ -48,7 +48,8 @@ public class InstanceBufferObject implements InstanceData {
 		this(isStatic, numVertices, new VertexAttributes(attributes));
 	}
 
-	@NullUnmarked public InstanceBufferObject (boolean isStatic, int numVertices, VertexAttributes instanceAttributes) {
+	@NullUnmarked
+	public InstanceBufferObject (boolean isStatic, int numVertices, VertexAttributes instanceAttributes) {
 		if (Gdx.gl30 == null)
 			throw new GdxRuntimeException("InstanceBufferObject requires a device running with GLES 3.0 compatibilty");
 
@@ -66,12 +67,14 @@ public class InstanceBufferObject implements InstanceData {
 		return attributes;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int getNumInstances () {
 		return buffer.limit() * 4 / attributes.vertexSize;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int getNumMaxInstances () {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}
@@ -105,7 +108,8 @@ public class InstanceBufferObject implements InstanceData {
 		((Buffer)buffer).limit(l / 4);
 	}
 
-	@NullUnmarked private void bufferChanged () {
+	@NullUnmarked
+	private void bufferChanged () {
 		if (isBound) {
 			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), null, usage);
 			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
@@ -113,7 +117,8 @@ public class InstanceBufferObject implements InstanceData {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void setInstanceData (float[] data, int offset, int count) {
 		isDirty = true;
 		BufferUtils.copy(data, byteBuffer, count, offset);
@@ -122,7 +127,8 @@ public class InstanceBufferObject implements InstanceData {
 		bufferChanged();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void setInstanceData (FloatBuffer data, int count) {
 		isDirty = true;
 		BufferUtils.copy(data, byteBuffer, count);
@@ -131,7 +137,8 @@ public class InstanceBufferObject implements InstanceData {
 		bufferChanged();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void updateInstanceData (int targetOffset, float[] data, int sourceOffset, int count) {
 		isDirty = true;
 		final int pos = byteBuffer.position();
@@ -142,7 +149,8 @@ public class InstanceBufferObject implements InstanceData {
 		bufferChanged();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void updateInstanceData (int targetOffset, FloatBuffer data, int sourceOffset, int count) {
 		isDirty = true;
 		final int pos = byteBuffer.position();
@@ -175,7 +183,8 @@ public class InstanceBufferObject implements InstanceData {
 		bind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		final GL20 gl = Gdx.gl20;
 
@@ -224,7 +233,8 @@ public class InstanceBufferObject implements InstanceData {
 		unbind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 		final int numAttributes = attributes.size();
@@ -250,14 +260,16 @@ public class InstanceBufferObject implements InstanceData {
 	}
 
 	/** Invalidates the InstanceBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void invalidate () {
 		bufferHandle = Gdx.gl20.glGenBuffer();
 		isDirty = true;
 	}
 
 	/** Disposes of all resources this InstanceBufferObject uses. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		GL20 gl = Gdx.gl20;
 		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, 0);

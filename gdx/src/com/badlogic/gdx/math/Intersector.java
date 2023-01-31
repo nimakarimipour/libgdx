@@ -158,7 +158,8 @@ public final class Intersector {
 	 * @param p2 The clip polygon
 	 * @param overlap The intersection of the two polygons (can be null, if an intersection polygon is not needed)
 	 * @return Whether the two polygons intersect. */
-	@NullUnmarked public static boolean intersectPolygons (Polygon p1, Polygon p2, Polygon overlap) {
+	@NullUnmarked
+	public static boolean intersectPolygons (Polygon p1, Polygon p2, Polygon overlap) {
 		if (p1.getVertices().length == 0 || p2.getVertices().length == 0) {
 			return false;
 		}
@@ -965,7 +966,8 @@ public final class Intersector {
 	 * @param p1 The first point of the line
 	 * @param p2 The second point of the line
 	 * @return Whether polygon and line intersects */
-	@NullUnmarked public static boolean intersectLinePolygon (Vector2 p1, Vector2 p2, Polygon polygon) {
+	@NullUnmarked
+	public static boolean intersectLinePolygon (Vector2 p1, Vector2 p2, Polygon polygon) {
 		float[] vertices = polygon.getTransformedVertices();
 		float x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y;
 		int n = vertices.length;
@@ -1034,7 +1036,8 @@ public final class Intersector {
 	 * @param p1 The first point of the segment
 	 * @param p2 The second point of the segment
 	 * @return Whether polygon and segment intersect */
-	@NullUnmarked public static boolean intersectSegmentPolygon (Vector2 p1, Vector2 p2, Polygon polygon) {
+	@NullUnmarked
+	public static boolean intersectSegmentPolygon (Vector2 p1, Vector2 p2, Polygon polygon) {
 		float[] vertices = polygon.getTransformedVertices();
 		float x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y;
 		int n = vertices.length;
@@ -1162,7 +1165,8 @@ public final class Intersector {
 	}
 
 	/** @see #overlapConvexPolygons(float[], int, int, float[], int, int, MinimumTranslationVector) */
-	@NullUnmarked public static boolean overlapConvexPolygons (@Nullable float[] verts1, @Nullable float[] verts2,
+	@NullUnmarked
+	public static boolean overlapConvexPolygons (@Nullable float[] verts1, @Nullable float[] verts2,
 		@Nullable MinimumTranslationVector mtv) {
 		return overlapConvexPolygons(verts1, 0, verts1.length, verts2, 0, verts2.length, mtv);
 	}
@@ -1207,7 +1211,8 @@ public final class Intersector {
 	 * @param count2 count of verts2
 	 * @param mtv the minimum translation vector
 	 * @param shapesShifted states if shape a and b are shifted. Important for calculating the axis translation for verts1. */
-	@NullUnmarked private static boolean overlapsOnAxisOfShape (@Nullable float[] verts1, int offset1, int count1, @Nullable float[] verts2,
+	@NullUnmarked
+	private static boolean overlapsOnAxisOfShape (@Nullable float[] verts1, int offset1, int count1, @Nullable float[] verts2,
 		int offset2, int count2, @Nullable MinimumTranslationVector mtv, boolean shapesShifted) {
 		int endA = offset1 + count1;
 		int endB = offset2 + count2;

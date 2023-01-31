@@ -512,7 +512,8 @@ public class Queue<T> implements Iterable<T> {
 		}
 
 		/** @see Collections#allocateIterators */
-		@NullUnmarked public Iterator<T> iterator () {
+		@NullUnmarked
+		public Iterator<T> iterator () {
 			if (Collections.allocateIterators) return new QueueIterator(queue, allowRemove);
 // lastAcquire.getBuffer().setLength(0);
 // new Throwable().printStackTrace(new java.io.PrintWriter(lastAcquire));

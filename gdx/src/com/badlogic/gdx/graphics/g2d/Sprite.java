@@ -80,7 +80,8 @@ public class Sprite extends TextureRegion {
 	// Note the region is copied.
 	/** Creates a sprite based on a specific TextureRegion, the new sprite's region is a copy of the parameter region - altering
 	 * one does not affect the other */
-	@NullUnmarked public Sprite (@Nullable TextureRegion region) {
+	@NullUnmarked
+	public Sprite (@Nullable TextureRegion region) {
 		setRegion(region);
 		setColor(1, 1, 1, 1);
 		setSize(region.getRegionWidth(), region.getRegionHeight());
@@ -714,7 +715,8 @@ public class Sprite extends TextureRegion {
 		}
 	}
 
-	@NullUnmarked public void scroll (float xAmount, float yAmount) {
+	@NullUnmarked
+	public void scroll (float xAmount, float yAmount) {
 		float[] vertices = Sprite.this.vertices;
 		if (xAmount != 0) {
 			float u = (vertices[U1] + xAmount) % 1;

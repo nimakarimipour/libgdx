@@ -302,7 +302,8 @@ public class Json {
 	}
 
 	/** Writes all fields of the specified object to the current JSON object. */
-	@NullUnmarked public void writeFields (Object object) {
+	@NullUnmarked
+	public void writeFields (Object object) {
 		Class type = object.getClass();
 
 		Object[] defaultValues = getDefaultValues(type);
@@ -345,7 +346,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	private @Null Object[] getDefaultValues (Class type) {
 		if (!usePrototypes) return null;
 		if (classToDefaultValues.containsKey(type)) return classToDefaultValues.get(type);
@@ -401,7 +403,8 @@ public class Json {
 
 	/** Writes the specified field to the current JSON object.
 	 * @param elementType May be null if the type is unknown. */
-	@NullUnmarked public void writeField (Object object, String fieldName, String jsonName, @Nullable @Null Class elementType) {
+	@NullUnmarked
+	public void writeField (Object object, String fieldName, String jsonName, @Nullable @Null Class elementType) {
 		Class type = object.getClass();
 		FieldMetadata metadata = getFields(type).get(fieldName);
 		if (metadata == null) throw new SerializationException("Field not found: " + fieldName + " (" + type.getName() + ")");
@@ -426,7 +429,8 @@ public class Json {
 	/** Writes the value as a field on the current JSON object, without writing the actual class.
 	 * @param value May be null.
 	 * @see #writeValue(String, Object, Class, Class) */
-	@NullUnmarked public void writeValue (String name, @Nullable @Null Object value) {
+	@NullUnmarked
+	public void writeValue (String name, @Nullable @Null Object value) {
 		try {
 			writer.name(name);
 		} catch (IOException ex) {
@@ -443,7 +447,8 @@ public class Json {
 	 * @param value May be null.
 	 * @param knownType May be null if the type is unknown.
 	 * @see #writeValue(String, Object, Class, Class) */
-	@NullUnmarked public void writeValue (String name, @Nullable @Null Object value, @Nullable @Null Class knownType) {
+	@NullUnmarked
+	public void writeValue (String name, @Nullable @Null Object value, @Nullable @Null Class knownType) {
 		try {
 			writer.name(name);
 		} catch (IOException ex) {
@@ -457,7 +462,8 @@ public class Json {
 	 * @param value May be null.
 	 * @param knownType May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown. */
-	@NullUnmarked public void writeValue (String name, @Nullable @Null Object value, @Null Class knownType, @Null Class elementType) {
+	@NullUnmarked
+	public void writeValue (String name, @Nullable @Null Object value, @Null Class knownType, @Null Class elementType) {
 		try {
 			writer.name(name);
 		} catch (IOException ex) {
@@ -487,7 +493,8 @@ public class Json {
 	 * @param value May be null.
 	 * @param knownType May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown. */
-	@NullUnmarked public void writeValue (@Nullable @Null Object value, @Nullable @Null Class knownType, @Nullable @Null Class elementType) {
+	@NullUnmarked
+	public void writeValue (@Nullable @Null Object value, @Nullable @Null Class knownType, @Nullable @Null Class elementType) {
 		try {
 			if (value == null) {
 				writer.value(null);
@@ -692,7 +699,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked public void writeObjectStart (String name) {
+	@NullUnmarked
+	public void writeObjectStart (String name) {
 		try {
 			writer.name(name);
 		} catch (IOException ex) {
@@ -702,7 +710,8 @@ public class Json {
 	}
 
 	/** @param knownType May be null if the type is unknown. */
-	@NullUnmarked public void writeObjectStart (String name, Class actualType, @Null Class knownType) {
+	@NullUnmarked
+	public void writeObjectStart (String name, Class actualType, @Null Class knownType) {
 		try {
 			writer.name(name);
 		} catch (IOException ex) {
@@ -711,7 +720,8 @@ public class Json {
 		writeObjectStart(actualType, knownType);
 	}
 
-	@NullUnmarked public void writeObjectStart () {
+	@NullUnmarked
+	public void writeObjectStart () {
 		try {
 			writer.object();
 		} catch (IOException ex) {
@@ -721,7 +731,8 @@ public class Json {
 
 	/** Starts writing an object, writing the actualType to a field if needed.
 	 * @param knownType May be null if the type is unknown. */
-	@NullUnmarked public void writeObjectStart (Class actualType, @Nullable @Null Class knownType) {
+	@NullUnmarked
+	public void writeObjectStart (Class actualType, @Nullable @Null Class knownType) {
 		try {
 			writer.object();
 		} catch (IOException ex) {
@@ -730,7 +741,8 @@ public class Json {
 		if (knownType == null || knownType != actualType) writeType(actualType);
 	}
 
-	@NullUnmarked public void writeObjectEnd () {
+	@NullUnmarked
+	public void writeObjectEnd () {
 		try {
 			writer.pop();
 		} catch (IOException ex) {
@@ -738,7 +750,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked public void writeArrayStart (String name) {
+	@NullUnmarked
+	public void writeArrayStart (String name) {
 		try {
 			writer.name(name);
 			writer.array();
@@ -747,7 +760,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked public void writeArrayStart () {
+	@NullUnmarked
+	public void writeArrayStart () {
 		try {
 			writer.array();
 		} catch (IOException ex) {
@@ -755,7 +769,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked public void writeArrayEnd () {
+	@NullUnmarked
+	public void writeArrayEnd () {
 		try {
 			writer.pop();
 		} catch (IOException ex) {
@@ -763,7 +778,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked public void writeType (Class type) {
+	@NullUnmarked
+	public void writeType (Class type) {
 		if (typeName == null) return;
 		String className = getTag(type);
 		if (className == null) className = type.getName();
@@ -902,7 +918,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked public void readFields (Object object, JsonValue jsonMap) {
+	@NullUnmarked
+	public void readFields (Object object, JsonValue jsonMap) {
 		Class type = object.getClass();
 		OrderedMap<String, FieldMetadata> fields = getFields(type);
 		for (JsonValue child = jsonMap.child; child != null; child = child.next) {
@@ -1000,7 +1017,8 @@ public class Json {
 	/** @param type May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public @Null <T> T readValue (@Nullable @Null Class<T> type, @Nullable @Null Class elementType, @Nullable JsonValue jsonData) {
 		if (jsonData == null) return null;
 
@@ -1205,7 +1223,8 @@ public class Json {
 	/** Each field on the <code>to</code> object is set to the value for the field with the same name on the <code>from</code>
 	 * object. The <code>to</code> object must have at least all the fields of the <code>from</code> object with the same name and
 	 * type. */
-	@NullUnmarked public void copyFields (Object from, Object to) {
+	@NullUnmarked
+	public void copyFields (Object from, Object to) {
 		OrderedMap<String, FieldMetadata> toFields = getFields(to.getClass());
 		for (ObjectMap.Entry<String, FieldMetadata> entry : getFields(from.getClass())) {
 			FieldMetadata toField = toFields.get(entry.key);
@@ -1269,7 +1288,8 @@ public class Json {
 		return prettyPrint(toJson(object), singleLineColumns);
 	}
 
-	@NullUnmarked public String prettyPrint (String json, int singleLineColumns) {
+	@NullUnmarked
+	public String prettyPrint (String json, int singleLineColumns) {
 		return new JsonReader().parse(json).prettyPrint(outputType, singleLineColumns);
 	}
 
@@ -1277,7 +1297,8 @@ public class Json {
 		return prettyPrint(toJson(object), settings);
 	}
 
-	@NullUnmarked public String prettyPrint (String json, PrettyPrintSettings settings) {
+	@NullUnmarked
+	public String prettyPrint (String json, PrettyPrintSettings settings) {
 		return new JsonReader().parse(json).prettyPrint(settings);
 	}
 

@@ -227,7 +227,8 @@ public class PixmapIO {
 		}
 
 		/** Writes the pixmap to the stream without closing the stream. */
-		@NullUnmarked public void write (OutputStream output, Pixmap pixmap) throws IOException {
+		@NullUnmarked
+		public void write (OutputStream output, Pixmap pixmap) throws IOException {
 			DeflaterOutputStream deflaterOutput = new DeflaterOutputStream(buffer, deflater);
 			DataOutputStream dataOutput = new DataOutputStream(output);
 			dataOutput.write(SIGNATURE);

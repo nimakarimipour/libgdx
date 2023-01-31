@@ -29,12 +29,14 @@ public class AlphaAction extends TemporalAction {
 	private float start, end;
 	@Nullable private @Null Color color;
 
-	@NullUnmarked protected void begin () {
+	@NullUnmarked
+	protected void begin () {
 		if (color == null) color = target.getColor();
 		start = color.a;
 	}
 
-	@NullUnmarked protected void update (float percent) {
+	@NullUnmarked
+	protected void update (float percent) {
 		if (percent == 0)
 			color.a = start;
 		else if (percent == 1)

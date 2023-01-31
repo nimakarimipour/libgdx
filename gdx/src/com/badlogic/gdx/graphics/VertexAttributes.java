@@ -56,7 +56,8 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 	@Nullable private ReadonlyIterable<VertexAttribute> iterable;
 
 	/** Constructor, sets the vertex attributes in a specific order */
-	@NullUnmarked public VertexAttributes (@Nullable VertexAttribute... attributes) {
+	@NullUnmarked
+	public VertexAttributes (@Nullable VertexAttribute... attributes) {
 		if (attributes.length == 0) throw new IllegalArgumentException("attributes must be >= 1");
 
 		VertexAttribute[] list = new VertexAttribute[attributes.length];
@@ -172,7 +173,8 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 		return getMask() | ((long)attributes.length << 32);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int compareTo (@Nullable VertexAttributes o) {
 		if (attributes.length != o.attributes.length) return attributes.length - o.attributes.length;
 		final long m1 = getMask();
@@ -242,7 +244,8 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 			this.array = array;
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public Iterator<T> iterator () {
 			if (Collections.allocateIterators) return new ReadonlyIterator(array);
 			if (iterator1 == null) {

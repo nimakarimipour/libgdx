@@ -108,7 +108,8 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected ModelData loadModelData (FileHandle file, boolean flipV) {
 		if (logWarning)
 			Gdx.app.error("ObjLoader", "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
@@ -420,7 +421,8 @@ class MtlLoader {
 		return new Color(r, g, b, a);
 	}
 
-	@NullUnmarked public ModelMaterial getMaterial (final String name) {
+	@NullUnmarked
+	public ModelMaterial getMaterial (final String name) {
 		for (final ModelMaterial m : materials)
 			if (m.id.equals(name)) return m;
 		ModelMaterial mat = new ModelMaterial();

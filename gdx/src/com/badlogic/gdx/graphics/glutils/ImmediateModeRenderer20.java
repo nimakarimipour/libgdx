@@ -57,7 +57,8 @@ public class ImmediateModeRenderer20 implements ImmediateModeRenderer {
 		ownsShader = true;
 	}
 
-	@NullUnmarked public ImmediateModeRenderer20 (int maxVertices, boolean hasNormals, boolean hasColors, int numTexCoords,
+	@NullUnmarked
+	public ImmediateModeRenderer20 (int maxVertices, boolean hasNormals, boolean hasColors, int numTexCoords,
 		ShaderProgram shader) {
 		this.maxVertices = maxVertices;
 		this.numTexCoords = numTexCoords;

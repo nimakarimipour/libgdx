@@ -71,7 +71,8 @@ public class ResourceData<T> implements Json.Serializable {
 			this.resources = resources;
 		}
 
-		@NullUnmarked public <K> void saveAsset (@Nullable String filename, Class<K> type) {
+		@NullUnmarked
+		public <K> void saveAsset (@Nullable String filename, Class<K> type) {
 			int i = resources.getAssetData(filename, type);
 			if (i == -1) {
 				resources.sharedAssets.add(new AssetData(filename, type));
@@ -80,18 +81,21 @@ public class ResourceData<T> implements Json.Serializable {
 			assets.add(i);
 		}
 
-		@NullUnmarked public void save (String key, Object value) {
+		@NullUnmarked
+		public void save (String key, Object value) {
 			data.put(key, value);
 		}
 
-		@NullUnmarked @Nullable
+		@NullUnmarked
+		@Nullable
 		public AssetDescriptor loadAsset () {
 			if (loadIndex == assets.size) return null;
 			AssetData data = (AssetData)resources.sharedAssets.get(assets.get(loadIndex++));
 			return new AssetDescriptor(data.filename, data.type);
 		}
 
-		@NullUnmarked @Nullable
+		@NullUnmarked
+		@Nullable
 		public <K> K load (String key) {
 			return (K)data.get(key);
 		}
@@ -122,7 +126,8 @@ public class ResourceData<T> implements Json.Serializable {
 			this.type = type;
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void write (Json json) {
 			json.writeValue("filename", filename);
 			json.writeValue("type", type.getName());
@@ -164,7 +169,8 @@ public class ResourceData<T> implements Json.Serializable {
 		this.resource = resource;
 	}
 
-	@NullUnmarked <K> int getAssetData (@Nullable String filename, Class<K> type) {
+	@NullUnmarked
+	<K> int getAssetData (@Nullable String filename, Class<K> type) {
 		int i = 0;
 		for (AssetData data : sharedAssets) {
 			if (data.filename.equals(filename) && data.type.equals(type)) {
@@ -188,14 +194,16 @@ public class ResourceData<T> implements Json.Serializable {
 	}
 
 	/** Creates and adds a new SaveData object to the save data list */
-	@NullUnmarked public SaveData createSaveData () {
+	@NullUnmarked
+	public SaveData createSaveData () {
 		SaveData saveData = new SaveData(this);
 		data.add(saveData);
 		return saveData;
 	}
 
 	/** Creates and adds a new and unique SaveData object to the save data map */
-	@NullUnmarked public SaveData createSaveData (String key) {
+	@NullUnmarked
+	public SaveData createSaveData (String key) {
 		SaveData saveData = new SaveData(this);
 		if (uniqueData.containsKey(key)) throw new RuntimeException("Key already used, data must be unique, use a different key");
 		uniqueData.put(key, saveData);
@@ -203,12 +211,14 @@ public class ResourceData<T> implements Json.Serializable {
 	}
 
 	/** @return the next save data in the list */
-	@NullUnmarked public SaveData getSaveData () {
+	@NullUnmarked
+	public SaveData getSaveData () {
 		return data.get(currentLoadIndex++);
 	}
 
 	/** @return the unique save data in the map */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public SaveData getSaveData (String key) {
 		return uniqueData.get(key);
 	}
@@ -221,7 +231,8 @@ public class ResourceData<T> implements Json.Serializable {
 		json.writeValue("resource", resource, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		uniqueData = json.readValue("unique", ObjectMap.class, jsonData);
 		for (Entry<String, SaveData> entry : uniqueData.entries()) {

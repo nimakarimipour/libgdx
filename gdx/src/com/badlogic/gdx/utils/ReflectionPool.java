@@ -58,7 +58,8 @@ public class ReflectionPool<T> extends Pool<T> {
 		}
 	}
 
-	@NullUnmarked protected T newObject () {
+	@NullUnmarked
+	protected T newObject () {
 		try {
 			return (T)constructor.newInstance((Object[])null);
 		} catch (Exception ex) {

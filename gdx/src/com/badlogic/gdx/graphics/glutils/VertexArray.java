@@ -103,7 +103,8 @@ public class VertexArray implements VertexData {
 		bind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final int numAttributes = attributes.size();
 		((Buffer)byteBuffer).limit(buffer.limit() * 4);
@@ -153,7 +154,8 @@ public class VertexArray implements VertexData {
 		unbind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		final int numAttributes = attributes.size();
 		if (locations == null) {

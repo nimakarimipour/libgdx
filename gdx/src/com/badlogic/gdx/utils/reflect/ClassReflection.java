@@ -34,7 +34,8 @@ public final class ClassReflection {
 	}
 
 	/** Returns the simple name of the underlying class as supplied in the source code. */
-	@NullUnmarked static public String getSimpleName (@Nullable Class c) {
+	@NullUnmarked
+	static public String getSimpleName (@Nullable Class c) {
 		return c.getSimpleName();
 	}
 
@@ -45,7 +46,8 @@ public final class ClassReflection {
 
 	/** Determines if the class or interface represented by first Class parameter is either the same as, or is a superclass or
 	 * superinterface of, the class or interface represented by the second Class parameter. */
-	@NullUnmarked static public boolean isAssignableFrom (Class c1, @Nullable Class c2) {
+	@NullUnmarked
+	static public boolean isAssignableFrom (Class c1, @Nullable Class c2) {
 		return c1.isAssignableFrom(c2);
 	}
 

@@ -47,7 +47,8 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		super(resolver);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable TextureParameter parameter) {
 		info.filename = fileName;

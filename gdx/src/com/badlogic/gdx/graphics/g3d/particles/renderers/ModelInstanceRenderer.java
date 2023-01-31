@@ -42,12 +42,14 @@ public class ModelInstanceRenderer
 		setBatch(batch);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		renderData.positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void init () {
 		renderData.modelInstanceChannel = controller.particles.getChannel(ParticleChannels.ModelInstance);
 		renderData.colorChannel = controller.particles.getChannel(ParticleChannels.Color);
@@ -58,7 +60,8 @@ public class ModelInstanceRenderer
 		hasRotation = renderData.rotationChannel != null;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void update () {
 		for (int i = 0, positionOffset = 0,
 			c = controller.particles.size; i < c; ++i, positionOffset += renderData.positionChannel.strideSize) {

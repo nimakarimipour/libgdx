@@ -45,7 +45,8 @@ public class NumericValue extends ParticleValue {
 		json.writeValue("value", value);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		value = json.readValue("value", float.class, jsonData);

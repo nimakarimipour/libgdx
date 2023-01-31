@@ -63,7 +63,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return parseModel(fileHandle);
 	}
 
-	@NullUnmarked public ModelData parseModel (FileHandle handle) {
+	@NullUnmarked
+	public ModelData parseModel (FileHandle handle) {
 		JsonValue json = reader.parse(handle);
 		ModelData model = new ModelData();
 		JsonValue version = json.require("version");
@@ -80,7 +81,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return model;
 	}
 
-	@NullUnmarked protected void parseMeshes (ModelData model, JsonValue json) {
+	@NullUnmarked
+	protected void parseMeshes (ModelData model, JsonValue json) {
 		JsonValue meshes = json.get("meshes");
 		if (meshes != null) {
 
@@ -142,7 +144,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		}
 	}
 
-	@NullUnmarked protected VertexAttribute[] parseAttributes (JsonValue attributes) {
+	@NullUnmarked
+	protected VertexAttribute[] parseAttributes (JsonValue attributes) {
 		Array<VertexAttribute> vertexAttributes = new Array<VertexAttribute>();
 		int unit = 0;
 		int blendWeightCount = 0;

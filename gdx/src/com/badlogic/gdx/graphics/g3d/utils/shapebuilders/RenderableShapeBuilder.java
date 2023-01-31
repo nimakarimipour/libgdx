@@ -95,7 +95,8 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
 	 * @param normalColor Normal vector's color
 	 * @param tangentColor Tangent vector's color
 	 * @param binormalColor Binormal vector's color */
-	@NullUnmarked public static void buildNormals (MeshPartBuilder builder, Renderable renderable, float vectorSize, Color normalColor,
+	@NullUnmarked
+	public static void buildNormals (MeshPartBuilder builder, Renderable renderable, float vectorSize, Color normalColor,
 		Color tangentColor, Color binormalColor) {
 		Mesh mesh = renderable.meshPart.mesh;
 
@@ -195,14 +196,16 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
 		if (indices == null || indices.length < capacity) indices = new short[capacity];
 	}
 
-	@NullUnmarked private static short minVerticeInIndices () {
+	@NullUnmarked
+	private static short minVerticeInIndices () {
 		short min = (short)32767;
 		for (int i = 0; i < indices.length; i++)
 			if (indices[i] < min) min = indices[i];
 		return min;
 	}
 
-	@NullUnmarked private static short maxVerticeInIndices () {
+	@NullUnmarked
+	private static short maxVerticeInIndices () {
 		short max = (short)-32768;
 		for (int i = 0; i < indices.length; i++)
 			if (indices[i] > max) max = indices[i];

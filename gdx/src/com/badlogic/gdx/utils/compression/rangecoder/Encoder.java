@@ -57,11 +57,13 @@ public class Encoder {
 			ShiftLow();
 	}
 
-	@NullUnmarked public void FlushStream () throws IOException {
+	@NullUnmarked
+	public void FlushStream () throws IOException {
 		Stream.flush();
 	}
 
-	@NullUnmarked public void ShiftLow () throws IOException {
+	@NullUnmarked
+	public void ShiftLow () throws IOException {
 		int LowHi = (int)(Low >>> 32);
 		if (LowHi != 0 || Low < 0xFF000000L) {
 			_position += _cacheSize;

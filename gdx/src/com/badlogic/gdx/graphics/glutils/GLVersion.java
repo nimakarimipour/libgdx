@@ -71,7 +71,8 @@ public class GLVersion {
 		this.rendererString = rendererString;
 	}
 
-	@NullUnmarked private void extractVersion (String patternString, String versionString) {
+	@NullUnmarked
+	private void extractVersion (String patternString, String versionString) {
 		Pattern pattern = Pattern.compile(patternString);
 		Matcher matcher = pattern.matcher(versionString);
 		boolean found = matcher.find();
@@ -90,7 +91,8 @@ public class GLVersion {
 	}
 
 	/** Forgiving parsing of gl major, minor and release versions as some manufacturers don't adhere to spec **/
-	@NullUnmarked private int parseInt (String v, int defaultValue) {
+	@NullUnmarked
+	private int parseInt (String v, int defaultValue) {
 		try {
 			return Integer.parseInt(v);
 		} catch (NumberFormatException nfe) {

@@ -75,7 +75,8 @@ public class ImageTextButton extends Button {
 		return new Label(text, style);
 	}
 
-	@NullUnmarked public void setStyle (ButtonStyle style) {
+	@NullUnmarked
+	public void setStyle (ButtonStyle style) {
 		if (!(style instanceof ImageTextButtonStyle)) throw new IllegalArgumentException("style must be a ImageTextButtonStyle.");
 		this.style = (ImageTextButtonStyle)style;
 		super.setStyle(style);
@@ -148,7 +149,8 @@ public class ImageTextButton extends Button {
 		return style.fontColor;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		updateImage();
 		label.getStyle().fontColor = getFontColor();
 		super.draw(batch, parentAlpha);
@@ -163,7 +165,8 @@ public class ImageTextButton extends Button {
 		return getCell(image);
 	}
 
-	@NullUnmarked public void setLabel (Label label) {
+	@NullUnmarked
+	public void setLabel (Label label) {
 		getLabelCell().setActor(label);
 		this.label = label;
 	}

@@ -41,7 +41,8 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 		bufferedParticlesCount = 0;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void draw (@Nullable T data) {
 		if (data.controller.particles.size > 0) {
 			renderData.add(data);

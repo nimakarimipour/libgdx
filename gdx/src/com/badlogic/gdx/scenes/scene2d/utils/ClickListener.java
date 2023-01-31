@@ -116,7 +116,8 @@ public class ClickListener extends InputListener {
 	}
 
 	/** Returns true if the specified position is over the specified actor or within the tap square. */
-	@NullUnmarked public boolean isOver (@Nullable Actor actor, float x, float y) {
+	@NullUnmarked
+	public boolean isOver (@Nullable Actor actor, float x, float y) {
 		Actor hit = actor.hit(x, y, true);
 		if (hit == null || !hit.isDescendantOf(actor)) return inTapSquare(x, y);
 		return true;

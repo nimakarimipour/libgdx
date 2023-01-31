@@ -67,7 +67,8 @@ public abstract class ParticleSorter {
 			}
 		}
 
-		@NullUnmarked @Nullable
+		@NullUnmarked
+		@Nullable
 		@Override
 		public <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData) {
 			float[] val = camera.view.val;
@@ -91,7 +92,8 @@ public abstract class ParticleSorter {
 			return particleOffsets;
 		}
 
-		@NullUnmarked public void qsort (int si, int ei) {
+		@NullUnmarked
+		public void qsort (int si, int ei) {
 			// base case
 			if (si < ei) {
 				float tmp;

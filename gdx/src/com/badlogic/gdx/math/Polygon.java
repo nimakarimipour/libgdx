@@ -175,7 +175,8 @@ public class Polygon implements Shape2D {
 	}
 
 	/** Returns the area contained within the polygon. */
-	@NullUnmarked public float area () {
+	@NullUnmarked
+	public float area () {
 		float[] vertices = getTransformedVertices();
 		return GeometryUtils.polygonArea(vertices, 0, vertices.length);
 	}
@@ -185,14 +186,16 @@ public class Polygon implements Shape2D {
 	}
 
 	/** @return Position(transformed) of vertex */
-	@NullUnmarked public Vector2 getVertex (int vertexNum, Vector2 pos) {
+	@NullUnmarked
+	public Vector2 getVertex (int vertexNum, Vector2 pos) {
 		if (vertexNum < 0 || vertexNum > getVertexCount())
 			throw new IllegalArgumentException("the vertex " + vertexNum + " doesn't exist");
 		float[] vertices = this.getTransformedVertices();
 		return pos.set(vertices[2 * vertexNum], vertices[2 * vertexNum + 1]);
 	}
 
-	@NullUnmarked public Vector2 getCentroid (Vector2 centroid) {
+	@NullUnmarked
+	public Vector2 getCentroid (Vector2 centroid) {
 		float[] vertices = getTransformedVertices();
 		return GeometryUtils.polygonCentroid(vertices, 0, vertices.length, centroid);
 	}
@@ -202,7 +205,8 @@ public class Polygon implements Shape2D {
 	 * Note the returned Rectangle is cached in this polygon, and will be reused if this Polygon is changed.
 	 * 
 	 * @return this polygon's bounding box {@link Rectangle} */
-	@NullUnmarked public Rectangle getBoundingRectangle () {
+	@NullUnmarked
+	public Rectangle getBoundingRectangle () {
 		float[] vertices = getTransformedVertices();
 
 		float minX = vertices[0];
@@ -228,7 +232,8 @@ public class Polygon implements Shape2D {
 	}
 
 	/** Returns whether an x, y pair is contained within the polygon. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean contains (float x, float y) {
 		final float[] vertices = getTransformedVertices();
 		final int numFloats = vertices.length;

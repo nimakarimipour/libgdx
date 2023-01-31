@@ -42,7 +42,8 @@ public class ParticleValue implements Json.Serializable {
 		this.active = active;
 	}
 
-	@NullUnmarked public void load (@Nullable ParticleValue value) {
+	@NullUnmarked
+	public void load (@Nullable ParticleValue value) {
 		active = value.active;
 	}
 
@@ -51,7 +52,8 @@ public class ParticleValue implements Json.Serializable {
 		json.writeValue("active", active);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		active = json.readValue("active", Boolean.class, jsonData);
 	}

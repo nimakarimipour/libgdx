@@ -47,13 +47,15 @@ public abstract class DynamicsModifier extends Influencer {
 			super(rotation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);
 			accellerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			for (int i = 0, accelOffset = 0, c = i + controller.particles.size
 				* rotationChannel.strideSize; i < c; i += rotationChannel.strideSize, accelOffset += accellerationChannel.strideSize) {
@@ -90,14 +92,16 @@ public abstract class DynamicsModifier extends Influencer {
 			strengthValue.load(rotation.strengthValue);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			ParticleChannels.Interpolation.id = controller.particleChannels.newId();
 			strengthChannel = controller.particles.addChannel(ParticleChannels.Interpolation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void activateParticles (int startIndex, int count) {
 			float start, diff;
 			for (int i = startIndex * strengthChannel.strideSize,
@@ -143,14 +147,16 @@ public abstract class DynamicsModifier extends Influencer {
 			phiValue.load(value.phiValue);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			ParticleChannels.Interpolation4.id = controller.particleChannels.newId();
 			angularChannel = controller.particles.addChannel(ParticleChannels.Interpolation4);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void activateParticles (int startIndex, int count) {
 			super.activateParticles(startIndex, count);
 			float start, diff;
@@ -198,13 +204,15 @@ public abstract class DynamicsModifier extends Influencer {
 			super(rotation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			rotationalVelocity2dChannel = controller.particles.addChannel(ParticleChannels.AngularVelocity2D);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, c = i + controller.particles.size
 				* rotationalVelocity2dChannel.strideSize; i < c; s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize, l += lifeChannel.strideSize) {
@@ -230,14 +238,16 @@ public abstract class DynamicsModifier extends Influencer {
 			super(rotation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);
 			rotationalForceChannel = controller.particles.addChannel(ParticleChannels.AngularVelocity3D);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 
 			// Matrix3 I_t = defined by the shape, it's the inertia tensor
@@ -305,14 +315,16 @@ public abstract class DynamicsModifier extends Influencer {
 			super(rotation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			accelerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 			positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			float cx = 0, cy = 0, cz = 0;
 			if (!isGlobal) {
@@ -354,13 +366,15 @@ public abstract class DynamicsModifier extends Influencer {
 			super(rotation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			directionalVelocityChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, a = 0, c = i + controller.particles.size
 				* directionalVelocityChannel.strideSize; i < c; s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize, a += angularChannel.strideSize, l += lifeChannel.strideSize) {
@@ -404,14 +418,16 @@ public abstract class DynamicsModifier extends Influencer {
 			super(rotation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			directionalVelocityChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 			positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, a = 0, positionOffset = 0,
 				c = i + controller.particles.size
@@ -460,13 +476,15 @@ public abstract class DynamicsModifier extends Influencer {
 			super(rotation);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			accelerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
 			for (int i = 0,
@@ -498,7 +516,8 @@ public abstract class DynamicsModifier extends Influencer {
 		this.isGlobal = modifier.isGlobal;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 	}
@@ -509,7 +528,8 @@ public abstract class DynamicsModifier extends Influencer {
 		json.writeValue("isGlobal", isGlobal);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		isGlobal = json.readValue("isGlobal", boolean.class, jsonData);

@@ -113,14 +113,16 @@ public class DecalBatch implements Disposable {
 	}
 
 	/** @return maximum amount of decal objects this buffer can hold in memory */
-	@NullUnmarked public int getSize () {
+	@NullUnmarked
+	public int getSize () {
 		return vertices.length / Decal.SIZE;
 	}
 
 	/** Add a decal to the batch, marking it for later rendering
 	 * 
 	 * @param decal Decal to add for rendering */
-	@NullUnmarked public void add (Decal decal) {
+	@NullUnmarked
+	public void add (Decal decal) {
 		int groupIndex = groupStrategy.decideGroup(decal);
 		Array<Decal> targetGroup = groupList.get(groupIndex);
 		if (targetGroup == null) {
@@ -139,7 +141,8 @@ public class DecalBatch implements Disposable {
 	}
 
 	/** Renders all decals to the buffer and flushes the buffer to the GL when full/done */
-	@NullUnmarked protected void render () {
+	@NullUnmarked
+	protected void render () {
 		groupStrategy.beforeGroups();
 		for (SortedIntList.Node<Array<Decal>> group : groupList) {
 			groupStrategy.beforeGroup(group.index, group.value);
@@ -153,7 +156,8 @@ public class DecalBatch implements Disposable {
 	/** Renders a group of vertices to the buffer, flushing them to GL when done/full
 	 * 
 	 * @param decals Decals to render */
-	@NullUnmarked private void render (@Nullable ShaderProgram shader, @Nullable Array<Decal> decals) {
+	@NullUnmarked
+	private void render (@Nullable ShaderProgram shader, @Nullable Array<Decal> decals) {
 		// batch vertices
 		DecalMaterial lastMaterial = null;
 		int idx = 0;
@@ -184,7 +188,8 @@ public class DecalBatch implements Disposable {
 	/** Flushes vertices[0,verticesPosition[ to GL verticesPosition % Decal.SIZE must equal 0
 	 * 
 	 * @param verticesPosition Amount of elements from the vertices array to flush */
-	@NullUnmarked protected void flush (@Nullable ShaderProgram shader, int verticesPosition) {
+	@NullUnmarked
+	protected void flush (@Nullable ShaderProgram shader, int verticesPosition) {
 		mesh.setVertices(vertices, 0, verticesPosition);
 		mesh.render(shader, GL20.GL_TRIANGLES, 0, verticesPosition / 4);
 	}
@@ -198,7 +203,8 @@ public class DecalBatch implements Disposable {
 
 	/** Frees up memory by dropping the buffer and underlying resources. If the batch is needed again after disposing it can be
 	 * {@link #initialize(int) initialized} again. */
-	@NullUnmarked public void dispose () {
+	@NullUnmarked
+	public void dispose () {
 		clear();
 		vertices = null;
 		mesh.dispose();

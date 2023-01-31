@@ -62,7 +62,8 @@ public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, 
 		@Nullable ShaderProgramParameter parameter) {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public ShaderProgram loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable ShaderProgramParameter parameter) {
 		String vertFileName = null, fragFileName = null;

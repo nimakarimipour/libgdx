@@ -80,7 +80,8 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 		return decal.getMaterial().isOpaque() ? GROUP_OPAQUE : GROUP_BLEND;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void beforeGroup (int group, @Nullable Array<Decal> contents) {
 		if (group == GROUP_BLEND) {
 			Sort.instance().sort(contents, comparator);
@@ -93,7 +94,8 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void afterGroup (int group) {
 		if (group == GROUP_BLEND) {
 			Gdx.gl.glDepthMask(true);
@@ -101,12 +103,14 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void beforeGroups () {
 		Gdx.gl.glEnable(GL20.GL_TEXTURE_2D);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void afterGroups () {
 		Gdx.gl.glDisable(GL20.GL_TEXTURE_2D);
 	}

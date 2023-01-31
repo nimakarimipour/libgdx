@@ -106,7 +106,8 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameters) {
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	@Override
 	public Model loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameters) {
 		ModelData data = null;

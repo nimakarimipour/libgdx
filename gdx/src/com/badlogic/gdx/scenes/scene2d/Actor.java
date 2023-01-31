@@ -91,7 +91,8 @@ public class Actor {
 	 * <p>
 	 * The default implementation calls {@link Action#act(float)} on each action and removes actions that are complete.
 	 * @param delta Time in seconds since the last frame. */
-	@NullUnmarked public void act (float delta) {
+	@NullUnmarked
+	public void act (float delta) {
 		Array<Action> actions = this.actions;
 		if (actions.size == 0) return;
 		if (stage != null && stage.getActionsRequestRendering()) Gdx.graphics.requestRendering();
@@ -260,7 +261,8 @@ public class Actor {
 		return captureListeners;
 	}
 
-	@NullUnmarked public void addAction (@Nullable Action action) {
+	@NullUnmarked
+	public void addAction (@Nullable Action action) {
 		action.setActor(this);
 		actions.add(action);
 

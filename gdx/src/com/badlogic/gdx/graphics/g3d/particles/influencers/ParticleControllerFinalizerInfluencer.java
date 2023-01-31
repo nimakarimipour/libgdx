@@ -35,7 +35,8 @@ public class ParticleControllerFinalizerInfluencer extends Influencer {
 	public ParticleControllerFinalizerInfluencer () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void init () {
 		controllerChannel = controller.particles.getChannel(ParticleChannels.ParticleController);
 		if (controllerChannel == null) throw new GdxRuntimeException(
@@ -46,12 +47,14 @@ public class ParticleControllerFinalizerInfluencer extends Influencer {
 		hasRotation = rotationChannel != null;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void update () {
 		for (int i = 0, positionOffset = 0,
 			c = controller.particles.size; i < c; ++i, positionOffset += positionChannel.strideSize) {

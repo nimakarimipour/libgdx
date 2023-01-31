@@ -39,7 +39,8 @@ public class FPSLogger {
 	}
 
 	/** Logs the current frames per second to the console. */
-	@NullUnmarked public void log () {
+	@NullUnmarked
+	public void log () {
 		final long nanoTime = TimeUtils.nanoTime();
 		if (nanoTime - startTime > 1000000000) /* 1,000,000,000ns == one second */ {
 			final int fps = Gdx.graphics.getFramesPerSecond();

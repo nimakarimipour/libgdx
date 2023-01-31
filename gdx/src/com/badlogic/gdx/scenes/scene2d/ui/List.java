@@ -174,7 +174,8 @@ public class List<T> extends Widget implements Cullable {
 		return style;
 	}
 
-	@NullUnmarked public void layout () {
+	@NullUnmarked
+	public void layout () {
 		BitmapFont font = style.font;
 		Drawable selectedDrawable = style.selection;
 
@@ -199,7 +200,8 @@ public class List<T> extends Widget implements Cullable {
 		}
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		drawBackground(batch, parentAlpha);
@@ -257,7 +259,8 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** Called to draw the background. Default implementation draws the style background drawable. */
-	@NullUnmarked protected void drawBackground (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	protected void drawBackground (Batch batch, float parentAlpha) {
 		if (style.background != null) {
 			Color color = getColor();
 			batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
@@ -334,7 +337,8 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** @return -1 if not over an item. */
-	@NullUnmarked public int getItemIndexAt (float y) {
+	@NullUnmarked
+	public int getItemIndexAt (float y) {
 		float height = getHeight();
 		Drawable background = List.this.style.background;
 		if (background != null) {
@@ -460,7 +464,8 @@ public class List<T> extends Widget implements Cullable {
 			this.selection = selection;
 		}
 
-		@NullUnmarked public ListStyle (@Nullable ListStyle style) {
+		@NullUnmarked
+		public ListStyle (@Nullable ListStyle style) {
 			font = style.font;
 			fontColorSelected.set(style.fontColorSelected);
 			fontColorUnselected.set(style.fontColorUnselected);

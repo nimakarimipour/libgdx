@@ -34,12 +34,14 @@ public abstract class ColorInfluencer extends Influencer {
 	public static class Random extends ColorInfluencer {
 		@Nullable FloatChannel colorChannel;
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex * colorChannel.strideSize,
 				c = i + count * colorChannel.strideSize; i < c; i += colorChannel.strideSize) {
@@ -74,12 +76,14 @@ public abstract class ColorInfluencer extends Influencer {
 			set(billboardColorInfluencer);
 		}
 
-		@NullUnmarked public void set (Single colorInfluencer) {
+		@NullUnmarked
+		public void set (Single colorInfluencer) {
 			this.colorValue.load(colorInfluencer.colorValue);
 			this.alphaValue.load(colorInfluencer.alphaValue);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			// Hack this allows to share the channel descriptor structure but using a different id temporary
@@ -88,7 +92,8 @@ public abstract class ColorInfluencer extends Influencer {
 			lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex * colorChannel.strideSize, a = startIndex * alphaInterpolationChannel.strideSize,
 				l = startIndex * lifeChannel.strideSize + ParticleChannels.LifePercentOffset, c = i + count
@@ -103,7 +108,8 @@ public abstract class ColorInfluencer extends Influencer {
 			}
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			for (int i = 0, a = 0, l = ParticleChannels.LifePercentOffset, c = i + controller.particles.size
 				* colorChannel.strideSize; i < c; i += colorChannel.strideSize, a += alphaInterpolationChannel.strideSize, l += lifeChannel.strideSize) {
@@ -137,7 +143,8 @@ public abstract class ColorInfluencer extends Influencer {
 
 	@Nullable FloatChannel colorChannel;
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 	}

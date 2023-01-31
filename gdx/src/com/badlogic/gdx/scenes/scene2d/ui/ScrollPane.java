@@ -283,7 +283,8 @@ public class ScrollPane extends WidgetGroup {
 		return style;
 	}
 
-	@NullUnmarked public void act (float delta) {
+	@NullUnmarked
+	public void act (float delta) {
 		super.act(delta);
 
 		boolean panning = flickScrollListener.getGestureDetector().isPanning();
@@ -501,7 +502,8 @@ public class ScrollPane extends WidgetGroup {
 		}
 	}
 
-	@NullUnmarked private void updateActorPosition () {
+	@NullUnmarked
+	private void updateActorPosition () {
 		// Calculate the actor's position depending on the scroll state and available actor area.
 		float x = actorArea.x - (scrollX ? (int)visualAmountX : 0);
 		float y = actorArea.y - (int)(scrollY ? maxY - visualAmountY : maxY);
@@ -1093,7 +1095,8 @@ public class ScrollPane extends WidgetGroup {
 			this.vScrollKnob = vScrollKnob;
 		}
 
-		@NullUnmarked public ScrollPaneStyle (@Nullable ScrollPaneStyle style) {
+		@NullUnmarked
+		public ScrollPaneStyle (@Nullable ScrollPaneStyle style) {
 			background = style.background;
 			corner = style.corner;
 

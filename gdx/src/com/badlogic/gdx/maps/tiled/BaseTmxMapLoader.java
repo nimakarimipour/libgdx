@@ -94,7 +94,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	 * @param parameter
 	 * @param imageResolver
 	 * @return the {@link TiledMap} */
-	@NullUnmarked protected TiledMap loadTiledMap (FileHandle tmxFile, @Nullable P parameter, ImageResolver imageResolver) {
+	@NullUnmarked
+	protected TiledMap loadTiledMap (FileHandle tmxFile, @Nullable P parameter, ImageResolver imageResolver) {
 		this.map = new TiledMap();
 
 		if (parameter != null) {
@@ -203,7 +204,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@NullUnmarked protected void loadTileLayer (TiledMap map, MapLayers parentLayers, Element element) {
+	@NullUnmarked
+	protected void loadTileLayer (TiledMap map, MapLayers parentLayers, Element element) {
 		if (element.getName().equals("layer")) {
 			int width = element.getIntAttribute("width", 0);
 			int height = element.getIntAttribute("height", 0);
@@ -256,7 +258,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@NullUnmarked protected void loadImageLayer (TiledMap map, MapLayers parentLayers, Element element, FileHandle tmxFile,
+	@NullUnmarked
+	protected void loadImageLayer (TiledMap map, MapLayers parentLayers, Element element, FileHandle tmxFile,
 		ImageResolver imageResolver) {
 		if (element.getName().equals("imagelayer")) {
 			float x = 0;
@@ -315,11 +318,13 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		loadObject(map, layer.getObjects(), element, mapHeightInPixels);
 	}
 
-	@NullUnmarked protected void loadObject (@Nullable TiledMap map, TiledMapTile tile, Element element) {
+	@NullUnmarked
+	protected void loadObject (@Nullable TiledMap map, TiledMapTile tile, Element element) {
 		loadObject(map, tile.getObjects(), element, tile.getTextureRegion().getRegionHeight());
 	}
 
-	@NullUnmarked protected void loadObject (@Nullable TiledMap map, MapObjects objects, Element element, float heightInPixels) {
+	@NullUnmarked
+	protected void loadObject (@Nullable TiledMap map, MapObjects objects, Element element, float heightInPixels) {
 		if (element.getName().equals("object")) {
 			MapObject object = null;
 
@@ -430,7 +435,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected Object castProperty (@Nullable String name, @Nullable String value, @Nullable String type) {
 		if (type == null) {
 			return value;
@@ -472,7 +478,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		return cell;
 	}
 
-	@NullUnmarked static public int[] getTileIds (Element element, int width, int height) {
+	@NullUnmarked
+	static public int[] getTileIds (Element element, int width, int height) {
 		Element data = element.getChildByName("data");
 		String encoding = data.getAttribute("encoding", null);
 		if (encoding == null) { // no 'encoding' attribute means that the encoding is XML
@@ -545,7 +552,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		return result;
 	}
 
-	@NullUnmarked protected void loadTileSet (Element element, FileHandle tmxFile, ImageResolver imageResolver) {
+	@NullUnmarked
+	protected void loadTileSet (Element element, FileHandle tmxFile, ImageResolver imageResolver) {
 		if (element.getName().equals("tileset")) {
 			int firstgid = element.getIntAttribute("firstgid", 1);
 			String imageSource = "";

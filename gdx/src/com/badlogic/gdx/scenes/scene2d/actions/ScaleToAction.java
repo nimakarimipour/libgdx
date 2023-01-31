@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.scenes.scene2d.actions;
+
 import com.badlogic.gdx.NullUnmarked;
 
 /** Sets the actor's scale from its current value to a specific value.
@@ -23,12 +24,14 @@ public class ScaleToAction extends TemporalAction {
 	private float startX, startY;
 	private float endX, endY;
 
-	@NullUnmarked protected void begin () {
+	@NullUnmarked
+	protected void begin () {
 		startX = target.getScaleX();
 		startY = target.getScaleY();
 	}
 
-	@NullUnmarked protected void update (float percent) {
+	@NullUnmarked
+	protected void update (float percent) {
 		float x, y;
 		if (percent == 0) {
 			x = startX;

@@ -207,7 +207,8 @@ public class ParallelArray {
 		return channel;
 	}
 
-	@NullUnmarked @SuppressWarnings({"unchecked", "rawtypes"})
+	@NullUnmarked
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private <T extends Channel> T allocateChannel (@Nullable ChannelDescriptor channelDescriptor) {
 		if (channelDescriptor.type == float.class) {
 			return (T)new FloatChannel(channelDescriptor.id, channelDescriptor.count, capacity);
@@ -256,7 +257,8 @@ public class ParallelArray {
 	}
 
 	/** @return the channel with the same id as the one in the descriptor */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	@SuppressWarnings("unchecked")
 	public <T extends Channel> T getChannel (@Nullable ChannelDescriptor descriptor) {
 		for (Channel array : arrays) {

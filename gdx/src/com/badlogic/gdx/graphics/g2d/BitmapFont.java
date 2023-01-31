@@ -70,7 +70,8 @@ public class BitmapFont implements Disposable {
 
 	/** Creates a BitmapFont using the default 15pt Liberation Sans font included in the libgdx JAR file. This is convenient to
 	 * easily display text without bothering without generating a bitmap font yourself. */
-	@NullUnmarked public BitmapFont () {
+	@NullUnmarked
+	public BitmapFont () {
 		this(Gdx.files.classpath("com/badlogic/gdx/utils/lsans-15.fnt"), Gdx.files.classpath("com/badlogic/gdx/utils/lsans-15.png"),
 			false, true);
 	}
@@ -78,7 +79,8 @@ public class BitmapFont implements Disposable {
 	/** Creates a BitmapFont using the default 15pt Liberation Sans font included in the libgdx JAR file. This is convenient to
 	 * easily display text without bothering without generating a bitmap font yourself.
 	 * @param flip If true, the glyphs will be flipped for use with a perspective where 0,0 is the upper left corner. */
-	@NullUnmarked public BitmapFont (boolean flip) {
+	@NullUnmarked
+	public BitmapFont (boolean flip) {
 		this(Gdx.files.classpath("com/badlogic/gdx/utils/lsans-15.fnt"), Gdx.files.classpath("com/badlogic/gdx/utils/lsans-15.png"),
 			flip, true);
 	}
@@ -150,7 +152,8 @@ public class BitmapFont implements Disposable {
 	 * is null or empty, the image path(s) will be read from the BitmapFontData. The dispose() method will not dispose the texture
 	 * of the region(s) if the regions array is != null and not empty.
 	 * @param integer If true, rendering positions will be at integer values to avoid filtering artifacts. */
-	@NullUnmarked public BitmapFont (BitmapFontData data, @Nullable Array<TextureRegion> pageRegions, boolean integer) {
+	@NullUnmarked
+	public BitmapFont (BitmapFontData data, @Nullable Array<TextureRegion> pageRegions, boolean integer) {
 		this.flipped = data.flipped;
 		this.data = data;
 		this.integer = integer;
@@ -316,7 +319,8 @@ public class BitmapFont implements Disposable {
 	}
 
 	/** Disposes the texture used by this BitmapFont's region IF this BitmapFont created the texture. */
-	@NullUnmarked public void dispose () {
+	@NullUnmarked
+	public void dispose () {
 		if (ownsTexture) {
 			for (int i = 0; i < regions.size; i++)
 				regions.get(i).getTexture().dispose();
@@ -722,7 +726,8 @@ public class BitmapFont implements Disposable {
 			}
 		}
 
-		@NullUnmarked public void setGlyphRegion (Glyph glyph, TextureRegion region) {
+		@NullUnmarked
+		public void setGlyphRegion (Glyph glyph, TextureRegion region) {
 			Texture texture = region.getTexture();
 			float invTexWidth = 1.0f / texture.getWidth();
 			float invTexHeight = 1.0f / texture.getHeight();
@@ -830,7 +835,8 @@ public class BitmapFont implements Disposable {
 		 *           square bracket.
 		 * @param lastGlyph The glyph immediately before this run, or null if this is run is the first on a line of text. Used tp
 		 *           apply kerning between the specified glyph and the first glyph in this run. */
-		@NullUnmarked public void getGlyphs (GlyphRun run, @Nullable CharSequence str, int start, int end, @Nullable Glyph lastGlyph) {
+		@NullUnmarked
+		public void getGlyphs (GlyphRun run, @Nullable CharSequence str, int start, int end, @Nullable Glyph lastGlyph) {
 			int max = end - start;
 			if (max == 0) return;
 			boolean markupEnabled = this.markupEnabled;
@@ -901,7 +907,8 @@ public class BitmapFont implements Disposable {
 		}
 
 		/** Returns the image path for the texture page at the given index (the "id" in the BMFont file). */
-		@NullUnmarked public String getImagePath (int index) {
+		@NullUnmarked
+		public String getImagePath (int index) {
 			return imagePaths[index];
 		}
 

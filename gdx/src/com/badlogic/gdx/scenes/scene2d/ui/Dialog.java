@@ -86,7 +86,8 @@ public class Dialog extends Window {
 		buttonTable.defaults().space(6);
 
 		buttonTable.addListener(new ChangeListener() {
-			@NullUnmarked public void changed (ChangeEvent event, @Nullable Actor actor) {
+			@NullUnmarked
+			public void changed (ChangeEvent event, @Nullable Actor actor) {
 				if (!values.containsKey(actor)) return;
 				while (actor.getParent() != buttonTable)
 					actor = actor.getParent();
@@ -256,7 +257,8 @@ public class Dialog extends Window {
 	 * @see Keys */
 	public Dialog key (final int keycode, final @Null Object object) {
 		addListener(new InputListener() {
-			@NullUnmarked public boolean keyDown (@Nullable InputEvent event, int keycode2) {
+			@NullUnmarked
+			public boolean keyDown (@Nullable InputEvent event, int keycode2) {
 				if (keycode == keycode2) {
 					// Delay a frame to eat the keyTyped event.
 					Gdx.app.postRunnable(new Runnable() {

@@ -46,7 +46,8 @@ public class Sort {
 		comparableTimSort.doSort(a, fromIndex, toIndex);
 	}
 
-	@NullUnmarked public <T> void sort (@Nullable Array<T> a, Comparator<? super T> c) {
+	@NullUnmarked
+	public <T> void sort (@Nullable Array<T> a, Comparator<? super T> c) {
 		if (timSort == null) timSort = new TimSort();
 		timSort.doSort(a.items, c, 0, a.size);
 	}

@@ -68,7 +68,8 @@ public class FileTextureArrayData implements TextureArrayData {
 		prepared = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void consumeTextureArrayData () {
 		boolean containsCustomData = false;
 		for (int i = 0; i < textureDatas.length; i++) {

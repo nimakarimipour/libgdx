@@ -40,14 +40,16 @@ public class Decoder {
 		Stream = null;
 	}
 
-	@NullUnmarked public final void Init () throws IOException {
+	@NullUnmarked
+	public final void Init () throws IOException {
 		Code = 0;
 		Range = -1;
 		for (int i = 0; i < 5; i++)
 			Code = (Code << 8) | Stream.read();
 	}
 
-	@NullUnmarked public final int DecodeDirectBits (int numTotalBits) throws IOException {
+	@NullUnmarked
+	public final int DecodeDirectBits (int numTotalBits) throws IOException {
 		int result = 0;
 		for (int i = numTotalBits; i != 0; i--) {
 			Range >>>= 1;
@@ -63,7 +65,8 @@ public class Decoder {
 		return result;
 	}
 
-	@NullUnmarked public int DecodeBit (short[] probs, int index) throws IOException {
+	@NullUnmarked
+	public int DecodeBit (short[] probs, int index) throws IOException {
 		int prob = probs[index];
 		int newBound = (Range >>> kNumBitModelTotalBits) * prob;
 		if ((Code ^ 0x80000000) < (newBound ^ 0x80000000)) {

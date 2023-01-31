@@ -78,7 +78,8 @@ public class CheckBox extends TextButton {
 		super.draw(batch, parentAlpha);
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getImageDrawable () {
 		if (isDisabled()) {
 			if (isChecked && style.checkboxOnDisabled != null) return style.checkboxOnDisabled;

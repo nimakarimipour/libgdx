@@ -49,7 +49,8 @@ public class DepthShader extends DefaultShader {
 
 	@Nullable private static String defaultVertexShader = null;
 
-	@NullUnmarked public final static String getDefaultVertexShader () {
+	@NullUnmarked
+	public final static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
 			defaultVertexShader = Gdx.files.classpath("com/badlogic/gdx/graphics/g3d/shaders/depth.vertex.glsl").readString();
 		return defaultVertexShader;
@@ -57,7 +58,8 @@ public class DepthShader extends DefaultShader {
 
 	@Nullable private static String defaultFragmentShader = null;
 
-	@NullUnmarked public final static String getDefaultFragmentShader () {
+	@NullUnmarked
+	public final static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null)
 			defaultFragmentShader = Gdx.files.classpath("com/badlogic/gdx/graphics/g3d/shaders/depth.fragment.glsl").readString();
 		return defaultFragmentShader;
@@ -91,7 +93,8 @@ public class DepthShader extends DefaultShader {
 		this(renderable, config, new ShaderProgram(prefix + vertexShader, prefix + fragmentShader));
 	}
 
-	@NullUnmarked public DepthShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
+	@NullUnmarked
+	public DepthShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
 		super(renderable, config, shaderProgram);
 		final Attributes attributes = combineAttributes(renderable);
 
@@ -123,7 +126,8 @@ public class DepthShader extends DefaultShader {
 		// Gdx.gl20.glDisable(GL20.GL_POLYGON_OFFSET_FILL);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean canRender (Renderable renderable) {
 		if (renderable.bones != null && renderable.bones.length > numBones) return false;
 		final Attributes attributes = combineAttributes(renderable);
@@ -137,7 +141,8 @@ public class DepthShader extends DefaultShader {
 		return skinned == (weights > 0);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void render (Renderable renderable, Attributes combinedAttributes) {
 		if (combinedAttributes.has(BlendingAttribute.Type)) {
 			final BlendingAttribute blending = (BlendingAttribute)combinedAttributes.get(BlendingAttribute.Type);

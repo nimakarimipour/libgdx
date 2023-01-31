@@ -112,7 +112,8 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	/** Override this method in a derived class to attach the backing texture to the GL framebuffer object. */
 	protected abstract void attachFrameBufferColorTexture (T texture);
 
-	@NullUnmarked protected void build () {
+	@NullUnmarked
+	protected void build () {
 		GL20 gl = Gdx.gl20;
 
 		checkValidBuilder();
@@ -268,7 +269,8 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 		addManagedFrameBuffer(Gdx.app, this);
 	}
 
-	@NullUnmarked private void checkValidBuilder () {
+	@NullUnmarked
+	private void checkValidBuilder () {
 		boolean runningGL30 = Gdx.graphics.isGL30Available();
 
 		if (!runningGL30) {
@@ -291,7 +293,8 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	}
 
 	/** Releases all resources associated with the FrameBuffer. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		GL20 gl = Gdx.gl20;
 
@@ -312,12 +315,14 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	}
 
 	/** Makes the frame buffer current so everything gets drawn to it. */
-	@NullUnmarked public void bind () {
+	@NullUnmarked
+	public void bind () {
 		Gdx.gl20.glBindFramebuffer(GL20.GL_FRAMEBUFFER, framebufferHandle);
 	}
 
 	/** Unbinds the framebuffer, all drawing will be performed to the normal framebuffer from here on. */
-	@NullUnmarked public static void unbind () {
+	@NullUnmarked
+	public static void unbind () {
 		Gdx.gl20.glBindFramebuffer(GL20.GL_FRAMEBUFFER, defaultFramebufferHandle);
 	}
 
@@ -328,12 +333,14 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	}
 
 	/** Sets viewport to the dimensions of framebuffer. Called by {@link #begin()}. */
-	@NullUnmarked protected void setFrameBufferViewport () {
+	@NullUnmarked
+	protected void setFrameBufferViewport () {
 		Gdx.gl20.glViewport(0, 0, bufferBuilder.width, bufferBuilder.height);
 	}
 
 	/** Unbinds the framebuffer, all drawing will be performed to the normal framebuffer from here on. */
-	@NullUnmarked public void end () {
+	@NullUnmarked
+	public void end () {
 		end(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
 	}
 
@@ -343,7 +350,8 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	 * @param y the y-asis position of the viewport in pixels
 	 * @param width the width of the viewport in pixels
 	 * @param height the height of the viewport in pixels */
-	@NullUnmarked public void end (int x, int y, int width, int height) {
+	@NullUnmarked
+	public void end (int x, int y, int width, int height) {
 		unbind();
 		Gdx.gl20.glViewport(x, y, width, height);
 	}
@@ -371,12 +379,14 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	}
 
 	/** @return the height of the framebuffer in pixels */
-	@NullUnmarked public int getHeight () {
+	@NullUnmarked
+	public int getHeight () {
 		return bufferBuilder.height;
 	}
 
 	/** @return the width of the framebuffer in pixels */
-	@NullUnmarked public int getWidth () {
+	@NullUnmarked
+	public int getWidth () {
 		return bufferBuilder.width;
 	}
 

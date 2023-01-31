@@ -88,7 +88,8 @@ public class Tooltip<T extends Actor> extends InputListener {
 		this.touchIndependent = touchIndependent;
 	}
 
-	@NullUnmarked public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+	@NullUnmarked
+	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 		if (instant) {
 			container.toFront();
 			return false;
@@ -103,7 +104,8 @@ public class Tooltip<T extends Actor> extends InputListener {
 		return true;
 	}
 
-	@NullUnmarked private void setContainerPosition (@Nullable Actor actor, float x, float y) {
+	@NullUnmarked
+	private void setContainerPosition (@Nullable Actor actor, float x, float y) {
 		this.targetActor = actor;
 		Stage stage = actor.getStage();
 		if (stage == null) return;
@@ -126,7 +128,8 @@ public class Tooltip<T extends Actor> extends InputListener {
 		container.setOrigin(point.x, point.y);
 	}
 
-	@NullUnmarked public void enter (InputEvent event, float x, float y, int pointer, @Nullable @Null Actor fromActor) {
+	@NullUnmarked
+	public void enter (InputEvent event, float x, float y, int pointer, @Nullable @Null Actor fromActor) {
 		if (pointer != -1) return;
 		if (touchIndependent && Gdx.input.isTouched()) return;
 		Actor actor = event.getListenerActor();
@@ -140,7 +143,8 @@ public class Tooltip<T extends Actor> extends InputListener {
 		hide();
 	}
 
-	@NullUnmarked public void hide () {
+	@NullUnmarked
+	public void hide () {
 		manager.hide(this);
 	}
 }

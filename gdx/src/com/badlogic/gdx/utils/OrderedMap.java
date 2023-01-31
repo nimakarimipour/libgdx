@@ -158,7 +158,8 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link OrderedMapEntries} constructor for nested or multithreaded iteration. */
-	@NullUnmarked public Entries<K, V> entries () {
+	@NullUnmarked
+	public Entries<K, V> entries () {
 		if (Collections.allocateIterators) return new OrderedMapEntries(this);
 		if (entries1 == null) {
 			entries1 = new OrderedMapEntries(this);
@@ -180,7 +181,8 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link OrderedMapValues} constructor for nested or multithreaded iteration. */
-	@NullUnmarked public Values<V> values () {
+	@NullUnmarked
+	public Values<V> values () {
 		if (Collections.allocateIterators) return new OrderedMapValues(this);
 		if (values1 == null) {
 			values1 = new OrderedMapValues(this);
@@ -202,7 +204,8 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link OrderedMapKeys} constructor for nested or multithreaded iteration. */
-	@NullUnmarked public Keys<K> keys () {
+	@NullUnmarked
+	public Keys<K> keys () {
 		if (Collections.allocateIterators) return new OrderedMapKeys(this);
 		if (keys1 == null) {
 			keys1 = new OrderedMapKeys(this);

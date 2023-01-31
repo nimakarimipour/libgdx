@@ -65,7 +65,8 @@ public class VertexBufferObject implements VertexData {
 	 * @param isStatic whether the vertex data is static.
 	 * @param numVertices the maximum number of vertices
 	 * @param attributes the {@link VertexAttributes}. */
-	@NullUnmarked public VertexBufferObject (boolean isStatic, int numVertices, @Nullable VertexAttributes attributes) {
+	@NullUnmarked
+	public VertexBufferObject (boolean isStatic, int numVertices, @Nullable VertexAttributes attributes) {
 		bufferHandle = Gdx.gl20.glGenBuffer();
 
 		ByteBuffer data = BufferUtils.newUnsafeByteBuffer(attributes.vertexSize * numVertices);
@@ -74,7 +75,8 @@ public class VertexBufferObject implements VertexData {
 		setUsage(isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW);
 	}
 
-	@NullUnmarked protected VertexBufferObject (int usage, ByteBuffer data, boolean ownsBuffer, VertexAttributes attributes) {
+	@NullUnmarked
+	protected VertexBufferObject (int usage, ByteBuffer data, boolean ownsBuffer, VertexAttributes attributes) {
 		bufferHandle = Gdx.gl20.glGenBuffer();
 
 		setBuffer(data, ownsBuffer, attributes);
@@ -87,12 +89,14 @@ public class VertexBufferObject implements VertexData {
 		return attributes;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int getNumVertices () {
 		return buffer.limit() * 4 / attributes.vertexSize;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int getNumMaxVertices () {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}
@@ -125,14 +129,16 @@ public class VertexBufferObject implements VertexData {
 		((Buffer)buffer).limit(l / 4);
 	}
 
-	@NullUnmarked private void bufferChanged () {
+	@NullUnmarked
+	private void bufferChanged () {
 		if (isBound) {
 			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
 			isDirty = false;
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void setVertices (@Nullable float[] vertices, int offset, int count) {
 		isDirty = true;
 		BufferUtils.copy(vertices, byteBuffer, count, offset);
@@ -141,7 +147,8 @@ public class VertexBufferObject implements VertexData {
 		bufferChanged();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void updateVertices (int targetOffset, float[] vertices, int sourceOffset, int count) {
 		isDirty = true;
 		final int pos = byteBuffer.position();
@@ -172,7 +179,8 @@ public class VertexBufferObject implements VertexData {
 		bind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		final GL20 gl = Gdx.gl20;
 
@@ -217,7 +225,8 @@ public class VertexBufferObject implements VertexData {
 		unbind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 		final int numAttributes = attributes.size();
@@ -236,14 +245,16 @@ public class VertexBufferObject implements VertexData {
 	}
 
 	/** Invalidates the VertexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void invalidate () {
 		bufferHandle = Gdx.gl20.glGenBuffer();
 		isDirty = true;
 	}
 
 	/** Disposes of all resources this VertexBufferObject uses. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		GL20 gl = Gdx.gl20;
 		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, 0);

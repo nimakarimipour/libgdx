@@ -56,7 +56,8 @@ public final class ScreenUtils {
 
 	/** Clears the color buffers and optionally the depth buffer.
 	 * @param clearDepth Clears the depth buffer if true. */
-	@NullUnmarked public static void clear (float r, float g, float b, float a, boolean clearDepth) {
+	@NullUnmarked
+	public static void clear (float r, float g, float b, float a, boolean clearDepth) {
 		Gdx.gl.glClearColor(r, g, b, a);
 		int mask = GL20.GL_COLOR_BUFFER_BIT;
 		if (clearDepth) mask = mask | GL20.GL_DEPTH_BUFFER_BIT;
@@ -67,7 +68,8 @@ public final class ScreenUtils {
 	 * size. The base {@link Texture} always has {@link MathUtils#nextPowerOfTwo} dimensions and RGBA8888 {@link Format}. It can be
 	 * accessed via {@link TextureRegion#getTexture}. The texture is not managed and has to be reloaded manually on a context loss.
 	 * The returned TextureRegion is flipped along the Y axis by default. */
-	@NullUnmarked public static TextureRegion getFrameBufferTexture () {
+	@NullUnmarked
+	public static TextureRegion getFrameBufferTexture () {
 		final int w = Gdx.graphics.getBackBufferWidth();
 		final int h = Gdx.graphics.getBackBufferHeight();
 		return getFrameBufferTexture(0, 0, w, h);
@@ -111,7 +113,8 @@ public final class ScreenUtils {
 	 * functionality wisely.
 	 *
 	 * @param flipY whether to flip pixels along Y axis */
-	@NullUnmarked public static byte[] getFrameBufferPixels (boolean flipY) {
+	@NullUnmarked
+	public static byte[] getFrameBufferPixels (boolean flipY) {
 		final int w = Gdx.graphics.getBackBufferWidth();
 		final int h = Gdx.graphics.getBackBufferHeight();
 		return getFrameBufferPixels(0, 0, w, h, flipY);
@@ -125,7 +128,8 @@ public final class ScreenUtils {
 	 * functionality wisely.
 	 *
 	 * @param flipY whether to flip pixels along Y axis */
-	@NullUnmarked public static byte[] getFrameBufferPixels (int x, int y, int w, int h, boolean flipY) {
+	@NullUnmarked
+	public static byte[] getFrameBufferPixels (int x, int y, int w, int h, boolean flipY) {
 		Gdx.gl.glPixelStorei(GL20.GL_PACK_ALIGNMENT, 1);
 		final ByteBuffer pixels = BufferUtils.newByteBuffer(w * h * 4);
 		Gdx.gl.glReadPixels(x, y, w, h, GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, pixels);

@@ -59,7 +59,8 @@ public class ETC1TextureData implements TextureData {
 		return isPrepared;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void prepare () {
 		if (isPrepared) throw new GdxRuntimeException("Already prepared");
 		if (file == null && data == null) throw new GdxRuntimeException("Can only load once from ETC1Data");
@@ -71,7 +72,8 @@ public class ETC1TextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void consumeCustomData (int target) {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling consumeCompressedData()");
 

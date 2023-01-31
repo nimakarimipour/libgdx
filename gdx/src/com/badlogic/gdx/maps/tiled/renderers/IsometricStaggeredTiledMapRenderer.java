@@ -45,7 +45,8 @@ public class IsometricStaggeredTiledMapRenderer extends BatchTiledMapRenderer {
 		super(map, unitScale, batch);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void renderTileLayer (TiledMapTileLayer layer) {
 		final Color batchColor = batch.getColor();
 		final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a * layer.getOpacity());

@@ -36,7 +36,8 @@ public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public EllipseSpawnShapeValue () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void spawnAux (Vector3 vector, float percent) {
 		// Generate the point on the surface of the sphere
 		float width = spawnWidth + spawnWidthDiff * spawnWidthValue.getScale(percent);
@@ -91,7 +92,8 @@ public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
 		this.side = side;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		EllipseSpawnShapeValue shape = (EllipseSpawnShapeValue)value;

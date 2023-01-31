@@ -70,7 +70,8 @@ public class OrthographicCamera extends Camera {
 	/** Sets this camera to an orthographic projection using a viewport fitting the screen resolution, centered at
 	 * (Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2), with the y-axis pointing up or down.
 	 * @param yDown whether y should be pointing down */
-	@NullUnmarked public void setToOrtho (boolean yDown) {
+	@NullUnmarked
+	public void setToOrtho (boolean yDown) {
 		setToOrtho(yDown, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 

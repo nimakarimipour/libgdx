@@ -371,7 +371,8 @@ class ComparableTimSort {
 	 * words, i must be equal to stackSize-2 or stackSize-3.
 	 * 
 	 * @param i stack index of the first of the two runs to merge */
-	@NullUnmarked @SuppressWarnings("unchecked")
+	@NullUnmarked
+	@SuppressWarnings("unchecked")
 	private void mergeAt (int i) {
 		if (DEBUG) assert stackSize >= 2;
 		if (DEBUG) assert i >= 0;
@@ -561,7 +562,8 @@ class ComparableTimSort {
 	 * @param len1 length of first run to be merged (must be > 0)
 	 * @param base2 index of first element in second run to be merged (must be aBase + aLen)
 	 * @param len2 length of second run to be merged (must be > 0) */
-	@NullUnmarked @SuppressWarnings("unchecked")
+	@NullUnmarked
+	@SuppressWarnings("unchecked")
 	private void mergeLo (int base1, int len1, int base2, int len2) {
 		if (DEBUG) assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
@@ -665,7 +667,8 @@ class ComparableTimSort {
 	 * @param len1 length of first run to be merged (must be > 0)
 	 * @param base2 index of first element in second run to be merged (must be aBase + aLen)
 	 * @param len2 length of second run to be merged (must be > 0) */
-	@NullUnmarked @SuppressWarnings("unchecked")
+	@NullUnmarked
+	@SuppressWarnings("unchecked")
 	private void mergeHi (int base1, int len1, int base2, int len2) {
 		if (DEBUG) assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
@@ -770,7 +773,8 @@ class ComparableTimSort {
 	 * 
 	 * @param minCapacity the minimum required capacity of the tmp array
 	 * @return tmp, whether or not it grew */
-	@NullUnmarked private Object[] ensureCapacity (int minCapacity) {
+	@NullUnmarked
+	private Object[] ensureCapacity (int minCapacity) {
 		tmpCount = Math.max(tmpCount, minCapacity);
 		if (tmp.length < minCapacity) {
 			// Compute smallest power of 2 > minCapacity

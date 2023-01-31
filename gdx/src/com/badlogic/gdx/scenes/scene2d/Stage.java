@@ -90,7 +90,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Creates a stage with a {@link ScalingViewport} set to {@link Scaling#stretch}. The stage will use its own {@link Batch}
 	 * which will be disposed when the stage is disposed. */
-	@NullUnmarked public Stage () {
+	@NullUnmarked
+	public Stage () {
 		this(new ScalingViewport(Scaling.stretch, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera()),
 			new SpriteBatch());
 		ownsBatch = true;
@@ -106,7 +107,8 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Creates a stage with the specified viewport and batch. This can be used to specify an existing batch or to customize which
 	 * batch implementation is used.
 	 * @param batch Will not be disposed if {@link #dispose()} is called, handle disposal yourself. */
-	@NullUnmarked public Stage (Viewport viewport, Batch batch) {
+	@NullUnmarked
+	public Stage (Viewport viewport, Batch batch) {
 		if (viewport == null) throw new IllegalArgumentException("viewport cannot be null.");
 		if (batch == null) throw new IllegalArgumentException("batch cannot be null.");
 		this.viewport = viewport;
@@ -118,7 +120,8 @@ public class Stage extends InputAdapter implements Disposable {
 		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 	}
 
-	@NullUnmarked public void draw () {
+	@NullUnmarked
+	public void draw () {
 		Camera camera = viewport.getCamera();
 		camera.update();
 
@@ -133,7 +136,8 @@ public class Stage extends InputAdapter implements Disposable {
 		if (debug) drawDebug();
 	}
 
-	@NullUnmarked private void drawDebug () {
+	@NullUnmarked
+	private void drawDebug () {
 		if (debugShapes == null) {
 			debugShapes = new ShapeRenderer();
 			debugShapes.setAutoShapeType(true);
@@ -184,14 +188,16 @@ public class Stage extends InputAdapter implements Disposable {
 	}
 
 	/** Calls {@link #act(float)} with {@link Graphics#getDeltaTime()}, limited to a minimum of 30fps. */
-	@NullUnmarked public void act () {
+	@NullUnmarked
+	public void act () {
 		act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
 	}
 
 	/** Calls the {@link Actor#act(float)} method on each actor in the stage. Typically called each frame. This method also fires
 	 * enter and exit events.
 	 * @param delta Time in seconds since the last frame. */
-	@NullUnmarked public void act (float delta) {
+	@NullUnmarked
+	public void act (float delta) {
 		// Update over actors. Done in act() because actors may change position, which can fire enter/exit without an input event.
 		for (int pointer = 0, n = pointerOverActors.length; pointer < n; pointer++) {
 			Actor overLast = pointerOverActors[pointer];
@@ -293,7 +299,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a touch moved event to the stage and returns true if an actor in the scene {@link Event#handle() handled} the
 	 * event. Only {@link InputListener listeners} that returned true for touchDown will receive this event. */
-	@NullUnmarked public boolean touchDragged (int screenX, int screenY, int pointer) {
+	@NullUnmarked
+	public boolean touchDragged (int screenX, int screenY, int pointer) {
 		pointerScreenX[pointer] = screenX;
 		pointerScreenY[pointer] = screenY;
 		mouseScreenX = screenX;
@@ -329,7 +336,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a touch up event to the stage and returns true if an actor in the scene {@link Event#handle() handled} the event.
 	 * Only {@link InputListener listeners} that returned true for touchDown will receive this event. */
-	@NullUnmarked public boolean touchUp (int screenX, int screenY, int pointer, int button) {
+	@NullUnmarked
+	public boolean touchUp (int screenX, int screenY, int pointer, int button) {
 		pointerTouched[pointer] = false;
 		pointerScreenX[pointer] = screenX;
 		pointerScreenY[pointer] = screenY;
@@ -487,7 +495,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Cancels touch focus for all listeners with the specified listener actor.
 	 * @see #cancelTouchFocus() */
-	@NullUnmarked public void cancelTouchFocus (Actor listenerActor) {
+	@NullUnmarked
+	public void cancelTouchFocus (Actor listenerActor) {
 		// Cancel all current touch focuses for the specified listener, allowing for concurrent modification, and never cancel the
 		// same focus twice.
 		InputEvent event = null;
@@ -527,7 +536,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Cancels touch focus for all listeners except the specified listener.
 	 * @see #cancelTouchFocus() */
-	@NullUnmarked public void cancelTouchFocusExcept (@Nullable @Null EventListener exceptListener, @Nullable @Null Actor exceptActor) {
+	@NullUnmarked
+	public void cancelTouchFocusExcept (@Nullable @Null EventListener exceptListener, @Nullable @Null Actor exceptActor) {
 		InputEvent event = Pools.obtain(InputEvent.class);
 		event.setType(InputEvent.Type.touchUp);
 		event.setStage(this);
@@ -767,7 +777,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Transforms the stage coordinates to screen coordinates.
 	 * @param stageCoords Input stage coordinates and output for resulting screen coordinates. */
-	@NullUnmarked public Vector2 stageToScreenCoordinates (Vector2 stageCoords) {
+	@NullUnmarked
+	public Vector2 stageToScreenCoordinates (Vector2 stageCoords) {
 		viewport.project(stageCoords);
 		stageCoords.y = Gdx.graphics.getHeight() - stageCoords.y;
 		return stageCoords;
@@ -874,7 +885,8 @@ public class Stage extends InputAdapter implements Disposable {
 	}
 
 	/** Check if screen coordinates are inside the viewport's screen area. */
-	@NullUnmarked protected boolean isInsideViewport (int screenX, int screenY) {
+	@NullUnmarked
+	protected boolean isInsideViewport (int screenX, int screenY) {
 		int x0 = viewport.getScreenX();
 		int x1 = x0 + viewport.getScreenWidth();
 		int y0 = viewport.getScreenY();

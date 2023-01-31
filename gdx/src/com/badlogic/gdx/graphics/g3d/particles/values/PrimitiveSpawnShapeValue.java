@@ -50,7 +50,8 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		spawnDepthValue = new ScaledNumericValue();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void setActive (boolean active) {
 		super.setActive(active);
 		spawnWidthValue.setActive(true);
@@ -81,13 +82,15 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		return spawnDepthValue;
 	}
 
-	@NullUnmarked public void setDimensions (float width, float height, float depth) {
+	@NullUnmarked
+	public void setDimensions (float width, float height, float depth) {
 		spawnWidthValue.setHigh(width);
 		spawnHeightValue.setHigh(height);
 		spawnDepthValue.setHigh(depth);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void start () {
 		spawnWidth = spawnWidthValue.newLowValue();
 		spawnWidthDiff = spawnWidthValue.newHighValue();
@@ -102,7 +105,8 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		if (!spawnDepthValue.isRelative()) spawnDepthDiff -= spawnDepth;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		PrimitiveSpawnShapeValue shape = (PrimitiveSpawnShapeValue)value;
@@ -121,7 +125,8 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		json.writeValue("edges", edges);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		spawnWidthValue = json.readValue("spawnWidthValue", ScaledNumericValue.class, jsonData);

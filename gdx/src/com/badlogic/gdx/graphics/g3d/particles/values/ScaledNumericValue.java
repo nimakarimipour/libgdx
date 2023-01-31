@@ -86,7 +86,8 @@ public class ScaledNumericValue extends RangedNumericValue {
 		this.relative = relative;
 	}
 
-	@NullUnmarked public float getScale (float percent) {
+	@NullUnmarked
+	public float getScale (float percent) {
 		int endIndex = -1;
 		int n = timeline.length;
 		// if (percent >= timeline[n-1])
@@ -105,7 +106,8 @@ public class ScaledNumericValue extends RangedNumericValue {
 		return startValue + (scaling[endIndex] - startValue) * ((percent - startTime) / (timeline[endIndex] - startTime));
 	}
 
-	@NullUnmarked public void load (@Nullable ScaledNumericValue value) {
+	@NullUnmarked
+	public void load (@Nullable ScaledNumericValue value) {
 		super.load(value);
 		highMax = value.highMax;
 		highMin = value.highMin;
@@ -126,7 +128,8 @@ public class ScaledNumericValue extends RangedNumericValue {
 		json.writeValue("timeline", timeline);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		highMin = json.readValue("highMin", float.class, jsonData);

@@ -49,7 +49,8 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		super(resolver);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable CubemapParameter parameter) {
 		info.filename = fileName;

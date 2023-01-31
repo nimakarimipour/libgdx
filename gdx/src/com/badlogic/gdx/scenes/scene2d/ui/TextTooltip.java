@@ -57,7 +57,8 @@ public class TextTooltip extends Tooltip<Label> {
 		return new Label(text, style);
 	}
 
-	@NullUnmarked public void setStyle (TextTooltipStyle style) {
+	@NullUnmarked
+	public void setStyle (TextTooltipStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		container.setBackground(style.background);
 		container.maxWidth(style.wrapWidth);

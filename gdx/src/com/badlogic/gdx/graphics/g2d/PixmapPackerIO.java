@@ -60,7 +60,8 @@ public class PixmapPackerIO {
 	 * @param packer the PixmapPacker to be written
 	 * @param parameters the SaveParameters specifying how to save the PixmapPacker
 	 * @throws IOException if the atlas file can not be written */
-	@NullUnmarked public void save (FileHandle file, PixmapPacker packer, SaveParameters parameters) throws IOException {
+	@NullUnmarked
+	public void save (FileHandle file, PixmapPacker packer, SaveParameters parameters) throws IOException {
 		Writer writer = file.writer(false);
 		int index = 0;
 		for (Page page : packer.pages) {

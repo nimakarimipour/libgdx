@@ -77,7 +77,8 @@ public class TextArea extends TextField {
 		linesShowing = 0;
 	}
 
-	@NullUnmarked protected int letterUnderCursor (float x) {
+	@NullUnmarked
+	protected int letterUnderCursor (float x) {
 		if (linesBreak.size > 0) {
 			if (cursorLine * 2 >= linesBreak.size) {
 				return text.length();
@@ -97,7 +98,8 @@ public class TextArea extends TextField {
 		}
 	}
 
-	@NullUnmarked public void setStyle (TextFieldStyle style) {
+	@NullUnmarked
+	public void setStyle (TextFieldStyle style) {
 		// same as super(), just different textHeight. no super() so we don't do same work twice
 		if (style == null) throw new IllegalArgumentException("style cannot be null.");
 		this.style = style;
@@ -113,7 +115,8 @@ public class TextArea extends TextField {
 		this.prefRows = prefRows;
 	}
 
-	@NullUnmarked public float getPrefHeight () {
+	@NullUnmarked
+	public float getPrefHeight () {
 		if (prefRows <= 0) {
 			return super.getPrefHeight();
 		} else {
@@ -129,18 +132,21 @@ public class TextArea extends TextField {
 	}
 
 	/** Returns total number of lines that the text occupies **/
-	@NullUnmarked public int getLines () {
+	@NullUnmarked
+	public int getLines () {
 		return linesBreak.size / 2 + (newLineAtEnd() ? 1 : 0);
 	}
 
 	/** Returns if there's a new line at then end of the text **/
-	@NullUnmarked public boolean newLineAtEnd () {
+	@NullUnmarked
+	public boolean newLineAtEnd () {
 		return text.length() != 0
 			&& (text.charAt(text.length() - 1) == NEWLINE || text.charAt(text.length() - 1) == CARRIAGE_RETURN);
 	}
 
 	/** Moves the cursor to the given number line **/
-	@NullUnmarked public void moveCursorLine (int line) {
+	@NullUnmarked
+	public void moveCursorLine (int line) {
 		if (line < 0) {
 			cursorLine = 0;
 			cursor = 0;
@@ -168,7 +174,8 @@ public class TextArea extends TextField {
 	}
 
 	/** Updates the current line, checking the cursor position in the text **/
-	@NullUnmarked void updateCurrentLine () {
+	@NullUnmarked
+	void updateCurrentLine () {
 		int index = calculateCurrentLineIndex(cursor);
 		int line = index / 2;
 		// Special case when cursor moves to the beginning of the line from the end of another and a word
@@ -199,7 +206,8 @@ public class TextArea extends TextField {
 	}
 
 	/** Calculates the text area line for the given cursor position **/
-	@NullUnmarked private int calculateCurrentLineIndex (int cursor) {
+	@NullUnmarked
+	private int calculateCurrentLineIndex (int cursor) {
 		int index = 0;
 		while (index < linesBreak.size && cursor > linesBreak.items[index]) {
 			index++;
@@ -209,7 +217,8 @@ public class TextArea extends TextField {
 
 	// OVERRIDE from TextField
 
-	@NullUnmarked protected void sizeChanged () {
+	@NullUnmarked
+	protected void sizeChanged () {
 		lastText = null; // Cause calculateOffsets to recalculate the line breaks.
 
 		// The number of lines showed must be updated whenever the height is updated
@@ -219,7 +228,8 @@ public class TextArea extends TextField {
 		linesShowing = (int)Math.floor(availableHeight / font.getLineHeight());
 	}
 
-	@NullUnmarked protected float getTextY (@Nullable BitmapFont font, @Nullable @Null Drawable background) {
+	@NullUnmarked
+	protected float getTextY (@Nullable BitmapFont font, @Nullable @Null Drawable background) {
 		float textY = getHeight();
 		if (background != null) {
 			textY = textY - background.getTopHeight();
@@ -228,7 +238,8 @@ public class TextArea extends TextField {
 		return textY;
 	}
 
-	@NullUnmarked protected void drawSelection (Drawable selection, Batch batch, @Nullable BitmapFont font, float x, float y) {
+	@NullUnmarked
+	protected void drawSelection (Drawable selection, Batch batch, @Nullable BitmapFont font, float x, float y) {
 		int i = firstLineShowing * 2;
 		float offsetY = 0;
 		int minIndex = Math.min(cursor, selectionStart);
@@ -271,7 +282,8 @@ public class TextArea extends TextField {
 		}
 	}
 
-	@NullUnmarked protected void drawText (Batch batch, BitmapFont font, float x, float y) {
+	@NullUnmarked
+	protected void drawText (Batch batch, BitmapFont font, float x, float y) {
 		float offsetY = -(style.font.getLineHeight() - textHeight) / 2;
 		for (int i = firstLineShowing * 2; i < (firstLineShowing + linesShowing) * 2 && i < linesBreak.size; i += 2) {
 			font.draw(batch, displayText, x, y + offsetY, linesBreak.items[i], linesBreak.items[i + 1], 0, Align.left, false);
@@ -283,7 +295,8 @@ public class TextArea extends TextField {
 		cursorPatch.draw(batch, x + getCursorX(), y + getCursorY(), cursorPatch.getMinWidth(), font.getLineHeight());
 	}
 
-	@NullUnmarked protected void calculateOffsets () {
+	@NullUnmarked
+	protected void calculateOffsets () {
 		super.calculateOffsets();
 		if (!this.text.equals(lastText)) {
 			this.lastText = text;
@@ -335,7 +348,8 @@ public class TextArea extends TextField {
 		updateCurrentLine();
 	}
 
-	@NullUnmarked protected void moveCursor (boolean forward, boolean jump) {
+	@NullUnmarked
+	protected void moveCursor (boolean forward, boolean jump) {
 		int count = forward ? 1 : -1;
 		int index = (cursorLine * 2) + count;
 		if (index >= 0 && index + 1 < linesBreak.size && linesBreak.items[index] == cursor
@@ -352,7 +366,8 @@ public class TextArea extends TextField {
 
 	}
 
-	@NullUnmarked protected boolean continueCursor (int index, int offset) {
+	@NullUnmarked
+	protected boolean continueCursor (int index, int offset) {
 		int pos = calculateCurrentLineIndex(index + offset);
 		return super.continueCursor(index, offset) && (pos < 0 || pos >= linesBreak.size - 2 || (linesBreak.items[pos + 1] != index)
 			|| (linesBreak.items[pos + 1] == linesBreak.items[pos + 2]));
@@ -370,7 +385,8 @@ public class TextArea extends TextField {
 		return linesShowing;
 	}
 
-	@NullUnmarked public float getCursorX () {
+	@NullUnmarked
+	public float getCursorX () {
 		float textOffset = 0;
 		BitmapFont.BitmapFontData fontData = style.font.getData();
 		if (!(cursor >= glyphPositions.size || cursorLine * 2 >= linesBreak.size)) {
@@ -386,14 +402,16 @@ public class TextArea extends TextField {
 		return textOffset + fontData.cursorX;
 	}
 
-	@NullUnmarked public float getCursorY () {
+	@NullUnmarked
+	public float getCursorY () {
 		BitmapFont font = style.font;
 		return -(cursorLine - firstLineShowing + 1) * font.getLineHeight();
 	}
 
 	/** Input listener for the text area **/
 	public class TextAreaListener extends TextFieldClickListener {
-		@NullUnmarked protected void setCursorPosition (float x, float y) {
+		@NullUnmarked
+		protected void setCursorPosition (float x, float y) {
 			moveOffset = -1;
 
 			Drawable background = style.background;
@@ -417,7 +435,8 @@ public class TextArea extends TextField {
 			updateCurrentLine();
 		}
 
-		@NullUnmarked public boolean keyDown (@Nullable InputEvent event, int keycode) {
+		@NullUnmarked
+		public boolean keyDown (@Nullable InputEvent event, int keycode) {
 			boolean result = super.keyDown(event, keycode);
 			if (hasKeyboardFocus()) {
 				boolean repeat = false;
@@ -468,7 +487,8 @@ public class TextArea extends TextField {
 			return result;
 		}
 
-		@NullUnmarked protected void goHome (boolean jump) {
+		@NullUnmarked
+		protected void goHome (boolean jump) {
 			if (jump) {
 				cursor = 0;
 			} else if (cursorLine * 2 < linesBreak.size) {
@@ -476,7 +496,8 @@ public class TextArea extends TextField {
 			}
 		}
 
-		@NullUnmarked protected void goEnd (boolean jump) {
+		@NullUnmarked
+		protected void goEnd (boolean jump) {
 			if (jump || cursorLine >= getLines()) {
 				cursor = text.length();
 			} else if (cursorLine * 2 + 1 < linesBreak.size) {

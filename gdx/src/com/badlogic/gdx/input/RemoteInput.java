@@ -242,7 +242,8 @@ public class RemoteInput implements Runnable, Input {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void run () {
 		while (true) {
 			try {
@@ -449,12 +450,14 @@ public class RemoteInput implements Runnable, Input {
 		return justPressedKeys[key];
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void getTextInput (TextInputListener listener, String title, String text, String hint) {
 		Gdx.app.getInput().getTextInput(listener, title, text, hint);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void getTextInput (TextInputListener listener, String title, String text, String hint, OnscreenKeyboardType type) {
 		Gdx.app.getInput().getTextInput(listener, title, text, hint, type);
 	}

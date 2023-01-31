@@ -17,7 +17,6 @@
 package com.badlogic.gdx;
 
 import javax.annotation.Nullable;
-import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -46,7 +45,8 @@ public abstract class Game implements ApplicationListener {
 		if (screen != null) screen.resume();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void render () {
 		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
 	}
@@ -59,7 +59,8 @@ public abstract class Game implements ApplicationListener {
 	/** Sets the current screen. {@link Screen#hide()} is called on any old screen, and {@link Screen#show()} is called on the new
 	 * screen, if any.
 	 * @param screen may be {@code null} */
-	@NullUnmarked public void setScreen (Screen screen) {
+	@NullUnmarked
+	public void setScreen (Screen screen) {
 		if (this.screen != null) this.screen.hide();
 		this.screen = screen;
 		if (this.screen != null) {

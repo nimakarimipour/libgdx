@@ -135,7 +135,8 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Returns the emitter with the specified name, or null. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public ParticleEmitter findEmitter (String name) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
@@ -196,7 +197,8 @@ public class ParticleEffect implements Disposable {
 		loadEmitterImages(atlas, null);
 	}
 
-	@NullUnmarked public void loadEmitterImages (@Nullable TextureAtlas atlas, @Nullable String atlasPrefix) {
+	@NullUnmarked
+	public void loadEmitterImages (@Nullable TextureAtlas atlas, @Nullable String atlasPrefix) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
 			if (emitter.getImagePaths().size == 0) continue;
@@ -247,7 +249,8 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Disposes the texture for each sprite for each ParticleEmitter. */
-	@NullUnmarked public void dispose () {
+	@NullUnmarked
+	public void dispose () {
 		if (!ownsTexture) return;
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);

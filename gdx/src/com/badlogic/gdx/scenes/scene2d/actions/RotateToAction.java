@@ -43,11 +43,13 @@ public class RotateToAction extends TemporalAction {
 		this.useShortestDirection = useShortestDirection;
 	}
 
-	@NullUnmarked protected void begin () {
+	@NullUnmarked
+	protected void begin () {
 		start = target.getRotation();
 	}
 
-	@NullUnmarked protected void update (float percent) {
+	@NullUnmarked
+	protected void update (float percent) {
 		float rotation;
 		if (percent == 0)
 			rotation = start;

@@ -32,7 +32,8 @@ public final class CylinderSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public CylinderSpawnShapeValue () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void spawnAux (Vector3 vector, float percent) {
 		// Generate the point on the surface of the sphere
 		float width = spawnWidth + (spawnWidthDiff * spawnWidthValue.getScale(percent));

@@ -266,7 +266,8 @@ public class CpuSpriteBatch extends SpriteBatch {
 		}
 	}
 
-	@NullUnmarked private void drawAdjusted (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width,
+	@NullUnmarked
+	private void drawAdjusted (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width,
 		float height, float scaleX, float scaleY, float rotation) {
 		// v must be flipped
 		drawAdjustedUV(region.texture, x, y, originX, originY, width, height, scaleX, scaleY, rotation, region.u, region.v2,

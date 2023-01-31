@@ -131,7 +131,8 @@ public class Array<T> implements Iterable<T> {
 		size += 4;
 	}
 
-	@NullUnmarked public void addAll (@Nullable Array<? extends T> array) {
+	@NullUnmarked
+	public void addAll (@Nullable Array<? extends T> array) {
 		addAll(array.items, 0, array.size);
 	}
 
@@ -684,7 +685,8 @@ public class Array<T> implements Iterable<T> {
 		}
 
 		/** @see Collections#allocateIterators */
-		@NullUnmarked public ArrayIterator<T> iterator () {
+		@NullUnmarked
+		public ArrayIterator<T> iterator () {
 			if (Collections.allocateIterators) return new ArrayIterator(array, allowRemove);
 // lastAcquire.getBuffer().setLength(0);
 // new Throwable().printStackTrace(new java.io.PrintWriter(lastAcquire));

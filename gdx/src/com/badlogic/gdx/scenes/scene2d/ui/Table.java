@@ -214,7 +214,8 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Adds a new cell to the table with the specified actor. */
-	@NullUnmarked public <T extends Actor> Cell<T> add (@Nullable @Null T actor) {
+	@NullUnmarked
+	public <T extends Actor> Cell<T> add (@Nullable @Null T actor) {
 		Cell<T> cell = obtainCell();
 		cell.actor = actor;
 
@@ -388,7 +389,8 @@ public class Table extends WidgetGroup {
 		return rowDefaults;
 	}
 
-	@NullUnmarked private void endRow () {
+	@NullUnmarked
+	private void endRow () {
 		Object[] cells = this.cells.items;
 		int rowColumns = 0;
 		for (int i = this.cells.size - 1; i >= 0; i--) {
@@ -750,13 +752,15 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Returns the min height of the specified row. */
-	@NullUnmarked public float getRowMinHeight (int rowIndex) {
+	@NullUnmarked
+	public float getRowMinHeight (int rowIndex) {
 		if (sizeInvalid) computeSize();
 		return rowMinHeight[rowIndex];
 	}
 
 	/** Returns the pref height of the specified row. */
-	@NullUnmarked public float getRowPrefHeight (int rowIndex) {
+	@NullUnmarked
+	public float getRowPrefHeight (int rowIndex) {
 		if (sizeInvalid) computeSize();
 		return rowPrefHeight[rowIndex];
 	}
@@ -768,13 +772,15 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Returns the min height of the specified column. */
-	@NullUnmarked public float getColumnMinWidth (int columnIndex) {
+	@NullUnmarked
+	public float getColumnMinWidth (int columnIndex) {
 		if (sizeInvalid) computeSize();
 		return columnMinWidth[columnIndex];
 	}
 
 	/** Returns the pref height of the specified column. */
-	@NullUnmarked public float getColumnPrefWidth (int columnIndex) {
+	@NullUnmarked
+	public float getColumnPrefWidth (int columnIndex) {
 		if (sizeInvalid) computeSize();
 		return columnPrefWidth[columnIndex];
 	}
@@ -785,7 +791,8 @@ public class Table extends WidgetGroup {
 		return array;
 	}
 
-	@NullUnmarked private void computeSize () {
+	@NullUnmarked
+	private void computeSize () {
 		sizeInvalid = false;
 
 		Object[] cells = this.cells.items;
@@ -956,7 +963,8 @@ public class Table extends WidgetGroup {
 
 	/** Positions and sizes children of the table using the cell associated with each child. The values given are the position
 	 * within the parent and size of the table. */
-	@NullUnmarked public void layout () {
+	@NullUnmarked
+	public void layout () {
 		if (sizeInvalid) computeSize();
 
 		float layoutWidth = getWidth(), layoutHeight = getHeight();
@@ -1176,7 +1184,8 @@ public class Table extends WidgetGroup {
 		if (debug != Debug.none) addDebugRects(x, y, tableWidth - hpadding, tableHeight - vpadding);
 	}
 
-	@NullUnmarked private void addDebugRects (float currentX, float currentY, float width, float height) {
+	@NullUnmarked
+	private void addDebugRects (float currentX, float currentY, float width, float height) {
 		clearDebugRects();
 		if (debug == Debug.table || debug == Debug.all) {
 			// Table actor bounds.
@@ -1218,7 +1227,8 @@ public class Table extends WidgetGroup {
 		debugRects.clear();
 	}
 
-	@NullUnmarked private void addDebugRect (float x, float y, float w, float h, Color color) {
+	@NullUnmarked
+	private void addDebugRect (float x, float y, float w, float h, Color color) {
 		DebugRect rect = DebugRect.pool.obtain();
 		rect.color = color;
 		rect.set(x, y, w, h);
@@ -1290,7 +1300,8 @@ public class Table extends WidgetGroup {
 	/** Value that is the top padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundTop = new Value() {
-		@NullUnmarked public float get (@Nullable @Null Actor context) {
+		@NullUnmarked
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getTopHeight();
 		}
@@ -1299,7 +1310,8 @@ public class Table extends WidgetGroup {
 	/** Value that is the left padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundLeft = new Value() {
-		@NullUnmarked public float get (@Nullable @Null Actor context) {
+		@NullUnmarked
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getLeftWidth();
 		}
@@ -1308,7 +1320,8 @@ public class Table extends WidgetGroup {
 	/** Value that is the bottom padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundBottom = new Value() {
-		@NullUnmarked public float get (@Nullable @Null Actor context) {
+		@NullUnmarked
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getBottomHeight();
 		}
@@ -1317,7 +1330,8 @@ public class Table extends WidgetGroup {
 	/** Value that is the right padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundRight = new Value() {
-		@NullUnmarked public float get (@Nullable @Null Actor context) {
+		@NullUnmarked
+		public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getRightWidth();
 		}

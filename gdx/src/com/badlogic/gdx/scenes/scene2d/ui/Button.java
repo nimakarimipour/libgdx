@@ -187,7 +187,8 @@ public class Button extends Table implements Disableable {
 	}
 
 	/** Returns appropriate background drawable from the style based on the current button state. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getBackgroundDrawable () {
 		if (isDisabled() && style.disabled != null) return style.disabled;
 		if (isPressed()) {
@@ -211,7 +212,8 @@ public class Button extends Table implements Disableable {
 		return style.up;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		setBackground(getBackgroundDrawable());
@@ -245,7 +247,8 @@ public class Button extends Table implements Disableable {
 			Gdx.graphics.requestRendering();
 	}
 
-	@NullUnmarked public float getPrefWidth () {
+	@NullUnmarked
+	public float getPrefWidth () {
 		float width = super.getPrefWidth();
 		if (style.up != null) width = Math.max(width, style.up.getMinWidth());
 		if (style.down != null) width = Math.max(width, style.down.getMinWidth());
@@ -253,7 +256,8 @@ public class Button extends Table implements Disableable {
 		return width;
 	}
 
-	@NullUnmarked public float getPrefHeight () {
+	@NullUnmarked
+	public float getPrefHeight () {
 		float height = super.getPrefHeight();
 		if (style.up != null) height = Math.max(height, style.up.getMinHeight());
 		if (style.down != null) height = Math.max(height, style.down.getMinHeight());

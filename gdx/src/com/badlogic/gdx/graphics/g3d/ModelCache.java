@@ -70,7 +70,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 			usedMeshes.clear();
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public Mesh obtain (@Nullable VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
 			for (int i = 0, n = freeMeshes.size; i < n; ++i) {
 				final Mesh mesh = freeMeshes.get(i);
@@ -111,7 +112,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 			usedMeshes.clear();
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public Mesh obtain (@Nullable VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
 			for (int i = 0, n = freeMeshes.size; i < n; ++i) {
 				final Mesh mesh = freeMeshes.get(i);
@@ -147,7 +149,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 			renderables.sort(this);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public int compare (Renderable arg0, Renderable arg1) {
 			final VertexAttributes va0 = arg0.meshPart.mesh.getVertexAttributes();
 			final VertexAttributes va1 = arg1.meshPart.mesh.getVertexAttributes();
@@ -248,7 +251,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 	/** Finishes creating the cache, must be called after a call to {@link #begin()}, only after this call the cache will be valid
 	 * (until the next call to {@link #begin()}). Calling this method will process all renderables added using one of the add(...)
 	 * methods and will combine them if possible. */
-	@NullUnmarked public void end () {
+	@NullUnmarked
+	public void end () {
 		if (!building) throw new GdxRuntimeException("Call begin() prior to calling end()");
 		building = false;
 

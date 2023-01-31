@@ -47,7 +47,8 @@ public abstract class Viewport {
 
 	/** Applies the viewport to the camera and sets the glViewport.
 	 * @param centerCamera If true, the camera position is set to the center of the world. */
-	@NullUnmarked public void apply (boolean centerCamera) {
+	@NullUnmarked
+	public void apply (boolean centerCamera) {
 		HdpiUtils.glViewport(screenX, screenY, screenWidth, screenHeight);
 		camera.viewportWidth = worldWidth;
 		camera.viewportHeight = worldHeight;
@@ -71,7 +72,8 @@ public abstract class Viewport {
 	/** Transforms the specified screen coordinate to world coordinates.
 	 * @return The vector that was passed in, transformed to world coordinates.
 	 * @see Camera#unproject(Vector3) */
-	@NullUnmarked public Vector2 unproject (Vector2 screenCoords) {
+	@NullUnmarked
+	public Vector2 unproject (Vector2 screenCoords) {
 		tmp.set(screenCoords.x, screenCoords.y, 1);
 		camera.unproject(tmp, screenX, screenY, screenWidth, screenHeight);
 		screenCoords.set(tmp.x, tmp.y);
@@ -81,7 +83,8 @@ public abstract class Viewport {
 	/** Transforms the specified world coordinate to screen coordinates.
 	 * @return The vector that was passed in, transformed to screen coordinates.
 	 * @see Camera#project(Vector3) */
-	@NullUnmarked public Vector2 project (Vector2 worldCoords) {
+	@NullUnmarked
+	public Vector2 project (Vector2 worldCoords) {
 		tmp.set(worldCoords.x, worldCoords.y, 1);
 		camera.project(tmp, screenX, screenY, screenWidth, screenHeight);
 		worldCoords.set(tmp.x, tmp.y);
@@ -91,7 +94,8 @@ public abstract class Viewport {
 	/** Transforms the specified screen coordinate to world coordinates.
 	 * @return The vector that was passed in, transformed to world coordinates.
 	 * @see Camera#unproject(Vector3) */
-	@NullUnmarked public Vector3 unproject (Vector3 screenCoords) {
+	@NullUnmarked
+	public Vector3 unproject (Vector3 screenCoords) {
 		camera.unproject(screenCoords, screenX, screenY, screenWidth, screenHeight);
 		return screenCoords;
 	}
@@ -99,13 +103,15 @@ public abstract class Viewport {
 	/** Transforms the specified world coordinate to screen coordinates.
 	 * @return The vector that was passed in, transformed to screen coordinates.
 	 * @see Camera#project(Vector3) */
-	@NullUnmarked public Vector3 project (Vector3 worldCoords) {
+	@NullUnmarked
+	public Vector3 project (Vector3 worldCoords) {
 		camera.project(worldCoords, screenX, screenY, screenWidth, screenHeight);
 		return worldCoords;
 	}
 
 	/** @see Camera#getPickRay(float, float, float, float, float, float) */
-	@NullUnmarked public Ray getPickRay (float screenX, float screenY) {
+	@NullUnmarked
+	public Ray getPickRay (float screenX, float screenY) {
 		return camera.getPickRay(screenX, screenY, this.screenX, this.screenY, screenWidth, screenHeight);
 	}
 
@@ -116,7 +122,8 @@ public abstract class Viewport {
 
 	/** Transforms a point to real screen coordinates (as opposed to OpenGL ES window coordinates), where the origin is in the top
 	 * left and the the y-axis is pointing downwards. */
-	@NullUnmarked public Vector2 toScreenCoordinates (Vector2 worldCoords, Matrix4 transformMatrix) {
+	@NullUnmarked
+	public Vector2 toScreenCoordinates (Vector2 worldCoords, Matrix4 transformMatrix) {
 		tmp.set(worldCoords.x, worldCoords.y, 0);
 		tmp.mul(transformMatrix);
 		camera.project(tmp, screenX, screenY, screenWidth, screenHeight);
@@ -227,7 +234,8 @@ public abstract class Viewport {
 	}
 
 	/** Returns the right gutter (black bar) width in screen coordinates. */
-	@NullUnmarked public int getRightGutterWidth () {
+	@NullUnmarked
+	public int getRightGutterWidth () {
 		return Gdx.graphics.getWidth() - (screenX + screenWidth);
 	}
 
@@ -242,7 +250,8 @@ public abstract class Viewport {
 	}
 
 	/** Returns the top gutter (black bar) height in screen coordinates. */
-	@NullUnmarked public int getTopGutterHeight () {
+	@NullUnmarked
+	public int getTopGutterHeight () {
 		return Gdx.graphics.getHeight() - (screenY + screenHeight);
 	}
 }

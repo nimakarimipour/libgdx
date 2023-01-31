@@ -40,7 +40,8 @@ public class BillboardRenderer extends ParticleControllerRenderer<BillboardContr
 		setBatch(batch);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		renderData.positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		renderData.regionChannel = controller.particles.addChannel(ParticleChannels.TextureRegion, TextureRegionInitializer.get());

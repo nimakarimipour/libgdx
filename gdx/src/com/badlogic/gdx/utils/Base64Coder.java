@@ -232,7 +232,8 @@ public class Base64Coder {
 	 * @param s A Base64 String to be decoded.
 	 * @return An array containing the decoded data bytes.
 	 * @throws IllegalArgumentException If the input is not valid Base64 encoded data. */
-	@NullUnmarked public static byte[] decode (@Nullable String s) {
+	@NullUnmarked
+	public static byte[] decode (@Nullable String s) {
 		return decode(s.toCharArray());
 	}
 

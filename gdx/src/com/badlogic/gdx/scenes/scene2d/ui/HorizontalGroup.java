@@ -204,7 +204,8 @@ public class HorizontalGroup extends WidgetGroup {
 		}
 	}
 
-	@NullUnmarked private void layoutWrapped () {
+	@NullUnmarked
+	private void layoutWrapped () {
 		float prefHeight = getPrefHeight();
 		if (prefHeight != lastPrefHeight) {
 			lastPrefHeight = prefHeight;
@@ -306,7 +307,8 @@ public class HorizontalGroup extends WidgetGroup {
 	}
 
 	/** When wrapping is enabled, the number of rows may be > 1. */
-	@NullUnmarked public int getRows () {
+	@NullUnmarked
+	public int getRows () {
 		return wrap ? rowSizes.size >> 1 : 1;
 	}
 

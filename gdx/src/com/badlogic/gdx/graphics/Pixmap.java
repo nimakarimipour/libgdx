@@ -98,7 +98,8 @@ public class Pixmap implements Disposable {
 	 * @param w framebuffer region width
 	 * @param h framebuffer region height
 	 * @return the pixmap */
-	@NullUnmarked public static Pixmap createFromFrameBuffer (int x, int y, int w, int h) {
+	@NullUnmarked
+	public static Pixmap createFromFrameBuffer (int x, int y, int w, int h) {
 		Gdx.gl.glPixelStorei(GL20.GL_PACK_ALIGNMENT, 1);
 
 		final Pixmap pixmap = new Pixmap(w, h, Format.RGBA8888);
@@ -204,11 +205,13 @@ public class Pixmap implements Disposable {
 	 *
 	 * @param url http url to download the image from
 	 * @param responseListener the listener to call once the image is available as a {@link Pixmap} */
-	@NullUnmarked public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
+	@NullUnmarked
+	public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
 		Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
 		request.setUrl(url);
 		Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void handleHttpResponse (Net.HttpResponse httpResponse) {
 				final byte[] result = httpResponse.getResult();
 				Gdx.app.postRunnable(new Runnable() {

@@ -25,7 +25,8 @@ import com.badlogic.gdx.NullUnmarked;
 public class AddAction extends Action {
 	@Nullable private Action action;
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		target.addAction(action);
 		return true;
 	}

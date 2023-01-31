@@ -29,7 +29,8 @@ public class ScaleInfluencer extends SimpleInfluencer {
 		valueChannelDescriptor = ParticleChannels.Scale;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void activateParticles (int startIndex, int count) {
 		if (value.isRelative()) {
 			for (int i = startIndex * valueChannel.strideSize, a = startIndex * interpolationChannel.strideSize,

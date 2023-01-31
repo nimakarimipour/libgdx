@@ -108,7 +108,8 @@ public class PolygonSprite {
 
 	/** Sets the x position relative to the current position where the sprite will be drawn. If origin, rotation, or scale are
 	 * changed, it is slightly more efficient to translate after those operations. */
-	@NullUnmarked public void translateX (float xAmount) {
+	@NullUnmarked
+	public void translateX (float xAmount) {
 		this.x += xAmount;
 
 		if (dirty) return;
@@ -120,7 +121,8 @@ public class PolygonSprite {
 
 	/** Sets the y position relative to the current position where the sprite will be drawn. If origin, rotation, or scale are
 	 * changed, it is slightly more efficient to translate after those operations. */
-	@NullUnmarked public void translateY (float yAmount) {
+	@NullUnmarked
+	public void translateY (float yAmount) {
 		y += yAmount;
 
 		if (dirty) return;
@@ -132,7 +134,8 @@ public class PolygonSprite {
 
 	/** Sets the position relative to the current position where the sprite will be drawn. If origin, rotation, or scale are
 	 * changed, it is slightly more efficient to translate after those operations. */
-	@NullUnmarked public void translate (float xAmount, float yAmount) {
+	@NullUnmarked
+	public void translate (float xAmount, float yAmount) {
 		x += xAmount;
 		y += yAmount;
 
@@ -145,7 +148,8 @@ public class PolygonSprite {
 		}
 	}
 
-	@NullUnmarked public void setColor (Color tint) {
+	@NullUnmarked
+	public void setColor (Color tint) {
 		color.set(tint);
 		float color = tint.toFloatBits();
 
@@ -154,7 +158,8 @@ public class PolygonSprite {
 			vertices[i] = color;
 	}
 
-	@NullUnmarked public void setColor (float r, float g, float b, float a) {
+	@NullUnmarked
+	public void setColor (float r, float g, float b, float a) {
 		color.set(r, g, b, a);
 		float packedColor = color.toFloatBits();
 		final float[] vertices = this.vertices;
@@ -200,7 +205,8 @@ public class PolygonSprite {
 	}
 
 	/** Returns the packed vertices, colors, and texture coordinates for this sprite. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public float[] getVertices () {
 		if (!dirty) return vertices;
 		dirty = false;
@@ -234,7 +240,8 @@ public class PolygonSprite {
 	 * its bottom left corner. If you change the position or size of the sprite, you have to fetch the triangle again for it to be
 	 * recomputed.
 	 * @return the bounding Rectangle */
-	@NullUnmarked public Rectangle getBoundingRectangle () {
+	@NullUnmarked
+	public Rectangle getBoundingRectangle () {
 		final float[] vertices = getVertices();
 
 		float minx = vertices[0];
@@ -258,7 +265,8 @@ public class PolygonSprite {
 		return bounds;
 	}
 
-	@NullUnmarked public void draw (PolygonSpriteBatch spriteBatch) {
+	@NullUnmarked
+	public void draw (PolygonSpriteBatch spriteBatch) {
 		final PolygonRegion region = this.region;
 		spriteBatch.draw(region.region.texture, getVertices(), 0, vertices.length, region.triangles, 0, region.triangles.length);
 	}
@@ -318,12 +326,14 @@ public class PolygonSprite {
 	/** Returns the actual color used in the vertices of this sprite. Modifying the returned color will have unexpected effects
 	 * unless {@link #setColor(Color)} or {@link #setColor(float, float, float, float)} is subsequently called before drawing this
 	 * sprite. */
-	@NullUnmarked public Color getPackedColor () {
+	@NullUnmarked
+	public Color getPackedColor () {
 		Color.abgr8888ToColor(color, vertices[2]);
 		return color;
 	}
 
-	@NullUnmarked public void setRegion (@Nullable PolygonRegion region) {
+	@NullUnmarked
+	public void setRegion (@Nullable PolygonRegion region) {
 		this.region = region;
 
 		float[] regionVertices = region.vertices;

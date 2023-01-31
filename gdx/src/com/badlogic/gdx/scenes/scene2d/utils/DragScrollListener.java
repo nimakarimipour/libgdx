@@ -70,7 +70,8 @@ public class DragScrollListener extends DragListener {
 		return interpolation.apply(minSpeed, maxSpeed, Math.min(1, (System.currentTimeMillis() - startTime) / (float)rampTime));
 	}
 
-	@NullUnmarked public void drag (InputEvent event, float x, float y, int pointer) {
+	@NullUnmarked
+	public void drag (InputEvent event, float x, float y, int pointer) {
 		event.getListenerActor().localToActorCoordinates(scroll, tmpCoords.set(x, y));
 		if (isAbove(tmpCoords.y)) {
 			scrollDown.cancel();

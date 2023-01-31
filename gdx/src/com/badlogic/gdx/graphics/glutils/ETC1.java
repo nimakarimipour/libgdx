@@ -173,7 +173,8 @@ public class ETC1 {
 	 * @param etc1Data the {@link ETC1Data} instance
 	 * @param format either {@link Format#RGB565} or {@link Format#RGB888}
 	 * @return the Pixmap */
-	@NullUnmarked public static Pixmap decodeImage (@Nullable ETC1Data etc1Data, Format format) {
+	@NullUnmarked
+	public static Pixmap decodeImage (@Nullable ETC1Data etc1Data, Format format) {
 		int dataOffset = 0;
 		int width = 0;
 		int height = 0;

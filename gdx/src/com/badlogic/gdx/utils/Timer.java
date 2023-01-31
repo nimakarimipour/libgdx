@@ -76,7 +76,8 @@ public class Timer {
 
 	/** Schedules a task to occur once after the specified delay and then a number of additional times at the specified interval.
 	 * @param repeatCount If negative, the task will repeat forever. */
-	@NullUnmarked public Task scheduleTask (Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
+	@NullUnmarked
+	public Task scheduleTask (Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
 		synchronized (threadLock) {
 			synchronized (this) {
 				synchronized (task) {
@@ -132,7 +133,8 @@ public class Timer {
 		return tasks.size == 0;
 	}
 
-	@NullUnmarked synchronized long update (long timeMillis, long waitMillis) {
+	@NullUnmarked
+	synchronized long update (long timeMillis, long waitMillis) {
 		for (int i = 0, n = tasks.size; i < n; i++) {
 			Task task = tasks.get(i);
 			synchronized (task) {
@@ -255,7 +257,8 @@ public class Timer {
 		@Nullable Timer instance;
 		long pauseTimeMillis;
 
-		@NullUnmarked public TimerThread () {
+		@NullUnmarked
+		public TimerThread () {
 			files = Gdx.files;
 			app = Gdx.app;
 			app.addLifecycleListener(this);
@@ -311,7 +314,8 @@ public class Timer {
 			}
 		}
 
-		@NullUnmarked public void dispose () { // OK to call multiple times.
+		@NullUnmarked
+		public void dispose () { // OK to call multiple times.
 			synchronized (threadLock) {
 				if (thread == this) thread = null;
 				instances.clear();

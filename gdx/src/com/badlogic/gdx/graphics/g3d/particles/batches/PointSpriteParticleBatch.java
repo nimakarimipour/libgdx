@@ -61,7 +61,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		CPU_REGION_OFFSET = (short)(CPU_ATTRIBUTES.findByUsage(Usage.TextureCoordinates).offset / 4),
 		CPU_SIZE_AND_ROTATION_OFFSET = (short)(CPU_ATTRIBUTES.findByUsage(sizeAndRotationUsage).offset / 4);
 
-	@NullUnmarked private static void enablePointSprites () {
+	@NullUnmarked
+	private static void enablePointSprites () {
 		Gdx.gl.glEnable(GL20.GL_VERTEX_PROGRAM_POINT_SIZE);
 		if (Gdx.app.getType() == ApplicationType.Desktop) {
 			Gdx.gl.glEnable(0x8861); // GL_POINT_OES
@@ -86,7 +87,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, shaderConfig, null, null);
 	}
 
-	@NullUnmarked public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
+	@NullUnmarked
+	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
 		@Nullable BlendingAttribute blendingAttribute, @Nullable DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
 
@@ -119,12 +121,14 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		renderable.material = new Material(blendingAttribute, depthTestAttribute, TextureAttribute.createDiffuse((Texture)null));
 	}
 
-	@NullUnmarked public void setTexture (@Nullable Texture texture) {
+	@NullUnmarked
+	public void setTexture (@Nullable Texture texture) {
 		TextureAttribute attribute = (TextureAttribute)renderable.material.get(TextureAttribute.Diffuse);
 		attribute.textureDescription.texture = texture;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public Texture getTexture () {
 		TextureAttribute attribute = (TextureAttribute)renderable.material.get(TextureAttribute.Diffuse);
 		return attribute.textureDescription.texture;
@@ -135,7 +139,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		return blendingAttribute;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	protected void flush (@Nullable int[] offsets) {
 		int tp = 0;
 		for (PointSpriteControllerRenderData data : renderData) {

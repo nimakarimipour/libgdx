@@ -68,7 +68,8 @@ public class FirstPersonCameraController extends InputAdapter {
 		this.degreesPerPixel = degreesPerPixel;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean touchDragged (int screenX, int screenY, int pointer) {
 		float deltaX = -Gdx.input.getDeltaX() * degreesPerPixel;
 		float deltaY = -Gdx.input.getDeltaY() * degreesPerPixel;
@@ -78,7 +79,8 @@ public class FirstPersonCameraController extends InputAdapter {
 		return true;
 	}
 
-	@NullUnmarked public void update () {
+	@NullUnmarked
+	public void update () {
 		update(Gdx.graphics.getDeltaTime());
 	}
 

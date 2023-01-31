@@ -42,7 +42,8 @@ public abstract class SpawnShapeValue extends ParticleValue implements ResourceD
 
 	public abstract void spawnAux (Vector3 vector, float percent);
 
-	@NullUnmarked public final Vector3 spawn (Vector3 vector, float percent) {
+	@NullUnmarked
+	public final Vector3 spawn (Vector3 vector, float percent) {
 		spawnAux(vector, percent);
 		if (xOffsetValue.active) vector.x += xOffsetValue.newLowValue();
 		if (yOffsetValue.active) vector.y += yOffsetValue.newLowValue();
@@ -56,7 +57,8 @@ public abstract class SpawnShapeValue extends ParticleValue implements ResourceD
 	public void start () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		SpawnShapeValue shape = (SpawnShapeValue)value;

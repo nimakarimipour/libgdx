@@ -79,7 +79,8 @@ public class VertexBufferObjectSubData implements VertexData {
 		((Buffer)byteBuffer).flip();
 	}
 
-	@NullUnmarked private int createBufferObject () {
+	@NullUnmarked
+	private int createBufferObject () {
 		int result = Gdx.gl20.glGenBuffer();
 		Gdx.gl20.glBindBuffer(GL20.GL_ARRAY_BUFFER, result);
 		Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.capacity(), null, usage);
@@ -108,7 +109,8 @@ public class VertexBufferObjectSubData implements VertexData {
 		return buffer;
 	}
 
-	@NullUnmarked private void bufferChanged () {
+	@NullUnmarked
+	private void bufferChanged () {
 		if (isBound) {
 			Gdx.gl20.glBufferSubData(GL20.GL_ARRAY_BUFFER, 0, byteBuffer.limit(), byteBuffer);
 			isDirty = false;
@@ -155,7 +157,8 @@ public class VertexBufferObjectSubData implements VertexData {
 		bind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 
@@ -199,7 +202,8 @@ public class VertexBufferObjectSubData implements VertexData {
 		unbind(shader, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 		final int numAttributes = attributes.size();
@@ -224,7 +228,8 @@ public class VertexBufferObjectSubData implements VertexData {
 	}
 
 	/** Disposes of all resources this VertexBufferObject uses. */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		GL20 gl = Gdx.gl20;
 		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, 0);

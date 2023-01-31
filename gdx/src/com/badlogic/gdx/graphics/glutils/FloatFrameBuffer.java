@@ -54,7 +54,8 @@ public class FloatFrameBuffer extends FrameBuffer {
 		build();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	protected Texture createTexture (FrameBufferTextureAttachmentSpec attachmentSpec) {
 		FloatTextureData data = new FloatTextureData(bufferBuilder.width, bufferBuilder.height, attachmentSpec.internalFormat,
 			attachmentSpec.format, attachmentSpec.type, attachmentSpec.isGpuOnly);

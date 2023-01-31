@@ -116,7 +116,8 @@ public class TextField extends Widget implements Disableable {
 	boolean cursorOn;
 	float blinkTime = 0.32f;
 	final Task blinkTask = new Task() {
-		@NullUnmarked public void run () {
+		@NullUnmarked
+		public void run () {
 			if (getStage() == null) {
 				cancel();
 				return;
@@ -137,7 +138,8 @@ public class TextField extends Widget implements Disableable {
 		this(text, skin.get(styleName, TextFieldStyle.class));
 	}
 
-	@NullUnmarked public TextField (@Null String text, TextFieldStyle style) {
+	@NullUnmarked
+	public TextField (@Null String text, TextFieldStyle style) {
 		setStyle(style);
 		clipboard = Gdx.app.getClipboard();
 		initialize();
@@ -153,7 +155,8 @@ public class TextField extends Widget implements Disableable {
 		return new TextFieldClickListener();
 	}
 
-	@NullUnmarked protected int letterUnderCursor (float x) {
+	@NullUnmarked
+	protected int letterUnderCursor (float x) {
 		x -= textOffset + fontOffset - style.font.getData().cursorX - glyphPositions.get(visibleTextStart);
 		Drawable background = getBackgroundDrawable();
 		if (background != null) x -= style.background.getLeftWidth();
@@ -172,7 +175,8 @@ public class TextField extends Widget implements Disableable {
 		return Character.isLetterOrDigit(c);
 	}
 
-	@NullUnmarked protected int[] wordUnderCursor (int at) {
+	@NullUnmarked
+	protected int[] wordUnderCursor (int at) {
 		String text = this.text;
 		int start = at, right = text.length(), left = 0, index = start;
 		if (at >= text.length()) {
@@ -218,7 +222,8 @@ public class TextField extends Widget implements Disableable {
 		this.onlyFontChars = onlyFontChars;
 	}
 
-	@NullUnmarked public void setStyle (TextFieldStyle style) {
+	@NullUnmarked
+	public void setStyle (TextFieldStyle style) {
 		if (style == null) throw new IllegalArgumentException("style cannot be null.");
 		this.style = style;
 
@@ -234,7 +239,8 @@ public class TextField extends Widget implements Disableable {
 		return style;
 	}
 
-	@NullUnmarked protected void calculateOffsets () {
+	@NullUnmarked
+	protected void calculateOffsets () {
 		float visibleWidth = getWidth();
 		Drawable background = getBackgroundDrawable();
 		if (background != null) visibleWidth -= background.getLeftWidth() + background.getRightWidth();
@@ -298,14 +304,16 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
 		return style.background;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		boolean focused = hasKeyboardFocus();
 		if (focused != this.focused || (focused && !blinkTask.isScheduled())) {
 			this.focused = focused;
@@ -366,7 +374,8 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	@NullUnmarked protected float getTextY (@Nullable BitmapFont font, @Nullable @Null Drawable background) {
+	@NullUnmarked
+	protected float getTextY (@Nullable BitmapFont font, @Nullable @Null Drawable background) {
 		float height = getHeight();
 		float textY = textHeight / 2 + font.getDescent();
 		if (background != null) {
@@ -380,7 +389,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** Draws selection rectangle **/
-	@NullUnmarked protected void drawSelection (Drawable selection, Batch batch, @Nullable BitmapFont font, float x, float y) {
+	@NullUnmarked
+	protected void drawSelection (Drawable selection, Batch batch, @Nullable BitmapFont font, float x, float y) {
 		selection.draw(batch, x + textOffset + selectionX + fontOffset, y - textHeight - font.getDescent(), selectionWidth,
 			textHeight);
 	}
@@ -389,7 +399,8 @@ public class TextField extends Widget implements Disableable {
 		font.draw(batch, displayText, x + textOffset, y, visibleTextStart, visibleTextEnd, 0, Align.left, false);
 	}
 
-	@NullUnmarked protected void drawMessageText (Batch batch, BitmapFont font, float x, float y, float maxWidth) {
+	@NullUnmarked
+	protected void drawMessageText (Batch batch, BitmapFont font, float x, float y, float maxWidth) {
 		font.draw(batch, messageText, x, y, 0, messageText.length(), maxWidth, textHAlign, false, "...");
 	}
 
@@ -399,7 +410,8 @@ public class TextField extends Widget implements Disableable {
 			y - textHeight - font.getDescent(), cursorPatch.getMinWidth(), textHeight);
 	}
 
-	@NullUnmarked void updateDisplayText () {
+	@NullUnmarked
+	void updateDisplayText () {
 		BitmapFont font = style.font;
 		BitmapFontData data = font.getData();
 		String text = this.text;
@@ -446,7 +458,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** Copies the contents of this TextField to the {@link Clipboard} implementation set on this TextField. */
-	@NullUnmarked public void copy () {
+	@NullUnmarked
+	public void copy () {
 		if (hasSelection && !passwordMode) {
 			clipboard.setContents(text.substring(Math.min(cursor, selectionStart), Math.max(cursor, selectionStart)));
 		}
@@ -466,7 +479,8 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	@NullUnmarked void paste (@Null String content, boolean fireChangeEvent) {
+	@NullUnmarked
+	void paste (@Null String content, boolean fireChangeEvent) {
 		if (content == null) return;
 		StringBuilder buffer = new StringBuilder();
 		int textLength = text.length();
@@ -498,7 +512,8 @@ public class TextField extends Widget implements Disableable {
 		return to.substring(0, position) + text + to.substring(position, to.length());
 	}
 
-	@NullUnmarked int delete (boolean fireChangeEvent) {
+	@NullUnmarked
+	int delete (boolean fireChangeEvent) {
 		int from = selectionStart;
 		int to = cursor;
 		int minIndex = Math.min(from, to);
@@ -516,7 +531,8 @@ public class TextField extends Widget implements Disableable {
 	/** Sets the {@link Stage#setKeyboardFocus(Actor) keyboard focus} to the next TextField. If no next text field is found, the
 	 * onscreen keyboard is hidden. Does nothing if the text field is not in a stage.
 	 * @param up If true, the text field with the same or next smallest y coordinate is found, else the next highest. */
-	@NullUnmarked public void next (boolean up) {
+	@NullUnmarked
+	public void next (boolean up) {
 		Stage stage = getStage();
 		if (stage == null) return;
 		TextField current = this;
@@ -545,7 +561,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return May be null. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
 		Vector2 currentCoords, boolean up) {
 		for (int i = 0, n = actors.size; i < n; i++) {
@@ -608,7 +625,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @param str If null, "" is used. */
-	@NullUnmarked public void appendText (@Null String str) {
+	@NullUnmarked
+	public void appendText (@Null String str) {
 		if (str == null) str = "";
 
 		clearSelection();
@@ -636,7 +654,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return True if the text was changed. */
-	@NullUnmarked boolean changeText (@Nullable String oldText, @Nullable String newText) {
+	@NullUnmarked
+	boolean changeText (@Nullable String oldText, @Nullable String newText) {
 		if (newText.equals(oldText)) return false;
 		text = newText;
 		ChangeEvent changeEvent = Pools.obtain(ChangeEvent.class);
@@ -660,12 +679,14 @@ public class TextField extends Widget implements Disableable {
 		return selectionStart;
 	}
 
-	@NullUnmarked public String getSelection () {
+	@NullUnmarked
+	public String getSelection () {
 		return hasSelection ? text.substring(Math.min(selectionStart, cursor), Math.max(selectionStart, cursor)) : "";
 	}
 
 	/** Sets the selected text. */
-	@NullUnmarked public void setSelection (int selectionStart, int selectionEnd) {
+	@NullUnmarked
+	public void setSelection (int selectionStart, int selectionEnd) {
 		if (selectionStart < 0) throw new IllegalArgumentException("selectionStart must be >= 0");
 		if (selectionEnd < 0) throw new IllegalArgumentException("selectionEnd must be >= 0");
 		selectionStart = Math.min(text.length(), selectionStart);
@@ -685,7 +706,8 @@ public class TextField extends Widget implements Disableable {
 		cursor = selectionEnd;
 	}
 
-	@NullUnmarked public void selectAll () {
+	@NullUnmarked
+	public void selectAll () {
 		setSelection(0, text.length());
 	}
 
@@ -694,7 +716,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** Sets the cursor position and clears any selection. */
-	@NullUnmarked public void setCursorPosition (int cursorPosition) {
+	@NullUnmarked
+	public void setCursorPosition (int cursorPosition) {
 		if (cursorPosition < 0) throw new IllegalArgumentException("cursorPosition must be >= 0");
 		clearSelection();
 		cursor = Math.min(cursorPosition, text.length());
@@ -721,7 +744,8 @@ public class TextField extends Widget implements Disableable {
 		return 150;
 	}
 
-	@NullUnmarked public float getPrefHeight () {
+	@NullUnmarked
+	public float getPrefHeight () {
 		float topAndBottom = 0, minHeight = 0;
 		if (style.background != null) {
 			topAndBottom = Math.max(topAndBottom, style.background.getBottomHeight() + style.background.getTopHeight());
@@ -780,7 +804,8 @@ public class TextField extends Widget implements Disableable {
 		return disabled;
 	}
 
-	@NullUnmarked protected void moveCursor (boolean forward, boolean jump) {
+	@NullUnmarked
+	protected void moveCursor (boolean forward, boolean jump) {
 		int limit = forward ? text.length() : 0;
 		int charOffset = forward ? 0 : -1;
 		while ((forward ? ++cursor < limit : --cursor > limit) && jump) {
@@ -788,7 +813,8 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	@NullUnmarked protected boolean continueCursor (int index, int offset) {
+	@NullUnmarked
+	protected boolean continueCursor (int index, int offset) {
 		char c = text.charAt(index + offset);
 		return isWordCharacter(c);
 	}
@@ -796,7 +822,8 @@ public class TextField extends Widget implements Disableable {
 	class KeyRepeatTask extends Task {
 		int keycode;
 
-		@NullUnmarked public void run () {
+		@NullUnmarked
+		public void run () {
 			if (getStage() == null) {
 				cancel();
 				return;
@@ -833,7 +860,8 @@ public class TextField extends Widget implements Disableable {
 	 * {@link Input#setOnscreenKeyboardVisible(boolean)} as appropriate. Might overlap your actual rendering, so use with care!
 	 * @author mzechner */
 	static public class DefaultOnscreenKeyboard implements OnscreenKeyboard {
-		@NullUnmarked public void show (boolean visible) {
+		@NullUnmarked
+		public void show (boolean visible) {
 			Gdx.input.setOnscreenKeyboardVisible(visible);
 		}
 	}
@@ -885,11 +913,13 @@ public class TextField extends Widget implements Disableable {
 			cursor = 0;
 		}
 
-		@NullUnmarked protected void goEnd (boolean jump) {
+		@NullUnmarked
+		protected void goEnd (boolean jump) {
 			cursor = text.length();
 		}
 
-		@NullUnmarked public boolean keyDown (@Nullable InputEvent event, int keycode) {
+		@NullUnmarked
+		public boolean keyDown (@Nullable InputEvent event, int keycode) {
 			if (disabled) return false;
 
 			cursorOn = focused;
@@ -1029,7 +1059,8 @@ public class TextField extends Widget implements Disableable {
 				|| ((character == CARRIAGE_RETURN || character == NEWLINE) && (UIUtils.isAndroid || UIUtils.isIos)));
 		}
 
-		@NullUnmarked public boolean keyTyped (InputEvent event, char character) {
+		@NullUnmarked
+		public boolean keyTyped (InputEvent event, char character) {
 			if (disabled) return false;
 
 			// Disallow "typing" most ASCII control characters, which would show up as a space when onlyFontChars is true.

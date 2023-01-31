@@ -138,7 +138,8 @@ public class InputEvent extends Event {
 
 	/** Sets actorCoords to this event's coordinates relative to the specified actor.
 	 * @param actorCoords Output for resulting coordinates. */
-	@NullUnmarked public Vector2 toCoordinates (@Nullable Actor actor, Vector2 actorCoords) {
+	@NullUnmarked
+	public Vector2 toCoordinates (@Nullable Actor actor, Vector2 actorCoords) {
 		actorCoords.set(stageX, stageY);
 		actor.stageToLocalCoordinates(actorCoords);
 		return actorCoords;
@@ -159,7 +160,8 @@ public class InputEvent extends Event {
 		this.touchFocus = touchFocus;
 	}
 
-	@NullUnmarked public String toString () {
+	@NullUnmarked
+	public String toString () {
 		return type.toString();
 	}
 

@@ -117,7 +117,8 @@ public class IntArray {
 		addAll(array.items, offset, length);
 	}
 
-	@NullUnmarked public void addAll (@Nullable int... array) {
+	@NullUnmarked
+	public void addAll (@Nullable int... array) {
 		addAll(array, 0, array.length);
 	}
 

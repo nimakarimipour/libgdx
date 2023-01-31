@@ -167,7 +167,8 @@ public abstract class BaseShader implements Shader {
 	}
 
 	/** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
-	@NullUnmarked @Initializer
+	@NullUnmarked
+	@Initializer
 	public void init (@Nullable final ShaderProgram program, @Nullable final Renderable renderable) {
 		if (locations != null) throw new GdxRuntimeException("Already initialized");
 		if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
@@ -206,7 +207,8 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void begin (@Nullable Camera camera, RenderContext context) {
 		this.camera = camera;
 		this.context = context;
@@ -218,7 +220,8 @@ public abstract class BaseShader implements Shader {
 
 	private final IntArray tempArray = new IntArray();
 
-	@NullUnmarked private final int[] getAttributeLocations (@Nullable final VertexAttributes attrs) {
+	@NullUnmarked
+	private final int[] getAttributeLocations (@Nullable final VertexAttributes attrs) {
 		tempArray.clear();
 		final int n = attrs.size();
 		for (int i = 0; i < n; i++) {
@@ -239,7 +242,8 @@ public abstract class BaseShader implements Shader {
 		render(renderable, combinedAttributes);
 	}
 
-	@NullUnmarked public void render (Renderable renderable, final Attributes combinedAttributes) {
+	@NullUnmarked
+	public void render (Renderable renderable, final Attributes combinedAttributes) {
 		for (int u, i = 0; i < localUniforms.size; ++i)
 			if (setters.get(u = localUniforms.get(i)) != null) setters.get(u).set(this, u, renderable, combinedAttributes);
 		if (currentMesh != renderable.meshPart.mesh) {
@@ -270,99 +274,116 @@ public abstract class BaseShader implements Shader {
 	}
 
 	/** Whether this Shader instance implements the specified uniform, only valid after a call to init(). */
-	@NullUnmarked public final boolean has (final int inputID) {
+	@NullUnmarked
+	public final boolean has (final int inputID) {
 		return inputID >= 0 && inputID < locations.length && locations[inputID] >= 0;
 	}
 
-	@NullUnmarked public final int loc (final int inputID) {
+	@NullUnmarked
+	public final int loc (final int inputID) {
 		return (inputID >= 0 && inputID < locations.length) ? locations[inputID] : -1;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final Matrix4 value) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final Matrix4 value) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformMatrix(locations[uniform], value);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final Matrix3 value) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final Matrix3 value) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformMatrix(locations[uniform], value);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final Vector3 value) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final Vector3 value) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformf(locations[uniform], value);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final Vector2 value) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final Vector2 value) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformf(locations[uniform], value);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final Color value) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final Color value) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformf(locations[uniform], value);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final float value) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final float value) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformf(locations[uniform], value);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final float v1, final float v2) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final float v1, final float v2) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformf(locations[uniform], v1, v2);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final float v1, final float v2, final float v3) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final float v1, final float v2, final float v3) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformf(locations[uniform], v1, v2, v3);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final float v1, final float v2, final float v3, final float v4) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final float v1, final float v2, final float v3, final float v4) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformf(locations[uniform], v1, v2, v3, v4);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final int value) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final int value) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformi(locations[uniform], value);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final int v1, final int v2) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final int v1, final int v2) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformi(locations[uniform], v1, v2);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final int v1, final int v2, final int v3) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final int v1, final int v2, final int v3) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformi(locations[uniform], v1, v2, v3);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final int v1, final int v2, final int v3, final int v4) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final int v1, final int v2, final int v3, final int v4) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformi(locations[uniform], v1, v2, v3, v4);
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final TextureDescriptor textureDesc) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final TextureDescriptor textureDesc) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformi(locations[uniform], context.textureBinder.bind(textureDesc));
 		return true;
 	}
 
-	@NullUnmarked public final boolean set (final int uniform, final GLTexture texture) {
+	@NullUnmarked
+	public final boolean set (final int uniform, final GLTexture texture) {
 		if (locations[uniform] < 0) return false;
 		program.setUniformi(locations[uniform], context.textureBinder.bind(texture));
 		return true;

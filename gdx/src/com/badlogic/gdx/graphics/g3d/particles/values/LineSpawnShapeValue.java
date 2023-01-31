@@ -32,7 +32,8 @@ public final class LineSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public LineSpawnShapeValue () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void spawnAux (Vector3 vector, float percent) {
 		float width = spawnWidth + (spawnWidthDiff * spawnWidthValue.getScale(percent));
 		float height = spawnHeight + (spawnHeightDiff * spawnHeightValue.getScale(percent));

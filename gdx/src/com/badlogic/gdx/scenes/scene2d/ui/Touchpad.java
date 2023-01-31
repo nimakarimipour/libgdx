@@ -140,7 +140,8 @@ public class Touchpad extends Widget {
 		return touchBounds.contains(x, y) ? this : null;
 	}
 
-	@NullUnmarked public void layout () {
+	@NullUnmarked
+	public void layout () {
 		// Recalc pad and deadzone bounds
 		float halfWidth = getWidth() / 2;
 		float halfHeight = getHeight() / 2;
@@ -154,7 +155,8 @@ public class Touchpad extends Widget {
 		knobPercent.set(0, 0);
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		Color c = getColor();
@@ -176,11 +178,13 @@ public class Touchpad extends Widget {
 		}
 	}
 
-	@NullUnmarked public float getPrefWidth () {
+	@NullUnmarked
+	public float getPrefWidth () {
 		return style.background != null ? style.background.getMinWidth() : 0;
 	}
 
-	@NullUnmarked public float getPrefHeight () {
+	@NullUnmarked
+	public float getPrefHeight () {
 		return style.background != null ? style.background.getMinHeight() : 0;
 	}
 

@@ -44,7 +44,8 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 
 	@Nullable BitmapFontData data;
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
 		@Nullable BitmapFontParameter parameter) {
 		Array<AssetDescriptor> deps = new Array();
@@ -82,7 +83,8 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 		@Nullable BitmapFontParameter parameter) {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public BitmapFont loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable BitmapFontParameter parameter) {
 		if (parameter != null && parameter.atlasName != null) {

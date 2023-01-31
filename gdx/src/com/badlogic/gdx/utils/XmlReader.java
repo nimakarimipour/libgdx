@@ -440,7 +440,8 @@ public class XmlReader {
 		current = child;
 	}
 
-	@NullUnmarked protected void attribute (@Nullable String name, @Nullable String value) {
+	@NullUnmarked
+	protected void attribute (@Nullable String name, @Nullable String value) {
 		current.setAttribute(name, value);
 	}
 
@@ -455,7 +456,8 @@ public class XmlReader {
 		return null;
 	}
 
-	@NullUnmarked protected void text (@Nullable String text) {
+	@NullUnmarked
+	protected void text (@Nullable String text) {
 		String existing = current.getText();
 		current.setText(existing != null ? existing + text : text);
 	}
@@ -545,7 +547,8 @@ public class XmlReader {
 			if (children != null) children.removeValue(child, true);
 		}
 
-		@NullUnmarked public void remove () {
+		@NullUnmarked
+		public void remove () {
 			parent.removeChild(this);
 		}
 

@@ -196,7 +196,8 @@ public class BitmapFontCache {
 
 	/** Sets the color of the specified characters. This may only be called after {@link #setText(CharSequence, float, float)} and
 	 * is reset every time setText is called. */
-	@NullUnmarked public void setColors (float color, int start, int end) {
+	@NullUnmarked
+	public void setColors (float color, int start, int end) {
 		if (pageVertices.length == 1) { // One page.
 			float[] vertices = pageVertices[0];
 			for (int i = start * 20 + 2, n = Math.min(end * 20, idx[0]); i < n; i += 5)
@@ -253,7 +254,8 @@ public class BitmapFontCache {
 		}
 	}
 
-	@NullUnmarked public void draw (Batch spriteBatch, int start, int end) {
+	@NullUnmarked
+	public void draw (Batch spriteBatch, int start, int end) {
 		if (pageVertices.length == 1) { // 1 page.
 			spriteBatch.draw(font.getRegion().getTexture(), pageVertices[0], start * 20, (end - start) * 20);
 			return;

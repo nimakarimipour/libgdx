@@ -57,7 +57,8 @@ public class RangedNumericValue extends ParticleValue {
 		this.lowMax = lowMax;
 	}
 
-	@NullUnmarked public void load (@Nullable RangedNumericValue value) {
+	@NullUnmarked
+	public void load (@Nullable RangedNumericValue value) {
 		super.load(value);
 		lowMax = value.lowMax;
 		lowMin = value.lowMin;
@@ -70,7 +71,8 @@ public class RangedNumericValue extends ParticleValue {
 		json.writeValue("lowMax", lowMax);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		lowMin = json.readValue("lowMin", float.class, jsonData);

@@ -177,7 +177,8 @@ public class NinePatch {
 		this(ninePatch, ninePatch.color);
 	}
 
-	@NullUnmarked public NinePatch (@Nullable NinePatch ninePatch, Color color) {
+	@NullUnmarked
+	public NinePatch (@Nullable NinePatch ninePatch, Color color) {
 		texture = ninePatch.texture;
 
 		bottomLeft = ninePatch.bottomLeft;
@@ -271,7 +272,8 @@ public class NinePatch {
 		}
 	}
 
-	@NullUnmarked private int add (TextureRegion region, boolean isStretchW, boolean isStretchH) {
+	@NullUnmarked
+	private int add (TextureRegion region, boolean isStretchW, boolean isStretchH) {
 		if (texture == null)
 			texture = region.getTexture();
 		else if (texture != region.getTexture()) //

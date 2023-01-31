@@ -17,7 +17,8 @@ public final class UIUtils {
 		|| System.getProperty("os.name").contains("FreeBSD");
 	static public boolean isIos = !isAndroid && (!(isWindows || isLinux || isMac));
 
-	@NullUnmarked static public boolean left () {
+	@NullUnmarked
+	static public boolean left () {
 		return Gdx.input.isButtonPressed(Buttons.LEFT);
 	}
 
@@ -25,7 +26,8 @@ public final class UIUtils {
 		return button == Buttons.LEFT;
 	}
 
-	@NullUnmarked static public boolean right () {
+	@NullUnmarked
+	static public boolean right () {
 		return Gdx.input.isButtonPressed(Buttons.RIGHT);
 	}
 
@@ -33,7 +35,8 @@ public final class UIUtils {
 		return button == Buttons.RIGHT;
 	}
 
-	@NullUnmarked static public boolean middle () {
+	@NullUnmarked
+	static public boolean middle () {
 		return Gdx.input.isButtonPressed(Buttons.MIDDLE);
 	}
 
@@ -41,7 +44,8 @@ public final class UIUtils {
 		return button == Buttons.MIDDLE;
 	}
 
-	@NullUnmarked static public boolean shift () {
+	@NullUnmarked
+	static public boolean shift () {
 		return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
 	}
 
@@ -49,7 +53,8 @@ public final class UIUtils {
 		return keycode == Keys.SHIFT_LEFT || keycode == Keys.SHIFT_RIGHT;
 	}
 
-	@NullUnmarked static public boolean ctrl () {
+	@NullUnmarked
+	static public boolean ctrl () {
 		if (isMac)
 			return Gdx.input.isKeyPressed(Keys.SYM);
 		else
@@ -63,7 +68,8 @@ public final class UIUtils {
 			return keycode == Keys.CONTROL_LEFT || keycode == Keys.CONTROL_RIGHT;
 	}
 
-	@NullUnmarked static public boolean alt () {
+	@NullUnmarked
+	static public boolean alt () {
 		return Gdx.input.isKeyPressed(Keys.ALT_LEFT) || Gdx.input.isKeyPressed(Keys.ALT_RIGHT);
 	}
 

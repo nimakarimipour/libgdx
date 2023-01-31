@@ -531,7 +531,8 @@ public class Decal {
 	}
 
 	/** Re-applies the uv coordinates from the material's texture region to the uv components of the vertices array */
-	@NullUnmarked protected void updateUVs () {
+	@NullUnmarked
+	protected void updateUVs () {
 		TextureRegion tr = material.textureRegion;
 		// left top
 		vertices[U1] = tr.getU();

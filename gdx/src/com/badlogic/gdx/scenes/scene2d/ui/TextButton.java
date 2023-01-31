@@ -55,7 +55,8 @@ public class TextButton extends Button {
 		return new Label(text, style);
 	}
 
-	@NullUnmarked public void setStyle (ButtonStyle style) {
+	@NullUnmarked
+	public void setStyle (ButtonStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		if (!(style instanceof TextButtonStyle)) throw new IllegalArgumentException("style must be a TextButtonStyle.");
 		this.style = (TextButtonStyle)style;
@@ -76,7 +77,8 @@ public class TextButton extends Button {
 	}
 
 	/** Returns the appropriate label font color from the style based on the current button state. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Color getFontColor () {
 		if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
 		if (isPressed()) {
@@ -100,12 +102,14 @@ public class TextButton extends Button {
 		return style.fontColor;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		label.getStyle().fontColor = getFontColor();
 		super.draw(batch, parentAlpha);
 	}
 
-	@NullUnmarked public void setLabel (Label label) {
+	@NullUnmarked
+	public void setLabel (Label label) {
 		if (label == null) throw new IllegalArgumentException("label cannot be null.");
 		getLabelCell().setActor(label);
 		this.label = label;

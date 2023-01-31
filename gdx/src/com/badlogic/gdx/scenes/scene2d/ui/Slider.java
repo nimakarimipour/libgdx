@@ -115,7 +115,8 @@ public class Slider extends ProgressBar {
 		return mouseOver;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getBackgroundDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
@@ -124,7 +125,8 @@ public class Slider extends ProgressBar {
 		return style.background;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getKnobDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
@@ -133,7 +135,8 @@ public class Slider extends ProgressBar {
 		return style.knob;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected Drawable getKnobBeforeDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
@@ -142,7 +145,8 @@ public class Slider extends ProgressBar {
 		return style.knobBefore;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected Drawable getKnobAfterDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
@@ -151,7 +155,8 @@ public class Slider extends ProgressBar {
 		return style.knobAfter;
 	}
 
-	@NullUnmarked boolean calculatePositionAndValue (float x, float y) {
+	@NullUnmarked
+	boolean calculatePositionAndValue (float x, float y) {
 		SliderStyle style = getStyle();
 		Drawable knob = style.knob;
 		Drawable bg = getBackgroundDrawable();

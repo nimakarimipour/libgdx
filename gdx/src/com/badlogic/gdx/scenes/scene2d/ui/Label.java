@@ -141,7 +141,8 @@ public class Label extends Widget {
 		prefSizeInvalid = true;
 	}
 
-	@NullUnmarked private void scaleAndComputePrefSize () {
+	@NullUnmarked
+	private void scaleAndComputePrefSize () {
 		BitmapFont font = cache.getFont();
 		float oldScaleX = font.getScaleX();
 		float oldScaleY = font.getScaleY();
@@ -152,7 +153,8 @@ public class Label extends Widget {
 		if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
 	}
 
-	@NullUnmarked protected void computePrefSize (GlyphLayout layout) {
+	@NullUnmarked
+	protected void computePrefSize (GlyphLayout layout) {
 		prefSizeInvalid = false;
 		if (wrap && ellipsis == null) {
 			float width = getWidth();
@@ -167,7 +169,8 @@ public class Label extends Widget {
 		prefHeight = layout.height;
 	}
 
-	@NullUnmarked public void layout () {
+	@NullUnmarked
+	public void layout () {
 		BitmapFont font = cache.getFont();
 		float oldScaleX = font.getScaleX();
 		float oldScaleY = font.getScaleY();
@@ -228,7 +231,8 @@ public class Label extends Widget {
 		if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		validate();
 		Color color = tempColor.set(getColor());
 		color.a *= parentAlpha;
@@ -242,7 +246,8 @@ public class Label extends Widget {
 		cache.draw(batch);
 	}
 
-	@NullUnmarked public float getPrefWidth () {
+	@NullUnmarked
+	public float getPrefWidth () {
 		if (wrap) return 0;
 		if (prefSizeInvalid) scaleAndComputePrefSize();
 		float width = prefWidth;
@@ -252,7 +257,8 @@ public class Label extends Widget {
 		return width;
 	}
 
-	@NullUnmarked public float getPrefHeight () {
+	@NullUnmarked
+	public float getPrefHeight () {
 		if (prefSizeInvalid) scaleAndComputePrefSize();
 		float descentScaleCorrection = 1;
 		if (fontScaleChanged) descentScaleCorrection = fontScaleY / style.font.getScaleY();
@@ -386,7 +392,8 @@ public class Label extends Widget {
 			this.fontColor = fontColor;
 		}
 
-		@NullUnmarked public LabelStyle (@Nullable LabelStyle style) {
+		@NullUnmarked
+		public LabelStyle (@Nullable LabelStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);
 			background = style.background;

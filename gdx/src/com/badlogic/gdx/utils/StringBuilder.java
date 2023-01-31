@@ -96,7 +96,8 @@ public class StringBuilder implements Appendable, CharSequence {
 	 * 
 	 * @param string the {@code String} to copy into the builder.
 	 * @throws NullPointerException if {@code str} is {@code null}. */
-	@NullUnmarked public StringBuilder (@Nullable String string) {
+	@NullUnmarked
+	public StringBuilder (@Nullable String string) {
 		length = string.length();
 		chars = new char[length + INITIAL_CAPACITY];
 		string.getChars(0, length, chars, 0);

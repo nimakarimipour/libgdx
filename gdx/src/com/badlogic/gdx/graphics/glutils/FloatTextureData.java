@@ -64,7 +64,8 @@ public class FloatTextureData implements TextureData {
 		return isPrepared;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void prepare () {
 		if (isPrepared) throw new GdxRuntimeException("Already prepared");
 		if (!isGpuOnly) {
@@ -80,7 +81,8 @@ public class FloatTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void consumeCustomData (int target) {
 		if (Gdx.app.getType() == ApplicationType.Android || Gdx.app.getType() == ApplicationType.iOS
 			|| Gdx.app.getType() == ApplicationType.WebGL) {

@@ -214,7 +214,8 @@ public class Polyline implements Shape2D {
 	 * Note the returned Rectangle is cached in this polyline, and will be reused if this Polyline is changed.
 	 *
 	 * @return this polyline's bounding box {@link Rectangle} */
-	@NullUnmarked public Rectangle getBoundingRectangle () {
+	@NullUnmarked
+	public Rectangle getBoundingRectangle () {
 		float[] vertices = getTransformedVertices();
 
 		float minX = vertices[0];

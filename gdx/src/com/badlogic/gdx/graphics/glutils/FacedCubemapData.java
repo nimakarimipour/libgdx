@@ -155,7 +155,8 @@ public class FacedCubemapData implements CubemapData {
 			if (!data[i].isPrepared()) data[i].prepare();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void consumeCubemapData () {
 		for (int i = 0; i < data.length; i++) {
 			if (data[i].getType() == TextureData.TextureDataType.Custom) {

@@ -34,7 +34,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
-import com.badlogic.gdx.NullUnmarked;
 
 /** Provides methods to perform networking operations, such as simple HTTP get and post requests, and TCP server/client socket
  * communication.
@@ -227,7 +226,8 @@ public interface Net {
 		 * XmlHttpRequests which always redirect.
 		 * @param followRedirects whether to follow redirects.
 		 * @exception IllegalArgumentException if redirection is disabled on the GWT backend. */
-		@NullUnmarked public void setFollowRedirects (boolean followRedirects) throws IllegalArgumentException {
+		@NullUnmarked
+		public void setFollowRedirects (boolean followRedirects) throws IllegalArgumentException {
 			if (followRedirects || Gdx.app.getType() != ApplicationType.WebGL) {
 				this.followRedirects = followRedirects;
 			} else {

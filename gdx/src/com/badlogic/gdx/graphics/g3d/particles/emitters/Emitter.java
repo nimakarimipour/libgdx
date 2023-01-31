@@ -41,12 +41,14 @@ public abstract class Emitter extends ParticleControllerComponent implements Jso
 	public Emitter () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void init () {
 		controller.particles.size = 0;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void end () {
 		controller.particles.size = 0;
 	}
@@ -87,7 +89,8 @@ public abstract class Emitter extends ParticleControllerComponent implements Jso
 		json.writeValue("maxParticleCount", maxParticleCount);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		minParticleCount = json.readValue("minParticleCount", int.class, jsonData);
 		maxParticleCount = json.readValue("maxParticleCount", int.class, jsonData);

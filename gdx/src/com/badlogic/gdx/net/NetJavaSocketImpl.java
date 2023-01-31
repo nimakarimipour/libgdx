@@ -56,7 +56,8 @@ public class NetJavaSocketImpl implements Socket {
 		applyHints(hints);
 	}
 
-	@NullUnmarked private void applyHints (SocketHints hints) {
+	@NullUnmarked
+	private void applyHints (SocketHints hints) {
 		if (hints != null) {
 			try {
 				socket.setPerformancePreferences(hints.performancePrefConnectionTime, hints.performancePrefLatency,
@@ -83,7 +84,8 @@ public class NetJavaSocketImpl implements Socket {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public InputStream getInputStream () {
 		try {
 			return socket.getInputStream();
@@ -92,7 +94,8 @@ public class NetJavaSocketImpl implements Socket {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public OutputStream getOutputStream () {
 		try {
 			return socket.getOutputStream();
@@ -101,7 +104,8 @@ public class NetJavaSocketImpl implements Socket {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public String getRemoteAddress () {
 		return socket.getRemoteSocketAddress().toString();
 	}

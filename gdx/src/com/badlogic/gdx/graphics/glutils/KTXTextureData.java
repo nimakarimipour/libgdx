@@ -156,7 +156,8 @@ public class KTXTextureData implements TextureData, CubemapData {
 		consumeCustomData(GL20.GL_TEXTURE_CUBE_MAP);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void consumeCustomData (int target) {
 		if (compressedData == null) throw new GdxRuntimeException("Call prepare() before calling consumeCompressedData()");
 		IntBuffer buffer = BufferUtils.newIntBuffer(16);
@@ -321,7 +322,8 @@ public class KTXTextureData implements TextureData, CubemapData {
 		return glInternalFormat;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public ByteBuffer getData (int requestedLevel, int requestedFace) {
 		int pos = imagePos;
 		for (int level = 0; level < numberOfMipmapLevels; level++) {

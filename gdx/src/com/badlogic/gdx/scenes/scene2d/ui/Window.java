@@ -128,7 +128,8 @@ public class Window extends Table {
 				dragging = false;
 			}
 
-			@NullUnmarked public void touchDragged (InputEvent event, float x, float y, int pointer) {
+			@NullUnmarked
+			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (!dragging) return;
 				float width = getWidth(), height = getHeight();
 				float windowX = getX(), windowY = getY();
@@ -243,7 +244,8 @@ public class Window extends Table {
 		}
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		Stage stage = getStage();
 		if (stage != null) {
 			if (stage.getKeyboardFocus() == null) stage.setKeyboardFocus(this);
@@ -260,7 +262,8 @@ public class Window extends Table {
 		super.draw(batch, parentAlpha);
 	}
 
-	@NullUnmarked protected void drawStageBackground (Batch batch, float parentAlpha, float x, float y, float width, float height) {
+	@NullUnmarked
+	protected void drawStageBackground (Batch batch, float parentAlpha, float x, float y, float width, float height) {
 		Color color = getColor();
 		batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 		style.stageBackground.draw(batch, x, y, width, height);
@@ -279,7 +282,8 @@ public class Window extends Table {
 		drawTitleTable = false; // Avoid drawing the title table again in drawChildren.
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (!isVisible()) return null;
 		Actor hit = super.hit(x, y, touchable);

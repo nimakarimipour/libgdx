@@ -73,7 +73,8 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		begin();
 	}
 
-	@NullUnmarked public void begin () {
+	@NullUnmarked
+	public void begin () {
 		final int w = fbo.getWidth();
 		final int h = fbo.getHeight();
 		fbo.begin();
@@ -84,7 +85,8 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		Gdx.gl.glScissor(1, 1, w - 2, h - 2);
 	}
 
-	@NullUnmarked public void end () {
+	@NullUnmarked
+	public void end () {
 		Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
 		fbo.end();
 	}
@@ -103,7 +105,8 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		return cam.combined;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public TextureDescriptor getDepthMap () {
 		textureDesc.texture = fbo.getColorBufferTexture();
 		return textureDesc;

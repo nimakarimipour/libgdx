@@ -43,27 +43,32 @@ public class SpawnInfluencer extends Influencer {
 		this.spawnShapeValue = spawnShapeValue;
 	}
 
-	@NullUnmarked public SpawnInfluencer (SpawnInfluencer source) {
+	@NullUnmarked
+	public SpawnInfluencer (SpawnInfluencer source) {
 		spawnShapeValue = source.spawnShapeValue.copy();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void init () {
 		spawnShapeValue.init();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void start () {
 		spawnShapeValue.start();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void activateParticles (int startIndex, int count) {
 		for (int i = startIndex * positionChannel.strideSize,
 			c = i + count * positionChannel.strideSize; i < c; i += positionChannel.strideSize) {
@@ -98,12 +103,14 @@ public class SpawnInfluencer extends Influencer {
 		spawnShapeValue = json.readValue("spawnShape", SpawnShapeValue.class, jsonData);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void save (AssetManager manager, ResourceData data) {
 		spawnShapeValue.save(manager, data);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void load (AssetManager manager, ResourceData data) {
 		spawnShapeValue.load(manager, data);
 	}

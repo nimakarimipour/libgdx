@@ -58,7 +58,8 @@ public class HttpRequestBuilder {
 	}
 
 	/** @see HttpRequest#setMethod(String) */
-	@NullUnmarked public HttpRequestBuilder method (String httpMethod) {
+	@NullUnmarked
+	public HttpRequestBuilder method (String httpMethod) {
 		validate();
 		httpRequest.setMethod(httpMethod);
 		return this;
@@ -67,7 +68,8 @@ public class HttpRequestBuilder {
 	/** The {@link #baseUrl} will automatically be added as a prefix to the given URL.
 	 * 
 	 * @see HttpRequest#setUrl(String) */
-	@NullUnmarked public HttpRequestBuilder url (String url) {
+	@NullUnmarked
+	public HttpRequestBuilder url (String url) {
 		validate();
 		httpRequest.setUrl(baseUrl + url);
 		return this;
@@ -76,49 +78,56 @@ public class HttpRequestBuilder {
 	/** If this method is not called, the {@link #defaultTimeout} will be used.
 	 * 
 	 * @see HttpRequest#setTimeOut(int) */
-	@NullUnmarked public HttpRequestBuilder timeout (int timeOut) {
+	@NullUnmarked
+	public HttpRequestBuilder timeout (int timeOut) {
 		validate();
 		httpRequest.setTimeOut(timeOut);
 		return this;
 	}
 
 	/** @see HttpRequest#setFollowRedirects(boolean) */
-	@NullUnmarked public HttpRequestBuilder followRedirects (boolean followRedirects) {
+	@NullUnmarked
+	public HttpRequestBuilder followRedirects (boolean followRedirects) {
 		validate();
 		httpRequest.setFollowRedirects(followRedirects);
 		return this;
 	}
 
 	/** @see HttpRequest#setIncludeCredentials(boolean) */
-	@NullUnmarked public HttpRequestBuilder includeCredentials (boolean includeCredentials) {
+	@NullUnmarked
+	public HttpRequestBuilder includeCredentials (boolean includeCredentials) {
 		validate();
 		httpRequest.setIncludeCredentials(includeCredentials);
 		return this;
 	}
 
 	/** @see HttpRequest#setHeader(String, String) */
-	@NullUnmarked public HttpRequestBuilder header (String name, String value) {
+	@NullUnmarked
+	public HttpRequestBuilder header (String name, String value) {
 		validate();
 		httpRequest.setHeader(name, value);
 		return this;
 	}
 
 	/** @see HttpRequest#setContent(String) */
-	@NullUnmarked public HttpRequestBuilder content (String content) {
+	@NullUnmarked
+	public HttpRequestBuilder content (String content) {
 		validate();
 		httpRequest.setContent(content);
 		return this;
 	}
 
 	/** @see HttpRequest#setContent(java.io.InputStream, long) */
-	@NullUnmarked public HttpRequestBuilder content (InputStream contentStream, long contentLength) {
+	@NullUnmarked
+	public HttpRequestBuilder content (InputStream contentStream, long contentLength) {
 		validate();
 		httpRequest.setContent(contentStream, contentLength);
 		return this;
 	}
 
 	/** Sets the correct {@code ContentType} and encodes the given parameter map, then sets it as the content. */
-	@NullUnmarked public HttpRequestBuilder formEncodedContent (Map<String, String> content) {
+	@NullUnmarked
+	public HttpRequestBuilder formEncodedContent (Map<String, String> content) {
 		validate();
 		httpRequest.setHeader(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
 		String formEncodedContent = HttpParametersUtils.convertHttpParameters(content);
@@ -128,7 +137,8 @@ public class HttpRequestBuilder {
 
 	/** Sets the correct {@code ContentType} and encodes the given content object via {@link #json}, then sets it as the
 	 * content. */
-	@NullUnmarked public HttpRequestBuilder jsonContent (Object content) {
+	@NullUnmarked
+	public HttpRequestBuilder jsonContent (Object content) {
 		validate();
 		httpRequest.setHeader(HttpRequestHeader.ContentType, "application/json");
 		String jsonContent = json.toJson(content);
@@ -137,7 +147,8 @@ public class HttpRequestBuilder {
 	}
 
 	/** Sets the {@code Authorization} header via the Base64 encoded username and password. */
-	@NullUnmarked public HttpRequestBuilder basicAuthentication (String username, String password) {
+	@NullUnmarked
+	public HttpRequestBuilder basicAuthentication (String username, String password) {
 		validate();
 		httpRequest.setHeader(HttpRequestHeader.Authorization, "Basic " + Base64Coder.encodeString(username + ":" + password));
 		return this;

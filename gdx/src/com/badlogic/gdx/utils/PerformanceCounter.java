@@ -64,7 +64,8 @@ public class PerformanceCounter {
 
 	/** Updates the time and load counters and resets the time. Call {@link #start()} to begin a new count.
 	 * @param delta The time since the last call to this method */
-	@NullUnmarked public void tick (final float delta) {
+	@NullUnmarked
+	public void tick (final float delta) {
 		if (!valid) {
 			Gdx.app.error("PerformanceCounter", "Invalid data, check if you called PerformanceCounter#stop()");
 			return;

@@ -72,14 +72,16 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 	public MeshSpawnShapeValue () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		MeshSpawnShapeValue spawnShapeValue = (MeshSpawnShapeValue)value;
 		setMesh(spawnShapeValue.mesh, spawnShapeValue.model);
 	}
 
-	@NullUnmarked public void setMesh (@Nullable Mesh mesh, @Nullable Model model) {
+	@NullUnmarked
+	public void setMesh (@Nullable Mesh mesh, @Nullable Model model) {
 		if (mesh.getVertexAttribute(Usage.Position) == null)
 			throw new GdxRuntimeException("Mesh vertices must have Usage.Position");
 		this.model = model;
@@ -99,7 +101,8 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void load (AssetManager manager, ResourceData data) {
 		SaveData saveData = data.getSaveData();
 		AssetDescriptor descriptor = saveData.loadAsset();

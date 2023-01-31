@@ -186,7 +186,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 		return items;
 	}
 
-	@NullUnmarked public void layout () {
+	@NullUnmarked
+	public void layout () {
 		Drawable bg = style.background;
 		BitmapFont font = style.font;
 
@@ -231,7 +232,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 	}
 
 	/** Returns appropriate background drawable from the style based on the current select box state. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getBackgroundDrawable () {
 		if (isDisabled() && style.backgroundDisabled != null) return style.backgroundDisabled;
 		if (scrollPane.hasParent() && style.backgroundOpen != null) return style.backgroundOpen;
@@ -240,13 +242,15 @@ public class SelectBox<T> extends Widget implements Disableable {
 	}
 
 	/** Returns the appropriate label font color from the style based on the current button state. */
-	@NullUnmarked protected Color getFontColor () {
+	@NullUnmarked
+	protected Color getFontColor () {
 		if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
 		if (style.overFontColor != null && (isOver() || scrollPane.hasParent())) return style.overFontColor;
 		return style.fontColor;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		Drawable background = getBackgroundDrawable();
@@ -331,7 +335,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 
 	/** Returns the pref width of the select box if the widest item was selected, for use when
 	 * {@link #setSelectedPrefWidth(boolean)} is true. */
-	@NullUnmarked public float getMaxSelectedPrefWidth () {
+	@NullUnmarked
+	public float getMaxSelectedPrefWidth () {
 		Pool<GlyphLayout> layoutPool = Pools.get(GlyphLayout.class);
 		GlyphLayout layout = layoutPool.obtain();
 		float width = 0;
@@ -432,7 +437,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 		private InputListener hideListener;
 		@Nullable private Actor previousScrollFocus;
 
-		@NullUnmarked public SelectBoxScrollPane (final SelectBox<T> selectBox) {
+		@NullUnmarked
+		public SelectBoxScrollPane (final SelectBox<T> selectBox) {
 			super(null, selectBox.style.scrollStyle);
 			this.selectBox = selectBox;
 
@@ -479,7 +485,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 					return false;
 				}
 
-				@NullUnmarked public boolean keyDown (@Nullable InputEvent event, int keycode) {
+				@NullUnmarked
+				public boolean keyDown (@Nullable InputEvent event, int keycode) {
 					switch (keycode) {
 					case Keys.NUMPAD_ENTER:
 					case Keys.ENTER:
@@ -497,7 +504,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 
 		/** Allows a subclass to customize the select box list. The default implementation returns a list that delegates
 		 * {@link List#toString(Object)} to {@link SelectBox#toString(Object)}. */
-		@NullUnmarked protected List<T> newList () {
+		@NullUnmarked
+		protected List<T> newList () {
 			return new List<T>(selectBox.style.listStyle) {
 				public String toString (T obj) {
 					return selectBox.toString(obj);
@@ -505,7 +513,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 			};
 		}
 
-		@NullUnmarked public void show (Stage stage) {
+		@NullUnmarked
+		public void show (Stage stage) {
 			if (list.isTouchable()) return;
 
 			stage.addActor(this);

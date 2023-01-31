@@ -27,7 +27,8 @@ public class AddListenerAction extends Action {
 	@Nullable private EventListener listener;
 	private boolean capture;
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		if (capture)
 			target.addCaptureListener(listener);
 		else

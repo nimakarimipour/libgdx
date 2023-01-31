@@ -30,7 +30,8 @@ public class ColorAction extends TemporalAction {
 	@Nullable private @Null Color color;
 	private final Color end = new Color();
 
-	@NullUnmarked protected void begin () {
+	@NullUnmarked
+	protected void begin () {
 		if (color == null) color = target.getColor();
 		startR = color.r;
 		startG = color.g;
@@ -38,7 +39,8 @@ public class ColorAction extends TemporalAction {
 		startA = color.a;
 	}
 
-	@NullUnmarked protected void update (float percent) {
+	@NullUnmarked
+	protected void update (float percent) {
 		if (percent == 0)
 			color.set(startR, startG, startB, startA);
 		else if (percent == 1)

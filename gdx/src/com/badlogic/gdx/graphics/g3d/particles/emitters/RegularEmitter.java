@@ -71,12 +71,14 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		set(regularEmitter);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void start () {
 		delay = delayValue.active ? delayValue.newLowValue() : 0;
 		delayTimer = 0;
@@ -104,7 +106,8 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		durationTimer = duration;
 	}
 
-	@NullUnmarked public void activateParticles (int startIndex, int count) {
+	@NullUnmarked
+	public void activateParticles (int startIndex, int count) {
 		int currentTotaLife = life + (int)(lifeDiff * lifeValue.getScale(percent)), currentLife = currentTotaLife;
 		int offsetTime = (int)(lifeOffset + lifeOffsetDiff * lifeOffsetValue.getScale(percent));
 		if (offsetTime > 0) {
@@ -121,7 +124,8 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		}
 	}
 
-	@NullUnmarked public void update () {
+	@NullUnmarked
+	public void update () {
 		float deltaMillis = controller.deltaTime * 1000;
 
 		if (delayTimer < delay) {
@@ -177,7 +181,8 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		}
 	}
 
-	@NullUnmarked private void addParticles (int count) {
+	@NullUnmarked
+	private void addParticles (int count) {
 		count = Math.min(count, maxParticleCount - controller.particles.size);
 		if (count <= 0) return;
 		controller.activateParticles(controller.particles.size, count);
@@ -229,7 +234,8 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		this.emissionMode = emissionMode;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean isComplete () {
 		if (delayTimer < delay) return false;
 		return durationTimer >= duration && controller.particles.size == 0;
@@ -240,7 +246,8 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		return Math.min(1, durationTimer / (float)duration);
 	}
 
-	@NullUnmarked public void set (RegularEmitter emitter) {
+	@NullUnmarked
+	public void set (RegularEmitter emitter) {
 		super.set(emitter);
 		delayValue.load(emitter.delayValue);
 		durationValue.load(emitter.durationValue);
@@ -277,7 +284,8 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		json.writeValue("lifeOffset", lifeOffsetValue);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		continuous = json.readValue("continous", boolean.class, jsonData);

@@ -35,7 +35,8 @@ public class ModelInstanceParticleBatch implements ParticleBatch<ModelInstanceCo
 		controllersRenderData = new Array<ModelInstanceControllerRenderData>(false, 5);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void getRenderables (Array<Renderable> renderables, Pool<Renderable> pool) {
 		for (ModelInstanceControllerRenderData data : controllersRenderData) {
 			for (int i = 0, count = data.controller.particles.size; i < count; ++i) {
@@ -58,7 +59,8 @@ public class ModelInstanceParticleBatch implements ParticleBatch<ModelInstanceCo
 	public void end () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void draw (@Nullable ModelInstanceControllerRenderData data) {
 		controllersRenderData.add(data);
 		bufferedParticlesCount += data.controller.particles.size;

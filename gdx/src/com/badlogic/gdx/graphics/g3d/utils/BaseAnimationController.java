@@ -123,7 +123,8 @@ public class BaseAnimationController {
 	}
 
 	/** End applying multiple animations to the instance and update it to reflect the changes. */
-	@NullUnmarked protected void end () {
+	@NullUnmarked
+	protected void end () {
 		if (!applying) throw new GdxRuntimeException("You must call begin() first");
 		for (Entry<Node, Transform> entry : transforms.entries()) {
 			entry.value.toMatrix4(entry.key.localTransform);
@@ -189,7 +190,8 @@ public class BaseAnimationController {
 		return minIndex;
 	}
 
-	@NullUnmarked private final static Vector3 getTranslationAtTime (final NodeAnimation nodeAnim, final float time, final Vector3 out) {
+	@NullUnmarked
+	private final static Vector3 getTranslationAtTime (final NodeAnimation nodeAnim, final float time, final Vector3 out) {
 		if (nodeAnim.translation == null) return out.set(nodeAnim.node.translation);
 		if (nodeAnim.translation.size == 1) return out.set(nodeAnim.translation.get(0).value);
 
@@ -205,7 +207,8 @@ public class BaseAnimationController {
 		return out;
 	}
 
-	@NullUnmarked private final static Quaternion getRotationAtTime (final NodeAnimation nodeAnim, final float time, final Quaternion out) {
+	@NullUnmarked
+	private final static Quaternion getRotationAtTime (final NodeAnimation nodeAnim, final float time, final Quaternion out) {
 		if (nodeAnim.rotation == null) return out.set(nodeAnim.node.rotation);
 		if (nodeAnim.rotation.size == 1) return out.set(nodeAnim.rotation.get(0).value);
 
@@ -221,7 +224,8 @@ public class BaseAnimationController {
 		return out;
 	}
 
-	@NullUnmarked private final static Vector3 getScalingAtTime (final NodeAnimation nodeAnim, final float time, final Vector3 out) {
+	@NullUnmarked
+	private final static Vector3 getScalingAtTime (final NodeAnimation nodeAnim, final float time, final Vector3 out) {
 		if (nodeAnim.scaling == null) return out.set(nodeAnim.node.scale);
 		if (nodeAnim.scaling.size == 1) return out.set(nodeAnim.scaling.get(0).value);
 
@@ -245,14 +249,16 @@ public class BaseAnimationController {
 		return transform;
 	}
 
-	@NullUnmarked private final static void applyNodeAnimationDirectly (final NodeAnimation nodeAnim, final float time) {
+	@NullUnmarked
+	private final static void applyNodeAnimationDirectly (final NodeAnimation nodeAnim, final float time) {
 		final Node node = nodeAnim.node;
 		node.isAnimated = true;
 		final Transform transform = getNodeAnimationTransform(nodeAnim, time);
 		transform.toMatrix4(node.localTransform);
 	}
 
-	@NullUnmarked private final static void applyNodeAnimationBlending (final NodeAnimation nodeAnim, final ObjectMap<Node, Transform> out,
+	@NullUnmarked
+	private final static void applyNodeAnimationBlending (final NodeAnimation nodeAnim, final ObjectMap<Node, Transform> out,
 		@Nullable final Pool<Transform> pool, final float alpha, final float time) {
 
 		final Node node = nodeAnim.node;
@@ -274,7 +280,8 @@ public class BaseAnimationController {
 	}
 
 	/** Helper method to apply one animation to either an objectmap for blending or directly to the bones. */
-	@NullUnmarked protected static void applyAnimation (@Nullable final ObjectMap<Node, Transform> out, @Nullable final Pool<Transform> pool,
+	@NullUnmarked
+	protected static void applyAnimation (@Nullable final ObjectMap<Node, Transform> out, @Nullable final Pool<Transform> pool,
 		final float alpha, @Nullable final Animation animation, final float time) {
 
 		if (out == null) {
@@ -296,7 +303,8 @@ public class BaseAnimationController {
 
 	/** Remove the specified animation, by marking the affected nodes as not animated. When switching animation, this should be
 	 * call prior to applyAnimation(s). */
-	@NullUnmarked protected void removeAnimation (@Nullable final Animation animation) {
+	@NullUnmarked
+	protected void removeAnimation (@Nullable final Animation animation) {
 		for (final NodeAnimation nodeAnim : animation.nodeAnimations) {
 			nodeAnim.node.isAnimated = false;
 		}

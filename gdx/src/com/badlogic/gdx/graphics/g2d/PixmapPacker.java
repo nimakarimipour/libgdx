@@ -165,7 +165,8 @@ public class PixmapPacker implements Disposable {
 	 * @return Rectangle describing the area the pixmap was rendered to.
 	 * @throws GdxRuntimeException in case the image did not fit due to the page size being too small or providing a duplicate
 	 *            name. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	public synchronized Rectangle pack (@Nullable String name, Pixmap image) {
 		if (disposed) return null;
 		if (name != null && getRect(name) != null)
@@ -360,7 +361,8 @@ public class PixmapPacker implements Disposable {
 	 * can be used to insert Pixmap instances on a separate thread via {@link #pack(String, Pixmap)} and update the TextureAtlas on
 	 * the rendering thread. This method must be called on the rendering thread. After calling this method, disposing the packer
 	 * will no longer dispose the page pixmaps. */
-	@NullUnmarked public synchronized void updateTextureAtlas (TextureAtlas atlas, TextureFilter minFilter, TextureFilter magFilter,
+	@NullUnmarked
+	public synchronized void updateTextureAtlas (TextureAtlas atlas, TextureFilter minFilter, TextureFilter magFilter,
 		boolean useMipMaps, boolean useIndexes) {
 		updatePageTextures(minFilter, magFilter, useMipMaps);
 		for (Page page : pages) {
@@ -550,7 +552,8 @@ public class PixmapPacker implements Disposable {
 			pixmaps.sort(comparator);
 		}
 
-		@NullUnmarked public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
+		@NullUnmarked
+		public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
 			GuillotinePage page;
 			if (packer.pages.size == 0) {
 				// Add a page if empty.

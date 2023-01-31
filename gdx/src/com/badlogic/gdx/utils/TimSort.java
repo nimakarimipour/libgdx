@@ -403,7 +403,8 @@ class TimSort<T> {
 	 * words, i must be equal to stackSize-2 or stackSize-3.
 	 * 
 	 * @param i stack index of the first of the two runs to merge */
-	@NullUnmarked private void mergeAt (int i) {
+	@NullUnmarked
+	private void mergeAt (int i) {
 		if (DEBUG) assert stackSize >= 2;
 		if (DEBUG) assert i >= 0;
 		if (DEBUG) assert i == stackSize - 2 || i == stackSize - 3;
@@ -464,7 +465,8 @@ class TimSort<T> {
 	 * @return the int k, 0 <= k <= n such that a[b + k - 1] < key <= a[b + k], pretending that a[b - 1] is minus infinity and a[b
 	 *         + n] is infinity. In other words, key belongs at index b + k; or in other words, the first k elements of a should
 	 *         precede key, and the last n - k should follow it. */
-	@NullUnmarked private static <T> int gallopLeft (T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
+	@NullUnmarked
+	private static <T> int gallopLeft (T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
 		if (DEBUG) assert len > 0 && hint >= 0 && hint < len;
 		int lastOfs = 0;
 		int ofs = 1;
@@ -528,7 +530,8 @@ class TimSort<T> {
 	 *           will run.
 	 * @param c the comparator used to order the range, and to search
 	 * @return the int k, 0 <= k <= n such that a[b + k - 1] <= key < a[b + k] */
-	@NullUnmarked private static <T> int gallopRight (T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
+	@NullUnmarked
+	private static <T> int gallopRight (T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
 		if (DEBUG) assert len > 0 && hint >= 0 && hint < len;
 
 		int ofs = 1;
@@ -593,7 +596,8 @@ class TimSort<T> {
 	 * @param len1 length of first run to be merged (must be > 0)
 	 * @param base2 index of first element in second run to be merged (must be aBase + aLen)
 	 * @param len2 length of second run to be merged (must be > 0) */
-	@NullUnmarked private void mergeLo (int base1, int len1, int base2, int len2) {
+	@NullUnmarked
+	private void mergeLo (int base1, int len1, int base2, int len2) {
 		if (DEBUG) assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
 		// Copy first run into temp array
@@ -697,7 +701,8 @@ class TimSort<T> {
 	 * @param len1 length of first run to be merged (must be > 0)
 	 * @param base2 index of first element in second run to be merged (must be aBase + aLen)
 	 * @param len2 length of second run to be merged (must be > 0) */
-	@NullUnmarked private void mergeHi (int base1, int len1, int base2, int len2) {
+	@NullUnmarked
+	private void mergeHi (int base1, int len1, int base2, int len2) {
 		if (DEBUG) assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
 		// Copy second run into temp array
@@ -803,7 +808,8 @@ class TimSort<T> {
 	 * 
 	 * @param minCapacity the minimum required capacity of the tmp array
 	 * @return tmp, whether or not it grew */
-	@NullUnmarked private T[] ensureCapacity (int minCapacity) {
+	@NullUnmarked
+	private T[] ensureCapacity (int minCapacity) {
 		tmpCount = Math.max(tmpCount, minCapacity);
 		if (tmp.length < minCapacity) {
 			// Compute smallest power of 2 > minCapacity

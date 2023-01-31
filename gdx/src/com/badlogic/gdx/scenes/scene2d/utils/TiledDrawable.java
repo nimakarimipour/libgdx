@@ -40,7 +40,8 @@ public class TiledDrawable extends TextureRegionDrawable {
 		super(drawable);
 	}
 
-	@NullUnmarked public void draw (Batch batch, float x, float y, float width, float height) {
+	@NullUnmarked
+	public void draw (Batch batch, float x, float y, float width, float height) {
 		float oldColor = batch.getPackedColor();
 		batch.setColor(batch.getColor().mul(color));
 

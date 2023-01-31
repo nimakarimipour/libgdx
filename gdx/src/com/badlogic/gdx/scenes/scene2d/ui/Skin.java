@@ -110,7 +110,8 @@ public class Skin implements Disposable {
 	}
 
 	/** Adds all named texture regions from the atlas. The atlas will not be automatically disposed when the skin is disposed. */
-	@NullUnmarked public void addRegions (@Nullable TextureAtlas atlas) {
+	@NullUnmarked
+	public void addRegions (@Nullable TextureAtlas atlas) {
 		Array<AtlasRegion> regions = atlas.getRegions();
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
@@ -122,7 +123,8 @@ public class Skin implements Disposable {
 		}
 	}
 
-	@NullUnmarked public void add (@Nullable String name, @Nullable Object resource) {
+	@NullUnmarked
+	public void add (@Nullable String name, @Nullable Object resource) {
 		add(name, resource, resource.getClass());
 	}
 
@@ -137,7 +139,8 @@ public class Skin implements Disposable {
 		typeResources.put(name, resource);
 	}
 
-	@NullUnmarked public void remove (String name, Class type) {
+	@NullUnmarked
+	public void remove (String name, Class type) {
 		if (name == null) throw new IllegalArgumentException("name cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(type);
 		typeResources.remove(name);
@@ -481,7 +484,8 @@ public class Skin implements Disposable {
 				return fieldName.equals(parentFieldName);
 			}
 
-			@NullUnmarked public void readFields (Object object, JsonValue jsonMap) {
+			@NullUnmarked
+			public void readFields (Object object, JsonValue jsonMap) {
 				if (jsonMap.has(parentFieldName)) {
 					String parentName = readValue(parentFieldName, String.class, jsonMap);
 					Class parentType = object.getClass();
@@ -538,7 +542,8 @@ public class Skin implements Disposable {
 		});
 
 		json.setSerializer(BitmapFont.class, new ReadOnlySerializer<BitmapFont>() {
-			@NullUnmarked public BitmapFont read (Json json, JsonValue jsonData, @Nullable Class type) {
+			@NullUnmarked
+			public BitmapFont read (Json json, JsonValue jsonData, @Nullable Class type) {
 				String path = json.readValue("file", String.class, jsonData);
 				int scaledSize = json.readValue("scaledSize", int.class, -1, jsonData);
 				Boolean flip = json.readValue("flip", Boolean.class, false, jsonData);
@@ -578,7 +583,8 @@ public class Skin implements Disposable {
 		});
 
 		json.setSerializer(Color.class, new ReadOnlySerializer<Color>() {
-			@NullUnmarked public Color read (Json json, JsonValue jsonData, @Nullable Class type) {
+			@NullUnmarked
+			public Color read (Json json, JsonValue jsonData, @Nullable Class type) {
 				if (jsonData.isString()) return get(jsonData.asString(), Color.class);
 				String hex = json.readValue("hex", String.class, (String)null, jsonData);
 				if (hex != null) return Color.valueOf(hex);

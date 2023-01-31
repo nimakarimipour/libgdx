@@ -81,7 +81,8 @@ public class TextureRegion {
 
 	/** @param width The width of the texture region. May be negative to flip the sprite when drawn.
 	 * @param height The height of the texture region. May be negative to flip the sprite when drawn. */
-	@NullUnmarked public void setRegion (int x, int y, int width, int height) {
+	@NullUnmarked
+	public void setRegion (int x, int y, int width, int height) {
 		float invTexWidth = 1f / texture.getWidth();
 		float invTexHeight = 1f / texture.getHeight();
 		setRegion(x * invTexWidth, y * invTexHeight, (x + width) * invTexWidth, (y + height) * invTexHeight);
@@ -89,7 +90,8 @@ public class TextureRegion {
 		regionHeight = Math.abs(height);
 	}
 
-	@NullUnmarked public void setRegion (float u, float v, float u2, float v2) {
+	@NullUnmarked
+	public void setRegion (float u, float v, float u2, float v2) {
 		int texWidth = texture.getWidth(), texHeight = texture.getHeight();
 		regionWidth = Math.round(Math.abs(u2 - u) * texWidth);
 		regionHeight = Math.round(Math.abs(v2 - v) * texHeight);
@@ -111,7 +113,8 @@ public class TextureRegion {
 	}
 
 	/** Sets the texture and coordinates to the specified region. */
-	@NullUnmarked public void setRegion (@Nullable TextureRegion region) {
+	@NullUnmarked
+	public void setRegion (@Nullable TextureRegion region) {
 		texture = region.texture;
 		setRegion(region.u, region.v, region.u2, region.v2);
 	}
@@ -135,7 +138,8 @@ public class TextureRegion {
 		return u;
 	}
 
-	@NullUnmarked public void setU (float u) {
+	@NullUnmarked
+	public void setU (float u) {
 		this.u = u;
 		regionWidth = Math.round(Math.abs(u2 - u) * texture.getWidth());
 	}
@@ -144,7 +148,8 @@ public class TextureRegion {
 		return v;
 	}
 
-	@NullUnmarked public void setV (float v) {
+	@NullUnmarked
+	public void setV (float v) {
 		this.v = v;
 		regionHeight = Math.round(Math.abs(v2 - v) * texture.getHeight());
 	}
@@ -153,7 +158,8 @@ public class TextureRegion {
 		return u2;
 	}
 
-	@NullUnmarked public void setU2 (float u2) {
+	@NullUnmarked
+	public void setU2 (float u2) {
 		this.u2 = u2;
 		regionWidth = Math.round(Math.abs(u2 - u) * texture.getWidth());
 	}
@@ -162,24 +168,29 @@ public class TextureRegion {
 		return v2;
 	}
 
-	@NullUnmarked public void setV2 (float v2) {
+	@NullUnmarked
+	public void setV2 (float v2) {
 		this.v2 = v2;
 		regionHeight = Math.round(Math.abs(v2 - v) * texture.getHeight());
 	}
 
-	@NullUnmarked public int getRegionX () {
+	@NullUnmarked
+	public int getRegionX () {
 		return Math.round(u * texture.getWidth());
 	}
 
-	@NullUnmarked public void setRegionX (int x) {
+	@NullUnmarked
+	public void setRegionX (int x) {
 		setU(x / (float)texture.getWidth());
 	}
 
-	@NullUnmarked public int getRegionY () {
+	@NullUnmarked
+	public int getRegionY () {
 		return Math.round(v * texture.getHeight());
 	}
 
-	@NullUnmarked public void setRegionY (int y) {
+	@NullUnmarked
+	public void setRegionY (int y) {
 		setV(y / (float)texture.getHeight());
 	}
 
@@ -188,7 +199,8 @@ public class TextureRegion {
 		return regionWidth;
 	}
 
-	@NullUnmarked public void setRegionWidth (int width) {
+	@NullUnmarked
+	public void setRegionWidth (int width) {
 		if (isFlipX()) {
 			setU(u2 + width / (float)texture.getWidth());
 		} else {
@@ -201,7 +213,8 @@ public class TextureRegion {
 		return regionHeight;
 	}
 
-	@NullUnmarked public void setRegionHeight (int height) {
+	@NullUnmarked
+	public void setRegionHeight (int height) {
 		if (isFlipY()) {
 			setV(v2 + height / (float)texture.getHeight());
 		} else {
@@ -234,7 +247,8 @@ public class TextureRegion {
 	 * the direction(s) it is scrolled.
 	 * @param xAmount The percentage to offset horizontally.
 	 * @param yAmount The percentage to offset vertically. This is done in texture space, so up is negative. */
-	@NullUnmarked public void scroll (float xAmount, float yAmount) {
+	@NullUnmarked
+	public void scroll (float xAmount, float yAmount) {
 		if (xAmount != 0) {
 			float width = (u2 - u) * texture.getWidth();
 			u = (u + xAmount) % 1;

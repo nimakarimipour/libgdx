@@ -80,7 +80,8 @@ public class ImageButton extends Button {
 	}
 
 	/** Returns the appropriate image drawable from the style based on the current button state. */
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getImageDrawable () {
 		if (isDisabled() && style.imageDisabled != null) return style.imageDisabled;
 		if (isPressed()) {

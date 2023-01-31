@@ -24,7 +24,8 @@ import com.badlogic.gdx.NullUnmarked;
 public class RemoveActorAction extends Action {
 	private boolean removed;
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		if (!removed) {
 			removed = true;
 			target.remove();

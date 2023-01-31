@@ -113,7 +113,8 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		) cached = false;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void render () {
 		if (!cached) {
 			cached = true;
@@ -155,7 +156,8 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		if (blending) Gdx.gl.glDisable(GL20.GL_BLEND);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void render (int[] layers) {
 		if (!cached) {
 			cached = true;
@@ -208,7 +210,8 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 	public void renderObject (MapObject object) {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void renderTileLayer (TiledMapTileLayer layer) {
 		final float color = Color.toFloatBits(1, 1, 1, layer.getOpacity());
 

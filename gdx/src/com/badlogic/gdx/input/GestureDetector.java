@@ -103,7 +103,8 @@ public class GestureDetector extends InputAdapter {
 		return touchDown((float)x, (float)y, pointer, button);
 	}
 
-	@NullUnmarked public boolean touchDown (float x, float y, int pointer, int button) {
+	@NullUnmarked
+	public boolean touchDown (float x, float y, int pointer, int button) {
 		if (pointer > 1) return false;
 
 		if (pointer == 0) {
@@ -143,7 +144,8 @@ public class GestureDetector extends InputAdapter {
 		return touchDragged((float)x, (float)y, pointer);
 	}
 
-	@NullUnmarked public boolean touchDragged (float x, float y, int pointer) {
+	@NullUnmarked
+	public boolean touchDragged (float x, float y, int pointer) {
 		if (pointer > 1) return false;
 		if (longPressFired) return false;
 
@@ -184,7 +186,8 @@ public class GestureDetector extends InputAdapter {
 		return touchUp((float)x, (float)y, pointer, button);
 	}
 
-	@NullUnmarked public boolean touchUp (float x, float y, int pointer, int button) {
+	@NullUnmarked
+	public boolean touchUp (float x, float y, int pointer, int button) {
 		if (pointer > 1) return false;
 
 		// check if we are still tapping.

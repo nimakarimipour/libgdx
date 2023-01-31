@@ -116,7 +116,8 @@ public class Animation<T> {
 	 * 
 	 * @param stateTime
 	 * @return the frame of animation for the given state time. */
-	@NullUnmarked public T getKeyFrame (float stateTime) {
+	@NullUnmarked
+	public T getKeyFrame (float stateTime) {
 		int frameNumber = getKeyFrameIndex(stateTime);
 		return keyFrames[frameNumber];
 	}
@@ -124,7 +125,8 @@ public class Animation<T> {
 	/** Returns the current frame number.
 	 * @param stateTime
 	 * @return current frame number */
-	@NullUnmarked public int getKeyFrameIndex (float stateTime) {
+	@NullUnmarked
+	public int getKeyFrameIndex (float stateTime) {
 		if (keyFrames.length == 1) return 0;
 
 		int frameNumber = (int)(stateTime / frameDuration);
@@ -190,14 +192,16 @@ public class Animation<T> {
 	/** Whether the animation would be finished if played without looping (PlayMode#NORMAL), given the state time.
 	 * @param stateTime
 	 * @return whether the animation is finished. */
-	@NullUnmarked public boolean isAnimationFinished (float stateTime) {
+	@NullUnmarked
+	public boolean isAnimationFinished (float stateTime) {
 		int frameNumber = (int)(stateTime / frameDuration);
 		return keyFrames.length - 1 < frameNumber;
 	}
 
 	/** Sets duration a frame will be displayed.
 	 * @param frameDuration in seconds */
-	@NullUnmarked public void setFrameDuration (float frameDuration) {
+	@NullUnmarked
+	public void setFrameDuration (float frameDuration) {
 		this.frameDuration = frameDuration;
 		this.animationDuration = keyFrames.length * frameDuration;
 	}

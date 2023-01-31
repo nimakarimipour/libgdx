@@ -42,27 +42,33 @@ public class Logger {
 		this.level = level;
 	}
 
-	@NullUnmarked public void debug (String message) {
+	@NullUnmarked
+	public void debug (String message) {
 		if (level >= DEBUG) Gdx.app.debug(tag, message);
 	}
 
-	@NullUnmarked public void debug (String message, Exception exception) {
+	@NullUnmarked
+	public void debug (String message, Exception exception) {
 		if (level >= DEBUG) Gdx.app.debug(tag, message, exception);
 	}
 
-	@NullUnmarked public void info (String message) {
+	@NullUnmarked
+	public void info (String message) {
 		if (level >= INFO) Gdx.app.log(tag, message);
 	}
 
-	@NullUnmarked public void info (String message, Exception exception) {
+	@NullUnmarked
+	public void info (String message, Exception exception) {
 		if (level >= INFO) Gdx.app.log(tag, message, exception);
 	}
 
-	@NullUnmarked public void error (String message) {
+	@NullUnmarked
+	public void error (String message) {
 		if (level >= ERROR) Gdx.app.error(tag, message);
 	}
 
-	@NullUnmarked public void error (String message, Throwable exception) {
+	@NullUnmarked
+	public void error (String message, Throwable exception) {
 		if (level >= ERROR) Gdx.app.error(tag, message, exception);
 	}
 

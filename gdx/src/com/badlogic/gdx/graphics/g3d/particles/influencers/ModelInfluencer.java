@@ -48,7 +48,8 @@ public abstract class ModelInfluencer extends Influencer {
 			super(models);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void init () {
 			Model first = models.first();
 			for (int i = 0, c = controller.emitter.maxParticleCount; i < c; ++i) {
@@ -96,14 +97,16 @@ public abstract class ModelInfluencer extends Influencer {
 			pool.clear();
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				modelChannel.data[i] = pool.obtain();
 			}
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void killParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				pool.free(modelChannel.data[i]);
@@ -132,7 +135,8 @@ public abstract class ModelInfluencer extends Influencer {
 		this((Model[])influencer.models.toArray(Model.class));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		modelChannel = controller.particles.addChannel(ParticleChannels.ModelInstance);
 	}

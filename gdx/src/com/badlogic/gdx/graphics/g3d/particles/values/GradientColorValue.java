@@ -52,7 +52,8 @@ public class GradientColorValue extends ParticleValue {
 		return temp;
 	}
 
-	@NullUnmarked public void getColor (float percent, float[] out, int index) {
+	@NullUnmarked
+	public void getColor (float percent, float[] out, int index) {
 		int startIndex = 0, endIndex = -1;
 		float[] timeline = this.timeline;
 		int n = timeline.length;
@@ -96,7 +97,8 @@ public class GradientColorValue extends ParticleValue {
 		timeline = json.readValue("timeline", float[].class, jsonData);
 	}
 
-	@NullUnmarked public void load (@Nullable GradientColorValue value) {
+	@NullUnmarked
+	public void load (@Nullable GradientColorValue value) {
 		super.load(value);
 		colors = new float[value.colors.length];
 		System.arraycopy(value.colors, 0, colors, 0, colors.length);

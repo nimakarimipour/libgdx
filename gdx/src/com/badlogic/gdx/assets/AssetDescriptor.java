@@ -46,14 +46,16 @@ public class AssetDescriptor<T> {
 	}
 
 	/** Creates an AssetDescriptor with an already resolved name. */
-	@NullUnmarked public AssetDescriptor (@Nullable FileHandle file, Class<T> assetType, @Nullable AssetLoaderParameters<T> params) {
+	@NullUnmarked
+	public AssetDescriptor (@Nullable FileHandle file, Class<T> assetType, @Nullable AssetLoaderParameters<T> params) {
 		this.fileName = file.path();
 		this.file = file;
 		this.type = assetType;
 		this.params = params;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public String toString () {
 		StringBuilder sb = new StringBuilder();
 		sb.append(fileName);

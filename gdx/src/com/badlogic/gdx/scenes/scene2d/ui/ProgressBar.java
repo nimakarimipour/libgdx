@@ -97,7 +97,8 @@ public class ProgressBar extends Widget implements Disableable {
 		return style;
 	}
 
-	@NullUnmarked public void act (float delta) {
+	@NullUnmarked
+	public void act (float delta) {
 		super.act(delta);
 		if (animateTime > 0) {
 			animateTime -= delta;
@@ -106,7 +107,8 @@ public class ProgressBar extends Widget implements Disableable {
 		}
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		ProgressBarStyle style = this.style;
 		boolean disabled = this.disabled;
 		Drawable knob = style.knob, currentKnob = getKnobDrawable();
@@ -228,25 +230,29 @@ public class ProgressBar extends Widget implements Disableable {
 		return visualInterpolation.apply((getVisualValue() - min) / (max - min));
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		return style.background;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected @Null Drawable getKnobDrawable () {
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		return style.knob;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected Drawable getKnobBeforeDrawable () {
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		return style.knobBefore;
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	protected Drawable getKnobAfterDrawable () {
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		return style.knobAfter;
@@ -312,7 +318,8 @@ public class ProgressBar extends Widget implements Disableable {
 		this.stepSize = stepSize;
 	}
 
-	@NullUnmarked public float getPrefWidth () {
+	@NullUnmarked
+	public float getPrefWidth () {
 		if (vertical) {
 			Drawable knob = style.knob, bg = getBackgroundDrawable();
 			return Math.max(knob == null ? 0 : knob.getMinWidth(), bg == null ? 0 : bg.getMinWidth());
@@ -320,7 +327,8 @@ public class ProgressBar extends Widget implements Disableable {
 			return 140;
 	}
 
-	@NullUnmarked public float getPrefHeight () {
+	@NullUnmarked
+	public float getPrefHeight () {
 		if (vertical)
 			return 140;
 		else {

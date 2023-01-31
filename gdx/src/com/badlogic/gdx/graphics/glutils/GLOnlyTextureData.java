@@ -74,7 +74,8 @@ public class GLOnlyTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void consumeCustomData (int target) {
 		Gdx.gl.glTexImage2D(target, mipLevel, internalFormat, width, height, 0, format, type, null);
 	}

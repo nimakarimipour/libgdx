@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
 import com.badlogic.gdx.NullUnmarked;
 
 public class ClasspathFileHandleResolver implements FileHandleResolver {
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public FileHandle resolve (@Nullable String fileName) {
 		return Gdx.files.classpath(fileName);
 	}

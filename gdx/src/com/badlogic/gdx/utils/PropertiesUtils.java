@@ -250,7 +250,8 @@ public final class PropertiesUtils {
 		writer.flush();
 	}
 
-	@NullUnmarked private static void dumpString (StringBuilder outBuffer, @Nullable String string, boolean escapeSpace, boolean escapeUnicode) {
+	@NullUnmarked
+	private static void dumpString (StringBuilder outBuffer, @Nullable String string, boolean escapeSpace, boolean escapeUnicode) {
 		int len = string.length();
 		for (int i = 0; i < len; i++) {
 			char ch = string.charAt(i);

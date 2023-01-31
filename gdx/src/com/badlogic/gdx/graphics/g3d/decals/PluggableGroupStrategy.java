@@ -26,12 +26,14 @@ import com.badlogic.gdx.NullUnmarked;
 public abstract class PluggableGroupStrategy implements GroupStrategy {
 	private IntMap<GroupPlug> plugs = new IntMap<GroupPlug>();
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void beforeGroup (int group, @Nullable Array<Decal> contents) {
 		plugs.get(group).beforeGroup(contents);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void afterGroup (int group) {
 		plugs.get(group).afterGroup();
 	}

@@ -80,7 +80,8 @@ public class IndexBufferObjectSubData implements IndexData {
 		bufferHandle = createBufferObject();
 	}
 
-	@NullUnmarked private int createBufferObject () {
+	@NullUnmarked
+	private int createBufferObject () {
 		int result = Gdx.gl20.glGenBuffer();
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, result);
 		Gdx.gl20.glBufferData(GL20.GL_ELEMENT_ARRAY_BUFFER, byteBuffer.capacity(), null, usage);
@@ -111,7 +112,8 @@ public class IndexBufferObjectSubData implements IndexData {
 	 * @param indices the vertex data
 	 * @param offset the offset to start copying the data from
 	 * @param count the number of floats to copy */
-	@NullUnmarked public void setIndices (short[] indices, int offset, int count) {
+	@NullUnmarked
+	public void setIndices (short[] indices, int offset, int count) {
 		isDirty = true;
 		((Buffer)buffer).clear();
 		buffer.put(indices, offset, count);
@@ -125,7 +127,8 @@ public class IndexBufferObjectSubData implements IndexData {
 		}
 	}
 
-	@NullUnmarked public void setIndices (ShortBuffer indices) {
+	@NullUnmarked
+	public void setIndices (ShortBuffer indices) {
 		int pos = indices.position();
 		isDirty = true;
 		((Buffer)buffer).clear();
@@ -141,7 +144,8 @@ public class IndexBufferObjectSubData implements IndexData {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void updateIndices (int targetOffset, short[] indices, int offset, int count) {
 		isDirty = true;
 		final int pos = byteBuffer.position();
@@ -169,7 +173,8 @@ public class IndexBufferObjectSubData implements IndexData {
 	}
 
 	/** Binds this IndexBufferObject for rendering with glDrawElements. */
-	@NullUnmarked public void bind () {
+	@NullUnmarked
+	public void bind () {
 		if (bufferHandle == 0) throw new GdxRuntimeException("IndexBufferObject cannot be used after it has been disposed.");
 
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, bufferHandle);
@@ -182,7 +187,8 @@ public class IndexBufferObjectSubData implements IndexData {
 	}
 
 	/** Unbinds this IndexBufferObject. */
-	@NullUnmarked public void unbind () {
+	@NullUnmarked
+	public void unbind () {
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);
 		isBound = false;
 	}
@@ -194,7 +200,8 @@ public class IndexBufferObjectSubData implements IndexData {
 	}
 
 	/** Disposes this IndexBufferObject and all its associated OpenGL resources. */
-	@NullUnmarked public void dispose () {
+	@NullUnmarked
+	public void dispose () {
 		GL20 gl = Gdx.gl20;
 		gl.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);
 		gl.glDeleteBuffer(bufferHandle);

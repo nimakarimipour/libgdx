@@ -117,7 +117,8 @@ public class FloatArray {
 		addAll(array.items, offset, length);
 	}
 
-	@NullUnmarked public void addAll (@Nullable float... array) {
+	@NullUnmarked
+	public void addAll (@Nullable float... array) {
 		addAll(array, 0, array.length);
 	}
 

@@ -31,7 +31,8 @@ public final class PointSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public PointSpawnShapeValue () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void spawnAux (Vector3 vector, float percent) {
 		vector.x = spawnWidth + (spawnWidthDiff * spawnWidthValue.getScale(percent));
 		vector.y = spawnHeight + (spawnHeightDiff * spawnHeightValue.getScale(percent));

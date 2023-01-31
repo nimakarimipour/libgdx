@@ -109,7 +109,8 @@ class AssetLoadingTask implements AsyncTask<Void> {
 			asset = syncLoader.load(manager, assetDesc.fileName, resolve(loader, assetDesc), assetDesc.params);
 	}
 
-	@NullUnmarked private void handleAsyncLoader () {
+	@NullUnmarked
+	private void handleAsyncLoader () {
 		AsynchronousAssetLoader asyncLoader = (AsynchronousAssetLoader)loader;
 		if (!dependenciesLoaded) {
 			if (depsFuture == null)
@@ -149,7 +150,8 @@ class AssetLoadingTask implements AsyncTask<Void> {
 		return assetDesc.file;
 	}
 
-	@NullUnmarked private void removeDuplicates (Array<AssetDescriptor> array) {
+	@NullUnmarked
+	private void removeDuplicates (Array<AssetDescriptor> array) {
 		boolean ordered = array.ordered;
 		array.ordered = true;
 		for (int i = 0; i < array.size; ++i) {

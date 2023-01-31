@@ -51,7 +51,8 @@ public class DynamicsInfluencer extends Influencer {
 		this((DynamicsModifier[])velocityInfluencer.velocities.toArray(DynamicsModifier.class));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void allocateChannels () {
 		for (int k = 0; k < velocities.size; ++k) {
 			velocities.items[k].allocateChannels();
@@ -94,7 +95,8 @@ public class DynamicsInfluencer extends Influencer {
 		}
 	}
 
-	@NullUnmarked public void activateParticles (int startIndex, int count) {
+	@NullUnmarked
+	public void activateParticles (int startIndex, int count) {
 		if (hasAcceleration) {
 			// Previous position is the current position
 			// Attention, this requires that some other influencer setting the position channel must execute before this influencer.
@@ -134,7 +136,8 @@ public class DynamicsInfluencer extends Influencer {
 		}
 	}
 
-	@NullUnmarked public void update () {
+	@NullUnmarked
+	public void update () {
 		// Clean previouse frame velocities
 		if (hasAcceleration)
 			Arrays.fill(accellerationChannel.data, 0, controller.particles.size * accellerationChannel.strideSize, 0);

@@ -152,7 +152,8 @@ public class RepeatablePolygonSprite {
 	}
 
 	/** Builds final vertices with vertex attributes like coordinates, color and region u/v */
-	@NullUnmarked private void buildVertices () {
+	@NullUnmarked
+	private void buildVertices () {
 		vertices.clear();
 		for (int i = 0; i < parts.size; i++) {
 			float verts[] = parts.get(i);
@@ -186,7 +187,8 @@ public class RepeatablePolygonSprite {
 		dirty = false;
 	}
 
-	@NullUnmarked public void draw (PolygonSpriteBatch batch) {
+	@NullUnmarked
+	public void draw (PolygonSpriteBatch batch) {
 		if (dirty) {
 			buildVertices();
 		}

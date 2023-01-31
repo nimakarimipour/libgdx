@@ -53,7 +53,8 @@ public class ParticleEffectLoader
 		@Nullable ParticleEffectLoadParameter parameter) {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
 		@Nullable ParticleEffectLoadParameter parameter) {
 		Json json = new Json();
@@ -86,7 +87,8 @@ public class ParticleEffectLoader
 	}
 
 	/** Saves the effect to the given file contained in the passed in parameter. */
-	@NullUnmarked public void save (ParticleEffect effect, ParticleEffectSaveParameter parameter) throws IOException {
+	@NullUnmarked
+	public void save (ParticleEffect effect, ParticleEffectSaveParameter parameter) throws IOException {
 		ResourceData<ParticleEffect> data = new ResourceData<ParticleEffect>(effect);
 
 		// effect assets
@@ -112,7 +114,8 @@ public class ParticleEffectLoader
 		json.toJson(data, parameter.file);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public ParticleEffect loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable ParticleEffectLoadParameter parameter) {
 		ResourceData<ParticleEffect> effectData = null;

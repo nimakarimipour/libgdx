@@ -66,7 +66,8 @@ public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, P
 		super(resolver);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public PolygonRegion load (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable PolygonRegionParameters parameter) {
 		Texture texture = manager.get(manager.getDependencies(fileName).first());

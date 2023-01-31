@@ -102,7 +102,8 @@ public class ResolutionFileResolver implements FileHandleResolver {
 		return parentString + suffix + "/" + originalHandle.name();
 	}
 
-	@NullUnmarked static public Resolution choose (Resolution... descriptors) {
+	@NullUnmarked
+	static public Resolution choose (Resolution... descriptors) {
 		int w = Gdx.graphics.getBackBufferWidth(), h = Gdx.graphics.getBackBufferHeight();
 
 		// Prefer the shortest side.

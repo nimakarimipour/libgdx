@@ -46,7 +46,8 @@ public class InputListener implements EventListener {
 	 * {@link #touchDown(InputEvent, float, float, int, int)} returns true (indicating the event was handled) then this listener is
 	 * added to the stage's {@link Stage#addTouchFocus(EventListener, Actor, Actor, int, int) touch focus} so it will receive all
 	 * touch dragged events until the next touch up event. */
-	@NullUnmarked public boolean handle (Event e) {
+	@NullUnmarked
+	public boolean handle (Event e) {
 		if (!(e instanceof InputEvent)) return false;
 		InputEvent event = (InputEvent)e;
 

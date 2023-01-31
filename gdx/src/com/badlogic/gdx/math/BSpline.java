@@ -64,7 +64,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	@NullUnmarked public static <T extends Vector<T>> T cubic (@Nullable final T out, final int i, final float u, @Nullable final T[] points,
+	@NullUnmarked
+	public static <T extends Vector<T>> T cubic (@Nullable final T out, final int i, final float u, @Nullable final T[] points,
 		final boolean continuous, @Nullable final T tmp) {
 		final int n = points.length;
 		final float dt = 1f - u;
@@ -85,7 +86,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	@NullUnmarked public static <T extends Vector<T>> T cubic_derivative (final T out, final int i, final float u, @Nullable final T[] points,
+	@NullUnmarked
+	public static <T extends Vector<T>> T cubic_derivative (final T out, final int i, final float u, @Nullable final T[] points,
 		final boolean continuous, @Nullable final T tmp) {
 		final int n = points.length;
 		final float dt = 1f - u;
@@ -238,7 +240,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	}
 
 	/** @return The span closest to the specified value, restricting to the specified spans. */
-	@NullUnmarked public int nearest (final T in, int start, final int count) {
+	@NullUnmarked
+	public int nearest (final T in, int start, final int count) {
 		while (start < 0)
 			start += spanCount;
 		int result = start % spanCount;
@@ -263,7 +266,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 		return approximate(in, nearest(in, start, count));
 	}
 
-	@NullUnmarked public float approximate (final T in, final int near) {
+	@NullUnmarked
+	public float approximate (final T in, final int near) {
 		int n = near;
 		final T nearest = knots.get(n);
 		final T previous = knots.get(n > 0 ? n - 1 : spanCount - 1);
@@ -296,7 +300,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 		return approximate(v);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public float approxLength (int samples) {
 		float tempLength = 0;
 		for (int i = 0; i < samples; ++i) {

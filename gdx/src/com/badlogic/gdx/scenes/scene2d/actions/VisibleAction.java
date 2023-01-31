@@ -25,7 +25,8 @@ import com.badlogic.gdx.NullUnmarked;
 public class VisibleAction extends Action {
 	private boolean visible;
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		target.setVisible(visible);
 		return true;
 	}

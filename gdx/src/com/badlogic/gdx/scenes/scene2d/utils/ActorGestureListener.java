@@ -49,13 +49,15 @@ public class ActorGestureListener implements EventListener {
 			private final Vector2 initialPointer1 = new Vector2(), initialPointer2 = new Vector2();
 			private final Vector2 pointer1 = new Vector2(), pointer2 = new Vector2();
 
-			@NullUnmarked public boolean tap (float stageX, float stageY, int count, int button) {
+			@NullUnmarked
+			public boolean tap (float stageX, float stageY, int count, int button) {
 				actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
 				ActorGestureListener.this.tap(event, tmpCoords.x, tmpCoords.y, count, button);
 				return true;
 			}
 
-			@NullUnmarked public boolean longPress (float stageX, float stageY) {
+			@NullUnmarked
+			public boolean longPress (float stageX, float stageY) {
 				actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
 				return ActorGestureListener.this.longPress(actor, tmpCoords.x, tmpCoords.y);
 			}
@@ -66,7 +68,8 @@ public class ActorGestureListener implements EventListener {
 				return true;
 			}
 
-			@NullUnmarked public boolean pan (float stageX, float stageY, float deltaX, float deltaY) {
+			@NullUnmarked
+			public boolean pan (float stageX, float stageY, float deltaX, float deltaY) {
 				stageToLocalAmount(tmpCoords.set(deltaX, deltaY));
 				deltaX = tmpCoords.x;
 				deltaY = tmpCoords.y;
@@ -75,7 +78,8 @@ public class ActorGestureListener implements EventListener {
 				return true;
 			}
 
-			@NullUnmarked public boolean panStop (float stageX, float stageY, int pointer, int button) {
+			@NullUnmarked
+			public boolean panStop (float stageX, float stageY, int pointer, int button) {
 				actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
 				ActorGestureListener.this.panStop(event, tmpCoords.x, tmpCoords.y, pointer, button);
 				return true;
@@ -86,7 +90,8 @@ public class ActorGestureListener implements EventListener {
 				return true;
 			}
 
-			@NullUnmarked public boolean pinch (Vector2 stageInitialPointer1, Vector2 stageInitialPointer2, Vector2 stagePointer1,
+			@NullUnmarked
+			public boolean pinch (Vector2 stageInitialPointer1, Vector2 stageInitialPointer2, Vector2 stagePointer1,
 				Vector2 stagePointer2) {
 				actor.stageToLocalCoordinates(initialPointer1.set(stageInitialPointer1));
 				actor.stageToLocalCoordinates(initialPointer2.set(stageInitialPointer2));
@@ -96,14 +101,16 @@ public class ActorGestureListener implements EventListener {
 				return true;
 			}
 
-			@NullUnmarked private void stageToLocalAmount (Vector2 amount) {
+			@NullUnmarked
+			private void stageToLocalAmount (Vector2 amount) {
 				actor.stageToLocalCoordinates(amount);
 				amount.sub(actor.stageToLocalCoordinates(tmpCoords2.set(0, 0)));
 			}
 		});
 	}
 
-	@NullUnmarked public boolean handle (Event e) {
+	@NullUnmarked
+	public boolean handle (Event e) {
 		if (!(e instanceof InputEvent)) return false;
 		InputEvent event = (InputEvent)e;
 

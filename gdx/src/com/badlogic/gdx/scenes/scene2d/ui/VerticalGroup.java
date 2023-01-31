@@ -204,7 +204,8 @@ public class VerticalGroup extends WidgetGroup {
 		}
 	}
 
-	@NullUnmarked private void layoutWrapped () {
+	@NullUnmarked
+	private void layoutWrapped () {
 		float prefWidth = getPrefWidth();
 		if (prefWidth != lastPrefWidth) {
 			lastPrefWidth = prefWidth;
@@ -305,7 +306,8 @@ public class VerticalGroup extends WidgetGroup {
 	}
 
 	/** When wrapping is enabled, the number of columns may be > 1. */
-	@NullUnmarked public int getColumns () {
+	@NullUnmarked
+	public int getColumns () {
 		return wrap ? columnSizes.size >> 1 : 1;
 	}
 

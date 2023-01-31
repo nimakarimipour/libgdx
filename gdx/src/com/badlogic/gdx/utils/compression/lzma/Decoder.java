@@ -108,13 +108,15 @@ public class Decoder {
 				m_Coders[i] = new Decoder2();
 		}
 
-		@NullUnmarked public void Init () {
+		@NullUnmarked
+		public void Init () {
 			int numStates = 1 << (m_NumPrevBits + m_NumPosBits);
 			for (int i = 0; i < numStates; i++)
 				m_Coders[i].Init();
 		}
 
-		@NullUnmarked Decoder2 GetDecoder (int pos, byte prevByte) {
+		@NullUnmarked
+		Decoder2 GetDecoder (int pos, byte prevByte) {
 			return m_Coders[((pos & m_PosMask) << m_NumPrevBits) + ((prevByte & 0xFF) >>> (8 - m_NumPrevBits))];
 		}
 	}

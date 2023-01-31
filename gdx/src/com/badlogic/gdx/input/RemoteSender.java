@@ -46,7 +46,8 @@ public class RemoteSender implements InputProcessor {
 	public static final int SIZE = 8;
 	public static final int GYRO = 9;
 
-	@NullUnmarked public RemoteSender (String ip, int port) {
+	@NullUnmarked
+	public RemoteSender (String ip, int port) {
 		try {
 			Socket socket = new Socket(ip, port);
 			socket.setTcpNoDelay(true);
@@ -60,7 +61,8 @@ public class RemoteSender implements InputProcessor {
 		}
 	}
 
-	@NullUnmarked public void sendUpdate () {
+	@NullUnmarked
+	public void sendUpdate () {
 		synchronized (this) {
 			if (!connected) return;
 		}
@@ -86,7 +88,8 @@ public class RemoteSender implements InputProcessor {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean keyDown (int keycode) {
 		synchronized (this) {
 			if (!connected) return false;
@@ -103,7 +106,8 @@ public class RemoteSender implements InputProcessor {
 		return false;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean keyUp (int keycode) {
 		synchronized (this) {
 			if (!connected) return false;
@@ -120,7 +124,8 @@ public class RemoteSender implements InputProcessor {
 		return false;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean keyTyped (char character) {
 		synchronized (this) {
 			if (!connected) return false;
@@ -137,7 +142,8 @@ public class RemoteSender implements InputProcessor {
 		return false;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean touchDown (int x, int y, int pointer, int button) {
 		synchronized (this) {
 			if (!connected) return false;
@@ -156,7 +162,8 @@ public class RemoteSender implements InputProcessor {
 		return false;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean touchUp (int x, int y, int pointer, int button) {
 		synchronized (this) {
 			if (!connected) return false;
@@ -180,7 +187,8 @@ public class RemoteSender implements InputProcessor {
 		return touchUp(screenX, screenY, pointer, button);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean touchDragged (int x, int y, int pointer) {
 		synchronized (this) {
 			if (!connected) return false;

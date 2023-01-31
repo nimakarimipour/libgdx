@@ -124,28 +124,32 @@ public class DefaultShader extends BaseShader {
 
 	public static class Setters {
 		public final static Setter projTrans = new GlobalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.projection);
 			}
 		};
 		public final static Setter viewTrans = new GlobalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.view);
 			}
 		};
 		public final static Setter projViewTrans = new GlobalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.combined);
 			}
 		};
 		public final static Setter cameraPosition = new GlobalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.position.x, shader.camera.position.y, shader.camera.position.z,
@@ -153,28 +157,32 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter cameraDirection = new GlobalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.direction);
 			}
 		};
 		public final static Setter cameraUp = new GlobalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.up);
 			}
 		};
 		public final static Setter cameraNearFar = new GlobalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.near, shader.camera.far);
 			}
 		};
 		public final static Setter worldTrans = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, renderable.worldTransform);
@@ -183,7 +191,8 @@ public class DefaultShader extends BaseShader {
 		public final static Setter viewWorldTrans = new LocalSetter() {
 			final Matrix4 temp = new Matrix4();
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, temp.set(shader.camera.view).mul(renderable.worldTransform));
@@ -192,7 +201,8 @@ public class DefaultShader extends BaseShader {
 		public final static Setter projViewWorldTrans = new LocalSetter() {
 			final Matrix4 temp = new Matrix4();
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, temp.set(shader.camera.combined).mul(renderable.worldTransform));
@@ -201,7 +211,8 @@ public class DefaultShader extends BaseShader {
 		public final static Setter normalMatrix = new LocalSetter() {
 			private final Matrix3 tmpM = new Matrix3();
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, tmpM.set(renderable.worldTransform).inv().transpose());
@@ -216,7 +227,8 @@ public class DefaultShader extends BaseShader {
 				this.bones = new float[numBones * 16];
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				for (int i = 0; i < bones.length; i += 16) {
@@ -231,21 +243,24 @@ public class DefaultShader extends BaseShader {
 		}
 
 		public final static Setter shininess = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, ((FloatAttribute)(combinedAttributes.get(FloatAttribute.Shininess))).value);
 			}
 		};
 		public final static Setter diffuseColor = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, ((ColorAttribute)(combinedAttributes.get(ColorAttribute.Diffuse))).color);
 			}
 		};
 		public final static Setter diffuseTexture = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final int unit = shader.context.textureBinder
@@ -254,7 +269,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter diffuseUVTransform = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final TextureAttribute ta = (TextureAttribute)(combinedAttributes.get(TextureAttribute.Diffuse));
@@ -262,14 +278,16 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter specularColor = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, ((ColorAttribute)(combinedAttributes.get(ColorAttribute.Specular))).color);
 			}
 		};
 		public final static Setter specularTexture = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final int unit = shader.context.textureBinder
@@ -278,7 +296,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter specularUVTransform = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final TextureAttribute ta = (TextureAttribute)(combinedAttributes.get(TextureAttribute.Specular));
@@ -286,14 +305,16 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter emissiveColor = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, ((ColorAttribute)(combinedAttributes.get(ColorAttribute.Emissive))).color);
 			}
 		};
 		public final static Setter emissiveTexture = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final int unit = shader.context.textureBinder
@@ -302,7 +323,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter emissiveUVTransform = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final TextureAttribute ta = (TextureAttribute)(combinedAttributes.get(TextureAttribute.Emissive));
@@ -310,14 +332,16 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter reflectionColor = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, ((ColorAttribute)(combinedAttributes.get(ColorAttribute.Reflection))).color);
 			}
 		};
 		public final static Setter reflectionTexture = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final int unit = shader.context.textureBinder
@@ -326,7 +350,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter reflectionUVTransform = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final TextureAttribute ta = (TextureAttribute)(combinedAttributes.get(TextureAttribute.Reflection));
@@ -334,7 +359,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter normalTexture = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final int unit = shader.context.textureBinder
@@ -343,7 +369,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter normalUVTransform = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final TextureAttribute ta = (TextureAttribute)(combinedAttributes.get(TextureAttribute.Normal));
@@ -351,7 +378,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter ambientTexture = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final int unit = shader.context.textureBinder
@@ -360,7 +388,8 @@ public class DefaultShader extends BaseShader {
 			}
 		};
 		public final static Setter ambientUVTransform = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				final TextureAttribute ta = (TextureAttribute)(combinedAttributes.get(TextureAttribute.Ambient));
@@ -380,7 +409,8 @@ public class DefaultShader extends BaseShader {
 				this.pointLightsOffset = pointLightsOffset;
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				if (renderable.environment == null)
@@ -410,7 +440,8 @@ public class DefaultShader extends BaseShader {
 		}
 
 		public final static Setter environmentCubemap = new LocalSetter() {
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				if (combinedAttributes.has(CubemapAttribute.EnvironmentMap)) {
@@ -423,7 +454,8 @@ public class DefaultShader extends BaseShader {
 
 	@Nullable private static String defaultVertexShader = null;
 
-	@NullUnmarked public static String getDefaultVertexShader () {
+	@NullUnmarked
+	public static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
 			defaultVertexShader = Gdx.files.classpath("com/badlogic/gdx/graphics/g3d/shaders/default.vertex.glsl").readString();
 		return defaultVertexShader;
@@ -431,7 +463,8 @@ public class DefaultShader extends BaseShader {
 
 	@Nullable private static String defaultFragmentShader = null;
 
-	@NullUnmarked public static String getDefaultFragmentShader () {
+	@NullUnmarked
+	public static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null)
 			defaultFragmentShader = Gdx.files.classpath("com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl").readString();
 		return defaultFragmentShader;
@@ -556,7 +589,8 @@ public class DefaultShader extends BaseShader {
 		this(renderable, config, new ShaderProgram(prefix + vertexShader, prefix + fragmentShader));
 	}
 
-	@NullUnmarked public DefaultShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
+	@NullUnmarked
+	public DefaultShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
 		final Attributes attributes = combineAttributes(renderable);
 		this.config = config;
 		this.program = shaderProgram;
@@ -685,7 +719,8 @@ public class DefaultShader extends BaseShader {
 		return mask;
 	}
 
-	@NullUnmarked public static String createPrefix (final Renderable renderable, final Config config) {
+	@NullUnmarked
+	public static String createPrefix (final Renderable renderable, final Config config) {
 		final Attributes attributes = combineAttributes(renderable);
 		String prefix = "";
 		final long attributesMask = attributes.getMask();
@@ -758,7 +793,8 @@ public class DefaultShader extends BaseShader {
 		return prefix;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean canRender (final Renderable renderable) {
 		if (renderable.bones != null && renderable.bones.length > config.numBones) return false;
 		final long renderableMask = combineAttributeMasks(renderable);
@@ -787,7 +823,8 @@ public class DefaultShader extends BaseShader {
 	private float time;
 	private boolean lightsSet;
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void begin (@Nullable final Camera camera, final RenderContext context) {
 		super.begin(camera, context);
 
@@ -802,7 +839,8 @@ public class DefaultShader extends BaseShader {
 		if (has(u_time)) set(u_time, time += Gdx.graphics.getDeltaTime());
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void render (Renderable renderable, Attributes combinedAttributes) {
 		if (!combinedAttributes.has(BlendingAttribute.Type))
 			context.setBlending(false, GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -816,7 +854,8 @@ public class DefaultShader extends BaseShader {
 		super.end();
 	}
 
-	@NullUnmarked protected void bindMaterial (final Attributes attributes) {
+	@NullUnmarked
+	protected void bindMaterial (final Attributes attributes) {
 		int cullFace = config.defaultCullFace == -1 ? defaultCullFace : config.defaultCullFace;
 		int depthFunc = config.defaultDepthFunc == -1 ? defaultDepthFunc : config.defaultDepthFunc;
 		float depthRangeNear = 0f;
@@ -848,7 +887,8 @@ public class DefaultShader extends BaseShader {
 
 	private final Vector3 tmpV1 = new Vector3();
 
-	@NullUnmarked protected void bindLights (final Renderable renderable, final Attributes attributes) {
+	@NullUnmarked
+	protected void bindLights (final Renderable renderable, final Attributes attributes) {
 		final Environment lights = renderable.environment;
 		final DirectionalLightsAttribute dla = attributes.get(DirectionalLightsAttribute.class, DirectionalLightsAttribute.Type);
 		final Array<DirectionalLight> dirs = dla == null ? null : dla.lights;
@@ -932,7 +972,8 @@ public class DefaultShader extends BaseShader {
 		lightsSet = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		program.dispose();
 		super.dispose();

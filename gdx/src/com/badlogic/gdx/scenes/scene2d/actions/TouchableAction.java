@@ -27,7 +27,8 @@ import com.badlogic.gdx.NullUnmarked;
 public class TouchableAction extends Action {
 	@Nullable private Touchable touchable;
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		target.setTouchable(touchable);
 		return true;
 	}

@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.scenes.scene2d.actions;
+
 import com.badlogic.gdx.NullUnmarked;
 
 /** Moves an actor to a relative position.
@@ -22,7 +23,8 @@ import com.badlogic.gdx.NullUnmarked;
 public class MoveByAction extends RelativeTemporalAction {
 	private float amountX, amountY;
 
-	@NullUnmarked protected void updateRelative (float percentDelta) {
+	@NullUnmarked
+	protected void updateRelative (float percentDelta) {
 		target.moveBy(amountX * percentDelta, amountY * percentDelta);
 	}
 

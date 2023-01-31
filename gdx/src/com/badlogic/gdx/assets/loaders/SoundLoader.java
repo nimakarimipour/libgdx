@@ -44,7 +44,8 @@ public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.Soun
 		return sound;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable SoundParameter parameter) {
 		sound = Gdx.audio.newSound(file);
 	}

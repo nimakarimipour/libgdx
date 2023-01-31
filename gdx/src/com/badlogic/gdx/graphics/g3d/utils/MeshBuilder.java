@@ -157,7 +157,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	}
 
 	/** Begin building a mesh */
-	@NullUnmarked @Initializer
+	@NullUnmarked
+	@Initializer
 	public void begin (@Nullable final VertexAttributes attributes, int primitiveType) {
 		if (this.attributes != null) throw new RuntimeException("Call end() first");
 		this.attributes = attributes;
@@ -546,7 +547,8 @@ public class MeshBuilder implements MeshPartBuilder {
 
 	private final Vector3 tmpNormal = new Vector3();
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public short vertex (@Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
 		if (vindex > MAX_INDEX) throw new GdxRuntimeException("Too many vertices used");
 
@@ -746,7 +748,8 @@ public class MeshBuilder implements MeshPartBuilder {
 		addMesh(meshpart.mesh, meshpart.offset, meshpart.size);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void addMesh (@Nullable Mesh mesh, int indexOffset, int numIndices) {
 		if (!attributes.equals(mesh.getVertexAttributes())) throw new GdxRuntimeException("Vertex attributes do not match");
 		if (numIndices <= 0) return; // silently ignore an empty mesh part

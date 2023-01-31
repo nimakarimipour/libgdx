@@ -26,12 +26,14 @@ public class MoveToAction extends TemporalAction {
 	private float endX, endY;
 	private int alignment = Align.bottomLeft;
 
-	@NullUnmarked protected void begin () {
+	@NullUnmarked
+	protected void begin () {
 		startX = target.getX(alignment);
 		startY = target.getY(alignment);
 	}
 
-	@NullUnmarked protected void update (float percent) {
+	@NullUnmarked
+	protected void update (float percent) {
 		float x, y;
 		if (percent == 0) {
 			x = startX;

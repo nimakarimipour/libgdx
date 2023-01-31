@@ -88,7 +88,8 @@ public class ParticleShader extends BaseShader {
 
 	@Nullable private static String defaultVertexShader = null;
 
-	@NullUnmarked public static String getDefaultVertexShader () {
+	@NullUnmarked
+	public static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
 			defaultVertexShader = Gdx.files.classpath("com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl").readString();
 		return defaultVertexShader;
@@ -96,7 +97,8 @@ public class ParticleShader extends BaseShader {
 
 	@Nullable private static String defaultFragmentShader = null;
 
-	@NullUnmarked public static String getDefaultFragmentShader () {
+	@NullUnmarked
+	public static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null) defaultFragmentShader = Gdx.files
 			.classpath("com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl").readString();
 		return defaultFragmentShader;
@@ -120,7 +122,8 @@ public class ParticleShader extends BaseShader {
 				return true;
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, TMP_VECTOR3.set(shader.camera.direction).crs(shader.camera.up).nor());
@@ -133,7 +136,8 @@ public class ParticleShader extends BaseShader {
 				return true;
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, TMP_VECTOR3.set(shader.camera.up).nor());
@@ -146,7 +150,8 @@ public class ParticleShader extends BaseShader {
 				return true;
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID,
@@ -159,7 +164,8 @@ public class ParticleShader extends BaseShader {
 				return true;
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.position);
@@ -171,7 +177,8 @@ public class ParticleShader extends BaseShader {
 				return true;
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, (float)Gdx.graphics.getWidth());
@@ -185,7 +192,8 @@ public class ParticleShader extends BaseShader {
 				return false;
 			}
 
-			@NullUnmarked @Override
+			@NullUnmarked
+			@Override
 			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
 				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, temp.set(shader.camera.view).mul(renderable.worldTransform));
@@ -219,7 +227,8 @@ public class ParticleShader extends BaseShader {
 		this(renderable, config, new ShaderProgram(prefix + vertexShader, prefix + fragmentShader));
 	}
 
-	@NullUnmarked public ParticleShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
+	@NullUnmarked
+	public ParticleShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
 		this.config = config;
 		this.program = shaderProgram;
 		this.renderable = renderable;
@@ -251,7 +260,8 @@ public class ParticleShader extends BaseShader {
 		renderable = null;
 	}
 
-	@NullUnmarked public static String createPrefix (final Renderable renderable, final Config config) {
+	@NullUnmarked
+	public static String createPrefix (final Renderable renderable, final Config config) {
 		String prefix = "";
 		if (Gdx.app.getType() == ApplicationType.Desktop)
 			prefix += "#version 120\n";
@@ -268,7 +278,8 @@ public class ParticleShader extends BaseShader {
 		return prefix;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public boolean canRender (final Renderable renderable) {
 		return (materialMask == (renderable.material.getMask() | optionalAttributes))
 			&& (vertexMask == renderable.meshPart.mesh.getVertexAttributes().getMask());
@@ -295,7 +306,8 @@ public class ParticleShader extends BaseShader {
 		super.begin(camera, context);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void render (final Renderable renderable) {
 		if (!renderable.material.has(BlendingAttribute.Type))
 			context.setBlending(false, GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -311,7 +323,8 @@ public class ParticleShader extends BaseShader {
 
 	@Nullable Material currentMaterial;
 
-	@NullUnmarked protected void bindMaterial (final Renderable renderable) {
+	@NullUnmarked
+	protected void bindMaterial (final Renderable renderable) {
 		if (currentMaterial == renderable.material) return;
 
 		int cullFace = config.defaultCullFace == -1 ? GL20.GL_BACK : config.defaultCullFace;
@@ -339,7 +352,8 @@ public class ParticleShader extends BaseShader {
 		context.setDepthMask(depthMask);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		program.dispose();
 		super.dispose();

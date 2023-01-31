@@ -50,7 +50,8 @@ public interface TextureProvider {
 			this.useMipMaps = useMipMaps;
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public Texture load (@Nullable String fileName) {
 			Texture result = new Texture(Gdx.files.internal(fileName), useMipMaps);
 			result.setFilter(minFilter, magFilter);

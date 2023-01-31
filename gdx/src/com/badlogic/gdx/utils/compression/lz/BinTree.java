@@ -45,7 +45,8 @@ public class BinTree extends InWindow {
 		}
 	}
 
-	@NullUnmarked public void Init () throws IOException {
+	@NullUnmarked
+	public void Init () throws IOException {
 		super.Init();
 		for (int i = 0; i < _hashSizeSum; i++)
 			_hash[i] = kEmptyHashValue;
@@ -91,7 +92,8 @@ public class BinTree extends InWindow {
 		return true;
 	}
 
-	@NullUnmarked public int GetMatches (int[] distances) throws IOException {
+	@NullUnmarked
+	public int GetMatches (int[] distances) throws IOException {
 		int lenLimit;
 		if (_pos + _matchMaxLen <= _streamPos)
 			lenLimit = _matchMaxLen;
@@ -199,7 +201,8 @@ public class BinTree extends InWindow {
 		return offset;
 	}
 
-	@NullUnmarked public void Skip (int num) throws IOException {
+	@NullUnmarked
+	public void Skip (int num) throws IOException {
 		do {
 			int lenLimit;
 			if (_pos + _matchMaxLen <= _streamPos)
@@ -275,7 +278,8 @@ public class BinTree extends InWindow {
 		} while (--num != 0);
 	}
 
-	@NullUnmarked void NormalizeLinks (@Nullable int[] items, int numItems, int subValue) {
+	@NullUnmarked
+	void NormalizeLinks (@Nullable int[] items, int numItems, int subValue) {
 		for (int i = 0; i < numItems; i++) {
 			int value = items[i];
 			if (value <= subValue)
