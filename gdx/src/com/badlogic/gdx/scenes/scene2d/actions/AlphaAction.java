@@ -42,7 +42,8 @@ public class AlphaAction extends TemporalAction {
 			color.a = start + (end - start) * percent;
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		super.reset();
 		color = null;
 	}

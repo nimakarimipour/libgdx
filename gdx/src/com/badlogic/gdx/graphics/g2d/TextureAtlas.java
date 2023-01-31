@@ -136,7 +136,8 @@ public class TextureAtlas implements Disposable {
 
 	/** Returns the first region found with the specified name. This method uses string comparison to find the region, so the
 	 * result should be cached rather than calling this method multiple times. */
-	@NullUnmarked public @Null AtlasRegion findRegion (String name) {
+	@NullUnmarked
+	public @Null AtlasRegion findRegion (String name) {
 		for (int i = 0, n = regions.size; i < n; i++)
 			if (regions.get(i).name.equals(name)) return regions.get(i);
 		return null;
@@ -144,7 +145,8 @@ public class TextureAtlas implements Disposable {
 
 	/** Returns the first region found with the specified name and index. This method uses string comparison to find the region, so
 	 * the result should be cached rather than calling this method multiple times. */
-	@NullUnmarked public @Null AtlasRegion findRegion (String name, int index) {
+	@NullUnmarked
+	public @Null AtlasRegion findRegion (String name, int index) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
 			if (!region.name.equals(name)) continue;
@@ -180,7 +182,8 @@ public class TextureAtlas implements Disposable {
 	 * packed, the sprite is automatically positioned as if whitespace had not been stripped. This method uses string comparison to
 	 * find the region and constructs a new sprite, so the result should be cached rather than calling this method multiple
 	 * times. */
-	@NullUnmarked public @Null Sprite createSprite (String name) {
+	@NullUnmarked
+	public @Null Sprite createSprite (String name) {
 		for (int i = 0, n = regions.size; i < n; i++)
 			if (regions.get(i).name.equals(name)) return newSprite(regions.get(i));
 		return null;
@@ -189,7 +192,8 @@ public class TextureAtlas implements Disposable {
 	/** Returns the first region found with the specified name and index as a sprite. This method uses string comparison to find
 	 * the region and constructs a new sprite, so the result should be cached rather than calling this method multiple times.
 	 * @see #createSprite(String) */
-	@NullUnmarked public @Null Sprite createSprite (String name, int index) {
+	@NullUnmarked
+	public @Null Sprite createSprite (String name, int index) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
 			if (region.index != index) continue;
@@ -228,7 +232,8 @@ public class TextureAtlas implements Disposable {
 	/** Returns the first region found with the specified name as a {@link NinePatch}. The region must have been packed with
 	 * ninepatch splits. This method uses string comparison to find the region and constructs a new ninepatch, so the result should
 	 * be cached rather than calling this method multiple times. */
-	@NullUnmarked public @Null NinePatch createPatch (String name) {
+	@NullUnmarked
+	public @Null NinePatch createPatch (String name) {
 		for (int i = 0, n = regions.size; i < n; i++) {
 			AtlasRegion region = regions.get(i);
 			if (region.name.equals(name)) {
@@ -267,7 +272,8 @@ public class TextureAtlas implements Disposable {
 			load(packFile, imagesDir, flip);
 		}
 
-		@NullUnmarked public void load (FileHandle packFile, FileHandle imagesDir, boolean flip) {
+		@NullUnmarked
+		public void load (FileHandle packFile, FileHandle imagesDir, boolean flip) {
 			final String[] entry = new String[5];
 
 			ObjectMap<String, Field<Page>> pageFields = new ObjectMap(15, 0.99f); // Size needed to avoid collisions.
@@ -505,7 +511,8 @@ public class TextureAtlas implements Disposable {
 			@SuppressWarnings("NullAway.Init") public @Null int[][] values;
 			public boolean flip;
 
-			@NullUnmarked public @Null int[] findValue (String name) {
+			@NullUnmarked
+			public @Null int[] findValue (String name) {
 				if (names != null) {
 					for (int i = 0, n = names.length; i < n; i++)
 						if (name.equals(names[i])) return values[i];
@@ -563,7 +570,8 @@ public class TextureAtlas implements Disposable {
 		/** Values for name/value pairs other than the fields provided on this class, each entry corresponding to {@link #names}. */
 		@SuppressWarnings("NullAway.Init") public @Null int[][] values;
 
-		@NullUnmarked public AtlasRegion (Texture texture, int x, int y, int width, int height) {
+		@NullUnmarked
+		public AtlasRegion (Texture texture, int x, int y, int width, int height) {
 			super(texture, x, y, width, height);
 			originalWidth = width;
 			originalHeight = height;
@@ -587,7 +595,8 @@ public class TextureAtlas implements Disposable {
 			values = region.values;
 		}
 
-		@NullUnmarked public AtlasRegion (TextureRegion region) {
+		@NullUnmarked
+		public AtlasRegion (TextureRegion region) {
 			setRegion(region);
 			packedWidth = region.getRegionWidth();
 			packedHeight = region.getRegionHeight();
@@ -616,7 +625,8 @@ public class TextureAtlas implements Disposable {
 			return rotate ? packedWidth : packedHeight;
 		}
 
-		@NullUnmarked public @Null int[] findValue (String name) {
+		@NullUnmarked
+		public @Null int[] findValue (String name) {
 			if (names != null) {
 				for (int i = 0, n = names.length; i < n; i++)
 					if (name.equals(names[i])) return values[i];

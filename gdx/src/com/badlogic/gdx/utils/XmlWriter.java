@@ -72,7 +72,8 @@ public class XmlWriter extends Writer {
 		return element(name).text(text).pop();
 	}
 
-	@NullUnmarked private boolean startElementContent () throws IOException {
+	@NullUnmarked
+	private boolean startElementContent () throws IOException {
 		if (currentElement == null) return false;
 		indent++;
 		stack.add(currentElement);
@@ -104,7 +105,8 @@ public class XmlWriter extends Writer {
 		return this;
 	}
 
-	@NullUnmarked public XmlWriter pop () throws IOException {
+	@NullUnmarked
+	public XmlWriter pop () throws IOException {
 		if (currentElement != null) {
 			writer.write("/>\n");
 			currentElement = null;

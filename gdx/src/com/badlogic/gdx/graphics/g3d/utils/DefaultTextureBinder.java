@@ -59,7 +59,8 @@ public final class DefaultTextureBinder implements TextureBinder {
 		this(method, offset, -1);
 	}
 
-	@NullUnmarked public DefaultTextureBinder (final int method, final int offset, int count) {
+	@NullUnmarked
+	public DefaultTextureBinder (final int method, final int offset, int count) {
 		final int max = Math.min(getMaxTextureUnits(), MAX_GLES_UNITS);
 		if (count < 0) count = max - offset;
 		if (offset < 0 || count < 0 || (offset + count) > max) throw new GdxRuntimeException("Illegal arguments");
@@ -101,7 +102,8 @@ public final class DefaultTextureBinder implements TextureBinder {
 
 	private final TextureDescriptor tempDesc = new TextureDescriptor();
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public final int bind (final GLTexture texture) {
 		tempDesc.set(texture, null, null, null, null);
 		return bindTexture(tempDesc, false);

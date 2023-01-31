@@ -82,7 +82,8 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 
 	/** Returns the first VertexAttribute for the given usage.
 	 * @param usage The usage of the VertexAttribute to find. */
-	@NullUnmarked public VertexAttribute findByUsage (int usage) {
+	@NullUnmarked
+	public VertexAttribute findByUsage (int usage) {
 		int len = size();
 		for (int i = 0; i < len; i++)
 			if (get(i).usage == usage) return get(i);
@@ -236,7 +237,8 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 		private final T[] array;
 		@SuppressWarnings("NullAway.Init") private ReadonlyIterator iterator1, iterator2;
 
-		@NullUnmarked public ReadonlyIterable (T[] array) {
+		@NullUnmarked
+		public ReadonlyIterable (T[] array) {
 			this.array = array;
 		}
 

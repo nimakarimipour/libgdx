@@ -80,12 +80,14 @@ public class Table extends WidgetGroup {
 	Debug debug = Debug.none;
 	@SuppressWarnings("NullAway.Init") Array<DebugRect> debugRects;
 
-	@SuppressWarnings("NullAway.Init") @Null Drawable background;
+	@SuppressWarnings("NullAway.Init")
+	@Null Drawable background;
 	private boolean clip;
 	private @Null Skin skin;
 	boolean round = true;
 
-	@NullUnmarked public Table () {
+	@NullUnmarked
+	public Table () {
 		this(null);
 	}
 
@@ -173,7 +175,8 @@ public class Table extends WidgetGroup {
 		return background;
 	}
 
-	@NullUnmarked public @Null Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
@@ -296,7 +299,8 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Adds a cell without an actor. */
-	@NullUnmarked public Cell add () {
+	@NullUnmarked
+	public Cell add () {
 		return add((Actor)null);
 	}
 
@@ -315,14 +319,16 @@ public class Table extends WidgetGroup {
 		return removeActor(actor, true);
 	}
 
-	@NullUnmarked public boolean removeActor (Actor actor, boolean unfocus) {
+	@NullUnmarked
+	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (!super.removeActor(actor, unfocus)) return false;
 		Cell cell = getCell(actor);
 		if (cell != null) cell.actor = null;
 		return true;
 	}
 
-	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked
+	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		Cell cell = getCell(actor);
 		if (cell != null) cell.actor = null;
@@ -330,7 +336,8 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Removes all actors and cells from the table. */
-	@NullUnmarked public void clearChildren (boolean unfocus) {
+	@NullUnmarked
+	public void clearChildren (boolean unfocus) {
 		Object[] cells = this.cells.items;
 		for (int i = this.cells.size - 1; i >= 0; i--) {
 			Cell cell = (Cell)cells[i];
@@ -398,7 +405,8 @@ public class Table extends WidgetGroup {
 
 	/** Gets the cell values that will be used as the defaults for all cells in the specified column. Columns are indexed starting
 	 * at 0. */
-	@NullUnmarked public Cell columnDefaults (int column) {
+	@NullUnmarked
+	public Cell columnDefaults (int column) {
 		Cell cell = columnDefaults.size > column ? columnDefaults.get(column) : null;
 		if (cell == null) {
 			cell = obtainCell();
@@ -414,7 +422,8 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Returns the cell for the specified actor in this table, or null. */
-	@NullUnmarked public @Null <T extends Actor> Cell<T> getCell (T actor) {
+	@NullUnmarked
+	public @Null <T extends Actor> Cell<T> getCell (T actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		Object[] cells = this.cells.items;
 		for (int i = 0, n = this.cells.size; i < n; i++) {

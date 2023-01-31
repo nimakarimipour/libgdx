@@ -454,7 +454,8 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 		protected boolean hasDepthRenderBuffer;
 		protected boolean hasPackedStencilDepthRenderBuffer;
 
-		@NullUnmarked public GLFrameBufferBuilder (int width, int height) {
+		@NullUnmarked
+		public GLFrameBufferBuilder (int width, int height) {
 			this.width = width;
 			this.height = height;
 		}

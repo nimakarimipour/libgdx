@@ -33,7 +33,6 @@ import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
-import com.badlogic.gdx.NullUnmarked;
 
 /** Provides methods to perform networking operations, such as simple HTTP get and post requests, and TCP server/client socket
  * communication.
@@ -176,7 +175,8 @@ public interface Net {
 
 		private boolean includeCredentials = false;
 
-		@NullUnmarked public HttpRequest () {
+		@NullUnmarked
+		public HttpRequest () {
 			this.headers = new HashMap<String, String>();
 		}
 
@@ -291,7 +291,8 @@ public interface Net {
 			return includeCredentials;
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void reset () {
 			httpMethod = null;
 			url = null;

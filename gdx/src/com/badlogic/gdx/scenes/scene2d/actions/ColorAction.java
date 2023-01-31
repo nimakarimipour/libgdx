@@ -51,7 +51,8 @@ public class ColorAction extends TemporalAction {
 		}
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		super.reset();
 		color = null;
 	}

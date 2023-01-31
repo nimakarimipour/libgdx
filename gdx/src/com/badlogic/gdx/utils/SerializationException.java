@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+
 import com.badlogic.gdx.NullUnmarked;
 
 /** Indicates an error during serialization due to misconfiguration or during deserialization due to invalid input data.
@@ -50,7 +51,8 @@ public class SerializationException extends RuntimeException {
 		return causedBy(cause, type);
 	}
 
-	@NullUnmarked public String getMessage () {
+	@NullUnmarked
+	public String getMessage () {
 		if (trace == null) return super.getMessage();
 		StringBuilder sb = new StringBuilder(512);
 		sb.append(super.getMessage());

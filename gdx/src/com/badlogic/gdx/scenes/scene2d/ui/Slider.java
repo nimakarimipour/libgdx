@@ -234,10 +234,12 @@ public class Slider extends ProgressBar {
 		@SuppressWarnings("NullAway.Init") public @Null Drawable knobBeforeOver, knobBeforeDown;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable knobAfterOver, knobAfterDown;
 
-		@NullUnmarked public SliderStyle () {
+		@NullUnmarked
+		public SliderStyle () {
 		}
 
-		@NullUnmarked public SliderStyle (@Null Drawable background, @Null Drawable knob) {
+		@NullUnmarked
+		public SliderStyle (@Null Drawable background, @Null Drawable knob) {
 			super(background, knob);
 		}
 

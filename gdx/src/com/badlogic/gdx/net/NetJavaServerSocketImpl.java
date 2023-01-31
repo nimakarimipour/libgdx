@@ -32,7 +32,8 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 	/** Our server or null for disposed, aka closed. */
 	private java.net.ServerSocket server;
 
-	@NullUnmarked public NetJavaServerSocketImpl (Protocol protocol, int port, ServerSocketHints hints) {
+	@NullUnmarked
+	public NetJavaServerSocketImpl (Protocol protocol, int port, ServerSocketHints hints) {
 		this(protocol, null, port, hints);
 	}
 
@@ -83,7 +84,8 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		if (server != null) {
 			try {

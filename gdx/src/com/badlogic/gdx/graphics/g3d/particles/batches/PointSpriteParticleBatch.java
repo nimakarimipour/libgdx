@@ -81,11 +81,13 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, new ParticleShader.Config(ParticleType.Point));
 	}
 
-	@NullUnmarked public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig) {
+	@NullUnmarked
+	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig) {
 		this(capacity, shaderConfig, null, null);
 	}
 
-	@NullUnmarked public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig, BlendingAttribute blendingAttribute,
+	@NullUnmarked
+	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig, BlendingAttribute blendingAttribute,
 		DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
 
@@ -111,7 +113,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		renderable.meshPart.mesh = new Mesh(false, capacity, 0, CPU_ATTRIBUTES);
 	}
 
-	@NullUnmarked protected void allocRenderable () {
+	@NullUnmarked
+	protected void allocRenderable () {
 		renderable = new Renderable();
 		renderable.meshPart.primitiveType = GL20.GL_POINTS;
 		renderable.meshPart.offset = 0;

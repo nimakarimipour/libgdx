@@ -108,7 +108,8 @@ public class ShapeRenderer implements Disposable {
 		this(5000);
 	}
 
-	@NullUnmarked public ShapeRenderer (int maxVertices) {
+	@NullUnmarked
+	public ShapeRenderer (int maxVertices) {
 		this(maxVertices, null);
 	}
 
@@ -223,7 +224,8 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Draws a point using {@link ShapeType#Point}, {@link ShapeType#Line} or {@link ShapeType#Filled}. */
-	@NullUnmarked public void point (float x, float y, float z) {
+	@NullUnmarked
+	public void point (float x, float y, float z) {
 		if (shapeType == ShapeType.Line) {
 			float size = defaultRectLineWidth * 0.5f;
 			line(x - size, y - size, z, x + size, y + size, z);
@@ -265,7 +267,8 @@ public class ShapeRenderer implements Disposable {
 
 	/** Draws a line using {@link ShapeType#Line} or {@link ShapeType#Filled}. The line is drawn with two colors interpolated
 	 * between the start and end points. */
-	@NullUnmarked public void line (float x, float y, float z, float x2, float y2, float z2, Color c1, Color c2) {
+	@NullUnmarked
+	public void line (float x, float y, float z, float x2, float y2, float z2, Color c1, Color c2) {
 		if (shapeType == ShapeType.Filled) {
 			rectLine(x, y, x2, y2, defaultRectLineWidth, c1, c2);
 			return;
@@ -278,7 +281,8 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Draws a curve using {@link ShapeType#Line}. */
-	@NullUnmarked public void curve (float x1, float y1, float cx1, float cy1, float cx2, float cy2, float x2, float y2, int segments) {
+	@NullUnmarked
+	public void curve (float x1, float y1, float cx1, float cy1, float cx2, float cy2, float x2, float y2, int segments) {
 		check(ShapeType.Line, null, segments * 2 + 2);
 		float colorBits = color.toFloatBits();
 
@@ -1106,7 +1110,8 @@ public class ShapeRenderer implements Disposable {
 
 	/** Draws a polygon in the x/y plane using {@link ShapeType#Line}. The vertices must contain at least 3 points (6 floats
 	 * x,y). */
-	@NullUnmarked public void polygon (float[] vertices, int offset, int count) {
+	@NullUnmarked
+	public void polygon (float[] vertices, int offset, int count) {
 		if (count < 6) throw new IllegalArgumentException("Polygons must contain at least 3 points.");
 		if (count % 2 != 0) throw new IllegalArgumentException("Polygons must have an even number of vertices.");
 
@@ -1144,7 +1149,8 @@ public class ShapeRenderer implements Disposable {
 
 	/** Draws a polyline in the x/y plane using {@link ShapeType#Line}. The vertices must contain at least 2 points (4 floats
 	 * x,y). */
-	@NullUnmarked public void polyline (float[] vertices, int offset, int count) {
+	@NullUnmarked
+	public void polyline (float[] vertices, int offset, int count) {
 		if (count < 4) throw new IllegalArgumentException("Polylines must contain at least 2 points.");
 		if (count % 2 != 0) throw new IllegalArgumentException("Polylines must have an even number of vertices.");
 
@@ -1205,7 +1211,8 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Finishes the batch of shapes and ensures they get rendered. */
-	@NullUnmarked public void end () {
+	@NullUnmarked
+	public void end () {
 		renderer.end();
 		shapeType = null;
 	}

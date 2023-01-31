@@ -163,7 +163,8 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 	}
 
 	/** Get the currently bound side. */
-	@NullUnmarked public Cubemap.CubemapSide getSide () {
+	@NullUnmarked
+	public Cubemap.CubemapSide getSide () {
 		return currentSide < 0 ? null : cubemapSides[currentSide];
 	}
 }

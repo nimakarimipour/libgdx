@@ -224,11 +224,13 @@ public class Json {
 		return nameToField;
 	}
 
-	@NullUnmarked public String toJson (@Null Object object) {
+	@NullUnmarked
+	public String toJson (@Null Object object) {
 		return toJson(object, object == null ? null : object.getClass(), (Class)null);
 	}
 
-	@NullUnmarked public String toJson (@Null Object object, @Null Class knownType) {
+	@NullUnmarked
+	public String toJson (@Null Object object, @Null Class knownType) {
 		return toJson(object, knownType, (Class)null);
 	}
 
@@ -240,18 +242,21 @@ public class Json {
 		return buffer.toString();
 	}
 
-	@NullUnmarked public void toJson (@Null Object object, FileHandle file) {
+	@NullUnmarked
+	public void toJson (@Null Object object, FileHandle file) {
 		toJson(object, object == null ? null : object.getClass(), null, file);
 	}
 
 	/** @param knownType May be null if the type is unknown. */
-	@NullUnmarked public void toJson (@Null Object object, @Null Class knownType, FileHandle file) {
+	@NullUnmarked
+	public void toJson (@Null Object object, @Null Class knownType, FileHandle file) {
 		toJson(object, knownType, null, file);
 	}
 
 	/** @param knownType May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown. */
-	@NullUnmarked public void toJson (@Null Object object, @Null Class knownType, @Null Class elementType, FileHandle file) {
+	@NullUnmarked
+	public void toJson (@Null Object object, @Null Class knownType, @Null Class elementType, FileHandle file) {
 		Writer writer = null;
 		try {
 			writer = file.writer(false, "UTF-8");
@@ -263,18 +268,21 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked public void toJson (@Null Object object, Writer writer) {
+	@NullUnmarked
+	public void toJson (@Null Object object, Writer writer) {
 		toJson(object, object == null ? null : object.getClass(), null, writer);
 	}
 
 	/** @param knownType May be null if the type is unknown. */
-	@NullUnmarked public void toJson (@Null Object object, @Null Class knownType, Writer writer) {
+	@NullUnmarked
+	public void toJson (@Null Object object, @Null Class knownType, Writer writer) {
 		toJson(object, knownType, null, writer);
 	}
 
 	/** @param knownType May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown. */
-	@NullUnmarked public void toJson (@Null Object object, @Null Class knownType, @Null Class elementType, Writer writer) {
+	@NullUnmarked
+	public void toJson (@Null Object object, @Null Class knownType, @Null Class elementType, Writer writer) {
 		setWriter(writer);
 		try {
 			writeValue(object, knownType, elementType);
@@ -340,7 +348,8 @@ public class Json {
 		}
 	}
 
-	@NullUnmarked private @Null Object[] getDefaultValues (Class type) {
+	@NullUnmarked
+	private @Null Object[] getDefaultValues (Class type) {
 		if (!usePrototypes) return null;
 		if (classToDefaultValues.containsKey(type)) return classToDefaultValues.get(type);
 		Object object;
@@ -378,7 +387,8 @@ public class Json {
 	}
 
 	/** @see #writeField(Object, String, String, Class) */
-	@NullUnmarked public void writeField (Object object, String name) {
+	@NullUnmarked
+	public void writeField (Object object, String name) {
 		writeField(object, name, name, null);
 	}
 
@@ -389,7 +399,8 @@ public class Json {
 	}
 
 	/** @see #writeField(Object, String, String, Class) */
-	@NullUnmarked public void writeField (Object object, String fieldName, String jsonName) {
+	@NullUnmarked
+	public void writeField (Object object, String fieldName, String jsonName) {
 		writeField(object, fieldName, jsonName, null);
 	}
 
@@ -420,7 +431,8 @@ public class Json {
 	/** Writes the value as a field on the current JSON object, without writing the actual class.
 	 * @param value May be null.
 	 * @see #writeValue(String, Object, Class, Class) */
-	@NullUnmarked public void writeValue (String name, @Null Object value) {
+	@NullUnmarked
+	public void writeValue (String name, @Null Object value) {
 		try {
 			writer.name(name);
 		} catch (IOException ex) {
@@ -437,7 +449,8 @@ public class Json {
 	 * @param value May be null.
 	 * @param knownType May be null if the type is unknown.
 	 * @see #writeValue(String, Object, Class, Class) */
-	@NullUnmarked public void writeValue (String name, @Null Object value, @Null Class knownType) {
+	@NullUnmarked
+	public void writeValue (String name, @Null Object value, @Null Class knownType) {
 		try {
 			writer.name(name);
 		} catch (IOException ex) {
@@ -462,7 +475,8 @@ public class Json {
 
 	/** Writes the value, without writing the class of the object.
 	 * @param value May be null. */
-	@NullUnmarked public void writeValue (@Null Object value) {
+	@NullUnmarked
+	public void writeValue (@Null Object value) {
 		if (value == null)
 			writeValue(value, null, null);
 		else
@@ -472,7 +486,8 @@ public class Json {
 	/** Writes the value, writing the class of the object if it differs from the specified known type.
 	 * @param value May be null.
 	 * @param knownType May be null if the type is unknown. */
-	@NullUnmarked public void writeValue (@Null Object value, @Null Class knownType) {
+	@NullUnmarked
+	public void writeValue (@Null Object value, @Null Class knownType) {
 		writeValue(value, knownType, null);
 	}
 
@@ -481,7 +496,8 @@ public class Json {
 	 * @param value May be null.
 	 * @param knownType May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown. */
-	@NullUnmarked public void writeValue (@Null Object value, @Null Class knownType, @Null Class elementType) {
+	@NullUnmarked
+	public void writeValue (@Null Object value, @Null Class knownType, @Null Class elementType) {
 		try {
 			if (value == null) {
 				writer.value(null);
@@ -771,7 +787,8 @@ public class Json {
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T fromJson (Class<T> type, Reader reader) {
+	@NullUnmarked
+	public @Null <T> T fromJson (Class<T> type, Reader reader) {
 		return readValue(type, null, new JsonReader().parse(reader));
 	}
 
@@ -784,7 +801,8 @@ public class Json {
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T fromJson (Class<T> type, InputStream input) {
+	@NullUnmarked
+	public @Null <T> T fromJson (Class<T> type, InputStream input) {
 		return readValue(type, null, new JsonReader().parse(input));
 	}
 
@@ -797,7 +815,8 @@ public class Json {
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T fromJson (Class<T> type, FileHandle file) {
+	@NullUnmarked
+	public @Null <T> T fromJson (Class<T> type, FileHandle file) {
 		try {
 			return readValue(type, null, new JsonReader().parse(file));
 		} catch (Exception ex) {
@@ -818,7 +837,8 @@ public class Json {
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T fromJson (Class<T> type, char[] data, int offset, int length) {
+	@NullUnmarked
+	public @Null <T> T fromJson (Class<T> type, char[] data, int offset, int length) {
 		return readValue(type, null, new JsonReader().parse(data, offset, length));
 	}
 
@@ -831,7 +851,8 @@ public class Json {
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T fromJson (Class<T> type, String json) {
+	@NullUnmarked
+	public @Null <T> T fromJson (Class<T> type, String json) {
 		return readValue(type, null, new JsonReader().parse(json));
 	}
 
@@ -841,7 +862,8 @@ public class Json {
 		return readValue(type, elementType, new JsonReader().parse(json));
 	}
 
-	@NullUnmarked public void readField (Object object, String name, JsonValue jsonData) {
+	@NullUnmarked
+	public void readField (Object object, String name, JsonValue jsonData) {
 		readField(object, name, name, null, jsonData);
 	}
 
@@ -849,7 +871,8 @@ public class Json {
 		readField(object, name, name, elementType, jsonData);
 	}
 
-	@NullUnmarked public void readField (Object object, String fieldName, String jsonName, JsonValue jsonData) {
+	@NullUnmarked
+	public void readField (Object object, String fieldName, String jsonName, JsonValue jsonData) {
 		readField(object, fieldName, jsonName, null, jsonData);
 	}
 
@@ -932,13 +955,15 @@ public class Json {
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T readValue (String name, @Null Class<T> type, JsonValue jsonMap) {
+	@NullUnmarked
+	public @Null <T> T readValue (String name, @Null Class<T> type, JsonValue jsonMap) {
 		return readValue(type, null, jsonMap.get(name));
 	}
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T readValue (String name, @Null Class<T> type, T defaultValue, JsonValue jsonMap) {
+	@NullUnmarked
+	public @Null <T> T readValue (String name, @Null Class<T> type, T defaultValue, JsonValue jsonMap) {
 		JsonValue jsonValue = jsonMap.get(name);
 		if (jsonValue == null) return defaultValue;
 		return readValue(type, null, jsonValue);
@@ -969,14 +994,16 @@ public class Json {
 
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T readValue (@Null Class<T> type, JsonValue jsonData) {
+	@NullUnmarked
+	public @Null <T> T readValue (@Null Class<T> type, JsonValue jsonData) {
 		return readValue(type, null, jsonData);
 	}
 
 	/** @param type May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown.
 	 * @return May be null. */
-	@NullUnmarked public @Null <T> T readValue (@Null Class<T> type, @Null Class elementType, JsonValue jsonData) {
+	@NullUnmarked
+	public @Null <T> T readValue (@Null Class<T> type, @Null Class elementType, JsonValue jsonData) {
 		if (jsonData == null) return null;
 
 		if (jsonData.isObject()) {

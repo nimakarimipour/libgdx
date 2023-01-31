@@ -59,14 +59,16 @@ public class ModelInstance implements RenderableProvider {
 
 	/** Constructs a new ModelInstance with all nodes and materials of the given model.
 	 * @param model The {@link Model} to create an instance of. */
-	@NullUnmarked public ModelInstance (final Model model) {
+	@NullUnmarked
+	public ModelInstance (final Model model) {
 		this(model, (String[])null);
 	}
 
 	/** @param model The source {@link Model}
 	 * @param nodeId The ID of the root {@link Node} of the {@link Model} for the instance to contain
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	@NullUnmarked public ModelInstance (final Model model, final String nodeId, boolean mergeTransform) {
+	@NullUnmarked
+	public ModelInstance (final Model model, final String nodeId, boolean mergeTransform) {
 		this(model, null, nodeId, false, false, mergeTransform);
 	}
 
@@ -83,7 +85,8 @@ public class ModelInstance implements RenderableProvider {
 	 * @param nodeId The ID of the {@link Node} within the {@link Model} for the instance to contain
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	@NullUnmarked public ModelInstance (final Model model, final String nodeId, boolean parentTransform, boolean mergeTransform) {
+	@NullUnmarked
+	public ModelInstance (final Model model, final String nodeId, boolean parentTransform, boolean mergeTransform) {
 		this(model, null, nodeId, true, parentTransform, mergeTransform);
 	}
 
@@ -103,7 +106,8 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive True to recursively search the Model's node tree, false to only search for a root node
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	@NullUnmarked public ModelInstance (final Model model, final String nodeId, boolean recursive, boolean parentTransform,
+	@NullUnmarked
+	public ModelInstance (final Model model, final String nodeId, boolean recursive, boolean parentTransform,
 		boolean mergeTransform) {
 		this(model, null, nodeId, recursive, parentTransform, mergeTransform);
 	}
@@ -143,7 +147,8 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	@NullUnmarked public ModelInstance (final Model model, final String... rootNodeIds) {
+	@NullUnmarked
+	public ModelInstance (final Model model, final String... rootNodeIds) {
 		this(model, null, rootNodeIds);
 	}
 
@@ -160,7 +165,8 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	@NullUnmarked public ModelInstance (final Model model, final Array<String> rootNodeIds) {
+	@NullUnmarked
+	public ModelInstance (final Model model, final Array<String> rootNodeIds) {
 		this(model, null, rootNodeIds);
 	}
 
@@ -191,7 +197,8 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with the specified transform. */
-	@NullUnmarked public ModelInstance (final Model model, Matrix4 transform) {
+	@NullUnmarked
+	public ModelInstance (final Model model, Matrix4 transform) {
 		this(model, transform, (String[])null);
 	}
 
@@ -438,7 +445,8 @@ public class ModelInstance implements RenderableProvider {
 	/** @param id The ID of the animation to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	@NullUnmarked public Animation getAnimation (final String id, boolean ignoreCase) {
+	@NullUnmarked
+	public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
 		if (ignoreCase) {
@@ -460,7 +468,8 @@ public class ModelInstance implements RenderableProvider {
 	/** @param id The ID of the material to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	@NullUnmarked public Material getMaterial (final String id, boolean ignoreCase) {
+	@NullUnmarked
+	public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;
 		if (ignoreCase) {

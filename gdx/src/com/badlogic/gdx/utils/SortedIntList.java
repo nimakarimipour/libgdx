@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+
 import com.badlogic.gdx.NullUnmarked;
 
 /** A sorted double linked list which uses ints for indexing
@@ -36,7 +37,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * @param index Index of the element
 	 * @param value Element to insert
 	 * @return Element replaced by newly inserted element, null if nothing was replaced */
-	@NullUnmarked public @Null E insert (int index, E value) {
+	@NullUnmarked
+	public @Null E insert (int index, E value) {
 		if (first != null) {
 			Node<E> c = first;
 			// iterate to the right until we can't move any further because the next number is bigger than index
@@ -73,7 +75,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * 
 	 * @param index Index of the element to retrieve
 	 * @return Matching element, null otherwise */
-	@NullUnmarked public E get (int index) {
+	@NullUnmarked
+	public E get (int index) {
 		E match = null;
 		if (first != null) {
 			Node<E> c = first;
@@ -124,7 +127,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 		@SuppressWarnings("NullAway.Init") private Node<E> position;
 		@SuppressWarnings("NullAway.Init") private Node<E> previousPosition;
 
-		@NullUnmarked public Iterator () {
+		@NullUnmarked
+		public Iterator () {
 			reset();
 		}
 
@@ -159,7 +163,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			}
 		}
 
-		@NullUnmarked public Iterator reset () {
+		@NullUnmarked
+		public Iterator reset () {
 			position = first;
 			previousPosition = null;
 			return this;

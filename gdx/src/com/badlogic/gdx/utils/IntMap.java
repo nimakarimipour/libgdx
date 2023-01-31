@@ -138,7 +138,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	@NullUnmarked public @Null V put (int key, @Null V value) {
+	@NullUnmarked
+	public @Null V put (int key, @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
 			zeroValue = value;
@@ -184,7 +185,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	@NullUnmarked public V get (int key) {
+	@NullUnmarked
+	public V get (int key) {
 		if (key == 0) return hasZeroValue ? zeroValue : null;
 		int i = locateKey(key);
 		return i >= 0 ? valueTable[i] : null;
@@ -197,7 +199,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
-	@NullUnmarked public @Null V remove (int key) {
+	@NullUnmarked
+	public @Null V remove (int key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
 			hasZeroValue = false;
@@ -248,7 +251,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	}
 
 	/** Clears the map and reduces the size of the backing arrays to be the specified capacity / loadFactor, if they are larger. */
-	@NullUnmarked public void clear (int maximumCapacity) {
+	@NullUnmarked
+	public void clear (int maximumCapacity) {
 		int tableSize = tableSize(maximumCapacity, loadFactor);
 		if (keyTable.length <= tableSize) {
 			clear();
@@ -260,7 +264,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		resize(tableSize);
 	}
 
-	@NullUnmarked public void clear () {
+	@NullUnmarked
+	public void clear () {
 		if (size == 0) return;
 		size = 0;
 		Arrays.fill(keyTable, 0);
@@ -556,7 +561,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 			hasNext = false;
 		}
 
-		@NullUnmarked public void remove () {
+		@NullUnmarked
+		public void remove () {
 			int i = currentIndex;
 			if (i == INDEX_ZERO && map.hasZeroValue) {
 				map.hasZeroValue = false;

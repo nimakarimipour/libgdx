@@ -134,7 +134,8 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Returns the emitter with the specified name, or null. */
-	@NullUnmarked public ParticleEmitter findEmitter (String name) {
+	@NullUnmarked
+	public ParticleEmitter findEmitter (String name) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
 			if (emitter.getName().equals(name)) return emitter;
@@ -163,7 +164,8 @@ public class ParticleEffect implements Disposable {
 		loadEmitterImages(imagesDir);
 	}
 
-	@NullUnmarked public void load (FileHandle effectFile, TextureAtlas atlas) {
+	@NullUnmarked
+	public void load (FileHandle effectFile, TextureAtlas atlas) {
 		load(effectFile, atlas, null);
 	}
 
@@ -172,7 +174,8 @@ public class ParticleEffect implements Disposable {
 		loadEmitterImages(atlas, atlasPrefix);
 	}
 
-	@NullUnmarked public void loadEmitters (FileHandle effectFile) {
+	@NullUnmarked
+	public void loadEmitters (FileHandle effectFile) {
 		InputStream input = effectFile.read();
 		emitters.clear();
 		BufferedReader reader = null;
@@ -190,7 +193,8 @@ public class ParticleEffect implements Disposable {
 		}
 	}
 
-	@NullUnmarked public void loadEmitterImages (TextureAtlas atlas) {
+	@NullUnmarked
+	public void loadEmitterImages (TextureAtlas atlas) {
 		loadEmitterImages(atlas, null);
 	}
 

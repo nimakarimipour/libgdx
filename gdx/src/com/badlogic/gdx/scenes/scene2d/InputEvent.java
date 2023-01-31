@@ -31,7 +31,8 @@ public class InputEvent extends Event {
 	@SuppressWarnings("NullAway.Init") private @Null Actor relatedActor;
 	private boolean touchFocus = true;
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		super.reset();
 		relatedActor = null;
 		button = -1;

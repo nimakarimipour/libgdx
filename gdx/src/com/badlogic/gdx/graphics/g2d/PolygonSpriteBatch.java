@@ -94,14 +94,16 @@ public class PolygonSpriteBatch implements PolygonBatch {
 
 	/** Constructs a PolygonSpriteBatch with the default shader, 2000 vertices, and 4000 triangles.
 	 * @see #PolygonSpriteBatch(int, int, ShaderProgram) */
-	@NullUnmarked public PolygonSpriteBatch () {
+	@NullUnmarked
+	public PolygonSpriteBatch () {
 		this(2000, null);
 	}
 
 	/** Constructs a PolygonSpriteBatch with the default shader, size vertices, and size * 2 triangles.
 	 * @param size The max number of vertices and number of triangles in a single batch. Max of 32767.
 	 * @see #PolygonSpriteBatch(int, int, ShaderProgram) */
-	@NullUnmarked public PolygonSpriteBatch (int size) {
+	@NullUnmarked
+	public PolygonSpriteBatch (int size) {
 		this(size, size * 2, null);
 	}
 
@@ -163,7 +165,8 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		drawing = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void end () {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before end.");
 		if (vertexIndex > 0) flush();

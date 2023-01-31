@@ -163,7 +163,8 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 	}
 
 	/** Build an ellipse */
-	@NullUnmarked public static void build (MeshPartBuilder builder, float width, float height, float innerWidth, float innerHeight,
+	@NullUnmarked
+	public static void build (MeshPartBuilder builder, float width, float height, float innerWidth, float innerHeight,
 		int divisions, float centerX, float centerY, float centerZ, float normalX, float normalY, float normalZ, float tangentX,
 		float tangentY, float tangentZ, float binormalX, float binormalY, float binormalZ, float angleFrom, float angleTo) {
 		if (innerWidth <= 0 || innerHeight <= 0) {

@@ -39,7 +39,8 @@ public class TextureAtlasLoader extends SynchronousAssetLoader<TextureAtlas, Tex
 
 	@SuppressWarnings("NullAway.Init") TextureAtlasData data;
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public TextureAtlas load (AssetManager assetManager, String fileName, FileHandle file, TextureAtlasParameter parameter) {
 		for (Page page : data.getPages()) {
 			Texture texture = assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);

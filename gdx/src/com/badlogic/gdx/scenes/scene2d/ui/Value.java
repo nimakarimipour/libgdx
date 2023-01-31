@@ -26,7 +26,8 @@ import com.badlogic.gdx.NullUnmarked;
  * @author Nathan Sweet */
 abstract public class Value {
 	/** Calls {@link #get(Actor)} with null. */
-	@NullUnmarked public float get () {
+	@NullUnmarked
+	public float get () {
 		return get(null);
 	}
 

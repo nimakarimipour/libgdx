@@ -112,18 +112,22 @@ public abstract class RegionInfluencer extends Influencer {
 	public static class Animated extends RegionInfluencer {
 		@SuppressWarnings("NullAway.Init") FloatChannel lifeChannel;
 
-		@NullUnmarked public Animated () {
+		@NullUnmarked
+		public Animated () {
 		}
 
-		@NullUnmarked public Animated (Animated regionInfluencer) {
+		@NullUnmarked
+		public Animated (Animated regionInfluencer) {
 			super(regionInfluencer);
 		}
 
-		@NullUnmarked public Animated (TextureRegion textureRegion) {
+		@NullUnmarked
+		public Animated (TextureRegion textureRegion) {
 			super(textureRegion);
 		}
 
-		@NullUnmarked public Animated (Texture texture) {
+		@NullUnmarked
+		public Animated (Texture texture) {
 			super(texture);
 		}
 
@@ -160,14 +164,17 @@ public abstract class RegionInfluencer extends Influencer {
 		public float halfInvAspectRatio;
 		@SuppressWarnings("NullAway.Init") public String imageName;
 
-		@NullUnmarked public AspectTextureRegion () {
+		@NullUnmarked
+		public AspectTextureRegion () {
 		}
 
-		@NullUnmarked public AspectTextureRegion (AspectTextureRegion aspectTextureRegion) {
+		@NullUnmarked
+		public AspectTextureRegion (AspectTextureRegion aspectTextureRegion) {
 			set(aspectTextureRegion);
 		}
 
-		@NullUnmarked public AspectTextureRegion (TextureRegion region) {
+		@NullUnmarked
+		public AspectTextureRegion (TextureRegion region) {
 			set(region);
 		}
 
@@ -222,7 +229,8 @@ public abstract class RegionInfluencer extends Influencer {
 	}
 
 	/** All the regions must be defined on the same Texture */
-	@NullUnmarked public RegionInfluencer (TextureRegion... regions) {
+	@NullUnmarked
+	public RegionInfluencer (TextureRegion... regions) {
 		setAtlasName(null);
 		this.regions = new Array<AspectTextureRegion>(false, regions.length, AspectTextureRegion.class);
 		add(regions);
@@ -251,7 +259,8 @@ public abstract class RegionInfluencer extends Influencer {
 		}
 	}
 
-	@NullUnmarked public void clear () {
+	@NullUnmarked
+	public void clear () {
 		atlasName = null;
 		regions.clear();
 	}

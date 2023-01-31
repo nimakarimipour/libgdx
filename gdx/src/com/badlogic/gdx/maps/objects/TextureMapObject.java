@@ -113,7 +113,8 @@ public class TextureMapObject extends MapObject {
 	}
 
 	/** Creates an empty texture map object */
-	@NullUnmarked public TextureMapObject () {
+	@NullUnmarked
+	public TextureMapObject () {
 		this(null);
 	}
 

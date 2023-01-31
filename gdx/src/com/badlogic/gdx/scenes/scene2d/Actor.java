@@ -57,7 +57,8 @@ import com.badlogic.gdx.NullUnmarked;
  * @author Nathan Sweet */
 public class Actor {
 	@SuppressWarnings("NullAway.Init") private @Null Stage stage;
-	@SuppressWarnings("NullAway.Init") @Null Group parent;
+	@SuppressWarnings("NullAway.Init")
+	@Null Group parent;
 	private final DelayedRemovalArray<EventListener> listeners = new DelayedRemovalArray(0);
 	private final DelayedRemovalArray<EventListener> captureListeners = new DelayedRemovalArray(0);
 	private final Array<Action> actions = new Array(0);
@@ -89,7 +90,8 @@ public class Actor {
 	 * <p>
 	 * The default implementation calls {@link Action#act(float)} on each action and removes actions that are complete.
 	 * @param delta Time in seconds since the last frame. */
-	@NullUnmarked public void act (float delta) {
+	@NullUnmarked
+	public void act (float delta) {
 		Array<Action> actions = this.actions;
 		if (actions.size == 0) return;
 		if (stage != null && stage.getActionsRequestRendering()) Gdx.graphics.requestRendering();
@@ -206,7 +208,8 @@ public class Actor {
 	 * The default implementation returns this actor if the point is within this actor's bounds and this actor is visible.
 	 * @param touchable If true, hit detection will respect the {@link #setTouchable(Touchable) touchability}.
 	 * @see Touchable */
-	@NullUnmarked public @Null Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.touchable != Touchable.enabled) return null;
 		if (!isVisible()) return null;
 		return x >= 0 && x < width && y >= 0 && y < height ? this : null;
@@ -265,7 +268,8 @@ public class Actor {
 	}
 
 	/** @param action May be null, in which case nothing is done. */
-	@NullUnmarked public void removeAction (@Null Action action) {
+	@NullUnmarked
+	public void removeAction (@Null Action action) {
 		if (action != null && actions.removeValue(action, true)) action.setActor(null);
 	}
 
@@ -279,7 +283,8 @@ public class Actor {
 	}
 
 	/** Removes all actions on this actor. */
-	@NullUnmarked public void clearActions () {
+	@NullUnmarked
+	public void clearActions () {
 		for (int i = actions.size - 1; i >= 0; i--)
 			actions.get(i).setActor(null);
 		actions.clear();
@@ -331,7 +336,8 @@ public class Actor {
 
 	/** Returns this actor or the first ascendant of this actor that is assignable with the specified type, or null if none were
 	 * found. */
-	@NullUnmarked public @Null <T extends Actor> T firstAscendant (Class<T> type) {
+	@NullUnmarked
+	public @Null <T extends Actor> T firstAscendant (Class<T> type) {
 		if (type == null) throw new IllegalArgumentException("actor cannot be null.");
 		Actor actor = this;
 		do {
@@ -894,14 +900,16 @@ public class Actor {
 
 	/** Transforms the specified point in the actor's coordinates to be in screen coordinates.
 	 * @see Stage#stageToScreenCoordinates(Vector2) */
-	@NullUnmarked public Vector2 localToScreenCoordinates (Vector2 localCoords) {
+	@NullUnmarked
+	public Vector2 localToScreenCoordinates (Vector2 localCoords) {
 		Stage stage = this.stage;
 		if (stage == null) return localCoords;
 		return stage.stageToScreenCoordinates(localToAscendantCoordinates(null, localCoords));
 	}
 
 	/** Transforms the specified point in the actor's coordinates to be in the stage's coordinates. */
-	@NullUnmarked public Vector2 localToStageCoordinates (Vector2 localCoords) {
+	@NullUnmarked
+	public Vector2 localToStageCoordinates (Vector2 localCoords) {
 		return localToAscendantCoordinates(null, localCoords);
 	}
 

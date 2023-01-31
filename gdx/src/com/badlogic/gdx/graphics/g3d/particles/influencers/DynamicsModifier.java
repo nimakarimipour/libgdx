@@ -39,10 +39,12 @@ public abstract class DynamicsModifier extends Influencer {
 	public static class FaceDirection extends DynamicsModifier {
 		@SuppressWarnings("NullAway.Init") FloatChannel rotationChannel, accellerationChannel;
 
-		@NullUnmarked public FaceDirection () {
+		@NullUnmarked
+		public FaceDirection () {
 		}
 
-		@NullUnmarked public FaceDirection (FaceDirection rotation) {
+		@NullUnmarked
+		public FaceDirection (FaceDirection rotation) {
 			super(rotation);
 		}
 
@@ -79,11 +81,13 @@ public abstract class DynamicsModifier extends Influencer {
 		@SuppressWarnings("NullAway.Init") protected FloatChannel strengthChannel;
 		public ScaledNumericValue strengthValue;
 
-		@NullUnmarked public Strength () {
+		@NullUnmarked
+		public Strength () {
 			strengthValue = new ScaledNumericValue();
 		}
 
-		@NullUnmarked public Strength (Strength rotation) {
+		@NullUnmarked
+		public Strength (Strength rotation) {
 			super(rotation);
 			strengthValue = new ScaledNumericValue();
 			strengthValue.load(rotation.strengthValue);
@@ -129,12 +133,14 @@ public abstract class DynamicsModifier extends Influencer {
 		/** Azimuth, Y */
 		public ScaledNumericValue phiValue;
 
-		@NullUnmarked public Angular () {
+		@NullUnmarked
+		public Angular () {
 			thetaValue = new ScaledNumericValue();
 			phiValue = new ScaledNumericValue();
 		}
 
-		@NullUnmarked public Angular (Angular value) {
+		@NullUnmarked
+		public Angular (Angular value) {
 			super(value);
 			thetaValue = new ScaledNumericValue();
 			phiValue = new ScaledNumericValue();
@@ -190,10 +196,12 @@ public abstract class DynamicsModifier extends Influencer {
 	public static class Rotational2D extends Strength {
 		@SuppressWarnings("NullAway.Init") FloatChannel rotationalVelocity2dChannel;
 
-		@NullUnmarked public Rotational2D () {
+		@NullUnmarked
+		public Rotational2D () {
 		}
 
-		@NullUnmarked public Rotational2D (Rotational2D rotation) {
+		@NullUnmarked
+		public Rotational2D (Rotational2D rotation) {
 			super(rotation);
 		}
 
@@ -222,10 +230,12 @@ public abstract class DynamicsModifier extends Influencer {
 	public static class Rotational3D extends Angular {
 		@SuppressWarnings("NullAway.Init") FloatChannel rotationChannel, rotationalForceChannel;
 
-		@NullUnmarked public Rotational3D () {
+		@NullUnmarked
+		public Rotational3D () {
 		}
 
-		@NullUnmarked public Rotational3D (Rotational3D rotation) {
+		@NullUnmarked
+		public Rotational3D (Rotational3D rotation) {
 			super(rotation);
 		}
 
@@ -297,10 +307,12 @@ public abstract class DynamicsModifier extends Influencer {
 		@SuppressWarnings("NullAway.Init") FloatChannel accelerationChannel;
 		@SuppressWarnings("NullAway.Init") FloatChannel positionChannel;
 
-		@NullUnmarked public CentripetalAcceleration () {
+		@NullUnmarked
+		public CentripetalAcceleration () {
 		}
 
-		@NullUnmarked public CentripetalAcceleration (CentripetalAcceleration rotation) {
+		@NullUnmarked
+		public CentripetalAcceleration (CentripetalAcceleration rotation) {
 			super(rotation);
 		}
 
@@ -346,10 +358,12 @@ public abstract class DynamicsModifier extends Influencer {
 	public static class PolarAcceleration extends Angular {
 		@SuppressWarnings("NullAway.Init") FloatChannel directionalVelocityChannel;
 
-		@NullUnmarked public PolarAcceleration () {
+		@NullUnmarked
+		public PolarAcceleration () {
 		}
 
-		@NullUnmarked public PolarAcceleration (PolarAcceleration rotation) {
+		@NullUnmarked
+		public PolarAcceleration (PolarAcceleration rotation) {
 			super(rotation);
 		}
 
@@ -396,10 +410,12 @@ public abstract class DynamicsModifier extends Influencer {
 	public static class TangentialAcceleration extends Angular {
 		@SuppressWarnings("NullAway.Init") FloatChannel directionalVelocityChannel, positionChannel;
 
-		@NullUnmarked public TangentialAcceleration () {
+		@NullUnmarked
+		public TangentialAcceleration () {
 		}
 
-		@NullUnmarked public TangentialAcceleration (TangentialAcceleration rotation) {
+		@NullUnmarked
+		public TangentialAcceleration (TangentialAcceleration rotation) {
 			super(rotation);
 		}
 
@@ -452,10 +468,12 @@ public abstract class DynamicsModifier extends Influencer {
 	public static class BrownianAcceleration extends Strength {
 		@SuppressWarnings("NullAway.Init") FloatChannel accelerationChannel;
 
-		@NullUnmarked public BrownianAcceleration () {
+		@NullUnmarked
+		public BrownianAcceleration () {
 		}
 
-		@NullUnmarked public BrownianAcceleration (BrownianAcceleration rotation) {
+		@NullUnmarked
+		public BrownianAcceleration (BrownianAcceleration rotation) {
 			super(rotation);
 		}
 

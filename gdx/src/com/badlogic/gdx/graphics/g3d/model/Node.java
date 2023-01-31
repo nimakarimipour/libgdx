@@ -146,7 +146,8 @@ public class Node {
 	}
 
 	/** Removes this node from its current parent, if any. Short for: <code>this.getParent().removeChild(this)</code> */
-	@NullUnmarked public void detach () {
+	@NullUnmarked
+	public void detach () {
 		if (parent != null) {
 			parent.removeChild(this);
 			parent = null;
@@ -232,7 +233,8 @@ public class Node {
 	 * is considered to be unsuccessful and the method will return false.
 	 * @param child The child node to remove.
 	 * @return Whether the removal was successful. */
-	@NullUnmarked public <T extends Node> boolean removeChild (final T child) {
+	@NullUnmarked
+	public <T extends Node> boolean removeChild (final T child) {
 		if (!children.removeValue(child, true)) return false;
 		child.parent = null;
 		return true;
@@ -296,7 +298,8 @@ public class Node {
 	/** Helper method to recursive fetch a node from an array
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
-	@NullUnmarked public static Node getNode (final Array<Node> nodes, final String id, boolean recursive, boolean ignoreCase) {
+	@NullUnmarked
+	public static Node getNode (final Array<Node> nodes, final String id, boolean recursive, boolean ignoreCase) {
 		final int n = nodes.size;
 		Node node;
 		if (ignoreCase) {

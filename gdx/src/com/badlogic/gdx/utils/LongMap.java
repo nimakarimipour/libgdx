@@ -137,7 +137,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		}
 	}
 
-	@NullUnmarked public @Null V put (long key, @Null V value) {
+	@NullUnmarked
+	public @Null V put (long key, @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
 			zeroValue = value;
@@ -183,7 +184,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		}
 	}
 
-	@NullUnmarked public @Null V get (long key) {
+	@NullUnmarked
+	public @Null V get (long key) {
 		if (key == 0) return hasZeroValue ? zeroValue : null;
 		int i = locateKey(key);
 		return i >= 0 ? valueTable[i] : null;
@@ -196,7 +198,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
-	@NullUnmarked public @Null V remove (long key) {
+	@NullUnmarked
+	public @Null V remove (long key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
 			hasZeroValue = false;
@@ -247,7 +250,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 	}
 
 	/** Clears the map and reduces the size of the backing arrays to be the specified capacity / loadFactor, if they are larger. */
-	@NullUnmarked public void clear (int maximumCapacity) {
+	@NullUnmarked
+	public void clear (int maximumCapacity) {
 		int tableSize = tableSize(maximumCapacity, loadFactor);
 		if (keyTable.length <= tableSize) {
 			clear();
@@ -259,7 +263,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		resize(tableSize);
 	}
 
-	@NullUnmarked public void clear () {
+	@NullUnmarked
+	public void clear () {
 		if (size == 0) return;
 		size = 0;
 		Arrays.fill(keyTable, 0);
@@ -555,7 +560,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 			hasNext = false;
 		}
 
-		@NullUnmarked public void remove () {
+		@NullUnmarked
+		public void remove () {
 			int i = currentIndex;
 			if (i == INDEX_ZERO && map.hasZeroValue) {
 				map.hasZeroValue = false;

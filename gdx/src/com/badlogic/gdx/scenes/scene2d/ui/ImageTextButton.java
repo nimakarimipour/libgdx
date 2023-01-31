@@ -66,7 +66,8 @@ public class ImageTextButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
-	@NullUnmarked protected Image newImage () {
+	@NullUnmarked
+	protected Image newImage () {
 		return new Image((Drawable)null, Scaling.fit);
 	}
 
@@ -196,10 +197,12 @@ public class ImageTextButton extends Button {
 		@SuppressWarnings("NullAway.Init") public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
-		@NullUnmarked public ImageTextButtonStyle () {
+		@NullUnmarked
+		public ImageTextButtonStyle () {
 		}
 
-		@NullUnmarked public ImageTextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, BitmapFont font) {
+		@NullUnmarked
+		public ImageTextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, BitmapFont font) {
 			super(up, down, checked, font);
 		}
 
@@ -215,7 +218,8 @@ public class ImageTextButton extends Button {
 			imageCheckedOver = style.imageCheckedOver;
 		}
 
-		@NullUnmarked public ImageTextButtonStyle (TextButtonStyle style) {
+		@NullUnmarked
+		public ImageTextButtonStyle (TextButtonStyle style) {
 			super(style);
 		}
 	}

@@ -35,7 +35,8 @@ public class Decoder {
 		Stream = stream;
 	}
 
-	@NullUnmarked public final void ReleaseStream () {
+	@NullUnmarked
+	public final void ReleaseStream () {
 		Stream = null;
 	}
 

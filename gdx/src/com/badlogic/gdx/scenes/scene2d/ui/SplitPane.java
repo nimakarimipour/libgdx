@@ -356,7 +356,8 @@ public class SplitPane extends WidgetGroup {
 		throw new UnsupportedOperationException("Use SplitPane#setWidget.");
 	}
 
-	@NullUnmarked public boolean removeActor (Actor actor) {
+	@NullUnmarked
+	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {
 			setFirstWidget(null);
@@ -369,7 +370,8 @@ public class SplitPane extends WidgetGroup {
 		return true;
 	}
 
-	@NullUnmarked public boolean removeActor (Actor actor, boolean unfocus) {
+	@NullUnmarked
+	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {
 			super.removeActor(actor, unfocus);
@@ -386,7 +388,8 @@ public class SplitPane extends WidgetGroup {
 		return false;
 	}
 
-	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked
+	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == firstWidget) {
 			super.removeActor(actor, unfocus);
@@ -410,7 +413,8 @@ public class SplitPane extends WidgetGroup {
 	static public class SplitPaneStyle {
 		@SuppressWarnings("NullAway.Init") public Drawable handle;
 
-		@NullUnmarked public SplitPaneStyle () {
+		@NullUnmarked
+		public SplitPaneStyle () {
 		}
 
 		public SplitPaneStyle (Drawable handle) {

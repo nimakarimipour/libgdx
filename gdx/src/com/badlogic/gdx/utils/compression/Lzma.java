@@ -59,7 +59,8 @@ public class Lzma {
 	 * @param in the {@link InputStream} to compress
 	 * @param out the {@link OutputStream} to compress to
 	 * @throws IOException */
-	@NullUnmarked static public void compress (InputStream in, OutputStream out) throws IOException {
+	@NullUnmarked
+	static public void compress (InputStream in, OutputStream out) throws IOException {
 		CommandLine params = new CommandLine();
 		boolean eos = false;
 		if (params.Eos) eos = true;

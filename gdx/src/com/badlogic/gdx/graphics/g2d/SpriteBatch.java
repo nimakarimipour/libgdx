@@ -78,13 +78,15 @@ public class SpriteBatch implements Batch {
 
 	/** Constructs a new SpriteBatch with a size of 1000, one buffer, and the default shader.
 	 * @see SpriteBatch#SpriteBatch(int, ShaderProgram) */
-	@NullUnmarked public SpriteBatch () {
+	@NullUnmarked
+	public SpriteBatch () {
 		this(1000, null);
 	}
 
 	/** Constructs a SpriteBatch with one buffer and the default shader.
 	 * @see SpriteBatch#SpriteBatch(int, ShaderProgram) */
-	@NullUnmarked public SpriteBatch (int size) {
+	@NullUnmarked
+	public SpriteBatch (int size) {
 		this(size, null);
 	}
 
@@ -181,7 +183,8 @@ public class SpriteBatch implements Batch {
 		drawing = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void end () {
 		if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before end.");
 		if (idx > 0) flush();

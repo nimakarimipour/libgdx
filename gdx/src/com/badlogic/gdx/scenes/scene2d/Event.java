@@ -66,7 +66,8 @@ public class Event implements Poolable {
 		stopped = true;
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		stage = null;
 		targetActor = null;
 		listenerActor = null;

@@ -142,7 +142,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	/** Binds this VertexBufferObject for rendering via glDrawArrays or glDrawElements
 	 *
 	 * @param shader the shader */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -231,7 +232,8 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	/** Unbinds this VertexBufferObject.
 	 *
 	 * @param shader the shader */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}

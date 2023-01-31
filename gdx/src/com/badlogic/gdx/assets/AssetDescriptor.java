@@ -29,12 +29,14 @@ public class AssetDescriptor<T> {
 	/** The resolved file. May be null if the fileName has not been resolved yet. */
 	@SuppressWarnings("NullAway.Init") public FileHandle file;
 
-	@NullUnmarked public AssetDescriptor (String fileName, Class<T> assetType) {
+	@NullUnmarked
+	public AssetDescriptor (String fileName, Class<T> assetType) {
 		this(fileName, assetType, null);
 	}
 
 	/** Creates an AssetDescriptor with an already resolved name. */
-	@NullUnmarked public AssetDescriptor (FileHandle file, Class<T> assetType) {
+	@NullUnmarked
+	public AssetDescriptor (FileHandle file, Class<T> assetType) {
 		this(file, assetType, null);
 	}
 

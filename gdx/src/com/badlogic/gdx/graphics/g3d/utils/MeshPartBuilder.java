@@ -226,7 +226,8 @@ public interface MeshPartBuilder {
 			return this;
 		}
 
-		@NullUnmarked public VertexInfo set (final VertexInfo other) {
+		@NullUnmarked
+		public VertexInfo set (final VertexInfo other) {
 			if (other == null) return set(null, null, null, null);
 			hasPosition = other.hasPosition;
 			position.set(other.position);

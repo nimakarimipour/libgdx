@@ -61,7 +61,8 @@ public class ETC1 {
 			checkNPOT();
 		}
 
-		@NullUnmarked public ETC1Data (FileHandle pkmFile) {
+		@NullUnmarked
+		public ETC1Data (FileHandle pkmFile) {
 			byte[] buffer = new byte[1024 * 10];
 			DataInputStream in = null;
 			try {
@@ -100,7 +101,8 @@ public class ETC1 {
 
 		/** Writes the ETC1Data with a PKM header to the given file.
 		 * @param file the file. */
-		@NullUnmarked public void write (FileHandle file) {
+		@NullUnmarked
+		public void write (FileHandle file) {
 			DataOutputStream write = null;
 			byte[] buffer = new byte[10 * 1024];
 			int writtenBytes = 0;

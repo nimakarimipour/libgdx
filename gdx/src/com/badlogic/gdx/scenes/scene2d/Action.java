@@ -54,7 +54,8 @@ abstract public class Action implements Poolable {
 	 * This method is not typically a good place for an action subclass to query the actor's state because the action may not be
 	 * executed for some time, eg it may be {@link DelayAction delayed}. The actor's state is best queried in the first call to
 	 * {@link #act(float)}. For a {@link TemporalAction}, use TemporalAction#begin(). */
-	@NullUnmarked public void setActor (Actor actor) {
+	@NullUnmarked
+	public void setActor (Actor actor) {
 		this.actor = actor;
 		if (target == null) setTarget(actor);
 		if (actor == null) {
@@ -87,7 +88,8 @@ abstract public class Action implements Poolable {
 	 * The default implementation calls {@link #restart()}.
 	 * <p>
 	 * If a subclass has optional state, it must override this method, call super, and reset the optional state. */
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		actor = null;
 		target = null;
 		pool = null;

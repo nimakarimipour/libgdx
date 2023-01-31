@@ -34,7 +34,8 @@ public class TextureDescriptor<T extends GLTexture> implements Comparable<Textur
 		set(texture, minFilter, magFilter, uWrap, vWrap);
 	}
 
-	@NullUnmarked public TextureDescriptor (final T texture) {
+	@NullUnmarked
+	public TextureDescriptor (final T texture) {
 		this(texture, null, null, null, null);
 	}
 

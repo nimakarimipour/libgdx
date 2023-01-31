@@ -207,7 +207,8 @@ public class Mesh implements Disposable {
 		return this;
 	}
 
-	@NullUnmarked public Mesh disableInstancedRendering () {
+	@NullUnmarked
+	public Mesh disableInstancedRendering () {
 		if (isInstanced) {
 			isInstanced = false;
 			instances.dispose();
@@ -500,7 +501,8 @@ public class Mesh implements Disposable {
 	 * ES 2.0 and when auto-bind is disabled.
 	 *
 	 * @param shader the shader (does not bind the shader) */
-	@NullUnmarked public void bind (final ShaderProgram shader) {
+	@NullUnmarked
+	public void bind (final ShaderProgram shader) {
 		bind(shader, null);
 	}
 
@@ -519,7 +521,8 @@ public class Mesh implements Disposable {
 	 * ES 1.x and when auto-bind is disabled.
 	 *
 	 * @param shader the shader (does not unbind the shader) */
-	@NullUnmarked public void unbind (final ShaderProgram shader) {
+	@NullUnmarked
+	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}
 
@@ -666,7 +669,8 @@ public class Mesh implements Disposable {
 	 *
 	 * @param usage the Usage.
 	 * @return the VertexAttribute or null if no attribute with that usage was found. */
-	@NullUnmarked public VertexAttribute getVertexAttribute (int usage) {
+	@NullUnmarked
+	public VertexAttribute getVertexAttribute (int usage) {
 		VertexAttributes attributes = vertices.getAttributes();
 		int len = attributes.size();
 		for (int i = 0; i < len; i++)
@@ -755,7 +759,8 @@ public class Mesh implements Disposable {
 	 * @param offset the start index of the part.
 	 * @param count the amount of indices the part contains.
 	 * @return the value specified by out. */
-	@NullUnmarked public BoundingBox extendBoundingBox (final BoundingBox out, int offset, int count) {
+	@NullUnmarked
+	public BoundingBox extendBoundingBox (final BoundingBox out, int offset, int count) {
 		return extendBoundingBox(out, offset, count, null);
 	}
 
@@ -917,7 +922,8 @@ public class Mesh implements Disposable {
 	 * @param offset the start index of the part.
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
-	@NullUnmarked public float calculateRadius (final float centerX, final float centerY, final float centerZ, int offset, int count) {
+	@NullUnmarked
+	public float calculateRadius (final float centerX, final float centerY, final float centerZ, int offset, int count) {
 		return calculateRadius(centerX, centerY, centerZ, offset, count, null);
 	}
 
@@ -926,7 +932,8 @@ public class Mesh implements Disposable {
 	 * @param offset the start index of the part.
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
-	@NullUnmarked public float calculateRadius (final Vector3 center, int offset, int count) {
+	@NullUnmarked
+	public float calculateRadius (final Vector3 center, int offset, int count) {
 		return calculateRadius(center.x, center.y, center.z, offset, count, null);
 	}
 
@@ -935,14 +942,16 @@ public class Mesh implements Disposable {
 	 * @param centerY The Y coordinate of the center of the bounding sphere
 	 * @param centerZ The Z coordinate of the center of the bounding sphere
 	 * @return the squared radius of the bounding sphere. */
-	@NullUnmarked public float calculateRadius (final float centerX, final float centerY, final float centerZ) {
+	@NullUnmarked
+	public float calculateRadius (final float centerX, final float centerY, final float centerZ) {
 		return calculateRadius(centerX, centerY, centerZ, 0, getNumIndices(), null);
 	}
 
 	/** Calculates the squared radius of the bounding sphere around the specified center for the specified part.
 	 * @param center The center of the bounding sphere
 	 * @return the squared radius of the bounding sphere. */
-	@NullUnmarked public float calculateRadius (final Vector3 center) {
+	@NullUnmarked
+	public float calculateRadius (final Vector3 center) {
 		return calculateRadius(center.x, center.y, center.z, 0, getNumIndices(), null);
 	}
 
@@ -1241,7 +1250,8 @@ public class Mesh implements Disposable {
 	/** Copies this mesh.
 	 * @param isStatic whether the new mesh is static or not. Allows for internal optimizations.
 	 * @return the copy of this mesh */
-	@NullUnmarked public Mesh copy (boolean isStatic) {
+	@NullUnmarked
+	public Mesh copy (boolean isStatic) {
 		return copy(isStatic, false, null);
 	}
 }

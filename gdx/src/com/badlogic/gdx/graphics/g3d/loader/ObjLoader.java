@@ -87,7 +87,8 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 	final FloatArray uvs = new FloatArray(200);
 	final Array<Group> groups = new Array<Group>(10);
 
-	@NullUnmarked public ObjLoader () {
+	@NullUnmarked
+	public ObjLoader () {
 		this(null);
 	}
 
@@ -105,7 +106,8 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 
-	@NullUnmarked protected ModelData loadModelData (FileHandle file, boolean flipV) {
+	@NullUnmarked
+	protected ModelData loadModelData (FileHandle file, boolean flipV) {
 		if (logWarning)
 			Gdx.app.error("ObjLoader", "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
 		String line;
@@ -439,11 +441,13 @@ class MtlLoader {
 		@SuppressWarnings("NullAway.Init") String shininessTexFilename;
 		@SuppressWarnings("NullAway.Init") String specularTexFilename;
 
-		@NullUnmarked public ObjMaterial () {
+		@NullUnmarked
+		public ObjMaterial () {
 			reset();
 		}
 
-		@NullUnmarked public ModelMaterial build () {
+		@NullUnmarked
+		public ModelMaterial build () {
 			ModelMaterial mat = new ModelMaterial();
 			mat.id = materialName;
 			mat.ambient = ambientColor == null ? null : new Color(ambientColor);
@@ -470,7 +474,8 @@ class MtlLoader {
 			}
 		}
 
-		@NullUnmarked public void reset () {
+		@NullUnmarked
+		public void reset () {
 			ambientColor = null;
 			diffuseColor = Color.WHITE;
 			specularColor = Color.WHITE;

@@ -59,7 +59,8 @@ public class ModelBuilder {
 	}
 
 	/** Begin building a new model */
-	@NullUnmarked public void begin () {
+	@NullUnmarked
+	public void begin () {
 		if (model != null) throw new GdxRuntimeException("Call end() first");
 		node = null;
 		model = new Model();
@@ -68,7 +69,8 @@ public class ModelBuilder {
 
 	/** End building the model.
 	 * @return The newly created model. Call the {@link Model#dispose()} method when no longer used. */
-	@NullUnmarked public Model end () {
+	@NullUnmarked
+	public Model end () {
 		if (model == null) throw new GdxRuntimeException("Call begin() first");
 		final Model result = model;
 		endnode();
@@ -82,7 +84,8 @@ public class ModelBuilder {
 		return result;
 	}
 
-	@NullUnmarked private void endnode () {
+	@NullUnmarked
+	private void endnode () {
 		if (node != null) {
 			node = null;
 		}

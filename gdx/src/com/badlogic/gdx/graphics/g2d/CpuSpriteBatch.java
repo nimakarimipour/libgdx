@@ -48,7 +48,8 @@ public class CpuSpriteBatch extends SpriteBatch {
 
 	/** Constructs a CpuSpriteBatch with the default shader.
 	 * @see SpriteBatch#SpriteBatch(int) */
-	@NullUnmarked public CpuSpriteBatch (int size) {
+	@NullUnmarked
+	public CpuSpriteBatch (int size) {
 		this(size, null);
 	}
 

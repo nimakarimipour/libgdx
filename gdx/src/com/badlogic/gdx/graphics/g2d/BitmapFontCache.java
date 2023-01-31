@@ -489,19 +489,22 @@ public class BitmapFontCache {
 
 	/** Adds glyphs for the specified text.
 	 * @see #addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	@NullUnmarked public GlyphLayout addText (CharSequence str, float x, float y) {
+	@NullUnmarked
+	public GlyphLayout addText (CharSequence str, float x, float y) {
 		return addText(str, x, y, 0, str.length(), 0, Align.left, false, null);
 	}
 
 	/** Adds glyphs for the specified text.
 	 * @see #addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	@NullUnmarked public GlyphLayout addText (CharSequence str, float x, float y, float targetWidth, int halign, boolean wrap) {
+	@NullUnmarked
+	public GlyphLayout addText (CharSequence str, float x, float y, float targetWidth, int halign, boolean wrap) {
 		return addText(str, x, y, 0, str.length(), targetWidth, halign, wrap, null);
 	}
 
 	/** Adds glyphs for the specified text.
 	 * @see #addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	@NullUnmarked public GlyphLayout addText (CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
+	@NullUnmarked
+	public GlyphLayout addText (CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
 		boolean wrap) {
 		return addText(str, x, y, start, end, targetWidth, halign, wrap, null);
 	}

@@ -41,7 +41,8 @@ abstract public class TemporalAction extends Action {
 		this.interpolation = interpolation;
 	}
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		if (complete) return true;
 		Pool pool = getPool();
 		setPool(null); // Ensure this action can't be returned to the pool while executing.
@@ -87,7 +88,8 @@ abstract public class TemporalAction extends Action {
 		complete = false;
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		super.reset();
 		reverse = false;
 		interpolation = null;

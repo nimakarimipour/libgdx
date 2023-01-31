@@ -23,7 +23,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	boolean multiple;
 	boolean required;
 	private boolean programmaticChangeEvents = true;
-	@SuppressWarnings("NullAway.Init") @Null T lastSelected;
+	@SuppressWarnings("NullAway.Init")
+	@Null T lastSelected;
 
 	/** @param actor An actor to fire {@link ChangeEvent} on when the selection changes, or null. */
 	public void setActor (@Null Actor actor) {
@@ -32,7 +33,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 
 	/** Selects or deselects the specified item based on how the selection is configured, whether ctrl is currently pressed, etc.
 	 * This is typically invoked by user interaction. */
-	@NullUnmarked public void choose (T item) {
+	@NullUnmarked
+	public void choose (T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (isDisabled) return;
 		snapshot();
@@ -83,7 +85,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Returns the first selected item, or null. */
-	@NullUnmarked public @Null T first () {
+	@NullUnmarked
+	public @Null T first () {
 		return selected.size == 0 ? null : selected.first();
 	}
 
@@ -117,7 +120,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		cleanup();
 	}
 
-	@NullUnmarked public void setAll (Array<T> items) {
+	@NullUnmarked
+	public void setAll (Array<T> items) {
 		boolean added = false;
 		snapshot();
 		lastSelected = null;
@@ -169,7 +173,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		cleanup();
 	}
 
-	@NullUnmarked public void remove (T item) {
+	@NullUnmarked
+	public void remove (T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (!selected.remove(item)) return;
 		if (programmaticChangeEvents && fireChangeEvent())
@@ -180,7 +185,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		}
 	}
 
-	@NullUnmarked public void removeAll (Array<T> items) {
+	@NullUnmarked
+	public void removeAll (Array<T> items) {
 		boolean removed = false;
 		snapshot();
 		for (int i = 0, n = items.size; i < n; i++) {
@@ -199,7 +205,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		cleanup();
 	}
 
-	@NullUnmarked public void clear () {
+	@NullUnmarked
+	public void clear () {
 		if (selected.size == 0) {
 			lastSelected = null;
 			return;
@@ -239,7 +246,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Makes a best effort to return the last item selected, else returns an arbitrary item or null if the selection is empty. */
-	@NullUnmarked public @Null T getLastSelected () {
+	@NullUnmarked
+	public @Null T getLastSelected () {
 		if (lastSelected != null) {
 			return lastSelected;
 		} else if (selected.size > 0) {

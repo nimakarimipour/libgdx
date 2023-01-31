@@ -55,7 +55,8 @@ public class CheckBox extends TextButton {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
-	@NullUnmarked protected Image newImage () {
+	@NullUnmarked
+	protected Image newImage () {
 		return new Image((Drawable)null, Scaling.none);
 	}
 
@@ -100,12 +101,15 @@ public class CheckBox extends TextButton {
 	 * @author Nathan Sweet */
 	static public class CheckBoxStyle extends TextButtonStyle {
 		@SuppressWarnings("NullAway.Init") public Drawable checkboxOn, checkboxOff;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable checkboxOnOver, checkboxOver, checkboxOnDisabled, checkboxOffDisabled;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable checkboxOnOver, checkboxOver, checkboxOnDisabled,
+			checkboxOffDisabled;
 
-		@NullUnmarked public CheckBoxStyle () {
+		@NullUnmarked
+		public CheckBoxStyle () {
 		}
 
-		@NullUnmarked public CheckBoxStyle (Drawable checkboxOff, Drawable checkboxOn, BitmapFont font, @Null Color fontColor) {
+		@NullUnmarked
+		public CheckBoxStyle (Drawable checkboxOff, Drawable checkboxOn, BitmapFont font, @Null Color fontColor) {
 			this.checkboxOff = checkboxOff;
 			this.checkboxOn = checkboxOn;
 			this.font = font;

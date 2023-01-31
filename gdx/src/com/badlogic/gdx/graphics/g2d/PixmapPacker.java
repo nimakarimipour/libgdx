@@ -153,7 +153,8 @@ public class PixmapPacker implements Disposable {
 
 	/** Inserts the pixmap without a name. It cannot be looked up by name.
 	 * @see #pack(String, Pixmap) */
-	@NullUnmarked public synchronized Rectangle pack (Pixmap image) {
+	@NullUnmarked
+	public synchronized Rectangle pack (Pixmap image) {
 		return pack(null, image);
 	}
 
@@ -163,7 +164,8 @@ public class PixmapPacker implements Disposable {
 	 * @return Rectangle describing the area the pixmap was rendered to.
 	 * @throws GdxRuntimeException in case the image did not fit due to the page size being too small or providing a duplicate
 	 *            name. */
-	@NullUnmarked public synchronized Rectangle pack (String name, Pixmap image) {
+	@NullUnmarked
+	public synchronized Rectangle pack (String name, Pixmap image) {
 		if (disposed) return null;
 		if (name != null && getRect(name) != null)
 			throw new GdxRuntimeException("Pixmap has already been packed with name: " + name);
@@ -294,7 +296,8 @@ public class PixmapPacker implements Disposable {
 
 	/** @param name the name of the image
 	 * @return the rectangle for the image in the page it's stored in or null */
-	@NullUnmarked public synchronized Rectangle getRect (String name) {
+	@NullUnmarked
+	public synchronized Rectangle getRect (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
 			if (rect != null) return rect;
@@ -304,7 +307,8 @@ public class PixmapPacker implements Disposable {
 
 	/** @param name the name of the image
 	 * @return the page the image is stored in or null */
-	@NullUnmarked public synchronized Page getPage (String name) {
+	@NullUnmarked
+	public synchronized Page getPage (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
 			if (rect != null) return page;
@@ -473,7 +477,8 @@ public class PixmapPacker implements Disposable {
 		boolean dirty;
 
 		/** Creates a new page filled with the color provided by the {@link PixmapPacker#getTransparentColor()} */
-		@NullUnmarked public Page (PixmapPacker packer) {
+		@NullUnmarked
+		public Page (PixmapPacker packer) {
 			image = new Pixmap(packer.pageWidth, packer.pageHeight, packer.pageFormat);
 			image.setBlending(Blending.None);
 			image.setColor(packer.getTransparentColor());
@@ -570,7 +575,8 @@ public class PixmapPacker implements Disposable {
 			return page;
 		}
 
-		@NullUnmarked private Node insert (Node node, Rectangle rect) {
+		@NullUnmarked
+		private Node insert (Node node, Rectangle rect) {
 			if (!node.full && node.leftChild != null && node.rightChild != null) {
 				Node newNode = insert(node.leftChild, rect);
 				if (newNode == null) newNode = insert(node.rightChild, rect);
@@ -724,7 +730,8 @@ public class PixmapPacker implements Disposable {
 		this.transparentColor.set(color);
 	}
 
-	@NullUnmarked private int[] getSplits (Pixmap raster) {
+	@NullUnmarked
+	private int[] getSplits (Pixmap raster) {
 
 		int startX = getSplitPoint(raster, 1, 0, true, true);
 		int endX = getSplitPoint(raster, startX, 0, false, true);
@@ -757,7 +764,8 @@ public class PixmapPacker implements Disposable {
 		return new int[] {startX, endX, startY, endY};
 	}
 
-	@NullUnmarked private int[] getPads (Pixmap raster, int[] splits) {
+	@NullUnmarked
+	private int[] getPads (Pixmap raster, int[] splits) {
 
 		int bottom = raster.getHeight() - 1;
 		int right = raster.getWidth() - 1;
@@ -855,7 +863,8 @@ public class PixmapPacker implements Disposable {
 		int offsetX, offsetY;
 		int originalWidth, originalHeight;
 
-		@NullUnmarked PixmapPackerRectangle (int x, int y, int width, int height) {
+		@NullUnmarked
+		PixmapPackerRectangle (int x, int y, int width, int height) {
 			super(x, y, width, height);
 			this.offsetX = 0;
 			this.offsetY = 0;
@@ -863,7 +872,8 @@ public class PixmapPacker implements Disposable {
 			this.originalHeight = height;
 		}
 
-		@NullUnmarked PixmapPackerRectangle (int x, int y, int width, int height, int left, int top, int originalWidth, int originalHeight) {
+		@NullUnmarked
+		PixmapPackerRectangle (int x, int y, int width, int height, int left, int top, int originalWidth, int originalHeight) {
 			super(x, y, width, height);
 			this.offsetX = left;
 			this.offsetY = top;

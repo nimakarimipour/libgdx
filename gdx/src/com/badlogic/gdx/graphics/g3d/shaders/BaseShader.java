@@ -131,15 +131,18 @@ public abstract class BaseShader implements Shader {
 		return uniforms.size - 1;
 	}
 
-	@NullUnmarked public int register (final String alias, final Validator validator) {
+	@NullUnmarked
+	public int register (final String alias, final Validator validator) {
 		return register(alias, validator, null);
 	}
 
-	@NullUnmarked public int register (final String alias, final Setter setter) {
+	@NullUnmarked
+	public int register (final String alias, final Setter setter) {
 		return register(alias, null, setter);
 	}
 
-	@NullUnmarked public int register (final String alias) {
+	@NullUnmarked
+	public int register (final String alias) {
 		return register(alias, null, null);
 	}
 
@@ -147,7 +150,8 @@ public abstract class BaseShader implements Shader {
 		return register(uniform.alias, uniform, setter);
 	}
 
-	@NullUnmarked public int register (final Uniform uniform) {
+	@NullUnmarked
+	public int register (final Uniform uniform) {
 		return register(uniform, null);
 	}
 
@@ -165,7 +169,9 @@ public abstract class BaseShader implements Shader {
 	}
 
 	/** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
-	@NullUnmarked @Initializer public void init (final ShaderProgram program, final Renderable renderable) {
+	@NullUnmarked
+	@Initializer
+	public void init (final ShaderProgram program, final Renderable renderable) {
 		if (locations != null) throw new GdxRuntimeException("Already initialized");
 		if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
 		this.program = program;
@@ -203,7 +209,8 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void begin (Camera camera, RenderContext context) {
 		this.camera = camera;
 		this.context = context;
@@ -247,7 +254,8 @@ public abstract class BaseShader implements Shader {
 		renderable.meshPart.render(program, false);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void end () {
 		if (currentMesh != null) {
 			currentMesh.unbind(program, tempArray.items);
@@ -255,7 +263,8 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		program = null;
 		uniforms.clear();

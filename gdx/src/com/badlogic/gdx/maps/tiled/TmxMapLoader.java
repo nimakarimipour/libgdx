@@ -107,7 +107,8 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 		return descriptors;
 	}
 
-	@NullUnmarked protected Array<FileHandle> getDependencyFileHandles (FileHandle tmxFile) {
+	@NullUnmarked
+	protected Array<FileHandle> getDependencyFileHandles (FileHandle tmxFile) {
 		Array<FileHandle> fileHandles = new Array<FileHandle>();
 
 		// TileSet descriptors

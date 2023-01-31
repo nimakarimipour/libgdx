@@ -545,7 +545,8 @@ public class UBJsonWriter implements Closeable {
 		return pop(false);
 	}
 
-	@NullUnmarked protected UBJsonWriter pop (boolean silent) throws IOException {
+	@NullUnmarked
+	protected UBJsonWriter pop (boolean silent) throws IOException {
 		if (named) throw new IllegalStateException("Expected an object, array, or value since a name was set.");
 		if (silent)
 			stack.pop();

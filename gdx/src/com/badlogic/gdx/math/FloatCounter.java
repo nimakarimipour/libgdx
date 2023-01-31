@@ -43,7 +43,8 @@ public class FloatCounter implements Poolable {
 
 	/** Construct a new FloatCounter
 	 * @param windowSize The size of the mean window or 1 or below to not use a windowed mean. */
-	@NullUnmarked public FloatCounter (int windowSize) {
+	@NullUnmarked
+	public FloatCounter (int windowSize) {
 		mean = (windowSize > 1) ? new WindowedMean(windowSize) : null;
 		reset();
 	}

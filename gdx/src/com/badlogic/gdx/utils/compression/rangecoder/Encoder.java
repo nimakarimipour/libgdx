@@ -39,7 +39,8 @@ public class Encoder {
 		Stream = stream;
 	}
 
-	@NullUnmarked public void ReleaseStream () {
+	@NullUnmarked
+	public void ReleaseStream () {
 		Stream = null;
 	}
 

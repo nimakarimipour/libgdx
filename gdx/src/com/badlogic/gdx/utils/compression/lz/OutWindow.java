@@ -24,7 +24,8 @@ public class OutWindow {
 		_stream = stream;
 	}
 
-	@NullUnmarked public void ReleaseStream () throws IOException {
+	@NullUnmarked
+	public void ReleaseStream () throws IOException {
 		Flush();
 		_stream = null;
 	}

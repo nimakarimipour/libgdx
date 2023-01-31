@@ -37,7 +37,8 @@ public class DefaultShaderProvider extends BaseShaderProvider {
 		this(vertexShader.readString(), fragmentShader.readString());
 	}
 
-	@NullUnmarked public DefaultShaderProvider () {
+	@NullUnmarked
+	public DefaultShaderProvider () {
 		this(null);
 	}
 

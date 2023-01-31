@@ -67,7 +67,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 	public Tree (TreeStyle style) {
 		selection = new Selection<N>() {
-			@NullUnmarked protected void changed () {
+			@NullUnmarked
+			protected void changed () {
 				switch (size()) {
 				case 0:
 					rangeStart = null;
@@ -131,7 +132,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 				setOverNode(getNodeAt(y));
 			}
 
-			@NullUnmarked public void exit (InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
+			@NullUnmarked
+			public void exit (InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
 				super.exit(event, x, y, pointer, toActor);
 				if (toActor == null || !toActor.isDescendantOf(Tree.this)) setOverNode(null);
 			}
@@ -149,7 +151,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		insert(rootNodes.size, node);
 	}
 
-	@NullUnmarked public void insert (int index, N node) {
+	@NullUnmarked
+	public void insert (int index, N node) {
 		if (node.parent != null) {
 			node.parent.remove(node);
 			node.parent = null;
@@ -189,7 +192,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** Removes all tree nodes. */
-	@NullUnmarked public void clearChildren (boolean unfocus) {
+	@NullUnmarked
+	public void clearChildren (boolean unfocus) {
 		super.clearChildren(unfocus);
 		setOverNode(null);
 		rootNodes.clear();
@@ -266,7 +270,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		return y;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		drawBackground(batch, parentAlpha);
 		Color color = getColor();
 		float a = color.a * parentAlpha;
@@ -366,7 +371,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** @return May be null. */
-	@NullUnmarked public @Null N getNodeAt (float y) {
+	@NullUnmarked
+	public @Null N getNodeAt (float y) {
 		foundNode = null;
 		getNodeAt(rootNodes, y, getHeight());
 		try {
@@ -414,7 +420,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** Returns the first selected value, or null. */
-	@NullUnmarked public @Null V getSelectedValue () {
+	@NullUnmarked
+	public @Null V getSelectedValue () {
 		N node = selection.first();
 		return node == null ? null : (V)node.getValue();
 	}
@@ -454,7 +461,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** @return May be null. */
-	@NullUnmarked public @Null V getOverValue () {
+	@NullUnmarked
+	public @Null V getOverValue () {
 		if (overNode == null) return null;
 		return (V)overNode.getValue();
 	}
@@ -540,7 +548,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		return (N)findNode(rootNodes, value);
 	}
 
-	@NullUnmarked static @Null Node findNode (Array<? extends Node> nodes, Object value) {
+	@NullUnmarked
+	static @Null Node findNode (Array<? extends Node> nodes, Object value) {
 		for (int i = 0, n = nodes.size; i < n; i++) {
 			Node node = nodes.get(i);
 			if (value.equals(node.value)) return node;
@@ -596,13 +605,15 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		float height;
 		@SuppressWarnings("NullAway.Init") V value;
 
-		@NullUnmarked public Node (A actor) {
+		@NullUnmarked
+		public Node (A actor) {
 			if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 			this.actor = actor;
 		}
 
 		/** Creates a node without an actor. An actor must be set using {@link #setActor(Actor)} before this node can be used. */
-		@NullUnmarked public Node () {
+		@NullUnmarked
+		public Node () {
 		}
 
 		public void setExpanded (boolean expanded) {
@@ -714,7 +725,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 		/** Returns the tree this node's actor is currently in, or null. The actor is only in the tree when all of its parent nodes
 		 * are expanded. */
-		@NullUnmarked public @Null Tree<N, V> getTree () {
+		@NullUnmarked
+		public @Null Tree<N, V> getTree () {
 			Group parent = actor.getParent();
 			if (parent instanceof Tree) return (Tree)parent;
 			return null;
@@ -886,10 +898,12 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		@SuppressWarnings("NullAway.Init") public @Null Drawable plusOver, minusOver;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable over, selection, background;
 
-		@NullUnmarked public TreeStyle () {
+		@NullUnmarked
+		public TreeStyle () {
 		}
 
-		@NullUnmarked public TreeStyle (Drawable plus, Drawable minus, @Null Drawable selection) {
+		@NullUnmarked
+		public TreeStyle (Drawable plus, Drawable minus, @Null Drawable selection) {
 			this.plus = plus;
 			this.minus = minus;
 			this.selection = selection;

@@ -505,7 +505,8 @@ public class Queue<T> implements Iterable<T> {
 			this(queue, true);
 		}
 
-		@NullUnmarked public QueueIterable (Queue<T> queue, boolean allowRemove) {
+		@NullUnmarked
+		public QueueIterable (Queue<T> queue, boolean allowRemove) {
 			this.queue = queue;
 			this.allowRemove = allowRemove;
 		}

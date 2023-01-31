@@ -97,7 +97,8 @@ public class VertexArray implements VertexData {
 		((Buffer)byteBuffer).position(pos);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (final ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -147,7 +148,8 @@ public class VertexArray implements VertexData {
 	/** Unbinds this VertexBufferObject.
 	 *
 	 * @param shader the shader */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (ShaderProgram shader) {
 		unbind(shader, null);
 	}

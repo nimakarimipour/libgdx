@@ -347,7 +347,8 @@ public class Label extends Widget {
 
 	/** When true the text will be truncated "..." if it does not fit within the width of the label. Wrapping will not occur when
 	 * ellipsis is true. Default is false. */
-	@NullUnmarked public void setEllipsis (boolean ellipsis) {
+	@NullUnmarked
+	public void setEllipsis (boolean ellipsis) {
 		if (ellipsis)
 			this.ellipsis = "...";
 		else
@@ -375,15 +376,18 @@ public class Label extends Widget {
 		@SuppressWarnings("NullAway.Init") public @Null Color fontColor;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable background;
 
-		@NullUnmarked public LabelStyle () {
+		@NullUnmarked
+		public LabelStyle () {
 		}
 
-		@NullUnmarked public LabelStyle (BitmapFont font, @Null Color fontColor) {
+		@NullUnmarked
+		public LabelStyle (BitmapFont font, @Null Color fontColor) {
 			this.font = font;
 			this.fontColor = fontColor;
 		}
 
-		@NullUnmarked public LabelStyle (LabelStyle style) {
+		@NullUnmarked
+		public LabelStyle (LabelStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);
 			background = style.background;

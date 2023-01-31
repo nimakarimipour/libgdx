@@ -90,8 +90,10 @@ public class TextField extends Widget implements Disableable {
 	@SuppressWarnings("NullAway.Init") protected CharSequence displayText;
 	Clipboard clipboard;
 	@SuppressWarnings("NullAway.Init") InputListener inputListener;
-	@SuppressWarnings("NullAway.Init") @Null TextFieldListener listener;
-	@SuppressWarnings("NullAway.Init") @Null TextFieldFilter filter;
+	@SuppressWarnings("NullAway.Init")
+	@Null TextFieldListener listener;
+	@SuppressWarnings("NullAway.Init")
+	@Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
 	boolean focusTraversal = true, onlyFontChars = true, disabled;
 	private int textHAlign = Align.left;
@@ -511,7 +513,8 @@ public class TextField extends Widget implements Disableable {
 	/** Sets the {@link Stage#setKeyboardFocus(Actor) keyboard focus} to the next TextField. If no next text field is found, the
 	 * onscreen keyboard is hidden. Does nothing if the text field is not in a stage.
 	 * @param up If true, the text field with the same or next smallest y coordinate is found, else the next highest. */
-	@NullUnmarked public void next (boolean up) {
+	@NullUnmarked
+	public void next (boolean up) {
 		Stage stage = getStage();
 		if (stage == null) return;
 		TextField current = this;
@@ -786,7 +789,8 @@ public class TextField extends Widget implements Disableable {
 	class KeyRepeatTask extends Task {
 		int keycode;
 
-		@NullUnmarked public void run () {
+		@NullUnmarked
+		public void run () {
 			if (getStage() == null) {
 				cancel();
 				return;
@@ -1091,14 +1095,17 @@ public class TextField extends Widget implements Disableable {
 		@SuppressWarnings("NullAway.Init") public BitmapFont font;
 		@SuppressWarnings("NullAway.Init") public Color fontColor;
 		@SuppressWarnings("NullAway.Init") public @Null Color focusedFontColor, disabledFontColor;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable background, focusedBackground, disabledBackground, cursor,
+			selection;
 		@SuppressWarnings("NullAway.Init") public @Null BitmapFont messageFont;
 		@SuppressWarnings("NullAway.Init") public @Null Color messageFontColor;
 
-		@NullUnmarked public TextFieldStyle () {
+		@NullUnmarked
+		public TextFieldStyle () {
 		}
 
-		@NullUnmarked public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,
+		@NullUnmarked
+		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,
 			@Null Drawable background) {
 			this.font = font;
 			this.fontColor = fontColor;
@@ -1107,7 +1114,8 @@ public class TextField extends Widget implements Disableable {
 			this.background = background;
 		}
 
-		@NullUnmarked public TextFieldStyle (TextFieldStyle style) {
+		@NullUnmarked
+		public TextFieldStyle (TextFieldStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);
 			if (style.focusedFontColor != null) focusedFontColor = new Color(style.focusedFontColor);

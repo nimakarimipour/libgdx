@@ -58,7 +58,8 @@ public class SequenceAction extends ParallelAction {
 		addAction(action5);
 	}
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		if (index >= actions.size) return true;
 		Pool pool = getPool();
 		setPool(null); // Ensure this action can't be returned to the pool while executings.

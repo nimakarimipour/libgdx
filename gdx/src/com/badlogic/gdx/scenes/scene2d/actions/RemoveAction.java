@@ -37,7 +37,8 @@ public class RemoveAction extends Action {
 		this.action = action;
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		super.reset();
 		action = null;
 	}

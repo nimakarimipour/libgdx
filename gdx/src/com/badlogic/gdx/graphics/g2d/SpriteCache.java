@@ -194,7 +194,8 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Ends the definition of a cache, returning the cache ID to be used with {@link #draw(int)}. */
-	@NullUnmarked public int endCache () {
+	@NullUnmarked
+	public int endCache () {
 		if (currentCache == null) throw new IllegalStateException("beginCache must be called before endCache.");
 		Cache cache = currentCache;
 		int cacheCount = mesh.getVerticesBuffer().position() - cache.offset;
@@ -971,7 +972,8 @@ public class SpriteCache implements Disposable {
 		@SuppressWarnings("NullAway.Init") Texture[] textures;
 		@SuppressWarnings("NullAway.Init") int[] counts;
 
-		@NullUnmarked public Cache (int id, int offset) {
+		@NullUnmarked
+		public Cache (int id, int offset) {
 			this.id = id;
 			this.offset = offset;
 		}

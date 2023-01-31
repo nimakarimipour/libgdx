@@ -102,7 +102,8 @@ public class InstanceBufferObject implements InstanceData {
 		((Buffer)buffer).limit(l / 4);
 	}
 
-	@NullUnmarked private void bufferChanged () {
+	@NullUnmarked
+	private void bufferChanged () {
 		if (isBound) {
 			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), null, usage);
 			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), byteBuffer, usage);
@@ -167,7 +168,8 @@ public class InstanceBufferObject implements InstanceData {
 	/** Binds this InstanceBufferObject for rendering via glDrawArraysInstanced or glDrawElementsInstanced
 	 *
 	 * @param shader the shader */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -216,7 +218,8 @@ public class InstanceBufferObject implements InstanceData {
 	/** Unbinds this InstanceBufferObject.
 	 *
 	 * @param shader the shader */
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}

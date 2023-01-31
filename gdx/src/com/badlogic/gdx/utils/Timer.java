@@ -114,7 +114,8 @@ public class Timer {
 	}
 
 	/** Cancels all tasks. */
-	@NullUnmarked public synchronized void clear () {
+	@NullUnmarked
+	public synchronized void clear () {
 		for (int i = 0, n = tasks.size; i < n; i++) {
 			Task task = tasks.get(i);
 			synchronized (task) {
@@ -131,7 +132,8 @@ public class Timer {
 		return tasks.size == 0;
 	}
 
-	@NullUnmarked synchronized long update (long timeMillis, long waitMillis) {
+	@NullUnmarked
+	synchronized long update (long timeMillis, long waitMillis) {
 		for (int i = 0, n = tasks.size; i < n; i++) {
 			Task task = tasks.get(i);
 			synchronized (task) {
@@ -197,7 +199,8 @@ public class Timer {
 		int repeatCount;
 		@SuppressWarnings("NullAway.Init") volatile Timer timer;
 
-		@NullUnmarked public Task () {
+		@NullUnmarked
+		public Task () {
 			app = Gdx.app; // Store which app to postRunnable (eg for multiple LwjglAWTCanvas).
 			if (app == null) throw new IllegalStateException("Gdx.app not available.");
 		}
@@ -207,7 +210,8 @@ public class Timer {
 		abstract public void run ();
 
 		/** Cancels the task. It will not be executed until it is scheduled again. This method can be called at any time. */
-		@NullUnmarked public void cancel () {
+		@NullUnmarked
+		public void cancel () {
 			Timer timer = this.timer;
 			if (timer != null) {
 				synchronized (timer) {
@@ -254,7 +258,8 @@ public class Timer {
 		@SuppressWarnings("NullAway.Init") Timer instance;
 		long pauseTimeMillis;
 
-		@NullUnmarked public TimerThread () {
+		@NullUnmarked
+		public TimerThread () {
 			files = Gdx.files;
 			app = Gdx.app;
 			app.addLifecycleListener(this);
@@ -310,7 +315,8 @@ public class Timer {
 			}
 		}
 
-		@NullUnmarked public void dispose () { // OK to call multiple times.
+		@NullUnmarked
+		public void dispose () { // OK to call multiple times.
 			synchronized (threadLock) {
 				if (thread == this) thread = null;
 				instances.clear();

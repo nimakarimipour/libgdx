@@ -92,13 +92,15 @@ public class GlyphLayout implements Poolable {
 
 	/** Calls {@link #setText(BitmapFont, CharSequence, int, int, Color, float, int, boolean, String) setText} with the whole
 	 * string, the font's current color, and no alignment or wrapping. */
-	@NullUnmarked public void setText (BitmapFont font, CharSequence str) {
+	@NullUnmarked
+	public void setText (BitmapFont font, CharSequence str) {
 		setText(font, str, 0, str.length(), font.getColor(), 0, Align.left, false, null);
 	}
 
 	/** Calls {@link #setText(BitmapFont, CharSequence, int, int, Color, float, int, boolean, String) setText} with the whole
 	 * string and no truncation. */
-	@NullUnmarked public void setText (BitmapFont font, CharSequence str, Color color, float targetWidth, int halign, boolean wrap) {
+	@NullUnmarked
+	public void setText (BitmapFont font, CharSequence str, Color color, float targetWidth, int halign, boolean wrap) {
 		setText(font, str, 0, str.length(), color, targetWidth, halign, wrap, null);
 	}
 
@@ -110,7 +112,8 @@ public class GlyphLayout implements Poolable {
 	 * @param truncate If not null and the width of the glyphs exceed targetWidth, the glyphs are truncated and the glyphs for the
 	 *           specified truncate string are placed at the end. Empty string can be used to truncate without adding glyphs.
 	 *           Truncate should not be used with text that contains multiple lines. Wrap is ignored if truncate is not null. */
-	@NullUnmarked public void setText (BitmapFont font, CharSequence str, int start, int end, Color color, float targetWidth, int halign,
+	@NullUnmarked
+	public void setText (BitmapFont font, CharSequence str, int start, int end, Color color, float targetWidth, int halign,
 		boolean wrap, @Null String truncate) {
 
 		reset();
@@ -307,7 +310,8 @@ public class GlyphLayout implements Poolable {
 	}
 
 	/** @param truncate May be empty string. */
-	@NullUnmarked private void truncate (BitmapFontData fontData, GlyphRun run, float targetWidth, String truncate) {
+	@NullUnmarked
+	private void truncate (BitmapFontData fontData, GlyphRun run, float targetWidth, String truncate) {
 		int glyphCount = run.glyphs.size;
 
 		// Determine truncate string size.
@@ -363,7 +367,8 @@ public class GlyphLayout implements Poolable {
 
 	/** Breaks a run into two runs at the specified wrapIndex.
 	 * @return May be null if second run is all whitespace. */
-	@NullUnmarked private GlyphRun wrap (BitmapFontData fontData, GlyphRun first, int wrapIndex) {
+	@NullUnmarked
+	private GlyphRun wrap (BitmapFontData fontData, GlyphRun first, int wrapIndex) {
 		Array<Glyph> glyphs2 = first.glyphs; // Starts with all the glyphs.
 		int glyphCount = first.glyphs.size;
 		FloatArray xAdvances2 = first.xAdvances; // Starts with all the xadvances.

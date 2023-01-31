@@ -938,7 +938,8 @@ public class Encoder {
 		_rangeEncoder.FlushStream();
 	}
 
-	@NullUnmarked public void CodeOneBlock (long[] inSize, long[] outSize, boolean[] finished) throws IOException {
+	@NullUnmarked
+	public void CodeOneBlock (long[] inSize, long[] outSize, boolean[] finished) throws IOException {
 		inSize[0] = 0;
 		outSize[0] = 0;
 		finished[0] = true;
@@ -1209,7 +1210,8 @@ public class Encoder {
 		return true;
 	}
 
-	@NullUnmarked public boolean SetMatchFinder (int matchFinderIndex) {
+	@NullUnmarked
+	public boolean SetMatchFinder (int matchFinderIndex) {
 		if (matchFinderIndex < 0 || matchFinderIndex > 2) return false;
 		int matchFinderIndexPrev = _matchFinderType;
 		_matchFinderType = matchFinderIndex;

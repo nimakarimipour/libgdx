@@ -219,7 +219,8 @@ public class RemoteInput implements Runnable, Input {
 		this(DEFAULT_PORT, listener);
 	}
 
-	@NullUnmarked public RemoteInput (int port) {
+	@NullUnmarked
+	public RemoteInput (int port) {
 		this(port, null);
 	}
 
@@ -241,7 +242,8 @@ public class RemoteInput implements Runnable, Input {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void run () {
 		while (true) {
 			try {

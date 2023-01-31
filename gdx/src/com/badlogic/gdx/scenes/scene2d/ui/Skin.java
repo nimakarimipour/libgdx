@@ -168,7 +168,8 @@ public class Skin implements Disposable {
 
 	/** Returns a named resource of the specified type.
 	 * @return null if not found. */
-	@NullUnmarked public @Null <T> T optional (String name, Class<T> type) {
+	@NullUnmarked
+	public @Null <T> T optional (String name, Class<T> type) {
 		if (name == null) throw new IllegalArgumentException("name cannot be null.");
 		if (type == null) throw new IllegalArgumentException("type cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(type);
@@ -209,7 +210,8 @@ public class Skin implements Disposable {
 	}
 
 	/** @return an array with the {@link TextureRegion} that have an index != -1, or null if none are found. */
-	@NullUnmarked public @Null Array<TextureRegion> getRegions (String regionName) {
+	@NullUnmarked
+	public @Null Array<TextureRegion> getRegions (String regionName) {
 		Array<TextureRegion> regions = null;
 		int i = 0;
 		TextureRegion region = optional(regionName + "_" + (i++), TextureRegion.class);
@@ -334,7 +336,8 @@ public class Skin implements Disposable {
 
 	/** Returns the name of the specified style object, or null if it is not in the skin. This compares potentially every style
 	 * object in the skin of the same type as the specified style, which may be a somewhat expensive operation. */
-	@NullUnmarked public @Null String find (Object resource) {
+	@NullUnmarked
+	public @Null String find (Object resource) {
 		if (resource == null) throw new IllegalArgumentException("style cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(resource.getClass());
 		if (typeResources == null) return null;
@@ -457,7 +460,8 @@ public class Skin implements Disposable {
 		}
 	}
 
-	@NullUnmarked protected Json getJsonLoader (final FileHandle skinFile) {
+	@NullUnmarked
+	protected Json getJsonLoader (final FileHandle skinFile) {
 		final Skin skin = this;
 
 		final Json json = new Json() {
@@ -571,7 +575,8 @@ public class Skin implements Disposable {
 		});
 
 		json.setSerializer(Color.class, new ReadOnlySerializer<Color>() {
-			@NullUnmarked public Color read (Json json, JsonValue jsonData, Class type) {
+			@NullUnmarked
+			public Color read (Json json, JsonValue jsonData, Class type) {
 				if (jsonData.isString()) return get(jsonData.asString(), Color.class);
 				String hex = json.readValue("hex", String.class, (String)null, jsonData);
 				if (hex != null) return Color.valueOf(hex);
@@ -618,7 +623,8 @@ public class Skin implements Disposable {
 		TextField.TextFieldStyle.class, TextTooltip.TextTooltipStyle.class, Touchpad.TouchpadStyle.class, Tree.TreeStyle.class,
 		Window.WindowStyle.class};
 
-	@NullUnmarked static private @Null Method findMethod (Class type, String name) {
+	@NullUnmarked
+	static private @Null Method findMethod (Class type, String name) {
 		Method[] methods = ClassReflection.getMethods(type);
 		for (int i = 0, n = methods.length; i < n; i++) {
 			Method method = methods[i];

@@ -86,7 +86,8 @@ public class XmlReader {
 		}
 	}
 
-	@NullUnmarked public Element parse (char[] data, int offset, int length) {
+	@NullUnmarked
+	public Element parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length;
 
 		int s = 0;
@@ -438,7 +439,8 @@ public class XmlReader {
 		current.setAttribute(name, value);
 	}
 
-	@NullUnmarked protected @Null String entity (String name) {
+	@NullUnmarked
+	protected @Null String entity (String name) {
 		if (name.equals("lt")) return "<";
 		if (name.equals("gt")) return ">";
 		if (name.equals("amp")) return "&";
@@ -453,7 +455,8 @@ public class XmlReader {
 		current.setText(existing != null ? existing + text : text);
 	}
 
-	@NullUnmarked protected void close () {
+	@NullUnmarked
+	protected void close () {
 		root = elements.pop();
 		current = elements.size > 0 ? elements.peek() : null;
 	}
@@ -465,7 +468,8 @@ public class XmlReader {
 		@SuppressWarnings("NullAway.Init") private String text;
 		private Element parent;
 
-		@NullUnmarked public Element (String name, Element parent) {
+		@NullUnmarked
+		public Element (String name, Element parent) {
 			this.name = name;
 			this.parent = parent;
 		}
@@ -587,7 +591,8 @@ public class XmlReader {
 
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, does not recurse */
-		@NullUnmarked public @Null Element getChildByName (String name) {
+		@NullUnmarked
+		public @Null Element getChildByName (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);
@@ -603,7 +608,8 @@ public class XmlReader {
 
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, recurses */
-		@NullUnmarked public @Null Element getChildByNameRecursive (String name) {
+		@NullUnmarked
+		public @Null Element getChildByNameRecursive (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);
@@ -653,7 +659,8 @@ public class XmlReader {
 			return Float.parseFloat(getAttribute(name));
 		}
 
-		@NullUnmarked public float getFloatAttribute (String name, float defaultValue) {
+		@NullUnmarked
+		public float getFloatAttribute (String name, float defaultValue) {
 			String value = getAttribute(name, null);
 			if (value == null) return defaultValue;
 			return Float.parseFloat(value);
@@ -664,7 +671,8 @@ public class XmlReader {
 			return Integer.parseInt(getAttribute(name));
 		}
 
-		@NullUnmarked public int getIntAttribute (String name, int defaultValue) {
+		@NullUnmarked
+		public int getIntAttribute (String name, int defaultValue) {
 			String value = getAttribute(name, null);
 			if (value == null) return defaultValue;
 			return Integer.parseInt(value);
@@ -675,7 +683,8 @@ public class XmlReader {
 			return Boolean.parseBoolean(getAttribute(name));
 		}
 
-		@NullUnmarked public boolean getBooleanAttribute (String name, boolean defaultValue) {
+		@NullUnmarked
+		public boolean getBooleanAttribute (String name, boolean defaultValue) {
 			String value = getAttribute(name, null);
 			if (value == null) return defaultValue;
 			return Boolean.parseBoolean(value);
@@ -683,7 +692,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@NullUnmarked public String get (String name) {
+		@NullUnmarked
+		public String get (String name) {
 			String value = get(name, null);
 			if (value == null) throw new GdxRuntimeException("Element " + this.name + " doesn't have attribute or child: " + name);
 			return value;
@@ -705,7 +715,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@NullUnmarked public int getInt (String name) {
+		@NullUnmarked
+		public int getInt (String name) {
 			String value = get(name, null);
 			if (value == null) throw new GdxRuntimeException("Element " + this.name + " doesn't have attribute or child: " + name);
 			return Integer.parseInt(value);
@@ -713,7 +724,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@NullUnmarked public int getInt (String name, int defaultValue) {
+		@NullUnmarked
+		public int getInt (String name, int defaultValue) {
 			String value = get(name, null);
 			if (value == null) return defaultValue;
 			return Integer.parseInt(value);
@@ -721,7 +733,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@NullUnmarked public float getFloat (String name) {
+		@NullUnmarked
+		public float getFloat (String name) {
 			String value = get(name, null);
 			if (value == null) throw new GdxRuntimeException("Element " + this.name + " doesn't have attribute or child: " + name);
 			return Float.parseFloat(value);
@@ -729,7 +742,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@NullUnmarked public float getFloat (String name, float defaultValue) {
+		@NullUnmarked
+		public float getFloat (String name, float defaultValue) {
 			String value = get(name, null);
 			if (value == null) return defaultValue;
 			return Float.parseFloat(value);
@@ -737,7 +751,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@NullUnmarked public boolean getBoolean (String name) {
+		@NullUnmarked
+		public boolean getBoolean (String name) {
 			String value = get(name, null);
 			if (value == null) throw new GdxRuntimeException("Element " + this.name + " doesn't have attribute or child: " + name);
 			return Boolean.parseBoolean(value);
@@ -745,7 +760,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@NullUnmarked public boolean getBoolean (String name, boolean defaultValue) {
+		@NullUnmarked
+		public boolean getBoolean (String name, boolean defaultValue) {
 			String value = get(name, null);
 			if (value == null) return defaultValue;
 			return Boolean.parseBoolean(value);

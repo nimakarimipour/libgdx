@@ -38,7 +38,8 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 	public UnweightedMeshSpawnShapeValue () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void setMesh (Mesh mesh, Model model) {
 		super.setMesh(mesh, model);
 		vertexSize = mesh.getVertexSize() / 4;

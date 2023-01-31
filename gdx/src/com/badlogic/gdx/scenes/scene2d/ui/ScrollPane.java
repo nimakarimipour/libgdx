@@ -689,27 +689,31 @@ public class ScrollPane extends WidgetGroup {
 		throw new UnsupportedOperationException("Use ScrollPane#setActor.");
 	}
 
-	@NullUnmarked public boolean removeActor (Actor actor) {
+	@NullUnmarked
+	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
 		setActor(null);
 		return true;
 	}
 
-	@NullUnmarked public boolean removeActor (Actor actor, boolean unfocus) {
+	@NullUnmarked
+	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
 		this.actor = null;
 		return super.removeActor(actor, unfocus);
 	}
 
-	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked
+	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == this.actor) this.actor = null;
 		return actor;
 	}
 
-	@NullUnmarked public @Null Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
 		if (touchable && getTouchable() == Touchable.enabled && isVisible()) {
 			if (scrollX && touchScrollH && hScrollBounds.contains(x, y)) return this;
@@ -1077,10 +1081,12 @@ public class ScrollPane extends WidgetGroup {
 		@SuppressWarnings("NullAway.Init") public @Null Drawable hScroll, hScrollKnob;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable vScroll, vScrollKnob;
 
-		@NullUnmarked public ScrollPaneStyle () {
+		@NullUnmarked
+		public ScrollPaneStyle () {
 		}
 
-		@NullUnmarked public ScrollPaneStyle (@Null Drawable background, @Null Drawable hScroll, @Null Drawable hScrollKnob,
+		@NullUnmarked
+		public ScrollPaneStyle (@Null Drawable background, @Null Drawable hScroll, @Null Drawable hScrollKnob,
 			@Null Drawable vScroll, @Null Drawable vScrollKnob) {
 			this.background = background;
 			this.hScroll = hScroll;

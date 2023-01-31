@@ -61,7 +61,8 @@ public class ParallelAction extends Action {
 		addAction(action5);
 	}
 
-	@NullUnmarked public boolean act (float delta) {
+	@NullUnmarked
+	public boolean act (float delta) {
 		if (complete) return true;
 		complete = true;
 		Pool pool = getPool();
