@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -96,7 +97,7 @@ public class VertexArray implements VertexData {
 		((Buffer)byteBuffer).position(pos);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void bind (final ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -146,7 +147,7 @@ public class VertexArray implements VertexData {
 	/** Unbinds this VertexBufferObject.
 	 *
 	 * @param shader the shader */
-	@Override
+	@NullUnmarked @Override
 	public void unbind (ShaderProgram shader) {
 		unbind(shader, null);
 	}

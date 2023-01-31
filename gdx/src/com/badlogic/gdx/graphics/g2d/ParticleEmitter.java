@@ -27,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
+import com.badlogic.gdx.NullUnmarked;
 
 public class ParticleEmitter {
 	static private final int UPDATE_SCALE = 1 << 0;
@@ -58,25 +59,25 @@ public class ParticleEmitter {
 	private ScaledNumericValue spawnHeightValue = new ScaledNumericValue();
 	private SpawnShapeValue spawnShapeValue = new SpawnShapeValue();
 
-	private RangedNumericValue[] xSizeValues;
-	private RangedNumericValue[] ySizeValues;
-	private RangedNumericValue[] motionValues;
+	@SuppressWarnings("NullAway.Init") private RangedNumericValue[] xSizeValues;
+	@SuppressWarnings("NullAway.Init") private RangedNumericValue[] ySizeValues;
+	@SuppressWarnings("NullAway.Init") private RangedNumericValue[] motionValues;
 
 	private float accumulator;
 	private Array<Sprite> sprites;
 	private SpriteMode spriteMode = SpriteMode.single;
-	private Particle[] particles;
+	@SuppressWarnings("NullAway.Init") private Particle[] particles;
 	private int minParticleCount, maxParticleCount = 4;
 	private float x, y;
-	private String name;
+	@SuppressWarnings("NullAway.Init") private String name;
 	private Array<String> imagePaths;
 	private int activeCount;
-	private boolean[] active;
+	@SuppressWarnings("NullAway.Init") private boolean[] active;
 	private boolean firstUpdate;
 	private boolean flipX, flipY;
 	private int updateFlags;
 	private boolean allowCompletion;
-	private BoundingBox bounds;
+	@SuppressWarnings("NullAway.Init") private BoundingBox bounds;
 
 	private int emission, emissionDiff, emissionDelta;
 	private int lifeOffset, lifeOffsetDiff;
@@ -394,7 +395,7 @@ public class ParticleEmitter {
 		return particles;
 	}
 
-	private void activateParticle (int index) {
+	@NullUnmarked private void activateParticle (int index) {
 		Sprite sprite = null;
 		switch (spriteMode) {
 		case single:
@@ -674,7 +675,7 @@ public class ParticleEmitter {
 		this.y = y;
 	}
 
-	public void setSprites (Array<Sprite> sprites) {
+	@NullUnmarked public void setSprites (Array<Sprite> sprites) {
 		this.sprites = sprites;
 		if (sprites.size == 0) return;
 		for (int i = 0, n = particles.length; i < n; i++) {
@@ -1228,10 +1229,10 @@ public class ParticleEmitter {
 		protected float transparency, transparencyDiff;
 		protected float wind, windDiff;
 		protected float gravity, gravityDiff;
-		protected float[] tint;
+		@SuppressWarnings("NullAway.Init") protected float[] tint;
 		protected int frame;
 
-		public Particle (Sprite sprite) {
+		@NullUnmarked public Particle (Sprite sprite) {
 			super(sprite);
 		}
 	}

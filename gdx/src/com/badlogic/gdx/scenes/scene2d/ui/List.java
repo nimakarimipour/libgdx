@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
@@ -45,10 +46,10 @@ import com.badlogic.gdx.utils.Pools;
  * @author mzechner
  * @author Nathan Sweet */
 public class List<T> extends Widget implements Cullable {
-	ListStyle style;
+	@SuppressWarnings("NullAway.Init") ListStyle style;
 	final Array<T> items = new Array();
 	ArraySelection<T> selection = new ArraySelection(items);
-	private Rectangle cullingArea;
+	@SuppressWarnings("NullAway.Init") private Rectangle cullingArea;
 	private float prefWidth, prefHeight;
 	float itemHeight;
 	private int alignment = Align.left;
@@ -73,9 +74,9 @@ public class List<T> extends Widget implements Cullable {
 
 		addListener(keyListener = new InputListener() {
 			long typeTimeout;
-			String prefix;
+			@SuppressWarnings("NullAway.Init") String prefix;
 
-			public boolean keyDown (InputEvent event, int keycode) {
+			@NullUnmarked public boolean keyDown (InputEvent event, int keycode) {
 				if (items.isEmpty()) return false;
 				int index;
 				switch (keycode) {
@@ -196,7 +197,7 @@ public class List<T> extends Widget implements Cullable {
 		}
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		drawBackground(batch, parentAlpha);
@@ -310,17 +311,17 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** @return May be null. */
-	public T getOverItem () {
+	@NullUnmarked public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
-	public T getPressedItem () {
+	@NullUnmarked public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
 
 	/** @return null if not over an item. */
-	public @Null T getItemAt (float y) {
+	@NullUnmarked public @Null T getItemAt (float y) {
 		int index = getItemIndexAt(y);
 		if (index == -1) return null;
 		return items.get(index);
@@ -436,16 +437,16 @@ public class List<T> extends Widget implements Cullable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ListStyle {
-		public BitmapFont font;
+		@SuppressWarnings("NullAway.Init") public BitmapFont font;
 		public Color fontColorSelected = new Color(1, 1, 1, 1);
 		public Color fontColorUnselected = new Color(1, 1, 1, 1);
-		public Drawable selection;
-		public @Null Drawable down, over, background;
+		@SuppressWarnings("NullAway.Init") public Drawable selection;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable down, over, background;
 
-		public ListStyle () {
+		@NullUnmarked public ListStyle () {
 		}
 
-		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
+		@NullUnmarked public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
 			this.font = font;
 			this.fontColorSelected.set(fontColorSelected);
 			this.fontColorUnselected.set(fontColorUnselected);

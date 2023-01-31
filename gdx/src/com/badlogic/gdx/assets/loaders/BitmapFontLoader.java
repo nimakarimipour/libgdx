@@ -40,7 +40,7 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 		super(resolver);
 	}
 
-	BitmapFontData data;
+	@SuppressWarnings("NullAway.Init") BitmapFontData data;
 
 	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, BitmapFontParameter parameter) {
@@ -116,10 +116,10 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 
 		/** optional {@link BitmapFontData} to be used instead of loading the {@link Texture} directly. Use this if your font is
 		 * embedded in a {@link Skin}. **/
-		public BitmapFontData bitmapFontData = null;
+		@SuppressWarnings("NullAway") public BitmapFontData bitmapFontData = null;
 
 		/** The name of the {@link TextureAtlas} to load the {@link BitmapFont} itself from. Optional; if {@code null}, will look
 		 * for a separate image */
-		public String atlasName = null;
+		@SuppressWarnings("NullAway") public String atlasName = null;
 	}
 }

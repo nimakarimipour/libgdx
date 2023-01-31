@@ -92,7 +92,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 
 	protected Array<Texture> trackedTextures = new Array<Texture>();
 
-	protected AtlasResolver atlasResolver;
+	@SuppressWarnings("NullAway.Init") protected AtlasResolver atlasResolver;
 
 	public AtlasTmxMapLoader () {
 		super(new InternalFileHandleResolver());

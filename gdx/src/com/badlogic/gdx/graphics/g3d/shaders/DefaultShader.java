@@ -47,13 +47,14 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.NullUnmarked;
 
 public class DefaultShader extends BaseShader {
 	public static class Config {
 		/** The uber vertex shader to use, null to use the default vertex shader. */
-		public String vertexShader = null;
+		@SuppressWarnings("NullAway") public String vertexShader = null;
 		/** The uber fragment shader to use, null to use the default fragment shader. */
-		public String fragmentShader = null;
+		@SuppressWarnings("NullAway") public String fragmentShader = null;
 		/** The number of directional lights to use */
 		public int numDirectionalLights = 2;
 		/** The number of point lights to use */
@@ -388,7 +389,7 @@ public class DefaultShader extends BaseShader {
 		};
 	}
 
-	private static String defaultVertexShader = null;
+	@SuppressWarnings("NullAway") private static String defaultVertexShader = null;
 
 	public static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
@@ -396,7 +397,7 @@ public class DefaultShader extends BaseShader {
 		return defaultVertexShader;
 	}
 
-	private static String defaultFragmentShader = null;
+	@SuppressWarnings("NullAway") private static String defaultFragmentShader = null;
 
 	public static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null)
@@ -596,7 +597,7 @@ public class DefaultShader extends BaseShader {
 		u_environmentCubemap = environmentCubemap ? register(Inputs.environmentCubemap, Setters.environmentCubemap) : -1;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void init () {
 		final ShaderProgram program = this.program;
 		this.program = null;

@@ -17,7 +17,7 @@
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 public class ModelMeshPart {
-	public String id;
-	public short[] indices;
+	@SuppressWarnings("NullAway.Init") public String id;
+	@SuppressWarnings("NullAway.Init") public short[] indices;
 	public int primitiveType;
 }

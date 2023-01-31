@@ -56,6 +56,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import java.nio.Buffer;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A model represents a 3D assets. It stores a hierarchy of nodes. A node has a transform and optionally a graphical part in form
  * of a {@link MeshPart} and {@link Material}. Mesh parts reference subsets of vertices in one of the meshes of the model.
@@ -404,7 +405,7 @@ public class Model implements Disposable {
 	/** @param id The ID of the animation to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	public Animation getAnimation (final String id, boolean ignoreCase) {
+	@NullUnmarked public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
 		if (ignoreCase) {
@@ -426,7 +427,7 @@ public class Model implements Disposable {
 	/** @param id The ID of the material to fetch.
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	public Material getMaterial (final String id, boolean ignoreCase) {
+	@NullUnmarked public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;
 		if (ignoreCase) {

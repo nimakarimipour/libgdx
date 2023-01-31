@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder.VertexInfo;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Helper class with static methods to build patch shapes using {@link MeshPartBuilder}.
  * @author xoppa */
@@ -44,7 +45,7 @@ public class PatchShapeBuilder extends BaseShapeBuilder {
 	}
 
 	/** Build a patch shape. Requires GL_POINTS, GL_LINES or GL_TRIANGLES primitive type. */
-	public static void build (MeshPartBuilder builder, Vector3 corner00, Vector3 corner10, Vector3 corner11, Vector3 corner01,
+	@NullUnmarked public static void build (MeshPartBuilder builder, Vector3 corner00, Vector3 corner10, Vector3 corner11, Vector3 corner01,
 		Vector3 normal, int divisionsU, int divisionsV) {
 		build(builder, vertTmp1.set(corner00, normal, null, null).setUV(0f, 1f),
 			vertTmp2.set(corner10, normal, null, null).setUV(1f, 1f), vertTmp3.set(corner11, normal, null, null).setUV(1f, 0f),
@@ -52,7 +53,7 @@ public class PatchShapeBuilder extends BaseShapeBuilder {
 	}
 
 	/** Build a patch shape. Requires GL_POINTS, GL_LINES or GL_TRIANGLES primitive type. */
-	public static void build (MeshPartBuilder builder, float x00, float y00, float z00, float x10, float y10, float z10, float x11,
+	@NullUnmarked public static void build (MeshPartBuilder builder, float x00, float y00, float z00, float x10, float y10, float z10, float x11,
 		float y11, float z11, float x01, float y01, float z01, float normalX, float normalY, float normalZ, int divisionsU,
 		int divisionsV) {
 		build(builder, vertTmp1.set(null).setPos(x00, y00, z00).setNor(normalX, normalY, normalZ).setUV(0f, 1f),

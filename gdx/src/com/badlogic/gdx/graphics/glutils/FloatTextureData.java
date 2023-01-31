@@ -41,7 +41,7 @@ public class FloatTextureData implements TextureData {
 	boolean isGpuOnly;
 
 	boolean isPrepared = false;
-	FloatBuffer buffer;
+	@SuppressWarnings("NullAway.Init") FloatBuffer buffer;
 
 	public FloatTextureData (int w, int h, int internalFormat, int format, int type, boolean isGpuOnly) {
 		this.width = w;

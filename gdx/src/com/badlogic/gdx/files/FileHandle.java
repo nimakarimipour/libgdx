@@ -43,6 +43,7 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Represents a file or directory on the filesystem, classpath, Android app storage, or Android assets directory. FileHandles are
  * created via a {@link Files} instance.
@@ -54,8 +55,8 @@ import com.badlogic.gdx.utils.StreamUtils;
  * @author mzechner
  * @author Nathan Sweet */
 public class FileHandle {
-	protected File file;
-	protected FileType type;
+	@SuppressWarnings("NullAway.Init") protected File file;
+	@SuppressWarnings("NullAway.Init") protected FileType type;
 
 	protected FileHandle () {
 	}
@@ -193,14 +194,14 @@ public class FileHandle {
 
 	/** Reads the entire file into a string using the platform's default charset.
 	 * @throws GdxRuntimeException if the file handle represents a directory, doesn't exist, or could not be read. */
-	public String readString () {
+	@NullUnmarked public String readString () {
 		return readString(null);
 	}
 
 	/** Reads the entire file into a string using the specified charset.
 	 * @param charset If null the default charset is used.
 	 * @throws GdxRuntimeException if the file handle represents a directory, doesn't exist, or could not be read. */
-	public String readString (String charset) {
+	@NullUnmarked public String readString (String charset) {
 		StringBuilder output = new StringBuilder(estimateLength());
 		InputStreamReader reader = null;
 		try {
@@ -272,7 +273,7 @@ public class FileHandle {
 	/** Attempts to memory map this file. Android files must not be compressed.
 	 * @throws GdxRuntimeException if this file handle represents a directory, doesn't exist, or could not be read, or memory
 	 *            mapping fails, or is a {@link FileType#Classpath} file. */
-	public ByteBuffer map (FileChannel.MapMode mode) {
+	@NullUnmarked public ByteBuffer map (FileChannel.MapMode mode) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot map a classpath file: " + this);
 		RandomAccessFile raf = null;
 		try {
@@ -320,7 +321,7 @@ public class FileHandle {
 	 * @param append If false, this file will be overwritten if it exists, otherwise it will be appended.
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
-	public void write (InputStream input, boolean append) {
+	@NullUnmarked public void write (InputStream input, boolean append) {
 		OutputStream output = null;
 		try {
 			output = write(append);
@@ -338,7 +339,7 @@ public class FileHandle {
 	 * @param append If false, this file will be overwritten if it exists, otherwise it will be appended.
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
-	public Writer writer (boolean append) {
+	@NullUnmarked public Writer writer (boolean append) {
 		return writer(append, null);
 	}
 
@@ -368,7 +369,7 @@ public class FileHandle {
 	 * @param append If false, this file will be overwritten if it exists, otherwise it will be appended.
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
-	public void writeString (String string, boolean append) {
+	@NullUnmarked public void writeString (String string, boolean append) {
 		writeString(string, append, null);
 	}
 
@@ -377,7 +378,7 @@ public class FileHandle {
 	 * @param charset May be null to use the default charset.
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
-	public void writeString (String string, boolean append, String charset) {
+	@NullUnmarked public void writeString (String string, boolean append, String charset) {
 		Writer writer = null;
 		try {
 			writer = writer(append, charset);

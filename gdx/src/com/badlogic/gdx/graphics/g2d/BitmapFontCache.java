@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pools;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Caches glyph geometry for a BitmapFont, providing a fast way to render static text. This saves needing to compute the glyph
  * geometry each frame.
@@ -51,7 +52,7 @@ public class BitmapFontCache {
 	private int[] idx;
 	/** For each page, an array with a value for each glyph from that page, where the value is the index of the character in the
 	 * full text being cached. */
-	private IntArray[] pageGlyphIndices;
+	@SuppressWarnings("NullAway.Init") private IntArray[] pageGlyphIndices;
 	/** Used internally to ensure a correct capacity for multi-page font vertex data. */
 	private int[] tempGlyphCount;
 
@@ -488,19 +489,19 @@ public class BitmapFontCache {
 
 	/** Adds glyphs for the specified text.
 	 * @see #addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	public GlyphLayout addText (CharSequence str, float x, float y) {
+	@NullUnmarked public GlyphLayout addText (CharSequence str, float x, float y) {
 		return addText(str, x, y, 0, str.length(), 0, Align.left, false, null);
 	}
 
 	/** Adds glyphs for the specified text.
 	 * @see #addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	public GlyphLayout addText (CharSequence str, float x, float y, float targetWidth, int halign, boolean wrap) {
+	@NullUnmarked public GlyphLayout addText (CharSequence str, float x, float y, float targetWidth, int halign, boolean wrap) {
 		return addText(str, x, y, 0, str.length(), targetWidth, halign, wrap, null);
 	}
 
 	/** Adds glyphs for the specified text.
 	 * @see #addText(CharSequence, float, float, int, int, float, int, boolean, String) */
-	public GlyphLayout addText (CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
+	@NullUnmarked public GlyphLayout addText (CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
 		boolean wrap) {
 		return addText(str, x, y, start, end, targetWidth, halign, wrap, null);
 	}

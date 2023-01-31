@@ -33,7 +33,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 	private final TooltipManager manager;
 	final Container<T> container;
 	boolean instant, always, touchIndependent;
-	Actor targetActor;
+	@SuppressWarnings("NullAway.Init") Actor targetActor;
 
 	/** @param contents May be null. */
 	public Tooltip (@Null T contents) {

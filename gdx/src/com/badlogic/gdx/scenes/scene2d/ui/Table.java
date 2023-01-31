@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A group that sizes and positions children using table constraints.
  * <p>
@@ -55,7 +56,7 @@ public class Table extends WidgetGroup {
 			return new Cell();
 		}
 	};
-	static private float[] columnWeightedWidth, rowWeightedHeight;
+	@SuppressWarnings("NullAway.Init") static private float[] columnWeightedWidth, rowWeightedHeight;
 
 	private int columns, rows;
 	private boolean implicitEndRow;
@@ -63,28 +64,28 @@ public class Table extends WidgetGroup {
 	private final Array<Cell> cells = new Array(4);
 	private final Cell cellDefaults;
 	private final Array<Cell> columnDefaults = new Array(2);
-	private Cell rowDefaults;
+	@SuppressWarnings("NullAway.Init") private Cell rowDefaults;
 
 	private boolean sizeInvalid = true;
-	private float[] columnMinWidth, rowMinHeight;
-	private float[] columnPrefWidth, rowPrefHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnMinWidth, rowMinHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnPrefWidth, rowPrefHeight;
 	private float tableMinWidth, tableMinHeight;
 	private float tablePrefWidth, tablePrefHeight;
-	private float[] columnWidth, rowHeight;
-	private float[] expandWidth, expandHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnWidth, rowHeight;
+	@SuppressWarnings("NullAway.Init") private float[] expandWidth, expandHeight;
 
 	Value padTop = backgroundTop, padLeft = backgroundLeft, padBottom = backgroundBottom, padRight = backgroundRight;
 	int align = Align.center;
 
 	Debug debug = Debug.none;
-	Array<DebugRect> debugRects;
+	@SuppressWarnings("NullAway.Init") Array<DebugRect> debugRects;
 
-	@Null Drawable background;
+	@SuppressWarnings("NullAway.Init") @Null Drawable background;
 	private boolean clip;
 	private @Null Skin skin;
 	boolean round = true;
 
-	public Table () {
+	@NullUnmarked public Table () {
 		this(null);
 	}
 
@@ -172,7 +173,7 @@ public class Table extends WidgetGroup {
 		return background;
 	}
 
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
@@ -295,7 +296,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Adds a cell without an actor. */
-	public Cell add () {
+	@NullUnmarked public Cell add () {
 		return add((Actor)null);
 	}
 
@@ -314,14 +315,14 @@ public class Table extends WidgetGroup {
 		return removeActor(actor, true);
 	}
 
-	public boolean removeActor (Actor actor, boolean unfocus) {
+	@NullUnmarked public boolean removeActor (Actor actor, boolean unfocus) {
 		if (!super.removeActor(actor, unfocus)) return false;
 		Cell cell = getCell(actor);
 		if (cell != null) cell.actor = null;
 		return true;
 	}
 
-	public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		Cell cell = getCell(actor);
 		if (cell != null) cell.actor = null;
@@ -329,7 +330,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Removes all actors and cells from the table. */
-	public void clearChildren (boolean unfocus) {
+	@NullUnmarked public void clearChildren (boolean unfocus) {
 		Object[] cells = this.cells.items;
 		for (int i = this.cells.size - 1; i >= 0; i--) {
 			Cell cell = (Cell)cells[i];
@@ -397,7 +398,7 @@ public class Table extends WidgetGroup {
 
 	/** Gets the cell values that will be used as the defaults for all cells in the specified column. Columns are indexed starting
 	 * at 0. */
-	public Cell columnDefaults (int column) {
+	@NullUnmarked public Cell columnDefaults (int column) {
 		Cell cell = columnDefaults.size > column ? columnDefaults.get(column) : null;
 		if (cell == null) {
 			cell = obtainCell();
@@ -413,7 +414,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Returns the cell for the specified actor in this table, or null. */
-	public @Null <T extends Actor> Cell<T> getCell (T actor) {
+	@NullUnmarked public @Null <T extends Actor> Cell<T> getCell (T actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		Object[] cells = this.cells.items;
 		for (int i = 0, n = this.cells.size; i < n; i++) {
@@ -1271,7 +1272,7 @@ public class Table extends WidgetGroup {
 	/** @author Nathan Sweet */
 	static public class DebugRect extends Rectangle {
 		static Pool<DebugRect> pool = Pools.get(DebugRect.class);
-		Color color;
+		@SuppressWarnings("NullAway.Init") Color color;
 	}
 
 	/** @author Nathan Sweet */

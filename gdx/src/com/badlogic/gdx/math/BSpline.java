@@ -166,14 +166,14 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 		throw new IllegalArgumentException();
 	}
 
-	public T[] controlPoints;
-	public Array<T> knots;
+	@SuppressWarnings("NullAway.Init") public T[] controlPoints;
+	@SuppressWarnings("NullAway.Init") public Array<T> knots;
 	public int degree;
 	public boolean continuous;
 	public int spanCount;
-	private T tmp;
-	private T tmp2;
-	private T tmp3;
+	@SuppressWarnings("NullAway.Init") private T tmp;
+	@SuppressWarnings("NullAway.Init") private T tmp2;
+	@SuppressWarnings("NullAway.Init") private T tmp3;
 
 	public BSpline () {
 	}

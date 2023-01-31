@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Base class for applying one or more {@link Animation}s to a {@link ModelInstance}. This class only applies the actual
  * {@link Node} transformations, it does not manage animations or keep track of animation states. See {@link AnimationController}
@@ -133,7 +134,7 @@ public class BaseAnimationController {
 	}
 
 	/** Apply a single animation to the {@link ModelInstance} and update the it to reflect the changes. */
-	protected void applyAnimation (final Animation animation, final float time) {
+	@NullUnmarked protected void applyAnimation (final Animation animation, final float time) {
 		if (applying) throw new GdxRuntimeException("Call end() first");
 		applyAnimation(null, null, 1.f, animation, time);
 		target.calculateTransforms();
@@ -250,7 +251,7 @@ public class BaseAnimationController {
 		transform.toMatrix4(node.localTransform);
 	}
 
-	private final static void applyNodeAnimationBlending (final NodeAnimation nodeAnim, final ObjectMap<Node, Transform> out,
+	@NullUnmarked private final static void applyNodeAnimationBlending (final NodeAnimation nodeAnim, final ObjectMap<Node, Transform> out,
 		final Pool<Transform> pool, final float alpha, final float time) {
 
 		final Node node = nodeAnim.node;

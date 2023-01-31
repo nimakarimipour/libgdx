@@ -32,11 +32,12 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
  * @author Xoppa */
 public class Cubemap extends GLTexture {
-	private static AssetManager assetManager;
+	@SuppressWarnings("NullAway.Init") private static AssetManager assetManager;
 	final static Map<Application, Array<Cubemap>> managedCubemaps = new HashMap<Application, Array<Cubemap>>();
 
 	/** Enum to identify each side of a Cubemap */
@@ -116,7 +117,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Construct a Cubemap with the specified {@link Pixmap}s for the sides, optionally generating mipmaps. */
-	public Cubemap (Pixmap positiveX, Pixmap negativeX, Pixmap positiveY, Pixmap negativeY, Pixmap positiveZ, Pixmap negativeZ,
+	@NullUnmarked public Cubemap (Pixmap positiveX, Pixmap negativeX, Pixmap positiveY, Pixmap negativeY, Pixmap positiveZ, Pixmap negativeZ,
 		boolean useMipMaps) {
 		this(positiveX == null ? null : new PixmapTextureData(positiveX, null, useMipMaps, false),
 			negativeX == null ? null : new PixmapTextureData(negativeX, null, useMipMaps, false),
@@ -127,7 +128,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Construct a Cubemap with {@link Pixmap}s for each side of the specified size. */
-	public Cubemap (int width, int height, int depth, Format format) {
+	@NullUnmarked public Cubemap (int width, int height, int depth, Format format) {
 		this(new PixmapTextureData(new Pixmap(depth, height, format), null, false, true),
 			new PixmapTextureData(new Pixmap(depth, height, format), null, false, true),
 			new PixmapTextureData(new Pixmap(width, depth, format), null, false, true),
@@ -287,7 +288,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** @return the number of managed cubemaps currently loaded */
-	public static int getNumManagedCubemaps () {
+	@NullUnmarked public static int getNumManagedCubemaps () {
 		return managedCubemaps.get(Gdx.app).size;
 	}
 

@@ -37,6 +37,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Draws 2D images, optimized for geometry that does not change. Sprites and/or textures are cached and given an ID, which can
  * later be used for drawing. The size, color, and texture region for each cached image cannot be modified. This information is
@@ -78,14 +79,14 @@ public class SpriteCache implements Disposable {
 	private final Matrix4 combinedMatrix = new Matrix4();
 	private final ShaderProgram shader;
 
-	private Cache currentCache;
+	@SuppressWarnings("NullAway.Init") private Cache currentCache;
 	private final Array<Texture> textures = new Array(8);
 	private final IntArray counts = new IntArray(8);
 
 	private final Color color = new Color(1, 1, 1, 1);
 	private float colorPacked = Color.WHITE_FLOAT_BITS;
 
-	private ShaderProgram customShader = null;
+	@SuppressWarnings("NullAway") private ShaderProgram customShader = null;
 
 	/** Number of render calls since the last {@link #begin()}. **/
 	public int renderCalls = 0;
@@ -193,7 +194,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Ends the definition of a cache, returning the cache ID to be used with {@link #draw(int)}. */
-	public int endCache () {
+	@NullUnmarked public int endCache () {
 		if (currentCache == null) throw new IllegalStateException("beginCache must be called before endCache.");
 		Cache cache = currentCache;
 		int cacheCount = mesh.getVerticesBuffer().position() - cache.offset;
@@ -967,10 +968,10 @@ public class SpriteCache implements Disposable {
 		final int offset;
 		int maxCount;
 		int textureCount;
-		Texture[] textures;
-		int[] counts;
+		@SuppressWarnings("NullAway.Init") Texture[] textures;
+		@SuppressWarnings("NullAway.Init") int[] counts;
 
-		public Cache (int id, int offset) {
+		@NullUnmarked public Cache (int id, int offset) {
 			this.id = id;
 			this.offset = offset;
 		}

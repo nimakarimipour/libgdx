@@ -43,7 +43,7 @@ public class Sprite extends TextureRegion {
 	private float rotation;
 	private float scaleX = 1, scaleY = 1;
 	private boolean dirty = true;
-	private Rectangle bounds;
+	@SuppressWarnings("NullAway.Init") private Rectangle bounds;
 
 	/** Creates an uninitialized sprite. The sprite will need a texture region and bounds set before it can be drawn. */
 	public Sprite () {

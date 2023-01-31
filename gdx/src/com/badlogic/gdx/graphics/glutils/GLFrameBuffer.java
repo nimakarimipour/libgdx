@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -80,7 +81,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	/** if multiple texture attachments are present **/
 	protected boolean isMRT;
 
-	protected GLFrameBufferBuilder<? extends GLFrameBuffer<T>> bufferBuilder;
+	@SuppressWarnings("NullAway.Init") protected GLFrameBufferBuilder<? extends GLFrameBuffer<T>> bufferBuilder;
 
 	GLFrameBuffer () {
 	}
@@ -445,15 +446,15 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 
 		protected Array<FrameBufferTextureAttachmentSpec> textureAttachmentSpecs = new Array<FrameBufferTextureAttachmentSpec>();
 
-		protected FrameBufferRenderBufferAttachmentSpec stencilRenderBufferSpec;
-		protected FrameBufferRenderBufferAttachmentSpec depthRenderBufferSpec;
-		protected FrameBufferRenderBufferAttachmentSpec packedStencilDepthRenderBufferSpec;
+		@SuppressWarnings("NullAway.Init") protected FrameBufferRenderBufferAttachmentSpec stencilRenderBufferSpec;
+		@SuppressWarnings("NullAway.Init") protected FrameBufferRenderBufferAttachmentSpec depthRenderBufferSpec;
+		@SuppressWarnings("NullAway.Init") protected FrameBufferRenderBufferAttachmentSpec packedStencilDepthRenderBufferSpec;
 
 		protected boolean hasStencilRenderBuffer;
 		protected boolean hasDepthRenderBuffer;
 		protected boolean hasPackedStencilDepthRenderBuffer;
 
-		public GLFrameBufferBuilder (int width, int height) {
+		@NullUnmarked public GLFrameBufferBuilder (int width, int height) {
 			this.width = width;
 			this.height = height;
 		}

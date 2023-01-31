@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link AssetLoader} for {@link Texture} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link TextureParameter} to
@@ -34,9 +35,9 @@ import com.badlogic.gdx.utils.Array;
  * @author mzechner */
 public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoader.TextureParameter> {
 	static public class TextureLoaderInfo {
-		String filename;
-		TextureData data;
-		Texture texture;
+		@SuppressWarnings("NullAway.Init") String filename;
+		@SuppressWarnings("NullAway.Init") TextureData data;
+		@SuppressWarnings("NullAway.Init") Texture texture;
 	};
 
 	TextureLoaderInfo info = new TextureLoaderInfo();
@@ -45,7 +46,7 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		super(resolver);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, TextureParameter parameter) {
 		info.filename = fileName;
 		if (parameter == null || parameter.textureData == null) {
@@ -67,7 +68,7 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		if (!info.data.isPrepared()) info.data.prepare();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public Texture loadSync (AssetManager manager, String fileName, FileHandle file, TextureParameter parameter) {
 		if (info == null) return null;
 		Texture texture = info.texture;
@@ -83,20 +84,20 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		return texture;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, TextureParameter parameter) {
 		return null;
 	}
 
 	static public class TextureParameter extends AssetLoaderParameters<Texture> {
 		/** the format of the final Texture. Uses the source images format if null **/
-		public Format format = null;
+		@SuppressWarnings("NullAway") public Format format = null;
 		/** whether to generate mipmaps **/
 		public boolean genMipMaps = false;
 		/** The texture to put the {@link TextureData} in, optional. **/
-		public Texture texture = null;
+		@SuppressWarnings("NullAway") public Texture texture = null;
 		/** TextureData for textures created on the fly, optional. When set, all format and genMipMaps are ignored */
-		public TextureData textureData = null;
+		@SuppressWarnings("NullAway") public TextureData textureData = null;
 		public TextureFilter minFilter = TextureFilter.Nearest;
 		public TextureFilter magFilter = TextureFilter.Nearest;
 		public TextureWrap wrapU = TextureWrap.ClampToEdge;

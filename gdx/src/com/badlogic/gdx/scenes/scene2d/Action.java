@@ -21,17 +21,18 @@ import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Actions attach to an {@link Actor} and perform some task, often over time.
  * @author Nathan Sweet */
 abstract public class Action implements Poolable {
 	/** The actor this action is attached to, or null if it is not attached. */
-	protected Actor actor;
+	@SuppressWarnings("NullAway.Init") protected Actor actor;
 
 	/** The actor this action targets, or null if a target has not been set. */
-	protected Actor target;
+	@SuppressWarnings("NullAway.Init") protected Actor target;
 
-	private @Null Pool pool;
+	@SuppressWarnings("NullAway.Init") private @Null Pool pool;
 
 	/** Updates the action based on time. Typically this is called each frame by {@link Actor#act(float)}.
 	 * @param delta Time in seconds since the last frame.
@@ -53,7 +54,7 @@ abstract public class Action implements Poolable {
 	 * This method is not typically a good place for an action subclass to query the actor's state because the action may not be
 	 * executed for some time, eg it may be {@link DelayAction delayed}. The actor's state is best queried in the first call to
 	 * {@link #act(float)}. For a {@link TemporalAction}, use TemporalAction#begin(). */
-	public void setActor (Actor actor) {
+	@NullUnmarked public void setActor (Actor actor) {
 		this.actor = actor;
 		if (target == null) setTarget(actor);
 		if (actor == null) {
@@ -86,7 +87,7 @@ abstract public class Action implements Poolable {
 	 * The default implementation calls {@link #restart()}.
 	 * <p>
 	 * If a subclass has optional state, it must override this method, call super, and reset the optional state. */
-	public void reset () {
+	@NullUnmarked public void reset () {
 		actor = null;
 		target = null;
 		pool = null;

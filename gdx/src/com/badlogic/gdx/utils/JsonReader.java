@@ -27,6 +27,7 @@ import java.io.Reader;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonValue.ValueType;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Lightweight JSON parser.<br>
  * <br>
@@ -85,7 +86,7 @@ public class JsonReader implements BaseJsonReader {
 		}
 	}
 
-	public JsonValue parse (char[] data, int offset, int length) {
+	@NullUnmarked public JsonValue parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length, eof = pe, top = 0;
 		int[] stack = new int[4];
 
@@ -661,7 +662,7 @@ public class JsonReader implements BaseJsonReader {
 
 	private final Array<JsonValue> elements = new Array(8);
 	private final Array<JsonValue> lastChild = new Array(8);
-	private JsonValue root, current;
+	@SuppressWarnings("NullAway.Init") private JsonValue root, current;
 
 	/** @param name May be null. */
 	private void addChild (@Null String name, JsonValue child) {
@@ -700,7 +701,7 @@ public class JsonReader implements BaseJsonReader {
 		current = value;
 	}
 
-	protected void pop () {
+	@NullUnmarked protected void pop () {
 		root = elements.pop();
 		if (current.size > 0) lastChild.pop();
 		current = elements.size > 0 ? elements.peek() : null;

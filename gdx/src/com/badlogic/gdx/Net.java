@@ -33,6 +33,7 @@ import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Provides methods to perform networking operations, such as simple HTTP get and post requests, and TCP server/client socket
  * communication.
@@ -162,20 +163,20 @@ public interface Net {
 	 */
 	public static class HttpRequest implements Poolable {
 
-		private String httpMethod;
-		private String url;
+		@SuppressWarnings("NullAway.Init") private String httpMethod;
+		@SuppressWarnings("NullAway.Init") private String url;
 		private Map<String, String> headers;
 		private int timeOut = 0;
 
-		private String content;
-		private InputStream contentStream;
+		@SuppressWarnings("NullAway.Init") private String content;
+		@SuppressWarnings("NullAway.Init") private InputStream contentStream;
 		private long contentLength;
 
 		private boolean followRedirects = true;
 
 		private boolean includeCredentials = false;
 
-		public HttpRequest () {
+		@NullUnmarked public HttpRequest () {
 			this.headers = new HashMap<String, String>();
 		}
 
@@ -290,7 +291,7 @@ public interface Net {
 			return includeCredentials;
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void reset () {
 			httpMethod = null;
 			url = null;

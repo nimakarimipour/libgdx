@@ -15,11 +15,12 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Indicates an error during serialization due to misconfiguration or during deserialization due to invalid input data.
  * @author Nathan Sweet */
 public class SerializationException extends RuntimeException {
-	private StringBuilder trace;
+	@SuppressWarnings("NullAway.Init") private StringBuilder trace;
 
 	public SerializationException () {
 		super();
@@ -49,7 +50,7 @@ public class SerializationException extends RuntimeException {
 		return causedBy(cause, type);
 	}
 
-	public String getMessage () {
+	@NullUnmarked public String getMessage () {
 		if (trace == null) return super.getMessage();
 		StringBuilder sb = new StringBuilder(512);
 		sb.append(super.getMessage());

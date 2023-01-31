@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A button with a child {@link Image} and {@link Label}.
  * @see ImageButton
@@ -65,7 +66,7 @@ public class ImageTextButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
-	protected Image newImage () {
+	@NullUnmarked protected Image newImage () {
 		return new Image((Drawable)null, Scaling.fit);
 	}
 
@@ -192,13 +193,13 @@ public class ImageTextButton extends Button {
 	/** The style for an image text button, see {@link ImageTextButton}.
 	 * @author Nathan Sweet */
 	static public class ImageTextButtonStyle extends TextButtonStyle {
-		public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
-		public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
-		public ImageTextButtonStyle () {
+		@NullUnmarked public ImageTextButtonStyle () {
 		}
 
-		public ImageTextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, BitmapFont font) {
+		@NullUnmarked public ImageTextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, BitmapFont font) {
 			super(up, down, checked, font);
 		}
 
@@ -214,7 +215,7 @@ public class ImageTextButton extends Button {
 			imageCheckedOver = style.imageCheckedOver;
 		}
 
-		public ImageTextButtonStyle (TextButtonStyle style) {
+		@NullUnmarked public ImageTextButtonStyle (TextButtonStyle style) {
 			super(style);
 		}
 	}

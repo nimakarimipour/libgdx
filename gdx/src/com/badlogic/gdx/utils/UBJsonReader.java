@@ -20,6 +20,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Lightweight UBJSON parser.<br>
  * <br>
@@ -31,7 +32,7 @@ public class UBJsonReader implements BaseJsonReader {
 
 	/** Parses the UBJSON from the given stream. <br>
 	 * For best performance you should provide buffered streams to this method! */
-	@Override
+	@NullUnmarked @Override
 	public JsonValue parse (InputStream input) {
 		DataInputStream din = null;
 		try {

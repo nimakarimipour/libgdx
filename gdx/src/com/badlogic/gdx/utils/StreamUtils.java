@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Provides utility methods to copy streams. */
 public final class StreamUtils {
@@ -95,12 +96,12 @@ public final class StreamUtils {
 
 	/** Calls {@link #copyStreamToString(InputStream, int, String)} using the input's {@link InputStream#available() available}
 	 * size and the platform's default charset. */
-	public static String copyStreamToString (InputStream input) throws IOException {
+	@NullUnmarked public static String copyStreamToString (InputStream input) throws IOException {
 		return copyStreamToString(input, input.available(), null);
 	}
 
 	/** Calls {@link #copyStreamToString(InputStream, int, String)} using the platform's default charset. */
-	public static String copyStreamToString (InputStream input, int estimatedSize) throws IOException {
+	@NullUnmarked public static String copyStreamToString (InputStream input, int estimatedSize) throws IOException {
 		return copyStreamToString(input, estimatedSize, null);
 	}
 

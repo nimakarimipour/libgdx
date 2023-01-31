@@ -17,6 +17,7 @@
 package com.badlogic.gdx.assets;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Describes an asset to be loaded by its filename, type and {@link AssetLoaderParameters}. Instances of this are used in
  * {@link AssetLoadingTask} to load the actual asset.
@@ -26,14 +27,14 @@ public class AssetDescriptor<T> {
 	public final Class<T> type;
 	public final AssetLoaderParameters params;
 	/** The resolved file. May be null if the fileName has not been resolved yet. */
-	public FileHandle file;
+	@SuppressWarnings("NullAway.Init") public FileHandle file;
 
-	public AssetDescriptor (String fileName, Class<T> assetType) {
+	@NullUnmarked public AssetDescriptor (String fileName, Class<T> assetType) {
 		this(fileName, assetType, null);
 	}
 
 	/** Creates an AssetDescriptor with an already resolved name. */
-	public AssetDescriptor (FileHandle file, Class<T> assetType) {
+	@NullUnmarked public AssetDescriptor (FileHandle file, Class<T> assetType) {
 		this(file, assetType, null);
 	}
 

@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Ordered list of {@link MapLayer} instances owned by a {@link Map} */
 public class MapLayers implements Iterable<MapLayer> {
@@ -33,7 +34,7 @@ public class MapLayers implements Iterable<MapLayer> {
 
 	/** @param name
 	 * @return the first layer having the specified name, if one exists, otherwise null */
-	public MapLayer get (String name) {
+	@NullUnmarked public MapLayer get (String name) {
 		for (int i = 0, n = layers.size; i < n; i++) {
 			MapLayer layer = layers.get(i);
 			if (name.equals(layer.getName())) {

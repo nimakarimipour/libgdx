@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.Texture;
  * @author mzechner
  * @author Nathan Sweet */
 public class TextureRegion {
-	Texture texture;
+	@SuppressWarnings("NullAway.Init") Texture texture;
 	float u, v;
 	float u2, v2;
 	int regionWidth, regionHeight;

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value.Fixed;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A cell for a {@link Table}.
  * @author Nathan Sweet */
@@ -17,25 +18,25 @@ public class Cell<T extends Actor> implements Poolable {
 	static private final Integer centeri = onei, topi = Align.top, bottomi = Align.bottom, lefti = Align.left,
 		righti = Align.right;
 
-	static private Files files;
-	static private Cell defaults;
+	@SuppressWarnings("NullAway.Init") static private Files files;
+	@SuppressWarnings("NullAway.Init") static private Cell defaults;
 
-	Value minWidth, minHeight;
-	Value prefWidth, prefHeight;
-	Value maxWidth, maxHeight;
-	Value spaceTop, spaceLeft, spaceBottom, spaceRight;
-	Value padTop, padLeft, padBottom, padRight;
-	Float fillX, fillY;
-	Integer align;
-	Integer expandX, expandY;
-	Integer colspan;
-	Boolean uniformX, uniformY;
+	@SuppressWarnings("NullAway.Init") Value minWidth, minHeight;
+	@SuppressWarnings("NullAway.Init") Value prefWidth, prefHeight;
+	@SuppressWarnings("NullAway.Init") Value maxWidth, maxHeight;
+	@SuppressWarnings("NullAway.Init") Value spaceTop, spaceLeft, spaceBottom, spaceRight;
+	@SuppressWarnings("NullAway.Init") Value padTop, padLeft, padBottom, padRight;
+	@SuppressWarnings("NullAway.Init") Float fillX, fillY;
+	@SuppressWarnings("NullAway.Init") Integer align;
+	@SuppressWarnings("NullAway.Init") Integer expandX, expandY;
+	@SuppressWarnings("NullAway.Init") Integer colspan;
+	@SuppressWarnings("NullAway.Init") Boolean uniformX, uniformY;
 
-	@Null Actor actor;
+	@SuppressWarnings("NullAway.Init") @Null Actor actor;
 	float actorX, actorY;
 	float actorWidth, actorHeight;
 
-	private Table table;
+	@SuppressWarnings("NullAway.Init") private Table table;
 	boolean endRow;
 	int column, row;
 	int cellAboveIndex;
@@ -62,7 +63,7 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Removes the current actor for the cell, if any. */
-	public Cell<T> clearActor () {
+	@NullUnmarked public Cell<T> clearActor () {
 		setActor(null);
 		return this;
 	}
@@ -897,7 +898,7 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Sets all constraint fields to null. */
-	void clear () {
+	@NullUnmarked void clear () {
 		minWidth = null;
 		minHeight = null;
 		prefWidth = null;
@@ -923,7 +924,7 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Reset state so the cell can be reused, setting all constraints to their {@link #defaults() default} values. */
-	public void reset () {
+	@NullUnmarked public void reset () {
 		actor = null;
 		table = null;
 		endRow = false;
@@ -988,7 +989,7 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Returns the defaults to use for all cells. This can be used to avoid needing to set the same defaults for every table (eg,
 	 * for spacing). */
-	static public Cell defaults () {
+	@NullUnmarked static public Cell defaults () {
 		if (files == null || files != Gdx.files) {
 			files = Gdx.files;
 			defaults = new Cell();

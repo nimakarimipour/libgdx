@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.glutils.ETC1.ETC1Data;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A KTXTextureData holds the data from a KTX (or zipped KTX file, aka ZKTX). That is to say an OpenGL ready texture data. The
  * KTX file format is just a thin wrapper around OpenGL textures and therefore is compatible with most OpenGL texture capabilities
@@ -50,7 +51,7 @@ public class KTXTextureData implements TextureData, CubemapData {
 	private int imagePos;
 
 	// KTX image data (only available after preparing and before consuming)
-	private ByteBuffer compressedData;
+	@SuppressWarnings("NullAway.Init") private ByteBuffer compressedData;
 
 	// Whether to generate mipmaps if they are not included in the file
 	private boolean useMipMaps;
@@ -70,7 +71,7 @@ public class KTXTextureData implements TextureData, CubemapData {
 		return compressedData != null;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void prepare () {
 		if (compressedData != null) throw new GdxRuntimeException("Already prepared");
 		if (file == null) throw new GdxRuntimeException("Need a file to load from");
@@ -282,7 +283,7 @@ public class KTXTextureData implements TextureData, CubemapData {
 		disposePreparedData();
 	}
 
-	public void disposePreparedData () {
+	@NullUnmarked public void disposePreparedData () {
 		if (compressedData != null) BufferUtils.disposeUnsafeByteBuffer(compressedData);
 		compressedData = null;
 	}
@@ -319,7 +320,7 @@ public class KTXTextureData implements TextureData, CubemapData {
 		return glInternalFormat;
 	}
 
-	public ByteBuffer getData (int requestedLevel, int requestedFace) {
+	@NullUnmarked public ByteBuffer getData (int requestedLevel, int requestedFace) {
 		int pos = imagePos;
 		for (int level = 0; level < numberOfMipmapLevels; level++) {
 			int faceLodSize = compressedData.getInt(pos);

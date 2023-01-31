@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A container that contains two widgets and is divided either horizontally or vertically. The user may resize the widgets. The
  * child widgets are always sized to fill their side of the SplitPane.
@@ -44,8 +45,8 @@ import com.badlogic.gdx.utils.Null;
  * @author mzechner
  * @author Nathan Sweet */
 public class SplitPane extends WidgetGroup {
-	SplitPaneStyle style;
-	private @Null Actor firstWidget, secondWidget;
+	@SuppressWarnings("NullAway.Init") SplitPaneStyle style;
+	@SuppressWarnings("NullAway.Init") private @Null Actor firstWidget, secondWidget;
 	boolean vertical;
 	float splitAmount = 0.5f, minAmount, maxAmount = 1;
 
@@ -355,7 +356,7 @@ public class SplitPane extends WidgetGroup {
 		throw new UnsupportedOperationException("Use SplitPane#setWidget.");
 	}
 
-	public boolean removeActor (Actor actor) {
+	@NullUnmarked public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {
 			setFirstWidget(null);
@@ -368,7 +369,7 @@ public class SplitPane extends WidgetGroup {
 		return true;
 	}
 
-	public boolean removeActor (Actor actor, boolean unfocus) {
+	@NullUnmarked public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {
 			super.removeActor(actor, unfocus);
@@ -385,7 +386,7 @@ public class SplitPane extends WidgetGroup {
 		return false;
 	}
 
-	public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == firstWidget) {
 			super.removeActor(actor, unfocus);
@@ -407,9 +408,9 @@ public class SplitPane extends WidgetGroup {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class SplitPaneStyle {
-		public Drawable handle;
+		@SuppressWarnings("NullAway.Init") public Drawable handle;
 
-		public SplitPaneStyle () {
+		@NullUnmarked public SplitPaneStyle () {
 		}
 
 		public SplitPaneStyle (Drawable handle) {

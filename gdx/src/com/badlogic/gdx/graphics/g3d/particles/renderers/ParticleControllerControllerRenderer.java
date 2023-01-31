@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * @author Inferno */
 @SuppressWarnings("rawtypes")
 public class ParticleControllerControllerRenderer extends ParticleControllerRenderer {
-	ObjectChannel<ParticleController> controllerChannel;
+	@SuppressWarnings("NullAway.Init") ObjectChannel<ParticleController> controllerChannel;
 
 	@Override
 	public void init () {

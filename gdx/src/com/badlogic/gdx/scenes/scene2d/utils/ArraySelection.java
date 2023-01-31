@@ -4,13 +4,14 @@ package com.badlogic.gdx.scenes.scene2d.utils;
 import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A selection that supports range selection by knowing about the array of items being selected.
  * @author Nathan Sweet */
 public class ArraySelection<T> extends Selection<T> {
 	private Array<T> array;
 	private boolean rangeSelect = true;
-	private T rangeStart;
+	@SuppressWarnings("NullAway.Init") private T rangeStart;
 
 	public ArraySelection (Array<T> array) {
 		this.array = array;
@@ -54,7 +55,7 @@ public class ArraySelection<T> extends Selection<T> {
 	}
 
 	/** Called after the selection changes, clears the range start item. */
-	protected void changed () {
+	@NullUnmarked protected void changed () {
 		rangeStart = null;
 	}
 

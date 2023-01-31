@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ShortArray;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Helper class with static methods to build sphere shapes using {@link MeshPartBuilder}.
  * @author xoppa */
@@ -48,7 +49,7 @@ public class SphereShapeBuilder extends BaseShapeBuilder {
 
 	/** @deprecated use {@link MeshPartBuilder#setVertexTransform(Matrix4)} instead of using the method signature taking a
 	 *             matrix. */
-	@Deprecated
+	@NullUnmarked @Deprecated
 	public static void build (MeshPartBuilder builder, final Matrix4 transform, float width, float height, float depth,
 		int divisionsU, int divisionsV, float angleUFrom, float angleUTo, float angleVFrom, float angleVTo) {
 		final boolean closedVFrom = MathUtils.isEqual(angleVFrom, 0f);

@@ -41,10 +41,10 @@ class AssetLoadingTask implements AsyncTask<Void> {
 
 	volatile boolean asyncDone;
 	volatile boolean dependenciesLoaded;
-	volatile Array<AssetDescriptor> dependencies;
-	volatile AsyncResult<Void> depsFuture;
-	volatile AsyncResult<Void> loadFuture;
-	volatile Object asset;
+	@SuppressWarnings("NullAway.Init") volatile Array<AssetDescriptor> dependencies;
+	@SuppressWarnings("NullAway.Init") volatile AsyncResult<Void> depsFuture;
+	@SuppressWarnings("NullAway.Init") volatile AsyncResult<Void> loadFuture;
+	@SuppressWarnings("NullAway.Init") volatile Object asset;
 
 	volatile boolean cancel;
 
