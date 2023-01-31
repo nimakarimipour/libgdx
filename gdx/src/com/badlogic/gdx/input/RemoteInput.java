@@ -27,6 +27,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -241,7 +242,7 @@ public class RemoteInput implements Runnable, Input {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void run () {
 		while (true) {
 			try {
@@ -448,12 +449,12 @@ public class RemoteInput implements Runnable, Input {
 		return justPressedKeys[key];
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void getTextInput (TextInputListener listener, String title, String text, String hint) {
 		Gdx.app.getInput().getTextInput(listener, title, text, hint);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void getTextInput (TextInputListener listener, String title, String text, String hint, OnscreenKeyboardType type) {
 		Gdx.app.getInput().getTextInput(listener, title, text, hint, type);
 	}

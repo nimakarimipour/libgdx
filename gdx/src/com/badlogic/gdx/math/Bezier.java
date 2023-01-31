@@ -19,6 +19,7 @@ package com.badlogic.gdx.math;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Implementation of the Bezier curve.
  * @author Xoppa */
@@ -32,7 +33,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p1 The end point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T linear (@Nullable final T out, final float t, final T p0, final T p1,
+	@NullUnmarked public static <T extends Vector<T>> T linear (@Nullable final T out, final float t, final T p0, final T p1,
 		@Nullable final T tmp) {
 		// B1(t) = p0 + (p1-p0)*t
 		return out.set(p0).scl(1f - t).add(tmp.set(p1).scl(t)); // Could just use lerp...
@@ -59,7 +60,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p2 The third bezier point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T quadratic (@Nullable final T out, final float t, final T p0, final T p1, final T p2,
+	@NullUnmarked public static <T extends Vector<T>> T quadratic (@Nullable final T out, final float t, final T p0, final T p1, final T p2,
 		@Nullable final T tmp) {
 		// B2(t) = (1 - t) * (1 - t) * p0 + 2 * (1-t) * t * p1 + t*t*p2
 		final float dt = 1f - t;
@@ -74,7 +75,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p2 The third bezier point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T quadratic_derivative (final T out, final float t, final T p0, final T p1, final T p2,
+	@NullUnmarked public static <T extends Vector<T>> T quadratic_derivative (final T out, final float t, final T p0, final T p1, final T p2,
 		@Nullable final T tmp) {
 		// B2'(t) = 2 * (1 - t) * (p1 - p0) + 2 * t * (p2 - p1)
 		final float dt = 1f - t;
@@ -90,7 +91,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p3 The fourth bezier point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T cubic (@Nullable final T out, final float t, final T p0, final T p1, final T p2,
+	@NullUnmarked public static <T extends Vector<T>> T cubic (@Nullable final T out, final float t, final T p0, final T p1, final T p2,
 		final T p3, @Nullable final T tmp) {
 		// B3(t) = (1-t) * (1-t) * (1-t) * p0 + 3 * (1-t) * (1-t) * t * p1 + 3 * (1-t) * t * t * p2 + t * t * t * p3
 		final float dt = 1f - t;
@@ -109,7 +110,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	 * @param p3 The fourth bezier point.
 	 * @param tmp A temporary vector to be used by the calculation.
 	 * @return The value specified by out for chaining */
-	public static <T extends Vector<T>> T cubic_derivative (final T out, final float t, final T p0, final T p1, final T p2,
+	@NullUnmarked public static <T extends Vector<T>> T cubic_derivative (final T out, final float t, final T p0, final T p1, final T p2,
 		final T p3, @Nullable final T tmp) {
 		// B3'(t) = 3 * (1-t) * (1-t) * (p1 - p0) + 6 * (1 - t) * t * (p2 - p1) + 3 * t * t * (p3 - p2)
 		final float dt = 1f - t;
@@ -207,7 +208,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 		return approximate(v);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public float approxLength (int samples) {
 		float tempLength = 0;
 		for (int i = 0; i < samples; ++i) {

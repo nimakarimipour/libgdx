@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** This class can save and load a {@link ParticleEffect}. It should be added as {@link AsynchronousAssetLoader} to the
  * {@link AssetManager} so it will be able to load the effects. It's important to note that the two classes
@@ -52,7 +53,7 @@ public class ParticleEffectLoader
 		@Nullable ParticleEffectLoadParameter parameter) {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
 		@Nullable ParticleEffectLoadParameter parameter) {
 		Json json = new Json();
@@ -85,7 +86,7 @@ public class ParticleEffectLoader
 	}
 
 	/** Saves the effect to the given file contained in the passed in parameter. */
-	public void save (ParticleEffect effect, ParticleEffectSaveParameter parameter) throws IOException {
+	@NullUnmarked public void save (ParticleEffect effect, ParticleEffectSaveParameter parameter) throws IOException {
 		ResourceData<ParticleEffect> data = new ResourceData<ParticleEffect>(effect);
 
 		// effect assets
@@ -111,7 +112,7 @@ public class ParticleEffectLoader
 		json.toJson(data, parameter.file);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public ParticleEffect loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable ParticleEffectLoadParameter parameter) {
 		ResourceData<ParticleEffect> effectData = null;

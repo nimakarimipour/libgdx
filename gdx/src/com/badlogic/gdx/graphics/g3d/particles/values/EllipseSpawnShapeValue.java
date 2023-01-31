@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Encapsulate the formulas to spawn a particle on a ellipse shape.
  * @author Inferno */
@@ -35,7 +36,7 @@ public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public EllipseSpawnShapeValue () {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void spawnAux (Vector3 vector, float percent) {
 		// Generate the point on the surface of the sphere
 		float width = spawnWidth + spawnWidthDiff * spawnWidthValue.getScale(percent);
@@ -90,7 +91,7 @@ public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
 		this.side = side;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		EllipseSpawnShapeValue shape = (EllipseSpawnShapeValue)value;

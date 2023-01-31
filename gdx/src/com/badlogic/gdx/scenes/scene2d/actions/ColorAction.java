@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Sets the actor's color (or a specified color), from the current to the new color. Note this action transitions from the color
  * at the time the action starts to the specified color.
@@ -29,7 +30,7 @@ public class ColorAction extends TemporalAction {
 	@Nullable private @Null Color color;
 	private final Color end = new Color();
 
-	protected void begin () {
+	@NullUnmarked protected void begin () {
 		if (color == null) color = target.getColor();
 		startR = color.r;
 		startG = color.g;
@@ -37,7 +38,7 @@ public class ColorAction extends TemporalAction {
 		startA = color.a;
 	}
 
-	protected void update (float percent) {
+	@NullUnmarked protected void update (float percent) {
 		if (percent == 0)
 			color.set(startR, startG, startB, startA);
 		else if (percent == 1)

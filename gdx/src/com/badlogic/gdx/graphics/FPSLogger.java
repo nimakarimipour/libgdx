@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A simple helper class to log the frames per seconds achieved. Just invoke the {@link #log()} method in your rendering method.
  * The output will be logged once per second.
@@ -38,7 +39,7 @@ public class FPSLogger {
 	}
 
 	/** Logs the current frames per second to the console. */
-	public void log () {
+	@NullUnmarked public void log () {
 		final long nanoTime = TimeUtils.nanoTime();
 		if (nanoTime - startTime > 1000000000) /* 1,000,000,000ns == one second */ {
 			final int fps = Gdx.graphics.getFramesPerSecond();

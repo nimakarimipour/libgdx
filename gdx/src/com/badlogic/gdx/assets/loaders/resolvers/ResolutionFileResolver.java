@@ -20,6 +20,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** This {@link FileHandleResolver} uses a given list of {@link Resolution}s to determine the best match based on the current back
  * buffer size. An example of how this resolver works:
@@ -101,7 +102,7 @@ public class ResolutionFileResolver implements FileHandleResolver {
 		return parentString + suffix + "/" + originalHandle.name();
 	}
 
-	static public Resolution choose (Resolution... descriptors) {
+	@NullUnmarked static public Resolution choose (Resolution... descriptors) {
 		int w = Gdx.graphics.getBackBufferWidth(), h = Gdx.graphics.getBackBufferHeight();
 
 		// Prefer the shortest side.

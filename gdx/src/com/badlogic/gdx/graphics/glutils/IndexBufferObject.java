@@ -24,6 +24,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -70,7 +71,7 @@ public class IndexBufferObject implements IndexData {
 	 *
 	 * @param isStatic whether the index buffer is static
 	 * @param maxIndices the maximum number of indices this buffer can hold */
-	public IndexBufferObject (boolean isStatic, int maxIndices) {
+	@NullUnmarked public IndexBufferObject (boolean isStatic, int maxIndices) {
 
 		empty = maxIndices == 0;
 		if (empty) {
@@ -88,7 +89,7 @@ public class IndexBufferObject implements IndexData {
 		usage = isStatic ? GL20.GL_STATIC_DRAW : GL20.GL_DYNAMIC_DRAW;
 	}
 
-	public IndexBufferObject (boolean isStatic, ByteBuffer data) {
+	@NullUnmarked public IndexBufferObject (boolean isStatic, ByteBuffer data) {
 
 		empty = data.limit() == 0;
 		byteBuffer = data;
@@ -123,7 +124,7 @@ public class IndexBufferObject implements IndexData {
 	 * @param indices the vertex data
 	 * @param offset the offset to start copying the data from
 	 * @param count the number of shorts to copy */
-	public void setIndices (short[] indices, int offset, int count) {
+	@NullUnmarked public void setIndices (short[] indices, int offset, int count) {
 		isDirty = true;
 		((Buffer)buffer).clear();
 		buffer.put(indices, offset, count);
@@ -137,7 +138,7 @@ public class IndexBufferObject implements IndexData {
 		}
 	}
 
-	public void setIndices (ShortBuffer indices) {
+	@NullUnmarked public void setIndices (ShortBuffer indices) {
 		isDirty = true;
 		int pos = indices.position();
 		((Buffer)buffer).clear();
@@ -153,7 +154,7 @@ public class IndexBufferObject implements IndexData {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void updateIndices (int targetOffset, short[] indices, int offset, int count) {
 		isDirty = true;
 		final int pos = byteBuffer.position();
@@ -181,7 +182,7 @@ public class IndexBufferObject implements IndexData {
 	}
 
 	/** Binds this IndexBufferObject for rendering with glDrawElements. */
-	public void bind () {
+	@NullUnmarked public void bind () {
 		if (bufferHandle == 0) throw new GdxRuntimeException("No buffer allocated!");
 
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, bufferHandle);
@@ -194,19 +195,19 @@ public class IndexBufferObject implements IndexData {
 	}
 
 	/** Unbinds this IndexBufferObject. */
-	public void unbind () {
+	@NullUnmarked public void unbind () {
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);
 		isBound = false;
 	}
 
 	/** Invalidates the IndexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss. */
-	public void invalidate () {
+	@NullUnmarked public void invalidate () {
 		bufferHandle = Gdx.gl20.glGenBuffer();
 		isDirty = true;
 	}
 
 	/** Disposes this IndexBufferObject and all its associated OpenGL resources. */
-	public void dispose () {
+	@NullUnmarked public void dispose () {
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);
 		Gdx.gl20.glDeleteBuffer(bufferHandle);
 		bufferHandle = 0;

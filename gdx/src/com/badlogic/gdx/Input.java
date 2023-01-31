@@ -18,6 +18,7 @@ package com.badlogic.gdx;
 
 import com.badlogic.gdx.utils.ObjectIntMap;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -626,7 +627,7 @@ public interface Input {
 
 		/** @param keyname the keyname returned by the {@link Keys#toString(int)} method
 		 * @return the int keycode */
-		public static int valueOf (String keyname) {
+		@NullUnmarked public static int valueOf (String keyname) {
 			if (keyNames == null) initializeKeyNames();
 			return keyNames.get(keyname, -1);
 		}

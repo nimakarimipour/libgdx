@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A value which has a defined minimum and maximum upper and lower bounds. Defines the variations of the value on a time line.
  * @author Inferno */
@@ -85,7 +86,7 @@ public class ScaledNumericValue extends RangedNumericValue {
 		this.relative = relative;
 	}
 
-	public float getScale (float percent) {
+	@NullUnmarked public float getScale (float percent) {
 		int endIndex = -1;
 		int n = timeline.length;
 		// if (percent >= timeline[n-1])
@@ -104,7 +105,7 @@ public class ScaledNumericValue extends RangedNumericValue {
 		return startValue + (scaling[endIndex] - startValue) * ((percent - startTime) / (timeline[endIndex] - startTime));
 	}
 
-	public void load (@Nullable ScaledNumericValue value) {
+	@NullUnmarked public void load (@Nullable ScaledNumericValue value) {
 		super.load(value);
 		highMax = value.highMax;
 		highMin = value.highMin;
@@ -125,7 +126,7 @@ public class ScaledNumericValue extends RangedNumericValue {
 		json.writeValue("timeline", timeline);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		highMin = json.readValue("highMin", float.class, jsonData);

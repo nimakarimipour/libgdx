@@ -23,6 +23,7 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
@@ -207,7 +208,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Returns this value as a string.
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
-	@Nullable
+	@NullUnmarked @Nullable
 	public @Null String asString () {
 		switch (type) {
 		case stringValue:
@@ -226,7 +227,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as a float.
 	 * @throws IllegalStateException if this an array or object. */
-	public float asFloat () {
+	@NullUnmarked public float asFloat () {
 		switch (type) {
 		case stringValue:
 			return Float.parseFloat(stringValue);
@@ -242,7 +243,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as a double.
 	 * @throws IllegalStateException if this an array or object. */
-	public double asDouble () {
+	@NullUnmarked public double asDouble () {
 		switch (type) {
 		case stringValue:
 			return Double.parseDouble(stringValue);
@@ -258,7 +259,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as a long.
 	 * @throws IllegalStateException if this an array or object. */
-	public long asLong () {
+	@NullUnmarked public long asLong () {
 		switch (type) {
 		case stringValue:
 			return Long.parseLong(stringValue);
@@ -274,7 +275,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as an int.
 	 * @throws IllegalStateException if this an array or object. */
-	public int asInt () {
+	@NullUnmarked public int asInt () {
 		switch (type) {
 		case stringValue:
 			return Integer.parseInt(stringValue);
@@ -290,7 +291,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as a boolean.
 	 * @throws IllegalStateException if this an array or object. */
-	public boolean asBoolean () {
+	@NullUnmarked public boolean asBoolean () {
 		switch (type) {
 		case stringValue:
 			return stringValue.equalsIgnoreCase("true");
@@ -306,7 +307,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as a byte.
 	 * @throws IllegalStateException if this an array or object. */
-	public byte asByte () {
+	@NullUnmarked public byte asByte () {
 		switch (type) {
 		case stringValue:
 			return Byte.parseByte(stringValue);
@@ -322,7 +323,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as a short.
 	 * @throws IllegalStateException if this an array or object. */
-	public short asShort () {
+	@NullUnmarked public short asShort () {
 		switch (type) {
 		case stringValue:
 			return Short.parseShort(stringValue);
@@ -338,7 +339,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns this value as a char.
 	 * @throws IllegalStateException if this an array or object. */
-	public char asChar () {
+	@NullUnmarked public char asChar () {
 		switch (type) {
 		case stringValue:
 			return stringValue.length() == 0 ? 0 : stringValue.charAt(0);
@@ -354,7 +355,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated String array.
 	 * @throws IllegalStateException if this is not an array. */
-	public String[] asStringArray () {
+	@NullUnmarked public String[] asStringArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		String[] array = new String[size];
 		int i = 0;
@@ -386,7 +387,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated float array.
 	 * @throws IllegalStateException if this is not an array. */
-	public float[] asFloatArray () {
+	@NullUnmarked public float[] asFloatArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		float[] array = new float[size];
 		int i = 0;
@@ -415,7 +416,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated double array.
 	 * @throws IllegalStateException if this is not an array. */
-	public double[] asDoubleArray () {
+	@NullUnmarked public double[] asDoubleArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		double[] array = new double[size];
 		int i = 0;
@@ -444,7 +445,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated long array.
 	 * @throws IllegalStateException if this is not an array. */
-	public long[] asLongArray () {
+	@NullUnmarked public long[] asLongArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		long[] array = new long[size];
 		int i = 0;
@@ -473,7 +474,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated int array.
 	 * @throws IllegalStateException if this is not an array. */
-	public int[] asIntArray () {
+	@NullUnmarked public int[] asIntArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		int[] array = new int[size];
 		int i = 0;
@@ -502,7 +503,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated boolean array.
 	 * @throws IllegalStateException if this is not an array. */
-	public boolean[] asBooleanArray () {
+	@NullUnmarked public boolean[] asBooleanArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		boolean[] array = new boolean[size];
 		int i = 0;
@@ -531,7 +532,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated byte array.
 	 * @throws IllegalStateException if this is not an array. */
-	public byte[] asByteArray () {
+	@NullUnmarked public byte[] asByteArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		byte[] array = new byte[size];
 		int i = 0;
@@ -560,7 +561,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated short array.
 	 * @throws IllegalStateException if this is not an array. */
-	public short[] asShortArray () {
+	@NullUnmarked public short[] asShortArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		short[] array = new short[size];
 		int i = 0;
@@ -589,7 +590,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the children of this value as a newly allocated char array.
 	 * @throws IllegalStateException if this is not an array. */
-	public char[] asCharArray () {
+	@NullUnmarked public char[] asCharArray () {
 		if (type != ValueType.array) throw new IllegalStateException("Value is not an array: " + type);
 		char[] array = new char[size];
 		int i = 0;
@@ -875,7 +876,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** Returns true if this is not an array or object. */
-	public boolean isValue () {
+	@NullUnmarked public boolean isValue () {
 		switch (type) {
 		case stringValue:
 		case doubleValue:
@@ -1065,7 +1066,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** Returns a human readable string representing the path from the root of the JSON object graph to this value. */
-	public String trace () {
+	@NullUnmarked public String trace () {
 		if (parent == null) {
 			if (type == ValueType.array) return "[]";
 			if (type == ValueType.object) return "{}";
@@ -1101,7 +1102,7 @@ public class JsonValue implements Iterable<JsonValue> {
 		return buffer.toString();
 	}
 
-	private void prettyPrint (JsonValue object, StringBuilder buffer, int indent, PrettyPrintSettings settings) {
+	@NullUnmarked private void prettyPrint (JsonValue object, StringBuilder buffer, int indent, PrettyPrintSettings settings) {
 		OutputType outputType = settings.outputType;
 		if (object.isObject()) {
 			if (object.child == null)
@@ -1181,7 +1182,7 @@ public class JsonValue implements Iterable<JsonValue> {
 		prettyPrint(this, writer, 0, settings);
 	}
 
-	private void prettyPrint (JsonValue object, Writer writer, int indent, PrettyPrintSettings settings) throws IOException {
+	@NullUnmarked private void prettyPrint (JsonValue object, Writer writer, int indent, PrettyPrintSettings settings) throws IOException {
 		OutputType outputType = settings.outputType;
 		if (object.isObject()) {
 			if (object.child == null)
@@ -1270,7 +1271,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
-		public void remove () {
+		@NullUnmarked public void remove () {
 			if (current.prev == null) {
 				child = current.next;
 				if (child != null) child.prev = null;

@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A button with a child {@link Image} and {@link Label}.
  * @see ImageButton
@@ -74,7 +75,7 @@ public class ImageTextButton extends Button {
 		return new Label(text, style);
 	}
 
-	public void setStyle (ButtonStyle style) {
+	@NullUnmarked public void setStyle (ButtonStyle style) {
 		if (!(style instanceof ImageTextButtonStyle)) throw new IllegalArgumentException("style must be a ImageTextButtonStyle.");
 		this.style = (ImageTextButtonStyle)style;
 		super.setStyle(style);
@@ -147,7 +148,7 @@ public class ImageTextButton extends Button {
 		return style.fontColor;
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		updateImage();
 		label.getStyle().fontColor = getFontColor();
 		super.draw(batch, parentAlpha);
@@ -162,7 +163,7 @@ public class ImageTextButton extends Button {
 		return getCell(image);
 	}
 
-	public void setLabel (Label label) {
+	@NullUnmarked public void setLabel (Label label) {
 		getLabelCell().setActor(label);
 		this.label = label;
 	}

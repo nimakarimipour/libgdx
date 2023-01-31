@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Base class of all the batches requiring to buffer {@link ParticleControllerRenderData}
  * @author Inferno */
@@ -40,7 +41,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 		bufferedParticlesCount = 0;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void draw (@Nullable T data) {
 		if (data.controller.particles.size > 0) {
 			renderData.add(data);

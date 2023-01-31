@@ -28,6 +28,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A {@link TextureData} implementation which should be used to create float textures. */
 public class FloatTextureData implements TextureData {
@@ -63,7 +64,7 @@ public class FloatTextureData implements TextureData {
 		return isPrepared;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void prepare () {
 		if (isPrepared) throw new GdxRuntimeException("Already prepared");
 		if (!isGpuOnly) {
@@ -79,7 +80,7 @@ public class FloatTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void consumeCustomData (int target) {
 		if (Gdx.app.getType() == ApplicationType.Android || Gdx.app.getType() == ApplicationType.iOS
 			|| Gdx.app.getType() == ApplicationType.WebGL) {

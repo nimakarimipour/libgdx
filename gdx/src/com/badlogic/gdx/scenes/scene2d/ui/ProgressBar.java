@@ -30,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A progress bar is a widget that visually displays the progress of some activity or a value within given range. The progress
  * bar has a range (min, max) and a stepping between each value it represents. The percentage of completeness typically starts out
@@ -96,7 +97,7 @@ public class ProgressBar extends Widget implements Disableable {
 		return style;
 	}
 
-	public void act (float delta) {
+	@NullUnmarked public void act (float delta) {
 		super.act(delta);
 		if (animateTime > 0) {
 			animateTime -= delta;
@@ -105,7 +106,7 @@ public class ProgressBar extends Widget implements Disableable {
 		}
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		ProgressBarStyle style = this.style;
 		boolean disabled = this.disabled;
 		Drawable knob = style.knob, currentKnob = getKnobDrawable();
@@ -227,25 +228,25 @@ public class ProgressBar extends Widget implements Disableable {
 		return visualInterpolation.apply((getVisualValue() - min) / (max - min));
 	}
 
-	@Nullable
+	@NullUnmarked @Nullable
 	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		return style.background;
 	}
 
-	@Nullable
+	@NullUnmarked @Nullable
 	protected @Null Drawable getKnobDrawable () {
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		return style.knob;
 	}
 
-	@Nullable
+	@NullUnmarked @Nullable
 	protected Drawable getKnobBeforeDrawable () {
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		return style.knobBefore;
 	}
 
-	@Nullable
+	@NullUnmarked @Nullable
 	protected Drawable getKnobAfterDrawable () {
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		return style.knobAfter;
@@ -311,7 +312,7 @@ public class ProgressBar extends Widget implements Disableable {
 		this.stepSize = stepSize;
 	}
 
-	public float getPrefWidth () {
+	@NullUnmarked public float getPrefWidth () {
 		if (vertical) {
 			Drawable knob = style.knob, bg = getBackgroundDrawable();
 			return Math.max(knob == null ? 0 : knob.getMinWidth(), bg == null ? 0 : bg.getMinWidth());
@@ -319,7 +320,7 @@ public class ProgressBar extends Widget implements Disableable {
 			return 140;
 	}
 
-	public float getPrefHeight () {
+	@NullUnmarked public float getPrefHeight () {
 		if (vertical)
 			return 140;
 		else {

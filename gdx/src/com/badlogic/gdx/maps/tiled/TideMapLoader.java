@@ -41,6 +41,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoader.Parameters> {
 
@@ -106,7 +107,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	 * @param tmxFile the Filehandle of the tmx file
 	 * @param imageResolver the {@link ImageResolver}
 	 * @return the {@link TiledMap} */
-	private TiledMap loadMap (@Nullable Element root, FileHandle tmxFile, ImageResolver imageResolver) {
+	@NullUnmarked private TiledMap loadMap (@Nullable Element root, FileHandle tmxFile, ImageResolver imageResolver) {
 		TiledMap map = new TiledMap();
 		Element properties = root.getChildByName("Properties");
 		if (properties != null) {
@@ -127,7 +128,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	 * @param root the root XML element
 	 * @return a list of filenames for images containing tiles
 	 * @throws IOException */
-	private Array<FileHandle> loadTileSheets (@Nullable Element root, FileHandle tideFile) throws IOException {
+	@NullUnmarked private Array<FileHandle> loadTileSheets (@Nullable Element root, FileHandle tideFile) throws IOException {
 		Array<FileHandle> images = new Array<FileHandle>();
 		Element tilesheets = root.getChildByName("TileSheets");
 		for (Element tileset : tilesheets.getChildrenByName("TileSheet")) {
@@ -138,7 +139,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		return images;
 	}
 
-	private void loadTileSheet (TiledMap map, Element element, FileHandle tideFile, ImageResolver imageResolver) {
+	@NullUnmarked private void loadTileSheet (TiledMap map, Element element, FileHandle tideFile, ImageResolver imageResolver) {
 		if (element.getName().equals("TileSheet")) {
 			String id = element.getAttribute("Id");
 			String description = element.getChildByName("Description").getText();
@@ -200,7 +201,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	private void loadLayer (TiledMap map, Element element) {
+	@NullUnmarked private void loadLayer (TiledMap map, Element element) {
 		if (element.getName().equals("Layer")) {
 			String id = element.getAttribute("Id");
 			String visible = element.getAttribute("Visible");
@@ -273,7 +274,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	private void loadProperties (MapProperties properties, Element element) {
+	@NullUnmarked private void loadProperties (MapProperties properties, Element element) {
 		if (element.getName().equals("Properties")) {
 			for (Element property : element.getChildrenByName("Property")) {
 				String key = property.getAttribute("Key", null);

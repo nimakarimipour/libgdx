@@ -24,6 +24,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link AssetLoader} to load {@link Sound} instances.
  * @author mzechner */
@@ -43,7 +44,7 @@ public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.Soun
 		return sound;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable SoundParameter parameter) {
 		sound = Gdx.audio.newSound(file);
 	}

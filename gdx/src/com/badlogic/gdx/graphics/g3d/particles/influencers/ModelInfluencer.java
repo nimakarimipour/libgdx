@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which controls which {@link Model} will be assigned to the particles as {@link ModelInstance}.
  * @author Inferno */
@@ -47,7 +48,7 @@ public abstract class ModelInfluencer extends Influencer {
 			super(models);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void init () {
 			Model first = models.first();
 			for (int i = 0, c = controller.emitter.maxParticleCount; i < c; ++i) {
@@ -95,14 +96,14 @@ public abstract class ModelInfluencer extends Influencer {
 			pool.clear();
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				modelChannel.data[i] = pool.obtain();
 			}
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void killParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				pool.free(modelChannel.data[i]);
@@ -131,7 +132,7 @@ public abstract class ModelInfluencer extends Influencer {
 		this((Model[])influencer.models.toArray(Model.class));
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		modelChannel = controller.particles.addChannel(ParticleChannels.ModelInstance);
 	}

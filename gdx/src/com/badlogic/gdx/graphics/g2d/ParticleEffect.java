@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StreamUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** See <a href=
  * "https://web.archive.org/web/20200427191041/http://www.badlogicgames.com/wordpress/?p=12555">http://www.badlogicgames.com/wordpress/?p=12555</a>
@@ -134,7 +135,7 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Returns the emitter with the specified name, or null. */
-	@Nullable
+	@NullUnmarked @Nullable
 	public ParticleEmitter findEmitter (String name) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
@@ -195,7 +196,7 @@ public class ParticleEffect implements Disposable {
 		loadEmitterImages(atlas, null);
 	}
 
-	public void loadEmitterImages (@Nullable TextureAtlas atlas, @Nullable String atlasPrefix) {
+	@NullUnmarked public void loadEmitterImages (@Nullable TextureAtlas atlas, @Nullable String atlasPrefix) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
 			if (emitter.getImagePaths().size == 0) continue;
@@ -246,7 +247,7 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Disposes the texture for each sprite for each ParticleEmitter. */
-	public void dispose () {
+	@NullUnmarked public void dispose () {
 		if (!ownsTexture) return;
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);

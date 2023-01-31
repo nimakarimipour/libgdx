@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link AssetLoader} for {@link BitmapFont} instances. Loads the font description file (.fnt) asynchronously, loads the
  * {@link Texture} containing the glyphs as a dependency. The {@link BitmapFontParameter} allows you to set things like texture
@@ -43,7 +44,7 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 
 	@Nullable BitmapFontData data;
 
-	@Override
+	@NullUnmarked @Override
 	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
 		@Nullable BitmapFontParameter parameter) {
 		Array<AssetDescriptor> deps = new Array();
@@ -81,7 +82,7 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 		@Nullable BitmapFontParameter parameter) {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public BitmapFont loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable BitmapFontParameter parameter) {
 		if (parameter != null && parameter.atlasName != null) {

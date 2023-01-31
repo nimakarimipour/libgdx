@@ -31,6 +31,7 @@ import com.badlogic.gdx.math.Matrix4;
 
 import java.nio.Buffer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Draws batched quads using indices.
  * @see Batch
@@ -96,7 +97,7 @@ public class SpriteBatch implements Batch {
 	 * the ones expect for shaders set with {@link #setShader(ShaderProgram)}. See {@link #createDefaultShader()}.
 	 * @param size The max number of sprites in a single batch. Max of 8191.
 	 * @param defaultShader The default shader to use. This is not owned by the SpriteBatch and must be disposed separately. */
-	public SpriteBatch (int size, @Nullable ShaderProgram defaultShader) {
+	@NullUnmarked public SpriteBatch (int size, @Nullable ShaderProgram defaultShader) {
 		// 32767 is max vertex index, so 32767 / 4 vertices per sprite = 8191 sprites max.
 		if (size > 8191) throw new IllegalArgumentException("Can't have more than 8191 sprites per batch: " + size);
 
@@ -166,7 +167,7 @@ public class SpriteBatch implements Batch {
 		return shader;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void begin () {
 		if (drawing) throw new IllegalStateException("SpriteBatch.end must be called before begin.");
 		renderCalls = 0;
@@ -181,7 +182,7 @@ public class SpriteBatch implements Batch {
 		drawing = true;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void end () {
 		if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before end.");
 		if (idx > 0) flush();
@@ -585,7 +586,7 @@ public class SpriteBatch implements Batch {
 		draw(region, x, y, region.getRegionWidth(), region.getRegionHeight());
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void draw (@Nullable TextureRegion region, float x, float y, float width, float height) {
 		if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
@@ -632,7 +633,7 @@ public class SpriteBatch implements Batch {
 		this.idx = idx + 20;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void draw (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width, float height,
 		float scaleX, float scaleY, float rotation) {
 		if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
@@ -944,7 +945,7 @@ public class SpriteBatch implements Batch {
 		this.idx = idx + 20;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void flush () {
 		if (idx == 0) return;
 
@@ -1063,7 +1064,7 @@ public class SpriteBatch implements Batch {
 		}
 	}
 
-	protected void switchTexture (@Nullable Texture texture) {
+	@NullUnmarked protected void switchTexture (@Nullable Texture texture) {
 		flush();
 		lastTexture = texture;
 		invTexWidth = 1.0f / texture.getWidth();

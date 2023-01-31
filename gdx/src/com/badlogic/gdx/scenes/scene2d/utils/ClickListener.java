@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.TimeUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Detects mouse over, mouse or finger touch presses, and clicks on an actor. A touch must go down over the actor and is
  * considered pressed as long as it is over the actor or within the {@link #setTapSquareSize(float) tap square}. This behavior
@@ -115,7 +116,7 @@ public class ClickListener extends InputListener {
 	}
 
 	/** Returns true if the specified position is over the specified actor or within the tap square. */
-	public boolean isOver (@Nullable Actor actor, float x, float y) {
+	@NullUnmarked public boolean isOver (@Nullable Actor actor, float x, float y) {
 		Actor hit = actor.hit(x, y, true);
 		if (hit == null || !hit.isDescendantOf(actor)) return inTapSquare(x, y);
 		return true;

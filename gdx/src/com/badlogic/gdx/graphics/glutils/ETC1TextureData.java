@@ -25,6 +25,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.ETC1.ETC1Data;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class ETC1TextureData implements TextureData {
 	@Nullable FileHandle file;
@@ -58,7 +59,7 @@ public class ETC1TextureData implements TextureData {
 		return isPrepared;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void prepare () {
 		if (isPrepared) throw new GdxRuntimeException("Already prepared");
 		if (file == null && data == null) throw new GdxRuntimeException("Can only load once from ETC1Data");
@@ -70,7 +71,7 @@ public class ETC1TextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void consumeCustomData (int target) {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling consumeCompressedData()");
 

@@ -24,6 +24,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link AssetLoader} for {@link Music} instances. The Music instance is loaded synchronously.
  * @author mzechner */
@@ -43,7 +44,7 @@ public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.Musi
 		return music;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable MusicParameter parameter) {
 		music = Gdx.audio.newMusic(file);
 	}

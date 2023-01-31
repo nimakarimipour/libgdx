@@ -22,6 +22,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.IntIntMap;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Takes a {@link Camera} instance and controls it via w,a,s,d and mouse panning.
  * @author badlogic */
@@ -67,7 +68,7 @@ public class FirstPersonCameraController extends InputAdapter {
 		this.degreesPerPixel = degreesPerPixel;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public boolean touchDragged (int screenX, int screenY, int pointer) {
 		float deltaX = -Gdx.input.getDeltaX() * degreesPerPixel;
 		float deltaY = -Gdx.input.getDeltaY() * degreesPerPixel;
@@ -77,7 +78,7 @@ public class FirstPersonCameraController extends InputAdapter {
 		return true;
 	}
 
-	public void update () {
+	@NullUnmarked public void update () {
 		update(Gdx.graphics.getDeltaTime());
 	}
 

@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.TextureArrayData;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.NullUnmarked;
 
 /** @author Tomski **/
 public class FileTextureArrayData implements TextureArrayData {
@@ -67,7 +68,7 @@ public class FileTextureArrayData implements TextureArrayData {
 		prepared = true;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void consumeTextureArrayData () {
 		boolean containsCustomData = false;
 		for (int i = 0; i < textureDatas.length; i++) {

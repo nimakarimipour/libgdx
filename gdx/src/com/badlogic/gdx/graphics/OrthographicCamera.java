@@ -20,6 +20,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A camera with orthographic projection.
  * 
@@ -69,7 +70,7 @@ public class OrthographicCamera extends Camera {
 	/** Sets this camera to an orthographic projection using a viewport fitting the screen resolution, centered at
 	 * (Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2), with the y-axis pointing up or down.
 	 * @param yDown whether y should be pointing down */
-	public void setToOrtho (boolean yDown) {
+	@NullUnmarked public void setToOrtho (boolean yDown) {
 		setToOrtho(yDown, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 

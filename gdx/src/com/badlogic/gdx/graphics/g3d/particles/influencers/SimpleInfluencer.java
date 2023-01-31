@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which controls a generic channel of the particles. It handles the interpolation through time using
  * {@link ScaledNumericValue}.
@@ -43,12 +44,12 @@ public abstract class SimpleInfluencer extends Influencer {
 		set(billboardScaleinfluencer);
 	}
 
-	private void set (SimpleInfluencer scaleInfluencer) {
+	@NullUnmarked private void set (SimpleInfluencer scaleInfluencer) {
 		value.load(scaleInfluencer.value);
 		valueChannelDescriptor = scaleInfluencer.valueChannelDescriptor;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		valueChannel = controller.particles.addChannel(valueChannelDescriptor);
 		ParticleChannels.Interpolation.id = controller.particleChannels.newId();
@@ -56,7 +57,7 @@ public abstract class SimpleInfluencer extends Influencer {
 		lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void activateParticles (int startIndex, int count) {
 		if (!value.isRelative()) {
 			for (int i = startIndex * valueChannel.strideSize, a = startIndex * interpolationChannel.strideSize,
@@ -79,7 +80,7 @@ public abstract class SimpleInfluencer extends Influencer {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void update () {
 		for (int i = 0, a = 0, l = ParticleChannels.LifePercentOffset, c = i + controller.particles.size
 			* valueChannel.strideSize; i < c; i += valueChannel.strideSize, a += interpolationChannel.strideSize, l += lifeChannel.strideSize) {

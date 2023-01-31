@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Base class for {@link OrthographicCamera} and {@link PerspectiveCamera}.
  * @author mzechner */
@@ -191,7 +192,7 @@ public abstract class Camera {
 	 * @param viewportWidth the width of the viewport in pixels
 	 * @param viewportHeight the height of the viewport in pixels
 	 * @return the mutated and unprojected screenCoords {@link Vector3} */
-	public Vector3 unproject (Vector3 screenCoords, float viewportX, float viewportY, float viewportWidth, float viewportHeight) {
+	@NullUnmarked public Vector3 unproject (Vector3 screenCoords, float viewportX, float viewportY, float viewportWidth, float viewportHeight) {
 		float x = screenCoords.x - viewportX, y = Gdx.graphics.getHeight() - screenCoords.y - viewportY;
 		screenCoords.x = (2 * x) / viewportWidth - 1;
 		screenCoords.y = (2 * y) / viewportHeight - 1;
@@ -207,7 +208,7 @@ public abstract class Camera {
 	 * will return a point on the near plane, a z-coordinate of 1 will return a point on the far plane.
 	 * @param screenCoords the point in screen coordinates
 	 * @return the mutated and unprojected screenCoords {@link Vector3} */
-	public Vector3 unproject (Vector3 screenCoords) {
+	@NullUnmarked public Vector3 unproject (Vector3 screenCoords) {
 		unproject(screenCoords, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		return screenCoords;
 	}
@@ -217,7 +218,7 @@ public abstract class Camera {
 	 * <b>bottom</b> left, with the y-axis pointing <b>upwards</b> and the x-axis pointing to the right. This makes it easily
 	 * useable in conjunction with {@link Batch} and similar classes.
 	 * @return the mutated and projected worldCoords {@link Vector3} */
-	public Vector3 project (Vector3 worldCoords) {
+	@NullUnmarked public Vector3 project (Vector3 worldCoords) {
 		project(worldCoords, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		return worldCoords;
 	}
@@ -261,7 +262,7 @@ public abstract class Camera {
 	 * whole screen. The screen coordinates origin is assumed to be in the top left corner, its y-axis pointing down, the x-axis
 	 * pointing to the right. The returned instance is not a new instance but an internal member only accessible via this function.
 	 * @return the picking Ray. */
-	public Ray getPickRay (float screenX, float screenY) {
+	@NullUnmarked public Ray getPickRay (float screenX, float screenY) {
 		return getPickRay(screenX, screenY, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 }

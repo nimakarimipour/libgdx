@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** An {@link Emitter} is a {@link ParticleControllerComponent} which will handle the particles emission. It must update the
  * {@link Emitter#percent} to reflect the current percentage of the current emission cycle. It should consider
@@ -40,12 +41,12 @@ public abstract class Emitter extends ParticleControllerComponent implements Jso
 	public Emitter () {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void init () {
 		controller.particles.size = 0;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void end () {
 		controller.particles.size = 0;
 	}
@@ -86,7 +87,7 @@ public abstract class Emitter extends ParticleControllerComponent implements Jso
 		json.writeValue("maxParticleCount", maxParticleCount);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void read (Json json, JsonValue jsonData) {
 		minParticleCount = json.readValue("minParticleCount", int.class, jsonData);
 		maxParticleCount = json.readValue("maxParticleCount", int.class, jsonData);

@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A FacedCubemapData holds a cubemap data definition based on a {@link TextureData} per face.
  * 
@@ -154,7 +155,7 @@ public class FacedCubemapData implements CubemapData {
 			if (!data[i].isPrepared()) data[i].prepare();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void consumeCubemapData () {
 		for (int i = 0; i < data.length; i++) {
 			if (data[i].getType() == TextureData.TextureDataType.Custom) {

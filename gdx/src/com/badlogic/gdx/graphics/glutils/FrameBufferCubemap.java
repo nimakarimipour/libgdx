@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -108,7 +109,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 		build();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected Cubemap createTexture (FrameBufferTextureAttachmentSpec attachmentSpec) {
 		GLOnlyTextureData data = new GLOnlyTextureData(bufferBuilder.width, bufferBuilder.height, 0, attachmentSpec.internalFormat,
 			attachmentSpec.format, attachmentSpec.type);
@@ -123,7 +124,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 		colorTexture.dispose();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void attachFrameBufferColorTexture (Cubemap texture) {
 		GL20 gl = Gdx.gl20;
 		int glHandle = texture.getTextureObjectHandle();
@@ -157,7 +158,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 
 	/** Bind the side, making it active to render on. Should be called in between a call to {@link #begin()} and {@link #end()}.
 	 * @param side The side to bind */
-	protected void bindSide (@Nullable final Cubemap.CubemapSide side) {
+	@NullUnmarked protected void bindSide (@Nullable final Cubemap.CubemapSide side) {
 		Gdx.gl20.glFramebufferTexture2D(GL20.GL_FRAMEBUFFER, GL20.GL_COLOR_ATTACHMENT0, side.glEnum,
 			getColorBufferTexture().getTextureObjectHandle(), 0);
 	}

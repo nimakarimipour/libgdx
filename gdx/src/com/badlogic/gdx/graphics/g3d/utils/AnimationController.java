@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Class to control one or more {@link Animation}s on a {@link ModelInstance}. Use the
  * {@link #setAnimation(String, int, float, AnimationListener)} method to change the current animation. Use the
@@ -500,7 +501,7 @@ public class AnimationController extends BaseAnimationController {
 	}
 
 	/** Apply an action animation on top of the current animation. */
-	protected AnimationDesc action (@Nullable final AnimationDesc anim, float transitionTime) {
+	@NullUnmarked protected AnimationDesc action (@Nullable final AnimationDesc anim, float transitionTime) {
 		if (anim.loopCount < 0) throw new GdxRuntimeException("An action cannot be continuous");
 		if (current == null || current.loopCount == 0)
 			animate(anim, transitionTime);

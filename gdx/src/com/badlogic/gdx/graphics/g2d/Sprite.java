@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Holds the geometry, color, and texture information for drawing 2D sprites using {@link Batch}. A Sprite has a position and a
  * size given as width and height. The position is relative to the origin of the coordinate system specified via
@@ -79,7 +80,7 @@ public class Sprite extends TextureRegion {
 	// Note the region is copied.
 	/** Creates a sprite based on a specific TextureRegion, the new sprite's region is a copy of the parameter region - altering
 	 * one does not affect the other */
-	public Sprite (@Nullable TextureRegion region) {
+	@NullUnmarked public Sprite (@Nullable TextureRegion region) {
 		setRegion(region);
 		setColor(1, 1, 1, 1);
 		setSize(region.getRegionWidth(), region.getRegionHeight());
@@ -713,7 +714,7 @@ public class Sprite extends TextureRegion {
 		}
 	}
 
-	public void scroll (float xAmount, float yAmount) {
+	@NullUnmarked public void scroll (float xAmount, float yAmount) {
 		float[] vertices = Sprite.this.vertices;
 		if (xAmount != 0) {
 			float u = (vertices[U1] + xAmount) % 1;

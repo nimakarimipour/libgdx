@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A group that lays out its children side by side horizontally, with optional wrapping. This can be easier than using
  * {@link Table} when actors need to be inserted into or removed from the middle of the group. {@link #getChildren()} can be
@@ -203,7 +204,7 @@ public class HorizontalGroup extends WidgetGroup {
 		}
 	}
 
-	private void layoutWrapped () {
+	@NullUnmarked private void layoutWrapped () {
 		float prefHeight = getPrefHeight();
 		if (prefHeight != lastPrefHeight) {
 			lastPrefHeight = prefHeight;
@@ -305,7 +306,7 @@ public class HorizontalGroup extends WidgetGroup {
 	}
 
 	/** When wrapping is enabled, the number of rows may be > 1. */
-	public int getRows () {
+	@NullUnmarked public int getRows () {
 		return wrap ? rowSizes.size >> 1 : 1;
 	}
 

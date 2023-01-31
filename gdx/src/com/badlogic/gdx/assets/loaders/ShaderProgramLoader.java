@@ -23,6 +23,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link AssetLoader} for {@link ShaderProgram} instances loaded from text files. If the file suffix is ".vert", it is assumed
  * to be a vertex shader, and a fragment shader is found using the same file name with a ".frag" suffix. And vice versa if the
@@ -61,7 +62,7 @@ public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, 
 		@Nullable ShaderProgramParameter parameter) {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public ShaderProgram loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable ShaderProgramParameter parameter) {
 		String vertFileName = null, fragFileName = null;

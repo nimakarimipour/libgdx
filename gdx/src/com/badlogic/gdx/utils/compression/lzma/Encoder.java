@@ -21,6 +21,7 @@ import java.io.IOException;
 import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class Encoder {
 	public static final int EMatchFinderTypeBT2 = 0;
@@ -144,13 +145,13 @@ public class Encoder {
 				m_Coders[i] = new Encoder2();
 		}
 
-		public void Init () {
+		@NullUnmarked public void Init () {
 			int numStates = 1 << (m_NumPrevBits + m_NumPosBits);
 			for (int i = 0; i < numStates; i++)
 				m_Coders[i].Init();
 		}
 
-		public Encoder2 GetSubCoder (int pos, byte prevByte) {
+		@NullUnmarked public Encoder2 GetSubCoder (int pos, byte prevByte) {
 			return m_Coders[((pos & m_PosMask) << m_NumPrevBits) + ((prevByte & 0xFF) >>> (8 - m_NumPrevBits))];
 		}
 	}
@@ -396,7 +397,7 @@ public class Encoder {
 		_additionalOffset = 0;
 	}
 
-	int ReadMatchDistances () throws java.io.IOException {
+	@NullUnmarked int ReadMatchDistances () throws java.io.IOException {
 		int lenRes = 0;
 		_numDistancePairs = _matchFinder.GetMatches(_matchDistances);
 		if (_numDistancePairs > 0) {
@@ -408,7 +409,7 @@ public class Encoder {
 		return lenRes;
 	}
 
-	void MovePos (int num) throws java.io.IOException {
+	@NullUnmarked void MovePos (int num) throws java.io.IOException {
 		if (num > 0) {
 			_matchFinder.Skip(num);
 			_additionalOffset += num;
@@ -487,7 +488,7 @@ public class Encoder {
 	int[] repLens = new int[Base.kNumRepDistances];
 	int backRes;
 
-	int GetOptimum (int position) throws IOException {
+	@NullUnmarked int GetOptimum (int position) throws IOException {
 		if (_optimumEndIndex != _optimumCurrentIndex) {
 			int lenRes = _optimum[_optimumCurrentIndex].PosPrev - _optimumCurrentIndex;
 			backRes = _optimum[_optimumCurrentIndex].BackPrev;
@@ -938,7 +939,7 @@ public class Encoder {
 		_rangeEncoder.FlushStream();
 	}
 
-	public void CodeOneBlock (long[] inSize, long[] outSize, boolean[] finished) throws IOException {
+	@NullUnmarked public void CodeOneBlock (long[] inSize, long[] outSize, boolean[] finished) throws IOException {
 		inSize[0] = 0;
 		outSize[0] = 0;
 		finished[0] = true;

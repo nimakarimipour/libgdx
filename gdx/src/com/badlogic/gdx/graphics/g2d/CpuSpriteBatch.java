@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** CpuSpriteBatch behaves like SpriteBatch, except it doesn't flush automatically whenever the transformation matrix changes.
  * Instead, the vertices get adjusted on subsequent draws to match the running batch. This can improve performance through longer
@@ -265,7 +266,7 @@ public class CpuSpriteBatch extends SpriteBatch {
 		}
 	}
 
-	private void drawAdjusted (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width,
+	@NullUnmarked private void drawAdjusted (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width,
 		float height, float scaleX, float scaleY, float rotation) {
 		// v must be flipped
 		drawAdjustedUV(region.texture, x, y, originX, originY, width, height, scaleX, scaleY, rotation, region.u, region.v2,

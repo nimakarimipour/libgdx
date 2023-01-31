@@ -44,6 +44,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** This class is used to render billboard particles.
  * @author Inferno */
@@ -69,7 +70,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 			new VertexAttribute(Usage.ColorUnpacked, 4, ShaderProgram.COLOR_ATTRIBUTE));
 
 	// Offsets
-	private static final int GPU_POSITION_OFFSET = (short)(GPU_ATTRIBUTES.findByUsage(Usage.Position).offset / 4),
+	@SuppressWarnings("NullAway") private static final int GPU_POSITION_OFFSET = (short)(GPU_ATTRIBUTES.findByUsage(Usage.Position).offset / 4),
 		GPU_UV_OFFSET = (short)(GPU_ATTRIBUTES.findByUsage(Usage.TextureCoordinates).offset / 4),
 		GPU_SIZE_ROTATION_OFFSET = (short)(GPU_ATTRIBUTES.findByUsage(sizeAndRotationUsage).offset / 4),
 		GPU_COLOR_OFFSET = (short)(GPU_ATTRIBUTES.findByUsage(Usage.ColorUnpacked).offset / 4),
@@ -216,7 +217,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		renderablePool.free(newRenderable);
 	}
 
-	private void clearRenderablesPool () {
+	@NullUnmarked private void clearRenderablesPool () {
 		renderablePool.freeAll(renderables);
 		for (int i = 0, free = renderablePool.getFree(); i < free; ++i) {
 			Renderable renderable = renderablePool.obtain();
@@ -278,7 +279,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		return useGPU;
 	}
 
-	public void setTexture (@Nullable Texture texture) {
+	@NullUnmarked public void setTexture (@Nullable Texture texture) {
 		renderablePool.freeAll(renderables);
 		renderables.clear();
 		for (int i = 0, free = renderablePool.getFree(); i < free; ++i) {
@@ -308,7 +309,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	// GPU
 	// Required + Color + Rotation
-	private static void putVertex (@Nullable float[] vertices, int offset, float x, float y, float z, float u, float v,
+	@NullUnmarked private static void putVertex (@Nullable float[] vertices, int offset, float x, float y, float z, float u, float v,
 		float scaleX, float scaleY, float cosRotation, float sinRotation, float r, float g, float b, float a) {
 		// Position
 		vertices[offset + GPU_POSITION_OFFSET] = x;
@@ -344,7 +345,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	// CPU
 	// Required
-	private static void putVertex (@Nullable float[] vertices, int offset, Vector3 p, float u, float v, float r, float g, float b,
+	@NullUnmarked private static void putVertex (@Nullable float[] vertices, int offset, Vector3 p, float u, float v, float r, float g, float b,
 		float a) {
 		// Position
 		vertices[offset + CPU_POSITION_OFFSET] = p.x;
@@ -360,7 +361,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		vertices[offset + CPU_COLOR_OFFSET + 3] = a;
 	}
 
-	private void fillVerticesGPU (@Nullable int[] particlesOffset) {
+	@NullUnmarked private void fillVerticesGPU (@Nullable int[] particlesOffset) {
 		int tp = 0;
 		for (BillboardControllerRenderData data : renderData) {
 			FloatChannel scaleChannel = data.scaleChannel;
@@ -476,7 +477,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	 * -TMP_V1.z+TMP_V2.z+pz), u, v, r, g, b, a); } } } }
 	 */
 
-	private void fillVerticesToViewPointCPU (@Nullable int[] particlesOffset) {
+	@NullUnmarked private void fillVerticesToViewPointCPU (@Nullable int[] particlesOffset) {
 		int tp = 0;
 		for (BillboardControllerRenderData data : renderData) {
 			FloatChannel scaleChannel = data.scaleChannel;
@@ -547,7 +548,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
-	private void fillVerticesToScreenCPU (@Nullable int[] particlesOffset) {
+	@NullUnmarked private void fillVerticesToScreenCPU (@Nullable int[] particlesOffset) {
 		Vector3 look = TMP_V3.set(camera.direction).scl(-1), // normal
 			right = TMP_V4.set(camera.up).crs(look).nor(), // tangent
 			up = camera.up;
@@ -619,7 +620,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void flush (@Nullable int[] offsets) {
 
 		// fill vertices
@@ -662,7 +663,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		data.saveAsset(manager.getAssetFileName(texture), Texture.class);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void load (AssetManager manager, ResourceData resources) {
 		SaveData data = resources.getSaveData("billboardBatch");
 		if (data != null) {

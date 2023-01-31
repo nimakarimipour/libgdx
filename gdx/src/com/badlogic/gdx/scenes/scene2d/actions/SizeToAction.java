@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.scenes.scene2d.actions;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Moves an actor from its current size to a specific size.
  * @author Nathan Sweet */
@@ -22,12 +23,12 @@ public class SizeToAction extends TemporalAction {
 	private float startWidth, startHeight;
 	private float endWidth, endHeight;
 
-	protected void begin () {
+	@NullUnmarked protected void begin () {
 		startWidth = target.getWidth();
 		startHeight = target.getHeight();
 	}
 
-	protected void update (float percent) {
+	@NullUnmarked protected void update (float percent) {
 		float width, height;
 		if (percent == 0) {
 			width = startWidth;

@@ -15,13 +15,14 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.scenes.scene2d.actions;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Moves an actor from its current size to a relative size.
  * @author Nathan Sweet */
 public class SizeByAction extends RelativeTemporalAction {
 	private float amountWidth, amountHeight;
 
-	protected void updateRelative (float percentDelta) {
+	@NullUnmarked protected void updateRelative (float percentDelta) {
 		target.sizeBy(amountWidth * percentDelta, amountHeight * percentDelta);
 	}
 

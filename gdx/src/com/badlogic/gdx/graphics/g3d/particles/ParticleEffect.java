@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's a set of particles controllers. It can be updated, rendered, transformed which means the changes will be applied on all
  * the particles controllers.
@@ -136,7 +137,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 	}
 
 	/** Returns the controller with the specified name, or null. */
-	@Nullable
+	@NullUnmarked @Nullable
 	public ParticleController findController (String name) {
 		for (int i = 0, n = controllers.size; i < n; i++) {
 			ParticleController emitter = controllers.get(i);
@@ -164,7 +165,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 
 	/** Assign one batch, among those passed in, to each controller. The batch must be compatible with the controller to be
 	 * assigned. */
-	public void setBatch (Array<ParticleBatch<?>> batches) {
+	@NullUnmarked public void setBatch (Array<ParticleBatch<?>> batches) {
 		for (ParticleController controller : controllers) {
 			for (ParticleBatch<?> batch : batches)
 				if (controller.renderer.setBatch(batch)) break;

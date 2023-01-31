@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A text label, with optional word wrapping.
  * <p>
@@ -140,7 +141,7 @@ public class Label extends Widget {
 		prefSizeInvalid = true;
 	}
 
-	private void scaleAndComputePrefSize () {
+	@NullUnmarked private void scaleAndComputePrefSize () {
 		BitmapFont font = cache.getFont();
 		float oldScaleX = font.getScaleX();
 		float oldScaleY = font.getScaleY();
@@ -151,7 +152,7 @@ public class Label extends Widget {
 		if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
 	}
 
-	protected void computePrefSize (GlyphLayout layout) {
+	@NullUnmarked protected void computePrefSize (GlyphLayout layout) {
 		prefSizeInvalid = false;
 		if (wrap && ellipsis == null) {
 			float width = getWidth();
@@ -166,7 +167,7 @@ public class Label extends Widget {
 		prefHeight = layout.height;
 	}
 
-	public void layout () {
+	@NullUnmarked public void layout () {
 		BitmapFont font = cache.getFont();
 		float oldScaleX = font.getScaleX();
 		float oldScaleY = font.getScaleY();
@@ -227,7 +228,7 @@ public class Label extends Widget {
 		if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		validate();
 		Color color = tempColor.set(getColor());
 		color.a *= parentAlpha;
@@ -241,7 +242,7 @@ public class Label extends Widget {
 		cache.draw(batch);
 	}
 
-	public float getPrefWidth () {
+	@NullUnmarked public float getPrefWidth () {
 		if (wrap) return 0;
 		if (prefSizeInvalid) scaleAndComputePrefSize();
 		float width = prefWidth;
@@ -251,7 +252,7 @@ public class Label extends Widget {
 		return width;
 	}
 
-	public float getPrefHeight () {
+	@NullUnmarked public float getPrefHeight () {
 		if (prefSizeInvalid) scaleAndComputePrefSize();
 		float descentScaleCorrection = 1;
 		if (fontScaleChanged) descentScaleCorrection = fontScaleY / style.font.getScaleY();
@@ -385,7 +386,7 @@ public class Label extends Widget {
 			this.fontColor = fontColor;
 		}
 
-		public LabelStyle (@Nullable LabelStyle style) {
+		@NullUnmarked public LabelStyle (@Nullable LabelStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);
 			background = style.background;

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker.Page;
 
 import static com.badlogic.gdx.graphics.g2d.PixmapPacker.indexPattern;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Saves PixmapPackers to files.
  * @author jshapcott */
@@ -59,7 +60,7 @@ public class PixmapPackerIO {
 	 * @param packer the PixmapPacker to be written
 	 * @param parameters the SaveParameters specifying how to save the PixmapPacker
 	 * @throws IOException if the atlas file can not be written */
-	public void save (FileHandle file, PixmapPacker packer, SaveParameters parameters) throws IOException {
+	@NullUnmarked public void save (FileHandle file, PixmapPacker packer, SaveParameters parameters) throws IOException {
 		Writer writer = file.writer(false);
 		int index = 0;
 		for (Page page : packer.pages) {

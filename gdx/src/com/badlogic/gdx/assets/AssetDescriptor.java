@@ -18,6 +18,7 @@ package com.badlogic.gdx.assets;
 
 import com.badlogic.gdx.files.FileHandle;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Describes an asset to be loaded by its filename, type and {@link AssetLoaderParameters}. Instances of this are used in
  * {@link AssetLoadingTask} to load the actual asset.
@@ -45,14 +46,14 @@ public class AssetDescriptor<T> {
 	}
 
 	/** Creates an AssetDescriptor with an already resolved name. */
-	public AssetDescriptor (@Nullable FileHandle file, Class<T> assetType, @Nullable AssetLoaderParameters<T> params) {
+	@NullUnmarked public AssetDescriptor (@Nullable FileHandle file, Class<T> assetType, @Nullable AssetLoaderParameters<T> params) {
 		this.fileName = file.path();
 		this.file = file;
 		this.type = assetType;
 		this.params = params;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public String toString () {
 		StringBuilder sb = new StringBuilder();
 		sb.append(fileName);

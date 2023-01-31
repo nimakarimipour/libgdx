@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Drawable for a {@link NinePatch}.
  * <p>
@@ -46,11 +47,11 @@ public class NinePatchDrawable extends BaseDrawable implements TransformDrawable
 		this.patch = drawable.patch;
 	}
 
-	public void draw (Batch batch, float x, float y, float width, float height) {
+	@NullUnmarked public void draw (Batch batch, float x, float y, float width, float height) {
 		patch.draw(batch, x, y, width, height);
 	}
 
-	public void draw (Batch batch, float x, float y, float originX, float originY, float width, float height, float scaleX,
+	@NullUnmarked public void draw (Batch batch, float x, float y, float originX, float originY, float width, float height, float scaleX,
 		float scaleY, float rotation) {
 		patch.draw(batch, x, y, originX, originY, width, height, scaleX, scaleY, rotation);
 	}

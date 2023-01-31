@@ -15,13 +15,14 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.scenes.scene2d.actions;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Scales an actor's scale to a relative size.
  * @author Nathan Sweet */
 public class ScaleByAction extends RelativeTemporalAction {
 	private float amountX, amountY;
 
-	protected void updateRelative (float percentDelta) {
+	@NullUnmarked protected void updateRelative (float percentDelta) {
 		target.scaleBy(amountX * percentDelta, amountY * percentDelta);
 	}
 

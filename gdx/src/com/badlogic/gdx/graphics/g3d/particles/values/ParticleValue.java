@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's a class which represents a value bound to the particles. Generally used by a particle controller component to find the
  * current value of a particle property during the simulation.
@@ -41,7 +42,7 @@ public class ParticleValue implements Json.Serializable {
 		this.active = active;
 	}
 
-	public void load (@Nullable ParticleValue value) {
+	@NullUnmarked public void load (@Nullable ParticleValue value) {
 		active = value.active;
 	}
 
@@ -50,7 +51,7 @@ public class ParticleValue implements Json.Serializable {
 		json.writeValue("active", active);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void read (Json json, JsonValue jsonData) {
 		active = json.readValue("active", Boolean.class, jsonData);
 	}

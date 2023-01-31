@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.model.data.ModelData;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Used by {@link Model} to load textures from {@link ModelData}.
  * @author badlogic */
@@ -49,7 +50,7 @@ public interface TextureProvider {
 			this.useMipMaps = useMipMaps;
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public Texture load (@Nullable String fileName) {
 			Texture result = new Texture(Gdx.files.internal(fileName), useMipMaps);
 			result.setFilter(minFilter, magFilter);

@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.math.CumulativeDistribution;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Encapsulate the formulas to spawn a particle on a mesh shape dealing with not uniform area triangles.
  * @author Inferno */
@@ -46,7 +47,7 @@ public final class WeightMeshSpawnShapeValue extends MeshSpawnShapeValue {
 
 	/** Calculate the weights of each triangle of the wrapped mesh. If the mesh has indices: the function will calculate the weight
 	 * of those triangles. If the mesh has not indices: the function will consider the vertices as a triangle strip. */
-	public void calculateWeights () {
+	@NullUnmarked public void calculateWeights () {
 		distribution.clear();
 		VertexAttributes attributes = mesh.getVertexAttributes();
 		int indicesCount = mesh.getNumIndices();

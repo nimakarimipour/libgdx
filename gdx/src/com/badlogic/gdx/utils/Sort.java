@@ -15,6 +15,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Provides methods to sort arrays of objects. Sorting requires working memory and this class allows that memory to be reused to
  * avoid allocation. The sorting is otherwise identical to the Arrays.sort methods (uses timsort).<br>
@@ -45,7 +46,7 @@ public class Sort {
 		comparableTimSort.doSort(a, fromIndex, toIndex);
 	}
 
-	public <T> void sort (@Nullable Array<T> a, Comparator<? super T> c) {
+	@NullUnmarked public <T> void sort (@Nullable Array<T> a, Comparator<? super T> c) {
 		if (timSort == null) timSort = new TimSort();
 		timSort.doSort(a.items, c, 0, a.size);
 	}

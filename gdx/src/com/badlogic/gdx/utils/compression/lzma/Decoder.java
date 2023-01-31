@@ -21,6 +21,7 @@ import java.io.IOException;
 import com.badlogic.gdx.utils.compression.lz.OutWindow;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeDecoder;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class Decoder {
 	class LenDecoder {
@@ -107,13 +108,13 @@ public class Decoder {
 				m_Coders[i] = new Decoder2();
 		}
 
-		public void Init () {
+		@NullUnmarked public void Init () {
 			int numStates = 1 << (m_NumPrevBits + m_NumPosBits);
 			for (int i = 0; i < numStates; i++)
 				m_Coders[i].Init();
 		}
 
-		Decoder2 GetDecoder (int pos, byte prevByte) {
+		@NullUnmarked Decoder2 GetDecoder (int pos, byte prevByte) {
 			return m_Coders[((pos & m_PosMask) << m_NumPrevBits) + ((prevByte & 0xFF) >>> (8 - m_NumPrevBits))];
 		}
 	}

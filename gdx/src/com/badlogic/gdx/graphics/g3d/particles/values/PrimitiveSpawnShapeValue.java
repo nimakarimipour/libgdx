@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** The base class of all the {@link SpawnShapeValue} values which spawn the particles on a geometric primitive.
  * @author Inferno */
@@ -49,7 +50,7 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		spawnDepthValue = new ScaledNumericValue();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void setActive (boolean active) {
 		super.setActive(active);
 		spawnWidthValue.setActive(true);
@@ -80,13 +81,13 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		return spawnDepthValue;
 	}
 
-	public void setDimensions (float width, float height, float depth) {
+	@NullUnmarked public void setDimensions (float width, float height, float depth) {
 		spawnWidthValue.setHigh(width);
 		spawnHeightValue.setHigh(height);
 		spawnDepthValue.setHigh(depth);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void start () {
 		spawnWidth = spawnWidthValue.newLowValue();
 		spawnWidthDiff = spawnWidthValue.newHighValue();
@@ -101,7 +102,7 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		if (!spawnDepthValue.isRelative()) spawnDepthDiff -= spawnDepth;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		PrimitiveSpawnShapeValue shape = (PrimitiveSpawnShapeValue)value;
@@ -120,7 +121,7 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		json.writeValue("edges", edges);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		spawnWidthValue = json.readValue("spawnWidthValue", ScaledNumericValue.class, jsonData);

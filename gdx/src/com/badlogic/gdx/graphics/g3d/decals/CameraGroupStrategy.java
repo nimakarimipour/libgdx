@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -130,7 +131,7 @@ public class CameraGroupStrategy implements GroupStrategy, Disposable {
 		return decal.getMaterial().isOpaque() ? GROUP_OPAQUE : GROUP_BLEND;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void beforeGroup (int group, @Nullable Array<Decal> contents) {
 		if (group == GROUP_BLEND) {
 			Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -159,14 +160,14 @@ public class CameraGroupStrategy implements GroupStrategy, Disposable {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void afterGroup (int group) {
 		if (group == GROUP_BLEND) {
 			Gdx.gl.glDisable(GL20.GL_BLEND);
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void beforeGroups () {
 		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
 		shader.bind();
@@ -174,7 +175,7 @@ public class CameraGroupStrategy implements GroupStrategy, Disposable {
 		shader.setUniformi("u_texture", 0);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void afterGroups () {
 		Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
 	}

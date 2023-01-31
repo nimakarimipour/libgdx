@@ -25,6 +25,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -102,7 +103,7 @@ public class VertexArray implements VertexData {
 		bind(shader, null);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void bind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final int numAttributes = attributes.size();
 		((Buffer)byteBuffer).limit(buffer.limit() * 4);
@@ -152,7 +153,7 @@ public class VertexArray implements VertexData {
 		unbind(shader, null);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void unbind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		final int numAttributes = attributes.size();
 		if (locations == null) {

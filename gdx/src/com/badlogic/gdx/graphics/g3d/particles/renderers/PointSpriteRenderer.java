@@ -25,6 +25,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.PointSpriteParticleBatch;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A {@link ParticleControllerRenderer} which will render particles as point sprites to a {@link PointSpriteParticleBatch} .
  * @author Inferno */
@@ -38,7 +39,7 @@ public class PointSpriteRenderer extends ParticleControllerRenderer<PointSpriteC
 		setBatch(batch);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		renderData.positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		renderData.regionChannel = controller.particles.addChannel(ParticleChannels.TextureRegion, TextureRegionInitializer.get());

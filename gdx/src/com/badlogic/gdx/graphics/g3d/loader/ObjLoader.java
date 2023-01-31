@@ -45,6 +45,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FloatArray;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link ModelLoader} to load Wavefront OBJ files. Only intended for testing basic models/meshes and educational usage. The
  * Wavefront specification is NOT fully implemented, only a subset of the specification is supported. Especially the
@@ -107,7 +108,7 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 
-	@Nullable
+	@NullUnmarked @Nullable
 	protected ModelData loadModelData (FileHandle file, boolean flipV) {
 		if (logWarning)
 			Gdx.app.error("ObjLoader", "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
@@ -419,7 +420,7 @@ class MtlLoader {
 		return new Color(r, g, b, a);
 	}
 
-	public ModelMaterial getMaterial (final String name) {
+	@NullUnmarked public ModelMaterial getMaterial (final String name) {
 		for (final ModelMaterial m : materials)
 			if (m.id.equals(name)) return m;
 		ModelMaterial mat = new ModelMaterial();

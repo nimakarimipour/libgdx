@@ -33,6 +33,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** loads {@link PolygonRegion PolygonRegions} using a {@link com.badlogic.gdx.graphics.g2d.PolygonRegionLoader}
  * @author dermetfan */
@@ -65,7 +66,7 @@ public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, P
 		super(resolver);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public PolygonRegion load (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable PolygonRegionParameters parameter) {
 		Texture texture = manager.get(manager.getDependencies(fileName).first());

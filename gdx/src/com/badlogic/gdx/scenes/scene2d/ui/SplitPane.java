@@ -30,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A container that contains two widgets and is divided either horizontally or vertically. The user may resize the widgets. The
  * child widgets are always sized to fill their side of the SplitPane.
@@ -102,7 +103,7 @@ public class SplitPane extends WidgetGroup {
 				if (pointer == draggingPointer) draggingPointer = -1;
 			}
 
-			public void touchDragged (InputEvent event, float x, float y, int pointer) {
+			@NullUnmarked public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (pointer != draggingPointer) return;
 
 				Drawable handle = style.handle;
@@ -168,7 +169,7 @@ public class SplitPane extends WidgetGroup {
 		}
 	}
 
-	public float getPrefWidth () {
+	@NullUnmarked public float getPrefWidth () {
 		float first = firstWidget == null ? 0
 			: (firstWidget instanceof Layout ? ((Layout)firstWidget).getPrefWidth() : firstWidget.getWidth());
 		float second = secondWidget == null ? 0
@@ -177,7 +178,7 @@ public class SplitPane extends WidgetGroup {
 		return first + style.handle.getMinWidth() + second;
 	}
 
-	public float getPrefHeight () {
+	@NullUnmarked public float getPrefHeight () {
 		float first = firstWidget == null ? 0
 			: (firstWidget instanceof Layout ? ((Layout)firstWidget).getPrefHeight() : firstWidget.getHeight());
 		float second = secondWidget == null ? 0
@@ -186,14 +187,14 @@ public class SplitPane extends WidgetGroup {
 		return first + style.handle.getMinHeight() + second;
 	}
 
-	public float getMinWidth () {
+	@NullUnmarked public float getMinWidth () {
 		float first = firstWidget instanceof Layout ? ((Layout)firstWidget).getMinWidth() : 0;
 		float second = secondWidget instanceof Layout ? ((Layout)secondWidget).getMinWidth() : 0;
 		if (vertical) return Math.max(first, second);
 		return first + style.handle.getMinWidth() + second;
 	}
 
-	public float getMinHeight () {
+	@NullUnmarked public float getMinHeight () {
 		float first = firstWidget instanceof Layout ? ((Layout)firstWidget).getMinHeight() : 0;
 		float second = secondWidget instanceof Layout ? ((Layout)secondWidget).getMinHeight() : 0;
 		if (!vertical) return Math.max(first, second);
@@ -210,7 +211,7 @@ public class SplitPane extends WidgetGroup {
 		return vertical;
 	}
 
-	private void calculateHorizBoundsAndPositions () {
+	@NullUnmarked private void calculateHorizBoundsAndPositions () {
 		Drawable handle = style.handle;
 
 		float height = getHeight();
@@ -225,7 +226,7 @@ public class SplitPane extends WidgetGroup {
 		handleBounds.set(leftAreaWidth, 0, handleWidth, height);
 	}
 
-	private void calculateVertBoundsAndPositions () {
+	@NullUnmarked private void calculateVertBoundsAndPositions () {
 		Drawable handle = style.handle;
 
 		float width = getWidth();
@@ -241,7 +242,7 @@ public class SplitPane extends WidgetGroup {
 		handleBounds.set(0, bottomAreaHeight, width, handleHeight);
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		Stage stage = getStage();
 		if (stage == null) return;
 
@@ -288,7 +289,7 @@ public class SplitPane extends WidgetGroup {
 	/** Called during layout to clamp the {@link #splitAmount} within the set limits. By default it imposes the limits of the
 	 * {@linkplain #getMinSplitAmount() min amount}, {@linkplain #getMaxSplitAmount() max amount}, and min sizes of the children.
 	 * This method is internally called in response to layout, so it should not call {@link #invalidate()}. */
-	protected void clampSplitAmount () {
+	@NullUnmarked protected void clampSplitAmount () {
 		float effectiveMinAmount = minAmount, effectiveMaxAmount = maxAmount;
 
 		if (vertical) {

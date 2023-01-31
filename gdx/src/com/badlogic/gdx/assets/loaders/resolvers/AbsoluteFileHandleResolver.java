@@ -5,9 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class AbsoluteFileHandleResolver implements FileHandleResolver {
-	@Override
+	@NullUnmarked @Override
 	public FileHandle resolve (@Nullable String fileName) {
 		return Gdx.files.absolute(fileName);
 	}

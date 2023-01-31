@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics;
 
 import com.badlogic.gdx.utils.NumberUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A color class, holding the r, g, b and alpha component as floats in the range [0,1]. All methods perform clamping on the
  * internal values after execution.
@@ -105,7 +106,7 @@ public class Color {
 	/** Sets this color to the given color.
 	 * 
 	 * @param color the Color */
-	public Color set (@Nullable Color color) {
+	@NullUnmarked public Color set (@Nullable Color color) {
 		this.r = color.r;
 		this.g = color.g;
 		this.b = color.b;

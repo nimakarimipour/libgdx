@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A static Octree implementation.
  *
@@ -206,14 +207,14 @@ public class Octree<T> {
 			nodePool.free(this);
 		}
 
-		private void clearChildren () {
+		@NullUnmarked private void clearChildren () {
 			for (int i = 0; i < 8; i++) {
 				children[i].free();
 				children[i] = null;
 			}
 		}
 
-		protected void add (T geometry) {
+		@NullUnmarked protected void add (T geometry) {
 			if (!collider.intersects(bounds, geometry)) {
 				return;
 			}
@@ -235,7 +236,7 @@ public class Octree<T> {
 			}
 		}
 
-		protected boolean remove (T object) {
+		@NullUnmarked protected boolean remove (T object) {
 			if (!leaf) {
 				boolean removed = false;
 				for (Octree.OctreeNode node : children) {
@@ -264,7 +265,7 @@ public class Octree<T> {
 			return leaf;
 		}
 
-		protected void query (BoundingBox aabb, ObjectSet<T> result) {
+		@NullUnmarked protected void query (BoundingBox aabb, ObjectSet<T> result) {
 			if (!aabb.intersects(bounds)) {
 				return;
 			}
@@ -283,7 +284,7 @@ public class Octree<T> {
 			}
 		}
 
-		protected void query (Frustum frustum, ObjectSet<T> result) {
+		@NullUnmarked protected void query (Frustum frustum, ObjectSet<T> result) {
 			if (!Intersector.intersectFrustumBounds(frustum, bounds)) {
 				return;
 			}
@@ -301,7 +302,7 @@ public class Octree<T> {
 			}
 		}
 
-		protected void rayCast (Ray ray, RayCastResult<T> result) {
+		@NullUnmarked protected void rayCast (Ray ray, RayCastResult<T> result) {
 			// Check intersection with node
 			boolean intersect = Intersector.intersectRayBounds(ray, bounds, tmp);
 			if (!intersect) {
@@ -332,7 +333,7 @@ public class Octree<T> {
 
 		/** Get all geometries using Depth-First Search recursion.
 		 * @param resultSet */
-		protected void getAll (ObjectSet<T> resultSet) {
+		@NullUnmarked protected void getAll (ObjectSet<T> resultSet) {
 			if (!leaf) {
 				for (Octree.OctreeNode child : children) {
 					child.getAll(resultSet);
@@ -343,7 +344,7 @@ public class Octree<T> {
 
 		/** Get bounding boxes using Depth-First Search recursion.
 		 * @param bounds */
-		protected void getBoundingBox (ObjectSet<BoundingBox> bounds) {
+		@NullUnmarked protected void getBoundingBox (ObjectSet<BoundingBox> bounds) {
 			if (!leaf) {
 				for (Octree.OctreeNode node : children) {
 					node.getBoundingBox(bounds);

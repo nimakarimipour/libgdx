@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link CubemapParameter} to
@@ -48,7 +49,7 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		super(resolver);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable CubemapParameter parameter) {
 		info.filename = fileName;

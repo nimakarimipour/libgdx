@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A value which has a defined minimum and maximum bounds.
  * @author Inferno */
@@ -56,7 +57,7 @@ public class RangedNumericValue extends ParticleValue {
 		this.lowMax = lowMax;
 	}
 
-	public void load (@Nullable RangedNumericValue value) {
+	@NullUnmarked public void load (@Nullable RangedNumericValue value) {
 		super.load(value);
 		lowMax = value.lowMax;
 		lowMin = value.lowMin;
@@ -69,7 +70,7 @@ public class RangedNumericValue extends ParticleValue {
 		json.writeValue("lowMax", lowMax);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		lowMin = json.readValue("lowMin", float.class, jsonData);

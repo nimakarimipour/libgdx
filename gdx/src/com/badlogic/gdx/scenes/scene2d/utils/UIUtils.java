@@ -4,6 +4,7 @@ package com.badlogic.gdx.scenes.scene2d.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.NullUnmarked;
 
 public final class UIUtils {
 	private UIUtils () {
@@ -16,7 +17,7 @@ public final class UIUtils {
 		|| System.getProperty("os.name").contains("FreeBSD");
 	static public boolean isIos = !isAndroid && (!(isWindows || isLinux || isMac));
 
-	static public boolean left () {
+	@NullUnmarked static public boolean left () {
 		return Gdx.input.isButtonPressed(Buttons.LEFT);
 	}
 
@@ -24,7 +25,7 @@ public final class UIUtils {
 		return button == Buttons.LEFT;
 	}
 
-	static public boolean right () {
+	@NullUnmarked static public boolean right () {
 		return Gdx.input.isButtonPressed(Buttons.RIGHT);
 	}
 
@@ -32,7 +33,7 @@ public final class UIUtils {
 		return button == Buttons.RIGHT;
 	}
 
-	static public boolean middle () {
+	@NullUnmarked static public boolean middle () {
 		return Gdx.input.isButtonPressed(Buttons.MIDDLE);
 	}
 
@@ -40,7 +41,7 @@ public final class UIUtils {
 		return button == Buttons.MIDDLE;
 	}
 
-	static public boolean shift () {
+	@NullUnmarked static public boolean shift () {
 		return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
 	}
 
@@ -48,7 +49,7 @@ public final class UIUtils {
 		return keycode == Keys.SHIFT_LEFT || keycode == Keys.SHIFT_RIGHT;
 	}
 
-	static public boolean ctrl () {
+	@NullUnmarked static public boolean ctrl () {
 		if (isMac)
 			return Gdx.input.isKeyPressed(Keys.SYM);
 		else
@@ -62,7 +63,7 @@ public final class UIUtils {
 			return keycode == Keys.CONTROL_LEFT || keycode == Keys.CONTROL_RIGHT;
 	}
 
-	static public boolean alt () {
+	@NullUnmarked static public boolean alt () {
 		return Gdx.input.isKeyPressed(Keys.ALT_LEFT) || Gdx.input.isKeyPressed(Keys.ALT_RIGHT);
 	}
 

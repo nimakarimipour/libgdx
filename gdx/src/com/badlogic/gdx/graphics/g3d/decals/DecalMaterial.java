@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.decals;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Material used by the {@link Decal} class */
 public class DecalMaterial {
@@ -28,7 +29,7 @@ public class DecalMaterial {
 	protected int dstBlendFactor;
 
 	/** Binds the material's texture to the OpenGL context and changes the glBlendFunc to the values used by it. */
-	public void set () {
+	@NullUnmarked public void set () {
 		textureRegion.getTexture().bind(0);
 		if (!isOpaque()) {
 			Gdx.gl.glBlendFunc(srcBlendFactor, dstBlendFactor);
@@ -48,7 +49,7 @@ public class DecalMaterial {
 		return dstBlendFactor;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public boolean equals (Object o) {
 		if (o == null) return false;
 
@@ -59,7 +60,7 @@ public class DecalMaterial {
 
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int hashCode () {
 		int result = textureRegion.getTexture() != null ? textureRegion.getTexture().hashCode() : 0;
 		result = 31 * result + srcBlendFactor;

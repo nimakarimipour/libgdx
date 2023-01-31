@@ -26,6 +26,7 @@ import java.util.MissingResourceException;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.Initializer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A {@code I18NBundle} provides {@code Locale}-specific resources loaded from property files. A bundle contains a number of
  * named resources, whose names and values are {@code Strings}. A bundle may have a parent bundle, and when a resource is not
@@ -432,7 +433,7 @@ public class I18NBundle {
 	 *               returns {@code true}
 	 * @return the string for the given key or the key surrounded by {@code ???} if it cannot be found and
 	 *         {@link #getExceptionOnMissingKey()} returns {@code false} */
-	public String get (String key) {
+	@NullUnmarked public String get (String key) {
 		String result = properties.get(key);
 		if (result == null) {
 			if (parent != null) result = parent.get(key);
@@ -462,7 +463,7 @@ public class I18NBundle {
 	 * I18NBundle won't be able to reset values after calling debug and should only be using during testing.
 	 * 
 	 * @param placeholder */
-	public void debug (String placeholder) {
+	@NullUnmarked public void debug (String placeholder) {
 		ObjectMap.Keys<String> keys = properties.keys();
 		if (keys == null) return;
 

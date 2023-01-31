@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Class that you assign a range of texture units and binds textures for you within that range. It does some basic usage tracking
  * to avoid unnecessary bind calls.
@@ -70,7 +71,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		this.unitsLRU = (method == LRU) ? new int[count] : null;
 	}
 
-	private static int getMaxTextureUnits () {
+	@NullUnmarked private static int getMaxTextureUnits () {
 		IntBuffer buffer = BufferUtils.newIntBuffer(16);
 		Gdx.gl.glGetIntegerv(GL20.GL_MAX_TEXTURE_IMAGE_UNITS, buffer);
 		return buffer.get(0);
@@ -84,7 +85,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void end () {
 		/*
 		 * No need to unbind and textures are set to null in begin() for(int i = 0; i < count; i++) { if (textures[i] != null) {
@@ -107,7 +108,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		return bindTexture(tempDesc, false);
 	}
 
-	private final int bindTexture (final TextureDescriptor textureDesc, final boolean rebind) {
+	@NullUnmarked private final int bindTexture (final TextureDescriptor textureDesc, final boolean rebind) {
 		final int idx, result;
 		final GLTexture texture = textureDesc.texture;
 		reused = false;
@@ -138,7 +139,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 
 	private int currentTexture = 0;
 
-	private final int bindTextureRoundRobin (@Nullable final GLTexture texture) {
+	@NullUnmarked private final int bindTextureRoundRobin (@Nullable final GLTexture texture) {
 		for (int i = 0; i < count; i++) {
 			final int idx = (currentTexture + i) % count;
 			if (textures[idx] == texture) {
@@ -152,7 +153,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		return currentTexture;
 	}
 
-	private final int bindTextureLRU (@Nullable final GLTexture texture) {
+	@NullUnmarked private final int bindTextureLRU (@Nullable final GLTexture texture) {
 		int i;
 		for (i = 0; i < count; i++) {
 			final int idx = unitsLRU[i];

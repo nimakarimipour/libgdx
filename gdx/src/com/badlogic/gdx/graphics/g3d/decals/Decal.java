@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.NumberUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p/>
@@ -530,7 +531,7 @@ public class Decal {
 	}
 
 	/** Re-applies the uv coordinates from the material's texture region to the uv components of the vertices array */
-	protected void updateUVs () {
+	@NullUnmarked protected void updateUVs () {
 		TextureRegion tr = material.textureRegion;
 		// left top
 		vertices[U1] = tr.getU();

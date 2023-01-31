@@ -37,6 +37,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Writes Pixmaps to various formats.
  * @author mzechner
@@ -226,7 +227,7 @@ public class PixmapIO {
 		}
 
 		/** Writes the pixmap to the stream without closing the stream. */
-		public void write (OutputStream output, Pixmap pixmap) throws IOException {
+		@NullUnmarked public void write (OutputStream output, Pixmap pixmap) throws IOException {
 			DeflaterOutputStream deflaterOutput = new DeflaterOutputStream(buffer, deflater);
 			DataOutputStream dataOutput = new DataOutputStream(output);
 			dataOutput.write(SIGNATURE);

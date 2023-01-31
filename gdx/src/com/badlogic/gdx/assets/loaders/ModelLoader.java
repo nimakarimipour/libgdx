@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends AsynchronousAssetLoader<Model, P> {
 	public ModelLoader (@Nullable FileHandleResolver resolver) {
@@ -105,7 +106,7 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameters) {
 	}
 
-	@Nullable
+	@NullUnmarked @Nullable
 	@Override
 	public Model loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameters) {
 		ModelData data = null;

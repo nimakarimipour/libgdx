@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
  * @author Inferno */
@@ -50,7 +51,7 @@ public abstract class RegionInfluencer extends Influencer {
 			super(texture);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void init () {
 			AspectTextureRegion region = regions.items[0];
 			for (int i = 0,
@@ -87,7 +88,7 @@ public abstract class RegionInfluencer extends Influencer {
 			super(texture);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex * regionChannel.strideSize,
 				c = i + count * regionChannel.strideSize; i < c; i += regionChannel.strideSize) {
@@ -127,13 +128,13 @@ public abstract class RegionInfluencer extends Influencer {
 			super(texture);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void allocateChannels () {
 			super.allocateChannels();
 			lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, c = controller.particles.size
 				* regionChannel.strideSize; i < c; i += regionChannel.strideSize, l += lifeChannel.strideSize) {
@@ -191,7 +192,7 @@ public abstract class RegionInfluencer extends Influencer {
 			imageName = aspectTextureRegion.imageName;
 		}
 
-		public void updateUV (@Nullable TextureAtlas atlas) {
+		@NullUnmarked public void updateUV (@Nullable TextureAtlas atlas) {
 			if (imageName == null) {
 				return;
 			}
@@ -284,7 +285,7 @@ public abstract class RegionInfluencer extends Influencer {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		regionChannel = controller.particles.addChannel(ParticleChannels.TextureRegion);
 	}

@@ -28,6 +28,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** @author Xoppa */
 public class DirectionalShadowLight extends DirectionalLight implements ShadowMap, Disposable {
@@ -72,7 +73,7 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		begin();
 	}
 
-	public void begin () {
+	@NullUnmarked public void begin () {
 		final int w = fbo.getWidth();
 		final int h = fbo.getHeight();
 		fbo.begin();
@@ -83,7 +84,7 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		Gdx.gl.glScissor(1, 1, w - 2, h - 2);
 	}
 
-	public void end () {
+	@NullUnmarked public void end () {
 		Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
 		fbo.end();
 	}
@@ -102,7 +103,7 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		return cam.combined;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public TextureDescriptor getDepthMap () {
 		textureDesc.texture = fbo.getColorBufferTexture();
 		return textureDesc;

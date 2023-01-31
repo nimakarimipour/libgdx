@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Iterator;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Interface used to select items within an iterator against a predicate.
  * @author Xoppa */
@@ -52,7 +53,7 @@ public interface Predicate<T> {
 			next = null;
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public boolean hasNext () {
 			if (end) return false;
 			if (next != null) return true;
@@ -78,7 +79,7 @@ public interface Predicate<T> {
 			return result;
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void remove () {
 			if (peeked) throw new GdxRuntimeException("Cannot remove between a call to hasNext() and next().");
 			iterator.remove();
@@ -103,7 +104,7 @@ public interface Predicate<T> {
 		 * <p>
 		 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is
 		 * called. Use the {@link Predicate.PredicateIterator} constructor for nested or multithreaded iteration. */
-		@Override
+		@NullUnmarked @Override
 		public Iterator<T> iterator () {
 			if (Collections.allocateIterators) return new PredicateIterator<T>(iterable.iterator(), predicate);
 			if (iterator == null)

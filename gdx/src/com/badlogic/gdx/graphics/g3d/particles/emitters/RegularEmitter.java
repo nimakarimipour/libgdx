@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's a generic use {@link Emitter} which fits most of the particles simulation scenarios.
  * @author Inferno */
@@ -70,12 +71,12 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		set(regularEmitter);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void start () {
 		delay = delayValue.active ? delayValue.newLowValue() : 0;
 		delayTimer = 0;
@@ -103,7 +104,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		durationTimer = duration;
 	}
 
-	public void activateParticles (int startIndex, int count) {
+	@NullUnmarked public void activateParticles (int startIndex, int count) {
 		int currentTotaLife = life + (int)(lifeDiff * lifeValue.getScale(percent)), currentLife = currentTotaLife;
 		int offsetTime = (int)(lifeOffset + lifeOffsetDiff * lifeOffsetValue.getScale(percent));
 		if (offsetTime > 0) {
@@ -120,7 +121,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		}
 	}
 
-	public void update () {
+	@NullUnmarked public void update () {
 		float deltaMillis = controller.deltaTime * 1000;
 
 		if (delayTimer < delay) {
@@ -176,7 +177,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		}
 	}
 
-	private void addParticles (int count) {
+	@NullUnmarked private void addParticles (int count) {
 		count = Math.min(count, maxParticleCount - controller.particles.size);
 		if (count <= 0) return;
 		controller.activateParticles(controller.particles.size, count);
@@ -228,7 +229,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		this.emissionMode = emissionMode;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public boolean isComplete () {
 		if (delayTimer < delay) return false;
 		return durationTimer >= duration && controller.particles.size == 0;
@@ -239,7 +240,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		return Math.min(1, durationTimer / (float)duration);
 	}
 
-	public void set (RegularEmitter emitter) {
+	@NullUnmarked public void set (RegularEmitter emitter) {
 		super.set(emitter);
 		delayValue.load(emitter.delayValue);
 		durationValue.load(emitter.durationValue);
@@ -276,7 +277,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		json.writeValue("lifeOffset", lifeOffsetValue);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		continuous = json.readValue("continous", boolean.class, jsonData);

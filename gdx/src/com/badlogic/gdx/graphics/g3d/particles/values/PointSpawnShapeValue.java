@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics.g3d.particles.values;
 
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Encapsulate the formulas to spawn a particle on a point shape.
  * @author Inferno */
@@ -30,7 +31,7 @@ public final class PointSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public PointSpawnShapeValue () {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void spawnAux (Vector3 vector, float percent) {
 		vector.x = spawnWidth + (spawnWidthDiff * spawnWidthValue.getScale(percent));
 		vector.y = spawnHeight + (spawnHeightDiff * spawnHeightValue.getScale(percent));

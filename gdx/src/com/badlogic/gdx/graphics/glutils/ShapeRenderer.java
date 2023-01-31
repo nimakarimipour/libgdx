@@ -26,6 +26,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Renders points, lines, shape outlines and filled shapes.
  * <p>
@@ -112,7 +113,7 @@ public class ShapeRenderer implements Disposable {
 		this(maxVertices, null);
 	}
 
-	public ShapeRenderer (int maxVertices, @Nullable ShaderProgram defaultShader) {
+	@NullUnmarked public ShapeRenderer (int maxVertices, @Nullable ShaderProgram defaultShader) {
 		if (defaultShader == null) {
 			renderer = new ImmediateModeRenderer20(maxVertices, false, true, 0);
 		} else {

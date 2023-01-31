@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Builder style API for emitting JSON.
  * @author Nathan Sweet */
@@ -199,7 +200,7 @@ public class JsonWriter extends Writer {
 			return '"' + buffer.replace('"', "\\\"").toString() + '"';
 		}
 
-		public String quoteName (@Nullable String value) {
+		@NullUnmarked public String quoteName (@Nullable String value) {
 			StringBuilder buffer = new StringBuilder(value);
 			buffer.replace('\\', "\\\\").replace('\r', "\\r").replace('\n', "\\n").replace('\t', "\\t");
 			switch (this) {

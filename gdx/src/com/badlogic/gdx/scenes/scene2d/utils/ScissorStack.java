@@ -26,6 +26,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A stack of {@link Rectangle} objects to be used for clipping via {@link GL20#glScissor(int, int, int, int)}. When a new
  * Rectangle is pushed onto the stack, it will be merged with the current top of stack. The minimum area of overlap is then set as
@@ -44,7 +45,7 @@ public class ScissorStack {
 	 * Any drawing should be flushed before pushing scissors.
 	 * @return true if the scissors were pushed. false if the scissor area was zero, in this case the scissors were not pushed and
 	 *         no drawing should occur. */
-	public static boolean pushScissors (Rectangle scissor) {
+	@NullUnmarked public static boolean pushScissors (Rectangle scissor) {
 		fix(scissor);
 
 		if (scissors.size == 0) {
@@ -75,7 +76,7 @@ public class ScissorStack {
 	 * no more rectangles are on the stack, {@link GL20#GL_SCISSOR_TEST} is disabled.
 	 * <p>
 	 * Any drawing should be flushed before popping scissors. */
-	public static Rectangle popScissors () {
+	@NullUnmarked public static Rectangle popScissors () {
 		Rectangle old = scissors.pop();
 		if (scissors.size == 0)
 			Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
@@ -111,7 +112,7 @@ public class ScissorStack {
 
 	/** Calculates a scissor rectangle using 0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight() as the viewport.
 	 * @see #calculateScissors(Camera, float, float, float, float, Matrix4, Rectangle, Rectangle) */
-	public static void calculateScissors (Camera camera, Matrix4 batchTransform, Rectangle area, Rectangle scissor) {
+	@NullUnmarked public static void calculateScissors (Camera camera, Matrix4 batchTransform, Rectangle area, Rectangle scissor) {
 		calculateScissors(camera, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), batchTransform, area, scissor);
 	}
 
@@ -124,7 +125,7 @@ public class ScissorStack {
 	 * @param batchTransform the transformation {@link Matrix4}
 	 * @param area the {@link Rectangle} to transform to window coordinates
 	 * @param scissor the Rectangle to store the result in */
-	public static void calculateScissors (@Nullable Camera camera, float viewportX, float viewportY, float viewportWidth,
+	@NullUnmarked public static void calculateScissors (@Nullable Camera camera, float viewportX, float viewportY, float viewportWidth,
 		float viewportHeight, Matrix4 batchTransform, Rectangle area, Rectangle scissor) {
 		tmp.set(area.x, area.y, 0);
 		tmp.mul(batchTransform);
@@ -140,7 +141,7 @@ public class ScissorStack {
 	}
 
 	/** @return the current viewport in OpenGL ES window coordinates based on the currently applied scissor */
-	public static Rectangle getViewport () {
+	@NullUnmarked public static Rectangle getViewport () {
 		if (scissors.size == 0) {
 			viewport.set(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			return viewport;

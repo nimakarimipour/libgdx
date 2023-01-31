@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A resizable, ordered array of objects with efficient add and remove at the beginning and end. Values in the backing array may
  * wrap back to the beginning, making add and remove at the beginning and end O(1) (unless the backing array needs to resize when
@@ -511,7 +512,7 @@ public class Queue<T> implements Iterable<T> {
 		}
 
 		/** @see Collections#allocateIterators */
-		public Iterator<T> iterator () {
+		@NullUnmarked public Iterator<T> iterator () {
 			if (Collections.allocateIterators) return new QueueIterator(queue, allowRemove);
 // lastAcquire.getBuffer().setLength(0);
 // new Throwable().printStackTrace(new java.io.PrintWriter(lastAcquire));

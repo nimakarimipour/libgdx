@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -78,7 +79,7 @@ public class VertexBufferObjectSubData implements VertexData {
 		((Buffer)byteBuffer).flip();
 	}
 
-	private int createBufferObject () {
+	@NullUnmarked private int createBufferObject () {
 		int result = Gdx.gl20.glGenBuffer();
 		Gdx.gl20.glBindBuffer(GL20.GL_ARRAY_BUFFER, result);
 		Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.capacity(), null, usage);
@@ -107,7 +108,7 @@ public class VertexBufferObjectSubData implements VertexData {
 		return buffer;
 	}
 
-	private void bufferChanged () {
+	@NullUnmarked private void bufferChanged () {
 		if (isBound) {
 			Gdx.gl20.glBufferSubData(GL20.GL_ARRAY_BUFFER, 0, byteBuffer.limit(), byteBuffer);
 			isDirty = false;
@@ -154,7 +155,7 @@ public class VertexBufferObjectSubData implements VertexData {
 		bind(shader, null);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void bind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 
@@ -198,7 +199,7 @@ public class VertexBufferObjectSubData implements VertexData {
 		unbind(shader, null);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 		final int numAttributes = attributes.size();
@@ -223,7 +224,7 @@ public class VertexBufferObjectSubData implements VertexData {
 	}
 
 	/** Disposes of all resources this VertexBufferObject uses. */
-	@Override
+	@NullUnmarked @Override
 	public void dispose () {
 		GL20 gl = Gdx.gl20;
 		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, 0);

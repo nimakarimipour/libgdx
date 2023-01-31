@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Manages OpenGL state and tries to reduce state changes. Uses a {@link TextureBinder} to reduce texture binds as well. Call
  * {@link #begin()} to setup the context, call {@link #end()} to undo all state changes. Use the setters to change state, use
@@ -40,7 +41,7 @@ public class RenderContext {
 	}
 
 	/** Sets up the render context, must be matched with a call to {@link #end()}. */
-	public void begin () {
+	@NullUnmarked public void begin () {
 		Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
 		depthFunc = 0;
 		Gdx.gl.glDepthMask(true);
@@ -53,7 +54,7 @@ public class RenderContext {
 	}
 
 	/** Resets all changed OpenGL states to their defaults. */
-	public void end () {
+	@NullUnmarked public void end () {
 		if (depthFunc != 0) Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
 		if (!depthMask) Gdx.gl.glDepthMask(true);
 		if (blending) Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -61,7 +62,7 @@ public class RenderContext {
 		textureBinder.end();
 	}
 
-	public void setDepthMask (final boolean depthMask) {
+	@NullUnmarked public void setDepthMask (final boolean depthMask) {
 		if (this.depthMask != depthMask) Gdx.gl.glDepthMask(this.depthMask = depthMask);
 	}
 
@@ -69,7 +70,7 @@ public class RenderContext {
 		setDepthTest(depthFunction, 0f, 1f);
 	}
 
-	public void setDepthTest (final int depthFunction, final float depthRangeNear, final float depthRangeFar) {
+	@NullUnmarked public void setDepthTest (final int depthFunction, final float depthRangeNear, final float depthRangeFar) {
 		final boolean wasEnabled = depthFunc != 0;
 		final boolean enabled = depthFunction != 0;
 		if (depthFunc != depthFunction) {
@@ -87,7 +88,7 @@ public class RenderContext {
 		}
 	}
 
-	public void setBlending (final boolean enabled, final int sFactor, final int dFactor) {
+	@NullUnmarked public void setBlending (final boolean enabled, final int sFactor, final int dFactor) {
 		if (enabled != blending) {
 			blending = enabled;
 			if (enabled)
@@ -102,7 +103,7 @@ public class RenderContext {
 		}
 	}
 
-	public void setCullFace (final int face) {
+	@NullUnmarked public void setCullFace (final int face) {
 		if (face != cullFace) {
 			cullFace = face;
 			if ((face == GL20.GL_FRONT) || (face == GL20.GL_BACK) || (face == GL20.GL_FRONT_AND_BACK)) {

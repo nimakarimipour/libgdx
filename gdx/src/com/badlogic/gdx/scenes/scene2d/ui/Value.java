@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Value placeholder, allowing the value to be computed on request. Values can be provided an actor for context to reduce the
  * number of value instances that need to be created and reduce verbosity in code that specifies values.
@@ -118,7 +119,7 @@ abstract public class Value {
 	/** Returns a value that is a percentage of the actor's width. */
 	static public Value percentWidth (final float percent) {
 		return new Value() {
-			public float get (@Nullable @Null Actor actor) {
+			@NullUnmarked public float get (@Nullable @Null Actor actor) {
 				return actor.getWidth() * percent;
 			}
 		};
@@ -127,7 +128,7 @@ abstract public class Value {
 	/** Returns a value that is a percentage of the actor's height. */
 	static public Value percentHeight (final float percent) {
 		return new Value() {
-			public float get (@Nullable @Null Actor actor) {
+			@NullUnmarked public float get (@Nullable @Null Actor actor) {
 				return actor.getHeight() * percent;
 			}
 		};

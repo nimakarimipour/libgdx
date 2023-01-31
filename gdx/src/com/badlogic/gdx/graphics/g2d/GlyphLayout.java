@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Stores {@link GlyphRun runs} of glyphs for a piece of text. The text may contain newlines and color markup tags.
  * <p>
@@ -92,7 +93,7 @@ public class GlyphLayout implements Poolable {
 
 	/** Calls {@link #setText(BitmapFont, CharSequence, int, int, Color, float, int, boolean, String) setText} with the whole
 	 * string, the font's current color, and no alignment or wrapping. */
-	public void setText (@Nullable BitmapFont font, CharSequence str) {
+	@NullUnmarked public void setText (@Nullable BitmapFont font, CharSequence str) {
 		setText(font, str, 0, str.length(), font.getColor(), 0, Align.left, false, null);
 	}
 
@@ -110,7 +111,7 @@ public class GlyphLayout implements Poolable {
 	 * @param truncate If not null and the width of the glyphs exceed targetWidth, the glyphs are truncated and the glyphs for the
 	 *           specified truncate string are placed at the end. Empty string can be used to truncate without adding glyphs.
 	 *           Truncate should not be used with text that contains multiple lines. Wrap is ignored if truncate is not null. */
-	public void setText (@Nullable BitmapFont font, @Nullable CharSequence str, int start, int end, Color color, float targetWidth,
+	@NullUnmarked public void setText (@Nullable BitmapFont font, @Nullable CharSequence str, int start, int end, Color color, float targetWidth,
 		int halign, boolean wrap, @Nullable @Null String truncate) {
 
 		reset();

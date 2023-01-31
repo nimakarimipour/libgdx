@@ -44,6 +44,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Represents a file or directory on the filesystem, classpath, Android app storage, or Android assets directory. FileHandles are
  * created via a {@link Files} instance.
@@ -64,7 +65,7 @@ public class FileHandle {
 	/** Creates a new absolute FileHandle for the file name. Use this for tools on the desktop that don't need any of the backends.
 	 * Do not use this constructor in case you write something cross-platform. Use the {@link Files} interface instead.
 	 * @param fileName the filename. */
-	public FileHandle (@Nullable String fileName) {
+	@NullUnmarked public FileHandle (@Nullable String fileName) {
 		this.file = new File(fileName);
 		this.type = FileType.Absolute;
 	}
@@ -89,17 +90,17 @@ public class FileHandle {
 
 	/** @return the path of the file as specified on construction, e.g. Gdx.files.internal("dir/file.png") -> dir/file.png.
 	 *         backward slashes will be replaced by forward slashes. */
-	public String path () {
+	@NullUnmarked public String path () {
 		return file.getPath().replace('\\', '/');
 	}
 
 	/** @return the name of the file, without any parent paths. */
-	public String name () {
+	@NullUnmarked public String name () {
 		return file.getName();
 	}
 
 	/** Returns the file extension (without the dot) or an empty string if the file name doesn't contain a dot. */
-	public String extension () {
+	@NullUnmarked public String extension () {
 		String name = file.getName();
 		int dotIndex = name.lastIndexOf('.');
 		if (dotIndex == -1) return "";
@@ -107,7 +108,7 @@ public class FileHandle {
 	}
 
 	/** @return the name of the file, without parent paths or the extension. */
-	public String nameWithoutExtension () {
+	@NullUnmarked public String nameWithoutExtension () {
 		String name = file.getName();
 		int dotIndex = name.lastIndexOf('.');
 		if (dotIndex == -1) return name;
@@ -116,7 +117,7 @@ public class FileHandle {
 
 	/** @return the path and filename without the extension, e.g. dir/dir2/file.png -> dir/dir2/file. backward slashes will be
 	 *         returned as forward slashes. */
-	public String pathWithoutExtension () {
+	@NullUnmarked public String pathWithoutExtension () {
 		String path = file.getPath().replace('\\', '/');
 		int dotIndex = path.lastIndexOf('.');
 		if (dotIndex == -1) return path;
@@ -130,7 +131,7 @@ public class FileHandle {
 
 	/** Returns a java.io.File that represents this file handle. Note the returned file will only be usable for
 	 * {@link FileType#Absolute} and {@link FileType#External} file handles. */
-	@Nullable
+	@NullUnmarked @Nullable
 	public File file () {
 		if (type == FileType.External) return new File(Gdx.files.getExternalStoragePath(), file.getPath());
 		return file;
@@ -138,7 +139,7 @@ public class FileHandle {
 
 	/** Returns a stream for reading this file as bytes.
 	 * @throws GdxRuntimeException if the file handle represents a directory, doesn't exist, or could not be read. */
-	public InputStream read () {
+	@NullUnmarked public InputStream read () {
 		if (type == FileType.Classpath || (type == FileType.Internal && !file().exists())
 			|| (type == FileType.Local && !file().exists())) {
 			InputStream input = FileHandle.class.getResourceAsStream("/" + file.getPath().replace('\\', '/'));
@@ -275,7 +276,7 @@ public class FileHandle {
 	/** Attempts to memory map this file. Android files must not be compressed.
 	 * @throws GdxRuntimeException if this file handle represents a directory, doesn't exist, or could not be read, or memory
 	 *            mapping fails, or is a {@link FileType#Classpath} file. */
-	public ByteBuffer map (FileChannel.MapMode mode) {
+	@NullUnmarked public ByteBuffer map (FileChannel.MapMode mode) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot map a classpath file: " + this);
 		RandomAccessFile raf = null;
 		try {
@@ -296,7 +297,7 @@ public class FileHandle {
 	 * @param append If false, this file will be overwritten if it exists, otherwise it will be appended.
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
-	public OutputStream write (boolean append) {
+	@NullUnmarked public OutputStream write (boolean append) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot write to a classpath file: " + file);
 		if (type == FileType.Internal) throw new GdxRuntimeException("Cannot write to an internal file: " + file);
 		parent().mkdirs();
@@ -350,7 +351,7 @@ public class FileHandle {
 	 * @param charset May be null to use the default charset.
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
-	public Writer writer (boolean append, @Nullable String charset) {
+	@NullUnmarked public Writer writer (boolean append, @Nullable String charset) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot write to a classpath file: " + file);
 		if (type == FileType.Internal) throw new GdxRuntimeException("Cannot write to an internal file: " + file);
 		parent().mkdirs();
@@ -426,7 +427,7 @@ public class FileHandle {
 	 * directory. On the desktop, an {@link FileType#Internal} handle to a directory on the classpath will return a zero length
 	 * array.
 	 * @throws GdxRuntimeException if this file is an {@link FileType#Classpath} file. */
-	public FileHandle[] list () {
+	@NullUnmarked public FileHandle[] list () {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot list a classpath directory: " + file);
 		String[] relativePaths = file().list();
 		if (relativePaths == null) return new FileHandle[0];
@@ -441,7 +442,7 @@ public class FileHandle {
 	 * classpath will return a zero length array.
 	 * @param filter the {@link FileFilter} to filter files
 	 * @throws GdxRuntimeException if this file is an {@link FileType#Classpath} file. */
-	public FileHandle[] list (FileFilter filter) {
+	@NullUnmarked public FileHandle[] list (FileFilter filter) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot list a classpath directory: " + file);
 		File file = file();
 		String[] relativePaths = file.list();
@@ -468,7 +469,7 @@ public class FileHandle {
 	 * classpath will return a zero length array.
 	 * @param filter the {@link FilenameFilter} to filter files
 	 * @throws GdxRuntimeException if this file is an {@link FileType#Classpath} file. */
-	public FileHandle[] list (FilenameFilter filter) {
+	@NullUnmarked public FileHandle[] list (FilenameFilter filter) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot list a classpath directory: " + file);
 		File file = file();
 		String[] relativePaths = file.list();
@@ -493,7 +494,7 @@ public class FileHandle {
 	 * represents a file and not a directory. On the desktop, an {@link FileType#Internal} handle to a directory on the classpath
 	 * will return a zero length array.
 	 * @throws GdxRuntimeException if this file is an {@link FileType#Classpath} file. */
-	public FileHandle[] list (String suffix) {
+	@NullUnmarked public FileHandle[] list (String suffix) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot list a classpath directory: " + file);
 		String[] relativePaths = file().list();
 		if (relativePaths == null) return new FileHandle[0];
@@ -516,25 +517,25 @@ public class FileHandle {
 	/** Returns true if this file is a directory. Always returns false for classpath files. On Android, an
 	 * {@link FileType#Internal} handle to an empty directory will return false. On the desktop, an {@link FileType#Internal}
 	 * handle to a directory on the classpath will return false. */
-	public boolean isDirectory () {
+	@NullUnmarked public boolean isDirectory () {
 		if (type == FileType.Classpath) return false;
 		return file().isDirectory();
 	}
 
 	/** Returns a handle to the child with the specified name. */
-	public FileHandle child (@Nullable String name) {
+	@NullUnmarked public FileHandle child (@Nullable String name) {
 		if (file.getPath().length() == 0) return new FileHandle(new File(name), type);
 		return new FileHandle(new File(file, name), type);
 	}
 
 	/** Returns a handle to the sibling with the specified name.
 	 * @throws GdxRuntimeException if this file is the root. */
-	public FileHandle sibling (String name) {
+	@NullUnmarked public FileHandle sibling (String name) {
 		if (file.getPath().length() == 0) throw new GdxRuntimeException("Cannot get the sibling of the root.");
 		return new FileHandle(new File(file.getParent(), name), type);
 	}
 
-	public FileHandle parent () {
+	@NullUnmarked public FileHandle parent () {
 		File parent = file.getParentFile();
 		if (parent == null) {
 			if (type == FileType.Absolute)
@@ -546,7 +547,7 @@ public class FileHandle {
 	}
 
 	/** @throws GdxRuntimeException if this file handle is a {@link FileType#Classpath} or {@link FileType#Internal} file. */
-	public void mkdirs () {
+	@NullUnmarked public void mkdirs () {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot mkdirs with a classpath file: " + file);
 		if (type == FileType.Internal) throw new GdxRuntimeException("Cannot mkdirs with an internal file: " + file);
 		file().mkdirs();
@@ -554,7 +555,7 @@ public class FileHandle {
 
 	/** Returns true if the file exists. On Android, a {@link FileType#Classpath} or {@link FileType#Internal} handle to a
 	 * directory will always return false. Note that this can be very slow for internal files on Android! */
-	public boolean exists () {
+	@NullUnmarked public boolean exists () {
 		switch (type) {
 		case Internal:
 			if (file().exists()) return true;
@@ -567,7 +568,7 @@ public class FileHandle {
 
 	/** Deletes this file or empty directory and returns success. Will not delete a directory that has children.
 	 * @throws GdxRuntimeException if this file handle is a {@link FileType#Classpath} or {@link FileType#Internal} file. */
-	public boolean delete () {
+	@NullUnmarked public boolean delete () {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot delete a classpath file: " + file);
 		if (type == FileType.Internal) throw new GdxRuntimeException("Cannot delete an internal file: " + file);
 		return file().delete();
@@ -621,7 +622,7 @@ public class FileHandle {
 	/** Moves this file to the specified file, overwriting the file if it already exists.
 	 * @throws GdxRuntimeException if the source or destination file handle is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file. */
-	public void moveTo (FileHandle dest) {
+	@NullUnmarked public void moveTo (FileHandle dest) {
 		switch (type) {
 		case Classpath:
 			throw new GdxRuntimeException("Cannot move a classpath file: " + file);
@@ -639,7 +640,7 @@ public class FileHandle {
 
 	/** Returns the length in bytes of this file, or 0 if this file is a directory, does not exist, or the size cannot otherwise be
 	 * determined. */
-	public long length () {
+	@NullUnmarked public long length () {
 		if (type == FileType.Classpath || (type == FileType.Internal && !file.exists())) {
 			InputStream input = read();
 			try {
@@ -656,7 +657,7 @@ public class FileHandle {
 	/** Returns the last modified time in milliseconds for this file. Zero is returned if the file doesn't exist. Zero is returned
 	 * for {@link FileType#Classpath} files. On Android, zero is returned for {@link FileType#Internal} files. On the desktop, zero
 	 * is returned for {@link FileType#Internal} files on the classpath. */
-	public long lastModified () {
+	@NullUnmarked public long lastModified () {
 		return file().lastModified();
 	}
 
@@ -666,14 +667,14 @@ public class FileHandle {
 		return type == other.type && path().equals(other.path());
 	}
 
-	public int hashCode () {
+	@NullUnmarked public int hashCode () {
 		int hash = 1;
 		hash = hash * 37 + type.hashCode();
 		hash = hash * 67 + path().hashCode();
 		return hash;
 	}
 
-	public String toString () {
+	@NullUnmarked public String toString () {
 		return file.getPath().replace('\\', '/');
 	}
 
@@ -696,7 +697,7 @@ public class FileHandle {
 		}
 	}
 
-	static private void emptyDirectory (@Nullable File file, boolean preserveTree) {
+	@NullUnmarked static private void emptyDirectory (@Nullable File file, boolean preserveTree) {
 		if (file.exists()) {
 			File[] files = file.listFiles();
 			if (files != null) {
@@ -712,7 +713,7 @@ public class FileHandle {
 		}
 	}
 
-	static private boolean deleteDirectory (@Nullable File file) {
+	@NullUnmarked static private boolean deleteDirectory (@Nullable File file) {
 		emptyDirectory(file, false);
 		return file.delete();
 	}

@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import com.badlogic.gdx.math.MathUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A resizable, ordered or unordered float array. Avoids the boxing that occurs with ArrayList<Float>. If unordered, this class
  * avoids a memory copy when removing elements (the last element is moved to the removed element's position).
@@ -116,7 +117,7 @@ public class FloatArray {
 		addAll(array.items, offset, length);
 	}
 
-	public void addAll (@Nullable float... array) {
+	@NullUnmarked public void addAll (@Nullable float... array) {
 		addAll(array, 0, array.length);
 	}
 

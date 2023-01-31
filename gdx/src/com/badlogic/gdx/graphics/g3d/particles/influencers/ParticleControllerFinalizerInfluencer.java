@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which updates the simulation of particles containing a {@link ParticleController}. Must be the last
  * influencer to be updated, so it has to be placed at the end of the influencers list when creating a {@link ParticleController}.
@@ -34,7 +35,7 @@ public class ParticleControllerFinalizerInfluencer extends Influencer {
 	public ParticleControllerFinalizerInfluencer () {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void init () {
 		controllerChannel = controller.particles.getChannel(ParticleChannels.ParticleController);
 		if (controllerChannel == null) throw new GdxRuntimeException(
@@ -45,12 +46,12 @@ public class ParticleControllerFinalizerInfluencer extends Influencer {
 		hasRotation = rotationChannel != null;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void update () {
 		for (int i = 0, positionOffset = 0,
 			c = controller.particles.size; i < c; ++i, positionOffset += positionChannel.strideSize) {

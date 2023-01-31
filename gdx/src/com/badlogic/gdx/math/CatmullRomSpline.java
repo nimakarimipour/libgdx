@@ -17,6 +17,7 @@
 package com.badlogic.gdx.math;
 
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** @author Xoppa */
 public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
@@ -44,7 +45,7 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T calculate (@Nullable final T out, final int i, final float u, @Nullable final T[] points,
+	@NullUnmarked public static <T extends Vector<T>> T calculate (@Nullable final T out, final int i, final float u, @Nullable final T[] points,
 		final boolean continuous, @Nullable final T tmp) {
 		final int n = points.length;
 		final float u2 = u * u;
@@ -80,7 +81,7 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, @Nullable final T[] points,
+	@NullUnmarked public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, @Nullable final T[] points,
 		final boolean continuous, @Nullable final T tmp) {
 		/*
 		 * catmull'(u) = 0.5 *((-p0 + p2) + 2 * (2*p0 - 5*p1 + 4*p2 - p3) * u + 3 * (-p0 + 3*p1 - 3*p2 + p3) * u * u)
@@ -153,7 +154,7 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 	}
 
 	/** @return The span closest to the specified value, restricting to the specified spans. */
-	public int nearest (final T in, int start, final int count) {
+	@NullUnmarked public int nearest (final T in, int start, final int count) {
 		while (start < 0)
 			start += spanCount;
 		int result = start % spanCount;
@@ -178,7 +179,7 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 		return approximate(in, nearest(in, start, count));
 	}
 
-	public float approximate (final T in, final int near) {
+	@NullUnmarked public float approximate (final T in, final int near) {
 		int n = near;
 		final T nearest = controlPoints[n];
 		final T previous = controlPoints[n > 0 ? n - 1 : spanCount - 1];
@@ -210,7 +211,7 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 		return approximate(v);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public float approxLength (int samples) {
 		float tempLength = 0;
 		for (int i = 0; i < samples; ++i) {

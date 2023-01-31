@@ -4,6 +4,7 @@ package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class InWindow {
 	@Nullable public byte[] _bufferBase; // pointer to buffer with data
@@ -21,7 +22,7 @@ public class InWindow {
 	int _keepSizeAfter; // how many BYTEs must be kept buffer after _pos
 	public int _streamPos; // offset (from _buffer) of first not read byte from Stream
 
-	public void MoveBlock () {
+	@NullUnmarked public void MoveBlock () {
 		int offset = _bufferOffset + _pos - _keepSizeBefore;
 		// we need one additional byte, since MovePos moves on 1 byte.
 		if (offset > 0) offset--;
@@ -34,7 +35,7 @@ public class InWindow {
 		_bufferOffset -= offset;
 	}
 
-	public void ReadBlock () throws IOException {
+	@NullUnmarked public void ReadBlock () throws IOException {
 		if (_streamEndWasReached) return;
 		while (true) {
 			int size = (0 - _bufferOffset) + _blockSize - _streamPos;
@@ -94,12 +95,12 @@ public class InWindow {
 		}
 	}
 
-	public byte GetIndexByte (int index) {
+	@NullUnmarked public byte GetIndexByte (int index) {
 		return _bufferBase[_bufferOffset + _pos + index];
 	}
 
 	// index + limit have not to exceed _keepSizeAfter;
-	public int GetMatchLen (int index, int distance, int limit) {
+	@NullUnmarked public int GetMatchLen (int index, int distance, int limit) {
 		if (_streamEndWasReached) if ((_pos + index) + limit > _streamPos) limit = _streamPos - (_pos + index);
 		distance++;
 		// Byte *pby = _buffer + (size_t)_pos + index;

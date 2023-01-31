@@ -20,6 +20,7 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Event for actor input: touch, mouse, touch/mouse actor enter/exit, mouse scroll, and keyboard events.
  * @see InputListener */
@@ -137,7 +138,7 @@ public class InputEvent extends Event {
 
 	/** Sets actorCoords to this event's coordinates relative to the specified actor.
 	 * @param actorCoords Output for resulting coordinates. */
-	public Vector2 toCoordinates (@Nullable Actor actor, Vector2 actorCoords) {
+	@NullUnmarked public Vector2 toCoordinates (@Nullable Actor actor, Vector2 actorCoords) {
 		actorCoords.set(stageX, stageY);
 		actor.stageToLocalCoordinates(actorCoords);
 		return actorCoords;
@@ -158,7 +159,7 @@ public class InputEvent extends Event {
 		this.touchFocus = touchFocus;
 	}
 
-	public String toString () {
+	@NullUnmarked public String toString () {
 		return type.toString();
 	}
 

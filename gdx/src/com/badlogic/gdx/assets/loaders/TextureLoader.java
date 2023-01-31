@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** {@link AssetLoader} for {@link Texture} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link TextureParameter} to
@@ -46,7 +47,7 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		super(resolver);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file,
 		@Nullable TextureParameter parameter) {
 		info.filename = fileName;

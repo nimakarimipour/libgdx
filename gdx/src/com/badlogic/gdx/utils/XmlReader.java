@@ -27,6 +27,7 @@ import java.io.Reader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Lightweight XML parser. Supports a subset of XML features: elements, attributes, text, predefined entities, CDATA, mixed
  * content. Namespaces are parsed as part of the element or attribute name. Prologs and doctypes are ignored. Only 8-bit character
@@ -439,7 +440,7 @@ public class XmlReader {
 		current = child;
 	}
 
-	protected void attribute (@Nullable String name, @Nullable String value) {
+	@NullUnmarked protected void attribute (@Nullable String name, @Nullable String value) {
 		current.setAttribute(name, value);
 	}
 
@@ -454,7 +455,7 @@ public class XmlReader {
 		return null;
 	}
 
-	protected void text (@Nullable String text) {
+	@NullUnmarked protected void text (@Nullable String text) {
 		String existing = current.getText();
 		current.setText(existing != null ? existing + text : text);
 	}
@@ -544,7 +545,7 @@ public class XmlReader {
 			if (children != null) children.removeValue(child, true);
 		}
 
-		public void remove () {
+		@NullUnmarked public void remove () {
 			parent.removeChild(this);
 		}
 

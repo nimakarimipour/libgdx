@@ -22,6 +22,7 @@ import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** An unordered map where the keys are unboxed ints and values are unboxed floats. No allocation is done except when growing the
  * table size.
@@ -459,7 +460,7 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link Entries} constructor for nested or multithreaded iteration. */
-	public Entries entries () {
+	@NullUnmarked public Entries entries () {
 		if (Collections.allocateIterators) return new Entries(this);
 		if (entries1 == null) {
 			entries1 = new Entries(this);
@@ -481,7 +482,7 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link Entries} constructor for nested or multithreaded iteration. */
-	public Values values () {
+	@NullUnmarked public Values values () {
 		if (Collections.allocateIterators) return new Values(this);
 		if (values1 == null) {
 			values1 = new Values(this);
@@ -503,7 +504,7 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link Entries} constructor for nested or multithreaded iteration. */
-	public Keys keys () {
+	@NullUnmarked public Keys keys () {
 		if (Collections.allocateIterators) return new Keys(this);
 		if (keys1 == null) {
 			keys1 = new Keys(this);

@@ -25,6 +25,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.SpawnShapeValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which controls where the particles will be spawned.
  * @author Inferno */
@@ -42,27 +43,27 @@ public class SpawnInfluencer extends Influencer {
 		this.spawnShapeValue = spawnShapeValue;
 	}
 
-	public SpawnInfluencer (SpawnInfluencer source) {
+	@NullUnmarked public SpawnInfluencer (SpawnInfluencer source) {
 		spawnShapeValue = source.spawnShapeValue.copy();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void init () {
 		spawnShapeValue.init();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void start () {
 		spawnShapeValue.start();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void activateParticles (int startIndex, int count) {
 		for (int i = startIndex * positionChannel.strideSize,
 			c = i + count * positionChannel.strideSize; i < c; i += positionChannel.strideSize) {
@@ -97,12 +98,12 @@ public class SpawnInfluencer extends Influencer {
 		spawnShapeValue = json.readValue("spawnShape", SpawnShapeValue.class, jsonData);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void save (AssetManager manager, ResourceData data) {
 		spawnShapeValue.save(manager, data);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void load (AssetManager manager, ResourceData data) {
 		spawnShapeValue.load(manager, data);
 	}

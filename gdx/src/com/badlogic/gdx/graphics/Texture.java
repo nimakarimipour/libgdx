@@ -32,6 +32,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
@@ -107,7 +108,7 @@ public class Texture extends GLTexture {
 
 	@Nullable TextureData data;
 
-	public Texture (String internalPath) {
+	@NullUnmarked public Texture (String internalPath) {
 		this(Gdx.files.internal(internalPath));
 	}
 
@@ -139,17 +140,17 @@ public class Texture extends GLTexture {
 		this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
 	}
 
-	public Texture (@Nullable TextureData data) {
+	@NullUnmarked public Texture (@Nullable TextureData data) {
 		this(GL20.GL_TEXTURE_2D, Gdx.gl.glGenTexture(), data);
 	}
 
-	protected Texture (int glTarget, int glHandle, @Nullable TextureData data) {
+	@NullUnmarked protected Texture (int glTarget, int glHandle, @Nullable TextureData data) {
 		super(glTarget, glHandle);
 		load(data);
 		if (data.isManaged()) addManagedTexture(Gdx.app, this);
 	}
 
-	public void load (@Nullable TextureData data) {
+	@NullUnmarked public void load (@Nullable TextureData data) {
 		if (this.data != null && data.isManaged() != this.data.isManaged())
 			throw new GdxRuntimeException("New data must have the same managed status as the old data");
 		this.data = data;
@@ -167,7 +168,7 @@ public class Texture extends GLTexture {
 
 	/** Used internally to reload after context loss. Creates a new GL handle then calls {@link #load(TextureData)}. Use this only
 	 * if you know what you do! */
-	@Override
+	@NullUnmarked @Override
 	protected void reload () {
 		if (!isManaged()) throw new GdxRuntimeException("Tried to reload unmanaged Texture");
 		glHandle = Gdx.gl.glGenTexture();
@@ -180,7 +181,7 @@ public class Texture extends GLTexture {
 	 * @param pixmap The Pixmap
 	 * @param x The x coordinate in pixels
 	 * @param y The y coordinate in pixels */
-	public void draw (Pixmap pixmap, int x, int y) {
+	@NullUnmarked public void draw (Pixmap pixmap, int x, int y) {
 		if (data.isManaged()) throw new GdxRuntimeException("can't draw to a managed texture");
 
 		bind();
@@ -188,12 +189,12 @@ public class Texture extends GLTexture {
 			pixmap.getPixels());
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int getWidth () {
 		return data.getWidth();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int getHeight () {
 		return data.getHeight();
 	}
@@ -209,12 +210,12 @@ public class Texture extends GLTexture {
 	}
 
 	/** @return whether this texture is managed or not. */
-	public boolean isManaged () {
+	@NullUnmarked public boolean isManaged () {
 		return data.isManaged();
 	}
 
 	/** Disposes all resources associated with the texture */
-	public void dispose () {
+	@NullUnmarked public void dispose () {
 		// this is a hack. reason: we have to set the glHandle to 0 for textures that are
 		// reloaded through the asset manager as we first remove (and thus dispose) the texture
 		// and then reload it. the glHandle is set to 0 in invalidateAllTextures prior to
@@ -242,7 +243,7 @@ public class Texture extends GLTexture {
 	}
 
 	/** Invalidate all managed textures. This is an internal method. Do not use it! */
-	public static void invalidateAllTextures (Application app) {
+	@NullUnmarked public static void invalidateAllTextures (Application app) {
 		Array<Texture> managedTextureArray = managedTextures.get(app);
 		if (managedTextureArray == null) return;
 
@@ -321,7 +322,7 @@ public class Texture extends GLTexture {
 	}
 
 	/** @return the number of managed textures currently loaded */
-	public static int getNumManagedTextures () {
+	@NullUnmarked public static int getNumManagedTextures () {
 		return managedTextures.get(Gdx.app).size;
 	}
 }

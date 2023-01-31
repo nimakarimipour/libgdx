@@ -31,6 +31,7 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A PolygonSpriteBatch is used to draw 2D polygons that reference a texture (region). The class will batch the drawing commands
  * and optimize them for processing by the GPU.
@@ -122,7 +123,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	 * @param maxTriangles The max number of triangles in a single batch.
 	 * @param defaultShader The default shader to use. This is not owned by the PolygonSpriteBatch and must be disposed separately.
 	 *           May be null to use the default shader. */
-	public PolygonSpriteBatch (int maxVertices, int maxTriangles, @Nullable ShaderProgram defaultShader) {
+	@NullUnmarked public PolygonSpriteBatch (int maxVertices, int maxTriangles, @Nullable ShaderProgram defaultShader) {
 		// 32767 is max vertex index.
 		if (maxVertices > 32767)
 			throw new IllegalArgumentException("Can't have more than 32767 vertices per batch: " + maxVertices);
@@ -148,7 +149,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		projectionMatrix.setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void begin () {
 		if (drawing) throw new IllegalStateException("PolygonSpriteBatch.end must be called before begin.");
 		renderCalls = 0;
@@ -163,7 +164,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		drawing = true;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void end () {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before end.");
 		if (vertexIndex > 0) flush();
@@ -794,7 +795,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		draw(region, x, y, region.getRegionWidth(), region.getRegionHeight());
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void draw (@Nullable TextureRegion region, float x, float y, float width, float height) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 
@@ -852,7 +853,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		this.vertexIndex = idx;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void draw (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width, float height,
 		float scaleX, float scaleY, float rotation) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
@@ -1196,7 +1197,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		vertexIndex = idx;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void flush () {
 		if (vertexIndex == 0) return;
 
@@ -1311,7 +1312,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		}
 	}
 
-	private void switchTexture (@Nullable Texture texture) {
+	@NullUnmarked private void switchTexture (@Nullable Texture texture) {
 		flush();
 		lastTexture = texture;
 		invTexWidth = 1.0f / texture.getWidth();

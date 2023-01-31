@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ShortArray;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Renders polygon filled with a repeating TextureRegion with specified density Without causing an additional flush or render
  * call
@@ -151,7 +152,7 @@ public class RepeatablePolygonSprite {
 	}
 
 	/** Builds final vertices with vertex attributes like coordinates, color and region u/v */
-	private void buildVertices () {
+	@NullUnmarked private void buildVertices () {
 		vertices.clear();
 		for (int i = 0; i < parts.size; i++) {
 			float verts[] = parts.get(i);
@@ -185,7 +186,7 @@ public class RepeatablePolygonSprite {
 		dirty = false;
 	}
 
-	public void draw (PolygonSpriteBatch batch) {
+	@NullUnmarked public void draw (PolygonSpriteBatch batch) {
 		if (dirty) {
 			buildVertices();
 		}

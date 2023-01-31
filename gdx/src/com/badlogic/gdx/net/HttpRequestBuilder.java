@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A builder for {@link HttpRequest}s.
  * 
@@ -57,7 +58,7 @@ public class HttpRequestBuilder {
 	}
 
 	/** @see HttpRequest#setMethod(String) */
-	public HttpRequestBuilder method (String httpMethod) {
+	@NullUnmarked public HttpRequestBuilder method (String httpMethod) {
 		validate();
 		httpRequest.setMethod(httpMethod);
 		return this;
@@ -66,7 +67,7 @@ public class HttpRequestBuilder {
 	/** The {@link #baseUrl} will automatically be added as a prefix to the given URL.
 	 * 
 	 * @see HttpRequest#setUrl(String) */
-	public HttpRequestBuilder url (String url) {
+	@NullUnmarked public HttpRequestBuilder url (String url) {
 		validate();
 		httpRequest.setUrl(baseUrl + url);
 		return this;
@@ -75,49 +76,49 @@ public class HttpRequestBuilder {
 	/** If this method is not called, the {@link #defaultTimeout} will be used.
 	 * 
 	 * @see HttpRequest#setTimeOut(int) */
-	public HttpRequestBuilder timeout (int timeOut) {
+	@NullUnmarked public HttpRequestBuilder timeout (int timeOut) {
 		validate();
 		httpRequest.setTimeOut(timeOut);
 		return this;
 	}
 
 	/** @see HttpRequest#setFollowRedirects(boolean) */
-	public HttpRequestBuilder followRedirects (boolean followRedirects) {
+	@NullUnmarked public HttpRequestBuilder followRedirects (boolean followRedirects) {
 		validate();
 		httpRequest.setFollowRedirects(followRedirects);
 		return this;
 	}
 
 	/** @see HttpRequest#setIncludeCredentials(boolean) */
-	public HttpRequestBuilder includeCredentials (boolean includeCredentials) {
+	@NullUnmarked public HttpRequestBuilder includeCredentials (boolean includeCredentials) {
 		validate();
 		httpRequest.setIncludeCredentials(includeCredentials);
 		return this;
 	}
 
 	/** @see HttpRequest#setHeader(String, String) */
-	public HttpRequestBuilder header (String name, String value) {
+	@NullUnmarked public HttpRequestBuilder header (String name, String value) {
 		validate();
 		httpRequest.setHeader(name, value);
 		return this;
 	}
 
 	/** @see HttpRequest#setContent(String) */
-	public HttpRequestBuilder content (String content) {
+	@NullUnmarked public HttpRequestBuilder content (String content) {
 		validate();
 		httpRequest.setContent(content);
 		return this;
 	}
 
 	/** @see HttpRequest#setContent(java.io.InputStream, long) */
-	public HttpRequestBuilder content (InputStream contentStream, long contentLength) {
+	@NullUnmarked public HttpRequestBuilder content (InputStream contentStream, long contentLength) {
 		validate();
 		httpRequest.setContent(contentStream, contentLength);
 		return this;
 	}
 
 	/** Sets the correct {@code ContentType} and encodes the given parameter map, then sets it as the content. */
-	public HttpRequestBuilder formEncodedContent (Map<String, String> content) {
+	@NullUnmarked public HttpRequestBuilder formEncodedContent (Map<String, String> content) {
 		validate();
 		httpRequest.setHeader(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
 		String formEncodedContent = HttpParametersUtils.convertHttpParameters(content);
@@ -127,7 +128,7 @@ public class HttpRequestBuilder {
 
 	/** Sets the correct {@code ContentType} and encodes the given content object via {@link #json}, then sets it as the
 	 * content. */
-	public HttpRequestBuilder jsonContent (Object content) {
+	@NullUnmarked public HttpRequestBuilder jsonContent (Object content) {
 		validate();
 		httpRequest.setHeader(HttpRequestHeader.ContentType, "application/json");
 		String jsonContent = json.toJson(content);
@@ -136,7 +137,7 @@ public class HttpRequestBuilder {
 	}
 
 	/** Sets the {@code Authorization} header via the Base64 encoded username and password. */
-	public HttpRequestBuilder basicAuthentication (String username, String password) {
+	@NullUnmarked public HttpRequestBuilder basicAuthentication (String username, String password) {
 		validate();
 		httpRequest.setHeader(HttpRequestHeader.Authorization, "Basic " + Base64Coder.encodeString(username + ":" + password));
 		return this;

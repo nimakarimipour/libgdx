@@ -35,6 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A tree widget where each node has an icon, actor, and child nodes.
  * <p>
@@ -86,7 +87,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 	private void initialize () {
 		addListener(clickListener = new ClickListener() {
-			public void clicked (InputEvent event, float x, float y) {
+			@NullUnmarked public void clicked (InputEvent event, float x, float y) {
 				N node = getNodeAt(y);
 				if (node == null) return;
 				if (node != getNodeAt(getTouchDownY())) return;
@@ -149,7 +150,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		insert(rootNodes.size, node);
 	}
 
-	public void insert (int index, N node) {
+	@NullUnmarked public void insert (int index, N node) {
 		if (node.parent != null) {
 			node.parent.remove(node);
 			node.parent = null;
@@ -178,7 +179,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		node.addToTree(this, actorIndex);
 	}
 
-	public void remove (N node) {
+	@NullUnmarked public void remove (N node) {
 		if (node.parent != null) {
 			node.parent.remove(node);
 			return;
@@ -201,7 +202,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		sizeInvalid = true;
 	}
 
-	private float plusMinusWidth () {
+	@NullUnmarked private float plusMinusWidth () {
 		float width = Math.max(style.plus.getMinWidth(), style.minus.getMinWidth());
 		if (style.plusOver != null) width = Math.max(width, style.plusOver.getMinWidth());
 		if (style.minusOver != null) width = Math.max(width, style.minusOver.getMinWidth());
@@ -216,7 +217,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		prefWidth += paddingLeft + paddingRight;
 	}
 
-	private void computeSize (Array<N> nodes, float indent, float plusMinusWidth) {
+	@NullUnmarked private void computeSize (Array<N> nodes, float indent, float plusMinusWidth) {
 		float ySpacing = this.ySpacing;
 		float spacing = iconSpacingLeft + iconSpacingRight;
 		for (int i = 0, n = nodes.size; i < n; i++) {
@@ -246,7 +247,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		layout(rootNodes, paddingLeft, getHeight() - ySpacing / 2, plusMinusWidth());
 	}
 
-	private float layout (Array<N> nodes, float indent, float y, float plusMinusWidth) {
+	@NullUnmarked private float layout (Array<N> nodes, float indent, float y, float plusMinusWidth) {
 		float ySpacing = this.ySpacing;
 		float iconSpacingLeft = this.iconSpacingLeft;
 		float spacing = iconSpacingLeft + iconSpacingRight;
@@ -276,7 +277,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** Called to draw the background. Default implementation draws the style background drawable. */
-	protected void drawBackground (Batch batch, float parentAlpha) {
+	@NullUnmarked protected void drawBackground (Batch batch, float parentAlpha) {
 		if (style.background != null) {
 			Color color = getColor();
 			batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
@@ -287,7 +288,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	/** Draws selection, icons, and expand icons.
 	 * @param parent null for the root nodes.
 	 * @return The Y position of the last visible actor for the nodes. */
-	protected float drawIcons (Batch batch, float r, float g, float b, float a, @Nullable @Null N parent, Array<N> nodes,
+	@NullUnmarked protected float drawIcons (Batch batch, float r, float g, float b, float a, @Nullable @Null N parent, Array<N> nodes,
 		float indent, float plusMinusWidth) {
 
 		Rectangle cullingArea = getCullingArea();
@@ -351,7 +352,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	 * {@link TreeStyle#minusOver} on the desktop if the node is the {@link #getOverNode() over node}, the mouse is left of
 	 * <code>iconX</code>, and clicking would expand the node.
 	 * @param iconX The X coordinate of the over node's icon. */
-	@Nullable
+	@NullUnmarked @Nullable
 	protected Drawable getExpandIcon (N node, float iconX) {
 		if (node == overNode //
 			&& Gdx.app.getType() == ApplicationType.Desktop //
@@ -396,7 +397,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		return rowY;
 	}
 
-	void selectNodes (Array<N> nodes, float low, float high) {
+	@NullUnmarked void selectNodes (Array<N> nodes, float low, float high) {
 		for (int i = 0, n = nodes.size; i < n; i++) {
 			N node = nodes.get(i);
 			if (node.actor.getY() < low) break;
@@ -443,7 +444,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	/** Updates the order of the actors in the tree for all root nodes and all child nodes. This is useful after changing the order
 	 * of {@link #getRootNodes()}.
 	 * @see Node#updateChildren() */
-	public void updateRootNodes () {
+	@NullUnmarked public void updateRootNodes () {
 		for (int i = 0, n = rootNodes.size; i < n; i++) {
 			N node = rootNodes.get(i);
 			int actorIndex = node.actor.getZIndex();
@@ -614,7 +615,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		public Node () {
 		}
 
-		public void setExpanded (boolean expanded) {
+		@NullUnmarked public void setExpanded (boolean expanded) {
 			if (expanded == this.expanded) return;
 			this.expanded = expanded;
 			if (children.size == 0) return;
@@ -662,7 +663,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 				insert(children.size, nodes.get(i));
 		}
 
-		public void insert (int childIndex, N node) {
+		@NullUnmarked public void insert (int childIndex, N node) {
 			node.parent = this;
 			children.insert(childIndex, node);
 			if (!expanded) return;
@@ -700,7 +701,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		}
 
 		/** Remove the specified child node from this node. Does nothing if the node is not a child of this node. */
-		public void remove (N node) {
+		@NullUnmarked public void remove (N node) {
 			if (!children.removeValue(node, true)) return;
 			if (!expanded) return;
 			Tree tree = getTree();
@@ -708,7 +709,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		}
 
 		/** Removes all children from this node. */
-		public void clearChildren () {
+		@NullUnmarked public void clearChildren () {
 			if (expanded) {
 				Tree tree = getTree();
 				if (tree != null) {
@@ -723,7 +724,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 		/** Returns the tree this node's actor is currently in, or null. The actor is only in the tree when all of its parent nodes
 		 * are expanded. */
-		@Nullable
+		@NullUnmarked @Nullable
 		public @Null Tree<N, V> getTree () {
 			Group parent = actor.getParent();
 			if (parent instanceof Tree) return (Tree)parent;
@@ -765,7 +766,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		/** Updates the order of the actors in the tree for this node and all child nodes. This is useful after changing the order
 		 * of {@link #getChildren()}.
 		 * @see Tree#updateRootNodes() */
-		public void updateChildren () {
+		@NullUnmarked public void updateChildren () {
 			if (!expanded) return;
 			Tree tree = getTree();
 			if (tree == null) return;

@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Draws a {@link TextureRegion} repeatedly to fill the area, instead of stretching it.
  * @author Nathan Sweet */
@@ -39,7 +40,7 @@ public class TiledDrawable extends TextureRegionDrawable {
 		super(drawable);
 	}
 
-	public void draw (Batch batch, float x, float y, float width, float height) {
+	@NullUnmarked public void draw (Batch batch, float x, float y, float width, float height) {
 		float oldColor = batch.getPackedColor();
 		batch.setColor(batch.getColor().mul(color));
 

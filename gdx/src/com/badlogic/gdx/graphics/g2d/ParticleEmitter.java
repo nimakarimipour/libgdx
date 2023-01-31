@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class ParticleEmitter {
 	static private final int UPDATE_SCALE = 1 << 0;
@@ -160,7 +161,7 @@ public class ParticleEmitter {
 		particles = new Particle[maxParticleCount];
 	}
 
-	public void addParticle () {
+	@NullUnmarked public void addParticle () {
 		int activeCount = this.activeCount;
 		if (activeCount == maxParticleCount) return;
 		boolean[] active = this.active;
@@ -174,7 +175,7 @@ public class ParticleEmitter {
 		}
 	}
 
-	public void addParticles (int count) {
+	@NullUnmarked public void addParticles (int count) {
 		count = Math.min(count, maxParticleCount - activeCount);
 		if (count == 0) return;
 		boolean[] active = this.active;
@@ -193,7 +194,7 @@ public class ParticleEmitter {
 		this.activeCount += count;
 	}
 
-	public void update (float delta) {
+	@NullUnmarked public void update (float delta) {
 		accumulator += delta * 1000;
 		if (accumulator < 1) return;
 		int deltaMillis = (int)accumulator;
@@ -246,7 +247,7 @@ public class ParticleEmitter {
 		this.activeCount = activeCount;
 	}
 
-	public void draw (Batch batch) {
+	@NullUnmarked public void draw (Batch batch) {
 		if (premultipliedAlpha) {
 			batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		} else if (additive) {
@@ -268,7 +269,7 @@ public class ParticleEmitter {
 
 	/** Updates and draws the particles. This is slightly more efficient than calling {@link #update(float)} and
 	 * {@link #draw(Batch)} separately. */
-	public void draw (Batch batch, float delta) {
+	@NullUnmarked public void draw (Batch batch, float delta) {
 		accumulator += delta * 1000;
 		if (accumulator < 1) {
 			draw(batch);
@@ -342,7 +343,7 @@ public class ParticleEmitter {
 		restart();
 	}
 
-	public void reset () {
+	@NullUnmarked public void reset () {
 		emissionDelta = 0;
 		durationTimer = duration;
 		boolean[] active = this.active;
@@ -396,7 +397,7 @@ public class ParticleEmitter {
 		return particles;
 	}
 
-	private void activateParticle (int index) {
+	@NullUnmarked private void activateParticle (int index) {
 		Sprite sprite = null;
 		switch (spriteMode) {
 		case single:
@@ -568,7 +569,7 @@ public class ParticleEmitter {
 		}
 	}
 
-	private boolean updateParticle (Particle particle, float delta, int deltaMillis) {
+	@NullUnmarked private boolean updateParticle (Particle particle, float delta, int deltaMillis) {
 		int life = particle.currentLife - deltaMillis;
 		if (life <= 0) return false;
 		particle.currentLife = life;
@@ -664,7 +665,7 @@ public class ParticleEmitter {
 		if (!lifeOffsetValue.isRelative()) lifeOffsetDiff -= lifeOffset;
 	}
 
-	public void setPosition (float x, float y) {
+	@NullUnmarked public void setPosition (float x, float y) {
 		if (attached) {
 			float xAmount = x - this.x;
 			float yAmount = y - this.y;
@@ -676,7 +677,7 @@ public class ParticleEmitter {
 		this.y = y;
 	}
 
-	public void setSprites (Array<Sprite> sprites) {
+	@NullUnmarked public void setSprites (Array<Sprite> sprites) {
 		this.sprites = sprites;
 		if (sprites.size == 0) return;
 		for (int i = 0, n = particles.length; i < n; i++) {
@@ -707,7 +708,7 @@ public class ParticleEmitter {
 
 	/** Allocates max particles emitter can hold. Usually called early on to avoid allocation on updates.
 	 * {@link #setSprites(Array)} must have been set before calling this method */
-	public void preAllocateParticles () {
+	@NullUnmarked public void preAllocateParticles () {
 		if (sprites.isEmpty())
 			throw new IllegalStateException("ParticleEmitter.setSprites() must have been called before preAllocateParticles()");
 		for (int index = 0; index < particles.length; index++) {
@@ -955,7 +956,7 @@ public class ParticleEmitter {
 	}
 
 	/** Returns the bounding box for all active particles. z axis will always be zero. */
-	public BoundingBox getBoundingBox () {
+	@NullUnmarked public BoundingBox getBoundingBox () {
 		if (bounds == null) bounds = new BoundingBox();
 
 		Particle[] particles = this.particles;
@@ -1555,7 +1556,7 @@ public class ParticleEmitter {
 			output.write("independent: " + independent + "\n");
 		}
 
-		public void load (BufferedReader reader) throws IOException {
+		@NullUnmarked public void load (BufferedReader reader) throws IOException {
 			super.load(reader);
 			// For backwards compatibility, independent property may not be defined
 			if (reader.markSupported()) reader.mark(100);

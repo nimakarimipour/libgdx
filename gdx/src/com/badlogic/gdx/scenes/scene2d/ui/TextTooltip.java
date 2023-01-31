@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A tooltip that shows a label.
  * @author Nathan Sweet */
@@ -56,7 +57,7 @@ public class TextTooltip extends Tooltip<Label> {
 		return new Label(text, style);
 	}
 
-	public void setStyle (TextTooltipStyle style) {
+	@NullUnmarked public void setStyle (TextTooltipStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		container.setBackground(style.background);
 		container.maxWidth(style.wrapWidth);

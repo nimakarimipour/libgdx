@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A button is a {@link Table} with a checked state and additional {@link ButtonStyle style} fields for pressed, unpressed, and
  * checked. Each time a button is clicked, the checked state is toggled. Being a table, a button can contain any other actors.<br>
@@ -186,7 +187,7 @@ public class Button extends Table implements Disableable {
 	}
 
 	/** Returns appropriate background drawable from the style based on the current button state. */
-	@Nullable
+	@NullUnmarked @Nullable
 	protected @Null Drawable getBackgroundDrawable () {
 		if (isDisabled() && style.disabled != null) return style.disabled;
 		if (isPressed()) {
@@ -210,7 +211,7 @@ public class Button extends Table implements Disableable {
 		return style.up;
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		setBackground(getBackgroundDrawable());
@@ -244,7 +245,7 @@ public class Button extends Table implements Disableable {
 			Gdx.graphics.requestRendering();
 	}
 
-	public float getPrefWidth () {
+	@NullUnmarked public float getPrefWidth () {
 		float width = super.getPrefWidth();
 		if (style.up != null) width = Math.max(width, style.up.getMinWidth());
 		if (style.down != null) width = Math.max(width, style.down.getMinWidth());
@@ -252,7 +253,7 @@ public class Button extends Table implements Disableable {
 		return width;
 	}
 
-	public float getPrefHeight () {
+	@NullUnmarked public float getPrefHeight () {
 		float height = super.getPrefHeight();
 		if (style.up != null) height = Math.max(height, style.up.getMinHeight());
 		if (style.down != null) height = Math.max(height, style.down.getMinHeight());

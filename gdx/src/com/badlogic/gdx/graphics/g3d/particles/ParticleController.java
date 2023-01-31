@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Base class of all the particle controllers. Encapsulate the generic structure of a controller and methods to update the
  * particles simulation.
@@ -147,13 +148,13 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 		transform.set(this.transform);
 	}
 
-	public boolean isComplete () {
+	@NullUnmarked public boolean isComplete () {
 		return emitter.isComplete();
 	}
 
 	/** Initialize the controller. All the sub systems will be initialized and binded to the controller. Must be called before any
 	 * other method. */
-	public void init () {
+	@NullUnmarked public void init () {
 		bind();
 		if (particles != null) {
 			end();
@@ -167,7 +168,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 		renderer.init();
 	}
 
-	protected void allocateChannels (@Nullable int maxParticleCount) {
+	@NullUnmarked protected void allocateChannels (@Nullable int maxParticleCount) {
 		particles = new ParallelArray(maxParticleCount);
 		// Alloc additional channels
 		emitter.allocateChannels();
@@ -177,7 +178,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** Bind the sub systems to the controller Called once during the init phase. */
-	protected void bind () {
+	@NullUnmarked protected void bind () {
 		emitter.set(this);
 		for (Influencer influencer : influencers)
 			influencer.set(this);
@@ -185,7 +186,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** Start the simulation. */
-	public void start () {
+	@NullUnmarked public void start () {
 		emitter.start();
 		for (Influencer influencer : influencers)
 			influencer.start();
@@ -198,7 +199,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** End the simulation. */
-	public void end () {
+	@NullUnmarked public void end () {
 		for (Influencer influencer : influencers)
 			influencer.end();
 		emitter.end();
@@ -206,7 +207,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 
 	/** Generally called by the Emitter. This method will notify all the sub systems that a given amount of particles has been
 	 * activated. */
-	public void activateParticles (int startIndex, int count) {
+	@NullUnmarked public void activateParticles (int startIndex, int count) {
 		emitter.activateParticles(startIndex, count);
 		for (Influencer influencer : influencers)
 			influencer.activateParticles(startIndex, count);
@@ -214,19 +215,19 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 
 	/** Generally called by the Emitter. This method will notify all the sub systems that a given amount of particles has been
 	 * killed. */
-	public void killParticles (int startIndex, int count) {
+	@NullUnmarked public void killParticles (int startIndex, int count) {
 		emitter.killParticles(startIndex, count);
 		for (Influencer influencer : influencers)
 			influencer.killParticles(startIndex, count);
 	}
 
 	/** Updates the particles data */
-	public void update () {
+	@NullUnmarked public void update () {
 		update(Gdx.graphics.getDeltaTime());
 	}
 
 	/** Updates the particles data */
-	public void update (float deltaTime) {
+	@NullUnmarked public void update (float deltaTime) {
 		setTimeStep(deltaTime);
 		emitter.update();
 		for (Influencer influencer : influencers)
@@ -234,14 +235,14 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** Updates the renderer used by this controller, usually this means the particles will be draw inside a batch. */
-	public void draw () {
+	@NullUnmarked public void draw () {
 		if (particles.size > 0) {
 			renderer.update();
 		}
 	}
 
 	/** @return a copy of this controller */
-	public ParticleController copy () {
+	@NullUnmarked public ParticleController copy () {
 		Emitter emitter = (Emitter)this.emitter.copy();
 		Influencer[] influencers = new Influencer[this.influencers.size];
 		int i = 0;
@@ -252,7 +253,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 			influencers);
 	}
 
-	public void dispose () {
+	@NullUnmarked public void dispose () {
 		emitter.dispose();
 		for (Influencer influencer : influencers)
 			influencer.dispose();
@@ -266,7 +267,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	}
 
 	/** Updates the bounding box using the position channel. */
-	protected void calculateBoundingBox () {
+	@NullUnmarked protected void calculateBoundingBox () {
 		boundingBox.clr();
 		FloatChannel positionChannel = particles.getChannel(ParticleChannels.Position);
 		for (int pos = 0, c = positionChannel.strideSize * particles.size; pos < c; pos += positionChannel.strideSize) {
@@ -326,7 +327,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 		renderer = json.readValue("renderer", ParticleControllerRenderer.class, jsonMap);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void save (AssetManager manager, ResourceData data) {
 		emitter.save(manager, data);
 		for (Influencer influencer : influencers)
@@ -334,7 +335,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 		renderer.save(manager, data);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void load (AssetManager manager, ResourceData data) {
 		emitter.load(manager, data);
 		for (Influencer influencer : influencers)

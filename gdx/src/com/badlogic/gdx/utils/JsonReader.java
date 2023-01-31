@@ -28,6 +28,7 @@ import java.io.Reader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonValue.ValueType;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Lightweight JSON parser.<br>
  * <br>
@@ -706,7 +707,7 @@ public class JsonReader implements BaseJsonReader {
 		current = value;
 	}
 
-	protected void pop () {
+	@NullUnmarked protected void pop () {
 		root = elements.pop();
 		if (current.size > 0) lastChild.pop();
 		current = elements.size > 0 ? elements.peek() : null;

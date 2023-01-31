@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.profiling;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import static com.badlogic.gdx.graphics.profiling.GLInterceptor.resolveErrorNumber;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Listener for GL errors detected by {@link GLProfiler}.
  * 
@@ -34,7 +35,7 @@ public interface GLErrorListener {
 
 	/** Listener that will log using Gdx.app.error GL error name and GL function. */
 	public static final GLErrorListener LOGGING_LISTENER = new GLErrorListener() {
-		@Override
+		@NullUnmarked @Override
 		public void onError (int error) {
 			String place = null;
 			try {

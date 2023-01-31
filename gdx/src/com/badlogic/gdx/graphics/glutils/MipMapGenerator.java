@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Blending;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.NullUnmarked;
 
 public class MipMapGenerator {
 
@@ -45,7 +46,7 @@ public class MipMapGenerator {
 
 	/** Sets the image data of the {@link Texture} based on the {@link Pixmap}. The texture must be bound for this to work. If
 	 * <code>disposePixmap</code> is true, the pixmap will be disposed at the end of the method. */
-	public static void generateMipMap (int target, Pixmap pixmap, int textureWidth, int textureHeight) {
+	@NullUnmarked public static void generateMipMap (int target, Pixmap pixmap, int textureWidth, int textureHeight) {
 		if (!useHWMipMap) {
 			generateMipMapCPU(target, pixmap, textureWidth, textureHeight);
 			return;
@@ -59,13 +60,13 @@ public class MipMapGenerator {
 		}
 	}
 
-	private static void generateMipMapGLES20 (int target, Pixmap pixmap) {
+	@NullUnmarked private static void generateMipMapGLES20 (int target, Pixmap pixmap) {
 		Gdx.gl.glTexImage2D(target, 0, pixmap.getGLInternalFormat(), pixmap.getWidth(), pixmap.getHeight(), 0, pixmap.getGLFormat(),
 			pixmap.getGLType(), pixmap.getPixels());
 		Gdx.gl20.glGenerateMipmap(target);
 	}
 
-	private static void generateMipMapDesktop (int target, Pixmap pixmap, int textureWidth, int textureHeight) {
+	@NullUnmarked private static void generateMipMapDesktop (int target, Pixmap pixmap, int textureWidth, int textureHeight) {
 		if (Gdx.graphics.supportsExtension("GL_ARB_framebuffer_object")
 			|| Gdx.graphics.supportsExtension("GL_EXT_framebuffer_object")
 			|| Gdx.gl20.getClass().getName().equals("com.badlogic.gdx.backends.lwjgl3.Lwjgl3GLES20") // LWJGL3ANGLE
@@ -78,7 +79,7 @@ public class MipMapGenerator {
 		}
 	}
 
-	private static void generateMipMapCPU (int target, Pixmap pixmap, int textureWidth, int textureHeight) {
+	@NullUnmarked private static void generateMipMapCPU (int target, Pixmap pixmap, int textureWidth, int textureHeight) {
 		Gdx.gl.glTexImage2D(target, 0, pixmap.getGLInternalFormat(), pixmap.getWidth(), pixmap.getHeight(), 0, pixmap.getGLFormat(),
 			pixmap.getGLType(), pixmap.getPixels());
 		if ((Gdx.gl20 == null) && textureWidth != textureHeight)

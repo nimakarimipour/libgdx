@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -115,7 +116,7 @@ public class Animation<T> {
 	 * 
 	 * @param stateTime
 	 * @return the frame of animation for the given state time. */
-	public T getKeyFrame (float stateTime) {
+	@NullUnmarked public T getKeyFrame (float stateTime) {
 		int frameNumber = getKeyFrameIndex(stateTime);
 		return keyFrames[frameNumber];
 	}
@@ -123,7 +124,7 @@ public class Animation<T> {
 	/** Returns the current frame number.
 	 * @param stateTime
 	 * @return current frame number */
-	public int getKeyFrameIndex (float stateTime) {
+	@NullUnmarked public int getKeyFrameIndex (float stateTime) {
 		if (keyFrames.length == 1) return 0;
 
 		int frameNumber = (int)(stateTime / frameDuration);
@@ -189,14 +190,14 @@ public class Animation<T> {
 	/** Whether the animation would be finished if played without looping (PlayMode#NORMAL), given the state time.
 	 * @param stateTime
 	 * @return whether the animation is finished. */
-	public boolean isAnimationFinished (float stateTime) {
+	@NullUnmarked public boolean isAnimationFinished (float stateTime) {
 		int frameNumber = (int)(stateTime / frameDuration);
 		return keyFrames.length - 1 < frameNumber;
 	}
 
 	/** Sets duration a frame will be displayed.
 	 * @param frameDuration in seconds */
-	public void setFrameDuration (float frameDuration) {
+	@NullUnmarked public void setFrameDuration (float frameDuration) {
 		this.frameDuration = frameDuration;
 		this.animationDuration = keyFrames.length * frameDuration;
 	}

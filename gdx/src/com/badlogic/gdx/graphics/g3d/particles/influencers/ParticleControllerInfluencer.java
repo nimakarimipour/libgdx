@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which controls which {@link ParticleController} will be assigned to a particle.
  * @author Inferno */
@@ -50,7 +51,7 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 			super(particleControllerSingle);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void init () {
 			ParticleController first = templates.first();
 			for (int i = 0, c = controller.particles.capacity; i < c; ++i) {
@@ -60,14 +61,14 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 			}
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				particleControllerChannel.data[i].start();
 			}
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void killParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				particleControllerChannel.data[i].end();
@@ -86,7 +87,7 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 			public ParticleControllerPool () {
 			}
 
-			@Override
+			@NullUnmarked @Override
 			public ParticleController newObject () {
 				ParticleController controller = templates.random().copy();
 				controller.init();
@@ -120,7 +121,7 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 			pool = new ParticleControllerPool();
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void init () {
 			pool.clear();
 			// Allocate the new instances
@@ -135,7 +136,7 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 			super.dispose();
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				ParticleController controller = pool.obtain();
@@ -144,7 +145,7 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 			}
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void killParticles (int startIndex, int count) {
 			for (int i = startIndex, c = startIndex + count; i < c; ++i) {
 				ParticleController controller = particleControllerChannel.data[i];
@@ -175,19 +176,19 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 		this(influencer.templates.items);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void allocateChannels () {
 		particleControllerChannel = controller.particles.addChannel(ParticleChannels.ParticleController);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void end () {
 		for (int i = 0; i < controller.particles.size; ++i) {
 			particleControllerChannel.data[i].end();
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void dispose () {
 		if (controller != null) {
 			for (int i = 0; i < controller.particles.size; ++i) {
@@ -233,7 +234,7 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 		data.save("indices", effectsIndices);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void load (AssetManager manager, ResourceData resources) {
 		SaveData data = resources.getSaveData();
 		Array<IntArray> effectsIndices = data.load("indices");

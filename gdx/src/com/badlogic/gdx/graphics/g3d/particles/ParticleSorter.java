@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** This class is used by particle batches to sort the particles before rendering.
  * @author Inferno */
@@ -66,7 +67,7 @@ public abstract class ParticleSorter {
 			}
 		}
 
-		@Nullable
+		@NullUnmarked @Nullable
 		@Override
 		public <T extends ParticleControllerRenderData> int[] sort (Array<T> renderData) {
 			float[] val = camera.view.val;
@@ -90,7 +91,7 @@ public abstract class ParticleSorter {
 			return particleOffsets;
 		}
 
-		public void qsort (int si, int ei) {
+		@NullUnmarked public void qsort (int si, int ei) {
 			// base case
 			if (si < ei) {
 				float tmp;

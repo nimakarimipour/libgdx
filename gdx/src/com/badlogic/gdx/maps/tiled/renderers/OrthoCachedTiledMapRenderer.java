@@ -37,6 +37,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Renders ortho tiles by caching geometry on the GPU. How much is cached is controlled by {@link #setOverCache(float)}. When the
  * view reaches the edge of the cached tiles, the cache is rebuilt at the new view position.
@@ -112,7 +113,7 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		) cached = false;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void render () {
 		if (!cached) {
 			cached = true;
@@ -154,7 +155,7 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		if (blending) Gdx.gl.glDisable(GL20.GL_BLEND);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void render (int[] layers) {
 		if (!cached) {
 			cached = true;
@@ -207,7 +208,7 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 	public void renderObject (MapObject object) {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void renderTileLayer (TiledMapTileLayer layer) {
 		final float color = Color.toFloatBits(1, 1, 1, layer.getOpacity());
 

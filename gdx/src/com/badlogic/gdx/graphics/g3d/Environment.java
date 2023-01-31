@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class Environment extends Attributes {
 
@@ -105,7 +106,7 @@ public class Environment extends Attributes {
 		return this;
 	}
 
-	public Environment remove (DirectionalLight light) {
+	@NullUnmarked public Environment remove (DirectionalLight light) {
 		if (has(DirectionalLightsAttribute.Type)) {
 			DirectionalLightsAttribute dirLights = ((DirectionalLightsAttribute)get(DirectionalLightsAttribute.Type));
 			dirLights.lights.removeValue(light, false);
@@ -114,7 +115,7 @@ public class Environment extends Attributes {
 		return this;
 	}
 
-	public Environment remove (PointLight light) {
+	@NullUnmarked public Environment remove (PointLight light) {
 		if (has(PointLightsAttribute.Type)) {
 			PointLightsAttribute pointLights = ((PointLightsAttribute)get(PointLightsAttribute.Type));
 			pointLights.lights.removeValue(light, false);
@@ -123,7 +124,7 @@ public class Environment extends Attributes {
 		return this;
 	}
 
-	public Environment remove (SpotLight light) {
+	@NullUnmarked public Environment remove (SpotLight light) {
 		if (has(SpotLightsAttribute.Type)) {
 			SpotLightsAttribute spotLights = ((SpotLightsAttribute)get(SpotLightsAttribute.Type));
 			spotLights.lights.removeValue(light, false);

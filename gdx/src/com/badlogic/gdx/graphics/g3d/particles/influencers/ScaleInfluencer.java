@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d.particles.influencers;
 
 import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
+import com.badlogic.gdx.NullUnmarked;
 
 /** It's an {@link Influencer} which controls the scale of the particles.
  * @author Inferno */
@@ -28,7 +29,7 @@ public class ScaleInfluencer extends SimpleInfluencer {
 		valueChannelDescriptor = ParticleChannels.Scale;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void activateParticles (int startIndex, int count) {
 		if (value.isRelative()) {
 			for (int i = startIndex * valueChannel.strideSize, a = startIndex * interpolationChannel.strideSize,

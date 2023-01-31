@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
+import com.badlogic.gdx.NullUnmarked;
 
 /**
  * <p>
@@ -75,7 +76,7 @@ public class FrameBuffer extends GLFrameBuffer<Texture> {
 		build();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected Texture createTexture (FrameBufferTextureAttachmentSpec attachmentSpec) {
 		GLOnlyTextureData data = new GLOnlyTextureData(bufferBuilder.width, bufferBuilder.height, 0, attachmentSpec.internalFormat,
 			attachmentSpec.format, attachmentSpec.type);
@@ -90,7 +91,7 @@ public class FrameBuffer extends GLFrameBuffer<Texture> {
 		colorTexture.dispose();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void attachFrameBufferColorTexture (Texture texture) {
 		Gdx.gl20.glFramebufferTexture2D(GL20.GL_FRAMEBUFFER, GL20.GL_COLOR_ATTACHMENT0, GL20.GL_TEXTURE_2D,
 			texture.getTextureObjectHandle(), 0);

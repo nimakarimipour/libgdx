@@ -38,6 +38,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Draws 2D images, optimized for geometry that does not change. Sprites and/or textures are cached and given an ID, which can
  * later be used for drawing. The size, color, and texture region for each cached image cannot be modified. This information is
@@ -111,7 +112,7 @@ public class SpriteCache implements Disposable {
 	 * @param size The maximum number of images this cache can hold. The memory required to hold the images is allocated up front.
 	 *           Max of 8191 if indices are used.
 	 * @param useIndices If true, indexed geometry will be used. */
-	public SpriteCache (int size, ShaderProgram shader, boolean useIndices) {
+	@NullUnmarked public SpriteCache (int size, ShaderProgram shader, boolean useIndices) {
 		this.shader = shader;
 
 		if (useIndices && size > 8191) throw new IllegalArgumentException("Can't have more than 8191 sprites per batch: " + size);
@@ -168,7 +169,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Starts the definition of a new cache, allowing the add and {@link #endCache()} methods to be called. */
-	public void beginCache () {
+	@NullUnmarked public void beginCache () {
 		if (drawing) throw new IllegalStateException("end must be called before beginCache");
 		if (currentCache != null) throw new IllegalStateException("endCache must be called before begin.");
 		int verticesPerImage = mesh.getNumIndices() > 0 ? 4 : 6;
@@ -180,7 +181,7 @@ public class SpriteCache implements Disposable {
 	/** Starts the redefinition of an existing cache, allowing the add and {@link #endCache()} methods to be called. If this is not
 	 * the last cache created, it cannot have more entries added to it than when it was first created. To do that, use
 	 * {@link #clear()} and then {@link #begin()}. */
-	public void beginCache (int cacheID) {
+	@NullUnmarked public void beginCache (int cacheID) {
 		if (drawing) throw new IllegalStateException("end must be called before beginCache");
 		if (currentCache != null) throw new IllegalStateException("endCache must be called before begin.");
 		if (cacheID == caches.size - 1) {
@@ -194,7 +195,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Ends the definition of a cache, returning the cache ID to be used with {@link #draw(int)}. */
-	public int endCache () {
+	@NullUnmarked public int endCache () {
 		if (currentCache == null) throw new IllegalStateException("beginCache must be called before endCache.");
 		Cache cache = currentCache;
 		int cacheCount = mesh.getVerticesBuffer().position() - cache.offset;
@@ -240,7 +241,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Invalidates all cache IDs and resets the SpriteCache so new caches can be added. */
-	public void clear () {
+	@NullUnmarked public void clear () {
 		caches.clear();
 		((Buffer)mesh.getVerticesBuffer()).clear().flip();
 	}
@@ -248,7 +249,7 @@ public class SpriteCache implements Disposable {
 	/** Adds the specified vertices to the cache. Each vertex should have 5 elements, one for each of the attributes: x, y, color,
 	 * u, and v. If indexed geometry is used, each image should be specified as 4 vertices, otherwise each image should be
 	 * specified as 6 vertices. */
-	public void add (@Nullable Texture texture, float[] vertices, int offset, int length) {
+	@NullUnmarked public void add (@Nullable Texture texture, float[] vertices, int offset, int length) {
 		if (currentCache == null) throw new IllegalStateException("beginCache must be called before add.");
 
 		int verticesPerImage = mesh.getNumIndices() > 0 ? 4 : 6;
@@ -848,7 +849,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Prepares the OpenGL state for SpriteCache rendering. */
-	public void begin () {
+	@NullUnmarked public void begin () {
 		if (drawing) throw new IllegalStateException("end must be called before begin.");
 		if (currentCache != null) throw new IllegalStateException("endCache must be called before begin");
 		renderCalls = 0;
@@ -873,7 +874,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Completes rendering for this SpriteCache. */
-	public void end () {
+	@NullUnmarked public void end () {
 		if (!drawing) throw new IllegalStateException("begin must be called before end.");
 		drawing = false;
 
@@ -886,7 +887,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Draws all the images defined for the specified cache ID. */
-	public void draw (int cacheID) {
+	@NullUnmarked public void draw (int cacheID) {
 		if (!drawing) throw new IllegalStateException("SpriteCache.begin must be called before draw.");
 
 		Cache cache = caches.get(cacheID);
@@ -911,7 +912,7 @@ public class SpriteCache implements Disposable {
 	/** Draws a subset of images defined for the specified cache ID.
 	 * @param offset The first image to render.
 	 * @param length The number of images from the first image (inclusive) to render. */
-	public void draw (int cacheID, int offset, int length) {
+	@NullUnmarked public void draw (int cacheID, int offset, int length) {
 		if (!drawing) throw new IllegalStateException("SpriteCache.begin must be called before draw.");
 
 		Cache cache = caches.get(cacheID);

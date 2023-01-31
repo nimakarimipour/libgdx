@@ -34,6 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Displays a dialog, which is a window with a title, a content table, and a button table. Methods are provided to add a label to
  * the content table and buttons to the button table, but any widgets can be added. When a button is clicked,
@@ -85,7 +86,7 @@ public class Dialog extends Window {
 		buttonTable.defaults().space(6);
 
 		buttonTable.addListener(new ChangeListener() {
-			public void changed (ChangeEvent event, @Nullable Actor actor) {
+			@NullUnmarked public void changed (ChangeEvent event, @Nullable Actor actor) {
 				if (!values.containsKey(actor)) return;
 				while (actor.getParent() != buttonTable)
 					actor = actor.getParent();
@@ -255,7 +256,7 @@ public class Dialog extends Window {
 	 * @see Keys */
 	public Dialog key (final int keycode, final @Null Object object) {
 		addListener(new InputListener() {
-			public boolean keyDown (@Nullable InputEvent event, int keycode2) {
+			@NullUnmarked public boolean keyDown (@Nullable InputEvent event, int keycode2) {
 				if (keycode == keycode2) {
 					// Delay a frame to eat the keyTyped event.
 					Gdx.app.postRunnable(new Runnable() {

@@ -42,6 +42,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** This class is used to draw particles as point sprites.
  * @author Inferno */
@@ -54,13 +55,13 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		new VertexAttribute(Usage.ColorUnpacked, 4, ShaderProgram.COLOR_ATTRIBUTE),
 		new VertexAttribute(Usage.TextureCoordinates, 4, "a_region"),
 		new VertexAttribute(sizeAndRotationUsage, 3, "a_sizeAndRotation"));
-	protected static final int CPU_VERTEX_SIZE = (short)(CPU_ATTRIBUTES.vertexSize / 4),
+	@SuppressWarnings("NullAway") protected static final int CPU_VERTEX_SIZE = (short)(CPU_ATTRIBUTES.vertexSize / 4),
 		CPU_POSITION_OFFSET = (short)(CPU_ATTRIBUTES.findByUsage(Usage.Position).offset / 4),
 		CPU_COLOR_OFFSET = (short)(CPU_ATTRIBUTES.findByUsage(Usage.ColorUnpacked).offset / 4),
 		CPU_REGION_OFFSET = (short)(CPU_ATTRIBUTES.findByUsage(Usage.TextureCoordinates).offset / 4),
 		CPU_SIZE_AND_ROTATION_OFFSET = (short)(CPU_ATTRIBUTES.findByUsage(sizeAndRotationUsage).offset / 4);
 
-	private static void enablePointSprites () {
+	@NullUnmarked private static void enablePointSprites () {
 		Gdx.gl.glEnable(GL20.GL_VERTEX_PROGRAM_POINT_SIZE);
 		if (Gdx.app.getType() == ApplicationType.Desktop) {
 			Gdx.gl.glEnable(0x8861); // GL_POINT_OES
@@ -85,7 +86,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, shaderConfig, null, null);
 	}
 
-	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
+	@NullUnmarked public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
 		@Nullable BlendingAttribute blendingAttribute, @Nullable DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
 
@@ -118,12 +119,12 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		renderable.material = new Material(blendingAttribute, depthTestAttribute, TextureAttribute.createDiffuse((Texture)null));
 	}
 
-	public void setTexture (@Nullable Texture texture) {
+	@NullUnmarked public void setTexture (@Nullable Texture texture) {
 		TextureAttribute attribute = (TextureAttribute)renderable.material.get(TextureAttribute.Diffuse);
 		attribute.textureDescription.texture = texture;
 	}
 
-	@Nullable
+	@NullUnmarked @Nullable
 	public Texture getTexture () {
 		TextureAttribute attribute = (TextureAttribute)renderable.material.get(TextureAttribute.Diffuse);
 		return attribute.textureDescription.texture;
@@ -134,7 +135,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		return blendingAttribute;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void flush (@Nullable int[] offsets) {
 		int tp = 0;
 		for (PointSpriteControllerRenderData data : renderData) {

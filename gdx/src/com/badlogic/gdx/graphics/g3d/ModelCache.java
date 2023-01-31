@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** ModelCache tries to combine multiple render calls into a single render call by merging them where possible. Can be used for
  * multiple type of models (e.g. varying vertex attributes or materials), the ModelCache will combine where possible. Can be used
@@ -69,7 +70,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 			usedMeshes.clear();
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public Mesh obtain (@Nullable VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
 			for (int i = 0, n = freeMeshes.size; i < n; ++i) {
 				final Mesh mesh = freeMeshes.get(i);
@@ -110,7 +111,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 			usedMeshes.clear();
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public Mesh obtain (@Nullable VertexAttributes vertexAttributes, int vertexCount, int indexCount) {
 			for (int i = 0, n = freeMeshes.size; i < n; ++i) {
 				final Mesh mesh = freeMeshes.get(i);
@@ -146,7 +147,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 			renderables.sort(this);
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public int compare (Renderable arg0, Renderable arg1) {
 			final VertexAttributes va0 = arg0.meshPart.mesh.getVertexAttributes();
 			final VertexAttributes va1 = arg1.meshPart.mesh.getVertexAttributes();
@@ -247,7 +248,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 	/** Finishes creating the cache, must be called after a call to {@link #begin()}, only after this call the cache will be valid
 	 * (until the next call to {@link #begin()}). Calling this method will process all renderables added using one of the add(...)
 	 * methods and will combine them if possible. */
-	public void end () {
+	@NullUnmarked public void end () {
 		if (!building) throw new GdxRuntimeException("Call begin() prior to calling end()");
 		building = false;
 

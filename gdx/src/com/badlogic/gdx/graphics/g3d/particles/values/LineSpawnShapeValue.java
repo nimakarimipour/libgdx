@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Encapsulate the formulas to spawn a particle on a line shape.
  * @author Inferno */
@@ -31,7 +32,7 @@ public final class LineSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public LineSpawnShapeValue () {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void spawnAux (Vector3 vector, float percent) {
 		float width = spawnWidth + (spawnWidthDiff * spawnWidthValue.getScale(percent));
 		float height = spawnHeight + (spawnHeightDiff * spawnHeightValue.getScale(percent));

@@ -17,6 +17,7 @@
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Sets the actor's rotation from its current value to a specific value.
  * 
@@ -42,11 +43,11 @@ public class RotateToAction extends TemporalAction {
 		this.useShortestDirection = useShortestDirection;
 	}
 
-	protected void begin () {
+	@NullUnmarked protected void begin () {
 		start = target.getRotation();
 	}
 
-	protected void update (float percent) {
+	@NullUnmarked protected void update (float percent) {
 		float rotation;
 		if (percent == 0)
 			rotation = start;

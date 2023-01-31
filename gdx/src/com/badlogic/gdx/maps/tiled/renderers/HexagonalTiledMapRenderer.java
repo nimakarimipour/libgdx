@@ -26,6 +26,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class HexagonalTiledMapRenderer extends BatchTiledMapRenderer {
 
@@ -175,7 +176,7 @@ public class HexagonalTiledMapRenderer extends BatchTiledMapRenderer {
 	}
 
 	/** render a single cell */
-	private void renderCell (@Nullable final TiledMapTileLayer.Cell cell, final float x, final float y, final float color) {
+	@NullUnmarked private void renderCell (@Nullable final TiledMapTileLayer.Cell cell, final float x, final float y, final float color) {
 		if (cell != null) {
 			final TiledMapTile tile = cell.getTile();
 			if (tile != null) {

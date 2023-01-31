@@ -33,6 +33,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
  * @author Xoppa */
@@ -90,7 +91,7 @@ public class Cubemap extends GLTexture {
 	@Nullable protected CubemapData data;
 
 	/** Construct a Cubemap based on the given CubemapData. */
-	public Cubemap (@Nullable CubemapData data) {
+	@NullUnmarked public Cubemap (@Nullable CubemapData data) {
 		super(GL20.GL_TEXTURE_CUBE_MAP);
 		this.data = data;
 		load(data);
@@ -144,7 +145,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Sets the sides of this cubemap to the specified {@link CubemapData}. */
-	public void load (@Nullable CubemapData data) {
+	@NullUnmarked public void load (@Nullable CubemapData data) {
 		if (!data.isPrepared()) data.prepare();
 		bind();
 		unsafeSetFilter(minFilter, magFilter, true);
@@ -159,24 +160,24 @@ public class Cubemap extends GLTexture {
 		return data;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public boolean isManaged () {
 		return data.isManaged();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void reload () {
 		if (!isManaged()) throw new GdxRuntimeException("Tried to reload an unmanaged Cubemap");
 		glHandle = Gdx.gl.glGenTexture();
 		load(data);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int getWidth () {
 		return data.getWidth();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int getHeight () {
 		return data.getHeight();
 	}
@@ -187,7 +188,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Disposes all resources associated with the cubemap */
-	@Override
+	@NullUnmarked @Override
 	public void dispose () {
 		// this is a hack. reason: we have to set the glHandle to 0 for textures that are
 		// reloaded through the asset manager as we first remove (and thus dispose) the texture
@@ -211,7 +212,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** Invalidate all managed cubemaps. This is an internal method. Do not use it! */
-	public static void invalidateAllCubemaps (Application app) {
+	@NullUnmarked public static void invalidateAllCubemaps (Application app) {
 		Array<Cubemap> managedCubemapArray = managedCubemaps.get(app);
 		if (managedCubemapArray == null) return;
 
@@ -289,7 +290,7 @@ public class Cubemap extends GLTexture {
 	}
 
 	/** @return the number of managed cubemaps currently loaded */
-	public static int getNumManagedCubemaps () {
+	@NullUnmarked public static int getNumManagedCubemaps () {
 		return managedCubemaps.get(Gdx.app).size;
 	}
 

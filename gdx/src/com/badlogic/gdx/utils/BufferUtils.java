@@ -29,6 +29,7 @@ import java.nio.ShortBuffer;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Class with static helper methods to increase the speed of array/direct buffer and direct buffer/direct buffer transfers
  * 
@@ -51,7 +52,7 @@ public final class BufferUtils {
 	 * @param dst the destination buffer, has to be a direct Buffer
 	 * @param numFloats the number of floats to copy
 	 * @param offset the offset in src to start copying from */
-	public static void copy (@Nullable float[] src, @Nullable Buffer dst, int numFloats, int offset) {
+	@NullUnmarked public static void copy (@Nullable float[] src, @Nullable Buffer dst, int numFloats, int offset) {
 		if (dst instanceof ByteBuffer)
 			dst.limit(numFloats << 2);
 		else if (dst instanceof FloatBuffer) dst.limit(numFloats);
@@ -227,7 +228,7 @@ public final class BufferUtils {
 	 * @param src the source Buffer.
 	 * @param dst the destination Buffer.
 	 * @param numElements the number of elements to copy. */
-	public static void copy (Buffer src, @Nullable Buffer dst, int numElements) {
+	@NullUnmarked public static void copy (Buffer src, @Nullable Buffer dst, int numElements) {
 		int numBytes = elementsToBytes(src, numElements);
 		dst.limit(dst.position() + bytesToElements(dst, numBytes));
 		copyJni(src, positionInBytes(src), dst, positionInBytes(dst), numBytes);
@@ -498,7 +499,7 @@ public final class BufferUtils {
 		return buffer.asLongBuffer();
 	}
 
-	public static void disposeUnsafeByteBuffer (@Nullable ByteBuffer buffer) {
+	@NullUnmarked public static void disposeUnsafeByteBuffer (@Nullable ByteBuffer buffer) {
 		int size = buffer.capacity();
 		synchronized (unsafeBuffers) {
 			if (!unsafeBuffers.removeValue(buffer, true))

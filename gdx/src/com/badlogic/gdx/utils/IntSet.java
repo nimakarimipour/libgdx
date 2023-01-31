@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** An unordered set where the items are unboxed ints. No allocation is done except when growing the table size.
  * <p>
@@ -337,7 +338,7 @@ public class IntSet {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link IntSetIterator} constructor for nested or multithreaded iteration. */
-	public IntSetIterator iterator () {
+	@NullUnmarked public IntSetIterator iterator () {
 		if (Collections.allocateIterators) return new IntSetIterator(this);
 		if (iterator1 == null) {
 			iterator1 = new IntSetIterator(this);

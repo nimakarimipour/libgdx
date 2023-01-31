@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A node is part of a hierarchy of Nodes in a {@link Model}. A Node encodes a transform relative to its parents. A Node can have
  * child nodes. Optionally a node can specify a {@link MeshPart} and a {@link Material} to be applied to the mesh part.
@@ -121,7 +122,7 @@ public class Node {
 
 	/** Extends the bounding box with the bounds of this Node. This is a potential slow operation, it is advised to cache the
 	 * result. */
-	public BoundingBox extendBoundingBox (final BoundingBox out, boolean transform) {
+	@NullUnmarked public BoundingBox extendBoundingBox (final BoundingBox out, boolean transform) {
 		final int partCount = parts.size;
 		for (int i = 0; i < partCount; i++) {
 			final NodePart part = parts.get(i);
@@ -298,7 +299,7 @@ public class Node {
 	/** Helper method to recursive fetch a node from an array
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
-	@Nullable
+	@NullUnmarked @Nullable
 	public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
 		final int n = nodes.size;
 		Node node;

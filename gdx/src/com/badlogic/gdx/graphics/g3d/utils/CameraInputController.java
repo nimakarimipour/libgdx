@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class CameraInputController extends GestureDetector {
 	/** The button for rotating the camera. */
@@ -105,7 +106,7 @@ public class CameraInputController extends GestureDetector {
 			return false;
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public boolean zoom (float initialDistance, float distance) {
 			float newZoom = distance - initialDistance;
 			float amount = newZoom - previousZoom;
@@ -133,7 +134,7 @@ public class CameraInputController extends GestureDetector {
 		this(new CameraGestureListener(), camera);
 	}
 
-	public void update () {
+	@NullUnmarked public void update () {
 		if (rotateRightPressed || rotateLeftPressed || forwardPressed || backwardPressed) {
 			final float delta = Gdx.graphics.getDeltaTime();
 			if (rotateRightPressed) camera.rotate(camera.up, -delta * rotateAngle);
@@ -202,7 +203,7 @@ public class CameraInputController extends GestureDetector {
 		return true;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public boolean touchDragged (int screenX, int screenY, int pointer) {
 		boolean result = super.touchDragged(screenX, screenY, pointer);
 		if (result || this.button < 0) return result;

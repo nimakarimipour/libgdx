@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A value which contains a single float variable.
  * @author Inferno */
@@ -44,7 +45,7 @@ public class NumericValue extends ParticleValue {
 		json.writeValue("value", value);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void read (Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 		value = json.readValue("value", float.class, jsonData);

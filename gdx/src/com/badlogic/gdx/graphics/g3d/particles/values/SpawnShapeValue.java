@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Encapsulate the formulas to spawn a particle on a shape.
  * @author Inferno */
@@ -41,7 +42,7 @@ public abstract class SpawnShapeValue extends ParticleValue implements ResourceD
 
 	public abstract void spawnAux (Vector3 vector, float percent);
 
-	public final Vector3 spawn (Vector3 vector, float percent) {
+	@NullUnmarked public final Vector3 spawn (Vector3 vector, float percent) {
 		spawnAux(vector, percent);
 		if (xOffsetValue.active) vector.x += xOffsetValue.newLowValue();
 		if (yOffsetValue.active) vector.y += yOffsetValue.newLowValue();
@@ -55,7 +56,7 @@ public abstract class SpawnShapeValue extends ParticleValue implements ResourceD
 	public void start () {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		SpawnShapeValue shape = (SpawnShapeValue)value;

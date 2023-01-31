@@ -21,6 +21,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, Comparable<Attributes> {
 	protected long mask;
@@ -124,7 +125,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 
 	/** Add an array of attributes to this material. If the material already contains an attribute of the same type it is
 	 * overwritten. */
-	public final void set (@Nullable final Attribute... attributes) {
+	@NullUnmarked public final void set (@Nullable final Attribute... attributes) {
 		for (final Attribute attr : attributes)
 			set(attr);
 	}
@@ -221,7 +222,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 		return same((Attributes)other, true);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int compareTo (@Nullable Attributes other) {
 		if (other == this) return 0;
 		if (mask != other.mask) return mask < other.mask ? -1 : 1;

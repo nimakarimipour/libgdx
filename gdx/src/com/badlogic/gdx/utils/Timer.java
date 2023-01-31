@@ -21,6 +21,7 @@ import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Executes tasks in the future on the main loop thread.
  * @author Nathan Sweet */
@@ -75,7 +76,7 @@ public class Timer {
 
 	/** Schedules a task to occur once after the specified delay and then a number of additional times at the specified interval.
 	 * @param repeatCount If negative, the task will repeat forever. */
-	public Task scheduleTask (Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
+	@NullUnmarked public Task scheduleTask (Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
 		synchronized (threadLock) {
 			synchronized (this) {
 				synchronized (task) {
@@ -131,7 +132,7 @@ public class Timer {
 		return tasks.size == 0;
 	}
 
-	synchronized long update (long timeMillis, long waitMillis) {
+	@NullUnmarked synchronized long update (long timeMillis, long waitMillis) {
 		for (int i = 0, n = tasks.size; i < n; i++) {
 			Task task = tasks.get(i);
 			synchronized (task) {
@@ -254,7 +255,7 @@ public class Timer {
 		@Nullable Timer instance;
 		long pauseTimeMillis;
 
-		public TimerThread () {
+		@NullUnmarked public TimerThread () {
 			files = Gdx.files;
 			app = Gdx.app;
 			app.addLifecycleListener(this);
@@ -310,7 +311,7 @@ public class Timer {
 			}
 		}
 
-		public void dispose () { // OK to call multiple times.
+		@NullUnmarked public void dispose () { // OK to call multiple times.
 			synchronized (threadLock) {
 				if (thread == this) thread = null;
 				instances.clear();

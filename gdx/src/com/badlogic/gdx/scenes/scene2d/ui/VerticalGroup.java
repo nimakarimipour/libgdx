@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A group that lays out its children top to bottom vertically, with optional wrapping. {@link #getChildren()} can be sorted to
  * change the order of the actors (eg {@link Actor#setZIndex(int)}). This can be easier than using {@link Table} when actors need
@@ -203,7 +204,7 @@ public class VerticalGroup extends WidgetGroup {
 		}
 	}
 
-	private void layoutWrapped () {
+	@NullUnmarked private void layoutWrapped () {
 		float prefWidth = getPrefWidth();
 		if (prefWidth != lastPrefWidth) {
 			lastPrefWidth = prefWidth;
@@ -304,7 +305,7 @@ public class VerticalGroup extends WidgetGroup {
 	}
 
 	/** When wrapping is enabled, the number of columns may be > 1. */
-	public int getColumns () {
+	@NullUnmarked public int getColumns () {
 		return wrap ? columnSizes.size >> 1 : 1;
 	}
 

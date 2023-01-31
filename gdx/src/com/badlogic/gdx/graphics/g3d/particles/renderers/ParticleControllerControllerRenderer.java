@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A {@link ParticleControllerRenderer} which will render the {@link ParticleController} of each particle.
  * @author Inferno */
@@ -30,14 +31,14 @@ import javax.annotation.Nullable;
 public class ParticleControllerControllerRenderer extends ParticleControllerRenderer {
 	@Nullable ObjectChannel<ParticleController> controllerChannel;
 
-	@Override
+	@NullUnmarked @Override
 	public void init () {
 		controllerChannel = controller.particles.getChannel(ParticleChannels.ParticleController);
 		if (controllerChannel == null) throw new GdxRuntimeException(
 			"ParticleController channel not found, specify an influencer which will allocate it please.");
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void update () {
 		for (int i = 0, c = controller.particles.size; i < c; ++i) {
 			controllerChannel.data[i].draw();

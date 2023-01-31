@@ -42,6 +42,7 @@ import com.badlogic.gdx.utils.BaseJsonReader;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	public static final short VERSION_HI = 0;
@@ -62,7 +63,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return parseModel(fileHandle);
 	}
 
-	public ModelData parseModel (FileHandle handle) {
+	@NullUnmarked public ModelData parseModel (FileHandle handle) {
 		JsonValue json = reader.parse(handle);
 		ModelData model = new ModelData();
 		JsonValue version = json.require("version");
@@ -79,7 +80,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return model;
 	}
 
-	protected void parseMeshes (ModelData model, JsonValue json) {
+	@NullUnmarked protected void parseMeshes (ModelData model, JsonValue json) {
 		JsonValue meshes = json.get("meshes");
 		if (meshes != null) {
 
@@ -141,7 +142,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		}
 	}
 
-	protected VertexAttribute[] parseAttributes (JsonValue attributes) {
+	@NullUnmarked protected VertexAttribute[] parseAttributes (JsonValue attributes) {
 		Array<VertexAttribute> vertexAttributes = new Array<VertexAttribute>();
 		int unit = 0;
 		int blendWeightCount = 0;

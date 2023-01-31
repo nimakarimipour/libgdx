@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Causes a scroll pane to scroll when a drag goes outside the bounds of the scroll pane. Attach the listener to the actor which
  * will cause scrolling when dragged, usually the scroll pane or the scroll pane's actor.
@@ -69,7 +70,7 @@ public class DragScrollListener extends DragListener {
 		return interpolation.apply(minSpeed, maxSpeed, Math.min(1, (System.currentTimeMillis() - startTime) / (float)rampTime));
 	}
 
-	public void drag (InputEvent event, float x, float y, int pointer) {
+	@NullUnmarked public void drag (InputEvent event, float x, float y, int pointer) {
 		event.getListenerActor().localToActorCoordinates(scroll, tmpCoords.set(x, y));
 		if (isAbove(tmpCoords.y)) {
 			scrollDown.cancel();

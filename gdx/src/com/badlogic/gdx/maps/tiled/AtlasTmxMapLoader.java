@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
  * 
@@ -87,7 +88,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 				return assetManager.get(atlasName, TextureAtlas.class);
 			}
 
-			@Nullable
+			@NullUnmarked @Nullable
 			@Override
 			public TextureRegion getImage (String name) {
 				return getAtlas().findRegion(name);
@@ -160,7 +161,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 		return descriptors;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
 		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
 		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight,
@@ -212,7 +213,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 		}
 	}
 
-	protected FileHandle getAtlasFileHandle (FileHandle tmxFile) {
+	@NullUnmarked protected FileHandle getAtlasFileHandle (FileHandle tmxFile) {
 		Element properties = root.getChildByName("properties");
 
 		String atlasFilePath = null;

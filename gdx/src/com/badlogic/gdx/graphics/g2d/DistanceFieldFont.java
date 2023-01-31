@@ -26,6 +26,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Renders bitmap fonts using distance field textures, see the
  * <a href="https://libgdx.com/wiki/graphics/2d/fonts/distance-field-fonts">Distance Field Fonts wiki article</a> for usage.
@@ -68,7 +69,7 @@ public class DistanceFieldFont extends BitmapFont {
 		super(fontFile);
 	}
 
-	protected void load (BitmapFontData data) {
+	@NullUnmarked protected void load (BitmapFontData data) {
 		super.load(data);
 
 		// Distance field font rendering requires font texture to be filtered linear.

@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import java.util.Arrays;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A resizable, ordered or unordered int array. Avoids the boxing that occurs with ArrayList<Integer>. If unordered, this class
  * avoids a memory copy when removing elements (the last element is moved to the removed element's position).
@@ -116,7 +117,7 @@ public class IntArray {
 		addAll(array.items, offset, length);
 	}
 
-	public void addAll (@Nullable int... array) {
+	@NullUnmarked public void addAll (@Nullable int... array) {
 		addAll(array, 0, array.length);
 	}
 

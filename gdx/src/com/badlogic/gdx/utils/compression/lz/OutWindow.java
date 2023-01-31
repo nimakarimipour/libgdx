@@ -4,6 +4,7 @@ package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class OutWindow {
 	@Nullable byte[] _buffer;
@@ -36,7 +37,7 @@ public class OutWindow {
 		}
 	}
 
-	public void Flush () throws IOException {
+	@NullUnmarked public void Flush () throws IOException {
 		int size = _pos - _streamPos;
 		if (size == 0) return;
 		_stream.write(_buffer, _streamPos, size);
@@ -44,7 +45,7 @@ public class OutWindow {
 		_streamPos = _pos;
 	}
 
-	public void CopyBlock (int distance, int len) throws IOException {
+	@NullUnmarked public void CopyBlock (int distance, int len) throws IOException {
 		int pos = _pos - distance - 1;
 		if (pos < 0) pos += _windowSize;
 		for (; len != 0; len--) {
@@ -54,12 +55,12 @@ public class OutWindow {
 		}
 	}
 
-	public void PutByte (byte b) throws IOException {
+	@NullUnmarked public void PutByte (byte b) throws IOException {
 		_buffer[_pos++] = b;
 		if (_pos >= _windowSize) Flush();
 	}
 
-	public byte GetByte (int distance) {
+	@NullUnmarked public byte GetByte (int distance) {
 		int pos = _pos - distance - 1;
 		if (pos < 0) pos += _windowSize;
 		return _buffer[pos];

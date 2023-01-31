@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceController
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /*** This class is used to render particles having a model instance channel.
  * @author Inferno */
@@ -34,7 +35,7 @@ public class ModelInstanceParticleBatch implements ParticleBatch<ModelInstanceCo
 		controllersRenderData = new Array<ModelInstanceControllerRenderData>(false, 5);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void getRenderables (Array<Renderable> renderables, Pool<Renderable> pool) {
 		for (ModelInstanceControllerRenderData data : controllersRenderData) {
 			for (int i = 0, count = data.controller.particles.size; i < count; ++i) {
@@ -57,7 +58,7 @@ public class ModelInstanceParticleBatch implements ParticleBatch<ModelInstanceCo
 	public void end () {
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void draw (@Nullable ModelInstanceControllerRenderData data) {
 		controllersRenderData.add(data);
 		bufferedParticlesCount += data.controller.particles.size;

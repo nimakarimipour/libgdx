@@ -19,6 +19,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Arrays;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A {@link java.lang.StringBuilder} that implements equals and hashcode.
  * @see CharSequence
@@ -95,7 +96,7 @@ public class StringBuilder implements Appendable, CharSequence {
 	 * 
 	 * @param string the {@code String} to copy into the builder.
 	 * @throws NullPointerException if {@code str} is {@code null}. */
-	public StringBuilder (@Nullable String string) {
+	@NullUnmarked public StringBuilder (@Nullable String string) {
 		length = string.length();
 		chars = new char[length + INITIAL_CAPACITY];
 		string.getChars(0, length, chars, 0);

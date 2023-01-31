@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class Material extends Attributes {
 	private static int counter = 0;
@@ -75,12 +76,12 @@ public class Material extends Attributes {
 		return new Material(this);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int hashCode () {
 		return super.hashCode() + 3 * id.hashCode();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public boolean equals (Object other) {
 		return (other instanceof Material) && ((other == this) || ((((Material)other).id.equals(id)) && super.equals(other)));
 	}

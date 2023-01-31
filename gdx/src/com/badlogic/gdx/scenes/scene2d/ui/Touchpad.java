@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** An on-screen joystick. The movement area of the joystick is circular, centered on the touchpad, and its size determined by the
  * smaller touchpad dimension.
@@ -139,7 +140,7 @@ public class Touchpad extends Widget {
 		return touchBounds.contains(x, y) ? this : null;
 	}
 
-	public void layout () {
+	@NullUnmarked public void layout () {
 		// Recalc pad and deadzone bounds
 		float halfWidth = getWidth() / 2;
 		float halfHeight = getHeight() / 2;
@@ -153,7 +154,7 @@ public class Touchpad extends Widget {
 		knobPercent.set(0, 0);
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		Color c = getColor();
@@ -175,11 +176,11 @@ public class Touchpad extends Widget {
 		}
 	}
 
-	public float getPrefWidth () {
+	@NullUnmarked public float getPrefWidth () {
 		return style.background != null ? style.background.getMinWidth() : 0;
 	}
 
-	public float getPrefHeight () {
+	@NullUnmarked public float getPrefHeight () {
 		return style.background != null ? style.background.getMinHeight() : 0;
 	}
 

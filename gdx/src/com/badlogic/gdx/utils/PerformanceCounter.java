@@ -19,6 +19,7 @@ package com.badlogic.gdx.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.FloatCounter;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Class to keep track of the time and load (percentage of total time) a specific task takes. Call {@link #start()} just before
  * starting the task and {@link #stop()} right after. You can do this multiple times if required. Every render or update call
@@ -63,7 +64,7 @@ public class PerformanceCounter {
 
 	/** Updates the time and load counters and resets the time. Call {@link #start()} to begin a new count.
 	 * @param delta The time since the last call to this method */
-	public void tick (final float delta) {
+	@NullUnmarked public void tick (final float delta) {
 		if (!valid) {
 			Gdx.app.error("PerformanceCounter", "Invalid data, check if you called PerformanceCounter#stop()");
 			return;

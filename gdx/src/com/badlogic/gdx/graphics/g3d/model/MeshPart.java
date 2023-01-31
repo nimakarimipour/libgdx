@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A MeshPart is composed of a subset of vertices of a {@link Mesh}, along with the primitive type. The vertices subset is
  * described by an offset and size. When the mesh is indexed (which is when {@link Mesh#getNumIndices()} > 0), then the
@@ -93,7 +94,7 @@ public class MeshPart {
 	/** Set this MeshPart to be a copy of the other MeshPart
 	 * @param other The MeshPart from which to copy the values
 	 * @return this MeshPart, for chaining */
-	public MeshPart set (@Nullable final MeshPart other) {
+	@NullUnmarked public MeshPart set (@Nullable final MeshPart other) {
 		this.id = other.id;
 		this.mesh = other.mesh;
 		this.offset = other.offset;
@@ -123,7 +124,7 @@ public class MeshPart {
 	 * operation and should not be called frequently. All vertices (points) of the shape are traversed to calculate the maximum and
 	 * minimum x, y and z coordinate of the shape. Note that MeshPart is not aware of any transformation that might be applied when
 	 * rendering. It calculates the untransformed (not moved, not scaled, not rotated) values. */
-	public void update () {
+	@NullUnmarked public void update () {
 		mesh.calculateBoundingBox(bounds, offset, size);
 		bounds.getCenter(center);
 		bounds.getDimensions(halfExtents).scl(0.5f);
@@ -150,13 +151,13 @@ public class MeshPart {
 	/** Renders the mesh part using the specified shader, must be called after {@link ShaderProgram#bind()}.
 	 * @param shader the shader to be used
 	 * @param autoBind overrides the autoBind member of the Mesh */
-	public void render (@Nullable ShaderProgram shader, boolean autoBind) {
+	@NullUnmarked public void render (@Nullable ShaderProgram shader, boolean autoBind) {
 		mesh.render(shader, primitiveType, offset, size, autoBind);
 	}
 
 	/** Renders the mesh part using the specified shader, must be called after {@link ShaderProgram#bind()}.
 	 * @param shader the shader to be used */
-	public void render (ShaderProgram shader) {
+	@NullUnmarked public void render (ShaderProgram shader) {
 		mesh.render(shader, primitiveType, offset, size);
 	}
 }

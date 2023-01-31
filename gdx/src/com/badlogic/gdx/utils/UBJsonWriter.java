@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Builder style API for emitting UBJSON.
  * @author Justin Shapcott */
@@ -175,7 +176,7 @@ public class UBJsonWriter implements Closeable {
 	/** Appends a {@code String} value to the stream. This corresponds to the {@code string} value type in the UBJSON
 	 * specification.
 	 * @return this writer, for chaining */
-	public UBJsonWriter value (@Nullable String value) throws IOException {
+	@NullUnmarked public UBJsonWriter value (@Nullable String value) throws IOException {
 		checkName();
 		byte[] bytes = value.getBytes("UTF-8");
 		out.writeByte('S');

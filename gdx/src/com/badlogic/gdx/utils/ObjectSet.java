@@ -22,6 +22,7 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** An unordered set where the keys are objects. Null keys are not allowed. No allocation is done except when growing the table
  * size.
@@ -329,7 +330,7 @@ public class ObjectSet<T> implements Iterable<T> {
 	 * <p>
 	 * If {@link Collections#allocateIterators} is false, the same iterator instance is returned each time this method is called.
 	 * Use the {@link ObjectSetIterator} constructor for nested or multithreaded iteration. */
-	public ObjectSetIterator<T> iterator () {
+	@NullUnmarked public ObjectSetIterator<T> iterator () {
 		if (Collections.allocateIterators) return new ObjectSetIterator(this);
 		if (iterator1 == null) {
 			iterator1 = new ObjectSetIterator(this);
