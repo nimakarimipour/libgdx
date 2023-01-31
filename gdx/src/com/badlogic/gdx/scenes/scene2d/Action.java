@@ -21,17 +21,18 @@ import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 /** Actions attach to an {@link Actor} and perform some task, often over time.
  * @author Nathan Sweet */
 abstract public class Action implements Poolable {
 	/** The actor this action is attached to, or null if it is not attached. */
-	protected Actor actor;
+	@Nullable protected Actor actor;
 
 	/** The actor this action targets, or null if a target has not been set. */
 	protected Actor target;
 
-	private @Null Pool pool;
+	@Nullable private @Null Pool pool;
 
 	/** Updates the action based on time. Typically this is called each frame by {@link Actor#act(float)}.
 	 * @param delta Time in seconds since the last frame.
@@ -53,7 +54,7 @@ abstract public class Action implements Poolable {
 	 * This method is not typically a good place for an action subclass to query the actor's state because the action may not be
 	 * executed for some time, eg it may be {@link DelayAction delayed}. The actor's state is best queried in the first call to
 	 * {@link #act(float)}. For a {@link TemporalAction}, use TemporalAction#begin(). */
-	public void setActor (Actor actor) {
+	public void setActor (@Nullable Actor actor) {
 		this.actor = actor;
 		if (target == null) setTarget(actor);
 		if (actor == null) {
@@ -65,7 +66,7 @@ abstract public class Action implements Poolable {
 	}
 
 	/** @return null if the action is not attached to an actor. */
-	public Actor getActor () {
+	@Nullable public Actor getActor () {
 		return actor;
 	}
 
@@ -93,14 +94,14 @@ abstract public class Action implements Poolable {
 		restart();
 	}
 
-	public @Null Pool getPool () {
+	@Nullable public @Null Pool getPool () {
 		return pool;
 	}
 
 	/** Sets the pool that the action will be returned to when removed from the actor.
 	 * @param pool May be null.
 	 * @see #setActor(Actor) */
-	public void setPool (@Null Pool pool) {
+	public void setPool (@Nullable @Null Pool pool) {
 		this.pool = pool;
 	}
 

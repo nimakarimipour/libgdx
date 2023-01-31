@@ -17,6 +17,7 @@
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** @author Xoppa */
 public class BSpline<T extends Vector<T>> implements Path<T> {

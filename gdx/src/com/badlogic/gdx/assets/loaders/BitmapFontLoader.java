@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** {@link AssetLoader} for {@link BitmapFont} instances. Loads the font description file (.fnt) asynchronously, loads the
  * {@link Texture} containing the glyphs as a dependency. The {@link BitmapFontParameter} allows you to set things like texture
@@ -116,10 +117,10 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 
 		/** optional {@link BitmapFontData} to be used instead of loading the {@link Texture} directly. Use this if your font is
 		 * embedded in a {@link Skin}. **/
-		public BitmapFontData bitmapFontData = null;
+		@Nullable public BitmapFontData bitmapFontData = null;
 
 		/** The name of the {@link TextureAtlas} to load the {@link BitmapFont} itself from. Optional; if {@code null}, will look
 		 * for a separate image */
-		public String atlasName = null;
+		@Nullable public String atlasName = null;
 	}
 }

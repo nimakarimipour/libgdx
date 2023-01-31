@@ -43,6 +43,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** A select box (aka a drop-down list) allows a user to choose one of a number of values from a list. When inactive, the selected
  * value is displayed. When activated, it shows the list of values that may be selected.
@@ -425,7 +426,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 		private final Vector2 stagePosition = new Vector2();
 		final List<T> list;
 		private InputListener hideListener;
-		private Actor previousScrollFocus;
+		@Nullable private Actor previousScrollFocus;
 
 		public SelectBoxScrollPane (final SelectBox<T> selectBox) {
 			super(null, selectBox.style.scrollStyle);
@@ -605,11 +606,11 @@ public class SelectBox<T> extends Widget implements Disableable {
 	static public class SelectBoxStyle {
 		public BitmapFont font;
 		public Color fontColor = new Color(1, 1, 1, 1);
-		public @Null Color overFontColor, disabledFontColor;
+		@Nullable public @Null Color overFontColor, disabledFontColor;
 		public @Null Drawable background;
 		public ScrollPaneStyle scrollStyle;
 		public ListStyle listStyle;
-		public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
+		@Nullable public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
 		public SelectBoxStyle () {
 		}

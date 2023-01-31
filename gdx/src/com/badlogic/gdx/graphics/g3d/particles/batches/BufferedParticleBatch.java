@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** Base class of all the batches requiring to buffer {@link ParticleControllerRenderData}
  * @author Inferno */

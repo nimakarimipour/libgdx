@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import javax.annotation.Nullable;
 
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
@@ -59,7 +60,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param value May be null. */
-	public JsonValue (@Null String value) {
+	public JsonValue (@Nullable @Null String value) {
 		set(value);
 	}
 
@@ -140,7 +141,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified index. This requires walking the linked list to the specified entry, see
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
-	public @Null JsonValue remove (int index) {
+	@Nullable public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -156,7 +157,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Removes the child with the specified name.
 	 * @return May be null. */
-	public @Null JsonValue remove (String name) {
+	@Nullable public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -617,14 +618,14 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
-	public @Null JsonValue getChild (String name) {
+	@Nullable public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
 	}
 
 	/** Finds the child with the specified name and returns it as a string. Returns defaultValue if not found.
 	 * @param defaultValue May be null. */
-	public String getString (String name, @Null String defaultValue) {
+	@Nullable public String getString (String name, @Nullable @Null String defaultValue) {
 		JsonValue child = get(name);
 		return (child == null || !child.isValue() || child.isNull()) ? defaultValue : child.asString();
 	}
@@ -883,7 +884,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param name May be null. */
-	public void setName (@Null String name) {
+	public void setName (@Nullable @Null String name) {
 		this.name = name;
 	}
 
@@ -953,13 +954,13 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param value May be null. */
-	public void set (@Null String value) {
+	public void set (@Nullable @Null String value) {
 		stringValue = value;
 		type = value == null ? ValueType.nullValue : ValueType.stringValue;
 	}
 
 	/** @param stringValue May be null if the string representation is the string value of the double (eg, no leading zeros). */
-	public void set (double value, @Null String stringValue) {
+	public void set (double value, @Nullable @Null String stringValue) {
 		doubleValue = value;
 		longValue = (long)value;
 		this.stringValue = stringValue;
@@ -967,7 +968,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param stringValue May be null if the string representation is the string value of the long (eg, no leading zeros). */
-	public void set (long value, @Null String stringValue) {
+	public void set (long value, @Nullable @Null String stringValue) {
 		longValue = value;
 		doubleValue = value;
 		this.stringValue = stringValue;
@@ -1238,8 +1239,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	public class JsonIterator implements Iterator<JsonValue>, Iterable<JsonValue> {
-		JsonValue entry = child;
-		JsonValue current;
+		@Nullable JsonValue entry = child;
+		@Nullable JsonValue current;
 
 		public boolean hasNext () {
 			return entry != null;

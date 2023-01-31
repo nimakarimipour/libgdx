@@ -17,6 +17,7 @@
 package com.badlogic.gdx.maps.tiled;
 
 import com.badlogic.gdx.maps.MapLayer;
+import javax.annotation.Nullable;
 
 /** @brief Layer for a TiledMap */
 public class TiledMapTileLayer extends MapLayer {
@@ -87,7 +88,7 @@ public class TiledMapTileLayer extends MapLayer {
 	/** @brief represents a cell in a TiledLayer: TiledMapTile, flip and rotation properties. */
 	public static class Cell {
 
-		private TiledMapTile tile;
+		@Nullable private TiledMapTile tile;
 
 		private boolean flipHorizontally;
 
@@ -96,7 +97,7 @@ public class TiledMapTileLayer extends MapLayer {
 		private int rotation;
 
 		/** @return The tile currently assigned to this cell. */
-		public TiledMapTile getTile () {
+		@Nullable public TiledMapTile getTile () {
 			return tile;
 		}
 

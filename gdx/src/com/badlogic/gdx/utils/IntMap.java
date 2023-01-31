@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
+import javax.annotation.Nullable;
 
 /** An unordered map where the keys are unboxed ints and values are objects. No allocation is done except when growing the table
  * size.
@@ -44,7 +45,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	int[] keyTable;
 	V[] valueTable;
 
-	V zeroValue;
+	@Nullable V zeroValue;
 	boolean hasZeroValue;
 
 	private final float loadFactor;
@@ -137,7 +138,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	public @Null V put (int key, @Null V value) {
+	@Nullable public @Null V put (int key, @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
 			zeroValue = value;
@@ -196,7 +197,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
-	public @Null V remove (int key) {
+	@Nullable public @Null V remove (int key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
 			hasZeroValue = false;
@@ -513,7 +514,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 
 	static public class Entry<V> {
 		public int key;
-		public @Null V value;
+		@Nullable public @Null V value;
 
 		public String toString () {
 			return key + "=" + value;

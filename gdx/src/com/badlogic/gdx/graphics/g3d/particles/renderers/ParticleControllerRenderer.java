@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles.renderers;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
+import javax.annotation.Nullable;
 
 /** It's a {@link ParticleControllerComponent} which determines how the particles are rendered. It's the base class of every
  * particle renderer.

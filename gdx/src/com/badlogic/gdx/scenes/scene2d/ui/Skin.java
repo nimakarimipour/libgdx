@@ -47,6 +47,7 @@ import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Method;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
+import javax.annotation.Nullable;
 
 /** A skin stores resources for UI widgets to use (texture regions, ninepatches, fonts, colors, etc). Resources are named and can
  * be looked up by name and type. Resources can be described in JSON. Skin provides useful conversions, such as allowing access to
@@ -57,7 +58,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
  * @author Nathan Sweet */
 public class Skin implements Disposable {
 	ObjectMap<Class, ObjectMap<String, Object>> resources = new ObjectMap();
-	TextureAtlas atlas;
+	@Nullable TextureAtlas atlas;
 	float scale = 1;
 
 	private final ObjectMap<String, Class> jsonClassTags = new ObjectMap(defaultTagClasses.length);
@@ -167,7 +168,7 @@ public class Skin implements Disposable {
 
 	/** Returns a named resource of the specified type.
 	 * @return null if not found. */
-	public @Null <T> T optional (String name, Class<T> type) {
+	@Nullable public @Null <T> T optional (String name, Class<T> type) {
 		if (name == null) throw new IllegalArgumentException("name cannot be null.");
 		if (type == null) throw new IllegalArgumentException("type cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(type);
@@ -208,7 +209,7 @@ public class Skin implements Disposable {
 	}
 
 	/** @return an array with the {@link TextureRegion} that have an index != -1, or null if none are found. */
-	public @Null Array<TextureRegion> getRegions (String regionName) {
+	@Nullable public @Null Array<TextureRegion> getRegions (String regionName) {
 		Array<TextureRegion> regions = null;
 		int i = 0;
 		TextureRegion region = optional(regionName + "_" + (i++), TextureRegion.class);
@@ -333,7 +334,7 @@ public class Skin implements Disposable {
 
 	/** Returns the name of the specified style object, or null if it is not in the skin. This compares potentially every style
 	 * object in the skin of the same type as the specified style, which may be a somewhat expensive operation. */
-	public @Null String find (Object resource) {
+	@Nullable public @Null String find (Object resource) {
 		if (resource == null) throw new IllegalArgumentException("style cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(resource.getClass());
 		if (typeResources == null) return null;
@@ -443,7 +444,7 @@ public class Skin implements Disposable {
 	}
 
 	/** Returns the {@link TextureAtlas} passed to this skin constructor, or null. */
-	public @Null TextureAtlas getAtlas () {
+	@Nullable public @Null TextureAtlas getAtlas () {
 		return atlas;
 	}
 
@@ -462,7 +463,7 @@ public class Skin implements Disposable {
 		final Json json = new Json() {
 			static private final String parentFieldName = "parent";
 
-			public <T> T readValue (Class<T> type, Class elementType, JsonValue jsonData) {
+			public <T> T readValue (Class<T> type, @Nullable Class elementType, JsonValue jsonData) {
 				// If the JSON is a string but the type is not, look up the actual value by name.
 				if (jsonData != null && jsonData.isString() && !ClassReflection.isAssignableFrom(CharSequence.class, type))
 					return get(jsonData.asString(), type);
@@ -617,7 +618,7 @@ public class Skin implements Disposable {
 		TextField.TextFieldStyle.class, TextTooltip.TextTooltipStyle.class, Touchpad.TouchpadStyle.class, Tree.TreeStyle.class,
 		Window.WindowStyle.class};
 
-	static private @Null Method findMethod (Class type, String name) {
+	@Nullable static private @Null Method findMethod (Class type, String name) {
 		Method[] methods = ClassReflection.getMethods(type);
 		for (int i = 0, n = methods.length; i < n; i++) {
 			Method method = methods[i];
@@ -628,7 +629,7 @@ public class Skin implements Disposable {
 
 	/** @author Nathan Sweet */
 	static public class TintedDrawable {
-		public String name;
-		public Color color;
+		@Nullable public String name;
+		@Nullable public Color color;
 	}
 }

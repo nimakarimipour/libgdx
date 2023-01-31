@@ -18,6 +18,7 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import javax.annotation.Nullable;
 
 /** Removes a listener from an actor.
  * @author Nathan Sweet */

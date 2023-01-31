@@ -31,13 +31,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StreamUtils;
+import javax.annotation.Nullable;
 
 /** See <a href=
  * "https://web.archive.org/web/20200427191041/http://www.badlogicgames.com/wordpress/?p=12555">http://www.badlogicgames.com/wordpress/?p=12555</a>
  * @author mzechner */
 public class ParticleEffect implements Disposable {
 	private final Array<ParticleEmitter> emitters;
-	private BoundingBox bounds;
+	@Nullable private BoundingBox bounds;
 	private boolean ownsTexture;
 	protected float xSizeScale = 1f;
 	protected float ySizeScale = 1f;
@@ -133,7 +134,7 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Returns the emitter with the specified name, or null. */
-	public ParticleEmitter findEmitter (String name) {
+	@Nullable public ParticleEmitter findEmitter (String name) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
 			if (emitter.getName().equals(name)) return emitter;
@@ -166,7 +167,7 @@ public class ParticleEffect implements Disposable {
 		load(effectFile, atlas, null);
 	}
 
-	public void load (FileHandle effectFile, TextureAtlas atlas, String atlasPrefix) {
+	public void load (FileHandle effectFile, TextureAtlas atlas, @Nullable String atlasPrefix) {
 		loadEmitters(effectFile);
 		loadEmitterImages(atlas, atlasPrefix);
 	}
@@ -193,7 +194,7 @@ public class ParticleEffect implements Disposable {
 		loadEmitterImages(atlas, null);
 	}
 
-	public void loadEmitterImages (TextureAtlas atlas, String atlasPrefix) {
+	public void loadEmitterImages (TextureAtlas atlas, @Nullable String atlasPrefix) {
 		for (int i = 0, n = emitters.size; i < n; i++) {
 			ParticleEmitter emitter = emitters.get(i);
 			if (emitter.getImagePaths().size == 0) continue;

@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
@@ -73,7 +74,7 @@ public class List<T> extends Widget implements Cullable {
 
 		addListener(keyListener = new InputListener() {
 			long typeTimeout;
-			String prefix;
+			@Nullable String prefix;
 
 			public boolean keyDown (InputEvent event, int keycode) {
 				if (items.isEmpty()) return false;
@@ -249,7 +250,7 @@ public class List<T> extends Widget implements Cullable {
 		}
 	}
 
-	protected void drawSelection (Batch batch, @Null Drawable drawable, float x, float y, float width, float height) {
+	protected void drawSelection (Batch batch, @Nullable @Null Drawable drawable, float x, float y, float width, float height) {
 		if (drawable != null) drawable.draw(batch, x, y, width, height);
 	}
 
@@ -310,17 +311,17 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** @return May be null. */
-	public T getOverItem () {
+	@Nullable public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
-	public T getPressedItem () {
+	@Nullable public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
 
 	/** @return null if not over an item. */
-	public @Null T getItemAt (float y) {
+	@Nullable public @Null T getItemAt (float y) {
 		int index = getItemIndexAt(y);
 		if (index == -1) return null;
 		return items.get(index);
@@ -440,7 +441,7 @@ public class List<T> extends Widget implements Cullable {
 		public Color fontColorSelected = new Color(1, 1, 1, 1);
 		public Color fontColorUnselected = new Color(1, 1, 1, 1);
 		public Drawable selection;
-		public @Null Drawable down, over, background;
+		@Nullable public @Null Drawable down, over, background;
 
 		public ListStyle () {
 		}

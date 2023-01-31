@@ -19,6 +19,7 @@ package com.badlogic.gdx.assets.loaders;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
+import javax.annotation.Nullable;
 
 /** Base class for asynchronous {@link AssetLoader} instances. Such loaders try to load parts of an OpenGL resource, like the
  * Pixmap, on a separate thread to then load the actual resource on the thread the OpenGL context is active on.
@@ -28,7 +29,7 @@ import com.badlogic.gdx.files.FileHandle;
  * @param <P> */
 public abstract class AsynchronousAssetLoader<T, P extends AssetLoaderParameters<T>> extends AssetLoader<T, P> {
 
-	public AsynchronousAssetLoader (FileHandleResolver resolver) {
+	public AsynchronousAssetLoader (@Nullable FileHandleResolver resolver) {
 		super(resolver);
 	}
 
@@ -57,5 +58,5 @@ public abstract class AsynchronousAssetLoader<T, P extends AssetLoaderParameters
 	 * @param fileName
 	 * @param file the resolved file to load
 	 * @param parameter */
-	public abstract T loadSync (AssetManager manager, String fileName, FileHandle file, P parameter);
+	@Nullable public abstract T loadSync (AssetManager manager, String fileName, FileHandle file, P parameter);
 }
