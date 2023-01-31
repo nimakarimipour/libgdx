@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Actions attach to an {@link Actor} and perform some task, often over time.
  * @author Nathan Sweet */
@@ -30,7 +31,7 @@ abstract public class Action implements Poolable {
 	@Nullable protected Actor actor;
 
 	/** The actor this action targets, or null if a target has not been set. */
-	protected Actor target;
+	@SuppressWarnings("NullAway.Init") protected Actor target;
 
 	@Nullable private @Null Pool pool;
 
@@ -73,7 +74,7 @@ abstract public class Action implements Poolable {
 
 	/** Sets the actor this action will manipulate. If no target actor is set, {@link #setActor(Actor)} will set the target actor
 	 * when the action is added to an actor. */
-	public void setTarget (@Nullable Actor target) {
+	@NullUnmarked public void setTarget (@Nullable Actor target) {
 		this.target = target;
 	}
 
@@ -88,7 +89,7 @@ abstract public class Action implements Poolable {
 	 * The default implementation calls {@link #restart()}.
 	 * <p>
 	 * If a subclass has optional state, it must override this method, call super, and reset the optional state. */
-	public void reset () {
+	@NullUnmarked public void reset () {
 		actor = null;
 		target = null;
 		pool = null;

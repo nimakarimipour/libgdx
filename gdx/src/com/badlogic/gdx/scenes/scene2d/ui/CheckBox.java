@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 public class CheckBox extends TextButton {
 	private Image image;
 	private Cell imageCell;
-	private CheckBoxStyle style;
+	@SuppressWarnings("NullAway.Init") private CheckBoxStyle style;
 
 	public CheckBox (@Null String text, Skin skin) {
 		this(text, skin.get(CheckBoxStyle.class));

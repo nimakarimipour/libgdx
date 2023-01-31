@@ -35,6 +35,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A group that sizes and positions children using table constraints.
  * <p>
@@ -67,18 +68,18 @@ public class Table extends WidgetGroup {
 	@Nullable private Cell rowDefaults;
 
 	private boolean sizeInvalid = true;
-	private float[] columnMinWidth, rowMinHeight;
-	private float[] columnPrefWidth, rowPrefHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnMinWidth, rowMinHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnPrefWidth, rowPrefHeight;
 	private float tableMinWidth, tableMinHeight;
 	private float tablePrefWidth, tablePrefHeight;
-	private float[] columnWidth, rowHeight;
-	private float[] expandWidth, expandHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnWidth, rowHeight;
+	@SuppressWarnings("NullAway.Init") private float[] expandWidth, expandHeight;
 
 	Value padTop = backgroundTop, padLeft = backgroundLeft, padBottom = backgroundBottom, padRight = backgroundRight;
 	int align = Align.center;
 
 	Debug debug = Debug.none;
-	Array<DebugRect> debugRects;
+	@SuppressWarnings("NullAway.Init") Array<DebugRect> debugRects;
 
 	@Nullable
 	@Null Drawable background;
@@ -418,7 +419,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Returns the cell for the specified actor in this table, or null. */
-	public @Null <T extends Actor> Cell<T> getCell (T actor) {
+	@NullUnmarked public @Null <T extends Actor> Cell<T> getCell (T actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		Object[] cells = this.cells.items;
 		for (int i = 0, n = this.cells.size; i < n; i++) {
@@ -954,7 +955,7 @@ public class Table extends WidgetGroup {
 
 	/** Positions and sizes children of the table using the cell associated with each child. The values given are the position
 	 * within the parent and size of the table. */
-	public void layout () {
+	@NullUnmarked public void layout () {
 		if (sizeInvalid) computeSize();
 
 		float layoutWidth = getWidth(), layoutHeight = getHeight();
@@ -1288,7 +1289,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the top padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundTop = new Value() {
-		public float get (@Nullable @Null Actor context) {
+		@NullUnmarked public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getTopHeight();
 		}
@@ -1297,7 +1298,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the left padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundLeft = new Value() {
-		public float get (@Nullable @Null Actor context) {
+		@NullUnmarked public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getLeftWidth();
 		}
@@ -1306,7 +1307,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the bottom padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundBottom = new Value() {
-		public float get (@Nullable @Null Actor context) {
+		@NullUnmarked public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getBottomHeight();
 		}
@@ -1315,7 +1316,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the right padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundRight = new Value() {
-		public float get (@Nullable @Null Actor context) {
+		@NullUnmarked public float get (@Nullable @Null Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getRightWidth();
 		}

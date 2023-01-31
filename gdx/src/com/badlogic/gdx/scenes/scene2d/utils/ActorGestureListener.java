@@ -35,7 +35,7 @@ public class ActorGestureListener implements EventListener {
 
 	private final GestureDetector detector;
 	@Nullable InputEvent event;
-	Actor actor, touchDownTarget;
+	@SuppressWarnings("NullAway.Init") Actor actor, touchDownTarget;
 
 	/** @see GestureDetector#GestureDetector(com.badlogic.gdx.input.GestureDetector.GestureListener) */
 	public ActorGestureListener () {

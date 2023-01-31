@@ -31,6 +31,7 @@ import com.badlogic.gdx.math.Matrix4;
 
 import java.nio.Buffer;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Draws batched quads using indices.
  * @see Batch
@@ -944,7 +945,7 @@ public class SpriteBatch implements Batch {
 		this.idx = idx + 20;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void flush () {
 		if (idx == 0) return;
 
@@ -1063,7 +1064,7 @@ public class SpriteBatch implements Batch {
 		}
 	}
 
-	protected void switchTexture (@Nullable Texture texture) {
+	@NullUnmarked protected void switchTexture (@Nullable Texture texture) {
 		flush();
 		lastTexture = texture;
 		invTexWidth = 1.0f / texture.getWidth();

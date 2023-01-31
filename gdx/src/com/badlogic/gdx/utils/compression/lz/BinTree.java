@@ -9,8 +9,8 @@ public class BinTree extends InWindow {
 	int _cyclicBufferSize = 0;
 	int _matchMaxLen;
 
-	int[] _son;
-	int[] _hash;
+	@SuppressWarnings("NullAway.Init") int[] _son;
+	@SuppressWarnings("NullAway.Init") int[] _hash;
 
 	int _cutValue = 0xFF;
 	int _hashMask;

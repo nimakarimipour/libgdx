@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 public class DefaultRenderableSorter implements RenderableSorter, Comparator<Renderable> {
 	@Nullable private Camera camera;
@@ -47,7 +48,7 @@ public class DefaultRenderableSorter implements RenderableSorter, Comparator<Ren
 		return output;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public int compare (final Renderable o1, final Renderable o2) {
 		final boolean b1 = o1.material.has(BlendingAttribute.Type)
 			&& ((BlendingAttribute)o1.material.get(BlendingAttribute.Type)).blended;

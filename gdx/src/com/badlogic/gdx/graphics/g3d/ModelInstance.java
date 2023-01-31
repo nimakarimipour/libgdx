@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** An instance of a {@link Model}, allows to specify global transform and modify the materials, as it has a copy of the model's
  * materials. Multiple instances can be created from the same Model, all sharing the meshes and textures of the Model. The Model
@@ -125,7 +126,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive True to recursively search the Model's node tree, false to only search for a root node
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
+	@NullUnmarked public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
 		boolean parentTransform, boolean mergeTransform, boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;

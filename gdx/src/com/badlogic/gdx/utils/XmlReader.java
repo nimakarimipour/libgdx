@@ -27,6 +27,7 @@ import java.io.Reader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Lightweight XML parser. Supports a subset of XML features: elements, attributes, text, predefined entities, CDATA, mixed
  * content. Namespaces are parsed as part of the element or attribute name. Prologs and doctypes are ignored. Only 8-bit character
@@ -86,7 +87,7 @@ public class XmlReader {
 		}
 	}
 
-	public Element parse (char[] data, int offset, int length) {
+	@NullUnmarked public Element parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length;
 
 		int s = 0;
@@ -434,7 +435,7 @@ public class XmlReader {
 		current = child;
 	}
 
-	protected void attribute (@Nullable String name, @Nullable String value) {
+	@NullUnmarked protected void attribute (@Nullable String name, @Nullable String value) {
 		current.setAttribute(name, value);
 	}
 
@@ -449,7 +450,7 @@ public class XmlReader {
 		return null;
 	}
 
-	protected void text (@Nullable String text) {
+	@NullUnmarked protected void text (@Nullable String text) {
 		String existing = current.getText();
 		current.setText(existing != null ? existing + text : text);
 	}
@@ -522,7 +523,7 @@ public class XmlReader {
 			children.add(element);
 		}
 
-		public String getText () {
+		@NullUnmarked public String getText () {
 			return text;
 		}
 
@@ -538,7 +539,7 @@ public class XmlReader {
 			if (children != null) children.removeValue(child, true);
 		}
 
-		public void remove () {
+		@NullUnmarked public void remove () {
 			parent.removeChild(this);
 		}
 
@@ -591,7 +592,7 @@ public class XmlReader {
 
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, does not recurse */
-		public @Null Element getChildByName (String name) {
+		@NullUnmarked public @Null Element getChildByName (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);

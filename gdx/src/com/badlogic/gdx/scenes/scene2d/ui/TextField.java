@@ -46,6 +46,7 @@ import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** A single-line text input field.
  * <p>
@@ -78,18 +79,18 @@ public class TextField extends Widget implements Disableable {
 	static public float keyRepeatInitialTime = 0.4f;
 	static public float keyRepeatTime = 0.1f;
 
-	protected String text;
+	@SuppressWarnings("NullAway.Init") protected String text;
 	protected int cursor, selectionStart;
 	protected boolean hasSelection;
 	protected boolean writeEnters;
 	protected final GlyphLayout layout = new GlyphLayout();
 	protected final FloatArray glyphPositions = new FloatArray();
 
-	TextFieldStyle style;
-	private String messageText;
-	protected CharSequence displayText;
+	@SuppressWarnings("NullAway.Init") TextFieldStyle style;
+	@SuppressWarnings("NullAway.Init") private String messageText;
+	@SuppressWarnings("NullAway.Init") protected CharSequence displayText;
 	Clipboard clipboard;
-	InputListener inputListener;
+	@SuppressWarnings("NullAway.Init") InputListener inputListener;
 	@Nullable
 	@Null TextFieldListener listener;
 	@Nullable
@@ -152,7 +153,7 @@ public class TextField extends Widget implements Disableable {
 		return new TextFieldClickListener();
 	}
 
-	protected int letterUnderCursor (float x) {
+	@NullUnmarked protected int letterUnderCursor (float x) {
 		x -= textOffset + fontOffset - style.font.getData().cursorX - glyphPositions.get(visibleTextStart);
 		Drawable background = getBackgroundDrawable();
 		if (background != null) x -= style.background.getLeftWidth();
@@ -303,7 +304,7 @@ public class TextField extends Widget implements Disableable {
 		return style.background;
 	}
 
-	public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
 		boolean focused = hasKeyboardFocus();
 		if (focused != this.focused || (focused && !blinkTask.isScheduled())) {
 			this.focused = focused;
@@ -1093,14 +1094,14 @@ public class TextField extends Widget implements Disableable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class TextFieldStyle {
-		public BitmapFont font;
+		@SuppressWarnings("NullAway.Init") public BitmapFont font;
 		@Nullable public Color fontColor;
 		@Nullable public @Null Color focusedFontColor, disabledFontColor;
 		@Nullable public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
 		@Nullable public @Null BitmapFont messageFont;
 		@Nullable public @Null Color messageFontColor;
 
-		public TextFieldStyle () {
+		@NullUnmarked public TextFieldStyle () {
 		}
 
 		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,

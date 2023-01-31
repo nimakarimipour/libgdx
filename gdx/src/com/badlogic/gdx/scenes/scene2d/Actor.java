@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** 2D scene graph node. An actor has a position, rectangular size, origin, scale, rotation, Z index, and color. The position
  * corresponds to the unrotated, unscaled bottom left corner of the actor. The position is relative to the actor's parent. The
@@ -259,7 +260,7 @@ public class Actor {
 		return captureListeners;
 	}
 
-	public void addAction (@Nullable Action action) {
+	@NullUnmarked public void addAction (@Nullable Action action) {
 		action.setActor(this);
 		actions.add(action);
 
@@ -351,7 +352,7 @@ public class Actor {
 	}
 
 	/** Returns the parent actor, or null if not in a group. */
-	public @Null Group getParent () {
+	@NullUnmarked public @Null Group getParent () {
 		return parent;
 	}
 

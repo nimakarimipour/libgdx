@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Constructor;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import javax.annotation.Nullable;
+import com.badlogic.gdx.NullUnmarked;
 
 /** Pool that creates new instances of a type using reflection. The type must have a zero argument constructor.
  * {@link Constructor#setAccessible(boolean)} will be used if the class and/or constructor is not visible.
@@ -35,7 +36,7 @@ public class ReflectionPool<T> extends Pool<T> {
 		this(type, initialCapacity, Integer.MAX_VALUE);
 	}
 
-	public ReflectionPool (Class<T> type, int initialCapacity, int max) {
+	@NullUnmarked public ReflectionPool (Class<T> type, int initialCapacity, int max) {
 		super(initialCapacity, max);
 		constructor = findConstructor(type);
 		if (constructor == null)
