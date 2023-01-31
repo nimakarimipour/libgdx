@@ -40,7 +40,8 @@ public class TextureAtlasLoader extends SynchronousAssetLoader<TextureAtlas, Tex
 
 	@Nullable TextureAtlasData data;
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public TextureAtlas load (AssetManager assetManager, String fileName, FileHandle file,
 		@Nullable TextureAtlasParameter parameter) {
 		for (Page page : data.getPages()) {

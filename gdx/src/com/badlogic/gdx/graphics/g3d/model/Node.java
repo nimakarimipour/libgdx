@@ -298,7 +298,8 @@ public class Node {
 	/** Helper method to recursive fetch a node from an array
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
-	@NullUnmarked public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
+	@NullUnmarked
+	public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
 		final int n = nodes.size;
 		Node node;
 		if (ignoreCase) {

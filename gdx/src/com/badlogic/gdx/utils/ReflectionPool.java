@@ -36,7 +36,8 @@ public class ReflectionPool<T> extends Pool<T> {
 		this(type, initialCapacity, Integer.MAX_VALUE);
 	}
 
-	@NullUnmarked public ReflectionPool (Class<T> type, int initialCapacity, int max) {
+	@NullUnmarked
+	public ReflectionPool (Class<T> type, int initialCapacity, int max) {
 		super(initialCapacity, max);
 		constructor = findConstructor(type);
 		if (constructor == null)

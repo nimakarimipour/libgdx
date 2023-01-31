@@ -525,7 +525,8 @@ public class DefaultShader extends BaseShader {
 		this(renderable, config, new ShaderProgram(prefix + vertexShader, prefix + fragmentShader));
 	}
 
-	@NullUnmarked public DefaultShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
+	@NullUnmarked
+	public DefaultShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
 		final Attributes attributes = combineAttributes(renderable);
 		this.config = config;
 		this.program = shaderProgram;
@@ -598,7 +599,8 @@ public class DefaultShader extends BaseShader {
 		u_environmentCubemap = environmentCubemap ? register(Inputs.environmentCubemap, Setters.environmentCubemap) : -1;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void init () {
 		final ShaderProgram program = this.program;
 		this.program = null;

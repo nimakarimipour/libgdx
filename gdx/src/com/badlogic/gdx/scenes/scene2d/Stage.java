@@ -888,7 +888,8 @@ public class Stage extends InputAdapter implements Disposable {
 		@Nullable Actor listenerActor, target;
 		int pointer, button;
 
-		@NullUnmarked public void reset () {
+		@NullUnmarked
+		public void reset () {
 			listenerActor = null;
 			listener = null;
 			target = null;

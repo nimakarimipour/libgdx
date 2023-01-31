@@ -39,7 +39,8 @@ public abstract class ColorInfluencer extends Influencer {
 			colorChannel = controller.particles.addChannel(ParticleChannels.Color);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void activateParticles (int startIndex, int count) {
 			for (int i = startIndex * colorChannel.strideSize,
 				c = i + count * colorChannel.strideSize; i < c; i += colorChannel.strideSize) {
@@ -63,7 +64,8 @@ public abstract class ColorInfluencer extends Influencer {
 		public ScaledNumericValue alphaValue;
 		public GradientColorValue colorValue;
 
-		@NullUnmarked public Single () {
+		@NullUnmarked
+		public Single () {
 			colorValue = new GradientColorValue();
 			alphaValue = new ScaledNumericValue();
 			alphaValue.setHigh(1);

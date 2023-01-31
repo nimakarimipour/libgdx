@@ -92,7 +92,8 @@ public class ButtonGroup<T extends Button> {
 	/** Called when a button is checked or unchecked. If overridden, generally changing button checked states should not be done
 	 * from within this method.
 	 * @return True if the new state should be allowed. */
-	@NullUnmarked protected boolean canCheck (T button, boolean newState) {
+	@NullUnmarked
+	protected boolean canCheck (T button, boolean newState) {
 		if (button.isChecked == newState) return false;
 
 		if (!newState) {

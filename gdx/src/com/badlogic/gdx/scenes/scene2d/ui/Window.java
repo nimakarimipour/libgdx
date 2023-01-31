@@ -128,7 +128,8 @@ public class Window extends Table {
 				dragging = false;
 			}
 
-			@NullUnmarked public void touchDragged (InputEvent event, float x, float y, int pointer) {
+			@NullUnmarked
+			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (!dragging) return;
 				float width = getWidth(), height = getHeight();
 				float windowX = getX(), windowY = getY();
@@ -259,7 +260,8 @@ public class Window extends Table {
 		super.draw(batch, parentAlpha);
 	}
 
-	@NullUnmarked protected void drawStageBackground (Batch batch, float parentAlpha, float x, float y, float width, float height) {
+	@NullUnmarked
+	protected void drawStageBackground (Batch batch, float parentAlpha, float x, float y, float width, float height) {
 		Color color = getColor();
 		batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 		style.stageBackground.draw(batch, x, y, width, height);
@@ -351,7 +353,8 @@ public class Window extends Table {
 		public @Null Color titleFontColor = new Color(1, 1, 1, 1);
 		@Nullable public @Null Drawable stageBackground;
 
-		@NullUnmarked public WindowStyle () {
+		@NullUnmarked
+		public WindowStyle () {
 		}
 
 		public WindowStyle (BitmapFont titleFont, Color titleFontColor, @Null Drawable background) {

@@ -143,7 +143,8 @@ public class AssetManager implements Disposable {
 	 * @param type the asset type
 	 * @return the asset
 	 * @throws GdxRuntimeException if the asset is not loaded */
-	@NullUnmarked public synchronized <T> T get (String fileName, Class<T> type) {
+	@NullUnmarked
+	public synchronized <T> T get (String fileName, Class<T> type) {
 		return get(fileName, type, true);
 	}
 
@@ -182,7 +183,8 @@ public class AssetManager implements Disposable {
 	/** @param assetDescriptor the asset descriptor
 	 * @return the asset
 	 * @throws GdxRuntimeException if the asset is not loaded */
-	@NullUnmarked public synchronized <T> T get (@Nullable AssetDescriptor<T> assetDescriptor) {
+	@NullUnmarked
+	public synchronized <T> T get (@Nullable AssetDescriptor<T> assetDescriptor) {
 		return get(assetDescriptor.fileName, assetDescriptor.type, true);
 	}
 
@@ -297,7 +299,8 @@ public class AssetManager implements Disposable {
 
 	/** @param asset the asset
 	 * @return the filename of the asset or null */
-	@NullUnmarked public synchronized <T> String getAssetFileName (T asset) {
+	@NullUnmarked
+	public synchronized <T> String getAssetFileName (T asset) {
 		for (Class assetType : assets.keys()) {
 			ObjectMap<String, RefCountedContainer> assetsByType = assets.get(assetType);
 			for (Entry<String, RefCountedContainer> entry : assetsByType) {

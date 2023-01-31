@@ -86,7 +86,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, shaderConfig, null, null);
 	}
 
-	@NullUnmarked public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
+	@NullUnmarked
+	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
 		@Nullable BlendingAttribute blendingAttribute, @Nullable DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
 
@@ -134,7 +135,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		return blendingAttribute;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	protected void flush (int[] offsets) {
 		int tp = 0;
 		for (PointSpriteControllerRenderData data : renderData) {

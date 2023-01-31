@@ -78,7 +78,8 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 		return x * x + y * y;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Vector2 set (@Nullable Vector2 v) {
 		x = v.x;
 		y = v.y;

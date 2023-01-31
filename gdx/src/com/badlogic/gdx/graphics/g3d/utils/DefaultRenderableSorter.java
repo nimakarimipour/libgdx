@@ -48,7 +48,8 @@ public class DefaultRenderableSorter implements RenderableSorter, Comparator<Ren
 		return output;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public int compare (final Renderable o1, final Renderable o2) {
 		final boolean b1 = o1.material.has(BlendingAttribute.Type)
 			&& ((BlendingAttribute)o1.material.get(BlendingAttribute.Type)).blended;

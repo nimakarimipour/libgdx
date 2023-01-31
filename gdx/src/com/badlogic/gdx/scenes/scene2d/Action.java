@@ -74,7 +74,8 @@ abstract public class Action implements Poolable {
 
 	/** Sets the actor this action will manipulate. If no target actor is set, {@link #setActor(Actor)} will set the target actor
 	 * when the action is added to an actor. */
-	@NullUnmarked public void setTarget (@Nullable Actor target) {
+	@NullUnmarked
+	public void setTarget (@Nullable Actor target) {
 		this.target = target;
 	}
 
@@ -89,7 +90,8 @@ abstract public class Action implements Poolable {
 	 * The default implementation calls {@link #restart()}.
 	 * <p>
 	 * If a subclass has optional state, it must override this method, call super, and reset the optional state. */
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		actor = null;
 		target = null;
 		pool = null;

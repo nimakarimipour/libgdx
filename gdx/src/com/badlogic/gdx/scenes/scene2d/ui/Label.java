@@ -376,7 +376,8 @@ public class Label extends Widget {
 		@Nullable public @Null Color fontColor;
 		@Nullable public @Null Drawable background;
 
-		@NullUnmarked public LabelStyle () {
+		@NullUnmarked
+		public LabelStyle () {
 		}
 
 		public LabelStyle (BitmapFont font, @Nullable @Null Color fontColor) {
@@ -384,7 +385,8 @@ public class Label extends Widget {
 			this.fontColor = fontColor;
 		}
 
-		@NullUnmarked public LabelStyle (@Nullable LabelStyle style) {
+		@NullUnmarked
+		public LabelStyle (@Nullable LabelStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);
 			background = style.background;

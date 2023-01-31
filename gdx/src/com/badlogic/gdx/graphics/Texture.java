@@ -144,13 +144,15 @@ public class Texture extends GLTexture {
 		this(GL20.GL_TEXTURE_2D, Gdx.gl.glGenTexture(), data);
 	}
 
-	@NullUnmarked protected Texture (int glTarget, int glHandle, @Nullable TextureData data) {
+	@NullUnmarked
+	protected Texture (int glTarget, int glHandle, @Nullable TextureData data) {
 		super(glTarget, glHandle);
 		load(data);
 		if (data.isManaged()) addManagedTexture(Gdx.app, this);
 	}
 
-	@NullUnmarked public void load (@Nullable TextureData data) {
+	@NullUnmarked
+	public void load (@Nullable TextureData data) {
 		if (this.data != null && data.isManaged() != this.data.isManaged())
 			throw new GdxRuntimeException("New data must have the same managed status as the old data");
 		this.data = data;
@@ -321,7 +323,8 @@ public class Texture extends GLTexture {
 	}
 
 	/** @return the number of managed textures currently loaded */
-	@NullUnmarked public static int getNumManagedTextures () {
+	@NullUnmarked
+	public static int getNumManagedTextures () {
 		return managedTextures.get(Gdx.app).size;
 	}
 }

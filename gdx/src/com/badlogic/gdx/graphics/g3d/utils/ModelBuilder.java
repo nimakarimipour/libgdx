@@ -103,7 +103,8 @@ public class ModelBuilder {
 
 	/** Add a node to the model. Use any of the part(...) method to add a NodePart.
 	 * @return The node being created. */
-	@NullUnmarked public Node node () {
+	@NullUnmarked
+	public Node node () {
 		final Node node = new Node();
 		node(node);
 		node.id = "node" + model.nodes.size;
@@ -132,7 +133,8 @@ public class ModelBuilder {
 	/** Adds the specified MeshPart to the current Node. The Mesh will be managed by the model and disposed when the model is
 	 * disposed. The resources the Material might contain are not managed, use {@link #manage(Disposable)} to add those to the
 	 * model. */
-	@NullUnmarked public void part (final MeshPart meshpart, final Material material) {
+	@NullUnmarked
+	public void part (final MeshPart meshpart, final Material material) {
 		if (node == null) node();
 		node.parts.add(new NodePart(meshpart, material));
 	}

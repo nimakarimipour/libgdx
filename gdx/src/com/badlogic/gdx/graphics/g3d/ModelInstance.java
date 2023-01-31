@@ -126,7 +126,8 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive True to recursively search the Model's node tree, false to only search for a root node
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	@NullUnmarked public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
+	@NullUnmarked
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
 		boolean parentTransform, boolean mergeTransform, boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;

@@ -35,7 +35,8 @@ public class InWindow {
 		_bufferOffset -= offset;
 	}
 
-	@NullUnmarked public void ReadBlock () throws IOException {
+	@NullUnmarked
+	public void ReadBlock () throws IOException {
 		if (_streamEndWasReached) return;
 		while (true) {
 			int size = (0 - _bufferOffset) + _blockSize - _streamPos;
@@ -54,7 +55,8 @@ public class InWindow {
 		}
 	}
 
-	@NullUnmarked void Free () {
+	@NullUnmarked
+	void Free () {
 		_bufferBase = null;
 	}
 

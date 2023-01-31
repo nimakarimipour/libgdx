@@ -36,7 +36,8 @@ public class TiledMapTileMapObject extends TextureMapObject {
 
 	@Nullable private TiledMapTile tile;
 
-	@NullUnmarked public TiledMapTileMapObject (@Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
+	@NullUnmarked
+	public TiledMapTileMapObject (@Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
 		this.flipHorizontally = flipHorizontally;
 		this.flipVertically = flipVertically;
 		this.tile = tile;

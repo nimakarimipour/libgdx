@@ -478,7 +478,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 					return false;
 				}
 
-				@NullUnmarked public boolean keyDown (@Nullable InputEvent event, int keycode) {
+				@NullUnmarked
+				public boolean keyDown (@Nullable InputEvent event, int keycode) {
 					switch (keycode) {
 					case Keys.NUMPAD_ENTER:
 					case Keys.ENTER:
@@ -615,7 +616,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 		@SuppressWarnings("NullAway.Init") public ListStyle listStyle;
 		@Nullable public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
-		@NullUnmarked public SelectBoxStyle () {
+		@NullUnmarked
+		public SelectBoxStyle () {
 		}
 
 		public SelectBoxStyle (BitmapFont font, Color fontColor, @Null Drawable background, ScrollPaneStyle scrollStyle,

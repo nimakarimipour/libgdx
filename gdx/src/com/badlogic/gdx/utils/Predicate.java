@@ -38,7 +38,8 @@ public interface Predicate<T> {
 			this(iterable.iterator(), predicate);
 		}
 
-		@NullUnmarked public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
+		@NullUnmarked
+		public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
 			set(iterator, predicate);
 		}
 
@@ -91,7 +92,8 @@ public interface Predicate<T> {
 		@SuppressWarnings("NullAway.Init") public Predicate<T> predicate;
 		@Nullable public PredicateIterator<T> iterator = null;
 
-		@NullUnmarked public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
+		@NullUnmarked
+		public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
 			set(iterable, predicate);
 		}
 

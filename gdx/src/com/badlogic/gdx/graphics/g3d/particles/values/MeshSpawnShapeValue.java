@@ -72,7 +72,8 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 	public MeshSpawnShapeValue () {
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void load (ParticleValue value) {
 		super.load(value);
 		MeshSpawnShapeValue spawnShapeValue = (MeshSpawnShapeValue)value;

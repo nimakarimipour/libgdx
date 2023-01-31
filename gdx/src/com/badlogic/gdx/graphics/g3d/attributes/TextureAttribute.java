@@ -140,7 +140,8 @@ public class TextureAttribute extends Attribute {
 		this(type, textureDescription, offsetU, offsetV, scaleU, scaleV, 0);
 	}
 
-	@NullUnmarked public TextureAttribute (final long type, @Nullable final Texture texture) {
+	@NullUnmarked
+	public TextureAttribute (final long type, @Nullable final Texture texture) {
 		this(type);
 		textureDescription.texture = texture;
 	}

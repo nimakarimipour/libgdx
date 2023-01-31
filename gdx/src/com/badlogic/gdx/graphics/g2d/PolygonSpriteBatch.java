@@ -1197,7 +1197,8 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		vertexIndex = idx;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void flush () {
 		if (vertexIndex == 0) return;
 
@@ -1312,7 +1313,8 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		}
 	}
 
-	@NullUnmarked private void switchTexture (@Nullable Texture texture) {
+	@NullUnmarked
+	private void switchTexture (@Nullable Texture texture) {
 		flush();
 		lastTexture = texture;
 		invTexWidth = 1.0f / texture.getWidth();
