@@ -97,7 +97,8 @@ public class TiledMapTileLayer extends MapLayer {
 		private int rotation;
 
 		/** @return The tile currently assigned to this cell. */
-		@Nullable public TiledMapTile getTile () {
+		@Nullable
+		public TiledMapTile getTile () {
 			return tile;
 		}
 

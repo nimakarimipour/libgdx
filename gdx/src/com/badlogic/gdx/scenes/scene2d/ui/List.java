@@ -311,17 +311,20 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** @return May be null. */
-	@Nullable public T getOverItem () {
+	@Nullable
+	public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
-	@Nullable public T getPressedItem () {
+	@Nullable
+	public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
 
 	/** @return null if not over an item. */
-	@Nullable public @Null T getItemAt (float y) {
+	@Nullable
+	public @Null T getItemAt (float y) {
 		int index = getItemIndexAt(y);
 		if (index == -1) return null;
 		return items.get(index);

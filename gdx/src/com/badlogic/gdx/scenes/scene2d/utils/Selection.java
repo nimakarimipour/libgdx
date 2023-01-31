@@ -23,7 +23,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	boolean multiple;
 	boolean required;
 	private boolean programmaticChangeEvents = true;
-	@Nullable @Null T lastSelected;
+	@Nullable
+	@Null T lastSelected;
 
 	/** @param actor An actor to fire {@link ChangeEvent} on when the selection changes, or null. */
 	public void setActor (@Null Actor actor) {
@@ -239,7 +240,8 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Makes a best effort to return the last item selected, else returns an arbitrary item or null if the selection is empty. */
-	@Nullable public @Null T getLastSelected () {
+	@Nullable
+	public @Null T getLastSelected () {
 		if (lastSelected != null) {
 			return lastSelected;
 		} else if (selected.size > 0) {

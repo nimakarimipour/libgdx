@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-import javax.annotation.Nullable;
 
 /** An unordered set where the items are unboxed ints. No allocation is done except when growing the table size.
  * <p>

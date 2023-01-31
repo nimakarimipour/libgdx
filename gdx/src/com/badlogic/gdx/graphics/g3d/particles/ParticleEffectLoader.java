@@ -136,7 +136,8 @@ public class ParticleEffectLoader
 		return effectData.resource;
 	}
 
-	@Nullable private <T> T find (Array<?> array, Class<T> type) {
+	@Nullable
+	private <T> T find (Array<?> array, Class<T> type) {
 		for (Object object : array) {
 			if (ClassReflection.isAssignableFrom(type, object.getClass())) return (T)object;
 		}

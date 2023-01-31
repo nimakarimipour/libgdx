@@ -31,7 +31,8 @@ public class TiledMapTileSet implements Iterable<TiledMapTile> {
 	private MapProperties properties;
 
 	/** @return tileset's name */
-	@Nullable public String getName () {
+	@Nullable
+	public String getName () {
 		return name;
 	}
 

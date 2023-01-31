@@ -244,7 +244,8 @@ public class Node {
 	}
 
 	/** @return The parent node that holds this node as child node, may be null. */
-	@Nullable public Node getParent () {
+	@Nullable
+	public Node getParent () {
 		return parent;
 	}
 

@@ -65,7 +65,8 @@ public class EarClippingTriangulator {
 	 * @param vertices pairs describing vertices of the polygon, in either clockwise or counterclockwise order.
 	 * @return triples of triangle indices in clockwise order. Note the returned array is reused for later calls to the same
 	 *         method. */
-	@Initializer public ShortArray computeTriangles (float[] vertices, int offset, int count) {
+	@Initializer
+	public ShortArray computeTriangles (float[] vertices, int offset, int count) {
 		this.vertices = vertices;
 		int vertexCount = this.vertexCount = count / 2;
 		int vertexOffset = offset / 2;

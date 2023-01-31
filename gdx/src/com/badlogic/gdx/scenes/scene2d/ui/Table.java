@@ -173,7 +173,8 @@ public class Table extends WidgetGroup {
 		return background;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
@@ -1265,7 +1266,8 @@ public class Table extends WidgetGroup {
 	}
 
 	/** @return The skin that was passed to this table in its constructor, or null if none was given. */
-	@Nullable public @Null Skin getSkin () {
+	@Nullable
+	public @Null Skin getSkin () {
 		return skin;
 	}
 

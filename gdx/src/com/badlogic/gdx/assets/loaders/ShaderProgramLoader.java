@@ -49,7 +49,8 @@ public class ShaderProgramLoader extends AsynchronousAssetLoader<ShaderProgram, 
 		this.fragmentFileSuffix = fragmentFileSuffix;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, ShaderProgramParameter parameter) {
 		return null;
 	}
