@@ -25,7 +25,7 @@ def run_annotator():
     commands += ['-n', 'edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted']
     commands += ['-cn', 'NULLAWAY']
     # Uncomment to see build output
-    commands += ['-rboserr']
+    # commands += ['-rboserr']
 
     subprocess.call(commands)
 
