@@ -52,7 +52,7 @@ dependencies {
 	// Not required on Android if you use the support
 	// library nullability annotations.
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-	compileOnly "com.uber.nullaway:nullaway:0.10.10"
+	compileOnly "com.uber.nullaway:nullaway-annotations:0.10.10"
 
 	errorprone "com.google.errorprone:error_prone_core:2.16"
 	errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
