@@ -18,15 +18,12 @@ package com.badlogic.gdx.physics.box2d;
 
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * The class manages contact between two shapes. A contact exists for each overlapping AABB in the
- * broad-phase (except if filtered). Therefore a contact object may exist that has no contact
- * points.
+/** The class manages contact between two shapes. A contact exists for each overlapping AABB in the broad-phase (except if
+ * filtered). Therefore a contact object may exist that has no contact points.
  *
- * @author mzechner
- */
+ * @author mzechner */
 public class Contact {
-  // @off
+	// @off
   /*JNI
   #include <Box2D/Box2D.h>
   	 */

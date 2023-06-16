@@ -26,58 +26,53 @@ import com.badlogic.gdx.tests.g3d.shadows.utils.NearFarAnalyzer;
 import com.badlogic.gdx.tests.g3d.shadows.utils.ShadowMapAllocator;
 import java.util.Set;
 
-/**
- * The Realistic shadow system creates real shadows. Indeed, with this system, a shadow is the
- * absence of light. This system performs only one render pass for each light and then render the
- * scene.
+/** The Realistic shadow system creates real shadows. Indeed, with this system, a shadow is the absence of light. This system
+ * performs only one render pass for each light and then render the scene.
  *
- * @author realitix
- */
+ * @author realitix */
 public class RealisticShadowSystem extends FirstPassBaseShadowSystem {
 
-  /** Number of pass before render the scene */
-  public static final int PASS_QUANTITY = 1;
+	/** Number of pass before render the scene */
+	public static final int PASS_QUANTITY = 1;
 
-  public RealisticShadowSystem() {
-    super();
-  }
+	public RealisticShadowSystem () {
+		super();
+	}
 
-  public RealisticShadowSystem(
-      NearFarAnalyzer nearFarAnalyzer,
-      ShadowMapAllocator allocator,
-      DirectionalAnalyzer directionalAnalyzer,
-      LightFilter lightFilter) {
-    super(nearFarAnalyzer, allocator, directionalAnalyzer, lightFilter);
-  }
+	public RealisticShadowSystem (NearFarAnalyzer nearFarAnalyzer, ShadowMapAllocator allocator,
+		DirectionalAnalyzer directionalAnalyzer, LightFilter lightFilter) {
+		super(nearFarAnalyzer, allocator, directionalAnalyzer, lightFilter);
+	}
 
-  @Override
-  public int getPassQuantity() {
-    return PASS_QUANTITY;
-  }
+	@Override
+	public int getPassQuantity () {
+		return PASS_QUANTITY;
+	}
 
-  @Override
-  public void init() {
-    super.init();
-    mainShaderProvider = new MainShaderProvider(new MainShader.Config(this));
-  }
+	@Override
+	public void init () {
+		super.init();
+		mainShaderProvider = new MainShaderProvider(new MainShader.Config(this));
+	}
 
-  @Override
-  protected void init1() {
-    super.init1();
-    passShaderProviders[FIRST_PASS] = new Pass1ShaderProvider();
-  }
+	@Override
+	protected void init1 () {
+		super.init1();
+		passShaderProviders[FIRST_PASS] = new Pass1ShaderProvider();
+	}
 
-  /** No point light support */
-  @Override
-  public void addLight(PointLight point, Set<CubemapSide> sides) {}
+	/** No point light support */
+	@Override
+	public void addLight (PointLight point, Set<CubemapSide> sides) {
+	}
 
-  /** @return First pass texture containing all depth maps. */
-  public Texture getTexture() {
-    return this.getTexture(FIRST_PASS);
-  }
+	/** @return First pass texture containing all depth maps. */
+	public Texture getTexture () {
+		return this.getTexture(FIRST_PASS);
+	}
 
-  @Override
-  public String toString() {
-    return "RealisticShadowSystem";
-  }
+	@Override
+	public String toString () {
+		return "RealisticShadowSystem";
+	}
 }

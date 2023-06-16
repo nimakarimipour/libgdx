@@ -40,136 +40,114 @@ import com.badlogic.gdx.tests.utils.GdxTestConfig;
 @GdxTestConfig(requireGL30 = true)
 public class TextureArrayTest extends GdxTest {
 
-  TextureArray textureArray;
-  Mesh terrain;
+	TextureArray textureArray;
+	Mesh terrain;
 
-  ShaderProgram shaderProgram;
+	ShaderProgram shaderProgram;
 
-  PerspectiveCamera camera;
-  FirstPersonCameraController cameraController;
+	PerspectiveCamera camera;
+	FirstPersonCameraController cameraController;
 
-  Matrix4 modelView = new Matrix4();
+	Matrix4 modelView = new Matrix4();
 
-  GLProfiler glProfiler;
+	GLProfiler glProfiler;
 
-  @Override
-  public void create() {
-    glProfiler = new GLProfiler(Gdx.graphics);
-    glProfiler.enable();
+	@Override
+	public void create () {
+		glProfiler = new GLProfiler(Gdx.graphics);
+		glProfiler.enable();
 
-    ShaderProgram.prependVertexCode =
-        Gdx.app.getType().equals(Application.ApplicationType.Desktop)
-            ? "#version 140\n #extension GL_EXT_texture_array : enable\n"
-            : "#version 300 es\n";
-    ShaderProgram.prependFragmentCode =
-        Gdx.app.getType().equals(Application.ApplicationType.Desktop)
-            ? "#version 140\n #extension GL_EXT_texture_array : enable\n"
-            : "#version 300 es\n";
+		ShaderProgram.prependVertexCode = Gdx.app.getType().equals(Application.ApplicationType.Desktop)
+			? "#version 140\n #extension GL_EXT_texture_array : enable\n"
+			: "#version 300 es\n";
+		ShaderProgram.prependFragmentCode = Gdx.app.getType().equals(Application.ApplicationType.Desktop)
+			? "#version 140\n #extension GL_EXT_texture_array : enable\n"
+			: "#version 300 es\n";
 
-    String[] texPaths =
-        new String[] {
-          "data/g3d/materials/Searing Gorge.jpg",
-          "data/g3d/materials/Lava Cracks.jpg",
-          "data/g3d/materials/Deep Fire.jpg"
-        };
+		String[] texPaths = new String[] {"data/g3d/materials/Searing Gorge.jpg", "data/g3d/materials/Lava Cracks.jpg",
+			"data/g3d/materials/Deep Fire.jpg"};
 
-    camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    camera.position.set(8, 10f, 20f);
-    camera.lookAt(10, 0, 10);
-    camera.up.set(0, 1, 0);
-    camera.update();
-    cameraController = new FirstPersonCameraController(camera);
-    Gdx.input.setInputProcessor(cameraController);
+		camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera.position.set(8, 10f, 20f);
+		camera.lookAt(10, 0, 10);
+		camera.up.set(0, 1, 0);
+		camera.update();
+		cameraController = new FirstPersonCameraController(camera);
+		Gdx.input.setInputProcessor(cameraController);
 
-    FileHandle[] texFiles = new FileHandle[texPaths.length];
-    for (int i = 0; i < texPaths.length; i++) {
-      texFiles[i] = Gdx.files.internal(texPaths[i]);
-    }
+		FileHandle[] texFiles = new FileHandle[texPaths.length];
+		for (int i = 0; i < texPaths.length; i++) {
+			texFiles[i] = Gdx.files.internal(texPaths[i]);
+		}
 
-    textureArray = new TextureArray(true, texFiles);
-    textureArray.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    textureArray.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.Linear);
-    shaderProgram =
-        new ShaderProgram(
-            Gdx.files.internal("data/shaders/texturearray.vert"),
-            Gdx.files.internal("data/shaders/texturearray.frag"));
-    System.out.println(shaderProgram.getLog());
+		textureArray = new TextureArray(true, texFiles);
+		textureArray.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+		textureArray.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.Linear);
+		shaderProgram = new ShaderProgram(Gdx.files.internal("data/shaders/texturearray.vert"),
+			Gdx.files.internal("data/shaders/texturearray.frag"));
+		System.out.println(shaderProgram.getLog());
 
-    int vertexStride = 6;
-    int vertexCount = 100 * 100;
-    terrain =
-        new Mesh(
-            false,
-            vertexCount * 6,
-            0,
-            new VertexAttributes(
-                VertexAttribute.Position(),
-                new VertexAttribute(
-                    VertexAttributes.Usage.TextureCoordinates,
-                    3,
-                    ShaderProgram.TEXCOORD_ATTRIBUTE + 0)));
+		int vertexStride = 6;
+		int vertexCount = 100 * 100;
+		terrain = new Mesh(false, vertexCount * 6, 0, new VertexAttributes(VertexAttribute.Position(),
+			new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 3, ShaderProgram.TEXCOORD_ATTRIBUTE + 0)));
 
-    Pixmap data = new Pixmap(Gdx.files.internal("data/g3d/heightmap.png"));
-    float[] vertices = new float[vertexCount * vertexStride * 6];
-    int idx = 0;
-    for (int i = 0; i < 100 - 1; i++) {
-      for (int j = 0; j < 100 - 1; j++) {
-        idx = addVertex(i, j, vertices, data, idx);
-        idx = addVertex(i, j + 1, vertices, data, idx);
-        idx = addVertex(i + 1, j, vertices, data, idx);
+		Pixmap data = new Pixmap(Gdx.files.internal("data/g3d/heightmap.png"));
+		float[] vertices = new float[vertexCount * vertexStride * 6];
+		int idx = 0;
+		for (int i = 0; i < 100 - 1; i++) {
+			for (int j = 0; j < 100 - 1; j++) {
+				idx = addVertex(i, j, vertices, data, idx);
+				idx = addVertex(i, j + 1, vertices, data, idx);
+				idx = addVertex(i + 1, j, vertices, data, idx);
 
-        idx = addVertex(i, j + 1, vertices, data, idx);
-        idx = addVertex(i + 1, j + 1, vertices, data, idx);
-        idx = addVertex(i + 1, j, vertices, data, idx);
-      }
-    }
-    terrain.setVertices(vertices);
+				idx = addVertex(i, j + 1, vertices, data, idx);
+				idx = addVertex(i + 1, j + 1, vertices, data, idx);
+				idx = addVertex(i + 1, j, vertices, data, idx);
+			}
+		}
+		terrain.setVertices(vertices);
 
-    data.dispose();
-  }
+		data.dispose();
+	}
 
-  Color tmpColor = new Color();
+	Color tmpColor = new Color();
 
-  private int addVertex(int i, int j, float[] vertsOut, Pixmap heightmap, int idx) {
-    int pixel =
-        heightmap.getPixel(
-            (int) (i / 100f * heightmap.getWidth()), (int) (j / 100f * heightmap.getHeight()));
-    tmpColor.set(pixel);
-    vertsOut[idx++] = i / 5f;
-    vertsOut[idx++] = tmpColor.r * 25f / 5f;
-    vertsOut[idx++] = j / 5f;
-    vertsOut[idx++] = i / 20f;
-    vertsOut[idx++] = j / 20f;
-    vertsOut[idx++] = (tmpColor.r * 3f) - 0.5f;
-    return idx;
-  }
+	private int addVertex (int i, int j, float[] vertsOut, Pixmap heightmap, int idx) {
+		int pixel = heightmap.getPixel((int)(i / 100f * heightmap.getWidth()), (int)(j / 100f * heightmap.getHeight()));
+		tmpColor.set(pixel);
+		vertsOut[idx++] = i / 5f;
+		vertsOut[idx++] = tmpColor.r * 25f / 5f;
+		vertsOut[idx++] = j / 5f;
+		vertsOut[idx++] = i / 20f;
+		vertsOut[idx++] = j / 20f;
+		vertsOut[idx++] = (tmpColor.r * 3f) - 0.5f;
+		return idx;
+	}
 
-  @Override
-  public void render() {
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-    Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
-    Gdx.gl.glDepthFunc(GL20.GL_LEQUAL);
-    Gdx.gl.glCullFace(GL20.GL_BACK);
+	@Override
+	public void render () {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+		Gdx.gl.glDepthFunc(GL20.GL_LEQUAL);
+		Gdx.gl.glCullFace(GL20.GL_BACK);
 
-    modelView
-        .translate(10f, 0, 10f)
-        .rotate(0, 1f, 0, 2f * Gdx.graphics.getDeltaTime())
-        .translate(-10f, 0, -10f);
+		modelView.translate(10f, 0, 10f).rotate(0, 1f, 0, 2f * Gdx.graphics.getDeltaTime()).translate(-10f, 0, -10f);
 
-    cameraController.update();
+		cameraController.update();
 
-    textureArray.bind();
+		textureArray.bind();
 
-    shaderProgram.bind();
-    shaderProgram.setUniformi("u_textureArray", 0);
-    shaderProgram.setUniformMatrix("u_projViewTrans", camera.combined);
-    shaderProgram.setUniformMatrix("u_modelView", modelView);
-    terrain.render(shaderProgram, GL20.GL_TRIANGLES);
-  }
+		shaderProgram.bind();
+		shaderProgram.setUniformi("u_textureArray", 0);
+		shaderProgram.setUniformMatrix("u_projViewTrans", camera.combined);
+		shaderProgram.setUniformMatrix("u_modelView", modelView);
+		terrain.render(shaderProgram, GL20.GL_TRIANGLES);
+	}
 
-  @Override
-  public void dispose() {
-    terrain.dispose();
-    shaderProgram.dispose();
-  }
+	@Override
+	public void dispose () {
+		terrain.dispose();
+		shaderProgram.dispose();
+	}
 }

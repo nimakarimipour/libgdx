@@ -15,60 +15,54 @@ package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
 
-/**
- * Provides methods to sort arrays of objects. Sorting requires working memory and this class allows
- * that memory to be reused to avoid allocation. The sorting is otherwise identical to the
- * Arrays.sort methods (uses timsort).<br>
+/** Provides methods to sort arrays of objects. Sorting requires working memory and this class allows that memory to be reused to
+ * avoid allocation. The sorting is otherwise identical to the Arrays.sort methods (uses timsort).<br>
  * <br>
- * Note that sorting primitive arrays with the Arrays.sort methods does not allocate memory (unless
- * sorting large arrays of char, short, or byte).
+ * Note that sorting primitive arrays with the Arrays.sort methods does not allocate memory (unless sorting large arrays of char,
+ * short, or byte).
  *
- * @author Nathan Sweet
- */
+ * @author Nathan Sweet */
 public class Sort {
-  private static Sort instance;
+	private static Sort instance;
 
-  private TimSort timSort;
-  private ComparableTimSort comparableTimSort;
+	private TimSort timSort;
+	private ComparableTimSort comparableTimSort;
 
-  public <T extends Comparable> void sort(Array<T> a) {
-    if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();
-    comparableTimSort.doSort(a.items, 0, a.size);
-  }
+	public <T extends Comparable> void sort (Array<T> a) {
+		if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();
+		comparableTimSort.doSort(a.items, 0, a.size);
+	}
 
-  /** The specified objects must implement {@link Comparable}. */
-  public void sort(Object[] a) {
-    if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();
-    comparableTimSort.doSort(a, 0, a.length);
-  }
+	/** The specified objects must implement {@link Comparable}. */
+	public void sort (Object[] a) {
+		if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();
+		comparableTimSort.doSort(a, 0, a.length);
+	}
 
-  /** The specified objects must implement {@link Comparable}. */
-  public void sort(Object[] a, int fromIndex, int toIndex) {
-    if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();
-    comparableTimSort.doSort(a, fromIndex, toIndex);
-  }
+	/** The specified objects must implement {@link Comparable}. */
+	public void sort (Object[] a, int fromIndex, int toIndex) {
+		if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();
+		comparableTimSort.doSort(a, fromIndex, toIndex);
+	}
 
-  public <T> void sort(Array<T> a, Comparator<? super T> c) {
-    if (timSort == null) timSort = new TimSort();
-    timSort.doSort(a.items, c, 0, a.size);
-  }
+	public <T> void sort (Array<T> a, Comparator<? super T> c) {
+		if (timSort == null) timSort = new TimSort();
+		timSort.doSort(a.items, c, 0, a.size);
+	}
 
-  public <T> void sort(T[] a, Comparator<? super T> c) {
-    if (timSort == null) timSort = new TimSort();
-    timSort.doSort(a, c, 0, a.length);
-  }
+	public <T> void sort (T[] a, Comparator<? super T> c) {
+		if (timSort == null) timSort = new TimSort();
+		timSort.doSort(a, c, 0, a.length);
+	}
 
-  public <T> void sort(T[] a, Comparator<? super T> c, int fromIndex, int toIndex) {
-    if (timSort == null) timSort = new TimSort();
-    timSort.doSort(a, c, fromIndex, toIndex);
-  }
+	public <T> void sort (T[] a, Comparator<? super T> c, int fromIndex, int toIndex) {
+		if (timSort == null) timSort = new TimSort();
+		timSort.doSort(a, c, fromIndex, toIndex);
+	}
 
-  /**
-   * Returns a Sort instance for convenience. Multiple threads must not use this instance at the
-   * same time.
-   */
-  public static Sort instance() {
-    if (instance == null) instance = new Sort();
-    return instance;
-  }
+	/** Returns a Sort instance for convenience. Multiple threads must not use this instance at the same time. */
+	public static Sort instance () {
+		if (instance == null) instance = new Sort();
+		return instance;
+	}
 }

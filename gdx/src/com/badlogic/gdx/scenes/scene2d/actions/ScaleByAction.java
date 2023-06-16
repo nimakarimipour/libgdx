@@ -16,41 +16,39 @@
 
 package com.badlogic.gdx.scenes.scene2d.actions;
 
-/**
- * Scales an actor's scale to a relative size.
+/** Scales an actor's scale to a relative size.
  *
- * @author Nathan Sweet
- */
+ * @author Nathan Sweet */
 public class ScaleByAction extends RelativeTemporalAction {
-  private float amountX, amountY;
+	private float amountX, amountY;
 
-  protected void updateRelative(float percentDelta) {
-    target.scaleBy(amountX * percentDelta, amountY * percentDelta);
-  }
+	protected void updateRelative (float percentDelta) {
+		target.scaleBy(amountX * percentDelta, amountY * percentDelta);
+	}
 
-  public void setAmount(float x, float y) {
-    amountX = x;
-    amountY = y;
-  }
+	public void setAmount (float x, float y) {
+		amountX = x;
+		amountY = y;
+	}
 
-  public void setAmount(float scale) {
-    amountX = scale;
-    amountY = scale;
-  }
+	public void setAmount (float scale) {
+		amountX = scale;
+		amountY = scale;
+	}
 
-  public float getAmountX() {
-    return amountX;
-  }
+	public float getAmountX () {
+		return amountX;
+	}
 
-  public void setAmountX(float x) {
-    this.amountX = x;
-  }
+	public void setAmountX (float x) {
+		this.amountX = x;
+	}
 
-  public float getAmountY() {
-    return amountY;
-  }
+	public float getAmountY () {
+		return amountY;
+	}
 
-  public void setAmountY(float y) {
-    this.amountY = y;
-  }
+	public void setAmountY (float y) {
+		this.amountY = y;
+	}
 }

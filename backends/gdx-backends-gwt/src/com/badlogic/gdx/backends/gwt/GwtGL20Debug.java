@@ -24,1073 +24,1030 @@ import java.nio.IntBuffer;
 
 public class GwtGL20Debug extends GwtGL20 {
 
-  protected GwtGL20Debug(WebGLRenderingContext gl) {
-    super(gl);
-  }
-
-  private void checkError() {
-    int error = 0;
-    if ((error = gl.getError()) != GL_NO_ERROR) {
-      throw new GdxRuntimeException("GL error: " + error + ", " + Integer.toHexString(error));
-    }
-  }
-
-  @Override
-  public void glActiveTexture(int texture) {
-    super.glActiveTexture(texture);
-    checkError();
-  }
-
-  @Override
-  public void glBindTexture(int target, int texture) {
-
-    super.glBindTexture(target, texture);
-    checkError();
-  }
-
-  @Override
-  public void glBlendFunc(int sfactor, int dfactor) {
-
-    super.glBlendFunc(sfactor, dfactor);
-    checkError();
-  }
-
-  @Override
-  public void glClear(int mask) {
-
-    super.glClear(mask);
-    checkError();
-  }
-
-  @Override
-  public void glClearColor(float red, float green, float blue, float alpha) {
-
-    super.glClearColor(red, green, blue, alpha);
-    checkError();
-  }
-
-  @Override
-  public void glClearDepthf(float depth) {
-
-    super.glClearDepthf(depth);
-    checkError();
-  }
-
-  @Override
-  public void glClearStencil(int s) {
-
-    super.glClearStencil(s);
-    checkError();
-  }
-
-  @Override
-  public void glColorMask(boolean red, boolean green, boolean blue, boolean alpha) {
-
-    super.glColorMask(red, green, blue, alpha);
-    checkError();
-  }
-
-  @Override
-  public void glCompressedTexImage2D(
-      int target,
-      int level,
-      int internalformat,
-      int width,
-      int height,
-      int border,
-      int imageSize,
-      Buffer data) {
-
-    super.glCompressedTexImage2D(
-        target, level, internalformat, width, height, border, imageSize, data);
-    checkError();
-  }
-
-  @Override
-  public void glCompressedTexSubImage2D(
-      int target,
-      int level,
-      int xoffset,
-      int yoffset,
-      int width,
-      int height,
-      int format,
-      int imageSize,
-      Buffer data) {
-
-    super.glCompressedTexSubImage2D(
-        target, level, xoffset, yoffset, width, height, format, imageSize, data);
-    checkError();
-  }
-
-  @Override
-  public void glCopyTexImage2D(
-      int target, int level, int internalformat, int x, int y, int width, int height, int border) {
+	protected GwtGL20Debug (WebGLRenderingContext gl) {
+		super(gl);
+	}
 
-    super.glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
-    checkError();
-  }
+	private void checkError () {
+		int error = 0;
+		if ((error = gl.getError()) != GL_NO_ERROR) {
+			throw new GdxRuntimeException("GL error: " + error + ", " + Integer.toHexString(error));
+		}
+	}
 
-  @Override
-  public void glCopyTexSubImage2D(
-      int target, int level, int xoffset, int yoffset, int x, int y, int width, int height) {
+	@Override
+	public void glActiveTexture (int texture) {
+		super.glActiveTexture(texture);
+		checkError();
+	}
 
-    super.glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
-    checkError();
-  }
+	@Override
+	public void glBindTexture (int target, int texture) {
 
-  @Override
-  public void glCullFace(int mode) {
+		super.glBindTexture(target, texture);
+		checkError();
+	}
 
-    super.glCullFace(mode);
-    checkError();
-  }
+	@Override
+	public void glBlendFunc (int sfactor, int dfactor) {
 
-  @Override
-  public void glDeleteTextures(int n, IntBuffer textures) {
+		super.glBlendFunc(sfactor, dfactor);
+		checkError();
+	}
 
-    super.glDeleteTextures(n, textures);
-    checkError();
-  }
+	@Override
+	public void glClear (int mask) {
 
-  @Override
-  public void glDepthFunc(int func) {
+		super.glClear(mask);
+		checkError();
+	}
 
-    super.glDepthFunc(func);
-    checkError();
-  }
+	@Override
+	public void glClearColor (float red, float green, float blue, float alpha) {
 
-  @Override
-  public void glDepthMask(boolean flag) {
+		super.glClearColor(red, green, blue, alpha);
+		checkError();
+	}
 
-    super.glDepthMask(flag);
-    checkError();
-  }
+	@Override
+	public void glClearDepthf (float depth) {
 
-  @Override
-  public void glDepthRangef(float zNear, float zFar) {
+		super.glClearDepthf(depth);
+		checkError();
+	}
 
-    super.glDepthRangef(zNear, zFar);
-    checkError();
-  }
+	@Override
+	public void glClearStencil (int s) {
 
-  @Override
-  public void glDisable(int cap) {
+		super.glClearStencil(s);
+		checkError();
+	}
 
-    super.glDisable(cap);
-    checkError();
-  }
+	@Override
+	public void glColorMask (boolean red, boolean green, boolean blue, boolean alpha) {
 
-  @Override
-  public void glDrawArrays(int mode, int first, int count) {
+		super.glColorMask(red, green, blue, alpha);
+		checkError();
+	}
 
-    super.glDrawArrays(mode, first, count);
-    checkError();
-  }
+	@Override
+	public void glCompressedTexImage2D (int target, int level, int internalformat, int width, int height, int border,
+		int imageSize, Buffer data) {
 
-  @Override
-  public void glDrawElements(int mode, int count, int type, Buffer indices) {
+		super.glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data);
+		checkError();
+	}
 
-    super.glDrawElements(mode, count, type, indices);
-    checkError();
-  }
+	@Override
+	public void glCompressedTexSubImage2D (int target, int level, int xoffset, int yoffset, int width, int height, int format,
+		int imageSize, Buffer data) {
 
-  @Override
-  public void glEnable(int cap) {
+		super.glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data);
+		checkError();
+	}
 
-    super.glEnable(cap);
-    checkError();
-  }
+	@Override
+	public void glCopyTexImage2D (int target, int level, int internalformat, int x, int y, int width, int height, int border) {
 
-  @Override
-  public void glFinish() {
+		super.glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
+		checkError();
+	}
 
-    super.glFinish();
-    checkError();
-  }
+	@Override
+	public void glCopyTexSubImage2D (int target, int level, int xoffset, int yoffset, int x, int y, int width, int height) {
 
-  @Override
-  public void glFlush() {
+		super.glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
+		checkError();
+	}
 
-    super.glFlush();
-    checkError();
-  }
+	@Override
+	public void glCullFace (int mode) {
 
-  @Override
-  public void glFrontFace(int mode) {
+		super.glCullFace(mode);
+		checkError();
+	}
 
-    super.glFrontFace(mode);
-    checkError();
-  }
+	@Override
+	public void glDeleteTextures (int n, IntBuffer textures) {
 
-  @Override
-  public void glGenTextures(int n, IntBuffer textures) {
+		super.glDeleteTextures(n, textures);
+		checkError();
+	}
 
-    super.glGenTextures(n, textures);
-    checkError();
-  }
+	@Override
+	public void glDepthFunc (int func) {
 
-  @Override
-  public int glGetError() {
+		super.glDepthFunc(func);
+		checkError();
+	}
 
-    return super.glGetError();
-  }
+	@Override
+	public void glDepthMask (boolean flag) {
 
-  @Override
-  public void glGetIntegerv(int pname, IntBuffer params) {
+		super.glDepthMask(flag);
+		checkError();
+	}
 
-    super.glGetIntegerv(pname, params);
-    checkError();
-  }
+	@Override
+	public void glDepthRangef (float zNear, float zFar) {
 
-  @Override
-  public String glGetString(int name) {
+		super.glDepthRangef(zNear, zFar);
+		checkError();
+	}
 
-    return super.glGetString(name);
-  }
+	@Override
+	public void glDisable (int cap) {
 
-  @Override
-  public void glHint(int target, int mode) {
+		super.glDisable(cap);
+		checkError();
+	}
 
-    super.glHint(target, mode);
-    checkError();
-  }
+	@Override
+	public void glDrawArrays (int mode, int first, int count) {
 
-  @Override
-  public void glLineWidth(float width) {
+		super.glDrawArrays(mode, first, count);
+		checkError();
+	}
 
-    super.glLineWidth(width);
-    checkError();
-  }
+	@Override
+	public void glDrawElements (int mode, int count, int type, Buffer indices) {
 
-  @Override
-  public void glPixelStorei(int pname, int param) {
+		super.glDrawElements(mode, count, type, indices);
+		checkError();
+	}
 
-    super.glPixelStorei(pname, param);
-    checkError();
-  }
+	@Override
+	public void glEnable (int cap) {
 
-  @Override
-  public void glPolygonOffset(float factor, float units) {
+		super.glEnable(cap);
+		checkError();
+	}
 
-    super.glPolygonOffset(factor, units);
-    checkError();
-  }
+	@Override
+	public void glFinish () {
 
-  @Override
-  public void glReadPixels(
-      int x, int y, int width, int height, int format, int type, Buffer pixels) {
+		super.glFinish();
+		checkError();
+	}
 
-    super.glReadPixels(x, y, width, height, format, type, pixels);
-    checkError();
-  }
+	@Override
+	public void glFlush () {
 
-  @Override
-  public void glScissor(int x, int y, int width, int height) {
+		super.glFlush();
+		checkError();
+	}
 
-    super.glScissor(x, y, width, height);
-    checkError();
-  }
+	@Override
+	public void glFrontFace (int mode) {
 
-  @Override
-  public void glStencilFunc(int func, int ref, int mask) {
+		super.glFrontFace(mode);
+		checkError();
+	}
 
-    super.glStencilFunc(func, ref, mask);
-    checkError();
-  }
+	@Override
+	public void glGenTextures (int n, IntBuffer textures) {
 
-  @Override
-  public void glStencilMask(int mask) {
+		super.glGenTextures(n, textures);
+		checkError();
+	}
 
-    super.glStencilMask(mask);
-    checkError();
-  }
+	@Override
+	public int glGetError () {
 
-  @Override
-  public void glStencilOp(int fail, int zfail, int zpass) {
+		return super.glGetError();
+	}
 
-    super.glStencilOp(fail, zfail, zpass);
-    checkError();
-  }
+	@Override
+	public void glGetIntegerv (int pname, IntBuffer params) {
 
-  @Override
-  public void glTexImage2D(
-      int target,
-      int level,
-      int internalformat,
-      int width,
-      int height,
-      int border,
-      int format,
-      int type,
-      Buffer pixels) {
+		super.glGetIntegerv(pname, params);
+		checkError();
+	}
 
-    super.glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
-    checkError();
-  }
+	@Override
+	public String glGetString (int name) {
 
-  @Override
-  public void glTexParameterf(int target, int pname, float param) {
+		return super.glGetString(name);
+	}
 
-    super.glTexParameterf(target, pname, param);
-    checkError();
-  }
+	@Override
+	public void glHint (int target, int mode) {
 
-  @Override
-  public void glTexSubImage2D(
-      int target,
-      int level,
-      int xoffset,
-      int yoffset,
-      int width,
-      int height,
-      int format,
-      int type,
-      Buffer pixels) {
+		super.glHint(target, mode);
+		checkError();
+	}
 
-    super.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
-    checkError();
-  }
+	@Override
+	public void glLineWidth (float width) {
 
-  @Override
-  public void glViewport(int x, int y, int width, int height) {
+		super.glLineWidth(width);
+		checkError();
+	}
 
-    super.glViewport(x, y, width, height);
-    checkError();
-  }
+	@Override
+	public void glPixelStorei (int pname, int param) {
 
-  @Override
-  public void glAttachShader(int program, int shader) {
+		super.glPixelStorei(pname, param);
+		checkError();
+	}
 
-    super.glAttachShader(program, shader);
-    checkError();
-  }
+	@Override
+	public void glPolygonOffset (float factor, float units) {
 
-  @Override
-  public void glBindAttribLocation(int program, int index, String name) {
+		super.glPolygonOffset(factor, units);
+		checkError();
+	}
 
-    super.glBindAttribLocation(program, index, name);
-    checkError();
-  }
+	@Override
+	public void glReadPixels (int x, int y, int width, int height, int format, int type, Buffer pixels) {
 
-  @Override
-  public void glBindBuffer(int target, int buffer) {
+		super.glReadPixels(x, y, width, height, format, type, pixels);
+		checkError();
+	}
 
-    super.glBindBuffer(target, buffer);
-    checkError();
-  }
+	@Override
+	public void glScissor (int x, int y, int width, int height) {
 
-  @Override
-  public void glBindFramebuffer(int target, int framebuffer) {
+		super.glScissor(x, y, width, height);
+		checkError();
+	}
 
-    super.glBindFramebuffer(target, framebuffer);
-    checkError();
-  }
+	@Override
+	public void glStencilFunc (int func, int ref, int mask) {
 
-  @Override
-  public void glBindRenderbuffer(int target, int renderbuffer) {
+		super.glStencilFunc(func, ref, mask);
+		checkError();
+	}
 
-    super.glBindRenderbuffer(target, renderbuffer);
-    checkError();
-  }
+	@Override
+	public void glStencilMask (int mask) {
 
-  @Override
-  public void glBlendColor(float red, float green, float blue, float alpha) {
+		super.glStencilMask(mask);
+		checkError();
+	}
 
-    super.glBlendColor(red, green, blue, alpha);
-    checkError();
-  }
+	@Override
+	public void glStencilOp (int fail, int zfail, int zpass) {
 
-  @Override
-  public void glBlendEquation(int mode) {
+		super.glStencilOp(fail, zfail, zpass);
+		checkError();
+	}
 
-    super.glBlendEquation(mode);
-    checkError();
-  }
+	@Override
+	public void glTexImage2D (int target, int level, int internalformat, int width, int height, int border, int format, int type,
+		Buffer pixels) {
 
-  @Override
-  public void glBlendEquationSeparate(int modeRGB, int modeAlpha) {
+		super.glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
+		checkError();
+	}
 
-    super.glBlendEquationSeparate(modeRGB, modeAlpha);
-    checkError();
-  }
+	@Override
+	public void glTexParameterf (int target, int pname, float param) {
 
-  @Override
-  public void glBlendFuncSeparate(int srcRGB, int dstRGB, int srcAlpha, int dstAlpha) {
+		super.glTexParameterf(target, pname, param);
+		checkError();
+	}
 
-    super.glBlendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha);
-    checkError();
-  }
+	@Override
+	public void glTexSubImage2D (int target, int level, int xoffset, int yoffset, int width, int height, int format, int type,
+		Buffer pixels) {
 
-  @Override
-  public void glBufferData(int target, int size, Buffer data, int usage) {
+		super.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
+		checkError();
+	}
 
-    super.glBufferData(target, size, data, usage);
-    checkError();
-  }
+	@Override
+	public void glViewport (int x, int y, int width, int height) {
 
-  @Override
-  public void glBufferSubData(int target, int offset, int size, Buffer data) {
+		super.glViewport(x, y, width, height);
+		checkError();
+	}
 
-    super.glBufferSubData(target, offset, size, data);
-    checkError();
-  }
+	@Override
+	public void glAttachShader (int program, int shader) {
 
-  @Override
-  public int glCheckFramebufferStatus(int target) {
+		super.glAttachShader(program, shader);
+		checkError();
+	}
 
-    return super.glCheckFramebufferStatus(target);
-  }
+	@Override
+	public void glBindAttribLocation (int program, int index, String name) {
 
-  @Override
-  public void glCompileShader(int shader) {
+		super.glBindAttribLocation(program, index, name);
+		checkError();
+	}
 
-    super.glCompileShader(shader);
-    checkError();
-  }
+	@Override
+	public void glBindBuffer (int target, int buffer) {
 
-  @Override
-  public int glCreateProgram() {
+		super.glBindBuffer(target, buffer);
+		checkError();
+	}
 
-    int program = super.glCreateProgram();
-    checkError();
-    return program;
-  }
+	@Override
+	public void glBindFramebuffer (int target, int framebuffer) {
 
-  @Override
-  public int glCreateShader(int type) {
+		super.glBindFramebuffer(target, framebuffer);
+		checkError();
+	}
 
-    int shader = super.glCreateShader(type);
-    checkError();
-    return shader;
-  }
+	@Override
+	public void glBindRenderbuffer (int target, int renderbuffer) {
 
-  @Override
-  public void glDeleteBuffers(int n, IntBuffer buffers) {
+		super.glBindRenderbuffer(target, renderbuffer);
+		checkError();
+	}
 
-    super.glDeleteBuffers(n, buffers);
-    checkError();
-  }
+	@Override
+	public void glBlendColor (float red, float green, float blue, float alpha) {
 
-  @Override
-  public void glDeleteFramebuffers(int n, IntBuffer framebuffers) {
+		super.glBlendColor(red, green, blue, alpha);
+		checkError();
+	}
 
-    super.glDeleteFramebuffers(n, framebuffers);
-    checkError();
-  }
+	@Override
+	public void glBlendEquation (int mode) {
 
-  @Override
-  public void glDeleteProgram(int program) {
+		super.glBlendEquation(mode);
+		checkError();
+	}
 
-    super.glDeleteProgram(program);
-    checkError();
-  }
+	@Override
+	public void glBlendEquationSeparate (int modeRGB, int modeAlpha) {
 
-  @Override
-  public void glDeleteRenderbuffers(int n, IntBuffer renderbuffers) {
+		super.glBlendEquationSeparate(modeRGB, modeAlpha);
+		checkError();
+	}
 
-    super.glDeleteRenderbuffers(n, renderbuffers);
-    checkError();
-  }
+	@Override
+	public void glBlendFuncSeparate (int srcRGB, int dstRGB, int srcAlpha, int dstAlpha) {
 
-  @Override
-  public void glDeleteShader(int shader) {
+		super.glBlendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha);
+		checkError();
+	}
 
-    super.glDeleteShader(shader);
-    checkError();
-  }
+	@Override
+	public void glBufferData (int target, int size, Buffer data, int usage) {
 
-  @Override
-  public void glDetachShader(int program, int shader) {
+		super.glBufferData(target, size, data, usage);
+		checkError();
+	}
 
-    super.glDetachShader(program, shader);
-    checkError();
-  }
+	@Override
+	public void glBufferSubData (int target, int offset, int size, Buffer data) {
 
-  @Override
-  public void glDisableVertexAttribArray(int index) {
+		super.glBufferSubData(target, offset, size, data);
+		checkError();
+	}
 
-    super.glDisableVertexAttribArray(index);
-    checkError();
-  }
+	@Override
+	public int glCheckFramebufferStatus (int target) {
 
-  @Override
-  public void glDrawElements(int mode, int count, int type, int indices) {
+		return super.glCheckFramebufferStatus(target);
+	}
 
-    super.glDrawElements(mode, count, type, indices);
-    checkError();
-  }
+	@Override
+	public void glCompileShader (int shader) {
 
-  @Override
-  public void glEnableVertexAttribArray(int index) {
+		super.glCompileShader(shader);
+		checkError();
+	}
 
-    super.glEnableVertexAttribArray(index);
-    checkError();
-  }
+	@Override
+	public int glCreateProgram () {
 
-  @Override
-  public void glFramebufferRenderbuffer(
-      int target, int attachment, int renderbuffertarget, int renderbuffer) {
+		int program = super.glCreateProgram();
+		checkError();
+		return program;
+	}
 
-    super.glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
-    checkError();
-  }
+	@Override
+	public int glCreateShader (int type) {
 
-  @Override
-  public void glFramebufferTexture2D(
-      int target, int attachment, int textarget, int texture, int level) {
+		int shader = super.glCreateShader(type);
+		checkError();
+		return shader;
+	}
 
-    super.glFramebufferTexture2D(target, attachment, textarget, texture, level);
-    checkError();
-  }
+	@Override
+	public void glDeleteBuffers (int n, IntBuffer buffers) {
 
-  @Override
-  public void glGenBuffers(int n, IntBuffer buffers) {
+		super.glDeleteBuffers(n, buffers);
+		checkError();
+	}
 
-    super.glGenBuffers(n, buffers);
-    checkError();
-  }
+	@Override
+	public void glDeleteFramebuffers (int n, IntBuffer framebuffers) {
 
-  @Override
-  public void glGenerateMipmap(int target) {
+		super.glDeleteFramebuffers(n, framebuffers);
+		checkError();
+	}
 
-    super.glGenerateMipmap(target);
-    checkError();
-  }
+	@Override
+	public void glDeleteProgram (int program) {
 
-  @Override
-  public void glGenFramebuffers(int n, IntBuffer framebuffers) {
+		super.glDeleteProgram(program);
+		checkError();
+	}
 
-    super.glGenFramebuffers(n, framebuffers);
-    checkError();
-  }
+	@Override
+	public void glDeleteRenderbuffers (int n, IntBuffer renderbuffers) {
 
-  @Override
-  public void glGenRenderbuffers(int n, IntBuffer renderbuffers) {
+		super.glDeleteRenderbuffers(n, renderbuffers);
+		checkError();
+	}
 
-    super.glGenRenderbuffers(n, renderbuffers);
-    checkError();
-  }
+	@Override
+	public void glDeleteShader (int shader) {
 
-  @Override
-  public String glGetActiveAttrib(int program, int index, IntBuffer size, IntBuffer type) {
+		super.glDeleteShader(shader);
+		checkError();
+	}
 
-    String attrib = super.glGetActiveAttrib(program, index, size, type);
-    checkError();
-    return attrib;
-  }
+	@Override
+	public void glDetachShader (int program, int shader) {
 
-  @Override
-  public String glGetActiveUniform(int program, int index, IntBuffer size, IntBuffer type) {
+		super.glDetachShader(program, shader);
+		checkError();
+	}
 
-    String uniform = super.glGetActiveUniform(program, index, size, type);
-    checkError();
-    return uniform;
-  }
+	@Override
+	public void glDisableVertexAttribArray (int index) {
 
-  @Override
-  public void glGetAttachedShaders(int program, int maxcount, Buffer count, IntBuffer shaders) {
+		super.glDisableVertexAttribArray(index);
+		checkError();
+	}
 
-    super.glGetAttachedShaders(program, maxcount, count, shaders);
-    checkError();
-  }
+	@Override
+	public void glDrawElements (int mode, int count, int type, int indices) {
 
-  @Override
-  public int glGetAttribLocation(int program, String name) {
+		super.glDrawElements(mode, count, type, indices);
+		checkError();
+	}
 
-    int loc = super.glGetAttribLocation(program, name);
-    checkError();
-    return loc;
-  }
+	@Override
+	public void glEnableVertexAttribArray (int index) {
 
-  @Override
-  public void glGetBooleanv(int pname, Buffer params) {
+		super.glEnableVertexAttribArray(index);
+		checkError();
+	}
 
-    super.glGetBooleanv(pname, params);
-    checkError();
-  }
+	@Override
+	public void glFramebufferRenderbuffer (int target, int attachment, int renderbuffertarget, int renderbuffer) {
 
-  @Override
-  public void glGetBufferParameteriv(int target, int pname, IntBuffer params) {
+		super.glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
+		checkError();
+	}
 
-    super.glGetBufferParameteriv(target, pname, params);
-    checkError();
-  }
+	@Override
+	public void glFramebufferTexture2D (int target, int attachment, int textarget, int texture, int level) {
 
-  @Override
-  public void glGetFloatv(int pname, FloatBuffer params) {
+		super.glFramebufferTexture2D(target, attachment, textarget, texture, level);
+		checkError();
+	}
 
-    super.glGetFloatv(pname, params);
-    checkError();
-  }
+	@Override
+	public void glGenBuffers (int n, IntBuffer buffers) {
 
-  @Override
-  public void glGetFramebufferAttachmentParameteriv(
-      int target, int attachment, int pname, IntBuffer params) {
+		super.glGenBuffers(n, buffers);
+		checkError();
+	}
 
-    super.glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
-    checkError();
-  }
+	@Override
+	public void glGenerateMipmap (int target) {
 
-  @Override
-  public void glGetProgramiv(int program, int pname, IntBuffer params) {
+		super.glGenerateMipmap(target);
+		checkError();
+	}
 
-    super.glGetProgramiv(program, pname, params);
-    checkError();
-  }
+	@Override
+	public void glGenFramebuffers (int n, IntBuffer framebuffers) {
 
-  @Override
-  public String glGetProgramInfoLog(int program) {
+		super.glGenFramebuffers(n, framebuffers);
+		checkError();
+	}
 
-    String info = super.glGetProgramInfoLog(program);
-    checkError();
-    return info;
-  }
+	@Override
+	public void glGenRenderbuffers (int n, IntBuffer renderbuffers) {
 
-  @Override
-  public void glGetRenderbufferParameteriv(int target, int pname, IntBuffer params) {
+		super.glGenRenderbuffers(n, renderbuffers);
+		checkError();
+	}
 
-    super.glGetRenderbufferParameteriv(target, pname, params);
-    checkError();
-  }
+	@Override
+	public String glGetActiveAttrib (int program, int index, IntBuffer size, IntBuffer type) {
 
-  @Override
-  public void glGetShaderiv(int shader, int pname, IntBuffer params) {
+		String attrib = super.glGetActiveAttrib(program, index, size, type);
+		checkError();
+		return attrib;
+	}
 
-    super.glGetShaderiv(shader, pname, params);
-    checkError();
-  }
+	@Override
+	public String glGetActiveUniform (int program, int index, IntBuffer size, IntBuffer type) {
 
-  @Override
-  public String glGetShaderInfoLog(int shader) {
+		String uniform = super.glGetActiveUniform(program, index, size, type);
+		checkError();
+		return uniform;
+	}
 
-    String info = super.glGetShaderInfoLog(shader);
-    checkError();
-    return info;
-  }
+	@Override
+	public void glGetAttachedShaders (int program, int maxcount, Buffer count, IntBuffer shaders) {
 
-  @Override
-  public void glGetShaderPrecisionFormat(
-      int shadertype, int precisiontype, IntBuffer range, IntBuffer precision) {
+		super.glGetAttachedShaders(program, maxcount, count, shaders);
+		checkError();
+	}
 
-    super.glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
-    checkError();
-  }
+	@Override
+	public int glGetAttribLocation (int program, String name) {
 
-  @Override
-  public void glGetTexParameterfv(int target, int pname, FloatBuffer params) {
+		int loc = super.glGetAttribLocation(program, name);
+		checkError();
+		return loc;
+	}
 
-    super.glGetTexParameterfv(target, pname, params);
-    checkError();
-  }
+	@Override
+	public void glGetBooleanv (int pname, Buffer params) {
 
-  @Override
-  public void glGetTexParameteriv(int target, int pname, IntBuffer params) {
+		super.glGetBooleanv(pname, params);
+		checkError();
+	}
 
-    super.glGetTexParameteriv(target, pname, params);
-    checkError();
-  }
+	@Override
+	public void glGetBufferParameteriv (int target, int pname, IntBuffer params) {
 
-  @Override
-  public void glGetUniformfv(int program, int location, FloatBuffer params) {
+		super.glGetBufferParameteriv(target, pname, params);
+		checkError();
+	}
 
-    super.glGetUniformfv(program, location, params);
-    checkError();
-  }
+	@Override
+	public void glGetFloatv (int pname, FloatBuffer params) {
 
-  @Override
-  public void glGetUniformiv(int program, int location, IntBuffer params) {
+		super.glGetFloatv(pname, params);
+		checkError();
+	}
 
-    super.glGetUniformiv(program, location, params);
-    checkError();
-  }
+	@Override
+	public void glGetFramebufferAttachmentParameteriv (int target, int attachment, int pname, IntBuffer params) {
 
-  @Override
-  public int glGetUniformLocation(int program, String name) {
+		super.glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
+		checkError();
+	}
 
-    int loc = super.glGetUniformLocation(program, name);
-    checkError();
-    return loc;
-  }
+	@Override
+	public void glGetProgramiv (int program, int pname, IntBuffer params) {
 
-  @Override
-  public void glGetVertexAttribfv(int index, int pname, FloatBuffer params) {
+		super.glGetProgramiv(program, pname, params);
+		checkError();
+	}
 
-    super.glGetVertexAttribfv(index, pname, params);
-    checkError();
-  }
+	@Override
+	public String glGetProgramInfoLog (int program) {
 
-  @Override
-  public void glGetVertexAttribiv(int index, int pname, IntBuffer params) {
+		String info = super.glGetProgramInfoLog(program);
+		checkError();
+		return info;
+	}
 
-    super.glGetVertexAttribiv(index, pname, params);
-    checkError();
-  }
+	@Override
+	public void glGetRenderbufferParameteriv (int target, int pname, IntBuffer params) {
 
-  @Override
-  public void glGetVertexAttribPointerv(int index, int pname, Buffer pointer) {
+		super.glGetRenderbufferParameteriv(target, pname, params);
+		checkError();
+	}
 
-    super.glGetVertexAttribPointerv(index, pname, pointer);
-    checkError();
-  }
+	@Override
+	public void glGetShaderiv (int shader, int pname, IntBuffer params) {
 
-  @Override
-  public boolean glIsBuffer(int buffer) {
+		super.glGetShaderiv(shader, pname, params);
+		checkError();
+	}
 
-    boolean res = super.glIsBuffer(buffer);
-    checkError();
-    return res;
-  }
+	@Override
+	public String glGetShaderInfoLog (int shader) {
 
-  @Override
-  public boolean glIsEnabled(int cap) {
+		String info = super.glGetShaderInfoLog(shader);
+		checkError();
+		return info;
+	}
 
-    boolean res = super.glIsEnabled(cap);
-    checkError();
-    return res;
-  }
+	@Override
+	public void glGetShaderPrecisionFormat (int shadertype, int precisiontype, IntBuffer range, IntBuffer precision) {
 
-  @Override
-  public boolean glIsFramebuffer(int framebuffer) {
+		super.glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
+		checkError();
+	}
 
-    boolean res = super.glIsFramebuffer(framebuffer);
-    checkError();
-    return res;
-  }
+	@Override
+	public void glGetTexParameterfv (int target, int pname, FloatBuffer params) {
 
-  @Override
-  public boolean glIsProgram(int program) {
+		super.glGetTexParameterfv(target, pname, params);
+		checkError();
+	}
 
-    boolean res = super.glIsProgram(program);
-    checkError();
-    return res;
-  }
+	@Override
+	public void glGetTexParameteriv (int target, int pname, IntBuffer params) {
 
-  @Override
-  public boolean glIsRenderbuffer(int renderbuffer) {
+		super.glGetTexParameteriv(target, pname, params);
+		checkError();
+	}
 
-    boolean res = super.glIsRenderbuffer(renderbuffer);
-    checkError();
-    return res;
-  }
+	@Override
+	public void glGetUniformfv (int program, int location, FloatBuffer params) {
 
-  @Override
-  public boolean glIsShader(int shader) {
+		super.glGetUniformfv(program, location, params);
+		checkError();
+	}
 
-    boolean res = super.glIsShader(shader);
-    checkError();
-    return res;
-  }
+	@Override
+	public void glGetUniformiv (int program, int location, IntBuffer params) {
 
-  @Override
-  public boolean glIsTexture(int texture) {
+		super.glGetUniformiv(program, location, params);
+		checkError();
+	}
 
-    boolean res = super.glIsTexture(texture);
-    checkError();
-    return res;
-  }
+	@Override
+	public int glGetUniformLocation (int program, String name) {
 
-  @Override
-  public void glLinkProgram(int program) {
+		int loc = super.glGetUniformLocation(program, name);
+		checkError();
+		return loc;
+	}
 
-    super.glLinkProgram(program);
-    checkError();
-  }
+	@Override
+	public void glGetVertexAttribfv (int index, int pname, FloatBuffer params) {
 
-  @Override
-  public void glReleaseShaderCompiler() {
+		super.glGetVertexAttribfv(index, pname, params);
+		checkError();
+	}
 
-    super.glReleaseShaderCompiler();
-    checkError();
-  }
+	@Override
+	public void glGetVertexAttribiv (int index, int pname, IntBuffer params) {
 
-  @Override
-  public void glRenderbufferStorage(int target, int internalformat, int width, int height) {
+		super.glGetVertexAttribiv(index, pname, params);
+		checkError();
+	}
 
-    super.glRenderbufferStorage(target, internalformat, width, height);
-    checkError();
-  }
+	@Override
+	public void glGetVertexAttribPointerv (int index, int pname, Buffer pointer) {
 
-  @Override
-  public void glSampleCoverage(float value, boolean invert) {
+		super.glGetVertexAttribPointerv(index, pname, pointer);
+		checkError();
+	}
 
-    super.glSampleCoverage(value, invert);
-    checkError();
-  }
+	@Override
+	public boolean glIsBuffer (int buffer) {
 
-  @Override
-  public void glShaderBinary(
-      int n, IntBuffer shaders, int binaryformat, Buffer binary, int length) {
+		boolean res = super.glIsBuffer(buffer);
+		checkError();
+		return res;
+	}
 
-    super.glShaderBinary(n, shaders, binaryformat, binary, length);
-    checkError();
-  }
+	@Override
+	public boolean glIsEnabled (int cap) {
 
-  @Override
-  public void glShaderSource(int shader, String source) {
+		boolean res = super.glIsEnabled(cap);
+		checkError();
+		return res;
+	}
 
-    super.glShaderSource(shader, source);
-    checkError();
-  }
+	@Override
+	public boolean glIsFramebuffer (int framebuffer) {
 
-  @Override
-  public void glStencilFuncSeparate(int face, int func, int ref, int mask) {
+		boolean res = super.glIsFramebuffer(framebuffer);
+		checkError();
+		return res;
+	}
 
-    super.glStencilFuncSeparate(face, func, ref, mask);
-    checkError();
-  }
+	@Override
+	public boolean glIsProgram (int program) {
 
-  @Override
-  public void glStencilMaskSeparate(int face, int mask) {
+		boolean res = super.glIsProgram(program);
+		checkError();
+		return res;
+	}
 
-    super.glStencilMaskSeparate(face, mask);
-    checkError();
-  }
+	@Override
+	public boolean glIsRenderbuffer (int renderbuffer) {
 
-  @Override
-  public void glStencilOpSeparate(int face, int fail, int zfail, int zpass) {
+		boolean res = super.glIsRenderbuffer(renderbuffer);
+		checkError();
+		return res;
+	}
 
-    super.glStencilOpSeparate(face, fail, zfail, zpass);
-    checkError();
-  }
+	@Override
+	public boolean glIsShader (int shader) {
 
-  @Override
-  public void glTexParameterfv(int target, int pname, FloatBuffer params) {
+		boolean res = super.glIsShader(shader);
+		checkError();
+		return res;
+	}
 
-    super.glTexParameterfv(target, pname, params);
-    checkError();
-  }
+	@Override
+	public boolean glIsTexture (int texture) {
 
-  @Override
-  public void glTexParameteri(int target, int pname, int param) {
+		boolean res = super.glIsTexture(texture);
+		checkError();
+		return res;
+	}
 
-    super.glTexParameteri(target, pname, param);
-    checkError();
-  }
+	@Override
+	public void glLinkProgram (int program) {
 
-  @Override
-  public void glTexParameteriv(int target, int pname, IntBuffer params) {
+		super.glLinkProgram(program);
+		checkError();
+	}
 
-    super.glTexParameteriv(target, pname, params);
-    checkError();
-  }
+	@Override
+	public void glReleaseShaderCompiler () {
 
-  @Override
-  public void glUniform1f(int location, float x) {
+		super.glReleaseShaderCompiler();
+		checkError();
+	}
 
-    super.glUniform1f(location, x);
-    checkError();
-  }
+	@Override
+	public void glRenderbufferStorage (int target, int internalformat, int width, int height) {
 
-  @Override
-  public void glUniform1fv(int location, int count, FloatBuffer v) {
+		super.glRenderbufferStorage(target, internalformat, width, height);
+		checkError();
+	}
 
-    super.glUniform1fv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glSampleCoverage (float value, boolean invert) {
 
-  @Override
-  public void glUniform1i(int location, int x) {
+		super.glSampleCoverage(value, invert);
+		checkError();
+	}
 
-    super.glUniform1i(location, x);
-    checkError();
-  }
+	@Override
+	public void glShaderBinary (int n, IntBuffer shaders, int binaryformat, Buffer binary, int length) {
 
-  @Override
-  public void glUniform1iv(int location, int count, IntBuffer v) {
+		super.glShaderBinary(n, shaders, binaryformat, binary, length);
+		checkError();
+	}
 
-    super.glUniform1iv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glShaderSource (int shader, String source) {
 
-  @Override
-  public void glUniform2f(int location, float x, float y) {
+		super.glShaderSource(shader, source);
+		checkError();
+	}
 
-    super.glUniform2f(location, x, y);
-    checkError();
-  }
+	@Override
+	public void glStencilFuncSeparate (int face, int func, int ref, int mask) {
 
-  @Override
-  public void glUniform2fv(int location, int count, FloatBuffer v) {
+		super.glStencilFuncSeparate(face, func, ref, mask);
+		checkError();
+	}
 
-    super.glUniform2fv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glStencilMaskSeparate (int face, int mask) {
 
-  @Override
-  public void glUniform2i(int location, int x, int y) {
+		super.glStencilMaskSeparate(face, mask);
+		checkError();
+	}
 
-    super.glUniform2i(location, x, y);
-    checkError();
-  }
+	@Override
+	public void glStencilOpSeparate (int face, int fail, int zfail, int zpass) {
 
-  @Override
-  public void glUniform2iv(int location, int count, IntBuffer v) {
+		super.glStencilOpSeparate(face, fail, zfail, zpass);
+		checkError();
+	}
 
-    super.glUniform2iv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glTexParameterfv (int target, int pname, FloatBuffer params) {
 
-  @Override
-  public void glUniform3f(int location, float x, float y, float z) {
+		super.glTexParameterfv(target, pname, params);
+		checkError();
+	}
 
-    super.glUniform3f(location, x, y, z);
-    checkError();
-  }
+	@Override
+	public void glTexParameteri (int target, int pname, int param) {
 
-  @Override
-  public void glUniform3fv(int location, int count, FloatBuffer v) {
+		super.glTexParameteri(target, pname, param);
+		checkError();
+	}
 
-    super.glUniform3fv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glTexParameteriv (int target, int pname, IntBuffer params) {
 
-  @Override
-  public void glUniform3i(int location, int x, int y, int z) {
+		super.glTexParameteriv(target, pname, params);
+		checkError();
+	}
 
-    super.glUniform3i(location, x, y, z);
-    checkError();
-  }
+	@Override
+	public void glUniform1f (int location, float x) {
 
-  @Override
-  public void glUniform3iv(int location, int count, IntBuffer v) {
+		super.glUniform1f(location, x);
+		checkError();
+	}
 
-    super.glUniform3iv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glUniform1fv (int location, int count, FloatBuffer v) {
 
-  @Override
-  public void glUniform4f(int location, float x, float y, float z, float w) {
+		super.glUniform1fv(location, count, v);
+		checkError();
+	}
 
-    super.glUniform4f(location, x, y, z, w);
-    checkError();
-  }
+	@Override
+	public void glUniform1i (int location, int x) {
 
-  @Override
-  public void glUniform4fv(int location, int count, FloatBuffer v) {
+		super.glUniform1i(location, x);
+		checkError();
+	}
 
-    super.glUniform4fv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glUniform1iv (int location, int count, IntBuffer v) {
 
-  @Override
-  public void glUniform4i(int location, int x, int y, int z, int w) {
+		super.glUniform1iv(location, count, v);
+		checkError();
+	}
 
-    super.glUniform4i(location, x, y, z, w);
-    checkError();
-  }
+	@Override
+	public void glUniform2f (int location, float x, float y) {
 
-  @Override
-  public void glUniform4iv(int location, int count, IntBuffer v) {
+		super.glUniform2f(location, x, y);
+		checkError();
+	}
 
-    super.glUniform4iv(location, count, v);
-    checkError();
-  }
+	@Override
+	public void glUniform2fv (int location, int count, FloatBuffer v) {
 
-  @Override
-  public void glUniformMatrix2fv(int location, int count, boolean transpose, FloatBuffer value) {
+		super.glUniform2fv(location, count, v);
+		checkError();
+	}
 
-    super.glUniformMatrix2fv(location, count, transpose, value);
-    checkError();
-  }
+	@Override
+	public void glUniform2i (int location, int x, int y) {
 
-  @Override
-  public void glUniformMatrix3fv(int location, int count, boolean transpose, FloatBuffer value) {
+		super.glUniform2i(location, x, y);
+		checkError();
+	}
 
-    super.glUniformMatrix3fv(location, count, transpose, value);
-    checkError();
-  }
+	@Override
+	public void glUniform2iv (int location, int count, IntBuffer v) {
 
-  @Override
-  public void glUniformMatrix4fv(int location, int count, boolean transpose, FloatBuffer value) {
+		super.glUniform2iv(location, count, v);
+		checkError();
+	}
 
-    super.glUniformMatrix4fv(location, count, transpose, value);
-    checkError();
-  }
+	@Override
+	public void glUniform3f (int location, float x, float y, float z) {
 
-  @Override
-  public void glUseProgram(int program) {
+		super.glUniform3f(location, x, y, z);
+		checkError();
+	}
 
-    super.glUseProgram(program);
-    checkError();
-  }
+	@Override
+	public void glUniform3fv (int location, int count, FloatBuffer v) {
 
-  @Override
-  public void glValidateProgram(int program) {
+		super.glUniform3fv(location, count, v);
+		checkError();
+	}
 
-    super.glValidateProgram(program);
-    checkError();
-  }
+	@Override
+	public void glUniform3i (int location, int x, int y, int z) {
 
-  @Override
-  public void glVertexAttrib1f(int indx, float x) {
+		super.glUniform3i(location, x, y, z);
+		checkError();
+	}
 
-    super.glVertexAttrib1f(indx, x);
-    checkError();
-  }
+	@Override
+	public void glUniform3iv (int location, int count, IntBuffer v) {
 
-  @Override
-  public void glVertexAttrib1fv(int indx, FloatBuffer values) {
+		super.glUniform3iv(location, count, v);
+		checkError();
+	}
 
-    super.glVertexAttrib1fv(indx, values);
-    checkError();
-  }
+	@Override
+	public void glUniform4f (int location, float x, float y, float z, float w) {
 
-  @Override
-  public void glVertexAttrib2f(int indx, float x, float y) {
+		super.glUniform4f(location, x, y, z, w);
+		checkError();
+	}
 
-    super.glVertexAttrib2f(indx, x, y);
-    checkError();
-  }
+	@Override
+	public void glUniform4fv (int location, int count, FloatBuffer v) {
 
-  @Override
-  public void glVertexAttrib2fv(int indx, FloatBuffer values) {
+		super.glUniform4fv(location, count, v);
+		checkError();
+	}
 
-    super.glVertexAttrib2fv(indx, values);
-    checkError();
-  }
+	@Override
+	public void glUniform4i (int location, int x, int y, int z, int w) {
 
-  @Override
-  public void glVertexAttrib3f(int indx, float x, float y, float z) {
+		super.glUniform4i(location, x, y, z, w);
+		checkError();
+	}
 
-    super.glVertexAttrib3f(indx, x, y, z);
-    checkError();
-  }
+	@Override
+	public void glUniform4iv (int location, int count, IntBuffer v) {
 
-  @Override
-  public void glVertexAttrib3fv(int indx, FloatBuffer values) {
+		super.glUniform4iv(location, count, v);
+		checkError();
+	}
 
-    super.glVertexAttrib3fv(indx, values);
-    checkError();
-  }
+	@Override
+	public void glUniformMatrix2fv (int location, int count, boolean transpose, FloatBuffer value) {
 
-  @Override
-  public void glVertexAttrib4f(int indx, float x, float y, float z, float w) {
+		super.glUniformMatrix2fv(location, count, transpose, value);
+		checkError();
+	}
 
-    super.glVertexAttrib4f(indx, x, y, z, w);
-    checkError();
-  }
+	@Override
+	public void glUniformMatrix3fv (int location, int count, boolean transpose, FloatBuffer value) {
 
-  @Override
-  public void glVertexAttrib4fv(int indx, FloatBuffer values) {
+		super.glUniformMatrix3fv(location, count, transpose, value);
+		checkError();
+	}
 
-    super.glVertexAttrib4fv(indx, values);
-    checkError();
-  }
+	@Override
+	public void glUniformMatrix4fv (int location, int count, boolean transpose, FloatBuffer value) {
 
-  @Override
-  public void glVertexAttribPointer(
-      int indx, int size, int type, boolean normalized, int stride, Buffer ptr) {
+		super.glUniformMatrix4fv(location, count, transpose, value);
+		checkError();
+	}
 
-    super.glVertexAttribPointer(indx, size, type, normalized, stride, ptr);
-    checkError();
-  }
+	@Override
+	public void glUseProgram (int program) {
 
-  @Override
-  public void glVertexAttribPointer(
-      int indx, int size, int type, boolean normalized, int stride, int ptr) {
+		super.glUseProgram(program);
+		checkError();
+	}
 
-    super.glVertexAttribPointer(indx, size, type, normalized, stride, ptr);
-    checkError();
-  }
+	@Override
+	public void glValidateProgram (int program) {
+
+		super.glValidateProgram(program);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib1f (int indx, float x) {
+
+		super.glVertexAttrib1f(indx, x);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib1fv (int indx, FloatBuffer values) {
+
+		super.glVertexAttrib1fv(indx, values);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib2f (int indx, float x, float y) {
+
+		super.glVertexAttrib2f(indx, x, y);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib2fv (int indx, FloatBuffer values) {
+
+		super.glVertexAttrib2fv(indx, values);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib3f (int indx, float x, float y, float z) {
+
+		super.glVertexAttrib3f(indx, x, y, z);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib3fv (int indx, FloatBuffer values) {
+
+		super.glVertexAttrib3fv(indx, values);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib4f (int indx, float x, float y, float z, float w) {
+
+		super.glVertexAttrib4f(indx, x, y, z, w);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttrib4fv (int indx, FloatBuffer values) {
+
+		super.glVertexAttrib4fv(indx, values);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttribPointer (int indx, int size, int type, boolean normalized, int stride, Buffer ptr) {
+
+		super.glVertexAttribPointer(indx, size, type, normalized, stride, ptr);
+		checkError();
+	}
+
+	@Override
+	public void glVertexAttribPointer (int indx, int size, int type, boolean normalized, int stride, int ptr) {
+
+		super.glVertexAttribPointer(indx, size, type, normalized, stride, ptr);
+		checkError();
+	}
 }

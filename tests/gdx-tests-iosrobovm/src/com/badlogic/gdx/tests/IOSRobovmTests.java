@@ -23,16 +23,16 @@ import org.robovm.apple.uikit.UIApplication;
 
 public class IOSRobovmTests extends IOSApplication.Delegate {
 
-  @Override
-  protected IOSApplication createApplication() {
-    IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-    config.useHaptics = true;
-    return new IOSApplication(new IosTestWrapper(), config);
-  }
+	@Override
+	protected IOSApplication createApplication () {
+		IOSApplicationConfiguration config = new IOSApplicationConfiguration();
+		config.useHaptics = true;
+		return new IOSApplication(new IosTestWrapper(), config);
+	}
 
-  public static void main(String[] argv) {
-    NSAutoreleasePool pool = new NSAutoreleasePool();
-    UIApplication.main(argv, null, IOSRobovmTests.class);
-    pool.close();
-  }
+	public static void main (String[] argv) {
+		NSAutoreleasePool pool = new NSAutoreleasePool();
+		UIApplication.main(argv, null, IOSRobovmTests.class);
+		pool.close();
+	}
 }

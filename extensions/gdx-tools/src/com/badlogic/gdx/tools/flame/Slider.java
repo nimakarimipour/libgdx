@@ -25,30 +25,30 @@ import javax.swing.event.ChangeListener;
 
 /** @author Inferno */
 public class Slider extends JPanel {
-  public JSpinner spinner;
+	public JSpinner spinner;
 
-  public Slider(float initialValue, final float min, final float max, float stepSize) {
-    spinner = new JSpinner(new SpinnerNumberModel(initialValue, min, max, stepSize));
-    setLayout(new BorderLayout());
-    add(spinner);
-  }
+	public Slider (float initialValue, final float min, final float max, float stepSize) {
+		spinner = new JSpinner(new SpinnerNumberModel(initialValue, min, max, stepSize));
+		setLayout(new BorderLayout());
+		add(spinner);
+	}
 
-  public void setValue(float value) {
-    spinner.setValue((double) value);
-  }
+	public void setValue (float value) {
+		spinner.setValue((double)value);
+	}
 
-  public float getValue() {
-    return ((Double) spinner.getValue()).floatValue();
-  }
+	public float getValue () {
+		return ((Double)spinner.getValue()).floatValue();
+	}
 
-  public void addChangeListener(ChangeListener listener) {
-    spinner.addChangeListener(listener);
-  }
+	public void addChangeListener (ChangeListener listener) {
+		spinner.addChangeListener(listener);
+	}
 
-  public Dimension getPreferredSize() {
-    Dimension size = super.getPreferredSize();
-    size.width = 75;
-    size.height = 26;
-    return size;
-  }
+	public Dimension getPreferredSize () {
+		Dimension size = super.getPreferredSize();
+		size.width = 75;
+		size.height = 26;
+		return size;
+	}
 }

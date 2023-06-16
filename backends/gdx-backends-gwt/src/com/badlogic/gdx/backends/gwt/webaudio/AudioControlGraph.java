@@ -19,20 +19,20 @@ package com.badlogic.gdx.backends.gwt.webaudio;
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class AudioControlGraph {
-  private final JavaScriptObject audioContext;
-  private JavaScriptObject destinationNode;
+	private final JavaScriptObject audioContext;
+	private JavaScriptObject destinationNode;
 
-  private JavaScriptObject gainNode;
-  private JavaScriptObject panNode;
+	private JavaScriptObject gainNode;
+	private JavaScriptObject panNode;
 
-  public AudioControlGraph(JavaScriptObject audioContext, JavaScriptObject destinationNode) {
-    this.audioContext = audioContext;
-    this.destinationNode = destinationNode;
+	public AudioControlGraph (JavaScriptObject audioContext, JavaScriptObject destinationNode) {
+		this.audioContext = audioContext;
+		this.destinationNode = destinationNode;
 
-    setupAudoGraph();
-  }
+		setupAudoGraph();
+	}
 
-  public native JavaScriptObject setupAudoGraph() /*-{
+	public native JavaScriptObject setupAudoGraph () /*-{
 		// Get the Java values here, for readability
 		var audioContext = this.@com.badlogic.gdx.backends.gwt.webaudio.AudioControlGraph::audioContext;
 
@@ -64,7 +64,7 @@ public class AudioControlGraph {
 
 	}-*/;
 
-  public native JavaScriptObject setSourceJSNI(JavaScriptObject sourceNode) /*-{
+	public native JavaScriptObject setSourceJSNI (JavaScriptObject sourceNode) /*-{
 		var gainNode = this.@com.badlogic.gdx.backends.gwt.webaudio.AudioControlGraph::gainNode;
 		var panNode = this.@com.badlogic.gdx.backends.gwt.webaudio.AudioControlGraph::panNode;
 
@@ -76,46 +76,46 @@ public class AudioControlGraph {
 		}
 	}-*/;
 
-  public void setVolume(float volume) {
-    setVolumeJSNI(volume);
-  }
+	public void setVolume (float volume) {
+		setVolumeJSNI(volume);
+	}
 
-  public float getVolume() {
-    return getVolumeJSNI();
-  }
+	public float getVolume () {
+		return getVolumeJSNI();
+	}
 
-  public native JavaScriptObject setVolumeJSNI(float volume) /*-{
+	public native JavaScriptObject setVolumeJSNI (float volume) /*-{
 		var gainNode = this.@com.badlogic.gdx.backends.gwt.webaudio.AudioControlGraph::gainNode;
 		gainNode.gain.value = volume;
 	}-*/;
 
-  public native float getVolumeJSNI() /*-{
+	public native float getVolumeJSNI () /*-{
 		var gainNode = this.@com.badlogic.gdx.backends.gwt.webaudio.AudioControlGraph::gainNode;
 		return gainNode.gain.value;
 	}-*/;
 
-  public void setPan(float pan) {
-    setPanJSNI(pan);
-  }
+	public void setPan (float pan) {
+		setPanJSNI(pan);
+	}
 
-  public float getPan() {
-    return getPanJSNI();
-  }
+	public float getPan () {
+		return getPanJSNI();
+	}
 
-  public native JavaScriptObject setPanJSNI(float pan) /*-{
+	public native JavaScriptObject setPanJSNI (float pan) /*-{
 		var panNode = this.@com.badlogic.gdx.backends.gwt.webaudio.AudioControlGraph::panNode;
 		if (panNode)
 			panNode.pan.value = pan;
 	}-*/;
 
-  public native float getPanJSNI() /*-{
+	public native float getPanJSNI () /*-{
 		var panNode = this.@com.badlogic.gdx.backends.gwt.webaudio.AudioControlGraph::panNode;
 		if (panNode)
 			return panNode.pan.value;
 		return 0;
 	}-*/;
 
-  public void setSource(JavaScriptObject sourceNode) {
-    setSourceJSNI(sourceNode);
-  }
+	public void setSource (JavaScriptObject sourceNode) {
+		setSourceJSNI(sourceNode);
+	}
 }

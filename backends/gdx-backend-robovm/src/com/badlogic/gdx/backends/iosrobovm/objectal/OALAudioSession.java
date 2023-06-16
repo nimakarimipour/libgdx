@@ -1,3 +1,4 @@
+
 package com.badlogic.gdx.backends.iosrobovm.objectal;
 
 import org.robovm.apple.foundation.NSObject;
@@ -9,13 +10,13 @@ import org.robovm.rt.bro.annotation.Library;
 @Library(Library.INTERNAL)
 @NativeClass
 public final class OALAudioSession extends NSObject {
-  static {
-    ObjCRuntime.bind(OALAudioSession.class);
-  }
+	static {
+		ObjCRuntime.bind(OALAudioSession.class);
+	}
 
-  @Method
-  public static native OALAudioSession sharedInstance();
+	@Method
+	public static native OALAudioSession sharedInstance ();
 
-  @Method
-  public native void forceEndInterruption();
+	@Method
+	public native void forceEndInterruption ();
 }

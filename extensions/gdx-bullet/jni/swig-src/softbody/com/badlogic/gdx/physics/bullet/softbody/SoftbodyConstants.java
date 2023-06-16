@@ -13,5 +13,5 @@ import com.badlogic.gdx.physics.bullet.dynamics.*;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public interface SoftbodyConstants {
-  public static final String btSoftBodyDataName = "btSoftBodyFloatData";
+	public static final String btSoftBodyDataName = "btSoftBodyFloatData";
 }

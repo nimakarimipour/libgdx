@@ -33,19 +33,19 @@ import com.badlogic.gdx.tests.utils.GdxTestConfig;
 
 @GdxTestConfig(requireGL30 = true)
 public class FloatTextureTest extends GdxTest {
-  FrameBuffer fb;
-  FloatFrameBuffer ffb;
-  ShaderProgram fbshader, shader;
-  Texture texture;
-  Mesh quad, screenQuad;
-  OrthographicCamera screenCamera;
+	FrameBuffer fb;
+	FloatFrameBuffer ffb;
+	ShaderProgram fbshader, shader;
+	Texture texture;
+	Mesh quad, screenQuad;
+	OrthographicCamera screenCamera;
 
-  @Override
-  public void create() {
-    fb = new FrameBuffer(Format.RGBA8888, 200, 100, false);
-    ffb = new FloatFrameBuffer(200, 100, false);
+	@Override
+	public void create () {
+		fb = new FrameBuffer(Format.RGBA8888, 200, 100, false);
+		ffb = new FloatFrameBuffer(200, 100, false);
 
-    // @off
+		// @off
     String vertexShader =
         "attribute vec4 a_position; "
             + "varying vec2 v_position; "
@@ -105,80 +105,61 @@ public class FloatTextureTest extends GdxTest {
             + "}";
     // @on
 
-    shader = new ShaderProgram(vertexShader, fragmentShader);
-    createQuad();
+		shader = new ShaderProgram(vertexShader, fragmentShader);
+		createQuad();
 
-    screenCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    createScreenQuad();
-  }
+		screenCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		createScreenQuad();
+	}
 
-  public void render() {
-    Gdx.gl20.glViewport(
-        0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
-    Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	public void render () {
+		Gdx.gl20.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    fb.begin();
-    fbshader.bind();
-    fbshader.setUniformf("u_viewport", fb.getWidth(), fb.getHeight());
-    fbshader.setUniformf("u_color", 0.0f, 1.0f, 0.0f);
-    quad.render(fbshader, GL20.GL_TRIANGLES);
-    fb.end();
+		fb.begin();
+		fbshader.bind();
+		fbshader.setUniformf("u_viewport", fb.getWidth(), fb.getHeight());
+		fbshader.setUniformf("u_color", 0.0f, 1.0f, 0.0f);
+		quad.render(fbshader, GL20.GL_TRIANGLES);
+		fb.end();
 
-    ffb.begin();
-    fbshader.bind();
-    fbshader.setUniformf("u_viewport", ffb.getWidth(), ffb.getHeight());
-    fbshader.setUniformf("u_color", 1.0f, 0.0f, 0.0f);
-    quad.render(fbshader, GL20.GL_TRIANGLES);
-    ffb.end();
+		ffb.begin();
+		fbshader.bind();
+		fbshader.setUniformf("u_viewport", ffb.getWidth(), ffb.getHeight());
+		fbshader.setUniformf("u_color", 1.0f, 0.0f, 0.0f);
+		quad.render(fbshader, GL20.GL_TRIANGLES);
+		ffb.end();
 
-    shader.bind();
-    fb.getColorBufferTexture().bind(0);
-    ffb.getColorBufferTexture().bind(1);
-    shader.setUniformMatrix("u_worldView", screenCamera.combined);
-    shader.setUniformi("u_fbtex", 0);
-    shader.setUniformi("u_ffbtex", 1);
-    screenQuad.render(shader, GL20.GL_TRIANGLES);
-  }
+		shader.bind();
+		fb.getColorBufferTexture().bind(0);
+		ffb.getColorBufferTexture().bind(1);
+		shader.setUniformMatrix("u_worldView", screenCamera.combined);
+		shader.setUniformi("u_fbtex", 0);
+		shader.setUniformi("u_ffbtex", 1);
+		screenQuad.render(shader, GL20.GL_TRIANGLES);
+	}
 
-  private void createQuad() {
-    if (quad != null) return;
-    quad =
-        new Mesh(
-            true,
-            4,
-            6,
-            new VertexAttribute(Usage.Position, 3, "a_position"),
-            new VertexAttribute(Usage.ColorUnpacked, 4, "a_color"),
-            new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));
+	private void createQuad () {
+		if (quad != null) return;
+		quad = new Mesh(true, 4, 6, new VertexAttribute(Usage.Position, 3, "a_position"),
+			new VertexAttribute(Usage.ColorUnpacked, 4, "a_color"), new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));
 
-    quad.setVertices(
-        new float[] {
-          -1, -1, 0, 1, 1, 1, 1, 0, 1, 1, -1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, -1, 1,
-          0, 1, 1, 1, 1, 0, 0
-        });
-    quad.setIndices(new short[] {0, 1, 2, 2, 3, 0});
-  }
+		quad.setVertices(new float[] {-1, -1, 0, 1, 1, 1, 1, 0, 1, 1, -1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, -1, 1, 0,
+			1, 1, 1, 1, 0, 0});
+		quad.setIndices(new short[] {0, 1, 2, 2, 3, 0});
+	}
 
-  private void createScreenQuad() {
-    if (screenQuad != null) return;
-    screenQuad =
-        new Mesh(
-            true,
-            4,
-            6,
-            new VertexAttribute(Usage.Position, 3, "a_position"),
-            new VertexAttribute(Usage.ColorUnpacked, 4, "a_color"),
-            new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));
+	private void createScreenQuad () {
+		if (screenQuad != null) return;
+		screenQuad = new Mesh(true, 4, 6, new VertexAttribute(Usage.Position, 3, "a_position"),
+			new VertexAttribute(Usage.ColorUnpacked, 4, "a_color"), new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));
 
-    Vector3 vec0 = new Vector3(0, 0, 0);
-    screenCamera.unproject(vec0);
-    Vector3 vec1 = new Vector3(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
-    screenCamera.unproject(vec1);
-    screenQuad.setVertices(
-        new float[] {
-          vec0.x, vec0.y, 0, 1, 1, 1, 1, 0, 1, vec1.x, vec0.y, 0, 1, 1, 1, 1, 1, 1, vec1.x, vec1.y,
-          0, 1, 1, 1, 1, 1, 0, vec0.x, vec1.y, 0, 1, 1, 1, 1, 0, 0
-        });
-    screenQuad.setIndices(new short[] {0, 1, 2, 2, 3, 0});
-  }
+		Vector3 vec0 = new Vector3(0, 0, 0);
+		screenCamera.unproject(vec0);
+		Vector3 vec1 = new Vector3(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
+		screenCamera.unproject(vec1);
+		screenQuad.setVertices(new float[] {vec0.x, vec0.y, 0, 1, 1, 1, 1, 0, 1, vec1.x, vec0.y, 0, 1, 1, 1, 1, 1, 1, vec1.x,
+			vec1.y, 0, 1, 1, 1, 1, 1, 0, vec0.x, vec1.y, 0, 1, 1, 1, 1, 0, 0});
+		screenQuad.setIndices(new short[] {0, 1, 2, 2, 3, 0});
+	}
 }

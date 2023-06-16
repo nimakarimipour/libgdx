@@ -18,13 +18,11 @@ package com.badlogic.gdx.physics.box2d;
 
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * A circle shape.
+/** A circle shape.
  *
- * @author mzechner
- */
+ * @author mzechner */
 public class CircleShape extends Shape {
-  // @off
+	// @off
   /*JNI
   #include <Box2D/Box2D.h>
   	 */

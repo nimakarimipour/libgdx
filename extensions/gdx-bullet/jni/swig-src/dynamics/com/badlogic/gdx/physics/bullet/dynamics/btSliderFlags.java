@@ -9,16 +9,16 @@
 package com.badlogic.gdx.physics.bullet.dynamics;
 
 public final class btSliderFlags {
-  public static final int BT_SLIDER_FLAGS_CFM_DIRLIN = (1 << 0);
-  public static final int BT_SLIDER_FLAGS_ERP_DIRLIN = (1 << 1);
-  public static final int BT_SLIDER_FLAGS_CFM_DIRANG = (1 << 2);
-  public static final int BT_SLIDER_FLAGS_ERP_DIRANG = (1 << 3);
-  public static final int BT_SLIDER_FLAGS_CFM_ORTLIN = (1 << 4);
-  public static final int BT_SLIDER_FLAGS_ERP_ORTLIN = (1 << 5);
-  public static final int BT_SLIDER_FLAGS_CFM_ORTANG = (1 << 6);
-  public static final int BT_SLIDER_FLAGS_ERP_ORTANG = (1 << 7);
-  public static final int BT_SLIDER_FLAGS_CFM_LIMLIN = (1 << 8);
-  public static final int BT_SLIDER_FLAGS_ERP_LIMLIN = (1 << 9);
-  public static final int BT_SLIDER_FLAGS_CFM_LIMANG = (1 << 10);
-  public static final int BT_SLIDER_FLAGS_ERP_LIMANG = (1 << 11);
+	public static final int BT_SLIDER_FLAGS_CFM_DIRLIN = (1 << 0);
+	public static final int BT_SLIDER_FLAGS_ERP_DIRLIN = (1 << 1);
+	public static final int BT_SLIDER_FLAGS_CFM_DIRANG = (1 << 2);
+	public static final int BT_SLIDER_FLAGS_ERP_DIRANG = (1 << 3);
+	public static final int BT_SLIDER_FLAGS_CFM_ORTLIN = (1 << 4);
+	public static final int BT_SLIDER_FLAGS_ERP_ORTLIN = (1 << 5);
+	public static final int BT_SLIDER_FLAGS_CFM_ORTANG = (1 << 6);
+	public static final int BT_SLIDER_FLAGS_ERP_ORTANG = (1 << 7);
+	public static final int BT_SLIDER_FLAGS_CFM_LIMLIN = (1 << 8);
+	public static final int BT_SLIDER_FLAGS_ERP_LIMLIN = (1 << 9);
+	public static final int BT_SLIDER_FLAGS_CFM_LIMANG = (1 << 10);
+	public static final int BT_SLIDER_FLAGS_ERP_LIMANG = (1 << 11);
 }

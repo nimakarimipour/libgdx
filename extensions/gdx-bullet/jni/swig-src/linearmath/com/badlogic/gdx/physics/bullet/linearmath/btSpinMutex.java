@@ -11,63 +11,60 @@ package com.badlogic.gdx.physics.bullet.linearmath;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 
 public class btSpinMutex extends BulletBase {
-  private long swigCPtr;
+	private long swigCPtr;
 
-  protected btSpinMutex(final String className, long cPtr, boolean cMemoryOwn) {
-    super(className, cPtr, cMemoryOwn);
-    swigCPtr = cPtr;
-  }
+	protected btSpinMutex (final String className, long cPtr, boolean cMemoryOwn) {
+		super(className, cPtr, cMemoryOwn);
+		swigCPtr = cPtr;
+	}
 
-  /**
-   * Construct a new btSpinMutex, normally you should not need this constructor it's intended for
-   * low-level usage.
-   */
-  public btSpinMutex(long cPtr, boolean cMemoryOwn) {
-    this("btSpinMutex", cPtr, cMemoryOwn);
-    construct();
-  }
+	/** Construct a new btSpinMutex, normally you should not need this constructor it's intended for low-level usage. */
+	public btSpinMutex (long cPtr, boolean cMemoryOwn) {
+		this("btSpinMutex", cPtr, cMemoryOwn);
+		construct();
+	}
 
-  @Override
-  protected void reset(long cPtr, boolean cMemoryOwn) {
-    if (!destroyed) destroy();
-    super.reset(swigCPtr = cPtr, cMemoryOwn);
-  }
+	@Override
+	protected void reset (long cPtr, boolean cMemoryOwn) {
+		if (!destroyed) destroy();
+		super.reset(swigCPtr = cPtr, cMemoryOwn);
+	}
 
-  public static long getCPtr(btSpinMutex obj) {
-    return (obj == null) ? 0 : obj.swigCPtr;
-  }
+	public static long getCPtr (btSpinMutex obj) {
+		return (obj == null) ? 0 : obj.swigCPtr;
+	}
 
-  @Override
-  protected void finalize() throws Throwable {
-    if (!destroyed) destroy();
-    super.finalize();
-  }
+	@Override
+	protected void finalize () throws Throwable {
+		if (!destroyed) destroy();
+		super.finalize();
+	}
 
-  @Override
-  protected synchronized void delete() {
-    if (swigCPtr != 0) {
-      if (swigCMemOwn) {
-        swigCMemOwn = false;
-        LinearMathJNI.delete_btSpinMutex(swigCPtr);
-      }
-      swigCPtr = 0;
-    }
-    super.delete();
-  }
+	@Override
+	protected synchronized void delete () {
+		if (swigCPtr != 0) {
+			if (swigCMemOwn) {
+				swigCMemOwn = false;
+				LinearMathJNI.delete_btSpinMutex(swigCPtr);
+			}
+			swigCPtr = 0;
+		}
+		super.delete();
+	}
 
-  public btSpinMutex() {
-    this(LinearMathJNI.new_btSpinMutex(), true);
-  }
+	public btSpinMutex () {
+		this(LinearMathJNI.new_btSpinMutex(), true);
+	}
 
-  public void lock() {
-    LinearMathJNI.btSpinMutex_lock(swigCPtr, this);
-  }
+	public void lock () {
+		LinearMathJNI.btSpinMutex_lock(swigCPtr, this);
+	}
 
-  public void unlock() {
-    LinearMathJNI.btSpinMutex_unlock(swigCPtr, this);
-  }
+	public void unlock () {
+		LinearMathJNI.btSpinMutex_unlock(swigCPtr, this);
+	}
 
-  public boolean tryLock() {
-    return LinearMathJNI.btSpinMutex_tryLock(swigCPtr, this);
-  }
+	public boolean tryLock () {
+		return LinearMathJNI.btSpinMutex_tryLock(swigCPtr, this);
+	}
 }
