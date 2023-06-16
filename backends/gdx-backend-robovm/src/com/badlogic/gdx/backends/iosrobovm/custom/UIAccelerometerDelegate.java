@@ -17,32 +17,38 @@
 package com.badlogic.gdx.backends.iosrobovm.custom;
 
 /*<imports>*/
-import org.robovm.objc.annotation.*;
 import org.robovm.apple.foundation.*;
+import org.robovm.objc.annotation.*;
+
 /*</imports>*/
 
 /*<javadoc>*/
 
 /*</javadoc>*/
-/*<annotations>*//*</annotations>*/
-/*<visibility>*/public/* </visibility> */ interface /* <name> */ UIAccelerometerDelegate/* </name> */
-	/* <implements> */extends NSObjectProtocol/* </implements> */ {
+/*<annotations>*/
+/*</annotations>*/
+/*<visibility>*/ public /* </visibility> */
+interface /* <name> */ UIAccelerometerDelegate /* </name> */
+    /* <implements> */ extends NSObjectProtocol /* </implements> */ {
 
-	/* <ptr> */
-	/* </ptr> */
-	/* <bind> */
-	/* </bind> */
-	/* <constants> *//* </constants> */
-	/* <properties> */
+  /* <ptr> */
+  /* </ptr> */
+  /* <bind> */
+  /* </bind> */
+  /* <constants> */
+  /* </constants> */
+  /* <properties> */
 
-	/* </properties> */
-	/* <methods> */
-	/** @since Available in iOS 2.0 and later.
-	 * @deprecated Deprecated in iOS 5.0. */
-	@Deprecated
-	@Method(selector = "accelerometer:didAccelerate:")
-	void didAccelerate (UIAccelerometer accelerometer, UIAcceleration acceleration);
-	/* </methods> */
-	/* <adapter> */
-	/* </adapter> */
+  /* </properties> */
+  /* <methods> */
+  /**
+   * @since Available in iOS 2.0 and later.
+   * @deprecated Deprecated in iOS 5.0.
+   */
+  @Deprecated
+  @Method(selector = "accelerometer:didAccelerate:")
+  void didAccelerate(UIAccelerometer accelerometer, UIAcceleration acceleration);
+  /* </methods> */
+  /* <adapter> */
+  /* </adapter> */
 }

@@ -9,7 +9,7 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 public final class HullFlag {
-	public final static int QF_TRIANGLES = (1 << 0);
-	public final static int QF_REVERSE_ORDER = (1 << 1);
-	public final static int QF_DEFAULT = QF_TRIANGLES;
+  public static final int QF_TRIANGLES = (1 << 0);
+  public static final int QF_REVERSE_ORDER = (1 << 1);
+  public static final int QF_DEFAULT = QF_TRIANGLES;
 }

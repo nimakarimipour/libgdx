@@ -1,4 +1,3 @@
-
 package com.badlogic.gdx.backends.iosrobovm.objectal;
 
 import org.robovm.apple.foundation.NSArray;
@@ -12,11 +11,10 @@ import org.robovm.rt.bro.annotation.Library;
 @NativeClass
 public class ALSoundSourcePool extends NSObject {
 
-	static {
-		ObjCRuntime.bind(ALSoundSourcePool.class);
-	}
+  static {
+    ObjCRuntime.bind(ALSoundSourcePool.class);
+  }
 
-	@Property(selector = "sources")
-	public native NSArray<ALSource> getSources ();
-
+  @Property(selector = "sources")
+  public native NSArray<ALSource> getSources();
 }

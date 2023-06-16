@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,83 +35,83 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class PolygonSpriteTest extends GdxTest {
 
-	PolygonSpriteBatch batch;
-	ShapeRenderer renderer;
+  PolygonSpriteBatch batch;
+  ShapeRenderer renderer;
 
-	Texture texture;
-	OrthographicCamera camera;
-	PolygonRegion region;
-	Rectangle bounds;
+  Texture texture;
+  OrthographicCamera camera;
+  PolygonRegion region;
+  Rectangle bounds;
 
-	Array<PolygonSprite> sprites = new Array<PolygonSprite>();
+  Array<PolygonSprite> sprites = new Array<PolygonSprite>();
 
-	@Override
-	public void create () {
-		texture = new Texture(Gdx.files.internal("data/tree.png"));
+  @Override
+  public void create() {
+    texture = new Texture(Gdx.files.internal("data/tree.png"));
 
-		PolygonRegionLoader loader = new PolygonRegionLoader();
-		region = loader.load(new TextureRegion(texture), Gdx.files.internal("data/tree.psh"));
+    PolygonRegionLoader loader = new PolygonRegionLoader();
+    region = loader.load(new TextureRegion(texture), Gdx.files.internal("data/tree.psh"));
 
-		renderer = new ShapeRenderer();
+    renderer = new ShapeRenderer();
 
-		camera = new OrthographicCamera(480, 320);
-		camera.position.x = 240;
-		camera.position.y = 160;
-		camera.update();
+    camera = new OrthographicCamera(480, 320);
+    camera.position.x = 240;
+    camera.position.y = 160;
+    camera.update();
 
-		batch = new PolygonSpriteBatch();
+    batch = new PolygonSpriteBatch();
 
-		for (int i = 0; i < 50; i++) {
-			PolygonSprite sprite = new PolygonSprite(region);
-			sprite.setPosition(MathUtils.random(-30, 440), MathUtils.random(-30, 290));
-			sprite.setColor(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1.0f);
-			sprite.setScale(MathUtils.random(0.5f, 1.5f), MathUtils.random(0.5f, 1.5f));
-			sprites.add(sprite);
-		}
-	}
+    for (int i = 0; i < 50; i++) {
+      PolygonSprite sprite = new PolygonSprite(region);
+      sprite.setPosition(MathUtils.random(-30, 440), MathUtils.random(-30, 290));
+      sprite.setColor(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1.0f);
+      sprite.setScale(MathUtils.random(0.5f, 1.5f), MathUtils.random(0.5f, 1.5f));
+      sprites.add(sprite);
+    }
+  }
 
-	@Override
-	public void render () {
-		ScreenUtils.clear(0.2f, 0.2f, 0.2f, 1f);
+  @Override
+  public void render() {
+    ScreenUtils.clear(0.2f, 0.2f, 0.2f, 1f);
 
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
+    camera.update();
+    batch.setProjectionMatrix(camera.combined);
 
-		batch.begin();
+    batch.begin();
 
-		for (int i = 0; i < sprites.size; i++) {
-			PolygonSprite sprite = sprites.get(i);
-			sprite.rotate(45 * Gdx.graphics.getDeltaTime());
-			sprite.translateX(10 * Gdx.graphics.getDeltaTime());
+    for (int i = 0; i < sprites.size; i++) {
+      PolygonSprite sprite = sprites.get(i);
+      sprite.rotate(45 * Gdx.graphics.getDeltaTime());
+      sprite.translateX(10 * Gdx.graphics.getDeltaTime());
 
-			if (sprite.getX() > 450) sprite.setX(-50);
+      if (sprite.getX() > 450) sprite.setX(-50);
 
-			sprite.draw(batch);
-		}
-		batch.end();
+      sprite.draw(batch);
+    }
+    batch.end();
 
-		// Some debug rendering, bounding box & origin of one sprite
-		renderer.setProjectionMatrix(camera.combined);
-		renderer.setColor(Color.GREEN);
-		renderer.begin(ShapeType.Line);
+    // Some debug rendering, bounding box & origin of one sprite
+    renderer.setProjectionMatrix(camera.combined);
+    renderer.setColor(Color.GREEN);
+    renderer.begin(ShapeType.Line);
 
-		PolygonSprite sprite = sprites.get(49);
+    PolygonSprite sprite = sprites.get(49);
 
-		bounds = sprite.getBoundingRectangle();
-		renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+    bounds = sprite.getBoundingRectangle();
+    renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
 
-		renderer.end();
+    renderer.end();
 
-		renderer.begin(ShapeType.Filled);
+    renderer.begin(ShapeType.Filled);
 
-		renderer.circle(sprite.getX() + sprite.getOriginX(), sprite.getY() + sprite.getOriginY(), 4);
+    renderer.circle(sprite.getX() + sprite.getOriginX(), sprite.getY() + sprite.getOriginY(), 4);
 
-		renderer.end();
-	}
+    renderer.end();
+  }
 
-	@Override
-	public void dispose () {
-		texture.dispose();
-		batch.dispose();
-	}
+  @Override
+  public void dispose() {
+    texture.dispose();
+    batch.dispose();
+  }
 }

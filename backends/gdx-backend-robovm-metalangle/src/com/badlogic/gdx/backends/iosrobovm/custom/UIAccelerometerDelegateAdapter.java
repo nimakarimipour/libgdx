@@ -3,8 +3,8 @@
 package com.badlogic.gdx.backends.iosrobovm.custom;
 
 /*<imports>*/
-import org.robovm.objc.annotation.*;
 import org.robovm.apple.foundation.*;
+import org.robovm.objc.annotation.*;
 
 /*</imports>*/
 /*<javadoc>*/
@@ -15,31 +15,34 @@ import org.robovm.apple.foundation.*;
 public class /* </visibility> */
 /* <name> */
 UIAccelerometerDelegateAdapter extends /* </name> */
-/* <extends> */
-	NSObject implements /* </extends> */
-/* <implements> */
-	UIAccelerometerDelegate {
+    /* <extends> */
+    NSObject
+    implements /* </extends> */
+    /* <implements> */
+    UIAccelerometerDelegate {
 
-	/* </implements> */
-	/* <ptr> */
-	/* </ptr> */
-	/* <bind> */
-	/* </bind> */
-	/* <constants> */
-	/* </constants> */
-	/* <constructors> */
-	/* </constructors> */
-	/* <properties> */
-	/* </properties> */
-	/* <members> */
-	/* </members> */
-	/* <methods> */
-	/** @since Available in iOS 2.0 and later.
-	 * @deprecated Deprecated in iOS 5.0. */
-	@Deprecated
-	@NotImplemented("accelerometer:didAccelerate:")
-	public void didAccelerate (UIAccelerometer accelerometer, UIAcceleration acceleration) {
-		throw new UnsupportedOperationException();
-	}
-	/* </methods> */
+  /* </implements> */
+  /* <ptr> */
+  /* </ptr> */
+  /* <bind> */
+  /* </bind> */
+  /* <constants> */
+  /* </constants> */
+  /* <constructors> */
+  /* </constructors> */
+  /* <properties> */
+  /* </properties> */
+  /* <members> */
+  /* </members> */
+  /* <methods> */
+  /**
+   * @since Available in iOS 2.0 and later.
+   * @deprecated Deprecated in iOS 5.0.
+   */
+  @Deprecated
+  @NotImplemented("accelerometer:didAccelerate:")
+  public void didAccelerate(UIAccelerometer accelerometer, UIAcceleration acceleration) {
+    throw new UnsupportedOperationException();
+  }
+  /* </methods> */
 }

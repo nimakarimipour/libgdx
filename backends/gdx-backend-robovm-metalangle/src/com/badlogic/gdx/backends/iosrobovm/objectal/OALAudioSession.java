@@ -13,13 +13,13 @@ import org.robovm.rt.bro.annotation.Library;
 @NativeClass
 public final class OALAudioSession extends NSObject {
 
-	static {
-		ObjCRuntime.bind(OALAudioSession.class);
-	}
+  static {
+    ObjCRuntime.bind(OALAudioSession.class);
+  }
 
-	@Method
-	public native static OALAudioSession sharedInstance ();
+  @Method
+  public static native OALAudioSession sharedInstance();
 
-	@Method
-	public native void forceEndInterruption ();
+  @Method
+  public native void forceEndInterruption();
 }

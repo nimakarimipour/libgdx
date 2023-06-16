@@ -1,8 +1,6 @@
-
 package com.badlogic.gdx.backends.iosrobovm;
 
 import com.badlogic.gdx.graphics.GL30;
-
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -10,203 +8,274 @@ import java.nio.LongBuffer;
 
 public class IOSGLES30 extends IOSGLES20 implements GL30 {
 
-	public IOSGLES30 () {
-		init();
-	}
+  public IOSGLES30() {
+    init();
+  }
+
+  private static native void init();
+
+  public native void glReadBuffer(int mode);
+
+  public native void glDrawRangeElements(
+      int mode, int start, int end, int count, int type, Buffer indices);
+
+  public native void glDrawRangeElements(
+      int mode, int start, int end, int count, int type, int offset);
+
+  public native void glTexImage3D(
+      int target,
+      int level,
+      int internalformat,
+      int width,
+      int height,
+      int depth,
+      int border,
+      int format,
+      int type,
+      Buffer pixels);
+
+  public native void glTexImage3D(
+      int target,
+      int level,
+      int internalformat,
+      int width,
+      int height,
+      int depth,
+      int border,
+      int format,
+      int type,
+      int offset);
+
+  public native void glTexSubImage3D(
+      int target,
+      int level,
+      int xoffset,
+      int yoffset,
+      int zoffset,
+      int width,
+      int height,
+      int depth,
+      int format,
+      int type,
+      Buffer pixels);
 
-	private static native void init ();
+  public native void glTexSubImage3D(
+      int target,
+      int level,
+      int xoffset,
+      int yoffset,
+      int zoffset,
+      int width,
+      int height,
+      int depth,
+      int format,
+      int type,
+      int offset);
 
-	public native void glReadBuffer (int mode);
+  public native void glCopyTexSubImage3D(
+      int target,
+      int level,
+      int xoffset,
+      int yoffset,
+      int zoffset,
+      int x,
+      int y,
+      int width,
+      int height);
 
-	public native void glDrawRangeElements (int mode, int start, int end, int count, int type, Buffer indices);
+  public native void glGenQueries(int n, int[] ids, int offset);
 
-	public native void glDrawRangeElements (int mode, int start, int end, int count, int type, int offset);
+  public native void glGenQueries(int n, IntBuffer ids);
 
-	public native void glTexImage3D (int target, int level, int internalformat, int width, int height, int depth, int border,
-		int format, int type, Buffer pixels);
+  public native void glDeleteQueries(int n, int[] ids, int offset);
 
-	public native void glTexImage3D (int target, int level, int internalformat, int width, int height, int depth, int border,
-		int format, int type, int offset);
+  public native void glDeleteQueries(int n, IntBuffer ids);
 
-	public native void glTexSubImage3D (int target, int level, int xoffset, int yoffset, int zoffset, int width, int height,
-		int depth, int format, int type, Buffer pixels);
+  public native boolean glIsQuery(int id);
 
-	public native void glTexSubImage3D (int target, int level, int xoffset, int yoffset, int zoffset, int width, int height,
-		int depth, int format, int type, int offset);
+  public native void glBeginQuery(int target, int id);
 
-	public native void glCopyTexSubImage3D (int target, int level, int xoffset, int yoffset, int zoffset, int x, int y, int width,
-		int height);
+  public native void glEndQuery(int target);
 
-	public native void glGenQueries (int n, int[] ids, int offset);
+  public native void glGetQueryiv(int target, int pname, IntBuffer params);
 
-	public native void glGenQueries (int n, IntBuffer ids);
+  public native void glGetQueryObjectuiv(int id, int pname, IntBuffer params);
 
-	public native void glDeleteQueries (int n, int[] ids, int offset);
+  public native boolean glUnmapBuffer(int target);
 
-	public native void glDeleteQueries (int n, IntBuffer ids);
+  public native Buffer glGetBufferPointerv(int target, int pname);
 
-	public native boolean glIsQuery (int id);
+  public native void glDrawBuffers(int n, IntBuffer bufs);
 
-	public native void glBeginQuery (int target, int id);
+  public native void glUniformMatrix2x3fv(
+      int location, int count, boolean transpose, FloatBuffer value);
 
-	public native void glEndQuery (int target);
+  public native void glUniformMatrix3x2fv(
+      int location, int count, boolean transpose, FloatBuffer value);
 
-	public native void glGetQueryiv (int target, int pname, IntBuffer params);
+  public native void glUniformMatrix2x4fv(
+      int location, int count, boolean transpose, FloatBuffer value);
 
-	public native void glGetQueryObjectuiv (int id, int pname, IntBuffer params);
+  public native void glUniformMatrix4x2fv(
+      int location, int count, boolean transpose, FloatBuffer value);
 
-	public native boolean glUnmapBuffer (int target);
+  public native void glUniformMatrix3x4fv(
+      int location, int count, boolean transpose, FloatBuffer value);
 
-	public native Buffer glGetBufferPointerv (int target, int pname);
+  public native void glUniformMatrix4x3fv(
+      int location, int count, boolean transpose, FloatBuffer value);
 
-	public native void glDrawBuffers (int n, IntBuffer bufs);
+  public native void glBlitFramebuffer(
+      int srcX0,
+      int srcY0,
+      int srcX1,
+      int srcY1,
+      int dstX0,
+      int dstY0,
+      int dstX1,
+      int dstY1,
+      int mask,
+      int filter);
 
-	public native void glUniformMatrix2x3fv (int location, int count, boolean transpose, FloatBuffer value);
+  public native void glRenderbufferStorageMultisample(
+      int target, int samples, int internalformat, int width, int height);
 
-	public native void glUniformMatrix3x2fv (int location, int count, boolean transpose, FloatBuffer value);
+  public native void glFramebufferTextureLayer(
+      int target, int attachment, int texture, int level, int layer);
 
-	public native void glUniformMatrix2x4fv (int location, int count, boolean transpose, FloatBuffer value);
+  public native java.nio.Buffer glMapBufferRange(int target, int offset, int length, int access);
 
-	public native void glUniformMatrix4x2fv (int location, int count, boolean transpose, FloatBuffer value);
+  public native void glFlushMappedBufferRange(int target, int offset, int length);
 
-	public native void glUniformMatrix3x4fv (int location, int count, boolean transpose, FloatBuffer value);
+  public native void glBindVertexArray(int array);
 
-	public native void glUniformMatrix4x3fv (int location, int count, boolean transpose, FloatBuffer value);
+  public native void glDeleteVertexArrays(int n, int[] arrays, int offset);
 
-	public native void glBlitFramebuffer (int srcX0, int srcY0, int srcX1, int srcY1, int dstX0, int dstY0, int dstX1, int dstY1,
-		int mask, int filter);
+  public native void glDeleteVertexArrays(int n, IntBuffer arrays);
 
-	public native void glRenderbufferStorageMultisample (int target, int samples, int internalformat, int width, int height);
+  public native void glGenVertexArrays(int n, int[] arrays, int offset);
 
-	public native void glFramebufferTextureLayer (int target, int attachment, int texture, int level, int layer);
+  public native void glGenVertexArrays(int n, IntBuffer arrays);
 
-	public native java.nio.Buffer glMapBufferRange (int target, int offset, int length, int access);
+  public native boolean glIsVertexArray(int array);
 
-	public native void glFlushMappedBufferRange (int target, int offset, int length);
+  public native void glBeginTransformFeedback(int primitiveMode);
 
-	public native void glBindVertexArray (int array);
+  public native void glEndTransformFeedback();
 
-	public native void glDeleteVertexArrays (int n, int[] arrays, int offset);
+  public native void glBindBufferRange(int target, int index, int buffer, int offset, int size);
 
-	public native void glDeleteVertexArrays (int n, IntBuffer arrays);
+  public native void glBindBufferBase(int target, int index, int buffer);
 
-	public native void glGenVertexArrays (int n, int[] arrays, int offset);
+  public native void glTransformFeedbackVaryings(int program, String[] varyings, int bufferMode);
 
-	public native void glGenVertexArrays (int n, IntBuffer arrays);
+  public native void glVertexAttribIPointer(int index, int size, int type, int stride, int offset);
 
-	public native boolean glIsVertexArray (int array);
+  public native void glGetVertexAttribIiv(int index, int pname, IntBuffer params);
 
-	public native void glBeginTransformFeedback (int primitiveMode);
+  public native void glGetVertexAttribIuiv(int index, int pname, IntBuffer params);
 
-	public native void glEndTransformFeedback ();
+  public native void glVertexAttribI4i(int index, int x, int y, int z, int w);
 
-	public native void glBindBufferRange (int target, int index, int buffer, int offset, int size);
+  public native void glVertexAttribI4ui(int index, int x, int y, int z, int w);
 
-	public native void glBindBufferBase (int target, int index, int buffer);
+  public native void glGetUniformuiv(int program, int location, IntBuffer params);
 
-	public native void glTransformFeedbackVaryings (int program, String[] varyings, int bufferMode);
+  public native int glGetFragDataLocation(int program, String name);
 
-	public native void glVertexAttribIPointer (int index, int size, int type, int stride, int offset);
+  public native void glUniform1uiv(int location, int count, IntBuffer value);
 
-	public native void glGetVertexAttribIiv (int index, int pname, IntBuffer params);
+  public native void glUniform3uiv(int location, int count, IntBuffer value);
 
-	public native void glGetVertexAttribIuiv (int index, int pname, IntBuffer params);
+  public native void glUniform4uiv(int location, int count, IntBuffer value);
 
-	public native void glVertexAttribI4i (int index, int x, int y, int z, int w);
+  public native void glClearBufferiv(int buffer, int drawbuffer, IntBuffer value);
 
-	public native void glVertexAttribI4ui (int index, int x, int y, int z, int w);
+  public native void glClearBufferuiv(int buffer, int drawbuffer, IntBuffer value);
 
-	public native void glGetUniformuiv (int program, int location, IntBuffer params);
+  public native void glClearBufferfv(int buffer, int drawbuffer, FloatBuffer value);
 
-	public native int glGetFragDataLocation (int program, String name);
+  public native void glClearBufferfi(int buffer, int drawbuffer, float depth, int stencil);
 
-	public native void glUniform1uiv (int location, int count, IntBuffer value);
+  public native String glGetStringi(int name, int index);
 
-	public native void glUniform3uiv (int location, int count, IntBuffer value);
+  public native void glCopyBufferSubData(
+      int readTarget, int writeTarget, int readOffset, int writeOffset, int size);
 
-	public native void glUniform4uiv (int location, int count, IntBuffer value);
+  public native void glGetUniformIndices(
+      int program, String[] uniformNames, IntBuffer uniformIndices);
 
-	public native void glClearBufferiv (int buffer, int drawbuffer, IntBuffer value);
+  public native void glGetActiveUniformsiv(
+      int program, int uniformCount, IntBuffer uniformIndices, int pname, IntBuffer params);
 
-	public native void glClearBufferuiv (int buffer, int drawbuffer, IntBuffer value);
+  public native int glGetUniformBlockIndex(int program, String uniformBlockName);
 
-	public native void glClearBufferfv (int buffer, int drawbuffer, FloatBuffer value);
+  public native void glGetActiveUniformBlockiv(
+      int program, int uniformBlockIndex, int pname, IntBuffer params);
 
-	public native void glClearBufferfi (int buffer, int drawbuffer, float depth, int stencil);
+  public native void glGetActiveUniformBlockName(
+      int program, int uniformBlockIndex, Buffer length, Buffer uniformBlockName);
 
-	public native String glGetStringi (int name, int index);
+  public native String glGetActiveUniformBlockName(int program, int uniformBlockIndex);
 
-	public native void glCopyBufferSubData (int readTarget, int writeTarget, int readOffset, int writeOffset, int size);
+  public native void glUniformBlockBinding(
+      int program, int uniformBlockIndex, int uniformBlockBinding);
 
-	public native void glGetUniformIndices (int program, String[] uniformNames, IntBuffer uniformIndices);
+  public native void glDrawArraysInstanced(int mode, int first, int count, int instanceCount);
 
-	public native void glGetActiveUniformsiv (int program, int uniformCount, IntBuffer uniformIndices, int pname,
-		IntBuffer params);
+  public native void glDrawElementsInstanced(
+      int mode, int count, int type, int indicesOffset, int instanceCount);
 
-	public native int glGetUniformBlockIndex (int program, String uniformBlockName);
+  public native void glGetInteger64v(int pname, LongBuffer params);
 
-	public native void glGetActiveUniformBlockiv (int program, int uniformBlockIndex, int pname, IntBuffer params);
+  public native void glGetBufferParameteri64v(int target, int pname, LongBuffer params);
 
-	public native void glGetActiveUniformBlockName (int program, int uniformBlockIndex, Buffer length, Buffer uniformBlockName);
+  public native void glGenSamplers(int count, int[] samplers, int offset);
 
-	public native String glGetActiveUniformBlockName (int program, int uniformBlockIndex);
+  public native void glGenSamplers(int count, IntBuffer samplers);
 
-	public native void glUniformBlockBinding (int program, int uniformBlockIndex, int uniformBlockBinding);
+  public native void glDeleteSamplers(int count, int[] samplers, int offset);
 
-	public native void glDrawArraysInstanced (int mode, int first, int count, int instanceCount);
+  public native void glDeleteSamplers(int count, IntBuffer samplers);
 
-	public native void glDrawElementsInstanced (int mode, int count, int type, int indicesOffset, int instanceCount);
+  public native boolean glIsSampler(int sampler);
 
-	public native void glGetInteger64v (int pname, LongBuffer params);
+  public native void glBindSampler(int unit, int sampler);
 
-	public native void glGetBufferParameteri64v (int target, int pname, LongBuffer params);
+  public native void glSamplerParameteri(int sampler, int pname, int param);
 
-	public native void glGenSamplers (int count, int[] samplers, int offset);
+  public native void glSamplerParameteriv(int sampler, int pname, IntBuffer param);
 
-	public native void glGenSamplers (int count, IntBuffer samplers);
+  public native void glSamplerParameterf(int sampler, int pname, float param);
 
-	public native void glDeleteSamplers (int count, int[] samplers, int offset);
+  public native void glSamplerParameterfv(int sampler, int pname, FloatBuffer param);
 
-	public native void glDeleteSamplers (int count, IntBuffer samplers);
+  public native void glGetSamplerParameteriv(int sampler, int pname, IntBuffer params);
 
-	public native boolean glIsSampler (int sampler);
+  public native void glGetSamplerParameterfv(int sampler, int pname, FloatBuffer params);
 
-	public native void glBindSampler (int unit, int sampler);
+  public native void glVertexAttribDivisor(int index, int divisor);
 
-	public native void glSamplerParameteri (int sampler, int pname, int param);
+  public native void glBindTransformFeedback(int target, int id);
 
-	public native void glSamplerParameteriv (int sampler, int pname, IntBuffer param);
+  public native void glDeleteTransformFeedbacks(int n, int[] ids, int offset);
 
-	public native void glSamplerParameterf (int sampler, int pname, float param);
+  public native void glDeleteTransformFeedbacks(int n, IntBuffer ids);
 
-	public native void glSamplerParameterfv (int sampler, int pname, FloatBuffer param);
+  public native void glGenTransformFeedbacks(int n, int[] ids, int offset);
 
-	public native void glGetSamplerParameteriv (int sampler, int pname, IntBuffer params);
+  public native void glGenTransformFeedbacks(int n, IntBuffer ids);
 
-	public native void glGetSamplerParameterfv (int sampler, int pname, FloatBuffer params);
+  public native boolean glIsTransformFeedback(int id);
 
-	public native void glVertexAttribDivisor (int index, int divisor);
+  public native void glPauseTransformFeedback();
 
-	public native void glBindTransformFeedback (int target, int id);
+  public native void glResumeTransformFeedback();
 
-	public native void glDeleteTransformFeedbacks (int n, int[] ids, int offset);
+  public native void glProgramParameteri(int program, int pname, int value);
 
-	public native void glDeleteTransformFeedbacks (int n, IntBuffer ids);
+  public native void glInvalidateFramebuffer(int target, int numAttachments, IntBuffer attachments);
 
-	public native void glGenTransformFeedbacks (int n, int[] ids, int offset);
-
-	public native void glGenTransformFeedbacks (int n, IntBuffer ids);
-
-	public native boolean glIsTransformFeedback (int id);
-
-	public native void glPauseTransformFeedback ();
-
-	public native void glResumeTransformFeedback ();
-
-	public native void glProgramParameteri (int program, int pname, int value);
-
-	public native void glInvalidateFramebuffer (int target, int numAttachments, IntBuffer attachments);
-
-	public native void glInvalidateSubFramebuffer (int target, int numAttachments, IntBuffer attachments, int x, int y, int width,
-		int height);
+  public native void glInvalidateSubFramebuffer(
+      int target, int numAttachments, IntBuffer attachments, int x, int y, int width, int height);
 }

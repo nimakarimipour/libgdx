@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -21,32 +21,32 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-/**
- * Created at 4:14:34 AM Jul 17, 2010
- */
-
+/** Created at 4:14:34 AM Jul 17, 2010 */
 package org.jbox2d.pooling.arrays;
 
 import java.util.HashMap;
 
-/** Not thread safe int[] pooling
- * @author Daniel Murphy */
+/**
+ * Not thread safe int[] pooling
+ *
+ * @author Daniel Murphy
+ */
 public class IntArray {
 
-	private final HashMap<Integer, int[]> map = new HashMap<Integer, int[]>();
+  private final HashMap<Integer, int[]> map = new HashMap<Integer, int[]>();
 
-	public int[] get (int argLength) {
-		assert (argLength > 0);
+  public int[] get(int argLength) {
+    assert (argLength > 0);
 
-		if (!map.containsKey(argLength)) {
-			map.put(argLength, getInitializedArray(argLength));
-		}
+    if (!map.containsKey(argLength)) {
+      map.put(argLength, getInitializedArray(argLength));
+    }
 
-		assert (map.get(argLength).length == argLength) : "Array not built of correct length";
-		return map.get(argLength);
-	}
+    assert (map.get(argLength).length == argLength) : "Array not built of correct length";
+    return map.get(argLength);
+  }
 
-	protected int[] getInitializedArray (int argLength) {
-		return new int[argLength];
-	}
+  protected int[] getInitializedArray(int argLength) {
+    return new int[argLength];
+  }
 }

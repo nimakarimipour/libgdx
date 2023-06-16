@@ -9,82 +9,87 @@
 package com.badlogic.gdx.physics.bullet.dynamics;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
+import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class btPoint2PointConstraintDoubleData extends BulletBase {
-	private long swigCPtr;
+  private long swigCPtr;
 
-	protected btPoint2PointConstraintDoubleData (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, cPtr, cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+  protected btPoint2PointConstraintDoubleData(
+      final String className, long cPtr, boolean cMemoryOwn) {
+    super(className, cPtr, cMemoryOwn);
+    swigCPtr = cPtr;
+  }
 
-	/** Construct a new btPoint2PointConstraintDoubleData, normally you should not need this constructor it's intended for
-	 * low-level usage. */
-	public btPoint2PointConstraintDoubleData (long cPtr, boolean cMemoryOwn) {
-		this("btPoint2PointConstraintDoubleData", cPtr, cMemoryOwn);
-		construct();
-	}
+  /**
+   * Construct a new btPoint2PointConstraintDoubleData, normally you should not need this
+   * constructor it's intended for low-level usage.
+   */
+  public btPoint2PointConstraintDoubleData(long cPtr, boolean cMemoryOwn) {
+    this("btPoint2PointConstraintDoubleData", cPtr, cMemoryOwn);
+    construct();
+  }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(swigCPtr = cPtr, cMemoryOwn);
-	}
+  @Override
+  protected void reset(long cPtr, boolean cMemoryOwn) {
+    if (!destroyed) destroy();
+    super.reset(swigCPtr = cPtr, cMemoryOwn);
+  }
 
-	public static long getCPtr (btPoint2PointConstraintDoubleData obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+  public static long getCPtr(btPoint2PointConstraintDoubleData obj) {
+    return (obj == null) ? 0 : obj.swigCPtr;
+  }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+  @Override
+  protected void finalize() throws Throwable {
+    if (!destroyed) destroy();
+    super.finalize();
+  }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				DynamicsJNI.delete_btPoint2PointConstraintDoubleData(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+  @Override
+  protected synchronized void delete() {
+    if (swigCPtr != 0) {
+      if (swigCMemOwn) {
+        swigCMemOwn = false;
+        DynamicsJNI.delete_btPoint2PointConstraintDoubleData(swigCPtr);
+      }
+      swigCPtr = 0;
+    }
+    super.delete();
+  }
 
-	public void setTypeConstraintData (btTypedConstraintData value) {
-		DynamicsJNI.btPoint2PointConstraintDoubleData_typeConstraintData_set(swigCPtr, this, btTypedConstraintData.getCPtr(value),
-			value);
-	}
+  public void setTypeConstraintData(btTypedConstraintData value) {
+    DynamicsJNI.btPoint2PointConstraintDoubleData_typeConstraintData_set(
+        swigCPtr, this, btTypedConstraintData.getCPtr(value), value);
+  }
 
-	public btTypedConstraintData getTypeConstraintData () {
-		long cPtr = DynamicsJNI.btPoint2PointConstraintDoubleData_typeConstraintData_get(swigCPtr, this);
-		return (cPtr == 0) ? null : new btTypedConstraintData(cPtr, false);
-	}
+  public btTypedConstraintData getTypeConstraintData() {
+    long cPtr =
+        DynamicsJNI.btPoint2PointConstraintDoubleData_typeConstraintData_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new btTypedConstraintData(cPtr, false);
+  }
 
-	public void setPivotInA (btVector3DoubleData value) {
-		DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInA_set(swigCPtr, this, btVector3DoubleData.getCPtr(value), value);
-	}
+  public void setPivotInA(btVector3DoubleData value) {
+    DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInA_set(
+        swigCPtr, this, btVector3DoubleData.getCPtr(value), value);
+  }
 
-	public btVector3DoubleData getPivotInA () {
-		long cPtr = DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInA_get(swigCPtr, this);
-		return (cPtr == 0) ? null : new btVector3DoubleData(cPtr, false);
-	}
+  public btVector3DoubleData getPivotInA() {
+    long cPtr = DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInA_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new btVector3DoubleData(cPtr, false);
+  }
 
-	public void setPivotInB (btVector3DoubleData value) {
-		DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInB_set(swigCPtr, this, btVector3DoubleData.getCPtr(value), value);
-	}
+  public void setPivotInB(btVector3DoubleData value) {
+    DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInB_set(
+        swigCPtr, this, btVector3DoubleData.getCPtr(value), value);
+  }
 
-	public btVector3DoubleData getPivotInB () {
-		long cPtr = DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInB_get(swigCPtr, this);
-		return (cPtr == 0) ? null : new btVector3DoubleData(cPtr, false);
-	}
+  public btVector3DoubleData getPivotInB() {
+    long cPtr = DynamicsJNI.btPoint2PointConstraintDoubleData_pivotInB_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new btVector3DoubleData(cPtr, false);
+  }
 
-	public btPoint2PointConstraintDoubleData () {
-		this(DynamicsJNI.new_btPoint2PointConstraintDoubleData(), true);
-	}
-
+  public btPoint2PointConstraintDoubleData() {
+    this(DynamicsJNI.new_btPoint2PointConstraintDoubleData(), true);
+  }
 }

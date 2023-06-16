@@ -8,10 +8,10 @@
 
 package com.badlogic.gdx.physics.bullet.softbody;
 
-import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
+import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public interface SoftbodyConstants {
-	public final static String btSoftBodyDataName = "btSoftBodyFloatData";
+  public static final String btSoftBodyDataName = "btSoftBodyFloatData";
 }

@@ -21,52 +21,54 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 
-/** Compute directional camera based on frustum bounding sphere.
- * @author realitix */
+/**
+ * Compute directional camera based on frustum bounding sphere.
+ *
+ * @author realitix
+ */
 public class BoundingSphereDirectionalAnalyzer implements DirectionalAnalyzer {
-	/** Objects used for computation */
-	protected BoundingBox bb = new BoundingBox();
-	protected Vector3 tmpV = new Vector3();
-	protected Vector3 tmpV2 = new Vector3();
+  /** Objects used for computation */
+  protected BoundingBox bb = new BoundingBox();
 
-	@Override
-	public Camera analyze (DirectionalLight light, Camera out, Camera mainCamera) {
-		bb.inf();
+  protected Vector3 tmpV = new Vector3();
+  protected Vector3 tmpV2 = new Vector3();
 
-		// Create bounding box encompassing main camera frustum
-		for (int i = 0; i < mainCamera.frustum.planePoints.length; i++) {
-			bb.ext(mainCamera.frustum.planePoints[i]);
-		}
+  @Override
+  public Camera analyze(DirectionalLight light, Camera out, Camera mainCamera) {
+    bb.inf();
 
-		// Radius
-		float radius = bb.getDimensions(tmpV).len() * 0.5f;
+    // Create bounding box encompassing main camera frustum
+    for (int i = 0; i < mainCamera.frustum.planePoints.length; i++) {
+      bb.ext(mainCamera.frustum.planePoints[i]);
+    }
 
-		// Center
-		bb.getCenter(tmpV);
+    // Radius
+    float radius = bb.getDimensions(tmpV).len() * 0.5f;
 
-		// Move back from 1.5*radius
-		tmpV2.set(light.direction);
-		tmpV2.scl(radius * 1.5f);
+    // Center
+    bb.getCenter(tmpV);
 
-		// Position out camera
-		out.direction.set(light.direction);
-		out.position.set(tmpV.sub(tmpV2));
+    // Move back from 1.5*radius
+    tmpV2.set(light.direction);
+    tmpV2.scl(radius * 1.5f);
 
-		// Compute near and far
-		out.near = 0.5f * radius;
-		out.far = 2.5f * radius;
+    // Position out camera
+    out.direction.set(light.direction);
+    out.position.set(tmpV.sub(tmpV2));
 
-		// Compute up vector
-		Vector3 d = light.direction;
-		if (d.z < d.x + d.y)
-			out.up.set(-light.direction.y, light.direction.x, light.direction.z);
-		else
-			out.up.set(light.direction.x, -light.direction.z, light.direction.y);
+    // Compute near and far
+    out.near = 0.5f * radius;
+    out.far = 2.5f * radius;
 
-		// Compute viewport (orthographic camera)
-		out.viewportWidth = radius;
-		out.viewportHeight = radius;
+    // Compute up vector
+    Vector3 d = light.direction;
+    if (d.z < d.x + d.y) out.up.set(-light.direction.y, light.direction.x, light.direction.z);
+    else out.up.set(light.direction.x, -light.direction.z, light.direction.y);
 
-		return out;
-	}
+    // Compute viewport (orthographic camera)
+    out.viewportWidth = radius;
+    out.viewportHeight = radius;
+
+    return out;
+  }
 }

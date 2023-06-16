@@ -20,6 +20,5 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class WebGLObject extends JavaScriptObject {
 
-	protected WebGLObject () {
-	}
+  protected WebGLObject() {}
 }

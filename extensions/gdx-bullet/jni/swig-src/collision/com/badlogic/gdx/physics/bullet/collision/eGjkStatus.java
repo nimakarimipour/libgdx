@@ -9,7 +9,7 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 public final class eGjkStatus {
-	public final static int eGjkValid = 0;
-	public final static int eGjkInside = eGjkValid + 1;
-	public final static int eGjkFailed = eGjkInside + 1;
+  public static final int eGjkValid = 0;
+  public static final int eGjkInside = eGjkValid + 1;
+  public static final int eGjkFailed = eGjkInside + 1;
 }

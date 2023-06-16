@@ -28,100 +28,112 @@ import com.badlogic.gdx.tests.g3d.shadows.utils.NearFarAnalyzer;
 import com.badlogic.gdx.tests.g3d.shadows.utils.ShadowMapAllocator;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-/** Classical shadow system uses shadow accumulation method. For each light, a depth map is generated and a second pass accumulate
- * the shadows. Obviously, the second pass must use the same lighting system as the main rendering pass. Compared to Realistic
- * shadow system, it's heavier but has some advantages:
+/**
+ * Classical shadow system uses shadow accumulation method. For each light, a depth map is generated
+ * and a second pass accumulate the shadows. Obviously, the second pass must use the same lighting
+ * system as the main rendering pass. Compared to Realistic shadow system, it's heavier but has some
+ * advantages:
  *
  * <pre>
  * 1 - It supports point light shadowing.
  * 2 - It's easy to use in custom shader.
  * 3 - There is no constraint about shader varying.
  * </pre>
- * 
- * @author realitix */
+ *
+ * @author realitix
+ */
 public class ClassicalShadowSystem extends FirstPassBaseShadowSystem {
 
-	public static final int PASS_QUANTITY = 2;
-	public static final int SECOND_PASS = 1;
+  public static final int PASS_QUANTITY = 2;
+  public static final int SECOND_PASS = 1;
 
-	/** true if it's the first light during second pass */
-	protected boolean firstCallPass2;
-	protected int nbCall = 0;
+  /** true if it's the first light during second pass */
+  protected boolean firstCallPass2;
 
-	public ClassicalShadowSystem () {
-		super();
-	}
+  protected int nbCall = 0;
 
-	public ClassicalShadowSystem (NearFarAnalyzer nearFarAnalyzer, ShadowMapAllocator allocator,
-		DirectionalAnalyzer directionalAnalyzer, LightFilter lightFilter) {
-		super(nearFarAnalyzer, allocator, directionalAnalyzer, lightFilter);
-	}
+  public ClassicalShadowSystem() {
+    super();
+  }
 
-	@Override
-	public int getPassQuantity () {
-		return PASS_QUANTITY;
-	}
+  public ClassicalShadowSystem(
+      NearFarAnalyzer nearFarAnalyzer,
+      ShadowMapAllocator allocator,
+      DirectionalAnalyzer directionalAnalyzer,
+      LightFilter lightFilter) {
+    super(nearFarAnalyzer, allocator, directionalAnalyzer, lightFilter);
+  }
 
-	@Override
-	public void init (int n) {
-		super.init(n);
-		mainShaderProvider = new MainShaderProvider(new MainShader.Config(this));
+  @Override
+  public int getPassQuantity() {
+    return PASS_QUANTITY;
+  }
 
-		if (n == SECOND_PASS) init2();
-	}
+  @Override
+  public void init(int n) {
+    super.init(n);
+    mainShaderProvider = new MainShaderProvider(new MainShader.Config(this));
 
-	@Override
-	protected void init1 () {
-		super.init1();
-		passShaderProviders[FIRST_PASS] = new Pass1ShaderProvider();
-	}
+    if (n == SECOND_PASS) init2();
+  }
 
-	protected void init2 () {
-		frameBuffers[SECOND_PASS] = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getBackBufferWidth(),
-			Gdx.graphics.getBackBufferHeight(), true);
-		passShaderProviders[SECOND_PASS] = new Pass2ShaderProvider(new Pass2Shader.Config(this));
-	}
+  @Override
+  protected void init1() {
+    super.init1();
+    passShaderProviders[FIRST_PASS] = new Pass1ShaderProvider();
+  }
 
-	@Override
-	protected void beginPass (int n) {
-		super.beginPass(n);
-		if (n == SECOND_PASS) beginPass2();
-	};
+  protected void init2() {
+    frameBuffers[SECOND_PASS] =
+        new FrameBuffer(
+            Pixmap.Format.RGBA8888,
+            Gdx.graphics.getBackBufferWidth(),
+            Gdx.graphics.getBackBufferHeight(),
+            true);
+    passShaderProviders[SECOND_PASS] = new Pass2ShaderProvider(new Pass2Shader.Config(this));
+  }
 
-	protected void beginPass2 () {
-		ScreenUtils.clear(0, 0, 0, 0, true);
-		firstCallPass2 = true;
-		nbCall = 0;
-	}
+  @Override
+  protected void beginPass(int n) {
+    super.beginPass(n);
+    if (n == SECOND_PASS) beginPass2();
+  }
+  ;
 
-	@Override
-	public Camera next () {
-		if (currentPass == SECOND_PASS && nbCall > 0) firstCallPass2 = false;
-		nbCall++;
-		return super.next();
-	}
+  protected void beginPass2() {
+    ScreenUtils.clear(0, 0, 0, 0, true);
+    firstCallPass2 = true;
+    nbCall = 0;
+  }
 
-	@Override
-	protected Camera interceptCamera (LightProperties lp) {
-		if (currentPass == SECOND_PASS) return this.camera;
-		return lp.camera;
-	}
+  @Override
+  public Camera next() {
+    if (currentPass == SECOND_PASS && nbCall > 0) firstCallPass2 = false;
+    nbCall++;
+    return super.next();
+  }
 
-	@Override
-	protected void processViewport (LightProperties lp, boolean cameraViewport) {
-		if (this.currentPass != SECOND_PASS) super.processViewport(lp, cameraViewport);
-	}
+  @Override
+  protected Camera interceptCamera(LightProperties lp) {
+    if (currentPass == SECOND_PASS) return this.camera;
+    return lp.camera;
+  }
 
-	public Texture getMainTexture () {
-		return getTexture(SECOND_PASS);
-	}
+  @Override
+  protected void processViewport(LightProperties lp, boolean cameraViewport) {
+    if (this.currentPass != SECOND_PASS) super.processViewport(lp, cameraViewport);
+  }
 
-	public boolean isFirstCallPass2 () {
-		return firstCallPass2;
-	}
+  public Texture getMainTexture() {
+    return getTexture(SECOND_PASS);
+  }
 
-	@Override
-	public String toString () {
-		return "ClassicalShadowSystem";
-	}
+  public boolean isFirstCallPass2() {
+    return firstCallPass2;
+  }
+
+  @Override
+  public String toString() {
+    return "ClassicalShadowSystem";
+  }
 }

@@ -12,49 +12,51 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class DISTANCE_PLANE_3D_FUNC extends BulletBase {
-	private long swigCPtr;
+  private long swigCPtr;
 
-	protected DISTANCE_PLANE_3D_FUNC (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, cPtr, cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+  protected DISTANCE_PLANE_3D_FUNC(final String className, long cPtr, boolean cMemoryOwn) {
+    super(className, cPtr, cMemoryOwn);
+    swigCPtr = cPtr;
+  }
 
-	/** Construct a new DISTANCE_PLANE_3D_FUNC, normally you should not need this constructor it's intended for low-level usage. */
-	public DISTANCE_PLANE_3D_FUNC (long cPtr, boolean cMemoryOwn) {
-		this("DISTANCE_PLANE_3D_FUNC", cPtr, cMemoryOwn);
-		construct();
-	}
+  /**
+   * Construct a new DISTANCE_PLANE_3D_FUNC, normally you should not need this constructor it's
+   * intended for low-level usage.
+   */
+  public DISTANCE_PLANE_3D_FUNC(long cPtr, boolean cMemoryOwn) {
+    this("DISTANCE_PLANE_3D_FUNC", cPtr, cMemoryOwn);
+    construct();
+  }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(swigCPtr = cPtr, cMemoryOwn);
-	}
+  @Override
+  protected void reset(long cPtr, boolean cMemoryOwn) {
+    if (!destroyed) destroy();
+    super.reset(swigCPtr = cPtr, cMemoryOwn);
+  }
 
-	public static long getCPtr (DISTANCE_PLANE_3D_FUNC obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+  public static long getCPtr(DISTANCE_PLANE_3D_FUNC obj) {
+    return (obj == null) ? 0 : obj.swigCPtr;
+  }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+  @Override
+  protected void finalize() throws Throwable {
+    if (!destroyed) destroy();
+    super.finalize();
+  }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_DISTANCE_PLANE_3D_FUNC(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+  @Override
+  protected synchronized void delete() {
+    if (swigCPtr != 0) {
+      if (swigCMemOwn) {
+        swigCMemOwn = false;
+        CollisionJNI.delete_DISTANCE_PLANE_3D_FUNC(swigCPtr);
+      }
+      swigCPtr = 0;
+    }
+    super.delete();
+  }
 
-	public DISTANCE_PLANE_3D_FUNC () {
-		this(CollisionJNI.new_DISTANCE_PLANE_3D_FUNC(), true);
-	}
-
+  public DISTANCE_PLANE_3D_FUNC() {
+    this(CollisionJNI.new_DISTANCE_PLANE_3D_FUNC(), true);
+  }
 }

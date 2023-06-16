@@ -22,6 +22,6 @@ import com.badlogic.gdx.utils.Disposable;
 
 public interface LwjglAudio extends Audio, Disposable {
 
-	/** Updates audio state (usually called every frame by the {@link LwjglApplication}) */
-	void update ();
+  /** Updates audio state (usually called every frame by the {@link LwjglApplication}) */
+  void update();
 }

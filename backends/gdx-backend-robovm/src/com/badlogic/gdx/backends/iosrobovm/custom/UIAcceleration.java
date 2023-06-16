@@ -17,59 +17,64 @@
 package com.badlogic.gdx.backends.iosrobovm.custom;
 
 /*<imports>*/
+import org.robovm.apple.foundation.*;
 import org.robovm.objc.*;
 import org.robovm.objc.annotation.*;
 import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
-import org.robovm.apple.foundation.*;
+
 /*</imports>*/
 
 /*<javadoc>*/
-/** @since Available in iOS 2.0 and later.
- * @deprecated Deprecated in iOS 5.0. */
+/**
+ * @since Available in iOS 2.0 and later.
+ * @deprecated Deprecated in iOS 5.0.
+ */
 @Deprecated
 /* </javadoc> */
 /* <annotations> */
 @Library("UIKit")
 @NativeClass
 /* </annotations> */
-/* <visibility> */public/* </visibility> */ class /* <name> */ UIAcceleration/* </name> */
-	extends /* <extends> */NSObject/* </extends> */
-/* <implements> *//* </implements> */ {
+/* <visibility> */ public /* </visibility> */ class /* <name> */ UIAcceleration /* </name> */
+    extends /* <extends> */ NSObject /* </extends> */
+/* <implements> */
+/* </implements> */ {
 
-	/* <ptr> */public static class UIAccelerationPtr extends Ptr<UIAcceleration, UIAccelerationPtr> {
-	}
+  /* <ptr> */ public static class UIAccelerationPtr
+      extends Ptr<UIAcceleration, UIAccelerationPtr> {}
 
-	/* </ptr> */
-	/* <bind> */static {
-		ObjCRuntime.bind(UIAcceleration.class);
-	}/* </bind> */
-	/* <constants> *//* </constants> */
-	/* <constructors> */
+  /* </ptr> */
+  /* <bind> */ static {
+    ObjCRuntime.bind(UIAcceleration.class);
+  } /* </bind> */
+  /* <constants> */
+  /* </constants> */
+  /* <constructors> */
 
-	public UIAcceleration () {
-	}
+  public UIAcceleration() {}
 
-	protected UIAcceleration (SkipInit skipInit) {
-		super(skipInit);
-	}
+  protected UIAcceleration(SkipInit skipInit) {
+    super(skipInit);
+  }
 
-	/* </constructors> */
-	/* <properties> */
-	@Property(selector = "timestamp")
-	public native double getTimestamp ();
+  /* </constructors> */
+  /* <properties> */
+  @Property(selector = "timestamp")
+  public native double getTimestamp();
 
-	@Property(selector = "x")
-	public native double getX ();
+  @Property(selector = "x")
+  public native double getX();
 
-	@Property(selector = "y")
-	public native double getY ();
+  @Property(selector = "y")
+  public native double getY();
 
-	@Property(selector = "z")
-	public native double getZ ();
-	/* </properties> */
-	/* <members> *//* </members> */
-	/* <methods> */
+  @Property(selector = "z")
+  public native double getZ();
+  /* </properties> */
+  /* <members> */
+  /* </members> */
+  /* <methods> */
 
-	/* </methods> */
+  /* </methods> */
 }

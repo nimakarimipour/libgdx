@@ -9,6 +9,6 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 public final class btContactManifoldTypes {
-	public final static int MIN_CONTACT_MANIFOLD_TYPE = 1024;
-	public final static int BT_PERSISTENT_MANIFOLD_TYPE = MIN_CONTACT_MANIFOLD_TYPE + 1;
+  public static final int MIN_CONTACT_MANIFOLD_TYPE = 1024;
+  public static final int BT_PERSISTENT_MANIFOLD_TYPE = MIN_CONTACT_MANIFOLD_TYPE + 1;
 }

@@ -21,17 +21,17 @@ import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 
 public class GwtTestStarter extends GwtApplication {
-	@Override
-	public GwtApplicationConfiguration getConfig () {
-		GwtApplicationConfiguration config = new GwtApplicationConfiguration(true);
-		config.useGyroscope = true;
-		config.padVertical = 150;
-		// config.openURLInNewWindow = true;
-		return config;
-	}
+  @Override
+  public GwtApplicationConfiguration getConfig() {
+    GwtApplicationConfiguration config = new GwtApplicationConfiguration(true);
+    config.useGyroscope = true;
+    config.padVertical = 150;
+    // config.openURLInNewWindow = true;
+    return config;
+  }
 
-	@Override
-	public ApplicationListener createApplicationListener () {
-		return new GwtTestWrapper();
-	}
+  @Override
+  public ApplicationListener createApplicationListener() {
+    return new GwtTestWrapper();
+  }
 }

@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,37 +26,37 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class PixelPerfectTest extends GdxTest {
-	SpriteBatch batch;
-	OrthographicCamera cam;
-	Texture tex;
+  SpriteBatch batch;
+  OrthographicCamera cam;
+  Texture tex;
 
-	@Override
-	public void create () {
-		Pixmap pixmap = new Pixmap(16, 16, Pixmap.Format.RGBA8888);
-		pixmap.setColor(Color.BLUE);
-		pixmap.fill();
-		pixmap.setColor(Color.RED);
-		pixmap.drawLine(0, 0, 15, 15);
-		pixmap.drawLine(0, 15, 15, 0);
+  @Override
+  public void create() {
+    Pixmap pixmap = new Pixmap(16, 16, Pixmap.Format.RGBA8888);
+    pixmap.setColor(Color.BLUE);
+    pixmap.fill();
+    pixmap.setColor(Color.RED);
+    pixmap.drawLine(0, 0, 15, 15);
+    pixmap.drawLine(0, 15, 15, 0);
 
-		tex = new Texture(pixmap);
-		batch = new SpriteBatch();
-		cam = new OrthographicCamera();
-		cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-	}
+    tex = new Texture(pixmap);
+    batch = new SpriteBatch();
+    cam = new OrthographicCamera();
+    cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+  }
 
-	@Override
-	public void resize (int width, int height) {
-		cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-	}
+  @Override
+  public void resize(int width, int height) {
+    cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+  }
 
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 1, 1);
-		cam.update();
-		batch.setProjectionMatrix(cam.combined);
-		batch.begin();
-		batch.draw(tex, 1, 1);
-		batch.end();
-	}
+  @Override
+  public void render() {
+    ScreenUtils.clear(1, 0, 1, 1);
+    cam.update();
+    batch.setProjectionMatrix(cam.combined);
+    batch.begin();
+    batch.draw(tex, 1, 1);
+    batch.end();
+  }
 }
