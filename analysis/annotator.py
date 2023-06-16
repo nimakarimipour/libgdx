@@ -22,7 +22,7 @@ def run_annotator():
     commands += ['-bc', 'cd {} && ./gradlew compileJava'.format(REPO)]
     commands += ['-cp', '/tmp/annotator/paths.tsv']
     commands += ['-i', 'com.uber.nullaway.annotations.Initializer']
-    commands += ['-n', 'edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted']
+    commands += ['-n', 'javax.annotation.Nullable']
     commands += ['-cn', 'NULLAWAY']
     # Uncomment to see build output
     # commands += ['-rboserr']
