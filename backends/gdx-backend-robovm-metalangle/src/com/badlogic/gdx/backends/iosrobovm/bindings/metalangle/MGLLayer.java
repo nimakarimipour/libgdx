@@ -35,76 +35,78 @@ import org.robovm.rt.bro.ptr.Ptr;
 /*<annotations>*/ @NativeClass
 /* </annotations> */
 /* <visibility> */ public /* </visibility> */ class /* <name> */ MGLLayer /* </name> */
-    extends /* <extends> */ CALayer /* </extends> */
+	extends /* <extends> */ CALayer /* </extends> */
 /* <implements> */
 /* </implements> */ {
 
-  /* <ptr> */ public static class MGLLayerPtr extends Ptr<MGLLayer, MGLLayerPtr> {}
+	/* <ptr> */ public static class MGLLayerPtr extends Ptr<MGLLayer, MGLLayerPtr> {
+	}
 
-  /* </ptr> */
-  /* <bind> */ static {
-    ObjCRuntime.bind(MGLLayer.class);
-  } /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <constructors> */
+	/* </ptr> */
+	/* <bind> */ static {
+		ObjCRuntime.bind(MGLLayer.class);
+	} /* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <constructors> */
 
-  protected MGLLayer() {}
+	protected MGLLayer () {
+	}
 
-  protected MGLLayer(Handle h, long handle) {
-    super(h, handle);
-  }
+	protected MGLLayer (Handle h, long handle) {
+		super(h, handle);
+	}
 
-  protected MGLLayer(SkipInit skipInit) {
-    super(skipInit);
-  }
+	protected MGLLayer (SkipInit skipInit) {
+		super(skipInit);
+	}
 
-  /* </constructors> */
-  /* <properties> */
-  @Property(selector = "drawableSize")
-  public native @ByVal CGSize getDrawableSize();
+	/* </constructors> */
+	/* <properties> */
+	@Property(selector = "drawableSize")
+	public native @ByVal CGSize getDrawableSize ();
 
-  @Property(selector = "defaultOpenGLFrameBufferID")
-  public native int getDefaultOpenGLFrameBufferID();
+	@Property(selector = "defaultOpenGLFrameBufferID")
+	public native int getDefaultOpenGLFrameBufferID ();
 
-  @Property(selector = "drawableColorFormat")
-  public native MGLDrawableColorFormat getDrawableColorFormat();
+	@Property(selector = "drawableColorFormat")
+	public native MGLDrawableColorFormat getDrawableColorFormat ();
 
-  @Property(selector = "setDrawableColorFormat:")
-  public native void setDrawableColorFormat(MGLDrawableColorFormat v);
+	@Property(selector = "setDrawableColorFormat:")
+	public native void setDrawableColorFormat (MGLDrawableColorFormat v);
 
-  @Property(selector = "drawableDepthFormat")
-  public native MGLDrawableDepthFormat getDrawableDepthFormat();
+	@Property(selector = "drawableDepthFormat")
+	public native MGLDrawableDepthFormat getDrawableDepthFormat ();
 
-  @Property(selector = "setDrawableDepthFormat:")
-  public native void setDrawableDepthFormat(MGLDrawableDepthFormat v);
+	@Property(selector = "setDrawableDepthFormat:")
+	public native void setDrawableDepthFormat (MGLDrawableDepthFormat v);
 
-  @Property(selector = "drawableStencilFormat")
-  public native MGLDrawableStencilFormat getDrawableStencilFormat();
+	@Property(selector = "drawableStencilFormat")
+	public native MGLDrawableStencilFormat getDrawableStencilFormat ();
 
-  @Property(selector = "setDrawableStencilFormat:")
-  public native void setDrawableStencilFormat(MGLDrawableStencilFormat v);
+	@Property(selector = "setDrawableStencilFormat:")
+	public native void setDrawableStencilFormat (MGLDrawableStencilFormat v);
 
-  @Property(selector = "drawableMultisample")
-  public native MGLDrawableMultisample getDrawableMultisample();
+	@Property(selector = "drawableMultisample")
+	public native MGLDrawableMultisample getDrawableMultisample ();
 
-  @Property(selector = "setDrawableMultisample:")
-  public native void setDrawableMultisample(MGLDrawableMultisample v);
+	@Property(selector = "setDrawableMultisample:")
+	public native void setDrawableMultisample (MGLDrawableMultisample v);
 
-  @Property(selector = "retainedBacking")
-  public native boolean isRetainedBacking();
+	@Property(selector = "retainedBacking")
+	public native boolean isRetainedBacking ();
 
-  @Property(selector = "setRetainedBacking:")
-  public native void setRetainedBacking(boolean v);
+	@Property(selector = "setRetainedBacking:")
+	public native void setRetainedBacking (boolean v);
 
-  /* </properties> */
-  /* <members> */
-  /* </members> */
-  /* <methods> */
-  @Method(selector = "present")
-  public native boolean present();
+	/* </properties> */
+	/* <members> */
+	/* </members> */
+	/* <methods> */
+	@Method(selector = "present")
+	public native boolean present ();
 
-  @Method(selector = "bindDefaultFrameBuffer")
-  public native void bindDefaultFrameBuffer();
-  /* </methods> */
+	@Method(selector = "bindDefaultFrameBuffer")
+	public native void bindDefaultFrameBuffer ();
+	/* </methods> */
 }
