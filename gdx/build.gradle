@@ -105,8 +105,8 @@ tasks.withType(JavaCompile) {
 			check("AnnotatorScanner", CheckSeverity.ERROR)
 			option("NullAway:AnnotatedPackages", "com.badlogic.gdx")
 			option("NullAway:SerializeFixMetadata", "true")
-			option("NullAway:FixSerializationConfigPath", "/tmp/NullAwayFix/nullaway.xml")
-			option("AnnotatorScanner:ConfigPath", "/tmp/NullAwayFix/scanner.xml")
+			option("NullAway:FixSerializationConfigPath", "/tmp/annotator/nullaway.xml")
+			option("AnnotatorScanner:ConfigPath", "/tmp/annotator/scanner.xml")
 		}
 	}
 	options.compilerArgs << "-Xmaxerrs" << "100000"

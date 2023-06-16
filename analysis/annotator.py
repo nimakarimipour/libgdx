@@ -23,7 +23,7 @@ def run_annotator():
     commands += ['-cp', '/tmp/annotator/paths.tsv']
     commands += ['-i', 'com.uber.nullaway.annotations.Initializer']
     commands += ['-n', 'edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted']
-    commands += ['-cn', 'NullAway']
+    commands += ['-cn', 'NULLAWAY']
     # Uncomment to see build output
     # commands += ['-rboserr']
 
