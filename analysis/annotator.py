@@ -11,7 +11,7 @@ def prepare():
     os.makedirs('/tmp/annotator', exist_ok=True)
     shutil.rmtree('/tmp/annotator/0', ignore_errors=True)
     with open('/tmp/annotator/paths.tsv', 'w') as o:
-        o.write("{}\t{}\n".format('/tmp/annotator/checker.xml', '/tmp/ucr-tainting/scanner.xml'))
+        o.write("{}\t{}\n".format('/tmp/annotator/checker.xml', '/tmp/annotator/scanner.xml'))
 
 
 def run_annotator():
@@ -25,7 +25,7 @@ def run_annotator():
     commands += ['-n', 'edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted']
     commands += ['-cn', 'NULLAWAY']
     # Uncomment to see build output
-    # commands += ['-rboserr']
+    commands += ['-rboserr']
 
     subprocess.call(commands)
 
