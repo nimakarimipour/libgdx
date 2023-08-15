@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.NumberUtils;
+import javax.annotation.Nullable;
 
 /**
  * Represents a sprite in 3d space. Typical 3d transformations such as translation, rotation and
@@ -58,7 +59,7 @@ public class Decal {
    * The transformation offset can be used to change the pivot point for rotation and scaling. By
    * default the pivot is the middle of the decal.
    */
-  public Vector2 transformationOffset = null;
+  @Nullable public Vector2 transformationOffset = null;
 
   protected Vector2 dimensions = new Vector2();
 

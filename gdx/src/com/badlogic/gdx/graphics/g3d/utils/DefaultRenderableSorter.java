@@ -23,14 +23,15 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 public class DefaultRenderableSorter implements RenderableSorter, Comparator<Renderable> {
-  private Camera camera;
+  @Nullable private Camera camera;
   private final Vector3 tmpV1 = new Vector3();
   private final Vector3 tmpV2 = new Vector3();
 
   @Override
-  public void sort(final Camera camera, final Array<Renderable> renderables) {
+  public void sort(@Nullable final Camera camera, final Array<Renderable> renderables) {
     this.camera = camera;
     renderables.sort(this);
   }

@@ -31,6 +31,7 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import javax.annotation.Nullable;
 
 /**
  * Class for encoding and decoding ETC1 compressed images. Also provides methods to add a PKM

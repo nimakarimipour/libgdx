@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Sort;
+import javax.annotation.Nullable;
 
 /**
  * Minimalistic grouping strategy useful for orthogonal scenes where the camera faces the negative z
@@ -117,7 +118,7 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
     }
   }
 
-  @Override
+  @Nullable @Override
   public ShaderProgram getGroupShader(int group) {
     return null;
   }

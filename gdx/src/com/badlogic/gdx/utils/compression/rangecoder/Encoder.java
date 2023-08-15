@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils.compression.rangecoder;
 
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 public class Encoder {
   static final int kTopMask = ~((1 << 24) - 1);
@@ -25,7 +26,7 @@ public class Encoder {
   static final int kBitModelTotal = (1 << kNumBitModelTotalBits);
   static final int kNumMoveBits = 5;
 
-  java.io.OutputStream Stream;
+  @Nullable java.io.OutputStream Stream;
 
   long Low;
   int Range;

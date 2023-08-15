@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value.Fixed;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 /**
  * A cell for a {@link Table}.
@@ -22,21 +23,21 @@ public class Cell<T extends Actor> implements Poolable {
       lefti = Align.left,
       righti = Align.right;
 
-  private static Files files;
-  private static Cell defaults;
+  @Nullable private static Files files;
+  @Nullable private static Cell defaults;
 
   Value minWidth, minHeight;
   Value prefWidth, prefHeight;
   Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
   Value padTop, padLeft, padBottom, padRight;
-  Float fillX, fillY;
-  Integer align;
+  @Nullable Float fillX, fillY;
+  @Nullable Integer align;
   Integer expandX, expandY;
   Integer colspan;
-  Boolean uniformX, uniformY;
+  @Nullable Boolean uniformX, uniformY;
 
-  @Null Actor actor;
+  @Nullable @Null Actor actor;
   float actorX, actorY;
   float actorWidth, actorHeight;
 
@@ -60,7 +61,7 @@ public class Cell<T extends Actor> implements Poolable {
    * Sets the actor in this cell and adds the actor to the cell's table. If null, removes any
    * current actor.
    */
-  public <A extends Actor> Cell<A> setActor(@Null A newActor) {
+  public <A extends Actor> Cell<A> setActor(@Nullable @Null A newActor) {
     if (actor != newActor) {
       if (actor != null && actor.getParent() == table) actor.remove();
       actor = newActor;
@@ -878,15 +879,15 @@ public class Cell<T extends Actor> implements Poolable {
     return padTop.get(actor) + padBottom.get(actor);
   }
 
-  public @Null Float getFillX() {
+  @Nullable public @Null Float getFillX() {
     return fillX;
   }
 
-  public @Null Float getFillY() {
+  @Nullable public @Null Float getFillY() {
     return fillY;
   }
 
-  public @Null Integer getAlign() {
+  @Nullable public @Null Integer getAlign() {
     return align;
   }
 
@@ -902,11 +903,11 @@ public class Cell<T extends Actor> implements Poolable {
     return colspan;
   }
 
-  public @Null Boolean getUniformX() {
+  @Nullable public @Null Boolean getUniformX() {
     return uniformX;
   }
 
-  public @Null Boolean getUniformY() {
+  @Nullable public @Null Boolean getUniformY() {
     return uniformY;
   }
 
@@ -981,7 +982,7 @@ public class Cell<T extends Actor> implements Poolable {
     set(defaults());
   }
 
-  void set(Cell cell) {
+  void set(@Nullable Cell cell) {
     minWidth = cell.minWidth;
     minHeight = cell.minHeight;
     prefWidth = cell.prefWidth;
@@ -1006,7 +1007,7 @@ public class Cell<T extends Actor> implements Poolable {
     uniformY = cell.uniformY;
   }
 
-  void merge(@Null Cell cell) {
+  void merge(@Nullable @Null Cell cell) {
     if (cell == null) return;
     if (cell.minWidth != null) minWidth = cell.minWidth;
     if (cell.minHeight != null) minHeight = cell.minHeight;
@@ -1040,7 +1041,7 @@ public class Cell<T extends Actor> implements Poolable {
    * Returns the defaults to use for all cells. This can be used to avoid needing to set the same
    * defaults for every table (eg, for spacing).
    */
-  public static Cell defaults() {
+  @Nullable public static Cell defaults() {
     if (files == null || files != Gdx.files) {
       files = Gdx.files;
       defaults = new Cell();

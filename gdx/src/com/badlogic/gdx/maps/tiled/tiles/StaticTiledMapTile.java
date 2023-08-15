@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import javax.annotation.Nullable;
 
 /** @brief Represents a non changing {@link TiledMapTile} (can be cached) */
 public class StaticTiledMapTile implements TiledMapTile {
@@ -28,9 +29,9 @@ public class StaticTiledMapTile implements TiledMapTile {
 
   private BlendMode blendMode = BlendMode.ALPHA;
 
-  private MapProperties properties;
+  @Nullable private MapProperties properties;
 
-  private MapObjects objects;
+  @Nullable private MapObjects objects;
 
   private TextureRegion textureRegion;
 

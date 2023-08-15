@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /**
  * An on-screen joystick. The movement area of the joystick is circular, centered on the touchpad,
@@ -149,7 +150,7 @@ public class Touchpad extends Widget {
     return style;
   }
 
-  public Actor hit(float x, float y, boolean touchable) {
+  @Nullable public Actor hit(float x, float y, boolean touchable) {
     if (touchable && this.getTouchable() != Touchable.enabled) return null;
     if (!isVisible()) return null;
     return touchBounds.contains(x, y) ? this : null;
@@ -262,9 +263,9 @@ public class Touchpad extends Widget {
    */
   public static class TouchpadStyle {
     /** Stretched in both directions. */
-    public @Null Drawable background;
+    @Nullable public @Null Drawable background;
 
-    public @Null Drawable knob;
+    @Nullable public @Null Drawable knob;
 
     public TouchpadStyle() {}
 

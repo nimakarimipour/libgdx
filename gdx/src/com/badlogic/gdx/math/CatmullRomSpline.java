@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import javax.annotation.Nullable;
 
 /** @author Xoppa */
 public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {

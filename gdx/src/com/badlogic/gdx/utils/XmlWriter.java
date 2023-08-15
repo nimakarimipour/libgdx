@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils;
 
 import java.io.IOException;
 import java.io.Writer;
+import javax.annotation.Nullable;
 
 // @off
 /**
@@ -45,7 +46,7 @@ import java.io.Writer;
 public class XmlWriter extends Writer {
   private final Writer writer;
   private final Array<String> stack = new Array();
-  private String currentElement;
+  @Nullable private String currentElement;
   private boolean indentNextClose;
 
   public int indent;

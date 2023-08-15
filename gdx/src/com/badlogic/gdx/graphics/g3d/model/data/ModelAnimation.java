@@ -17,8 +17,9 @@
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class ModelAnimation {
-  public String id;
+  @Nullable public String id;
   public Array<ModelNodeAnimation> nodeAnimations = new Array<ModelNodeAnimation>();
 }

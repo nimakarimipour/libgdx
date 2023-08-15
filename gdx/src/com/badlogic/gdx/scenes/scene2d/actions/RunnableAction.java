@@ -18,6 +18,7 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * An action that runs a {@link Runnable}. Alternatively, the {@link #run()} method can be
@@ -26,7 +27,7 @@ import com.badlogic.gdx.utils.Pool;
  * @author Nathan Sweet
  */
 public class RunnableAction extends Action {
-  private Runnable runnable;
+  @Nullable private Runnable runnable;
   private boolean ran;
 
   public boolean act(float delta) {
@@ -57,7 +58,7 @@ public class RunnableAction extends Action {
     runnable = null;
   }
 
-  public Runnable getRunnable() {
+  @Nullable public Runnable getRunnable() {
     return runnable;
   }
 

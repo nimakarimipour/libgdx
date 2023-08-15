@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles.renderers;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
+import javax.annotation.Nullable;
 
 /**
  * It's a {@link ParticleControllerComponent} which determines how the particles are rendered. It's
@@ -29,7 +30,7 @@ import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 public abstract class ParticleControllerRenderer<
         D extends ParticleControllerRenderData, T extends ParticleBatch<D>>
     extends ParticleControllerComponent {
-  protected T batch;
+  @Nullable protected T batch;
   protected D renderData;
 
   protected ParticleControllerRenderer() {}
@@ -44,7 +45,7 @@ public abstract class ParticleControllerRenderer<
   }
 
   @SuppressWarnings("unchecked")
-  public boolean setBatch(ParticleBatch<?> batch) {
+  public boolean setBatch(@Nullable ParticleBatch<?> batch) {
     if (isCompatible(batch)) {
       this.batch = (T) batch;
       return true;
@@ -52,7 +53,7 @@ public abstract class ParticleControllerRenderer<
     return false;
   }
 
-  public abstract boolean isCompatible(ParticleBatch<?> batch);
+  public abstract boolean isCompatible(@Nullable ParticleBatch<?> batch);
 
   @Override
   public void set(ParticleController particleController) {

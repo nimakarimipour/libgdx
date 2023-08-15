@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * A {@link ObjectSet} that also stores keys in an {@link Array} using the insertion order. Null
@@ -49,7 +50,7 @@ import java.util.NoSuchElementException;
  */
 public class OrderedSet<T> extends ObjectSet<T> {
   final Array<T> items;
-  transient OrderedSetIterator iterator1, iterator2;
+  @Nullable transient OrderedSetIterator iterator1, iterator2;
 
   public OrderedSet() {
     items = new Array();

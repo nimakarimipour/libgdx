@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
+import javax.annotation.Nullable;
 
 /**
  * This class represents an group of elements like an array, but the properties of the elements are
@@ -206,7 +207,7 @@ public class ParallelArray {
    * new channel is allocated and initialized with the initializer.
    */
   public <T extends Channel> T addChannel(
-      ChannelDescriptor channelDescriptor, ChannelInitializer<T> initializer) {
+      ChannelDescriptor channelDescriptor, @Nullable ChannelInitializer<T> initializer) {
     T channel = getChannel(channelDescriptor);
     if (channel == null) {
       channel = allocateChannel(channelDescriptor);

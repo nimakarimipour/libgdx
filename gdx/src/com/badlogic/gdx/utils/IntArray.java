@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.math.MathUtils;
 import java.util.Arrays;
+import javax.annotation.Nullable;
 
 /**
  * A resizable, ordered or unordered int array. Avoids the boxing that occurs with

@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import javax.annotation.Nullable;
 
 /**
  * A {@link VertexData} implementation based on OpenGL vertex buffer objects.
@@ -135,7 +136,7 @@ public class VertexBufferObject implements VertexData {
   }
 
   @Override
-  public void setVertices(float[] vertices, int offset, int count) {
+  public void setVertices(@Nullable float[] vertices, int offset, int count) {
     isDirty = true;
     BufferUtils.copy(vertices, byteBuffer, count, offset);
     ((Buffer) buffer).position(0);
@@ -182,7 +183,7 @@ public class VertexBufferObject implements VertexData {
   }
 
   @Override
-  public void bind(ShaderProgram shader, int[] locations) {
+  public void bind(ShaderProgram shader, @Nullable int[] locations) {
     final GL20 gl = Gdx.gl20;
 
     gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
@@ -239,7 +240,7 @@ public class VertexBufferObject implements VertexData {
   }
 
   @Override
-  public void unbind(final ShaderProgram shader, final int[] locations) {
+  public void unbind(final ShaderProgram shader, @Nullable final int[] locations) {
     final GL20 gl = Gdx.gl20;
     final int numAttributes = attributes.size();
     if (locations == null) {

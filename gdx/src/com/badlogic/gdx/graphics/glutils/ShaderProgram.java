@@ -36,6 +36,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import javax.annotation.Nullable;
 
 /**
  * A shader program encapsulates a vertex and fragment shader pair linked to form a shader program.
@@ -108,7 +109,7 @@ public class ShaderProgram implements Disposable {
   private final ObjectIntMap<String> uniformSizes = new ObjectIntMap<String>();
 
   /** uniform names * */
-  private String[] uniformNames;
+  @Nullable private String[] uniformNames;
 
   /** attribute lookup * */
   private final ObjectIntMap<String> attributes = new ObjectIntMap<String>();
@@ -120,7 +121,7 @@ public class ShaderProgram implements Disposable {
   private final ObjectIntMap<String> attributeSizes = new ObjectIntMap<String>();
 
   /** attribute names * */
-  private String[] attributeNames;
+  @Nullable private String[] attributeNames;
 
   /** program handle * */
   private int program;
@@ -984,12 +985,12 @@ public class ShaderProgram implements Disposable {
   }
 
   /** @return the attributes */
-  public String[] getAttributes() {
+  @Nullable public String[] getAttributes() {
     return attributeNames;
   }
 
   /** @return the uniforms */
-  public String[] getUniforms() {
+  @Nullable public String[] getUniforms() {
     return uniformNames;
   }
 

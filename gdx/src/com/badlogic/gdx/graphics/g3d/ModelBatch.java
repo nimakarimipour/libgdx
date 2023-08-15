@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * Batches {@link Renderable} instances, fetches {@link Shader}s for them, sorts them and then
@@ -64,7 +65,7 @@ public class ModelBatch implements Disposable {
     }
   }
 
-  protected Camera camera;
+  @Nullable protected Camera camera;
   protected final RenderablePool renderablesPool = new RenderablePool();
   /** list of Renderables to be rendered in the current batch * */
   protected final Array<Renderable> renderables = new Array<Renderable>();
@@ -87,9 +88,9 @@ public class ModelBatch implements Disposable {
    * @param sorter The {@link RenderableSorter} to use.
    */
   public ModelBatch(
-      final RenderContext context,
-      final ShaderProvider shaderProvider,
-      final RenderableSorter sorter) {
+      @Nullable final RenderContext context,
+      @Nullable final ShaderProvider shaderProvider,
+      @Nullable final RenderableSorter sorter) {
     this.sorter = (sorter == null) ? new DefaultRenderableSorter() : sorter;
     this.ownContext = (context == null);
     this.context =

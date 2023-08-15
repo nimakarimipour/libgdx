@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
+import javax.annotation.Nullable;
 
 /**
  * This class handles the assets and configurations required by a given resource when de/serialized.
@@ -91,7 +92,7 @@ public class ResourceData<T> implements Json.Serializable {
       data.put(key, value);
     }
 
-    public AssetDescriptor loadAsset() {
+    @Nullable public AssetDescriptor loadAsset() {
       if (loadIndex == assets.size) return null;
       AssetData data = (AssetData) resources.sharedAssets.get(assets.get(loadIndex++));
       return new AssetDescriptor(data.filename, data.type);
@@ -158,7 +159,7 @@ public class ResourceData<T> implements Json.Serializable {
   Array<AssetData> sharedAssets;
 
   private int currentLoadIndex;
-  public T resource;
+  @Nullable public T resource;
 
   public ResourceData() {
     uniqueData = new ObjectMap<String, SaveData>();

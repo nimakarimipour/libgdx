@@ -55,6 +55,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import java.nio.Buffer;
+import javax.annotation.Nullable;
 
 /**
  * A model represents a 3D assets. It stores a hierarchy of nodes. A node has a transform and
@@ -447,7 +448,7 @@ public class Model implements Disposable {
    * @param id The ID of the animation to fetch (case sensitive).
    * @return The {@link Animation} with the specified id, or null if not available.
    */
-  public Animation getAnimation(final String id) {
+  @Nullable public Animation getAnimation(final String id) {
     return getAnimation(id, true);
   }
 
@@ -456,7 +457,7 @@ public class Model implements Disposable {
    * @param ignoreCase whether to use case sensitivity when comparing the animation id.
    * @return The {@link Animation} with the specified id, or null if not available.
    */
-  public Animation getAnimation(final String id, boolean ignoreCase) {
+  @Nullable public Animation getAnimation(final String id, boolean ignoreCase) {
     final int n = animations.size;
     Animation animation;
     if (ignoreCase) {
@@ -473,7 +474,7 @@ public class Model implements Disposable {
    * @param id The ID of the material to fetch.
    * @return The {@link Material} with the specified id, or null if not available.
    */
-  public Material getMaterial(final String id) {
+  @Nullable public Material getMaterial(final String id) {
     return getMaterial(id, true);
   }
 
@@ -482,7 +483,7 @@ public class Model implements Disposable {
    * @param ignoreCase whether to use case sensitivity when comparing the material id.
    * @return The {@link Material} with the specified id, or null if not available.
    */
-  public Material getMaterial(final String id, boolean ignoreCase) {
+  @Nullable public Material getMaterial(final String id, boolean ignoreCase) {
     final int n = materials.size;
     Material material;
     if (ignoreCase) {
@@ -498,7 +499,7 @@ public class Model implements Disposable {
    * @param id The ID of the node to fetch.
    * @return The {@link Node} with the specified id, or null if not found.
    */
-  public Node getNode(final String id) {
+  @Nullable public Node getNode(@Nullable final String id) {
     return getNode(id, true);
   }
 
@@ -508,7 +509,7 @@ public class Model implements Disposable {
    *     specified node.
    * @return The {@link Node} with the specified id, or null if not found.
    */
-  public Node getNode(final String id, boolean recursive) {
+  @Nullable public Node getNode(@Nullable final String id, boolean recursive) {
     return getNode(id, recursive, false);
   }
 
@@ -519,7 +520,7 @@ public class Model implements Disposable {
    * @param ignoreCase whether to use case sensitivity when comparing the node id.
    * @return The {@link Node} with the specified id, or null if not found.
    */
-  public Node getNode(final String id, boolean recursive, boolean ignoreCase) {
+  @Nullable public Node getNode(@Nullable final String id, boolean recursive, boolean ignoreCase) {
     return Node.getNode(nodes, id, recursive, ignoreCase);
   }
 }

@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class Material extends Attributes {
   private static int counter = 0;
@@ -34,7 +35,7 @@ public class Material extends Attributes {
   }
 
   /** Create a material with the specified attributes */
-  public Material(final Attribute... attributes) {
+  public Material(@Nullable final Attribute... attributes) {
     this();
     set(attributes);
   }

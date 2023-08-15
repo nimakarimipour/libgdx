@@ -21,6 +21,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An unordered map where the keys and values are objects. Null keys are not allowed. No allocation
@@ -150,7 +151,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
    * This can be overridden in this pacakge to compare for equality differently than {@link
    * Object#equals(Object)}.
    */
-  int locateKey(K key) {
+  int locateKey(@Nullable K key) {
     if (key == null) throw new IllegalArgumentException("key cannot be null.");
     K[] keyTable = this.keyTable;
     for (int i = place(key); ; i = i + 1 & mask) {
@@ -161,7 +162,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
   }
 
   /** Returns the old value associated with the specified key, or null. */
-  public @Null V put(K key, @Null V value) {
+  @Nullable public @Null V put(@Nullable K key, @Nullable @Null V value) {
     int i = locateKey(key);
     if (i >= 0) { // Existing key was found.
       V oldValue = valueTable[i];
@@ -205,13 +206,13 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
   }
 
   /** Returns the value for the specified key, or the default value if the key is not in the map. */
-  public V get(K key, @Null V defaultValue) {
+  @Nullable public V get(K key, @Nullable @Null V defaultValue) {
     int i = locateKey(key);
     return i < 0 ? defaultValue : valueTable[i];
   }
 
   /** Returns the value for the removed key, or null if the key is not in the map. */
-  public @Null V remove(K key) {
+  @Nullable public @Null V remove(K key) {
     int i = locateKey(key);
     if (i < 0) return null;
     K[] keyTable = this.keyTable;
@@ -308,7 +309,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
    * @param identity If true, uses == to compare the specified value with values in the map. If
    *     false, uses {@link #equals(Object)}.
    */
-  public @Null K findKey(@Null Object value, boolean identity) {
+  @Nullable public @Null K findKey(@Null Object value, boolean identity) {
     V[] valueTable = this.valueTable;
     if (value == null) {
       K[] keyTable = this.keyTable;

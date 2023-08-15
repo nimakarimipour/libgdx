@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ObjectMap;
+import javax.annotation.Nullable;
 
 /**
  * Resolves an image by a string, wrapper around a Map or AssetManager to load maps either directly

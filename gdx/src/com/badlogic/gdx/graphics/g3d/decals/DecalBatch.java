@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SortedIntList;
+import javax.annotation.Nullable;
 
 /**
  * Renderer for {@link Decal} objects.
@@ -176,7 +177,7 @@ public class DecalBatch implements Disposable {
    *
    * @param decals Decals to render
    */
-  private void render(ShaderProgram shader, Array<Decal> decals) {
+  private void render(@Nullable ShaderProgram shader, Array<Decal> decals) {
     // batch vertices
     DecalMaterial lastMaterial = null;
     int idx = 0;
@@ -209,7 +210,7 @@ public class DecalBatch implements Disposable {
    *
    * @param verticesPosition Amount of elements from the vertices array to flush
    */
-  protected void flush(ShaderProgram shader, int verticesPosition) {
+  protected void flush(@Nullable ShaderProgram shader, int verticesPosition) {
     mesh.setVertices(vertices, 0, verticesPosition);
     mesh.render(shader, GL20.GL_TRIANGLES, 0, verticesPosition / 4);
   }

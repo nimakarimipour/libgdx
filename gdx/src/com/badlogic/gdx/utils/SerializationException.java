@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+import javax.annotation.Nullable;
 
 /**
  * Indicates an error during serialization due to misconfiguration or during deserialization due to
@@ -23,13 +24,13 @@ package com.badlogic.gdx.utils;
  * @author Nathan Sweet
  */
 public class SerializationException extends RuntimeException {
-  private StringBuilder trace;
+  @Nullable private StringBuilder trace;
 
   public SerializationException() {
     super();
   }
 
-  public SerializationException(String message, Throwable cause) {
+  public SerializationException(String message, @Nullable Throwable cause) {
     super(message, cause);
   }
 
@@ -53,7 +54,7 @@ public class SerializationException extends RuntimeException {
     return causedBy(cause, type);
   }
 
-  public String getMessage() {
+  @Nullable public String getMessage() {
     if (trace == null) return super.getMessage();
     StringBuilder sb = new StringBuilder(512);
     sb.append(super.getMessage());

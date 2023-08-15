@@ -20,6 +20,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /**
  * @brief Represents a tiled map, adds the concept of tiles and tilesets.
@@ -27,7 +28,7 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public class TiledMap extends Map {
   private TiledMapTileSets tilesets;
-  private Array<? extends Disposable> ownedResources;
+  @Nullable private Array<? extends Disposable> ownedResources;
 
   /** @return collection of tilesets for this map. */
   public TiledMapTileSets getTileSets() {

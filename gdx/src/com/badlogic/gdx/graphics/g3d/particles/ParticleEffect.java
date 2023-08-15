@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /**
  * It's a set of particles controllers. It can be updated, rendered, transformed which means the
@@ -33,7 +34,7 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public class ParticleEffect implements Disposable, ResourceData.Configurable {
   private Array<ParticleController> controllers;
-  private BoundingBox bounds;
+  @Nullable private BoundingBox bounds;
 
   public ParticleEffect() {
     controllers = new Array<ParticleController>(true, 3, ParticleController.class);
@@ -131,7 +132,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
   }
 
   /** Returns the controller with the specified name, or null. */
-  public ParticleController findController(String name) {
+  @Nullable public ParticleController findController(String name) {
     for (int i = 0, n = controllers.size; i < n; i++) {
       ParticleController emitter = controllers.get(i);
       if (emitter.name.equals(name)) return emitter;

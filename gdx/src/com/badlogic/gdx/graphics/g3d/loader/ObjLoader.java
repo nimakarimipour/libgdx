@@ -43,6 +43,7 @@ import com.badlogic.gdx.utils.FloatArray;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import javax.annotation.Nullable;
 
 /**
  * {@link ModelLoader} to load Wavefront OBJ files. Only intended for testing basic models/meshes
@@ -88,7 +89,7 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
     this(null);
   }
 
-  public ObjLoader(FileHandleResolver resolver) {
+  public ObjLoader(@Nullable FileHandleResolver resolver) {
     super(resolver);
   }
 
@@ -96,16 +97,16 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
    * Directly load the model on the calling thread. The model with not be managed by an {@link
    * AssetManager}.
    */
-  public Model loadModel(final FileHandle fileHandle, boolean flipV) {
+  @Nullable public Model loadModel(final FileHandle fileHandle, boolean flipV) {
     return loadModel(fileHandle, new ObjLoaderParameters(flipV));
   }
 
-  @Override
-  public ModelData loadModelData(FileHandle file, ObjLoaderParameters parameters) {
+  @Nullable @Override
+  public ModelData loadModelData(FileHandle file, @Nullable ObjLoaderParameters parameters) {
     return loadModelData(file, parameters != null && parameters.flipV);
   }
 
-  protected ModelData loadModelData(FileHandle file, boolean flipV) {
+  @Nullable protected ModelData loadModelData(FileHandle file, boolean flipV) {
     if (logWarning)
       Gdx.app.error(
           "ObjLoader",
@@ -427,16 +428,16 @@ class MtlLoader {
 
   private static class ObjMaterial {
     String materialName = "default";
-    Color ambientColor;
-    Color diffuseColor;
-    Color specularColor;
+    @Nullable Color ambientColor;
+    @Nullable Color diffuseColor;
+    @Nullable Color specularColor;
     float opacity;
     float shininess;
-    String alphaTexFilename;
-    String ambientTexFilename;
-    String diffuseTexFilename;
-    String shininessTexFilename;
-    String specularTexFilename;
+    @Nullable String alphaTexFilename;
+    @Nullable String ambientTexFilename;
+    @Nullable String diffuseTexFilename;
+    @Nullable String shininessTexFilename;
+    @Nullable String specularTexFilename;
 
     public ObjMaterial() {
       reset();
@@ -459,7 +460,7 @@ class MtlLoader {
       return mat;
     }
 
-    private void addTexture(ModelMaterial mat, String texFilename, int usage) {
+    private void addTexture(ModelMaterial mat, @Nullable String texFilename, int usage) {
       if (texFilename != null) {
         ModelTexture tex = new ModelTexture();
         tex.usage = usage;

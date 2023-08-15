@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 /**
  * Base class for applying one or more {@link Animation}s to a {@link ModelInstance}. This class
@@ -307,8 +308,8 @@ public class BaseAnimationController {
    * bones.
    */
   protected static void applyAnimation(
-      final ObjectMap<Node, Transform> out,
-      final Pool<Transform> pool,
+      @Nullable final ObjectMap<Node, Transform> out,
+      @Nullable final Pool<Transform> pool,
       final float alpha,
       final Animation animation,
       final float time) {

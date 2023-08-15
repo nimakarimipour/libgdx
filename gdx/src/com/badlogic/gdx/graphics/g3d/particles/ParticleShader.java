@@ -36,6 +36,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * This is a custom shader to render the particles. Usually is not required, because the {@link
@@ -57,9 +58,9 @@ public class ParticleShader extends BaseShader {
 
   public static class Config {
     /** The uber vertex shader to use, null to use the default vertex shader. */
-    public String vertexShader = null;
+    @Nullable public String vertexShader = null;
     /** The uber fragment shader to use, null to use the default fragment shader. */
-    public String fragmentShader = null;
+    @Nullable public String fragmentShader = null;
 
     public boolean ignoreUnimplemented = true;
     /** Set to 0 to disable culling */
@@ -67,7 +68,7 @@ public class ParticleShader extends BaseShader {
     /** Set to 0 to disable depth test */
     public int defaultDepthFunc = -1;
 
-    public AlignMode align = AlignMode.Screen;
+    @Nullable public AlignMode align = AlignMode.Screen;
     public ParticleType type = ParticleType.Billboard;
 
     public Config() {}
@@ -77,7 +78,7 @@ public class ParticleShader extends BaseShader {
       this.type = type;
     }
 
-    public Config(AlignMode align) {
+    public Config(@Nullable AlignMode align) {
       this.align = align;
     }
 
@@ -91,7 +92,7 @@ public class ParticleShader extends BaseShader {
     }
   }
 
-  private static String defaultVertexShader = null;
+  @Nullable private static String defaultVertexShader = null;
 
   public static String getDefaultVertexShader() {
     if (defaultVertexShader == null)
@@ -102,7 +103,7 @@ public class ParticleShader extends BaseShader {
     return defaultVertexShader;
   }
 
-  private static String defaultFragmentShader = null;
+  @Nullable private static String defaultFragmentShader = null;
 
   public static String getDefaultFragmentShader() {
     if (defaultFragmentShader == null)
@@ -236,7 +237,7 @@ public class ParticleShader extends BaseShader {
   }
 
   /** The renderable used to create this shader, invalid after the call to init */
-  private Renderable renderable;
+  @Nullable private Renderable renderable;
 
   private long materialMask;
   private long vertexMask;
@@ -358,7 +359,7 @@ public class ParticleShader extends BaseShader {
     super.end();
   }
 
-  Material currentMaterial;
+  @Nullable Material currentMaterial;
 
   protected void bindMaterial(final Renderable renderable) {
     if (currentMaterial == renderable.material) return;

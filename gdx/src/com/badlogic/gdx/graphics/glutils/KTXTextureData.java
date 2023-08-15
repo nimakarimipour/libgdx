@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.zip.GZIPInputStream;
+import javax.annotation.Nullable;
 
 /**
  * A KTXTextureData holds the data from a KTX (or zipped KTX file, aka ZKTX). That is to say an
@@ -51,7 +52,7 @@ public class KTXTextureData implements TextureData, CubemapData {
   private int imagePos;
 
   // KTX image data (only available after preparing and before consuming)
-  private ByteBuffer compressedData;
+  @Nullable private ByteBuffer compressedData;
 
   // Whether to generate mipmaps if they are not included in the file
   private boolean useMipMaps;
@@ -364,7 +365,7 @@ public class KTXTextureData implements TextureData, CubemapData {
     return glInternalFormat;
   }
 
-  public ByteBuffer getData(int requestedLevel, int requestedFace) {
+  @Nullable public ByteBuffer getData(int requestedLevel, int requestedFace) {
     int pos = imagePos;
     for (int level = 0; level < numberOfMipmapLevels; level++) {
       int faceLodSize = compressedData.getInt(pos);

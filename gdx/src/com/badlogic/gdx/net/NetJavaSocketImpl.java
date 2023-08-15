@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import javax.annotation.Nullable;
 
 /**
  * Socket implementation using java.net.Socket.

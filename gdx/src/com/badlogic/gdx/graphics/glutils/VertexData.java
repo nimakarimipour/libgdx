@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.glutils;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.Disposable;
 import java.nio.FloatBuffer;
+import javax.annotation.Nullable;
 
 /**
  * A VertexData instance holds vertices for rendering with OpenGL. It is implemented as either a
@@ -49,7 +50,7 @@ public interface VertexData extends Disposable {
    * @param offset the offset to start copying the data from
    * @param count the number of floats to copy
    */
-  public void setVertices(float[] vertices, int offset, int count);
+  public void setVertices(@Nullable float[] vertices, int offset, int count);
 
   /**
    * Update (a portion of) the vertices. Does not resize the backing buffer.
@@ -78,7 +79,7 @@ public interface VertexData extends Disposable {
    *
    * @param locations array containing the attribute locations.
    */
-  public void bind(ShaderProgram shader, int[] locations);
+  public void bind(ShaderProgram shader, @Nullable int[] locations);
 
   /** Unbinds this VertexData. */
   public void unbind(ShaderProgram shader);
@@ -88,7 +89,7 @@ public interface VertexData extends Disposable {
    *
    * @param locations array containing the attribute locations.
    */
-  public void unbind(ShaderProgram shader, int[] locations);
+  public void unbind(ShaderProgram shader, @Nullable int[] locations);
 
   /** Invalidates the VertexData if applicable. Use this in case of a context loss. */
   public void invalidate();

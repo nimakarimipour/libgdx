@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils.compression.rangecoder;
 
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 public class Decoder {
   static final int kTopMask = ~((1 << 24) - 1);

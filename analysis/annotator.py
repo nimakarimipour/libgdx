@@ -3,7 +3,8 @@ import os
 import shutil
 from pathlib import Path
 
-ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/1.3.7-SNAPSHOT/annotator-core-1.3.7-SNAPSHOT.jar".format(str(Path.home()))
+VERSION = '1.3.6-alpha-5'
+ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/annotator-core-{}.jar".format(str(Path.home()), VERSION, VERSION)
 REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
 
 
@@ -23,7 +24,11 @@ def run_annotator():
     commands += ['-cp', '/tmp/annotator/paths.tsv']
     commands += ['-i', 'com.uber.nullaway.annotations.Initializer']
     commands += ['-n', 'javax.annotation.Nullable']
-    commands += ['-cn', 'NULLAWAY']
+    # Comment to enable fix impact cache
+    commands += ['-dfc']
+    # commands += ['-dc']
+    # commands += ['-cn', 'NULLAWAY']
+    commands += ["--depth", "7"]
     # Uncomment to see build output
     # commands += ['-rboserr']
 

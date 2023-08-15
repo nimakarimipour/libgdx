@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * {@link AssetLoader} for {@link BitmapFont} instances. Loads the font description file (.fnt)
@@ -49,7 +50,7 @@ public class BitmapFontLoader
 
   @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, BitmapFontParameter parameter) {
+      String fileName, FileHandle file, @Nullable BitmapFontParameter parameter) {
     Array<AssetDescriptor> deps = new Array();
     if (parameter != null && parameter.bitmapFontData != null) {
       data = parameter.bitmapFontData;
@@ -82,11 +83,11 @@ public class BitmapFontLoader
 
   @Override
   public void loadAsync(
-      AssetManager manager, String fileName, FileHandle file, BitmapFontParameter parameter) {}
+      AssetManager manager, String fileName, FileHandle file, @Nullable BitmapFontParameter parameter) {}
 
   @Override
   public BitmapFont loadSync(
-      AssetManager manager, String fileName, FileHandle file, BitmapFontParameter parameter) {
+      AssetManager manager, String fileName, FileHandle file, @Nullable BitmapFontParameter parameter) {
     if (parameter != null && parameter.atlasName != null) {
       TextureAtlas atlas = manager.get(parameter.atlasName, TextureAtlas.class);
       String name = file.sibling(data.imagePaths[0]).nameWithoutExtension().toString();
@@ -135,12 +136,12 @@ public class BitmapFontLoader
      * optional {@link BitmapFontData} to be used instead of loading the {@link Texture} directly.
      * Use this if your font is embedded in a {@link Skin}. *
      */
-    public BitmapFontData bitmapFontData = null;
+    @Nullable public BitmapFontData bitmapFontData = null;
 
     /**
      * The name of the {@link TextureAtlas} to load the {@link BitmapFont} itself from. Optional; if
      * {@code null}, will look for a separate image
      */
-    public String atlasName = null;
+    @Nullable public String atlasName = null;
   }
 }

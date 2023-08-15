@@ -44,6 +44,7 @@ import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * A Mesh holds vertices composed of attributes specified by a {@link VertexAttributes} instance.
@@ -81,7 +82,7 @@ public class Mesh implements Disposable {
   boolean autoBind = true;
   final boolean isVertexArray;
 
-  InstanceData instances;
+  @Nullable InstanceData instances;
   boolean isInstanced = false;
 
   protected Mesh(VertexData vertices, IndexData indices, boolean isVertexArray) {
@@ -387,7 +388,7 @@ public class Mesh implements Disposable {
    * @param count the number of floats to use
    * @return the mesh for invocation chaining.
    */
-  public Mesh setVertices(float[] vertices, int offset, int count) {
+  public Mesh setVertices(@Nullable float[] vertices, int offset, int count) {
     this.vertices.setVertices(vertices, offset, count);
 
     return this;
@@ -618,7 +619,7 @@ public class Mesh implements Disposable {
    * @param shader the shader (does not bind the shader)
    * @param locations array containing the attribute locations.
    */
-  public void bind(final ShaderProgram shader, final int[] locations) {
+  public void bind(final ShaderProgram shader, @Nullable final int[] locations) {
     vertices.bind(shader, locations);
     if (instances != null && instances.getNumInstances() > 0) instances.bind(shader, locations);
     if (indices.getNumIndices() > 0) indices.bind();
@@ -641,7 +642,7 @@ public class Mesh implements Disposable {
    * @param shader the shader (does not unbind the shader)
    * @param locations array containing the attribute locations.
    */
-  public void unbind(final ShaderProgram shader, final int[] locations) {
+  public void unbind(final ShaderProgram shader, @Nullable final int[] locations) {
     vertices.unbind(shader, locations);
     if (instances != null && instances.getNumInstances() > 0) instances.unbind(shader, locations);
     if (indices.getNumIndices() > 0) indices.unbind();
@@ -694,7 +695,7 @@ public class Mesh implements Disposable {
    * @param offset the offset into the vertex or index buffer
    * @param count number of vertices or indices to use
    */
-  public void render(ShaderProgram shader, int primitiveType, int offset, int count) {
+  public void render(@Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
     render(shader, primitiveType, offset, count, autoBind);
   }
 
@@ -906,7 +907,7 @@ public class Mesh implements Disposable {
    * @return the value specified by out.
    */
   public BoundingBox extendBoundingBox(
-      final BoundingBox out, int offset, int count, final Matrix4 transform) {
+      final BoundingBox out, int offset, int count, @Nullable final Matrix4 transform) {
     final int numIndices = getNumIndices();
     final int numVertices = getNumVertices();
     final int max = numIndices == 0 ? numVertices : numIndices;
@@ -994,7 +995,7 @@ public class Mesh implements Disposable {
       final float centerZ,
       int offset,
       int count,
-      final Matrix4 transform) {
+      @Nullable final Matrix4 transform) {
     int numIndices = getNumIndices();
     if (offset < 0 || count < 1 || offset + count > numIndices)
       throw new GdxRuntimeException("Not enough indices");
@@ -1057,7 +1058,7 @@ public class Mesh implements Disposable {
       final float centerZ,
       int offset,
       int count,
-      final Matrix4 transform) {
+      @Nullable final Matrix4 transform) {
     return (float)
         Math.sqrt(calculateRadiusSquared(centerX, centerY, centerZ, offset, count, transform));
   }
@@ -1388,7 +1389,7 @@ public class Mesh implements Disposable {
    * @param usage which attributes (if available) to copy
    * @return the copy of this mesh
    */
-  public Mesh copy(boolean isStatic, boolean removeDuplicates, final int[] usage) {
+  public Mesh copy(boolean isStatic, boolean removeDuplicates, @Nullable final int[] usage) {
     // TODO move this to a copy constructor?
     // TODO duplicate the buffers without double copying the data if possible.
     // TODO perhaps move this code to JNI if it turns out being too slow.

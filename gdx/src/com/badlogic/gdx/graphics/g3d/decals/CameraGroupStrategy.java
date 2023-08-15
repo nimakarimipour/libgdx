@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Pool;
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /**
  * Minimalistic grouping strategy that splits decals into opaque and transparent ones enabling and

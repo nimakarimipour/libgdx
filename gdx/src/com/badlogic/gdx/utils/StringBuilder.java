@@ -18,6 +18,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Arrays;
+import javax.annotation.Nullable;
 
 /**
  * A {@link java.lang.StringBuilder} that implements equals and hashcode.
@@ -168,7 +169,7 @@ public class StringBuilder implements Appendable, CharSequence {
     chars[length++] = ch;
   }
 
-  final void append0(String string) {
+  final void append0(@Nullable String string) {
     if (string == null) {
       appendNull();
       return;
@@ -1035,7 +1036,7 @@ public class StringBuilder implements Appendable, CharSequence {
    * @param str the string to append.
    * @return this builder.
    */
-  public StringBuilder append(String str) {
+  public StringBuilder append(@Nullable String str) {
     append0(str);
     return this;
   }

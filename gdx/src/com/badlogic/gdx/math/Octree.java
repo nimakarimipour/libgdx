@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * A static Octree implementation.
@@ -155,7 +156,7 @@ public class Octree<T> {
     return result;
   }
 
-  public T rayCast(Ray ray, RayCastResult<T> result) {
+  @Nullable public T rayCast(Ray ray, RayCastResult<T> result) {
     result.distance = result.maxDistanceSq;
     root.rayCast(ray, result);
     return result.geometry;
@@ -438,7 +439,7 @@ public class Octree<T> {
   }
 
   public static class RayCastResult<T> {
-    T geometry;
+    @Nullable T geometry;
     float distance;
     float maxDistanceSq = Float.MAX_VALUE;
   }

@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /**
  * ModelCache tries to combine multiple render calls into a single render call by merging them where
@@ -162,7 +163,7 @@ public class ModelCache implements Disposable, RenderableProvider {
    */
   public static class Sorter implements RenderableSorter, Comparator<Renderable> {
     @Override
-    public void sort(Camera camera, Array<Renderable> renderables) {
+    public void sort(@Nullable Camera camera, Array<Renderable> renderables) {
       renderables.sort(this);
     }
 
@@ -205,7 +206,7 @@ public class ModelCache implements Disposable, RenderableProvider {
   private boolean building;
   private RenderableSorter sorter;
   private MeshPool meshPool;
-  private Camera camera;
+  @Nullable private Camera camera;
 
   /**
    * Create a ModelCache using the default {@link Sorter} and the {@link SimpleMeshPool}
@@ -249,7 +250,7 @@ public class ModelCache implements Disposable, RenderableProvider {
    *
    * @param camera The {@link Camera} that will passed to the {@link RenderableSorter}
    */
-  public void begin(Camera camera) {
+  public void begin(@Nullable Camera camera) {
     if (building) throw new GdxRuntimeException("Call end() after calling begin()");
     building = true;
 

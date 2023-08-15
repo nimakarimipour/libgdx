@@ -36,6 +36,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.IntIntMap;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * @author Xoppa A BaseShader is a wrapper around a ShaderProgram that keeps track of the uniform
@@ -45,7 +47,7 @@ import com.badlogic.gdx.utils.IntIntMap;
 public abstract class BaseShader implements Shader {
   public interface Validator {
     /** @return True if the input is valid for the renderable, false otherwise. */
-    boolean validate(final BaseShader shader, final int inputID, final Renderable renderable);
+    boolean validate(final BaseShader shader, final int inputID, @Nullable final Renderable renderable);
   }
 
   public interface Setter {
@@ -106,7 +108,7 @@ public abstract class BaseShader implements Shader {
     }
 
     public boolean validate(
-        final BaseShader shader, final int inputID, final Renderable renderable) {
+        final BaseShader shader, final int inputID, @Nullable final Renderable renderable) {
       final long matFlags =
           (renderable != null && renderable.material != null) ? renderable.material.getMask() : 0;
       final long envFlags =
@@ -130,7 +132,7 @@ public abstract class BaseShader implements Shader {
   public ShaderProgram program;
   public RenderContext context;
   public Camera camera;
-  private Mesh currentMesh;
+  @Nullable private Mesh currentMesh;
 
   /**
    * Register an uniform which might be used by this shader. Only possible prior to the call to
@@ -138,7 +140,7 @@ public abstract class BaseShader implements Shader {
    *
    * @return The ID of the uniform to use in this shader.
    */
-  public int register(final String alias, final Validator validator, final Setter setter) {
+  public int register(final String alias, @Nullable final Validator validator, @Nullable final Setter setter) {
     if (locations != null)
       throw new GdxRuntimeException("Cannot register an uniform after initialization");
     final int existing = getUniformID(alias);
@@ -165,7 +167,7 @@ public abstract class BaseShader implements Shader {
     return register(alias, null, null);
   }
 
-  public int register(final Uniform uniform, final Setter setter) {
+  public int register(final Uniform uniform, @Nullable final Setter setter) {
     return register(uniform.alias, uniform, setter);
   }
 
@@ -186,7 +188,7 @@ public abstract class BaseShader implements Shader {
   }
 
   /** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
-  public void init(final ShaderProgram program, final Renderable renderable) {
+  @Initializer public void init(final ShaderProgram program, @Nullable final Renderable renderable) {
     if (locations != null) throw new GdxRuntimeException("Already initialized");
     if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
     this.program = program;

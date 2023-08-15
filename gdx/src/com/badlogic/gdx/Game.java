@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx;
+import javax.annotation.Nullable;
 
 /**
  * An {@link ApplicationListener} that delegates to a {@link Screen}. This allows an application to
@@ -24,7 +25,7 @@ package com.badlogic.gdx;
  * around or dispose of them when another screen is set.
  */
 public abstract class Game implements ApplicationListener {
-  protected Screen screen;
+  @Nullable protected Screen screen;
 
   @Override
   public void dispose() {
@@ -67,7 +68,7 @@ public abstract class Game implements ApplicationListener {
   }
 
   /** @return the currently active {@link Screen}. */
-  public Screen getScreen() {
+  @Nullable public Screen getScreen() {
     return screen;
   }
 }

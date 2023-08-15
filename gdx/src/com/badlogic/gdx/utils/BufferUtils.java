@@ -27,6 +27,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
+import javax.annotation.Nullable;
 
 /**
  * Class with static helper methods to increase the speed of array/direct buffer and direct
@@ -54,7 +55,7 @@ public final class BufferUtils {
    * @param numFloats the number of floats to copy
    * @param offset the offset in src to start copying from
    */
-  public static void copy(float[] src, Buffer dst, int numFloats, int offset) {
+  public static void copy(@Nullable float[] src, Buffer dst, int numFloats, int offset) {
     if (dst instanceof ByteBuffer) dst.limit(numFloats << 2);
     else if (dst instanceof FloatBuffer) dst.limit(numFloats);
 
@@ -667,7 +668,7 @@ public final class BufferUtils {
 		memset(buffer, 0, numBytes);
 	*/
 
-  private static native void copyJni(float[] src, Buffer dst, int numFloats, int offset); /*
+  private static native void copyJni(@Nullable float[] src, Buffer dst, int numFloats, int offset); /*
 		memcpy(dst, src + offset, numFloats << 2 );
 	*/
 

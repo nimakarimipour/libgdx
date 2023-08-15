@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.model.data;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * Returned by a {@link ModelLoader}, contains meshes, materials, nodes and animations. OpenGL
@@ -28,7 +29,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * @author badlogic
  */
 public class ModelData {
-  public String id;
+  @Nullable public String id;
   public final short version[] = new short[2];
   public final Array<ModelMesh> meshes = new Array<ModelMesh>();
   public final Array<ModelMaterial> materials = new Array<ModelMaterial>();

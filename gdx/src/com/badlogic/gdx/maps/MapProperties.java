@@ -18,6 +18,7 @@ package com.badlogic.gdx.maps;
 
 import com.badlogic.gdx.utils.ObjectMap;
 import java.util.Iterator;
+import javax.annotation.Nullable;
 
 /**
  * @brief Set of string indexed values representing map elements' properties, allowing to retrieve,
@@ -78,7 +79,7 @@ public class MapProperties {
    * @param key property name
    * @param value value to be inserted or modified (if it already existed)
    */
-  public void put(String key, Object value) {
+  public void put(@Nullable String key, Object value) {
     properties.put(key, value);
   }
 

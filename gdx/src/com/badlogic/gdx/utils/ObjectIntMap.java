@@ -21,6 +21,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An unordered map where the keys are objects and the values are unboxed ints. Null keys are not
@@ -316,7 +317,7 @@ public class ObjectIntMap<K> implements Iterable<ObjectIntMap.Entry<K>> {
    * Returns the key for the specified value, or null if it is not in the map. Note this traverses
    * the entire map and compares every value, which may be an expensive operation.
    */
-  public @Null K findKey(int value) {
+  @Nullable public @Null K findKey(int value) {
     K[] keyTable = this.keyTable;
     int[] valueTable = this.valueTable;
     for (int i = valueTable.length - 1; i >= 0; i--) {
@@ -499,7 +500,7 @@ public class ObjectIntMap<K> implements Iterable<ObjectIntMap.Entry<K>> {
   }
 
   public static class Entry<K> {
-    public K key;
+    @Nullable public K key;
     public int value;
 
     public String toString() {

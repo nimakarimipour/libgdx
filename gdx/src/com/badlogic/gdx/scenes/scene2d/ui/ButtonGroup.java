@@ -18,6 +18,7 @@ package com.badlogic.gdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /**
  * Manages a group of buttons to enforce a minimum and maximum number of checked buttons. This
@@ -33,7 +34,7 @@ public class ButtonGroup<T extends Button> {
   private Array<T> checkedButtons = new Array(1);
   private int minCheckCount, maxCheckCount = 1;
   private boolean uncheckLast = true;
-  private T lastChecked;
+  @Nullable private T lastChecked;
 
   public ButtonGroup() {
     minCheckCount = 1;
@@ -138,7 +139,7 @@ public class ButtonGroup<T extends Button> {
   }
 
   /** @return The first checked button, or null. */
-  public @Null T getChecked() {
+  @Nullable public @Null T getChecked() {
     if (checkedButtons.size > 0) return checkedButtons.get(0);
     return null;
   }

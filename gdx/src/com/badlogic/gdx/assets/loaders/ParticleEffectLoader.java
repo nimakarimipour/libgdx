@@ -23,6 +23,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * {@link AssetLoader} to load {@link ParticleEffect} instances. Passing a {@link
@@ -38,7 +39,7 @@ public class ParticleEffectLoader
 
   @Override
   public ParticleEffect load(
-      AssetManager am, String fileName, FileHandle file, ParticleEffectParameter param) {
+      AssetManager am, String fileName, FileHandle file, @Nullable ParticleEffectParameter param) {
     ParticleEffect effect = new ParticleEffect();
     if (param != null && param.atlasFile != null)
       effect.load(file, am.get(param.atlasFile, TextureAtlas.class), param.atlasPrefix);
@@ -47,9 +48,9 @@ public class ParticleEffectLoader
     return effect;
   }
 
-  @Override
+  @Nullable @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, ParticleEffectParameter param) {
+      String fileName, FileHandle file, @Nullable ParticleEffectParameter param) {
     Array<AssetDescriptor> deps = null;
     if (param != null && param.atlasFile != null) {
       deps = new Array();
@@ -64,10 +65,10 @@ public class ParticleEffectLoader
    */
   public static class ParticleEffectParameter extends AssetLoaderParameters<ParticleEffect> {
     /** Atlas file name. */
-    public String atlasFile;
+    @Nullable public String atlasFile;
     /** Optional prefix to image names * */
-    public String atlasPrefix;
+    @Nullable public String atlasPrefix;
     /** Image directory. */
-    public FileHandle imagesDir;
+    @Nullable public FileHandle imagesDir;
   }
 }

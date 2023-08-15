@@ -21,6 +21,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An unordered map where the keys are unboxed ints and values are unboxed floats. No allocation is
