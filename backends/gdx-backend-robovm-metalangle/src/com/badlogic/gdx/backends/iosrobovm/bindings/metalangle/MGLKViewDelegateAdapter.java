@@ -30,24 +30,25 @@ import org.robovm.rt.bro.annotation.ByVal;
 /*<annotations>*/
 /*</annotations>*/
 /*<visibility>*/ public /* </visibility> */ class /* <name> */ MGLKViewDelegateAdapter /* </name> */
-    extends /* <extends> */ NSObject /* </extends> */
-    /* <implements> */ implements MGLKViewDelegate /* </implements> */ {
+	extends /* <extends> */ NSObject /* </extends> */
+	/* <implements> */ implements MGLKViewDelegate /* </implements> */ {
 
-  /* <ptr> */
-  /* </ptr> */
-  /* <bind> */
-  /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <constructors> */
-  /* </constructors> */
-  /* <properties> */
+	/* <ptr> */
+	/* </ptr> */
+	/* <bind> */
+	/* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <constructors> */
+	/* </constructors> */
+	/* <properties> */
 
-  /* </properties> */
-  /* <members> */
-  /* </members> */
-  /* <methods> */
-  @NotImplemented("mglkView:drawInRect:")
-  public void draw(MGLKView view, @ByVal CGRect rect) {}
-  /* </methods> */
+	/* </properties> */
+	/* <members> */
+	/* </members> */
+	/* <methods> */
+	@NotImplemented("mglkView:drawInRect:")
+	public void draw (MGLKView view, @ByVal CGRect rect) {
+	}
+	/* </methods> */
 }

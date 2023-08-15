@@ -29,24 +29,25 @@ import org.robovm.objc.annotation.NotImplemented;
 /*</annotations>*/
 /*<visibility>*/ public /* </visibility> */
 class /* <name> */ MGLKViewControllerDelegateAdapter /* </name> */
-    extends /* <extends> */ NSObject /* </extends> */
-    /* <implements> */ implements MGLKViewControllerDelegate /* </implements> */ {
+	extends /* <extends> */ NSObject /* </extends> */
+	/* <implements> */ implements MGLKViewControllerDelegate /* </implements> */ {
 
-  /* <ptr> */
-  /* </ptr> */
-  /* <bind> */
-  /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <constructors> */
-  /* </constructors> */
-  /* <properties> */
+	/* <ptr> */
+	/* </ptr> */
+	/* <bind> */
+	/* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <constructors> */
+	/* </constructors> */
+	/* <properties> */
 
-  /* </properties> */
-  /* <members> */
-  /* </members> */
-  /* <methods> */
-  @NotImplemented("mglkViewControllerUpdate:")
-  public void update(MGLKViewController controller) {}
-  /* </methods> */
+	/* </properties> */
+	/* <members> */
+	/* </members> */
+	/* <methods> */
+	@NotImplemented("mglkViewControllerUpdate:")
+	public void update (MGLKViewController controller) {
+	}
+	/* </methods> */
 }
