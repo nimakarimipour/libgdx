@@ -26,7 +26,7 @@ import org.robovm.rt.bro.annotation.Library;
 @NativeClass
 public class ALBuffer extends NSObject {
 
-  static {
-    ObjCRuntime.bind(ALBuffer.class);
-  }
+	static {
+		ObjCRuntime.bind(ALBuffer.class);
+	}
 }

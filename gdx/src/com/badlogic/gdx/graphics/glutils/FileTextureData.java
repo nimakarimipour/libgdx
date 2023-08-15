@@ -26,99 +26,102 @@ import javax.annotation.Nullable;
 
 public class FileTextureData implements TextureData {
 
-  final FileHandle file;
-  int width = 0;
-  int height = 0;
-  @Nullable Format format;
-  @Nullable Pixmap pixmap;
-  boolean useMipMaps;
-  boolean isPrepared = false;
+	final FileHandle file;
+	int width = 0;
+	int height = 0;
+	@Nullable Format format;
+	@Nullable Pixmap pixmap;
+	boolean useMipMaps;
+	boolean isPrepared = false;
 
-  public FileTextureData(
-      FileHandle file, Pixmap preloadedPixmap, @Nullable Format format, boolean useMipMaps) {
-    this.file = file;
-    this.pixmap = preloadedPixmap;
-    this.format = format;
-    this.useMipMaps = useMipMaps;
-    if (pixmap != null) {
-      width = pixmap.getWidth();
-      height = pixmap.getHeight();
-      if (format == null) this.format = pixmap.getFormat();
-    }
-  }
+	public FileTextureData (FileHandle file, Pixmap preloadedPixmap, @Nullable Format format, boolean useMipMaps) {
+		this.file = file;
+		this.pixmap = preloadedPixmap;
+		this.format = format;
+		this.useMipMaps = useMipMaps;
+		if (pixmap != null) {
+			width = pixmap.getWidth();
+			height = pixmap.getHeight();
+			if (format == null) this.format = pixmap.getFormat();
+		}
+	}
 
-  @Override
-  public boolean isPrepared() {
-    return isPrepared;
-  }
+	@Override
+	public boolean isPrepared () {
+		return isPrepared;
+	}
 
-  @Override
-  public void prepare() {
-    if (isPrepared) throw new GdxRuntimeException("Already prepared");
-    if (pixmap == null) {
-      if (file.extension().equals("cim")) pixmap = PixmapIO.readCIM(file);
-      else pixmap = new Pixmap(file);
-      width = pixmap.getWidth();
-      height = pixmap.getHeight();
-      if (format == null) format = pixmap.getFormat();
-    }
-    isPrepared = true;
-  }
+	@Override
+	public void prepare () {
+		if (isPrepared) throw new GdxRuntimeException("Already prepared");
+		if (pixmap == null) {
+			if (file.extension().equals("cim"))
+				pixmap = PixmapIO.readCIM(file);
+			else
+				pixmap = new Pixmap(file);
+			width = pixmap.getWidth();
+			height = pixmap.getHeight();
+			if (format == null) format = pixmap.getFormat();
+		}
+		isPrepared = true;
+	}
 
-  @Nullable @Override
-  public Pixmap consumePixmap() {
-    if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling getPixmap()");
-    isPrepared = false;
-    Pixmap pixmap = this.pixmap;
-    this.pixmap = null;
-    return pixmap;
-  }
+	@Nullable
+	@Override
+	public Pixmap consumePixmap () {
+		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling getPixmap()");
+		isPrepared = false;
+		Pixmap pixmap = this.pixmap;
+		this.pixmap = null;
+		return pixmap;
+	}
 
-  @Override
-  public boolean disposePixmap() {
-    return true;
-  }
+	@Override
+	public boolean disposePixmap () {
+		return true;
+	}
 
-  @Override
-  public int getWidth() {
-    return width;
-  }
+	@Override
+	public int getWidth () {
+		return width;
+	}
 
-  @Override
-  public int getHeight() {
-    return height;
-  }
+	@Override
+	public int getHeight () {
+		return height;
+	}
 
-  @Nullable @Override
-  public Format getFormat() {
-    return format;
-  }
+	@Nullable
+	@Override
+	public Format getFormat () {
+		return format;
+	}
 
-  @Override
-  public boolean useMipMaps() {
-    return useMipMaps;
-  }
+	@Override
+	public boolean useMipMaps () {
+		return useMipMaps;
+	}
 
-  @Override
-  public boolean isManaged() {
-    return true;
-  }
+	@Override
+	public boolean isManaged () {
+		return true;
+	}
 
-  public FileHandle getFileHandle() {
-    return file;
-  }
+	public FileHandle getFileHandle () {
+		return file;
+	}
 
-  @Override
-  public TextureDataType getType() {
-    return TextureDataType.Pixmap;
-  }
+	@Override
+	public TextureDataType getType () {
+		return TextureDataType.Pixmap;
+	}
 
-  @Override
-  public void consumeCustomData(int target) {
-    throw new GdxRuntimeException("This TextureData implementation does not upload data itself");
-  }
+	@Override
+	public void consumeCustomData (int target) {
+		throw new GdxRuntimeException("This TextureData implementation does not upload data itself");
+	}
 
-  public String toString() {
-    return file.toString();
-  }
+	public String toString () {
+		return file.toString();
+	}
 }

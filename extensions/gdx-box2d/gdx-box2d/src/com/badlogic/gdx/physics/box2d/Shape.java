@@ -18,18 +18,15 @@ package com.badlogic.gdx.physics.box2d;
 
 import com.badlogic.gdx.utils.Disposable;
 
-/**
- * A shape is used for collision detection. You can create a shape however you like. Shapes used for
- * simulation in b2World are created automatically when a b2Fixture is created. Shapes may
- * encapsulate a one or more child shapes.
+/** A shape is used for collision detection. You can create a shape however you like. Shapes used for simulation in b2World are
+ * created automatically when a b2Fixture is created. Shapes may encapsulate a one or more child shapes.
  *
- * <p>NOTE: YOU NEED TO DISPOSE SHAPES YOU CREATED YOURSELF AFTER YOU NO LONGER USE THEM! E.g. after
- * calling body.createFixture();
+ * <p>
+ * NOTE: YOU NEED TO DISPOSE SHAPES YOU CREATED YOURSELF AFTER YOU NO LONGER USE THEM! E.g. after calling body.createFixture();
  *
- * @author mzechner
- */
+ * @author mzechner */
 public abstract class Shape implements Disposable {
-  // @off
+	// @off
   /*JNI
   #include <Box2D/Box2D.h>
   	 */

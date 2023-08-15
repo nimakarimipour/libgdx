@@ -27,62 +27,61 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.tests.utils.GdxTest;
 
 public class GroupCullingTest extends GdxTest {
-  private static final int count = 100;
+	private static final int count = 100;
 
-  private Stage stage;
-  private Skin skin;
-  private Table root;
-  private Label drawnLabel;
-  int drawn;
+	private Stage stage;
+	private Skin skin;
+	private Table root;
+	private Label drawnLabel;
+	int drawn;
 
-  public void create() {
-    stage = new Stage();
-    Gdx.input.setInputProcessor(stage);
+	public void create () {
+		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
 
-    root = new Table();
-    root.setFillParent(true);
-    stage.addActor(root);
+		root = new Table();
+		root.setFillParent(true);
+		stage.addActor(root);
 
-    skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-    Table labels = new Table();
-    root.add(new ScrollPane(labels, skin)).expand().fill();
-    root.row();
-    root.add(drawnLabel = new Label("", skin));
+		Table labels = new Table();
+		root.add(new ScrollPane(labels, skin)).expand().fill();
+		root.row();
+		root.add(drawnLabel = new Label("", skin));
 
-    for (int i = 0; i < count; i++) {
-      labels.add(
-          new Label("Label: " + i, skin) {
-            public void draw(Batch batch, float parentAlpha) {
-              super.draw(batch, parentAlpha);
-              drawn++;
-            }
-          });
-      labels.row();
-    }
-  }
+		for (int i = 0; i < count; i++) {
+			labels.add(new Label("Label: " + i, skin) {
+				public void draw (Batch batch, float parentAlpha) {
+					super.draw(batch, parentAlpha);
+					drawn++;
+				}
+			});
+			labels.row();
+		}
+	}
 
-  @Override
-  public void dispose() {
-    stage.dispose();
-    skin.dispose();
-  }
+	@Override
+	public void dispose () {
+		stage.dispose();
+		skin.dispose();
+	}
 
-  public void resize(int width, int height) {
-    stage.getViewport().update(width, height, true);
-    root.invalidate();
-  }
+	public void resize (int width, int height) {
+		stage.getViewport().update(width, height, true);
+		root.invalidate();
+	}
 
-  public void render() {
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    drawn = 0;
-    stage.act(Gdx.graphics.getDeltaTime());
-    stage.draw();
-    drawnLabel.setText("Drawn: " + drawn + "/" + count);
-    drawnLabel.invalidateHierarchy();
-  }
+	public void render () {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		drawn = 0;
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
+		drawnLabel.setText("Drawn: " + drawn + "/" + count);
+		drawnLabel.invalidateHierarchy();
+	}
 
-  public boolean needsGL20() {
-    return false;
-  }
+	public boolean needsGL20 () {
+		return false;
+	}
 }

@@ -12,51 +12,48 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class GIM_HASH_NODE_GET_KEY extends BulletBase {
-  private long swigCPtr;
+	private long swigCPtr;
 
-  protected GIM_HASH_NODE_GET_KEY(final String className, long cPtr, boolean cMemoryOwn) {
-    super(className, cPtr, cMemoryOwn);
-    swigCPtr = cPtr;
-  }
+	protected GIM_HASH_NODE_GET_KEY (final String className, long cPtr, boolean cMemoryOwn) {
+		super(className, cPtr, cMemoryOwn);
+		swigCPtr = cPtr;
+	}
 
-  /**
-   * Construct a new GIM_HASH_NODE_GET_KEY, normally you should not need this constructor it's
-   * intended for low-level usage.
-   */
-  public GIM_HASH_NODE_GET_KEY(long cPtr, boolean cMemoryOwn) {
-    this("GIM_HASH_NODE_GET_KEY", cPtr, cMemoryOwn);
-    construct();
-  }
+	/** Construct a new GIM_HASH_NODE_GET_KEY, normally you should not need this constructor it's intended for low-level usage. */
+	public GIM_HASH_NODE_GET_KEY (long cPtr, boolean cMemoryOwn) {
+		this("GIM_HASH_NODE_GET_KEY", cPtr, cMemoryOwn);
+		construct();
+	}
 
-  @Override
-  protected void reset(long cPtr, boolean cMemoryOwn) {
-    if (!destroyed) destroy();
-    super.reset(swigCPtr = cPtr, cMemoryOwn);
-  }
+	@Override
+	protected void reset (long cPtr, boolean cMemoryOwn) {
+		if (!destroyed) destroy();
+		super.reset(swigCPtr = cPtr, cMemoryOwn);
+	}
 
-  public static long getCPtr(GIM_HASH_NODE_GET_KEY obj) {
-    return (obj == null) ? 0 : obj.swigCPtr;
-  }
+	public static long getCPtr (GIM_HASH_NODE_GET_KEY obj) {
+		return (obj == null) ? 0 : obj.swigCPtr;
+	}
 
-  @Override
-  protected void finalize() throws Throwable {
-    if (!destroyed) destroy();
-    super.finalize();
-  }
+	@Override
+	protected void finalize () throws Throwable {
+		if (!destroyed) destroy();
+		super.finalize();
+	}
 
-  @Override
-  protected synchronized void delete() {
-    if (swigCPtr != 0) {
-      if (swigCMemOwn) {
-        swigCMemOwn = false;
-        CollisionJNI.delete_GIM_HASH_NODE_GET_KEY(swigCPtr);
-      }
-      swigCPtr = 0;
-    }
-    super.delete();
-  }
+	@Override
+	protected synchronized void delete () {
+		if (swigCPtr != 0) {
+			if (swigCMemOwn) {
+				swigCMemOwn = false;
+				CollisionJNI.delete_GIM_HASH_NODE_GET_KEY(swigCPtr);
+			}
+			swigCPtr = 0;
+		}
+		super.delete();
+	}
 
-  public GIM_HASH_NODE_GET_KEY() {
-    this(CollisionJNI.new_GIM_HASH_NODE_GET_KEY(), true);
-  }
+	public GIM_HASH_NODE_GET_KEY () {
+		this(CollisionJNI.new_GIM_HASH_NODE_GET_KEY(), true);
+	}
 }

@@ -21,8 +21,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 import javax.annotation.Nullable;
 
 public class ModelNodePart {
-  @Nullable public String materialId;
-  @Nullable public String meshPartId;
-  @Nullable public ArrayMap<String, Matrix4> bones;
-  @Nullable public int uvMapping[][];
+	@Nullable public String materialId;
+	@Nullable public String meshPartId;
+	@Nullable public ArrayMap<String, Matrix4> bones;
+	@Nullable public int uvMapping[][];
 }

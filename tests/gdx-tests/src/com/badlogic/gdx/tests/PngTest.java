@@ -28,39 +28,38 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import java.io.IOException;
 
 public class PngTest extends GdxTest {
-  SpriteBatch batch;
-  Texture badlogic, screenshot;
+	SpriteBatch batch;
+	Texture badlogic, screenshot;
 
-  public void create() {
-    batch = new SpriteBatch();
-    badlogic = new Texture(Gdx.files.internal("data/badlogic.jpg"));
-  }
+	public void create () {
+		batch = new SpriteBatch();
+		badlogic = new Texture(Gdx.files.internal("data/badlogic.jpg"));
+	}
 
-  public void render() {
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    batch.begin();
-    if (screenshot == null) {
-      int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
-      for (int i = 0; i < 100; i++)
-        batch.draw(badlogic, MathUtils.random(width), MathUtils.random(height));
-      batch.flush();
+	public void render () {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+		if (screenshot == null) {
+			int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
+			for (int i = 0; i < 100; i++)
+				batch.draw(badlogic, MathUtils.random(width), MathUtils.random(height));
+			batch.flush();
 
-      FileHandle file = FileHandle.tempFile("screenshot-");
-      System.out.println(file.file().getAbsolutePath());
-      Pixmap pixmap =
-          Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-      try {
-        PNG writer = new PNG((int) (pixmap.getWidth() * pixmap.getHeight() * 1.5f));
-        // writer.setCompression(Deflater.NO_COMPRESSION);
-        writer.write(file, pixmap);
-        writer.write(file, pixmap); // Write twice to make sure the object is reusable.
-        writer.dispose();
-      } catch (IOException ex) {
-        throw new RuntimeException(ex);
-      }
-      screenshot = new Texture(file);
-    }
-    batch.draw(screenshot, 0, 0);
-    batch.end();
-  }
+			FileHandle file = FileHandle.tempFile("screenshot-");
+			System.out.println(file.file().getAbsolutePath());
+			Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			try {
+				PNG writer = new PNG((int)(pixmap.getWidth() * pixmap.getHeight() * 1.5f));
+				// writer.setCompression(Deflater.NO_COMPRESSION);
+				writer.write(file, pixmap);
+				writer.write(file, pixmap); // Write twice to make sure the object is reusable.
+				writer.dispose();
+			} catch (IOException ex) {
+				throw new RuntimeException(ex);
+			}
+			screenshot = new Texture(file);
+		}
+		batch.draw(screenshot, 0, 0);
+		batch.end();
+	}
 }

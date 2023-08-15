@@ -27,34 +27,34 @@ import com.google.gwt.typedarrays.shared.Int8Array;
 
 public final class Numbers {
 
-  public static int floatToIntBits(float f) {
-    wfa.set(0, f);
-    return wia.get(0);
-  }
+	public static int floatToIntBits (float f) {
+		wfa.set(0, f);
+		return wia.get(0);
+	}
 
-  private static final Int8Array wba = Int8ArrayNative.create(8);
-  private static final Int32Array wia = Int32ArrayNative.create(wba.buffer(), 0, 2);
-  private static final Float32Array wfa = Float32ArrayNative.create(wba.buffer(), 0, 1);
-  private static final Float64Array wda = Float64ArrayNative.create(wba.buffer(), 0, 1);
+	private static final Int8Array wba = Int8ArrayNative.create(8);
+	private static final Int32Array wia = Int32ArrayNative.create(wba.buffer(), 0, 2);
+	private static final Float32Array wfa = Float32ArrayNative.create(wba.buffer(), 0, 1);
+	private static final Float64Array wda = Float64ArrayNative.create(wba.buffer(), 0, 1);
 
-  public static float intBitsToFloat(int i) {
-    wia.set(0, i);
-    return wfa.get(0);
-  }
+	public static float intBitsToFloat (int i) {
+		wia.set(0, i);
+		return wfa.get(0);
+	}
 
-  public static long doubleToLongBits(double d) {
-    wda.set(0, d);
-    return ((long) wia.get(1) << 32) | (wia.get(0) & 0xffffffffL);
-  }
+	public static long doubleToLongBits (double d) {
+		wda.set(0, d);
+		return ((long)wia.get(1) << 32) | (wia.get(0) & 0xffffffffL);
+	}
 
-  public static double longBitsToDouble(long l) {
-    wia.set(1, (int) (l >>> 32));
-    wia.set(0, (int) (l & 0xffffffffL));
-    return wda.get(0);
-  }
+	public static double longBitsToDouble (long l) {
+		wia.set(1, (int)(l >>> 32));
+		wia.set(0, (int)(l & 0xffffffffL));
+		return wda.get(0);
+	}
 
-  public static long doubleToRawLongBits(double d) {
-    wda.set(0, d);
-    return ((long) wia.get(1) << 32) | (wia.get(0) & 0xffffffffL);
-  }
+	public static long doubleToRawLongBits (double d) {
+		wda.set(0, d);
+		return ((long)wia.get(1) << 32) | (wia.get(0) & 0xffffffffL);
+	}
 }

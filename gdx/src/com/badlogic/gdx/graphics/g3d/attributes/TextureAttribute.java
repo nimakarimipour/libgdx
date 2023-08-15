@@ -26,191 +26,170 @@ import com.badlogic.gdx.utils.NumberUtils;
 import javax.annotation.Nullable;
 
 public class TextureAttribute extends Attribute {
-  public static final String DiffuseAlias = "diffuseTexture";
-  public static final long Diffuse = register(DiffuseAlias);
-  public static final String SpecularAlias = "specularTexture";
-  public static final long Specular = register(SpecularAlias);
-  public static final String BumpAlias = "bumpTexture";
-  public static final long Bump = register(BumpAlias);
-  public static final String NormalAlias = "normalTexture";
-  public static final long Normal = register(NormalAlias);
-  public static final String AmbientAlias = "ambientTexture";
-  public static final long Ambient = register(AmbientAlias);
-  public static final String EmissiveAlias = "emissiveTexture";
-  public static final long Emissive = register(EmissiveAlias);
-  public static final String ReflectionAlias = "reflectionTexture";
-  public static final long Reflection = register(ReflectionAlias);
+	public static final String DiffuseAlias = "diffuseTexture";
+	public static final long Diffuse = register(DiffuseAlias);
+	public static final String SpecularAlias = "specularTexture";
+	public static final long Specular = register(SpecularAlias);
+	public static final String BumpAlias = "bumpTexture";
+	public static final long Bump = register(BumpAlias);
+	public static final String NormalAlias = "normalTexture";
+	public static final long Normal = register(NormalAlias);
+	public static final String AmbientAlias = "ambientTexture";
+	public static final long Ambient = register(AmbientAlias);
+	public static final String EmissiveAlias = "emissiveTexture";
+	public static final long Emissive = register(EmissiveAlias);
+	public static final String ReflectionAlias = "reflectionTexture";
+	public static final long Reflection = register(ReflectionAlias);
 
-  protected static long Mask = Diffuse | Specular | Bump | Normal | Ambient | Emissive | Reflection;
+	protected static long Mask = Diffuse | Specular | Bump | Normal | Ambient | Emissive | Reflection;
 
-  public static final boolean is(final long mask) {
-    return (mask & Mask) != 0;
-  }
+	public static final boolean is (final long mask) {
+		return (mask & Mask) != 0;
+	}
 
-  public static TextureAttribute createDiffuse(@Nullable final Texture texture) {
-    return new TextureAttribute(Diffuse, texture);
-  }
+	public static TextureAttribute createDiffuse (@Nullable final Texture texture) {
+		return new TextureAttribute(Diffuse, texture);
+	}
 
-  public static TextureAttribute createDiffuse(final TextureRegion region) {
-    return new TextureAttribute(Diffuse, region);
-  }
+	public static TextureAttribute createDiffuse (final TextureRegion region) {
+		return new TextureAttribute(Diffuse, region);
+	}
 
-  public static TextureAttribute createSpecular(final Texture texture) {
-    return new TextureAttribute(Specular, texture);
-  }
+	public static TextureAttribute createSpecular (final Texture texture) {
+		return new TextureAttribute(Specular, texture);
+	}
 
-  public static TextureAttribute createSpecular(final TextureRegion region) {
-    return new TextureAttribute(Specular, region);
-  }
+	public static TextureAttribute createSpecular (final TextureRegion region) {
+		return new TextureAttribute(Specular, region);
+	}
 
-  public static TextureAttribute createNormal(final Texture texture) {
-    return new TextureAttribute(Normal, texture);
-  }
+	public static TextureAttribute createNormal (final Texture texture) {
+		return new TextureAttribute(Normal, texture);
+	}
 
-  public static TextureAttribute createNormal(final TextureRegion region) {
-    return new TextureAttribute(Normal, region);
-  }
+	public static TextureAttribute createNormal (final TextureRegion region) {
+		return new TextureAttribute(Normal, region);
+	}
 
-  public static TextureAttribute createBump(final Texture texture) {
-    return new TextureAttribute(Bump, texture);
-  }
+	public static TextureAttribute createBump (final Texture texture) {
+		return new TextureAttribute(Bump, texture);
+	}
 
-  public static TextureAttribute createBump(final TextureRegion region) {
-    return new TextureAttribute(Bump, region);
-  }
+	public static TextureAttribute createBump (final TextureRegion region) {
+		return new TextureAttribute(Bump, region);
+	}
 
-  public static TextureAttribute createAmbient(final Texture texture) {
-    return new TextureAttribute(Ambient, texture);
-  }
+	public static TextureAttribute createAmbient (final Texture texture) {
+		return new TextureAttribute(Ambient, texture);
+	}
 
-  public static TextureAttribute createAmbient(final TextureRegion region) {
-    return new TextureAttribute(Ambient, region);
-  }
+	public static TextureAttribute createAmbient (final TextureRegion region) {
+		return new TextureAttribute(Ambient, region);
+	}
 
-  public static TextureAttribute createEmissive(final Texture texture) {
-    return new TextureAttribute(Emissive, texture);
-  }
+	public static TextureAttribute createEmissive (final Texture texture) {
+		return new TextureAttribute(Emissive, texture);
+	}
 
-  public static TextureAttribute createEmissive(final TextureRegion region) {
-    return new TextureAttribute(Emissive, region);
-  }
+	public static TextureAttribute createEmissive (final TextureRegion region) {
+		return new TextureAttribute(Emissive, region);
+	}
 
-  public static TextureAttribute createReflection(final Texture texture) {
-    return new TextureAttribute(Reflection, texture);
-  }
+	public static TextureAttribute createReflection (final Texture texture) {
+		return new TextureAttribute(Reflection, texture);
+	}
 
-  public static TextureAttribute createReflection(final TextureRegion region) {
-    return new TextureAttribute(Reflection, region);
-  }
+	public static TextureAttribute createReflection (final TextureRegion region) {
+		return new TextureAttribute(Reflection, region);
+	}
 
-  public final TextureDescriptor<Texture> textureDescription;
-  public float offsetU = 0;
-  public float offsetV = 0;
-  public float scaleU = 1;
-  public float scaleV = 1;
-  /**
-   * The index of the texture coordinate vertex attribute to use for this TextureAttribute. Whether
-   * this value is used, depends on the shader and {@link Attribute#type} value. For basic (model
-   * specific) types (e.g. {@link #Diffuse}, {@link #Normal}, etc.), this value is usually ignored
-   * and the first texture coordinate vertex attribute is used.
-   */
-  public int uvIndex = 0;
+	public final TextureDescriptor<Texture> textureDescription;
+	public float offsetU = 0;
+	public float offsetV = 0;
+	public float scaleU = 1;
+	public float scaleV = 1;
+	/** The index of the texture coordinate vertex attribute to use for this TextureAttribute. Whether this value is used, depends
+	 * on the shader and {@link Attribute#type} value. For basic (model specific) types (e.g. {@link #Diffuse}, {@link #Normal},
+	 * etc.), this value is usually ignored and the first texture coordinate vertex attribute is used. */
+	public int uvIndex = 0;
 
-  public TextureAttribute(final long type) {
-    super(type);
-    if (!is(type)) throw new GdxRuntimeException("Invalid type specified");
-    textureDescription = new TextureDescriptor<Texture>();
-  }
+	public TextureAttribute (final long type) {
+		super(type);
+		if (!is(type)) throw new GdxRuntimeException("Invalid type specified");
+		textureDescription = new TextureDescriptor<Texture>();
+	}
 
-  public <T extends Texture> TextureAttribute(
-      final long type, final TextureDescriptor<T> textureDescription) {
-    this(type);
-    this.textureDescription.set(textureDescription);
-  }
+	public <T extends Texture> TextureAttribute (final long type, final TextureDescriptor<T> textureDescription) {
+		this(type);
+		this.textureDescription.set(textureDescription);
+	}
 
-  public <T extends Texture> TextureAttribute(
-      final long type,
-      final TextureDescriptor<T> textureDescription,
-      float offsetU,
-      float offsetV,
-      float scaleU,
-      float scaleV,
-      int uvIndex) {
-    this(type, textureDescription);
-    this.offsetU = offsetU;
-    this.offsetV = offsetV;
-    this.scaleU = scaleU;
-    this.scaleV = scaleV;
-    this.uvIndex = uvIndex;
-  }
+	public <T extends Texture> TextureAttribute (final long type, final TextureDescriptor<T> textureDescription, float offsetU,
+		float offsetV, float scaleU, float scaleV, int uvIndex) {
+		this(type, textureDescription);
+		this.offsetU = offsetU;
+		this.offsetV = offsetV;
+		this.scaleU = scaleU;
+		this.scaleV = scaleV;
+		this.uvIndex = uvIndex;
+	}
 
-  public <T extends Texture> TextureAttribute(
-      final long type,
-      final TextureDescriptor<T> textureDescription,
-      float offsetU,
-      float offsetV,
-      float scaleU,
-      float scaleV) {
-    this(type, textureDescription, offsetU, offsetV, scaleU, scaleV, 0);
-  }
+	public <T extends Texture> TextureAttribute (final long type, final TextureDescriptor<T> textureDescription, float offsetU,
+		float offsetV, float scaleU, float scaleV) {
+		this(type, textureDescription, offsetU, offsetV, scaleU, scaleV, 0);
+	}
 
-  public TextureAttribute(final long type, @Nullable final Texture texture) {
-    this(type);
-    textureDescription.texture = texture;
-  }
+	public TextureAttribute (final long type, @Nullable final Texture texture) {
+		this(type);
+		textureDescription.texture = texture;
+	}
 
-  public TextureAttribute(final long type, final TextureRegion region) {
-    this(type);
-    set(region);
-  }
+	public TextureAttribute (final long type, final TextureRegion region) {
+		this(type);
+		set(region);
+	}
 
-  public TextureAttribute(final TextureAttribute copyFrom) {
-    this(
-        copyFrom.type,
-        copyFrom.textureDescription,
-        copyFrom.offsetU,
-        copyFrom.offsetV,
-        copyFrom.scaleU,
-        copyFrom.scaleV,
-        copyFrom.uvIndex);
-  }
+	public TextureAttribute (final TextureAttribute copyFrom) {
+		this(copyFrom.type, copyFrom.textureDescription, copyFrom.offsetU, copyFrom.offsetV, copyFrom.scaleU, copyFrom.scaleV,
+			copyFrom.uvIndex);
+	}
 
-  public void set(final TextureRegion region) {
-    textureDescription.texture = region.getTexture();
-    offsetU = region.getU();
-    offsetV = region.getV();
-    scaleU = region.getU2() - offsetU;
-    scaleV = region.getV2() - offsetV;
-  }
+	public void set (final TextureRegion region) {
+		textureDescription.texture = region.getTexture();
+		offsetU = region.getU();
+		offsetV = region.getV();
+		scaleU = region.getU2() - offsetU;
+		scaleV = region.getV2() - offsetV;
+	}
 
-  @Override
-  public Attribute copy() {
-    return new TextureAttribute(this);
-  }
+	@Override
+	public Attribute copy () {
+		return new TextureAttribute(this);
+	}
 
-  @Override
-  public int hashCode() {
-    int result = super.hashCode();
-    result = 991 * result + textureDescription.hashCode();
-    result = 991 * result + NumberUtils.floatToRawIntBits(offsetU);
-    result = 991 * result + NumberUtils.floatToRawIntBits(offsetV);
-    result = 991 * result + NumberUtils.floatToRawIntBits(scaleU);
-    result = 991 * result + NumberUtils.floatToRawIntBits(scaleV);
-    result = 991 * result + uvIndex;
-    return result;
-  }
+	@Override
+	public int hashCode () {
+		int result = super.hashCode();
+		result = 991 * result + textureDescription.hashCode();
+		result = 991 * result + NumberUtils.floatToRawIntBits(offsetU);
+		result = 991 * result + NumberUtils.floatToRawIntBits(offsetV);
+		result = 991 * result + NumberUtils.floatToRawIntBits(scaleU);
+		result = 991 * result + NumberUtils.floatToRawIntBits(scaleV);
+		result = 991 * result + uvIndex;
+		return result;
+	}
 
-  @Override
-  public int compareTo(Attribute o) {
-    if (type != o.type) return type < o.type ? -1 : 1;
-    TextureAttribute other = (TextureAttribute) o;
-    final int c = textureDescription.compareTo(other.textureDescription);
-    if (c != 0) return c;
-    if (uvIndex != other.uvIndex) return uvIndex - other.uvIndex;
-    if (!MathUtils.isEqual(scaleU, other.scaleU)) return scaleU > other.scaleU ? 1 : -1;
-    if (!MathUtils.isEqual(scaleV, other.scaleV)) return scaleV > other.scaleV ? 1 : -1;
-    if (!MathUtils.isEqual(offsetU, other.offsetU)) return offsetU > other.offsetU ? 1 : -1;
-    if (!MathUtils.isEqual(offsetV, other.offsetV)) return offsetV > other.offsetV ? 1 : -1;
-    return 0;
-  }
+	@Override
+	public int compareTo (Attribute o) {
+		if (type != o.type) return type < o.type ? -1 : 1;
+		TextureAttribute other = (TextureAttribute)o;
+		final int c = textureDescription.compareTo(other.textureDescription);
+		if (c != 0) return c;
+		if (uvIndex != other.uvIndex) return uvIndex - other.uvIndex;
+		if (!MathUtils.isEqual(scaleU, other.scaleU)) return scaleU > other.scaleU ? 1 : -1;
+		if (!MathUtils.isEqual(scaleV, other.scaleV)) return scaleV > other.scaleV ? 1 : -1;
+		if (!MathUtils.isEqual(offsetU, other.offsetU)) return offsetU > other.offsetU ? 1 : -1;
+		if (!MathUtils.isEqual(offsetV, other.offsetV)) return offsetV > other.offsetV ? 1 : -1;
+		return 0;
+	}
 }

@@ -26,26 +26,26 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MeshWithCustomAttributesTest extends GdxTest {
-  ShaderProgram shader;
-  Mesh mesh;
+	ShaderProgram shader;
+	Mesh mesh;
 
-  @Override
-  public void dispose() {
-    mesh.dispose();
-    shader.dispose();
-  }
+	@Override
+	public void dispose () {
+		mesh.dispose();
+		shader.dispose();
+	}
 
-  @Override
-  public void render() {
-    ScreenUtils.clear(Color.BLACK, true);
+	@Override
+	public void render () {
+		ScreenUtils.clear(Color.BLACK, true);
 
-    shader.bind();
-    mesh.render(shader, GL20.GL_TRIANGLES);
-  }
+		shader.bind();
+		mesh.render(shader, GL20.GL_TRIANGLES);
+	}
 
-  @Override
-  public void create() {
-    // @off
+	@Override
+	public void create () {
+		// @off
     String vertexShader =
         "attribute vec4 a_position;    \n"
             + "attribute vec4 a_color;\n"
@@ -87,7 +87,7 @@ public class MeshWithCustomAttributesTest extends GdxTest {
           Color.toFloatBits(0, 0, 254, 0)
         };
     // @on
-    shader = new ShaderProgram(vertexShader, fragmentShader);
-    mesh.setVertices(vertices);
-  }
+		shader = new ShaderProgram(vertexShader, fragmentShader);
+		mesh.setVertices(vertices);
+	}
 }

@@ -23,26 +23,26 @@ import com.badlogic.gdx.graphics.g3d.shaders.DepthShader;
 import javax.annotation.Nullable;
 
 public class DepthShaderProvider extends BaseShaderProvider {
-  public final DepthShader.Config config;
+	public final DepthShader.Config config;
 
-  public DepthShaderProvider(@Nullable final DepthShader.Config config) {
-    this.config = (config == null) ? new DepthShader.Config() : config;
-  }
+	public DepthShaderProvider (@Nullable final DepthShader.Config config) {
+		this.config = (config == null) ? new DepthShader.Config() : config;
+	}
 
-  public DepthShaderProvider(final String vertexShader, final String fragmentShader) {
-    this(new DepthShader.Config(vertexShader, fragmentShader));
-  }
+	public DepthShaderProvider (final String vertexShader, final String fragmentShader) {
+		this(new DepthShader.Config(vertexShader, fragmentShader));
+	}
 
-  public DepthShaderProvider(final FileHandle vertexShader, final FileHandle fragmentShader) {
-    this(vertexShader.readString(), fragmentShader.readString());
-  }
+	public DepthShaderProvider (final FileHandle vertexShader, final FileHandle fragmentShader) {
+		this(vertexShader.readString(), fragmentShader.readString());
+	}
 
-  public DepthShaderProvider() {
-    this(null);
-  }
+	public DepthShaderProvider () {
+		this(null);
+	}
 
-  @Override
-  protected Shader createShader(final Renderable renderable) {
-    return new DepthShader(renderable, config);
-  }
+	@Override
+	protected Shader createShader (final Renderable renderable) {
+		return new DepthShader(renderable, config);
+	}
 }

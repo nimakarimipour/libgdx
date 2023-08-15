@@ -18,12 +18,10 @@ package com.badlogic.gdx.physics.box2d;
 
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * A line segment (edge) shape. These can be connected in chains or loops to other edge shapes. The
- * connectivity information is used to ensure correct contact normals.
- */
+/** A line segment (edge) shape. These can be connected in chains or loops to other edge shapes. The connectivity information is
+ * used to ensure correct contact normals. */
 public class EdgeShape extends Shape {
-  // @off
+	// @off
   /*JNI
   #include <Box2D/Box2D.h>
   	 */

@@ -25,39 +25,35 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.tests.utils.GdxTest;
 
 public class TextInputDialogTest extends GdxTest {
-  String message;
-  SpriteBatch batch;
-  BitmapFont font;
+	String message;
+	SpriteBatch batch;
+	BitmapFont font;
 
-  public void create() {
-    message = "Touch screen for dialog";
-    batch = new SpriteBatch();
-    font = new BitmapFont();
+	public void create () {
+		message = "Touch screen for dialog";
+		batch = new SpriteBatch();
+		font = new BitmapFont();
 
-    Gdx.input.getTextInput(
-        new TextInputListener() {
-          @Override
-          public void input(String text) {
-            message = "message: " + text + ", touch screen for new dialog";
-          }
+		Gdx.input.getTextInput(new TextInputListener() {
+			@Override
+			public void input (String text) {
+				message = "message: " + text + ", touch screen for new dialog";
+			}
 
-          @Override
-          public void canceled() {
-            message = "cancled by user";
-          }
-        },
-        "enter something funny",
-        "funny",
-        "something funny",
-        Input.OnscreenKeyboardType.Default);
-  }
+			@Override
+			public void canceled () {
+				message = "cancled by user";
+			}
+		}, "enter something funny", "funny", "something funny", Input.OnscreenKeyboardType.Default);
+	}
 
-  public void render() {
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    batch.begin();
-    font.draw(batch, message, 10, 40);
-    batch.end();
+	public void render () {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+		font.draw(batch, message, 10, 40);
+		batch.end();
 
-    if (Gdx.input.justTouched()) {}
-  }
+		if (Gdx.input.justTouched()) {
+		}
+	}
 }

@@ -9,6 +9,6 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 public final class ebtDispatcherQueryType {
-  public static final int BT_CONTACT_POINT_ALGORITHMS = 1;
-  public static final int BT_CLOSEST_POINT_ALGORITHMS = 2;
+	public static final int BT_CONTACT_POINT_ALGORITHMS = 1;
+	public static final int BT_CLOSEST_POINT_ALGORITHMS = 2;
 }

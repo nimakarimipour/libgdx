@@ -43,41 +43,41 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class ShaderTest extends GdxTest {
-  // Create a custom attribute, see https://libgdx.com/wiki/graphics/3d/material-and-environment
-  // See also: https://xoppa.github.io/blog/using-materials-with-libgdx/
-  public static class TestAttribute extends Attribute {
-    public static final String Alias = "Test";
-    public static final long ID = register(Alias);
+	// Create a custom attribute, see https://libgdx.com/wiki/graphics/3d/material-and-environment
+	// See also: https://xoppa.github.io/blog/using-materials-with-libgdx/
+	public static class TestAttribute extends Attribute {
+		public static final String Alias = "Test";
+		public static final long ID = register(Alias);
 
-    public float value;
+		public float value;
 
-    protected TestAttribute(final float value) {
-      super(ID);
-      this.value = value;
-    }
+		protected TestAttribute (final float value) {
+			super(ID);
+			this.value = value;
+		}
 
-    @Override
-    public Attribute copy() {
-      return new TestAttribute(value);
-    }
+		@Override
+		public Attribute copy () {
+			return new TestAttribute(value);
+		}
 
-    @Override
-    protected boolean equals(Attribute other) {
-      return ((TestAttribute) other).value == value;
-    }
+		@Override
+		protected boolean equals (Attribute other) {
+			return ((TestAttribute)other).value == value;
+		}
 
-    @Override
-    public int compareTo(Attribute o) {
-      if (type != o.type) return type < o.type ? -1 : 1;
-      float otherValue = ((TestAttribute) o).value;
-      return MathUtils.isEqual(value, otherValue) ? 0 : (value < otherValue ? -1 : 1);
-    }
-  }
+		@Override
+		public int compareTo (Attribute o) {
+			if (type != o.type) return type < o.type ? -1 : 1;
+			float otherValue = ((TestAttribute)o).value;
+			return MathUtils.isEqual(value, otherValue) ? 0 : (value < otherValue ? -1 : 1);
+		}
+	}
 
-  // Create a custom shader, see also https://xoppa.github.io/blog/creating-a-shader-with-libgdx/
-  // BaseShader adds some basic functionality used to manage uniforms etc.
-  public static class TestShader extends BaseShader {
-    // @off
+	// Create a custom shader, see also https://xoppa.github.io/blog/creating-a-shader-with-libgdx/
+	// BaseShader adds some basic functionality used to manage uniforms etc.
+	public static class TestShader extends BaseShader {
+		// @off
     public static final String vertexShader =
         "attribute vec3 a_position;\n"
             + "uniform mat4 u_projTrans;\n"
@@ -106,162 +106,154 @@ public class ShaderTest extends GdxTest {
             + "}\n";
     // @on
 
-    protected final int u_projTrans = register(new Uniform("u_projTrans"));
-    protected final int u_worldTrans = register(new Uniform("u_worldTrans"));
-    protected final int u_test = register(new Uniform("u_test"));
-    protected final int u_color = register(new Uniform("u_color"));
+		protected final int u_projTrans = register(new Uniform("u_projTrans"));
+		protected final int u_worldTrans = register(new Uniform("u_worldTrans"));
+		protected final int u_test = register(new Uniform("u_test"));
+		protected final int u_color = register(new Uniform("u_color"));
 
-    protected final ShaderProgram program;
-    private boolean withColor;
+		protected final ShaderProgram program;
+		private boolean withColor;
 
-    public TestShader(Renderable renderable) {
-      super();
-      withColor = renderable.material.has(ColorAttribute.Diffuse);
-      if (withColor) Gdx.app.log("ShaderTest", "Compiling test shader with u_color uniform");
-      else Gdx.app.log("ShaderTest", "Compiling test shader without u_color uniform");
+		public TestShader (Renderable renderable) {
+			super();
+			withColor = renderable.material.has(ColorAttribute.Diffuse);
+			if (withColor)
+				Gdx.app.log("ShaderTest", "Compiling test shader with u_color uniform");
+			else
+				Gdx.app.log("ShaderTest", "Compiling test shader without u_color uniform");
 
-      String prefix = withColor ? "#define HasDiffuseColor\n" : "";
-      program = new ShaderProgram(vertexShader, prefix + fragmentShader);
+			String prefix = withColor ? "#define HasDiffuseColor\n" : "";
+			program = new ShaderProgram(vertexShader, prefix + fragmentShader);
 
-      if (!program.isCompiled())
-        throw new GdxRuntimeException("Couldn't compile shader " + program.getLog());
-      String log = program.getLog();
-      if (log.length() > 0) Gdx.app.error("ShaderTest", "Shader compilation log: " + log);
-    }
+			if (!program.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader " + program.getLog());
+			String log = program.getLog();
+			if (log.length() > 0) Gdx.app.error("ShaderTest", "Shader compilation log: " + log);
+		}
 
-    @Override
-    public void init() {
-      super.init(program, null);
-    }
+		@Override
+		public void init () {
+			super.init(program, null);
+		}
 
-    @Override
-    public int compareTo(Shader other) {
-      return 0;
-    }
+		@Override
+		public int compareTo (Shader other) {
+			return 0;
+		}
 
-    @Override
-    public boolean canRender(Renderable instance) {
-      return instance.material.has(TestAttribute.ID)
-          && (instance.material.has(ColorAttribute.Diffuse) == withColor);
-    }
+		@Override
+		public boolean canRender (Renderable instance) {
+			return instance.material.has(TestAttribute.ID) && (instance.material.has(ColorAttribute.Diffuse) == withColor);
+		}
 
-    @Override
-    public void begin(Camera camera, RenderContext context) {
-      program.bind();
-      context.setDepthTest(GL20.GL_LEQUAL, 0f, 1f);
-      context.setDepthMask(true);
-      set(u_projTrans, camera.combined);
-    }
+		@Override
+		public void begin (Camera camera, RenderContext context) {
+			program.bind();
+			context.setDepthTest(GL20.GL_LEQUAL, 0f, 1f);
+			context.setDepthMask(true);
+			set(u_projTrans, camera.combined);
+		}
 
-    @Override
-    public void render(Renderable renderable) {
-      set(u_worldTrans, renderable.worldTransform);
+		@Override
+		public void render (Renderable renderable) {
+			set(u_worldTrans, renderable.worldTransform);
 
-      TestAttribute testAttr = (TestAttribute) renderable.material.get(TestAttribute.ID);
-      set(u_test, testAttr.value);
+			TestAttribute testAttr = (TestAttribute)renderable.material.get(TestAttribute.ID);
+			set(u_test, testAttr.value);
 
-      if (withColor) {
-        ColorAttribute colorAttr = (ColorAttribute) renderable.material.get(ColorAttribute.Diffuse);
-        set(u_color, colorAttr.color);
-      }
+			if (withColor) {
+				ColorAttribute colorAttr = (ColorAttribute)renderable.material.get(ColorAttribute.Diffuse);
+				set(u_color, colorAttr.color);
+			}
 
-      renderable.meshPart.render(program);
-    }
+			renderable.meshPart.render(program);
+		}
 
-    @Override
-    public void dispose() {
-      super.dispose();
-      program.dispose();
-    }
-  }
+		@Override
+		public void dispose () {
+			super.dispose();
+			program.dispose();
+		}
+	}
 
-  public PerspectiveCamera cam;
-  public CameraInputController camController;
-  public ModelBatch modelBatch;
-  public Model model;
-  public Array<ModelInstance> instances = new Array<ModelInstance>();
-  public TestAttribute testAttribute1, testAttribute2;
+	public PerspectiveCamera cam;
+	public CameraInputController camController;
+	public ModelBatch modelBatch;
+	public Model model;
+	public Array<ModelInstance> instances = new Array<ModelInstance>();
+	public TestAttribute testAttribute1, testAttribute2;
 
-  @Override
-  public void create() {
-    modelBatch =
-        new ModelBatch(
-            new DefaultShaderProvider() {
-              @Override
-              protected Shader createShader(Renderable renderable) {
-                if (renderable.material.has(TestAttribute.ID)) return new TestShader(renderable);
-                return super.createShader(renderable);
-              }
-            });
+	@Override
+	public void create () {
+		modelBatch = new ModelBatch(new DefaultShaderProvider() {
+			@Override
+			protected Shader createShader (Renderable renderable) {
+				if (renderable.material.has(TestAttribute.ID)) return new TestShader(renderable);
+				return super.createShader(renderable);
+			}
+		});
 
-    cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    cam.position.set(0f, 0f, 20f);
-    cam.lookAt(0, 0, 0);
-    cam.near = 1f;
-    cam.far = 300f;
-    cam.update();
+		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		cam.position.set(0f, 0f, 20f);
+		cam.lookAt(0, 0, 0);
+		cam.near = 1f;
+		cam.far = 300f;
+		cam.update();
 
-    camController = new CameraInputController(cam);
-    Gdx.input.setInputProcessor(camController);
+		camController = new CameraInputController(cam);
+		Gdx.input.setInputProcessor(camController);
 
-    Material testMaterial1 = new Material("TestMaterial1", new TestAttribute(1f));
-    Material redMaterial = new Material("RedMaterial", ColorAttribute.createDiffuse(Color.RED));
-    Material testMaterial2 =
-        new Material(
-            "TestMaterial2", new TestAttribute(1f), ColorAttribute.createDiffuse(Color.BLUE));
+		Material testMaterial1 = new Material("TestMaterial1", new TestAttribute(1f));
+		Material redMaterial = new Material("RedMaterial", ColorAttribute.createDiffuse(Color.RED));
+		Material testMaterial2 = new Material("TestMaterial2", new TestAttribute(1f), ColorAttribute.createDiffuse(Color.BLUE));
 
-    ModelBuilder builder = new ModelBuilder();
-    Node node;
+		ModelBuilder builder = new ModelBuilder();
+		Node node;
 
-    builder.begin();
-    node = builder.node();
-    node.id = "testCone1";
-    node.translation.set(-10, 0f, 0f);
-    builder.part("testCone", GL20.GL_TRIANGLES, Usage.Position, testMaterial1).cone(5, 5, 5, 20);
+		builder.begin();
+		node = builder.node();
+		node.id = "testCone1";
+		node.translation.set(-10, 0f, 0f);
+		builder.part("testCone", GL20.GL_TRIANGLES, Usage.Position, testMaterial1).cone(5, 5, 5, 20);
 
-    node = builder.node();
-    node.id = "redSphere";
-    builder
-        .part("redSphere", GL20.GL_TRIANGLES, Usage.Position, redMaterial)
-        .sphere(5, 5, 5, 20, 20);
+		node = builder.node();
+		node.id = "redSphere";
+		builder.part("redSphere", GL20.GL_TRIANGLES, Usage.Position, redMaterial).sphere(5, 5, 5, 20, 20);
 
-    node = builder.node();
-    node.id = "testCone1";
-    node.translation.set(10, 0f, 0f);
-    builder.part("testCone", GL20.GL_TRIANGLES, Usage.Position, testMaterial2).cone(5, 5, 5, 20);
+		node = builder.node();
+		node.id = "testCone1";
+		node.translation.set(10, 0f, 0f);
+		builder.part("testCone", GL20.GL_TRIANGLES, Usage.Position, testMaterial2).cone(5, 5, 5, 20);
 
-    model = builder.end();
+		model = builder.end();
 
-    ModelInstance modelInstance;
-    modelInstance = new ModelInstance(model);
-    testAttribute1 =
-        (TestAttribute) modelInstance.getMaterial("TestMaterial1").get(TestAttribute.ID);
-    testAttribute2 =
-        (TestAttribute) modelInstance.getMaterial("TestMaterial2").get(TestAttribute.ID);
-    instances.add(modelInstance);
-  }
+		ModelInstance modelInstance;
+		modelInstance = new ModelInstance(model);
+		testAttribute1 = (TestAttribute)modelInstance.getMaterial("TestMaterial1").get(TestAttribute.ID);
+		testAttribute2 = (TestAttribute)modelInstance.getMaterial("TestMaterial2").get(TestAttribute.ID);
+		instances.add(modelInstance);
+	}
 
-  private float counter;
+	private float counter;
 
-  @Override
-  public void render() {
-    counter = (counter + Gdx.graphics.getDeltaTime()) % 2.f;
-    testAttribute1.value = Math.abs(1f - counter);
-    testAttribute2.value = 1f - testAttribute1.value;
+	@Override
+	public void render () {
+		counter = (counter + Gdx.graphics.getDeltaTime()) % 2.f;
+		testAttribute1.value = Math.abs(1f - counter);
+		testAttribute2.value = 1f - testAttribute1.value;
 
-    camController.update();
+		camController.update();
 
-    Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-    modelBatch.begin(cam);
-    modelBatch.render(instances);
-    modelBatch.end();
-  }
+		modelBatch.begin(cam);
+		modelBatch.render(instances);
+		modelBatch.end();
+	}
 
-  @Override
-  public void dispose() {
-    modelBatch.dispose();
-    model.dispose();
-  }
+	@Override
+	public void dispose () {
+		modelBatch.dispose();
+		model.dispose();
+	}
 }
