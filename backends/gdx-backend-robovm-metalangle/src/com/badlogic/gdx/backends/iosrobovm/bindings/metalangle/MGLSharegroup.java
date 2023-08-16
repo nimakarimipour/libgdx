@@ -31,36 +31,38 @@ import org.robovm.rt.bro.ptr.Ptr;
 /*<annotations>*/ @NativeClass
 /* </annotations> */
 /* <visibility> */ public /* </visibility> */ class /* <name> */ MGLSharegroup /* </name> */
-    extends /* <extends> */ NSObject /* </extends> */
+	extends /* <extends> */ NSObject /* </extends> */
 /* <implements> */
 /* </implements> */ {
 
-  /* <ptr> */ public static class MGLSharegroupPtr extends Ptr<MGLSharegroup, MGLSharegroupPtr> {}
+	/* <ptr> */ public static class MGLSharegroupPtr extends Ptr<MGLSharegroup, MGLSharegroupPtr> {
+	}
 
-  /* </ptr> */
-  /* <bind> */ static {
-    ObjCRuntime.bind(MGLSharegroup.class);
-  } /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <constructors> */
+	/* </ptr> */
+	/* <bind> */ static {
+		ObjCRuntime.bind(MGLSharegroup.class);
+	} /* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <constructors> */
 
-  protected MGLSharegroup() {}
+	protected MGLSharegroup () {
+	}
 
-  protected MGLSharegroup(Handle h, long handle) {
-    super(h, handle);
-  }
+	protected MGLSharegroup (Handle h, long handle) {
+		super(h, handle);
+	}
 
-  protected MGLSharegroup(SkipInit skipInit) {
-    super(skipInit);
-  }
-  /* </constructors> */
-  /* <properties> */
+	protected MGLSharegroup (SkipInit skipInit) {
+		super(skipInit);
+	}
+	/* </constructors> */
+	/* <properties> */
 
-  /* </properties> */
-  /* <members> */
-  /* </members> */
-  /* <methods> */
+	/* </properties> */
+	/* <members> */
+	/* </members> */
+	/* <methods> */
 
-  /* </methods> */
+	/* </methods> */
 }

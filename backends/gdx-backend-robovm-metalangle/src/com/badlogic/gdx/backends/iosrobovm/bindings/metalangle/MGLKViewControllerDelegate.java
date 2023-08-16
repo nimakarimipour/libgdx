@@ -30,21 +30,21 @@ import org.robovm.objc.annotation.Method;
 /*</annotations>*/
 /*<visibility>*/ public /* </visibility> */
 interface /* <name> */ MGLKViewControllerDelegate /* </name> */
-    /* <implements> */ extends NSObjectProtocol /* </implements> */ {
+	/* <implements> */ extends NSObjectProtocol /* </implements> */ {
 
-  /* <ptr> */
-  /* </ptr> */
-  /* <bind> */
-  /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <properties> */
+	/* <ptr> */
+	/* </ptr> */
+	/* <bind> */
+	/* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <properties> */
 
-  /* </properties> */
-  /* <methods> */
-  @Method(selector = "mglkViewControllerUpdate:")
-  void update(MGLKViewController controller);
-  /* </methods> */
-  /* <adapter> */
-  /* </adapter> */
+	/* </properties> */
+	/* <methods> */
+	@Method(selector = "mglkViewControllerUpdate:")
+	void update (MGLKViewController controller);
+	/* </methods> */
+	/* <adapter> */
+	/* </adapter> */
 }

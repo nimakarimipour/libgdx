@@ -28,38 +28,34 @@ import org.robovm.rt.bro.ValuedEnum;
 /*<annotations>*/
 /*</annotations>*/
 public enum /* <name> */ MGLDrawableStencilFormat /* </name> */ implements ValuedEnum {
-  /* <values> */
-  None(0L),
-  _8(8L);
-  /* </values> */
+	/* <values> */
+	None(0L), _8(8L);
+	/* </values> */
 
-  /* <bind> */
-  /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <methods> */
-  /* </methods> */
+	/* <bind> */
+	/* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <methods> */
+	/* </methods> */
 
-  private final long n;
+	private final long n;
 
-  private /* <name> */ MGLDrawableStencilFormat /* </name> */(long n) {
-    this.n = n;
-  }
+	private /* <name> */ MGLDrawableStencilFormat /* </name> */ (long n) {
+		this.n = n;
+	}
 
-  public long value() {
-    return n;
-  }
+	public long value () {
+		return n;
+	}
 
-  public static /* <name> */ MGLDrawableStencilFormat /* </name> */ valueOf(long n) {
-    for (/* <name> */ MGLDrawableStencilFormat /* </name> */ v : values()) {
-      if (v.n == n) {
-        return v;
-      }
-    }
-    throw new IllegalArgumentException(
-        "No constant with value "
-            + n
-            + " found in "
-            + /* <name> */ MGLDrawableStencilFormat /* </name> */.class.getName());
-  }
+	public static /* <name> */ MGLDrawableStencilFormat /* </name> */ valueOf (long n) {
+		for (/* <name> */ MGLDrawableStencilFormat /* </name> */ v : values()) {
+			if (v.n == n) {
+				return v;
+			}
+		}
+		throw new IllegalArgumentException(
+			"No constant with value " + n + " found in " + /* <name> */ MGLDrawableStencilFormat /* </name> */.class.getName());
+	}
 }
