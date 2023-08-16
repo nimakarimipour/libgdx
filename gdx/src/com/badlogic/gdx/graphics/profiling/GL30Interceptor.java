@@ -22,6 +22,7 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.LongBuffer;
+import javax.annotation.Nullable;
 
 /**
  * @author Daniel Holderbaum
@@ -356,7 +357,7 @@ public class GL30Interceptor extends GLInterceptor implements GL30 {
       int border,
       int format,
       int type,
-      Buffer pixels) {
+      @Nullable Buffer pixels) {
     calls++;
     gl30.glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
     check();
@@ -456,7 +457,7 @@ public class GL30Interceptor extends GLInterceptor implements GL30 {
   }
 
   @Override
-  public void glBufferData(int target, int size, Buffer data, int usage) {
+  public void glBufferData(int target, int size, @Nullable Buffer data, int usage) {
     calls++;
     gl30.glBufferData(target, size, data, usage);
     check();
@@ -1296,7 +1297,7 @@ public class GL30Interceptor extends GLInterceptor implements GL30 {
       int border,
       int format,
       int type,
-      Buffer pixels) {
+      @Nullable Buffer pixels) {
     calls++;
     gl30.glTexImage3D(
         target, level, internalformat, width, height, depth, border, format, type, pixels);

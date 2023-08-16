@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pools;
 import java.util.Arrays;
+import javax.annotation.Nullable;
 
 /**
  * Caches glyph geometry for a BitmapFont, providing a fast way to render static text. This saves
@@ -612,7 +613,7 @@ public class BitmapFontCache {
       float targetWidth,
       int halign,
       boolean wrap,
-      String truncate) {
+      @Nullable String truncate) {
     GlyphLayout layout = Pools.obtain(GlyphLayout.class);
     pooledLayouts.add(layout);
     layout.setText(font, str, start, end, color, targetWidth, halign, wrap, truncate);

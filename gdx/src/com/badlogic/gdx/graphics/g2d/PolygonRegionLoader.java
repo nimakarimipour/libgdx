@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 /**
  * loads {@link PolygonRegion PolygonRegions} using a {@link
@@ -78,7 +79,7 @@ public class PolygonRegionLoader
 
   @Override
   public PolygonRegion load(
-      AssetManager manager, String fileName, FileHandle file, PolygonRegionParameters parameter) {
+      AssetManager manager, String fileName, FileHandle file, @Nullable PolygonRegionParameters parameter) {
     Texture texture = manager.get(manager.getDependencies(fileName).first());
     return load(new TextureRegion(texture), file);
   }
@@ -91,9 +92,9 @@ public class PolygonRegionLoader
    * params.textureExtensions} will be used. If no suitable file is found, the returned Array will
    * be empty.
    */
-  @Override
+  @Nullable @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, PolygonRegionParameters params) {
+      String fileName, FileHandle file, @Nullable PolygonRegionParameters params) {
     if (params == null) params = defaultParameters;
     String image = null;
     try {

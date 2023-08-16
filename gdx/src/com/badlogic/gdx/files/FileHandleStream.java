@@ -20,6 +20,7 @@ import com.badlogic.gdx.Files.FileType;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javax.annotation.Nullable;
 
 /**
  * A FileHandle intended to be subclassed for the purpose of implementing {@link #read()} and/or

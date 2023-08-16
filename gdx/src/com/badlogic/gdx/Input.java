@@ -17,6 +17,7 @@
 package com.badlogic.gdx;
 
 import com.badlogic.gdx.utils.ObjectIntMap;
+import javax.annotation.Nullable;
 
 /**
  * Interface to the input facilities. This allows polling the state of the keyboard, the touch
@@ -278,7 +279,7 @@ public interface Input {
      * @return a human readable representation of the keycode. The returned value can be used in
      *     {@link Input.Keys#valueOf(String)}
      */
-    public static String toString(int keycode) {
+    @Nullable public static String toString(int keycode) {
       if (keycode < 0)
         throw new IllegalArgumentException("keycode cannot be negative, keycode: " + keycode);
       if (keycode > MAX_KEYCODE)
@@ -627,7 +628,7 @@ public interface Input {
       }
     }
 
-    private static ObjectIntMap<String> keyNames;
+    @Nullable private static ObjectIntMap<String> keyNames;
 
     /**
      * @param keyname the keyname returned by the {@link Keys#toString(int)} method
@@ -1050,7 +1051,7 @@ public interface Input {
   public void setInputProcessor(InputProcessor processor);
 
   /** @return the currently set {@link InputProcessor} or null. */
-  public InputProcessor getInputProcessor();
+  @Nullable public InputProcessor getInputProcessor();
 
   /**
    * Queries whether a {@link Peripheral} is currently available. In case of Android and the {@link

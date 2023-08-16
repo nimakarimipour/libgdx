@@ -29,6 +29,7 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import java.nio.Buffer;
+import javax.annotation.Nullable;
 
 /**
  * Draws batched quads using indices.
@@ -49,7 +50,7 @@ public class SpriteBatch implements Batch {
 
   final float[] vertices;
   int idx = 0;
-  Texture lastTexture = null;
+  @Nullable Texture lastTexture = null;
   float invTexWidth = 0, invTexHeight = 0;
 
   boolean drawing = false;
@@ -65,7 +66,7 @@ public class SpriteBatch implements Batch {
   private int blendDstFuncAlpha = GL20.GL_ONE_MINUS_SRC_ALPHA;
 
   private final ShaderProgram shader;
-  private ShaderProgram customShader = null;
+  @Nullable private ShaderProgram customShader = null;
   private boolean ownsShader;
 
   private final Color color = new Color(1, 1, 1, 1);
@@ -112,7 +113,7 @@ public class SpriteBatch implements Batch {
    * @param defaultShader The default shader to use. This is not owned by the SpriteBatch and must
    *     be disposed separately.
    */
-  public SpriteBatch(int size, ShaderProgram defaultShader) {
+  public SpriteBatch(int size, @Nullable ShaderProgram defaultShader) {
     // 32767 is max vertex index, so 32767 / 4 vertices per sprite = 8191 sprites max.
     if (size > 8191)
       throw new IllegalArgumentException("Can't have more than 8191 sprites per batch: " + size);
@@ -620,7 +621,7 @@ public class SpriteBatch implements Batch {
   }
 
   @Override
-  public void draw(Texture texture, float[] spriteVertices, int offset, int count) {
+  public void draw(@Nullable Texture texture, float[] spriteVertices, int offset, int count) {
     if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
     int verticesLength = vertices.length;
@@ -1155,7 +1156,7 @@ public class SpriteBatch implements Batch {
     }
   }
 
-  protected void switchTexture(Texture texture) {
+  protected void switchTexture(@Nullable Texture texture) {
     flush();
     lastTexture = texture;
     invTexWidth = 1.0f / texture.getWidth();

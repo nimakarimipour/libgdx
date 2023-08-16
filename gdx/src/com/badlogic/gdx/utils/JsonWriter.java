@@ -21,6 +21,7 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 
 /**
  * Builder style API for emitting JSON.
@@ -30,7 +31,7 @@ import java.util.regex.Pattern;
 public class JsonWriter extends Writer {
   final Writer writer;
   private final Array<JsonObject> stack = new Array();
-  private JsonObject current;
+  @Nullable private JsonObject current;
   private boolean named;
   private OutputType outputType = OutputType.json;
   private boolean quoteLongValues = false;
@@ -80,7 +81,7 @@ public class JsonWriter extends Writer {
     return this;
   }
 
-  public JsonWriter value(Object value) throws IOException {
+  public JsonWriter value(@Nullable Object value) throws IOException {
     if (quoteLongValues
         && (value instanceof Long
             || value instanceof Double
@@ -192,7 +193,7 @@ public class JsonWriter extends Writer {
     private static Pattern minimalNamePattern = Pattern.compile("^[^\":,}/ ][^:]*$");
     private static Pattern minimalValuePattern = Pattern.compile("^[^\":,{\\[\\]/ ][^}\\],]*$");
 
-    public String quoteValue(Object value) {
+    public String quoteValue(@Nullable Object value) {
       if (value == null) return "null";
       String string = value.toString();
       if (value instanceof Number || value instanceof Boolean) return string;

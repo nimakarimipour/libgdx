@@ -19,6 +19,7 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * Executes an action only after all other actions on the actor at the time this action's target was

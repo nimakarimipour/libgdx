@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * Base class for actions that transition over time using the percent complete.
@@ -28,7 +29,7 @@ import com.badlogic.gdx.utils.Pool;
  */
 public abstract class TemporalAction extends Action {
   private float duration, time;
-  private @Null Interpolation interpolation;
+  @Nullable private @Null Interpolation interpolation;
   private boolean reverse, began, complete;
 
   public TemporalAction() {}
@@ -116,11 +117,11 @@ public abstract class TemporalAction extends Action {
     this.duration = duration;
   }
 
-  public @Null Interpolation getInterpolation() {
+  @Nullable public @Null Interpolation getInterpolation() {
     return interpolation;
   }
 
-  public void setInterpolation(@Null Interpolation interpolation) {
+  public void setInterpolation(@Nullable @Null Interpolation interpolation) {
     this.interpolation = interpolation;
   }
 

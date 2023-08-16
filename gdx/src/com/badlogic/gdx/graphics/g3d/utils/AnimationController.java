@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * Class to control one or more {@link Animation}s on a {@link ModelInstance}. Use the {@link
@@ -70,7 +71,7 @@ public class AnimationController extends BaseAnimationController {
    */
   public static class AnimationDesc {
     /** Listener which will be informed when the animation is looped or ended. */
-    public AnimationListener listener;
+    @Nullable public AnimationListener listener;
     /** The animation to be applied. */
     public Animation animation;
     /** The speed at which to play the animation (can be negative), 1.0 for normal speed. */
@@ -131,18 +132,18 @@ public class AnimationController extends BaseAnimationController {
       };
 
   /** The animation currently playing. Do not alter this value. */
-  public AnimationDesc current;
+  @Nullable public AnimationDesc current;
   /**
    * The animation queued to be played when the {@link #current} animation is completed. Do not
    * alter this value.
    */
-  public AnimationDesc queued;
+  @Nullable public AnimationDesc queued;
   /**
    * The transition time which should be applied to the queued animation. Do not alter this value.
    */
   public float queuedTransitionTime;
   /** The animation which previously played. Do not alter this value. */
-  public AnimationDesc previous;
+  @Nullable public AnimationDesc previous;
   /** The current transition time. Do not alter this value. */
   public float transitionCurrentTime;
   /** The target transition time. Do not alter this value. */
@@ -171,7 +172,7 @@ public class AnimationController extends BaseAnimationController {
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener) {
+      @Nullable final AnimationListener listener) {
     if (anim == null) return null;
     final AnimationDesc result = animationPool.obtain();
     result.animation = anim;
@@ -190,7 +191,7 @@ public class AnimationController extends BaseAnimationController {
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener) {
+      @Nullable final AnimationListener listener) {
     if (id == null) return null;
     final Animation anim = target.getAnimation(id);
     if (anim == null) throw new GdxRuntimeException("Unknown animation: " + id);
@@ -308,7 +309,7 @@ public class AnimationController extends BaseAnimationController {
    *     be invalid when the animation is completed.
    */
   public AnimationDesc setAnimation(
-      final String id, int loopCount, float speed, final AnimationListener listener) {
+      final String id, int loopCount, float speed, @Nullable final AnimationListener listener) {
     return setAnimation(id, 0f, -1f, loopCount, speed, listener);
   }
 
@@ -336,7 +337,7 @@ public class AnimationController extends BaseAnimationController {
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener) {
+      @Nullable final AnimationListener listener) {
     return setAnimation(obtain(id, offset, duration, loopCount, speed, listener));
   }
 
@@ -433,7 +434,7 @@ public class AnimationController extends BaseAnimationController {
       final String id,
       int loopCount,
       float speed,
-      final AnimationListener listener,
+      @Nullable final AnimationListener listener,
       float transitionTime) {
     return animate(id, 0f, -1f, loopCount, speed, listener, transitionTime);
   }
@@ -464,7 +465,7 @@ public class AnimationController extends BaseAnimationController {
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener,
+      @Nullable final AnimationListener listener,
       float transitionTime) {
     return animate(obtain(id, offset, duration, loopCount, speed, listener), transitionTime);
   }

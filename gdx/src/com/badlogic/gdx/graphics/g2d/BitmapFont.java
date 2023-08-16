@@ -39,6 +39,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 
 /**
  * Renders bitmap fonts. The font consists of 2 files: an image file or {@link TextureRegion}
@@ -192,7 +193,7 @@ public class BitmapFont implements Disposable {
    * @param integer If true, rendering positions will be at integer values to avoid filtering
    *     artifacts.
    */
-  public BitmapFont(BitmapFontData data, TextureRegion region, boolean integer) {
+  public BitmapFont(BitmapFontData data, @Nullable TextureRegion region, boolean integer) {
     this(data, region != null ? Array.with(region) : null, integer);
   }
 
@@ -205,7 +206,7 @@ public class BitmapFont implements Disposable {
    * @param integer If true, rendering positions will be at integer values to avoid filtering
    *     artifacts.
    */
-  public BitmapFont(BitmapFontData data, Array<TextureRegion> pageRegions, boolean integer) {
+  public BitmapFont(BitmapFontData data, @Nullable Array<TextureRegion> pageRegions, boolean integer) {
     this.flipped = data.flipped;
     this.data = data;
     this.integer = integer;
@@ -534,7 +535,7 @@ public class BitmapFont implements Disposable {
     public float u, v, u2, v2;
     public int xoffset, yoffset;
     public int xadvance;
-    public byte[][] kerning;
+    @Nullable public byte[][] kerning;
     public boolean fixedWidth;
 
     /** The index to the texture page that holds this glyph. */
@@ -569,11 +570,11 @@ public class BitmapFont implements Disposable {
   /** Backing data for a {@link BitmapFont}. */
   public static class BitmapFontData {
     /** The name of the font, or null. */
-    public String name;
+    @Nullable public String name;
     /** An array of the image paths, for multiple texture pages. */
     public String[] imagePaths;
 
-    public FileHandle fontFile;
+    @Nullable public FileHandle fontFile;
     public boolean flipped;
     public float padTop, padRight, padBottom, padLeft;
     /**
@@ -613,7 +614,7 @@ public class BitmapFont implements Disposable {
 
     public final Glyph[][] glyphs = new Glyph[PAGES][];
     /** The glyph to display for characters not in the font. May be null. */
-    public Glyph missingGlyph;
+    @Nullable public Glyph missingGlyph;
 
     /** The width of the space character. */
     public float spaceXadvance;
@@ -624,7 +625,7 @@ public class BitmapFont implements Disposable {
     public float xHeight = 1;
 
     /** Additional characters besides whitespace where text is wrapped. Eg, a hypen (-). */
-    public char[] breakChars;
+    @Nullable public char[] breakChars;
 
     public char[] xChars = {'x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'};
     public char[] capChars = {
@@ -978,7 +979,7 @@ public class BitmapFont implements Disposable {
      * {@link #getGlyphs(GlyphRun, CharSequence, int, int, Glyph)} should be be used to shape a
      * string of characters into a list of glyphs.
      */
-    public Glyph getGlyph(char ch) {
+    @Nullable public Glyph getGlyph(char ch) {
       Glyph[] page = glyphs[ch / PAGE_SIZE];
       if (page != null) return page[ch & PAGE_SIZE - 1];
       return null;
@@ -993,7 +994,7 @@ public class BitmapFont implements Disposable {
      *     on a line of text. Used tp apply kerning between the specified glyph and the first glyph
      *     in this run.
      */
-    public void getGlyphs(GlyphRun run, CharSequence str, int start, int end, Glyph lastGlyph) {
+    public void getGlyphs(GlyphRun run, CharSequence str, int start, int end, @Nullable Glyph lastGlyph) {
       int max = end - start;
       if (max == 0) return;
       boolean markupEnabled = this.markupEnabled;
@@ -1079,7 +1080,7 @@ public class BitmapFont implements Disposable {
       return imagePaths;
     }
 
-    public FileHandle getFontFile() {
+    @Nullable public FileHandle getFontFile() {
       return fontFile;
     }
 

@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover
@@ -175,7 +176,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
    *
    * @param side The side to bind
    */
-  protected void bindSide(final Cubemap.CubemapSide side) {
+  protected void bindSide(@Nullable final Cubemap.CubemapSide side) {
     Gdx.gl20.glFramebufferTexture2D(
         GL20.GL_FRAMEBUFFER,
         GL20.GL_COLOR_ATTACHMENT0,
@@ -185,7 +186,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
   }
 
   /** Get the currently bound side. */
-  public Cubemap.CubemapSide getSide() {
+  @Nullable public Cubemap.CubemapSide getSide() {
     return currentSide < 0 ? null : cubemapSides[currentSide];
   }
 }

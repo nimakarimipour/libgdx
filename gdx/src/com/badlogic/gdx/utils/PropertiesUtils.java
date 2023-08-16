@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.Date;
+import javax.annotation.Nullable;
 
 /**
  * {@code PropertiesUtils} is a helper class that allows you to load and store key/value pairs of an

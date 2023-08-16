@@ -12,6 +12,7 @@
  */
 
 package com.badlogic.gdx.utils;
+import javax.annotation.Nullable;
 
 /**
  * This is a near duplicate of {@link TimSort}, modified for use with arrays of objects that

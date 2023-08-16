@@ -20,6 +20,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
+import javax.annotation.Nullable;
 
 /**
  * Common interface to all the batches that render particles.

@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics;
 
 import com.badlogic.gdx.utils.ObjectMap;
+import javax.annotation.Nullable;
 
 /**
  * A general purpose class containing named colors that can be changed at will. For example, the
@@ -59,7 +60,7 @@ public final class Colors {
    * @return the previous {@code color} associated with {@code name}, or {@code null} if there was
    *     no mapping for {@code name} .
    */
-  public static Color put(String name, Color color) {
+  @Nullable public static Color put(String name, Color color) {
     return map.put(name, color);
   }
 

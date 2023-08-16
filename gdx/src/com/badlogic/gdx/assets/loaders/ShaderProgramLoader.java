@@ -22,6 +22,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * {@link AssetLoader} for {@link ShaderProgram} instances loaded from text files. If the file
@@ -56,19 +57,19 @@ public class ShaderProgramLoader
     this.fragmentFileSuffix = fragmentFileSuffix;
   }
 
-  @Override
+  @Nullable @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, ShaderProgramParameter parameter) {
+      String fileName, FileHandle file, @Nullable ShaderProgramParameter parameter) {
     return null;
   }
 
   @Override
   public void loadAsync(
-      AssetManager manager, String fileName, FileHandle file, ShaderProgramParameter parameter) {}
+      AssetManager manager, String fileName, FileHandle file, @Nullable ShaderProgramParameter parameter) {}
 
   @Override
   public ShaderProgram loadSync(
-      AssetManager manager, String fileName, FileHandle file, ShaderProgramParameter parameter) {
+      AssetManager manager, String fileName, FileHandle file, @Nullable ShaderProgramParameter parameter) {
     String vertFileName = null, fragFileName = null;
     if (parameter != null) {
       if (parameter.vertexFile != null) vertFileName = parameter.vertexFile;
@@ -108,12 +109,12 @@ public class ShaderProgramLoader
      * File name to be used for the vertex program instead of the default determined by the file
      * name used to submit this asset to AssetManager.
      */
-    public String vertexFile;
+    @Nullable public String vertexFile;
     /**
      * File name to be used for the fragment program instead of the default determined by the file
      * name used to submit this asset to AssetManager.
      */
-    public String fragmentFile;
+    @Nullable public String fragmentFile;
     /**
      * Whether to log (at the error level) the shader's log if it fails to compile. Default true.
      */
@@ -123,12 +124,12 @@ public class ShaderProgramLoader
      * include a newline (`\n`) if needed. {@linkplain ShaderProgram#prependVertexCode} is placed
      * before this code.
      */
-    public String prependVertexCode;
+    @Nullable public String prependVertexCode;
     /**
      * Code that is always added to the fragment shader code. This is added as-is, and you should
      * include a newline (`\n`) if needed. {@linkplain ShaderProgram#prependFragmentCode} is placed
      * before this code.
      */
-    public String prependFragmentCode;
+    @Nullable public String prependFragmentCode;
   }
 }

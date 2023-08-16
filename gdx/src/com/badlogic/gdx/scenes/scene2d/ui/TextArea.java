@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** A text input field with multiple lines. */
 public class TextArea extends TextField {
@@ -40,7 +41,7 @@ public class TextArea extends TextField {
    * Last text processed. This attribute is used to avoid unnecessary computations while calculating
    * offsets *
    */
-  private String lastText;
+  @Nullable private String lastText;
 
   /** Current line for the cursor * */
   int cursorLine;
@@ -471,7 +472,7 @@ public class TextArea extends TextField {
       updateCurrentLine();
     }
 
-    public boolean keyDown(InputEvent event, int keycode) {
+    public boolean keyDown(@Nullable InputEvent event, int keycode) {
       boolean result = super.keyDown(event, keycode);
       if (hasKeyboardFocus()) {
         boolean repeat = false;

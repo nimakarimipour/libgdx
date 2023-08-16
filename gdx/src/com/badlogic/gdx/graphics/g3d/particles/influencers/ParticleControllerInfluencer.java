@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Pool;
 import java.util.Iterator;
+import javax.annotation.Nullable;
 
 /**
  * It's an {@link Influencer} which controls which {@link ParticleController} will be assigned to a

@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import javax.annotation.Nullable;
 
 /** @author Nathan Sweet */
 public final class GeometryUtils {

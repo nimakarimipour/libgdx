@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Pools;
 import java.io.InputStream;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * A builder for {@link HttpRequest}s.

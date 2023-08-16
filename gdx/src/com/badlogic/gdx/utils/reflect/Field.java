@@ -20,6 +20,7 @@ import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import javax.annotation.Nullable;
 
 /**
  * Provides information about, and access to, a single field of a class or interface.
@@ -109,7 +110,7 @@ public final class Field {
    * If the type of the field is parameterized, returns the Class object representing the parameter
    * type at the specified index, null otherwise.
    */
-  public Class getElementType(int index) {
+  @Nullable public Class getElementType(int index) {
     Type genericType = field.getGenericType();
     if (genericType instanceof ParameterizedType) {
       Type[] actualTypes = ((ParameterizedType) genericType).getActualTypeArguments();
@@ -152,7 +153,7 @@ public final class Field {
    * doesn't have such an annotation. This is a convenience function if the caller knows already
    * which annotation type he's looking for.
    */
-  public Annotation getDeclaredAnnotation(
+  @Nullable public Annotation getDeclaredAnnotation(
       Class<? extends java.lang.annotation.Annotation> annotationType) {
     java.lang.annotation.Annotation[] annotations = field.getDeclaredAnnotations();
     if (annotations == null) {

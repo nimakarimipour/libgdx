@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /**
  * A progress bar is a widget that visually displays the progress of some activity or a value within
@@ -284,17 +285,17 @@ public class ProgressBar extends Widget implements Disableable {
     return style.background;
   }
 
-  protected @Null Drawable getKnobDrawable() {
+  @Nullable protected @Null Drawable getKnobDrawable() {
     if (disabled && style.disabledKnob != null) return style.disabledKnob;
     return style.knob;
   }
 
-  protected Drawable getKnobBeforeDrawable() {
+  @Nullable protected Drawable getKnobBeforeDrawable() {
     if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
     return style.knobBefore;
   }
 
-  protected Drawable getKnobAfterDrawable() {
+  @Nullable protected Drawable getKnobAfterDrawable() {
     if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
     return style.knobAfter;
   }
@@ -457,11 +458,11 @@ public class ProgressBar extends Widget implements Disableable {
    */
   public static class ProgressBarStyle {
     /** The progress bar background, stretched only in one direction. */
-    public @Null Drawable background, disabledBackground;
+    @Nullable public @Null Drawable background, disabledBackground;
 
-    public @Null Drawable knob, disabledKnob;
-    public @Null Drawable knobBefore, disabledKnobBefore;
-    public @Null Drawable knobAfter, disabledKnobAfter;
+    @Nullable public @Null Drawable knob, disabledKnob;
+    @Nullable public @Null Drawable knobBefore, disabledKnobBefore;
+    @Nullable public @Null Drawable knobAfter, disabledKnobAfter;
 
     public ProgressBarStyle() {}
 

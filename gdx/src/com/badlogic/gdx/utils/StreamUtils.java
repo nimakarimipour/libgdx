@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import javax.annotation.Nullable;
 
 /** Provides utility methods to copy streams. */
 public final class StreamUtils {
@@ -138,7 +139,7 @@ public final class StreamUtils {
    * @param charset May be null to use the platform's default charset.
    */
   public static String copyStreamToString(
-      InputStream input, int estimatedSize, @Null String charset) throws IOException {
+      InputStream input, int estimatedSize, @Nullable @Null String charset) throws IOException {
     InputStreamReader reader =
         charset == null ? new InputStreamReader(input) : new InputStreamReader(input, charset);
     StringWriter writer = new StringWriter(Math.max(0, estimatedSize));
@@ -151,7 +152,7 @@ public final class StreamUtils {
   }
 
   /** Close and ignore all errors. */
-  public static void closeQuietly(Closeable c) {
+  public static void closeQuietly(@Nullable Closeable c) {
     if (c != null) {
       try {
         c.close();

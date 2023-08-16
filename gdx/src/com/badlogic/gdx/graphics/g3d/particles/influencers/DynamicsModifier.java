@@ -26,6 +26,7 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /**
  * It's the base class for any kind of influencer which operates on angular velocity and
@@ -41,7 +42,7 @@ public abstract class DynamicsModifier extends Influencer {
   protected static final Quaternion TMP_Q = new Quaternion();
 
   public static class FaceDirection extends DynamicsModifier {
-    FloatChannel rotationChannel, accellerationChannel;
+    @Nullable FloatChannel rotationChannel, accellerationChannel;
 
     public FaceDirection() {}
 
@@ -205,7 +206,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class Rotational2D extends Strength {
-    FloatChannel rotationalVelocity2dChannel;
+    @Nullable FloatChannel rotationalVelocity2dChannel;
 
     public Rotational2D() {}
 
@@ -243,7 +244,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class Rotational3D extends Angular {
-    FloatChannel rotationChannel, rotationalForceChannel;
+    @Nullable FloatChannel rotationChannel, rotationalForceChannel;
 
     public Rotational3D() {}
 
@@ -391,7 +392,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class PolarAcceleration extends Angular {
-    FloatChannel directionalVelocityChannel;
+    @Nullable FloatChannel directionalVelocityChannel;
 
     public PolarAcceleration() {}
 
@@ -454,7 +455,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class TangentialAcceleration extends Angular {
-    FloatChannel directionalVelocityChannel, positionChannel;
+    @Nullable FloatChannel directionalVelocityChannel, positionChannel;
 
     public TangentialAcceleration() {}
 
@@ -525,7 +526,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class BrownianAcceleration extends Strength {
-    FloatChannel accelerationChannel;
+    @Nullable FloatChannel accelerationChannel;
 
     public BrownianAcceleration() {}
 

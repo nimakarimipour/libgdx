@@ -19,6 +19,7 @@ package com.badlogic.gdx.maps;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import java.util.Iterator;
+import javax.annotation.Nullable;
 
 /** @brief Collection of MapObject instances */
 public class MapObjects implements Iterable<MapObject> {
@@ -42,7 +43,7 @@ public class MapObjects implements Iterable<MapObject> {
    * @param name
    * @return the first object having the specified name, if one exists, otherwise null
    */
-  public MapObject get(String name) {
+  @Nullable public MapObject get(String name) {
     for (int i = 0, n = objects.size; i < n; i++) {
       MapObject object = objects.get(i);
       if (name.equals(object.getName())) {
@@ -58,7 +59,7 @@ public class MapObjects implements Iterable<MapObject> {
   }
 
   /** Get the index of the object in the collection, or -1 if no such object exists. */
-  public int getIndex(MapObject object) {
+  public int getIndex(@Nullable MapObject object) {
     return objects.indexOf(object, true);
   }
 

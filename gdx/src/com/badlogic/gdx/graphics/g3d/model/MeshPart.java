@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import javax.annotation.Nullable;
 
 /**
  * A MeshPart is composed of a subset of vertices of a {@link Mesh}, along with the primitive type.
@@ -42,7 +43,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
  */
 public class MeshPart {
   /** Unique id within model, may be null. Will be ignored by {@link #equals(MeshPart)} * */
-  public String id;
+  @Nullable public String id;
   /**
    * The primitive type, OpenGL constant e.g: {@link GL20#GL_TRIANGLES}, {@link GL20#GL_POINTS},
    * {@link GL20#GL_LINES}, {@link GL20#GL_LINE_STRIP}, {@link GL20#GL_TRIANGLE_STRIP} *
@@ -136,7 +137,7 @@ public class MeshPart {
    * @return this MeshPart, for chaining.
    */
   public MeshPart set(
-      final String id, final Mesh mesh, final int offset, final int size, final int type) {
+      final String id, @Nullable final Mesh mesh, final int offset, final int size, final int type) {
     this.id = id;
     this.mesh = mesh;
     this.offset = offset;

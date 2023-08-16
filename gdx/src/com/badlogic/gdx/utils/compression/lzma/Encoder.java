@@ -19,6 +19,7 @@ package com.badlogic.gdx.utils.compression.lzma;
 import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 public class Encoder {
   public static final int EMatchFinderTypeBT2 = 0;
@@ -347,7 +348,7 @@ public class Encoder {
 
   long nowPos64;
   boolean _finished;
-  java.io.InputStream _inStream;
+  @Nullable java.io.InputStream _inStream;
 
   int _matchFinderType = EMatchFinderTypeBT4;
   boolean _writeEndMark = false;
@@ -1167,7 +1168,7 @@ public class Encoder {
       java.io.OutputStream outStream,
       long inSize,
       long outSize,
-      ICodeProgress progress)
+      @Nullable ICodeProgress progress)
       throws IOException {
     _needReleaseMFStream = false;
     try {

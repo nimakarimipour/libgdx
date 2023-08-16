@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import javax.annotation.Nullable;
 
 /**
  * Convenience class for working with OpenGL vertex arrays. It interleaves all data in the order you
@@ -103,7 +104,7 @@ public class VertexArray implements VertexData {
   }
 
   @Override
-  public void bind(final ShaderProgram shader, final int[] locations) {
+  public void bind(final ShaderProgram shader, @Nullable final int[] locations) {
     final int numAttributes = attributes.size();
     ((Buffer) byteBuffer).limit(buffer.limit() * 4);
     if (locations == null) {
@@ -175,7 +176,7 @@ public class VertexArray implements VertexData {
   }
 
   @Override
-  public void unbind(ShaderProgram shader, int[] locations) {
+  public void unbind(ShaderProgram shader, @Nullable int[] locations) {
     final int numAttributes = attributes.size();
     if (locations == null) {
       for (int i = 0; i < numAttributes; i++) {

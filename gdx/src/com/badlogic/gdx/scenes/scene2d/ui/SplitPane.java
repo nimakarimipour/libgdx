@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /**
  * A container that contains two widgets and is divided either horizontally or vertically. The user
@@ -50,7 +51,7 @@ import com.badlogic.gdx.utils.Null;
  */
 public class SplitPane extends WidgetGroup {
   SplitPaneStyle style;
-  private @Null Actor firstWidget, secondWidget;
+  @Nullable private @Null Actor firstWidget, secondWidget;
   boolean vertical;
   float splitAmount = 0.5f, minAmount, maxAmount = 1;
 
@@ -394,7 +395,7 @@ public class SplitPane extends WidgetGroup {
   }
 
   /** @param widget May be null. */
-  public void setFirstWidget(@Null Actor widget) {
+  public void setFirstWidget(@Nullable @Null Actor widget) {
     if (firstWidget != null) super.removeActor(firstWidget);
     firstWidget = widget;
     if (widget != null) super.addActor(widget);
@@ -402,7 +403,7 @@ public class SplitPane extends WidgetGroup {
   }
 
   /** @param widget May be null. */
-  public void setSecondWidget(@Null Actor widget) {
+  public void setSecondWidget(@Nullable @Null Actor widget) {
     if (secondWidget != null) super.removeActor(secondWidget);
     secondWidget = widget;
     if (widget != null) super.addActor(widget);

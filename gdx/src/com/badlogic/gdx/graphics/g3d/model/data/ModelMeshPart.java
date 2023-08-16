@@ -15,9 +15,10 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.graphics.g3d.model.data;
+import javax.annotation.Nullable;
 
 public class ModelMeshPart {
-  public String id;
+  @Nullable public String id;
   public short[] indices;
   public int primitiveType;
 }

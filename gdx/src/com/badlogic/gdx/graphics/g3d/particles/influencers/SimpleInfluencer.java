@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /**
  * It's an {@link Influencer} which controls a generic channel of the particles. It handles the

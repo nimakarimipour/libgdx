@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.nio.IntBuffer;
+import javax.annotation.Nullable;
 
 /**
  * Class that you assign a range of texture units and binds textures for you within that range. It
@@ -41,7 +42,7 @@ public final class DefaultTextureBinder implements TextureBinder {
   /** The textures currently exclusive bound */
   private final GLTexture[] textures;
   /** Texture units ordered from most to least recently used */
-  private int[] unitsLRU;
+  @Nullable private int[] unitsLRU;
   /** The method of binding to use */
   private final int method;
   /** Flag to indicate the current texture is reused */

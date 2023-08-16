@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import javax.annotation.Nullable;
 
 /**
  * A single-line text input field.
@@ -95,8 +96,8 @@ public class TextField extends Widget implements Disableable {
   protected CharSequence displayText;
   Clipboard clipboard;
   InputListener inputListener;
-  @Null TextFieldListener listener;
-  @Null TextFieldFilter filter;
+  @Nullable @Null TextFieldListener listener;
+  @Nullable @Null TextFieldFilter filter;
   OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
   boolean focusTraversal = true, onlyFontChars = true, disabled;
   private int textHAlign = Align.left;
@@ -106,7 +107,7 @@ public class TextField extends Widget implements Disableable {
   long lastChangeTime;
 
   boolean passwordMode;
-  private StringBuilder passwordBuffer;
+  @Nullable private StringBuilder passwordBuffer;
   private char passwordCharacter = BULLET;
 
   protected float fontOffset, textHeight, textOffset;
@@ -594,9 +595,9 @@ public class TextField extends Widget implements Disableable {
   }
 
   /** @return May be null. */
-  private @Null TextField findNextTextField(
+  @Nullable private @Null TextField findNextTextField(
       Array<Actor> actors,
-      @Null TextField best,
+      @Nullable @Null TextField best,
       Vector2 bestCoords,
       Vector2 currentCoords,
       boolean up) {
@@ -640,7 +641,7 @@ public class TextField extends Widget implements Disableable {
     this.filter = filter;
   }
 
-  public @Null TextFieldFilter getTextFieldFilter() {
+  @Nullable public @Null TextFieldFilter getTextFieldFilter() {
     return filter;
   }
 
@@ -976,7 +977,7 @@ public class TextField extends Widget implements Disableable {
       cursor = text.length();
     }
 
-    public boolean keyDown(InputEvent event, int keycode) {
+    public boolean keyDown(@Nullable InputEvent event, int keycode) {
       if (disabled) return false;
 
       cursorOn = focused;
@@ -1198,11 +1199,11 @@ public class TextField extends Widget implements Disableable {
    */
   public static class TextFieldStyle {
     public BitmapFont font;
-    public Color fontColor;
-    public @Null Color focusedFontColor, disabledFontColor;
-    public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
-    public @Null BitmapFont messageFont;
-    public @Null Color messageFontColor;
+    @Nullable public Color fontColor;
+    @Nullable public @Null Color focusedFontColor, disabledFontColor;
+    @Nullable public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
+    @Nullable public @Null BitmapFont messageFont;
+    @Nullable public @Null Color messageFontColor;
 
     public TextFieldStyle() {}
 

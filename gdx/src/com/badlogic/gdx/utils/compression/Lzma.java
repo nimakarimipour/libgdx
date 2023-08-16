@@ -19,6 +19,7 @@ package com.badlogic.gdx.utils.compression;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javax.annotation.Nullable;
 
 /**
  * Adapted from LZMA SDK version 9.22.
@@ -53,8 +54,8 @@ public class Lzma {
     public int Algorithm = 2;
     public int MatchFinder = 1;
 
-    public String InFile;
-    public String OutFile;
+    @Nullable public String InFile;
+    @Nullable public String OutFile;
   }
 
   /**

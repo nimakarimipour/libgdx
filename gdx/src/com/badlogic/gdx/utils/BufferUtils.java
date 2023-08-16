@@ -27,6 +27,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
+import javax.annotation.Nullable;
 
 /**
  * Class with static helper methods to increase the speed of array/direct buffer and direct
