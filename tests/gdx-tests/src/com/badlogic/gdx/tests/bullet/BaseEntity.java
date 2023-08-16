@@ -25,25 +25,25 @@ import com.badlogic.gdx.utils.Disposable;
 
 /** @author xoppa Base class specifying only a renderable entity */
 public abstract class BaseEntity implements Disposable {
-  public Matrix4 transform;
-  public ModelInstance modelInstance;
-  private Color color = new Color(1f, 1f, 1f, 1f);
+	public Matrix4 transform;
+	public ModelInstance modelInstance;
+	private Color color = new Color(1f, 1f, 1f, 1f);
 
-  public Color getColor() {
-    return color;
-  }
+	public Color getColor () {
+		return color;
+	}
 
-  public void setColor(Color color) {
-    setColor(color.r, color.g, color.b, color.a);
-  }
+	public void setColor (Color color) {
+		setColor(color.r, color.g, color.b, color.a);
+	}
 
-  public void setColor(float r, float g, float b, float a) {
-    color.set(r, g, b, a);
-    if (modelInstance != null) {
-      for (Material m : modelInstance.materials) {
-        ColorAttribute ca = (ColorAttribute) m.get(ColorAttribute.Diffuse);
-        if (ca != null) ca.color.set(r, g, b, a);
-      }
-    }
-  }
+	public void setColor (float r, float g, float b, float a) {
+		color.set(r, g, b, a);
+		if (modelInstance != null) {
+			for (Material m : modelInstance.materials) {
+				ColorAttribute ca = (ColorAttribute)m.get(ColorAttribute.Diffuse);
+				if (ca != null) ca.color.set(r, g, b, a);
+			}
+		}
+	}
 }

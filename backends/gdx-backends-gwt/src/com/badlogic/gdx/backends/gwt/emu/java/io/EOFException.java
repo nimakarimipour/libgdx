@@ -16,4 +16,5 @@
 
 package java.io;
 
-public class EOFException extends IOException {}
+public class EOFException extends IOException {
+}

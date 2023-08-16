@@ -9,6 +9,6 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 public final class HullError {
-  public static final int QE_OK = 0;
-  public static final int QE_FAIL = QE_OK + 1;
+	public static final int QE_OK = 0;
+	public static final int QE_FAIL = QE_OK + 1;
 }

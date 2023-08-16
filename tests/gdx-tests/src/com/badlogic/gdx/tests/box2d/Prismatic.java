@@ -40,70 +40,70 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 
 public class Prismatic extends Box2DTest {
-  PrismaticJoint m_joint;
+	PrismaticJoint m_joint;
 
-  @Override
-  protected void createWorld(World world) {
-    Body ground;
+	@Override
+	protected void createWorld (World world) {
+		Body ground;
 
-    {
-      BodyDef bd = new BodyDef();
-      ground = world.createBody(bd);
-      EdgeShape shape = new EdgeShape();
-      shape.set(new Vector2(-40, 0), new Vector2(40, 0));
-      ground.createFixture(shape, 0);
-      shape.dispose();
-    }
+		{
+			BodyDef bd = new BodyDef();
+			ground = world.createBody(bd);
+			EdgeShape shape = new EdgeShape();
+			shape.set(new Vector2(-40, 0), new Vector2(40, 0));
+			ground.createFixture(shape, 0);
+			shape.dispose();
+		}
 
-    {
-      PolygonShape shape = new PolygonShape();
-      shape.setAsBox(2, 5);
+		{
+			PolygonShape shape = new PolygonShape();
+			shape.setAsBox(2, 5);
 
-      BodyDef bd = new BodyDef();
-      bd.type = BodyType.DynamicBody;
-      bd.position.set(-10, 10);
-      bd.angle = 0.5f * (float) Math.PI;
-      bd.allowSleep = false;
+			BodyDef bd = new BodyDef();
+			bd.type = BodyType.DynamicBody;
+			bd.position.set(-10, 10);
+			bd.angle = 0.5f * (float)Math.PI;
+			bd.allowSleep = false;
 
-      Body body = world.createBody(bd);
-      body.createFixture(shape, 5.0f);
+			Body body = world.createBody(bd);
+			body.createFixture(shape, 5.0f);
 
-      PrismaticJointDef pjd = new PrismaticJointDef();
+			PrismaticJointDef pjd = new PrismaticJointDef();
 
-      Vector2 axis = new Vector2(2, 1);
-      axis.nor();
-      pjd.initialize(ground, body, new Vector2(0, 0), axis);
+			Vector2 axis = new Vector2(2, 1);
+			axis.nor();
+			pjd.initialize(ground, body, new Vector2(0, 0), axis);
 
-      pjd.motorSpeed = 10.0f;
-      pjd.maxMotorForce = 10000.0f;
-      pjd.enableMotor = true;
-      pjd.lowerTranslation = 0;
-      pjd.upperTranslation = 20.0f;
-      pjd.enableLimit = true;
+			pjd.motorSpeed = 10.0f;
+			pjd.maxMotorForce = 10000.0f;
+			pjd.enableMotor = true;
+			pjd.lowerTranslation = 0;
+			pjd.upperTranslation = 20.0f;
+			pjd.enableLimit = true;
 
-      m_joint = (PrismaticJoint) world.createJoint(pjd);
-    }
-  }
+			m_joint = (PrismaticJoint)world.createJoint(pjd);
+		}
+	}
 
-  public boolean keyDown(int keyCode) {
-    if (keyCode == Keys.L) m_joint.enableLimit(!m_joint.isLimitEnabled());
-    if (keyCode == Keys.M) m_joint.enableMotor(!m_joint.isMotorEnabled());
-    if (keyCode == Keys.S) m_joint.setMotorSpeed(-m_joint.getMotorSpeed());
+	public boolean keyDown (int keyCode) {
+		if (keyCode == Keys.L) m_joint.enableLimit(!m_joint.isLimitEnabled());
+		if (keyCode == Keys.M) m_joint.enableMotor(!m_joint.isMotorEnabled());
+		if (keyCode == Keys.S) m_joint.setMotorSpeed(-m_joint.getMotorSpeed());
 
-    return false;
-  }
+		return false;
+	}
 
-  public void render() {
-    super.render();
+	public void render () {
+		super.render();
 
-    // if (renderer.batch != null) {
-    // renderer.batch.begin();
-    // // renderer.batch.drawText(renderer.font, "Keys: (l) limits, (m) motors, (s) speed", 0,
-    // Gdx.app.getGraphics().getHeight(),
-    // // Color.WHITE);
-    // // renderer.batch.drawText(renderer.font, "Motor Force = " + m_joint.getMotorForce(), 0,
-    // // Gdx.app.getGraphics().getHeight() - 15, Color.WHITE);
-    // renderer.batch.end();
-    // }
-  }
+		// if (renderer.batch != null) {
+		// renderer.batch.begin();
+		// // renderer.batch.drawText(renderer.font, "Keys: (l) limits, (m) motors, (s) speed", 0,
+		// Gdx.app.getGraphics().getHeight(),
+		// // Color.WHITE);
+		// // renderer.batch.drawText(renderer.font, "Motor Force = " + m_joint.getMotorForce(), 0,
+		// // Gdx.app.getGraphics().getHeight() - 15, Color.WHITE);
+		// renderer.batch.end();
+		// }
+	}
 }

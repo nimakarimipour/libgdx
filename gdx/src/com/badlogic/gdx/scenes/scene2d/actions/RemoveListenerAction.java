@@ -20,39 +20,40 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import javax.annotation.Nullable;
 
-/**
- * Removes a listener from an actor.
+/** Removes a listener from an actor.
  *
- * @author Nathan Sweet
- */
+ * @author Nathan Sweet */
 public class RemoveListenerAction extends Action {
-  @Nullable private EventListener listener;
-  private boolean capture;
+	@Nullable private EventListener listener;
+	private boolean capture;
 
-  public boolean act(float delta) {
-    if (capture) target.removeCaptureListener(listener);
-    else target.removeListener(listener);
-    return true;
-  }
+	public boolean act (float delta) {
+		if (capture)
+			target.removeCaptureListener(listener);
+		else
+			target.removeListener(listener);
+		return true;
+	}
 
-  @Nullable public EventListener getListener() {
-    return listener;
-  }
+	@Nullable
+	public EventListener getListener () {
+		return listener;
+	}
 
-  public void setListener(EventListener listener) {
-    this.listener = listener;
-  }
+	public void setListener (EventListener listener) {
+		this.listener = listener;
+	}
 
-  public boolean getCapture() {
-    return capture;
-  }
+	public boolean getCapture () {
+		return capture;
+	}
 
-  public void setCapture(boolean capture) {
-    this.capture = capture;
-  }
+	public void setCapture (boolean capture) {
+		this.capture = capture;
+	}
 
-  public void reset() {
-    super.reset();
-    listener = null;
-  }
+	public void reset () {
+		super.reset();
+		listener = null;
+	}
 }

@@ -19,34 +19,33 @@ package com.badlogic.gdx.graphics.glutils;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 
-/**
- * A {@link VertexData} implementation based on OpenGL vertex buffer objects.
+/** A {@link VertexData} implementation based on OpenGL vertex buffer objects.
  *
- * <p>If the OpenGL ES context was lost you can call {@link #invalidate()} to recreate a new OpenGL
- * vertex buffer object. This class can be used seamlessly with OpenGL ES 1.x and 2.0.
+ * <p>
+ * If the OpenGL ES context was lost you can call {@link #invalidate()} to recreate a new OpenGL vertex buffer object. This class
+ * can be used seamlessly with OpenGL ES 1.x and 2.0.
  *
- * <p>In case OpenGL ES 2.0 is used in the application the data is bound via glVertexAttribPointer()
- * according to the attribute aliases specified via {@link VertexAttributes} in the constructor.
+ * <p>
+ * In case OpenGL ES 2.0 is used in the application the data is bound via glVertexAttribPointer() according to the attribute
+ * aliases specified via {@link VertexAttributes} in the constructor.
  *
- * <p>Uses indirect Buffers on Android 1.5/1.6 to fix GC invocation due to leaking PlatformAddress
- * instances.
+ * <p>
+ * Uses indirect Buffers on Android 1.5/1.6 to fix GC invocation due to leaking PlatformAddress instances.
  *
- * <p>VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
+ * <p>
+ * VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
  *
- * @author mzechner, Dave Clayton <contact@redskyforge.com>
- */
+ * @author mzechner, Dave Clayton <contact@redskyforge.com> */
 public class VertexArray extends VertexBufferObject {
-  public VertexArray(int numVertices, VertexAttribute... attributes) {
-    this(numVertices, new VertexAttributes(attributes));
-  }
+	public VertexArray (int numVertices, VertexAttribute... attributes) {
+		this(numVertices, new VertexAttributes(attributes));
+	}
 
-  /**
-   * Constructs a new interleaved VertexArray
-   *
-   * @param numVertices the maximum number of vertices
-   * @param attributes the {@link VertexAttributes}
-   */
-  public VertexArray(int numVertices, VertexAttributes attributes) {
-    super(false, numVertices, attributes);
-  }
+	/** Constructs a new interleaved VertexArray
+	 *
+	 * @param numVertices the maximum number of vertices
+	 * @param attributes the {@link VertexAttributes} */
+	public VertexArray (int numVertices, VertexAttributes attributes) {
+		super(false, numVertices, attributes);
+	}
 }

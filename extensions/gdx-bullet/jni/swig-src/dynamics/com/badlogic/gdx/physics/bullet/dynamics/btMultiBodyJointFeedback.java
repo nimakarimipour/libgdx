@@ -13,61 +13,58 @@ import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class btMultiBodyJointFeedback extends BulletBase {
-  private long swigCPtr;
+	private long swigCPtr;
 
-  protected btMultiBodyJointFeedback(final String className, long cPtr, boolean cMemoryOwn) {
-    super(className, cPtr, cMemoryOwn);
-    swigCPtr = cPtr;
-  }
+	protected btMultiBodyJointFeedback (final String className, long cPtr, boolean cMemoryOwn) {
+		super(className, cPtr, cMemoryOwn);
+		swigCPtr = cPtr;
+	}
 
-  /**
-   * Construct a new btMultiBodyJointFeedback, normally you should not need this constructor it's
-   * intended for low-level usage.
-   */
-  public btMultiBodyJointFeedback(long cPtr, boolean cMemoryOwn) {
-    this("btMultiBodyJointFeedback", cPtr, cMemoryOwn);
-    construct();
-  }
+	/** Construct a new btMultiBodyJointFeedback, normally you should not need this constructor it's intended for low-level
+	 * usage. */
+	public btMultiBodyJointFeedback (long cPtr, boolean cMemoryOwn) {
+		this("btMultiBodyJointFeedback", cPtr, cMemoryOwn);
+		construct();
+	}
 
-  @Override
-  protected void reset(long cPtr, boolean cMemoryOwn) {
-    if (!destroyed) destroy();
-    super.reset(swigCPtr = cPtr, cMemoryOwn);
-  }
+	@Override
+	protected void reset (long cPtr, boolean cMemoryOwn) {
+		if (!destroyed) destroy();
+		super.reset(swigCPtr = cPtr, cMemoryOwn);
+	}
 
-  public static long getCPtr(btMultiBodyJointFeedback obj) {
-    return (obj == null) ? 0 : obj.swigCPtr;
-  }
+	public static long getCPtr (btMultiBodyJointFeedback obj) {
+		return (obj == null) ? 0 : obj.swigCPtr;
+	}
 
-  @Override
-  protected void finalize() throws Throwable {
-    if (!destroyed) destroy();
-    super.finalize();
-  }
+	@Override
+	protected void finalize () throws Throwable {
+		if (!destroyed) destroy();
+		super.finalize();
+	}
 
-  @Override
-  protected synchronized void delete() {
-    if (swigCPtr != 0) {
-      if (swigCMemOwn) {
-        swigCMemOwn = false;
-        DynamicsJNI.delete_btMultiBodyJointFeedback(swigCPtr);
-      }
-      swigCPtr = 0;
-    }
-    super.delete();
-  }
+	@Override
+	protected synchronized void delete () {
+		if (swigCPtr != 0) {
+			if (swigCMemOwn) {
+				swigCMemOwn = false;
+				DynamicsJNI.delete_btMultiBodyJointFeedback(swigCPtr);
+			}
+			swigCPtr = 0;
+		}
+		super.delete();
+	}
 
-  public void setReactionForces(btSpatialForceVector value) {
-    DynamicsJNI.btMultiBodyJointFeedback_reactionForces_set(
-        swigCPtr, this, btSpatialForceVector.getCPtr(value), value);
-  }
+	public void setReactionForces (btSpatialForceVector value) {
+		DynamicsJNI.btMultiBodyJointFeedback_reactionForces_set(swigCPtr, this, btSpatialForceVector.getCPtr(value), value);
+	}
 
-  public btSpatialForceVector getReactionForces() {
-    long cPtr = DynamicsJNI.btMultiBodyJointFeedback_reactionForces_get(swigCPtr, this);
-    return (cPtr == 0) ? null : new btSpatialForceVector(cPtr, false);
-  }
+	public btSpatialForceVector getReactionForces () {
+		long cPtr = DynamicsJNI.btMultiBodyJointFeedback_reactionForces_get(swigCPtr, this);
+		return (cPtr == 0) ? null : new btSpatialForceVector(cPtr, false);
+	}
 
-  public btMultiBodyJointFeedback() {
-    this(DynamicsJNI.new_btMultiBodyJointFeedback(), true);
-  }
+	public btMultiBodyJointFeedback () {
+		this(DynamicsJNI.new_btMultiBodyJointFeedback(), true);
+	}
 }

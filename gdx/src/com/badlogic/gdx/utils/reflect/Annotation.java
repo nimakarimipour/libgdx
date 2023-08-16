@@ -1,28 +1,29 @@
+
 package com.badlogic.gdx.utils.reflect;
+
 import javax.annotation.Nullable;
 
-/**
- * Provides information about, and access to, an annotation of a field, class or interface.
+/** Provides information about, and access to, an annotation of a field, class or interface.
  *
- * @author dludwig
- */
+ * @author dludwig */
 public final class Annotation {
 
-  private java.lang.annotation.Annotation annotation;
+	private java.lang.annotation.Annotation annotation;
 
-  Annotation(java.lang.annotation.Annotation annotation) {
-    this.annotation = annotation;
-  }
+	Annotation (java.lang.annotation.Annotation annotation) {
+		this.annotation = annotation;
+	}
 
-  @Nullable @SuppressWarnings("unchecked")
-  public <T extends java.lang.annotation.Annotation> T getAnnotation(Class<T> annotationType) {
-    if (annotation.annotationType().equals(annotationType)) {
-      return (T) annotation;
-    }
-    return null;
-  }
+	@Nullable
+	@SuppressWarnings("unchecked")
+	public <T extends java.lang.annotation.Annotation> T getAnnotation (Class<T> annotationType) {
+		if (annotation.annotationType().equals(annotationType)) {
+			return (T)annotation;
+		}
+		return null;
+	}
 
-  public Class<? extends java.lang.annotation.Annotation> getAnnotationType() {
-    return annotation.annotationType();
-  }
+	public Class<? extends java.lang.annotation.Annotation> getAnnotationType () {
+		return annotation.annotationType();
+	}
 }

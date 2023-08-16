@@ -21,23 +21,22 @@ import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
 
 public class ModelMaterial {
-  public enum MaterialType {
-    Lambert,
-    Phong
-  }
+	public enum MaterialType {
+		Lambert, Phong
+	}
 
-  public String id;
+	public String id;
 
-  @Nullable public MaterialType type;
+	@Nullable public MaterialType type;
 
-  @Nullable public Color ambient;
-  @Nullable public Color diffuse;
-  @Nullable public Color specular;
-  @Nullable public Color emissive;
-  @Nullable public Color reflection;
+	@Nullable public Color ambient;
+	@Nullable public Color diffuse;
+	@Nullable public Color specular;
+	@Nullable public Color emissive;
+	@Nullable public Color reflection;
 
-  public float shininess;
-  public float opacity = 1.f;
+	public float shininess;
+	public float opacity = 1.f;
 
-  @Nullable public Array<ModelTexture> textures;
+	@Nullable public Array<ModelTexture> textures;
 }

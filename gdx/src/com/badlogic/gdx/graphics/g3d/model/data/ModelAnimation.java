@@ -20,6 +20,6 @@ import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
 
 public class ModelAnimation {
-  @Nullable public String id;
-  public Array<ModelNodeAnimation> nodeAnimations = new Array<ModelNodeAnimation>();
+	@Nullable public String id;
+	public Array<ModelNodeAnimation> nodeAnimations = new Array<ModelNodeAnimation>();
 }

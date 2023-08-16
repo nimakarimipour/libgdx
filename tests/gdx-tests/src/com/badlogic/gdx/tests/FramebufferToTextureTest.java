@@ -36,63 +36,63 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class FramebufferToTextureTest extends GdxTest {
 
-  TextureRegion fbTexture;
-  Texture texture;
-  Model mesh;
-  ModelInstance modelInstance;
-  ModelBatch modelBatch;
-  PerspectiveCamera cam;
-  SpriteBatch batch;
-  BitmapFont font;
-  Color clearColor = new Color(0.2f, 0.2f, 0.2f, 1);
-  float angle = 0;
+	TextureRegion fbTexture;
+	Texture texture;
+	Model mesh;
+	ModelInstance modelInstance;
+	ModelBatch modelBatch;
+	PerspectiveCamera cam;
+	SpriteBatch batch;
+	BitmapFont font;
+	Color clearColor = new Color(0.2f, 0.2f, 0.2f, 1);
+	float angle = 0;
 
-  @Override
-  public void create() {
-    texture = new Texture(Gdx.files.internal("data/badlogic.jpg"), true);
-    texture.setFilter(TextureFilter.MipMap, TextureFilter.Linear);
-    ObjLoader objLoader = new ObjLoader();
-    mesh = objLoader.loadModel(Gdx.files.internal("data/cube.obj"));
-    mesh.materials.get(0).set(new TextureAttribute(TextureAttribute.Diffuse, texture));
-    modelInstance = new ModelInstance(mesh);
-    modelBatch = new ModelBatch();
+	@Override
+	public void create () {
+		texture = new Texture(Gdx.files.internal("data/badlogic.jpg"), true);
+		texture.setFilter(TextureFilter.MipMap, TextureFilter.Linear);
+		ObjLoader objLoader = new ObjLoader();
+		mesh = objLoader.loadModel(Gdx.files.internal("data/cube.obj"));
+		mesh.materials.get(0).set(new TextureAttribute(TextureAttribute.Diffuse, texture));
+		modelInstance = new ModelInstance(mesh);
+		modelBatch = new ModelBatch();
 
-    cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    cam.position.set(3, 3, 3);
-    cam.direction.set(-1, -1, -1);
-    batch = new SpriteBatch();
-    font = new BitmapFont();
-  }
+		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		cam.position.set(3, 3, 3);
+		cam.direction.set(-1, -1, -1);
+		batch = new SpriteBatch();
+		font = new BitmapFont();
+	}
 
-  @Override
-  public void render() {
-    Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
-    Gdx.gl.glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-    Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+	@Override
+	public void render () {
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+		Gdx.gl.glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
 
-    cam.update();
+		cam.update();
 
-    modelInstance.transform.rotate(Vector3.Y, 45 * Gdx.graphics.getDeltaTime());
-    modelBatch.begin(cam);
-    modelBatch.render(modelInstance);
-    modelBatch.end();
+		modelInstance.transform.rotate(Vector3.Y, 45 * Gdx.graphics.getDeltaTime());
+		modelBatch.begin(cam);
+		modelBatch.render(modelInstance);
+		modelBatch.end();
 
-    if (Gdx.input.justTouched() || fbTexture == null) {
-      if (fbTexture != null) fbTexture.getTexture().dispose();
-      fbTexture = ScreenUtils.getFrameBufferTexture();
-    }
+		if (Gdx.input.justTouched() || fbTexture == null) {
+			if (fbTexture != null) fbTexture.getTexture().dispose();
+			fbTexture = ScreenUtils.getFrameBufferTexture();
+		}
 
-    batch.begin();
-    if (fbTexture != null) {
-      batch.draw(fbTexture, 0, 0, 100, 100);
-    }
-    font.draw(batch, "Touch screen to take a snapshot", 10, 40);
-    batch.end();
-  }
+		batch.begin();
+		if (fbTexture != null) {
+			batch.draw(fbTexture, 0, 0, 100, 100);
+		}
+		font.draw(batch, "Touch screen to take a snapshot", 10, 40);
+		batch.end();
+	}
 
-  @Override
-  public void pause() {
-    fbTexture = null;
-  }
+	@Override
+	public void pause () {
+		fbTexture = null;
+	}
 }

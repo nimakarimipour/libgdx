@@ -22,12 +22,12 @@ import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
 
 public class ModelNodeAnimation {
-  /** the id of the node animated by this animation FIXME should be nodeId * */
-  @Nullable public String nodeId;
-  /** the keyframes, defining the translation of a node for a specific timestamp * */
-  @Nullable public Array<ModelNodeKeyframe<Vector3>> translation;
-  /** the keyframes, defining the rotation of a node for a specific timestamp * */
-  @Nullable public Array<ModelNodeKeyframe<Quaternion>> rotation;
-  /** the keyframes, defining the scaling of a node for a specific timestamp * */
-  @Nullable public Array<ModelNodeKeyframe<Vector3>> scaling;
+	/** the id of the node animated by this animation FIXME should be nodeId * */
+	@Nullable public String nodeId;
+	/** the keyframes, defining the translation of a node for a specific timestamp * */
+	@Nullable public Array<ModelNodeKeyframe<Vector3>> translation;
+	/** the keyframes, defining the rotation of a node for a specific timestamp * */
+	@Nullable public Array<ModelNodeKeyframe<Quaternion>> rotation;
+	/** the keyframes, defining the scaling of a node for a specific timestamp * */
+	@Nullable public Array<ModelNodeKeyframe<Vector3>> scaling;
 }

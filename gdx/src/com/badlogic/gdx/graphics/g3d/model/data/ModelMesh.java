@@ -20,8 +20,8 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import javax.annotation.Nullable;
 
 public class ModelMesh {
-  @Nullable public String id;
-  @Nullable public VertexAttribute[] attributes;
-  @Nullable public float[] vertices;
-  public ModelMeshPart[] parts;
+	@Nullable public String id;
+	@Nullable public VertexAttribute[] attributes;
+	@Nullable public float[] vertices;
+	public ModelMeshPart[] parts;
 }

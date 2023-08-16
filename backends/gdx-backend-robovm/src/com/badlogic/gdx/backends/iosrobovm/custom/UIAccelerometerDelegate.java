@@ -29,26 +29,24 @@ import org.robovm.objc.annotation.*;
 /*</annotations>*/
 /*<visibility>*/ public /* </visibility> */
 interface /* <name> */ UIAccelerometerDelegate /* </name> */
-    /* <implements> */ extends NSObjectProtocol /* </implements> */ {
+	/* <implements> */ extends NSObjectProtocol /* </implements> */ {
 
-  /* <ptr> */
-  /* </ptr> */
-  /* <bind> */
-  /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <properties> */
+	/* <ptr> */
+	/* </ptr> */
+	/* <bind> */
+	/* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <properties> */
 
-  /* </properties> */
-  /* <methods> */
-  /**
-   * @since Available in iOS 2.0 and later.
-   * @deprecated Deprecated in iOS 5.0.
-   */
-  @Deprecated
-  @Method(selector = "accelerometer:didAccelerate:")
-  void didAccelerate(UIAccelerometer accelerometer, UIAcceleration acceleration);
-  /* </methods> */
-  /* <adapter> */
-  /* </adapter> */
+	/* </properties> */
+	/* <methods> */
+	/** @since Available in iOS 2.0 and later.
+	 * @deprecated Deprecated in iOS 5.0. */
+	@Deprecated
+	@Method(selector = "accelerometer:didAccelerate:")
+	void didAccelerate (UIAccelerometer accelerometer, UIAcceleration acceleration);
+	/* </methods> */
+	/* <adapter> */
+	/* </adapter> */
 }

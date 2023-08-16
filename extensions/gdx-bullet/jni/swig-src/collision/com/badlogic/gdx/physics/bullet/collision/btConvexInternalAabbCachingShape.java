@@ -11,53 +11,49 @@ package com.badlogic.gdx.physics.bullet.collision;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class btConvexInternalAabbCachingShape extends btConvexInternalShape {
-  private long swigCPtr;
+	private long swigCPtr;
 
-  protected btConvexInternalAabbCachingShape(
-      final String className, long cPtr, boolean cMemoryOwn) {
-    super(className, CollisionJNI.btConvexInternalAabbCachingShape_SWIGUpcast(cPtr), cMemoryOwn);
-    swigCPtr = cPtr;
-  }
+	protected btConvexInternalAabbCachingShape (final String className, long cPtr, boolean cMemoryOwn) {
+		super(className, CollisionJNI.btConvexInternalAabbCachingShape_SWIGUpcast(cPtr), cMemoryOwn);
+		swigCPtr = cPtr;
+	}
 
-  /**
-   * Construct a new btConvexInternalAabbCachingShape, normally you should not need this constructor
-   * it's intended for low-level usage.
-   */
-  public btConvexInternalAabbCachingShape(long cPtr, boolean cMemoryOwn) {
-    this("btConvexInternalAabbCachingShape", cPtr, cMemoryOwn);
-    construct();
-  }
+	/** Construct a new btConvexInternalAabbCachingShape, normally you should not need this constructor it's intended for low-level
+	 * usage. */
+	public btConvexInternalAabbCachingShape (long cPtr, boolean cMemoryOwn) {
+		this("btConvexInternalAabbCachingShape", cPtr, cMemoryOwn);
+		construct();
+	}
 
-  @Override
-  protected void reset(long cPtr, boolean cMemoryOwn) {
-    if (!destroyed) destroy();
-    super.reset(
-        CollisionJNI.btConvexInternalAabbCachingShape_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-  }
+	@Override
+	protected void reset (long cPtr, boolean cMemoryOwn) {
+		if (!destroyed) destroy();
+		super.reset(CollisionJNI.btConvexInternalAabbCachingShape_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+	}
 
-  public static long getCPtr(btConvexInternalAabbCachingShape obj) {
-    return (obj == null) ? 0 : obj.swigCPtr;
-  }
+	public static long getCPtr (btConvexInternalAabbCachingShape obj) {
+		return (obj == null) ? 0 : obj.swigCPtr;
+	}
 
-  @Override
-  protected void finalize() throws Throwable {
-    if (!destroyed) destroy();
-    super.finalize();
-  }
+	@Override
+	protected void finalize () throws Throwable {
+		if (!destroyed) destroy();
+		super.finalize();
+	}
 
-  @Override
-  protected synchronized void delete() {
-    if (swigCPtr != 0) {
-      if (swigCMemOwn) {
-        swigCMemOwn = false;
-        CollisionJNI.delete_btConvexInternalAabbCachingShape(swigCPtr);
-      }
-      swigCPtr = 0;
-    }
-    super.delete();
-  }
+	@Override
+	protected synchronized void delete () {
+		if (swigCPtr != 0) {
+			if (swigCMemOwn) {
+				swigCMemOwn = false;
+				CollisionJNI.delete_btConvexInternalAabbCachingShape(swigCPtr);
+			}
+			swigCPtr = 0;
+		}
+		super.delete();
+	}
 
-  public void recalcLocalAabb() {
-    CollisionJNI.btConvexInternalAabbCachingShape_recalcLocalAabb(swigCPtr, this);
-  }
+	public void recalcLocalAabb () {
+		CollisionJNI.btConvexInternalAabbCachingShape_recalcLocalAabb(swigCPtr, this);
+	}
 }

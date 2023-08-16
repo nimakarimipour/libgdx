@@ -25,48 +25,44 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
 
-/**
- * {@link AssetLoader} for {@link Music} instances. The Music instance is loaded synchronously.
+/** {@link AssetLoader} for {@link Music} instances. The Music instance is loaded synchronously.
  *
- * @author mzechner
- */
+ * @author mzechner */
 public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.MusicParameter> {
 
-  @Nullable private Music music;
+	@Nullable private Music music;
 
-  public MusicLoader(FileHandleResolver resolver) {
-    super(resolver);
-  }
+	public MusicLoader (FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-  /**
-   * Returns the {@link Music} instance currently loaded by this {@link MusicLoader}.
-   *
-   * @return the currently loaded {@link Music}, otherwise {@code null} if no {@link Music} has been
-   *     loaded yet.
-   */
-  @Nullable protected Music getLoadedMusic() {
-    return music;
-  }
+	/** Returns the {@link Music} instance currently loaded by this {@link MusicLoader}.
+	 *
+	 * @return the currently loaded {@link Music}, otherwise {@code null} if no {@link Music} has been loaded yet. */
+	@Nullable
+	protected Music getLoadedMusic () {
+		return music;
+	}
 
-  @Override
-  public void loadAsync(
-      AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
-    music = Gdx.audio.newMusic(file);
-  }
+	@Override
+	public void loadAsync (AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
+		music = Gdx.audio.newMusic(file);
+	}
 
-  @Nullable @Override
-  public Music loadSync(
-      AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
-    Music music = this.music;
-    this.music = null;
-    return music;
-  }
+	@Nullable
+	@Override
+	public Music loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
+		Music music = this.music;
+		this.music = null;
+		return music;
+	}
 
-  @Nullable @Override
-  public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, @Nullable MusicParameter parameter) {
-    return null;
-  }
+	@Nullable
+	@Override
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable MusicParameter parameter) {
+		return null;
+	}
 
-  public static class MusicParameter extends AssetLoaderParameters<Music> {}
+	public static class MusicParameter extends AssetLoaderParameters<Music> {
+	}
 }
