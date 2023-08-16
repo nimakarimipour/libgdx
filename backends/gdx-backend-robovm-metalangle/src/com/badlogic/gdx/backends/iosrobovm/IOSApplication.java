@@ -46,8 +46,8 @@ public class IOSApplication implements Application {
 
 		@Override
 		public boolean didFinishLaunching (UIApplication application, UIApplicationLaunchOptions launchOptions) {
-			application.addStrongRef(// Prevent this from being GCed until the ObjC UIApplication is deallocated
-				this);
+			// Prevent this from being GCed until the ObjC UIApplication is deallocated
+			application.addStrongRef(this);
 			this.app = createApplication();
 			return app.didFinishLaunching(application, launchOptions);
 		}
