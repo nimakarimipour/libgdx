@@ -25,29 +25,29 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class DefaultGwtAudio implements GwtAudio {
-  private WebAudioAPIManager webAudioAPIManager = null;
+	private WebAudioAPIManager webAudioAPIManager = null;
 
-  public DefaultGwtAudio() {
-    webAudioAPIManager = new WebAudioAPIManager();
-  }
+	public DefaultGwtAudio () {
+		webAudioAPIManager = new WebAudioAPIManager();
+	}
 
-  @Override
-  public AudioDevice newAudioDevice(int samplingRate, boolean isMono) {
-    throw new GdxRuntimeException("AudioDevice not supported by GWT backend");
-  }
+	@Override
+	public AudioDevice newAudioDevice (int samplingRate, boolean isMono) {
+		throw new GdxRuntimeException("AudioDevice not supported by GWT backend");
+	}
 
-  @Override
-  public AudioRecorder newAudioRecorder(int samplingRate, boolean isMono) {
-    throw new GdxRuntimeException("AudioRecorder not supported by GWT backend");
-  }
+	@Override
+	public AudioRecorder newAudioRecorder (int samplingRate, boolean isMono) {
+		throw new GdxRuntimeException("AudioRecorder not supported by GWT backend");
+	}
 
-  @Override
-  public Sound newSound(FileHandle fileHandle) {
-    return webAudioAPIManager.createSound(fileHandle);
-  }
+	@Override
+	public Sound newSound (FileHandle fileHandle) {
+		return webAudioAPIManager.createSound(fileHandle);
+	}
 
-  @Override
-  public Music newMusic(FileHandle file) {
-    return webAudioAPIManager.createMusic(file);
-  }
+	@Override
+	public Music newMusic (FileHandle file) {
+		return webAudioAPIManager.createMusic(file);
+	}
 }

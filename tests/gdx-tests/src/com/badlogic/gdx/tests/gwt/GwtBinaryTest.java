@@ -24,24 +24,24 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 public class GwtBinaryTest extends GdxTest {
-  byte[] bytes;
+	byte[] bytes;
 
-  @Override
-  public void create() {
-    FileHandle handle = Gdx.files.internal("data/lsans.ttf");
-    bytes = new byte[(int) handle.length()];
-    DataInputStream in = new DataInputStream(handle.read());
-    for (int i = 0; i < 100; i++) {
-      try {
-        bytes[i] = in.readByte();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
+	@Override
+	public void create () {
+		FileHandle handle = Gdx.files.internal("data/lsans.ttf");
+		bytes = new byte[(int)handle.length()];
+		DataInputStream in = new DataInputStream(handle.read());
+		for (int i = 0; i < 100; i++) {
+			try {
+				bytes[i] = in.readByte();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-  @Override
-  public void render() {
-    ScreenUtils.clear(1, 0, 0, 1);
-  }
+	@Override
+	public void render () {
+		ScreenUtils.clear(1, 0, 0, 1);
+	}
 }

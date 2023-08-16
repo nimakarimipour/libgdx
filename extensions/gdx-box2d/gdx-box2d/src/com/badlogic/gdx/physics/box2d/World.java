@@ -48,14 +48,12 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
 import java.util.Iterator;
 
-/**
- * The world class manages all physics entities, dynamic simulation, and asynchronous queries. The
- * world also contains efficient memory management facilities.
+/** The world class manages all physics entities, dynamic simulation, and asynchronous queries. The world also contains efficient
+ * memory management facilities.
  *
- * @author mzechner
- */
+ * @author mzechner */
 public final class World implements Disposable {
-  // @off
+	// @off
   /*JNI
   #include <Box2D/Box2D.h>
 

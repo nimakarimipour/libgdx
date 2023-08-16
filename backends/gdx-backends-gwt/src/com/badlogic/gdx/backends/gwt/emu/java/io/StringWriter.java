@@ -11,29 +11,31 @@ details. */
 package java.io;
 
 public class StringWriter extends Writer {
-  private final StringBuffer out;
+	private final StringBuffer out;
 
-  public StringWriter() {
-    out = new StringBuffer();
-  }
+	public StringWriter () {
+		out = new StringBuffer();
+	}
 
-  public StringWriter(int initialCapacity) {
-    out = new StringBuffer(initialCapacity);
-  }
+	public StringWriter (int initialCapacity) {
+		out = new StringBuffer(initialCapacity);
+	}
 
-  public void write(char[] b, int offset, int length) throws IOException {
-    out.append(b, offset, length);
-  }
+	public void write (char[] b, int offset, int length) throws IOException {
+		out.append(b, offset, length);
+	}
 
-  public String toString() {
-    return out.toString();
-  }
+	public String toString () {
+		return out.toString();
+	}
 
-  public StringBuffer getBuffer() {
-    return out;
-  }
+	public StringBuffer getBuffer () {
+		return out;
+	}
 
-  public void flush() throws IOException {}
+	public void flush () throws IOException {
+	}
 
-  public void close() throws IOException {}
+	public void close () throws IOException {
+	}
 }

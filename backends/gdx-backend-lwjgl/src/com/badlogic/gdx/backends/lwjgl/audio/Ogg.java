@@ -22,58 +22,58 @@ import java.io.ByteArrayOutputStream;
 
 /** @author Nathan Sweet */
 public class Ogg {
-  public static class Music extends OpenALMusic {
-    private OggInputStream input;
-    private OggInputStream previousInput;
+	public static class Music extends OpenALMusic {
+		private OggInputStream input;
+		private OggInputStream previousInput;
 
-    public Music(OpenALLwjglAudio audio, FileHandle file) {
-      super(audio, file);
-      if (audio.noDevice) return;
-      input = new OggInputStream(file.read());
-      setup(input.getChannels(), input.getSampleRate());
-    }
+		public Music (OpenALLwjglAudio audio, FileHandle file) {
+			super(audio, file);
+			if (audio.noDevice) return;
+			input = new OggInputStream(file.read());
+			setup(input.getChannels(), input.getSampleRate());
+		}
 
-    public int read(byte[] buffer) {
-      if (input == null) {
-        input = new OggInputStream(file.read(), previousInput);
-        setup(input.getChannels(), input.getSampleRate());
-        previousInput = null; // release this reference
-      }
-      return input.read(buffer);
-    }
+		public int read (byte[] buffer) {
+			if (input == null) {
+				input = new OggInputStream(file.read(), previousInput);
+				setup(input.getChannels(), input.getSampleRate());
+				previousInput = null; // release this reference
+			}
+			return input.read(buffer);
+		}
 
-    public void reset() {
-      StreamUtils.closeQuietly(input);
-      previousInput = null;
-      input = null;
-    }
+		public void reset () {
+			StreamUtils.closeQuietly(input);
+			previousInput = null;
+			input = null;
+		}
 
-    @Override
-    protected void loop() {
-      StreamUtils.closeQuietly(input);
-      previousInput = input;
-      input = null;
-    }
-  }
+		@Override
+		protected void loop () {
+			StreamUtils.closeQuietly(input);
+			previousInput = input;
+			input = null;
+		}
+	}
 
-  public static class Sound extends OpenALSound {
-    public Sound(OpenALLwjglAudio audio, FileHandle file) {
-      super(audio);
-      if (audio.noDevice) return;
-      OggInputStream input = null;
-      try {
-        input = new OggInputStream(file.read());
-        ByteArrayOutputStream output = new ByteArrayOutputStream(4096);
-        byte[] buffer = new byte[2048];
-        while (!input.atEnd()) {
-          int length = input.read(buffer);
-          if (length == -1) break;
-          output.write(buffer, 0, length);
-        }
-        setup(output.toByteArray(), input.getChannels(), input.getSampleRate());
-      } finally {
-        StreamUtils.closeQuietly(input);
-      }
-    }
-  }
+	public static class Sound extends OpenALSound {
+		public Sound (OpenALLwjglAudio audio, FileHandle file) {
+			super(audio);
+			if (audio.noDevice) return;
+			OggInputStream input = null;
+			try {
+				input = new OggInputStream(file.read());
+				ByteArrayOutputStream output = new ByteArrayOutputStream(4096);
+				byte[] buffer = new byte[2048];
+				while (!input.atEnd()) {
+					int length = input.read(buffer);
+					if (length == -1) break;
+					output.write(buffer, 0, length);
+				}
+				setup(output.toByteArray(), input.getChannels(), input.getSampleRate());
+			} finally {
+				StreamUtils.closeQuietly(input);
+			}
+		}
+	}
 }

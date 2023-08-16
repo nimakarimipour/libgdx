@@ -9,14 +9,14 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 public final class eEpaStatus {
-  public static final int eEpaValid = 0;
-  public static final int eEpaTouching = eEpaValid + 1;
-  public static final int eEpaDegenerated = eEpaTouching + 1;
-  public static final int eEpaNonConvex = eEpaDegenerated + 1;
-  public static final int eEpaInvalidHull = eEpaNonConvex + 1;
-  public static final int eEpaOutOfFaces = eEpaInvalidHull + 1;
-  public static final int eEpaOutOfVertices = eEpaOutOfFaces + 1;
-  public static final int eEpaAccuraryReached = eEpaOutOfVertices + 1;
-  public static final int eEpaFallBack = eEpaAccuraryReached + 1;
-  public static final int eEpaFailed = eEpaFallBack + 1;
+	public static final int eEpaValid = 0;
+	public static final int eEpaTouching = eEpaValid + 1;
+	public static final int eEpaDegenerated = eEpaTouching + 1;
+	public static final int eEpaNonConvex = eEpaDegenerated + 1;
+	public static final int eEpaInvalidHull = eEpaNonConvex + 1;
+	public static final int eEpaOutOfFaces = eEpaInvalidHull + 1;
+	public static final int eEpaOutOfVertices = eEpaOutOfFaces + 1;
+	public static final int eEpaAccuraryReached = eEpaOutOfVertices + 1;
+	public static final int eEpaFallBack = eEpaAccuraryReached + 1;
+	public static final int eEpaFailed = eEpaFallBack + 1;
 }

@@ -35,77 +35,78 @@ import org.robovm.rt.bro.ptr.VoidPtr;
 /*<annotations>*/ @NativeClass
 /* </annotations> */
 /* <visibility> */ public /* </visibility> */ class /* <name> */ MGLContext /* </name> */
-    extends /* <extends> */ NSObject /* </extends> */
+	extends /* <extends> */ NSObject /* </extends> */
 /* <implements> */
 /* </implements> */ {
 
-  /* <ptr> */ public static class MGLContextPtr extends Ptr<MGLContext, MGLContextPtr> {}
+	/* <ptr> */ public static class MGLContextPtr extends Ptr<MGLContext, MGLContextPtr> {
+	}
 
-  /* </ptr> */
-  /* <bind> */ static {
-    ObjCRuntime.bind(MGLContext.class);
-  } /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <constructors> */
+	/* </ptr> */
+	/* <bind> */ static {
+		ObjCRuntime.bind(MGLContext.class);
+	} /* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <constructors> */
 
-  protected MGLContext() {}
+	protected MGLContext () {
+	}
 
-  protected MGLContext(Handle h, long handle) {
-    super(h, handle);
-  }
+	protected MGLContext (Handle h, long handle) {
+		super(h, handle);
+	}
 
-  protected MGLContext(SkipInit skipInit) {
-    super(skipInit);
-  }
+	protected MGLContext (SkipInit skipInit) {
+		super(skipInit);
+	}
 
-  @Method(selector = "initWithAPI:")
-  public MGLContext(MGLRenderingAPI api) {
-    super((SkipInit) null);
-    initObject(initWithAPI(api));
-  }
+	@Method(selector = "initWithAPI:")
+	public MGLContext (MGLRenderingAPI api) {
+		super((SkipInit)null);
+		initObject(initWithAPI(api));
+	}
 
-  @Method(selector = "initWithAPI:sharegroup:")
-  public MGLContext(MGLRenderingAPI api, MGLSharegroup sharegroup) {
-    super((SkipInit) null);
-    initObject(initWithAPISharegroup(api, sharegroup));
-  }
+	@Method(selector = "initWithAPI:sharegroup:")
+	public MGLContext (MGLRenderingAPI api, MGLSharegroup sharegroup) {
+		super((SkipInit)null);
+		initObject(initWithAPISharegroup(api, sharegroup));
+	}
 
-  /* </constructors> */
-  /* <properties> */
-  @Property(selector = "API")
-  public native MGLRenderingAPI getAPI();
+	/* </constructors> */
+	/* <properties> */
+	@Property(selector = "API")
+	public native MGLRenderingAPI getAPI ();
 
-  @Property(selector = "sharegroup")
-  public native MGLSharegroup getSharegroup();
+	@Property(selector = "sharegroup")
+	public native MGLSharegroup getSharegroup ();
 
-  @Property(selector = "eglDisplay")
-  public native VoidPtr getEglDisplay();
+	@Property(selector = "eglDisplay")
+	public native VoidPtr getEglDisplay ();
 
-  /* </properties> */
-  /* <members> */
-  /* </members> */
-  /* <methods> */
-  @Method(selector = "initWithAPI:")
-  protected native @Pointer long initWithAPI(MGLRenderingAPI api);
+	/* </properties> */
+	/* <members> */
+	/* </members> */
+	/* <methods> */
+	@Method(selector = "initWithAPI:")
+	protected native @Pointer long initWithAPI (MGLRenderingAPI api);
 
-  @Method(selector = "initWithAPI:sharegroup:")
-  protected native @Pointer long initWithAPISharegroup(
-      MGLRenderingAPI api, MGLSharegroup sharegroup);
+	@Method(selector = "initWithAPI:sharegroup:")
+	protected native @Pointer long initWithAPISharegroup (MGLRenderingAPI api, MGLSharegroup sharegroup);
 
-  @Method(selector = "present:")
-  public native boolean present(MGLLayer layer);
+	@Method(selector = "present:")
+	public native boolean present (MGLLayer layer);
 
-  @Method(selector = "currentContext")
-  public static native MGLContext currentContext();
+	@Method(selector = "currentContext")
+	public static native MGLContext currentContext ();
 
-  @Method(selector = "currentLayer")
-  public static native MGLLayer currentLayer();
+	@Method(selector = "currentLayer")
+	public static native MGLLayer currentLayer ();
 
-  @Method(selector = "setCurrentContext:")
-  public static native boolean setCurrentContext(MGLContext context);
+	@Method(selector = "setCurrentContext:")
+	public static native boolean setCurrentContext (MGLContext context);
 
-  @Method(selector = "setCurrentContext:forLayer:")
-  public static native boolean setCurrentContextForLayer(MGLContext context, MGLLayer layer);
-  /* </methods> */
+	@Method(selector = "setCurrentContext:forLayer:")
+	public static native boolean setCurrentContextForLayer (MGLContext context, MGLLayer layer);
+	/* </methods> */
 }

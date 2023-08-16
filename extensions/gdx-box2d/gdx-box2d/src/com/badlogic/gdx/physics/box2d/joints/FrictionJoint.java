@@ -20,12 +20,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.World;
 
-/**
- * Friction joint. This is used for top-down friction. It provides 2D translational friction and
- * angular friction.
- */
+/** Friction joint. This is used for top-down friction. It provides 2D translational friction and angular friction. */
 public class FrictionJoint extends Joint {
-  // @off
+	// @off
   /*JNI
   #include <Box2D/Box2D.h>
   	 */

@@ -24,43 +24,37 @@ import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * Makes {@link FreeTypeFontGenerator} managable via {@link AssetManager}.
+/** Makes {@link FreeTypeFontGenerator} managable via {@link AssetManager}.
  *
- * <p>Do {@code assetManager.setLoader(FreeTypeFontGenerator.class, new
+ * <p>
+ * Do {@code assetManager.setLoader(FreeTypeFontGenerator.class, new
  * FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()))} to register it.
  *
- * @author Daniel Holderbaum
- */
+ * @author Daniel Holderbaum */
 public class FreeTypeFontGeneratorLoader
-    extends SynchronousAssetLoader<
-        FreeTypeFontGenerator, FreeTypeFontGeneratorLoader.FreeTypeFontGeneratorParameters> {
+	extends SynchronousAssetLoader<FreeTypeFontGenerator, FreeTypeFontGeneratorLoader.FreeTypeFontGeneratorParameters> {
 
-  public FreeTypeFontGeneratorLoader(FileHandleResolver resolver) {
-    super(resolver);
-  }
+	public FreeTypeFontGeneratorLoader (FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-  @Override
-  public FreeTypeFontGenerator load(
-      AssetManager assetManager,
-      String fileName,
-      FileHandle file,
-      FreeTypeFontGeneratorParameters parameter) {
-    FreeTypeFontGenerator generator = null;
-    if (file.extension().equals("gen")) {
-      generator = new FreeTypeFontGenerator(file.sibling(file.nameWithoutExtension()));
-    } else {
-      generator = new FreeTypeFontGenerator(file);
-    }
-    return generator;
-  }
+	@Override
+	public FreeTypeFontGenerator load (AssetManager assetManager, String fileName, FileHandle file,
+		FreeTypeFontGeneratorParameters parameter) {
+		FreeTypeFontGenerator generator = null;
+		if (file.extension().equals("gen")) {
+			generator = new FreeTypeFontGenerator(file.sibling(file.nameWithoutExtension()));
+		} else {
+			generator = new FreeTypeFontGenerator(file);
+		}
+		return generator;
+	}
 
-  @Override
-  public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, FreeTypeFontGeneratorParameters parameter) {
-    return null;
-  }
+	@Override
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, FreeTypeFontGeneratorParameters parameter) {
+		return null;
+	}
 
-  public static class FreeTypeFontGeneratorParameters
-      extends AssetLoaderParameters<FreeTypeFontGenerator> {}
+	public static class FreeTypeFontGeneratorParameters extends AssetLoaderParameters<FreeTypeFontGenerator> {
+	}
 }

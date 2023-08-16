@@ -33,108 +33,98 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StringBuilder;
 
 public class ModelTest extends BaseG3dHudTest {
-  protected Environment environment;
+	protected Environment environment;
 
-  ObjectMap<ModelInstance, AnimationController> animationControllers =
-      new ObjectMap<ModelInstance, AnimationController>();
+	ObjectMap<ModelInstance, AnimationController> animationControllers = new ObjectMap<ModelInstance, AnimationController>();
 
-  @Override
-  public void create() {
-    super.create();
-    environment = new Environment();
-    environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1.f));
-    environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.5f, -1.0f, -0.8f));
+	@Override
+	public void create () {
+		super.create();
+		environment = new Environment();
+		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1.f));
+		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.5f, -1.0f, -0.8f));
 
-    cam.position.set(1, 1, 1);
-    cam.lookAt(0, 0, 0);
-    cam.update();
-    showAxes = true;
+		cam.position.set(1, 1, 1);
+		cam.lookAt(0, 0, 0);
+		cam.update();
+		showAxes = true;
 
-    onModelClicked("g3d/teapot.g3db");
-  }
+		onModelClicked("g3d/teapot.g3db");
+	}
 
-  private final Vector3 tmpV1 = new Vector3(), tmpV2 = new Vector3();
-  private final BoundingBox bounds = new BoundingBox();
+	private final Vector3 tmpV1 = new Vector3(), tmpV2 = new Vector3();
+	private final BoundingBox bounds = new BoundingBox();
 
-  @Override
-  protected void render(ModelBatch batch, Array<ModelInstance> instances) {
-    for (ObjectMap.Entry<ModelInstance, AnimationController> e : animationControllers.entries())
-      e.value.update(Gdx.graphics.getDeltaTime());
-    batch.render(instances, environment);
-  }
+	@Override
+	protected void render (ModelBatch batch, Array<ModelInstance> instances) {
+		for (ObjectMap.Entry<ModelInstance, AnimationController> e : animationControllers.entries())
+			e.value.update(Gdx.graphics.getDeltaTime());
+		batch.render(instances, environment);
+	}
 
-  @Override
-  protected void getStatus(StringBuilder stringBuilder) {
-    super.getStatus(stringBuilder);
+	@Override
+	protected void getStatus (StringBuilder stringBuilder) {
+		super.getStatus(stringBuilder);
 
-    for (final ModelInstance instance : instances) {
-      if (instance.animations.size > 0) {
-        stringBuilder.append(" press space or menu to switch animation");
-        break;
-      }
-    }
-  }
+		for (final ModelInstance instance : instances) {
+			if (instance.animations.size > 0) {
+				stringBuilder.append(" press space or menu to switch animation");
+				break;
+			}
+		}
+	}
 
-  protected String currentlyLoading;
+	protected String currentlyLoading;
 
-  @Override
-  protected void onModelClicked(final String name) {
-    if (name == null) return;
+	@Override
+	protected void onModelClicked (final String name) {
+		if (name == null) return;
 
-    currentlyLoading = "data/" + name;
-    assets.load(currentlyLoading, Model.class);
-    loading = true;
-  }
+		currentlyLoading = "data/" + name;
+		assets.load(currentlyLoading, Model.class);
+		loading = true;
+	}
 
-  @Override
-  protected void onLoaded() {
-    if (currentlyLoading == null || currentlyLoading.length() == 0) return;
+	@Override
+	protected void onLoaded () {
+		if (currentlyLoading == null || currentlyLoading.length() == 0) return;
 
-    instances.clear();
-    animationControllers.clear();
-    final ModelInstance instance = new ModelInstance(assets.get(currentlyLoading, Model.class));
-    instance.transform = transform;
-    instances.add(instance);
-    if (instance.animations.size > 0)
-      animationControllers.put(instance, new AnimationController(instance));
-    currentlyLoading = null;
+		instances.clear();
+		animationControllers.clear();
+		final ModelInstance instance = new ModelInstance(assets.get(currentlyLoading, Model.class));
+		instance.transform = transform;
+		instances.add(instance);
+		if (instance.animations.size > 0) animationControllers.put(instance, new AnimationController(instance));
+		currentlyLoading = null;
 
-    instance.calculateBoundingBox(bounds);
-    cam.position
-        .set(1, 1, 1)
-        .nor()
-        .scl(bounds.getDimensions(tmpV1).len() * 0.75f + bounds.getCenter(tmpV2).len());
-    cam.up.set(0, 1, 0);
-    cam.lookAt(0, 0, 0);
-    cam.far = 50f + bounds.getDimensions(tmpV1).len() * 2.0f;
-    cam.update();
-  }
+		instance.calculateBoundingBox(bounds);
+		cam.position.set(1, 1, 1).nor().scl(bounds.getDimensions(tmpV1).len() * 0.75f + bounds.getCenter(tmpV2).len());
+		cam.up.set(0, 1, 0);
+		cam.lookAt(0, 0, 0);
+		cam.far = 50f + bounds.getDimensions(tmpV1).len() * 2.0f;
+		cam.update();
+	}
 
-  protected void switchAnimation() {
-    for (ObjectMap.Entry<ModelInstance, AnimationController> e : animationControllers.entries()) {
-      int animIndex = 0;
-      if (e.value.current != null) {
-        for (int i = 0; i < e.key.animations.size; i++) {
-          final Animation animation = e.key.animations.get(i);
-          if (e.value.current.animation == animation) {
-            animIndex = i;
-            break;
-          }
-        }
-      }
-      animIndex = (animIndex + 1) % (e.key.animations.size + 1);
-      e.value.animate(
-          (animIndex == e.key.animations.size) ? null : e.key.animations.get(animIndex).id,
-          -1,
-          1f,
-          null,
-          0.2f);
-    }
-  }
+	protected void switchAnimation () {
+		for (ObjectMap.Entry<ModelInstance, AnimationController> e : animationControllers.entries()) {
+			int animIndex = 0;
+			if (e.value.current != null) {
+				for (int i = 0; i < e.key.animations.size; i++) {
+					final Animation animation = e.key.animations.get(i);
+					if (e.value.current.animation == animation) {
+						animIndex = i;
+						break;
+					}
+				}
+			}
+			animIndex = (animIndex + 1) % (e.key.animations.size + 1);
+			e.value.animate((animIndex == e.key.animations.size) ? null : e.key.animations.get(animIndex).id, -1, 1f, null, 0.2f);
+		}
+	}
 
-  @Override
-  public boolean keyUp(int keycode) {
-    if (keycode == Keys.SPACE || keycode == Keys.MENU) switchAnimation();
-    return super.keyUp(keycode);
-  }
+	@Override
+	public boolean keyUp (int keycode) {
+		if (keycode == Keys.SPACE || keycode == Keys.MENU) switchAnimation();
+		return super.keyUp(keycode);
+	}
 }

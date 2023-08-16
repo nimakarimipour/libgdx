@@ -23,6 +23,6 @@ import org.robovm.objc.annotation.Method;
 /** @author Niklas Therning */
 public interface AVAudioPlayerDelegate extends NSObjectProtocol {
 
-  @Method(selector = "audioPlayerDidFinishPlaying:successfully:")
-  void didFinishPlaying(NSObject player, boolean success);
+	@Method(selector = "audioPlayerDidFinishPlaying:successfully:")
+	void didFinishPlaying (NSObject player, boolean success);
 }

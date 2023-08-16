@@ -24,32 +24,32 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.tests.utils.GdxTest;
 
 public class TouchpadTest extends GdxTest {
-  Stage stage;
-  Touchpad touchpad;
+	Stage stage;
+	Touchpad touchpad;
 
-  public void create() {
-    stage = new Stage();
-    Gdx.input.setInputProcessor(stage);
+	public void create () {
+		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
 
-    Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-    touchpad = new Touchpad(20, skin);
-    touchpad.setBounds(15, 15, 100, 100);
-    stage.addActor(touchpad);
-  }
+		touchpad = new Touchpad(20, skin);
+		touchpad.setBounds(15, 15, 100, 100);
+		stage.addActor(touchpad);
+	}
 
-  public void render() {
-    // System.out.println(touchpad.getKnobPercentX() + " " + touchpad.getKnobPercentY());
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    stage.act(Gdx.graphics.getDeltaTime());
-    stage.draw();
-  }
+	public void render () {
+		// System.out.println(touchpad.getKnobPercentX() + " " + touchpad.getKnobPercentY());
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
+	}
 
-  public void resize(int width, int height) {
-    stage.getViewport().update(width, height, true);
-  }
+	public void resize (int width, int height) {
+		stage.getViewport().update(width, height, true);
+	}
 
-  public void dispose() {
-    stage.dispose();
-  }
+	public void dispose () {
+		stage.dispose();
+	}
 }

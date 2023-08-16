@@ -28,38 +28,34 @@ import org.robovm.rt.bro.ValuedEnum;
 /*<annotations>*/
 /*</annotations>*/
 public enum /* <name> */ MGLDrawableMultisample /* </name> */ implements ValuedEnum {
-  /* <values> */
-  None(0L),
-  _4X(4L);
-  /* </values> */
+	/* <values> */
+	None(0L), _4X(4L);
+	/* </values> */
 
-  /* <bind> */
-  /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <methods> */
-  /* </methods> */
+	/* <bind> */
+	/* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <methods> */
+	/* </methods> */
 
-  private final long n;
+	private final long n;
 
-  private /* <name> */ MGLDrawableMultisample /* </name> */(long n) {
-    this.n = n;
-  }
+	private /* <name> */ MGLDrawableMultisample /* </name> */ (long n) {
+		this.n = n;
+	}
 
-  public long value() {
-    return n;
-  }
+	public long value () {
+		return n;
+	}
 
-  public static /* <name> */ MGLDrawableMultisample /* </name> */ valueOf(long n) {
-    for (/* <name> */ MGLDrawableMultisample /* </name> */ v : values()) {
-      if (v.n == n) {
-        return v;
-      }
-    }
-    throw new IllegalArgumentException(
-        "No constant with value "
-            + n
-            + " found in "
-            + /* <name> */ MGLDrawableMultisample /* </name> */.class.getName());
-  }
+	public static /* <name> */ MGLDrawableMultisample /* </name> */ valueOf (long n) {
+		for (/* <name> */ MGLDrawableMultisample /* </name> */ v : values()) {
+			if (v.n == n) {
+				return v;
+			}
+		}
+		throw new IllegalArgumentException(
+			"No constant with value " + n + " found in " + /* <name> */ MGLDrawableMultisample /* </name> */.class.getName());
+	}
 }

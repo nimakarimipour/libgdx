@@ -31,21 +31,21 @@ import org.robovm.rt.bro.annotation.ByVal;
 /*<annotations>*/
 /*</annotations>*/
 /*<visibility>*/ public /* </visibility> */ interface /* <name> */ MGLKViewDelegate /* </name> */
-    /* <implements> */ extends NSObjectProtocol /* </implements> */ {
+	/* <implements> */ extends NSObjectProtocol /* </implements> */ {
 
-  /* <ptr> */
-  /* </ptr> */
-  /* <bind> */
-  /* </bind> */
-  /* <constants> */
-  /* </constants> */
-  /* <properties> */
+	/* <ptr> */
+	/* </ptr> */
+	/* <bind> */
+	/* </bind> */
+	/* <constants> */
+	/* </constants> */
+	/* <properties> */
 
-  /* </properties> */
-  /* <methods> */
-  @Method(selector = "mglkView:drawInRect:")
-  void draw(MGLKView view, @ByVal CGRect rect);
-  /* </methods> */
-  /* <adapter> */
-  /* </adapter> */
+	/* </properties> */
+	/* <methods> */
+	@Method(selector = "mglkView:drawInRect:")
+	void draw (MGLKView view, @ByVal CGRect rect);
+	/* </methods> */
+	/* <adapter> */
+	/* </adapter> */
 }

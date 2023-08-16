@@ -24,28 +24,27 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class LwjglCanvasTest extends JFrame {
-  LwjglCanvas canvas;
+	LwjglCanvas canvas;
 
-  public LwjglCanvasTest() {
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public LwjglCanvasTest () {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    Container container = getContentPane();
-    canvas = new LwjglCanvas(new UITest());
+		Container container = getContentPane();
+		canvas = new LwjglCanvas(new UITest());
 
-    container.add(canvas.getCanvas(), BorderLayout.CENTER);
+		container.add(canvas.getCanvas(), BorderLayout.CENTER);
 
-    pack();
-    setVisible(true);
-    setSize(800, 480);
-  }
+		pack();
+		setVisible(true);
+		setSize(800, 480);
+	}
 
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(
-        new Runnable() {
-          @Override
-          public void run() {
-            new LwjglCanvasTest();
-          }
-        });
-  }
+	public static void main (String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run () {
+				new LwjglCanvasTest();
+			}
+		});
+	}
 }
