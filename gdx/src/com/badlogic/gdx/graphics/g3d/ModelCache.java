@@ -30,7 +30,6 @@ import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 
-
 /** ModelCache tries to combine multiple render calls into a single render call by merging them where possible. Can be used for
  * multiple type of models (e.g. varying vertex attributes or materials), the ModelCache will combine where possible. Can be used
  * dynamically (e.g. every frame) or statically (e.g. to combine part of scenery). Be aware that any combined vertices are
@@ -183,7 +182,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 	private boolean building;
 	private RenderableSorter sorter;
 	private MeshPool meshPool;
-	 private Camera camera;
+	private Camera camera;
 
 	/** Create a ModelCache using the default {@link Sorter} and the {@link SimpleMeshPool} implementation. This might not be the
 	 * most optimal implementation for you use-case, but should be good to start with. */
@@ -205,7 +204,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 	 * the add(...) methods can be made. Calling this method will clear the cache and prepare it for creating a new cache. The
 	 * cache is not valid until the call to {@link #end()} is made. Use one of the add methods (e.g. {@link #add(Renderable)} or
 	 * {@link #add(RenderableProvider)}) to add renderables to the cache. */
-	
+
 	public void begin () {
 		begin(null);
 	}
@@ -227,7 +226,6 @@ public class ModelCache implements Disposable, RenderableProvider {
 		meshPool.flush();
 	}
 
-	
 	private Renderable obtainRenderable (Material material, int primitiveType) {
 		Renderable result = renderablesPool.obtain();
 		result.bones = null;
@@ -343,7 +341,6 @@ public class ModelCache implements Disposable, RenderableProvider {
 			add(renderableProvider);
 	}
 
-	
 	@Override
 	public void getRenderables (Array<Renderable> renderables, Pool<Renderable> pool) {
 		if (building) throw new GdxRuntimeException("Cannot render a ModelCache in between .begin() and .end()");

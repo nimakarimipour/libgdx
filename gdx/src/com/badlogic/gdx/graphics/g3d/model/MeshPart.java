@@ -45,7 +45,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
  * @author badlogic, Xoppa */
 public class MeshPart {
 	/** Unique id within model, may be null. Will be ignored by {@link #equals(MeshPart)} **/
-	 public String id;
+	public String id;
 	/** The primitive type, OpenGL constant e.g: {@link GL20#GL_TRIANGLES}, {@link GL20#GL_POINTS}, {@link GL20#GL_LINES},
 	 * {@link GL20#GL_LINE_STRIP}, {@link GL20#GL_TRIANGLE_STRIP} **/
 	public int primitiveType;
@@ -56,7 +56,7 @@ public class MeshPart {
 	 * {@link Mesh#getNumIndices()} > 0), this is the number of indices, otherwise it is the number of vertices. **/
 	public int size;
 	/** The Mesh the part references, also stored in {@link Model} **/
-	 public Mesh mesh;
+	public Mesh mesh;
 	/** The offset to the center of the bounding box of the shape, only valid after the call to {@link #update()}. **/
 	public final Vector3 center = new Vector3();
 	/** The location, relative to {@link #center}, of the corner of the axis aligned bounding box of the shape. Or, in other words:

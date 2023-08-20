@@ -28,7 +28,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 
-
 /** @author Xoppa */
 public class DirectionalShadowLight extends DirectionalLight implements ShadowMap, Disposable {
 	protected FrameBuffer fbo;
@@ -107,7 +106,6 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
 		return textureDesc;
 	}
 
-	
 	@Override
 	public void dispose () {
 		if (fbo != null) fbo.dispose();

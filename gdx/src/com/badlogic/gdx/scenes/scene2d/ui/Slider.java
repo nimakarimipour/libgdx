@@ -29,7 +29,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 
-
 /** A slider is a horizontal indicator that allows a user to set a value. The slider has a range (min, max) and a stepping between
  * each value the slider represents.
  * <p>
@@ -44,7 +43,7 @@ public class Slider extends ProgressBar {
 	int draggingPointer = -1;
 	boolean mouseOver;
 	private Interpolation visualInterpolationInverse = Interpolation.linear;
-	 private float[] snapValues;
+	private float[] snapValues;
 	private float threshold;
 
 	public Slider (float min, float max, float stepSize, boolean vertical, Skin skin) {
@@ -229,16 +228,14 @@ public class Slider extends ProgressBar {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class SliderStyle extends ProgressBarStyle {
-		 public @Null Drawable backgroundOver, backgroundDown;
-		 public @Null Drawable knobOver, knobDown;
-		 public @Null Drawable knobBeforeOver, knobBeforeDown;
-		 public @Null Drawable knobAfterOver, knobAfterDown;
+		public @Null Drawable backgroundOver, backgroundDown;
+		public @Null Drawable knobOver, knobDown;
+		public @Null Drawable knobBeforeOver, knobBeforeDown;
+		public @Null Drawable knobAfterOver, knobAfterDown;
 
-		
 		public SliderStyle () {
 		}
 
-		
 		public SliderStyle (@Null Drawable background, @Null Drawable knob) {
 			super(background, knob);
 		}

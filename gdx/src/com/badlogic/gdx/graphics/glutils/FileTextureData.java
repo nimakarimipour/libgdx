@@ -23,7 +23,6 @@ import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 public class FileTextureData implements TextureData {
 
 	final FileHandle file;
@@ -66,7 +65,6 @@ public class FileTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	
 	@Override
 	public Pixmap consumePixmap () {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling getPixmap()");

@@ -48,7 +48,6 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-
 /** A 2D scene graph containing hierarchies of {@link Actor actors}. Stage handles the viewport and distributes input events.
  * <p>
  * {@link #setViewport(Viewport)} controls the coordinates used within the stage and sets up the camera used to convert between
@@ -77,12 +76,12 @@ public class Stage extends InputAdapter implements Disposable {
 	private final boolean[] pointerTouched = new boolean[20];
 	private final int[] pointerScreenX = new int[20], pointerScreenY = new int[20];
 	private int mouseScreenX, mouseScreenY;
-	 private @Null Actor mouseOverActor;
-	 private @Null Actor keyboardFocus, scrollFocus;
+	private @Null Actor mouseOverActor;
+	private @Null Actor keyboardFocus, scrollFocus;
 	final SnapshotArray<TouchFocus> touchFocuses = new SnapshotArray(true, 4, TouchFocus.class);
 	private boolean actionsRequestRendering = true;
 
-	 private ShapeRenderer debugShapes;
+	private ShapeRenderer debugShapes;
 	private boolean debugInvisible, debugAll, debugUnderMouse, debugParentUnderMouse;
 	private Debug debugTableUnderMouse = Debug.none;
 	private final Color debugColor = new Color(0, 1, 0, 0.85f);
@@ -518,7 +517,7 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Removes all touch focus listeners, sending a touchUp event to each listener. Listeners typically expect to receive a
 	 * touchUp event when they have touch focus. The location of the touchUp is {@link Integer#MIN_VALUE}. Listeners can use
 	 * {@link InputEvent#isTouchFocusCancel()} to ignore this event if needed. */
-	
+
 	public void cancelTouchFocus () {
 		cancelTouchFocusExcept(null, null);
 	}
@@ -597,7 +596,7 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Called just before an actor is removed from a group.
 	 * <p>
 	 * The default implementation fires an {@link InputEvent.Type#exit} event if a pointer had entered the actor. */
-	
+
 	protected void actorRemoved (Actor actor) {
 		for (int pointer = 0, n = pointerOverActors.length; pointer < n; pointer++) {
 			if (actor == pointerOverActors[pointer]) {
@@ -619,7 +618,7 @@ public class Stage extends InputAdapter implements Disposable {
 	}
 
 	/** Removes the touch, keyboard, and scroll focused actors. */
-	
+
 	public void unfocusAll () {
 		setScrollFocus(null);
 		setKeyboardFocus(null);
@@ -627,7 +626,7 @@ public class Stage extends InputAdapter implements Disposable {
 	}
 
 	/** Removes the touch, keyboard, and scroll focus for the specified actor and any descendants. */
-	
+
 	public void unfocus (Actor actor) {
 		cancelTouchFocus(actor);
 		if (scrollFocus != null && scrollFocus.isDescendantOf(actor)) setScrollFocus(null);
@@ -738,7 +737,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Replaces the root group. This can be useful, for example, to subclass the root group to be notified by
 	 * {@link Group#childrenChanged()}. */
-	
+
 	public void setRoot (Group root) {
 		if (root.parent != null) root.parent.removeActor(root, false);
 		this.root = root;
@@ -884,11 +883,10 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Internal class for managing touch focus. Public only for GWT.
 	 * @author Nathan Sweet */
 	public static final class TouchFocus implements Poolable {
-		 EventListener listener;
-		 Actor listenerActor, target;
+		EventListener listener;
+		Actor listenerActor, target;
 		int pointer, button;
 
-		
 		public void reset () {
 			listenerActor = null;
 			listener = null;

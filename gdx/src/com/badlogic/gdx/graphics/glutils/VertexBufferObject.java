@@ -27,7 +27,6 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /**
  * <p>
  * A {@link VertexData} implementation based on OpenGL vertex buffer objects.
@@ -41,9 +40,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  *
  * @author mzechner, Dave Clayton <contact@redskyforge.com> */
 public class VertexBufferObject implements VertexData {
-	 private VertexAttributes attributes;
-	 private FloatBuffer buffer;
-	 private ByteBuffer byteBuffer;
+	private VertexAttributes attributes;
+	private FloatBuffer buffer;
+	private ByteBuffer byteBuffer;
 	private boolean ownsBuffer;
 	private int bufferHandle;
 	private int usage;
@@ -164,7 +163,7 @@ public class VertexBufferObject implements VertexData {
 
 	/** Binds this VertexBufferObject for rendering via glDrawArrays or glDrawElements
 	 * @param shader the shader */
-	
+
 	@Override
 	public void bind (ShaderProgram shader) {
 		bind(shader, null);
@@ -210,7 +209,7 @@ public class VertexBufferObject implements VertexData {
 	/** Unbinds this VertexBufferObject.
 	 *
 	 * @param shader the shader */
-	
+
 	@Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);

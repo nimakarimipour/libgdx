@@ -26,11 +26,11 @@ import com.badlogic.gdx.utils.Array;
  * @author badlogic, Xoppa */
 public class NodeAnimation {
 	/** the Node affected by this animation **/
-	 public Node node;
+	public Node node;
 	/** the translation keyframes if any (might be null), sorted by time ascending **/
-	 public Array<NodeKeyframe<Vector3>> translation = null;
+	public Array<NodeKeyframe<Vector3>> translation = null;
 	/** the rotation keyframes if any (might be null), sorted by time ascending **/
-	 public Array<NodeKeyframe<Quaternion>> rotation = null;
+	public Array<NodeKeyframe<Quaternion>> rotation = null;
 	/** the scaling keyframes if any (might be null), sorted by time ascending **/
-	 public Array<NodeKeyframe<Vector3>> scaling = null;
+	public Array<NodeKeyframe<Vector3>> scaling = null;
 }

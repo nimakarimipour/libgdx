@@ -45,7 +45,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FloatArray;
 
-
 /** {@link ModelLoader} to load Wavefront OBJ files. Only intended for testing basic models/meshes and educational usage. The
  * Wavefront specification is NOT fully implemented, only a subset of the specification is supported. Especially the
  * {@link Material} ({@link Attributes}), e.g. the color or texture applied, might not or not correctly be loaded.
@@ -87,7 +86,6 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 	final FloatArray uvs = new FloatArray(200);
 	final Array<Group> groups = new Array<Group>(10);
 
-	
 	public ObjLoader () {
 		this(null);
 	}
@@ -106,7 +104,6 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 
-	
 	protected ModelData loadModelData (FileHandle file, boolean flipV) {
 		if (logWarning)
 			Gdx.app.error("ObjLoader", "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
@@ -430,23 +427,21 @@ class MtlLoader {
 
 	private static class ObjMaterial {
 		String materialName = "default";
-		 Color ambientColor;
-		 Color diffuseColor;
-		 Color specularColor;
+		Color ambientColor;
+		Color diffuseColor;
+		Color specularColor;
 		float opacity;
 		float shininess;
-		 String alphaTexFilename;
-		 String ambientTexFilename;
-		 String diffuseTexFilename;
-		 String shininessTexFilename;
-		 String specularTexFilename;
+		String alphaTexFilename;
+		String ambientTexFilename;
+		String diffuseTexFilename;
+		String shininessTexFilename;
+		String specularTexFilename;
 
-		
 		public ObjMaterial () {
 			reset();
 		}
 
-		
 		public ModelMaterial build () {
 			ModelMaterial mat = new ModelMaterial();
 			mat.id = materialName;
@@ -474,7 +469,6 @@ class MtlLoader {
 			}
 		}
 
-		
 		public void reset () {
 			ambientColor = null;
 			diffuseColor = Color.WHITE;

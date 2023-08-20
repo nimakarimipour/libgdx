@@ -16,12 +16,10 @@
 
 package com.badlogic.gdx.utils;
 
-
-
 /** Indicates an error during serialization due to misconfiguration or during deserialization due to invalid input data.
  * @author Nathan Sweet */
 public class SerializationException extends RuntimeException {
-	 private StringBuilder trace;
+	private StringBuilder trace;
 
 	public SerializationException () {
 		super();
@@ -51,7 +49,6 @@ public class SerializationException extends RuntimeException {
 		return causedBy(cause, type);
 	}
 
-	
 	public String getMessage () {
 		if (trace == null) return super.getMessage();
 		StringBuilder sb = new StringBuilder(512);

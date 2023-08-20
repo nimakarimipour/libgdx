@@ -23,7 +23,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /** CpuSpriteBatch behaves like SpriteBatch, except it doesn't flush automatically whenever the transformation matrix changes.
  * Instead, the vertices get adjusted on subsequent draws to match the running batch. This can improve performance through longer
  * batches, for example when drawing Groups with transform enabled.
@@ -48,7 +47,7 @@ public class CpuSpriteBatch extends SpriteBatch {
 
 	/** Constructs a CpuSpriteBatch with the default shader.
 	 * @see SpriteBatch#SpriteBatch(int) */
-	
+
 	public CpuSpriteBatch (int size) {
 		this(size, null);
 	}

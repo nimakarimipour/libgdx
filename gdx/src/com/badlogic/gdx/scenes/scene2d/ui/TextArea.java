@@ -31,14 +31,13 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 
-
 /** A text input field with multiple lines. */
 public class TextArea extends TextField {
 	/** Array storing lines breaks positions **/
-	 IntArray linesBreak;
+	IntArray linesBreak;
 
 	/** Last text processed. This attribute is used to avoid unnecessary computations while calculating offsets **/
-	 private String lastText;
+	private String lastText;
 
 	/** Current line for the cursor **/
 	int cursorLine;
@@ -208,7 +207,6 @@ public class TextArea extends TextField {
 
 	// OVERRIDE from TextField
 
-	
 	protected void sizeChanged () {
 		lastText = null; // Cause calculateOffsets to recalculate the line breaks.
 

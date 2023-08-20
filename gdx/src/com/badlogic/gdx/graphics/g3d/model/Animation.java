@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Array;
  * @author badlogic */
 public class Animation {
 	/** the unique id of the animation **/
-	 public String id;
+	public String id;
 	/** the duration in seconds **/
 	public float duration;
 	/** the animation curves for individual nodes **/

@@ -27,7 +27,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /**
  * <p>
  * An {@link Input} implementation that receives touch, key, accelerometer and compass events from a remote Android device. Just
@@ -207,7 +206,7 @@ public class RemoteInput implements Runnable, Input {
 	int[] touchY = new int[MAX_TOUCHES];
 	boolean isTouched[] = new boolean[MAX_TOUCHES];
 	boolean justTouched = false;
-	 InputProcessor processor = null;
+	InputProcessor processor = null;
 	private final int port;
 	public final String[] ips;
 
@@ -219,7 +218,6 @@ public class RemoteInput implements Runnable, Input {
 		this(DEFAULT_PORT, listener);
 	}
 
-	
 	public RemoteInput (int port) {
 		this(port, null);
 	}
@@ -242,7 +240,6 @@ public class RemoteInput implements Runnable, Input {
 		}
 	}
 
-	
 	@Override
 	public void run () {
 		while (true) {

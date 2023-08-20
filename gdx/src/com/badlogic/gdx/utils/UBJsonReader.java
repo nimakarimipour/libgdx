@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import com.badlogic.gdx.files.FileHandle;
 
-
 /** Lightweight UBJSON parser.<br>
  * <br>
  * The default behavior is to parse the JSON into a DOM containing {@link JsonValue} objects. Extend this class and override
@@ -32,7 +31,7 @@ public class UBJsonReader implements BaseJsonReader {
 
 	/** Parses the UBJSON from the given stream. <br>
 	 * For best performance you should provide buffered streams to this method! */
-	
+
 	@Override
 	public JsonValue parse (InputStream input) {
 		DataInputStream din = null;

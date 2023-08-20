@@ -37,7 +37,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /** This is a custom shader to render the particles. Usually is not required, because the {@link DefaultShader} will be used
  * instead. This shader will be used when dealing with billboards using GPU mode or point sprites.
  * @author inferno */
@@ -52,9 +51,9 @@ public class ParticleShader extends BaseShader {
 
 	public static class Config {
 		/** The uber vertex shader to use, null to use the default vertex shader. */
-		 public String vertexShader = null;
+		public String vertexShader = null;
 		/** The uber fragment shader to use, null to use the default fragment shader. */
-		 public String fragmentShader = null;
+		public String fragmentShader = null;
 		public boolean ignoreUnimplemented = true;
 		/** Set to 0 to disable culling */
 		public int defaultCullFace = -1;
@@ -85,7 +84,7 @@ public class ParticleShader extends BaseShader {
 		}
 	}
 
-	 private static String defaultVertexShader = null;
+	private static String defaultVertexShader = null;
 
 	public static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
@@ -93,7 +92,7 @@ public class ParticleShader extends BaseShader {
 		return defaultVertexShader;
 	}
 
-	 private static String defaultFragmentShader = null;
+	private static String defaultFragmentShader = null;
 
 	public static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null) defaultFragmentShader = Gdx.files
@@ -236,7 +235,6 @@ public class ParticleShader extends BaseShader {
 		register(DefaultShader.Inputs.diffuseTexture, DefaultShader.Setters.diffuseTexture);
 	}
 
-	
 	@Override
 	public void init () {
 		final ShaderProgram program = this.program;
@@ -297,14 +295,13 @@ public class ParticleShader extends BaseShader {
 		super.render(renderable);
 	}
 
-	
 	@Override
 	public void end () {
 		currentMaterial = null;
 		super.end();
 	}
 
-	 Material currentMaterial;
+	Material currentMaterial;
 
 	protected void bindMaterial (final Renderable renderable) {
 		if (currentMaterial == renderable.material) return;

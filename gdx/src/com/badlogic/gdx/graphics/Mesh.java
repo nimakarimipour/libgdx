@@ -46,7 +46,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /**
  * <p>
  * A Mesh holds vertices composed of attributes specified by a {@link VertexAttributes} instance. The vertices are held either in
@@ -82,7 +81,7 @@ public class Mesh implements Disposable {
 	boolean autoBind = true;
 	final boolean isVertexArray;
 
-	 InstanceData instances;
+	InstanceData instances;
 	boolean isInstanced = false;
 
 	protected Mesh (VertexData vertices, IndexData indices, boolean isVertexArray) {
@@ -207,7 +206,6 @@ public class Mesh implements Disposable {
 		return this;
 	}
 
-	
 	public Mesh disableInstancedRendering () {
 		if (isInstanced) {
 			isInstanced = false;
@@ -501,7 +499,7 @@ public class Mesh implements Disposable {
 	 * ES 2.0 and when auto-bind is disabled.
 	 *
 	 * @param shader the shader (does not bind the shader) */
-	
+
 	public void bind (final ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -521,7 +519,7 @@ public class Mesh implements Disposable {
 	 * ES 1.x and when auto-bind is disabled.
 	 *
 	 * @param shader the shader (does not unbind the shader) */
-	
+
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}
@@ -669,7 +667,7 @@ public class Mesh implements Disposable {
 	 *
 	 * @param usage the Usage.
 	 * @return the VertexAttribute or null if no attribute with that usage was found. */
-	
+
 	public VertexAttribute getVertexAttribute (int usage) {
 		VertexAttributes attributes = vertices.getAttributes();
 		int len = attributes.size();
@@ -759,7 +757,7 @@ public class Mesh implements Disposable {
 	 * @param offset the start index of the part.
 	 * @param count the amount of indices the part contains.
 	 * @return the value specified by out. */
-	
+
 	public BoundingBox extendBoundingBox (final BoundingBox out, int offset, int count) {
 		return extendBoundingBox(out, offset, count, null);
 	}
@@ -922,7 +920,7 @@ public class Mesh implements Disposable {
 	 * @param offset the start index of the part.
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
-	
+
 	public float calculateRadius (final float centerX, final float centerY, final float centerZ, int offset, int count) {
 		return calculateRadius(centerX, centerY, centerZ, offset, count, null);
 	}
@@ -932,7 +930,7 @@ public class Mesh implements Disposable {
 	 * @param offset the start index of the part.
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
-	
+
 	public float calculateRadius (final Vector3 center, int offset, int count) {
 		return calculateRadius(center.x, center.y, center.z, offset, count, null);
 	}
@@ -942,7 +940,7 @@ public class Mesh implements Disposable {
 	 * @param centerY The Y coordinate of the center of the bounding sphere
 	 * @param centerZ The Z coordinate of the center of the bounding sphere
 	 * @return the squared radius of the bounding sphere. */
-	
+
 	public float calculateRadius (final float centerX, final float centerY, final float centerZ) {
 		return calculateRadius(centerX, centerY, centerZ, 0, getNumIndices(), null);
 	}
@@ -950,7 +948,7 @@ public class Mesh implements Disposable {
 	/** Calculates the squared radius of the bounding sphere around the specified center for the specified part.
 	 * @param center The center of the bounding sphere
 	 * @return the squared radius of the bounding sphere. */
-	
+
 	public float calculateRadius (final Vector3 center) {
 		return calculateRadius(center.x, center.y, center.z, 0, getNumIndices(), null);
 	}
@@ -1250,7 +1248,7 @@ public class Mesh implements Disposable {
 	/** Copies this mesh.
 	 * @param isStatic whether the new mesh is static or not. Allows for internal optimizations.
 	 * @return the copy of this mesh */
-	
+
 	public Mesh copy (boolean isStatic) {
 		return copy(isStatic, false, null);
 	}

@@ -19,7 +19,6 @@ package com.badlogic.gdx.scenes.scene2d.ui;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 
-
 /** Manages a group of buttons to enforce a minimum and maximum number of checked buttons. This enables "radio button"
  * functionality and more. A button may only be in one group at a time.
  * <p>
@@ -30,7 +29,7 @@ public class ButtonGroup<T extends Button> {
 	private Array<T> checkedButtons = new Array(1);
 	private int minCheckCount, maxCheckCount = 1;
 	private boolean uncheckLast = true;
-	 private T lastChecked;
+	private T lastChecked;
 
 	public ButtonGroup () {
 		minCheckCount = 1;
@@ -42,7 +41,6 @@ public class ButtonGroup<T extends Button> {
 		minCheckCount = 1;
 	}
 
-	
 	public void add (T button) {
 		if (button == null) throw new IllegalArgumentException("button cannot be null.");
 		button.buttonGroup = null;
@@ -59,7 +57,6 @@ public class ButtonGroup<T extends Button> {
 			add(buttons[i]);
 	}
 
-	
 	public void remove (T button) {
 		if (button == null) throw new IllegalArgumentException("button cannot be null.");
 		button.buttonGroup = null;
@@ -133,7 +130,7 @@ public class ButtonGroup<T extends Button> {
 	}
 
 	/** @return The first checked button, or null. */
-	
+
 	public @Null T getChecked () {
 		if (checkedButtons.size > 0) return checkedButtons.get(0);
 		return null;

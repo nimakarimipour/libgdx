@@ -4,10 +4,9 @@ package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
 
-
 public class InWindow {
-	 public byte[] _bufferBase; // pointer to buffer with data
-	 java.io.InputStream _stream;
+	public byte[] _bufferBase; // pointer to buffer with data
+	java.io.InputStream _stream;
 	int _posLimit; // offset (from _buffer) of first byte when new block reading must be done
 	boolean _streamEndWasReached; // if (true) then _streamPos shows real end of stream
 
@@ -53,7 +52,6 @@ public class InWindow {
 		}
 	}
 
-	
 	void Free () {
 		_bufferBase = null;
 	}
@@ -74,7 +72,6 @@ public class InWindow {
 		_stream = stream;
 	}
 
-	
 	public void ReleaseStream () {
 		_stream = null;
 	}

@@ -26,7 +26,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
 
-
 /** A button with a child {@link Image} and {@link Label}.
  * @see ImageButton
  * @see TextButton
@@ -66,7 +65,6 @@ public class ImageTextButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
-	
 	protected Image newImage () {
 		return new Image((Drawable)null, Scaling.fit);
 	}
@@ -194,14 +192,12 @@ public class ImageTextButton extends Button {
 	/** The style for an image text button, see {@link ImageTextButton}.
 	 * @author Nathan Sweet */
 	static public class ImageTextButtonStyle extends TextButtonStyle {
-		 public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
-		 public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
+		public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
+		public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
-		
 		public ImageTextButtonStyle () {
 		}
 
-		
 		public ImageTextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, BitmapFont font) {
 			super(up, down, checked, font);
 		}
@@ -218,7 +214,6 @@ public class ImageTextButton extends Button {
 			imageCheckedOver = style.imageCheckedOver;
 		}
 
-		
 		public ImageTextButtonStyle (TextButtonStyle style) {
 			super(style);
 		}

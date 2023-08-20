@@ -23,7 +23,6 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 
-
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
  * JsonValue children are a linked list. Iteration of arrays or objects is easily done using an iterator or the {@link #next()}
@@ -41,18 +40,18 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
  * 
  * @author Nathan Sweet */
 public class JsonValue implements Iterable<JsonValue> {
-	 private ValueType type;
+	private ValueType type;
 
 	/** May be null. */
-	 private String stringValue;
+	private String stringValue;
 	private double doubleValue;
 	private long longValue;
 
-	 public String name;
+	public String name;
 	/** May be null. */
-	 public JsonValue child, parent;
+	public JsonValue child, parent;
 	/** May be null. When changing this field the parent {@link #size()} may need to be changed. */
-	 public JsonValue next, prev;
+	public JsonValue next, prev;
 	public int size;
 
 	public JsonValue (ValueType type) {
@@ -64,12 +63,10 @@ public class JsonValue implements Iterable<JsonValue> {
 		set(value);
 	}
 
-	
 	public JsonValue (double value) {
 		set(value, null);
 	}
 
-	
 	public JsonValue (long value) {
 		set(value, null);
 	}
@@ -113,7 +110,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** Returns an iterator for the child with the specified name, or an empty iterator if no child is found. */
-	
+
 	public JsonIterator iterator (String name) {
 		JsonValue current = get(name);
 		if (current == null) {
@@ -144,7 +141,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified index. This requires walking the linked list to the specified entry, see
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
-	
+
 	public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
@@ -161,7 +158,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Removes the child with the specified name.
 	 * @return May be null. */
-	
+
 	public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
@@ -177,7 +174,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** Removes this value from its parent. */
-	
+
 	public void remove () {
 		if (parent == null) throw new IllegalStateException();
 		if (prev == null) {
@@ -209,7 +206,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Returns this value as a string.
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
-	
+
 	public @Null String asString () {
 		switch (type) {
 		case stringValue:
@@ -625,7 +622,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
-	
+
 	public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
@@ -1248,7 +1245,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	public class JsonIterator implements Iterator<JsonValue>, Iterable<JsonValue> {
 		JsonValue entry = child;
-		 JsonValue current;
+		JsonValue current;
 
 		public boolean hasNext () {
 			return entry != null;
@@ -1261,7 +1258,6 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
-		
 		public void remove () {
 			if (current.prev == null) {
 				child = current.next;
@@ -1283,7 +1279,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	static public class PrettyPrintSettings {
-		 public OutputType outputType;
+		public OutputType outputType;
 
 		/** If an object on a single line fits this many columns, it won't wrap. */
 		public int singleLineColumns;

@@ -28,7 +28,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 
-
 /** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
  * @author Inferno */
 public abstract class RegionInfluencer extends Influencer {
@@ -110,23 +109,19 @@ public abstract class RegionInfluencer extends Influencer {
 	/** Assigns a region to the particles using the particle life percent to calculate the current index in the
 	 * {@link RegionInfluencer#regions} array. */
 	public static class Animated extends RegionInfluencer {
-		 FloatChannel lifeChannel;
+		FloatChannel lifeChannel;
 
-		
 		public Animated () {
 		}
 
-		
 		public Animated (Animated regionInfluencer) {
 			super(regionInfluencer);
 		}
 
-		
 		public Animated (TextureRegion textureRegion) {
 			super(textureRegion);
 		}
 
-		
 		public Animated (Texture texture) {
 			super(texture);
 		}
@@ -162,18 +157,15 @@ public abstract class RegionInfluencer extends Influencer {
 	public static class AspectTextureRegion {
 		public float u, v, u2, v2;
 		public float halfInvAspectRatio;
-		 public String imageName;
+		public String imageName;
 
-		
 		public AspectTextureRegion () {
 		}
 
-		
 		public AspectTextureRegion (AspectTextureRegion aspectTextureRegion) {
 			set(aspectTextureRegion);
 		}
 
-		
 		public AspectTextureRegion (TextureRegion region) {
 			set(region);
 		}
@@ -212,8 +204,8 @@ public abstract class RegionInfluencer extends Influencer {
 	}
 
 	public Array<AspectTextureRegion> regions;
-	 FloatChannel regionChannel;
-	 public String atlasName;
+	FloatChannel regionChannel;
+	public String atlasName;
 
 	public RegionInfluencer (int regionsCount) {
 		this.regions = new Array<AspectTextureRegion>(false, regionsCount, AspectTextureRegion.class);
@@ -229,7 +221,7 @@ public abstract class RegionInfluencer extends Influencer {
 	}
 
 	/** All the regions must be defined on the same Texture */
-	
+
 	public RegionInfluencer (TextureRegion... regions) {
 		setAtlasName(null);
 		this.regions = new Array<AspectTextureRegion>(false, regions.length, AspectTextureRegion.class);
@@ -259,7 +251,6 @@ public abstract class RegionInfluencer extends Influencer {
 		}
 	}
 
-	
 	public void clear () {
 		atlasName = null;
 		regions.clear();

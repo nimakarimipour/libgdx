@@ -37,7 +37,6 @@ import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 
-
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
  * {@link ChangeEvent} is fired when the list selection changes.
@@ -46,10 +45,10 @@ import com.badlogic.gdx.utils.Pools;
  * @author mzechner
  * @author Nathan Sweet */
 public class List<T> extends Widget implements Cullable {
-	 ListStyle style;
+	ListStyle style;
 	final Array<T> items = new Array();
 	ArraySelection<T> selection = new ArraySelection(items);
-	 private Rectangle cullingArea;
+	private Rectangle cullingArea;
 	private float prefWidth, prefHeight;
 	float itemHeight;
 	private int alignment = Align.left;
@@ -74,9 +73,8 @@ public class List<T> extends Widget implements Cullable {
 
 		addListener(keyListener = new InputListener() {
 			long typeTimeout;
-			 String prefix;
+			String prefix;
 
-			
 			public boolean keyDown (InputEvent event, int keycode) {
 				if (items.isEmpty()) return false;
 				int index;
@@ -198,7 +196,6 @@ public class List<T> extends Widget implements Cullable {
 		}
 	}
 
-	
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
@@ -313,19 +310,19 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** @return May be null. */
-	
+
 	public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
-	
+
 	public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
 
 	/** @return null if not over an item. */
-	
+
 	public @Null T getItemAt (float y) {
 		int index = getItemIndexAt(y);
 		if (index == -1) return null;
@@ -442,17 +439,15 @@ public class List<T> extends Widget implements Cullable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ListStyle {
-		 public BitmapFont font;
+		public BitmapFont font;
 		public Color fontColorSelected = new Color(1, 1, 1, 1);
 		public Color fontColorUnselected = new Color(1, 1, 1, 1);
-		 public Drawable selection;
-		 public @Null Drawable down, over, background;
+		public Drawable selection;
+		public @Null Drawable down, over, background;
 
-		
 		public ListStyle () {
 		}
 
-		
 		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
 			this.font = font;
 			this.fontColorSelected.set(fontColorSelected);

@@ -31,7 +31,6 @@ import com.badlogic.gdx.math.Matrix4;
 
 import java.nio.Buffer;
 
-
 /** Draws batched quads using indices.
  * @see Batch
  * @author mzechner
@@ -45,7 +44,7 @@ public class SpriteBatch implements Batch {
 
 	final float[] vertices;
 	int idx = 0;
-	 Texture lastTexture = null;
+	Texture lastTexture = null;
 	float invTexWidth = 0, invTexHeight = 0;
 
 	boolean drawing = false;
@@ -61,7 +60,7 @@ public class SpriteBatch implements Batch {
 	private int blendDstFuncAlpha = GL20.GL_ONE_MINUS_SRC_ALPHA;
 
 	private final ShaderProgram shader;
-	 private ShaderProgram customShader = null;
+	private ShaderProgram customShader = null;
 	private boolean ownsShader;
 
 	private final Color color = new Color(1, 1, 1, 1);
@@ -78,14 +77,14 @@ public class SpriteBatch implements Batch {
 
 	/** Constructs a new SpriteBatch with a size of 1000, one buffer, and the default shader.
 	 * @see SpriteBatch#SpriteBatch(int, ShaderProgram) */
-	
+
 	public SpriteBatch () {
 		this(1000, null);
 	}
 
 	/** Constructs a SpriteBatch with one buffer and the default shader.
 	 * @see SpriteBatch#SpriteBatch(int, ShaderProgram) */
-	
+
 	public SpriteBatch (int size) {
 		this(size, null);
 	}
@@ -183,7 +182,6 @@ public class SpriteBatch implements Batch {
 		drawing = true;
 	}
 
-	
 	@Override
 	public void end () {
 		if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before end.");

@@ -21,7 +21,6 @@ import java.net.InetSocketAddress;
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /** Server socket implementation using java.net.ServerSocket.
  * 
  * @author noblemaster */
@@ -32,7 +31,6 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 	/** Our server or null for disposed, aka closed. */
 	private java.net.ServerSocket server;
 
-	
 	public NetJavaServerSocketImpl (Protocol protocol, int port, ServerSocketHints hints) {
 		this(protocol, null, port, hints);
 	}
@@ -84,7 +82,6 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 		}
 	}
 
-	
 	@Override
 	public void dispose () {
 		if (server != null) {

@@ -31,8 +31,8 @@ import java.util.Comparator;
  * </p>
  * @author Jon Renner */
 public class Select {
-	 private static Select instance;
-	 private QuickSelect quickSelect;
+	private static Select instance;
+	private QuickSelect quickSelect;
 
 	/** Provided for convenience */
 	public static Select instance () {

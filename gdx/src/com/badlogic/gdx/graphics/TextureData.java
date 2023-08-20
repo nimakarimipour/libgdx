@@ -23,7 +23,6 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.graphics.glutils.MipMapGenerator;
 
-
 /** Used by a {@link Texture} to load the pixel data. A TextureData can either return a {@link Pixmap} or upload the pixel data
  * itself. It signals it's type via {@link #getType()} to the Texture that's using it. The Texture will then either invoke
  * {@link #consumePixmap()} or {@link #consumeCustomData(int)}. These are the first methods to be called by Texture. After that
@@ -90,12 +89,10 @@ public interface TextureData {
 	 * @author Vincent Bousquet */
 	public static class Factory {
 
-		
 		public static TextureData loadFromFile (FileHandle file, boolean useMipMaps) {
 			return loadFromFile(file, null, useMipMaps);
 		}
 
-		
 		public static TextureData loadFromFile (FileHandle file, Format format, boolean useMipMaps) {
 			if (file == null) return null;
 			if (file.name().endsWith(".cim")) return new FileTextureData(file, PixmapIO.readCIM(file), format, useMipMaps);

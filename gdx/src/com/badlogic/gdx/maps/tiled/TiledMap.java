@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Disposable;
  * @see Map */
 public class TiledMap extends Map {
 	private TiledMapTileSets tilesets;
-	 private Array<? extends Disposable> ownedResources;
+	private Array<? extends Disposable> ownedResources;
 
 	/** @return collection of tilesets for this map. */
 	public TiledMapTileSets getTileSets () {

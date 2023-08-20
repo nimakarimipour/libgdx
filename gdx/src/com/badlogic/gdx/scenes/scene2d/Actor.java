@@ -36,7 +36,6 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 
-
 /** 2D scene graph node. An actor has a position, rectangular size, origin, scale, rotation, Z index, and color. The position
  * corresponds to the unrotated, unscaled bottom left corner of the actor. The position is relative to the actor's parent. The
  * origin is relative to the position and is used for scale and rotation.
@@ -56,14 +55,14 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
  * @author mzechner
  * @author Nathan Sweet */
 public class Actor {
-	 private @Null Stage stage;
-	
+	private @Null Stage stage;
+
 	@Null Group parent;
 	private final DelayedRemovalArray<EventListener> listeners = new DelayedRemovalArray(0);
 	private final DelayedRemovalArray<EventListener> captureListeners = new DelayedRemovalArray(0);
 	private final Array<Action> actions = new Array(0);
 
-	 private @Null String name;
+	private @Null String name;
 	private Touchable touchable = Touchable.enabled;
 	private boolean visible = true, debug;
 	float x, y;
@@ -72,7 +71,7 @@ public class Actor {
 	float scaleX = 1, scaleY = 1;
 	float rotation;
 	final Color color = new Color(1, 1, 1, 1);
-	 private @Null Object userObject;
+	private @Null Object userObject;
 
 	/** Draws the actor. The batch is configured to draw in the parent's coordinate system.
 	 * {@link Batch#draw(com.badlogic.gdx.graphics.g2d.TextureRegion, float, float, float, float, float, float, float, float, float)
@@ -90,7 +89,7 @@ public class Actor {
 	 * <p>
 	 * The default implementation calls {@link Action#act(float)} on each action and removes actions that are complete.
 	 * @param delta Time in seconds since the last frame. */
-	
+
 	public void act (float delta) {
 		Array<Action> actions = this.actions;
 		if (actions.size == 0) return;
@@ -208,7 +207,7 @@ public class Actor {
 	 * The default implementation returns this actor if the point is within this actor's bounds and this actor is visible.
 	 * @param touchable If true, hit detection will respect the {@link #setTouchable(Touchable) touchability}.
 	 * @see Touchable */
-	
+
 	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.touchable != Touchable.enabled) return null;
 		if (!isVisible()) return null;
@@ -268,7 +267,7 @@ public class Actor {
 	}
 
 	/** @param action May be null, in which case nothing is done. */
-	
+
 	public void removeAction (@Null Action action) {
 		if (action != null && actions.removeValue(action, true)) action.setActor(null);
 	}
@@ -283,7 +282,7 @@ public class Actor {
 	}
 
 	/** Removes all actions on this actor. */
-	
+
 	public void clearActions () {
 		for (int i = actions.size - 1; i >= 0; i--)
 			actions.get(i).setActor(null);
@@ -336,7 +335,7 @@ public class Actor {
 
 	/** Returns this actor or the first ascendant of this actor that is assignable with the specified type, or null if none were
 	 * found. */
-	
+
 	public @Null <T extends Actor> T firstAscendant (Class<T> type) {
 		if (type == null) throw new IllegalArgumentException("actor cannot be null.");
 		Actor actor = this;
@@ -900,7 +899,7 @@ public class Actor {
 
 	/** Transforms the specified point in the actor's coordinates to be in screen coordinates.
 	 * @see Stage#stageToScreenCoordinates(Vector2) */
-	
+
 	public Vector2 localToScreenCoordinates (Vector2 localCoords) {
 		Stage stage = this.stage;
 		if (stage == null) return localCoords;
@@ -908,7 +907,7 @@ public class Actor {
 	}
 
 	/** Transforms the specified point in the actor's coordinates to be in the stage's coordinates. */
-	
+
 	public Vector2 localToStageCoordinates (Vector2 localCoords) {
 		return localToAscendantCoordinates(null, localCoords);
 	}

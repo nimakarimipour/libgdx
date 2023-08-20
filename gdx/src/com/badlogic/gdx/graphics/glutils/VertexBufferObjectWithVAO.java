@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.IntArray;
 
-
 /**
  * <p>
  * A {@link VertexData} implementation that uses vertex buffer objects and vertex array objects. (This is required for OpenGL 3.0+
@@ -142,7 +141,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	/** Binds this VertexBufferObject for rendering via glDrawArrays or glDrawElements
 	 *
 	 * @param shader the shader */
-	
+
 	@Override
 	public void bind (ShaderProgram shader) {
 		bind(shader, null);
@@ -232,7 +231,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	/** Unbinds this VertexBufferObject.
 	 *
 	 * @param shader the shader */
-	
+
 	@Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);

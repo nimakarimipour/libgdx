@@ -27,17 +27,16 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
-
 /** Manages drag and drop operations through registered drag sources and drop targets.
  * @author Nathan Sweet */
 public class DragAndDrop {
 	static final Vector2 tmpVector = new Vector2();
 
-	 Source dragSource;
-	 Payload payload;
-	 Actor dragActor;
+	Source dragSource;
+	Payload payload;
+	Actor dragActor;
 	boolean removeDragActor;
-	 Target target;
+	Target target;
 	boolean isValidTarget;
 	final Array<Target> targets = new Array(8);
 	final ObjectMap<Source, DragListener> sourceListeners = new ObjectMap(8);
@@ -72,7 +71,6 @@ public class DragAndDrop {
 				}
 			}
 
-			
 			public void drag (InputEvent event, float x, float y, int pointer) {
 				if (payload == null) return;
 				if (pointer != activePointer) return;
@@ -142,7 +140,6 @@ public class DragAndDrop {
 				actor.setPosition(actorX, actorY);
 			}
 
-			
 			public void dragStop (InputEvent event, float x, float y, int pointer) {
 				if (pointer != activePointer) return;
 				activePointer = -1;
@@ -336,9 +333,9 @@ public class DragAndDrop {
 	 * target. Such actors will be added the stage automatically during the drag operation as necessary and they will only be
 	 * removed from the stage if they were added automatically. A source actor can be used as a payload drag actor. */
 	static public class Payload {
-		
+
 		@Null Actor dragActor, validDragActor, invalidDragActor;
-		
+
 		@Null Object object;
 
 		public void setDragActor (@Null Actor dragActor) {

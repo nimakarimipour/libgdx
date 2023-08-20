@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 
-
 /** A tooltip that shows a label.
  * @author Nathan Sweet */
 public class TextTooltip extends Tooltip<Label> {
@@ -44,7 +43,6 @@ public class TextTooltip extends Tooltip<Label> {
 		this(text, manager, skin.get(styleName, TextTooltipStyle.class));
 	}
 
-	
 	public TextTooltip (@Null String text, final TooltipManager manager, TextTooltipStyle style) {
 		super(null, manager);
 
@@ -73,12 +71,11 @@ public class TextTooltip extends Tooltip<Label> {
 	/** The style for a text tooltip, see {@link TextTooltip}.
 	 * @author Nathan Sweet */
 	static public class TextTooltipStyle {
-		 public LabelStyle label;
-		 public @Null Drawable background;
+		public LabelStyle label;
+		public @Null Drawable background;
 		/** 0 means don't wrap. */
 		public float wrapWidth;
 
-		
 		public TextTooltipStyle () {
 		}
 

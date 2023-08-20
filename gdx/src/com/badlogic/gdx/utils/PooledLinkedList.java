@@ -16,21 +16,19 @@
 
 package com.badlogic.gdx.utils;
 
-
-
 /** A simple linked list that pools its nodes.
  * @author mzechner */
 public class PooledLinkedList<T> {
 	static final class Item<T> {
-		 public T payload;
-		 public Item<T> next;
-		 public Item<T> prev;
+		public T payload;
+		public Item<T> next;
+		public Item<T> prev;
 	}
 
-	 private Item<T> head;
-	 private Item<T> tail;
-	 private Item<T> iter;
-	 private Item<T> curr;
+	private Item<T> head;
+	private Item<T> tail;
+	private Item<T> iter;
+	private Item<T> curr;
 	private int size = 0;
 
 	private final Pool<Item<T>> pool;
@@ -45,7 +43,7 @@ public class PooledLinkedList<T> {
 	}
 
 	/** Adds the specified object to the end of the list regardless of iteration status */
-	
+
 	public void add (T object) {
 		Item<T> item = pool.obtain();
 		item.payload = object;
@@ -66,7 +64,7 @@ public class PooledLinkedList<T> {
 	}
 
 	/** Adds the specified object to the head of the list regardless of iteration status */
-	
+
 	public void addFirst (T object) {
 		Item<T> item = pool.obtain();
 		item.payload = object;
@@ -102,7 +100,7 @@ public class PooledLinkedList<T> {
 	/** Gets the next item in the list
 	 * 
 	 * @return the next item in the list or null if there are no more items */
-	
+
 	public @Null T next () {
 		if (iter == null) return null;
 
@@ -115,7 +113,7 @@ public class PooledLinkedList<T> {
 	/** Gets the previous item in the list
 	 * 
 	 * @return the previous item in the list or null if there are no more items */
-	
+
 	public @Null T previous () {
 		if (iter == null) return null;
 
@@ -126,7 +124,7 @@ public class PooledLinkedList<T> {
 	}
 
 	/** Removes the current list item based on the iterator position. */
-	
+
 	public void remove () {
 		if (curr == null) return;
 
@@ -161,7 +159,7 @@ public class PooledLinkedList<T> {
 	}
 
 	/** Removes the tail of the list regardless of iteration status */
-	
+
 	public @Null T removeLast () {
 		if (tail == null) {
 			return null;

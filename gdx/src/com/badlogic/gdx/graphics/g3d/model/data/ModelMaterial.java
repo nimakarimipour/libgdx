@@ -24,18 +24,18 @@ public class ModelMaterial {
 		Lambert, Phong
 	}
 
-	 public String id;
+	public String id;
 
-	 public MaterialType type;
+	public MaterialType type;
 
-	 public Color ambient;
-	 public Color diffuse;
-	 public Color specular;
-	 public Color emissive;
-	 public Color reflection;
+	public Color ambient;
+	public Color diffuse;
+	public Color specular;
+	public Color emissive;
+	public Color reflection;
 
 	public float shininess;
 	public float opacity = 1.f;
 
-	 public Array<ModelTexture> textures;
+	public Array<ModelTexture> textures;
 }

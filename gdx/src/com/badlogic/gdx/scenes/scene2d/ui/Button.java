@@ -30,7 +30,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 
-
 /** A button is a {@link Table} with a checked state and additional {@link ButtonStyle style} fields for pressed, unpressed, and
  * checked. Each time a button is clicked, the checked state is toggled. Being a table, a button can contain any other actors.<br>
  * <br>
@@ -43,9 +42,9 @@ import com.badlogic.gdx.utils.Pools;
  * The preferred size of the button is determined by the background and the button contents.
  * @author Nathan Sweet */
 public class Button extends Table implements Disableable {
-	 private ButtonStyle style;
+	private ButtonStyle style;
 	boolean isChecked, isDisabled;
-	 ButtonGroup buttonGroup;
+	ButtonGroup buttonGroup;
 	private ClickListener clickListener;
 	private boolean programmaticChangeEvents = true;
 
@@ -96,12 +95,10 @@ public class Button extends Table implements Disableable {
 		});
 	}
 
-	
 	public Button (@Null Drawable up) {
 		this(new ButtonStyle(up, null, null));
 	}
 
-	
 	public Button (@Null Drawable up, @Null Drawable down) {
 		this(new ButtonStyle(up, down, null));
 	}
@@ -270,15 +267,13 @@ public class Button extends Table implements Disableable {
 	/** The style for a button, see {@link Button}.
 	 * @author mzechner */
 	static public class ButtonStyle {
-		 public @Null Drawable up, down, over, focused, disabled;
-		 public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;
+		public @Null Drawable up, down, over, focused, disabled;
+		public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;
 		public float pressedOffsetX, pressedOffsetY, unpressedOffsetX, unpressedOffsetY, checkedOffsetX, checkedOffsetY;
 
-		
 		public ButtonStyle () {
 		}
 
-		
 		public ButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked) {
 			this.up = up;
 			this.down = down;

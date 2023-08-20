@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.g3d.shaders.DepthShader;
 
-
 public class DepthShaderProvider extends BaseShaderProvider {
 	public final DepthShader.Config config;
 
@@ -37,7 +36,6 @@ public class DepthShaderProvider extends BaseShaderProvider {
 		this(vertexShader.readString(), fragmentShader.readString());
 	}
 
-	
 	public DepthShaderProvider () {
 		this(null);
 	}

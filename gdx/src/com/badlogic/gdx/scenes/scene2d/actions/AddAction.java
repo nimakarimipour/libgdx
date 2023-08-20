@@ -18,11 +18,10 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-
 /** Adds an action to an actor.
  * @author Nathan Sweet */
 public class AddAction extends Action {
-	 private Action action;
+	private Action action;
 
 	public boolean act (float delta) {
 		target.addAction(action);
@@ -41,7 +40,6 @@ public class AddAction extends Action {
 		if (action != null) action.restart();
 	}
 
-	
 	public void reset () {
 		super.reset();
 		action = null;

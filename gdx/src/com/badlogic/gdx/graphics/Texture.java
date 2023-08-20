@@ -32,7 +32,6 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
  * A Texture can be managed. If the OpenGL context is lost all managed textures get invalidated. This happens when a user switches
@@ -47,7 +46,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * A Texture must be disposed when it is no longer used
  * @author badlogicgames@gmail.com */
 public class Texture extends GLTexture {
-	 private static AssetManager assetManager;
+	private static AssetManager assetManager;
 	final static Map<Application, Array<Texture>> managedTextures = new HashMap<Application, Array<Texture>>();
 
 	public enum TextureFilter {
@@ -105,18 +104,16 @@ public class Texture extends GLTexture {
 		}
 	}
 
-	 TextureData data;
+	TextureData data;
 
 	public Texture (String internalPath) {
 		this(Gdx.files.internal(internalPath));
 	}
 
-	
 	public Texture (FileHandle file) {
 		this(file, null, false);
 	}
 
-	
 	public Texture (FileHandle file, boolean useMipMaps) {
 		this(file, null, useMipMaps);
 	}
@@ -125,12 +122,10 @@ public class Texture extends GLTexture {
 		this(TextureData.Factory.loadFromFile(file, format, useMipMaps));
 	}
 
-	
 	public Texture (Pixmap pixmap) {
 		this(new PixmapTextureData(pixmap, null, false, false));
 	}
 
-	
 	public Texture (Pixmap pixmap, boolean useMipMaps) {
 		this(new PixmapTextureData(pixmap, null, useMipMaps, false));
 	}
@@ -139,7 +134,6 @@ public class Texture extends GLTexture {
 		this(new PixmapTextureData(pixmap, format, useMipMaps, false));
 	}
 
-	
 	public Texture (int width, int height, Format format) {
 		this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
 	}
@@ -325,7 +319,7 @@ public class Texture extends GLTexture {
 	}
 
 	/** @return the number of managed textures currently loaded */
-	
+
 	public static int getNumManagedTextures () {
 		return managedTextures.get(Gdx.app).size;
 	}

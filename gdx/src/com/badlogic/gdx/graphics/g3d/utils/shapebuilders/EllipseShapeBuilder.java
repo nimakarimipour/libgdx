@@ -23,7 +23,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /** Helper class with static methods to build ellipse shapes using {@link MeshPartBuilder}.
  * @author xoppa */
 public class EllipseShapeBuilder extends BaseShapeBuilder {
@@ -163,7 +162,7 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 	}
 
 	/** Build an ellipse */
-	
+
 	public static void build (MeshPartBuilder builder, float width, float height, float innerWidth, float innerHeight,
 		int divisions, float centerX, float centerY, float centerZ, float normalX, float normalY, float normalZ, float tangentX,
 		float tangentY, float tangentZ, float binormalX, float binormalY, float binormalZ, float angleFrom, float angleTo) {

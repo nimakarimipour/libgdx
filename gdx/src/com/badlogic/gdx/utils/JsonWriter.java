@@ -22,13 +22,12 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
 
-
 /** Builder style API for emitting JSON.
  * @author Nathan Sweet */
 public class JsonWriter extends Writer {
 	final Writer writer;
 	private final Array<JsonObject> stack = new Array();
-	 private JsonObject current;
+	private JsonObject current;
 	private boolean named;
 	private OutputType outputType = OutputType.json;
 	private boolean quoteLongValues = false;
@@ -127,7 +126,6 @@ public class JsonWriter extends Writer {
 		return name(name).json(json);
 	}
 
-	
 	public JsonWriter pop () throws IOException {
 		if (named) throw new IllegalStateException("Expected an object, array, or value since a name was set.");
 		stack.pop().close();

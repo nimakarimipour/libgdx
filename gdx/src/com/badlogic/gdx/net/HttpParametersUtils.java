@@ -23,7 +23,6 @@ import java.util.Set;
 
 import com.badlogic.gdx.Net.HttpRequest;
 
-
 /** Provides utility methods to work with the {@link HttpRequest} content and parameters. */
 public final class HttpParametersUtils {
 
@@ -37,7 +36,7 @@ public final class HttpParametersUtils {
 	/** Useful method to convert a map of key,value pairs to a String to be used as part of a GET or POST content.
 	 * @param parameters A Map<String, String> with the parameters to encode.
 	 * @return The String with the parameters encoded. */
-	
+
 	public static String convertHttpParameters (Map<String, String> parameters) {
 		Set<String> keySet = parameters.keySet();
 		StringBuilder convertedParameters = new StringBuilder();

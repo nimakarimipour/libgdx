@@ -28,9 +28,9 @@ public class StaticTiledMapTile implements TiledMapTile {
 
 	private BlendMode blendMode = BlendMode.ALPHA;
 
-	 private MapProperties properties;
+	private MapProperties properties;
 
-	 private MapObjects objects;
+	private MapObjects objects;
 
 	private TextureRegion textureRegion;
 

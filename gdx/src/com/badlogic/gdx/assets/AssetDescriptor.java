@@ -26,15 +26,14 @@ public class AssetDescriptor<T> {
 	public final Class<T> type;
 	public final AssetLoaderParameters params;
 	/** The resolved file. May be null if the fileName has not been resolved yet. */
-	 public FileHandle file;
+	public FileHandle file;
 
-	
 	public AssetDescriptor (String fileName, Class<T> assetType) {
 		this(fileName, assetType, null);
 	}
 
 	/** Creates an AssetDescriptor with an already resolved name. */
-	
+
 	public AssetDescriptor (FileHandle file, Class<T> assetType) {
 		this(file, assetType, null);
 	}

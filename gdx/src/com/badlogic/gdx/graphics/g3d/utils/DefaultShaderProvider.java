@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 
-
 public class DefaultShaderProvider extends BaseShaderProvider {
 	public final DefaultShader.Config config;
 
@@ -37,7 +36,6 @@ public class DefaultShaderProvider extends BaseShaderProvider {
 		this(vertexShader.readString(), fragmentShader.readString());
 	}
 
-	
 	public DefaultShaderProvider () {
 		this(null);
 	}

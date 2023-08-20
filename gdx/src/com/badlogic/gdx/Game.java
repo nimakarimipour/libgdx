@@ -26,7 +26,7 @@ package com.badlogic.gdx;
  * </p>
  */
 public abstract class Game implements ApplicationListener {
-	 protected Screen screen;
+	protected Screen screen;
 
 	@Override
 	public void dispose () {

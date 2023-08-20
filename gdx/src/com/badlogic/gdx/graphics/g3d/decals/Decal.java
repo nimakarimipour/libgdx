@@ -53,7 +53,7 @@ public class Decal {
 
 	/** The transformation offset can be used to change the pivot point for rotation and scaling. By default the pivot is the
 	 * middle of the decal. */
-	 public Vector2 transformationOffset = null;
+	public Vector2 transformationOffset = null;
 	protected Vector2 dimensions = new Vector2();
 
 	protected DecalMaterial material;

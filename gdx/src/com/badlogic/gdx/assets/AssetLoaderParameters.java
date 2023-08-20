@@ -24,5 +24,5 @@ public class AssetLoaderParameters<T> {
 		public void finishedLoading (AssetManager assetManager, String fileName, Class type);
 	}
 
-	 public LoadedCallback loadedCallback;
+	public LoadedCallback loadedCallback;
 }

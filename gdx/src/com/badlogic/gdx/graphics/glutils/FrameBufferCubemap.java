@@ -24,7 +24,6 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /**
  * <p>
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover most FBO uses. It will
@@ -163,7 +162,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 	}
 
 	/** Get the currently bound side. */
-	
+
 	public Cubemap.CubemapSide getSide () {
 		return currentSide < 0 ? null : cubemapSides[currentSide];
 	}

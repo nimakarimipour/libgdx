@@ -27,7 +27,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.SnapshotArray;
 
-
 /** 2D scene graph node that may contain other actors.
  * <p>
  * Actors have a z-order equal to the order they were inserted into the group. Actors inserted later will be drawn on top of
@@ -42,7 +41,7 @@ public class Group extends Actor implements Cullable {
 	private final Matrix4 computedTransform = new Matrix4();
 	private final Matrix4 oldTransform = new Matrix4();
 	boolean transform = true;
-	 private @Null Rectangle cullingArea;
+	private @Null Rectangle cullingArea;
 
 	public void act (float delta) {
 		super.act(delta);
@@ -240,7 +239,6 @@ public class Group extends Actor implements Cullable {
 		return cullingArea;
 	}
 
-	
 	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && getTouchable() == Touchable.disabled) return null;
 		if (!isVisible()) return null;
@@ -339,7 +337,7 @@ public class Group extends Actor implements Cullable {
 	 * {@link Action#setPool(com.badlogic.gdx.utils.Pool) pool}, if any. This is not done automatically.
 	 * @param unfocus If true, {@link Stage#unfocus(Actor)} is called.
 	 * @return the actor removed from this group. */
-	
+
 	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = children.removeIndex(index);
 		Stage stage = getStage();
@@ -359,7 +357,7 @@ public class Group extends Actor implements Cullable {
 	}
 
 	/** Removes all actors from this group. */
-	
+
 	public void clearChildren (boolean unfocus) {
 		Actor[] actors = children.begin();
 		for (int i = 0, n = children.size; i < n; i++) {
@@ -390,7 +388,7 @@ public class Group extends Actor implements Cullable {
 
 	/** Returns the first actor found with the specified name. Note this recursively compares the name of every actor in the
 	 * group. */
-	
+
 	public @Null <T extends Actor> T findActor (String name) {
 		Array<Actor> children = this.children;
 		for (int i = 0, n = children.size; i < n; i++)

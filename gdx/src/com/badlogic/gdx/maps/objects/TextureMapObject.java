@@ -19,7 +19,6 @@ package com.badlogic.gdx.maps.objects;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 
-
 /** @brief Represents a map object containing a texture (region) */
 public class TextureMapObject extends MapObject {
 
@@ -30,7 +29,7 @@ public class TextureMapObject extends MapObject {
 	private float scaleX = 1.0f;
 	private float scaleY = 1.0f;
 	private float rotation = 0.0f;
-	 private TextureRegion textureRegion = null;
+	private TextureRegion textureRegion = null;
 
 	/** @return x axis coordinate */
 	public float getX () {
@@ -113,7 +112,7 @@ public class TextureMapObject extends MapObject {
 	}
 
 	/** Creates an empty texture map object */
-	
+
 	public TextureMapObject () {
 		this(null);
 	}

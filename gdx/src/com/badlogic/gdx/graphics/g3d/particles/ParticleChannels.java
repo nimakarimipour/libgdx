@@ -35,7 +35,7 @@ public class ParticleChannels {
 
 	// Initializers
 	public static class TextureRegionInitializer implements ChannelInitializer<FloatChannel> {
-		 private static TextureRegionInitializer instance;
+		private static TextureRegionInitializer instance;
 
 		public static TextureRegionInitializer get () {
 			if (instance == null) instance = new TextureRegionInitializer();
@@ -56,7 +56,7 @@ public class ParticleChannels {
 	}
 
 	public static class ColorInitializer implements ChannelInitializer<FloatChannel> {
-		 private static ColorInitializer instance;
+		private static ColorInitializer instance;
 
 		public static ColorInitializer get () {
 			if (instance == null) instance = new ColorInitializer();
@@ -70,7 +70,7 @@ public class ParticleChannels {
 	}
 
 	public static class ScaleInitializer implements ChannelInitializer<FloatChannel> {
-		 private static ScaleInitializer instance;
+		private static ScaleInitializer instance;
 
 		public static ScaleInitializer get () {
 			if (instance == null) instance = new ScaleInitializer();
@@ -84,7 +84,7 @@ public class ParticleChannels {
 	}
 
 	public static class Rotation2dInitializer implements ChannelInitializer<FloatChannel> {
-		 private static Rotation2dInitializer instance;
+		private static Rotation2dInitializer instance;
 
 		public static Rotation2dInitializer get () {
 			if (instance == null) instance = new Rotation2dInitializer();
@@ -101,7 +101,7 @@ public class ParticleChannels {
 	}
 
 	public static class Rotation3dInitializer implements ChannelInitializer<FloatChannel> {
-		 private static Rotation3dInitializer instance;
+		private static Rotation3dInitializer instance;
 
 		public static Rotation3dInitializer get () {
 			if (instance == null) instance = new Rotation3dInitializer();

@@ -24,7 +24,6 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 
-
 /** {@link AssetLoader} to load {@link ParticleEffect} instances. Passing a {@link ParticleEffectParameter} to
  * {@link AssetManager#load(String, Class, AssetLoaderParameters)} allows to specify an atlas file or an image directory to be
  * used for the effect's images. Per default images are loaded from the directory in which the effect file is found. */
@@ -45,7 +44,6 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 		return effect;
 	}
 
-	
 	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, ParticleEffectParameter param) {
 		Array<AssetDescriptor> deps = null;
@@ -60,10 +58,10 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 	 * necessary for the {@link ParticleEffect}. */
 	public static class ParticleEffectParameter extends AssetLoaderParameters<ParticleEffect> {
 		/** Atlas file name. */
-		 public String atlasFile;
+		public String atlasFile;
 		/** Optional prefix to image names **/
-		 public String atlasPrefix;
+		public String atlasPrefix;
 		/** Image directory. */
-		 public FileHandle imagesDir;
+		public FileHandle imagesDir;
 	}
 }

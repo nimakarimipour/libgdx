@@ -25,7 +25,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /**
  * <p>
  * IndexBufferObject wraps OpenGL's index buffer functionality to be used in conjunction with VBOs.
@@ -80,7 +79,6 @@ public class IndexBufferObjectSubData implements IndexData {
 		bufferHandle = createBufferObject();
 	}
 
-	
 	private int createBufferObject () {
 		int result = Gdx.gl20.glGenBuffer();
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, result);

@@ -24,7 +24,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 
-
 /** An ordered or unordered map of objects. This implementation uses arrays to store the keys and values, which means
  * {@link #getKey(Object, boolean) gets} do a comparison for each key in the map. This is slower than a typical hash map
  * implementation, but may be acceptable for small maps and has the benefits that keys and values can be accessed by index, which
@@ -37,9 +36,9 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	public int size;
 	public boolean ordered;
 
-	 private transient Entries entries1, entries2;
-	 private transient Values values1, values2;
-	 private transient Keys keys1, keys2;
+	private transient Entries entries1, entries2;
+	private transient Values values1, values2;
+	private transient Keys keys1, keys2;
 
 	/** Creates an ordered map with a capacity of 16. */
 	public ArrayMap () {
@@ -126,7 +125,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
 	/** Returns the value (which may be null) for the specified key, or null if the key is not in the map. Note this does a
 	 * .equals() comparison of each key in reverse order until the specified key is found. */
-	
+
 	public @Null V get (K key) {
 		return get(key, null);
 	}
@@ -149,7 +148,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	/** Returns the key for the specified value. Note this does a comparison of each value in reverse order until the specified
 	 * value is found.
 	 * @param identity If true, == comparison will be used. If false, .equals() comparison will be used. */
-	
+
 	public @Null K getKey (V value, boolean identity) {
 		Object[] values = this.values;
 		int i = size - 1;
@@ -259,7 +258,6 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return -1;
 	}
 
-	
 	public @Null V removeKey (K key) {
 		Object[] keys = this.keys;
 		if (key == null) {

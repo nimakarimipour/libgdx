@@ -22,7 +22,6 @@ import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 
-
 /** An unordered map where the keys are objects and the values are unboxed floats. Null keys are not allowed. No allocation is
  * done except when growing the table size.
  * <p>
@@ -63,9 +62,9 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 	 * hash. */
 	protected int mask;
 
-	 transient Entries entries1, entries2;
-	 transient Values values1, values2;
-	 transient Keys keys1, keys2;
+	transient Entries entries1, entries2;
+	transient Values values1, values2;
+	transient Keys keys1, keys2;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectFloatMap () {
@@ -292,7 +291,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 
 	/** Returns the key for the specified value, or null if it is not in the map. Note this traverses the entire map and compares
 	 * every value, which may be an expensive operation. */
-	
+
 	public @Null K findKey (float value) {
 		K[] keyTable = this.keyTable;
 		float[] valueTable = this.valueTable;
@@ -305,7 +304,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 
 	/** Returns the key for the specified value, or null if it is not in the map. Note this traverses the entire map and compares
 	 * every value, which may be an expensive operation. */
-	
+
 	public @Null K findKey (float value, float epsilon) {
 		K[] keyTable = this.keyTable;
 		float[] valueTable = this.valueTable;
@@ -478,7 +477,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 	}
 
 	static public class Entry<K> {
-		 public K key;
+		public K key;
 		public float value;
 
 		public String toString () {

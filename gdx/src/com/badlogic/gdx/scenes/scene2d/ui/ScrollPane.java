@@ -36,7 +36,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
 
-
 /** A group that scrolls a child actor using scrollbars and/or mouse or touch dragging.
  * <p>
  * The actor is sized to its preferred size. If the actor's preferred width or height is less than the size of this scroll pane,
@@ -48,7 +47,7 @@ import com.badlogic.gdx.utils.Null;
  * @author Nathan Sweet */
 public class ScrollPane extends WidgetGroup {
 	private ScrollPaneStyle style;
-	 private Actor actor;
+	private Actor actor;
 
 	final Rectangle actorArea = new Rectangle();
 	final Rectangle hScrollBounds = new Rectangle(), hKnobBounds = new Rectangle();
@@ -689,7 +688,6 @@ public class ScrollPane extends WidgetGroup {
 		throw new UnsupportedOperationException("Use ScrollPane#setActor.");
 	}
 
-	
 	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -697,7 +695,6 @@ public class ScrollPane extends WidgetGroup {
 		return true;
 	}
 
-	
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -705,14 +702,12 @@ public class ScrollPane extends WidgetGroup {
 		return super.removeActor(actor, unfocus);
 	}
 
-	
 	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == this.actor) this.actor = null;
 		return actor;
 	}
 
-	
 	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
 		if (touchable && getTouchable() == Touchable.enabled && isVisible()) {
@@ -1077,15 +1072,13 @@ public class ScrollPane extends WidgetGroup {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ScrollPaneStyle {
-		 public @Null Drawable background, corner;
-		 public @Null Drawable hScroll, hScrollKnob;
-		 public @Null Drawable vScroll, vScrollKnob;
+		public @Null Drawable background, corner;
+		public @Null Drawable hScroll, hScrollKnob;
+		public @Null Drawable vScroll, vScrollKnob;
 
-		
 		public ScrollPaneStyle () {
 		}
 
-		
 		public ScrollPaneStyle (@Null Drawable background, @Null Drawable hScroll, @Null Drawable hScrollKnob,
 			@Null Drawable vScroll, @Null Drawable vScrollKnob) {
 			this.background = background;

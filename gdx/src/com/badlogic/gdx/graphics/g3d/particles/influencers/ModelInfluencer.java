@@ -116,7 +116,7 @@ public abstract class ModelInfluencer extends Influencer {
 	}
 
 	public Array<Model> models;
-	 ObjectChannel<ModelInstance> modelChannel;
+	ObjectChannel<ModelInstance> modelChannel;
 
 	public ModelInfluencer () {
 		this.models = new Array<Model>(true, 1, Model.class);

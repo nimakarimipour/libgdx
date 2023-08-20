@@ -21,14 +21,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
 /** Builder style API for emitting UBJSON.
  * @author Justin Shapcott */
 public class UBJsonWriter implements Closeable {
 
 	final DataOutputStream out;
 
-	 private JsonObject current;
+	private JsonObject current;
 	private boolean named;
 	private final Array<JsonObject> stack = new Array();
 
@@ -545,7 +544,6 @@ public class UBJsonWriter implements Closeable {
 		return pop(false);
 	}
 
-	
 	protected UBJsonWriter pop (boolean silent) throws IOException {
 		if (named) throw new IllegalStateException("Expected an object, array, or value since a name was set.");
 		if (silent)

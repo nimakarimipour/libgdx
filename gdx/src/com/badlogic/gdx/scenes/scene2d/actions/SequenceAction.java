@@ -19,7 +19,6 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Pool;
 
-
 /** Executes a number of actions one at a time.
  * @author Nathan Sweet */
 public class SequenceAction extends ParallelAction {
@@ -58,7 +57,6 @@ public class SequenceAction extends ParallelAction {
 		addAction(action5);
 	}
 
-	
 	public boolean act (float delta) {
 		if (index >= actions.size) return true;
 		Pool pool = getPool();

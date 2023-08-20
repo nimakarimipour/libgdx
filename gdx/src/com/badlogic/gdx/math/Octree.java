@@ -155,7 +155,7 @@ public class Octree<T> {
 		int level;
 		final BoundingBox bounds = new BoundingBox();
 		boolean leaf;
-		 private Octree.OctreeNode[] children; // May be null when leaf is true.
+		private Octree.OctreeNode[] children; // May be null when leaf is true.
 		private final Array<T> geometries = new Array<T>(Math.min(16, maxItemsPerNode));
 
 		private void split () {
@@ -375,7 +375,7 @@ public class Octree<T> {
 	}
 
 	public static class RayCastResult<T> {
-		 T geometry;
+		T geometry;
 		float distance;
 		float maxDistanceSq = Float.MAX_VALUE;
 	}

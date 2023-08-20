@@ -20,18 +20,16 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Null;
 
-
 /** Event for actor input: touch, mouse, touch/mouse actor enter/exit, mouse scroll, and keyboard events.
  * @see InputListener */
 public class InputEvent extends Event {
-	 private Type type;
+	private Type type;
 	private float stageX, stageY, scrollAmountX, scrollAmountY;
 	private int pointer, button, keyCode;
 	private char character;
-	 private @Null Actor relatedActor;
+	private @Null Actor relatedActor;
 	private boolean touchFocus = true;
 
-	
 	public void reset () {
 		super.reset();
 		relatedActor = null;

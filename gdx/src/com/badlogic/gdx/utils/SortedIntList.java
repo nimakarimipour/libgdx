@@ -16,17 +16,15 @@
 
 package com.badlogic.gdx.utils;
 
-
-
 /** A sorted double linked list which uses ints for indexing
  * 
  * @param <E> */
 public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	private NodePool<E> nodePool = new NodePool<E>(); // avoid allocating nodes
-	 private transient Iterator iterator;
+	private transient Iterator iterator;
 	int size = 0;
 
-	 Node<E> first;
+	Node<E> first;
 
 	/** Creates an ascending list */
 	public SortedIntList () {
@@ -37,7 +35,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * @param index Index of the element
 	 * @param value Element to insert
 	 * @return Element replaced by newly inserted element, null if nothing was replaced */
-	
+
 	public @Null E insert (int index, E value) {
 		if (first != null) {
 			Node<E> c = first;
@@ -75,7 +73,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * 
 	 * @param index Index of the element to retrieve
 	 * @return Matching element, null otherwise */
-	
+
 	public E get (int index) {
 		E match = null;
 		if (first != null) {
@@ -124,10 +122,9 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	}
 
 	public class Iterator implements java.util.Iterator<Node<E>> {
-		 private Node<E> position;
-		 private Node<E> previousPosition;
+		private Node<E> position;
+		private Node<E> previousPosition;
 
-		
 		public Iterator () {
 			reset();
 		}
@@ -163,7 +160,6 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			}
 		}
 
-		
 		public Iterator reset () {
 			position = first;
 			previousPosition = null;
@@ -173,11 +169,11 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 
 	public static class Node<E> {
 		/** Node previous to this */
-		 protected Node<E> p;
+		protected Node<E> p;
 		/** Node next to this */
-		 protected Node<E> n;
+		protected Node<E> n;
 		/** Value held */
-		 public E value;
+		public E value;
 		/** Index value in list */
 		public int index;
 	}

@@ -16,7 +16,6 @@ package com.badlogic.gdx.utils;
 import java.util.Arrays;
 import java.util.Comparator;
 
-
 /** A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when running on partially sorted
  * arrays, while offering performance comparable to a traditional mergesort when run on random arrays. Like all proper mergesorts,
  * this sort is stable and runs O(n log n) time (worst case). In the worst case, this sort requires temporary storage space for
@@ -52,10 +51,10 @@ class TimSort<T> {
 	private static final int MIN_MERGE = 32;
 
 	/** The array being sorted. */
-	 private T[] a;
+	private T[] a;
 
 	/** The comparator for this sort. */
-	 private Comparator<? super T> c;
+	private Comparator<? super T> c;
 
 	/** When we get into galloping mode, we stay there until both runs win less often than MIN_GALLOP consecutive times. */
 	private static final int MIN_GALLOP = 7;
@@ -94,7 +93,6 @@ class TimSort<T> {
 		runLen = new int[40];
 	}
 
-	
 	public void doSort (T[] a, Comparator<T> c, int lo, int hi) {
 		stackSize = 0;
 		rangeCheck(a.length, lo, hi);

@@ -22,10 +22,10 @@ import java.util.Comparator;
  * short, or byte).
  * @author Nathan Sweet */
 public class Sort {
-	 static private Sort instance;
+	static private Sort instance;
 
-	 private TimSort timSort;
-	 private ComparableTimSort comparableTimSort;
+	private TimSort timSort;
+	private ComparableTimSort comparableTimSort;
 
 	public <T extends Comparable> void sort (Array<T> a) {
 		if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();

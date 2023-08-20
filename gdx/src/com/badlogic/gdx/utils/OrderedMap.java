@@ -18,7 +18,6 @@ package com.badlogic.gdx.utils;
 
 import java.util.NoSuchElementException;
 
-
 /** An {@link ObjectMap} that also stores keys in an {@link Array} using the insertion order. Null keys are not allowed. No
  * allocation is done except when growing the table size.
  * <p>
@@ -70,7 +69,6 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		keys = new Array(map.keys);
 	}
 
-	
 	public V put (K key, V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.

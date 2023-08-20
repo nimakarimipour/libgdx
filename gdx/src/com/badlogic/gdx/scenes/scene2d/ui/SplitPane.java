@@ -30,7 +30,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 
-
 /** A container that contains two widgets and is divided either horizontally or vertically. The user may resize the widgets. The
  * child widgets are always sized to fill their side of the SplitPane.
  * <p>
@@ -45,8 +44,8 @@ import com.badlogic.gdx.utils.Null;
  * @author mzechner
  * @author Nathan Sweet */
 public class SplitPane extends WidgetGroup {
-	 SplitPaneStyle style;
-	 private @Null Actor firstWidget, secondWidget;
+	SplitPaneStyle style;
+	private @Null Actor firstWidget, secondWidget;
 	boolean vertical;
 	float splitAmount = 0.5f, minAmount, maxAmount = 1;
 
@@ -356,7 +355,6 @@ public class SplitPane extends WidgetGroup {
 		throw new UnsupportedOperationException("Use SplitPane#setWidget.");
 	}
 
-	
 	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {
@@ -370,7 +368,6 @@ public class SplitPane extends WidgetGroup {
 		return true;
 	}
 
-	
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {
@@ -388,7 +385,6 @@ public class SplitPane extends WidgetGroup {
 		return false;
 	}
 
-	
 	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == firstWidget) {
@@ -411,9 +407,8 @@ public class SplitPane extends WidgetGroup {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class SplitPaneStyle {
-		 public Drawable handle;
+		public Drawable handle;
 
-		
 		public SplitPaneStyle () {
 		}
 

@@ -23,13 +23,13 @@ import com.badlogic.gdx.math.Rectangle;
 /** @author Stefan Bachmann
  * @author Nathan Sweet */
 public class PolygonSprite {
-	 PolygonRegion region;
+	PolygonRegion region;
 	private float x, y;
 	private float width, height;
 	private float scaleX = 1f, scaleY = 1f;
 	private float rotation;
 	private float originX, originY;
-	 private float[] vertices;
+	private float[] vertices;
 	private boolean dirty;
 	private Rectangle bounds = new Rectangle();
 	private final Color color = new Color(1f, 1f, 1f, 1f);

@@ -25,7 +25,6 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 
-
 /**
  * <p>
  * Convenience class for working with OpenGL vertex arrays. It interleaves all data in the order you specified in the constructor
@@ -97,7 +96,6 @@ public class VertexArray implements VertexData {
 		((Buffer)byteBuffer).position(pos);
 	}
 
-	
 	@Override
 	public void bind (final ShaderProgram shader) {
 		bind(shader, null);
@@ -148,7 +146,7 @@ public class VertexArray implements VertexData {
 	/** Unbinds this VertexBufferObject.
 	 *
 	 * @param shader the shader */
-	
+
 	@Override
 	public void unbind (ShaderProgram shader) {
 		unbind(shader, null);

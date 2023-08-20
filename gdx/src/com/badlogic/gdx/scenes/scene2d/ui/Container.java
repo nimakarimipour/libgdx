@@ -14,19 +14,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 
-
 /** A group with a single child that sizes and positions the child using constraints. This provides layout similar to a
  * {@link Table} with a single cell but is more lightweight.
  * @author Nathan Sweet */
 public class Container<T extends Actor> extends WidgetGroup {
-	 private @Null T actor;
+	private @Null T actor;
 	private Value minWidth = Value.minWidth, minHeight = Value.minHeight;
 	private Value prefWidth = Value.prefWidth, prefHeight = Value.prefHeight;
 	private Value maxWidth = Value.zero, maxHeight = Value.zero;
 	private Value padTop = Value.zero, padLeft = Value.zero, padBottom = Value.zero, padRight = Value.zero;
 	private float fillX, fillY;
 	private int align;
-	 private @Null Drawable background;
+	private @Null Drawable background;
 	private boolean clip;
 	private boolean round = true;
 
@@ -201,7 +200,6 @@ public class Container<T extends Actor> extends WidgetGroup {
 		throw new UnsupportedOperationException("Use Container#setActor.");
 	}
 
-	
 	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -209,7 +207,6 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return true;
 	}
 
-	
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -217,7 +214,6 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return super.removeActor(actor, unfocus);
 	}
 
-	
 	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == this.actor) this.actor = null;
@@ -742,7 +738,6 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return clip;
 	}
 
-	
 	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;

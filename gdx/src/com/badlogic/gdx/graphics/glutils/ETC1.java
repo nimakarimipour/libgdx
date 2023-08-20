@@ -33,7 +33,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 
-
 /** Class for encoding and decoding ETC1 compressed images. Also provides methods to add a PKM header.
  * @author mzechner */
 public class ETC1 {
@@ -61,7 +60,6 @@ public class ETC1 {
 			checkNPOT();
 		}
 
-		
 		public ETC1Data (FileHandle pkmFile) {
 			byte[] buffer = new byte[1024 * 10];
 			DataInputStream in = null;
@@ -101,7 +99,7 @@ public class ETC1 {
 
 		/** Writes the ETC1Data with a PKM header to the given file.
 		 * @param file the file. */
-		
+
 		public void write (FileHandle file) {
 			DataOutputStream write = null;
 			byte[] buffer = new byte[10 * 1024];

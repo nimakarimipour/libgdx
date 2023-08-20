@@ -23,7 +23,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
-
 /** A Renderable contains all information about a single render instruction (typically a draw call).
  * </p>
  * 
@@ -94,7 +93,6 @@ public class Renderable {
 	/** User definable value, may be null. */
 	public Object userData;
 
-	
 	public Renderable set (Renderable renderable) {
 		worldTransform.set(renderable.worldTransform);
 		material = renderable.material;

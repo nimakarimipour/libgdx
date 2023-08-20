@@ -24,7 +24,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 
-
 /** Helper class with static methods to build box shapes using {@link MeshPartBuilder}.
  * @author realitix, xoppa */
 public class BoxShapeBuilder extends BaseShapeBuilder {
@@ -73,7 +72,7 @@ public class BoxShapeBuilder extends BaseShapeBuilder {
 	}
 
 	/** Add a box. Requires GL_POINTS, GL_LINES or GL_TRIANGLES primitive type. */
-	
+
 	public static void build (MeshPartBuilder builder, Vector3 corner000, Vector3 corner010, Vector3 corner100, Vector3 corner110,
 		Vector3 corner001, Vector3 corner011, Vector3 corner101, Vector3 corner111) {
 		if ((builder.getAttributes().getMask() & (Usage.Normal | Usage.BiNormal | Usage.Tangent | Usage.TextureCoordinates)) == 0) {

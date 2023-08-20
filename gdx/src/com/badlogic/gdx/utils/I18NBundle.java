@@ -25,8 +25,6 @@ import java.util.MissingResourceException;
 
 import com.badlogic.gdx.files.FileHandle;
 
-
-
 /** A {@code I18NBundle} provides {@code Locale}-specific resources loaded from property files. A bundle contains a number of
  * named resources, whose names and values are {@code Strings}. A bundle may have a parent bundle, and when a resource is not
  * found in a bundle, the parent bundle is searched for the resource. If the fallback mechanism reaches the base bundle and still
@@ -74,13 +72,13 @@ public class I18NBundle {
 	private static boolean exceptionOnMissingKey = true;
 
 	/** The parent of this {@code I18NBundle} that is used if this bundle doesn't include the requested resource. */
-	 private I18NBundle parent;
+	private I18NBundle parent;
 
 	/** The locale for this bundle. */
 	private Locale locale;
 
 	/** The properties for this bundle. */
-	 private ObjectMap<String, String> properties;
+	private ObjectMap<String, String> properties;
 
 	/** The formatter used for argument replacement. */
 	private TextFormatter formatter;
@@ -158,7 +156,6 @@ public class I18NBundle {
 		return createBundleImpl(baseFileHandle, locale, encoding);
 	}
 
-	
 	private static I18NBundle createBundleImpl (FileHandle baseFileHandle, Locale locale, String encoding) {
 		if (baseFileHandle == null || locale == null || encoding == null) throw new NullPointerException();
 
@@ -290,13 +287,12 @@ public class I18NBundle {
 	 *           (except for the base bundle)
 	 * @return a <code>Locale</code> for the fallback search, or <code>null</code> if no further fallback search is needed.
 	 * @exception NullPointerException if <code>locale</code> is <code>null</code> */
-	
+
 	private static Locale getFallbackLocale (Locale locale) {
 		Locale defaultLocale = Locale.getDefault();
 		return locale.equals(defaultLocale) ? null : defaultLocale;
 	}
 
-	
 	private static I18NBundle loadBundleChain (FileHandle baseFileHandle, String encoding, List<Locale> candidateLocales,
 		int candidateIndex, I18NBundle baseBundle) {
 		Locale targetLocale = candidateLocales.get(candidateIndex);
@@ -319,7 +315,7 @@ public class I18NBundle {
 	}
 
 	// Tries to load the bundle for the given locale.
-	
+
 	private static I18NBundle loadBundle (FileHandle baseFileHandle, String encoding, Locale targetLocale) {
 		I18NBundle bundle = null;
 		Reader reader = null;
@@ -419,8 +415,7 @@ public class I18NBundle {
 	/** Sets the bundle locale. This method is private because a bundle can't change the locale during its life.
 	 * 
 	 * @param locale */
-	
-	
+
 	private void setLocale (Locale locale) {
 		this.locale = locale;
 		this.formatter = new TextFormatter(locale, !simpleFormatter);

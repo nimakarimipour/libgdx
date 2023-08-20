@@ -160,7 +160,7 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 	}
 
 	public Array<ParticleController> templates;
-	 ObjectChannel<ParticleController> particleControllerChannel;
+	ObjectChannel<ParticleController> particleControllerChannel;
 
 	public ParticleControllerInfluencer () {
 		this.templates = new Array<ParticleController>(true, 1, ParticleController.class);

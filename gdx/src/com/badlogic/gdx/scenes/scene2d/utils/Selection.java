@@ -10,12 +10,11 @@ import com.badlogic.gdx.utils.Pools;
 
 import java.util.Iterator;
 
-
 /** Manages selected objects. Optionally fires a {@link ChangeEvent} on an actor. Selection changes can be vetoed via
  * {@link ChangeEvent#cancel()}.
  * @author Nathan Sweet */
 public class Selection<T> implements Disableable, Iterable<T> {
-	 private @Null Actor actor;
+	private @Null Actor actor;
 	final OrderedSet<T> selected = new OrderedSet();
 	private final OrderedSet<T> old = new OrderedSet();
 	boolean isDisabled;
@@ -23,7 +22,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	boolean multiple;
 	boolean required;
 	private boolean programmaticChangeEvents = true;
-	
+
 	@Null T lastSelected;
 
 	/** @param actor An actor to fire {@link ChangeEvent} on when the selection changes, or null. */
@@ -33,7 +32,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 
 	/** Selects or deselects the specified item based on how the selection is configured, whether ctrl is currently pressed, etc.
 	 * This is typically invoked by user interaction. */
-	
+
 	public void choose (T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (isDisabled) return;
@@ -85,7 +84,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Returns the first selected item, or null. */
-	
+
 	public @Null T first () {
 		return selected.size == 0 ? null : selected.first();
 	}
@@ -120,7 +119,6 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		cleanup();
 	}
 
-	
 	public void setAll (Array<T> items) {
 		boolean added = false;
 		snapshot();
@@ -173,7 +171,6 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		cleanup();
 	}
 
-	
 	public void remove (T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (!selected.remove(item)) return;
@@ -185,7 +182,6 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		}
 	}
 
-	
 	public void removeAll (Array<T> items) {
 		boolean removed = false;
 		snapshot();
@@ -205,7 +201,6 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		cleanup();
 	}
 
-	
 	public void clear () {
 		if (selected.size == 0) {
 			lastSelected = null;
@@ -246,7 +241,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** Makes a best effort to return the last item selected, else returns an arbitrary item or null if the selection is empty. */
-	
+
 	public @Null T getLastSelected () {
 		if (lastSelected != null) {
 			return lastSelected;

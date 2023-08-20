@@ -31,7 +31,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-
 /** Helper class to create {@link Model}s from code. To start building use the {@link #begin()} method, when finished building use
  * the {@link #end()} method. The end method returns the model just build. Building cannot be nested, only one model (per
  * ModelBuilder) can be build at the time. The same ModelBuilder can be used to build multiple models sequential. Use the
@@ -41,9 +40,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * @author Xoppa */
 public class ModelBuilder {
 	/** The model currently being build */
-	 private Model model;
+	private Model model;
 	/** The node currently being build */
-	 private Node node;
+	private Node node;
 	/** The mesh builders created between begin and end */
 	private Array<MeshBuilder> builders = new Array<MeshBuilder>();
 
@@ -59,7 +58,7 @@ public class ModelBuilder {
 	}
 
 	/** Begin building a new model */
-	
+
 	public void begin () {
 		if (model != null) throw new GdxRuntimeException("Call end() first");
 		node = null;
@@ -69,7 +68,7 @@ public class ModelBuilder {
 
 	/** End building the model.
 	 * @return The newly created model. Call the {@link Model#dispose()} method when no longer used. */
-	
+
 	public Model end () {
 		if (model == null) throw new GdxRuntimeException("Call begin() first");
 		final Model result = model;
@@ -84,7 +83,6 @@ public class ModelBuilder {
 		return result;
 	}
 
-	
 	private void endnode () {
 		if (node != null) {
 			node = null;
