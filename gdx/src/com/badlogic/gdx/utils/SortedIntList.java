@@ -16,17 +16,17 @@
 
 package com.badlogic.gdx.utils;
 
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A sorted double linked list which uses ints for indexing
  * 
  * @param <E> */
 public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	private NodePool<E> nodePool = new NodePool<E>(); // avoid allocating nodes
-	@SuppressWarnings("NullAway.Init") private transient Iterator iterator;
+	 private transient Iterator iterator;
 	int size = 0;
 
-	@SuppressWarnings("NullAway.Init") Node<E> first;
+	 Node<E> first;
 
 	/** Creates an ascending list */
 	public SortedIntList () {
@@ -37,7 +37,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * @param index Index of the element
 	 * @param value Element to insert
 	 * @return Element replaced by newly inserted element, null if nothing was replaced */
-	@NullUnmarked
+	
 	public @Null E insert (int index, E value) {
 		if (first != null) {
 			Node<E> c = first;
@@ -75,7 +75,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * 
 	 * @param index Index of the element to retrieve
 	 * @return Matching element, null otherwise */
-	@NullUnmarked
+	
 	public E get (int index) {
 		E match = null;
 		if (first != null) {
@@ -124,10 +124,10 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	}
 
 	public class Iterator implements java.util.Iterator<Node<E>> {
-		@SuppressWarnings("NullAway.Init") private Node<E> position;
-		@SuppressWarnings("NullAway.Init") private Node<E> previousPosition;
+		 private Node<E> position;
+		 private Node<E> previousPosition;
 
-		@NullUnmarked
+		
 		public Iterator () {
 			reset();
 		}
@@ -163,7 +163,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			}
 		}
 
-		@NullUnmarked
+		
 		public Iterator reset () {
 			position = first;
 			previousPosition = null;
@@ -173,11 +173,11 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 
 	public static class Node<E> {
 		/** Node previous to this */
-		@SuppressWarnings("NullAway.Init") protected Node<E> p;
+		 protected Node<E> p;
 		/** Node next to this */
-		@SuppressWarnings("NullAway.Init") protected Node<E> n;
+		 protected Node<E> n;
 		/** Value held */
-		@SuppressWarnings("NullAway.Init") public E value;
+		 public E value;
 		/** Index value in list */
 		public int index;
 	}

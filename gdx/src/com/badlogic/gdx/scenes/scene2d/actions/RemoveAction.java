@@ -17,12 +17,12 @@
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Removes an action from an actor.
  * @author Nathan Sweet */
 public class RemoveAction extends Action {
-	@SuppressWarnings("NullAway.Init") private Action action;
+	 private Action action;
 
 	public boolean act (float delta) {
 		target.removeAction(action);
@@ -37,7 +37,7 @@ public class RemoveAction extends Action {
 		this.action = action;
 	}
 
-	@NullUnmarked
+	
 	public void reset () {
 		super.reset();
 		action = null;

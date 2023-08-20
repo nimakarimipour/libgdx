@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A resizable, ordered or unordered array of objects. If unordered, this class avoids a memory copy when removing elements (the
  * last element is moved to the removed element's position).
@@ -36,8 +36,8 @@ public class Array<T> implements Iterable<T> {
 	public int size;
 	public boolean ordered;
 
-	@SuppressWarnings("NullAway.Init") private ArrayIterable iterable;
-	@SuppressWarnings("NullAway.Init") private Predicate.PredicateIterable<T> predicateIterable;
+	 private ArrayIterable iterable;
+	 private Predicate.PredicateIterable<T> predicateIterable;
 
 	/** Creates an ordered array with a capacity of 16. */
 	public Array () {
@@ -514,7 +514,7 @@ public class Array<T> implements Iterable<T> {
 	}
 
 	/** Returns a random item from the array, or null if the array is empty. */
-	@NullUnmarked
+	
 	public @Null T random () {
 		if (size == 0) return null;
 		return items[MathUtils.random(0, size - 1)];
@@ -669,7 +669,7 @@ public class Array<T> implements Iterable<T> {
 	static public class ArrayIterable<T> implements Iterable<T> {
 		private final Array<T> array;
 		private final boolean allowRemove;
-		@SuppressWarnings("NullAway.Init") private ArrayIterator iterator1, iterator2;
+		 private ArrayIterator iterator1, iterator2;
 
 // java.io.StringWriter lastAcquire = new java.io.StringWriter();
 
@@ -677,7 +677,7 @@ public class Array<T> implements Iterable<T> {
 			this(array, true);
 		}
 
-		@NullUnmarked
+		
 		public ArrayIterable (Array<T> array, boolean allowRemove) {
 			this.array = array;
 			this.allowRemove = allowRemove;

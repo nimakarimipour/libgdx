@@ -35,7 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A group that scrolls a child actor using scrollbars and/or mouse or touch dragging.
  * <p>
@@ -48,7 +48,7 @@ import com.badlogic.gdx.NullUnmarked;
  * @author Nathan Sweet */
 public class ScrollPane extends WidgetGroup {
 	private ScrollPaneStyle style;
-	@SuppressWarnings("NullAway.Init") private Actor actor;
+	 private Actor actor;
 
 	final Rectangle actorArea = new Rectangle();
 	final Rectangle hScrollBounds = new Rectangle(), hKnobBounds = new Rectangle();
@@ -689,7 +689,7 @@ public class ScrollPane extends WidgetGroup {
 		throw new UnsupportedOperationException("Use ScrollPane#setActor.");
 	}
 
-	@NullUnmarked
+	
 	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -697,7 +697,7 @@ public class ScrollPane extends WidgetGroup {
 		return true;
 	}
 
-	@NullUnmarked
+	
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -705,14 +705,14 @@ public class ScrollPane extends WidgetGroup {
 		return super.removeActor(actor, unfocus);
 	}
 
-	@NullUnmarked
+	
 	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == this.actor) this.actor = null;
 		return actor;
 	}
 
-	@NullUnmarked
+	
 	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
 		if (touchable && getTouchable() == Touchable.enabled && isVisible()) {
@@ -1077,15 +1077,15 @@ public class ScrollPane extends WidgetGroup {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ScrollPaneStyle {
-		@SuppressWarnings("NullAway.Init") public @Null Drawable background, corner;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable hScroll, hScrollKnob;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable vScroll, vScrollKnob;
+		 public @Null Drawable background, corner;
+		 public @Null Drawable hScroll, hScrollKnob;
+		 public @Null Drawable vScroll, vScrollKnob;
 
-		@NullUnmarked
+		
 		public ScrollPaneStyle () {
 		}
 
-		@NullUnmarked
+		
 		public ScrollPaneStyle (@Null Drawable background, @Null Drawable hScroll, @Null Drawable hScrollKnob,
 			@Null Drawable vScroll, @Null Drawable vScrollKnob) {
 			this.background = background;

@@ -30,7 +30,7 @@ public abstract class ParticleSorter {
 	/** Using this class will not apply sorting */
 	public static class None extends ParticleSorter {
 		int currentCapacity = 0;
-		@SuppressWarnings("NullAway.Init") int[] indices;
+		 int[] indices;
 
 		@Override
 		public void ensureCapacity (int capacity) {
@@ -50,8 +50,8 @@ public abstract class ParticleSorter {
 
 	/** This class will sort all the particles using the distance from camera. */
 	public static class Distance extends ParticleSorter {
-		@SuppressWarnings("NullAway.Init") private float[] distances;
-		@SuppressWarnings("NullAway.Init") private int[] particleIndices, particleOffsets;
+		 private float[] distances;
+		 private int[] particleIndices, particleOffsets;
 		private int currentSize = 0;
 
 		@Override
@@ -144,7 +144,7 @@ public abstract class ParticleSorter {
 		}
 	}
 
-	@SuppressWarnings("NullAway.Init") protected Camera camera;
+	 protected Camera camera;
 
 	/** @return an array of offsets where each particle should be put in the resulting mesh (also if more than one mesh will be
 	 *         generated, this is an absolute offset considering a BIG output array). */

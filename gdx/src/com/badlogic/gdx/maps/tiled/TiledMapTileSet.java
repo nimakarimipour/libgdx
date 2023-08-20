@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.IntMap;
 /** @brief Set of {@link TiledMapTile} instances used to compose a TiledMapLayer */
 public class TiledMapTileSet implements Iterable<TiledMapTile> {
 
-	@SuppressWarnings("NullAway.Init") private String name;
+	 private String name;
 
 	private IntMap<TiledMapTile> tiles;
 

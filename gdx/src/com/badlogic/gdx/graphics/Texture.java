@@ -31,7 +31,7 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
@@ -47,7 +47,7 @@ import com.badlogic.gdx.NullUnmarked;
  * A Texture must be disposed when it is no longer used
  * @author badlogicgames@gmail.com */
 public class Texture extends GLTexture {
-	@SuppressWarnings("NullAway.Init") private static AssetManager assetManager;
+	 private static AssetManager assetManager;
 	final static Map<Application, Array<Texture>> managedTextures = new HashMap<Application, Array<Texture>>();
 
 	public enum TextureFilter {
@@ -105,18 +105,18 @@ public class Texture extends GLTexture {
 		}
 	}
 
-	@SuppressWarnings("NullAway.Init") TextureData data;
+	 TextureData data;
 
 	public Texture (String internalPath) {
 		this(Gdx.files.internal(internalPath));
 	}
 
-	@NullUnmarked
+	
 	public Texture (FileHandle file) {
 		this(file, null, false);
 	}
 
-	@NullUnmarked
+	
 	public Texture (FileHandle file, boolean useMipMaps) {
 		this(file, null, useMipMaps);
 	}
@@ -125,12 +125,12 @@ public class Texture extends GLTexture {
 		this(TextureData.Factory.loadFromFile(file, format, useMipMaps));
 	}
 
-	@NullUnmarked
+	
 	public Texture (Pixmap pixmap) {
 		this(new PixmapTextureData(pixmap, null, false, false));
 	}
 
-	@NullUnmarked
+	
 	public Texture (Pixmap pixmap, boolean useMipMaps) {
 		this(new PixmapTextureData(pixmap, null, useMipMaps, false));
 	}
@@ -139,7 +139,7 @@ public class Texture extends GLTexture {
 		this(new PixmapTextureData(pixmap, format, useMipMaps, false));
 	}
 
-	@NullUnmarked
+	
 	public Texture (int width, int height, Format format) {
 		this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
 	}
@@ -325,7 +325,7 @@ public class Texture extends GLTexture {
 	}
 
 	/** @return the number of managed textures currently loaded */
-	@NullUnmarked
+	
 	public static int getNumManagedTextures () {
 		return managedTextures.get(Gdx.app).size;
 	}

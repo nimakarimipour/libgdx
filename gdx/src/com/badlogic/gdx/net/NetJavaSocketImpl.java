@@ -22,7 +22,7 @@ import java.net.InetSocketAddress;
 
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Socket implementation using java.net.Socket.
  * 
@@ -105,7 +105,7 @@ public class NetJavaSocketImpl implements Socket {
 		return socket.getRemoteSocketAddress().toString();
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public void dispose () {
 		if (socket != null) {

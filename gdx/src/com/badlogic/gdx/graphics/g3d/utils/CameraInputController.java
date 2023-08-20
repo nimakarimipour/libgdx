@@ -75,7 +75,7 @@ public class CameraInputController extends GestureDetector {
 	private final Vector3 tmpV2 = new Vector3();
 
 	protected static class CameraGestureListener extends GestureAdapter {
-		@SuppressWarnings("NullAway.Init") public CameraInputController controller;
+		 public CameraInputController controller;
 		private float previousZoom;
 
 		@Override

@@ -22,7 +22,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
@@ -41,18 +41,18 @@ import com.badlogic.gdx.NullUnmarked;
  * 
  * @author Nathan Sweet */
 public class JsonValue implements Iterable<JsonValue> {
-	@SuppressWarnings("NullAway.Init") private ValueType type;
+	 private ValueType type;
 
 	/** May be null. */
-	@SuppressWarnings("NullAway.Init") private String stringValue;
+	 private String stringValue;
 	private double doubleValue;
 	private long longValue;
 
-	@SuppressWarnings("NullAway.Init") public String name;
+	 public String name;
 	/** May be null. */
-	@SuppressWarnings("NullAway.Init") public JsonValue child, parent;
+	 public JsonValue child, parent;
 	/** May be null. When changing this field the parent {@link #size()} may need to be changed. */
-	@SuppressWarnings("NullAway.Init") public JsonValue next, prev;
+	 public JsonValue next, prev;
 	public int size;
 
 	public JsonValue (ValueType type) {
@@ -64,12 +64,12 @@ public class JsonValue implements Iterable<JsonValue> {
 		set(value);
 	}
 
-	@NullUnmarked
+	
 	public JsonValue (double value) {
 		set(value, null);
 	}
 
-	@NullUnmarked
+	
 	public JsonValue (long value) {
 		set(value, null);
 	}
@@ -113,7 +113,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** Returns an iterator for the child with the specified name, or an empty iterator if no child is found. */
-	@NullUnmarked
+	
 	public JsonIterator iterator (String name) {
 		JsonValue current = get(name);
 		if (current == null) {
@@ -144,7 +144,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified index. This requires walking the linked list to the specified entry, see
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
-	@NullUnmarked
+	
 	public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
@@ -161,7 +161,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Removes the child with the specified name.
 	 * @return May be null. */
-	@NullUnmarked
+	
 	public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
@@ -177,7 +177,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** Removes this value from its parent. */
-	@NullUnmarked
+	
 	public void remove () {
 		if (parent == null) throw new IllegalStateException();
 		if (prev == null) {
@@ -209,7 +209,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Returns this value as a string.
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
-	@NullUnmarked
+	
 	public @Null String asString () {
 		switch (type) {
 		case stringValue:
@@ -625,7 +625,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
-	@NullUnmarked
+	
 	public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
@@ -1248,7 +1248,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	public class JsonIterator implements Iterator<JsonValue>, Iterable<JsonValue> {
 		JsonValue entry = child;
-		@SuppressWarnings("NullAway.Init") JsonValue current;
+		 JsonValue current;
 
 		public boolean hasNext () {
 			return entry != null;
@@ -1261,7 +1261,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
-		@NullUnmarked
+		
 		public void remove () {
 			if (current.prev == null) {
 				child = current.next;
@@ -1283,7 +1283,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	static public class PrettyPrintSettings {
-		@SuppressWarnings("NullAway.Init") public OutputType outputType;
+		 public OutputType outputType;
 
 		/** If an object on a single line fits this many columns, it won't wrap. */
 		public int singleLineColumns;

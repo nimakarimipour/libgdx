@@ -25,8 +25,8 @@ import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
  * @author Inferno */
 public abstract class ParticleControllerRenderer<D extends ParticleControllerRenderData, T extends ParticleBatch<D>>
 	extends ParticleControllerComponent {
-	@SuppressWarnings("NullAway.Init") protected T batch;
-	@SuppressWarnings("NullAway.Init") protected D renderData;
+	 protected T batch;
+	 protected D renderData;
 
 	protected ParticleControllerRenderer () {
 	}

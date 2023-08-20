@@ -18,7 +18,7 @@ package com.badlogic.gdx.scenes.scene2d;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Pool.Poolable;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** The base class for all events.
  * <p>
@@ -35,9 +35,9 @@ import com.badlogic.gdx.NullUnmarked;
  * @see InputEvent
  * @see Actor#fire(Event) */
 public class Event implements Poolable {
-	@SuppressWarnings("NullAway.Init") private Stage stage;
-	@SuppressWarnings("NullAway.Init") private Actor targetActor;
-	@SuppressWarnings("NullAway.Init") private Actor listenerActor;
+	 private Stage stage;
+	 private Actor targetActor;
+	 private Actor listenerActor;
 	private boolean capture; // true means event occurred during the capture phase
 	private boolean bubbles = true; // true means propagate to target's parents
 	private boolean handled; // true means the event was handled (the stage will eat the input)
@@ -66,7 +66,7 @@ public class Event implements Poolable {
 		stopped = true;
 	}
 
-	@NullUnmarked
+	
 	public void reset () {
 		stage = null;
 		targetActor = null;

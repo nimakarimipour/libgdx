@@ -43,7 +43,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A select box (aka a drop-down list) allows a user to choose one of a number of values from a list. When inactive, the selected
  * value is displayed. When activated, it shows the list of values that may be selected.
@@ -57,7 +57,7 @@ import com.badlogic.gdx.NullUnmarked;
 public class SelectBox<T> extends Widget implements Disableable {
 	static final Vector2 temp = new Vector2();
 
-	@SuppressWarnings("NullAway.Init") SelectBoxStyle style;
+	 SelectBoxStyle style;
 	final Array<T> items = new Array();
 	SelectBoxScrollPane<T> scrollPane;
 	private float prefWidth, prefHeight;
@@ -426,9 +426,9 @@ public class SelectBox<T> extends Widget implements Disableable {
 		private final Vector2 stagePosition = new Vector2();
 		final List<T> list;
 		private InputListener hideListener;
-		@SuppressWarnings("NullAway.Init") private Actor previousScrollFocus;
+		 private Actor previousScrollFocus;
 
-		@NullUnmarked
+		
 		public SelectBoxScrollPane (final SelectBox<T> selectBox) {
 			super(null, selectBox.style.scrollStyle);
 			this.selectBox = selectBox;
@@ -502,7 +502,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 			};
 		}
 
-		@NullUnmarked
+		
 		public void show (Stage stage) {
 			if (list.isTouchable()) return;
 
@@ -556,7 +556,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 			selectBox.onShow(this, below);
 		}
 
-		@NullUnmarked
+		
 		public void hide () {
 			if (!list.isTouchable() || !hasParent()) return;
 			list.setTouchable(Touchable.disabled);
@@ -607,19 +607,19 @@ public class SelectBox<T> extends Widget implements Disableable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class SelectBoxStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		 public BitmapFont font;
 		public Color fontColor = new Color(1, 1, 1, 1);
-		@SuppressWarnings("NullAway.Init") public @Null Color overFontColor, disabledFontColor;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable background;
-		@SuppressWarnings("NullAway.Init") public ScrollPaneStyle scrollStyle;
-		@SuppressWarnings("NullAway.Init") public ListStyle listStyle;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
+		 public @Null Color overFontColor, disabledFontColor;
+		 public @Null Drawable background;
+		 public ScrollPaneStyle scrollStyle;
+		 public ListStyle listStyle;
+		 public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
-		@NullUnmarked
+		
 		public SelectBoxStyle () {
 		}
 
-		@NullUnmarked
+		
 		public SelectBoxStyle (BitmapFont font, Color fontColor, @Null Drawable background, ScrollPaneStyle scrollStyle,
 			ListStyle listStyle) {
 			this.font = font;
@@ -629,7 +629,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 			this.listStyle = listStyle;
 		}
 
-		@NullUnmarked
+		
 		public SelectBoxStyle (SelectBoxStyle style) {
 			font = style.font;
 			fontColor.set(style.fontColor);

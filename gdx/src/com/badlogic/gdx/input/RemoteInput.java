@@ -26,7 +26,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /**
  * <p>
@@ -207,7 +207,7 @@ public class RemoteInput implements Runnable, Input {
 	int[] touchY = new int[MAX_TOUCHES];
 	boolean isTouched[] = new boolean[MAX_TOUCHES];
 	boolean justTouched = false;
-	@SuppressWarnings("NullAway") InputProcessor processor = null;
+	 InputProcessor processor = null;
 	private final int port;
 	public final String[] ips;
 
@@ -219,7 +219,7 @@ public class RemoteInput implements Runnable, Input {
 		this(DEFAULT_PORT, listener);
 	}
 
-	@NullUnmarked
+	
 	public RemoteInput (int port) {
 		this(port, null);
 	}
@@ -242,7 +242,7 @@ public class RemoteInput implements Runnable, Input {
 		}
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public void run () {
 		while (true) {

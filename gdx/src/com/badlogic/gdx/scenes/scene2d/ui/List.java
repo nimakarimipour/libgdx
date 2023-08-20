@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
@@ -46,10 +46,10 @@ import com.badlogic.gdx.NullUnmarked;
  * @author mzechner
  * @author Nathan Sweet */
 public class List<T> extends Widget implements Cullable {
-	@SuppressWarnings("NullAway.Init") ListStyle style;
+	 ListStyle style;
 	final Array<T> items = new Array();
 	ArraySelection<T> selection = new ArraySelection(items);
-	@SuppressWarnings("NullAway.Init") private Rectangle cullingArea;
+	 private Rectangle cullingArea;
 	private float prefWidth, prefHeight;
 	float itemHeight;
 	private int alignment = Align.left;
@@ -74,9 +74,9 @@ public class List<T> extends Widget implements Cullable {
 
 		addListener(keyListener = new InputListener() {
 			long typeTimeout;
-			@SuppressWarnings("NullAway.Init") String prefix;
+			 String prefix;
 
-			@NullUnmarked
+			
 			public boolean keyDown (InputEvent event, int keycode) {
 				if (items.isEmpty()) return false;
 				int index;
@@ -198,7 +198,7 @@ public class List<T> extends Widget implements Cullable {
 		}
 	}
 
-	@NullUnmarked
+	
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
@@ -313,19 +313,19 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** @return May be null. */
-	@NullUnmarked
+	
 	public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
-	@NullUnmarked
+	
 	public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
 
 	/** @return null if not over an item. */
-	@NullUnmarked
+	
 	public @Null T getItemAt (float y) {
 		int index = getItemIndexAt(y);
 		if (index == -1) return null;
@@ -442,17 +442,17 @@ public class List<T> extends Widget implements Cullable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ListStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		 public BitmapFont font;
 		public Color fontColorSelected = new Color(1, 1, 1, 1);
 		public Color fontColorUnselected = new Color(1, 1, 1, 1);
-		@SuppressWarnings("NullAway.Init") public Drawable selection;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable down, over, background;
+		 public Drawable selection;
+		 public @Null Drawable down, over, background;
 
-		@NullUnmarked
+		
 		public ListStyle () {
 		}
 
-		@NullUnmarked
+		
 		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
 			this.font = font;
 			this.fontColorSelected.set(fontColorSelected);

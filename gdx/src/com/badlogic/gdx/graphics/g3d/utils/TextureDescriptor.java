@@ -18,14 +18,14 @@ package com.badlogic.gdx.graphics.g3d.utils;
 
 import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.NullUnmarked;
+
 
 public class TextureDescriptor<T extends GLTexture> implements Comparable<TextureDescriptor<T>> {
-	@SuppressWarnings("NullAway") public T texture = null;
-	@SuppressWarnings("NullAway.Init") public Texture.TextureFilter minFilter;
-	@SuppressWarnings("NullAway.Init") public Texture.TextureFilter magFilter;
-	@SuppressWarnings("NullAway.Init") public Texture.TextureWrap uWrap;
-	@SuppressWarnings("NullAway.Init") public Texture.TextureWrap vWrap;
+	 public T texture = null;
+	 public Texture.TextureFilter minFilter;
+	 public Texture.TextureFilter magFilter;
+	 public Texture.TextureWrap uWrap;
+	 public Texture.TextureWrap vWrap;
 
 	// TODO add other values, see http://www.opengl.org/sdk/docs/man/xhtml/glTexParameter.xml
 
@@ -34,7 +34,7 @@ public class TextureDescriptor<T extends GLTexture> implements Comparable<Textur
 		set(texture, minFilter, magFilter, uWrap, vWrap);
 	}
 
-	@NullUnmarked
+	
 	public TextureDescriptor (final T texture) {
 		this(texture, null, null, null, null);
 	}

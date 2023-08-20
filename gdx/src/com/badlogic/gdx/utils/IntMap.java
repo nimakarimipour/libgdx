@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** An unordered map where the keys are unboxed ints and values are objects. No allocation is done except when growing the table
  * size.
@@ -45,7 +45,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	int[] keyTable;
 	V[] valueTable;
 
-	@SuppressWarnings("NullAway.Init") V zeroValue;
+	 V zeroValue;
 	boolean hasZeroValue;
 
 	private final float loadFactor;
@@ -66,9 +66,9 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	 * hash. */
 	protected int mask;
 
-	@SuppressWarnings("NullAway.Init") private transient Entries entries1, entries2;
-	@SuppressWarnings("NullAway.Init") private transient Values values1, values2;
-	@SuppressWarnings("NullAway.Init") private transient Keys keys1, keys2;
+	 private transient Entries entries1, entries2;
+	 private transient Values values1, values2;
+	 private transient Keys keys1, keys2;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public IntMap () {
@@ -138,7 +138,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	@NullUnmarked
+	
 	public @Null V put (int key, @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
@@ -185,7 +185,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	@NullUnmarked
+	
 	public V get (int key) {
 		if (key == 0) return hasZeroValue ? zeroValue : null;
 		int i = locateKey(key);
@@ -199,7 +199,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
-	@NullUnmarked
+	
 	public @Null V remove (int key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
@@ -251,7 +251,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 	}
 
 	/** Clears the map and reduces the size of the backing arrays to be the specified capacity / loadFactor, if they are larger. */
-	@NullUnmarked
+	
 	public void clear (int maximumCapacity) {
 		int tableSize = tableSize(maximumCapacity, loadFactor);
 		if (keyTable.length <= tableSize) {
@@ -264,7 +264,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		resize(tableSize);
 	}
 
-	@NullUnmarked
+	
 	public void clear () {
 		if (size == 0) return;
 		size = 0;
@@ -519,7 +519,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 
 	static public class Entry<V> {
 		public int key;
-		@SuppressWarnings("NullAway.Init") public @Null V value;
+		 public @Null V value;
 
 		public String toString () {
 			return key + "=" + value;
@@ -561,7 +561,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 			hasNext = false;
 		}
 
-		@NullUnmarked
+		
 		public void remove () {
 			int i = currentIndex;
 			if (i == INDEX_ZERO && map.hasZeroValue) {

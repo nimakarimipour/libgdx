@@ -24,7 +24,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** {@link AssetLoader} for {@link I18NBundle} instances. The I18NBundle is loaded asynchronously.
  * <p>
@@ -49,9 +49,9 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 		super(resolver);
 	}
 
-	@SuppressWarnings("NullAway.Init") I18NBundle bundle;
+	 I18NBundle bundle;
 
-	@NullUnmarked
+	
 	@Override
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
 		this.bundle = null;
@@ -71,7 +71,7 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 		}
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public I18NBundle loadSync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
 		I18NBundle bundle = this.bundle;
@@ -79,7 +79,7 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 		return bundle;
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, I18NBundleParameter parameter) {
 		return null;
@@ -89,12 +89,12 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 		public final Locale locale;
 		public final String encoding;
 
-		@NullUnmarked
+		
 		public I18NBundleParameter () {
 			this(null, null);
 		}
 
-		@NullUnmarked
+		
 		public I18NBundleParameter (Locale locale) {
 			this(locale, null);
 		}

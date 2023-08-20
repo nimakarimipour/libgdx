@@ -19,7 +19,7 @@ package com.badlogic.gdx.utils;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Extends {@link DataInputStream} with additional convenience methods.
  * @author Nathan Sweet */
@@ -55,7 +55,7 @@ public class DataInput extends DataInputStream {
 
 	/** Reads the length and string of UTF8 characters, or null.
 	 * @return May be null. */
-	@NullUnmarked
+	
 	public @Null String readString () throws IOException {
 		int charCount = readInt(true);
 		switch (charCount) {

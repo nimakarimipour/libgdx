@@ -24,7 +24,7 @@ import java.nio.ByteBuffer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** @author mzechner */
 public class Gdx2DPixmap implements Disposable {
@@ -223,7 +223,7 @@ public class Gdx2DPixmap implements Disposable {
 		setScale(basePtr, scale);
 	}
 
-	@NullUnmarked
+	
 	public static Gdx2DPixmap newPixmap (InputStream in, int requestedFormat) {
 		try {
 			return new Gdx2DPixmap(in, requestedFormat);
@@ -232,7 +232,7 @@ public class Gdx2DPixmap implements Disposable {
 		}
 	}
 
-	@NullUnmarked
+	
 	public static Gdx2DPixmap newPixmap (int width, int height, int format) {
 		try {
 			return new Gdx2DPixmap(width, height, format);

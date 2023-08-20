@@ -30,7 +30,7 @@ public class DelaunayTriangulator {
 	static private final int INCOMPLETE = 2;
 
 	private final IntArray quicksortStack = new IntArray();
-	@SuppressWarnings("NullAway.Init") private float[] sortedPoints;
+	 private float[] sortedPoints;
 	private final ShortArray triangles = new ShortArray(false, 16);
 	private final ShortArray originalIndices = new ShortArray(false, 0);
 	private final IntArray edges = new IntArray();

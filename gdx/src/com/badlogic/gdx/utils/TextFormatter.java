@@ -24,7 +24,7 @@ import java.util.Locale;
  * @author davebaol */
 class TextFormatter {
 
-	@SuppressWarnings("NullAway.Init") private MessageFormat messageFormat;
+	 private MessageFormat messageFormat;
 	private StringBuilder buffer;
 
 	public TextFormatter (Locale locale, boolean useMessageFormat) {

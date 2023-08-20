@@ -19,7 +19,7 @@ package com.badlogic.gdx.utils.compression;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Adapted from LZMA SDK version 9.22.
  * 
@@ -50,8 +50,8 @@ public class Lzma {
 		public int Algorithm = 2;
 		public int MatchFinder = 1;
 
-		@SuppressWarnings("NullAway.Init") public String InFile;
-		@SuppressWarnings("NullAway.Init") public String OutFile;
+		 public String InFile;
+		 public String OutFile;
 	}
 
 	/** Compresses the given {@link InputStream} into the given {@link OutputStream}.
@@ -59,7 +59,7 @@ public class Lzma {
 	 * @param in the {@link InputStream} to compress
 	 * @param out the {@link OutputStream} to compress to
 	 * @throws IOException */
-	@NullUnmarked
+	
 	static public void compress (InputStream in, OutputStream out) throws IOException {
 		CommandLine params = new CommandLine();
 		boolean eos = false;

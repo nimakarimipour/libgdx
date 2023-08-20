@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
-import com.badlogic.gdx.NullUnmarked;
+
 
 public class Encoder {
 	public static final int EMatchFinderTypeBT2 = 0;
@@ -128,7 +128,7 @@ public class Encoder {
 			}
 		}
 
-		@SuppressWarnings("NullAway.Init") Encoder2[] m_Coders;
+		 Encoder2[] m_Coders;
 		int m_NumPrevBits;
 		int m_NumPosBits;
 		int m_PosMask;
@@ -284,7 +284,7 @@ public class Encoder {
 	};
 
 	Optimal[] _optimum = new Optimal[kNumOpts];
-	@SuppressWarnings("NullAway") com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
+	 com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
 	com.badlogic.gdx.utils.compression.rangecoder.Encoder _rangeEncoder = new com.badlogic.gdx.utils.compression.rangecoder.Encoder();
 
 	short[] _isMatch = new short[Base.kNumStates << Base.kNumPosStatesBitsMax];
@@ -335,7 +335,7 @@ public class Encoder {
 
 	long nowPos64;
 	boolean _finished;
-	@SuppressWarnings("NullAway.Init") java.io.InputStream _inStream;
+	 java.io.InputStream _inStream;
 
 	int _matchFinderType = EMatchFinderTypeBT4;
 	boolean _writeEndMark = false;
@@ -938,7 +938,7 @@ public class Encoder {
 		_rangeEncoder.FlushStream();
 	}
 
-	@NullUnmarked
+	
 	public void CodeOneBlock (long[] inSize, long[] outSize, boolean[] finished) throws IOException {
 		inSize[0] = 0;
 		outSize[0] = 0;
@@ -1210,7 +1210,7 @@ public class Encoder {
 		return true;
 	}
 
-	@NullUnmarked
+	
 	public boolean SetMatchFinder (int matchFinderIndex) {
 		if (matchFinderIndex < 0 || matchFinderIndex > 2) return false;
 		int matchFinderIndexPrev = _matchFinderType;

@@ -20,5 +20,5 @@ public class ModelNodeKeyframe<T> {
 	/** the timestamp of the keyframe in seconds **/
 	public float keytime;
 	/** the value of the keyframe */
-	@SuppressWarnings("NullAway") public T value = null;
+	 public T value = null;
 }

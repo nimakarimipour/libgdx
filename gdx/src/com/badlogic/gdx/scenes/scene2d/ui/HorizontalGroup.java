@@ -40,7 +40,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 public class HorizontalGroup extends WidgetGroup {
 	private float prefWidth, prefHeight, lastPrefHeight;
 	private boolean sizeInvalid = true;
-	@SuppressWarnings("NullAway.Init") private FloatArray rowSizes; // row width, row height, ...
+	 private FloatArray rowSizes; // row width, row height, ...
 
 	private int align = Align.left, rowAlign;
 	private boolean reverse, round = true, wrap, wrapReverse, expand;

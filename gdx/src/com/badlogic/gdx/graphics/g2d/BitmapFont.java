@@ -40,7 +40,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Renders bitmap fonts. The font consists of 2 files: an image file or {@link TextureRegion} containing the glyphs and a file in
  * the AngleCode BMFont text format that describes where each glyph is on the image.
@@ -113,7 +113,7 @@ public class BitmapFont implements Disposable {
 	/** Creates a BitmapFont from a BMFont file. The image file name is read from the BMFont file and the image is loaded from the
 	 * same directory.
 	 * @param flip If true, the glyphs will be flipped for use with a perspective where 0,0 is the upper left corner. */
-	@NullUnmarked
+	
 	public BitmapFont (FileHandle fontFile, boolean flip) {
 		this(new BitmapFontData(fontFile, flip), (TextureRegion)null, true);
 	}
@@ -142,7 +142,7 @@ public class BitmapFont implements Disposable {
 	 * pages, either let the Font read the images themselves (by specifying null as the TextureRegion), or by specifying each page
 	 * manually with the TextureRegion[] constructor.
 	 * @param integer If true, rendering positions will be at integer values to avoid filtering artifacts. */
-	@NullUnmarked
+	
 	public BitmapFont (BitmapFontData data, TextureRegion region, boolean integer) {
 		this(data, region != null ? Array.with(region) : null, integer);
 	}
@@ -326,7 +326,7 @@ public class BitmapFont implements Disposable {
 
 	/** Makes the specified glyphs fixed width. This can be useful to make the numbers in a font fixed width. Eg, when horizontally
 	 * centering a score or loading percentage text, it will not jump around as different numbers are shown. */
-	@NullUnmarked
+	
 	public void setFixedWidthGlyphs (CharSequence glyphs) {
 		BitmapFontData data = this.data;
 		int maxAdvance = 0;
@@ -401,7 +401,7 @@ public class BitmapFont implements Disposable {
 		public float u, v, u2, v2;
 		public int xoffset, yoffset;
 		public int xadvance;
-		@SuppressWarnings("NullAway.Init") public byte[][] kerning;
+		 public byte[][] kerning;
 		public boolean fixedWidth;
 
 		/** The index to the texture page that holds this glyph. */
@@ -437,10 +437,10 @@ public class BitmapFont implements Disposable {
 	/** Backing data for a {@link BitmapFont}. */
 	static public class BitmapFontData {
 		/** The name of the font, or null. */
-		@SuppressWarnings("NullAway.Init") public String name;
+		 public String name;
 		/** An array of the image paths, for multiple texture pages. */
-		@SuppressWarnings("NullAway.Init") public String[] imagePaths;
-		@SuppressWarnings("NullAway.Init") public FileHandle fontFile;
+		 public String[] imagePaths;
+		 public FileHandle fontFile;
 		public boolean flipped;
 		public float padTop, padRight, padBottom, padLeft;
 		/** The distance from one line of text to the next. To set this value, use {@link #setLineHeight(float)}. */
@@ -465,7 +465,7 @@ public class BitmapFont implements Disposable {
 
 		public final Glyph[][] glyphs = new Glyph[PAGES][];
 		/** The glyph to display for characters not in the font. May be null. */
-		@SuppressWarnings("NullAway.Init") public Glyph missingGlyph;
+		 public Glyph missingGlyph;
 
 		/** The width of the space character. */
 		public float spaceXadvance;
@@ -473,18 +473,18 @@ public class BitmapFont implements Disposable {
 		public float xHeight = 1;
 
 		/** Additional characters besides whitespace where text is wrapped. Eg, a hypen (-). */
-		@SuppressWarnings("NullAway.Init") public char[] breakChars;
+		 public char[] breakChars;
 		public char[] xChars = {'x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'};
 		public char[] capChars = {'M', 'N', 'B', 'D', 'C', 'E', 'F', 'K', 'A', 'G', 'H', 'I', 'J', 'L', 'O', 'P', 'Q', 'R', 'S',
 			'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
 		/** Creates an empty BitmapFontData for configuration before calling {@link #load(FileHandle, boolean)}, to subclass, or to
 		 * populate yourself, e.g. using stb-truetype or FreeType. */
-		@NullUnmarked
+		
 		public BitmapFontData () {
 		}
 
-		@NullUnmarked
+		
 		public BitmapFontData (FileHandle fontFile, boolean flip) {
 			this.fontFile = fontFile;
 			this.flipped = flip;
@@ -822,7 +822,7 @@ public class BitmapFont implements Disposable {
 		/** Returns the glyph for the specified character, or null if no such glyph exists. Note that
 		 * {@link #getGlyphs(GlyphRun, CharSequence, int, int, Glyph)} should be be used to shape a string of characters into a list
 		 * of glyphs. */
-		@NullUnmarked
+		
 		public Glyph getGlyph (char ch) {
 			Glyph[] page = glyphs[ch / PAGE_SIZE];
 			if (page != null) return page[ch & PAGE_SIZE - 1];

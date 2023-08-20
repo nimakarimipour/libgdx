@@ -27,7 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
-import com.badlogic.gdx.NullUnmarked;
+
 
 public class ParticleEmitter {
 	static private final int UPDATE_SCALE = 1 << 0;
@@ -59,25 +59,25 @@ public class ParticleEmitter {
 	private ScaledNumericValue spawnHeightValue = new ScaledNumericValue();
 	private SpawnShapeValue spawnShapeValue = new SpawnShapeValue();
 
-	@SuppressWarnings("NullAway.Init") private RangedNumericValue[] xSizeValues;
-	@SuppressWarnings("NullAway.Init") private RangedNumericValue[] ySizeValues;
-	@SuppressWarnings("NullAway.Init") private RangedNumericValue[] motionValues;
+	 private RangedNumericValue[] xSizeValues;
+	 private RangedNumericValue[] ySizeValues;
+	 private RangedNumericValue[] motionValues;
 
 	private float accumulator;
 	private Array<Sprite> sprites;
 	private SpriteMode spriteMode = SpriteMode.single;
-	@SuppressWarnings("NullAway.Init") private Particle[] particles;
+	 private Particle[] particles;
 	private int minParticleCount, maxParticleCount = 4;
 	private float x, y;
-	@SuppressWarnings("NullAway.Init") private String name;
+	 private String name;
 	private Array<String> imagePaths;
 	private int activeCount;
-	@SuppressWarnings("NullAway.Init") private boolean[] active;
+	 private boolean[] active;
 	private boolean firstUpdate;
 	private boolean flipX, flipY;
 	private int updateFlags;
 	private boolean allowCompletion;
-	@SuppressWarnings("NullAway.Init") private BoundingBox bounds;
+	 private BoundingBox bounds;
 
 	private int emission, emissionDiff, emissionDelta;
 	private int lifeOffset, lifeOffsetDiff;
@@ -395,7 +395,7 @@ public class ParticleEmitter {
 		return particles;
 	}
 
-	@NullUnmarked
+	
 	private void activateParticle (int index) {
 		Sprite sprite = null;
 		switch (spriteMode) {
@@ -676,7 +676,7 @@ public class ParticleEmitter {
 		this.y = y;
 	}
 
-	@NullUnmarked
+	
 	public void setSprites (Array<Sprite> sprites) {
 		this.sprites = sprites;
 		if (sprites.size == 0) return;
@@ -1231,10 +1231,10 @@ public class ParticleEmitter {
 		protected float transparency, transparencyDiff;
 		protected float wind, windDiff;
 		protected float gravity, gravityDiff;
-		@SuppressWarnings("NullAway.Init") protected float[] tint;
+		 protected float[] tint;
 		protected int frame;
 
-		@NullUnmarked
+		
 		public Particle (Sprite sprite) {
 			super(sprite);
 		}

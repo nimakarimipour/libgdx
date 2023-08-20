@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** This class handles the assets and configurations required by a given resource when de/serialized. It's handy when a given
  * object or one of its members requires some assets to be loaded to work properly after being deserialized. To save the assets,
@@ -55,9 +55,9 @@ public class ResourceData<T> implements Json.Serializable {
 		ObjectMap<String, Object> data;
 		IntArray assets;
 		private int loadIndex;
-		@SuppressWarnings("NullAway.Init") protected ResourceData resources;
+		 protected ResourceData resources;
 
-		@NullUnmarked
+		
 		public SaveData () {
 			data = new ObjectMap<String, Object>();
 			assets = new IntArray();
@@ -84,7 +84,7 @@ public class ResourceData<T> implements Json.Serializable {
 			data.put(key, value);
 		}
 
-		@NullUnmarked
+		
 		public AssetDescriptor loadAsset () {
 			if (loadIndex == assets.size) return null;
 			AssetData data = (AssetData)resources.sharedAssets.get(assets.get(loadIndex++));
@@ -110,10 +110,10 @@ public class ResourceData<T> implements Json.Serializable {
 
 	/** This class contains all the information related to a given asset */
 	public static class AssetData<T> implements Json.Serializable {
-		@SuppressWarnings("NullAway.Init") public String filename;
-		@SuppressWarnings("NullAway.Init") public Class<T> type;
+		 public String filename;
+		 public Class<T> type;
 
-		@NullUnmarked
+		
 		public AssetData () {
 		}
 
@@ -150,7 +150,7 @@ public class ResourceData<T> implements Json.Serializable {
 	/** Shared assets among all the configurable objects */
 	Array<AssetData> sharedAssets;
 	private int currentLoadIndex;
-	@SuppressWarnings("NullAway.Init") public T resource;
+	 public T resource;
 
 	public ResourceData () {
 		uniqueData = new ObjectMap<String, SaveData>();
@@ -212,7 +212,7 @@ public class ResourceData<T> implements Json.Serializable {
 		return uniqueData.get(key);
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public void write (Json json) {
 		json.writeValue("unique", uniqueData, ObjectMap.class);
@@ -221,7 +221,7 @@ public class ResourceData<T> implements Json.Serializable {
 		json.writeValue("resource", resource, null);
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public void read (Json json, JsonValue jsonData) {
 		uniqueData = json.readValue("unique", ObjectMap.class, jsonData);

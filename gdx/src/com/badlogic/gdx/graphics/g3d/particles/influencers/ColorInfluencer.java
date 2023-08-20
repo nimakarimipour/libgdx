@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** It's an {@link Influencer} which controls particles color and transparency.
  * @author Inferno */
@@ -31,7 +31,7 @@ public abstract class ColorInfluencer extends Influencer {
 
 	/** It's an {@link Influencer} which assigns a random color when a particle is activated. */
 	public static class Random extends ColorInfluencer {
-		@SuppressWarnings("NullAway.Init") FloatChannel colorChannel;
+		 FloatChannel colorChannel;
 
 		@Override
 		public void allocateChannels () {
@@ -57,12 +57,12 @@ public abstract class ColorInfluencer extends Influencer {
 
 	/** It's an {@link Influencer} which manages the particle color during its life time. */
 	public static class Single extends ColorInfluencer {
-		@SuppressWarnings("NullAway.Init") FloatChannel alphaInterpolationChannel;
-		@SuppressWarnings("NullAway.Init") FloatChannel lifeChannel;
+		 FloatChannel alphaInterpolationChannel;
+		 FloatChannel lifeChannel;
 		public ScaledNumericValue alphaValue;
 		public GradientColorValue colorValue;
 
-		@NullUnmarked
+		
 		public Single () {
 			colorValue = new GradientColorValue();
 			alphaValue = new ScaledNumericValue();
@@ -135,7 +135,7 @@ public abstract class ColorInfluencer extends Influencer {
 		}
 	}
 
-	@SuppressWarnings("NullAway.Init") FloatChannel colorChannel;
+	 FloatChannel colorChannel;
 
 	@Override
 	public void allocateChannels () {

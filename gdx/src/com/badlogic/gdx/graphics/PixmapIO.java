@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.ByteArray;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Writes Pixmaps to various formats.
  * @author mzechner
@@ -87,7 +87,7 @@ public class PixmapIO {
 		static private final byte[] writeBuffer = new byte[BUFFER_SIZE];
 		static private final byte[] readBuffer = new byte[BUFFER_SIZE];
 
-		@NullUnmarked
+		
 		static public void write (FileHandle file, Pixmap pixmap) {
 			DataOutputStream out = null;
 
@@ -124,7 +124,7 @@ public class PixmapIO {
 			}
 		}
 
-		@NullUnmarked
+		
 		static public Pixmap read (FileHandle file) {
 			DataInputStream in = null;
 
@@ -195,7 +195,7 @@ public class PixmapIO {
 
 		private final ChunkBuffer buffer;
 		private final Deflater deflater;
-		@SuppressWarnings("NullAway.Init") private ByteArray lineOutBytes, curLineBytes, prevLineBytes;
+		 private ByteArray lineOutBytes, curLineBytes, prevLineBytes;
 		private boolean flipY = true;
 		private int lastLineLen;
 
@@ -203,7 +203,7 @@ public class PixmapIO {
 			this(128 * 128);
 		}
 
-		@NullUnmarked
+		
 		public PNG (int initialBufferSize) {
 			buffer = new ChunkBuffer(initialBufferSize);
 			deflater = new Deflater();

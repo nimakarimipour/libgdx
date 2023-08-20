@@ -32,7 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
  * @author Daniel Holderbaum
  * @author Nathan Sweet */
 public abstract class Viewport {
-	@SuppressWarnings("NullAway.Init") private Camera camera;
+	 private Camera camera;
 	private float worldWidth, worldHeight;
 	private int screenX, screenY, screenWidth, screenHeight;
 

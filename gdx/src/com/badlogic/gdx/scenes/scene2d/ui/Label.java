@@ -25,7 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A text label, with optional word wrapping.
  * <p>
@@ -35,12 +35,12 @@ public class Label extends Widget {
 	static private final Color tempColor = new Color();
 	static private final GlyphLayout prefSizeLayout = new GlyphLayout();
 
-	@SuppressWarnings("NullAway.Init") private LabelStyle style;
+	 private LabelStyle style;
 	private final GlyphLayout layout = new GlyphLayout();
 	private float prefWidth, prefHeight;
 	private final StringBuilder text = new StringBuilder();
 	private int intValue = Integer.MIN_VALUE;
-	@SuppressWarnings("NullAway.Init") private BitmapFontCache cache;
+	 private BitmapFontCache cache;
 	private int labelAlign = Align.left;
 	private int lineAlign = Align.left;
 	private boolean wrap;
@@ -48,7 +48,7 @@ public class Label extends Widget {
 	private boolean prefSizeInvalid = true;
 	private float fontScaleX = 1, fontScaleY = 1;
 	private boolean fontScaleChanged = false;
-	@SuppressWarnings("NullAway.Init") private @Null String ellipsis;
+	 private @Null String ellipsis;
 
 	public Label (@Null CharSequence text, Skin skin) {
 		this(text, skin.get(LabelStyle.class));
@@ -347,7 +347,7 @@ public class Label extends Widget {
 
 	/** When true the text will be truncated "..." if it does not fit within the width of the label. Wrapping will not occur when
 	 * ellipsis is true. Default is false. */
-	@NullUnmarked
+	
 	public void setEllipsis (boolean ellipsis) {
 		if (ellipsis)
 			this.ellipsis = "...";
@@ -372,21 +372,21 @@ public class Label extends Widget {
 	/** The style for a label, see {@link Label}.
 	 * @author Nathan Sweet */
 	static public class LabelStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
-		@SuppressWarnings("NullAway.Init") public @Null Color fontColor;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable background;
+		 public BitmapFont font;
+		 public @Null Color fontColor;
+		 public @Null Drawable background;
 
-		@NullUnmarked
+		
 		public LabelStyle () {
 		}
 
-		@NullUnmarked
+		
 		public LabelStyle (BitmapFont font, @Null Color fontColor) {
 			this.font = font;
 			this.fontColor = fontColor;
 		}
 
-		@NullUnmarked
+		
 		public LabelStyle (LabelStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);

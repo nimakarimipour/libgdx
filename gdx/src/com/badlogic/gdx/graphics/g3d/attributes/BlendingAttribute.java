@@ -20,7 +20,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Attribute;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.NumberUtils;
-import com.badlogic.gdx.NullUnmarked;
+
 
 public class BlendingAttribute extends Attribute {
 	public final static String Alias = "blended";
@@ -41,7 +41,7 @@ public class BlendingAttribute extends Attribute {
 	/** The opacity used as source alpha value, ranging from 0 (fully transparent) to 1 (fully opaque), (default: 1). */
 	public float opacity = 1.f;
 
-	@NullUnmarked
+	
 	public BlendingAttribute () {
 		this(null);
 	}

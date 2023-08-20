@@ -20,7 +20,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A button with a child {@link Image} to display an image. This is useful when the button must be larger than the image and the
  * image centered on the button. If the image is the size of the button, a {@link Button} without any children can be used, where
@@ -29,7 +29,7 @@ import com.badlogic.gdx.NullUnmarked;
  * @author Nathan Sweet */
 public class ImageButton extends Button {
 	private final Image image;
-	@SuppressWarnings("NullAway.Init") private ImageButtonStyle style;
+	 private ImageButtonStyle style;
 
 	public ImageButton (Skin skin) {
 		this(skin.get(ImageButtonStyle.class));
@@ -49,22 +49,22 @@ public class ImageButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
-	@NullUnmarked
+	
 	public ImageButton (@Null Drawable imageUp) {
 		this(new ImageButtonStyle(null, null, null, imageUp, null, null));
 	}
 
-	@NullUnmarked
+	
 	public ImageButton (@Null Drawable imageUp, @Null Drawable imageDown) {
 		this(new ImageButtonStyle(null, null, null, imageUp, imageDown, null));
 	}
 
-	@NullUnmarked
+	
 	public ImageButton (@Null Drawable imageUp, @Null Drawable imageDown, @Null Drawable imageChecked) {
 		this(new ImageButtonStyle(null, null, null, imageUp, imageDown, imageChecked));
 	}
 
-	@NullUnmarked
+	
 	protected Image newImage () {
 		return new Image((Drawable)null, Scaling.fit);
 	}
@@ -133,14 +133,14 @@ public class ImageButton extends Button {
 	/** The style for an image button, see {@link ImageButton}.
 	 * @author Nathan Sweet */
 	static public class ImageButtonStyle extends ButtonStyle {
-		@SuppressWarnings("NullAway.Init") public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
+		 public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
+		 public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
-		@NullUnmarked
+		
 		public ImageButtonStyle () {
 		}
 
-		@NullUnmarked
+		
 		public ImageButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null Drawable imageUp,
 			@Null Drawable imageDown, @Null Drawable imageChecked) {
 			super(up, down, checked);
@@ -161,7 +161,7 @@ public class ImageButton extends Button {
 			imageCheckedOver = style.imageCheckedOver;
 		}
 
-		@NullUnmarked
+		
 		public ImageButtonStyle (ButtonStyle style) {
 			super(style);
 		}

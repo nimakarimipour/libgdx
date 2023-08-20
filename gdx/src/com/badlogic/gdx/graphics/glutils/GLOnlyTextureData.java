@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A {@link TextureData} implementation which should be used to create gl only textures. This TextureData fits perfectly for
  * FrameBuffer. The data is not managed. */
@@ -74,7 +74,7 @@ public class GLOnlyTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public void consumeCustomData (int target) {
 		Gdx.gl.glTexImage2D(target, mipLevel, internalFormat, width, height, 0, format, type, null);

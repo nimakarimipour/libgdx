@@ -35,7 +35,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Packs {@link Pixmap pixmaps} into one or more {@link Page pages} to generate an atlas of pixmap instances. Provides means to
  * directly convert the pixmap atlas to a {@link TextureAtlas}. The packer supports padding and border pixel duplication,
@@ -153,7 +153,7 @@ public class PixmapPacker implements Disposable {
 
 	/** Inserts the pixmap without a name. It cannot be looked up by name.
 	 * @see #pack(String, Pixmap) */
-	@NullUnmarked
+	
 	public synchronized Rectangle pack (Pixmap image) {
 		return pack(null, image);
 	}
@@ -164,7 +164,7 @@ public class PixmapPacker implements Disposable {
 	 * @return Rectangle describing the area the pixmap was rendered to.
 	 * @throws GdxRuntimeException in case the image did not fit due to the page size being too small or providing a duplicate
 	 *            name. */
-	@NullUnmarked
+	
 	public synchronized Rectangle pack (String name, Pixmap image) {
 		if (disposed) return null;
 		if (name != null && getRect(name) != null)
@@ -296,7 +296,7 @@ public class PixmapPacker implements Disposable {
 
 	/** @param name the name of the image
 	 * @return the rectangle for the image in the page it's stored in or null */
-	@NullUnmarked
+	
 	public synchronized Rectangle getRect (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
@@ -307,7 +307,7 @@ public class PixmapPacker implements Disposable {
 
 	/** @param name the name of the image
 	 * @return the page the image is stored in or null */
-	@NullUnmarked
+	
 	public synchronized Page getPage (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
@@ -472,12 +472,12 @@ public class PixmapPacker implements Disposable {
 	static public class Page {
 		OrderedMap<String, PixmapPackerRectangle> rects = new OrderedMap();
 		Pixmap image;
-		@SuppressWarnings("NullAway.Init") Texture texture;
+		 Texture texture;
 		final Array<String> addedRects = new Array();
 		boolean dirty;
 
 		/** Creates a new page filled with the color provided by the {@link PixmapPacker#getTransparentColor()} */
-		@NullUnmarked
+		
 		public Page (PixmapPacker packer) {
 			image = new Pixmap(packer.pageWidth, packer.pageHeight, packer.pageFormat);
 			image.setBlending(Blending.None);
@@ -536,7 +536,7 @@ public class PixmapPacker implements Disposable {
 	 * @author Nathan Sweet
 	 * @author Rob Rendell */
 	static public class GuillotineStrategy implements PackStrategy {
-		@SuppressWarnings("NullAway.Init") Comparator<Pixmap> comparator;
+		 Comparator<Pixmap> comparator;
 
 		public void sort (Array<Pixmap> pixmaps) {
 			if (comparator == null) {
@@ -575,7 +575,7 @@ public class PixmapPacker implements Disposable {
 			return page;
 		}
 
-		@NullUnmarked
+		
 		private Node insert (Node node, Rectangle rect) {
 			if (!node.full && node.leftChild != null && node.rightChild != null) {
 				Node newNode = insert(node.leftChild, rect);
@@ -618,8 +618,8 @@ public class PixmapPacker implements Disposable {
 		}
 
 		static final class Node {
-			@SuppressWarnings("NullAway.Init") public Node leftChild;
-			@SuppressWarnings("NullAway.Init") public Node rightChild;
+			 public Node leftChild;
+			 public Node rightChild;
 			public final Rectangle rect = new Rectangle();
 			public boolean full;
 		}
@@ -641,7 +641,7 @@ public class PixmapPacker implements Disposable {
 	/** Does bin packing by inserting in rows. This is good at packing images that have similar heights.
 	 * @author Nathan Sweet */
 	static public class SkylineStrategy implements PackStrategy {
-		@SuppressWarnings("NullAway.Init") Comparator<Pixmap> comparator;
+		 Comparator<Pixmap> comparator;
 
 		public void sort (Array<Pixmap> images) {
 			if (comparator == null) {
@@ -730,7 +730,7 @@ public class PixmapPacker implements Disposable {
 		this.transparentColor.set(color);
 	}
 
-	@NullUnmarked
+	
 	private int[] getSplits (Pixmap raster) {
 
 		int startX = getSplitPoint(raster, 1, 0, true, true);
@@ -764,7 +764,7 @@ public class PixmapPacker implements Disposable {
 		return new int[] {startX, endX, startY, endY};
 	}
 
-	@NullUnmarked
+	
 	private int[] getPads (Pixmap raster, int[] splits) {
 
 		int bottom = raster.getHeight() - 1;
@@ -858,12 +858,12 @@ public class PixmapPacker implements Disposable {
 	}
 
 	public static class PixmapPackerRectangle extends Rectangle {
-		@SuppressWarnings("NullAway.Init") int[] splits;
-		@SuppressWarnings("NullAway.Init") int[] pads;
+		 int[] splits;
+		 int[] pads;
 		int offsetX, offsetY;
 		int originalWidth, originalHeight;
 
-		@NullUnmarked
+		
 		PixmapPackerRectangle (int x, int y, int width, int height) {
 			super(x, y, width, height);
 			this.offsetX = 0;
@@ -872,7 +872,7 @@ public class PixmapPacker implements Disposable {
 			this.originalHeight = height;
 		}
 
-		@NullUnmarked
+		
 		PixmapPackerRectangle (int x, int y, int width, int height, int left, int top, int originalWidth, int originalHeight) {
 			super(x, y, width, height);
 			this.offsetX = left;

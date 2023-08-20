@@ -23,14 +23,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A checkbox is a button that contains an image indicating the checked or unchecked state and a label.
  * @author Nathan Sweet */
 public class CheckBox extends TextButton {
 	private Image image;
 	private Cell imageCell;
-	@SuppressWarnings("NullAway.Init") private CheckBoxStyle style;
+	 private CheckBoxStyle style;
 
 	public CheckBox (@Null String text, Skin skin) {
 		this(text, skin.get(CheckBoxStyle.class));
@@ -55,7 +55,7 @@ public class CheckBox extends TextButton {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
-	@NullUnmarked
+	
 	protected Image newImage () {
 		return new Image((Drawable)null, Scaling.none);
 	}
@@ -100,15 +100,15 @@ public class CheckBox extends TextButton {
 	/** The style for a select box, see {@link CheckBox}.
 	 * @author Nathan Sweet */
 	static public class CheckBoxStyle extends TextButtonStyle {
-		@SuppressWarnings("NullAway.Init") public Drawable checkboxOn, checkboxOff;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable checkboxOnOver, checkboxOver, checkboxOnDisabled,
+		 public Drawable checkboxOn, checkboxOff;
+		 public @Null Drawable checkboxOnOver, checkboxOver, checkboxOnDisabled,
 			checkboxOffDisabled;
 
-		@NullUnmarked
+		
 		public CheckBoxStyle () {
 		}
 
-		@NullUnmarked
+		
 		public CheckBoxStyle (Drawable checkboxOff, Drawable checkboxOn, BitmapFont font, @Null Color fontColor) {
 			this.checkboxOff = checkboxOff;
 			this.checkboxOn = checkboxOn;

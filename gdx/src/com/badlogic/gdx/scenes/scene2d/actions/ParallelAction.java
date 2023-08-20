@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Executes a number of actions at the same time.
  * @author Nathan Sweet */
@@ -61,7 +61,7 @@ public class ParallelAction extends Action {
 		addAction(action5);
 	}
 
-	@NullUnmarked
+	
 	public boolean act (float delta) {
 		if (complete) return true;
 		complete = true;

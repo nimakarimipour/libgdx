@@ -19,7 +19,7 @@ package com.badlogic.gdx.graphics.g3d.utils.shapebuilders;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder.VertexInfo;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Helper class with static methods to build cylinders shapes using {@link MeshPartBuilder}.
  * @author xoppa */
@@ -36,7 +36,7 @@ public class CylinderShapeBuilder extends BaseShapeBuilder {
 	}
 
 	/** Build a cylinder */
-	@NullUnmarked
+	
 	public static void build (MeshPartBuilder builder, float width, float height, float depth, int divisions, float angleFrom,
 		float angleTo, boolean close) {
 		// FIXME create better cylinder method (- axis on which to create the cylinder (matrix?))

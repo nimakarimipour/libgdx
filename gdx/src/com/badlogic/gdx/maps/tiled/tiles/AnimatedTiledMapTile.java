@@ -34,9 +34,9 @@ public class AnimatedTiledMapTile implements TiledMapTile {
 
 	private BlendMode blendMode = BlendMode.ALPHA;
 
-	@SuppressWarnings("NullAway.Init") private MapProperties properties;
+	 private MapProperties properties;
 
-	@SuppressWarnings("NullAway.Init") private MapObjects objects;
+	 private MapObjects objects;
 
 	private StaticTiledMapTile[] frameTiles;
 

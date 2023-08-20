@@ -29,7 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TransformDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Displays a {@link Drawable}, scaled various way within the widgets bounds. The preferred size is the min size of the drawable.
  * Only when using a {@link TextureRegionDrawable} will the actor's scale, rotation, and origin be used when drawing.
@@ -38,10 +38,10 @@ public class Image extends Widget {
 	private Scaling scaling;
 	private int align = Align.center;
 	private float imageX, imageY, imageWidth, imageHeight;
-	@SuppressWarnings("NullAway.Init") private Drawable drawable;
+	 private Drawable drawable;
 
 	/** Creates an image with no drawable, stretched, and aligned center. */
-	@NullUnmarked
+	
 	public Image () {
 		this((Drawable)null);
 	}

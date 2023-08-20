@@ -41,14 +41,14 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.BaseJsonReader;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.JsonValue;
-import com.badlogic.gdx.NullUnmarked;
+
 
 public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	public static final short VERSION_HI = 0;
 	public static final short VERSION_LO = 1;
 	protected final BaseJsonReader reader;
 
-	@NullUnmarked
+	
 	public G3dModelLoader (final BaseJsonReader reader) {
 		this(reader, null);
 	}
@@ -80,7 +80,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return model;
 	}
 
-	@NullUnmarked
+	
 	protected void parseMeshes (ModelData model, JsonValue json) {
 		JsonValue meshes = json.get("meshes");
 		if (meshes != null) {
@@ -174,7 +174,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return vertexAttributes.toArray(VertexAttribute.class);
 	}
 
-	@NullUnmarked
+	
 	protected void parseMaterials (ModelData model, JsonValue json, String materialDir) {
 		JsonValue materials = json.get("materials");
 		if (materials == null) {
@@ -291,7 +291,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 
 	protected final Quaternion tempQ = new Quaternion();
 
-	@NullUnmarked
+	
 	protected ModelNode parseNodesRecursively (JsonValue json) {
 		ModelNode jsonNode = new ModelNode();
 

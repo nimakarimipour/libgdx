@@ -24,18 +24,18 @@ public class ModelMaterial {
 		Lambert, Phong
 	}
 
-	@SuppressWarnings("NullAway.Init") public String id;
+	 public String id;
 
-	@SuppressWarnings("NullAway.Init") public MaterialType type;
+	 public MaterialType type;
 
-	@SuppressWarnings("NullAway.Init") public Color ambient;
-	@SuppressWarnings("NullAway.Init") public Color diffuse;
-	@SuppressWarnings("NullAway.Init") public Color specular;
-	@SuppressWarnings("NullAway.Init") public Color emissive;
-	@SuppressWarnings("NullAway.Init") public Color reflection;
+	 public Color ambient;
+	 public Color diffuse;
+	 public Color specular;
+	 public Color emissive;
+	 public Color reflection;
 
 	public float shininess;
 	public float opacity = 1.f;
 
-	@SuppressWarnings("NullAway.Init") public Array<ModelTexture> textures;
+	 public Array<ModelTexture> textures;
 }

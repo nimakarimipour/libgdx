@@ -28,7 +28,7 @@ public class MapLayer {
 	private float renderOffsetX;
 	private float renderOffsetY;
 	private boolean renderOffsetDirty = true;
-	@SuppressWarnings("NullAway.Init") private MapLayer parent;
+	 private MapLayer parent;
 	private MapObjects objects = new MapObjects();
 	private MapProperties properties = new MapProperties();
 

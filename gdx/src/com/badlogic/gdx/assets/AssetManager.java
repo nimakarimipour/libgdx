@@ -63,7 +63,7 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.badlogic.gdx.utils.async.ThreadUtils;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Loads and stores assets like textures, bitmapfonts, tile maps, sounds, music and so on.
  * @author mzechner */
@@ -78,7 +78,7 @@ public class AssetManager implements Disposable {
 	final AsyncExecutor executor;
 
 	final Array<AssetLoadingTask> tasks = new Array();
-	@SuppressWarnings("NullAway.Init") AssetErrorListener listener;
+	 AssetErrorListener listener;
 	int loaded;
 	int toLoad;
 	int peakTasks;
@@ -148,7 +148,7 @@ public class AssetManager implements Disposable {
 	/** @param fileName the asset file name
 	 * @param required true to throw GdxRuntimeException if the asset is not loaded, else null is returned
 	 * @return the asset or null if it is not loaded and required is false */
-	@NullUnmarked
+	
 	public synchronized @Null <T> T get (String fileName, boolean required) {
 		Class<T> type = assetTypes.get(fileName);
 		if (type != null) {
@@ -166,7 +166,7 @@ public class AssetManager implements Disposable {
 	 * @param type the asset type
 	 * @param required true to throw GdxRuntimeException if the asset is not loaded, else null is returned
 	 * @return the asset or null if it is not loaded and required is false */
-	@NullUnmarked
+	
 	public synchronized @Null <T> T get (String fileName, Class<T> type, boolean required) {
 		ObjectMap<String, RefCountedContainer> assetsByType = assets.get(type);
 		if (assetsByType != null) {
@@ -295,7 +295,7 @@ public class AssetManager implements Disposable {
 
 	/** @param asset the asset
 	 * @return the filename of the asset or null */
-	@NullUnmarked
+	
 	public synchronized <T> String getAssetFileName (T asset) {
 		for (Class assetType : assets.keys()) {
 			ObjectMap<String, RefCountedContainer> assetsByType = assets.get(assetType);
@@ -331,7 +331,7 @@ public class AssetManager implements Disposable {
 	/** Returns the default loader for the given type.
 	 * @param type The type of the loader to get
 	 * @return The loader capable of loading the type, or null if none exists */
-	@NullUnmarked
+	
 	public <T> AssetLoader getLoader (final Class<T> type) {
 		return getLoader(type, null);
 	}
@@ -341,7 +341,7 @@ public class AssetManager implements Disposable {
 	 * @param type The type of the loader to get
 	 * @param fileName The filename of the asset to get a loader for, or null to get the default loader
 	 * @return The loader capable of loading the type and filename, or null if none exists */
-	@NullUnmarked
+	
 	public <T> AssetLoader getLoader (final Class<T> type, final String fileName) {
 		ObjectMap<String, AssetLoader> loaders = this.loaders.get(type);
 		if (loaders == null || loaders.size < 1) return null;
@@ -360,7 +360,7 @@ public class AssetManager implements Disposable {
 	/** Adds the given asset to the loading queue of the AssetManager.
 	 * @param fileName the file name (interpretation depends on {@link AssetLoader})
 	 * @param type the type of the asset. */
-	@NullUnmarked
+	
 	public synchronized <T> void load (String fileName, Class<T> type) {
 		load(fileName, type, null);
 	}
@@ -658,7 +658,7 @@ public class AssetManager implements Disposable {
 	/** Sets a new {@link AssetLoader} for the given type.
 	 * @param type the type of the asset
 	 * @param loader the loader */
-	@NullUnmarked
+	
 	public synchronized <T, P extends AssetLoaderParameters<T>> void setLoader (Class<T> type, AssetLoader<T, P> loader) {
 		setLoader(type, null, loader);
 	}
@@ -819,7 +819,7 @@ public class AssetManager implements Disposable {
 	}
 
 	static class RefCountedContainer {
-		@SuppressWarnings("NullAway.Init") Object object;
+		 Object object;
 		int refCount = 1;
 	}
 }

@@ -18,7 +18,7 @@ package com.badlogic.gdx.utils;
 
 import java.io.IOException;
 import java.io.Writer;
-import com.badlogic.gdx.NullUnmarked;
+
 
 //@off
 /**
@@ -43,7 +43,7 @@ import com.badlogic.gdx.NullUnmarked;
 public class XmlWriter extends Writer {
 	private final Writer writer;
 	private final Array<String> stack = new Array();
-	@SuppressWarnings("NullAway.Init") private String currentElement;
+	 private String currentElement;
 	private boolean indentNextClose;
 
 	public int indent;
@@ -72,7 +72,7 @@ public class XmlWriter extends Writer {
 		return element(name).text(text).pop();
 	}
 
-	@NullUnmarked
+	
 	private boolean startElementContent () throws IOException {
 		if (currentElement == null) return false;
 		indent++;
@@ -105,7 +105,7 @@ public class XmlWriter extends Writer {
 		return this;
 	}
 
-	@NullUnmarked
+	
 	public XmlWriter pop () throws IOException {
 		if (currentElement != null) {
 			writer.write("/>\n");

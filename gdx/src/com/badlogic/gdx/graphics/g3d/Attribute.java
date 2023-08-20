@@ -17,7 +17,7 @@
 package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Extend this class to implement a material attribute. Register the attribute type by statically calling the
  * {@link #register(String)} method, whose return value should be used to instantiate the attribute. A class can implement
@@ -35,7 +35,7 @@ public abstract class Attribute implements Comparable<Attribute> {
 	}
 
 	/** @return The alias of the specified attribute type, or null if not available. */
-	@NullUnmarked
+	
 	public final static String getAttributeAlias (final long type) {
 		int idx = -1;
 		while (type != 0 && ++idx < 63 && (((type >> idx) & 1) == 0))

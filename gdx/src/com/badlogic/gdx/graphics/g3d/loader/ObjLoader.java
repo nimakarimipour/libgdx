@@ -44,7 +44,7 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FloatArray;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** {@link ModelLoader} to load Wavefront OBJ files. Only intended for testing basic models/meshes and educational usage. The
  * Wavefront specification is NOT fully implemented, only a subset of the specification is supported. Especially the
@@ -87,7 +87,7 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 	final FloatArray uvs = new FloatArray(200);
 	final Array<Group> groups = new Array<Group>(10);
 
-	@NullUnmarked
+	
 	public ObjLoader () {
 		this(null);
 	}
@@ -106,7 +106,7 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 
-	@NullUnmarked
+	
 	protected ModelData loadModelData (FileHandle file, boolean flipV) {
 		if (logWarning)
 			Gdx.app.error("ObjLoader", "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
@@ -430,23 +430,23 @@ class MtlLoader {
 
 	private static class ObjMaterial {
 		String materialName = "default";
-		@SuppressWarnings("NullAway.Init") Color ambientColor;
-		@SuppressWarnings("NullAway.Init") Color diffuseColor;
-		@SuppressWarnings("NullAway.Init") Color specularColor;
+		 Color ambientColor;
+		 Color diffuseColor;
+		 Color specularColor;
 		float opacity;
 		float shininess;
-		@SuppressWarnings("NullAway.Init") String alphaTexFilename;
-		@SuppressWarnings("NullAway.Init") String ambientTexFilename;
-		@SuppressWarnings("NullAway.Init") String diffuseTexFilename;
-		@SuppressWarnings("NullAway.Init") String shininessTexFilename;
-		@SuppressWarnings("NullAway.Init") String specularTexFilename;
+		 String alphaTexFilename;
+		 String ambientTexFilename;
+		 String diffuseTexFilename;
+		 String shininessTexFilename;
+		 String specularTexFilename;
 
-		@NullUnmarked
+		
 		public ObjMaterial () {
 			reset();
 		}
 
-		@NullUnmarked
+		
 		public ModelMaterial build () {
 			ModelMaterial mat = new ModelMaterial();
 			mat.id = materialName;
@@ -474,7 +474,7 @@ class MtlLoader {
 			}
 		}
 
-		@NullUnmarked
+		
 		public void reset () {
 			ambientColor = null;
 			diffuseColor = Color.WHITE;

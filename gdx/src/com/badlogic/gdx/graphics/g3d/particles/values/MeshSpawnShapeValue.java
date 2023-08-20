@@ -26,7 +26,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** The base class of all the {@link ParticleValue} values which spawn a particle on a mesh shape.
  * @author Inferno */
@@ -60,9 +60,9 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 		}
 	}
 
-	@SuppressWarnings("NullAway.Init") protected Mesh mesh;
+	 protected Mesh mesh;
 	/** the model this mesh belongs to. It can be null, but this means the mesh will not be able to be serialized correctly. */
-	@SuppressWarnings("NullAway.Init") protected Model model;
+	 protected Model model;
 
 	public MeshSpawnShapeValue (MeshSpawnShapeValue value) {
 		super(value);
@@ -85,7 +85,7 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 		this.mesh = mesh;
 	}
 
-	@NullUnmarked
+	
 	public void setMesh (Mesh mesh) {
 		this.setMesh(mesh, null);
 	}

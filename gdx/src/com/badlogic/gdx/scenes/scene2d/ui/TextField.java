@@ -45,7 +45,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A single-line text input field.
  * <p>
@@ -78,21 +78,21 @@ public class TextField extends Widget implements Disableable {
 	static public float keyRepeatInitialTime = 0.4f;
 	static public float keyRepeatTime = 0.1f;
 
-	@SuppressWarnings("NullAway.Init") protected String text;
+	 protected String text;
 	protected int cursor, selectionStart;
 	protected boolean hasSelection;
 	protected boolean writeEnters;
 	protected final GlyphLayout layout = new GlyphLayout();
 	protected final FloatArray glyphPositions = new FloatArray();
 
-	@SuppressWarnings("NullAway.Init") TextFieldStyle style;
-	@SuppressWarnings("NullAway.Init") private String messageText;
-	@SuppressWarnings("NullAway.Init") protected CharSequence displayText;
+	 TextFieldStyle style;
+	 private String messageText;
+	 protected CharSequence displayText;
 	Clipboard clipboard;
-	@SuppressWarnings("NullAway.Init") InputListener inputListener;
-	@SuppressWarnings("NullAway.Init")
+	 InputListener inputListener;
+	
 	@Null TextFieldListener listener;
-	@SuppressWarnings("NullAway.Init")
+	
 	@Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
 	boolean focusTraversal = true, onlyFontChars = true, disabled;
@@ -103,7 +103,7 @@ public class TextField extends Widget implements Disableable {
 	long lastChangeTime;
 
 	boolean passwordMode;
-	@SuppressWarnings("NullAway.Init") private StringBuilder passwordBuffer;
+	 private StringBuilder passwordBuffer;
 	private char passwordCharacter = BULLET;
 
 	protected float fontOffset, textHeight, textOffset;
@@ -513,7 +513,7 @@ public class TextField extends Widget implements Disableable {
 	/** Sets the {@link Stage#setKeyboardFocus(Actor) keyboard focus} to the next TextField. If no next text field is found, the
 	 * onscreen keyboard is hidden. Does nothing if the text field is not in a stage.
 	 * @param up If true, the text field with the same or next smallest y coordinate is found, else the next highest. */
-	@NullUnmarked
+	
 	public void next (boolean up) {
 		Stage stage = getStage();
 		if (stage == null) return;
@@ -789,7 +789,7 @@ public class TextField extends Widget implements Disableable {
 	class KeyRepeatTask extends Task {
 		int keycode;
 
-		@NullUnmarked
+		
 		public void run () {
 			if (getStage() == null) {
 				cancel();
@@ -1092,19 +1092,19 @@ public class TextField extends Widget implements Disableable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class TextFieldStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
-		@SuppressWarnings("NullAway.Init") public Color fontColor;
-		@SuppressWarnings("NullAway.Init") public @Null Color focusedFontColor, disabledFontColor;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable background, focusedBackground, disabledBackground, cursor,
+		 public BitmapFont font;
+		 public Color fontColor;
+		 public @Null Color focusedFontColor, disabledFontColor;
+		 public @Null Drawable background, focusedBackground, disabledBackground, cursor,
 			selection;
-		@SuppressWarnings("NullAway.Init") public @Null BitmapFont messageFont;
-		@SuppressWarnings("NullAway.Init") public @Null Color messageFontColor;
+		 public @Null BitmapFont messageFont;
+		 public @Null Color messageFontColor;
 
-		@NullUnmarked
+		
 		public TextFieldStyle () {
 		}
 
-		@NullUnmarked
+		
 		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,
 			@Null Drawable background) {
 			this.font = font;
@@ -1114,7 +1114,7 @@ public class TextField extends Widget implements Disableable {
 			this.background = background;
 		}
 
-		@NullUnmarked
+		
 		public TextFieldStyle (TextFieldStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);

@@ -18,7 +18,7 @@ package com.badlogic.gdx.math;
 
 public class Polyline implements Shape2D {
 	private float[] localVertices;
-	@SuppressWarnings("NullAway.Init") private float[] worldVertices;
+	 private float[] worldVertices;
 	private float x, y;
 	private float originX, originY;
 	private float rotation;
@@ -28,7 +28,7 @@ public class Polyline implements Shape2D {
 	private boolean calculateScaledLength = true;
 	private boolean calculateLength = true;
 	private boolean dirty = true;
-	@SuppressWarnings("NullAway.Init") private Rectangle bounds;
+	 private Rectangle bounds;
 
 	public Polyline () {
 		this.localVertices = new float[0];

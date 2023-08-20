@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.ShortArray;
  * @author Nathan Sweet */
 public class ConvexHull {
 	private final IntArray quicksortStack = new IntArray();
-	@SuppressWarnings("NullAway.Init") private float[] sortedPoints;
+	 private float[] sortedPoints;
 	private final FloatArray hull = new FloatArray();
 	private final IntArray indices = new IntArray();
 	private final ShortArray originalIndices = new ShortArray(false, 0);

@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** This class can save and load a {@link ParticleEffect}. It should be added as {@link AsynchronousAssetLoader} to the
  * {@link AssetManager} so it will be able to load the effects. It's important to note that the two classes
@@ -109,7 +109,7 @@ public class ParticleEffectLoader
 		json.toJson(data, parameter.file);
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public ParticleEffect loadSync (AssetManager manager, String fileName, FileHandle file,
 		ParticleEffectLoadParameter parameter) {
@@ -137,7 +137,7 @@ public class ParticleEffectLoader
 		return effectData.resource;
 	}
 
-	@NullUnmarked
+	
 	private <T> T find (Array<?> array, Class<T> type) {
 		for (Object object : array) {
 			if (ClassReflection.isAssignableFrom(type, object.getClass())) return (T)object;

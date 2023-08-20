@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** An unordered set where the keys are objects. Null keys are not allowed. No allocation is done except when growing the table
  * size.
@@ -62,7 +62,7 @@ public class ObjectSet<T> implements Iterable<T> {
 	 * hash. */
 	protected int mask;
 
-	@SuppressWarnings("NullAway.Init") private transient ObjectSetIterator iterator1, iterator2;
+	 private transient ObjectSetIterator iterator1, iterator2;
 
 	/** Creates a new set with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectSet () {
@@ -244,7 +244,7 @@ public class ObjectSet<T> implements Iterable<T> {
 		return locateKey(key) >= 0;
 	}
 
-	@NullUnmarked
+	
 	public @Null T get (T key) {
 		int i = locateKey(key);
 		return i < 0 ? null : keyTable[i];

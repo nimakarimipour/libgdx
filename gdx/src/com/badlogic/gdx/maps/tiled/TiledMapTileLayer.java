@@ -17,7 +17,7 @@
 package com.badlogic.gdx.maps.tiled;
 
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** @brief Layer for a TiledMap */
 public class TiledMapTileLayer extends MapLayer {
@@ -68,7 +68,7 @@ public class TiledMapTileLayer extends MapLayer {
 	/** @param x X coordinate
 	 * @param y Y coordinate
 	 * @return {@link Cell} at (x, y) */
-	@NullUnmarked
+	
 	public Cell getCell (int x, int y) {
 		if (x < 0 || x >= width) return null;
 		if (y < 0 || y >= height) return null;
@@ -89,7 +89,7 @@ public class TiledMapTileLayer extends MapLayer {
 	/** @brief represents a cell in a TiledLayer: TiledMapTile, flip and rotation properties. */
 	public static class Cell {
 
-		@SuppressWarnings("NullAway.Init") private TiledMapTile tile;
+		 private TiledMapTile tile;
 
 		private boolean flipHorizontally;
 

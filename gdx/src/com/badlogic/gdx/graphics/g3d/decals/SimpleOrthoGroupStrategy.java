@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Sort;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /**
  * <p>
@@ -118,7 +118,7 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 		}
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public ShaderProgram getGroupShader (int group) {
 		return null;

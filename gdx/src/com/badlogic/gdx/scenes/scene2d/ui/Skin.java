@@ -47,7 +47,7 @@ import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Method;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A skin stores resources for UI widgets to use (texture regions, ninepatches, fonts, colors, etc). Resources are named and can
  * be looked up by name and type. Resources can be described in JSON. Skin provides useful conversions, such as allowing access to
@@ -58,7 +58,7 @@ import com.badlogic.gdx.NullUnmarked;
  * @author Nathan Sweet */
 public class Skin implements Disposable {
 	ObjectMap<Class, ObjectMap<String, Object>> resources = new ObjectMap();
-	@SuppressWarnings("NullAway.Init") TextureAtlas atlas;
+	 TextureAtlas atlas;
 	float scale = 1;
 
 	private final ObjectMap<String, Class> jsonClassTags = new ObjectMap(defaultTagClasses.length);
@@ -168,7 +168,7 @@ public class Skin implements Disposable {
 
 	/** Returns a named resource of the specified type.
 	 * @return null if not found. */
-	@NullUnmarked
+	
 	public @Null <T> T optional (String name, Class<T> type) {
 		if (name == null) throw new IllegalArgumentException("name cannot be null.");
 		if (type == null) throw new IllegalArgumentException("type cannot be null.");
@@ -210,7 +210,7 @@ public class Skin implements Disposable {
 	}
 
 	/** @return an array with the {@link TextureRegion} that have an index != -1, or null if none are found. */
-	@NullUnmarked
+	
 	public @Null Array<TextureRegion> getRegions (String regionName) {
 		Array<TextureRegion> regions = null;
 		int i = 0;
@@ -336,7 +336,7 @@ public class Skin implements Disposable {
 
 	/** Returns the name of the specified style object, or null if it is not in the skin. This compares potentially every style
 	 * object in the skin of the same type as the specified style, which may be a somewhat expensive operation. */
-	@NullUnmarked
+	
 	public @Null String find (Object resource) {
 		if (resource == null) throw new IllegalArgumentException("style cannot be null.");
 		ObjectMap<String, Object> typeResources = resources.get(resource.getClass());
@@ -460,7 +460,7 @@ public class Skin implements Disposable {
 		}
 	}
 
-	@NullUnmarked
+	
 	protected Json getJsonLoader (final FileHandle skinFile) {
 		final Skin skin = this;
 
@@ -575,7 +575,7 @@ public class Skin implements Disposable {
 		});
 
 		json.setSerializer(Color.class, new ReadOnlySerializer<Color>() {
-			@NullUnmarked
+			
 			public Color read (Json json, JsonValue jsonData, Class type) {
 				if (jsonData.isString()) return get(jsonData.asString(), Color.class);
 				String hex = json.readValue("hex", String.class, (String)null, jsonData);
@@ -623,7 +623,7 @@ public class Skin implements Disposable {
 		TextField.TextFieldStyle.class, TextTooltip.TextTooltipStyle.class, Touchpad.TouchpadStyle.class, Tree.TreeStyle.class,
 		Window.WindowStyle.class};
 
-	@NullUnmarked
+	
 	static private @Null Method findMethod (Class type, String name) {
 		Method[] methods = ClassReflection.getMethods(type);
 		for (int i = 0, n = methods.length; i < n; i++) {
@@ -635,7 +635,7 @@ public class Skin implements Disposable {
 
 	/** @author Nathan Sweet */
 	static public class TintedDrawable {
-		@SuppressWarnings("NullAway.Init") public String name;
-		@SuppressWarnings("NullAway.Init") public Color color;
+		 public String name;
+		 public Color color;
 	}
 }

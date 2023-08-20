@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Modification of the {@link VertexBufferObject} class. Sets the glVertexAttribDivisor for every {@link VertexAttribute}
  * automatically.
@@ -34,9 +34,9 @@ import com.badlogic.gdx.NullUnmarked;
  * @author mrdlink */
 public class InstanceBufferObject implements InstanceData {
 
-	@SuppressWarnings("NullAway.Init") private VertexAttributes attributes;
-	@SuppressWarnings("NullAway.Init") private FloatBuffer buffer;
-	@SuppressWarnings("NullAway.Init") private ByteBuffer byteBuffer;
+	 private VertexAttributes attributes;
+	 private FloatBuffer buffer;
+	 private ByteBuffer byteBuffer;
 	private boolean ownsBuffer;
 	private int bufferHandle;
 	private int usage;
@@ -102,7 +102,7 @@ public class InstanceBufferObject implements InstanceData {
 		((Buffer)buffer).limit(l / 4);
 	}
 
-	@NullUnmarked
+	
 	private void bufferChanged () {
 		if (isBound) {
 			Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.limit(), null, usage);
@@ -168,7 +168,7 @@ public class InstanceBufferObject implements InstanceData {
 	/** Binds this InstanceBufferObject for rendering via glDrawArraysInstanced or glDrawElementsInstanced
 	 *
 	 * @param shader the shader */
-	@NullUnmarked
+	
 	@Override
 	public void bind (ShaderProgram shader) {
 		bind(shader, null);
@@ -218,7 +218,7 @@ public class InstanceBufferObject implements InstanceData {
 	/** Unbinds this InstanceBufferObject.
 	 *
 	 * @param shader the shader */
-	@NullUnmarked
+	
 	@Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);

@@ -41,7 +41,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** This class is used to draw particles as point sprites.
  * @author Inferno */
@@ -68,7 +68,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		pointSpritesEnabled = true;
 	}
 
-	@SuppressWarnings("NullAway.Init") private float[] vertices;
+	 private float[] vertices;
 	Renderable renderable;
 	protected BlendingAttribute blendingAttribute;
 	protected DepthTestAttribute depthTestAttribute;
@@ -81,12 +81,12 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, new ParticleShader.Config(ParticleType.Point));
 	}
 
-	@NullUnmarked
+	
 	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig) {
 		this(capacity, shaderConfig, null, null);
 	}
 
-	@NullUnmarked
+	
 	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig, BlendingAttribute blendingAttribute,
 		DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
@@ -113,7 +113,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		renderable.meshPart.mesh = new Mesh(false, capacity, 0, CPU_ATTRIBUTES);
 	}
 
-	@NullUnmarked
+	
 	protected void allocRenderable () {
 		renderable = new Renderable();
 		renderable.meshPart.primitiveType = GL20.GL_POINTS;

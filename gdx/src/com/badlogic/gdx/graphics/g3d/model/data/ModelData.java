@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * buffer objects are not stored. Instead, a ModelData instance needs to be converted to a Model first.
  * @author badlogic */
 public class ModelData {
-	@SuppressWarnings("NullAway.Init") public String id;
+	 public String id;
 	public final short version[] = new short[2];
 	public final Array<ModelMesh> meshes = new Array<ModelMesh>();
 	public final Array<ModelMaterial> materials = new Array<ModelMaterial>();

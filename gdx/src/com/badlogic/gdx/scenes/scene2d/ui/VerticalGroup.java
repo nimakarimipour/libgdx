@@ -40,7 +40,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 public class VerticalGroup extends WidgetGroup {
 	private float prefWidth, prefHeight, lastPrefWidth;
 	private boolean sizeInvalid = true;
-	@SuppressWarnings("NullAway.Init") private FloatArray columnSizes; // column height, column width, ...
+	 private FloatArray columnSizes; // column height, column width, ...
 
 	private int align = Align.top, columnAlign;
 	private boolean reverse, round = true, wrap, expand;

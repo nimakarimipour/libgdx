@@ -162,20 +162,20 @@ public interface Net {
 	 */
 	public static class HttpRequest implements Poolable {
 
-		@SuppressWarnings("NullAway.Init") private String httpMethod;
-		@SuppressWarnings("NullAway.Init") private String url;
+		 private String httpMethod;
+		 private String url;
 		private Map<String, String> headers;
 		private int timeOut = 0;
 
-		@SuppressWarnings("NullAway.Init") private String content;
-		@SuppressWarnings("NullAway.Init") private InputStream contentStream;
+		 private String content;
+		 private InputStream contentStream;
 		private long contentLength;
 
 		private boolean followRedirects = true;
 
 		private boolean includeCredentials = false;
 
-		@NullUnmarked
+		
 		public HttpRequest () {
 			this.headers = new HashMap<String, String>();
 		}
@@ -291,7 +291,7 @@ public interface Net {
 			return includeCredentials;
 		}
 
-		@NullUnmarked
+		
 		@Override
 		public void reset () {
 			httpMethod = null;

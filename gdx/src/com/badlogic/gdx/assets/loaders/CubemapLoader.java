@@ -28,7 +28,7 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link CubemapParameter} to
@@ -37,9 +37,9 @@ import com.badlogic.gdx.NullUnmarked;
  * @author mzechner, Vincent Bousquet */
 public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
 	static public class CubemapLoaderInfo {
-		@SuppressWarnings("NullAway.Init") String filename;
-		@SuppressWarnings("NullAway.Init") CubemapData data;
-		@SuppressWarnings("NullAway.Init") Cubemap cubemap;
+		 String filename;
+		 CubemapData data;
+		 Cubemap cubemap;
 	};
 
 	CubemapLoaderInfo info = new CubemapLoaderInfo();
@@ -48,7 +48,7 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		super(resolver);
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
 		info.filename = fileName;
@@ -72,7 +72,7 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		if (!info.data.isPrepared()) info.data.prepare();
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public Cubemap loadSync (AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
 		if (info == null) return null;
@@ -89,7 +89,7 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		return cubemap;
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, CubemapParameter parameter) {
 		return null;
@@ -97,11 +97,11 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 
 	static public class CubemapParameter extends AssetLoaderParameters<Cubemap> {
 		/** the format of the final Texture. Uses the source images format if null **/
-		@SuppressWarnings("NullAway") public Format format = null;
+		 public Format format = null;
 		/** The texture to put the {@link TextureData} in, optional. **/
-		@SuppressWarnings("NullAway") public Cubemap cubemap = null;
+		 public Cubemap cubemap = null;
 		/** CubemapData for textures created on the fly, optional. When set, all format and genMipMaps are ignored */
-		@SuppressWarnings("NullAway") public CubemapData cubemapData = null;
+		 public CubemapData cubemapData = null;
 		public TextureFilter minFilter = TextureFilter.Nearest;
 		public TextureFilter magFilter = TextureFilter.Nearest;
 		public TextureWrap wrapU = TextureWrap.ClampToEdge;

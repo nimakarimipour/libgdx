@@ -17,7 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Iterator;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Interface used to select items within an iterator against a predicate.
  * @author Xoppa */
@@ -27,17 +27,17 @@ public interface Predicate<T> {
 	boolean evaluate (T arg0);
 
 	public class PredicateIterator<T> implements Iterator<T> {
-		@SuppressWarnings("NullAway.Init") public Iterator<T> iterator;
-		@SuppressWarnings("NullAway.Init") public Predicate<T> predicate;
+		 public Iterator<T> iterator;
+		 public Predicate<T> predicate;
 		public boolean end = false;
 		public boolean peeked = false;
-		@SuppressWarnings("NullAway") public T next = null;
+		 public T next = null;
 
 		public PredicateIterator (final Iterable<T> iterable, final Predicate<T> predicate) {
 			this(iterable.iterator(), predicate);
 		}
 
-		@NullUnmarked
+		
 		public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
 			set(iterator, predicate);
 		}
@@ -46,7 +46,7 @@ public interface Predicate<T> {
 			set(iterable.iterator(), predicate);
 		}
 
-		@NullUnmarked
+		
 		public void set (final Iterator<T> iterator, final Predicate<T> predicate) {
 			this.iterator = iterator;
 			this.predicate = predicate;
@@ -70,7 +70,7 @@ public interface Predicate<T> {
 			return false;
 		}
 
-		@NullUnmarked
+		
 		@Override
 		public T next () {
 			if (next == null && !hasNext()) return null;
@@ -88,11 +88,11 @@ public interface Predicate<T> {
 	}
 
 	public static class PredicateIterable<T> implements Iterable<T> {
-		@SuppressWarnings("NullAway.Init") public Iterable<T> iterable;
-		@SuppressWarnings("NullAway.Init") public Predicate<T> predicate;
-		@SuppressWarnings("NullAway") public PredicateIterator<T> iterator = null;
+		 public Iterable<T> iterable;
+		 public Predicate<T> predicate;
+		 public PredicateIterator<T> iterator = null;
 
-		@NullUnmarked
+		
 		public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
 			set(iterable, predicate);
 		}

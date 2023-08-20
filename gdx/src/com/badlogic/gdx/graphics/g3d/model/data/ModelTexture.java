@@ -31,9 +31,9 @@ public class ModelTexture {
 	public final static int USAGE_TRANSPARENCY = 9;
 	public final static int USAGE_REFLECTION = 10;
 
-	@SuppressWarnings("NullAway.Init") public String id;
-	@SuppressWarnings("NullAway.Init") public String fileName;
-	@SuppressWarnings("NullAway.Init") public Vector2 uvTranslation;
-	@SuppressWarnings("NullAway.Init") public Vector2 uvScaling;
+	 public String id;
+	 public String fileName;
+	 public Vector2 uvTranslation;
+	 public Vector2 uvScaling;
 	public int usage;
 }

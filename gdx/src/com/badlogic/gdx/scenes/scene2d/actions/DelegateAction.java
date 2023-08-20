@@ -19,12 +19,12 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Pool;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Base class for an action that wraps another action.
  * @author Nathan Sweet */
 abstract public class DelegateAction extends Action {
-	@SuppressWarnings("NullAway.Init") protected Action action;
+	 protected Action action;
 
 	/** Sets the wrapped action. */
 	public void setAction (Action action) {
@@ -37,7 +37,7 @@ abstract public class DelegateAction extends Action {
 
 	abstract protected boolean delegate (float delta);
 
-	@NullUnmarked
+	
 	public final boolean act (float delta) {
 		Pool pool = getPool();
 		setPool(null); // Ensure this action can't be returned to the pool inside the delegate action.
@@ -52,7 +52,7 @@ abstract public class DelegateAction extends Action {
 		if (action != null) action.restart();
 	}
 
-	@NullUnmarked
+	
 	public void reset () {
 		super.reset();
 		action = null;

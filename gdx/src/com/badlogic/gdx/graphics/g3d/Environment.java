@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 public class Environment extends Attributes {
 
 	/** Shadow map used to render shadows */
-	@SuppressWarnings("NullAway.Init") public ShadowMap shadowMap;
+	 public ShadowMap shadowMap;
 
 	public Environment () {
 	}

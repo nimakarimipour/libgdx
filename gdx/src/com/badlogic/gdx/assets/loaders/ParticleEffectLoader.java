@@ -23,7 +23,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** {@link AssetLoader} to load {@link ParticleEffect} instances. Passing a {@link ParticleEffectParameter} to
  * {@link AssetManager#load(String, Class, AssetLoaderParameters)} allows to specify an atlas file or an image directory to be
@@ -45,7 +45,7 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 		return effect;
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, ParticleEffectParameter param) {
 		Array<AssetDescriptor> deps = null;
@@ -60,10 +60,10 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 	 * necessary for the {@link ParticleEffect}. */
 	public static class ParticleEffectParameter extends AssetLoaderParameters<ParticleEffect> {
 		/** Atlas file name. */
-		@SuppressWarnings("NullAway.Init") public String atlasFile;
+		 public String atlasFile;
 		/** Optional prefix to image names **/
-		@SuppressWarnings("NullAway.Init") public String atlasPrefix;
+		 public String atlasPrefix;
 		/** Image directory. */
-		@SuppressWarnings("NullAway.Init") public FileHandle imagesDir;
+		 public FileHandle imagesDir;
 	}
 }

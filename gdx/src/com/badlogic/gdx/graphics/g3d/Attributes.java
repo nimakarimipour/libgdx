@@ -20,7 +20,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.NullUnmarked;
+
 
 public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, Comparable<Attributes> {
 	protected long mask;
@@ -43,7 +43,7 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 
 	/** Example usage: ((BlendingAttribute)material.get(BlendingAttribute.ID)).sourceFunction;
 	 * @return The attribute (which can safely be cast) if any, otherwise null */
-	@NullUnmarked
+	
 	public final Attribute get (final long type) {
 		if (has(type)) for (int i = 0; i < attributes.size; i++)
 			if (attributes.get(i).type == type) return attributes.get(i);

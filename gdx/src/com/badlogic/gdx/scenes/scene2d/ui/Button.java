@@ -29,7 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A button is a {@link Table} with a checked state and additional {@link ButtonStyle style} fields for pressed, unpressed, and
  * checked. Each time a button is clicked, the checked state is toggled. Being a table, a button can contain any other actors.<br>
@@ -43,9 +43,9 @@ import com.badlogic.gdx.NullUnmarked;
  * The preferred size of the button is determined by the background and the button contents.
  * @author Nathan Sweet */
 public class Button extends Table implements Disableable {
-	@SuppressWarnings("NullAway.Init") private ButtonStyle style;
+	 private ButtonStyle style;
 	boolean isChecked, isDisabled;
-	@SuppressWarnings("NullAway.Init") ButtonGroup buttonGroup;
+	 ButtonGroup buttonGroup;
 	private ClickListener clickListener;
 	private boolean programmaticChangeEvents = true;
 
@@ -96,12 +96,12 @@ public class Button extends Table implements Disableable {
 		});
 	}
 
-	@NullUnmarked
+	
 	public Button (@Null Drawable up) {
 		this(new ButtonStyle(up, null, null));
 	}
 
-	@NullUnmarked
+	
 	public Button (@Null Drawable up, @Null Drawable down) {
 		this(new ButtonStyle(up, down, null));
 	}
@@ -270,15 +270,15 @@ public class Button extends Table implements Disableable {
 	/** The style for a button, see {@link Button}.
 	 * @author mzechner */
 	static public class ButtonStyle {
-		@SuppressWarnings("NullAway.Init") public @Null Drawable up, down, over, focused, disabled;
-		@SuppressWarnings("NullAway.Init") public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;
+		 public @Null Drawable up, down, over, focused, disabled;
+		 public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;
 		public float pressedOffsetX, pressedOffsetY, unpressedOffsetX, unpressedOffsetY, checkedOffsetX, checkedOffsetY;
 
-		@NullUnmarked
+		
 		public ButtonStyle () {
 		}
 
-		@NullUnmarked
+		
 		public ButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked) {
 			this.up = up;
 			this.down = down;

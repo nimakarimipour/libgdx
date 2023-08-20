@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool.Poolable;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A quad tree that stores a float for each point.
  * @author Nathan Sweet */
@@ -36,7 +36,7 @@ public class QuadTreeFloat implements Poolable {
 	public final int maxValues, maxDepth;
 	public float x, y, width, height;
 	public int depth;
-	@SuppressWarnings("NullAway.Init") public @Null QuadTreeFloat nw, ne, sw, se;
+	 public @Null QuadTreeFloat nw, ne, sw, se;
 
 	/** For each entry, stores the value, x, and y. */
 	public float[] values;
@@ -251,7 +251,7 @@ public class QuadTreeFloat implements Poolable {
 		}
 	}
 
-	@NullUnmarked
+	
 	public void reset () {
 		if (count == -1) {
 			if (nw != null) {

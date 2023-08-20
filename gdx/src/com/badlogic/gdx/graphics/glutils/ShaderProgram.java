@@ -109,7 +109,7 @@ public class ShaderProgram implements Disposable {
 	private final ObjectIntMap<String> uniformSizes = new ObjectIntMap<String>();
 
 	/** uniform names **/
-	@SuppressWarnings("NullAway.Init") private String[] uniformNames;
+	 private String[] uniformNames;
 
 	/** attribute lookup **/
 	private final ObjectIntMap<String> attributes = new ObjectIntMap<String>();
@@ -121,7 +121,7 @@ public class ShaderProgram implements Disposable {
 	private final ObjectIntMap<String> attributeSizes = new ObjectIntMap<String>();
 
 	/** attribute names **/
-	@SuppressWarnings("NullAway.Init") private String[] attributeNames;
+	 private String[] attributeNames;
 
 	/** program handle **/
 	private int program;

@@ -45,7 +45,7 @@ public class DepthShader extends DefaultShader {
 		}
 	}
 
-	@SuppressWarnings("NullAway") private static String defaultVertexShader = null;
+	 private static String defaultVertexShader = null;
 
 	public final static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
@@ -53,7 +53,7 @@ public class DepthShader extends DefaultShader {
 		return defaultVertexShader;
 	}
 
-	@SuppressWarnings("NullAway") private static String defaultFragmentShader = null;
+	 private static String defaultFragmentShader = null;
 
 	public final static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null)

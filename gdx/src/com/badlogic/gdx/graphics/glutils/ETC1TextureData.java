@@ -24,11 +24,11 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.ETC1.ETC1Data;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.NullUnmarked;
+
 
 public class ETC1TextureData implements TextureData {
-	@SuppressWarnings("NullAway.Init") FileHandle file;
-	@SuppressWarnings("NullAway.Init") ETC1Data data;
+	 FileHandle file;
+	 ETC1Data data;
 	boolean useMipMaps;
 	int width = 0;
 	int height = 0;
@@ -70,7 +70,7 @@ public class ETC1TextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@NullUnmarked
+	
 	@Override
 	public void consumeCustomData (int target) {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling consumeCompressedData()");

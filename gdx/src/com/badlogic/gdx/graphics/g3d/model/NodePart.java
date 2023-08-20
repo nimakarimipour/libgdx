@@ -22,22 +22,22 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** A combination of {@link MeshPart} and {@link Material}, used to represent a {@link Node}'s graphical properties. A NodePart is
  * the smallest visible part of a {@link Model}, each NodePart implies a render call.
  * @author badlogic, Xoppa */
 public class NodePart {
 	/** The MeshPart (shape) to render. Must not be null. */
-	@SuppressWarnings("NullAway.Init") public MeshPart meshPart;
+	 public MeshPart meshPart;
 	/** The Material used to render the {@link #meshPart}. Must not be null. */
-	@SuppressWarnings("NullAway.Init") public Material material;
+	 public Material material;
 	/** Mapping to each bone (node) and the inverse transform of the bind pose. Will be used to fill the {@link #bones} array. May
 	 * be null. */
-	@SuppressWarnings("NullAway.Init") public ArrayMap<Node, Matrix4> invBoneBindTransforms;
+	 public ArrayMap<Node, Matrix4> invBoneBindTransforms;
 	/** The current transformation (relative to the bind pose) of each bone, may be null. When the part is skinned, this will be
 	 * updated by a call to {@link ModelInstance#calculateTransforms()}. Do not set or change this value manually. */
-	@SuppressWarnings("NullAway.Init") public Matrix4[] bones;
+	 public Matrix4[] bones;
 	/** true by default. If set to false, this part will not participate in rendering and bounding box calculation. */
 	public boolean enabled = true;
 
@@ -72,7 +72,7 @@ public class NodePart {
 		return new NodePart().set(this);
 	}
 
-	@NullUnmarked
+	
 	protected NodePart set (NodePart other) {
 		meshPart = new MeshPart(other.meshPart);
 		material = other.material;

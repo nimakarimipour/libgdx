@@ -33,7 +33,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.NullUnmarked;
+
 
 /** Displays a dialog, which is a window with a title, a content table, and a button table. Methods are provided to add a label to
  * the content table and buttons to the button table, but any widgets can be added. When a button is clicked,
@@ -41,10 +41,10 @@ import com.badlogic.gdx.NullUnmarked;
  * @author Nathan Sweet */
 public class Dialog extends Window {
 	Table contentTable, buttonTable;
-	@SuppressWarnings("NullAway.Init") private @Null Skin skin;
+	 private @Null Skin skin;
 	ObjectMap<Actor, Object> values = new ObjectMap();
 	boolean cancelHide;
-	@SuppressWarnings("NullAway.Init") Actor previousKeyboardFocus, previousScrollFocus;
+	 Actor previousKeyboardFocus, previousScrollFocus;
 	FocusListener focusListener;
 
 	protected InputListener ignoreTouchDown = new InputListener() {
@@ -153,7 +153,7 @@ public class Dialog extends Window {
 
 	/** Adds a text button to the button table. Null will be passed to {@link #result(Object)} if this button is clicked. The
 	 * dialog must have been constructed with a skin to use this method. */
-	@NullUnmarked
+	
 	public Dialog button (@Null String text) {
 		return button(text, null);
 	}
@@ -173,7 +173,7 @@ public class Dialog extends Window {
 	}
 
 	/** Adds the given button to the button table. */
-	@NullUnmarked
+	
 	public Dialog button (Button button) {
 		return button(button, null);
 	}
@@ -190,7 +190,7 @@ public class Dialog extends Window {
 	 * focus, clears any actions on the dialog, and adds the specified action to it. The previous keyboard and scroll focus are
 	 * remembered so they can be restored when the dialog is hidden.
 	 * @param action May be null. */
-	@NullUnmarked
+	
 	public Dialog show (Stage stage, @Null Action action) {
 		clearActions();
 		removeCaptureListener(ignoreTouchDown);
@@ -225,7 +225,7 @@ public class Dialog extends Window {
 	 * dialog.
 	 * @param action If null, the dialog is removed immediately. Otherwise, the dialog is removed when the action completes. The
 	 *           dialog will not respond to touch down events during the action. */
-	@NullUnmarked
+	
 	public void hide (@Null Action action) {
 		Stage stage = getStage();
 		if (stage != null) {
