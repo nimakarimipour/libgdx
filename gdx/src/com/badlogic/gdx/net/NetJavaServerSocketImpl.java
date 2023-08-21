@@ -20,6 +20,8 @@ import java.net.InetSocketAddress;
 
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Server socket implementation using java.net.ServerSocket.
  * 
@@ -29,13 +31,13 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 	private Protocol protocol;
 
 	/** Our server or null for disposed, aka closed. */
-	private java.net.ServerSocket server;
+	@Nullable private java.net.ServerSocket server;
 
 	public NetJavaServerSocketImpl (Protocol protocol, int port, ServerSocketHints hints) {
 		this(protocol, null, port, hints);
 	}
 
-	public NetJavaServerSocketImpl (Protocol protocol, String hostname, int port, ServerSocketHints hints) {
+	public NetJavaServerSocketImpl (Protocol protocol, @Nullable String hostname, int port, ServerSocketHints hints) {
 		this.protocol = protocol;
 
 		// create the server socket
@@ -73,7 +75,7 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 		return protocol;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public Socket accept (SocketHints hints) {
 		try {
 			return new NetJavaSocketImpl(server.accept(), hints);

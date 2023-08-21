@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import javax.annotation.Nullable;
 
 /** @author Xoppa */
 public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
@@ -93,12 +94,12 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 		return out;
 	}
 
-	public T[] controlPoints;
+	@SuppressWarnings("NullAway.Init") public T[] controlPoints;
 	public boolean continuous;
 	public int spanCount;
-	private T tmp;
-	private T tmp2;
-	private T tmp3;
+	@SuppressWarnings("NullAway.Init") private T tmp;
+	@SuppressWarnings("NullAway.Init") private T tmp2;
+	@SuppressWarnings("NullAway.Init") private T tmp3;
 
 	public CatmullRomSpline () {
 	}

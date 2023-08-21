@@ -47,6 +47,8 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A 2D scene graph containing hierarchies of {@link Actor actors}. Stage handles the viewport and distributes input events.
  * <p>
@@ -76,12 +78,12 @@ public class Stage extends InputAdapter implements Disposable {
 	private final boolean[] pointerTouched = new boolean[20];
 	private final int[] pointerScreenX = new int[20], pointerScreenY = new int[20];
 	private int mouseScreenX, mouseScreenY;
-	private @Null Actor mouseOverActor;
-	private @Null Actor keyboardFocus, scrollFocus;
+	@Nullable private @Null Actor mouseOverActor;
+	@Nullable private @Null Actor keyboardFocus, scrollFocus;
 	final SnapshotArray<TouchFocus> touchFocuses = new SnapshotArray(true, 4, TouchFocus.class);
 	private boolean actionsRequestRendering = true;
 
-	private ShapeRenderer debugShapes;
+	@Nullable private ShapeRenderer debugShapes;
 	private boolean debugInvisible, debugAll, debugUnderMouse, debugParentUnderMouse;
 	private Debug debugTableUnderMouse = Debug.none;
 	private final Color debugColor = new Color(0, 1, 0, 0.85f);
@@ -211,7 +213,7 @@ public class Stage extends InputAdapter implements Disposable {
 		root.act(delta);
 	}
 
-	private @Null Actor fireEnterAndExit (@Null Actor overLast, int screenX, int screenY, int pointer) {
+	@Nullable private @Null Actor fireEnterAndExit (@Nullable @Null Actor overLast, int screenX, int screenY, int pointer) {
 		// Find the actor under the point.
 		screenToStageCoordinates(tempCoords.set(screenX, screenY));
 		Actor over = hit(tempCoords.x, tempCoords.y, true);
@@ -524,7 +526,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Cancels touch focus for all listeners except the specified listener.
 	 * @see #cancelTouchFocus() */
-	public void cancelTouchFocusExcept (@Null EventListener exceptListener, @Null Actor exceptActor) {
+	public void cancelTouchFocusExcept (@Nullable @Null EventListener exceptListener, @Nullable @Null Actor exceptActor) {
 		InputEvent event = Pools.obtain(InputEvent.class);
 		event.setType(InputEvent.Type.touchUp);
 		event.setStage(this);
@@ -636,7 +638,7 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Sets the actor that will receive key events.
 	 * @param actor May be null.
 	 * @return true if the unfocus and focus events were not cancelled by a {@link FocusListener}. */
-	public boolean setKeyboardFocus (@Null Actor actor) {
+	public boolean setKeyboardFocus (@Nullable @Null Actor actor) {
 		if (keyboardFocus == actor) return true;
 		FocusEvent event = Pools.obtain(FocusEvent.class);
 		event.setStage(this);
@@ -664,14 +666,14 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Gets the actor that will receive key events.
 	 * @return May be null. */
-	public @Null Actor getKeyboardFocus () {
+	@Nullable public @Null Actor getKeyboardFocus () {
 		return keyboardFocus;
 	}
 
 	/** Sets the actor that will receive scroll events.
 	 * @param actor May be null.
 	 * @return true if the unfocus and focus events were not cancelled by a {@link FocusListener}. */
-	public boolean setScrollFocus (@Null Actor actor) {
+	public boolean setScrollFocus (@Nullable @Null Actor actor) {
 		if (scrollFocus == actor) return true;
 		FocusEvent event = Pools.obtain(FocusEvent.class);
 		event.setStage(this);
@@ -699,7 +701,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Gets the actor that will receive scroll events.
 	 * @return May be null. */
-	public @Null Actor getScrollFocus () {
+	@Nullable public @Null Actor getScrollFocus () {
 		return scrollFocus;
 	}
 
@@ -750,7 +752,7 @@ public class Stage extends InputAdapter implements Disposable {
 	 * {@link #screenToStageCoordinates(Vector2)}.
 	 * @param touchable If true, the hit detection will respect the {@link Actor#setTouchable(Touchable) touchability}.
 	 * @return May be null if no actor was hit. */
-	public @Null Actor hit (float stageX, float stageY, boolean touchable) {
+	@Nullable public @Null Actor hit (float stageX, float stageY, boolean touchable) {
 		root.parentToLocalCoordinates(tempCoords.set(stageX, stageY));
 		return root.hit(tempCoords.x, tempCoords.y, touchable);
 	}
@@ -883,11 +885,11 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Internal class for managing touch focus. Public only for GWT.
 	 * @author Nathan Sweet */
 	public static final class TouchFocus implements Poolable {
-		EventListener listener;
-		Actor listenerActor, target;
+		@SuppressWarnings("NullAway.Init") EventListener listener;
+		@Nullable Actor listenerActor, target;
 		int pointer, button;
 
-		public void reset () {
+		@NullUnmarked public void reset () {
 			listenerActor = null;
 			listener = null;
 			target = null;

@@ -33,6 +33,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
+import javax.annotation.Nullable;
 
 /** Displays a dialog, which is a window with a title, a content table, and a button table. Methods are provided to add a label to
  * the content table and buttons to the button table, but any widgets can be added. When a button is clicked,
@@ -40,10 +41,10 @@ import com.badlogic.gdx.utils.ObjectMap;
  * @author Nathan Sweet */
 public class Dialog extends Window {
 	Table contentTable, buttonTable;
-	private @Null Skin skin;
+	@Nullable private @Null Skin skin;
 	ObjectMap<Actor, Object> values = new ObjectMap();
 	boolean cancelHide;
-	Actor previousKeyboardFocus, previousScrollFocus;
+	@Nullable Actor previousKeyboardFocus, previousScrollFocus;
 	FocusListener focusListener;
 
 	protected InputListener ignoreTouchDown = new InputListener() {
@@ -116,7 +117,7 @@ public class Dialog extends Window {
 		};
 	}
 
-	protected void setStage (Stage stage) {
+	protected void setStage (@Nullable Stage stage) {
 		if (stage == null)
 			addListener(focusListener);
 		else
@@ -159,7 +160,7 @@ public class Dialog extends Window {
 
 	/** Adds a text button to the button table. The dialog must have been constructed with a skin to use this method.
 	 * @param object The object that will be passed to {@link #result(Object)} if this button is clicked. May be null. */
-	public Dialog button (@Null String text, @Null Object object) {
+	public Dialog button (@Null String text, @Nullable @Null Object object) {
 		if (skin == null)
 			throw new IllegalStateException("This method may only be used if the dialog was constructed with a Skin.");
 		return button(text, object, skin.get(TextButtonStyle.class));
@@ -167,7 +168,7 @@ public class Dialog extends Window {
 
 	/** Adds a text button to the button table.
 	 * @param object The object that will be passed to {@link #result(Object)} if this button is clicked. May be null. */
-	public Dialog button (@Null String text, @Null Object object, TextButtonStyle buttonStyle) {
+	public Dialog button (@Null String text, @Nullable @Null Object object, TextButtonStyle buttonStyle) {
 		return button(new TextButton(text, buttonStyle), object);
 	}
 
@@ -179,7 +180,7 @@ public class Dialog extends Window {
 
 	/** Adds the given button to the button table.
 	 * @param object The object that will be passed to {@link #result(Object)} if this button is clicked. May be null. */
-	public Dialog button (Button button, @Null Object object) {
+	public Dialog button (Button button, @Nullable @Null Object object) {
 		buttonTable.add(button);
 		setObject(button, object);
 		return this;
@@ -250,7 +251,7 @@ public class Dialog extends Window {
 		hide(fadeOut(0.4f, Interpolation.fade));
 	}
 
-	public void setObject (Actor actor, @Null Object object) {
+	public void setObject (Actor actor, @Nullable @Null Object object) {
 		values.put(actor, object);
 	}
 
@@ -258,7 +259,7 @@ public class Dialog extends Window {
 	 * @see Keys */
 	public Dialog key (final int keycode, final @Null Object object) {
 		addListener(new InputListener() {
-			public boolean keyDown (InputEvent event, int keycode2) {
+			public boolean keyDown (@Nullable InputEvent event, int keycode2) {
 				if (keycode == keycode2) {
 					// Delay a frame to eat the keyTyped event.
 					Gdx.app.postRunnable(new Runnable() {

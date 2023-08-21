@@ -29,6 +29,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A progress bar is a widget that visually displays the progress of some activity or a value within given range. The progress
  * bar has a range (min, max) and a stepping between each value it represents. The percentage of completeness typically starts out
@@ -42,7 +44,7 @@ import com.badlogic.gdx.utils.Pools;
  * @author mzechner
  * @author Nathan Sweet */
 public class ProgressBar extends Widget implements Disableable {
-	private ProgressBarStyle style;
+	@SuppressWarnings("NullAway.Init") private ProgressBarStyle style;
 	float min, max, stepSize;
 	private float value, animateFromValue;
 	float position;
@@ -225,22 +227,22 @@ public class ProgressBar extends Widget implements Disableable {
 		return visualInterpolation.apply((getVisualValue() - min) / (max - min));
 	}
 
-	protected @Null Drawable getBackgroundDrawable () {
+	@NullUnmarked protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		return style.background;
 	}
 
-	protected @Null Drawable getKnobDrawable () {
+	@Nullable protected @Null Drawable getKnobDrawable () {
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		return style.knob;
 	}
 
-	protected Drawable getKnobBeforeDrawable () {
+	@Nullable protected Drawable getKnobBeforeDrawable () {
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		return style.knobBefore;
 	}
 
-	protected Drawable getKnobAfterDrawable () {
+	@Nullable protected Drawable getKnobAfterDrawable () {
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		return style.knobAfter;
 	}
@@ -383,10 +385,10 @@ public class ProgressBar extends Widget implements Disableable {
 	 * @author Nathan Sweet */
 	static public class ProgressBarStyle {
 		/** The progress bar background, stretched only in one direction. */
-		public @Null Drawable background, disabledBackground;
-		public @Null Drawable knob, disabledKnob;
-		public @Null Drawable knobBefore, disabledKnobBefore;
-		public @Null Drawable knobAfter, disabledKnobAfter;
+		@Nullable public @Null Drawable background, disabledBackground;
+		@Nullable public @Null Drawable knob, disabledKnob;
+		@Nullable public @Null Drawable knobBefore, disabledKnobBefore;
+		@Nullable public @Null Drawable knobAfter, disabledKnobAfter;
 
 		public ProgressBarStyle () {
 		}

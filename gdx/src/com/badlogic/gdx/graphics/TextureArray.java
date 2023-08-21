@@ -24,6 +24,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Open GLES wrapper for TextureArray
  * @author Tomski */
@@ -150,7 +152,7 @@ public class TextureArray extends GLTexture {
 
 	/** @return the number of managed TextureArrays currently loaded */
 
-	public static int getNumManagedTextureArrays () {
+	@NullUnmarked public static int getNumManagedTextureArrays () {
 		return managedTextureArrays.get(Gdx.app).size;
 	}
 

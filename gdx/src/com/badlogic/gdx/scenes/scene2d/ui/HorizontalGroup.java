@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
+import javax.annotation.Nullable;
 
 /** A group that lays out its children side by side horizontally, with optional wrapping. This can be easier than using
  * {@link Table} when actors need to be inserted into or removed from the middle of the group. {@link #getChildren()} can be
@@ -40,7 +41,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 public class HorizontalGroup extends WidgetGroup {
 	private float prefWidth, prefHeight, lastPrefHeight;
 	private boolean sizeInvalid = true;
-	private FloatArray rowSizes; // row width, row height, ...
+	@SuppressWarnings("NullAway.Init") private FloatArray rowSizes; // row width, row height, ...
 
 	private int align = Align.left, rowAlign;
 	private boolean reverse, round = true, wrap, wrapReverse, expand;

@@ -19,14 +19,16 @@ package com.badlogic.gdx.graphics.g3d.particles.renderers;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** It's a {@link ParticleControllerComponent} which determines how the particles are rendered. It's the base class of every
  * particle renderer.
  * @author Inferno */
 public abstract class ParticleControllerRenderer<D extends ParticleControllerRenderData, T extends ParticleBatch<D>>
 	extends ParticleControllerComponent {
-	protected T batch;
-	protected D renderData;
+	@Nullable protected T batch;
+	@SuppressWarnings("NullAway.Init") protected D renderData;
 
 	protected ParticleControllerRenderer () {
 	}
@@ -35,13 +37,13 @@ public abstract class ParticleControllerRenderer<D extends ParticleControllerRen
 		this.renderData = renderData;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void update () {
 		batch.draw(renderData);
 	}
 
 	@SuppressWarnings("unchecked")
-	public boolean setBatch (ParticleBatch<?> batch) {
+	public boolean setBatch (@Nullable ParticleBatch<?> batch) {
 		if (isCompatible(batch)) {
 			this.batch = (T)batch;
 			return true;
@@ -49,7 +51,7 @@ public abstract class ParticleControllerRenderer<D extends ParticleControllerRen
 		return false;
 	}
 
-	public abstract boolean isCompatible (ParticleBatch<?> batch);
+	public abstract boolean isCompatible (@Nullable ParticleBatch<?> batch);
 
 	@Override
 	public void set (ParticleController particleController) {

@@ -15,10 +15,12 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class Polyline implements Shape2D {
 	private float[] localVertices;
-	private float[] worldVertices;
+	@Nullable private float[] worldVertices;
 	private float x, y;
 	private float originX, originY;
 	private float rotation;
@@ -28,7 +30,7 @@ public class Polyline implements Shape2D {
 	private boolean calculateScaledLength = true;
 	private boolean calculateLength = true;
 	private boolean dirty = true;
-	private Rectangle bounds;
+	@Nullable private Rectangle bounds;
 
 	public Polyline () {
 		this.localVertices = new float[0];
@@ -45,7 +47,7 @@ public class Polyline implements Shape2D {
 	}
 
 	/** Returns vertices scaled, rotated, and offset by the polygon position. */
-	public float[] getTransformedVertices () {
+	@NullUnmarked public float[] getTransformedVertices () {
 		if (!dirty) return worldVertices;
 		dirty = false;
 

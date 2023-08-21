@@ -20,11 +20,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Drawable for a {@link Sprite}.
  * @author Nathan Sweet */
 public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
-	private Sprite sprite;
+	@Nullable private Sprite sprite;
 
 	/** Creates an uninitialized SpriteDrawable. The sprite must be set before use. */
 	public SpriteDrawable () {
@@ -39,7 +41,7 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
 		setSprite(drawable.sprite);
 	}
 
-	public void draw (Batch batch, float x, float y, float width, float height) {
+	@NullUnmarked public void draw (Batch batch, float x, float y, float width, float height) {
 		Color spriteColor = sprite.getColor();
 		float oldColor = spriteColor.toFloatBits();
 		sprite.setColor(spriteColor.mul(batch.getColor()));
@@ -52,7 +54,7 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
 		sprite.setPackedColor(oldColor);
 	}
 
-	public void draw (Batch batch, float x, float y, float originX, float originY, float width, float height, float scaleX,
+	@NullUnmarked public void draw (Batch batch, float x, float y, float originX, float originY, float width, float height, float scaleX,
 		float scaleY, float rotation) {
 
 		Color spriteColor = sprite.getColor();
@@ -68,13 +70,13 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
 		sprite.setPackedColor(oldColor);
 	}
 
-	public void setSprite (Sprite sprite) {
+	@NullUnmarked public void setSprite (@Nullable Sprite sprite) {
 		this.sprite = sprite;
 		setMinWidth(sprite.getWidth());
 		setMinHeight(sprite.getHeight());
 	}
 
-	public Sprite getSprite () {
+	@Nullable public Sprite getSprite () {
 		return sprite;
 	}
 

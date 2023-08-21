@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /** Base class of all the particle controllers. Encapsulate the generic structure of a controller and methods to update the
  * particles simulation.
@@ -40,20 +41,20 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	protected static final float DEFAULT_TIME_STEP = 1f / 60;
 
 	/** Name of the controller */
-	public String name;
+	@SuppressWarnings("NullAway.Init") public String name;
 
 	/** Controls the emission of the particles */
-	public Emitter emitter;
+	@SuppressWarnings("NullAway.Init") public Emitter emitter;
 
 	/** Update the properties of the particles */
 	public Array<Influencer> influencers;
 
 	/** Controls the graphical representation of the particles */
-	public ParticleControllerRenderer<?, ?> renderer;
+	@SuppressWarnings("NullAway.Init") public ParticleControllerRenderer<?, ?> renderer;
 
 	/** Particles components */
-	public ParallelArray particles;
-	public ParticleChannels particleChannels;
+	@SuppressWarnings("NullAway.Init") public ParallelArray particles;
+	@SuppressWarnings("NullAway.Init") public ParticleChannels particleChannels;
 
 	/** Current transform of the controller DO NOT CHANGE MANUALLY */
 	public Matrix4 transform;
@@ -62,7 +63,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	public Vector3 scale;
 
 	/** Not used by the simulation, it should represent the bounding box containing all the particles */
-	protected BoundingBox boundingBox;
+	@SuppressWarnings("NullAway.Init") protected BoundingBox boundingBox;
 
 	/** Time step, DO NOT CHANGE MANUALLY */
 	public float deltaTime, deltaTimeSqr;
@@ -287,7 +288,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 
 	/** @return the influencer having the given type. */
 
-	public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
+	@Nullable public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
 		int index = findIndex(influencerClass);
 		return index > -1 ? (K)influencers.get(index) : null;
 	}

@@ -19,18 +19,19 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** Base class for an action that wraps another action.
  * @author Nathan Sweet */
 abstract public class DelegateAction extends Action {
-	protected Action action;
+	@Nullable protected Action action;
 
 	/** Sets the wrapped action. */
 	public void setAction (Action action) {
 		this.action = action;
 	}
 
-	public Action getAction () {
+	@Nullable public Action getAction () {
 		return action;
 	}
 
@@ -55,7 +56,7 @@ abstract public class DelegateAction extends Action {
 		action = null;
 	}
 
-	public void setActor (Actor actor) {
+	public void setActor (@Nullable Actor actor) {
 		if (action != null) action.setActor(actor);
 		super.setActor(actor);
 	}

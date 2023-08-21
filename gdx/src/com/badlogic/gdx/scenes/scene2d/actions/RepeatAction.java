@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.scenes.scene2d.actions;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Repeats an action a number of times or forever.
  * @author Nathan Sweet */
@@ -24,7 +25,7 @@ public class RepeatAction extends DelegateAction {
 	private int repeatCount, executedCount;
 	private boolean finished;
 
-	protected boolean delegate (float delta) {
+	@NullUnmarked protected boolean delegate (float delta) {
 		if (executedCount == repeatCount) return true;
 		if (action.act(delta)) {
 			if (finished) return true;

@@ -47,13 +47,15 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class DefaultShader extends BaseShader {
 	public static class Config {
 		/** The uber vertex shader to use, null to use the default vertex shader. */
-		public String vertexShader = null;
+		@Nullable public String vertexShader = null;
 		/** The uber fragment shader to use, null to use the default fragment shader. */
-		public String fragmentShader = null;
+		@Nullable public String fragmentShader = null;
 		/** The number of directional lights to use */
 		public int numDirectionalLights = 2;
 		/** The number of point lights to use */
@@ -388,7 +390,7 @@ public class DefaultShader extends BaseShader {
 		};
 	}
 
-	private static String defaultVertexShader = null;
+	@Nullable private static String defaultVertexShader = null;
 
 	public static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
@@ -396,7 +398,7 @@ public class DefaultShader extends BaseShader {
 		return defaultVertexShader;
 	}
 
-	private static String defaultFragmentShader = null;
+	@Nullable private static String defaultFragmentShader = null;
 
 	public static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null)
@@ -497,7 +499,7 @@ public class DefaultShader extends BaseShader {
 	protected final SpotLight spotLights[];
 
 	/** The renderable used to create this shader, invalid after the call to init */
-	private Renderable renderable;
+	@Nullable private Renderable renderable;
 	/** The attributes that this shader supports */
 	protected final long attributesMask;
 	private final long vertexMask;
@@ -523,7 +525,7 @@ public class DefaultShader extends BaseShader {
 		this(renderable, config, new ShaderProgram(prefix + vertexShader, prefix + fragmentShader));
 	}
 
-	public DefaultShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
+	@NullUnmarked public DefaultShader (final Renderable renderable, final Config config, final ShaderProgram shaderProgram) {
 		final Attributes attributes = combineAttributes(renderable);
 		this.config = config;
 		this.program = shaderProgram;
@@ -596,7 +598,7 @@ public class DefaultShader extends BaseShader {
 		u_environmentCubemap = environmentCubemap ? register(Inputs.environmentCubemap, Setters.environmentCubemap) : -1;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void init () {
 		final ShaderProgram program = this.program;
 		this.program = null;

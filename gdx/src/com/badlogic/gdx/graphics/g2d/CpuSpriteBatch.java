@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** CpuSpriteBatch behaves like SpriteBatch, except it doesn't flush automatically whenever the transformation matrix changes.
  * Instead, the vertices get adjusted on subsequent draws to match the running batch. This can improve performance through longer
@@ -54,7 +55,7 @@ public class CpuSpriteBatch extends SpriteBatch {
 
 	/** Constructs a CpuSpriteBatch with a custom shader.
 	 * @see SpriteBatch#SpriteBatch(int, ShaderProgram) */
-	public CpuSpriteBatch (int size, ShaderProgram defaultShader) {
+	public CpuSpriteBatch (int size, @Nullable ShaderProgram defaultShader) {
 		super(size, defaultShader);
 	}
 
@@ -246,7 +247,7 @@ public class CpuSpriteBatch extends SpriteBatch {
 	}
 
 	@Override
-	public void draw (Texture texture, float[] spriteVertices, int offset, int count) {
+	public void draw (@Nullable Texture texture, float[] spriteVertices, int offset, int count) {
 		if (count % Sprite.SPRITE_SIZE != 0) throw new GdxRuntimeException("invalid vertex count");
 
 		if (!adjustNeeded) {
@@ -593,7 +594,7 @@ public class CpuSpriteBatch extends SpriteBatch {
 		idx += Sprite.SPRITE_SIZE;
 	}
 
-	private void drawAdjusted (Texture texture, float[] spriteVertices, int offset, int count) {
+	private void drawAdjusted (@Nullable Texture texture, float[] spriteVertices, int offset, int count) {
 		if (!drawing) throw new IllegalStateException("CpuSpriteBatch.begin must be called before draw.");
 
 		if (texture != lastTexture) switchTexture(texture);

@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
@@ -40,18 +42,18 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
  * 
  * @author Nathan Sweet */
 public class JsonValue implements Iterable<JsonValue> {
-	private ValueType type;
+	@SuppressWarnings("NullAway.Init") private ValueType type;
 
 	/** May be null. */
-	private String stringValue;
+	@SuppressWarnings("NullAway.Init") private String stringValue;
 	private double doubleValue;
 	private long longValue;
 
-	public String name;
+	@SuppressWarnings("NullAway.Init") public String name;
 	/** May be null. */
-	public JsonValue child, parent;
+	@Nullable public JsonValue child, parent;
 	/** May be null. When changing this field the parent {@link #size()} may need to be changed. */
-	public JsonValue next, prev;
+	@Nullable public JsonValue next, prev;
 	public int size;
 
 	public JsonValue (ValueType type) {
@@ -59,7 +61,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param value May be null. */
-	public JsonValue (@Null String value) {
+	public JsonValue (@Nullable @Null String value) {
 		set(value);
 	}
 
@@ -86,7 +88,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Returns the child at the specified index. This requires walking the linked list to the specified entry, see
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
-	public @Null JsonValue get (int index) {
+	@Nullable public @Null JsonValue get (int index) {
 		JsonValue current = child;
 		while (current != null && index > 0) {
 			index--;
@@ -97,7 +99,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the child with the specified name.
 	 * @return May be null. */
-	public @Null JsonValue get (String name) {
+	@Nullable public @Null JsonValue get (String name) {
 		JsonValue current = child;
 		while (current != null && (current.name == null || !current.name.equalsIgnoreCase(name)))
 			current = current.next;
@@ -142,7 +144,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
 
-	public @Null JsonValue remove (int index) {
+	@Nullable public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -159,7 +161,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified name.
 	 * @return May be null. */
 
-	public @Null JsonValue remove (String name) {
+	@Nullable public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -207,7 +209,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
 
-	public @Null String asString () {
+	@NullUnmarked public @Null String asString () {
 		switch (type) {
 		case stringValue:
 			return stringValue;
@@ -623,14 +625,14 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
 
-	public @Null JsonValue getChild (String name) {
+	@Nullable public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
 	}
 
 	/** Finds the child with the specified name and returns it as a string. Returns defaultValue if not found.
 	 * @param defaultValue May be null. */
-	public String getString (String name, @Null String defaultValue) {
+	@Nullable public String getString (String name, @Nullable @Null String defaultValue) {
 		JsonValue child = get(name);
 		return (child == null || !child.isValue() || child.isNull()) ? defaultValue : child.asString();
 	}
@@ -889,19 +891,19 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param name May be null. */
-	public void setName (@Null String name) {
+	@NullUnmarked public void setName (@Nullable @Null String name) {
 		this.name = name;
 	}
 
 	/** Returns the parent for this value.
 	 * @return May be null. */
-	public @Null JsonValue parent () {
+	@Nullable public @Null JsonValue parent () {
 		return parent;
 	}
 
 	/** Returns the first child for this object or array.
 	 * @return May be null. */
-	public @Null JsonValue child () {
+	@Nullable public @Null JsonValue child () {
 		return child;
 	}
 
@@ -936,7 +938,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the next sibling of this value.
 	 * @return May be null. */
-	public @Null JsonValue next () {
+	@Nullable public @Null JsonValue next () {
 		return next;
 	}
 
@@ -948,7 +950,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the previous sibling of this value.
 	 * @return May be null. */
-	public @Null JsonValue prev () {
+	@Nullable public @Null JsonValue prev () {
 		return prev;
 	}
 
@@ -959,13 +961,13 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param value May be null. */
-	public void set (@Null String value) {
+	@NullUnmarked public void set (@Nullable @Null String value) {
 		stringValue = value;
 		type = value == null ? ValueType.nullValue : ValueType.stringValue;
 	}
 
 	/** @param stringValue May be null if the string representation is the string value of the double (eg, no leading zeros). */
-	public void set (double value, @Null String stringValue) {
+	@NullUnmarked public void set (double value, @Nullable @Null String stringValue) {
 		doubleValue = value;
 		longValue = (long)value;
 		this.stringValue = stringValue;
@@ -973,7 +975,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param stringValue May be null if the string representation is the string value of the long (eg, no leading zeros). */
-	public void set (long value, @Null String stringValue) {
+	@NullUnmarked public void set (long value, @Nullable @Null String stringValue) {
 		longValue = value;
 		doubleValue = value;
 		this.stringValue = stringValue;
@@ -1244,8 +1246,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	public class JsonIterator implements Iterator<JsonValue>, Iterable<JsonValue> {
-		JsonValue entry = child;
-		JsonValue current;
+		@Nullable JsonValue entry = child;
+		@Nullable JsonValue current;
 
 		public boolean hasNext () {
 			return entry != null;
@@ -1258,7 +1260,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
-		public void remove () {
+		@NullUnmarked public void remove () {
 			if (current.prev == null) {
 				child = current.next;
 				if (child != null) child.prev = null;
@@ -1279,7 +1281,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	static public class PrettyPrintSettings {
-		public OutputType outputType;
+		@SuppressWarnings("NullAway.Init") public OutputType outputType;
 
 		/** If an object on a single line fits this many columns, it won't wrap. */
 		public int singleLineColumns;

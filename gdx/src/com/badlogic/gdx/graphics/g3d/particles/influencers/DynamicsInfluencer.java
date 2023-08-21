@@ -25,12 +25,13 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** It's an {@link Influencer} which controls the particles dynamics (movement, rotations).
  * @author Inferno */
 public class DynamicsInfluencer extends Influencer {
 	public Array<DynamicsModifier> velocities;
-	private FloatChannel accellerationChannel, positionChannel, previousPositionChannel, rotationChannel, angularVelocityChannel;
+	@SuppressWarnings("NullAway.Init") private FloatChannel accellerationChannel, positionChannel, previousPositionChannel, rotationChannel, angularVelocityChannel;
 	boolean hasAcceleration, has2dAngularVelocity, has3dAngularVelocity;
 
 	public DynamicsInfluencer () {

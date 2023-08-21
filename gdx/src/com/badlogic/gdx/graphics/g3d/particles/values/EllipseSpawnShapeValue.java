@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** Encapsulate the formulas to spawn a particle on a ellipse shape.
  * @author Inferno */

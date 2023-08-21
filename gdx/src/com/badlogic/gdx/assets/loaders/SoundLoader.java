@@ -23,12 +23,13 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** {@link AssetLoader} to load {@link Sound} instances.
  * @author mzechner */
 public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.SoundParameter> {
 
-	private Sound sound;
+	@Nullable private Sound sound;
 
 	public SoundLoader (FileHandleResolver resolver) {
 		super(resolver);
@@ -37,24 +38,24 @@ public class SoundLoader extends AsynchronousAssetLoader<Sound, SoundLoader.Soun
 	/** Returns the {@link Sound} instance currently loaded by this {@link SoundLoader}.
 	 * 
 	 * @return the currently loaded {@link Sound}, otherwise {@code null} if no {@link Sound} has been loaded yet. */
-	protected Sound getLoadedSound () {
+	@Nullable protected Sound getLoadedSound () {
 		return sound;
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, String fileName, FileHandle file, SoundParameter parameter) {
+	public void loadAsync (AssetManager manager, String fileName, FileHandle file, @Nullable SoundParameter parameter) {
 		sound = Gdx.audio.newSound(file);
 	}
 
-	@Override
-	public Sound loadSync (AssetManager manager, String fileName, FileHandle file, SoundParameter parameter) {
+	@Nullable @Override
+	public Sound loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable SoundParameter parameter) {
 		Sound sound = this.sound;
 		this.sound = null;
 		return sound;
 	}
 
-	@Override
-	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, SoundParameter parameter) {
+	@Nullable @Override
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable SoundParameter parameter) {
 		return null;
 	}
 

@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /** An array that queues removal during iteration until the iteration has completed. Queues any removals done after
  * {@link #begin()} is called to occur once {@link #end()} is called. This can allow code out of your control to remove items
@@ -136,7 +137,7 @@ public class DelayedRemovalArray<T> extends Array<T> {
 		super.clear();
 	}
 
-	public void set (int index, T value) {
+	public void set (int index, @Nullable T value) {
 		if (iterating > 0) throw new IllegalStateException("Invalid between begin/end.");
 		super.set(index, value);
 	}

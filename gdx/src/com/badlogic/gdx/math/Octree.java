@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** A static Octree implementation.
  *
@@ -136,7 +137,7 @@ public class Octree<T> {
 		return result;
 	}
 
-	public T rayCast (Ray ray, RayCastResult<T> result) {
+	@Nullable public T rayCast (Ray ray, RayCastResult<T> result) {
 		result.distance = result.maxDistanceSq;
 		root.rayCast(ray, result);
 		return result.geometry;
@@ -155,7 +156,7 @@ public class Octree<T> {
 		int level;
 		final BoundingBox bounds = new BoundingBox();
 		boolean leaf;
-		private Octree.OctreeNode[] children; // May be null when leaf is true.
+		@SuppressWarnings("NullAway.Init") private Octree.OctreeNode[] children; // May be null when leaf is true.
 		private final Array<T> geometries = new Array<T>(Math.min(16, maxItemsPerNode));
 
 		private void split () {
@@ -375,7 +376,7 @@ public class Octree<T> {
 	}
 
 	public static class RayCastResult<T> {
-		T geometry;
+		@Nullable T geometry;
 		float distance;
 		float maxDistanceSq = Float.MAX_VALUE;
 	}

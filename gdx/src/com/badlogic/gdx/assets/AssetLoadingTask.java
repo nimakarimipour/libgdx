@@ -27,6 +27,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.badlogic.gdx.utils.async.AsyncResult;
 import com.badlogic.gdx.utils.async.AsyncTask;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Responsible for loading an asset through an {@link AssetLoader} based on an {@link AssetDescriptor}. Please don't forget to
  * update the overriding emu file on GWT backend when changing this file!
@@ -41,10 +43,10 @@ class AssetLoadingTask implements AsyncTask<Void> {
 
 	volatile boolean asyncDone;
 	volatile boolean dependenciesLoaded;
-	volatile Array<AssetDescriptor> dependencies;
-	volatile AsyncResult<Void> depsFuture;
-	volatile AsyncResult<Void> loadFuture;
-	volatile Object asset;
+	@Nullable volatile Array<AssetDescriptor> dependencies;
+	@Nullable volatile AsyncResult<Void> depsFuture;
+	@Nullable volatile AsyncResult<Void> loadFuture;
+	@Nullable volatile Object asset;
 
 	volatile boolean cancel;
 
@@ -107,7 +109,7 @@ class AssetLoadingTask implements AsyncTask<Void> {
 			asset = syncLoader.load(manager, assetDesc.fileName, resolve(loader, assetDesc), assetDesc.params);
 	}
 
-	private void handleAsyncLoader () {
+	@NullUnmarked private void handleAsyncLoader () {
 		AsynchronousAssetLoader asyncLoader = (AsynchronousAssetLoader)loader;
 		if (!dependenciesLoaded) {
 			if (depsFuture == null)

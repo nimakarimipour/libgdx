@@ -41,6 +41,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.BaseJsonReader;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	public static final short VERSION_HI = 0;
@@ -51,13 +53,13 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		this(reader, null);
 	}
 
-	public G3dModelLoader (BaseJsonReader reader, FileHandleResolver resolver) {
+	public G3dModelLoader (BaseJsonReader reader, @Nullable FileHandleResolver resolver) {
 		super(resolver);
 		this.reader = reader;
 	}
 
 	@Override
-	public ModelData loadModelData (FileHandle fileHandle, ModelLoader.ModelParameters parameters) {
+	public ModelData loadModelData (FileHandle fileHandle, @Nullable ModelLoader.ModelParameters parameters) {
 		return parseModel(fileHandle);
 	}
 
@@ -78,7 +80,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return model;
 	}
 
-	protected void parseMeshes (ModelData model, JsonValue json) {
+	@NullUnmarked protected void parseMeshes (ModelData model, JsonValue json) {
 		JsonValue meshes = json.get("meshes");
 		if (meshes != null) {
 
@@ -264,7 +266,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 			throw new GdxRuntimeException("Expected Color values <> than three.");
 	}
 
-	protected Vector2 readVector2 (JsonValue vectorArray, float x, float y) {
+	protected Vector2 readVector2 (@Nullable JsonValue vectorArray, float x, float y) {
 		if (vectorArray == null)
 			return new Vector2(x, y);
 		else if (vectorArray.size == 2)

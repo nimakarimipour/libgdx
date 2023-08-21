@@ -22,18 +22,20 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class FileTextureData implements TextureData {
 
 	final FileHandle file;
 	int width = 0;
 	int height = 0;
-	Format format;
-	Pixmap pixmap;
+	@Nullable Format format;
+	@Nullable Pixmap pixmap;
 	boolean useMipMaps;
 	boolean isPrepared = false;
 
-	public FileTextureData (FileHandle file, Pixmap preloadedPixmap, Format format, boolean useMipMaps) {
+	public FileTextureData (FileHandle file, Pixmap preloadedPixmap, @Nullable Format format, boolean useMipMaps) {
 		this.file = file;
 		this.pixmap = preloadedPixmap;
 		this.format = format;
@@ -65,7 +67,7 @@ public class FileTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@Override
+	@NullUnmarked @Nullable @Override
 	public Pixmap consumePixmap () {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling getPixmap()");
 		isPrepared = false;
@@ -89,7 +91,7 @@ public class FileTextureData implements TextureData {
 		return height;
 	}
 
-	@Override
+	@Nullable @Override
 	public Format getFormat () {
 		return format;
 	}

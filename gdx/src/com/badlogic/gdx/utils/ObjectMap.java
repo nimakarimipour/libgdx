@@ -21,6 +21,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** An unordered map where the keys and values are objects. Null keys are not allowed. No allocation is done except when growing
  * the table size.
@@ -64,9 +66,9 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	 * hash. */
 	protected int mask;
 
-	transient Entries entries1, entries2;
-	transient Values values1, values2;
-	transient Keys keys1, keys2;
+	@SuppressWarnings("NullAway.Init") transient Entries entries1, entries2;
+	@SuppressWarnings("NullAway.Init") transient Values values1, values2;
+	@SuppressWarnings("NullAway.Init") transient Keys keys1, keys2;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectMap () {
@@ -124,7 +126,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
 	/** Returns the index of the key if already present, else -(index + 1) for the next empty index. This can be overridden in this
 	 * pacakge to compare for equality differently than {@link Object#equals(Object)}. */
-	int locateKey (K key) {
+	int locateKey (@Nullable K key) {
 		if (key == null) throw new IllegalArgumentException("key cannot be null.");
 		K[] keyTable = this.keyTable;
 		for (int i = place(key);; i = i + 1 & mask) {
@@ -136,7 +138,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
 	/** Returns the old value associated with the specified key, or null. */
 
-	public @Null V put (K key, @Null V value) {
+	@Nullable public @Null V put (@Nullable K key, @Nullable @Null V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];
@@ -175,20 +177,20 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
 	/** Returns the value for the specified key, or null if the key is not in the map. */
 
-	public @Null <T extends K> V get (T key) {
+	@NullUnmarked public @Null <T extends K> V get (T key) {
 		int i = locateKey(key);
 		return i < 0 ? null : valueTable[i];
 	}
 
 	/** Returns the value for the specified key, or the default value if the key is not in the map. */
-	public V get (K key, @Null V defaultValue) {
+	@Nullable public V get (K key, @Nullable @Null V defaultValue) {
 		int i = locateKey(key);
 		return i < 0 ? defaultValue : valueTable[i];
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
 
-	public @Null V remove (K key) {
+	@Nullable public @Null V remove (K key) {
 		int i = locateKey(key);
 		if (i < 0) return null;
 		K[] keyTable = this.keyTable;
@@ -276,7 +278,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	 * @param identity If true, uses == to compare the specified value with values in the map. If false, uses
 	 *           {@link #equals(Object)}. */
 
-	public @Null K findKey (@Null Object value, boolean identity) {
+	@Nullable public @Null K findKey (@Null Object value, boolean identity) {
 		V[] valueTable = this.valueTable;
 		if (value == null) {
 			K[] keyTable = this.keyTable;
@@ -478,8 +480,8 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	}
 
 	static public class Entry<K, V> {
-		public K key;
-		public @Null V value;
+		@SuppressWarnings("NullAway.Init") public K key;
+		@SuppressWarnings("NullAway.Init") public @Null V value;
 
 		public String toString () {
 			return key + "=" + value;

@@ -20,6 +20,8 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Abstract base class for asset loaders.
  * @author mzechner
@@ -28,17 +30,17 @@ import com.badlogic.gdx.utils.Array;
  * @param <P> the class of the loading parameters the loader supports. */
 public abstract class AssetLoader<T, P extends AssetLoaderParameters<T>> {
 	/** {@link FileHandleResolver} used to map from plain asset names to {@link FileHandle} instances **/
-	private FileHandleResolver resolver;
+	@Nullable private FileHandleResolver resolver;
 
 	/** Constructor, sets the {@link FileHandleResolver} to use to resolve the file associated with the asset name.
 	 * @param resolver */
-	public AssetLoader (FileHandleResolver resolver) {
+	public AssetLoader (@Nullable FileHandleResolver resolver) {
 		this.resolver = resolver;
 	}
 
 	/** @param fileName file name to resolve
 	 * @return handle to the file, as resolved by the {@link FileHandleResolver} set on the loader */
-	public FileHandle resolve (String fileName) {
+	@NullUnmarked public FileHandle resolve (String fileName) {
 		return resolver.resolve(fileName);
 	}
 
@@ -47,5 +49,5 @@ public abstract class AssetLoader<T, P extends AssetLoaderParameters<T>> {
 	 * @param file the resolved file to load
 	 * @param parameter parameters for loading the asset
 	 * @return other assets that the asset depends on and need to be loaded first or null if there are no dependencies. */
-	public abstract Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, P parameter);
+	@Nullable public abstract Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable P parameter);
 }

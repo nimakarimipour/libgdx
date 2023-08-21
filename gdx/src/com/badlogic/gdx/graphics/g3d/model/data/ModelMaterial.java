@@ -18,24 +18,25 @@ package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 public class ModelMaterial {
 	public enum MaterialType {
 		Lambert, Phong
 	}
 
-	public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 
-	public MaterialType type;
+	@Nullable public MaterialType type;
 
-	public Color ambient;
-	public Color diffuse;
-	public Color specular;
-	public Color emissive;
-	public Color reflection;
+	@Nullable public Color ambient;
+	@Nullable public Color diffuse;
+	@Nullable public Color specular;
+	@Nullable public Color emissive;
+	@Nullable public Color reflection;
 
 	public float shininess;
 	public float opacity = 1.f;
 
-	public Array<ModelTexture> textures;
+	@Nullable public Array<ModelTexture> textures;
 }

@@ -25,6 +25,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A text label, with optional word wrapping.
  * <p>
@@ -34,12 +36,12 @@ public class Label extends Widget {
 	static private final Color tempColor = new Color();
 	static private final GlyphLayout prefSizeLayout = new GlyphLayout();
 
-	private LabelStyle style;
+	@SuppressWarnings("NullAway.Init") private LabelStyle style;
 	private final GlyphLayout layout = new GlyphLayout();
 	private float prefWidth, prefHeight;
 	private final StringBuilder text = new StringBuilder();
 	private int intValue = Integer.MIN_VALUE;
-	private BitmapFontCache cache;
+	@SuppressWarnings("NullAway.Init") private BitmapFontCache cache;
 	private int labelAlign = Align.left;
 	private int lineAlign = Align.left;
 	private boolean wrap;
@@ -47,7 +49,7 @@ public class Label extends Widget {
 	private boolean prefSizeInvalid = true;
 	private float fontScaleX = 1, fontScaleY = 1;
 	private boolean fontScaleChanged = false;
-	private @Null String ellipsis;
+	@Nullable private @Null String ellipsis;
 
 	public Label (@Null CharSequence text, Skin skin) {
 		this(text, skin.get(LabelStyle.class));
@@ -371,14 +373,14 @@ public class Label extends Widget {
 	/** The style for a label, see {@link Label}.
 	 * @author Nathan Sweet */
 	static public class LabelStyle {
-		public BitmapFont font;
-		public @Null Color fontColor;
-		public @Null Drawable background;
+		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		@Nullable public @Null Color fontColor;
+		@Nullable public @Null Drawable background;
 
-		public LabelStyle () {
+		@NullUnmarked public LabelStyle () {
 		}
 
-		public LabelStyle (BitmapFont font, @Null Color fontColor) {
+		public LabelStyle (BitmapFont font, @Nullable @Null Color fontColor) {
 			this.font = font;
 			this.fontColor = fontColor;
 		}

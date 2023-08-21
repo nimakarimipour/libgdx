@@ -19,17 +19,18 @@ package com.badlogic.gdx.graphics.g2d;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import javax.annotation.Nullable;
 
 /** @author Stefan Bachmann
  * @author Nathan Sweet */
 public class PolygonSprite {
-	PolygonRegion region;
+	@SuppressWarnings("NullAway.Init") PolygonRegion region;
 	private float x, y;
 	private float width, height;
 	private float scaleX = 1f, scaleY = 1f;
 	private float rotation;
 	private float originX, originY;
-	private float[] vertices;
+	@SuppressWarnings("NullAway.Init") private float[] vertices;
 	private boolean dirty;
 	private Rectangle bounds = new Rectangle();
 	private final Color color = new Color(1f, 1f, 1f, 1f);

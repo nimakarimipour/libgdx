@@ -23,6 +23,8 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A resizable, ordered or unordered array of objects. If unordered, this class avoids a memory copy when removing elements (the
  * last element is moved to the removed element's position).
@@ -35,8 +37,8 @@ public class Array<T> implements Iterable<T> {
 	public int size;
 	public boolean ordered;
 
-	private ArrayIterable iterable;
-	private Predicate.PredicateIterable<T> predicateIterable;
+	@Nullable private ArrayIterable iterable;
+	@Nullable private Predicate.PredicateIterable<T> predicateIterable;
 
 	/** Creates an ordered array with a capacity of 16. */
 	public Array () {
@@ -96,7 +98,7 @@ public class Array<T> implements Iterable<T> {
 		System.arraycopy(array, start, items, 0, size);
 	}
 
-	public void add (T value) {
+	public void add (@Nullable T value) {
 		T[] items = this.items;
 		if (size == items.length) items = resize(Math.max(8, (int)(size * 1.75f)));
 		items[size++] = value;
@@ -156,7 +158,7 @@ public class Array<T> implements Iterable<T> {
 		return items[index];
 	}
 
-	public void set (int index, T value) {
+	public void set (int index, @Nullable T value) {
 		if (index >= size) throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
 		items[index] = value;
 	}
@@ -232,7 +234,7 @@ public class Array<T> implements Iterable<T> {
 	 * @param value May be null.
 	 * @param identity If true, == comparison will be used. If false, .equals() comparison will be used.
 	 * @return An index of first occurrence of value in array or -1 if no such value exists */
-	public int indexOf (@Null T value, boolean identity) {
+	public int indexOf (@Nullable @Null T value, boolean identity) {
 		T[] items = this.items;
 		if (identity || value == null) {
 			for (int i = 0, n = size; i < n; i++)
@@ -514,7 +516,7 @@ public class Array<T> implements Iterable<T> {
 
 	/** Returns a random item from the array, or null if the array is empty. */
 
-	public @Null T random () {
+	@NullUnmarked public @Null T random () {
 		if (size == 0) return null;
 		return items[MathUtils.random(0, size - 1)];
 	}
@@ -668,7 +670,7 @@ public class Array<T> implements Iterable<T> {
 	static public class ArrayIterable<T> implements Iterable<T> {
 		private final Array<T> array;
 		private final boolean allowRemove;
-		private ArrayIterator iterator1, iterator2;
+		@SuppressWarnings("NullAway.Init") private ArrayIterator iterator1, iterator2;
 
 // java.io.StringWriter lastAcquire = new java.io.StringWriter();
 
@@ -676,7 +678,7 @@ public class Array<T> implements Iterable<T> {
 			this(array, true);
 		}
 
-		public ArrayIterable (Array<T> array, boolean allowRemove) {
+		@NullUnmarked public ArrayIterable (Array<T> array, boolean allowRemove) {
 			this.array = array;
 			this.allowRemove = allowRemove;
 		}

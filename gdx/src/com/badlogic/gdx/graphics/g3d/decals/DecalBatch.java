@@ -26,6 +26,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SortedIntList;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * <p>
@@ -51,11 +53,11 @@ import com.badlogic.gdx.utils.SortedIntList;
  */
 public class DecalBatch implements Disposable {
 	private static final int DEFAULT_SIZE = 1000;
-	private float[] vertices;
-	private Mesh mesh;
+	@SuppressWarnings("NullAway.Init") private float[] vertices;
+	@SuppressWarnings("NullAway.Init") private Mesh mesh;
 
 	private final SortedIntList<Array<Decal>> groupList = new SortedIntList<Array<Decal>>();
-	private GroupStrategy groupStrategy;
+	@SuppressWarnings("NullAway.Init") private GroupStrategy groupStrategy;
 	private final Pool<Array<Decal>> groupPool = new Pool<Array<Decal>>(16) {
 		@Override
 		protected Array<Decal> newObject () {
@@ -151,7 +153,7 @@ public class DecalBatch implements Disposable {
 	/** Renders a group of vertices to the buffer, flushing them to GL when done/full
 	 * 
 	 * @param decals Decals to render */
-	private void render (ShaderProgram shader, Array<Decal> decals) {
+	private void render (@Nullable ShaderProgram shader, Array<Decal> decals) {
 		// batch vertices
 		DecalMaterial lastMaterial = null;
 		int idx = 0;
@@ -182,7 +184,7 @@ public class DecalBatch implements Disposable {
 	/** Flushes vertices[0,verticesPosition[ to GL verticesPosition % Decal.SIZE must equal 0
 	 * 
 	 * @param verticesPosition Amount of elements from the vertices array to flush */
-	protected void flush (ShaderProgram shader, int verticesPosition) {
+	protected void flush (@Nullable ShaderProgram shader, int verticesPosition) {
 		mesh.setVertices(vertices, 0, verticesPosition);
 		mesh.render(shader, GL20.GL_TRIANGLES, 0, verticesPosition / 4);
 	}
@@ -197,7 +199,7 @@ public class DecalBatch implements Disposable {
 	/** Frees up memory by dropping the buffer and underlying resources. If the batch is needed again after disposing it can be
 	 * {@link #initialize(int) initialized} again. */
 
-	public void dispose () {
+	@NullUnmarked public void dispose () {
 		clear();
 		vertices = null;
 		mesh.dispose();

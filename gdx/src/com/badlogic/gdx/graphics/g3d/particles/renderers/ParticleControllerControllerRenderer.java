@@ -22,12 +22,14 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A {@link ParticleControllerRenderer} which will render the {@link ParticleController} of each particle.
  * @author Inferno */
 @SuppressWarnings("rawtypes")
 public class ParticleControllerControllerRenderer extends ParticleControllerRenderer {
-	ObjectChannel<ParticleController> controllerChannel;
+	@Nullable ObjectChannel<ParticleController> controllerChannel;
 
 	@Override
 	public void init () {
@@ -36,7 +38,7 @@ public class ParticleControllerControllerRenderer extends ParticleControllerRend
 			"ParticleController channel not found, specify an influencer which will allocate it please.");
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void update () {
 		for (int i = 0, c = controller.particles.size; i < c; ++i) {
 			controllerChannel.data[i].draw();
@@ -49,7 +51,7 @@ public class ParticleControllerControllerRenderer extends ParticleControllerRend
 	}
 
 	@Override
-	public boolean isCompatible (ParticleBatch batch) {
+	public boolean isCompatible (@Nullable ParticleBatch batch) {
 		return false;
 	}
 

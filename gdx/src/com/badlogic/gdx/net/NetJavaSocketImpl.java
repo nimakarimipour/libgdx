@@ -22,6 +22,8 @@ import java.net.InetSocketAddress;
 
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Socket implementation using java.net.Socket.
  * 
@@ -104,7 +106,7 @@ public class NetJavaSocketImpl implements Socket {
 		return socket.getRemoteSocketAddress().toString();
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void dispose () {
 		if (socket != null) {
 			try {

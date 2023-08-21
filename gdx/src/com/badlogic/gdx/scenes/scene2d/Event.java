@@ -18,6 +18,8 @@ package com.badlogic.gdx.scenes.scene2d;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** The base class for all events.
  * <p>
@@ -34,9 +36,9 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  * @see InputEvent
  * @see Actor#fire(Event) */
 public class Event implements Poolable {
-	private Stage stage;
-	private Actor targetActor;
-	private Actor listenerActor;
+	@Nullable private Stage stage;
+	@Nullable private Actor targetActor;
+	@Nullable private Actor listenerActor;
 	private boolean capture; // true means event occurred during the capture phase
 	private boolean bubbles = true; // true means propagate to target's parents
 	private boolean handled; // true means the event was handled (the stage will eat the input)
@@ -77,20 +79,20 @@ public class Event implements Poolable {
 	}
 
 	/** Returns the actor that the event originated from. */
-	public Actor getTarget () {
+	@NullUnmarked public Actor getTarget () {
 		return targetActor;
 	}
 
-	public void setTarget (Actor targetActor) {
+	public void setTarget (@Nullable Actor targetActor) {
 		this.targetActor = targetActor;
 	}
 
 	/** Returns the actor that this listener is attached to. */
-	public Actor getListenerActor () {
+	@NullUnmarked public Actor getListenerActor () {
 		return listenerActor;
 	}
 
-	public void setListenerActor (Actor listenerActor) {
+	public void setListenerActor (@Nullable Actor listenerActor) {
 		this.listenerActor = listenerActor;
 	}
 
@@ -129,12 +131,12 @@ public class Event implements Poolable {
 		return capture;
 	}
 
-	public void setStage (Stage stage) {
+	public void setStage (@Nullable Stage stage) {
 		this.stage = stage;
 	}
 
 	/** The stage for the actor the event was fired on. */
-	public Stage getStage () {
+	@NullUnmarked public Stage getStage () {
 		return stage;
 	}
 }

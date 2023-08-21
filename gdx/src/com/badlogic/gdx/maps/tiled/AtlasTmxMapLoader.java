@@ -31,6 +31,8 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
  * 
@@ -92,7 +94,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 
 	protected Array<Texture> trackedTextures = new Array<Texture>();
 
-	protected AtlasResolver atlasResolver;
+	@Nullable protected AtlasResolver atlasResolver;
 
 	public AtlasTmxMapLoader () {
 		super(new InternalFileHandleResolver());
@@ -122,7 +124,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, String fileName, FileHandle tmxFile, AtlasTiledMapLoaderParameters parameter) {
+	public void loadAsync (AssetManager manager, String fileName, FileHandle tmxFile, @Nullable AtlasTiledMapLoaderParameters parameter) {
 		FileHandle atlasHandle = getAtlasFileHandle(tmxFile);
 		this.atlasResolver = new AtlasResolver.AssetManagerAtlasResolver(manager, atlasHandle.path());
 
@@ -130,7 +132,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	}
 
 	@Override
-	public TiledMap loadSync (AssetManager manager, String fileName, FileHandle file, AtlasTiledMapLoaderParameters parameter) {
+	public TiledMap loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable AtlasTiledMapLoaderParameters parameter) {
 		if (parameter != null) {
 			setTextureFilters(parameter.textureMinFilter, parameter.textureMagFilter);
 		}
@@ -152,10 +154,10 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 		return descriptors;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
-		Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
+		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image) {
 
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;

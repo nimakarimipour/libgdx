@@ -19,6 +19,8 @@ package com.badlogic.gdx.scenes.scene2d.ui;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A tooltip that shows a label.
  * @author Nathan Sweet */
@@ -43,7 +45,7 @@ public class TextTooltip extends Tooltip<Label> {
 		this(text, manager, skin.get(styleName, TextTooltipStyle.class));
 	}
 
-	public TextTooltip (@Null String text, final TooltipManager manager, TextTooltipStyle style) {
+	@NullUnmarked public TextTooltip (@Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
 		super(null, manager);
 
 		container.setActor(newLabel(text, style.label));
@@ -55,7 +57,7 @@ public class TextTooltip extends Tooltip<Label> {
 		return new Label(text, style);
 	}
 
-	public void setStyle (TextTooltipStyle style) {
+	@NullUnmarked public void setStyle (TextTooltipStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		container.setBackground(style.background);
 		container.maxWidth(style.wrapWidth);
@@ -71,8 +73,8 @@ public class TextTooltip extends Tooltip<Label> {
 	/** The style for a text tooltip, see {@link TextTooltip}.
 	 * @author Nathan Sweet */
 	static public class TextTooltipStyle {
-		public LabelStyle label;
-		public @Null Drawable background;
+		@Nullable public LabelStyle label;
+		@Nullable public @Null Drawable background;
 		/** 0 means don't wrap. */
 		public float wrapWidth;
 
@@ -84,7 +86,7 @@ public class TextTooltip extends Tooltip<Label> {
 			this.background = background;
 		}
 
-		public TextTooltipStyle (TextTooltipStyle style) {
+		@NullUnmarked public TextTooltipStyle (TextTooltipStyle style) {
 			label = new LabelStyle(style.label);
 			background = style.background;
 			wrapWidth = style.wrapWidth;

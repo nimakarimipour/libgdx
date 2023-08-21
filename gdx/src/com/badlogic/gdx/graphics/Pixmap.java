@@ -26,6 +26,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * <p>
@@ -47,7 +49,7 @@ public class Pixmap implements Disposable {
 	public enum Format {
 		Alpha, Intensity, LuminanceAlpha, RGB565, RGBA4444, RGB888, RGBA8888;
 
-		public static int toGdx2DPixmapFormat (Format format) {
+		public static int toGdx2DPixmapFormat (@Nullable Format format) {
 			if (format == Alpha) return Gdx2DPixmap.GDX2D_FORMAT_ALPHA;
 			if (format == Intensity) return Gdx2DPixmap.GDX2D_FORMAT_ALPHA;
 			if (format == LuminanceAlpha) return Gdx2DPixmap.GDX2D_FORMAT_LUMINANCE_ALPHA;
@@ -133,7 +135,7 @@ public class Pixmap implements Disposable {
 	 * @param width the width in pixels
 	 * @param height the height in pixels
 	 * @param format the {@link Format} */
-	public Pixmap (int width, int height, Format format) {
+	public Pixmap (int width, int height, @Nullable Format format) {
 		pixmap = new Gdx2DPixmap(width, height, Format.toGdx2DPixmapFormat(format));
 		setColor(0, 0, 0, 0);
 		fill();
@@ -202,7 +204,7 @@ public class Pixmap implements Disposable {
 	 *
 	 * @param url http url to download the image from
 	 * @param responseListener the listener to call once the image is available as a {@link Pixmap} */
-	public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
+	@NullUnmarked public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
 		Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
 		request.setUrl(url);
 		Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {

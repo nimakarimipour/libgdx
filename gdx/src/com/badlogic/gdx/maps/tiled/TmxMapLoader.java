@@ -31,6 +31,8 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** @brief synchronous loader for TMX maps created with the Tiled tool */
 public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
@@ -84,12 +86,12 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, String fileName, FileHandle tmxFile, Parameters parameter) {
+	public void loadAsync (AssetManager manager, String fileName, FileHandle tmxFile, @Nullable Parameters parameter) {
 		this.map = loadTiledMap(tmxFile, parameter, new AssetManagerImageResolver(manager));
 	}
 
 	@Override
-	public TiledMap loadSync (AssetManager manager, String fileName, FileHandle file, Parameters parameter) {
+	public TiledMap loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable Parameters parameter) {
 		return map;
 	}
 
@@ -157,10 +159,10 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 		return fileHandles;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
-		Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
+		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image) {
 
 		MapProperties props = tileSet.getProperties();
 		if (image != null) {

@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /** Caches glyph geometry for a BitmapFont, providing a fast way to render static text. This saves needing to compute the glyph
  * geometry each frame.
@@ -51,7 +52,7 @@ public class BitmapFontCache {
 	private int[] idx;
 	/** For each page, an array with a value for each glyph from that page, where the value is the index of the character in the
 	 * full text being cached. */
-	private IntArray[] pageGlyphIndices;
+	@SuppressWarnings("NullAway.Init") private IntArray[] pageGlyphIndices;
 	/** Used internally to ensure a correct capacity for multi-page font vertex data. */
 	private int[] tempGlyphCount;
 
@@ -520,7 +521,7 @@ public class BitmapFontCache {
 	 *           string.
 	 * @return The glyph layout for the cached string (the layout's height is the distance from y to the baseline). */
 	public GlyphLayout addText (CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
-		boolean wrap, String truncate) {
+		boolean wrap, @Nullable String truncate) {
 		GlyphLayout layout = Pools.obtain(GlyphLayout.class);
 		pooledLayouts.add(layout);
 		layout.setText(font, str, start, end, color, targetWidth, halign, wrap, truncate);

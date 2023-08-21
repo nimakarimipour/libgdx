@@ -17,10 +17,11 @@
 package com.badlogic.gdx.graphics.g3d.model.data;
 
 import com.badlogic.gdx.graphics.VertexAttribute;
+import javax.annotation.Nullable;
 
 public class ModelMesh {
-	public String id;
-	public VertexAttribute[] attributes;
-	public float[] vertices;
-	public ModelMeshPart[] parts;
+	@Nullable public String id;
+	@Nullable public VertexAttribute[] attributes;
+	@Nullable public float[] vertices;
+	@SuppressWarnings("NullAway.Init") public ModelMeshPart[] parts;
 }
