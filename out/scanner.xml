@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><scanner><method active="true"/><field active="true"/><call active="true"/><class active="true"/><uuid>3c56ed6f-21fc-43f5-98a8-5a9f81732dd2</uuid><path>/Users/nima/Desktop/docker/benchmarks/libgdx/out/0</path><processor><LOMBOK active="true"/></processor><annotations/></scanner>
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><scanner><method active="true"/><field active="true"/><call active="true"/><class active="true"/><uuid>d052b3fa-fd9e-42a9-92cc-25b891c24738</uuid><path>/Users/nima/Desktop/docker/benchmarks/libgdx/out/0</path><processor><LOMBOK active="true"/></processor><annotations/></scanner>
+>>>>>>> base
