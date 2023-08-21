@@ -322,7 +322,7 @@ public class KTXTextureData implements TextureData, CubemapData {
 	public ByteBuffer getData (int requestedLevel, int requestedFace) {
 		int pos = imagePos;
 		for (int level = 0; level < numberOfMipmapLevels; level++) {
-			int faceLodSize = compressedData.getInt(pos);
+			int faceLodSize = compressedData != null ? compressedData.getInt(pos) : 0;
 			int faceLodSizeRounded = (faceLodSize + 3) & ~3;
 			pos += 4;
 			if (level == requestedLevel) {

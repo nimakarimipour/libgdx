@@ -123,6 +123,9 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 	/** Add an array of attributes to this material. If the material already contains an attribute of the same type it is
 	 * overwritten. */
 	public final void set (final Attribute... attributes) {
+		if (attributes == null) {
+			return;
+		}
 		for (final Attribute attr : attributes)
 			set(attr);
 	}
