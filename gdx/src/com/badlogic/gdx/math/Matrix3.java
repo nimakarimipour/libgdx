@@ -348,7 +348,9 @@ public class Matrix3 implements Serializable {
 	 * @param mat The matrix whose top left corner will be copied. This matrix will not be modified.
 	 * @return This matrix for the purpose of chaining operations. */
 	public Matrix3 set (Matrix4 mat) {
-		if(mat == null) {throw new IllegalArgumentException("mat cannot be null.");}
+		if (mat == null) {
+			throw new IllegalArgumentException("mat cannot be null.");
+		}
 		float[] val = this.val;
 		val[M00] = mat.val[Matrix4.M00];
 		val[M10] = mat.val[Matrix4.M10];

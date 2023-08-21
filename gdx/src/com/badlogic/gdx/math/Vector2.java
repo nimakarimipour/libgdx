@@ -78,7 +78,7 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 
 	@Override
 	public Vector2 set (Vector2 v) {
-		if(v == null) return this;
+		if (v == null) return this;
 		x = v.x;
 		y = v.y;
 		return this;
