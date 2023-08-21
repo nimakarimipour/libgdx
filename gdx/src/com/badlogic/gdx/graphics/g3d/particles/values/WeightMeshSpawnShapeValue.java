@@ -48,7 +48,7 @@ public final class WeightMeshSpawnShapeValue extends MeshSpawnShapeValue {
 	 * of those triangles. If the mesh has not indices: the function will consider the vertices as a triangle strip. */
 	public void calculateWeights () {
 		distribution.clear();
-		if(mesh == null) {
+		if (mesh == null) {
 			return;
 		}
 		VertexAttributes attributes = mesh.getVertexAttributes();

@@ -56,7 +56,7 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 
 	@Override
 	public void spawnAux (Vector3 vector, float percent) {
-		if(vertices == null) return;
+		if (vertices == null) return;
 		if (indices == null) {
 			// Triangles
 			int triangleIndex = MathUtils.random(vertexCount - 3) * vertexSize;
