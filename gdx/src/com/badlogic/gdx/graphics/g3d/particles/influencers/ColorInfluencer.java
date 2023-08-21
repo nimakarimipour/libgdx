@@ -39,7 +39,7 @@ public abstract class ColorInfluencer extends Influencer {
 
 		@Override
 		public void activateParticles (int startIndex, int count) {
-			if(colorChannel != null){
+			if (colorChannel != null) {
 				for (int i = startIndex * colorChannel.strideSize,
 					c = i + count * colorChannel.strideSize; i < c; i += colorChannel.strideSize) {
 					colorChannel.data[i + ParticleChannels.RedOffset] = MathUtils.random();

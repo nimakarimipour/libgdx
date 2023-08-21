@@ -31,7 +31,7 @@ public abstract class PluggableGroupStrategy implements GroupStrategy {
 
 	@Override
 	public void afterGroup (int group) {
-		if(plugs.containsKey(group)){
+		if (plugs.containsKey(group)) {
 			plugs.get(group).afterGroup();
 		}
 	}

@@ -530,7 +530,7 @@ public class DefaultShader extends BaseShader {
 		this.lighting = renderable.environment != null;
 		this.environmentCubemap = attributes.has(CubemapAttribute.EnvironmentMap)
 			|| (lighting && attributes.has(CubemapAttribute.EnvironmentMap));
-		this.shadowMap = lighting && renderable.environment !=null && renderable.environment.shadowMap != null;
+		this.shadowMap = lighting && renderable.environment != null && renderable.environment.shadowMap != null;
 		this.renderable = renderable;
 		attributesMask = attributes.getMask() | optionalAttributes;
 		vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked();
