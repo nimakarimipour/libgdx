@@ -141,7 +141,6 @@ public class TextureAttribute extends Attribute {
 
 	public TextureAttribute (final long type, @Nullable final Texture texture) {
 		this(type);
-		textureDescription.texture = texture;
 	}
 
 	public TextureAttribute (final long type, final TextureRegion region) {
