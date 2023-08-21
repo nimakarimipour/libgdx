@@ -156,7 +156,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
 		Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
 		String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image) {
-		if(atlasResolver == null) return;	
+		if (atlasResolver == null) return;
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;
 
