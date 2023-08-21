@@ -1,0 +1,1984 @@
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureRegion.java:34: error: [NullAway] initializer method does not guarantee @NonNull field texture (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextureRegion () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureRegion.java:64: error: [NullAway] initializer method does not guarantee @NonNull field texture (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextureRegion (TextureRegion region) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureRegion.java:72: error: [NullAway] initializer method does not guarantee @NonNull field texture (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextureRegion (TextureRegion region, int x, int y, int width, int height) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureRegion.java:115: error: [NullAway] dereferenced expression region is @Nullable
+		texture = region.texture;
+		                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Pixmap.java:210: error: [NullAway] dereferenced expression Gdx.net is @Nullable
+		Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/TextureLoader.java:69: error: [NullAway] dereferenced expression info.data is @Nullable
+		if (!info.data.isPrepared()) info.data.prepare();
+		              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/TextureLoader.java:77: error: [NullAway] passing @Nullable parameter 'info.data' where @NonNull is required
+			texture.load(info.data);
+			                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Texture.java:147: error: [NullAway] initializer method does not guarantee @NonNull field data (line 109) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	protected Texture (int glTarget, int glHandle, TextureData data) {
+	          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Texture.java:144: error: [NullAway] passing @Nullable parameter 'data' where @NonNull is required
+		this(GL20.GL_TEXTURE_2D, Gdx.gl.glGenTexture(), data);
+		                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Texture.java:326: error: [NullAway] dereferenced expression managedTextures.get(Gdx.app) is @Nullable
+		return managedTextures.get(Gdx.app).size;
+		                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/AssetLoader.java:44: error: [NullAway] dereferenced expression resolver is @Nullable
+		return resolver.resolve(fileName);
+		               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectSet.java:81: error: [NullAway] initializer method does not guarantee @NonNull fields iterator1 (line 65), iterator2 (line 65) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ObjectSet (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectMap.java:87: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 69), entries2 (line 69), values1 (line 70), values2 (line 70), keys1 (line 71), keys2 (line 71) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ObjectMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectMap.java:182: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return i < 0 ? null : valueTable[i];
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectMap.java:483: error: [NullAway] @NonNull field ObjectMap$Entry.key not initialized
+		 public K key;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectMap.java:484: error: [NullAway] @NonNull field ObjectMap$Entry.value not initialized
+		 public @Null V value;
+		                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/AssetManager.java:146: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return get(fileName, type, true);
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/AssetManager.java:185: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return get(assetDescriptor.fileName, assetDescriptor.type, true);
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/AssetManager.java:185: error: [NullAway] dereferenced expression assetDescriptor is @Nullable
+		return get(assetDescriptor.fileName, assetDescriptor.type, true);
+		                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/AssetManager.java:308: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Array.java:520: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		if (size == 0) return null;
+		               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Array.java:681: error: [NullAway] initializer method does not guarantee @NonNull fields iterator1 (line 673), iterator2 (line 673) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public ArrayIterable (Array<T> array, boolean allowRemove) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/files/FileHandle.java:61: error: [NullAway] initializer method does not guarantee @NonNull fields file (line 58), type (line 59) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	protected FileHandle () {
+	          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Predicate.java:41: error: [NullAway] initializer method does not guarantee @NonNull fields iterator (line 31), predicate (line 32) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Predicate.java:93: error: [NullAway] initializer method does not guarantee @NonNull fields iterable (line 89), predicate (line 90) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Input.java:632: error: [NullAway] dereferenced expression keyNames is @Nullable
+			return keyNames.get(keyname, -1);
+			               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/AssetLoadingTask.java:131: error: [NullAway] dereferenced expression loadFuture is @Nullable
+		else if (loadFuture.isDone()) {
+		                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Color.java:110: error: [NullAway] dereferenced expression color is @Nullable
+		this.r = color.r;
+		              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:97: error: [NullAway] dereferenced expression region.page is @Nullable
+			AtlasRegion atlasRegion = new AtlasRegion(region.page.texture, region.left, region.top, //
+			                                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:101: error: [NullAway] assigning @Nullable expression to @NonNull field
+			atlasRegion.name = region.name;
+			                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:144: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:422: error: [NullAway] dereferenced expression values is @Nullable
+								values.add(entryValues);
+								      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:431: error: [NullAway] dereferenced expression values is @Nullable
+							region.values = values.toArray(int[].class);
+							                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:490: error: [NullAway] @NonNull field TextureAtlas$TextureAtlasData$Page.textureFile not initialized
+			 public @Null FileHandle textureFile;
+			                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:511: error: [NullAway] @NonNull field TextureAtlas$TextureAtlasData$Region.values not initialized
+			 public @Null int[][] values;
+			                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:572: error: [NullAway] initializer method does not guarantee @NonNull fields name (line 536), values (line 570) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public AtlasRegion (@Nullable Texture texture, int x, int y, int width, int height) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:596: error: [NullAway] initializer method does not guarantee @NonNull fields name (line 536), values (line 570) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public AtlasRegion (TextureRegion region) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java:573: error: [NullAway] passing @Nullable parameter 'texture' where @NonNull is required
+			super(texture, x, y, width, height);
+			      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/VertexAttributes.java:60: error: [NullAway] dereferenced expression attributes is @Nullable
+		if (attributes.length == 0) throw new IllegalArgumentException("attributes must be >= 1");
+		              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/VertexAttributes.java:91: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/VertexAttributes.java:241: error: [NullAway] initializer method does not guarantee @NonNull fields iterator1 (line 239), iterator2 (line 239) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public ReadonlyIterable (T[] array) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Mesh.java:214: error: [NullAway] dereferenced expression instances is @Nullable
+			instances.dispose();
+			         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Mesh.java:289: error: [NullAway] dereferenced expression this.instances is @Nullable
+		this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
+		              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Mesh.java:306: error: [NullAway] dereferenced expression this.instances is @Nullable
+		this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
+		              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Mesh.java:589: error: [NullAway] passing @Nullable parameter 'shader' where @NonNull is required
+		render(shader, primitiveType, offset, count, autoBind);
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Mesh.java:635: error: [NullAway] dereferenced expression instances is @Nullable
+			if (isInstanced) numInstances = instances.getNumInstances();
+			                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Mesh.java:679: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteBatch.java:960: error: [NullAway] dereferenced expression lastTexture is @Nullable
+		lastTexture.bind();
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteBatch.java:1072: error: [NullAway] dereferenced expression texture is @Nullable
+		invTexWidth = 1.0f / texture.getWidth();
+		                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Vector2.java:83: error: [NullAway] dereferenced expression v is @Nullable
+		x = v.x;
+		     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Matrix3.java:354: error: [NullAway] dereferenced expression mat is @Nullable
+		val[M00] = mat.val[Matrix4.M00];
+		              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Vector3.java:93: error: [NullAway] dereferenced expression vector is @Nullable
+		return this.set(vector.x, vector.y, vector.z);
+		                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Matrix4.java:131: error: [NullAway] dereferenced expression matrix is @Nullable
+		return set(matrix.val);
+		                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectIntMap.java:84: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 66), entries2 (line 66), values1 (line 67), values2 (line 67), keys1 (line 68), keys2 (line 68) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ObjectIntMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/XmlReader.java:349: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return root;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/XmlReader.java:439: error: [NullAway] dereferenced expression current is @Nullable
+		current.setAttribute(name, value);
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/XmlReader.java:453: error: [NullAway] dereferenced expression current is @Nullable
+		String existing = current.getText();
+		                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/XmlReader.java:524: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+			return text;
+			^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/XmlReader.java:540: error: [NullAway] dereferenced expression parent is @Nullable
+			parent.removeChild(this);
+			      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/XmlReader.java:593: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+			if (children == null) return null;
+			                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/XmlReader.java:598: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+			return null;
+			^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/AtlasTmxMapLoader.java:162: error: [NullAway] dereferenced expression atlasResolver is @Nullable
+		TextureAtlas atlas = atlasResolver.getAtlas();
+		                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/BaseTmxMapLoader.java:70: error: [NullAway] initializer method does not guarantee @NonNull fields root (line 59), map (line 68) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public BaseTmxMapLoader (FileHandleResolver resolver) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/BaseTmxMapLoader.java:377: error: [NullAway] dereferenced expression textureRegion is @Nullable
+					float objectWidth = element.getFloatAttribute("width", textureRegion.getRegionWidth());
+					                                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/IntMap.java:88: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 69), entries2 (line 69), values1 (line 70), values2 (line 70), keys1 (line 71), keys2 (line 71) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public IntMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTileSets.java:50: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteCache.java:976: error: [NullAway] initializer method does not guarantee @NonNull fields textures (line 973), counts (line 974) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Cache (int id, int offset) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TideMapLoader.java:111: error: [NullAway] dereferenced expression root is @Nullable
+		Element properties = root.getChildByName("Properties");
+		                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TideMapLoader.java:243: error: [NullAway] dereferenced expression currentTileSet is @Nullable
+						cell.setTile(currentTileSet.getTile(firstgid + currentChild.getIntAttribute("Index")));
+						                           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TideMapLoader.java:257: error: [NullAway] dereferenced expression currentTileSet is @Nullable
+								frameTiles.add((StaticTiledMapTile)currentTileSet.getTile(firstgid + frame.getIntAttribute("Index")));
+								                                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TideMapLoader.java:283: error: [NullAway] dereferenced expression type is @Nullable
+				if (type.equals("Int32")) {
+				        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/objects/TiledMapTileMapObject.java:44: error: [NullAway] dereferenced expression tile is @Nullable
+		TextureRegion textureRegion = new TextureRegion(tile.getTextureRegion());
+		                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TmxMapLoader.java:205: error: [NullAway] dereferenced expression image is @Nullable
+				TextureRegion texture = imageResolver.getImage(image.path());
+				                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Polygon.java:58: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		if (!dirty) return worldVertices;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Polyline.java:51: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		if (!dirty) return worldVertices;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Actor.java:265: error: [NullAway] dereferenced expression action is @Nullable
+		action.setActor(this);
+		      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Actor.java:358: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return parent;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/InputEvent.java:27: error: [NullAway] @NonNull field type not initialized
+	 private Type type;
+	              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Label.java:74: error: [NullAway] initializer method does not guarantee @NonNull fields style (line 39), cache (line 44) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Label (@Null CharSequence text, LabelStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Label.java:380: error: [NullAway] initializer method does not guarantee @NonNull field font (line 376) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public LabelStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Value.java:32: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+		return get(null);
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:94: error: [NullAway] initializer method does not guarantee @NonNull fields columnMinWidth (line 71), rowMinHeight (line 71), columnPrefWidth (line 72), rowPrefHeight (line 72), columnWidth (line 75), rowHeight (line 75), expandWidth (line 76), expandHeight (line 76), debugRects (line 82) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Table (@Nullable @Null Skin skin) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:429: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:821: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			c.computedPadLeft = c.padLeft.get(a) + (column == 0 ? 0 : Math.max(0, c.spaceLeft.get(a) - spaceRightLast));
+			                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:821: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			c.computedPadLeft = c.padLeft.get(a) + (column == 0 ? 0 : Math.max(0, c.spaceLeft.get(a) - spaceRightLast));
+			                                                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:822: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			c.computedPadTop = c.padTop.get(a);
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:825: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+				c.computedPadTop += Math.max(0, c.spaceTop.get(a) - above.spaceBottom.get(a));
+				                                               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:825: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+				c.computedPadTop += Math.max(0, c.spaceTop.get(a) - above.spaceBottom.get(a));
+				                                                                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:827: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float spaceRight = c.spaceRight.get(a);
+			                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:828: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			c.computedPadRight = c.padRight.get(a) + ((column + colspan) == columns ? 0 : spaceRight);
+			                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:829: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			c.computedPadBottom = c.padBottom.get(a) + (row == rows - 1 ? 0 : c.spaceBottom.get(a));
+			                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:829: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			c.computedPadBottom = c.padBottom.get(a) + (row == rows - 1 ? 0 : c.spaceBottom.get(a));
+			                                                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:833: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float prefWidth = c.prefWidth.get(a), prefHeight = c.prefHeight.get(a);
+			                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:833: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float prefWidth = c.prefWidth.get(a), prefHeight = c.prefHeight.get(a);
+			                                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:834: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:834: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
+			                                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:835: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float maxWidth = c.maxWidth.get(a), maxHeight = c.maxHeight.get(a);
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:835: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float maxWidth = c.maxWidth.get(a), maxHeight = c.maxHeight.get(a);
+			                                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:912: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float minWidth = c.minWidth.get(a), prefWidth = c.prefWidth.get(a), maxWidth = c.maxWidth.get(a);
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:912: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float minWidth = c.minWidth.get(a), prefWidth = c.prefWidth.get(a), maxWidth = c.maxWidth.get(a);
+			                                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:912: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float minWidth = c.minWidth.get(a), prefWidth = c.prefWidth.get(a), maxWidth = c.maxWidth.get(a);
+			                                                                                              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1012: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float prefWidth = c.prefWidth.get(a), prefHeight = c.prefHeight.get(a);
+			                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1012: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float prefWidth = c.prefWidth.get(a), prefHeight = c.prefHeight.get(a);
+			                                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1013: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1013: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
+			                                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1014: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float maxWidth = c.maxWidth.get(a), maxHeight = c.maxHeight.get(a);
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1014: error: [NullAway] passing @Nullable parameter 'a' where @NonNull is required
+			float maxWidth = c.maxWidth.get(a), maxHeight = c.maxHeight.get(a);
+			                                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1122: error: [NullAway] unboxing of a @Nullable value
+			float fillX = c.fillX, fillY = c.fillY;
+			               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1122: error: [NullAway] unboxing of a @Nullable value
+			float fillX = c.fillX, fillY = c.fillY;
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1124: error: [NullAway] passing @Nullable parameter 'c.actor' where @NonNull is required
+				c.actorWidth = Math.max(spannedCellWidth * fillX, c.minWidth.get(c.actor));
+				                                                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1125: error: [NullAway] passing @Nullable parameter 'c.actor' where @NonNull is required
+				float maxWidth = c.maxWidth.get(c.actor);
+				                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1129: error: [NullAway] passing @Nullable parameter 'c.actor' where @NonNull is required
+				c.actorHeight = Math.max(rowHeight[c.row] * fillY - c.computedPadTop - c.computedPadBottom, c.minHeight.get(c.actor));
+				                                                                                                             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1130: error: [NullAway] passing @Nullable parameter 'c.actor' where @NonNull is required
+				float maxHeight = c.maxHeight.get(c.actor);
+				                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java:1134: error: [NullAway] unboxing of a @Nullable value
+			align = c.align;
+			         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/FocusListener.java:32: error: [NullAway] switch expression focusEvent.getType() is @Nullable
+		switch (focusEvent.getType()) {
+		                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Stage.java:888: error: [NullAway] @NonNull field Stage$TouchFocus.listener not initialized
+		 EventListener listener;
+		               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Stage.java:894: error: [NullAway] assigning @Nullable expression to @NonNull field
+			listener = null;
+			         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Event.java:83: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return targetActor;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Event.java:92: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return listenerActor;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Event.java:140: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return stage;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/viewport/Viewport.java:36: error: [NullAway] @NonNull field camera not initialized
+	 private Camera camera;
+	                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Action.java:34: error: [NullAway] @NonNull field target not initialized
+	 protected Actor target;
+	                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Action.java:61: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		if (target == null) setTarget(actor);
+		                              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Action.java:95: error: [NullAway] assigning @Nullable expression to @NonNull field
+		target = null;
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:46: error: [NullAway] initializer method does not guarantee @NonNull fields minWidth (line 25), minHeight (line 25), prefWidth (line 26), prefHeight (line 26), maxWidth (line 27), maxHeight (line 27), spaceTop (line 28), spaceLeft (line 28), spaceBottom (line 28), spaceRight (line 28), padTop (line 29), padLeft (line 29), padBottom (line 29), padRight (line 29), expandX (line 32), expandY (line 32), colspan (line 33), table (line 40) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Cell () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:75: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return (T)actor;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:707: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return minWidth.get(actor);
+		                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:716: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return minHeight.get(actor);
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:725: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return prefWidth.get(actor);
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:734: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return prefHeight.get(actor);
+		                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:743: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return maxWidth.get(actor);
+		                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:752: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return maxHeight.get(actor);
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:761: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return spaceTop.get(actor);
+		                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:770: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return spaceLeft.get(actor);
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:779: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return spaceBottom.get(actor);
+		                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:788: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return spaceRight.get(actor);
+		                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:797: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padTop.get(actor);
+		                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:806: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padLeft.get(actor);
+		                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:815: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padBottom.get(actor);
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:824: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padRight.get(actor);
+		                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:829: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padLeft.get(actor) + padRight.get(actor);
+		                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:829: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padLeft.get(actor) + padRight.get(actor);
+		                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:834: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padTop.get(actor) + padBottom.get(actor);
+		                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:834: error: [NullAway] passing @Nullable parameter 'actor' where @NonNull is required
+		return padTop.get(actor) + padBottom.get(actor);
+		                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:905: error: [NullAway] assigning @Nullable expression to @NonNull field
+		minWidth = null;
+		         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:906: error: [NullAway] assigning @Nullable expression to @NonNull field
+		minHeight = null;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:907: error: [NullAway] assigning @Nullable expression to @NonNull field
+		prefWidth = null;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:908: error: [NullAway] assigning @Nullable expression to @NonNull field
+		prefHeight = null;
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:909: error: [NullAway] assigning @Nullable expression to @NonNull field
+		maxWidth = null;
+		         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:910: error: [NullAway] assigning @Nullable expression to @NonNull field
+		maxHeight = null;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:911: error: [NullAway] assigning @Nullable expression to @NonNull field
+		spaceTop = null;
+		         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:912: error: [NullAway] assigning @Nullable expression to @NonNull field
+		spaceLeft = null;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:913: error: [NullAway] assigning @Nullable expression to @NonNull field
+		spaceBottom = null;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:914: error: [NullAway] assigning @Nullable expression to @NonNull field
+		spaceRight = null;
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:915: error: [NullAway] assigning @Nullable expression to @NonNull field
+		padTop = null;
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:916: error: [NullAway] assigning @Nullable expression to @NonNull field
+		padLeft = null;
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:917: error: [NullAway] assigning @Nullable expression to @NonNull field
+		padBottom = null;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:918: error: [NullAway] assigning @Nullable expression to @NonNull field
+		padRight = null;
+		         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:922: error: [NullAway] assigning @Nullable expression to @NonNull field
+		expandX = null;
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:923: error: [NullAway] assigning @Nullable expression to @NonNull field
+		expandY = null;
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:924: error: [NullAway] assigning @Nullable expression to @NonNull field
+		colspan = null;
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:933: error: [NullAway] assigning @Nullable expression to @NonNull field
+		table = null;
+		      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Cell.java:940: error: [NullAway] dereferenced expression cell is @Nullable
+		minWidth = cell.minWidth;
+		               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFont.java:485: error: [NullAway] initializer method does not guarantee @NonNull field imagePaths (line 443) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public BitmapFontData () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFont.java:488: error: [NullAway] initializer method does not guarantee @NonNull field imagePaths (line 443) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public BitmapFontData (FileHandle fontFile, boolean flip) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/IntSet.java:80: error: [NullAway] initializer method does not guarantee @NonNull fields iterator1 (line 64), iterator2 (line 64) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public IntSet (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:59: error: [NullAway] initializer method does not guarantee @NonNull fields stringValue (line 48), name (line 52) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public JsonValue (ValueType type) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:64: error: [NullAway] initializer method does not guarantee @NonNull fields stringValue (line 48), name (line 52), type (line 45) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public JsonValue (@Nullable @Null String value) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:68: error: [NullAway] initializer method does not guarantee @NonNull fields stringValue (line 48), name (line 52), type (line 45) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public JsonValue (double value) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:72: error: [NullAway] initializer method does not guarantee @NonNull fields stringValue (line 48), name (line 52), type (line 45) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public JsonValue (long value) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:76: error: [NullAway] initializer method does not guarantee @NonNull fields stringValue (line 48), name (line 52), type (line 45) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public JsonValue (double value, String stringValue) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:80: error: [NullAway] initializer method does not guarantee @NonNull fields stringValue (line 48), name (line 52), type (line 45) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public JsonValue (long value, String stringValue) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:84: error: [NullAway] initializer method does not guarantee @NonNull fields stringValue (line 48), name (line 52), type (line 45) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public JsonValue (boolean value) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:223: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+			return null;
+			^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:895: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.name = name;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:965: error: [NullAway] assigning @Nullable expression to @NonNull field
+		stringValue = value;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:973: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.stringValue = stringValue;
+		                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:981: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.stringValue = stringValue;
+		                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:1264: error: [NullAway] dereferenced expression current is @Nullable
+			if (current.prev == null) {
+			           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonValue.java:1284: error: [NullAway] @NonNull field JsonValue$PrettyPrintSettings.outputType not initialized
+		 public OutputType outputType;
+		                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Json.java:69: error: [NullAway] initializer method does not guarantee @NonNull field writer (line 51) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Json () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Json.java:73: error: [NullAway] initializer method does not guarantee @NonNull field writer (line 51) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Json (OutputType outputType) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Json.java:288: error: [NullAway] assigning @Nullable expression to @NonNull field
+			this.writer = null;
+			            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Json.java:962: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		if (jsonValue == null) return defaultValue;
+		                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Json.java:1001: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		if (jsonData == null) return null;
+		                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Json.java:1198: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Skin.java:494: error: [NullAway] dereferenced expression jsonMap.child is @Nullable
+								se.addTrace(jsonMap.child.trace());
+								                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/TextureRegionDrawable.java:34: error: [NullAway] initializer method does not guarantee @NonNull field region (line 31) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextureRegionDrawable () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/TextureRegionDrawable.java:37: error: [NullAway] initializer method does not guarantee @NonNull field region (line 31) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextureRegionDrawable (Texture texture) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/TextureRegionDrawable.java:41: error: [NullAway] initializer method does not guarantee @NonNull field region (line 31) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextureRegionDrawable (TextureRegion region) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/TextureRegionDrawable.java:45: error: [NullAway] initializer method does not guarantee @NonNull field region (line 31) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextureRegionDrawable (TextureRegionDrawable drawable) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java:64: error: [NullAway] initializer method does not guarantee @NonNull field pageGlyphIndices (line 55) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public BitmapFontCache (BitmapFont font, boolean integer) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tree.java:69: error: [NullAway] initializer method does not guarantee @NonNull field style (line 51) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Tree (TreeStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tree.java:100: error: [NullAway] dereferenced expression rangeStart is @Nullable
+					float start = rangeStart.actor.getY(), end = node.actor.getY();
+					                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tree.java:612: error: [NullAway] initializer method does not guarantee @NonNull field actor (line 596) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Node () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tree.java:897: error: [NullAway] initializer method does not guarantee @NonNull fields plus (line 893), minus (line 893) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public TreeStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/OrderedSet.java:157: error: [NullAway] dereferenced expression iterator2 is @Nullable
+			iterator2.valid = false;
+			         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/OrderedSet.java:160: error: [NullAway] dereferenced expression iterator2 is @Nullable
+		iterator2.reset();
+		         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Touchpad.java:63: error: [NullAway] initializer method does not guarantee @NonNull field style (line 42) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Touchpad (float deadzoneRadius, TouchpadStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Window.java:68: error: [NullAway] initializer method does not guarantee @NonNull field style (line 47) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Window (String title, WindowStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Window.java:163: error: [NullAway] dereferenced expression stage is @Nullable
+					if (clampPosition && windowX + width + amountX > stage.getWidth()) amountX = stage.getWidth() - windowX - width;
+					                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Window.java:169: error: [NullAway] dereferenced expression stage is @Nullable
+					if (clampPosition && windowY + height + amountY > stage.getHeight())
+					                                                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Window.java:265: error: [NullAway] dereferenced expression style.stageBackground is @Nullable
+		style.stageBackground.draw(batch, x, y, width, height);
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Window.java:353: error: [NullAway] initializer method does not guarantee @NonNull field titleFont (line 349) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public WindowStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ScrollPane.java:508: error: [NullAway] dereferenced expression actor is @Nullable
+		actor.setPosition(x, y);
+		     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Timer.java:87: error: [NullAway] dereferenced expression thread is @Nullable
+					if (thread.pauseTimeMillis > 0) executeTimeMillis -= timeMillis - thread.pauseTimeMillis;
+					          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/ActorGestureListener.java:46: error: [NullAway] initializer method does not guarantee @NonNull fields actor (line 38), touchDownTarget (line 38) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ActorGestureListener (float halfTapSquareSize, float tapCountInterval, float longPressDuration, float maxFlingDelay) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextArea.java:57: error: [NullAway] initializer method does not guarantee @NonNull field linesBreak (line 38) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextArea (String text, Skin skin) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextArea.java:61: error: [NullAway] initializer method does not guarantee @NonNull field linesBreak (line 38) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextArea (String text, Skin skin, String styleName) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextArea.java:65: error: [NullAway] initializer method does not guarantee @NonNull field linesBreak (line 38) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextArea (String text, TextFieldStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java:140: error: [NullAway] initializer method does not guarantee @NonNull fields text (line 82), style (line 89), messageText (line 90), displayText (line 91), inputListener (line 93) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextField (@Null String text, TextFieldStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java:159: error: [NullAway] dereferenced expression style.background is @Nullable
+		if (background != null) x -= style.background.getLeftWidth();
+		                                             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java:303: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return style.background;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java:359: error: [NullAway] dereferenced expression fontColor is @Nullable
+			font.setColor(fontColor.r, fontColor.g, fontColor.b, fontColor.a * color.a * parentAlpha);
+			                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java:1102: error: [NullAway] initializer method does not guarantee @NonNull field font (line 1095) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public TextFieldStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/List.java:69: error: [NullAway] initializer method does not guarantee @NonNull field style (line 50) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public List (ListStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/List.java:450: error: [NullAway] initializer method does not guarantee @NonNull fields font (line 444), selection (line 447) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public ListStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/VerticalGroup.java:50: error: [NullAway] initializer method does not guarantee @NonNull field columnSizes (line 44) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public VerticalGroup () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Button.java:52: error: [NullAway] initializer method does not guarantee @NonNull field style (line 46) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Button (Skin skin) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Button.java:59: error: [NullAway] initializer method does not guarantee @NonNull field style (line 46) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Button (Skin skin, String styleName) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Button.java:71: error: [NullAway] initializer method does not guarantee @NonNull field style (line 46) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Button (Actor child, ButtonStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Button.java:78: error: [NullAway] initializer method does not guarantee @NonNull field style (line 46) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Button (ButtonStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Button.java:85: error: [NullAway] initializer method does not guarantee @NonNull field style (line 46) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Button () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ButtonGroup.java:109: error: [NullAway] dereferenced expression lastChecked is @Nullable
+					lastChecked.setChecked(false); // May have listeners that change button states.
+					           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tooltip.java:47: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.manager = manager;
+		             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java:35: error: [NullAway] initializer method does not guarantee @NonNull field actor (line 23) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Container () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java:168: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.actor = actor;
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java:215: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.actor = null;
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java:221: error: [NullAway] assigning @Nullable expression to @NonNull field
+		if (actor == this.actor) this.actor = null;
+		                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/actions/ColorAction.java:30: error: [NullAway] @NonNull field color not initialized
+	 private @Null Color color;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/actions/ColorAction.java:57: error: [NullAway] assigning @Nullable expression to @NonNull field
+		color = null;
+		      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/actions/AlphaAction.java:30: error: [NullAway] @NonNull field color not initialized
+	 private @Null Color color;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/actions/AlphaAction.java:48: error: [NullAway] assigning @Nullable expression to @NonNull field
+		color = null;
+		      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/actions/RepeatAction.java:30: error: [NullAway] dereferenced expression action is @Nullable
+		if (action.act(delta)) {
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/actions/RunnableAction.java:45: error: [NullAway] dereferenced expression runnable is @Nullable
+			runnable.run();
+			        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/actions/AfterAction.java:49: error: [NullAway] dereferenced expression action is @Nullable
+		return action.act(delta);
+		             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/SplitPane.java:77: error: [NullAway] initializer method does not guarantee @NonNull field style (line 49) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public SplitPane (@Null Actor firstWidget, @Null Actor secondWidget, boolean vertical, SplitPaneStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/SplitPane.java:414: error: [NullAway] initializer method does not guarantee @NonNull field handle (line 412) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public SplitPaneStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextButton.java:45: error: [NullAway] initializer method does not guarantee @NonNull field style (line 33) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public TextButton (@Null String text, TextButtonStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextButton.java:144: error: [NullAway] initializer method does not guarantee @NonNull field font (line 140) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public TextButtonStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/SelectBox.java:85: error: [NullAway] initializer method does not guarantee @NonNull field style (line 61) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public SelectBox (SelectBoxStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/SelectBox.java:487: error: [NullAway] dereferenced expression event is @Nullable
+						event.stop();
+						     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/SelectBox.java:616: error: [NullAway] initializer method does not guarantee @NonNull fields font (line 608), scrollStyle (line 612), listStyle (line 613) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public SelectBoxStyle () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/CheckBox.java:43: error: [NullAway] initializer method does not guarantee @NonNull field style (line 33) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public CheckBox (@Null String text, CheckBoxStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/HorizontalGroup.java:50: error: [NullAway] initializer method does not guarantee @NonNull field rowSizes (line 44) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public HorizontalGroup () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java:99: error: [NullAway] initializer method does not guarantee @NonNull fields particles (line 70), name (line 73), active (line 76) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ParticleEmitter () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java:103: error: [NullAway] initializer method does not guarantee @NonNull fields particles (line 70), name (line 73), active (line 76) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ParticleEmitter (BufferedReader reader) throws IOException {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java:108: error: [NullAway] initializer method does not guarantee @NonNull fields particles (line 70), active (line 76) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ParticleEmitter (ParticleEmitter emitter) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java:445: error: [NullAway] dereferenced expression sprite is @Nullable
+		float spriteWidth = sprite.getWidth();
+		                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java:700: error: [NullAway] dereferenced expression sprite is @Nullable
+			particle.setOrigin(sprite.getOriginX(), sprite.getOriginY());
+			                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java:1236: error: [NullAway] initializer method does not guarantee @NonNull field tint (line 1233) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Particle (@Nullable Sprite sprite) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextTooltip.java:51: error: [NullAway] passing @Nullable parameter 'style.label' where @NonNull is required
+		container.setActor(newLabel(text, style.label));
+		                                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextTooltip.java:69: error: [NullAway] passing @Nullable parameter 'style.label' where @NonNull is required
+		label.setStyle(style.label);
+		                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextTooltip.java:90: error: [NullAway] passing @Nullable parameter 'style.label' where @NonNull is required
+			label = new LabelStyle(style.label);
+			                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Slider.java:122: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return style.background;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ProgressBar.java:75: error: [NullAway] initializer method does not guarantee @NonNull field style (line 47) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ProgressBar (float min, float max, float stepSize, boolean vertical, ProgressBarStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ProgressBar.java:232: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return style.background;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ImageButton.java:44: error: [NullAway] initializer method does not guarantee @NonNull field style (line 32) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ImageButton (ImageButtonStyle style) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/DragAndDrop.java:128: error: [NullAway] dereferenced expression actor is @Nullable
+					removeDragActor = actor.getStage() == null; // Only remove later if not already in the stage now.
+					                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/DragAndDrop.java:160: error: [NullAway] dereferenced expression target is @Nullable
+					target.actor.stageToLocalCoordinates(tmpVector.set(stageX, stageY));
+					      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/NinePatchDrawable.java:37: error: [NullAway] initializer method does not guarantee @NonNull field patch (line 34) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public NinePatchDrawable () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/NinePatchDrawable.java:40: error: [NullAway] initializer method does not guarantee @NonNull field patch (line 34) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public NinePatchDrawable (NinePatch patch) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/SpriteDrawable.java:45: error: [NullAway] dereferenced expression sprite is @Nullable
+		Color spriteColor = sprite.getColor();
+		                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/SpriteDrawable.java:60: error: [NullAway] dereferenced expression sprite is @Nullable
+		Color spriteColor = sprite.getColor();
+		                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/utils/SpriteDrawable.java:75: error: [NullAway] dereferenced expression sprite is @Nullable
+		setMinWidth(sprite.getWidth());
+		                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/net/NetJavaImpl.java:167: error: [NullAway] dereferenced expression method is @Nullable
+			final boolean doInput = !method.equalsIgnoreCase(HttpMethods.HEAD);
+			                               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/net/NetJavaSocketImpl.java:114: error: [NullAway] assigning @Nullable expression to @NonNull field
+				socket = null;
+				       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/net/NetJavaServerSocketImpl.java:81: error: [NullAway] dereferenced expression server is @Nullable
+			return new NetJavaSocketImpl(server.accept(), hints);
+			                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/net/HttpRequestBuilder.java:47: error: [NullAway] @NonNull field httpRequest not initialized
+	 private HttpRequest httpRequest;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/net/HttpRequestBuilder.java:152: error: [NullAway] assigning @Nullable expression to @NonNull field
+		httpRequest = null;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/input/RemoteSender.java:49: error: [NullAway] initializer method does not guarantee @NonNull field out (line 33) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public RemoteSender (String ip, int port) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/input/RemoteSender.java:84: error: [NullAway] assigning @Nullable expression to @NonNull field
+			out = null;
+			    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/SortedIntList.java:142: error: [NullAway] dereferenced expression position is @Nullable
+			position = position.n;
+			                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/SortedIntList.java:156: error: [NullAway] dereferenced expression previousPosition.p is @Nullable
+					previousPosition.p.n = position;
+					                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/SortedIntList.java:178: error: [NullAway] @NonNull field SortedIntList$Node.value not initialized
+		 public E value;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/TimSort.java:92: error: [NullAway] initializer method does not guarantee @NonNull fields a (line 56), c (line 59) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	TimSort () {
+	^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/TimSort.java:143: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.a = null;
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/TimSort.java:144: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.c = null;
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ComparableTimSort.java:72: error: [NullAway] initializer method does not guarantee @NonNull field a (line 39) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	ComparableTimSort () {
+	^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ComparableTimSort.java:122: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.a = null;
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/I18NBundle.java:422: error: [NullAway] initializer method does not guarantee @NonNull field properties (line 84) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	 @Initializer private void setLocale (Locale locale) {
+	                           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectFloatMap.java:84: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 66), entries2 (line 66), values1 (line 67), values2 (line 67), keys1 (line 68), keys2 (line 68) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ObjectFloatMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ArrayMap.java:57: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 40), entries2 (line 40), values1 (line 41), values2 (line 41), keys1 (line 42), keys2 (line 42) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ArrayMap (boolean ordered, int capacity) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ArrayMap.java:67: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 40), entries2 (line 40), values1 (line 41), values2 (line 41), keys1 (line 42), keys2 (line 42) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ArrayMap (boolean ordered, int capacity, Class keyArrayType, Class valueArrayType) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/LongMap.java:87: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 69), entries2 (line 69), values1 (line 70), values2 (line 70), keys1 (line 71), keys2 (line 71) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public LongMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ObjectLongMap.java:84: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 66), entries2 (line 66), values1 (line 67), values2 (line 67), keys1 (line 68), keys2 (line 68) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ObjectLongMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/reflect/ClassReflection.java:49: error: [NullAway] passing @Nullable parameter 'c2' where @NonNull is required
+		return c1.isAssignableFrom(c2);
+		                           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/Queue.java:509: error: [NullAway] initializer method does not guarantee @NonNull fields iterator1 (line 501), iterator2 (line 501) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public QueueIterable (Queue<T> queue, boolean allowRemove) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/IntIntMap.java:86: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 68), entries2 (line 68), values1 (line 69), values2 (line 69), keys1 (line 70), keys2 (line 70) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public IntIntMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/PooledLinkedList.java:63: error: [NullAway] dereferenced expression tail is @Nullable
+		tail.next = item;
+		    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/PooledLinkedList.java:148: error: [NullAway] dereferenced expression n is @Nullable
+			n.prev = null;
+			 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/PooledLinkedList.java:154: error: [NullAway] dereferenced expression p is @Nullable
+			p.next = null;
+			 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/PooledLinkedList.java:159: error: [NullAway] dereferenced expression p is @Nullable
+		p.next = n;
+		 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/PooledLinkedList.java:160: error: [NullAway] dereferenced expression n is @Nullable
+		n.prev = p;
+		 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/PooledLinkedList.java:182: error: [NullAway] dereferenced expression tail is @Nullable
+			tail.next = null;
+			    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonReader.java:569: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return root;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/JsonReader.java:707: error: [NullAway] dereferenced expression current is @Nullable
+		if (current.size > 0) lastChild.pop();
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/IntFloatMap.java:88: error: [NullAway] initializer method does not guarantee @NonNull fields entries1 (line 69), entries2 (line 69), values1 (line 70), values2 (line 70), keys1 (line 71), keys2 (line 71) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public IntFloatMap (int initialCapacity, float loadFactor) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ReflectionPool.java:41: error: [NullAway] assigning @Nullable expression to @NonNull field
+		constructor = findConstructor(type);
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/rangecoder/Decoder.java:33: error: [NullAway] @NonNull field Stream not initialized
+	 java.io.InputStream Stream;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/rangecoder/Decoder.java:40: error: [NullAway] assigning @Nullable expression to @NonNull field
+		Stream = null;
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/rangecoder/Encoder.java:61: error: [NullAway] dereferenced expression Stream is @Nullable
+		Stream.flush();
+		      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/rangecoder/Encoder.java:70: error: [NullAway] dereferenced expression Stream is @Nullable
+				Stream.write(temp + LowHi);
+				      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lz/OutWindow.java:10: error: [NullAway] @NonNull field _buffer not initialized
+	 byte[] _buffer;
+	        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lz/OutWindow.java:43: error: [NullAway] dereferenced expression _stream is @Nullable
+		_stream.write(_buffer, _streamPos, size);
+		       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lz/BinTree.java:13: error: [NullAway] @NonNull field _son not initialized
+	 int[] _son;
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lz/BinTree.java:14: error: [NullAway] @NonNull field _hash not initialized
+	 int[] _hash;
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lz/InWindow.java:10: error: [NullAway] @NonNull field _bufferBase not initialized
+	 public byte[] _bufferBase; // pointer to buffer with data
+	               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lz/InWindow.java:43: error: [NullAway] dereferenced expression _stream is @Nullable
+			int numReadBytes = _stream.read(_bufferBase, _bufferOffset + _streamPos, size);
+			                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lz/InWindow.java:58: error: [NullAway] assigning @Nullable expression to @NonNull field
+		_bufferBase = null;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lzma/Decoder.java:94: error: [NullAway] @NonNull field Decoder$LiteralDecoder.m_Coders not initialized
+		 Decoder2[] m_Coders;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lzma/Encoder.java:132: error: [NullAway] @NonNull field Encoder$LiteralEncoder.m_Coders not initialized
+		 Encoder2[] m_Coders;
+		            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lzma/Encoder.java:288: error: [NullAway] assigning @Nullable expression to @NonNull field
+	 com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
+	                                               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/compression/lzma/Encoder.java:1219: error: [NullAway] assigning @Nullable expression to @NonNull field
+			_matchFinder = null;
+			             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Octree.java:159: error: [NullAway] @NonNull field Octree$OctreeNode.children not initialized
+		 private Octree.OctreeNode[] children; // May be null when leaf is true.
+		                             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/CatmullRomSpline.java:104: error: [NullAway] initializer method does not guarantee @NonNull fields controlPoints (line 97), tmp (line 100), tmp2 (line 101), tmp3 (line 102) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public CatmullRomSpline () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/CatmullRomSpline.java:107: error: [NullAway] initializer method does not guarantee @NonNull fields controlPoints (line 97), tmp (line 100), tmp2 (line 101), tmp3 (line 102) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public CatmullRomSpline (final T[] controlPoints, final boolean continuous) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Bezier.java:123: error: [NullAway] initializer method does not guarantee @NonNull fields tmp (line 119), tmp2 (line 120), tmp3 (line 121) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Bezier () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Bezier.java:126: error: [NullAway] initializer method does not guarantee @NonNull fields tmp (line 119), tmp2 (line 120), tmp3 (line 121) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Bezier (final T... points) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Bezier.java:130: error: [NullAway] initializer method does not guarantee @NonNull fields tmp (line 119), tmp2 (line 120), tmp3 (line 121) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Bezier (final T[] points, final int offset, final int length) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/Bezier.java:134: error: [NullAway] initializer method does not guarantee @NonNull fields tmp (line 119), tmp2 (line 120), tmp3 (line 121) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Bezier (final Array<T> points, final int offset, final int length) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/BSpline.java:179: error: [NullAway] initializer method does not guarantee @NonNull fields controlPoints (line 170), knots (line 171), tmp (line 175), tmp2 (line 176), tmp3 (line 177) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public BSpline () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/math/BSpline.java:182: error: [NullAway] initializer method does not guarantee @NonNull fields controlPoints (line 170), knots (line 171), tmp (line 175), tmp2 (line 176), tmp3 (line 177) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public BSpline (final T[] controlPoints, final int degree, final boolean continuous) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:30: error: [NullAway] @NonNull static field app not initialized
+	 public static Application app;
+	                           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:31: error: [NullAway] @NonNull static field graphics not initialized
+	 public static Graphics graphics;
+	                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:32: error: [NullAway] @NonNull static field audio not initialized
+	 public static Audio audio;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:33: error: [NullAway] @NonNull static field input not initialized
+	 public static Input input;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:34: error: [NullAway] @NonNull static field files not initialized
+	 public static Files files;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:37: error: [NullAway] @NonNull static field gl not initialized
+	 public static GL20 gl;
+	                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:38: error: [NullAway] @NonNull static field gl20 not initialized
+	 public static GL20 gl20;
+	                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/Gdx.java:39: error: [NullAway] @NonNull static field gl30 not initialized
+	 public static GL30 gl30;
+	                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/VertexBufferObject.java:67: error: [NullAway] initializer method does not guarantee @NonNull fields attributes (line 44), buffer (line 45), byteBuffer (line 46) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public VertexBufferObject (boolean isStatic, int numVertices, VertexAttributes attributes) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/VertexBufferObject.java:76: error: [NullAway] initializer method does not guarantee @NonNull fields attributes (line 44), buffer (line 45), byteBuffer (line 46) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	protected VertexBufferObject (int usage, ByteBuffer data, boolean ownsBuffer, VertexAttributes attributes) {
+	          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/GLFrameBuffer.java:87: error: [NullAway] initializer method does not guarantee @NonNull field bufferBuilder (line 85) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	GLFrameBuffer () {
+	^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/GLFrameBuffer.java:458: error: [NullAway] initializer method does not guarantee @NonNull fields stencilRenderBufferSpec (line 450), depthRenderBufferSpec (line 451), packedStencilDepthRenderBufferSpec (line 452) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public GLFrameBufferBuilder (int width, int height) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/CubemapLoader.java:41: error: [NullAway] @NonNull field CubemapLoader$CubemapLoaderInfo.data not initialized
+		 CubemapData data;
+		             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/Cubemap.java:296: error: [NullAway] dereferenced expression managedCubemaps.get(Gdx.app) is @Nullable
+		return managedCubemaps.get(Gdx.app).size;
+		                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/InstanceBufferObject.java:50: error: [NullAway] initializer method does not guarantee @NonNull fields attributes (line 37), buffer (line 38), byteBuffer (line 39) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public InstanceBufferObject (boolean isStatic, int numVertices, VertexAttributes instanceAttributes) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/FileTextureData.java:71: error: [NullAway] method returns @Nullable, but superclass method com.badlogic.gdx.graphics.TextureData.consumePixmap() returns @NonNull
+	public Pixmap consumePixmap () {
+	              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/FrameBufferCubemap.java:162: error: [NullAway] dereferenced expression side is @Nullable
+		Gdx.gl20.glFramebufferTexture2D(GL20.GL_FRAMEBUFFER, GL20.GL_COLOR_ATTACHMENT0, side.glEnum,
+		                                                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/ETC1TextureData.java:42: error: [NullAway] initializer method does not guarantee @NonNull field data (line 32) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ETC1TextureData (FileHandle file, boolean useMipMaps) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/ETC1TextureData.java:91: error: [NullAway] assigning @Nullable expression to @NonNull field
+		data = null;
+		     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/glutils/KTXTextureData.java:327: error: [NullAway] dereferenced expression compressedData is @Nullable
+			int faceLodSize = compressedData.getInt(pos);
+			                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/PixmapIO.java:205: error: [NullAway] initializer method does not guarantee @NonNull fields lineOutBytes (line 197), curLineBytes (line 197), prevLineBytes (line 197) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public PNG (int initialBufferSize) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/PixmapPacker.java:399: error: [NullAway] passing @Nullable parameter 'page.texture' where @NonNull is required
+				atlas.getTextures().add(page.texture);
+				                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/PixmapPacker.java:500: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+			return texture;
+			^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/PixmapPacker.java:574: error: [NullAway] dereferenced expression node is @Nullable
+			node.full = true;
+			    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/Animation.java:56: error: [NullAway] initializer method does not guarantee @NonNull field keyFrames (line 43) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Animation (float frameDuration, Array<? extends T> keyFrames) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/Animation.java:80: error: [NullAway] initializer method does not guarantee @NonNull field keyFrames (line 43) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public Animation (float frameDuration, T... keyFrames) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/RepeatablePolygonSprite.java:31: error: [NullAway] @NonNull field region not initialized
+	 private TextureRegion region;
+	                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/PolygonSpriteBatch.java:1211: error: [NullAway] dereferenced expression lastTexture is @Nullable
+		lastTexture.bind();
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/PolygonSpriteBatch.java:1320: error: [NullAway] dereferenced expression texture is @Nullable
+		invTexWidth = 1.0f / texture.getWidth();
+		                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/PolygonSprite.java:38: error: [NullAway] initializer method does not guarantee @NonNull fields region (line 27), vertices (line 33) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public PolygonSprite (PolygonRegion region) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/PolygonSprite.java:45: error: [NullAway] initializer method does not guarantee @NonNull fields region (line 27), vertices (line 33) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public PolygonSprite (PolygonSprite sprite) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/TextureArray.java:156: error: [NullAway] dereferenced expression managedTextureArrays.get(Gdx.app) is @Nullable
+		return managedTextureArrays.get(Gdx.app).size;
+		                                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/Attributes.java:51: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/Attributes.java:128: error: [NullAway] enhanced-for expression attributes is @Nullable
+		for (final Attribute attr : attributes)
+		                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/TextureDescriptor.java:24: error: [NullAway] assigning @Nullable expression to @NonNull field
+	 public T texture = null;
+	          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/MeshPart.java:75: error: [NullAway] initializer method does not guarantee @NonNull field mesh (line 61) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public MeshPart () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/MeshPart.java:84: error: [NullAway] initializer method does not guarantee @NonNull field mesh (line 61) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public MeshPart (final String id, final Mesh mesh, final int offset, final int size, final int type) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/MeshPart.java:90: error: [NullAway] initializer method does not guarantee @NonNull field mesh (line 61) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public MeshPart (final MeshPart copyFrom) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/MeshPart.java:113: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.mesh = mesh;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelInstance.java:144: error: [NullAway] dereferenced expression node.getParent() is @Nullable
+		} else if (parentTransform && copy.hasParent()) this.transform.mul(node.getParent().globalTransform);
+		                                                                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelInstance.java:272: error: [NullAway] passing @Nullable parameter 'bindPose.keys[j].id' where @NonNull is required
+					bindPose.keys[j] = getNode(bindPose.keys[j].id);
+					                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelInstance.java:327: error: [NullAway] passing @Nullable parameter 'nanim.node.id' where @NonNull is required
+			final Node node = getNode(nanim.node.id);
+			                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/Node.java:308: error: [NullAway] dereferenced expression (node = nodes.get(i)).id is @Nullable
+				if ((node = nodes.get(i)).id.equalsIgnoreCase(id)) return node;
+				                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/Node.java:311: error: [NullAway] dereferenced expression (node = nodes.get(i)).id is @Nullable
+				if ((node = nodes.get(i)).id.equals(id)) return node;
+				                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/Node.java:317: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/Animation.java:30: error: [NullAway] @NonNull field id not initialized
+	 public String id;
+	               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/Model.java:122: error: [NullAway] assigning @Nullable expression to @NonNull field
+			animation.id = anim.id;
+			             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/Model.java:246: error: [NullAway] dereferenced expression modelMesh.vertices is @Nullable
+		int numVertices = modelMesh.vertices.length / (attributes.vertexSize / 4);
+		                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/NodePart.java:46: error: [NullAway] initializer method does not guarantee @NonNull fields meshPart (line 32), material (line 34) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public NodePart () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/data/ModelData.java:38: error: [NullAway] dereferenced expression other.id is @Nullable
+			if (other.id.equals(mesh.id)) {
+			            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/data/ModelMesh.java:26: error: [NullAway] @NonNull field parts not initialized
+	 public ModelMeshPart[] parts;
+	                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/data/ModelMaterial.java:28: error: [NullAway] @NonNull field id not initialized
+	 public String id;
+	               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/data/ModelTexture.java:36: error: [NullAway] @NonNull field fileName not initialized
+	 public String fileName;
+	               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/data/ModelMeshPart.java:22: error: [NullAway] @NonNull field indices not initialized
+	 public short[] indices;
+	                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/model/NodeAnimation.java:30: error: [NullAway] @NonNull field node not initialized
+	 public Node node;
+	             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/AnimationController.java:73: error: [NullAway] initializer method does not guarantee @NonNull field animation (line 61) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 protected AnimationDesc () {
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/AnimationController.java:147: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		if (anim == null) return null;
+		                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/AnimationController.java:161: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		if (id == null) return null;
+		                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/BaseAnimationController.java:288: error: [NullAway] passing @Nullable parameter 'pool' where @NonNull is required
+				applyNodeAnimationBlending(nodeAnim, out, pool, alpha, time);
+				                                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/DefaultTextureBinder.java:159: error: [NullAway] dereferenced expression unitsLRU is @Nullable
+			final int idx = unitsLRU[i];
+			                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/DefaultTextureBinder.java:169: error: [NullAway] dereferenced expression unitsLRU is @Nullable
+		final int idx = unitsLRU[i];
+		                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/MeshBuilder.java:260: error: [NullAway] assigning @Nullable expression to @NonNull field
+		attributes = null;
+		           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/MeshBuilder.java:554: error: [NullAway] dereferenced expression pos is @Nullable
+		vertex[posOffset] = pos.x;
+		                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/DefaultShader.java:535: error: [NullAway] dereferenced expression renderable.environment is @Nullable
+		this.shadowMap = lighting && renderable.environment.shadowMap != null;
+		                                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/DefaultShader.java:604: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.program = null;
+		             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/BaseShader.java:170: error: [NullAway] initializer method does not guarantee @NonNull fields context (line 115), camera (line 116) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	 @Initializer public void init (final ShaderProgram program, @Nullable final Renderable renderable) {
+	                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/BaseShader.java:215: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+			if (setters.get(u = globalUniforms.get(i)) != null) setters.get(u).set(this, u, null, null);
+			                                                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/BaseShader.java:215: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+			if (setters.get(u = globalUniforms.get(i)) != null) setters.get(u).set(this, u, null, null);
+			                                                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/BaseShader.java:262: error: [NullAway] assigning @Nullable expression to @NonNull field
+		program = null;
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/BaseShader.java:268: error: [NullAway] assigning @Nullable expression to @NonNull field
+		locations = null;
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/DefaultRenderableSorter.java:63: error: [NullAway] dereferenced expression camera is @Nullable
+		final float dst = (int)(1000f * camera.position.dst2(tmpV1)) - (int)(1000f * camera.position.dst2(tmpV2));
+		                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/shapebuilders/RenderableShapeBuilder.java:56: error: [NullAway] @NonNull static field indices not initialized
+	 private static short[] indices;
+	                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/shapebuilders/RenderableShapeBuilder.java:57: error: [NullAway] @NonNull static field vertices not initialized
+	 private static float[] vertices;
+	                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/shapebuilders/RenderableShapeBuilder.java:48: error: [NullAway] assigning @Nullable expression to @NonNull field
+			renderable.material = null;
+			                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/ModelBuilder.java:111: error: [NullAway] dereferenced expression model is @Nullable
+		node.id = "node" + model.nodes.size;
+		                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/ModelBuilder.java:139: error: [NullAway] dereferenced expression node is @Nullable
+		node.parts.add(new NodePart(meshpart, material));
+		    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/utils/CameraInputController.java:115: error: [NullAway] dereferenced expression controller is @Nullable
+			return controller.pinchZoom(amount / ((w > h) ? h : w));
+			                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParallelArray.java:265: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return null;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ParticleControllerRenderer.java:33: error: [NullAway] initializer method does not guarantee @NonNull field renderData (line 31) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	protected ParticleControllerRenderer () {
+	          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ParticleControllerRenderer.java:42: error: [NullAway] dereferenced expression batch is @Nullable
+		batch.draw(renderData);
+		     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleControllerComponent.java:38: error: [NullAway] @NonNull field controller not initialized
+	 protected ParticleController controller;
+	                              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ResourceData.java:61: error: [NullAway] initializer method does not guarantee @NonNull field resources (line 59) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public SaveData () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ResourceData.java:115: error: [NullAway] initializer method does not guarantee @NonNull fields filename (line 112), type (line 113) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public AssetData () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ParticleControllerRenderData.java:26: error: [NullAway] @NonNull field controller not initialized
+	 public ParticleController controller;
+	                           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ParticleControllerRenderData.java:27: error: [NullAway] @NonNull field positionChannel not initialized
+	 public FloatChannel positionChannel;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleShader.java:243: error: [NullAway] assigning @Nullable expression to @NonNull field
+		this.program = null;
+		             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:89: error: [NullAway] initializer method does not guarantee @NonNull field vertices (line 72) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	 public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig, @Nullable BlendingAttribute blendingAttribute,
+	        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:104: error: [NullAway] read of @NonNull field renderable before initialization
+		renderable.shader = new ParticleShader(renderable, shaderConfig);
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:104: error: [NullAway] read of @NonNull field renderable before initialization
+		renderable.shader = new ParticleShader(renderable, shaderConfig);
+		                                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:148: error: [NullAway] dereferenced expression regionChannel is @Nullable
+				int regionOffset = p * regionChannel.strideSize;
+				                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:150: error: [NullAway] dereferenced expression colorChannel is @Nullable
+				int colorOffset = p * colorChannel.strideSize;
+				                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:151: error: [NullAway] dereferenced expression rotationChannel is @Nullable
+				int rotationOffset = p * rotationChannel.strideSize;
+				                                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:160: error: [NullAway] dereferenced expression scaleChannel is @Nullable
+				vertices[offset + CPU_SIZE_AND_ROTATION_OFFSET] = scaleChannel.data[p * scaleChannel.strideSize];
+				                                                              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/BufferedParticleBatch.java:34: error: [NullAway] initializer method does not guarantee @NonNull field camera (line 32) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	protected BufferedParticleBatch (Class<T> type) {
+	          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/BufferedParticleBatch.java:56: error: [NullAway] passing @Nullable parameter 'sorter.sort(renderData)' where @NonNull is required
+			flush(sorter.sort(renderData));
+			                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleController.java:71: error: [NullAway] initializer method does not guarantee @NonNull fields name (line 44), emitter (line 47), renderer (line 53), particles (line 56), particleChannels (line 57), boundingBox (line 66) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ParticleController () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleSorter.java:55: error: [NullAway] @NonNull field ParticleSorter$Distance.distances not initialized
+		 private float[] distances;
+		                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleSorter.java:56: error: [NullAway] @NonNull field ParticleSorter$Distance.particleIndices not initialized
+		 private int[] particleIndices, particleOffsets;
+		               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleSorter.java:56: error: [NullAway] @NonNull field ParticleSorter$Distance.particleOffsets not initialized
+		 private int[] particleIndices, particleOffsets;
+		                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleSorter.java:71: error: [NullAway] dereferenced expression camera is @Nullable
+			float[] val = camera.view.val;
+			                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/BillboardControllerRenderData.java:25: error: [NullAway] @NonNull field regionChannel not initialized
+	 public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
+	                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/BillboardControllerRenderData.java:25: error: [NullAway] @NonNull field colorChannel not initialized
+	 public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
+	                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/BillboardControllerRenderData.java:25: error: [NullAway] @NonNull field scaleChannel not initialized
+	 public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
+	                                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/BillboardControllerRenderData.java:25: error: [NullAway] @NonNull field rotationChannel not initialized
+	 public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
+	                                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ModelInstanceControllerRenderData.java:27: error: [NullAway] @NonNull field modelInstanceChannel not initialized
+	 public ObjectChannel<ModelInstance> modelInstanceChannel;
+	                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ParticleControllerControllerRenderer.java:44: error: [NullAway] dereferenced expression controllerChannel is @Nullable
+			controllerChannel.data[i].draw();
+			                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ModelInstanceRenderer.java:66: error: [NullAway] dereferenced expression renderData.scaleChannel is @Nullable
+			float scale = hasScale ? renderData.scaleChannel.data[i] : 1;
+			                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ModelInstanceRenderer.java:69: error: [NullAway] dereferenced expression renderData.rotationChannel is @Nullable
+				int rotationOffset = i * renderData.rotationChannel.strideSize;
+				                                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/renderers/ModelInstanceRenderer.java:80: error: [NullAway] dereferenced expression renderData.colorChannel is @Nullable
+				int colorOffset = i * renderData.colorChannel.strideSize;
+				                                             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/BillboardParticleBatch.java:137: error: [NullAway] initializer method does not guarantee @NonNull fields vertices (line 120), currentAttributes (line 123), texture (line 126) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity, @Nullable BlendingAttribute blendingAttribute,
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/values/MeshSpawnShapeValue.java:79: error: [NullAway] passing @Nullable parameter 'spawnShapeValue.mesh' where @NonNull is required
+		setMesh(spawnShapeValue.mesh, spawnShapeValue.model);
+		                       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/values/UnweightedMeshSpawnShapeValue.java:65: error: [NullAway] dereferenced expression vertices is @Nullable
+			float x1 = vertices[p1Offset], y1 = vertices[p1Offset + 1], z1 = vertices[p1Offset + 2], x2 = vertices[p2Offset],
+			                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/values/UnweightedMeshSpawnShapeValue.java:75: error: [NullAway] dereferenced expression vertices is @Nullable
+			float x1 = vertices[p1Offset], y1 = vertices[p1Offset + 1], z1 = vertices[p1Offset + 2], x2 = vertices[p2Offset],
+			                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/values/WeightMeshSpawnShapeValue.java:52: error: [NullAway] dereferenced expression mesh is @Nullable
+		VertexAttributes attributes = mesh.getVertexAttributes();
+		                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleEffectLoader.java:128: error: [NullAway] dereferenced expression effectData.resource is @Nullable
+		effectData.resource.load(manager, effectData);
+		                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ParticleEffectLoader.java:128: error: [NullAway] dereferenced expression effectData is @Nullable
+		effectData.resource.load(manager, effectData);
+		          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ColorInfluencer.java:138: error: [NullAway] @NonNull field colorChannel not initialized
+	 FloatChannel colorChannel;
+	              ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ColorInfluencer.java:44: error: [NullAway] dereferenced expression colorChannel is @Nullable
+			for (int i = startIndex * colorChannel.strideSize,
+			                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ColorInfluencer.java:66: error: [NullAway] initializer method does not guarantee @NonNull fields alphaInterpolationChannel (line 61), lifeChannel (line 62) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Single () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsInfluencer.java:37: error: [NullAway] initializer method does not guarantee @NonNull fields accellerationChannel (line 34), positionChannel (line 34), previousPositionChannel (line 34), rotationChannel (line 34), angularVelocityChannel (line 34) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public DynamicsInfluencer () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsInfluencer.java:41: error: [NullAway] initializer method does not guarantee @NonNull fields accellerationChannel (line 34), positionChannel (line 34), previousPositionChannel (line 34), rotationChannel (line 34), angularVelocityChannel (line 34) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public DynamicsInfluencer (DynamicsModifier... velocities) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:494: error: [NullAway] initializer method does not guarantee @NonNull field lifeChannel (line 492) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public DynamicsModifier () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:497: error: [NullAway] initializer method does not guarantee @NonNull field lifeChannel (line 492) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public DynamicsModifier (DynamicsModifier modifier) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:59: error: [NullAway] dereferenced expression rotationChannel is @Nullable
+				* rotationChannel.strideSize; i < c; i += rotationChannel.strideSize, accelOffset += accellerationChannel.strideSize) {
+				                 ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:61: error: [NullAway] dereferenced expression accellerationChannel is @Nullable
+				Vector3 axisZ = TMP_V1.set(accellerationChannel.data[accelOffset + ParticleChannels.XOffset],
+				                                               ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:83: error: [NullAway] initializer method does not guarantee @NonNull field strengthChannel (line 80) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Strength () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:87: error: [NullAway] initializer method does not guarantee @NonNull field strengthChannel (line 80) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Strength (Strength rotation) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:133: error: [NullAway] initializer method does not guarantee @NonNull field angularChannel (line 127) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Angular () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:138: error: [NullAway] initializer method does not guarantee @NonNull field angularChannel (line 127) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public Angular (Angular value) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:210: error: [NullAway] dereferenced expression rotationalVelocity2dChannel is @Nullable
+				* rotationalVelocity2dChannel.strideSize; i < c; s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize, l += lifeChannel.strideSize) {
+				                             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:269: error: [NullAway] dereferenced expression rotationalForceChannel is @Nullable
+				* rotationalForceChannel.strideSize; i < c; s += strengthChannel.strideSize, i += rotationalForceChannel.strideSize, a += angularChannel.strideSize, l += lifeChannel.strideSize) {
+				                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:301: error: [NullAway] initializer method does not guarantee @NonNull fields accelerationChannel (line 298), positionChannel (line 299) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public CentripetalAcceleration () {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:304: error: [NullAway] initializer method does not guarantee @NonNull fields accelerationChannel (line 298), positionChannel (line 299) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+		 public CentripetalAcceleration (CentripetalAcceleration rotation) {
+		        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:366: error: [NullAway] dereferenced expression directionalVelocityChannel is @Nullable
+				* directionalVelocityChannel.strideSize; i < c; s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize, a += angularChannel.strideSize, l += lifeChannel.strideSize) {
+				                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:418: error: [NullAway] dereferenced expression directionalVelocityChannel is @Nullable
+					* directionalVelocityChannel.strideSize; i < c; s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize, a += angularChannel.strideSize, l += lifeChannel.strideSize, positionOffset += positionChannel.strideSize) {
+					                            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:431: error: [NullAway] dereferenced expression positionChannel is @Nullable
+				TMP_V1.set(positionChannel.data[positionOffset + ParticleChannels.XOffset],
+				                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/DynamicsModifier.java:479: error: [NullAway] dereferenced expression accelerationChannel is @Nullable
+				accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
+				                   ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/SpawnInfluencer.java:37: error: [NullAway] initializer method does not guarantee @NonNull fields positionChannel (line 34), rotationChannel (line 35) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public SpawnInfluencer () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/SpawnInfluencer.java:41: error: [NullAway] initializer method does not guarantee @NonNull fields positionChannel (line 34), rotationChannel (line 35) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public SpawnInfluencer (SpawnShapeValue spawnShapeValue) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/SpawnInfluencer.java:45: error: [NullAway] initializer method does not guarantee @NonNull fields positionChannel (line 34), rotationChannel (line 35) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public SpawnInfluencer (SpawnInfluencer source) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ModelInfluencer.java:122: error: [NullAway] initializer method does not guarantee @NonNull field modelChannel (line 120) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ModelInfluencer () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ModelInfluencer.java:126: error: [NullAway] initializer method does not guarantee @NonNull field modelChannel (line 120) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ModelInfluencer (Model... models) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ParticleControllerInfluencer.java:166: error: [NullAway] initializer method does not guarantee @NonNull field particleControllerChannel (line 164) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ParticleControllerInfluencer () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ParticleControllerInfluencer.java:170: error: [NullAway] initializer method does not guarantee @NonNull field particleControllerChannel (line 164) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ParticleControllerInfluencer (ParticleController... templates) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/SimpleInfluencer.java:36: error: [NullAway] initializer method does not guarantee @NonNull fields valueChannel (line 33), interpolationChannel (line 33), lifeChannel (line 33), valueChannelDescriptor (line 34) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public SimpleInfluencer () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/RegionInfluencer.java:212: error: [NullAway] initializer method does not guarantee @NonNull field regionChannel (line 209) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public RegionInfluencer (int regionsCount) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/RegionInfluencer.java:227: error: [NullAway] initializer method does not guarantee @NonNull field regionChannel (line 209) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public RegionInfluencer (TextureRegion... regions) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/RegionInfluencer.java:141: error: [NullAway] dereferenced expression lifeChannel is @Nullable
+				AspectTextureRegion region = regions.get((int)(lifeChannel.data[l] * (regions.size - 1)));
+				                                                          ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/influencers/ParticleControllerFinalizerInfluencer.java:34: error: [NullAway] initializer method does not guarantee @NonNull fields positionChannel (line 30), scaleChannel (line 30), rotationChannel (line 30), controllerChannel (line 31) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public ParticleControllerFinalizerInfluencer () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/emitters/RegularEmitter.java:54: error: [NullAway] initializer method does not guarantee @NonNull field lifeChannel (line 52) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public RegularEmitter () {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelBatch.java:56: error: [NullAway] assigning @Nullable expression to @NonNull field
+			renderable.material = null;
+			                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelBatch.java:183: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+		return camera;
+		^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelBatch.java:219: error: [NullAway] passing @Nullable parameter 'camera' where @NonNull is required
+				currentShader.begin(camera, context);
+				                    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelBatch.java:219: error: [NullAway] dereferenced expression currentShader is @Nullable
+				currentShader.begin(camera, context);
+				             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelBatch.java:221: error: [NullAway] dereferenced expression currentShader is @Nullable
+			currentShader.render(renderable);
+			             ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/ModelCache.java:236: error: [NullAway] assigning @Nullable expression to @NonNull field
+		result.meshPart.mesh = null;
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/attributes/TextureAttribute.java:145: error: [NullAway] assigning @Nullable expression to @NonNull field
+		textureDescription.texture = texture;
+		                           ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/loader/G3dModelLoader.java:107: error: [NullAway] dereferenced expression other.id is @Nullable
+						if (other.id.equals(partId)) {
+						            ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/loader/ObjLoader.java:451: error: [NullAway] passing @Nullable parameter 'diffuseColor' where @NonNull is required
+			mat.diffuse = new Color(diffuseColor);
+			                        ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/loader/ObjLoader.java:452: error: [NullAway] passing @Nullable parameter 'specularColor' where @NonNull is required
+			mat.specular = new Color(specularColor);
+			                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/environment/DirectionalShadowLight.java:114: error: [NullAway] assigning @Nullable expression to @NonNull field
+		fbo = null;
+		    ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/decals/DecalMaterial.java:26: error: [NullAway] @NonNull field textureRegion not initialized
+	 protected TextureRegion textureRegion;
+	                         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/decals/PluggableGroupStrategy.java:31: error: [NullAway] dereferenced expression plugs.get(group) is @Nullable
+		plugs.get(group).beforeGroup(contents);
+		                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/decals/PluggableGroupStrategy.java:36: error: [NullAway] dereferenced expression plugs.get(group) is @Nullable
+		plugs.get(group).afterGroup();
+		                ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/decals/DecalBatch.java:76: error: [NullAway] initializer method does not guarantee @NonNull fields vertices (line 56), mesh (line 57), groupStrategy (line 60) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public DecalBatch (int size, GroupStrategy groupStrategy) {
+	       ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/decals/DecalBatch.java:204: error: [NullAway] assigning @Nullable expression to @NonNull field
+		vertices = null;
+		         ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/TextureAtlasLoader.java:45: error: [NullAway] dereferenced expression data is @Nullable
+		for (Page page : data.getPages()) {
+		                     ^
+    (see http://t.uber.com/nullaway )
+/Users/nima/Desktop/docker/benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/BitmapFontLoader.java:40: error: [NullAway] initializer method does not guarantee @NonNull field data (line 44) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+	public BitmapFontLoader (FileHandleResolver resolver) {
+	       ^
+    (see http://t.uber.com/nullaway )
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+491 errors
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':gdx:compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 20s

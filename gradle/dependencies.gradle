@@ -22,7 +22,7 @@ ext {
 }
 
 versions.java = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 11
-versions.javaLwjgl3 = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 8
+versions.javaLwjgl3 = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 11
 versions.robovm = "2.3.16"
 versions.gwt = "2.8.2"
 versions.gwtPlugin = "1.1.16"
@@ -46,7 +46,7 @@ versions.spotless = "6.7.1"
 libraries.compileOnly = [:]
 
 libraries.lwjgl = [
-        "org.lwjgl.lwjgl:lwjgl:${versions.lwjgl}",        
+        "org.lwjgl.lwjgl:lwjgl:${versions.lwjgl}",
         "com.badlogicgames.jlayer:jlayer:${versions.jlayer}",
         "org.jcraft:jorbis:${versions.jorbis}"
 ]
