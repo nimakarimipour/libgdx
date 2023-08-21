@@ -24,13 +24,14 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A node is part of a hierarchy of Nodes in a {@link Model}. A Node encodes a transform relative to its parents. A Node can have
  * child nodes. Optionally a node can specify a {@link MeshPart} and a {@link Material} to be applied to the mesh part.
  * @author badlogic */
 public class Node {
 	/** the id, may be null, FIXME is this unique? **/
-	public String id;
+	@SuppressWarnings("NullAway.Init") public String id;
 	/** Whether this node should inherit the transformation of its parent node, defaults to true. When this flag is false the value
 	 * of {@link #globalTransform} will be the same as the value of {@link #localTransform} causing the transform to be independent
 	 * of its parent transform. */
@@ -51,7 +52,7 @@ public class Node {
 
 	public Array<NodePart> parts = new Array<NodePart>(2);
 
-	protected Node parent;
+	@SuppressWarnings("NullAway.Init") protected Node parent;
 	private final Array<Node> children = new Array<Node>(2);
 
 	/** Calculates the local transform based on the translation, scale and rotation
@@ -146,7 +147,7 @@ public class Node {
 
 	/** Removes this node from its current parent, if any. Short for: <code>this.getParent().removeChild(this)</code> */
 
-	public void detach () {
+	@NullUnmarked public void detach () {
 		if (parent != null) {
 			parent.removeChild(this);
 			parent = null;
@@ -233,7 +234,7 @@ public class Node {
 	 * @param child The child node to remove.
 	 * @return Whether the removal was successful. */
 
-	public <T extends Node> boolean removeChild (final T child) {
+	@NullUnmarked public <T extends Node> boolean removeChild (final T child) {
 		if (!children.removeValue(child, true)) return false;
 		child.parent = null;
 		return true;
@@ -298,7 +299,7 @@ public class Node {
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
 
-	public static Node getNode (final Array<Node> nodes, final String id, boolean recursive, boolean ignoreCase) {
+	@NullUnmarked public static Node getNode (final Array<Node> nodes, final String id, boolean recursive, boolean ignoreCase) {
 		final int n = nodes.size;
 		Node node;
 		if (ignoreCase) {

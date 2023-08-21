@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A single-line text input field.
  * <p>
@@ -77,22 +78,22 @@ public class TextField extends Widget implements Disableable {
 	static public float keyRepeatInitialTime = 0.4f;
 	static public float keyRepeatTime = 0.1f;
 
-	protected String text;
+	@SuppressWarnings("NullAway.Init") protected String text;
 	protected int cursor, selectionStart;
 	protected boolean hasSelection;
 	protected boolean writeEnters;
 	protected final GlyphLayout layout = new GlyphLayout();
 	protected final FloatArray glyphPositions = new FloatArray();
 
-	TextFieldStyle style;
-	private String messageText;
-	protected CharSequence displayText;
+	@SuppressWarnings("NullAway.Init") TextFieldStyle style;
+	@SuppressWarnings("NullAway.Init") private String messageText;
+	@SuppressWarnings("NullAway.Init") protected CharSequence displayText;
 	Clipboard clipboard;
-	InputListener inputListener;
+	@SuppressWarnings("NullAway.Init") InputListener inputListener;
 
-	@Null TextFieldListener listener;
+	@SuppressWarnings("NullAway.Init") @Null TextFieldListener listener;
 
-	@Null TextFieldFilter filter;
+	@SuppressWarnings("NullAway.Init") @Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
 	boolean focusTraversal = true, onlyFontChars = true, disabled;
 	private int textHAlign = Align.left;
@@ -102,7 +103,7 @@ public class TextField extends Widget implements Disableable {
 	long lastChangeTime;
 
 	boolean passwordMode;
-	private StringBuilder passwordBuffer;
+	@SuppressWarnings("NullAway.Init") private StringBuilder passwordBuffer;
 	private char passwordCharacter = BULLET;
 
 	protected float fontOffset, textHeight, textOffset;
@@ -513,7 +514,7 @@ public class TextField extends Widget implements Disableable {
 	 * onscreen keyboard is hidden. Does nothing if the text field is not in a stage.
 	 * @param up If true, the text field with the same or next smallest y coordinate is found, else the next highest. */
 
-	public void next (boolean up) {
+	@NullUnmarked public void next (boolean up) {
 		Stage stage = getStage();
 		if (stage == null) return;
 		TextField current = this;
@@ -788,7 +789,7 @@ public class TextField extends Widget implements Disableable {
 	class KeyRepeatTask extends Task {
 		int keycode;
 
-		public void run () {
+		@NullUnmarked public void run () {
 			if (getStage() == null) {
 				cancel();
 				return;
@@ -1090,17 +1091,17 @@ public class TextField extends Widget implements Disableable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class TextFieldStyle {
-		public BitmapFont font;
-		public Color fontColor;
-		public @Null Color focusedFontColor, disabledFontColor;
-		public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
-		public @Null BitmapFont messageFont;
-		public @Null Color messageFontColor;
+		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		@SuppressWarnings("NullAway.Init") public Color fontColor;
+		@SuppressWarnings("NullAway.Init") public @Null Color focusedFontColor, disabledFontColor;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
+		@SuppressWarnings("NullAway.Init") public @Null BitmapFont messageFont;
+		@SuppressWarnings("NullAway.Init") public @Null Color messageFontColor;
 
-		public TextFieldStyle () {
+		@NullUnmarked public TextFieldStyle () {
 		}
 
-		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,
+		@NullUnmarked public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,
 			@Null Drawable background) {
 			this.font = font;
 			this.fontColor = fontColor;
@@ -1109,7 +1110,7 @@ public class TextField extends Widget implements Disableable {
 			this.background = background;
 		}
 
-		public TextFieldStyle (TextFieldStyle style) {
+		@NullUnmarked public TextFieldStyle (TextFieldStyle style) {
 			font = style.font;
 			if (style.fontColor != null) fontColor = new Color(style.fontColor);
 			if (style.focusedFontColor != null) focusedFontColor = new Color(style.focusedFontColor);

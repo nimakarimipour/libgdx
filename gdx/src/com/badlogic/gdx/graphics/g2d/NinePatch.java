@@ -44,7 +44,7 @@ public class NinePatch {
 
 	static private final Color tmpDrawColor = new Color();
 
-	private Texture texture;
+	@SuppressWarnings("NullAway.Init") private Texture texture;
 	private int bottomLeft, bottomCenter, bottomRight;
 	private int middleLeft, middleCenter, middleRight;
 	private int topLeft, topCenter, topRight;

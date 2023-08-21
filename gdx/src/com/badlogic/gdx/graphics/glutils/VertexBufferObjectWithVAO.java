@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.IntArray;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * <p>
@@ -142,7 +143,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	 *
 	 * @param shader the shader */
 
-	@Override
+	@NullUnmarked @Override
 	public void bind (ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -232,7 +233,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
 	 *
 	 * @param shader the shader */
 
-	@Override
+	@NullUnmarked @Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}

@@ -19,18 +19,19 @@ package com.badlogic.gdx.scenes.scene2d;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Null;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Event for actor input: touch, mouse, touch/mouse actor enter/exit, mouse scroll, and keyboard events.
  * @see InputListener */
 public class InputEvent extends Event {
-	private Type type;
+	@SuppressWarnings("NullAway.Init") private Type type;
 	private float stageX, stageY, scrollAmountX, scrollAmountY;
 	private int pointer, button, keyCode;
 	private char character;
-	private @Null Actor relatedActor;
+	@SuppressWarnings("NullAway.Init") private @Null Actor relatedActor;
 	private boolean touchFocus = true;
 
-	public void reset () {
+	@NullUnmarked public void reset () {
 		super.reset();
 		relatedActor = null;
 		button = -1;

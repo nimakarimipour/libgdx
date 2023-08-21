@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A table that can be dragged and act as a modal window. The top padding is used as the window's title height.
  * <p>
@@ -42,7 +43,7 @@ public class Window extends Table {
 	static private final Vector2 tmpSize = new Vector2();
 	static private final int MOVE = 1 << 5;
 
-	private WindowStyle style;
+	@SuppressWarnings("NullAway.Init") private WindowStyle style;
 	boolean isMovable = true, isModal, isResizable;
 	int resizeBorder = 8;
 	boolean keepWithinStage = true;
@@ -275,7 +276,7 @@ public class Window extends Table {
 		drawTitleTable = false; // Avoid drawing the title table again in drawChildren.
 	}
 
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked public @Null Actor hit (float x, float y, boolean touchable) {
 		if (!isVisible()) return null;
 		Actor hit = super.hit(x, y, touchable);
 		if (hit == null && isModal && (!touchable || getTouchable() == Touchable.enabled)) return this;
@@ -342,21 +343,21 @@ public class Window extends Table {
 	/** The style for a window, see {@link Window}.
 	 * @author Nathan Sweet */
 	static public class WindowStyle {
-		public @Null Drawable background;
-		public BitmapFont titleFont;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable background;
+		@SuppressWarnings("NullAway.Init") public BitmapFont titleFont;
 		public @Null Color titleFontColor = new Color(1, 1, 1, 1);
-		public @Null Drawable stageBackground;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable stageBackground;
 
-		public WindowStyle () {
+		@NullUnmarked public WindowStyle () {
 		}
 
-		public WindowStyle (BitmapFont titleFont, Color titleFontColor, @Null Drawable background) {
+		@NullUnmarked public WindowStyle (BitmapFont titleFont, Color titleFontColor, @Null Drawable background) {
 			this.titleFont = titleFont;
 			this.titleFontColor.set(titleFontColor);
 			this.background = background;
 		}
 
-		public WindowStyle (WindowStyle style) {
+		@NullUnmarked public WindowStyle (WindowStyle style) {
 			background = style.background;
 			titleFont = style.titleFont;
 			if (style.titleFontColor != null) titleFontColor = new Color(style.titleFontColor);

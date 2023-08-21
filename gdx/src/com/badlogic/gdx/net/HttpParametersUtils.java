@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.badlogic.gdx.Net.HttpRequest;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Provides utility methods to work with the {@link HttpRequest} content and parameters. */
 public final class HttpParametersUtils {
@@ -37,7 +38,7 @@ public final class HttpParametersUtils {
 	 * @param parameters A Map<String, String> with the parameters to encode.
 	 * @return The String with the parameters encoded. */
 
-	public static String convertHttpParameters (Map<String, String> parameters) {
+	@NullUnmarked public static String convertHttpParameters (Map<String, String> parameters) {
 		Set<String> keySet = parameters.keySet();
 		StringBuilder convertedParameters = new StringBuilder();
 		for (String name : keySet) {

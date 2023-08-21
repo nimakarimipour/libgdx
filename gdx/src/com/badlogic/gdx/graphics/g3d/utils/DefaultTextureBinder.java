@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Class that you assign a range of texture units and binds textures for you within that range. It does some basic usage tracking
  * to avoid unnecessary bind calls.
@@ -39,7 +40,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 	/** The textures currently exclusive bound */
 	private final GLTexture[] textures;
 	/** Texture units ordered from most to least recently used */
-	private int[] unitsLRU;
+	@SuppressWarnings("NullAway.Init") private int[] unitsLRU;
 	/** The method of binding to use */
 	private final int method;
 	/** Flag to indicate the current texture is reused */
@@ -58,7 +59,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		this(method, offset, -1);
 	}
 
-	public DefaultTextureBinder (final int method, final int offset, int count) {
+	@NullUnmarked public DefaultTextureBinder (final int method, final int offset, int count) {
 		final int max = Math.min(getMaxTextureUnits(), MAX_GLES_UNITS);
 		if (count < 0) count = max - offset;
 		if (offset < 0 || count < 0 || (offset + count) > max) throw new GdxRuntimeException("Illegal arguments");
@@ -100,7 +101,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 
 	private final TextureDescriptor tempDesc = new TextureDescriptor();
 
-	@Override
+	@NullUnmarked @Override
 	public final int bind (final GLTexture texture) {
 		tempDesc.set(texture, null, null, null, null);
 		return bindTexture(tempDesc, false);

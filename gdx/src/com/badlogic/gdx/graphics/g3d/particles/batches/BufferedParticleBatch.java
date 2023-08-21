@@ -27,7 +27,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 	protected Array<T> renderData;
 	protected int bufferedParticlesCount, currentCapacity = 0;
 	protected ParticleSorter sorter;
-	protected Camera camera;
+	@SuppressWarnings("NullAway.Init") protected Camera camera;
 
 	protected BufferedParticleBatch (Class<T> type) {
 		this.sorter = new ParticleSorter.Distance();

@@ -18,11 +18,12 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Removes a listener from an actor.
  * @author Nathan Sweet */
 public class RemoveListenerAction extends Action {
-	private EventListener listener;
+	@SuppressWarnings("NullAway.Init") private EventListener listener;
 	private boolean capture;
 
 	public boolean act (float delta) {
@@ -49,7 +50,7 @@ public class RemoveListenerAction extends Action {
 		this.capture = capture;
 	}
 
-	public void reset () {
+	@NullUnmarked public void reset () {
 		super.reset();
 		listener = null;
 	}

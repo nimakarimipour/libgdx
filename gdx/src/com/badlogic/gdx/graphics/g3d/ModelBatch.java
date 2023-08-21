@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Batches {@link Renderable} instances, fetches {@link Shader}s for them, sorts them and then renders them. Fetching the shaders
  * is done using a {@link ShaderProvider}, which defaults to {@link DefaultShaderProvider}. Sorting the renderables is done using
@@ -47,7 +48,7 @@ public class ModelBatch implements Disposable {
 			return new Renderable();
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public Renderable obtain () {
 			Renderable renderable = super.obtain();
 			renderable.environment = null;
@@ -59,7 +60,7 @@ public class ModelBatch implements Disposable {
 		}
 	}
 
-	protected Camera camera;
+	@SuppressWarnings("NullAway.Init") protected Camera camera;
 	protected final RenderablePool renderablesPool = new RenderablePool();
 	/** list of Renderables to be rendered in the current batch **/
 	protected final Array<Renderable> renderables = new Array<Renderable>();
@@ -88,7 +89,7 @@ public class ModelBatch implements Disposable {
 	 * @param context The {@link RenderContext} to use.
 	 * @param shaderProvider The {@link ShaderProvider} to use, will be disposed when this ModelBatch is disposed. */
 
-	public ModelBatch (final RenderContext context, final ShaderProvider shaderProvider) {
+	@NullUnmarked public ModelBatch (final RenderContext context, final ShaderProvider shaderProvider) {
 		this(context, shaderProvider, null);
 	}
 
@@ -97,7 +98,7 @@ public class ModelBatch implements Disposable {
 	 * @param context The {@link RenderContext} to use.
 	 * @param sorter The {@link RenderableSorter} to use. */
 
-	public ModelBatch (final RenderContext context, final RenderableSorter sorter) {
+	@NullUnmarked public ModelBatch (final RenderContext context, final RenderableSorter sorter) {
 		this(context, null, sorter);
 	}
 
@@ -105,7 +106,7 @@ public class ModelBatch implements Disposable {
 	 * yourself.
 	 * @param context The {@link RenderContext} to use. */
 
-	public ModelBatch (final RenderContext context) {
+	@NullUnmarked public ModelBatch (final RenderContext context) {
 		this(context, null, null);
 	}
 
@@ -113,21 +114,21 @@ public class ModelBatch implements Disposable {
 	 * @param shaderProvider The {@link ShaderProvider} to use, will be disposed when this ModelBatch is disposed.
 	 * @param sorter The {@link RenderableSorter} to use. */
 
-	public ModelBatch (final ShaderProvider shaderProvider, final RenderableSorter sorter) {
+	@NullUnmarked public ModelBatch (final ShaderProvider shaderProvider, final RenderableSorter sorter) {
 		this(null, shaderProvider, sorter);
 	}
 
 	/** Construct a ModelBatch
 	 * @param sorter The {@link RenderableSorter} to use. */
 
-	public ModelBatch (final RenderableSorter sorter) {
+	@NullUnmarked public ModelBatch (final RenderableSorter sorter) {
 		this(null, null, sorter);
 	}
 
 	/** Construct a ModelBatch
 	 * @param shaderProvider The {@link ShaderProvider} to use, will be disposed when this ModelBatch is disposed. */
 
-	public ModelBatch (final ShaderProvider shaderProvider) {
+	@NullUnmarked public ModelBatch (final ShaderProvider shaderProvider) {
 		this(null, shaderProvider, null);
 	}
 
@@ -136,7 +137,7 @@ public class ModelBatch implements Disposable {
 	 * @param vertexShader The {@link FileHandle} of the vertex shader to use.
 	 * @param fragmentShader The {@link FileHandle} of the fragment shader to use. */
 
-	public ModelBatch (final FileHandle vertexShader, final FileHandle fragmentShader) {
+	@NullUnmarked public ModelBatch (final FileHandle vertexShader, final FileHandle fragmentShader) {
 		this(null, new DefaultShaderProvider(vertexShader, fragmentShader), null);
 	}
 
@@ -145,13 +146,13 @@ public class ModelBatch implements Disposable {
 	 * @param vertexShader The vertex shader to use.
 	 * @param fragmentShader The fragment shader to use. */
 
-	public ModelBatch (final String vertexShader, final String fragmentShader) {
+	@NullUnmarked public ModelBatch (final String vertexShader, final String fragmentShader) {
 		this(null, new DefaultShaderProvider(vertexShader, fragmentShader), null);
 	}
 
 	/** Construct a ModelBatch with the default implementation */
 
-	public ModelBatch () {
+	@NullUnmarked public ModelBatch () {
 		this(null, null, null);
 	}
 
@@ -227,7 +228,7 @@ public class ModelBatch implements Disposable {
 	 * batch, causing any renderables provided using one of the render() methods to be rendered. After a call to this method the
 	 * OpenGL context can be altered again. */
 
-	public void end () {
+	@NullUnmarked public void end () {
 		flush();
 		if (ownContext) context.end();
 		camera = null;

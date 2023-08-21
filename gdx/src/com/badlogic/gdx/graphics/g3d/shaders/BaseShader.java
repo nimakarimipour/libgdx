@@ -36,6 +36,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.IntIntMap;
+import com.uber.nullaway.annotations.Initializer;
+import org.jspecify.annotations.NullUnmarked;
 
 /** @author Xoppa A BaseShader is a wrapper around a ShaderProgram that keeps track of the uniform and attribute locations. It
  *         does not manage the ShaderPogram, you are still responsible for disposing the ShaderProgram. */
@@ -109,9 +111,9 @@ public abstract class BaseShader implements Shader {
 	private final IntIntMap attributes = new IntIntMap();
 
 	public ShaderProgram program;
-	public RenderContext context;
-	public Camera camera;
-	private Mesh currentMesh;
+	@SuppressWarnings("NullAway.Init") public RenderContext context;
+	@SuppressWarnings("NullAway.Init") public Camera camera;
+	@SuppressWarnings("NullAway.Init") private Mesh currentMesh;
 
 	/** Register an uniform which might be used by this shader. Only possible prior to the call to init().
 	 * @return The ID of the uniform to use in this shader. */
@@ -129,15 +131,15 @@ public abstract class BaseShader implements Shader {
 		return uniforms.size - 1;
 	}
 
-	public int register (final String alias, final Validator validator) {
+	@NullUnmarked public int register (final String alias, final Validator validator) {
 		return register(alias, validator, null);
 	}
 
-	public int register (final String alias, final Setter setter) {
+	@NullUnmarked public int register (final String alias, final Setter setter) {
 		return register(alias, null, setter);
 	}
 
-	public int register (final String alias) {
+	@NullUnmarked public int register (final String alias) {
 		return register(alias, null, null);
 	}
 
@@ -145,7 +147,7 @@ public abstract class BaseShader implements Shader {
 		return register(uniform.alias, uniform, setter);
 	}
 
-	public int register (final Uniform uniform) {
+	@NullUnmarked public int register (final Uniform uniform) {
 		return register(uniform, null);
 	}
 
@@ -164,7 +166,7 @@ public abstract class BaseShader implements Shader {
 
 	/** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
 
-	public void init (final ShaderProgram program, final Renderable renderable) {
+	@NullUnmarked @Initializer public void init (final ShaderProgram program, final Renderable renderable) {
 		if (locations != null) throw new GdxRuntimeException("Already initialized");
 		if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
 		this.program = program;
@@ -202,7 +204,7 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void begin (Camera camera, RenderContext context) {
 		this.camera = camera;
 		this.context = context;
@@ -246,7 +248,7 @@ public abstract class BaseShader implements Shader {
 		renderable.meshPart.render(program, false);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void end () {
 		if (currentMesh != null) {
 			currentMesh.unbind(program, tempArray.items);
@@ -254,7 +256,7 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void dispose () {
 		program = null;
 		uniforms.clear();

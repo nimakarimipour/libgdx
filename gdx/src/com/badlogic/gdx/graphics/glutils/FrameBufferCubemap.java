@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * <p>
@@ -166,7 +167,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 
 	/** Get the currently bound side. */
 
-	public Cubemap.CubemapSide getSide () {
+	@NullUnmarked public Cubemap.CubemapSide getSide () {
 		return currentSide < 0 ? null : cubemapSides[currentSide];
 	}
 }

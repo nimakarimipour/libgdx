@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A PolygonSpriteBatch is used to draw 2D polygons that reference a texture (region). The class will batch the drawing commands
  * and optimize them for processing by the GPU.
@@ -61,7 +62,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	private final float[] vertices;
 	private final short[] triangles;
 	private int vertexIndex, triangleIndex;
-	private Texture lastTexture;
+	@SuppressWarnings("NullAway.Init") private Texture lastTexture;
 	private float invTexWidth = 0, invTexHeight = 0;
 	private boolean drawing;
 
@@ -76,7 +77,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	private int blendDstFuncAlpha = GL20.GL_ONE_MINUS_SRC_ALPHA;
 
 	private final ShaderProgram shader;
-	private ShaderProgram customShader;
+	@SuppressWarnings("NullAway.Init") private ShaderProgram customShader;
 	private boolean ownsShader;
 
 	private final Color color = new Color(1, 1, 1, 1);
@@ -94,7 +95,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	/** Constructs a PolygonSpriteBatch with the default shader, 2000 vertices, and 4000 triangles.
 	 * @see #PolygonSpriteBatch(int, int, ShaderProgram) */
 
-	public PolygonSpriteBatch () {
+	@NullUnmarked public PolygonSpriteBatch () {
 		this(2000, null);
 	}
 
@@ -102,7 +103,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	 * @param size The max number of vertices and number of triangles in a single batch. Max of 32767.
 	 * @see #PolygonSpriteBatch(int, int, ShaderProgram) */
 
-	public PolygonSpriteBatch (int size) {
+	@NullUnmarked public PolygonSpriteBatch (int size) {
 		this(size, size * 2, null);
 	}
 
@@ -164,7 +165,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
 		drawing = true;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void end () {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before end.");
 		if (vertexIndex > 0) flush();

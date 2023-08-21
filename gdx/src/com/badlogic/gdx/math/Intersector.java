@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.FloatArray;
 
 import java.util.Arrays;
 import java.util.List;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Class offering various static methods for intersection testing between different geometric objects.
  * @author badlogicgames@gmail.com
@@ -222,7 +223,7 @@ public final class Intersector {
 
 	/** Returns true if the lines of the specified poygons intersect. */
 
-	static public boolean intersectPolygonEdges (FloatArray polygon1, FloatArray polygon2) {
+	@NullUnmarked static public boolean intersectPolygonEdges (FloatArray polygon1, FloatArray polygon2) {
 		int last1 = polygon1.size - 2, last2 = polygon2.size - 2;
 		float[] p1 = polygon1.items, p2 = polygon2.items;
 		float x1 = p1[last1], y1 = p1[last1 + 1];
@@ -1008,7 +1009,7 @@ public final class Intersector {
 	 * @param rectangle rectangle that is being tested for collision
 	 * @return whether the rectangle intersects with the line segment */
 
-	public static boolean intersectSegmentRectangle (float startX, float startY, float endX, float endY, Rectangle rectangle) {
+	@NullUnmarked public static boolean intersectSegmentRectangle (float startX, float startY, float endX, float endY, Rectangle rectangle) {
 		float rectangleEndX = rectangle.x + rectangle.width;
 		float rectangleEndY = rectangle.y + rectangle.height;
 
@@ -1147,7 +1148,7 @@ public final class Intersector {
 	 * @param p2 The second polygon.
 	 * @return Whether polygons overlap. */
 
-	public static boolean overlapConvexPolygons (Polygon p1, Polygon p2) {
+	@NullUnmarked public static boolean overlapConvexPolygons (Polygon p1, Polygon p2) {
 		return overlapConvexPolygons(p1, p2, null);
 	}
 

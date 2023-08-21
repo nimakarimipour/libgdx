@@ -17,6 +17,7 @@
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Pool.Poolable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Track properties of a stream of float values. The properties (total value, minimum, etc) are updated as values are
  * {@link #put(float)} into the stream.
@@ -43,7 +44,7 @@ public class FloatCounter implements Poolable {
 	/** Construct a new FloatCounter
 	 * @param windowSize The size of the mean window or 1 or below to not use a windowed mean. */
 
-	public FloatCounter (int windowSize) {
+	@NullUnmarked public FloatCounter (int windowSize) {
 		mean = (windowSize > 1) ? new WindowedMean(windowSize) : null;
 		reset();
 	}

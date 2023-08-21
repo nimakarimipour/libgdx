@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * <p>
@@ -40,9 +41,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  *
  * @author mzechner, Dave Clayton <contact@redskyforge.com> */
 public class VertexBufferObject implements VertexData {
-	private VertexAttributes attributes;
-	private FloatBuffer buffer;
-	private ByteBuffer byteBuffer;
+	@SuppressWarnings("NullAway.Init") private VertexAttributes attributes;
+	@SuppressWarnings("NullAway.Init") private FloatBuffer buffer;
+	@SuppressWarnings("NullAway.Init") private ByteBuffer byteBuffer;
 	private boolean ownsBuffer;
 	private int bufferHandle;
 	private int usage;
@@ -164,7 +165,7 @@ public class VertexBufferObject implements VertexData {
 	/** Binds this VertexBufferObject for rendering via glDrawArrays or glDrawElements
 	 * @param shader the shader */
 
-	@Override
+	@NullUnmarked @Override
 	public void bind (ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -210,7 +211,7 @@ public class VertexBufferObject implements VertexData {
 	 *
 	 * @param shader the shader */
 
-	@Override
+	@NullUnmarked @Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}

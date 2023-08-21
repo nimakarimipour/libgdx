@@ -20,6 +20,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Executes tasks in the future on the main loop thread.
  * @author Nathan Sweet */
@@ -29,7 +30,7 @@ public class Timer {
 	// Task access is synchronized using the Task instance.
 
 	static final Object threadLock = new Object();
-	static TimerThread thread;
+	@SuppressWarnings("NullAway.Init") static TimerThread thread;
 
 	/** Timer instance singleton for general application wide usage. Static methods on {@link Timer} make convenient use of this
 	 * instance. */
@@ -114,7 +115,7 @@ public class Timer {
 
 	/** Cancels all tasks. */
 
-	public synchronized void clear () {
+	@NullUnmarked public synchronized void clear () {
 		for (int i = 0, n = tasks.size; i < n; i++) {
 			Task task = tasks.get(i);
 			synchronized (task) {
@@ -131,7 +132,7 @@ public class Timer {
 		return tasks.size == 0;
 	}
 
-	synchronized long update (long timeMillis, long waitMillis) {
+	@NullUnmarked synchronized long update (long timeMillis, long waitMillis) {
 		for (int i = 0, n = tasks.size; i < n; i++) {
 			Task task = tasks.get(i);
 			synchronized (task) {
@@ -195,9 +196,9 @@ public class Timer {
 		final Application app;
 		long executeTimeMillis, intervalMillis;
 		int repeatCount;
-		volatile Timer timer;
+		@SuppressWarnings("NullAway.Init") volatile Timer timer;
 
-		public Task () {
+		@NullUnmarked public Task () {
 			app = Gdx.app; // Store which app to postRunnable (eg for multiple LwjglAWTCanvas).
 			if (app == null) throw new IllegalStateException("Gdx.app not available.");
 		}
@@ -208,7 +209,7 @@ public class Timer {
 
 		/** Cancels the task. It will not be executed until it is scheduled again. This method can be called at any time. */
 
-		public void cancel () {
+		@NullUnmarked public void cancel () {
 			Timer timer = this.timer;
 			if (timer != null) {
 				synchronized (timer) {
@@ -252,10 +253,10 @@ public class Timer {
 		final Files files;
 		final Application app;
 		final Array<Timer> instances = new Array(1);
-		Timer instance;
+		@SuppressWarnings("NullAway.Init") Timer instance;
 		long pauseTimeMillis;
 
-		public TimerThread () {
+		@NullUnmarked public TimerThread () {
 			files = Gdx.files;
 			app = Gdx.app;
 			app.addLifecycleListener(this);
@@ -311,7 +312,7 @@ public class Timer {
 			}
 		}
 
-		public void dispose () { // OK to call multiple times.
+		@NullUnmarked public void dispose () { // OK to call multiple times.
 			synchronized (threadLock) {
 				if (thread == this) thread = null;
 				instances.clear();

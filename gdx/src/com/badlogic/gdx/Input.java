@@ -17,6 +17,7 @@
 package com.badlogic.gdx;
 
 import com.badlogic.gdx.utils.ObjectIntMap;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * <p>
@@ -275,7 +276,7 @@ public interface Input {
 		/** @return a human readable representation of the keycode. The returned value can be used in
 		 *         {@link Input.Keys#valueOf(String)} */
 
-		public static String toString (int keycode) {
+		@NullUnmarked public static String toString (int keycode) {
 			if (keycode < 0) throw new IllegalArgumentException("keycode cannot be negative, keycode: " + keycode);
 			if (keycode > MAX_KEYCODE) throw new IllegalArgumentException("keycode cannot be greater than 255, keycode: " + keycode);
 			switch (keycode) {
@@ -621,7 +622,7 @@ public interface Input {
 			}
 		}
 
-		private static ObjectIntMap<String> keyNames;
+		@SuppressWarnings("NullAway.Init") private static ObjectIntMap<String> keyNames;
 
 		/** @param keyname the keyname returned by the {@link Keys#toString(int)} method
 		 * @return the int keycode */

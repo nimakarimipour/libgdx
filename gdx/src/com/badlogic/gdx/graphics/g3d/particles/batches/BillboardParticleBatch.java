@@ -43,6 +43,7 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import org.jspecify.annotations.NullUnmarked;
 
 /** This class is used to render billboard particles.
  * @author Inferno */
@@ -102,7 +103,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	public static class Config {
 
-		public Config () {
+		@NullUnmarked public Config () {
 		}
 
 		public Config (boolean useGPU, AlignMode mode) {
@@ -111,21 +112,21 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 
 		boolean useGPU;
-		AlignMode mode;
+		@SuppressWarnings("NullAway.Init") AlignMode mode;
 	}
 
 	private RenderablePool renderablePool;
 	private Array<Renderable> renderables;
-	private float[] vertices;
+	@SuppressWarnings("NullAway.Init") private float[] vertices;
 	private short[] indices;
 	private int currentVertexSize = 0;
-	private VertexAttributes currentAttributes;
+	@SuppressWarnings("NullAway.Init") private VertexAttributes currentAttributes;
 	protected boolean useGPU = false;
 	protected AlignMode mode = AlignMode.Screen;
-	protected Texture texture;
+	@SuppressWarnings("NullAway.Init") protected Texture texture;
 	protected BlendingAttribute blendingAttribute;
 	protected DepthTestAttribute depthTestAttribute;
-	Shader shader;
+	@SuppressWarnings("NullAway.Init") Shader shader;
 
 	/** Create a new BillboardParticleBatch
 	 * @param mode
@@ -152,7 +153,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		setAlignMode(mode);
 	}
 
-	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity) {
+	@NullUnmarked public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity) {
 		this(mode, useGPU, capacity, null, null);
 	}
 

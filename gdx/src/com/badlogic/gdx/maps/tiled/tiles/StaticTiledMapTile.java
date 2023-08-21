@@ -28,9 +28,9 @@ public class StaticTiledMapTile implements TiledMapTile {
 
 	private BlendMode blendMode = BlendMode.ALPHA;
 
-	private MapProperties properties;
+	@SuppressWarnings("NullAway.Init") private MapProperties properties;
 
-	private MapObjects objects;
+	@SuppressWarnings("NullAway.Init") private MapObjects objects;
 
 	private TextureRegion textureRegion;
 

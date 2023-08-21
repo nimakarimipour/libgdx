@@ -23,6 +23,7 @@ import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Pools;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A builder for {@link HttpRequest}s.
  * 
@@ -42,7 +43,7 @@ public class HttpRequestBuilder {
 	/** Will be used for the object serialization in case {@link #jsonContent(Object)} is called. */
 	public static Json json = new Json();
 
-	private HttpRequest httpRequest;
+	@SuppressWarnings("NullAway.Init") private HttpRequest httpRequest;
 
 	/** Initializes the builder and sets it up to build a new {@link HttpRequest} . */
 	public HttpRequestBuilder newRequest () {
@@ -144,7 +145,7 @@ public class HttpRequestBuilder {
 	/** Returns the {@link HttpRequest} that has been setup by this builder so far. After using the request, it should be returned
 	 * to the pool via {@code Pools.free(request)}. */
 
-	public HttpRequest build () {
+	@NullUnmarked public HttpRequest build () {
 		validate();
 		HttpRequest request = httpRequest;
 		httpRequest = null;

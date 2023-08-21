@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Open GLES wrapper for TextureArray
  * @author Tomski */
@@ -69,7 +70,7 @@ public class TextureArray extends GLTexture {
 		return handles;
 	}
 
-	private void load (TextureArrayData data) {
+	@NullUnmarked private void load (TextureArrayData data) {
 		if (this.data != null && data.isManaged() != this.data.isManaged())
 			throw new GdxRuntimeException("New data must have the same managed status as the old data");
 		this.data = data;
@@ -150,7 +151,7 @@ public class TextureArray extends GLTexture {
 
 	/** @return the number of managed TextureArrays currently loaded */
 
-	public static int getNumManagedTextureArrays () {
+	@NullUnmarked public static int getNumManagedTextureArrays () {
 		return managedTextureArrays.get(Gdx.app).size;
 	}
 

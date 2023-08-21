@@ -26,7 +26,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 public class DefaultRenderableSorter implements RenderableSorter, Comparator<Renderable> {
-	private Camera camera;
+	@SuppressWarnings("NullAway.Init") private Camera camera;
 	private final Vector3 tmpV1 = new Vector3();
 	private final Vector3 tmpV2 = new Vector3();
 

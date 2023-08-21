@@ -20,11 +20,11 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
 public class ModelNode {
-	public String id;
-	public Vector3 translation;
-	public Quaternion rotation;
-	public Vector3 scale;
-	public String meshId;
-	public ModelNodePart[] parts;
-	public ModelNode[] children;
+	@SuppressWarnings("NullAway.Init") public String id;
+	@SuppressWarnings("NullAway.Init") public Vector3 translation;
+	@SuppressWarnings("NullAway.Init") public Quaternion rotation;
+	@SuppressWarnings("NullAway.Init") public Vector3 scale;
+	@SuppressWarnings("NullAway.Init") public String meshId;
+	@SuppressWarnings("NullAway.Init") public ModelNodePart[] parts;
+	@SuppressWarnings("NullAway.Init") public ModelNode[] children;
 }

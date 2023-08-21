@@ -20,8 +20,8 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ArrayMap;
 
 public class ModelNodePart {
-	public String materialId;
-	public String meshPartId;
-	public ArrayMap<String, Matrix4> bones;
-	public int uvMapping[][];
+	@SuppressWarnings("NullAway.Init") public String materialId;
+	@SuppressWarnings("NullAway.Init") public String meshPartId;
+	@SuppressWarnings("NullAway.Init") public ArrayMap<String, Matrix4> bones;
+	@SuppressWarnings("NullAway.Init") public int uvMapping[][];
 }

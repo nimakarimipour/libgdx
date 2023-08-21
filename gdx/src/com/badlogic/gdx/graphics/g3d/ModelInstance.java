@@ -28,6 +28,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Pool;
+import org.jspecify.annotations.NullUnmarked;
 
 /** An instance of a {@link Model}, allows to specify global transform and modify the materials, as it has a copy of the model's
  * materials. Multiple instances can be created from the same Model, all sharing the meshes and textures of the Model. The Model
@@ -54,12 +55,12 @@ public class ModelInstance implements RenderableProvider {
 	/** the world transform **/
 	public Matrix4 transform;
 	/** user definable value, which is passed to the {@link Shader}. */
-	public Object userData;
+	@SuppressWarnings("NullAway.Init") public Object userData;
 
 	/** Constructs a new ModelInstance with all nodes and materials of the given model.
 	 * @param model The {@link Model} to create an instance of. */
 
-	public ModelInstance (final Model model) {
+	@NullUnmarked public ModelInstance (final Model model) {
 		this(model, (String[])null);
 	}
 
@@ -67,7 +68,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param nodeId The ID of the root {@link Node} of the {@link Model} for the instance to contain
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
 
-	public ModelInstance (final Model model, final String nodeId, boolean mergeTransform) {
+	@NullUnmarked public ModelInstance (final Model model, final String nodeId, boolean mergeTransform) {
 		this(model, null, nodeId, false, false, mergeTransform);
 	}
 
@@ -85,7 +86,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
 
-	public ModelInstance (final Model model, final String nodeId, boolean parentTransform, boolean mergeTransform) {
+	@NullUnmarked public ModelInstance (final Model model, final String nodeId, boolean parentTransform, boolean mergeTransform) {
 		this(model, null, nodeId, true, parentTransform, mergeTransform);
 	}
 
@@ -106,7 +107,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
 
-	public ModelInstance (final Model model, final String nodeId, boolean recursive, boolean parentTransform,
+	@NullUnmarked public ModelInstance (final Model model, final String nodeId, boolean recursive, boolean parentTransform,
 		boolean mergeTransform) {
 		this(model, null, nodeId, recursive, parentTransform, mergeTransform);
 	}
@@ -148,7 +149,7 @@ public class ModelInstance implements RenderableProvider {
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
 
-	public ModelInstance (final Model model, final String... rootNodeIds) {
+	@NullUnmarked public ModelInstance (final Model model, final String... rootNodeIds) {
 		this(model, null, rootNodeIds);
 	}
 
@@ -166,7 +167,7 @@ public class ModelInstance implements RenderableProvider {
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
 
-	public ModelInstance (final Model model, final Array<String> rootNodeIds) {
+	@NullUnmarked public ModelInstance (final Model model, final Array<String> rootNodeIds) {
 		this(model, null, rootNodeIds);
 	}
 
@@ -198,7 +199,7 @@ public class ModelInstance implements RenderableProvider {
 
 	/** Constructs a new ModelInstance with the specified transform. */
 
-	public ModelInstance (final Model model, Matrix4 transform) {
+	@NullUnmarked public ModelInstance (final Model model, Matrix4 transform) {
 		this(model, transform, (String[])null);
 	}
 
@@ -446,7 +447,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
 
-	public Animation getAnimation (final String id, boolean ignoreCase) {
+	@NullUnmarked public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
 		if (ignoreCase) {
@@ -469,7 +470,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
 
-	public Material getMaterial (final String id, boolean ignoreCase) {
+	@NullUnmarked public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;
 		if (ignoreCase) {

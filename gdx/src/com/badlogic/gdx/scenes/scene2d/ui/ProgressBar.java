@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A progress bar is a widget that visually displays the progress of some activity or a value within given range. The progress
  * bar has a range (min, max) and a stepping between each value it represents. The percentage of completeness typically starts out
@@ -42,7 +43,7 @@ import com.badlogic.gdx.utils.Pools;
  * @author mzechner
  * @author Nathan Sweet */
 public class ProgressBar extends Widget implements Disableable {
-	private ProgressBarStyle style;
+	@SuppressWarnings("NullAway.Init") private ProgressBarStyle style;
 	float min, max, stepSize;
 	private float value, animateFromValue;
 	float position;
@@ -383,15 +384,15 @@ public class ProgressBar extends Widget implements Disableable {
 	 * @author Nathan Sweet */
 	static public class ProgressBarStyle {
 		/** The progress bar background, stretched only in one direction. */
-		public @Null Drawable background, disabledBackground;
-		public @Null Drawable knob, disabledKnob;
-		public @Null Drawable knobBefore, disabledKnobBefore;
-		public @Null Drawable knobAfter, disabledKnobAfter;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable background, disabledBackground;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable knob, disabledKnob;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable knobBefore, disabledKnobBefore;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable knobAfter, disabledKnobAfter;
 
-		public ProgressBarStyle () {
+		@NullUnmarked public ProgressBarStyle () {
 		}
 
-		public ProgressBarStyle (@Null Drawable background, @Null Drawable knob) {
+		@NullUnmarked public ProgressBarStyle (@Null Drawable background, @Null Drawable knob) {
 			this.background = background;
 			this.knob = knob;
 		}

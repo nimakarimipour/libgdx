@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * <p>
@@ -77,7 +78,7 @@ public class VertexBufferObjectSubData implements VertexData {
 		((Buffer)byteBuffer).flip();
 	}
 
-	private int createBufferObject () {
+	@NullUnmarked private int createBufferObject () {
 		int result = Gdx.gl20.glGenBuffer();
 		Gdx.gl20.glBindBuffer(GL20.GL_ARRAY_BUFFER, result);
 		Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.capacity(), null, usage);
@@ -149,7 +150,7 @@ public class VertexBufferObjectSubData implements VertexData {
 	 *
 	 * @param shader the shader */
 
-	@Override
+	@NullUnmarked @Override
 	public void bind (final ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -194,7 +195,7 @@ public class VertexBufferObjectSubData implements VertexData {
 	 *
 	 * @param shader the shader */
 
-	@Override
+	@NullUnmarked @Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}

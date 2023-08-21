@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
@@ -40,18 +41,18 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
  * 
  * @author Nathan Sweet */
 public class JsonValue implements Iterable<JsonValue> {
-	private ValueType type;
+	@SuppressWarnings("NullAway.Init") private ValueType type;
 
 	/** May be null. */
-	private String stringValue;
+	@SuppressWarnings("NullAway.Init") private String stringValue;
 	private double doubleValue;
 	private long longValue;
 
-	public String name;
+	@SuppressWarnings("NullAway.Init") public String name;
 	/** May be null. */
-	public JsonValue child, parent;
+	@SuppressWarnings("NullAway.Init") public JsonValue child, parent;
 	/** May be null. When changing this field the parent {@link #size()} may need to be changed. */
-	public JsonValue next, prev;
+	@SuppressWarnings("NullAway.Init") public JsonValue next, prev;
 	public int size;
 
 	public JsonValue (ValueType type) {
@@ -63,11 +64,11 @@ public class JsonValue implements Iterable<JsonValue> {
 		set(value);
 	}
 
-	public JsonValue (double value) {
+	@NullUnmarked public JsonValue (double value) {
 		set(value, null);
 	}
 
-	public JsonValue (long value) {
+	@NullUnmarked public JsonValue (long value) {
 		set(value, null);
 	}
 
@@ -111,7 +112,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns an iterator for the child with the specified name, or an empty iterator if no child is found. */
 
-	public JsonIterator iterator (String name) {
+	@NullUnmarked public JsonIterator iterator (String name) {
 		JsonValue current = get(name);
 		if (current == null) {
 			JsonIterator iter = new JsonIterator();
@@ -142,7 +143,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
 
-	public @Null JsonValue remove (int index) {
+	@NullUnmarked public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -159,7 +160,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified name.
 	 * @return May be null. */
 
-	public @Null JsonValue remove (String name) {
+	@NullUnmarked public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -175,7 +176,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Removes this value from its parent. */
 
-	public void remove () {
+	@NullUnmarked public void remove () {
 		if (parent == null) throw new IllegalStateException();
 		if (prev == null) {
 			parent.child = next;
@@ -207,7 +208,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
 
-	public @Null String asString () {
+	@NullUnmarked public @Null String asString () {
 		switch (type) {
 		case stringValue:
 			return stringValue;
@@ -623,7 +624,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
 
-	public @Null JsonValue getChild (String name) {
+	@NullUnmarked public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
 	}
@@ -1245,7 +1246,7 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	public class JsonIterator implements Iterator<JsonValue>, Iterable<JsonValue> {
 		JsonValue entry = child;
-		JsonValue current;
+		@SuppressWarnings("NullAway.Init") JsonValue current;
 
 		public boolean hasNext () {
 			return entry != null;
@@ -1258,7 +1259,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
-		public void remove () {
+		@NullUnmarked public void remove () {
 			if (current.prev == null) {
 				child = current.next;
 				if (child != null) child.prev = null;
@@ -1279,7 +1280,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	static public class PrettyPrintSettings {
-		public OutputType outputType;
+		@SuppressWarnings("NullAway.Init") public OutputType outputType;
 
 		/** If an object on a single line fits this many columns, it won't wrap. */
 		public int singleLineColumns;

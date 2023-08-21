@@ -23,7 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 /** Sets the actor's {@link Actor#setTouchable(Touchable) touchability}.
  * @author Nathan Sweet */
 public class TouchableAction extends Action {
-	private Touchable touchable;
+	@SuppressWarnings("NullAway.Init") private Touchable touchable;
 
 	public boolean act (float delta) {
 		target.setTouchable(touchable);

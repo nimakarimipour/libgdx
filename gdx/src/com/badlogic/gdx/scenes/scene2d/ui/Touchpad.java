@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import org.jspecify.annotations.NullUnmarked;
 
 /** An on-screen joystick. The movement area of the joystick is circular, centered on the touchpad, and its size determined by the
  * smaller touchpad dimension.
@@ -38,7 +39,7 @@ import com.badlogic.gdx.utils.Pools;
  * previously.
  * @author Josh Street */
 public class Touchpad extends Widget {
-	private TouchpadStyle style;
+	@SuppressWarnings("NullAway.Init") private TouchpadStyle style;
 	boolean touched;
 	boolean resetOnTouchUp = true;
 	private float deadzoneRadius;
@@ -130,7 +131,7 @@ public class Touchpad extends Widget {
 		return style;
 	}
 
-	public Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked public Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.getTouchable() != Touchable.enabled) return null;
 		if (!isVisible()) return null;
 		return touchBounds.contains(x, y) ? this : null;
@@ -226,10 +227,10 @@ public class Touchpad extends Widget {
 	 * @author Josh Street */
 	public static class TouchpadStyle {
 		/** Stretched in both directions. */
-		public @Null Drawable background;
-		public @Null Drawable knob;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable background;
+		@SuppressWarnings("NullAway.Init") public @Null Drawable knob;
 
-		public TouchpadStyle () {
+		@NullUnmarked public TouchpadStyle () {
 		}
 
 		public TouchpadStyle (@Null Drawable background, @Null Drawable knob) {

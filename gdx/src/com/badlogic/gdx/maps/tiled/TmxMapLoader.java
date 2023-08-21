@@ -31,6 +31,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
+import org.jspecify.annotations.NullUnmarked;
 
 /** @brief synchronous loader for TMX maps created with the Tiled tool */
 public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
@@ -106,7 +107,7 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 		return descriptors;
 	}
 
-	protected Array<FileHandle> getDependencyFileHandles (FileHandle tmxFile) {
+	@NullUnmarked protected Array<FileHandle> getDependencyFileHandles (FileHandle tmxFile) {
 		Array<FileHandle> fileHandles = new Array<FileHandle>();
 
 		// TileSet descriptors

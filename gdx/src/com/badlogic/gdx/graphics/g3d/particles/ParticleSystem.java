@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Pool;
  * effects update.
  * @author inferno */
 public final class ParticleSystem implements RenderableProvider {
-	private static ParticleSystem instance;
+	@SuppressWarnings("NullAway.Init") private static ParticleSystem instance;
 
 	/** @deprecated Please directly use the constructor */
 	@Deprecated

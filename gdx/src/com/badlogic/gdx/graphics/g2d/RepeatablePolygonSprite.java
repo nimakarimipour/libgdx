@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ShortArray;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Renders polygon filled with a repeating TextureRegion with specified density Without causing an additional flush or render
  * call
@@ -27,7 +28,7 @@ import com.badlogic.gdx.utils.ShortArray;
  * @author Avetis Zakharyan */
 public class RepeatablePolygonSprite {
 
-	private TextureRegion region;
+	@SuppressWarnings("NullAway.Init") private TextureRegion region;
 	private float density;
 
 	private boolean dirty = true;
@@ -57,7 +58,7 @@ public class RepeatablePolygonSprite {
 	 * @param vertices - cw vertices of polygon
 	 * @param density - number of regions per polygon width bound */
 
-	public void setPolygon (TextureRegion region, float[] vertices, float density) {
+	@NullUnmarked public void setPolygon (TextureRegion region, float[] vertices, float density) {
 
 		this.region = region;
 
