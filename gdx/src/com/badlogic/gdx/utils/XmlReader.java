@@ -87,7 +87,8 @@ public class XmlReader {
 		}
 	}
 
-	@NullUnmarked public Element parse (char[] data, int offset, int length) {
+	@NullUnmarked
+	public Element parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length;
 
 		int s = 0;
@@ -435,7 +436,8 @@ public class XmlReader {
 		current = child;
 	}
 
-	@NullUnmarked protected void attribute (@Nullable String name, @Nullable String value) {
+	@NullUnmarked
+	protected void attribute (@Nullable String name, @Nullable String value) {
 		current.setAttribute(name, value);
 	}
 
@@ -525,7 +527,8 @@ public class XmlReader {
 			children.add(element);
 		}
 
-		@NullUnmarked public String getText () {
+		@NullUnmarked
+		public String getText () {
 			return text;
 		}
 
@@ -541,7 +544,8 @@ public class XmlReader {
 			if (children != null) children.removeValue(child, true);
 		}
 
-		@NullUnmarked public void remove () {
+		@NullUnmarked
+		public void remove () {
 			parent.removeChild(this);
 		}
 
@@ -595,7 +599,8 @@ public class XmlReader {
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, does not recurse */
 
-		@NullUnmarked public @Null Element getChildByName (String name) {
+		@NullUnmarked
+		public @Null Element getChildByName (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);

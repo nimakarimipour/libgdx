@@ -58,7 +58,8 @@ public class ModelInstanceRenderer
 		hasRotation = renderData.rotationChannel != null;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void update () {
 		for (int i = 0, positionOffset = 0,
 			c = controller.particles.size; i < c; ++i, positionOffset += renderData.positionChannel.strideSize) {

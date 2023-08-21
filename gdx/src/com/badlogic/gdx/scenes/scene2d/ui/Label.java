@@ -377,7 +377,8 @@ public class Label extends Widget {
 		@Nullable public @Null Color fontColor;
 		@Nullable public @Null Drawable background;
 
-		@NullUnmarked public LabelStyle () {
+		@NullUnmarked
+		public LabelStyle () {
 		}
 
 		public LabelStyle (BitmapFont font, @Nullable @Null Color fontColor) {

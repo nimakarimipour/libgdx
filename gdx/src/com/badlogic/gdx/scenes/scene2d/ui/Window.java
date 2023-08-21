@@ -128,7 +128,8 @@ public class Window extends Table {
 				dragging = false;
 			}
 
-			@NullUnmarked public void touchDragged (InputEvent event, float x, float y, int pointer) {
+			@NullUnmarked
+			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (!dragging) return;
 				float width = getWidth(), height = getHeight();
 				float windowX = getX(), windowY = getY();
@@ -350,7 +351,8 @@ public class Window extends Table {
 		public @Null Color titleFontColor = new Color(1, 1, 1, 1);
 		@Nullable public @Null Drawable stageBackground;
 
-		@NullUnmarked public WindowStyle () {
+		@NullUnmarked
+		public WindowStyle () {
 		}
 
 		public WindowStyle (BitmapFont titleFont, Color titleFontColor, @Null Drawable background) {

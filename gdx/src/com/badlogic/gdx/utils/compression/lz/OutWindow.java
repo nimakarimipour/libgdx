@@ -37,7 +37,8 @@ public class OutWindow {
 		}
 	}
 
-	@NullUnmarked public void Flush () throws IOException {
+	@NullUnmarked
+	public void Flush () throws IOException {
 		int size = _pos - _streamPos;
 		if (size == 0) return;
 		_stream.write(_buffer, _streamPos, size);

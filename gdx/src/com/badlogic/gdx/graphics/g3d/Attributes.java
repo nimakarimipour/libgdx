@@ -45,7 +45,8 @@ public class Attributes implements Iterable<Attribute>, Comparator<Attribute>, C
 	/** Example usage: ((BlendingAttribute)material.get(BlendingAttribute.ID)).sourceFunction;
 	 * @return The attribute (which can safely be cast) if any, otherwise null */
 
-	@NullUnmarked public final Attribute get (final long type) {
+	@NullUnmarked
+	public final Attribute get (final long type) {
 		if (has(type)) for (int i = 0; i < attributes.size; i++)
 			if (attributes.get(i).type == type) return attributes.get(i);
 		return null;

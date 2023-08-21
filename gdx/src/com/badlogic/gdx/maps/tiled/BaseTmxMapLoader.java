@@ -320,7 +320,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		loadObject(map, tile.getObjects(), element, tile.getTextureRegion().getRegionHeight());
 	}
 
-	@NullUnmarked protected void loadObject (TiledMap map, MapObjects objects, Element element, float heightInPixels) {
+	@NullUnmarked
+	protected void loadObject (TiledMap map, MapObjects objects, Element element, float heightInPixels) {
 		if (element.getName().equals("object")) {
 			MapObject object = null;
 

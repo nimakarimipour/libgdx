@@ -139,7 +139,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			return position != null;
 		}
 
-		@NullUnmarked @Nullable
+		@NullUnmarked
+		@Nullable
 		@Override
 		public Node<E> next () {
 			previousPosition = position;
@@ -147,7 +148,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			return previousPosition;
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void remove () {
 			// the contract specifies to remove the last returned element, if nothing was returned yet assumably do nothing
 			if (previousPosition != null) {

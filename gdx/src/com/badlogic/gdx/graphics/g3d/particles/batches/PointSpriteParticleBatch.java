@@ -86,7 +86,8 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 		this(capacity, shaderConfig, null, null);
 	}
 
-	@NullUnmarked public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
+	@NullUnmarked
+	public PointSpriteParticleBatch (int capacity, ParticleShader.Config shaderConfig,
 		@Nullable BlendingAttribute blendingAttribute, @Nullable DepthTestAttribute depthTestAttribute) {
 		super(PointSpriteControllerRenderData.class);
 

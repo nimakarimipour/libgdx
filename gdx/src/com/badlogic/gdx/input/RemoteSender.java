@@ -59,7 +59,8 @@ public class RemoteSender implements InputProcessor {
 		}
 	}
 
-	@NullUnmarked public void sendUpdate () {
+	@NullUnmarked
+	public void sendUpdate () {
 		synchronized (this) {
 			if (!connected) return;
 		}

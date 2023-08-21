@@ -201,7 +201,8 @@ public class PixmapIO {
 			this(128 * 128);
 		}
 
-		@NullUnmarked public PNG (int initialBufferSize) {
+		@NullUnmarked
+		public PNG (int initialBufferSize) {
 			buffer = new ChunkBuffer(initialBufferSize);
 			deflater = new Deflater();
 		}

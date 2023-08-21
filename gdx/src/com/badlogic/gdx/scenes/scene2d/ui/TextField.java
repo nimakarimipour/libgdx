@@ -299,13 +299,15 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	@NullUnmarked protected @Null Drawable getBackgroundDrawable () {
+	@NullUnmarked
+	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
 		return style.background;
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		boolean focused = hasKeyboardFocus();
 		if (focused != this.focused || (focused && !blinkTask.isScheduled())) {
 			this.focused = focused;
@@ -1103,7 +1105,8 @@ public class TextField extends Widget implements Disableable {
 		@Nullable public @Null BitmapFont messageFont;
 		@Nullable public @Null Color messageFontColor;
 
-		@NullUnmarked public TextFieldStyle () {
+		@NullUnmarked
+		public TextFieldStyle () {
 		}
 
 		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,

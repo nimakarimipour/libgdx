@@ -452,7 +452,8 @@ public class List<T> extends Widget implements Cullable {
 		@SuppressWarnings("NullAway.Init") public Drawable selection;
 		@Nullable public @Null Drawable down, over, background;
 
-		@NullUnmarked public ListStyle () {
+		@NullUnmarked
+		public ListStyle () {
 		}
 
 		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {

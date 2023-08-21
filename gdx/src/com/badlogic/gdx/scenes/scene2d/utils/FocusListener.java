@@ -26,7 +26,8 @@ import org.jspecify.annotations.NullUnmarked;
 /** Listener for {@link FocusEvent}.
  * @author Nathan Sweet */
 abstract public class FocusListener implements EventListener {
-	@NullUnmarked public boolean handle (Event event) {
+	@NullUnmarked
+	public boolean handle (Event event) {
 		if (!(event instanceof FocusEvent)) return false;
 		FocusEvent focusEvent = (FocusEvent)event;
 		switch (focusEvent.getType()) {

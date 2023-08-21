@@ -423,7 +423,8 @@ public class Table extends WidgetGroup {
 
 	/** Returns the cell for the specified actor in this table, or null. */
 
-	@NullUnmarked public @Null <T extends Actor> Cell<T> getCell (T actor) {
+	@NullUnmarked
+	public @Null <T extends Actor> Cell<T> getCell (T actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		Object[] cells = this.cells.items;
 		for (int i = 0, n = this.cells.size; i < n; i++) {
@@ -788,7 +789,8 @@ public class Table extends WidgetGroup {
 		return array;
 	}
 
-	@NullUnmarked private void computeSize () {
+	@NullUnmarked
+	private void computeSize () {
 		sizeInvalid = false;
 
 		Object[] cells = this.cells.items;
@@ -959,7 +961,8 @@ public class Table extends WidgetGroup {
 
 	/** Positions and sizes children of the table using the cell associated with each child. The values given are the position
 	 * within the parent and size of the table. */
-	@NullUnmarked public void layout () {
+	@NullUnmarked
+	public void layout () {
 		if (sizeInvalid) computeSize();
 
 		float layoutWidth = getWidth(), layoutHeight = getHeight();

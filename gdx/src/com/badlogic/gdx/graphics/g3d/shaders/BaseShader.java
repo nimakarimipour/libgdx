@@ -167,7 +167,8 @@ public abstract class BaseShader implements Shader {
 
 	/** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
 
-	@NullUnmarked @Initializer
+	@NullUnmarked
+	@Initializer
 	public void init (final ShaderProgram program, @Nullable final Renderable renderable) {
 		if (locations != null) throw new GdxRuntimeException("Already initialized");
 		if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
@@ -206,7 +207,8 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void begin (Camera camera, RenderContext context) {
 		this.camera = camera;
 		this.context = context;
@@ -258,7 +260,8 @@ public abstract class BaseShader implements Shader {
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		program = null;
 		uniforms.clear();

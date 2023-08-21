@@ -482,10 +482,12 @@ public class BitmapFont implements Disposable {
 		/** Creates an empty BitmapFontData for configuration before calling {@link #load(FileHandle, boolean)}, to subclass, or to
 		 * populate yourself, e.g. using stb-truetype or FreeType. */
 
-		@NullUnmarked public BitmapFontData () {
+		@NullUnmarked
+		public BitmapFontData () {
 		}
 
-		@NullUnmarked public BitmapFontData (FileHandle fontFile, boolean flip) {
+		@NullUnmarked
+		public BitmapFontData (FileHandle fontFile, boolean flip) {
 			this.fontFile = fontFile;
 			this.flipped = flip;
 			load(fontFile, flip);

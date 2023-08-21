@@ -75,7 +75,8 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 		return protocol;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Socket accept (SocketHints hints) {
 		try {
 			return new NetJavaSocketImpl(server.accept(), hints);

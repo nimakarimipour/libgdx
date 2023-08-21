@@ -87,7 +87,8 @@ public class JsonReader implements BaseJsonReader {
 		}
 	}
 
-	@NullUnmarked public JsonValue parse (char[] data, int offset, int length) {
+	@NullUnmarked
+	public JsonValue parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length, eof = pe, top = 0;
 		int[] stack = new int[4];
 
@@ -702,7 +703,8 @@ public class JsonReader implements BaseJsonReader {
 		current = value;
 	}
 
-	@NullUnmarked protected void pop () {
+	@NullUnmarked
+	protected void pop () {
 		root = elements.pop();
 		if (current.size > 0) lastChild.pop();
 		current = elements.size > 0 ? elements.peek() : null;

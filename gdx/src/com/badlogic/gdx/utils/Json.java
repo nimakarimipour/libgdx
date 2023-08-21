@@ -279,7 +279,8 @@ public class Json {
 	/** @param knownType May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown. */
 
-	@NullUnmarked public void toJson (@Null Object object, @Nullable @Null Class knownType, @Nullable @Null Class elementType, Writer writer) {
+	@NullUnmarked
+	public void toJson (@Null Object object, @Nullable @Null Class knownType, @Nullable @Null Class elementType, Writer writer) {
 		setWriter(writer);
 		try {
 			writeValue(object, knownType, elementType);
@@ -960,7 +961,8 @@ public class Json {
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
 
-	@NullUnmarked public @Null <T> T readValue (String name, @Null Class<T> type, @Nullable T defaultValue, JsonValue jsonMap) {
+	@NullUnmarked
+	public @Null <T> T readValue (String name, @Null Class<T> type, @Nullable T defaultValue, JsonValue jsonMap) {
 		JsonValue jsonValue = jsonMap.get(name);
 		if (jsonValue == null) return defaultValue;
 		return readValue(type, null, jsonValue);
@@ -1000,7 +1002,8 @@ public class Json {
 	 * @param elementType May be null if the type is unknown.
 	 * @return May be null. */
 
-	@NullUnmarked public @Null <T> T readValue (@Nullable @Null Class<T> type, @Nullable @Null Class elementType, @Nullable JsonValue jsonData) {
+	@NullUnmarked
+	public @Null <T> T readValue (@Nullable @Null Class<T> type, @Nullable @Null Class elementType, @Nullable JsonValue jsonData) {
 		if (jsonData == null) return null;
 
 		if (jsonData.isObject()) {

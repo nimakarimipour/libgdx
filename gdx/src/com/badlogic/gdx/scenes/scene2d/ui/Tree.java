@@ -88,7 +88,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 	private void initialize () {
 		addListener(clickListener = new ClickListener() {
-			@NullUnmarked public void clicked (InputEvent event, float x, float y) {
+			@NullUnmarked
+			public void clicked (InputEvent event, float x, float y) {
 				N node = getNodeAt(y);
 				if (node == null) return;
 				if (node != getNodeAt(getTouchDownY())) return;
@@ -616,7 +617,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 		/** Creates a node without an actor. An actor must be set using {@link #setActor(Actor)} before this node can be used. */
 
-		@NullUnmarked public Node () {
+		@NullUnmarked
+		public Node () {
 		}
 
 		public void setExpanded (boolean expanded) {
@@ -906,7 +908,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		@Nullable public @Null Drawable plusOver, minusOver;
 		@Nullable public @Null Drawable over, selection, background;
 
-		@NullUnmarked public TreeStyle () {
+		@NullUnmarked
+		public TreeStyle () {
 		}
 
 		public TreeStyle (Drawable plus, Drawable minus, @Null Drawable selection) {

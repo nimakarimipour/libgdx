@@ -108,7 +108,8 @@ public class MeshPart {
 
 	/** Set this MeshPart to given values, does not {@link #update()} the bounding box values.
 	 * @return this MeshPart, for chaining. */
-	@NullUnmarked public MeshPart set (final String id, @Nullable final Mesh mesh, final int offset, final int size, final int type) {
+	@NullUnmarked
+	public MeshPart set (final String id, @Nullable final Mesh mesh, final int offset, final int size, final int type) {
 		this.id = id;
 		this.mesh = mesh;
 		this.offset = offset;

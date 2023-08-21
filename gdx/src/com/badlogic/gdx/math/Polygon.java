@@ -55,7 +55,8 @@ public class Polygon implements Shape2D {
 	 * as they are position within the world.
 	 * 
 	 * @return vertices scaled, rotated, and offset by the polygon position. */
-	@NullUnmarked public float[] getTransformedVertices () {
+	@NullUnmarked
+	public float[] getTransformedVertices () {
 		if (!dirty) return worldVertices;
 		dirty = false;
 

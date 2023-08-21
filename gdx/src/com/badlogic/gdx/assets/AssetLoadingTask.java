@@ -109,7 +109,8 @@ class AssetLoadingTask implements AsyncTask<Void> {
 			asset = syncLoader.load(manager, assetDesc.fileName, resolve(loader, assetDesc), assetDesc.params);
 	}
 
-	@NullUnmarked private void handleAsyncLoader () {
+	@NullUnmarked
+	private void handleAsyncLoader () {
 		AsynchronousAssetLoader asyncLoader = (AsynchronousAssetLoader)loader;
 		if (!dependenciesLoaded) {
 			if (depsFuture == null)

@@ -45,7 +45,8 @@ public class TextTooltip extends Tooltip<Label> {
 		this(text, manager, skin.get(styleName, TextTooltipStyle.class));
 	}
 
-	@NullUnmarked public TextTooltip (@Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
+	@NullUnmarked
+	public TextTooltip (@Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
 		super(null, manager);
 
 		container.setActor(newLabel(text, style.label));
@@ -57,7 +58,8 @@ public class TextTooltip extends Tooltip<Label> {
 		return new Label(text, style);
 	}
 
-	@NullUnmarked public void setStyle (TextTooltipStyle style) {
+	@NullUnmarked
+	public void setStyle (TextTooltipStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		container.setBackground(style.background);
 		container.maxWidth(style.wrapWidth);
@@ -86,7 +88,8 @@ public class TextTooltip extends Tooltip<Label> {
 			this.background = background;
 		}
 
-		@NullUnmarked public TextTooltipStyle (TextTooltipStyle style) {
+		@NullUnmarked
+		public TextTooltipStyle (TextTooltipStyle style) {
 			label = new LabelStyle(style.label);
 			background = style.background;
 			wrapWidth = style.wrapWidth;

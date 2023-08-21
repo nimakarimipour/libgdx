@@ -275,7 +275,8 @@ public class BaseAnimationController {
 	}
 
 	/** Helper method to apply one animation to either an objectmap for blending or directly to the bones. */
-	@NullUnmarked protected static void applyAnimation (@Nullable final ObjectMap<Node, Transform> out, @Nullable final Pool<Transform> pool,
+	@NullUnmarked
+	protected static void applyAnimation (@Nullable final ObjectMap<Node, Transform> out, @Nullable final Pool<Transform> pool,
 		final float alpha, final Animation animation, final float time) {
 
 		if (out == null) {

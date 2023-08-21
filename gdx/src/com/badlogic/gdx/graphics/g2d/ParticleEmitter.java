@@ -396,7 +396,8 @@ public class ParticleEmitter {
 		return particles;
 	}
 
-	@NullUnmarked private void activateParticle (int index) {
+	@NullUnmarked
+	private void activateParticle (int index) {
 		Sprite sprite = null;
 		switch (spriteMode) {
 		case single:
@@ -676,7 +677,8 @@ public class ParticleEmitter {
 		this.y = y;
 	}
 
-	@NullUnmarked public void setSprites (Array<Sprite> sprites) {
+	@NullUnmarked
+	public void setSprites (Array<Sprite> sprites) {
 		this.sprites = sprites;
 		if (sprites.size == 0) return;
 		for (int i = 0, n = particles.length; i < n; i++) {
@@ -1233,7 +1235,8 @@ public class ParticleEmitter {
 		@SuppressWarnings("NullAway.Init") protected float[] tint;
 		protected int frame;
 
-		@NullUnmarked public Particle (@Nullable Sprite sprite) {
+		@NullUnmarked
+		public Particle (@Nullable Sprite sprite) {
 			super(sprite);
 		}
 	}

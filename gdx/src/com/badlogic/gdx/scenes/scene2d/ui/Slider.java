@@ -114,7 +114,8 @@ public class Slider extends ProgressBar {
 		return mouseOver;
 	}
 
-	@NullUnmarked protected @Null Drawable getBackgroundDrawable () {
+	@NullUnmarked
+	protected @Null Drawable getBackgroundDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (isDragging() && style.backgroundDown != null) return style.backgroundDown;

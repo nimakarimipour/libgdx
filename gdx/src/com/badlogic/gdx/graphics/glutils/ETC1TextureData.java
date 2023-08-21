@@ -71,7 +71,8 @@ public class ETC1TextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void consumeCustomData (int target) {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling consumeCompressedData()");
 

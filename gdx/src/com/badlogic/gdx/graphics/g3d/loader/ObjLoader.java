@@ -447,7 +447,8 @@ class MtlLoader {
 			reset();
 		}
 
-		@NullUnmarked public ModelMaterial build () {
+		@NullUnmarked
+		public ModelMaterial build () {
 			ModelMaterial mat = new ModelMaterial();
 			mat.id = materialName;
 			mat.ambient = ambientColor == null ? null : new Color(ambientColor);

@@ -111,7 +111,8 @@ public class TextureRegion {
 	}
 
 	/** Sets the texture and coordinates to the specified region. */
-	@NullUnmarked public void setRegion (@Nullable TextureRegion region) {
+	@NullUnmarked
+	public void setRegion (@Nullable TextureRegion region) {
 		texture = region.texture;
 		setRegion(region.u, region.v, region.u2, region.v2);
 	}

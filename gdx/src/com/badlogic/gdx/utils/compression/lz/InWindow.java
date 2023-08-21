@@ -54,7 +54,8 @@ public class InWindow {
 		}
 	}
 
-	@NullUnmarked void Free () {
+	@NullUnmarked
+	void Free () {
 		_bufferBase = null;
 	}
 

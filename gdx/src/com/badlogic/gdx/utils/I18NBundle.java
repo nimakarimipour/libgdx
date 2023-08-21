@@ -422,7 +422,8 @@ public class I18NBundle {
 	 * 
 	 * @param locale */
 
-	@NullUnmarked @Initializer
+	@NullUnmarked
+	@Initializer
 	private void setLocale (Locale locale) {
 		this.locale = locale;
 		this.formatter = new TextFormatter(locale, !simpleFormatter);

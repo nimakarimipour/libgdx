@@ -43,7 +43,8 @@ public class Tooltip<T extends Actor> extends InputListener {
 	}
 
 	/** @param contents May be null. */
-	@NullUnmarked public Tooltip (@Nullable @Null T contents, @Nullable TooltipManager manager) {
+	@NullUnmarked
+	public Tooltip (@Nullable @Null T contents, @Nullable TooltipManager manager) {
 		this.manager = manager;
 
 		container = new Container(contents) {

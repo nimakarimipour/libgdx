@@ -73,7 +73,8 @@ public class DragAndDrop {
 				}
 			}
 
-			@NullUnmarked public void drag (InputEvent event, float x, float y, int pointer) {
+			@NullUnmarked
+			public void drag (InputEvent event, float x, float y, int pointer) {
 				if (payload == null) return;
 				if (pointer != activePointer) return;
 
@@ -142,7 +143,8 @@ public class DragAndDrop {
 				actor.setPosition(actorX, actorY);
 			}
 
-			@NullUnmarked public void dragStop (InputEvent event, float x, float y, int pointer) {
+			@NullUnmarked
+			public void dragStop (InputEvent event, float x, float y, int pointer) {
 				if (pointer != activePointer) return;
 				activePointer = -1;
 				if (payload == null) return;

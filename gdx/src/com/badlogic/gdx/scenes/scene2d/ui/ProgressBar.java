@@ -227,7 +227,8 @@ public class ProgressBar extends Widget implements Disableable {
 		return visualInterpolation.apply((getVisualValue() - min) / (max - min));
 	}
 
-	@NullUnmarked protected @Null Drawable getBackgroundDrawable () {
+	@NullUnmarked
+	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		return style.background;
 	}

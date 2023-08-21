@@ -263,7 +263,8 @@ public class Actor {
 		return captureListeners;
 	}
 
-	@NullUnmarked public void addAction (@Nullable Action action) {
+	@NullUnmarked
+	public void addAction (@Nullable Action action) {
 		action.setActor(this);
 		actions.add(action);
 
@@ -358,7 +359,8 @@ public class Actor {
 	}
 
 	/** Returns the parent actor, or null if not in a group. */
-	@NullUnmarked public @Null Group getParent () {
+	@NullUnmarked
+	public @Null Group getParent () {
 		return parent;
 	}
 

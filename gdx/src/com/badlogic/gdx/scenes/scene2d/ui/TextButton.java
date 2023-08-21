@@ -142,7 +142,8 @@ public class TextButton extends Button {
 		@Nullable public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
 		@Nullable public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor, checkedFocusedFontColor;
 
-		@NullUnmarked public TextButtonStyle () {
+		@NullUnmarked
+		public TextButtonStyle () {
 		}
 
 		public TextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null BitmapFont font) {

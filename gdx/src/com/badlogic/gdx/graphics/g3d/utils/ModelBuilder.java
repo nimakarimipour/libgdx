@@ -105,7 +105,8 @@ public class ModelBuilder {
 
 	/** Add a node to the model. Use any of the part(...) method to add a NodePart.
 	 * @return The node being created. */
-	@NullUnmarked public Node node () {
+	@NullUnmarked
+	public Node node () {
 		final Node node = new Node();
 		node(node);
 		node.id = "node" + model != null ? model.nodes.size + "" : "";

@@ -482,7 +482,8 @@ public class Skin implements Disposable {
 				return fieldName.equals(parentFieldName);
 			}
 
-			@NullUnmarked public void readFields (Object object, JsonValue jsonMap) {
+			@NullUnmarked
+			public void readFields (Object object, JsonValue jsonMap) {
 				if (jsonMap.has(parentFieldName)) {
 					String parentName = readValue(parentFieldName, String.class, jsonMap);
 					Class parentType = object.getClass();

@@ -241,7 +241,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	 * @param mesh The mesh to receive the built vertices and indices, must have the same attributes and must be big enough to hold
 	 *           the data, any existing data will be overwritten. */
 
-	@NullUnmarked public Mesh end (Mesh mesh) {
+	@NullUnmarked
+	public Mesh end (Mesh mesh) {
 		endpart();
 
 		if (attributes == null) throw new GdxRuntimeException("Call begin() first");

@@ -134,7 +134,8 @@ public abstract class RegionInfluencer extends Influencer {
 			lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, c = controller.particles.size
 				* regionChannel.strideSize; i < c; i += regionChannel.strideSize, l += lifeChannel.strideSize) {

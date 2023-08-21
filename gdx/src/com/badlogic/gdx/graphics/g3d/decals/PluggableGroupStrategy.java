@@ -26,12 +26,14 @@ import org.jspecify.annotations.NullUnmarked;
 public abstract class PluggableGroupStrategy implements GroupStrategy {
 	private IntMap<GroupPlug> plugs = new IntMap<GroupPlug>();
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void beforeGroup (int group, Array<Decal> contents) {
 		plugs.get(group).beforeGroup(contents);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void afterGroup (int group) {
 		if (plugs.containsKey(group)) {
 			plugs.get(group).afterGroup();

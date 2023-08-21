@@ -69,7 +69,8 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		if (info.data != null && !info.data.isPrepared()) info.data.prepare();
 	}
 
-	@NullUnmarked @Nullable
+	@NullUnmarked
+	@Nullable
 	@Override
 	public Texture loadSync (AssetManager manager, String fileName, FileHandle file, @Nullable TextureParameter parameter) {
 		if (info == null) return null;

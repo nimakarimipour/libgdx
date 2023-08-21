@@ -202,7 +202,8 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	@NullUnmarked private void loadLayer (TiledMap map, Element element) {
+	@NullUnmarked
+	private void loadLayer (TiledMap map, Element element) {
 		if (element.getName().equals("Layer")) {
 			String id = element.getAttribute("Id");
 			String visible = element.getAttribute("Visible");
@@ -275,7 +276,8 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	@NullUnmarked private void loadProperties (MapProperties properties, Element element) {
+	@NullUnmarked
+	private void loadProperties (MapProperties properties, Element element) {
 		if (element.getName().equals("Properties")) {
 			for (Element property : element.getChildrenByName("Property")) {
 				String key = property.getAttribute("Key", null);

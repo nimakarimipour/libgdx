@@ -237,7 +237,8 @@ public class ParticleShader extends BaseShader {
 		register(DefaultShader.Inputs.diffuseTexture, DefaultShader.Setters.diffuseTexture);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void init () {
 		final ShaderProgram program = this.program;
 		this.program = null;

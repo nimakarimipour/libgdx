@@ -12,6 +12,7 @@
  */
 
 package com.badlogic.gdx.utils;
+
 import org.jspecify.annotations.NullUnmarked;
 
 /** This is a near duplicate of {@link TimSort}, modified for use with arrays of objects that implement {@link Comparable},
@@ -74,7 +75,8 @@ class ComparableTimSort {
 		runLen = new int[40];
 	}
 
-	@NullUnmarked public void doSort (Object[] a, int lo, int hi) {
+	@NullUnmarked
+	public void doSort (Object[] a, int lo, int hi) {
 		stackSize = 0;
 		rangeCheck(a.length, lo, hi);
 		int nRemaining = hi - lo;
