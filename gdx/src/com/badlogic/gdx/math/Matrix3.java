@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 
 /** A 3x3 <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column major</a> matrix; useful for 2D
  * transforms.
- * 
+ *
  * @author mzechner */
 public class Matrix3 implements Serializable {
 	private static final long serialVersionUID = 7907569533774959788L;
@@ -72,11 +72,11 @@ public class Matrix3 implements Serializable {
 	}
 
 	/** Postmultiplies this matrix with the provided matrix and stores the result in this matrix. For example:
-	 * 
+	 *
 	 * <pre>
 	 * A.mul(B) results in A := AB
 	 * </pre>
-	 * 
+	 *
 	 * @param m Matrix to multiply by.
 	 * @return This matrix for the purpose of chaining operations together. */
 	public Matrix3 mul (Matrix3 m) {
@@ -108,11 +108,11 @@ public class Matrix3 implements Serializable {
 	}
 
 	/** Premultiplies this matrix with the provided matrix and stores the result in this matrix. For example:
-	 * 
+	 *
 	 * <pre>
 	 * A.mulLeft(B) results in A := BA
 	 * </pre>
-	 * 
+	 *
 	 * @param m The other Matrix to multiply by
 	 * @return This matrix for the purpose of chaining operations. */
 	public Matrix3 mulLeft (Matrix3 m) {
@@ -236,7 +236,7 @@ public class Matrix3 implements Serializable {
 	}
 
 	/** Sets this matrix to a scaling matrix.
-	 * 
+	 *
 	 * @param scaleX the scale in x
 	 * @param scaleY the scale in y
 	 * @return This matrix for the purpose of chaining operations. */
@@ -349,6 +349,7 @@ public class Matrix3 implements Serializable {
 	 * @param mat The matrix whose top left corner will be copied. This matrix will not be modified.
 	 * @return This matrix for the purpose of chaining operations. */
 	public Matrix3 set (@Nullable Matrix4 mat) {
+		if(mat == null) {throw new IllegalArgumentException("mat cannot be null.");}
 		float[] val = this.val;
 		val[M00] = mat.val[Matrix4.M00];
 		val[M10] = mat.val[Matrix4.M10];
@@ -364,7 +365,7 @@ public class Matrix3 implements Serializable {
 
 	/** Sets the matrix to the given matrix as a float array. The float array must have at least 9 elements; the first 9 will be
 	 * copied.
-	 * 
+	 *
 	 * @param values The matrix, in float form, that is to be copied. Remember that this matrix is in
 	 *           <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column major</a> order.
 	 * @return This matrix for the purpose of chaining methods together. */
@@ -593,11 +594,11 @@ public class Matrix3 implements Serializable {
 	}
 
 	/** Multiplies matrix a with matrix b in the following manner:
-	 * 
+	 *
 	 * <pre>
 	 * mul(A, B) => A := AB
 	 * </pre>
-	 * 
+	 *
 	 * @param mata The float array representing the first matrix. Must have at least 9 elements.
 	 * @param matb The float array representing the second matrix. Must have at least 9 elements. */
 	private static void mul (float[] mata, float[] matb) {
