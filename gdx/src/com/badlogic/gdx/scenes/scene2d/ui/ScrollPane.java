@@ -504,7 +504,6 @@ public class ScrollPane extends WidgetGroup {
 		// Calculate the actor's position depending on the scroll state and available actor area.
 		float x = actorArea.x - (scrollX ? (int)visualAmountX : 0);
 		float y = actorArea.y - (int)(scrollY ? maxY - visualAmountY : maxY);
-		actor.setPosition(x, y);
 
 		if (actor instanceof Cullable) {
 			actorCullingArea.x = actorArea.x - x;
