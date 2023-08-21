@@ -20,6 +20,7 @@ import java.io.Serializable;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
+import javax.annotation.Nullable;
 
 /** Encapsulates a 3D vector. Allows chaining operations by returning a reference to itself in all modification methods.
  * @author badlogicgames@gmail.com */
@@ -87,7 +88,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	}
 
 	@Override
-	public Vector3 set (final Vector3 vector) {
+	public Vector3 set (@Nullable final Vector3 vector) {
 		return this.set(vector.x, vector.y, vector.z);
 	}
 
@@ -253,7 +254,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	}
 
 	@Override
-	public float dst (final Vector3 vector) {
+	public float dst (@Nullable final Vector3 vector) {
 		final float a = vector.x - x;
 		final float b = vector.y - y;
 		final float c = vector.z - z;

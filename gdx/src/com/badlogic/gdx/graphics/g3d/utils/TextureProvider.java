@@ -21,11 +21,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.model.data.ModelData;
+import javax.annotation.Nullable;
 
 /** Used by {@link Model} to load textures from {@link ModelData}.
  * @author badlogic */
 public interface TextureProvider {
-	public Texture load (String fileName);
+	@Nullable public Texture load (@Nullable String fileName);
 
 	public static class FileTextureProvider implements TextureProvider {
 		private Texture.TextureFilter minFilter, magFilter;
@@ -48,7 +49,7 @@ public interface TextureProvider {
 		}
 
 		@Override
-		public Texture load (String fileName) {
+		public Texture load (@Nullable String fileName) {
 			Texture result = new Texture(Gdx.files.internal(fileName), useMipMaps);
 			result.setFilter(minFilter, magFilter);
 			result.setWrap(uWrap, vWrap);
@@ -63,8 +64,8 @@ public interface TextureProvider {
 			this.assetManager = assetManager;
 		}
 
-		@Override
-		public Texture load (String fileName) {
+		@Nullable @Override
+		public Texture load (@Nullable String fileName) {
 			return assetManager.get(fileName, Texture.class);
 		}
 	}

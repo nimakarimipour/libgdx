@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.badlogic.gdx.Net.HttpRequest;
+import javax.annotation.Nullable;
 
 /** Provides utility methods to work with the {@link HttpRequest} content and parameters. */
 public final class HttpParametersUtils {
@@ -50,7 +51,7 @@ public final class HttpParametersUtils {
 		return convertedParameters.toString();
 	}
 
-	private static String encode (String content, String encoding) {
+	private static String encode (@Nullable String content, String encoding) {
 		try {
 			return URLEncoder.encode(content, encoding);
 		} catch (UnsupportedEncodingException e) {

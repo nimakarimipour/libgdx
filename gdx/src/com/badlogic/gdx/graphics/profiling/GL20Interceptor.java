@@ -21,6 +21,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import com.badlogic.gdx.graphics.GL20;
+import javax.annotation.Nullable;
 
 /** @author Daniel Holderbaum
  * @author Jan Polák */
@@ -325,7 +326,7 @@ public class GL20Interceptor extends GLInterceptor implements GL20 {
 
 	@Override
 	public void glTexImage2D (int target, int level, int internalformat, int width, int height, int border, int format, int type,
-		Buffer pixels) {
+		@Nullable Buffer pixels) {
 		calls++;
 		gl20.glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
 		check();
@@ -417,7 +418,7 @@ public class GL20Interceptor extends GLInterceptor implements GL20 {
 	}
 
 	@Override
-	public void glBufferData (int target, int size, Buffer data, int usage) {
+	public void glBufferData (int target, int size, @Nullable Buffer data, int usage) {
 		calls++;
 		gl20.glBufferData(target, size, data, usage);
 		check();

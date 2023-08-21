@@ -20,6 +20,7 @@ import java.io.Serializable;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
+import javax.annotation.Nullable;
 
 /** Encapsulates a 2D vector. Allows chaining methods by returning a reference to itself
  * @author badlogicgames@gmail.com */
@@ -77,7 +78,7 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 	}
 
 	@Override
-	public Vector2 set (Vector2 v) {
+	public Vector2 set (@Nullable Vector2 v) {
 		if (v == null) return this;
 		x = v.x;
 		y = v.y;
@@ -194,7 +195,7 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 	}
 
 	@Override
-	public float dst (Vector2 v) {
+	public float dst (@Nullable Vector2 v) {
 		final float x_d = v.x - x;
 		final float y_d = v.y - y;
 		return (float)Math.sqrt(x_d * x_d + y_d * y_d);

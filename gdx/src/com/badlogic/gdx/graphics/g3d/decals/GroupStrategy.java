@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d.decals;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -45,7 +46,7 @@ public interface GroupStrategy {
 	/** Returns the shader to be used for the group. Can be null in which case the GroupStrategy doesn't support GLES 2.0
 	 * @param group the group
 	 * @return the {@link ShaderProgram} */
-	public ShaderProgram getGroupShader (int group);
+	@Nullable public ShaderProgram getGroupShader (int group);
 
 	/** Assigns a group to a decal
 	 * 
@@ -57,7 +58,7 @@ public interface GroupStrategy {
 	 * 
 	 * @param group Group that will be rendered
 	 * @param contents Array of entries of arrays containing all the decals in the group */
-	public void beforeGroup (int group, Array<Decal> contents);
+	public void beforeGroup (int group, @Nullable Array<Decal> contents);
 
 	/** Invoked directly after rendering of a group has completed
 	 * 

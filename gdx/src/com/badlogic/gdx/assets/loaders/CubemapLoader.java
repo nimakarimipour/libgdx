@@ -28,6 +28,7 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The texture is then created on the
  * rendering thread, synchronously. Passing a {@link CubemapParameter} to
@@ -36,9 +37,9 @@ import com.badlogic.gdx.utils.Array;
  * @author mzechner, Vincent Bousquet */
 public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
 	static public class CubemapLoaderInfo {
-		String filename;
-		CubemapData data;
-		Cubemap cubemap;
+		@Nullable String filename;
+		@Nullable CubemapData data;
+		@Nullable Cubemap cubemap;
 	};
 
 	CubemapLoaderInfo info = new CubemapLoaderInfo();
@@ -48,7 +49,7 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
+	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
 		info.filename = fileName;
 		if (parameter == null || parameter.cubemapData == null) {
 			Format format = null;
@@ -70,8 +71,8 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		if (!info.data.isPrepared()) info.data.prepare();
 	}
 
-	@Override
-	public Cubemap loadSync (AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
+	@Nullable @Override
+	public Cubemap loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
 		if (info == null) return null;
 		Cubemap cubemap = info.cubemap;
 		if (cubemap != null) {
@@ -86,18 +87,18 @@ public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoade
 		return cubemap;
 	}
 
-	@Override
-	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, CubemapParameter parameter) {
+	@Nullable @Override
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
 		return null;
 	}
 
 	static public class CubemapParameter extends AssetLoaderParameters<Cubemap> {
 		/** the format of the final Texture. Uses the source images format if null **/
-		public Format format = null;
+		@Nullable public Format format = null;
 		/** The texture to put the {@link TextureData} in, optional. **/
-		public Cubemap cubemap = null;
+		@Nullable public Cubemap cubemap = null;
 		/** CubemapData for textures created on the fly, optional. When set, all format and genMipMaps are ignored */
-		public CubemapData cubemapData = null;
+		@Nullable public CubemapData cubemapData = null;
 		public TextureFilter minFilter = TextureFilter.Nearest;
 		public TextureFilter magFilter = TextureFilter.Nearest;
 		public TextureWrap wrapU = TextureWrap.ClampToEdge;

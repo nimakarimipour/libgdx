@@ -27,12 +27,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
+import javax.annotation.Nullable;
 
 /** Manages a {@link Camera} and determines how world coordinates are mapped to and from the screen.
  * @author Daniel Holderbaum
  * @author Nathan Sweet */
 public abstract class Viewport {
-	private Camera camera;
+	@Nullable private Camera camera;
 	private float worldWidth, worldHeight;
 	private int screenX, screenY, screenWidth, screenHeight;
 
@@ -124,7 +125,7 @@ public abstract class Viewport {
 		return worldCoords;
 	}
 
-	public Camera getCamera () {
+	@Nullable public Camera getCamera () {
 		return camera;
 	}
 

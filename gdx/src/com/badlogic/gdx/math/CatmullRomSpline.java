@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import javax.annotation.Nullable;
 
 /** @author Xoppa */
 public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
@@ -42,8 +43,8 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T calculate (final T out, final int i, final float u, final T[] points,
-		final boolean continuous, final T tmp) {
+	public static <T extends Vector<T>> T calculate (@Nullable final T out, final int i, final float u, @Nullable final T[] points,
+		final boolean continuous, @Nullable final T tmp) {
 		final int n = points.length;
 		final float u2 = u * u;
 		final float u3 = u2 * u;
@@ -78,8 +79,8 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, final T[] points,
-		final boolean continuous, final T tmp) {
+	public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, @Nullable final T[] points,
+		final boolean continuous, @Nullable final T tmp) {
 		/*
 		 * catmull'(u) = 0.5 *((-p0 + p2) + 2 * (2*p0 - 5*p1 + 4*p2 - p3) * u + 3 * (-p0 + 3*p1 - 3*p2 + p3) * u * u)
 		 */
@@ -93,12 +94,12 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 		return out;
 	}
 
-	public T[] controlPoints;
+	@Nullable public T[] controlPoints;
 	public boolean continuous;
 	public int spanCount;
-	private T tmp;
-	private T tmp2;
-	private T tmp3;
+	@Nullable private T tmp;
+	@Nullable private T tmp2;
+	@Nullable private T tmp3;
 
 	public CatmullRomSpline () {
 	}
@@ -118,7 +119,7 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 	}
 
 	@Override
-	public T valueAt (T out, float t) {
+	public T valueAt (@Nullable T out, float t) {
 		final int n = spanCount;
 		float u = t * n;
 		int i = (t >= 1f) ? (n - 1) : (int)u;
@@ -127,7 +128,7 @@ public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
 	}
 
 	/** @return The value of the spline at position u of the specified span */
-	public T valueAt (final T out, final int span, final float u) {
+	public T valueAt (@Nullable final T out, final int span, final float u) {
 		return calculate(out, continuous ? span : (span + 1), u, controlPoints, continuous, tmp);
 	}
 

@@ -19,6 +19,7 @@ package com.badlogic.gdx.maps;
 import java.util.Iterator;
 
 import com.badlogic.gdx.utils.ObjectMap;
+import javax.annotation.Nullable;
 
 /** @brief Set of string indexed values representing map elements' properties, allowing to retrieve, modify and add properties to
  *        the set. */
@@ -39,7 +40,7 @@ public class MapProperties {
 
 	/** @param key property name
 	 * @return the value for that property if it exists, otherwise, null */
-	public Object get (String key) {
+	@Nullable public Object get (String key) {
 		return properties.get(key);
 	}
 
@@ -48,7 +49,7 @@ public class MapProperties {
 	 * @param clazz the class of the object
 	 * @return the object or null if the object is not in the map
 	 * @throws ClassCastException if the object with the given key is not of type clazz */
-	public <T> T get (String key, Class<T> clazz) {
+	@Nullable public <T> T get (String key, Class<T> clazz) {
 		return (T)get(key);
 	}
 
@@ -65,7 +66,7 @@ public class MapProperties {
 
 	/** @param key property name
 	 * @param value value to be inserted or modified (if it already existed) */
-	public void put (String key, Object value) {
+	public void put (@Nullable String key, @Nullable Object value) {
 		properties.put(key, value);
 	}
 

@@ -19,6 +19,7 @@ package com.badlogic.gdx.math;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.ShortArray;
+import com.uber.nullaway.annotations.Initializer;
 
 /** A simple implementation of the ear cutting algorithm to triangulate simple polygons without holes. For more information:
  * <ul>
@@ -65,7 +66,7 @@ public class EarClippingTriangulator {
 	 * @return triples of triangle indices in clockwise order. Note the returned array is reused for later calls to the same
 	 *         method. */
 
-	public ShortArray computeTriangles (float[] vertices, int offset, int count) {
+	@Initializer public ShortArray computeTriangles (float[] vertices, int offset, int count) {
 		this.vertices = vertices;
 		int vertexCount = this.vertexCount = count / 2;
 		int vertexOffset = offset / 2;

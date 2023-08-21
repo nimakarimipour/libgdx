@@ -19,17 +19,18 @@ package com.badlogic.gdx.graphics.g2d;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import javax.annotation.Nullable;
 
 /** @author Stefan Bachmann
  * @author Nathan Sweet */
 public class PolygonSprite {
-	PolygonRegion region;
+	@Nullable PolygonRegion region;
 	private float x, y;
 	private float width, height;
 	private float scaleX = 1f, scaleY = 1f;
 	private float rotation;
 	private float originX, originY;
-	private float[] vertices;
+	@Nullable private float[] vertices;
 	private boolean dirty;
 	private Rectangle bounds = new Rectangle();
 	private final Color color = new Color(1f, 1f, 1f, 1f);
@@ -198,7 +199,7 @@ public class PolygonSprite {
 	}
 
 	/** Returns the packed vertices, colors, and texture coordinates for this sprite. */
-	public float[] getVertices () {
+	@Nullable public float[] getVertices () {
 		if (!dirty) return vertices;
 		dirty = false;
 
@@ -320,7 +321,7 @@ public class PolygonSprite {
 		return color;
 	}
 
-	public void setRegion (PolygonRegion region) {
+	public void setRegion (@Nullable PolygonRegion region) {
 		this.region = region;
 
 		float[] regionVertices = region.vertices;
@@ -341,7 +342,7 @@ public class PolygonSprite {
 		dirty = true;
 	}
 
-	public PolygonRegion getRegion () {
+	@Nullable public PolygonRegion getRegion () {
 		return region;
 	}
 }

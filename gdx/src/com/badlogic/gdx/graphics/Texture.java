@@ -31,6 +31,7 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
@@ -46,7 +47,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * A Texture must be disposed when it is no longer used
  * @author badlogicgames@gmail.com */
 public class Texture extends GLTexture {
-	private static AssetManager assetManager;
+	@Nullable private static AssetManager assetManager;
 	final static Map<Application, Array<Texture>> managedTextures = new HashMap<Application, Array<Texture>>();
 
 	public enum TextureFilter {
@@ -104,7 +105,7 @@ public class Texture extends GLTexture {
 		}
 	}
 
-	TextureData data;
+	@Nullable TextureData data;
 
 	public Texture (String internalPath) {
 		this(Gdx.files.internal(internalPath));
@@ -118,7 +119,7 @@ public class Texture extends GLTexture {
 		this(file, null, useMipMaps);
 	}
 
-	public Texture (FileHandle file, Format format, boolean useMipMaps) {
+	public Texture (@Nullable FileHandle file, @Nullable Format format, boolean useMipMaps) {
 		this(TextureData.Factory.loadFromFile(file, format, useMipMaps));
 	}
 
@@ -138,17 +139,17 @@ public class Texture extends GLTexture {
 		this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
 	}
 
-	public Texture (TextureData data) {
+	public Texture (@Nullable TextureData data) {
 		this(GL20.GL_TEXTURE_2D, Gdx.gl.glGenTexture(), data);
 	}
 
-	protected Texture (int glTarget, int glHandle, TextureData data) {
+	protected Texture (int glTarget, int glHandle, @Nullable TextureData data) {
 		super(glTarget, glHandle);
 		load(data);
 		if (data.isManaged()) addManagedTexture(Gdx.app, this);
 	}
 
-	public void load (TextureData data) {
+	public void load (@Nullable TextureData data) {
 		if (this.data != null && data.isManaged() != this.data.isManaged())
 			throw new GdxRuntimeException("New data must have the same managed status as the old data");
 		this.data = data;
@@ -202,7 +203,7 @@ public class Texture extends GLTexture {
 		return 0;
 	}
 
-	public TextureData getTextureData () {
+	@Nullable public TextureData getTextureData () {
 		return data;
 	}
 
@@ -227,7 +228,7 @@ public class Texture extends GLTexture {
 		return super.toString();
 	}
 
-	private static void addManagedTexture (Application app, Texture texture) {
+	private static void addManagedTexture (@Nullable Application app, Texture texture) {
 		Array<Texture> managedTextureArray = managedTextures.get(app);
 		if (managedTextureArray == null) managedTextureArray = new Array<Texture>();
 		managedTextureArray.add(texture);
@@ -283,7 +284,7 @@ public class Texture extends GLTexture {
 					params.texture = texture; // special parameter which will ensure that the references stay the same.
 					params.loadedCallback = new LoadedCallback() {
 						@Override
-						public void finishedLoading (AssetManager assetManager, String fileName, Class type) {
+						public void finishedLoading (AssetManager assetManager, @Nullable String fileName, @Nullable Class type) {
 							assetManager.setReferenceCount(fileName, refCount);
 						}
 					};

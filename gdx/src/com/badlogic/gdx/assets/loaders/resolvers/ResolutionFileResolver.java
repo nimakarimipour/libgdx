@@ -19,6 +19,7 @@ package com.badlogic.gdx.assets.loaders.resolvers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
+import javax.annotation.Nullable;
 
 /** This {@link FileHandleResolver} uses a given list of {@link Resolution}s to determine the best match based on the current back
  * buffer size. An example of how this resolver works:
@@ -83,7 +84,7 @@ public class ResolutionFileResolver implements FileHandleResolver {
 	}
 
 	@Override
-	public FileHandle resolve (String fileName) {
+	public FileHandle resolve (@Nullable String fileName) {
 		Resolution bestResolution = choose(descriptors);
 		FileHandle originalHandle = new FileHandle(fileName);
 		FileHandle handle = baseResolver.resolve(resolve(originalHandle, bestResolution.folder));

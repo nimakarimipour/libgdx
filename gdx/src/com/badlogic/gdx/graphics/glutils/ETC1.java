@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+import javax.annotation.Nullable;
 
 /** Class for encoding and decoding ETC1 compressed images. Also provides methods to add a PKM header.
  * @author mzechner */
@@ -172,7 +173,7 @@ public class ETC1 {
 	 * @param etc1Data the {@link ETC1Data} instance
 	 * @param format either {@link Format#RGB565} or {@link Format#RGB888}
 	 * @return the Pixmap */
-	public static Pixmap decodeImage (ETC1Data etc1Data, Format format) {
+	public static Pixmap decodeImage (@Nullable ETC1Data etc1Data, Format format) {
 		int dataOffset = 0;
 		int width = 0;
 		int height = 0;

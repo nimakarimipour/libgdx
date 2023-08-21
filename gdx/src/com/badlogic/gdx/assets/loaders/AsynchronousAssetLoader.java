@@ -19,6 +19,7 @@ package com.badlogic.gdx.assets.loaders;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
+import javax.annotation.Nullable;
 
 /** Base class for asynchronous {@link AssetLoader} instances. Such loaders try to load parts of an OpenGL resource, like the
  * Pixmap, on a separate thread to then load the actual resource on the thread the OpenGL context is active on.
@@ -28,7 +29,7 @@ import com.badlogic.gdx.files.FileHandle;
  * @param <P> */
 public abstract class AsynchronousAssetLoader<T, P extends AssetLoaderParameters<T>> extends AssetLoader<T, P> {
 
-	public AsynchronousAssetLoader (FileHandleResolver resolver) {
+	public AsynchronousAssetLoader (@Nullable FileHandleResolver resolver) {
 		super(resolver);
 	}
 
@@ -37,7 +38,7 @@ public abstract class AsynchronousAssetLoader<T, P extends AssetLoaderParameters
 	 * @param fileName the name of the asset to load
 	 * @param file the resolved file to load
 	 * @param parameter the parameters to use for loading the asset */
-	public abstract void loadAsync (AssetManager manager, String fileName, FileHandle file, P parameter);
+	public abstract void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameter);
 
 	/** Called if this task is unloaded before {@link #loadSync(AssetManager, String, FileHandle, AssetLoaderParameters) loadSync}
 	 * is called. This method may be invoked on any thread, but will not be invoked during or after
@@ -49,7 +50,7 @@ public abstract class AsynchronousAssetLoader<T, P extends AssetLoaderParameters
 	 * before this method, but never during or after this method. Note that
 	 * {@link #loadAsync(AssetManager, String, FileHandle, AssetLoaderParameters) loadAsync} may still be executing when this
 	 * method is called and must release any resources it allocated. */
-	public void unloadAsync (AssetManager manager, String fileName, FileHandle file, P parameter) {
+	public void unloadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameter) {
 	}
 
 	/** Loads the OpenGL part of the asset.
@@ -57,5 +58,5 @@ public abstract class AsynchronousAssetLoader<T, P extends AssetLoaderParameters
 	 * @param fileName
 	 * @param file the resolved file to load
 	 * @param parameter */
-	public abstract T loadSync (AssetManager manager, String fileName, FileHandle file, P parameter);
+	@Nullable public abstract T loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameter);
 }

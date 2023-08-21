@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /** Ordered list of {@link MapLayer} instances owned by a {@link Map} */
 public class MapLayers implements Iterable<MapLayer> {
@@ -34,7 +35,7 @@ public class MapLayers implements Iterable<MapLayer> {
 	/** @param name
 	 * @return the first layer having the specified name, if one exists, otherwise null */
 
-	public MapLayer get (String name) {
+	@Nullable public MapLayer get (String name) {
 		for (int i = 0, n = layers.size; i < n; i++) {
 			MapLayer layer = layers.get(i);
 			if (name.equals(layer.getName())) {
@@ -50,7 +51,7 @@ public class MapLayers implements Iterable<MapLayer> {
 	}
 
 	/** Get the index of the layer in the collection, or -1 if no such layer exists. */
-	public int getIndex (MapLayer layer) {
+	public int getIndex (@Nullable MapLayer layer) {
 		return layers.indexOf(layer, true);
 	}
 

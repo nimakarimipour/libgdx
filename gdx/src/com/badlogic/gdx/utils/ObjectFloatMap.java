@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
+import javax.annotation.Nullable;
 
 /** An unordered map where the keys are objects and the values are unboxed floats. Null keys are not allowed. No allocation is
  * done except when growing the table size.
@@ -62,9 +63,9 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 	 * hash. */
 	protected int mask;
 
-	transient Entries entries1, entries2;
-	transient Values values1, values2;
-	transient Keys keys1, keys2;
+	@Nullable transient Entries entries1, entries2;
+	@Nullable transient Values values1, values2;
+	@Nullable transient Keys keys1, keys2;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectFloatMap () {
@@ -122,7 +123,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 
 	/** Returns the index of the key if already present, else -(index + 1) for the next empty index. This can be overridden in this
 	 * pacakge to compare for equality differently than {@link Object#equals(Object)}. */
-	int locateKey (K key) {
+	int locateKey (@Nullable K key) {
 		if (key == null) throw new IllegalArgumentException("key cannot be null.");
 		K[] keyTable = this.keyTable;
 		for (int i = place(key);; i = i + 1 & mask) {
@@ -132,7 +133,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 		}
 	}
 
-	public void put (K key, float value) {
+	public void put (@Nullable K key, @Nullable float value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			valueTable[i] = value;
@@ -292,7 +293,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 	/** Returns the key for the specified value, or null if it is not in the map. Note this traverses the entire map and compares
 	 * every value, which may be an expensive operation. */
 
-	public @Null K findKey (float value) {
+	@Nullable public @Null K findKey (float value) {
 		K[] keyTable = this.keyTable;
 		float[] valueTable = this.valueTable;
 		for (int i = valueTable.length - 1; i >= 0; i--) {
@@ -305,7 +306,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 	/** Returns the key for the specified value, or null if it is not in the map. Note this traverses the entire map and compares
 	 * every value, which may be an expensive operation. */
 
-	public @Null K findKey (float value, float epsilon) {
+	@Nullable public @Null K findKey (float value, float epsilon) {
 		K[] keyTable = this.keyTable;
 		float[] valueTable = this.valueTable;
 		for (int i = valueTable.length - 1; i >= 0; i--) {
@@ -477,7 +478,7 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
 	}
 
 	static public class Entry<K> {
-		public K key;
+		@Nullable public K key;
 		public float value;
 
 		public String toString () {

@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g2d;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -39,7 +40,7 @@ public class Animation<T> {
 	}
 
 	/** Length must not be modified without updating {@link #animationDuration}. See {@link #setKeyFrames(T[])}. */
-	T[] keyFrames;
+	@Nullable T[] keyFrames;
 	private float frameDuration;
 	private float animationDuration;
 	private int lastFrameNumber;
@@ -163,7 +164,7 @@ public class Animation<T> {
 	/** Returns the keyframes[] array where all the frames of the animation are stored.
 	 * @return The keyframes[] field. This array is an Object[] if the animation was instantiated with an Array that was not
 	 *         type-aware. */
-	public T[] getKeyFrames () {
+	@Nullable public T[] getKeyFrames () {
 		return keyFrames;
 	}
 

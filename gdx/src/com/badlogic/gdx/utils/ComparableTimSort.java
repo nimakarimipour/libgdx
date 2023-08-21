@@ -12,6 +12,7 @@
  */
 
 package com.badlogic.gdx.utils;
+import javax.annotation.Nullable;
 
 /** This is a near duplicate of {@link TimSort}, modified for use with arrays of objects that implement {@link Comparable},
  * instead of using explicit comparators.
@@ -34,7 +35,7 @@ class ComparableTimSort {
 	private static final int MIN_MERGE = 32;
 
 	/** The array being sorted. */
-	private Object[] a;
+	@Nullable private Object[] a;
 
 	/** When we get into galloping mode, we stay there until both runs win less often than MIN_GALLOP consecutive times. */
 	private static final int MIN_GALLOP = 7;

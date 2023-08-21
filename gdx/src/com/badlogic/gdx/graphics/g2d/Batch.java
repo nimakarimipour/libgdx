@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /** A Batch is used to draw 2D rectangles that reference a texture (region). The class will batch the drawing commands and
  * optimize them for processing by the GPU.
@@ -143,19 +144,19 @@ public interface Batch extends Disposable {
 
 	/** Draws a rectangle using the given vertices. There must be 4 vertices, each made up of 5 elements in this order: x, y,
 	 * color, u, v. The {@link #getColor()} from the Batch is not applied. */
-	public void draw (Texture texture, float[] spriteVertices, int offset, int count);
+	public void draw (@Nullable Texture texture, float[] spriteVertices, int offset, int count);
 
 	/** Draws a rectangle with the bottom left corner at x,y having the width and height of the region. */
 	public void draw (TextureRegion region, float x, float y);
 
 	/** Draws a rectangle with the bottom left corner at x,y and stretching the region to cover the given width and height. */
-	public void draw (TextureRegion region, float x, float y, float width, float height);
+	public void draw (@Nullable TextureRegion region, float x, float y, float width, float height);
 
 	/** Draws a rectangle with the bottom left corner at x,y and stretching the region to cover the given width and height. The
 	 * rectangle is offset by originX, originY relative to the origin. Scale specifies the scaling factor by which the rectangle
 	 * should be scaled around originX, originY. Rotation specifies the angle of counter clockwise rotation of the rectangle around
 	 * originX, originY. */
-	public void draw (TextureRegion region, float x, float y, float originX, float originY, float width, float height,
+	public void draw (@Nullable TextureRegion region, float x, float y, float originX, float originY, float width, float height,
 		float scaleX, float scaleY, float rotation);
 
 	/** Draws a rectangle with the texture coordinates rotated 90 degrees. The bottom left corner at x,y and stretching the region

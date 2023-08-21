@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -26,7 +27,7 @@ package com.badlogic.gdx;
  * </p>
  */
 public abstract class Game implements ApplicationListener {
-	protected Screen screen;
+	@Nullable protected Screen screen;
 
 	@Override
 	public void dispose () {
@@ -66,7 +67,7 @@ public abstract class Game implements ApplicationListener {
 	}
 
 	/** @return the currently active {@link Screen}. */
-	public Screen getScreen () {
+	@Nullable public Screen getScreen () {
 		return screen;
 	}
 }

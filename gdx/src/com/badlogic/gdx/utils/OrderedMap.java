@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /** An {@link ObjectMap} that also stores keys in an {@link Array} using the insertion order. Null keys are not allowed. No
  * allocation is done except when growing the table size.
@@ -69,7 +70,7 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		keys = new Array(map.keys);
 	}
 
-	public V put (K key, V value) {
+	@Nullable public V put (@Nullable K key, @Nullable V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];
@@ -93,12 +94,12 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		}
 	}
 
-	public V remove (K key) {
+	@Nullable public V remove (@Nullable K key) {
 		keys.removeValue(key, false);
 		return super.remove(key);
 	}
 
-	public V removeIndex (int index) {
+	@Nullable public V removeIndex (int index) {
 		return super.remove(keys.removeIndex(index));
 	}
 
@@ -322,7 +323,7 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 			hasNext = map.size > 0;
 		}
 
-		public V next () {
+		@Nullable public V next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			V value = map.get(keys.get(nextIndex));

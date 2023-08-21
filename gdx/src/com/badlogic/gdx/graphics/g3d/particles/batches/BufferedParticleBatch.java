@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** Base class of all the batches requiring to buffer {@link ParticleControllerRenderData}
  * @author Inferno */
@@ -27,7 +28,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 	protected Array<T> renderData;
 	protected int bufferedParticlesCount, currentCapacity = 0;
 	protected ParticleSorter sorter;
-	protected Camera camera;
+	@Nullable protected Camera camera;
 
 	protected BufferedParticleBatch (Class<T> type) {
 		this.sorter = new ParticleSorter.Distance();
@@ -40,7 +41,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 	}
 
 	@Override
-	public void draw (T data) {
+	public void draw (@Nullable T data) {
 		if (data.controller.particles.size > 0) {
 			renderData.add(data);
 			bufferedParticlesCount += data.controller.particles.size;
@@ -87,7 +88,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 	/** Sends the data to the gpu. This method must use the calculated offsets to build the particles meshes. The offsets represent
 	 * the position at which a particle should be placed into the vertex array.
 	 * @param offsets the calculated offsets */
-	protected abstract void flush (int[] offsets);
+	protected abstract void flush (@Nullable int[] offsets);
 
 	public int getBufferedCount () {
 		return bufferedParticlesCount;

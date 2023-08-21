@@ -35,6 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /** A group that scrolls a child actor using scrollbars and/or mouse or touch dragging.
  * <p>
@@ -47,7 +48,7 @@ import com.badlogic.gdx.utils.Null;
  * @author Nathan Sweet */
 public class ScrollPane extends WidgetGroup {
 	private ScrollPaneStyle style;
-	private Actor actor;
+	@Nullable private Actor actor;
 
 	final Rectangle actorArea = new Rectangle();
 	final Rectangle hScrollBounds = new Rectangle(), hKnobBounds = new Rectangle();
@@ -93,7 +94,7 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** @param actor May be null. */
-	public ScrollPane (@Null Actor actor, ScrollPaneStyle style) {
+	public ScrollPane (@Nullable @Null Actor actor, @Nullable ScrollPaneStyle style) {
 		if (style == null) throw new IllegalArgumentException("style cannot be null.");
 		this.style = style;
 		setActor(actor);
@@ -185,7 +186,7 @@ public class ScrollPane extends WidgetGroup {
 	/** Called by constructor. */
 	protected ActorGestureListener getFlickScrollListener () {
 		return new ActorGestureListener() {
-			public void pan (InputEvent event, float x, float y, float deltaX, float deltaY) {
+			public void pan (@Nullable InputEvent event, float x, float y, float deltaX, float deltaY) {
 				setScrollbarsVisible(true);
 				if (!scrollX) deltaX = 0;
 				if (!scrollY) deltaY = 0;
@@ -195,7 +196,7 @@ public class ScrollPane extends WidgetGroup {
 				if (cancelTouchFocus && (deltaX != 0 || deltaY != 0)) cancelTouchFocus();
 			}
 
-			public void fling (InputEvent event, float x, float y, int button) {
+			public void fling (@Nullable InputEvent event, float x, float y, int button) {
 				float velocityX = Math.abs(x) > 150 && scrollX ? x : 0;
 				float velocityY = Math.abs(y) > 150 && scrollY ? -y : 0;
 				if (velocityX != 0 || velocityY != 0) {
@@ -269,7 +270,7 @@ public class ScrollPane extends WidgetGroup {
 			: MathUtils.clamp(amountY, 0, maxY));
 	}
 
-	public void setStyle (ScrollPaneStyle style) {
+	public void setStyle (@Nullable ScrollPaneStyle style) {
 		if (style == null) throw new IllegalArgumentException("style cannot be null.");
 		this.style = style;
 		invalidateHierarchy();
@@ -635,7 +636,7 @@ public class ScrollPane extends WidgetGroup {
 
 	/** Sets the {@link Actor} embedded in this scroll pane.
 	 * @param actor May be null to remove any current actor. */
-	public void setActor (@Null Actor actor) {
+	public void setActor (@Nullable @Null Actor actor) {
 		if (this.actor == this) throw new IllegalArgumentException("actor cannot be the ScrollPane.");
 		if (this.actor != null) super.removeActor(this.actor);
 		this.actor = actor;
@@ -643,7 +644,7 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** Returns the actor embedded in this scroll pane, or null. */
-	public @Null Actor getActor () {
+	@Nullable public @Null Actor getActor () {
 		return actor;
 	}
 
@@ -654,7 +655,7 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** @deprecated Use {@link #getActor()}. */
-	@Deprecated
+	@Nullable @Deprecated
 	public @Null Actor getWidget () {
 		return actor;
 	}
@@ -669,7 +670,7 @@ public class ScrollPane extends WidgetGroup {
 	/** @deprecated ScrollPane may have only a single child.
 	 * @see #setActor(Actor) */
 	@Deprecated
-	public void addActorAt (int index, Actor actor) {
+	public void addActorAt (int index, @Nullable Actor actor) {
 		throw new UnsupportedOperationException("Use ScrollPane#setActor.");
 	}
 
@@ -707,7 +708,7 @@ public class ScrollPane extends WidgetGroup {
 		return actor;
 	}
 
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
 		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
 		if (touchable && getTouchable() == Touchable.enabled && isVisible()) {
 			if (scrollX && touchScrollH && hScrollBounds.contains(x, y)) return this;
@@ -1071,9 +1072,9 @@ public class ScrollPane extends WidgetGroup {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ScrollPaneStyle {
-		public @Null Drawable background, corner;
-		public @Null Drawable hScroll, hScrollKnob;
-		public @Null Drawable vScroll, vScrollKnob;
+		@Nullable public @Null Drawable background, corner;
+		@Nullable public @Null Drawable hScroll, hScrollKnob;
+		@Nullable public @Null Drawable vScroll, vScrollKnob;
 
 		public ScrollPaneStyle () {
 		}
@@ -1087,7 +1088,7 @@ public class ScrollPane extends WidgetGroup {
 			this.vScrollKnob = vScrollKnob;
 		}
 
-		public ScrollPaneStyle (ScrollPaneStyle style) {
+		public ScrollPaneStyle (@Nullable ScrollPaneStyle style) {
 			background = style.background;
 			corner = style.corner;
 

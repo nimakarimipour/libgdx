@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /** Interface which is used to render one or more {@link Renderable}s.
  * </p>
@@ -78,7 +79,7 @@ public interface Shader extends Disposable {
 	 * @param camera The camera to use when rendering
 	 * @param context The context to be used, which must be exclusive available for the shader until the call to the {@link #end()}
 	 *           method. */
-	void begin (Camera camera, RenderContext context);
+	void begin (@Nullable Camera camera, RenderContext context);
 
 	/** Renders the {@link Renderable}, must be called between {@link #begin(Camera, RenderContext)} and {@link #end()}. The Shader
 	 * instance might not be able to render every type of {@link Renderable}s. Use the {@link #canRender(Renderable)} method to

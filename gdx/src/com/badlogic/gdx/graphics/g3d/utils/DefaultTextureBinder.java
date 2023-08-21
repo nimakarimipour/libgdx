@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Class that you assign a range of texture units and binds textures for you within that range. It does some basic usage tracking
  * to avoid unnecessary bind calls.
@@ -39,7 +40,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 	/** The textures currently exclusive bound */
 	private final GLTexture[] textures;
 	/** Texture units ordered from most to least recently used */
-	private int[] unitsLRU;
+	@Nullable private int[] unitsLRU;
 	/** The method of binding to use */
 	private final int method;
 	/** Flag to indicate the current texture is reused */
@@ -137,7 +138,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 
 	private int currentTexture = 0;
 
-	private final int bindTextureRoundRobin (final GLTexture texture) {
+	private final int bindTextureRoundRobin (@Nullable final GLTexture texture) {
 		for (int i = 0; i < count; i++) {
 			final int idx = (currentTexture + i) % count;
 			if (textures[idx] == texture) {
@@ -151,7 +152,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		return currentTexture;
 	}
 
-	private final int bindTextureLRU (final GLTexture texture) {
+	private final int bindTextureLRU (@Nullable final GLTexture texture) {
 		if (unitsLRU == null) {
 			return 0;
 		}

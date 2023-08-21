@@ -22,6 +22,7 @@ import java.net.InetSocketAddress;
 
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Socket implementation using java.net.Socket.
  * 
@@ -29,7 +30,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 public class NetJavaSocketImpl implements Socket {
 
 	/** Our socket or null for disposed, aka closed. */
-	private java.net.Socket socket;
+	@Nullable private java.net.Socket socket;
 
 	public NetJavaSocketImpl (Protocol protocol, String host, int port, SocketHints hints) {
 		try {

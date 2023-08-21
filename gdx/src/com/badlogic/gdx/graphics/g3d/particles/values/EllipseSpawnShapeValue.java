@@ -20,11 +20,12 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** Encapsulate the formulas to spawn a particle on a ellipse shape.
  * @author Inferno */
 public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
-	SpawnSide side = SpawnSide.both;
+	@Nullable SpawnSide side = SpawnSide.both;
 
 	public EllipseSpawnShapeValue (EllipseSpawnShapeValue value) {
 		super(value);
@@ -80,7 +81,7 @@ public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
 		vector.set(radiusX * r * MathUtils.cos(t), radiusY * r * MathUtils.sin(t), radiusZ * z);
 	}
 
-	public SpawnSide getSide () {
+	@Nullable public SpawnSide getSide () {
 		return side;
 	}
 
@@ -89,7 +90,7 @@ public final class EllipseSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	}
 
 	@Override
-	public void load (ParticleValue value) {
+	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		EllipseSpawnShapeValue shape = (EllipseSpawnShapeValue)value;
 		side = shape.side;

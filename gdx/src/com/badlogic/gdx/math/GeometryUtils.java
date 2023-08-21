@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.math;
+import javax.annotation.Nullable;
 
 /** @author Nathan Sweet */
 public final class GeometryUtils {
@@ -185,7 +186,7 @@ public final class GeometryUtils {
 	}
 
 	/** Returns the centroid for the specified non-self-intersecting polygon. */
-	static public Vector2 polygonCentroid (float[] polygon, int offset, int count, Vector2 centroid) {
+	static public Vector2 polygonCentroid (@Nullable float[] polygon, int offset, int count, Vector2 centroid) {
 		if (count < 6) throw new IllegalArgumentException("A polygon must have 3 or more coordinate pairs.");
 
 		float area = 0, x = 0, y = 0;
@@ -212,7 +213,7 @@ public final class GeometryUtils {
 	}
 
 	/** Computes the area for a convex polygon. */
-	static public float polygonArea (float[] polygon, int offset, int count) {
+	static public float polygonArea (@Nullable float[] polygon, int offset, int count) {
 		float area = 0;
 		int last = offset + count - 2;
 		float x1 = polygon[last], y1 = polygon[last + 1];

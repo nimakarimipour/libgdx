@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -156,7 +157,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 
 	/** Bind the side, making it active to render on. Should be called in between a call to {@link #begin()} and {@link #end()}.
 	 * @param side The side to bind */
-	protected void bindSide (final Cubemap.CubemapSide side) {
+	protected void bindSide (@Nullable final Cubemap.CubemapSide side) {
 		if (side == null) {
 			throw new GdxRuntimeException("Cannot bind cubemap side to null.");
 		}
@@ -166,7 +167,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 
 	/** Get the currently bound side. */
 
-	public Cubemap.CubemapSide getSide () {
+	@Nullable public Cubemap.CubemapSide getSide () {
 		return currentSide < 0 ? null : cubemapSides[currentSide];
 	}
 }

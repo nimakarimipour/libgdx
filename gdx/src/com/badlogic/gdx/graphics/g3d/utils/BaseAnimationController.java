@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 /** Base class for applying one or more {@link Animation}s to a {@link ModelInstance}. This class only applies the actual
  * {@link Node} transformations, it does not manage animations or keep track of animation states. See {@link AnimationController}
@@ -134,14 +135,14 @@ public class BaseAnimationController {
 
 	/** Apply a single animation to the {@link ModelInstance} and update the it to reflect the changes. */
 
-	protected void applyAnimation (final Animation animation, final float time) {
+	protected void applyAnimation (@Nullable final Animation animation, final float time) {
 		if (applying) throw new GdxRuntimeException("Call end() first");
 		applyAnimation(null, null, 1.f, animation, time);
 		target.calculateTransforms();
 	}
 
 	/** Apply two animations, blending the second onto to first using weight. */
-	protected void applyAnimations (final Animation anim1, final float time1, final Animation anim2, final float time2,
+	protected void applyAnimations (@Nullable final Animation anim1, final float time1, final Animation anim2, final float time2,
 		final float weight) {
 		if (anim2 == null || weight == 0.f)
 			applyAnimation(anim1, time1);
@@ -252,7 +253,7 @@ public class BaseAnimationController {
 	}
 
 	private final static void applyNodeAnimationBlending (final NodeAnimation nodeAnim, final ObjectMap<Node, Transform> out,
-		final Pool<Transform> pool, final float alpha, final float time) {
+		@Nullable final Pool<Transform> pool, final float alpha, final float time) {
 
 		final Node node = nodeAnim.node;
 		node.isAnimated = true;
@@ -273,8 +274,8 @@ public class BaseAnimationController {
 	}
 
 	/** Helper method to apply one animation to either an objectmap for blending or directly to the bones. */
-	protected static void applyAnimation (final ObjectMap<Node, Transform> out, final Pool<Transform> pool, final float alpha,
-		final Animation animation, final float time) {
+	protected static void applyAnimation (@Nullable final ObjectMap<Node, Transform> out, @Nullable final Pool<Transform> pool, final float alpha,
+		@Nullable final Animation animation, final float time) {
 
 		if (out == null) {
 			for (final NodeAnimation nodeAnim : animation.nodeAnimations)
@@ -295,7 +296,7 @@ public class BaseAnimationController {
 
 	/** Remove the specified animation, by marking the affected nodes as not animated. When switching animation, this should be
 	 * call prior to applyAnimation(s). */
-	protected void removeAnimation (final Animation animation) {
+	protected void removeAnimation (@Nullable final Animation animation) {
 		for (final NodeAnimation nodeAnim : animation.nodeAnimations) {
 			nodeAnim.node.isAnimated = false;
 		}

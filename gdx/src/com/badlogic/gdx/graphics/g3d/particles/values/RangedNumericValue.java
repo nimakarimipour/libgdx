@@ -19,11 +19,12 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** A value which has a defined minimum and maximum bounds.
  * @author Inferno */
 public class RangedNumericValue extends ParticleValue {
-	private float lowMin, lowMax;
+	@Nullable private float lowMin, lowMax;
 
 	public float newLowValue () {
 		return lowMin + (lowMax - lowMin) * MathUtils.random();
@@ -55,7 +56,7 @@ public class RangedNumericValue extends ParticleValue {
 		this.lowMax = lowMax;
 	}
 
-	public void load (RangedNumericValue value) {
+	public void load (@Nullable RangedNumericValue value) {
 		super.load(value);
 		lowMax = value.lowMax;
 		lowMin = value.lowMin;

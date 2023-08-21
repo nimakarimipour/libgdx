@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles.emitters;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** An {@link Emitter} is a {@link ParticleControllerComponent} which will handle the particles emission. It must update the
  * {@link Emitter#percent} to reflect the current percentage of the current emission cycle. It should consider
@@ -27,7 +28,7 @@ import com.badlogic.gdx.utils.JsonValue;
  * @author Inferno */
 public abstract class Emitter extends ParticleControllerComponent implements Json.Serializable {
 	/** The min/max quantity of particles */
-	public int minParticleCount, maxParticleCount = 4;
+	@Nullable public int minParticleCount, maxParticleCount = 4;
 
 	/** Current state of the emission, should be currentTime/ duration Must be updated on each update */
 	public float percent;

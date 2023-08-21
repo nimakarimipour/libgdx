@@ -23,11 +23,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import javax.annotation.Nullable;
 
 /** Drawable for a {@link TextureRegion}.
  * @author Nathan Sweet */
 public class TextureRegionDrawable extends BaseDrawable implements TransformDrawable {
-	private TextureRegion region;
+	@Nullable private TextureRegion region;
 
 	/** Creates an uninitialized TextureRegionDrawable. The texture region must be set before use. */
 	public TextureRegionDrawable () {
@@ -55,7 +56,7 @@ public class TextureRegionDrawable extends BaseDrawable implements TransformDraw
 		batch.draw(region, x, y, originX, originY, width, height, scaleX, scaleY, rotation);
 	}
 
-	public void setRegion (TextureRegion region) {
+	public void setRegion (@Nullable TextureRegion region) {
 		this.region = region;
 		if (region != null) {
 			setMinWidth(region.getRegionWidth());
@@ -63,7 +64,7 @@ public class TextureRegionDrawable extends BaseDrawable implements TransformDraw
 		}
 	}
 
-	public TextureRegion getRegion () {
+	@Nullable public TextureRegion getRegion () {
 		return region;
 	}
 

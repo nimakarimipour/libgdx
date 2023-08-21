@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** The base class of all the {@link SpawnShapeValue} values which spawn the particles on a geometric primitive.
  * @author Inferno */
@@ -29,11 +30,11 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		both, top, bottom
 	}
 
-	public ScaledNumericValue spawnWidthValue, spawnHeightValue, spawnDepthValue;
+	@Nullable public ScaledNumericValue spawnWidthValue, spawnHeightValue, spawnDepthValue;
 	protected float spawnWidth, spawnWidthDiff;
 	protected float spawnHeight, spawnHeightDiff;
 	protected float spawnDepth, spawnDepthDiff;
-	boolean edges = false;
+	@Nullable boolean edges = false;
 
 	public PrimitiveSpawnShapeValue () {
 		spawnWidthValue = new ScaledNumericValue();
@@ -64,15 +65,15 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 		this.edges = edges;
 	}
 
-	public ScaledNumericValue getSpawnWidth () {
+	@Nullable public ScaledNumericValue getSpawnWidth () {
 		return spawnWidthValue;
 	}
 
-	public ScaledNumericValue getSpawnHeight () {
+	@Nullable public ScaledNumericValue getSpawnHeight () {
 		return spawnHeightValue;
 	}
 
-	public ScaledNumericValue getSpawnDepth () {
+	@Nullable public ScaledNumericValue getSpawnDepth () {
 		return spawnDepthValue;
 	}
 
@@ -98,7 +99,7 @@ public abstract class PrimitiveSpawnShapeValue extends SpawnShapeValue {
 	}
 
 	@Override
-	public void load (ParticleValue value) {
+	public void load (@Nullable ParticleValue value) {
 		super.load(value);
 		PrimitiveSpawnShapeValue shape = (PrimitiveSpawnShapeValue)value;
 		edges = shape.edges;

@@ -43,6 +43,7 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+import javax.annotation.Nullable;
 
 /** Represents a file or directory on the filesystem, classpath, Android app storage, or Android assets directory. FileHandles are
  * created via a {@link Files} instance.
@@ -54,8 +55,8 @@ import com.badlogic.gdx.utils.StreamUtils;
  * @author mzechner
  * @author Nathan Sweet */
 public class FileHandle {
-	protected File file;
-	protected FileType type;
+	@Nullable protected File file;
+	@Nullable protected FileType type;
 
 	protected FileHandle () {
 	}
@@ -63,7 +64,7 @@ public class FileHandle {
 	/** Creates a new absolute FileHandle for the file name. Use this for tools on the desktop that don't need any of the backends.
 	 * Do not use this constructor in case you write something cross-platform. Use the {@link Files} interface instead.
 	 * @param fileName the filename. */
-	public FileHandle (String fileName) {
+	public FileHandle (@Nullable String fileName) {
 		this.file = new File(fileName);
 		this.type = FileType.Absolute;
 	}
@@ -81,7 +82,7 @@ public class FileHandle {
 		file = new File(fileName);
 	}
 
-	protected FileHandle (File file, FileType type) {
+	protected FileHandle (File file, @Nullable FileType type) {
 		this.file = file;
 		this.type = type;
 	}
@@ -122,13 +123,13 @@ public class FileHandle {
 		return path.substring(0, dotIndex);
 	}
 
-	public FileType type () {
+	@Nullable public FileType type () {
 		return type;
 	}
 
 	/** Returns a java.io.File that represents this file handle. Note the returned file will only be usable for
 	 * {@link FileType#Absolute} and {@link FileType#External} file handles. */
-	public File file () {
+	@Nullable public File file () {
 		if (type == FileType.External) return new File(Gdx.files.getExternalStoragePath(), file.getPath());
 		return file;
 	}
@@ -202,7 +203,7 @@ public class FileHandle {
 	 * @param charset If null the default charset is used.
 	 * @throws GdxRuntimeException if the file handle represents a directory, doesn't exist, or could not be read. */
 
-	public String readString (String charset) {
+	public String readString (@Nullable String charset) {
 		StringBuilder output = new StringBuilder(estimateLength());
 		InputStreamReader reader = null;
 		try {
@@ -352,7 +353,7 @@ public class FileHandle {
 	 * @param charset May be null to use the default charset.
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
-	public Writer writer (boolean append, String charset) {
+	public Writer writer (boolean append, @Nullable String charset) {
 		if (type == FileType.Classpath) throw new GdxRuntimeException("Cannot write to a classpath file: " + file);
 		if (type == FileType.Internal) throw new GdxRuntimeException("Cannot write to an internal file: " + file);
 		parent().mkdirs();
@@ -384,7 +385,7 @@ public class FileHandle {
 	 * @throws GdxRuntimeException if this file handle represents a directory, if it is a {@link FileType#Classpath} or
 	 *            {@link FileType#Internal} file, or if it could not be written. */
 
-	public void writeString (String string, boolean append, String charset) {
+	public void writeString (String string, boolean append, @Nullable String charset) {
 		Writer writer = null;
 		try {
 			writer = writer(append, charset);
@@ -526,7 +527,7 @@ public class FileHandle {
 	}
 
 	/** Returns a handle to the child with the specified name. */
-	public FileHandle child (String name) {
+	public FileHandle child (@Nullable String name) {
 		if (file.getPath().length() == 0) return new FileHandle(new File(name), type);
 		return new FileHandle(new File(file, name), type);
 	}
@@ -700,7 +701,7 @@ public class FileHandle {
 		}
 	}
 
-	static private void emptyDirectory (File file, boolean preserveTree) {
+	static private void emptyDirectory (@Nullable File file, boolean preserveTree) {
 		if (file.exists()) {
 			File[] files = file.listFiles();
 			if (files != null) {
@@ -716,7 +717,7 @@ public class FileHandle {
 		}
 	}
 
-	static private boolean deleteDirectory (File file) {
+	static private boolean deleteDirectory (@Nullable File file) {
 		emptyDirectory(file, false);
 		return file.delete();
 	}

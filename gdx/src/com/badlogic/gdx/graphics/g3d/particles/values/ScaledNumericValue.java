@@ -19,14 +19,15 @@ package com.badlogic.gdx.graphics.g3d.particles.values;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** A value which has a defined minimum and maximum upper and lower bounds. Defines the variations of the value on a time line.
  * @author Inferno */
 public class ScaledNumericValue extends RangedNumericValue {
-	private float[] scaling = {1};
-	public float[] timeline = {0};
-	private float highMin, highMax;
-	private boolean relative = false;
+	@Nullable private float[] scaling = {1};
+	@Nullable public float[] timeline = {0};
+	@Nullable private float highMin, highMax;
+	@Nullable private boolean relative = false;
 
 	public float newHighValue () {
 		return highMin + (highMax - highMin) * MathUtils.random();
@@ -58,7 +59,7 @@ public class ScaledNumericValue extends RangedNumericValue {
 		this.highMax = highMax;
 	}
 
-	public float[] getScaling () {
+	@Nullable public float[] getScaling () {
 		return scaling;
 	}
 
@@ -66,7 +67,7 @@ public class ScaledNumericValue extends RangedNumericValue {
 		this.scaling = values;
 	}
 
-	public float[] getTimeline () {
+	@Nullable public float[] getTimeline () {
 		return timeline;
 	}
 
@@ -101,7 +102,7 @@ public class ScaledNumericValue extends RangedNumericValue {
 		return startValue + (scaling[endIndex] - startValue) * ((percent - startTime) / (timeline[endIndex] - startTime));
 	}
 
-	public void load (ScaledNumericValue value) {
+	public void load (@Nullable ScaledNumericValue value) {
 		super.load(value);
 		highMax = value.highMax;
 		highMin = value.highMin;

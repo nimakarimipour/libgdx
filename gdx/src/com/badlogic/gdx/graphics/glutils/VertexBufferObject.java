@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -40,9 +41,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  *
  * @author mzechner, Dave Clayton <contact@redskyforge.com> */
 public class VertexBufferObject implements VertexData {
-	private VertexAttributes attributes;
-	private FloatBuffer buffer;
-	private ByteBuffer byteBuffer;
+	@Nullable private VertexAttributes attributes;
+	@Nullable private FloatBuffer buffer;
+	@Nullable private ByteBuffer byteBuffer;
 	private boolean ownsBuffer;
 	private int bufferHandle;
 	private int usage;
@@ -63,7 +64,7 @@ public class VertexBufferObject implements VertexData {
 	 * @param isStatic whether the vertex data is static.
 	 * @param numVertices the maximum number of vertices
 	 * @param attributes the {@link VertexAttributes}. */
-	public VertexBufferObject (boolean isStatic, int numVertices, VertexAttributes attributes) {
+	public VertexBufferObject (boolean isStatic, int numVertices, @Nullable VertexAttributes attributes) {
 		bufferHandle = Gdx.gl20.glGenBuffer();
 
 		ByteBuffer data = BufferUtils.newUnsafeByteBuffer(attributes.vertexSize * numVertices);
@@ -79,7 +80,7 @@ public class VertexBufferObject implements VertexData {
 		setUsage(usage);
 	}
 
-	@Override
+	@Nullable @Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}
@@ -94,7 +95,7 @@ public class VertexBufferObject implements VertexData {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}
 
-	@Override
+	@Nullable @Override
 	public FloatBuffer getBuffer () {
 		isDirty = true;
 		return buffer;
@@ -129,7 +130,7 @@ public class VertexBufferObject implements VertexData {
 	}
 
 	@Override
-	public void setVertices (float[] vertices, int offset, int count) {
+	public void setVertices (@Nullable float[] vertices, int offset, int count) {
 		isDirty = true;
 		BufferUtils.copy(vertices, byteBuffer, count, offset);
 		((Buffer)buffer).position(0);
@@ -170,7 +171,7 @@ public class VertexBufferObject implements VertexData {
 	}
 
 	@Override
-	public void bind (ShaderProgram shader, int[] locations) {
+	public void bind (@Nullable ShaderProgram shader, @Nullable int[] locations) {
 		final GL20 gl = Gdx.gl20;
 
 		gl.glBindBuffer(GL20.GL_ARRAY_BUFFER, bufferHandle);
@@ -216,7 +217,7 @@ public class VertexBufferObject implements VertexData {
 	}
 
 	@Override
-	public void unbind (final ShaderProgram shader, final int[] locations) {
+	public void unbind (@Nullable final ShaderProgram shader, @Nullable final int[] locations) {
 		final GL20 gl = Gdx.gl20;
 		final int numAttributes = attributes.size();
 		if (locations == null) {

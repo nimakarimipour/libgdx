@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Sort;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -79,7 +80,7 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 	}
 
 	@Override
-	public void beforeGroup (int group, Array<Decal> contents) {
+	public void beforeGroup (int group, @Nullable Array<Decal> contents) {
 		if (group == GROUP_BLEND) {
 			Sort.instance().sort(contents, comparator);
 			Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -117,7 +118,7 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 		}
 	}
 
-	@Override
+	@Nullable @Override
 	public ShaderProgram getGroupShader (int group) {
 		return null;
 	}

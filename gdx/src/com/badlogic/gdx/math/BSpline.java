@@ -17,6 +17,7 @@
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /** @author Xoppa */
 public class BSpline<T extends Vector<T>> implements Path<T> {
@@ -62,8 +63,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T cubic (final T out, final int i, final float u, final T[] points,
-		final boolean continuous, final T tmp) {
+	public static <T extends Vector<T>> T cubic (@Nullable final T out, final int i, final float u, @Nullable final T[] points,
+		final boolean continuous, @Nullable final T tmp) {
 		final int n = points.length;
 		final float dt = 1f - u;
 		final float t2 = u * u;
@@ -83,8 +84,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T cubic_derivative (final T out, final int i, final float u, final T[] points,
-		final boolean continuous, final T tmp) {
+	public static <T extends Vector<T>> T cubic_derivative (final T out, final int i, final float u, @Nullable final T[] points,
+		final boolean continuous, @Nullable final T tmp) {
 		final int n = points.length;
 		final float dt = 1f - u;
 		final float t2 = u * u;
@@ -139,8 +140,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T calculate (final T out, final int i, final float u, final T[] points, final int degree,
-		final boolean continuous, final T tmp) {
+	public static <T extends Vector<T>> T calculate (@Nullable final T out, final int i, final float u, @Nullable final T[] points, final int degree,
+		final boolean continuous, @Nullable final T tmp) {
 		switch (degree) {
 		case 3:
 			return cubic(out, i, u, points, continuous, tmp);
@@ -157,8 +158,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, final T[] points, final int degree,
-		final boolean continuous, final T tmp) {
+	public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, @Nullable final T[] points, final int degree,
+		final boolean continuous, @Nullable final T tmp) {
 		switch (degree) {
 		case 3:
 			return cubic_derivative(out, i, u, points, continuous, tmp);
@@ -166,14 +167,14 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 		throw new IllegalArgumentException();
 	}
 
-	public T[] controlPoints;
-	public Array<T> knots;
+	@Nullable public T[] controlPoints;
+	@Nullable public Array<T> knots;
 	public int degree;
 	public boolean continuous;
 	public int spanCount;
-	private T tmp;
-	private T tmp2;
-	private T tmp3;
+	@Nullable private T tmp;
+	@Nullable private T tmp2;
+	@Nullable private T tmp3;
 
 	public BSpline () {
 	}
@@ -203,7 +204,7 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	}
 
 	@Override
-	public T valueAt (T out, float t) {
+	public T valueAt (@Nullable T out, float t) {
 		final int n = spanCount;
 		float u = t * n;
 		int i = (t >= 1f) ? (n - 1) : (int)u;
@@ -212,7 +213,7 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	}
 
 	/** @return The value of the spline at position u of the specified span */
-	public T valueAt (final T out, final int span, final float u) {
+	public T valueAt (@Nullable final T out, final int span, final float u) {
 		return calculate(out, continuous ? span : (span + (int)(degree * 0.5f)), u, controlPoints, degree, continuous, tmp);
 	}
 

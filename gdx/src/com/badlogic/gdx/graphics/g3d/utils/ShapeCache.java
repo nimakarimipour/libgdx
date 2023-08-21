@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /** A relatively lightweight class which can be used to render basic shapes which don't need a node structure and alike. Can be
  * used for batching both static and dynamic shapes which share the same {@link Material} and transformation {@link Matrix4}
@@ -121,7 +122,7 @@ public class ShapeCache implements Disposable, RenderableProvider {
 
 	/** Allows to customize the material.
 	 * @return material */
-	public Material getMaterial () {
+	@Nullable public Material getMaterial () {
 		return renderable.material;
 	}
 

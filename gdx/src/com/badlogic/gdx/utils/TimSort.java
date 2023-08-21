@@ -15,6 +15,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /** A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when running on partially sorted
  * arrays, while offering performance comparable to a traditional mergesort when run on random arrays. Like all proper mergesorts,
@@ -51,10 +52,10 @@ class TimSort<T> {
 	private static final int MIN_MERGE = 32;
 
 	/** The array being sorted. */
-	private T[] a;
+	@Nullable private T[] a;
 
 	/** The comparator for this sort. */
-	private Comparator<? super T> c;
+	@Nullable private Comparator<? super T> c;
 
 	/** When we get into galloping mode, we stay there until both runs win less often than MIN_GALLOP consecutive times. */
 	private static final int MIN_GALLOP = 7;
@@ -462,7 +463,7 @@ class TimSort<T> {
 	 * @return the int k, 0 <= k <= n such that a[b + k - 1] < key <= a[b + k], pretending that a[b - 1] is minus infinity and a[b
 	 *         + n] is infinity. In other words, key belongs at index b + k; or in other words, the first k elements of a should
 	 *         precede key, and the last n - k should follow it. */
-	private static <T> int gallopLeft (T key, T[] a, int base, int len, int hint, Comparator<? super T> c) {
+	private static <T> int gallopLeft (T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
 		if (DEBUG) assert len > 0 && hint >= 0 && hint < len;
 		int lastOfs = 0;
 		int ofs = 1;
@@ -526,7 +527,7 @@ class TimSort<T> {
 	 *           will run.
 	 * @param c the comparator used to order the range, and to search
 	 * @return the int k, 0 <= k <= n such that a[b + k - 1] <= key < a[b + k] */
-	private static <T> int gallopRight (T key, T[] a, int base, int len, int hint, Comparator<? super T> c) {
+	private static <T> int gallopRight (T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
 		if (DEBUG) assert len > 0 && hint >= 0 && hint < len;
 
 		int ofs = 1;
