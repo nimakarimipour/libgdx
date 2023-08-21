@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 public class DepthShader extends DefaultShader {
 	public static class Config extends DefaultShader.Config {
@@ -45,7 +46,7 @@ public class DepthShader extends DefaultShader {
 		}
 	}
 
-	private static String defaultVertexShader = null;
+	@Nullable private static String defaultVertexShader = null;
 
 	public final static String getDefaultVertexShader () {
 		if (defaultVertexShader == null)
@@ -53,7 +54,7 @@ public class DepthShader extends DefaultShader {
 		return defaultVertexShader;
 	}
 
-	private static String defaultFragmentShader = null;
+	@Nullable private static String defaultFragmentShader = null;
 
 	public final static String getDefaultFragmentShader () {
 		if (defaultFragmentShader == null)

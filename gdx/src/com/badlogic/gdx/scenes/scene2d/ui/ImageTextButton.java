@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
+import javax.annotation.Nullable;
 
 /** A button with a child {@link Image} and {@link Label}.
  * @see ImageButton
@@ -192,8 +193,8 @@ public class ImageTextButton extends Button {
 	/** The style for an image text button, see {@link ImageTextButton}.
 	 * @author Nathan Sweet */
 	static public class ImageTextButtonStyle extends TextButtonStyle {
-		public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
-		public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
+		@Nullable public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
+		@Nullable public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
 		public ImageTextButtonStyle () {
 		}

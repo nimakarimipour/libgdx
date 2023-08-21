@@ -19,6 +19,7 @@ package com.badlogic.gdx.utils;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Constructor;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
+import javax.annotation.Nullable;
 
 /** Pool that creates new instances of a type using reflection. The type must have a zero argument constructor.
  * {@link Constructor#setAccessible(boolean)} will be used if the class and/or constructor is not visible.
@@ -43,7 +44,7 @@ public class ReflectionPool<T> extends Pool<T> {
 		constructor = c;
 	}
 
-	private @Null Constructor findConstructor (Class<T> type) {
+	@Nullable private @Null Constructor findConstructor (Class<T> type) {
 		try {
 			return ClassReflection.getConstructor(type, (Class[])null);
 		} catch (Exception ex1) {

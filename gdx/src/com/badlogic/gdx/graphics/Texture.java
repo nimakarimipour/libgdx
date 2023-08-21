@@ -31,6 +31,7 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
@@ -46,7 +47,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * A Texture must be disposed when it is no longer used
  * @author badlogicgames@gmail.com */
 public class Texture extends GLTexture {
-	private static AssetManager assetManager;
+	@Nullable private static AssetManager assetManager;
 	final static Map<Application, Array<Texture>> managedTextures = new HashMap<Application, Array<Texture>>();
 
 	public enum TextureFilter {
@@ -118,7 +119,7 @@ public class Texture extends GLTexture {
 		this(file, null, useMipMaps);
 	}
 
-	public Texture (FileHandle file, Format format, boolean useMipMaps) {
+	public Texture (FileHandle file, @Nullable Format format, boolean useMipMaps) {
 		this(TextureData.Factory.loadFromFile(file, format, useMipMaps));
 	}
 

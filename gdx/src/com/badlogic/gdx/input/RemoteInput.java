@@ -26,6 +26,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -206,7 +207,7 @@ public class RemoteInput implements Runnable, Input {
 	int[] touchY = new int[MAX_TOUCHES];
 	boolean isTouched[] = new boolean[MAX_TOUCHES];
 	boolean justTouched = false;
-	InputProcessor processor = null;
+	@Nullable InputProcessor processor = null;
 	private final int port;
 	public final String[] ips;
 
@@ -531,7 +532,7 @@ public class RemoteInput implements Runnable, Input {
 		this.processor = processor;
 	}
 
-	@Override
+	@Nullable @Override
 	public InputProcessor getInputProcessor () {
 		return this.processor;
 	}

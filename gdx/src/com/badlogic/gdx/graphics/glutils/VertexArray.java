@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.utils.BufferUtils;
+import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -102,7 +103,7 @@ public class VertexArray implements VertexData {
 	}
 
 	@Override
-	public void bind (final ShaderProgram shader, final int[] locations) {
+	public void bind (final ShaderProgram shader, @Nullable final int[] locations) {
 		final int numAttributes = attributes.size();
 		((Buffer)byteBuffer).limit(buffer.limit() * 4);
 		if (locations == null) {
@@ -153,7 +154,7 @@ public class VertexArray implements VertexData {
 	}
 
 	@Override
-	public void unbind (ShaderProgram shader, int[] locations) {
+	public void unbind (ShaderProgram shader, @Nullable int[] locations) {
 		final int numAttributes = attributes.size();
 		if (locations == null) {
 			for (int i = 0; i < numAttributes; i++) {

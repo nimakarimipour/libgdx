@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
  * @author Inferno */
@@ -109,7 +110,7 @@ public abstract class RegionInfluencer extends Influencer {
 	/** Assigns a region to the particles using the particle life percent to calculate the current index in the
 	 * {@link RegionInfluencer#regions} array. */
 	public static class Animated extends RegionInfluencer {
-		FloatChannel lifeChannel;
+		@Nullable FloatChannel lifeChannel;
 
 		public Animated () {
 		}
@@ -157,7 +158,7 @@ public abstract class RegionInfluencer extends Influencer {
 	public static class AspectTextureRegion {
 		public float u, v, u2, v2;
 		public float halfInvAspectRatio;
-		public String imageName;
+		@Nullable public String imageName;
 
 		public AspectTextureRegion () {
 		}
@@ -205,7 +206,7 @@ public abstract class RegionInfluencer extends Influencer {
 
 	public Array<AspectTextureRegion> regions;
 	FloatChannel regionChannel;
-	public String atlasName;
+	@Nullable public String atlasName;
 
 	public RegionInfluencer (int regionsCount) {
 		this.regions = new Array<AspectTextureRegion>(false, regionsCount, AspectTextureRegion.class);
@@ -240,7 +241,7 @@ public abstract class RegionInfluencer extends Influencer {
 		}
 	}
 
-	public void setAtlasName (String atlasName) {
+	public void setAtlasName (@Nullable String atlasName) {
 		this.atlasName = atlasName;
 	}
 

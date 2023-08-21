@@ -30,6 +30,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Helper class to create {@link Model}s from code. To start building use the {@link #begin()} method, when finished building use
  * the {@link #end()} method. The end method returns the model just build. Building cannot be nested, only one model (per
@@ -40,9 +41,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * @author Xoppa */
 public class ModelBuilder {
 	/** The model currently being build */
-	private Model model;
+	@Nullable private Model model;
 	/** The node currently being build */
-	private Node node;
+	@Nullable private Node node;
 	/** The mesh builders created between begin and end */
 	private Array<MeshBuilder> builders = new Array<MeshBuilder>();
 

@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
+import javax.annotation.Nullable;
 
 /** Renders points, lines, shape outlines and filled shapes.
  * <p>
@@ -99,7 +100,7 @@ public class ShapeRenderer implements Disposable {
 	private final Matrix4 combinedMatrix = new Matrix4();
 	private final Vector2 tmp = new Vector2();
 	private final Color color = new Color(1, 1, 1, 1);
-	private ShapeType shapeType;
+	@Nullable private ShapeType shapeType;
 	private boolean autoShapeType;
 	private float defaultRectLineWidth = 0.75f;
 
@@ -111,7 +112,7 @@ public class ShapeRenderer implements Disposable {
 		this(maxVertices, null);
 	}
 
-	public ShapeRenderer (int maxVertices, ShaderProgram defaultShader) {
+	public ShapeRenderer (int maxVertices, @Nullable ShaderProgram defaultShader) {
 		if (defaultShader == null) {
 			renderer = new ImmediateModeRenderer20(maxVertices, false, true, 0);
 		} else {
@@ -122,7 +123,7 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Sets the color to be used by the next shapes drawn. */
-	public void setColor (Color color) {
+	public void setColor (@Nullable Color color) {
 		this.color.set(color);
 	}
 
@@ -1182,7 +1183,7 @@ public class ShapeRenderer implements Disposable {
 	 * @param preferred usually ShapeType.Line
 	 * @param other usually ShapeType.Filled. May be null.
 	 * @param newVertices vertices count of geometric figure you want to draw */
-	protected final void check (ShapeType preferred, ShapeType other, int newVertices) {
+	protected final void check (ShapeType preferred, @Nullable ShapeType other, int newVertices) {
 		if (shapeType == null) throw new IllegalStateException("begin must be called first.");
 
 		if (shapeType != preferred && shapeType != other) {
@@ -1223,7 +1224,7 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Returns the current shape type. */
-	public ShapeType getCurrentType () {
+	@Nullable public ShapeType getCurrentType () {
 		return shapeType;
 	}
 

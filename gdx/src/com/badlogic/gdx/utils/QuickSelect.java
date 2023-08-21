@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
+import com.uber.nullaway.annotations.Initializer;
 
 /** Implementation of Tony Hoare's quickselect algorithm. Running time is generally O(n), but worst case is O(n^2) Pivot choice is
  * median of three method, providing better performance than a random pivot for partially sorted data.
@@ -26,7 +27,7 @@ public class QuickSelect<T> {
 	private T[] array;
 	private Comparator<? super T> comp;
 
-	public int select (T[] items, Comparator<T> comp, int n, int size) {
+	@Initializer public int select (T[] items, Comparator<T> comp, int n, int size) {
 		this.array = items;
 		this.comp = comp;
 		return recursiveSelect(0, size - 1, n);

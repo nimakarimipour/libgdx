@@ -35,6 +35,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /** 2D scene graph node. An actor has a position, rectangular size, origin, scale, rotation, Z index, and color. The position
  * corresponds to the unrotated, unscaled bottom left corner of the actor. The position is relative to the actor's parent. The
@@ -57,12 +58,12 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 public class Actor {
 	private @Null Stage stage;
 
-	@Null Group parent;
+	@Nullable @Null Group parent;
 	private final DelayedRemovalArray<EventListener> listeners = new DelayedRemovalArray(0);
 	private final DelayedRemovalArray<EventListener> captureListeners = new DelayedRemovalArray(0);
 	private final Array<Action> actions = new Array(0);
 
-	private @Null String name;
+	@Nullable private @Null String name;
 	private Touchable touchable = Touchable.enabled;
 	private boolean visible = true, debug;
 	float x, y;
@@ -71,7 +72,7 @@ public class Actor {
 	float scaleX = 1, scaleY = 1;
 	float rotation;
 	final Color color = new Color(1, 1, 1, 1);
-	private @Null Object userObject;
+	@Nullable private @Null Object userObject;
 
 	/** Draws the actor. The batch is configured to draw in the parent's coordinate system.
 	 * {@link Batch#draw(com.badlogic.gdx.graphics.g2d.TextureRegion, float, float, float, float, float, float, float, float, float)
@@ -208,7 +209,7 @@ public class Actor {
 	 * @param touchable If true, hit detection will respect the {@link #setTouchable(Touchable) touchability}.
 	 * @see Touchable */
 
-	public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.touchable != Touchable.enabled) return null;
 		if (!isVisible()) return null;
 		return x >= 0 && x < width && y >= 0 && y < height ? this : null;
@@ -259,7 +260,7 @@ public class Actor {
 		return captureListeners;
 	}
 
-	public void addAction (Action action) {
+	public void addAction (@Nullable Action action) {
 		action.setActor(this);
 		actions.add(action);
 
@@ -268,7 +269,7 @@ public class Actor {
 
 	/** @param action May be null, in which case nothing is done. */
 
-	public void removeAction (@Null Action action) {
+	public void removeAction (@Nullable @Null Action action) {
 		if (action != null && actions.removeValue(action, true)) action.setActor(null);
 	}
 
@@ -336,7 +337,7 @@ public class Actor {
 	/** Returns this actor or the first ascendant of this actor that is assignable with the specified type, or null if none were
 	 * found. */
 
-	public @Null <T extends Actor> T firstAscendant (Class<T> type) {
+	@Nullable public @Null <T extends Actor> T firstAscendant (Class<T> type) {
 		if (type == null) throw new IllegalArgumentException("actor cannot be null.");
 		Actor actor = this;
 		do {
@@ -358,7 +359,7 @@ public class Actor {
 
 	/** Called by the framework when an actor is added to or removed from a group.
 	 * @param parent May be null if the actor has been removed from the parent. */
-	protected void setParent (@Null Group parent) {
+	protected void setParent (@Nullable @Null Group parent) {
 		this.parent = parent;
 	}
 
@@ -434,7 +435,7 @@ public class Actor {
 	}
 
 	/** Returns an application specific object for convenience, or null. */
-	public @Null Object getUserObject () {
+	@Nullable public @Null Object getUserObject () {
 		return userObject;
 	}
 
@@ -775,7 +776,7 @@ public class Actor {
 
 	/** @see #setName(String)
 	 * @return May be null. */
-	public @Null String getName () {
+	@Nullable public @Null String getName () {
 		return name;
 	}
 
@@ -944,7 +945,7 @@ public class Actor {
 
 	/** Converts coordinates for this actor to those of an ascendant. The ascendant is not required to be the immediate parent.
 	 * @throws IllegalArgumentException if the specified actor is not an ascendant of this actor. */
-	public Vector2 localToAscendantCoordinates (@Null Actor ascendant, Vector2 localCoords) {
+	public Vector2 localToAscendantCoordinates (@Nullable @Null Actor ascendant, Vector2 localCoords) {
 		Actor actor = this;
 		do {
 			actor.localToParentCoordinates(localCoords);

@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import javax.annotation.Nullable;
 
 /** It's an {@link Influencer} which controls particles color and transparency.
  * @author Inferno */
@@ -30,7 +31,7 @@ public abstract class ColorInfluencer extends Influencer {
 
 	/** It's an {@link Influencer} which assigns a random color when a particle is activated. */
 	public static class Random extends ColorInfluencer {
-		FloatChannel colorChannel;
+		@Nullable FloatChannel colorChannel;
 
 		@Override
 		public void allocateChannels () {

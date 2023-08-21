@@ -17,18 +17,19 @@
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
+import javax.annotation.Nullable;
 
 /** Removes an action from an actor.
  * @author Nathan Sweet */
 public class RemoveAction extends Action {
-	private Action action;
+	@Nullable private Action action;
 
 	public boolean act (float delta) {
 		target.removeAction(action);
 		return true;
 	}
 
-	public Action getAction () {
+	@Nullable public Action getAction () {
 		return action;
 	}
 

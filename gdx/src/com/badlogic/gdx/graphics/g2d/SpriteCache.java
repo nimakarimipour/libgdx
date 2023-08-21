@@ -37,6 +37,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
+import javax.annotation.Nullable;
 
 /** Draws 2D images, optimized for geometry that does not change. Sprites and/or textures are cached and given an ID, which can
  * later be used for drawing. The size, color, and texture region for each cached image cannot be modified. This information is
@@ -78,14 +79,14 @@ public class SpriteCache implements Disposable {
 	private final Matrix4 combinedMatrix = new Matrix4();
 	private final ShaderProgram shader;
 
-	private Cache currentCache;
+	@Nullable private Cache currentCache;
 	private final Array<Texture> textures = new Array(8);
 	private final IntArray counts = new IntArray(8);
 
 	private final Color color = new Color(1, 1, 1, 1);
 	private float colorPacked = Color.WHITE_FLOAT_BITS;
 
-	private ShaderProgram customShader = null;
+	@Nullable private ShaderProgram customShader = null;
 
 	/** Number of render calls since the last {@link #begin()}. **/
 	public int renderCalls = 0;
@@ -1021,7 +1022,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Returns the custom shader, or null if the default shader is being used. */
-	public ShaderProgram getCustomShader () {
+	@Nullable public ShaderProgram getCustomShader () {
 		return customShader;
 	}
 

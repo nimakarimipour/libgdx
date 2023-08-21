@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import javax.annotation.Nullable;
 
 /** A single-line text input field.
  * <p>
@@ -90,7 +91,7 @@ public class TextField extends Widget implements Disableable {
 	Clipboard clipboard;
 	InputListener inputListener;
 
-	@Null TextFieldListener listener;
+	@Nullable @Null TextFieldListener listener;
 
 	@Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
@@ -102,7 +103,7 @@ public class TextField extends Widget implements Disableable {
 	long lastChangeTime;
 
 	boolean passwordMode;
-	private StringBuilder passwordBuffer;
+	@Nullable private StringBuilder passwordBuffer;
 	private char passwordCharacter = BULLET;
 
 	protected float fontOffset, textHeight, textOffset;
@@ -542,7 +543,7 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return May be null. */
-	private @Null TextField findNextTextField (Array<Actor> actors, @Null TextField best, Vector2 bestCoords,
+	@Nullable private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
 		Vector2 currentCoords, boolean up) {
 		for (int i = 0, n = actors.size; i < n; i++) {
 			Actor actor = actors.get(i);
@@ -1091,11 +1092,11 @@ public class TextField extends Widget implements Disableable {
 	 * @author Nathan Sweet */
 	static public class TextFieldStyle {
 		public BitmapFont font;
-		public Color fontColor;
-		public @Null Color focusedFontColor, disabledFontColor;
-		public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
-		public @Null BitmapFont messageFont;
-		public @Null Color messageFontColor;
+		@Nullable public Color fontColor;
+		@Nullable public @Null Color focusedFontColor, disabledFontColor;
+		@Nullable public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
+		@Nullable public @Null BitmapFont messageFont;
+		@Nullable public @Null Color messageFontColor;
 
 		public TextFieldStyle () {
 		}

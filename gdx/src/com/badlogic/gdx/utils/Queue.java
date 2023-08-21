@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
+import javax.annotation.Nullable;
 
 /** A resizable, ordered array of objects with efficient add and remove at the beginning and end. Values in the backing array may
  * wrap back to the beginning, making add and remove at the beginning and end O(1) (unless the backing array needs to resize when
@@ -38,7 +39,7 @@ public class Queue<T> implements Iterable<T> {
 	/** Number of elements in the queue. */
 	public int size = 0;
 
-	private transient QueueIterable iterable;
+	@Nullable private transient QueueIterable iterable;
 
 	/** Creates a new Queue which can hold 16 values without needing to resize backing array. */
 	public Queue () {

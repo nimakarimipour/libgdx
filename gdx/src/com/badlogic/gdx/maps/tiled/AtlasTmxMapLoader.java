@@ -31,6 +31,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
+import javax.annotation.Nullable;
 
 /** A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
  * 
@@ -92,7 +93,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 
 	protected Array<Texture> trackedTextures = new Array<Texture>();
 
-	protected AtlasResolver atlasResolver;
+	@Nullable protected AtlasResolver atlasResolver;
 
 	public AtlasTmxMapLoader () {
 		super(new InternalFileHandleResolver());
