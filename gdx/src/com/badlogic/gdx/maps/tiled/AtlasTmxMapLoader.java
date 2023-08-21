@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,11 +34,11 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 import javax.annotation.Nullable;
 
 /** A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
- * 
+ *
  * It requires a map-level property called 'atlas' with its value being the relative path to the TextureAtlas. The atlas must have
  * in it indexed regions named after the tilesets used in the map. The indexes shall be local to the tileset (not the global id).
  * Strip whitespace and rotation should not be used when creating the atlas.
- * 
+ *
  * @author Justin Shapcott
  * @author Manuel Bua */
 public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasTiledMapLoaderParameters> {
@@ -160,7 +160,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
 		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight,
 		@Nullable FileHandle image) {
-
+		if(atlasResolver == null) return;
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;
 
