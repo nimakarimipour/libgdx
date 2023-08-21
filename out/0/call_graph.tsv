@@ -2695,6 +2695,7 @@ com.badlogic.gdx.math.Matrix3	setToRotation(com.badlogic.gdx.math.Vector3,float)
 com.badlogic.gdx.math.Matrix3	inv()	det()	com.badlogic.gdx.math.Matrix3	SOURCE
 com.badlogic.gdx.math.Matrix3	inv()	GdxRuntimeException(java.lang.String)	com.badlogic.gdx.utils.GdxRuntimeException	SOURCE
 com.badlogic.gdx.math.Matrix3	set(com.badlogic.gdx.math.Matrix3)	arraycopy(java.lang.Object,int,java.lang.Object,int,int)	java.lang.System	SOURCE
+com.badlogic.gdx.math.Matrix3	set(com.badlogic.gdx.math.Matrix4)	IllegalArgumentException(java.lang.String)	java.lang.IllegalArgumentException	SOURCE
 com.badlogic.gdx.math.Matrix3	set(float[])	arraycopy(java.lang.Object,int,java.lang.Object,int,int)	java.lang.System	SOURCE
 com.badlogic.gdx.math.Matrix3	translate(float,float)	mul(float[],float[])	com.badlogic.gdx.math.Matrix3	SOURCE
 com.badlogic.gdx.math.Matrix3	translate(com.badlogic.gdx.math.Vector2)	mul(float[],float[])	com.badlogic.gdx.math.Matrix3	SOURCE
@@ -5729,10 +5730,6 @@ com.badlogic.gdx.maps.tiled.TideMapLoader	getRelativeFileHandle(com.badlogic.gdx
 com.badlogic.gdx.maps.tiled.TideMapLoader	getRelativeFileHandle(com.badlogic.gdx.files.FileHandle,java.lang.String)	child(java.lang.String)	com.badlogic.gdx.files.FileHandle	SOURCE
 com.badlogic.gdx.assets.loaders.SynchronousAssetLoader	SynchronousAssetLoader(com.badlogic.gdx.assets.loaders.FileHandleResolver)	AssetLoader(com.badlogic.gdx.assets.loaders.FileHandleResolver)	com.badlogic.gdx.assets.loaders.AssetLoader	SOURCE
 com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject	TiledMapTileMapObject(com.badlogic.gdx.maps.tiled.TiledMapTile,boolean,boolean)	TextureMapObject()	com.badlogic.gdx.maps.objects.TextureMapObject	SOURCE
-com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject	TiledMapTileMapObject(com.badlogic.gdx.maps.tiled.TiledMapTile,boolean,boolean)	TextureRegion(com.badlogic.gdx.graphics.g2d.TextureRegion)	com.badlogic.gdx.graphics.g2d.TextureRegion	SOURCE
-com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject	TiledMapTileMapObject(com.badlogic.gdx.maps.tiled.TiledMapTile,boolean,boolean)	getTextureRegion()	com.badlogic.gdx.maps.tiled.TiledMapTile	SOURCE
-com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject	TiledMapTileMapObject(com.badlogic.gdx.maps.tiled.TiledMapTile,boolean,boolean)	flip(boolean,boolean)	com.badlogic.gdx.graphics.g2d.TextureRegion	SOURCE
-com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject	TiledMapTileMapObject(com.badlogic.gdx.maps.tiled.TiledMapTile,boolean,boolean)	setTextureRegion(com.badlogic.gdx.graphics.g2d.TextureRegion)	com.badlogic.gdx.maps.objects.TextureMapObject	SOURCE
 com.badlogic.gdx.maps.objects.TextureMapObject	TextureMapObject()	TextureMapObject(com.badlogic.gdx.graphics.g2d.TextureRegion)	com.badlogic.gdx.maps.objects.TextureMapObject	SOURCE
 com.badlogic.gdx.maps.objects.TextureMapObject	TextureMapObject(com.badlogic.gdx.graphics.g2d.TextureRegion)	MapObject()	com.badlogic.gdx.maps.MapObject	SOURCE
 com.badlogic.gdx.maps.tiled.TmxMapLoader	TmxMapLoader()	BaseTmxMapLoader(com.badlogic.gdx.assets.loaders.FileHandleResolver)	com.badlogic.gdx.maps.tiled.BaseTmxMapLoader	SOURCE
@@ -5808,10 +5805,6 @@ com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.F
 com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	getRelativeFileHandle(com.badlogic.gdx.files.FileHandle,java.lang.String)	com.badlogic.gdx.maps.tiled.BaseTmxMapLoader	SOURCE
 com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	getRelativeFileHandle(com.badlogic.gdx.files.FileHandle,java.lang.String)	com.badlogic.gdx.maps.tiled.BaseTmxMapLoader	SOURCE
 com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	getRelativeFileHandle(com.badlogic.gdx.files.FileHandle,java.lang.String)	com.badlogic.gdx.maps.tiled.BaseTmxMapLoader	SOURCE
-com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	getImage(java.lang.String)	com.badlogic.gdx.maps.ImageResolver	SOURCE
-com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	path()	com.badlogic.gdx.files.FileHandle	SOURCE
-com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	getIntAttribute(java.lang.String)	com.badlogic.gdx.utils.XmlReader$Element	SOURCE
-com.badlogic.gdx.maps.tiled.TmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	addStaticTiledMapTile(com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.graphics.g2d.TextureRegion,int,float,float)	com.badlogic.gdx.maps.tiled.BaseTmxMapLoader	SOURCE
 com.badlogic.gdx.maps.objects.EllipseMapObject	EllipseMapObject()	EllipseMapObject(float,float,float,float)	com.badlogic.gdx.maps.objects.EllipseMapObject	SOURCE
 com.badlogic.gdx.maps.objects.EllipseMapObject	EllipseMapObject(float,float,float,float)	MapObject()	com.badlogic.gdx.maps.MapObject	SOURCE
 com.badlogic.gdx.maps.objects.EllipseMapObject	EllipseMapObject(float,float,float,float)	Ellipse(float,float,float,float)	com.badlogic.gdx.math.Ellipse	SOURCE
@@ -10434,10 +10427,6 @@ com.badlogic.gdx.utils.OrderedSet	clear(int)	clear(int)	com.badlogic.gdx.utils.O
 com.badlogic.gdx.utils.OrderedSet	clear()	clear()	com.badlogic.gdx.utils.Array	SOURCE
 com.badlogic.gdx.utils.OrderedSet	clear()	clear()	com.badlogic.gdx.utils.ObjectSet	SOURCE
 com.badlogic.gdx.utils.OrderedSet	iterator()	OrderedSetIterator(com.badlogic.gdx.utils.OrderedSet<K>)	com.badlogic.gdx.utils.OrderedSet$OrderedSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	OrderedSetIterator(com.badlogic.gdx.utils.OrderedSet<K>)	com.badlogic.gdx.utils.OrderedSet$OrderedSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	OrderedSetIterator(com.badlogic.gdx.utils.OrderedSet<K>)	com.badlogic.gdx.utils.OrderedSet$OrderedSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	reset()	com.badlogic.gdx.utils.OrderedSet$OrderedSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	reset()	com.badlogic.gdx.utils.OrderedSet$OrderedSetIterator	SOURCE
 com.badlogic.gdx.utils.OrderedSet	toString()	StringBuilder(int)	java.lang.StringBuilder	SOURCE
 com.badlogic.gdx.utils.OrderedSet	toString()	append(char)	java.lang.StringBuilder	SOURCE
 com.badlogic.gdx.utils.OrderedSet	toString()	append(java.lang.Object)	java.lang.StringBuilder	SOURCE
@@ -10710,7 +10699,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Window	draw(com.badlogic.gdx.graphics.g2d.Bat
 com.badlogic.gdx.scenes.scene2d.ui.Window	draw(com.badlogic.gdx.graphics.g2d.Batch,float)	draw(com.badlogic.gdx.graphics.g2d.Batch,float)	com.badlogic.gdx.scenes.scene2d.ui.Table	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	getColor()	com.badlogic.gdx.scenes.scene2d.Actor	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	setColor(float,float,float,float)	com.badlogic.gdx.graphics.g2d.Batch	SOURCE
-com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	draw(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float)	com.badlogic.gdx.scenes.scene2d.utils.Drawable	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float)	drawBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float)	com.badlogic.gdx.scenes.scene2d.ui.Table	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float)	getColor()	com.badlogic.gdx.scenes.scene2d.Actor	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float)	getColor()	com.badlogic.gdx.scenes.scene2d.Actor	SOURCE
@@ -10896,7 +10884,6 @@ com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	layout()	set(float,float,float,flo
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	layout()	updateActorPosition()	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	layout()	setSize(float,float)	com.badlogic.gdx.scenes.scene2d.Actor	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	layout()	validate()	com.badlogic.gdx.scenes.scene2d.utils.Layout	SOURCE
-com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	setPosition(float,float)	com.badlogic.gdx.scenes.scene2d.Actor	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	setCullingArea(com.badlogic.gdx.math.Rectangle)	com.badlogic.gdx.scenes.scene2d.utils.Cullable	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	draw(com.badlogic.gdx.graphics.g2d.Batch,float)	validate()	com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	draw(com.badlogic.gdx.graphics.g2d.Batch,float)	applyTransform(com.badlogic.gdx.graphics.g2d.Batch,com.badlogic.gdx.math.Matrix4)	com.badlogic.gdx.scenes.scene2d.Group	SOURCE
@@ -20311,6 +20298,7 @@ com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	bind()	bind()	com.badlogic.
 com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	nextSide()	GdxRuntimeException(java.lang.String)	com.badlogic.gdx.utils.GdxRuntimeException	SOURCE
 com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	nextSide()	bindSide(com.badlogic.gdx.graphics.Cubemap.CubemapSide)	com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	SOURCE
 com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	nextSide()	getSide()	com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	SOURCE
+com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	bindSide(com.badlogic.gdx.graphics.Cubemap.CubemapSide)	GdxRuntimeException(java.lang.String)	com.badlogic.gdx.utils.GdxRuntimeException	SOURCE
 com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	bindSide(com.badlogic.gdx.graphics.Cubemap.CubemapSide)	glFramebufferTexture2D(int,int,int,int,int)	com.badlogic.gdx.graphics.GL20	SOURCE
 com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	bindSide(com.badlogic.gdx.graphics.Cubemap.CubemapSide)	getTextureObjectHandle()	com.badlogic.gdx.graphics.GLTexture	SOURCE
 com.badlogic.gdx.graphics.glutils.FrameBufferCubemap	bindSide(com.badlogic.gdx.graphics.Cubemap.CubemapSide)	getColorBufferTexture()	com.badlogic.gdx.graphics.glutils.GLFrameBuffer	SOURCE
@@ -20695,7 +20683,6 @@ com.badlogic.gdx.graphics.glutils.KTXTextureData	disposePreparedData()	disposeUn
 com.badlogic.gdx.graphics.glutils.KTXTextureData	consumePixmap()	GdxRuntimeException(java.lang.String)	com.badlogic.gdx.utils.GdxRuntimeException	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	disposePixmap()	GdxRuntimeException(java.lang.String)	com.badlogic.gdx.utils.GdxRuntimeException	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	getInt(int)	java.nio.ByteBuffer	SOURCE
-com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	position(int)	java.nio.Buffer	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	slice()	java.nio.ByteBuffer	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	limit(int)	java.nio.Buffer	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getFormat()	GdxRuntimeException(java.lang.String)	com.badlogic.gdx.utils.GdxRuntimeException	SOURCE
@@ -21342,7 +21329,6 @@ com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	draw(com.badlogic.gdx.graphics.
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	draw(com.badlogic.gdx.graphics.g2d.TextureRegion,float,float,com.badlogic.gdx.math.Affine2)	IllegalStateException(java.lang.String)	java.lang.IllegalStateException	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	draw(com.badlogic.gdx.graphics.g2d.TextureRegion,float,float,com.badlogic.gdx.math.Affine2)	switchTexture(com.badlogic.gdx.graphics.Texture)	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	draw(com.badlogic.gdx.graphics.g2d.TextureRegion,float,float,com.badlogic.gdx.math.Affine2)	flush()	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
-com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	bind()	com.badlogic.gdx.graphics.GLTexture	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	setVertices(float[],int,int)	com.badlogic.gdx.graphics.Mesh	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	setIndices(short[],int,int)	com.badlogic.gdx.graphics.Mesh	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	glDisable(int)	com.badlogic.gdx.graphics.GL20	SOURCE
@@ -22680,6 +22666,7 @@ com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graph
 com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graphics.g3d.Model,com.badlogic.gdx.math.Matrix4,java.lang.String,boolean,boolean,boolean,boolean)	idt()	com.badlogic.gdx.math.Quaternion	SOURCE
 com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graphics.g3d.Model,com.badlogic.gdx.math.Matrix4,java.lang.String,boolean,boolean,boolean,boolean)	set(float,float,float)	com.badlogic.gdx.math.Vector3	SOURCE
 com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graphics.g3d.Model,com.badlogic.gdx.math.Matrix4,java.lang.String,boolean,boolean,boolean,boolean)	hasParent()	com.badlogic.gdx.graphics.g3d.model.Node	SOURCE
+com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graphics.g3d.Model,com.badlogic.gdx.math.Matrix4,java.lang.String,boolean,boolean,boolean,boolean)	getParent()	com.badlogic.gdx.graphics.g3d.model.Node	SOURCE
 com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graphics.g3d.Model,com.badlogic.gdx.math.Matrix4,java.lang.String,boolean,boolean,boolean,boolean)	mul(com.badlogic.gdx.math.Matrix4)	com.badlogic.gdx.math.Matrix4	SOURCE
 com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graphics.g3d.Model,com.badlogic.gdx.math.Matrix4,java.lang.String,boolean,boolean,boolean,boolean)	getParent()	com.badlogic.gdx.graphics.g3d.model.Node	SOURCE
 com.badlogic.gdx.graphics.g3d.ModelInstance	ModelInstance(com.badlogic.gdx.graphics.g3d.Model,com.badlogic.gdx.math.Matrix4,java.lang.String,boolean,boolean,boolean,boolean)	invalidate()	com.badlogic.gdx.graphics.g3d.ModelInstance	SOURCE
@@ -23038,6 +23025,7 @@ com.badlogic.gdx.graphics.g3d.utils.AnimationController$AnimationDesc	update(flo
 com.badlogic.gdx.graphics.g3d.utils.AnimationController	animationPool	()	com.badlogic.gdx.graphics.g3d.utils.AnimationController$1	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.AnimationController$1	newObject()	AnimationDesc()	com.badlogic.gdx.graphics.g3d.utils.AnimationController$AnimationDesc	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.AnimationController	AnimationController(com.badlogic.gdx.graphics.g3d.ModelInstance)	BaseAnimationController(com.badlogic.gdx.graphics.g3d.ModelInstance)	com.badlogic.gdx.graphics.g3d.utils.BaseAnimationController	SOURCE
+com.badlogic.gdx.graphics.g3d.utils.AnimationController	obtain(com.badlogic.gdx.graphics.g3d.model.Animation,float,float,int,float,com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationListener)	IllegalArgumentException(java.lang.String)	java.lang.IllegalArgumentException	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.AnimationController	obtain(com.badlogic.gdx.graphics.g3d.model.Animation,float,float,int,float,com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationListener)	obtain()	com.badlogic.gdx.utils.Pool	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.AnimationController	obtain(java.lang.String,float,float,int,float,com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationListener)	getAnimation(java.lang.String)	com.badlogic.gdx.graphics.g3d.ModelInstance	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.AnimationController	obtain(java.lang.String,float,float,int,float,com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationListener)	GdxRuntimeException(java.lang.String)	com.badlogic.gdx.utils.GdxRuntimeException	SOURCE
@@ -27372,6 +27360,7 @@ com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy	dispose()	dispose()	com
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	plugs	IntMap()	com.badlogic.gdx.utils.IntMap	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	beforeGroup(int,com.badlogic.gdx.utils.Array<com.badlogic.gdx.graphics.g3d.decals.Decal>)	beforeGroup(com.badlogic.gdx.utils.Array<com.badlogic.gdx.graphics.g3d.decals.Decal>)	com.badlogic.gdx.graphics.g3d.decals.GroupPlug	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	beforeGroup(int,com.badlogic.gdx.utils.Array<com.badlogic.gdx.graphics.g3d.decals.Decal>)	get(int)	com.badlogic.gdx.utils.IntMap	SOURCE
+com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	afterGroup(int)	containsKey(int)	com.badlogic.gdx.utils.IntMap	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	afterGroup(int)	afterGroup()	com.badlogic.gdx.graphics.g3d.decals.GroupPlug	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	afterGroup(int)	get(int)	com.badlogic.gdx.utils.IntMap	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	plugIn(com.badlogic.gdx.graphics.g3d.decals.GroupPlug,int)	put(int,V)	com.badlogic.gdx.utils.IntMap	SOURCE

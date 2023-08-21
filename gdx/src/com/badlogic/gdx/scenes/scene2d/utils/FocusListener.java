@@ -21,11 +21,12 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Listener for {@link FocusEvent}.
  * @author Nathan Sweet */
 abstract public class FocusListener implements EventListener {
-	public boolean handle (Event event) {
+	@NullUnmarked public boolean handle (Event event) {
 		if (!(event instanceof FocusEvent)) return false;
 		FocusEvent focusEvent = (FocusEvent)event;
 		switch (focusEvent.getType()) {

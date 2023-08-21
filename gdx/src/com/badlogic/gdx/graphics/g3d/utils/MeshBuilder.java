@@ -46,6 +46,7 @@ import com.badlogic.gdx.utils.IntIntMap;
 import com.badlogic.gdx.utils.ShortArray;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Class to construct a mesh, optionally splitting it into one or more mesh parts. Before you can call any other method you must
  * call {@link #begin(VertexAttributes)} or {@link #begin(VertexAttributes, int)}. To use mesh parts you must call
@@ -240,7 +241,7 @@ public class MeshBuilder implements MeshPartBuilder {
 	 * @param mesh The mesh to receive the built vertices and indices, must have the same attributes and must be big enough to hold
 	 *           the data, any existing data will be overwritten. */
 
-	public Mesh end (Mesh mesh) {
+	@NullUnmarked public Mesh end (Mesh mesh) {
 		endpart();
 
 		if (attributes == null) throw new GdxRuntimeException("Call begin() first");

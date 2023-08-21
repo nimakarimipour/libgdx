@@ -4,9 +4,10 @@ package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class OutWindow {
-	byte[] _buffer;
+	@SuppressWarnings("NullAway.Init") byte[] _buffer;
 	int _pos;
 	int _windowSize = 0;
 	int _streamPos;
@@ -36,7 +37,7 @@ public class OutWindow {
 		}
 	}
 
-	public void Flush () throws IOException {
+	@NullUnmarked public void Flush () throws IOException {
 		int size = _pos - _streamPos;
 		if (size == 0) return;
 		_stream.write(_buffer, _streamPos, size);

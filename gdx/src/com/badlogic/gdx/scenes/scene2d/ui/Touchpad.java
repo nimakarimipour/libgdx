@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
  * previously.
  * @author Josh Street */
 public class Touchpad extends Widget {
-	private TouchpadStyle style;
+	@SuppressWarnings("NullAway.Init") private TouchpadStyle style;
 	boolean touched;
 	boolean resetOnTouchUp = true;
 	private float deadzoneRadius;

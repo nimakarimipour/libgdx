@@ -158,6 +158,7 @@ com.badlogic.gdx.graphics.Pixmap	Pixmap(com.badlogic.gdx.graphics.g2d.Gdx2DPixma
 com.badlogic.gdx.graphics.Pixmap	Pixmap(com.badlogic.gdx.graphics.g2d.Gdx2DPixmap)	this	com.badlogic.gdx.graphics.Pixmap	SOURCE
 com.badlogic.gdx.graphics.Pixmap	downloadFromUrl(java.lang.String,com.badlogic.gdx.graphics.Pixmap.DownloadPixmapResponseListener)	GET	com.badlogic.gdx.Net$HttpMethods	SOURCE
 com.badlogic.gdx.graphics.Pixmap	downloadFromUrl(java.lang.String,com.badlogic.gdx.graphics.Pixmap.DownloadPixmapResponseListener)	net	com.badlogic.gdx.Gdx	SOURCE
+com.badlogic.gdx.graphics.Pixmap	downloadFromUrl(java.lang.String,com.badlogic.gdx.graphics.Pixmap.DownloadPixmapResponseListener)	net	com.badlogic.gdx.Gdx	SOURCE
 com.badlogic.gdx.graphics.Pixmap$1	handleHttpResponse(com.badlogic.gdx.Net.HttpResponse)	app	com.badlogic.gdx.Gdx	SOURCE
 com.badlogic.gdx.graphics.Pixmap$1$1	run()	length	Array	SOURCE
 com.badlogic.gdx.graphics.Pixmap	setColor(int)	color	com.badlogic.gdx.graphics.Pixmap	SOURCE
@@ -226,6 +227,8 @@ com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.
 com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	texture	com.badlogic.gdx.assets.loaders.TextureLoader$TextureLoaderInfo	SOURCE
 com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	info	com.badlogic.gdx.assets.loaders.TextureLoader	SOURCE
 com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	texture	com.badlogic.gdx.assets.loaders.TextureLoader$TextureParameter	SOURCE
+com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	data	com.badlogic.gdx.assets.loaders.TextureLoader$TextureLoaderInfo	SOURCE
+com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	info	com.badlogic.gdx.assets.loaders.TextureLoader	SOURCE
 com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	data	com.badlogic.gdx.assets.loaders.TextureLoader$TextureLoaderInfo	SOURCE
 com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	info	com.badlogic.gdx.assets.loaders.TextureLoader	SOURCE
 com.badlogic.gdx.assets.loaders.TextureLoader	loadAsync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	data	com.badlogic.gdx.assets.loaders.TextureLoader$TextureLoaderInfo	SOURCE
@@ -5004,6 +5007,7 @@ com.badlogic.gdx.math.Vector2	len2()	x	com.badlogic.gdx.math.Vector2	SOURCE
 com.badlogic.gdx.math.Vector2	len2()	x	com.badlogic.gdx.math.Vector2	SOURCE
 com.badlogic.gdx.math.Vector2	len2()	y	com.badlogic.gdx.math.Vector2	SOURCE
 com.badlogic.gdx.math.Vector2	len2()	y	com.badlogic.gdx.math.Vector2	SOURCE
+com.badlogic.gdx.math.Vector2	set(com.badlogic.gdx.math.Vector2)	this	com.badlogic.gdx.math.Vector2	SOURCE
 com.badlogic.gdx.math.Vector2	set(com.badlogic.gdx.math.Vector2)	x	com.badlogic.gdx.math.Vector2	SOURCE
 com.badlogic.gdx.math.Vector2	set(com.badlogic.gdx.math.Vector2)	x	com.badlogic.gdx.math.Vector2	SOURCE
 com.badlogic.gdx.math.Vector2	set(com.badlogic.gdx.math.Vector2)	y	com.badlogic.gdx.math.Vector2	SOURCE
@@ -11806,6 +11810,7 @@ com.badlogic.gdx.utils.XmlReader	open(java.lang.String)	current	com.badlogic.gdx
 com.badlogic.gdx.utils.XmlReader	attribute(java.lang.String,java.lang.String)	current	com.badlogic.gdx.utils.XmlReader	SOURCE
 com.badlogic.gdx.utils.XmlReader	text(java.lang.String)	current	com.badlogic.gdx.utils.XmlReader	SOURCE
 com.badlogic.gdx.utils.XmlReader	text(java.lang.String)	current	com.badlogic.gdx.utils.XmlReader	SOURCE
+com.badlogic.gdx.utils.XmlReader	text(java.lang.String)	current	com.badlogic.gdx.utils.XmlReader	SOURCE
 com.badlogic.gdx.utils.XmlReader	close()	root	com.badlogic.gdx.utils.XmlReader	SOURCE
 com.badlogic.gdx.utils.XmlReader	close()	elements	com.badlogic.gdx.utils.XmlReader	SOURCE
 com.badlogic.gdx.utils.XmlReader	close()	current	com.badlogic.gdx.utils.XmlReader	SOURCE
@@ -11924,6 +11929,7 @@ com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	loadSync(com.badlogic.gdx.assets.A
 com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	loadSync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader.AtlasTiledMapLoaderParameters)	textureMagFilter	com.badlogic.gdx.maps.tiled.BaseTmxMapLoader$Parameters	SOURCE
 com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	loadSync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader.AtlasTiledMapLoaderParameters)	map	com.badlogic.gdx.maps.tiled.BaseTmxMapLoader	SOURCE
 com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	getDependencyAssetDescriptors(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)	class	com.badlogic.gdx.graphics.g2d.TextureAtlas	SOURCE
+com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	atlasResolver	com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	SOURCE
 com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	atlasResolver	com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	SOURCE
 com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	trackedTextures	com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	SOURCE
 com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader	addStaticTiles(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.maps.ImageResolver,com.badlogic.gdx.maps.tiled.TiledMapTileSet,com.badlogic.gdx.utils.XmlReader.Element,com.badlogic.gdx.utils.Array<com.badlogic.gdx.utils.XmlReader.Element>,java.lang.String,int,int,int,int,int,java.lang.String,int,int,java.lang.String,int,int,com.badlogic.gdx.files.FileHandle)	index	com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion	SOURCE
@@ -22357,27 +22363,7 @@ com.badlogic.gdx.utils.OrderedSet	clear(int)	super	com.badlogic.gdx.utils.Ordere
 com.badlogic.gdx.utils.OrderedSet	clear()	items	com.badlogic.gdx.utils.OrderedSet	SOURCE
 com.badlogic.gdx.utils.OrderedSet	clear()	super	com.badlogic.gdx.utils.OrderedSet	SOURCE
 com.badlogic.gdx.utils.OrderedSet	orderedItems()	items	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	allocateIterators	com.badlogic.gdx.utils.Collections	SOURCE
 com.badlogic.gdx.utils.OrderedSet	iterator()	this	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator1	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator1	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	this	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator2	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	this	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	valid	com.badlogic.gdx.utils.ObjectSet$ObjectSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator1	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator1	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	valid	com.badlogic.gdx.utils.ObjectSet$ObjectSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator1	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	valid	com.badlogic.gdx.utils.ObjectSet$ObjectSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator2	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator1	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator2	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	valid	com.badlogic.gdx.utils.ObjectSet$ObjectSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator2	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	valid	com.badlogic.gdx.utils.ObjectSet$ObjectSetIterator	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator1	com.badlogic.gdx.utils.OrderedSet	SOURCE
-com.badlogic.gdx.utils.OrderedSet	iterator()	iterator2	com.badlogic.gdx.utils.OrderedSet	SOURCE
 com.badlogic.gdx.utils.OrderedSet	toString()	size	com.badlogic.gdx.utils.ObjectSet	SOURCE
 com.badlogic.gdx.utils.OrderedSet	toString()	items	com.badlogic.gdx.utils.Array	SOURCE
 com.badlogic.gdx.utils.OrderedSet	toString()	items	com.badlogic.gdx.utils.Array	SOURCE
@@ -22781,8 +22767,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.g
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	g	com.badlogic.gdx.graphics.Color	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	b	com.badlogic.gdx.graphics.Color	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	a	com.badlogic.gdx.graphics.Color	SOURCE
-com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	stageBackground	com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle	SOURCE
-com.badlogic.gdx.scenes.scene2d.ui.Window	drawStageBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float,float,float)	style	com.badlogic.gdx.scenes.scene2d.ui.Window	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float)	super	com.badlogic.gdx.scenes.scene2d.ui.Window	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float)	a	com.badlogic.gdx.graphics.Color	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.Window	drawBackground(com.badlogic.gdx.graphics.g2d.Batch,float,float,float)	titleTable	com.badlogic.gdx.scenes.scene2d.ui.Window	SOURCE
@@ -23274,7 +23258,6 @@ com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	scrollY	com.
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	maxY	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	visualAmountY	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	maxY	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	SOURCE
-com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	actor	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	actor	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	x	com.badlogic.gdx.math.Rectangle	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	updateActorPosition()	actorCullingArea	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane	SOURCE
@@ -24409,6 +24392,8 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	font	com.b
 com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	style	com.badlogic.gdx.scenes.scene2d.ui.TextField	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	glyphPositions	com.badlogic.gdx.scenes.scene2d.ui.TextField	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	visibleTextStart	com.badlogic.gdx.scenes.scene2d.ui.TextField	SOURCE
+com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	background	com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle	SOURCE
+com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	style	com.badlogic.gdx.scenes.scene2d.ui.TextField	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	background	com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	style	com.badlogic.gdx.scenes.scene2d.ui.TextField	SOURCE
 com.badlogic.gdx.scenes.scene2d.ui.TextField	letterUnderCursor(float)	size	com.badlogic.gdx.utils.FloatArray	SOURCE
@@ -35508,7 +35493,6 @@ com.badlogic.gdx.utils.LongQueue	equals(java.lang.Object)	head	com.badlogic.gdx.
 com.badlogic.gdx.utils.ReflectionPool	ReflectionPool(java.lang.Class<T>)	MAX_VALUE	java.lang.Integer	SOURCE
 com.badlogic.gdx.utils.ReflectionPool	ReflectionPool(java.lang.Class<T>,int)	MAX_VALUE	java.lang.Integer	SOURCE
 com.badlogic.gdx.utils.ReflectionPool	ReflectionPool(java.lang.Class<T>,int,int)	constructor	com.badlogic.gdx.utils.ReflectionPool	SOURCE
-com.badlogic.gdx.utils.ReflectionPool	ReflectionPool(java.lang.Class<T>,int,int)	constructor	com.badlogic.gdx.utils.ReflectionPool	SOURCE
 com.badlogic.gdx.utils.ReflectionPool	newObject()	constructor	com.badlogic.gdx.utils.ReflectionPool	SOURCE
 com.badlogic.gdx.utils.ReflectionPool	newObject()	constructor	com.badlogic.gdx.utils.ReflectionPool	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Decoder	kNumBitModelTotalBits	kNumBitModelTotalBits	com.badlogic.gdx.utils.compression.rangecoder.Decoder	SOURCE
@@ -35585,12 +35569,14 @@ com.badlogic.gdx.utils.compression.rangecoder.Encoder	Init()	Range	com.badlogic.
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	Init()	_cacheSize	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	Init()	_cache	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	FlushStream()	Stream	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
+com.badlogic.gdx.utils.compression.rangecoder.Encoder	FlushStream()	Stream	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	Low	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	Low	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	_position	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	_cacheSize	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	_cache	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	_cache	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
+com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	Stream	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	Stream	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	_cacheSize	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
 com.badlogic.gdx.utils.compression.rangecoder.Encoder	ShiftLow()	_cache	com.badlogic.gdx.utils.compression.rangecoder.Encoder	SOURCE
@@ -35896,6 +35882,7 @@ com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_streamEndWasReached	
 com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_bufferOffset	com.badlogic.gdx.utils.compression.lz.InWindow	SOURCE
 com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_blockSize	com.badlogic.gdx.utils.compression.lz.InWindow	SOURCE
 com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_streamPos	com.badlogic.gdx.utils.compression.lz.InWindow	SOURCE
+com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_stream	com.badlogic.gdx.utils.compression.lz.InWindow	SOURCE
 com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_stream	com.badlogic.gdx.utils.compression.lz.InWindow	SOURCE
 com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_bufferBase	com.badlogic.gdx.utils.compression.lz.InWindow	SOURCE
 com.badlogic.gdx.utils.compression.lz.InWindow	ReadBlock()	_bufferOffset	com.badlogic.gdx.utils.compression.lz.InWindow	SOURCE
@@ -41705,6 +41692,7 @@ com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	imagePos	com.b
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	imagePos	com.badlogic.gdx.graphics.glutils.KTXTextureData	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	numberOfMipmapLevels	com.badlogic.gdx.graphics.glutils.KTXTextureData	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	compressedData	com.badlogic.gdx.graphics.glutils.KTXTextureData	SOURCE
+com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	compressedData	com.badlogic.gdx.graphics.glutils.KTXTextureData	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	numberOfFaces	com.badlogic.gdx.graphics.glutils.KTXTextureData	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	compressedData	com.badlogic.gdx.graphics.glutils.KTXTextureData	SOURCE
 com.badlogic.gdx.graphics.glutils.KTXTextureData	getData(int,int)	compressedData	com.badlogic.gdx.graphics.glutils.KTXTextureData	SOURCE
@@ -43390,7 +43378,6 @@ com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	triangleIndex	com.badlo
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	triangleIndex	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	maxTrianglesInBatch	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	maxTrianglesInBatch	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
-com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	lastTexture	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	mesh	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	mesh	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
 com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	flush()	this	com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch	SOURCE
@@ -45827,6 +45814,7 @@ com.badlogic.gdx.graphics.g3d.model.data.ModelData	addMesh(com.badlogic.gdx.grap
 com.badlogic.gdx.graphics.g3d.model.data.ModelData	addMesh(com.badlogic.gdx.graphics.g3d.model.data.ModelMesh)	id	com.badlogic.gdx.graphics.g3d.model.data.ModelMesh	SOURCE
 com.badlogic.gdx.graphics.g3d.model.data.ModelData	addMesh(com.badlogic.gdx.graphics.g3d.model.data.ModelMesh)	id	com.badlogic.gdx.graphics.g3d.model.data.ModelMesh	SOURCE
 com.badlogic.gdx.graphics.g3d.model.data.ModelData	addMesh(com.badlogic.gdx.graphics.g3d.model.data.ModelMesh)	id	com.badlogic.gdx.graphics.g3d.model.data.ModelMesh	SOURCE
+com.badlogic.gdx.graphics.g3d.model.data.ModelData	addMesh(com.badlogic.gdx.graphics.g3d.model.data.ModelMesh)	id	com.badlogic.gdx.graphics.g3d.model.data.ModelMesh	SOURCE
 com.badlogic.gdx.graphics.g3d.model.data.ModelData	addMesh(com.badlogic.gdx.graphics.g3d.model.data.ModelMesh)	meshes	com.badlogic.gdx.graphics.g3d.model.data.ModelData	SOURCE
 com.badlogic.gdx.graphics.g3d.model.NodeKeyframe	NodeKeyframe(float,T)	keytime	com.badlogic.gdx.graphics.g3d.model.NodeKeyframe	SOURCE
 com.badlogic.gdx.graphics.g3d.model.NodeKeyframe	NodeKeyframe(float,T)	value	com.badlogic.gdx.graphics.g3d.model.NodeKeyframe	SOURCE
@@ -46250,6 +46238,7 @@ com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureRoundRobin(c
 com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureRoundRobin(com.badlogic.gdx.graphics.GLTexture)	offset	com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureRoundRobin(com.badlogic.gdx.graphics.GLTexture)	currentTexture	com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureRoundRobin(com.badlogic.gdx.graphics.GLTexture)	currentTexture	com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	SOURCE
+com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureLRU(com.badlogic.gdx.graphics.GLTexture)	unitsLRU	com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureLRU(com.badlogic.gdx.graphics.GLTexture)	count	com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureLRU(com.badlogic.gdx.graphics.GLTexture)	unitsLRU	com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	bindTextureLRU(com.badlogic.gdx.graphics.GLTexture)	textures	com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder	SOURCE
@@ -47203,6 +47192,7 @@ com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.g
 com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config,com.badlogic.gdx.graphics.glutils.ShaderProgram)	shadowMap	com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	SOURCE
 com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config,com.badlogic.gdx.graphics.glutils.ShaderProgram)	this	com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	SOURCE
 com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config,com.badlogic.gdx.graphics.glutils.ShaderProgram)	lighting	com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	SOURCE
+com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config,com.badlogic.gdx.graphics.glutils.ShaderProgram)	environment	com.badlogic.gdx.graphics.g3d.Renderable	SOURCE
 com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config,com.badlogic.gdx.graphics.glutils.ShaderProgram)	shadowMap	com.badlogic.gdx.graphics.g3d.Environment	SOURCE
 com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config,com.badlogic.gdx.graphics.glutils.ShaderProgram)	environment	com.badlogic.gdx.graphics.g3d.Renderable	SOURCE
 com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	DefaultShader(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config,com.badlogic.gdx.graphics.glutils.ShaderProgram)	renderable	com.badlogic.gdx.graphics.g3d.shaders.DefaultShader	SOURCE
@@ -48038,6 +48028,7 @@ com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic
 com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.Renderable)	center	com.badlogic.gdx.graphics.g3d.model.MeshPart	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.Renderable)	meshPart	com.badlogic.gdx.graphics.g3d.Renderable	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.Renderable)	tmpV2	com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	SOURCE
+com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.Renderable)	camera	com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.Renderable)	position	com.badlogic.gdx.graphics.Camera	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.Renderable)	camera	com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	compare(com.badlogic.gdx.graphics.g3d.Renderable,com.badlogic.gdx.graphics.g3d.Renderable)	tmpV1	com.badlogic.gdx.graphics.g3d.utils.DefaultRenderableSorter	SOURCE
@@ -48458,6 +48449,7 @@ com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node(com.badlogic.gdx.graphics.
 com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node(com.badlogic.gdx.graphics.g3d.model.Node)	node	com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node(com.badlogic.gdx.graphics.g3d.model.Node)	this	com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node()	id	com.badlogic.gdx.graphics.g3d.model.Node	SOURCE
+com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node()	model	com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node()	size	com.badlogic.gdx.utils.Array	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node()	nodes	com.badlogic.gdx.graphics.g3d.Model	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	node()	model	com.badlogic.gdx.graphics.g3d.utils.ModelBuilder	SOURCE
@@ -48534,6 +48526,7 @@ com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	
 com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	zoom(float,float)	previousZoom	com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	zoom(float,float)	graphics	com.badlogic.gdx.Gdx	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	zoom(float,float)	graphics	com.badlogic.gdx.Gdx	SOURCE
+com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	zoom(float,float)	controller	com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	zoom(float,float)	controller	com.badlogic.gdx.graphics.g3d.utils.CameraInputController$CameraGestureListener	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.CameraInputController	CameraInputController(com.badlogic.gdx.graphics.g3d.utils.CameraInputController.CameraGestureListener,com.badlogic.gdx.graphics.Camera)	gestureListener	com.badlogic.gdx.graphics.g3d.utils.CameraInputController	SOURCE
 com.badlogic.gdx.graphics.g3d.utils.CameraInputController	CameraInputController(com.badlogic.gdx.graphics.g3d.utils.CameraInputController.CameraGestureListener,com.badlogic.gdx.graphics.Camera)	this	com.badlogic.gdx.graphics.g3d.utils.CameraInputController	SOURCE
@@ -49028,6 +49021,7 @@ com.badlogic.gdx.graphics.g3d.particles.renderers.PointSpriteRenderer	allocateCh
 com.badlogic.gdx.graphics.g3d.particles.renderers.PointSpriteRenderer	copy()	batch	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	ParticleControllerRenderer(D)	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	ParticleControllerRenderer(D)	this	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	update()	batch	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	update()	batch	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	update()	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	setBatch(com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch<?>)	batch	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
@@ -49756,6 +49750,8 @@ com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	ensureCapacity(i
 com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	ensureCapacity(int)	particleIndices	com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	ensureCapacity(int)	particleOffsets	com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	ensureCapacity(int)	currentSize	com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	<T>sort(com.badlogic.gdx.utils.Array<T>)	camera	com.badlogic.gdx.graphics.g3d.particles.ParticleSorter	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	<T>sort(com.badlogic.gdx.utils.Array<T>)	particleOffsets	com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	<T>sort(com.badlogic.gdx.utils.Array<T>)	val	com.badlogic.gdx.math.Matrix4	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	<T>sort(com.badlogic.gdx.utils.Array<T>)	val	com.badlogic.gdx.math.Matrix4	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.ParticleSorter$Distance	<T>sort(com.badlogic.gdx.utils.Array<T>)	view	com.badlogic.gdx.graphics.Camera	SOURCE
@@ -49823,6 +49819,7 @@ com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRe
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	update()	size	com.badlogic.gdx.graphics.g3d.particles.ParallelArray	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	update()	particles	com.badlogic.gdx.graphics.g3d.particles.ParticleController	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	update()	controller	com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	update()	controllerChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	update()	data	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$ObjectChannel	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	update()	controllerChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	allocateChannels()	positionChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData	SOURCE
@@ -49874,6 +49871,8 @@ com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	scaleChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceControllerRenderData	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	hasRotation	com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	rotationChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceControllerRenderData	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	strideSize	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$Channel	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	rotationChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceControllerRenderData	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
@@ -49907,6 +49906,8 @@ com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	ZOffset	com.badlogic.gdx.graphics.g3d.particles.ParticleChannels	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	hasColor	com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	colorChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceControllerRenderData	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	strideSize	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$Channel	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	colorChannel	com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceControllerRenderData	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceRenderer	update()	renderData	com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer	SOURCE
@@ -50968,6 +50969,7 @@ com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	set
 com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	setMesh(com.badlogic.gdx.graphics.Mesh,com.badlogic.gdx.graphics.g3d.Model)	vertexCount	com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	setMesh(com.badlogic.gdx.graphics.Mesh,com.badlogic.gdx.graphics.g3d.Model)	vertexSize	com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	setMesh(com.badlogic.gdx.graphics.Mesh,com.badlogic.gdx.graphics.g3d.Model)	vertices	com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	spawnAux(com.badlogic.gdx.math.Vector3,float)	vertices	com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	spawnAux(com.badlogic.gdx.math.Vector3,float)	indices	com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	spawnAux(com.badlogic.gdx.math.Vector3,float)	vertexCount	com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	spawnAux(com.badlogic.gdx.math.Vector3,float)	vertexSize	com.badlogic.gdx.graphics.g3d.particles.values.UnweightedMeshSpawnShapeValue	SOURCE
@@ -51035,6 +51037,7 @@ com.badlogic.gdx.graphics.g3d.particles.values.RectangleSpawnShapeValue	copy()	t
 com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	WeightMeshSpawnShapeValue(com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue)	distribution	com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	WeightMeshSpawnShapeValue()	distribution	com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	calculateWeights()	distribution	com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	calculateWeights()	mesh	com.badlogic.gdx.graphics.g3d.particles.values.MeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	calculateWeights()	mesh	com.badlogic.gdx.graphics.g3d.particles.values.MeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	calculateWeights()	mesh	com.badlogic.gdx.graphics.g3d.particles.values.MeshSpawnShapeValue	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.values.WeightMeshSpawnShapeValue	calculateWeights()	mesh	com.badlogic.gdx.graphics.g3d.particles.values.MeshSpawnShapeValue	SOURCE
@@ -51212,6 +51215,7 @@ com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	alloc
 com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	allocateChannels()	particles	com.badlogic.gdx.graphics.g3d.particles.ParticleController	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	allocateChannels()	controller	com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	allocateChannels()	Color	com.badlogic.gdx.graphics.g3d.particles.ParticleChannels	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	activateParticles(int,int)	colorChannel	com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	activateParticles(int,int)	strideSize	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$Channel	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	activateParticles(int,int)	colorChannel	com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer$Random	activateParticles(int,int)	strideSize	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$Channel	SOURCE
@@ -52029,6 +52033,7 @@ com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialA
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	update()	VelocityThetaDiffOffset	com.badlogic.gdx.graphics.g3d.particles.ParticleChannels	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	update()	thetaValue	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$Angular	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	update()	TMP_V3	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	update()	positionChannel	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	update()	TMP_V1	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	update()	data	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$FloatChannel	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	update()	positionChannel	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$TangentialAcceleration	SOURCE
@@ -52095,6 +52100,7 @@ com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcc
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	update()	data	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$FloatChannel	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	update()	lifeChannel	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	update()	TMP_V3	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier	SOURCE
+com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	update()	accelerationChannel	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	update()	data	com.badlogic.gdx.graphics.g3d.particles.ParallelArray$FloatChannel	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	update()	accelerationChannel	com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	SOURCE
 com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier$BrownianAcceleration	update()	XOffset	com.badlogic.gdx.graphics.g3d.particles.ParticleChannels	SOURCE
@@ -53285,8 +53291,6 @@ com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	<T>TextureAttribute(lo
 com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	<T>TextureAttribute(long,com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor<T>,float,float,float,float,int)	this	com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	SOURCE
 com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	<T>TextureAttribute(long,com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor<T>,float,float,float,float,int)	uvIndex	com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	SOURCE
 com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	<T>TextureAttribute(long,com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor<T>,float,float,float,float,int)	this	com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	SOURCE
-com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	TextureAttribute(long,com.badlogic.gdx.graphics.Texture)	texture	com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor	SOURCE
-com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	TextureAttribute(long,com.badlogic.gdx.graphics.Texture)	textureDescription	com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	SOURCE
 com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	TextureAttribute(com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute)	type	com.badlogic.gdx.graphics.g3d.Attribute	SOURCE
 com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	TextureAttribute(com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute)	textureDescription	com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	SOURCE
 com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	TextureAttribute(com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute)	offsetU	com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute	SOURCE
@@ -53474,6 +53478,7 @@ com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx
 com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx.graphics.g3d.model.data.ModelData,com.badlogic.gdx.utils.JsonValue)	child	com.badlogic.gdx.utils.JsonValue	SOURCE
 com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx.graphics.g3d.model.data.ModelData,com.badlogic.gdx.utils.JsonValue)	child	com.badlogic.gdx.utils.JsonValue	SOURCE
 com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx.graphics.g3d.model.data.ModelData,com.badlogic.gdx.utils.JsonValue)	next	com.badlogic.gdx.utils.JsonValue	SOURCE
+com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx.graphics.g3d.model.data.ModelData,com.badlogic.gdx.utils.JsonValue)	id	com.badlogic.gdx.graphics.g3d.model.data.ModelMeshPart	SOURCE
 com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx.graphics.g3d.model.data.ModelData,com.badlogic.gdx.utils.JsonValue)	id	com.badlogic.gdx.graphics.g3d.model.data.ModelMeshPart	SOURCE
 com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx.graphics.g3d.model.data.ModelData,com.badlogic.gdx.utils.JsonValue)	id	com.badlogic.gdx.graphics.g3d.model.data.ModelMeshPart	SOURCE
 com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader	parseMeshes(com.badlogic.gdx.graphics.g3d.model.data.ModelData,com.badlogic.gdx.utils.JsonValue)	primitiveType	com.badlogic.gdx.graphics.g3d.model.data.ModelMeshPart	SOURCE
@@ -54656,6 +54661,7 @@ com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy	dispose()	shader	com.ba
 com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy	dispose()	shader	com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	beforeGroup(int,com.badlogic.gdx.utils.Array<com.badlogic.gdx.graphics.g3d.decals.Decal>)	plugs	com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	afterGroup(int)	plugs	com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	SOURCE
+com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	afterGroup(int)	plugs	com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	plugIn(com.badlogic.gdx.graphics.g3d.decals.GroupPlug,int)	plugs	com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	unPlug(int)	plugs	com.badlogic.gdx.graphics.g3d.decals.PluggableGroupStrategy	SOURCE
 com.badlogic.gdx.graphics.g3d.decals.DecalBatch	DecalBatch(com.badlogic.gdx.graphics.g3d.decals.GroupStrategy)	DEFAULT_SIZE	com.badlogic.gdx.graphics.g3d.decals.DecalBatch	SOURCE
@@ -54729,6 +54735,7 @@ com.badlogic.gdx.assets.loaders.SoundLoader	loadSync(com.badlogic.gdx.assets.Ass
 com.badlogic.gdx.assets.loaders.SoundLoader	loadSync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.SoundLoader.SoundParameter)	this	com.badlogic.gdx.assets.loaders.SoundLoader	SOURCE
 com.badlogic.gdx.assets.loaders.SoundLoader	loadSync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.SoundLoader.SoundParameter)	sound	com.badlogic.gdx.assets.loaders.SoundLoader	SOURCE
 com.badlogic.gdx.assets.loaders.SoundLoader	loadSync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.SoundLoader.SoundParameter)	this	com.badlogic.gdx.assets.loaders.SoundLoader	SOURCE
+com.badlogic.gdx.assets.loaders.TextureAtlasLoader	load(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureAtlasLoader.TextureAtlasParameter)	data	com.badlogic.gdx.assets.loaders.TextureAtlasLoader	SOURCE
 com.badlogic.gdx.assets.loaders.TextureAtlasLoader	load(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureAtlasLoader.TextureAtlasParameter)	data	com.badlogic.gdx.assets.loaders.TextureAtlasLoader	SOURCE
 com.badlogic.gdx.assets.loaders.TextureAtlasLoader	load(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureAtlasLoader.TextureAtlasParameter)	textureFile	com.badlogic.gdx.graphics.g2d.TextureAtlas$TextureAtlasData$Page	SOURCE
 com.badlogic.gdx.assets.loaders.TextureAtlasLoader	load(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureAtlasLoader.TextureAtlasParameter)	class	com.badlogic.gdx.graphics.Texture	SOURCE

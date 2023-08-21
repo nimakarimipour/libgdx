@@ -18,6 +18,7 @@ package com.badlogic.gdx.math;
 
 import java.io.Serializable;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Encapsulates a <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column major</a> 4 by 4 matrix. Like
  * the {@link Vector3} class it allows the chaining of methods by returning a reference to itself. For example:
@@ -126,7 +127,7 @@ public class Matrix4 implements Serializable {
 	/** Sets the matrix to the given matrix.
 	 * @param matrix The matrix that is to be copied. (The given matrix is not modified)
 	 * @return This matrix for the purpose of chaining methods together. */
-	public Matrix4 set (@Nullable Matrix4 matrix) {
+	@NullUnmarked public Matrix4 set (@Nullable Matrix4 matrix) {
 		return set(matrix.val);
 	}
 

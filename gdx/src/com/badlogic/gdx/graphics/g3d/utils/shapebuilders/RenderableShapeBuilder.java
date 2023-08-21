@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FlushablePool;
+import org.jspecify.annotations.NullUnmarked;
 
 /** RenderableShapeBuilder builds various properties of a renderable.
  * @author realitix */
@@ -39,7 +40,7 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
 			return new Renderable();
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public Renderable obtain () {
 			Renderable renderable = super.obtain();
 			renderable.environment = null;
@@ -51,8 +52,8 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
 		}
 	}
 
-	private static short[] indices;
-	private static float[] vertices;
+	@SuppressWarnings("NullAway.Init") private static short[] indices;
+	@SuppressWarnings("NullAway.Init") private static float[] vertices;
 	private final static RenderablePool renderablesPool = new RenderablePool();
 	private final static Array<Renderable> renderables = new Array<Renderable>();
 	private static final int FLOAT_BYTES = 4;

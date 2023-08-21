@@ -40,6 +40,7 @@ import com.badlogic.gdx.Net.HttpResponseListener;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StreamUtils;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Implements part of the {@link Net} API using {@link HttpURLConnection}, to be easily reused between the Android and Desktop
  * backends.
@@ -152,7 +153,7 @@ public class NetJavaImpl {
 		tasks = new ObjectMap<HttpRequest, Future<?>>();
 	}
 
-	public void sendHttpRequest (final HttpRequest httpRequest, final HttpResponseListener httpResponseListener) {
+	@NullUnmarked public void sendHttpRequest (final HttpRequest httpRequest, final HttpResponseListener httpResponseListener) {
 		if (httpRequest.getUrl() == null) {
 			httpResponseListener.failed(new GdxRuntimeException("can't process a HTTP request without URL set"));
 			return;

@@ -66,9 +66,9 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 	 * hash. */
 	protected int mask;
 
-	private transient Entries entries1, entries2;
-	private transient Values values1, values2;
-	private transient Keys keys1, keys2;
+	@SuppressWarnings("NullAway.Init") private transient Entries entries1, entries2;
+	@SuppressWarnings("NullAway.Init") private transient Values values1, values2;
+	@SuppressWarnings("NullAway.Init") private transient Keys keys1, keys2;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public LongMap () {

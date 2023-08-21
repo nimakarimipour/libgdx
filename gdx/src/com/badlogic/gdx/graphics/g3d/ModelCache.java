@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** ModelCache tries to combine multiple render calls into a single render call by merging them where possible. Can be used for
  * multiple type of models (e.g. varying vertex attributes or materials), the ModelCache will combine where possible. Can be used
@@ -227,7 +228,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 		meshPool.flush();
 	}
 
-	private Renderable obtainRenderable (Material material, int primitiveType) {
+	@NullUnmarked private Renderable obtainRenderable (Material material, int primitiveType) {
 		Renderable result = renderablesPool.obtain();
 		result.bones = null;
 		result.environment = null;

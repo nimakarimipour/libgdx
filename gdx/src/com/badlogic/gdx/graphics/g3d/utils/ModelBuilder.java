@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Helper class to create {@link Model}s from code. To start building use the {@link #begin()} method, when finished building use
  * the {@link #end()} method. The end method returns the model just build. Building cannot be nested, only one model (per
@@ -104,7 +105,7 @@ public class ModelBuilder {
 
 	/** Add a node to the model. Use any of the part(...) method to add a NodePart.
 	 * @return The node being created. */
-	public Node node () {
+	@NullUnmarked public Node node () {
 		final Node node = new Node();
 		node(node);
 		node.id = "node" + model != null ? model.nodes.size + "" : "";

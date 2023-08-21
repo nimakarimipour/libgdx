@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils.reflect;
 
 import java.lang.reflect.Modifier;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Utilities for Class reflection.
  * @author nexsoftware */
@@ -44,7 +45,7 @@ public final class ClassReflection {
 
 	/** Determines if the class or interface represented by first Class parameter is either the same as, or is a superclass or
 	 * superinterface of, the class or interface represented by the second Class parameter. */
-	static public boolean isAssignableFrom (Class c1, @Nullable Class c2) {
+	@NullUnmarked static public boolean isAssignableFrom (Class c1, @Nullable Class c2) {
 		return c1.isAssignableFrom(c2);
 	}
 

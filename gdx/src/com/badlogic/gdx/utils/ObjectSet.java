@@ -62,7 +62,7 @@ public class ObjectSet<T> implements Iterable<T> {
 	 * hash. */
 	protected int mask;
 
-	private transient ObjectSetIterator iterator1, iterator2;
+	@SuppressWarnings("NullAway.Init") private transient ObjectSetIterator iterator1, iterator2;
 
 	/** Creates a new set with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectSet () {

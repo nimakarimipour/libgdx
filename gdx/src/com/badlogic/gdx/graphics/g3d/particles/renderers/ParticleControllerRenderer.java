@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 public abstract class ParticleControllerRenderer<D extends ParticleControllerRenderData, T extends ParticleBatch<D>>
 	extends ParticleControllerComponent {
 	@Nullable protected T batch;
-	protected D renderData;
+	@SuppressWarnings("NullAway.Init") protected D renderData;
 
 	protected ParticleControllerRenderer () {
 	}

@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.OrderedMap;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Packs {@link Pixmap pixmaps} into one or more {@link Page pages} to generate an atlas of pixmap instances. Provides means to
  * directly convert the pixmap atlas to a {@link TextureAtlas}. The packer supports padding and border pixel duplication,
@@ -363,7 +364,7 @@ public class PixmapPacker implements Disposable {
 	 * can be used to insert Pixmap instances on a separate thread via {@link #pack(String, Pixmap)} and update the TextureAtlas on
 	 * the rendering thread. This method must be called on the rendering thread. After calling this method, disposing the packer
 	 * will no longer dispose the page pixmaps. */
-	public synchronized void updateTextureAtlas (TextureAtlas atlas, TextureFilter minFilter, TextureFilter magFilter,
+	@NullUnmarked public synchronized void updateTextureAtlas (TextureAtlas atlas, TextureFilter minFilter, TextureFilter magFilter,
 		boolean useMipMaps, boolean useIndexes) {
 		updatePageTextures(minFilter, magFilter, useMipMaps);
 		for (Page page : pages) {
@@ -499,7 +500,7 @@ public class PixmapPacker implements Disposable {
 
 		/** Returns the texture for this page, or null if the texture has not been created.
 		 * @see #updateTexture(TextureFilter, TextureFilter, boolean) */
-		public Texture getTexture () {
+		@NullUnmarked public Texture getTexture () {
 			return texture;
 		}
 
@@ -553,7 +554,7 @@ public class PixmapPacker implements Disposable {
 			pixmaps.sort(comparator);
 		}
 
-		public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
+		@NullUnmarked public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
 			GuillotinePage page;
 			if (packer.pages.size == 0) {
 				// Add a page if empty.

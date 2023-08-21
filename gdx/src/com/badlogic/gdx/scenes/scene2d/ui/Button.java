@@ -43,7 +43,7 @@ import javax.annotation.Nullable;
  * The preferred size of the button is determined by the background and the button contents.
  * @author Nathan Sweet */
 public class Button extends Table implements Disableable {
-	private ButtonStyle style;
+	@SuppressWarnings("NullAway.Init") private ButtonStyle style;
 	boolean isChecked, isDisabled;
 	@Nullable ButtonGroup buttonGroup;
 	private ClickListener clickListener;

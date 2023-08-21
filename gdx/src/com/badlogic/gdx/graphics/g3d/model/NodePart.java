@@ -29,9 +29,9 @@ import javax.annotation.Nullable;
  * @author badlogic, Xoppa */
 public class NodePart {
 	/** The MeshPart (shape) to render. Must not be null. */
-	public MeshPart meshPart;
+	@SuppressWarnings("NullAway.Init") public MeshPart meshPart;
 	/** The Material used to render the {@link #meshPart}. Must not be null. */
-	public Material material;
+	@SuppressWarnings("NullAway.Init") public Material material;
 	/** Mapping to each bone (node) and the inverse transform of the bind pose. Will be used to fill the {@link #bones} array. May
 	 * be null. */
 	@Nullable public ArrayMap<Node, Matrix4> invBoneBindTransforms;

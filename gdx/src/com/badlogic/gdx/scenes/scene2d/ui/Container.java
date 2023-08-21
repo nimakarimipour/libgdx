@@ -14,12 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A group with a single child that sizes and positions the child using constraints. This provides layout similar to a
  * {@link Table} with a single cell but is more lightweight.
  * @author Nathan Sweet */
 public class Container<T extends Actor> extends WidgetGroup {
-	private @Null T actor;
+	@SuppressWarnings("NullAway.Init") private @Null T actor;
 	private Value minWidth = Value.minWidth, minHeight = Value.minHeight;
 	private Value prefWidth = Value.prefWidth, prefHeight = Value.prefHeight;
 	private Value maxWidth = Value.zero, maxHeight = Value.zero;
@@ -161,7 +162,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 	}
 
 	/** @param actor May be null. */
-	public void setActor (@Nullable @Null T actor) {
+	@NullUnmarked public void setActor (@Nullable @Null T actor) {
 		if (actor == this) throw new IllegalArgumentException("actor cannot be the Container.");
 		if (actor == this.actor) return;
 		if (this.actor != null) super.removeActor(this.actor);
@@ -209,14 +210,14 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return true;
 	}
 
-	public boolean removeActor (Actor actor, boolean unfocus) {
+	@NullUnmarked public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
 		this.actor = null;
 		return super.removeActor(actor, unfocus);
 	}
 
-	public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == this.actor) this.actor = null;
 		return actor;

@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A slider is a horizontal indicator that allows a user to set a value. The slider has a range (min, max) and a stepping between
  * each value the slider represents.
@@ -113,7 +114,7 @@ public class Slider extends ProgressBar {
 		return mouseOver;
 	}
 
-	protected @Null Drawable getBackgroundDrawable () {
+	@NullUnmarked protected @Null Drawable getBackgroundDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (isDragging() && style.backgroundDown != null) return style.backgroundDown;

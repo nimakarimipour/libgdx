@@ -18,13 +18,14 @@ package com.badlogic.gdx.graphics.g2d;
 
 import com.badlogic.gdx.graphics.Texture;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Defines a rectangular area of a texture. The coordinate system used has its origin in the upper left corner with the x-axis
  * pointing to the right and the y axis pointing downwards.
  * @author mzechner
  * @author Nathan Sweet */
 public class TextureRegion {
-	Texture texture;
+	@SuppressWarnings("NullAway.Init") Texture texture;
 	float u, v;
 	float u2, v2;
 	int regionWidth, regionHeight;
@@ -110,7 +111,7 @@ public class TextureRegion {
 	}
 
 	/** Sets the texture and coordinates to the specified region. */
-	public void setRegion (@Nullable TextureRegion region) {
+	@NullUnmarked public void setRegion (@Nullable TextureRegion region) {
 		texture = region.texture;
 		setRegion(region.u, region.v, region.u2, region.v2);
 	}

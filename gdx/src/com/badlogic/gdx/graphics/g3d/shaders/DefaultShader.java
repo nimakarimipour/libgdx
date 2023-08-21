@@ -48,6 +48,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class DefaultShader extends BaseShader {
 	public static class Config {
@@ -597,7 +598,7 @@ public class DefaultShader extends BaseShader {
 		u_environmentCubemap = environmentCubemap ? register(Inputs.environmentCubemap, Setters.environmentCubemap) : -1;
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void init () {
 		final ShaderProgram program = this.program;
 		this.program = null;

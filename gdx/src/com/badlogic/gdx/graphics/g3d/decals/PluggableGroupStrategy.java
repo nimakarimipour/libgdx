@@ -19,18 +19,19 @@ package com.badlogic.gdx.graphics.g3d.decals;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** This class in combination with the {@link GroupPlug GroupPlugs} allows you to build a modular {@link GroupStrategy} out of
  * routines you already implemented. */
 public abstract class PluggableGroupStrategy implements GroupStrategy {
 	private IntMap<GroupPlug> plugs = new IntMap<GroupPlug>();
 
-	@Override
+	@NullUnmarked @Override
 	public void beforeGroup (int group, Array<Decal> contents) {
 		plugs.get(group).beforeGroup(contents);
 	}
 
-	@Override
+	@NullUnmarked @Override
 	public void afterGroup (int group) {
 		if (plugs.containsKey(group)) {
 			plugs.get(group).afterGroup();

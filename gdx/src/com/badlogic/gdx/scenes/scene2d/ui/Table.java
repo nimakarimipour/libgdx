@@ -35,6 +35,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A group that sizes and positions children using table constraints.
  * <p>
@@ -67,18 +68,18 @@ public class Table extends WidgetGroup {
 	@Nullable private Cell rowDefaults;
 
 	private boolean sizeInvalid = true;
-	private float[] columnMinWidth, rowMinHeight;
-	private float[] columnPrefWidth, rowPrefHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnMinWidth, rowMinHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnPrefWidth, rowPrefHeight;
 	private float tableMinWidth, tableMinHeight;
 	private float tablePrefWidth, tablePrefHeight;
-	private float[] columnWidth, rowHeight;
-	private float[] expandWidth, expandHeight;
+	@SuppressWarnings("NullAway.Init") private float[] columnWidth, rowHeight;
+	@SuppressWarnings("NullAway.Init") private float[] expandWidth, expandHeight;
 
 	Value padTop = backgroundTop, padLeft = backgroundLeft, padBottom = backgroundBottom, padRight = backgroundRight;
 	int align = Align.center;
 
 	Debug debug = Debug.none;
-	Array<DebugRect> debugRects;
+	@SuppressWarnings("NullAway.Init") Array<DebugRect> debugRects;
 
 	@Nullable
 	@Null Drawable background;
@@ -422,7 +423,7 @@ public class Table extends WidgetGroup {
 
 	/** Returns the cell for the specified actor in this table, or null. */
 
-	public @Null <T extends Actor> Cell<T> getCell (T actor) {
+	@NullUnmarked public @Null <T extends Actor> Cell<T> getCell (T actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		Object[] cells = this.cells.items;
 		for (int i = 0, n = this.cells.size; i < n; i++) {
@@ -787,7 +788,7 @@ public class Table extends WidgetGroup {
 		return array;
 	}
 
-	private void computeSize () {
+	@NullUnmarked private void computeSize () {
 		sizeInvalid = false;
 
 		Object[] cells = this.cells.items;
@@ -958,7 +959,7 @@ public class Table extends WidgetGroup {
 
 	/** Positions and sizes children of the table using the cell associated with each child. The values given are the position
 	 * within the parent and size of the table. */
-	public void layout () {
+	@NullUnmarked public void layout () {
 		if (sizeInvalid) computeSize();
 
 		float layoutWidth = getWidth(), layoutHeight = getHeight();

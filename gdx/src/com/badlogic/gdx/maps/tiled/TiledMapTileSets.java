@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** @brief Collection of {@link TiledMapTileSet} */
 public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
@@ -40,7 +41,7 @@ public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
 	/** @param name Name of the {@link TiledMapTileSet} to retrieve.
 	 * @return tileset with matching name, null if it doesn't exist */
 
-	public TiledMapTileSet getTileSet (String name) {
+	@NullUnmarked public TiledMapTileSet getTileSet (String name) {
 		for (TiledMapTileSet tileset : tilesets) {
 			if (name.equals(tileset.getName())) {
 				return tileset;

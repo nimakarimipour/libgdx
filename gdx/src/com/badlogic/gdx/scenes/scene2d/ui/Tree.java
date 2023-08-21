@@ -35,6 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A tree widget where each node has an icon, actor, and child nodes.
  * <p>
@@ -47,7 +48,7 @@ import javax.annotation.Nullable;
 public class Tree<N extends Node, V> extends WidgetGroup {
 	static private final Vector2 tmp = new Vector2();
 
-	TreeStyle style;
+	@SuppressWarnings("NullAway.Init") TreeStyle style;
 	final Array<N> rootNodes = new Array();
 	final Selection<N> selection;
 	float ySpacing = 4, iconSpacingLeft = 2, iconSpacingRight = 2, paddingLeft, paddingRight, indentSpacing;
@@ -87,7 +88,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 	private void initialize () {
 		addListener(clickListener = new ClickListener() {
-			public void clicked (InputEvent event, float x, float y) {
+			@NullUnmarked public void clicked (InputEvent event, float x, float y) {
 				N node = getNodeAt(y);
 				if (node == null) return;
 				if (node != getNodeAt(getTouchDownY())) return;
@@ -599,7 +600,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	 * @param <A> The type for the node's actor.
 	 * @author Nathan Sweet */
 	static abstract public class Node<N extends Node, V, A extends Actor> {
-		A actor;
+		@SuppressWarnings("NullAway.Init") A actor;
 		@Nullable N parent;
 		final Array<N> children = new Array(0);
 		boolean selectable = true;
@@ -615,7 +616,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 		/** Creates a node without an actor. An actor must be set using {@link #setActor(Actor)} before this node can be used. */
 
-		public Node () {
+		@NullUnmarked public Node () {
 		}
 
 		public void setExpanded (boolean expanded) {
@@ -901,11 +902,11 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	/** The style for a {@link Tree}.
 	 * @author Nathan Sweet */
 	static public class TreeStyle {
-		public Drawable plus, minus;
+		@SuppressWarnings("NullAway.Init") public Drawable plus, minus;
 		@Nullable public @Null Drawable plusOver, minusOver;
 		@Nullable public @Null Drawable over, selection, background;
 
-		public TreeStyle () {
+		@NullUnmarked public TreeStyle () {
 		}
 
 		public TreeStyle (Drawable plus, Drawable minus, @Null Drawable selection) {

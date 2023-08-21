@@ -41,6 +41,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoader.Parameters> {
 
@@ -201,7 +202,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	private void loadLayer (TiledMap map, Element element) {
+	@NullUnmarked private void loadLayer (TiledMap map, Element element) {
 		if (element.getName().equals("Layer")) {
 			String id = element.getAttribute("Id");
 			String visible = element.getAttribute("Visible");
@@ -274,7 +275,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	private void loadProperties (MapProperties properties, Element element) {
+	@NullUnmarked private void loadProperties (MapProperties properties, Element element) {
 		if (element.getName().equals("Properties")) {
 			for (Element property : element.getChildrenByName("Property")) {
 				String key = property.getAttribute("Key", null);

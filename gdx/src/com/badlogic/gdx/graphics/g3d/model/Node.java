@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A node is part of a hierarchy of Nodes in a {@link Model}. A Node encodes a transform relative to its parents. A Node can have
  * child nodes. Optionally a node can specify a {@link MeshPart} and a {@link Material} to be applied to the mesh part.
@@ -300,7 +301,7 @@ public class Node {
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
 
-	public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
+	@NullUnmarked public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
 		final int n = nodes.size;
 		Node node;
 		if (ignoreCase) {

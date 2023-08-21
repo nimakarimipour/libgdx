@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /** A sorted double linked list which uses ints for indexing
  * 
@@ -138,7 +139,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			return position != null;
 		}
 
-		@Nullable
+		@NullUnmarked @Nullable
 		@Override
 		public Node<E> next () {
 			previousPosition = position;
@@ -146,7 +147,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			return previousPosition;
 		}
 
-		@Override
+		@NullUnmarked @Override
 		public void remove () {
 			// the contract specifies to remove the last returned element, if nothing was returned yet assumably do nothing
 			if (previousPosition != null) {
@@ -178,7 +179,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 		/** Node next to this */
 		@Nullable protected Node<E> n;
 		/** Value held */
-		public E value;
+		@SuppressWarnings("NullAway.Init") public E value;
 		/** Index value in list */
 		public int index;
 	}

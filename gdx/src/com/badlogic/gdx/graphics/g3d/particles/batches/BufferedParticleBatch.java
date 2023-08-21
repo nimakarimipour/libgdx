@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
 import com.badlogic.gdx.utils.Array;
+import org.jspecify.annotations.NullUnmarked;
 
 /** Base class of all the batches requiring to buffer {@link ParticleControllerRenderData}
  * @author Inferno */
@@ -27,7 +28,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 	protected Array<T> renderData;
 	protected int bufferedParticlesCount, currentCapacity = 0;
 	protected ParticleSorter sorter;
-	protected Camera camera;
+	@SuppressWarnings("NullAway.Init") protected Camera camera;
 
 	protected BufferedParticleBatch (Class<T> type) {
 		this.sorter = new ParticleSorter.Distance();
@@ -48,7 +49,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 	}
 
 	/** */
-	public void end () {
+	@NullUnmarked public void end () {
 		if (bufferedParticlesCount > 0) {
 			ensureCapacity(bufferedParticlesCount);
 			flush(sorter.sort(renderData));
