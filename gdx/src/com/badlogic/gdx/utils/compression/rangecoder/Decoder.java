@@ -17,8 +17,6 @@
 package com.badlogic.gdx.utils.compression.rangecoder;
 
 import java.io.IOException;
-import javax.annotation.Nullable;
-
 
 public class Decoder {
 	static final int kTopMask = ~((1 << 24) - 1);
@@ -30,13 +28,13 @@ public class Decoder {
 	int Range;
 	int Code;
 
-	 java.io.InputStream Stream;
+	java.io.InputStream Stream;
 
 	public final void SetStream (java.io.InputStream stream) {
 		Stream = stream;
 	}
 
-	 public final void ReleaseStream () {
+	public final void ReleaseStream () {
 		Stream = null;
 	}
 

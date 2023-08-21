@@ -368,7 +368,8 @@ public class GlyphLayout implements Poolable {
 	/** Breaks a run into two runs at the specified wrapIndex.
 	 * @return May be null if second run is all whitespace. */
 
-	@Nullable private GlyphRun wrap (BitmapFontData fontData, GlyphRun first, int wrapIndex) {
+	@Nullable
+	private GlyphRun wrap (BitmapFontData fontData, GlyphRun first, int wrapIndex) {
 		Array<Glyph> glyphs2 = first.glyphs; // Starts with all the glyphs.
 		int glyphCount = first.glyphs.size;
 		FloatArray xAdvances2 = first.xAdvances; // Starts with all the xadvances.

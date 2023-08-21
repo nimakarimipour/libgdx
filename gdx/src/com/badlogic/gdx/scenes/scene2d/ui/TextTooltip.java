@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** A tooltip that shows a label.
  * @author Nathan Sweet */
 public class TextTooltip extends Tooltip<Label> {
@@ -45,7 +44,7 @@ public class TextTooltip extends Tooltip<Label> {
 		this(text, manager, skin.get(styleName, TextTooltipStyle.class));
 	}
 
-	 public TextTooltip (@Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
+	public TextTooltip (@Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
 		super(null, manager);
 
 		container.setActor(newLabel(text, style.label));
@@ -57,7 +56,7 @@ public class TextTooltip extends Tooltip<Label> {
 		return new Label(text, style);
 	}
 
-	 public void setStyle (TextTooltipStyle style) {
+	public void setStyle (TextTooltipStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		container.setBackground(style.background);
 		container.maxWidth(style.wrapWidth);
@@ -86,7 +85,7 @@ public class TextTooltip extends Tooltip<Label> {
 			this.background = background;
 		}
 
-		 public TextTooltipStyle (TextTooltipStyle style) {
+		public TextTooltipStyle (TextTooltipStyle style) {
 			label = new LabelStyle(style.label);
 			background = style.background;
 			wrapWidth = style.wrapWidth;

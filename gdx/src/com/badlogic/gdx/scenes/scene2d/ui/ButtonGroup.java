@@ -20,7 +20,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** Manages a group of buttons to enforce a minimum and maximum number of checked buttons. This enables "radio button"
  * functionality and more. A button may only be in one group at a time.
  * <p>
@@ -92,7 +91,7 @@ public class ButtonGroup<T extends Button> {
 	/** Called when a button is checked or unchecked. If overridden, generally changing button checked states should not be done
 	 * from within this method.
 	 * @return True if the new state should be allowed. */
-	 protected boolean canCheck (T button, boolean newState) {
+	protected boolean canCheck (T button, boolean newState) {
 		if (button.isChecked == newState) return false;
 
 		if (!newState) {
@@ -133,7 +132,8 @@ public class ButtonGroup<T extends Button> {
 
 	/** @return The first checked button, or null. */
 
-	@Nullable public @Null T getChecked () {
+	@Nullable
+	public @Null T getChecked () {
 		if (checkedButtons.size > 0) return checkedButtons.get(0);
 		return null;
 	}

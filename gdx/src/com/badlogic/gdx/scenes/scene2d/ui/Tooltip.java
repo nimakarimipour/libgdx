@@ -26,7 +26,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** A listener that shows a tooltip actor when the mouse is over another actor.
  * @author Nathan Sweet */
 public class Tooltip<T extends Actor> extends InputListener {
@@ -43,7 +42,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 	}
 
 	/** @param contents May be null. */
-	 public Tooltip (@Nullable @Null T contents, @Nullable TooltipManager manager) {
+	public Tooltip (@Nullable @Null T contents, @Nullable TooltipManager manager) {
 		this.manager = manager;
 
 		container = new Container(contents) {

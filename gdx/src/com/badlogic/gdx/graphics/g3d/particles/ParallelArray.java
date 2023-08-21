@@ -21,7 +21,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import javax.annotation.Nullable;
 
-
 /** This class represents an group of elements like an array, but the properties of the elements are stored as separate arrays.
  * These arrays are called {@link Channel} and are represented by {@link ChannelDescriptor}. It's not necessary to store primitive
  * types in the channels but doing so will "exploit" data locality in the JVM, which is ensured for primitive types. Use
@@ -257,7 +256,7 @@ public class ParallelArray {
 
 	/** @return the channel with the same id as the one in the descriptor */
 
-	 @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public <T extends Channel> T getChannel (ChannelDescriptor descriptor) {
 		for (Channel array : arrays) {
 			if (array.id == descriptor.id) return (T)array;

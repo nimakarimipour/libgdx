@@ -117,13 +117,13 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	private RenderablePool renderablePool;
 	private Array<Renderable> renderables;
-	 private float[] vertices;
+	private float[] vertices;
 	private short[] indices;
 	private int currentVertexSize = 0;
-	 private VertexAttributes currentAttributes;
+	private VertexAttributes currentAttributes;
 	protected boolean useGPU = false;
 	@Nullable protected AlignMode mode = AlignMode.Screen;
-	 protected Texture texture;
+	protected Texture texture;
 	@Nullable protected BlendingAttribute blendingAttribute;
 	@Nullable protected DepthTestAttribute depthTestAttribute;
 	@Nullable Shader shader;
@@ -261,7 +261,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		}
 	}
 
-	@Nullable public AlignMode getAlignMode () {
+	@Nullable
+	public AlignMode getAlignMode () {
 		return mode;
 	}
 
@@ -293,7 +294,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		return texture;
 	}
 
-	@Nullable public BlendingAttribute getBlendingAttribute () {
+	@Nullable
+	public BlendingAttribute getBlendingAttribute () {
 		return blendingAttribute;
 	}
 

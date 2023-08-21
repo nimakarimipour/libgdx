@@ -42,7 +42,6 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 import javax.annotation.Nullable;
 
-
 public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoader.Parameters> {
 
 	public static class Parameters extends AssetLoaderParameters<TiledMap> {
@@ -106,7 +105,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	 * @param tmxFile the Filehandle of the tmx file
 	 * @param imageResolver the {@link ImageResolver}
 	 * @return the {@link TiledMap} */
-	 private TiledMap loadMap (@Nullable Element root, FileHandle tmxFile, ImageResolver imageResolver) {
+	private TiledMap loadMap (@Nullable Element root, FileHandle tmxFile, ImageResolver imageResolver) {
 		TiledMap map = new TiledMap();
 		Element properties = root.getChildByName("Properties");
 		if (properties != null) {
@@ -200,7 +199,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	 private void loadLayer (TiledMap map, Element element) {
+	private void loadLayer (TiledMap map, Element element) {
 		if (element.getName().equals("Layer")) {
 			String id = element.getAttribute("Id");
 			String visible = element.getAttribute("Visible");
@@ -273,7 +272,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		}
 	}
 
-	 private void loadProperties (MapProperties properties, Element element) {
+	private void loadProperties (MapProperties properties, Element element) {
 		if (element.getName().equals("Properties")) {
 			for (Element property : element.getChildrenByName("Property")) {
 				String key = property.getAttribute("Key", null);

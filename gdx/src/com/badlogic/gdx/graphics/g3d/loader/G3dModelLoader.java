@@ -43,7 +43,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
 
-
 public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	public static final short VERSION_HI = 0;
 	public static final short VERSION_LO = 1;
@@ -80,7 +79,7 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return model;
 	}
 
-	 protected void parseMeshes (ModelData model, JsonValue json) {
+	protected void parseMeshes (ModelData model, JsonValue json) {
 		JsonValue meshes = json.get("meshes");
 		if (meshes != null) {
 

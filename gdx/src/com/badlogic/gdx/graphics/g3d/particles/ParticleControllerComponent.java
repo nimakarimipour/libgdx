@@ -24,7 +24,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** It's the base class of every {@link ParticleController} component. A component duty is to participate in one or some events
  * during the simulation. (i.e it can handle the particles emission or modify particle properties, etc.).
@@ -35,7 +34,7 @@ public abstract class ParticleControllerComponent implements Disposable, Json.Se
 	protected static final Quaternion TMP_Q = new Quaternion(), TMP_Q2 = new Quaternion();
 	protected static final Matrix3 TMP_M3 = new Matrix3();
 	protected static final Matrix4 TMP_M4 = new Matrix4();
-	 protected ParticleController controller;
+	protected ParticleController controller;
 
 	/** Called to initialize new emitted particles. */
 	public void activateParticles (int startIndex, int count) {

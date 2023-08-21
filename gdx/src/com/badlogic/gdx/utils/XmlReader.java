@@ -28,7 +28,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import javax.annotation.Nullable;
 
-
 /** Lightweight XML parser. Supports a subset of XML features: elements, attributes, text, predefined entities, CDATA, mixed
  * content. Namespaces are parsed as part of the element or attribute name. Prologs and doctypes are ignored. Only 8-bit character
  * encodings are supported. Input is assumed to be well formed.<br>
@@ -87,7 +86,7 @@ public class XmlReader {
 		}
 	}
 
-	 public Element parse (char[] data, int offset, int length) {
+	public Element parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length;
 
 		int s = 0;
@@ -435,11 +434,12 @@ public class XmlReader {
 		current = child;
 	}
 
-	 protected void attribute (@Nullable String name, @Nullable String value) {
+	protected void attribute (@Nullable String name, @Nullable String value) {
 		current.setAttribute(name, value);
 	}
 
-	@Nullable protected @Null String entity (String name) {
+	@Nullable
+	protected @Null String entity (String name) {
 		if (name.equals("lt")) return "<";
 		if (name.equals("gt")) return ">";
 		if (name.equals("amp")) return "&";
@@ -449,7 +449,7 @@ public class XmlReader {
 		return null;
 	}
 
-	 protected void text (@Nullable String text) {
+	protected void text (@Nullable String text) {
 		String existing = current.getText();
 		current.setText(existing != null ? existing + text : text);
 	}
@@ -475,7 +475,8 @@ public class XmlReader {
 			return name;
 		}
 
-		@Nullable public ObjectMap<String, String> getAttributes () {
+		@Nullable
+		public ObjectMap<String, String> getAttributes () {
 			return attributes;
 		}
 
@@ -487,7 +488,8 @@ public class XmlReader {
 			return value;
 		}
 
-		@Nullable public String getAttribute (String name, @Nullable String defaultValue) {
+		@Nullable
+		public String getAttribute (String name, @Nullable String defaultValue) {
 			if (attributes == null) return defaultValue;
 			String value = attributes.get(name);
 			if (value == null) return defaultValue;
@@ -520,7 +522,7 @@ public class XmlReader {
 			children.add(element);
 		}
 
-		 public String getText () {
+		public String getText () {
 			return text;
 		}
 
@@ -536,11 +538,12 @@ public class XmlReader {
 			if (children != null) children.removeValue(child, true);
 		}
 
-		 public void remove () {
+		public void remove () {
 			parent.removeChild(this);
 		}
 
-		@Nullable public Element getParent () {
+		@Nullable
+		public Element getParent () {
 			return parent;
 		}
 
@@ -589,7 +592,7 @@ public class XmlReader {
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, does not recurse */
 
-		 public @Null Element getChildByName (String name) {
+		public @Null Element getChildByName (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);
@@ -606,7 +609,8 @@ public class XmlReader {
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, recurses */
 
-		@Nullable public @Null Element getChildByNameRecursive (String name) {
+		@Nullable
+		public @Null Element getChildByNameRecursive (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);
@@ -695,7 +699,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@Nullable public String get (String name, @Nullable String defaultValue) {
+		@Nullable
+		public String get (String name, @Nullable String defaultValue) {
 			if (attributes != null) {
 				String value = attributes.get(name);
 				if (value != null) return value;

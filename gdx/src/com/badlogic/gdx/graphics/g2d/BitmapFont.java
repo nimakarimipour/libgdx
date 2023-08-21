@@ -42,7 +42,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 import javax.annotation.Nullable;
 
-
 /** Renders bitmap fonts. The font consists of 2 files: an image file or {@link TextureRegion} containing the glyphs and a file in
  * the AngleCode BMFont text format that describes where each glyph is on the image.
  * <p>
@@ -440,7 +439,7 @@ public class BitmapFont implements Disposable {
 		/** The name of the font, or null. */
 		@Nullable public String name;
 		/** An array of the image paths, for multiple texture pages. */
-		 public String[] imagePaths;
+		public String[] imagePaths;
 		@Nullable public FileHandle fontFile;
 		public boolean flipped;
 		public float padTop, padRight, padBottom, padLeft;
@@ -482,10 +481,10 @@ public class BitmapFont implements Disposable {
 		/** Creates an empty BitmapFontData for configuration before calling {@link #load(FileHandle, boolean)}, to subclass, or to
 		 * populate yourself, e.g. using stb-truetype or FreeType. */
 
-		 public BitmapFontData () {
+		public BitmapFontData () {
 		}
 
-		 public BitmapFontData (FileHandle fontFile, boolean flip) {
+		public BitmapFontData (FileHandle fontFile, boolean flip) {
 			this.fontFile = fontFile;
 			this.flipped = flip;
 			load(fontFile, flip);
@@ -823,7 +822,8 @@ public class BitmapFont implements Disposable {
 		 * {@link #getGlyphs(GlyphRun, CharSequence, int, int, Glyph)} should be be used to shape a string of characters into a list
 		 * of glyphs. */
 
-		@Nullable public Glyph getGlyph (char ch) {
+		@Nullable
+		public Glyph getGlyph (char ch) {
 			Glyph[] page = glyphs[ch / PAGE_SIZE];
 			if (page != null) return page[ch & PAGE_SIZE - 1];
 			return null;
@@ -913,7 +913,8 @@ public class BitmapFont implements Disposable {
 			return imagePaths;
 		}
 
-		@Nullable public FileHandle getFontFile () {
+		@Nullable
+		public FileHandle getFontFile () {
 			return fontFile;
 		}
 

@@ -37,7 +37,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** A group that scrolls a child actor using scrollbars and/or mouse or touch dragging.
  * <p>
  * The actor is sized to its preferred size. If the actor's preferred width or height is less than the size of this scroll pane,
@@ -501,7 +500,7 @@ public class ScrollPane extends WidgetGroup {
 		}
 	}
 
-	 private void updateActorPosition () {
+	private void updateActorPosition () {
 		// Calculate the actor's position depending on the scroll state and available actor area.
 		float x = actorArea.x - (scrollX ? (int)visualAmountX : 0);
 		float y = actorArea.y - (int)(scrollY ? maxY - visualAmountY : maxY);
@@ -646,7 +645,8 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** Returns the actor embedded in this scroll pane, or null. */
-	@Nullable public @Null Actor getActor () {
+	@Nullable
+	public @Null Actor getActor () {
 		return actor;
 	}
 
@@ -657,7 +657,8 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** @deprecated Use {@link #getActor()}. */
-	@Nullable @Deprecated
+	@Nullable
+	@Deprecated
 	public @Null Actor getWidget () {
 		return actor;
 	}
@@ -710,7 +711,8 @@ public class ScrollPane extends WidgetGroup {
 		return actor;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
 		if (touchable && getTouchable() == Touchable.enabled && isVisible()) {
 			if (scrollX && touchScrollH && hScrollBounds.contains(x, y)) return this;

@@ -55,8 +55,8 @@ import javax.annotation.Nullable;
  * @author mzechner
  * @author Nathan Sweet */
 public class FileHandle {
-	 protected File file;
-	 protected FileType type;
+	protected File file;
+	protected FileType type;
 
 	protected FileHandle () {
 	}

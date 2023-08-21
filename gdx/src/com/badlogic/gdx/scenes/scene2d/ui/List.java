@@ -38,7 +38,6 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
 
-
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
  * {@link ChangeEvent} is fired when the list selection changes.
@@ -47,7 +46,7 @@ import javax.annotation.Nullable;
  * @author mzechner
  * @author Nathan Sweet */
 public class List<T> extends Widget implements Cullable {
-	 ListStyle style;
+	ListStyle style;
 	final Array<T> items = new Array();
 	ArraySelection<T> selection = new ArraySelection(items);
 	@Nullable private Rectangle cullingArea;
@@ -278,7 +277,8 @@ public class List<T> extends Widget implements Cullable {
 	}
 
 	/** Returns the first selected item, or null. */
-	@Nullable public @Null T getSelected () {
+	@Nullable
+	public @Null T getSelected () {
 		return selection.first();
 	}
 
@@ -313,19 +313,22 @@ public class List<T> extends Widget implements Cullable {
 
 	/** @return May be null. */
 
-	@Nullable public T getOverItem () {
+	@Nullable
+	public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
 
-	@Nullable public T getPressedItem () {
+	@Nullable
+	public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
 
 	/** @return null if not over an item. */
 
-	@Nullable public @Null T getItemAt (float y) {
+	@Nullable
+	public @Null T getItemAt (float y) {
 		int index = getItemIndexAt(y);
 		if (index == -1) return null;
 		return items.get(index);
@@ -415,7 +418,8 @@ public class List<T> extends Widget implements Cullable {
 
 	/** @return May be null.
 	 * @see #setCullingArea(Rectangle) */
-	@Nullable public Rectangle getCullingArea () {
+	@Nullable
+	public Rectangle getCullingArea () {
 		return cullingArea;
 	}
 
@@ -441,13 +445,13 @@ public class List<T> extends Widget implements Cullable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ListStyle {
-		 public BitmapFont font;
+		public BitmapFont font;
 		public Color fontColorSelected = new Color(1, 1, 1, 1);
 		public Color fontColorUnselected = new Color(1, 1, 1, 1);
-		 public Drawable selection;
+		public Drawable selection;
 		@Nullable public @Null Drawable down, over, background;
 
-		 public ListStyle () {
+		public ListStyle () {
 		}
 
 		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {

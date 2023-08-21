@@ -69,7 +69,8 @@ public class TiledMapTileLayer extends MapLayer {
 	 * @param y Y coordinate
 	 * @return {@link Cell} at (x, y) */
 
-	@Nullable public Cell getCell (int x, int y) {
+	@Nullable
+	public Cell getCell (int x, int y) {
 		if (x < 0 || x >= width) return null;
 		if (y < 0 || y >= height) return null;
 		return cells[x][y];
@@ -98,7 +99,8 @@ public class TiledMapTileLayer extends MapLayer {
 		private int rotation;
 
 		/** @return The tile currently assigned to this cell. */
-		@Nullable public TiledMapTile getTile () {
+		@Nullable
+		public TiledMapTile getTile () {
 			return tile;
 		}
 

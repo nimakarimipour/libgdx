@@ -62,7 +62,7 @@ public class ObjectSet<T> implements Iterable<T> {
 	 * hash. */
 	protected int mask;
 
-	 private transient ObjectSetIterator iterator1, iterator2;
+	private transient ObjectSetIterator iterator1, iterator2;
 
 	/** Creates a new set with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectSet () {
@@ -244,7 +244,8 @@ public class ObjectSet<T> implements Iterable<T> {
 		return locateKey(key) >= 0;
 	}
 
-	@Nullable public @Null T get (T key) {
+	@Nullable
+	public @Null T get (T key) {
 		int i = locateKey(key);
 		return i < 0 ? null : keyTable[i];
 	}

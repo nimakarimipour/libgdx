@@ -137,7 +137,8 @@ public class Octree<T> {
 		return result;
 	}
 
-	@Nullable public T rayCast (Ray ray, RayCastResult<T> result) {
+	@Nullable
+	public T rayCast (Ray ray, RayCastResult<T> result) {
 		result.distance = result.maxDistanceSq;
 		root.rayCast(ray, result);
 		return result.geometry;
@@ -156,7 +157,7 @@ public class Octree<T> {
 		int level;
 		final BoundingBox bounds = new BoundingBox();
 		boolean leaf;
-		 private Octree.OctreeNode[] children; // May be null when leaf is true.
+		private Octree.OctreeNode[] children; // May be null when leaf is true.
 		private final Array<T> geometries = new Array<T>(Math.min(16, maxItemsPerNode));
 
 		private void split () {

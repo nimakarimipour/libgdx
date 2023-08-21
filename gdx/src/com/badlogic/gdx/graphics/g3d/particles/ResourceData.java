@@ -29,7 +29,6 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import javax.annotation.Nullable;
 
-
 /** This class handles the assets and configurations required by a given resource when de/serialized. It's handy when a given
  * object or one of its members requires some assets to be loaded to work properly after being deserialized. To save the assets,
  * the object should implement the {@link Configurable} interface and obtain a {@link SaveData} object to store every required
@@ -56,9 +55,9 @@ public class ResourceData<T> implements Json.Serializable {
 		ObjectMap<String, Object> data;
 		IntArray assets;
 		private int loadIndex;
-		 protected ResourceData resources;
+		protected ResourceData resources;
 
-		 public SaveData () {
+		public SaveData () {
 			data = new ObjectMap<String, Object>();
 			assets = new IntArray();
 			loadIndex = 0;
@@ -84,7 +83,8 @@ public class ResourceData<T> implements Json.Serializable {
 			data.put(key, value);
 		}
 
-		@Nullable public AssetDescriptor loadAsset () {
+		@Nullable
+		public AssetDescriptor loadAsset () {
 			if (loadIndex == assets.size) return null;
 			AssetData data = (AssetData)resources.sharedAssets.get(assets.get(loadIndex++));
 			return new AssetDescriptor(data.filename, data.type);
@@ -109,10 +109,10 @@ public class ResourceData<T> implements Json.Serializable {
 
 	/** This class contains all the information related to a given asset */
 	public static class AssetData<T> implements Json.Serializable {
-		 public String filename;
-		 public Class<T> type;
+		public String filename;
+		public Class<T> type;
 
-		 public AssetData () {
+		public AssetData () {
 		}
 
 		public AssetData (String filename, Class<T> type) {

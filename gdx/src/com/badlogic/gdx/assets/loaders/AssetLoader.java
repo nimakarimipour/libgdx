@@ -22,7 +22,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
 
-
 /** Abstract base class for asset loaders.
  * @author mzechner
  * 
@@ -40,7 +39,7 @@ public abstract class AssetLoader<T, P extends AssetLoaderParameters<T>> {
 
 	/** @param fileName file name to resolve
 	 * @return handle to the file, as resolved by the {@link FileHandleResolver} set on the loader */
-	 public FileHandle resolve (String fileName) {
+	public FileHandle resolve (String fileName) {
 		return resolver.resolve(fileName);
 	}
 
@@ -49,5 +48,6 @@ public abstract class AssetLoader<T, P extends AssetLoaderParameters<T>> {
 	 * @param file the resolved file to load
 	 * @param parameter parameters for loading the asset
 	 * @return other assets that the asset depends on and need to be loaded first or null if there are no dependencies. */
-	@Nullable public abstract Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable P parameter);
+	@Nullable
+	public abstract Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable P parameter);
 }

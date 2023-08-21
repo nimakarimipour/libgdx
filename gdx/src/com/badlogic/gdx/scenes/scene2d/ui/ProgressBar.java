@@ -31,7 +31,6 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
 
-
 /** A progress bar is a widget that visually displays the progress of some activity or a value within given range. The progress
  * bar has a range (min, max) and a stepping between each value it represents. The percentage of completeness typically starts out
  * as an empty progress bar and gradually becomes filled in as the task or variable value progresses.
@@ -44,7 +43,7 @@ import javax.annotation.Nullable;
  * @author mzechner
  * @author Nathan Sweet */
 public class ProgressBar extends Widget implements Disableable {
-	 private ProgressBarStyle style;
+	private ProgressBarStyle style;
 	float min, max, stepSize;
 	private float value, animateFromValue;
 	float position;
@@ -227,22 +226,25 @@ public class ProgressBar extends Widget implements Disableable {
 		return visualInterpolation.apply((getVisualValue() - min) / (max - min));
 	}
 
-	 protected @Null Drawable getBackgroundDrawable () {
+	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		return style.background;
 	}
 
-	@Nullable protected @Null Drawable getKnobDrawable () {
+	@Nullable
+	protected @Null Drawable getKnobDrawable () {
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		return style.knob;
 	}
 
-	@Nullable protected Drawable getKnobBeforeDrawable () {
+	@Nullable
+	protected Drawable getKnobBeforeDrawable () {
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		return style.knobBefore;
 	}
 
-	@Nullable protected Drawable getKnobAfterDrawable () {
+	@Nullable
+	protected Drawable getKnobAfterDrawable () {
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		return style.knobAfter;
 	}

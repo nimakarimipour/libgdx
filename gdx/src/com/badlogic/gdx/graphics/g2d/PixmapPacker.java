@@ -37,7 +37,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.OrderedMap;
 import javax.annotation.Nullable;
 
-
 /** Packs {@link Pixmap pixmaps} into one or more {@link Page pages} to generate an atlas of pixmap instances. Provides means to
  * directly convert the pixmap atlas to a {@link TextureAtlas}. The packer supports padding and border pixel duplication,
  * specified during construction. The packer supports incremental inserts and updates of TextureAtlases generated with this class.
@@ -155,7 +154,8 @@ public class PixmapPacker implements Disposable {
 	/** Inserts the pixmap without a name. It cannot be looked up by name.
 	 * @see #pack(String, Pixmap) */
 
-	@Nullable public synchronized Rectangle pack (Pixmap image) {
+	@Nullable
+	public synchronized Rectangle pack (Pixmap image) {
 		return pack(null, image);
 	}
 
@@ -166,7 +166,8 @@ public class PixmapPacker implements Disposable {
 	 * @throws GdxRuntimeException in case the image did not fit due to the page size being too small or providing a duplicate
 	 *            name. */
 
-	@Nullable public synchronized Rectangle pack (@Nullable String name, Pixmap image) {
+	@Nullable
+	public synchronized Rectangle pack (@Nullable String name, Pixmap image) {
 		if (disposed) return null;
 		if (name != null && getRect(name) != null)
 			throw new GdxRuntimeException("Pixmap has already been packed with name: " + name);
@@ -298,7 +299,8 @@ public class PixmapPacker implements Disposable {
 	/** @param name the name of the image
 	 * @return the rectangle for the image in the page it's stored in or null */
 
-	@Nullable public synchronized Rectangle getRect (String name) {
+	@Nullable
+	public synchronized Rectangle getRect (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
 			if (rect != null) return rect;
@@ -309,7 +311,8 @@ public class PixmapPacker implements Disposable {
 	/** @param name the name of the image
 	 * @return the page the image is stored in or null */
 
-	@Nullable public synchronized Page getPage (String name) {
+	@Nullable
+	public synchronized Page getPage (String name) {
 		for (Page page : pages) {
 			Rectangle rect = page.rects.get(name);
 			if (rect != null) return page;
@@ -360,7 +363,7 @@ public class PixmapPacker implements Disposable {
 	 * can be used to insert Pixmap instances on a separate thread via {@link #pack(String, Pixmap)} and update the TextureAtlas on
 	 * the rendering thread. This method must be called on the rendering thread. After calling this method, disposing the packer
 	 * will no longer dispose the page pixmaps. */
-	 public synchronized void updateTextureAtlas (TextureAtlas atlas, TextureFilter minFilter, TextureFilter magFilter,
+	public synchronized void updateTextureAtlas (TextureAtlas atlas, TextureFilter minFilter, TextureFilter magFilter,
 		boolean useMipMaps, boolean useIndexes) {
 		updatePageTextures(minFilter, magFilter, useMipMaps);
 		for (Page page : pages) {
@@ -496,7 +499,7 @@ public class PixmapPacker implements Disposable {
 
 		/** Returns the texture for this page, or null if the texture has not been created.
 		 * @see #updateTexture(TextureFilter, TextureFilter, boolean) */
-		 public Texture getTexture () {
+		public Texture getTexture () {
 			return texture;
 		}
 
@@ -550,7 +553,7 @@ public class PixmapPacker implements Disposable {
 			pixmaps.sort(comparator);
 		}
 
-		 public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
+		public Page pack (PixmapPacker packer, @Nullable String name, Rectangle rect) {
 			GuillotinePage page;
 			if (packer.pages.size == 0) {
 				// Add a page if empty.
@@ -576,7 +579,8 @@ public class PixmapPacker implements Disposable {
 			return page;
 		}
 
-		@Nullable private Node insert (Node node, Rectangle rect) {
+		@Nullable
+		private Node insert (Node node, Rectangle rect) {
 			if (!node.full && node.leftChild != null && node.rightChild != null) {
 				Node newNode = insert(node.leftChild, rect);
 				if (newNode == null) newNode = insert(node.rightChild, rect);
@@ -730,7 +734,8 @@ public class PixmapPacker implements Disposable {
 		this.transparentColor.set(color);
 	}
 
-	@Nullable private int[] getSplits (Pixmap raster) {
+	@Nullable
+	private int[] getSplits (Pixmap raster) {
 
 		int startX = getSplitPoint(raster, 1, 0, true, true);
 		int endX = getSplitPoint(raster, startX, 0, false, true);
@@ -763,7 +768,8 @@ public class PixmapPacker implements Disposable {
 		return new int[] {startX, endX, startY, endY};
 	}
 
-	@Nullable private int[] getPads (Pixmap raster, @Nullable int[] splits) {
+	@Nullable
+	private int[] getPads (Pixmap raster, @Nullable int[] splits) {
 
 		int bottom = raster.getHeight() - 1;
 		int right = raster.getWidth() - 1;

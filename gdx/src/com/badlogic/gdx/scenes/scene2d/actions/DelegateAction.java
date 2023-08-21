@@ -31,7 +31,8 @@ abstract public class DelegateAction extends Action {
 		this.action = action;
 	}
 
-	@Nullable public Action getAction () {
+	@Nullable
+	public Action getAction () {
 		return action;
 	}
 

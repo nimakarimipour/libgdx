@@ -41,7 +41,7 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 		super(resolver);
 	}
 
-	 BitmapFontData data;
+	BitmapFontData data;
 
 	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable BitmapFontParameter parameter) {

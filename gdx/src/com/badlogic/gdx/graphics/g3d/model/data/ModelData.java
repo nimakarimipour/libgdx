@@ -21,7 +21,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
 
-
 /** Returned by a {@link ModelLoader}, contains meshes, materials, nodes and animations. OpenGL resources like textures or vertex
  * buffer objects are not stored. Instead, a ModelData instance needs to be converted to a Model first.
  * @author badlogic */
@@ -33,7 +32,7 @@ public class ModelData {
 	public final Array<ModelNode> nodes = new Array<ModelNode>();
 	public final Array<ModelAnimation> animations = new Array<ModelAnimation>();
 
-	 public void addMesh (ModelMesh mesh) {
+	public void addMesh (ModelMesh mesh) {
 		for (ModelMesh other : meshes) {
 			if (other.id.equals(mesh.id)) {
 				throw new GdxRuntimeException("Mesh with id '" + other.id + "' already in model");

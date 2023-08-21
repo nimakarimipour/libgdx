@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
-import javax.annotation.Nullable;
 
 /** A group that lays out its children top to bottom vertically, with optional wrapping. {@link #getChildren()} can be sorted to
  * change the order of the actors (eg {@link Actor#setZIndex(int)}). This can be easier than using {@link Table} when actors need
@@ -41,7 +40,7 @@ import javax.annotation.Nullable;
 public class VerticalGroup extends WidgetGroup {
 	private float prefWidth, prefHeight, lastPrefWidth;
 	private boolean sizeInvalid = true;
-	 private FloatArray columnSizes; // column height, column width, ...
+	private FloatArray columnSizes; // column height, column width, ...
 
 	private int align = Align.top, columnAlign;
 	private boolean reverse, round = true, wrap, expand;

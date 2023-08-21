@@ -63,9 +63,9 @@ public class ObjectIntMap<K> implements Iterable<ObjectIntMap.Entry<K>> {
 	 * hash. */
 	protected int mask;
 
-	 transient Entries entries1, entries2;
-	 transient Values values1, values2;
-	 transient Keys keys1, keys2;
+	transient Entries entries1, entries2;
+	transient Values values1, values2;
+	transient Keys keys1, keys2;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectIntMap () {
@@ -280,7 +280,8 @@ public class ObjectIntMap<K> implements Iterable<ObjectIntMap.Entry<K>> {
 	/** Returns the key for the specified value, or null if it is not in the map. Note this traverses the entire map and compares
 	 * every value, which may be an expensive operation. */
 
-	@Nullable public @Null K findKey (int value) {
+	@Nullable
+	public @Null K findKey (int value) {
 		K[] keyTable = this.keyTable;
 		int[] valueTable = this.valueTable;
 		for (int i = valueTable.length - 1; i >= 0; i--) {

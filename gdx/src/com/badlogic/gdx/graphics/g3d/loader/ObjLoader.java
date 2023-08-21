@@ -46,7 +46,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FloatArray;
 import javax.annotation.Nullable;
 
-
 /** {@link ModelLoader} to load Wavefront OBJ files. Only intended for testing basic models/meshes and educational usage. The
  * Wavefront specification is NOT fully implemented, only a subset of the specification is supported. Especially the
  * {@link Material} ({@link Attributes}), e.g. the color or texture applied, might not or not correctly be loaded.
@@ -97,16 +96,19 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 	}
 
 	/** Directly load the model on the calling thread. The model with not be managed by an {@link AssetManager}. */
-	@Nullable public Model loadModel (final FileHandle fileHandle, boolean flipV) {
+	@Nullable
+	public Model loadModel (final FileHandle fileHandle, boolean flipV) {
 		return loadModel(fileHandle, new ObjLoaderParameters(flipV));
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public ModelData loadModelData (FileHandle file, @Nullable ObjLoaderParameters parameters) {
 		return loadModelData(file, parameters != null && parameters.flipV);
 	}
 
-	@Nullable protected ModelData loadModelData (FileHandle file, boolean flipV) {
+	@Nullable
+	protected ModelData loadModelData (FileHandle file, boolean flipV) {
 		if (logWarning)
 			Gdx.app.error("ObjLoader", "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
 		String line;
@@ -444,7 +446,7 @@ class MtlLoader {
 			reset();
 		}
 
-		 public ModelMaterial build () {
+		public ModelMaterial build () {
 			ModelMaterial mat = new ModelMaterial();
 			mat.id = materialName;
 			mat.ambient = ambientColor == null ? null : new Color(ambientColor);

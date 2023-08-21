@@ -31,7 +31,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
 
-
 /** ModelCache tries to combine multiple render calls into a single render call by merging them where possible. Can be used for
  * multiple type of models (e.g. varying vertex attributes or materials), the ModelCache will combine where possible. Can be used
  * dynamically (e.g. every frame) or statically (e.g. to combine part of scenery). Be aware that any combined vertices are
@@ -228,7 +227,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 		meshPool.flush();
 	}
 
-	 private Renderable obtainRenderable (Material material, int primitiveType) {
+	private Renderable obtainRenderable (Material material, int primitiveType) {
 		Renderable result = renderablesPool.obtain();
 		result.bones = null;
 		result.environment = null;

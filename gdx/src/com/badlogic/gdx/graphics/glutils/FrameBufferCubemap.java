@@ -25,7 +25,6 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
 
-
 /**
  * <p>
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover most FBO uses. It will
@@ -158,14 +157,15 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 
 	/** Bind the side, making it active to render on. Should be called in between a call to {@link #begin()} and {@link #end()}.
 	 * @param side The side to bind */
-	 protected void bindSide (@Nullable final Cubemap.CubemapSide side) {
+	protected void bindSide (@Nullable final Cubemap.CubemapSide side) {
 		Gdx.gl20.glFramebufferTexture2D(GL20.GL_FRAMEBUFFER, GL20.GL_COLOR_ATTACHMENT0, side.glEnum,
 			getColorBufferTexture().getTextureObjectHandle(), 0);
 	}
 
 	/** Get the currently bound side. */
 
-	@Nullable public Cubemap.CubemapSide getSide () {
+	@Nullable
+	public Cubemap.CubemapSide getSide () {
 		return currentSide < 0 ? null : cubemapSides[currentSide];
 	}
 }

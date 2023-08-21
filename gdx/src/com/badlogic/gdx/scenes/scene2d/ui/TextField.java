@@ -47,7 +47,6 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import javax.annotation.Nullable;
 
-
 /** A single-line text input field.
  * <p>
  * The preferred height of a text field is the height of the {@link TextFieldStyle#font} and {@link TextFieldStyle#background}.
@@ -79,22 +78,24 @@ public class TextField extends Widget implements Disableable {
 	static public float keyRepeatInitialTime = 0.4f;
 	static public float keyRepeatTime = 0.1f;
 
-	 protected String text;
+	protected String text;
 	protected int cursor, selectionStart;
 	protected boolean hasSelection;
 	protected boolean writeEnters;
 	protected final GlyphLayout layout = new GlyphLayout();
 	protected final FloatArray glyphPositions = new FloatArray();
 
-	 TextFieldStyle style;
-	 private String messageText;
-	 protected CharSequence displayText;
+	TextFieldStyle style;
+	private String messageText;
+	protected CharSequence displayText;
 	Clipboard clipboard;
-	 InputListener inputListener;
+	InputListener inputListener;
 
-	@Nullable @Null TextFieldListener listener;
+	@Nullable
+	@Null TextFieldListener listener;
 
-	@Nullable @Null TextFieldFilter filter;
+	@Nullable
+	@Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
 	boolean focusTraversal = true, onlyFontChars = true, disabled;
 	private int textHAlign = Align.left;
@@ -153,7 +154,7 @@ public class TextField extends Widget implements Disableable {
 		return new TextFieldClickListener();
 	}
 
-	 protected int letterUnderCursor (float x) {
+	protected int letterUnderCursor (float x) {
 		x -= textOffset + fontOffset - style.font.getData().cursorX - glyphPositions.get(visibleTextStart);
 		Drawable background = getBackgroundDrawable();
 		if (background != null) x -= style.background.getLeftWidth();
@@ -297,13 +298,13 @@ public class TextField extends Widget implements Disableable {
 		}
 	}
 
-	 protected @Null Drawable getBackgroundDrawable () {
+	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
 		return style.background;
 	}
 
-	 public void draw (Batch batch, float parentAlpha) {
+	public void draw (Batch batch, float parentAlpha) {
 		boolean focused = hasKeyboardFocus();
 		if (focused != this.focused || (focused && !blinkTask.isScheduled())) {
 			this.focused = focused;
@@ -544,7 +545,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return May be null. */
-	@Nullable private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
+	@Nullable
+	private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
 		Vector2 currentCoords, boolean up) {
 		for (int i = 0, n = actors.size; i < n; i++) {
 			Actor actor = actors.get(i);
@@ -582,7 +584,8 @@ public class TextField extends Widget implements Disableable {
 		this.filter = filter;
 	}
 
-	@Nullable public @Null TextFieldFilter getTextFieldFilter () {
+	@Nullable
+	public @Null TextFieldFilter getTextFieldFilter () {
 		return filter;
 	}
 
@@ -1092,14 +1095,14 @@ public class TextField extends Widget implements Disableable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class TextFieldStyle {
-		 public BitmapFont font;
+		public BitmapFont font;
 		@Nullable public Color fontColor;
 		@Nullable public @Null Color focusedFontColor, disabledFontColor;
 		@Nullable public @Null Drawable background, focusedBackground, disabledBackground, cursor, selection;
 		@Nullable public @Null BitmapFont messageFont;
 		@Nullable public @Null Color messageFontColor;
 
-		 public TextFieldStyle () {
+		public TextFieldStyle () {
 		}
 
 		public TextFieldStyle (BitmapFont font, Color fontColor, @Null Drawable cursor, @Null Drawable selection,

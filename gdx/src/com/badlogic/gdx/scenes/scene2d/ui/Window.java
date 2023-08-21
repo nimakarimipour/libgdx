@@ -33,7 +33,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** A table that can be dragged and act as a modal window. The top padding is used as the window's title height.
  * <p>
  * The preferred size of a window is the preferred size of the title text and the children as laid out by the table. After adding
@@ -44,7 +43,7 @@ public class Window extends Table {
 	static private final Vector2 tmpSize = new Vector2();
 	static private final int MOVE = 1 << 5;
 
-	 private WindowStyle style;
+	private WindowStyle style;
 	boolean isMovable = true, isModal, isResizable;
 	int resizeBorder = 8;
 	boolean keepWithinStage = true;
@@ -128,7 +127,7 @@ public class Window extends Table {
 				dragging = false;
 			}
 
-			 public void touchDragged (InputEvent event, float x, float y, int pointer) {
+			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (!dragging) return;
 				float width = getWidth(), height = getHeight();
 				float windowX = getX(), windowY = getY();
@@ -259,7 +258,7 @@ public class Window extends Table {
 		super.draw(batch, parentAlpha);
 	}
 
-	 protected void drawStageBackground (Batch batch, float parentAlpha, float x, float y, float width, float height) {
+	protected void drawStageBackground (Batch batch, float parentAlpha, float x, float y, float width, float height) {
 		Color color = getColor();
 		batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 		style.stageBackground.draw(batch, x, y, width, height);
@@ -278,7 +277,8 @@ public class Window extends Table {
 		drawTitleTable = false; // Avoid drawing the title table again in drawChildren.
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (!isVisible()) return null;
 		Actor hit = super.hit(x, y, touchable);
 		if (hit == null && isModal && (!touchable || getTouchable() == Touchable.enabled)) return this;
@@ -346,11 +346,11 @@ public class Window extends Table {
 	 * @author Nathan Sweet */
 	static public class WindowStyle {
 		@Nullable public @Null Drawable background;
-		 public BitmapFont titleFont;
+		public BitmapFont titleFont;
 		public @Null Color titleFontColor = new Color(1, 1, 1, 1);
 		@Nullable public @Null Drawable stageBackground;
 
-		 public WindowStyle () {
+		public WindowStyle () {
 		}
 
 		public WindowStyle (BitmapFont titleFont, Color titleFontColor, @Null Drawable background) {

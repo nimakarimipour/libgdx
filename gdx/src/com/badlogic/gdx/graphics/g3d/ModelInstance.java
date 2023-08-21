@@ -30,7 +30,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
 
-
 /** An instance of a {@link Model}, allows to specify global transform and modify the materials, as it has a copy of the model's
  * materials. Multiple instances can be created from the same Model, all sharing the meshes and textures of the Model. The Model
  * owns the meshes and textures, to dispose of these, the Model has to be disposed. Therefor, the Model must outlive all its
@@ -130,7 +129,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive True to recursively search the Model's node tree, false to only search for a root node
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	 public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
 		boolean parentTransform, boolean mergeTransform, boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
@@ -177,7 +176,8 @@ public class ModelInstance implements RenderableProvider {
 	}
 
 	/** Constructs a new ModelInstance with only the specified nodes and materials of the given model. */
-	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final Array<String> rootNodeIds, boolean shareKeyframes) {
+	public ModelInstance (final Model model, @Nullable final Matrix4 transform, final Array<String> rootNodeIds,
+		boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
 		copyNodes(model.nodes, rootNodeIds);
@@ -263,7 +263,7 @@ public class ModelInstance implements RenderableProvider {
 
 	/** Makes sure that each {@link NodePart} of the {@link Node} and its sub-nodes, doesn't reference a node outside this node
 	 * tree and that all materials are listed in the {@link #materials} array. */
-	 private void invalidate (Node node) {
+	private void invalidate (Node node) {
 		for (int i = 0, n = node.parts.size; i < n; ++i) {
 			NodePart part = node.parts.get(i);
 			ArrayMap<Node, Matrix4> bindPose = part.invBoneBindTransforms;
@@ -319,7 +319,7 @@ public class ModelInstance implements RenderableProvider {
 	/** Copy the source animation to this ModelInstance
 	 * @param sourceAnim The source animation {@link Animation}
 	 * @param shareKeyframes Shallow copy of {@link NodeKeyframe}'s if it's true, otherwise make a deep copy. */
-	 public void copyAnimation (Animation sourceAnim, boolean shareKeyframes) {
+	public void copyAnimation (Animation sourceAnim, boolean shareKeyframes) {
 		Animation animation = new Animation();
 		animation.id = sourceAnim.id;
 		animation.duration = sourceAnim.duration;
@@ -439,7 +439,8 @@ public class ModelInstance implements RenderableProvider {
 
 	/** @param id The ID of the animation to fetch (case sensitive).
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	@Nullable public Animation getAnimation (final String id) {
+	@Nullable
+	public Animation getAnimation (final String id) {
 		return getAnimation(id, false);
 	}
 
@@ -447,7 +448,8 @@ public class ModelInstance implements RenderableProvider {
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
 
-	@Nullable public Animation getAnimation (final String id, boolean ignoreCase) {
+	@Nullable
+	public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
 		if (ignoreCase) {
@@ -462,7 +464,8 @@ public class ModelInstance implements RenderableProvider {
 
 	/** @param id The ID of the material to fetch.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	@Nullable public Material getMaterial (final String id) {
+	@Nullable
+	public Material getMaterial (final String id) {
 		return getMaterial(id, true);
 	}
 
@@ -470,7 +473,8 @@ public class ModelInstance implements RenderableProvider {
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
 
-	@Nullable public Material getMaterial (final String id, boolean ignoreCase) {
+	@Nullable
+	public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;
 		if (ignoreCase) {

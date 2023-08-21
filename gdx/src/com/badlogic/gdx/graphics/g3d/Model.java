@@ -58,7 +58,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import java.nio.Buffer;
 import javax.annotation.Nullable;
 
-
 /** A model represents a 3D assets. It stores a hierarchy of nodes. A node has a transform and optionally a graphical part in form
  * of a {@link MeshPart} and {@link Material}. Mesh parts reference subsets of vertices in one of the meshes of the model.
  * Animations can be applied to nodes, to modify their transform (translation, rotation, scale) over time.
@@ -116,7 +115,7 @@ public class Model implements Disposable {
 		calculateTransforms();
 	}
 
-	 protected void loadAnimations (Iterable<ModelAnimation> modelAnimations) {
+	protected void loadAnimations (Iterable<ModelAnimation> modelAnimations) {
 		for (final ModelAnimation anim : modelAnimations) {
 			Animation animation = new Animation();
 			animation.id = anim.id;
@@ -236,7 +235,7 @@ public class Model implements Disposable {
 		}
 	}
 
-	 protected void convertMesh (ModelMesh modelMesh) {
+	protected void convertMesh (ModelMesh modelMesh) {
 		int numIndices = 0;
 		for (ModelMeshPart part : modelMesh.parts) {
 			numIndices += part.indices.length;
@@ -399,7 +398,8 @@ public class Model implements Disposable {
 
 	/** @param id The ID of the animation to fetch (case sensitive).
 	 * @return The {@link Animation} with the specified id, or null if not available. */
-	@Nullable public Animation getAnimation (final String id) {
+	@Nullable
+	public Animation getAnimation (final String id) {
 		return getAnimation(id, true);
 	}
 
@@ -407,7 +407,8 @@ public class Model implements Disposable {
 	 * @param ignoreCase whether to use case sensitivity when comparing the animation id.
 	 * @return The {@link Animation} with the specified id, or null if not available. */
 
-	@Nullable public Animation getAnimation (final String id, boolean ignoreCase) {
+	@Nullable
+	public Animation getAnimation (final String id, boolean ignoreCase) {
 		final int n = animations.size;
 		Animation animation;
 		if (ignoreCase) {
@@ -422,7 +423,8 @@ public class Model implements Disposable {
 
 	/** @param id The ID of the material to fetch.
 	 * @return The {@link Material} with the specified id, or null if not available. */
-	@Nullable public Material getMaterial (final String id) {
+	@Nullable
+	public Material getMaterial (final String id) {
 		return getMaterial(id, true);
 	}
 
@@ -430,7 +432,8 @@ public class Model implements Disposable {
 	 * @param ignoreCase whether to use case sensitivity when comparing the material id.
 	 * @return The {@link Material} with the specified id, or null if not available. */
 
-	@Nullable public Material getMaterial (final String id, boolean ignoreCase) {
+	@Nullable
+	public Material getMaterial (final String id, boolean ignoreCase) {
 		final int n = materials.size;
 		Material material;
 		if (ignoreCase) {

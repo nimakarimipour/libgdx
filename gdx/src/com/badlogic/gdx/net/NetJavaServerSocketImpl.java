@@ -22,7 +22,6 @@ import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
 
-
 /** Server socket implementation using java.net.ServerSocket.
  * 
  * @author noblemaster */
@@ -75,7 +74,7 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 		return protocol;
 	}
 
-	 @Override
+	@Override
 	public Socket accept (SocketHints hints) {
 		try {
 			return new NetJavaSocketImpl(server.accept(), hints);

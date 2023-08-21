@@ -25,7 +25,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
 import javax.annotation.Nullable;
 
-
 public class TextureAttribute extends Attribute {
 	public final static String DiffuseAlias = "diffuseTexture";
 	public final static long Diffuse = register(DiffuseAlias);
@@ -140,7 +139,7 @@ public class TextureAttribute extends Attribute {
 		this(type, textureDescription, offsetU, offsetV, scaleU, scaleV, 0);
 	}
 
-	 public TextureAttribute (final long type, @Nullable final Texture texture) {
+	public TextureAttribute (final long type, @Nullable final Texture texture) {
 		this(type);
 		textureDescription.texture = texture;
 	}

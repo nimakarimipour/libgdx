@@ -24,7 +24,6 @@ import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import javax.annotation.Nullable;
 
-
 /** A {@link MapObject} with a {@link TiledMapTile}. Can be both {@link StaticTiledMapTile} or {@link AnimatedTiledMapTile}. For
  * compatibility reasons, this extends {@link TextureMapObject}. Use {@link TiledMapTile#getTextureRegion()} instead of
  * {@link #getTextureRegion()}.
@@ -36,7 +35,7 @@ public class TiledMapTileMapObject extends TextureMapObject {
 
 	@Nullable private TiledMapTile tile;
 
-	 public TiledMapTileMapObject (@Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
+	public TiledMapTileMapObject (@Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
 		this.flipHorizontally = flipHorizontally;
 		this.flipVertically = flipVertically;
 		this.tile = tile;
@@ -62,7 +61,8 @@ public class TiledMapTileMapObject extends TextureMapObject {
 		this.flipVertically = flipVertically;
 	}
 
-	@Nullable public TiledMapTile getTile () {
+	@Nullable
+	public TiledMapTile getTile () {
 		return tile;
 	}
 

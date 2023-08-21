@@ -236,11 +236,13 @@ public class Group extends Actor implements Cullable {
 
 	/** @return May be null.
 	 * @see #setCullingArea(Rectangle) */
-	@Nullable public @Null Rectangle getCullingArea () {
+	@Nullable
+	public @Null Rectangle getCullingArea () {
 		return cullingArea;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && getTouchable() == Touchable.disabled) return null;
 		if (!isVisible()) return null;
 		Vector2 point = tmp;
@@ -390,7 +392,8 @@ public class Group extends Actor implements Cullable {
 	/** Returns the first actor found with the specified name. Note this recursively compares the name of every actor in the
 	 * group. */
 
-	@Nullable public @Null <T extends Actor> T findActor (String name) {
+	@Nullable
+	public @Null <T extends Actor> T findActor (String name) {
 		Array<Actor> children = this.children;
 		for (int i = 0, n = children.size; i < n; i++)
 			if (name.equals(children.get(i).getName())) return (T)children.get(i);

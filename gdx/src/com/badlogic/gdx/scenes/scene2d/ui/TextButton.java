@@ -25,12 +25,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** A button with a child {@link Label} to display text.
  * @author Nathan Sweet */
 public class TextButton extends Button {
 	private Label label;
-	 private TextButtonStyle style;
+	private TextButtonStyle style;
 
 	public TextButton (@Null String text, Skin skin) {
 		this(text, skin.get(TextButtonStyle.class));
@@ -75,7 +74,8 @@ public class TextButton extends Button {
 	}
 
 	/** Returns the appropriate label font color from the style based on the current button state. */
-	@Nullable protected @Null Color getFontColor () {
+	@Nullable
+	protected @Null Color getFontColor () {
 		if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
 		if (isPressed()) {
 			if (isChecked() && style.checkedDownFontColor != null) return style.checkedDownFontColor;
@@ -137,11 +137,11 @@ public class TextButton extends Button {
 	/** The style for a text button, see {@link TextButton}.
 	 * @author Nathan Sweet */
 	static public class TextButtonStyle extends ButtonStyle {
-		 public BitmapFont font;
+		public BitmapFont font;
 		@Nullable public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
 		@Nullable public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor, checkedFocusedFontColor;
 
-		 public TextButtonStyle () {
+		public TextButtonStyle () {
 		}
 
 		public TextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null BitmapFont font) {

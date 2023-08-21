@@ -22,7 +22,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
 import javax.annotation.Nullable;
 
-
 /** Executes tasks in the future on the main loop thread.
  * @author Nathan Sweet */
 public class Timer {
@@ -76,7 +75,7 @@ public class Timer {
 
 	/** Schedules a task to occur once after the specified delay and then a number of additional times at the specified interval.
 	 * @param repeatCount If negative, the task will repeat forever. */
-	 public Task scheduleTask (Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
+	public Task scheduleTask (Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
 		synchronized (threadLock) {
 			synchronized (this) {
 				synchronized (task) {

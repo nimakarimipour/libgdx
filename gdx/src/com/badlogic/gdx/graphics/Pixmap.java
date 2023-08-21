@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import javax.annotation.Nullable;
 
-
 /**
  * <p>
  * A Pixmap represents an image in memory. It has a width and height expressed in pixels as well as a {@link Format} specifying
@@ -204,7 +203,7 @@ public class Pixmap implements Disposable {
 	 *
 	 * @param url http url to download the image from
 	 * @param responseListener the listener to call once the image is available as a {@link Pixmap} */
-	 public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
+	public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
 		Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
 		request.setUrl(url);
 		Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {

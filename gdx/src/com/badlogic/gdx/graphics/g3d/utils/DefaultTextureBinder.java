@@ -25,7 +25,6 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
 
-
 /** Class that you assign a range of texture units and binds textures for you within that range. It does some basic usage tracking
  * to avoid unnecessary bind calls.
  * @author xoppa */
@@ -153,7 +152,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 		return currentTexture;
 	}
 
-	 private final int bindTextureLRU (final GLTexture texture) {
+	private final int bindTextureLRU (final GLTexture texture) {
 		int i;
 		for (i = 0; i < count; i++) {
 			final int idx = unitsLRU[i];

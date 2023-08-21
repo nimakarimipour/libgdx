@@ -41,20 +41,20 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	protected static final float DEFAULT_TIME_STEP = 1f / 60;
 
 	/** Name of the controller */
-	 public String name;
+	public String name;
 
 	/** Controls the emission of the particles */
-	 public Emitter emitter;
+	public Emitter emitter;
 
 	/** Update the properties of the particles */
 	public Array<Influencer> influencers;
 
 	/** Controls the graphical representation of the particles */
-	 public ParticleControllerRenderer<?, ?> renderer;
+	public ParticleControllerRenderer<?, ?> renderer;
 
 	/** Particles components */
-	 public ParallelArray particles;
-	 public ParticleChannels particleChannels;
+	public ParallelArray particles;
+	public ParticleChannels particleChannels;
 
 	/** Current transform of the controller DO NOT CHANGE MANUALLY */
 	public Matrix4 transform;
@@ -63,7 +63,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 	public Vector3 scale;
 
 	/** Not used by the simulation, it should represent the bounding box containing all the particles */
-	 protected BoundingBox boundingBox;
+	protected BoundingBox boundingBox;
 
 	/** Time step, DO NOT CHANGE MANUALLY */
 	public float deltaTime, deltaTimeSqr;
@@ -288,7 +288,8 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 
 	/** @return the influencer having the given type. */
 
-	@Nullable public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
+	@Nullable
+	public <K extends Influencer> K findInfluencer (Class<K> influencerClass) {
 		int index = findIndex(influencerClass);
 		return index > -1 ? (K)influencers.get(index) : null;
 	}

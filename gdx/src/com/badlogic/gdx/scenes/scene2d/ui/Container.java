@@ -15,12 +15,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** A group with a single child that sizes and positions the child using constraints. This provides layout similar to a
  * {@link Table} with a single cell but is more lightweight.
  * @author Nathan Sweet */
 public class Container<T extends Actor> extends WidgetGroup {
-	 private @Null T actor;
+	private @Null T actor;
 	private Value minWidth = Value.minWidth, minHeight = Value.minHeight;
 	private Value prefWidth = Value.prefWidth, prefHeight = Value.prefHeight;
 	private Value maxWidth = Value.zero, maxHeight = Value.zero;
@@ -102,7 +101,8 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return this;
 	}
 
-	@Nullable public @Null Drawable getBackground () {
+	@Nullable
+	public @Null Drawable getBackground () {
 		return background;
 	}
 
@@ -161,7 +161,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 	}
 
 	/** @param actor May be null. */
-	 public void setActor (@Nullable @Null T actor) {
+	public void setActor (@Nullable @Null T actor) {
 		if (actor == this) throw new IllegalArgumentException("actor cannot be the Container.");
 		if (actor == this.actor) return;
 		if (this.actor != null) super.removeActor(this.actor);
@@ -209,14 +209,14 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return true;
 	}
 
-	 public boolean removeActor (Actor actor, boolean unfocus) {
+	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
 		this.actor = null;
 		return super.removeActor(actor, unfocus);
 	}
 
-	 public Actor removeActorAt (int index, boolean unfocus) {
+	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == this.actor) this.actor = null;
 		return actor;
@@ -740,7 +740,8 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return clip;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;

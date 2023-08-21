@@ -43,7 +43,7 @@ import javax.annotation.Nullable;
  * The preferred size of the button is determined by the background and the button contents.
  * @author Nathan Sweet */
 public class Button extends Table implements Disableable {
-	 private ButtonStyle style;
+	private ButtonStyle style;
 	boolean isChecked, isDisabled;
 	@Nullable ButtonGroup buttonGroup;
 	private ClickListener clickListener;
@@ -179,12 +179,14 @@ public class Button extends Table implements Disableable {
 	}
 
 	/** @return May be null. */
-	@Nullable public @Null ButtonGroup getButtonGroup () {
+	@Nullable
+	public @Null ButtonGroup getButtonGroup () {
 		return buttonGroup;
 	}
 
 	/** Returns appropriate background drawable from the style based on the current button state. */
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		if (isDisabled() && style.disabled != null) return style.disabled;
 		if (isPressed()) {
 			if (isChecked() && style.checkedDown != null) return style.checkedDown;

@@ -19,7 +19,6 @@ package com.badlogic.gdx.utils;
 import java.util.NoSuchElementException;
 import javax.annotation.Nullable;
 
-
 /** A {@link ObjectSet} that also stores keys in an {@link Array} using the insertion order. Null keys are not allowed. No
  * allocation is done except when growing the table size.
  * <p>
@@ -145,7 +144,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		return items;
 	}
 
-	 public OrderedSetIterator<T> iterator () {
+	public OrderedSetIterator<T> iterator () {
 		if (Collections.allocateIterators) return new OrderedSetIterator(this);
 		if (iterator1 == null) {
 			iterator1 = new OrderedSetIterator(this);

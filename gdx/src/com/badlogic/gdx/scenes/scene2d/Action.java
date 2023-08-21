@@ -23,7 +23,6 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
 
-
 /** Actions attach to an {@link Actor} and perform some task, often over time.
  * @author Nathan Sweet */
 abstract public class Action implements Poolable {
@@ -31,7 +30,7 @@ abstract public class Action implements Poolable {
 	@Nullable protected Actor actor;
 
 	/** The actor this action targets, or null if a target has not been set. */
-	 protected Actor target;
+	protected Actor target;
 
 	@Nullable private @Null Pool pool;
 
@@ -56,7 +55,7 @@ abstract public class Action implements Poolable {
 	 * executed for some time, eg it may be {@link DelayAction delayed}. The actor's state is best queried in the first call to
 	 * {@link #act(float)}. For a {@link TemporalAction}, use TemporalAction#begin(). */
 
-	 public void setActor (@Nullable Actor actor) {
+	public void setActor (@Nullable Actor actor) {
 		this.actor = actor;
 		if (target == null) setTarget(actor);
 		if (actor == null) {
@@ -68,7 +67,8 @@ abstract public class Action implements Poolable {
 	}
 
 	/** @return null if the action is not attached to an actor. */
-	@Nullable public Actor getActor () {
+	@Nullable
+	public Actor getActor () {
 		return actor;
 	}
 
@@ -90,14 +90,15 @@ abstract public class Action implements Poolable {
 	 * <p>
 	 * If a subclass has optional state, it must override this method, call super, and reset the optional state. */
 
-	 public void reset () {
+	public void reset () {
 		actor = null;
 		target = null;
 		pool = null;
 		restart();
 	}
 
-	@Nullable public @Null Pool getPool () {
+	@Nullable
+	public @Null Pool getPool () {
 		return pool;
 	}
 

@@ -25,7 +25,6 @@ import com.badlogic.gdx.graphics.g3d.particles.batches.ModelInstanceParticleBatc
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import javax.annotation.Nullable;
 
-
 /** A {@link ParticleControllerRenderer} which will render particles as {@link ModelInstance} to a
  * {@link ModelInstanceParticleBatch}.
  * @author Inferno */
@@ -58,7 +57,7 @@ public class ModelInstanceRenderer
 		hasRotation = renderData.rotationChannel != null;
 	}
 
-	 @Override
+	@Override
 	public void update () {
 		for (int i = 0, positionOffset = 0,
 			c = controller.particles.size; i < c; ++i, positionOffset += renderData.positionChannel.strideSize) {

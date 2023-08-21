@@ -20,7 +20,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
 
-
 /** The base class for all events.
  * <p>
  * By default an event will "bubble" up through an actor's parent's handlers (see {@link #setBubbles(boolean)}).
@@ -79,7 +78,7 @@ public class Event implements Poolable {
 	}
 
 	/** Returns the actor that the event originated from. */
-	 public Actor getTarget () {
+	public Actor getTarget () {
 		return targetActor;
 	}
 
@@ -88,7 +87,7 @@ public class Event implements Poolable {
 	}
 
 	/** Returns the actor that this listener is attached to. */
-	 public Actor getListenerActor () {
+	public Actor getListenerActor () {
 		return listenerActor;
 	}
 
@@ -136,7 +135,7 @@ public class Event implements Poolable {
 	}
 
 	/** The stage for the actor the event was fired on. */
-	 public Stage getStage () {
+	public Stage getStage () {
 		return stage;
 	}
 }

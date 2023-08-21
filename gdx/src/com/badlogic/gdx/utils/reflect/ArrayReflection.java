@@ -15,7 +15,6 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils.reflect;
-import javax.annotation.Nullable;
 
 /** Utilities for Array reflection.
  * @author nexsoftware */

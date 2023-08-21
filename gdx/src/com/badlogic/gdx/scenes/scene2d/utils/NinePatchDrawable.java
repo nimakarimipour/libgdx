@@ -19,7 +19,6 @@ package com.badlogic.gdx.scenes.scene2d.utils;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
-import javax.annotation.Nullable;
 
 /** Drawable for a {@link NinePatch}.
  * <p>
@@ -31,7 +30,7 @@ import javax.annotation.Nullable;
  * middle size, to allow the drawable to be sized down as small as possible.
  * @author Nathan Sweet */
 public class NinePatchDrawable extends BaseDrawable implements TransformDrawable {
-	 private NinePatch patch;
+	private NinePatch patch;
 
 	/** Creates an uninitialized NinePatchDrawable. The ninepatch must be {@link #setPatch(NinePatch) set} before use. */
 	public NinePatchDrawable () {

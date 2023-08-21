@@ -23,7 +23,6 @@ import com.badlogic.gdx.graphics.g3d.particles.values.RangedNumericValue;
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import javax.annotation.Nullable;
 
 /** It's a generic use {@link Emitter} which fits most of the particles simulation scenarios.
  * @author Inferno */
@@ -49,7 +48,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 	private boolean continuous;
 	private EmissionMode emissionMode;
 
-	 private FloatChannel lifeChannel;
+	private FloatChannel lifeChannel;
 
 	public RegularEmitter () {
 		delayValue = new RangedNumericValue();

@@ -154,7 +154,8 @@ public class Image extends Widget {
 	}
 
 	/** @return May be null. */
-	@Nullable public @Null Drawable getDrawable () {
+	@Nullable
+	public @Null Drawable getDrawable () {
 		return drawable;
 	}
 

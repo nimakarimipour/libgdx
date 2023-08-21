@@ -20,18 +20,17 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import javax.annotation.Nullable;
 
-
 /** This class in combination with the {@link GroupPlug GroupPlugs} allows you to build a modular {@link GroupStrategy} out of
  * routines you already implemented. */
 public abstract class PluggableGroupStrategy implements GroupStrategy {
 	private IntMap<GroupPlug> plugs = new IntMap<GroupPlug>();
 
-	 @Override
+	@Override
 	public void beforeGroup (int group, Array<Decal> contents) {
 		plugs.get(group).beforeGroup(contents);
 	}
 
-	 @Override
+	@Override
 	public void afterGroup (int group) {
 		plugs.get(group).afterGroup();
 	}
@@ -46,7 +45,8 @@ public abstract class PluggableGroupStrategy implements GroupStrategy {
 	/** Remove a plug from the strategy
 	 * @param group Group to remove the plug from
 	 * @return removed plug, null if there was none for that group */
-	@Nullable public GroupPlug unPlug (int group) {
+	@Nullable
+	public GroupPlug unPlug (int group) {
 		return plugs.remove(group);
 	}
 }

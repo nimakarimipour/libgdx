@@ -35,7 +35,7 @@ public class ActorGestureListener implements EventListener {
 
 	private final GestureDetector detector;
 	@Nullable InputEvent event;
-	 Actor actor, touchDownTarget;
+	Actor actor, touchDownTarget;
 
 	/** @see GestureDetector#GestureDetector(com.badlogic.gdx.input.GestureDetector.GestureListener) */
 	public ActorGestureListener () {
@@ -164,7 +164,8 @@ public class ActorGestureListener implements EventListener {
 	public void zoom (@Nullable InputEvent event, float initialDistance, float distance) {
 	}
 
-	public void pinch (@Nullable InputEvent event, Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+	public void pinch (@Nullable InputEvent event, Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1,
+		Vector2 pointer2) {
 	}
 
 	public GestureDetector getGestureDetector () {

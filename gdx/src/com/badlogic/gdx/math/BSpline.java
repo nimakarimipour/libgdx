@@ -17,7 +17,6 @@
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Array;
-import javax.annotation.Nullable;
 
 /** @author Xoppa */
 public class BSpline<T extends Vector<T>> implements Path<T> {
@@ -167,14 +166,14 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 		throw new IllegalArgumentException();
 	}
 
-	 public T[] controlPoints;
-	 public Array<T> knots;
+	public T[] controlPoints;
+	public Array<T> knots;
 	public int degree;
 	public boolean continuous;
 	public int spanCount;
-	 private T tmp;
-	 private T tmp2;
-	 private T tmp3;
+	private T tmp;
+	private T tmp2;
+	private T tmp3;
 
 	public BSpline () {
 	}

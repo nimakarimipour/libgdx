@@ -24,7 +24,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import javax.annotation.Nullable;
 
-
 /** A MeshPart is composed of a subset of vertices of a {@link Mesh}, along with the primitive type. The vertices subset is
  * described by an offset and size. When the mesh is indexed (which is when {@link Mesh#getNumIndices()} > 0), then the
  * {@link #offset} represents the offset in the indices array and {@link #size} represents the number of indices. When the mesh
@@ -58,7 +57,7 @@ public class MeshPart {
 	 * {@link Mesh#getNumIndices()} > 0), this is the number of indices, otherwise it is the number of vertices. **/
 	public int size;
 	/** The Mesh the part references, also stored in {@link Model} **/
-	 public Mesh mesh;
+	public Mesh mesh;
 	/** The offset to the center of the bounding box of the shape, only valid after the call to {@link #update()}. **/
 	public final Vector3 center = new Vector3();
 	/** The location, relative to {@link #center}, of the corner of the axis aligned bounding box of the shape. Or, in other words:
@@ -108,7 +107,7 @@ public class MeshPart {
 
 	/** Set this MeshPart to given values, does not {@link #update()} the bounding box values.
 	 * @return this MeshPart, for chaining. */
-	 public MeshPart set (final String id, @Nullable final Mesh mesh, final int offset, final int size, final int type) {
+	public MeshPart set (final String id, @Nullable final Mesh mesh, final int offset, final int size, final int type) {
 		this.id = id;
 		this.mesh = mesh;
 		this.offset = offset;

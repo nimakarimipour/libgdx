@@ -32,7 +32,6 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-import javax.annotation.Nullable;
 
 /** Class for encoding and decoding ETC1 compressed images. Also provides methods to add a PKM header.
  * @author mzechner */

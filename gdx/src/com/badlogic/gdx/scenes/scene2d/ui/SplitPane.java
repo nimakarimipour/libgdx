@@ -31,7 +31,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
 
-
 /** A container that contains two widgets and is divided either horizontally or vertically. The user may resize the widgets. The
  * child widgets are always sized to fill their side of the SplitPane.
  * <p>
@@ -46,7 +45,7 @@ import javax.annotation.Nullable;
  * @author mzechner
  * @author Nathan Sweet */
 public class SplitPane extends WidgetGroup {
-	 SplitPaneStyle style;
+	SplitPaneStyle style;
 	@Nullable private @Null Actor firstWidget, secondWidget;
 	boolean vertical;
 	float splitAmount = 0.5f, minAmount, maxAmount = 1;
@@ -409,9 +408,9 @@ public class SplitPane extends WidgetGroup {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class SplitPaneStyle {
-		 public Drawable handle;
+		public Drawable handle;
 
-		 public SplitPaneStyle () {
+		public SplitPaneStyle () {
 		}
 
 		public SplitPaneStyle (Drawable handle) {

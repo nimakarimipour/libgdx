@@ -34,9 +34,9 @@ import javax.annotation.Nullable;
  * @author mrdlink */
 public class InstanceBufferObject implements InstanceData {
 
-	 private VertexAttributes attributes;
-	 private FloatBuffer buffer;
-	 private ByteBuffer byteBuffer;
+	private VertexAttributes attributes;
+	private FloatBuffer buffer;
+	private ByteBuffer byteBuffer;
 	private boolean ownsBuffer;
 	private int bufferHandle;
 	private int usage;

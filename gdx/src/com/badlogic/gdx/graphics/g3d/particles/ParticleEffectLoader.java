@@ -32,7 +32,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import javax.annotation.Nullable;
 
-
 /** This class can save and load a {@link ParticleEffect}. It should be added as {@link AsynchronousAssetLoader} to the
  * {@link AssetManager} so it will be able to load the effects. It's important to note that the two classes
  * {@link ParticleEffectLoadParameter} and {@link ParticleEffectSaveParameter} should be passed in whenever possible, because when
@@ -49,11 +48,13 @@ public class ParticleEffectLoader
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, String fileName, FileHandle file, @Nullable ParticleEffectLoadParameter parameter) {
+	public void loadAsync (AssetManager manager, String fileName, FileHandle file,
+		@Nullable ParticleEffectLoadParameter parameter) {
 	}
 
 	@Override
-	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, @Nullable ParticleEffectLoadParameter parameter) {
+	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file,
+		@Nullable ParticleEffectLoadParameter parameter) {
 		Json json = new Json();
 		ResourceData<ParticleEffect> data = json.fromJson(ResourceData.class, file);
 		Array<AssetData> assets = null;
@@ -110,7 +111,7 @@ public class ParticleEffectLoader
 		json.toJson(data, parameter.file);
 	}
 
-	 @Override
+	@Override
 	public ParticleEffect loadSync (AssetManager manager, String fileName, FileHandle file,
 		@Nullable ParticleEffectLoadParameter parameter) {
 		ResourceData<ParticleEffect> effectData = null;
@@ -137,7 +138,8 @@ public class ParticleEffectLoader
 		return effectData.resource;
 	}
 
-	@Nullable private <T> T find (Array<?> array, Class<T> type) {
+	@Nullable
+	private <T> T find (Array<?> array, Class<T> type) {
 		for (Object object : array) {
 			if (ClassReflection.isAssignableFrom(type, object.getClass())) return (T)object;
 		}

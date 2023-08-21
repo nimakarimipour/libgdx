@@ -78,7 +78,8 @@ public interface TextureData {
 	public int getHeight ();
 
 	/** @return the {@link Format} of the pixel data */
-	@Nullable public Format getFormat ();
+	@Nullable
+	public Format getFormat ();
 
 	/** @return whether to generate mipmaps or not. */
 	public boolean useMipMaps ();
@@ -90,11 +91,13 @@ public interface TextureData {
 	 * @author Vincent Bousquet */
 	public static class Factory {
 
-		@Nullable public static TextureData loadFromFile (FileHandle file, boolean useMipMaps) {
+		@Nullable
+		public static TextureData loadFromFile (FileHandle file, boolean useMipMaps) {
 			return loadFromFile(file, null, useMipMaps);
 		}
 
-		@Nullable public static TextureData loadFromFile (FileHandle file, @Nullable Format format, boolean useMipMaps) {
+		@Nullable
+		public static TextureData loadFromFile (FileHandle file, @Nullable Format format, boolean useMipMaps) {
 			if (file == null) return null;
 			if (file.name().endsWith(".cim")) return new FileTextureData(file, PixmapIO.readCIM(file), format, useMipMaps);
 			if (file.name().endsWith(".etc1")) return new ETC1TextureData(file, useMipMaps);

@@ -28,7 +28,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
 
-
 /** It's the base class for any kind of influencer which operates on angular velocity and acceleration of the particles. All the
  * classes that will inherit this base class can and should be used only as sub-influencer of an instance of
  * {@link DynamicsInfluencer} .
@@ -53,7 +52,7 @@ public abstract class DynamicsModifier extends Influencer {
 			accellerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 		}
 
-		 @Override
+		@Override
 		public void update () {
 			for (int i = 0, accelOffset = 0, c = i + controller.particles.size
 				* rotationChannel.strideSize; i < c; i += rotationChannel.strideSize, accelOffset += accellerationChannel.strideSize) {
@@ -77,14 +76,14 @@ public abstract class DynamicsModifier extends Influencer {
 	}
 
 	public static abstract class Strength extends DynamicsModifier {
-		 protected FloatChannel strengthChannel;
+		protected FloatChannel strengthChannel;
 		public ScaledNumericValue strengthValue;
 
-		 public Strength () {
+		public Strength () {
 			strengthValue = new ScaledNumericValue();
 		}
 
-		 public Strength (Strength rotation) {
+		public Strength (Strength rotation) {
 			super(rotation);
 			strengthValue = new ScaledNumericValue();
 			strengthValue.load(rotation.strengthValue);
@@ -124,18 +123,18 @@ public abstract class DynamicsModifier extends Influencer {
 	}
 
 	public static abstract class Angular extends Strength {
-		 protected FloatChannel angularChannel;
+		protected FloatChannel angularChannel;
 		/** Polar angle, XZ plane */
 		public ScaledNumericValue thetaValue;
 		/** Azimuth, Y */
 		public ScaledNumericValue phiValue;
 
-		 public Angular () {
+		public Angular () {
 			thetaValue = new ScaledNumericValue();
 			phiValue = new ScaledNumericValue();
 		}
 
-		 public Angular (Angular value) {
+		public Angular (Angular value) {
 			super(value);
 			thetaValue = new ScaledNumericValue();
 			phiValue = new ScaledNumericValue();
@@ -204,7 +203,7 @@ public abstract class DynamicsModifier extends Influencer {
 			rotationalVelocity2dChannel = controller.particles.addChannel(ParticleChannels.AngularVelocity2D);
 		}
 
-		 @Override
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, c = i + controller.particles.size
 				* rotationalVelocity2dChannel.strideSize; i < c; s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize, l += lifeChannel.strideSize) {
@@ -237,7 +236,7 @@ public abstract class DynamicsModifier extends Influencer {
 			rotationalForceChannel = controller.particles.addChannel(ParticleChannels.AngularVelocity3D);
 		}
 
-		 @Override
+		@Override
 		public void update () {
 
 			// Matrix3 I_t = defined by the shape, it's the inertia tensor
@@ -295,13 +294,13 @@ public abstract class DynamicsModifier extends Influencer {
 	}
 
 	public static class CentripetalAcceleration extends Strength {
-		 FloatChannel accelerationChannel;
-		 FloatChannel positionChannel;
+		FloatChannel accelerationChannel;
+		FloatChannel positionChannel;
 
-		 public CentripetalAcceleration () {
+		public CentripetalAcceleration () {
 		}
 
-		 public CentripetalAcceleration (CentripetalAcceleration rotation) {
+		public CentripetalAcceleration (CentripetalAcceleration rotation) {
 			super(rotation);
 		}
 
@@ -360,7 +359,7 @@ public abstract class DynamicsModifier extends Influencer {
 			directionalVelocityChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 		}
 
-		 @Override
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, a = 0, c = i + controller.particles.size
 				* directionalVelocityChannel.strideSize; i < c; s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize, a += angularChannel.strideSize, l += lifeChannel.strideSize) {
@@ -411,7 +410,7 @@ public abstract class DynamicsModifier extends Influencer {
 			positionChannel = controller.particles.addChannel(ParticleChannels.Position);
 		}
 
-		 @Override
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, s = 0, a = 0, positionOffset = 0,
 				c = i + controller.particles.size
@@ -466,7 +465,7 @@ public abstract class DynamicsModifier extends Influencer {
 			accelerationChannel = controller.particles.addChannel(ParticleChannels.Acceleration);
 		}
 
-		 @Override
+		@Override
 		public void update () {
 			int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
 			for (int i = 0,
@@ -489,7 +488,7 @@ public abstract class DynamicsModifier extends Influencer {
 	}
 
 	public boolean isGlobal = false;
-	 protected FloatChannel lifeChannel;
+	protected FloatChannel lifeChannel;
 
 	public DynamicsModifier () {
 	}

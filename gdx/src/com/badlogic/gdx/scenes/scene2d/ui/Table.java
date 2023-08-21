@@ -36,7 +36,6 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
 
-
 /** A group that sizes and positions children using table constraints.
  * <p>
  * Children added with {@link #add(Actor...)} (and similar methods returning a {@link Cell}) are laid out in rows and columns.
@@ -68,20 +67,21 @@ public class Table extends WidgetGroup {
 	@Nullable private Cell rowDefaults;
 
 	private boolean sizeInvalid = true;
-	 private float[] columnMinWidth, rowMinHeight;
-	 private float[] columnPrefWidth, rowPrefHeight;
+	private float[] columnMinWidth, rowMinHeight;
+	private float[] columnPrefWidth, rowPrefHeight;
 	private float tableMinWidth, tableMinHeight;
 	private float tablePrefWidth, tablePrefHeight;
-	 private float[] columnWidth, rowHeight;
-	 private float[] expandWidth, expandHeight;
+	private float[] columnWidth, rowHeight;
+	private float[] expandWidth, expandHeight;
 
 	Value padTop = backgroundTop, padLeft = backgroundLeft, padBottom = backgroundBottom, padRight = backgroundRight;
 	int align = Align.center;
 
 	Debug debug = Debug.none;
-	 Array<DebugRect> debugRects;
+	Array<DebugRect> debugRects;
 
-	@Nullable @Null Drawable background;
+	@Nullable
+	@Null Drawable background;
 	private boolean clip;
 	@Nullable private @Null Skin skin;
 	boolean round = true;
@@ -170,11 +170,13 @@ public class Table extends WidgetGroup {
 		return this;
 	}
 
-	@Nullable public @Null Drawable getBackground () {
+	@Nullable
+	public @Null Drawable getBackground () {
 		return background;
 	}
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
@@ -371,7 +373,8 @@ public class Table extends WidgetGroup {
 
 	/** Indicates that subsequent cells should be added to a new row and returns the cell values that will be used as the defaults
 	 * for all cells in the new row. */
-	@Nullable public Cell row () {
+	@Nullable
+	public Cell row () {
 		if (cells.size > 0) {
 			if (!implicitEndRow) {
 				if (cells.peek().endRow) return rowDefaults; // Row was already ended.
@@ -419,7 +422,7 @@ public class Table extends WidgetGroup {
 
 	/** Returns the cell for the specified actor in this table, or null. */
 
-	 public @Null <T extends Actor> Cell<T> getCell (T actor) {
+	public @Null <T extends Actor> Cell<T> getCell (T actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		Object[] cells = this.cells.items;
 		for (int i = 0, n = this.cells.size; i < n; i++) {
@@ -784,7 +787,7 @@ public class Table extends WidgetGroup {
 		return array;
 	}
 
-	 private void computeSize () {
+	private void computeSize () {
 		sizeInvalid = false;
 
 		Object[] cells = this.cells.items;
@@ -955,7 +958,7 @@ public class Table extends WidgetGroup {
 
 	/** Positions and sizes children of the table using the cell associated with each child. The values given are the position
 	 * within the parent and size of the table. */
-	 public void layout () {
+	public void layout () {
 		if (sizeInvalid) computeSize();
 
 		float layoutWidth = getWidth(), layoutHeight = getHeight();
@@ -1270,7 +1273,8 @@ public class Table extends WidgetGroup {
 	}
 
 	/** @return The skin that was passed to this table in its constructor, or null if none was given. */
-	@Nullable public @Null Skin getSkin () {
+	@Nullable
+	public @Null Skin getSkin () {
 		return skin;
 	}
 

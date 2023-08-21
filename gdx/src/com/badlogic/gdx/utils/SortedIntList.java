@@ -15,8 +15,8 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
-import javax.annotation.Nullable;
 
+import javax.annotation.Nullable;
 
 /** A sorted double linked list which uses ints for indexing
  * 
@@ -38,7 +38,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * @param value Element to insert
 	 * @return Element replaced by newly inserted element, null if nothing was replaced */
 
-	@Nullable public @Null E insert (int index, E value) {
+	@Nullable
+	public @Null E insert (int index, E value) {
 		if (first != null) {
 			Node<E> c = first;
 			// iterate to the right until we can't move any further because the next number is bigger than index
@@ -76,7 +77,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 	 * @param index Index of the element to retrieve
 	 * @return Matching element, null otherwise */
 
-	@Nullable public E get (int index) {
+	@Nullable
+	public E get (int index) {
 		E match = null;
 		if (first != null) {
 			Node<E> c = first;
@@ -136,14 +138,15 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 			return position != null;
 		}
 
-		 @Nullable @Override
+		@Nullable
+		@Override
 		public Node<E> next () {
 			previousPosition = position;
 			position = position.n;
 			return previousPosition;
 		}
 
-		 @Override
+		@Override
 		public void remove () {
 			// the contract specifies to remove the last returned element, if nothing was returned yet assumably do nothing
 			if (previousPosition != null) {
@@ -175,7 +178,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 		/** Node next to this */
 		@Nullable protected Node<E> n;
 		/** Value held */
-		 public E value;
+		public E value;
 		/** Index value in list */
 		public int index;
 	}

@@ -25,7 +25,7 @@ public class ModelMaterial {
 		Lambert, Phong
 	}
 
-	 public String id;
+	public String id;
 
 	@Nullable public MaterialType type;
 

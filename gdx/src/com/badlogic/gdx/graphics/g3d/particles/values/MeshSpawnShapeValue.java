@@ -28,7 +28,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
 
-
 /** The base class of all the {@link ParticleValue} values which spawn a particle on a mesh shape.
  * @author Inferno */
 public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
@@ -72,7 +71,7 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 	public MeshSpawnShapeValue () {
 	}
 
-	 @Override
+	@Override
 	public void load (ParticleValue value) {
 		super.load(value);
 		MeshSpawnShapeValue spawnShapeValue = (MeshSpawnShapeValue)value;

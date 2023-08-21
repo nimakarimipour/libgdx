@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 public class CheckBox extends TextButton {
 	private Image image;
 	private Cell imageCell;
-	 private CheckBoxStyle style;
+	private CheckBoxStyle style;
 
 	public CheckBox (@Null String text, Skin skin) {
 		this(text, skin.get(CheckBoxStyle.class));
@@ -76,7 +76,8 @@ public class CheckBox extends TextButton {
 		super.draw(batch, parentAlpha);
 	}
 
-	@Nullable protected @Null Drawable getImageDrawable () {
+	@Nullable
+	protected @Null Drawable getImageDrawable () {
 		if (isDisabled()) {
 			if (isChecked && style.checkboxOnDisabled != null) return style.checkboxOnDisabled;
 			return style.checkboxOffDisabled;

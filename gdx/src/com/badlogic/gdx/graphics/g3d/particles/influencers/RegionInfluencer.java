@@ -29,7 +29,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
 
-
 /** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
  * @author Inferno */
 public abstract class RegionInfluencer extends Influencer {
@@ -134,7 +133,7 @@ public abstract class RegionInfluencer extends Influencer {
 			lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 		}
 
-		 @Override
+		@Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, c = controller.particles.size
 				* regionChannel.strideSize; i < c; i += regionChannel.strideSize, l += lifeChannel.strideSize) {
@@ -206,7 +205,7 @@ public abstract class RegionInfluencer extends Influencer {
 	}
 
 	public Array<AspectTextureRegion> regions;
-	 FloatChannel regionChannel;
+	FloatChannel regionChannel;
 	@Nullable public String atlasName;
 
 	public RegionInfluencer (int regionsCount) {

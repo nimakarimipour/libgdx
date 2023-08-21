@@ -45,7 +45,6 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
 
-
 /** A select box (aka a drop-down list) allows a user to choose one of a number of values from a list. When inactive, the selected
  * value is displayed. When activated, it shows the list of values that may be selected.
  * <p>
@@ -58,7 +57,7 @@ import javax.annotation.Nullable;
 public class SelectBox<T> extends Widget implements Disableable {
 	static final Vector2 temp = new Vector2();
 
-	 SelectBoxStyle style;
+	SelectBoxStyle style;
 	final Array<T> items = new Array();
 	SelectBoxScrollPane<T> scrollPane;
 	private float prefWidth, prefHeight;
@@ -230,7 +229,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 	}
 
 	/** Returns appropriate background drawable from the style based on the current select box state. */
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		if (isDisabled() && style.backgroundDisabled != null) return style.backgroundDisabled;
 		if (scrollPane.hasParent() && style.backgroundOpen != null) return style.backgroundOpen;
 		if (isOver() && style.backgroundOver != null) return style.backgroundOver;
@@ -292,7 +292,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 	}
 
 	/** Returns the first selected item, or null. For multiple selections use {@link SelectBox#getSelection()}. */
-	@Nullable public @Null T getSelected () {
+	@Nullable
+	public @Null T getSelected () {
 		return selection.first();
 	}
 
@@ -476,7 +477,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 					return false;
 				}
 
-				 public boolean keyDown (@Nullable InputEvent event, int keycode) {
+				public boolean keyDown (@Nullable InputEvent event, int keycode) {
 					switch (keycode) {
 					case Keys.NUMPAD_ENTER:
 					case Keys.ENTER:
@@ -605,15 +606,15 @@ public class SelectBox<T> extends Widget implements Disableable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class SelectBoxStyle {
-		 public BitmapFont font;
+		public BitmapFont font;
 		public Color fontColor = new Color(1, 1, 1, 1);
 		@Nullable public @Null Color overFontColor, disabledFontColor;
 		@Nullable public @Null Drawable background;
-		 public ScrollPaneStyle scrollStyle;
-		 public ListStyle listStyle;
+		public ScrollPaneStyle scrollStyle;
+		public ListStyle listStyle;
 		@Nullable public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
-		 public SelectBoxStyle () {
+		public SelectBoxStyle () {
 		}
 
 		public SelectBoxStyle (BitmapFont font, Color fontColor, @Null Drawable background, ScrollPaneStyle scrollStyle,

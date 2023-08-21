@@ -30,7 +30,6 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
 
-
 /** A slider is a horizontal indicator that allows a user to set a value. The slider has a range (min, max) and a stepping between
  * each value the slider represents.
  * <p>
@@ -114,7 +113,7 @@ public class Slider extends ProgressBar {
 		return mouseOver;
 	}
 
-	 protected @Null Drawable getBackgroundDrawable () {
+	protected @Null Drawable getBackgroundDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		if (isDragging() && style.backgroundDown != null) return style.backgroundDown;
@@ -122,7 +121,8 @@ public class Slider extends ProgressBar {
 		return style.background;
 	}
 
-	@Nullable protected @Null Drawable getKnobDrawable () {
+	@Nullable
+	protected @Null Drawable getKnobDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		if (isDragging() && style.knobDown != null) return style.knobDown;
@@ -130,7 +130,8 @@ public class Slider extends ProgressBar {
 		return style.knob;
 	}
 
-	@Nullable protected Drawable getKnobBeforeDrawable () {
+	@Nullable
+	protected Drawable getKnobBeforeDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		if (isDragging() && style.knobBeforeDown != null) return style.knobBeforeDown;
@@ -138,7 +139,8 @@ public class Slider extends ProgressBar {
 		return style.knobBefore;
 	}
 
-	@Nullable protected Drawable getKnobAfterDrawable () {
+	@Nullable
+	protected Drawable getKnobAfterDrawable () {
 		SliderStyle style = (SliderStyle)super.getStyle();
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		if (isDragging() && style.knobAfterDown != null) return style.knobAfterDown;

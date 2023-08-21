@@ -24,7 +24,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 import javax.annotation.Nullable;
 
-
 /** A KTXTextureData holds the data from a KTX (or zipped KTX file, aka ZKTX). That is to say an OpenGL ready texture data. The
  * KTX file format is just a thin wrapper around OpenGL textures and therefore is compatible with most OpenGL texture capabilities
  * like texture compression, cubemapping, mipmapping, etc.
@@ -321,7 +320,8 @@ public class KTXTextureData implements TextureData, CubemapData {
 		return glInternalFormat;
 	}
 
-	 @Nullable public ByteBuffer getData (int requestedLevel, int requestedFace) {
+	@Nullable
+	public ByteBuffer getData (int requestedLevel, int requestedFace) {
 		int pos = imagePos;
 		for (int level = 0; level < numberOfMipmapLevels; level++) {
 			int faceLodSize = compressedData.getInt(pos);

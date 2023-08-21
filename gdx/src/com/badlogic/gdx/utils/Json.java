@@ -41,14 +41,13 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
 
-
 /** Reads/writes Java objects to/from JSON, automatically. See the wiki for usage:
  * https://libgdx.com/wiki/utils/reading-and-writing-json
  * @author Nathan Sweet */
 public class Json {
 	static private final boolean debug = false;
 
-	 private JsonWriter writer;
+	private JsonWriter writer;
 	@Nullable private String typeName = "class";
 	private boolean usePrototypes = true;
 	private OutputType outputType;
@@ -279,7 +278,7 @@ public class Json {
 	/** @param knownType May be null if the type is unknown.
 	 * @param elementType May be null if the type is unknown. */
 
-	 public void toJson (@Null Object object, @Nullable @Null Class knownType, @Nullable @Null Class elementType, Writer writer) {
+	public void toJson (@Null Object object, @Nullable @Null Class knownType, @Nullable @Null Class elementType, Writer writer) {
 		setWriter(writer);
 		try {
 			writeValue(object, knownType, elementType);
@@ -345,7 +344,8 @@ public class Json {
 		}
 	}
 
-	@Nullable private @Null Object[] getDefaultValues (Class type) {
+	@Nullable
+	private @Null Object[] getDefaultValues (Class type) {
 		if (!usePrototypes) return null;
 		if (classToDefaultValues.containsKey(type)) return classToDefaultValues.get(type);
 		Object object;
@@ -871,7 +871,8 @@ public class Json {
 	}
 
 	/** @param elementType May be null if the type is unknown. */
-	public void readField (Object object, String fieldName, String jsonName, @Nullable @Null Class elementType, JsonValue jsonMap) {
+	public void readField (Object object, String fieldName, String jsonName, @Nullable @Null Class elementType,
+		JsonValue jsonMap) {
 		Class type = object.getClass();
 		FieldMetadata metadata = getFields(type).get(fieldName);
 		if (metadata == null) throw new SerializationException("Field not found: " + fieldName + " (" + type.getName() + ")");
@@ -882,7 +883,8 @@ public class Json {
 
 	/** @param object May be null if the field is static.
 	 * @param elementType May be null if the type is unknown. */
-	public void readField (@Null Object object, Field field, String jsonName, @Nullable @Null Class elementType, JsonValue jsonMap) {
+	public void readField (@Null Object object, Field field, String jsonName, @Nullable @Null Class elementType,
+		JsonValue jsonMap) {
 		JsonValue jsonValue = jsonMap.get(jsonName);
 		if (jsonValue == null) return;
 		try {
@@ -957,7 +959,7 @@ public class Json {
 	/** @param type May be null if the type is unknown.
 	 * @return May be null. */
 
-	 public @Null <T> T readValue (String name, @Null Class<T> type, @Nullable T defaultValue, JsonValue jsonMap) {
+	public @Null <T> T readValue (String name, @Null Class<T> type, @Nullable T defaultValue, JsonValue jsonMap) {
 		JsonValue jsonValue = jsonMap.get(name);
 		if (jsonValue == null) return defaultValue;
 		return readValue(type, null, jsonValue);
@@ -997,7 +999,7 @@ public class Json {
 	 * @param elementType May be null if the type is unknown.
 	 * @return May be null. */
 
-	 public @Null <T> T readValue (@Nullable @Null Class<T> type, @Nullable @Null Class elementType, @Nullable JsonValue jsonData) {
+	public @Null <T> T readValue (@Nullable @Null Class<T> type, @Nullable @Null Class elementType, @Nullable JsonValue jsonData) {
 		if (jsonData == null) return null;
 
 		if (jsonData.isObject()) {

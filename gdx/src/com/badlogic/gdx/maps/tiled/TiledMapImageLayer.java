@@ -33,7 +33,8 @@ public class TiledMapImageLayer extends MapLayer {
 		this.y = y;
 	}
 
-	@Nullable public TextureRegion getTextureRegion () {
+	@Nullable
+	public TextureRegion getTextureRegion () {
 		return region;
 	}
 

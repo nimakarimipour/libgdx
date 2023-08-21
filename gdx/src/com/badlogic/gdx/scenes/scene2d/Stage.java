@@ -49,7 +49,6 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import javax.annotation.Nullable;
 
-
 /** A 2D scene graph containing hierarchies of {@link Actor actors}. Stage handles the viewport and distributes input events.
  * <p>
  * {@link #setViewport(Viewport)} controls the coordinates used within the stage and sets up the camera used to convert between
@@ -213,7 +212,8 @@ public class Stage extends InputAdapter implements Disposable {
 		root.act(delta);
 	}
 
-	@Nullable private @Null Actor fireEnterAndExit (@Nullable @Null Actor overLast, int screenX, int screenY, int pointer) {
+	@Nullable
+	private @Null Actor fireEnterAndExit (@Nullable @Null Actor overLast, int screenX, int screenY, int pointer) {
 		// Find the actor under the point.
 		screenToStageCoordinates(tempCoords.set(screenX, screenY));
 		Actor over = hit(tempCoords.x, tempCoords.y, true);
@@ -666,7 +666,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Gets the actor that will receive key events.
 	 * @return May be null. */
-	@Nullable public @Null Actor getKeyboardFocus () {
+	@Nullable
+	public @Null Actor getKeyboardFocus () {
 		return keyboardFocus;
 	}
 
@@ -701,7 +702,8 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Gets the actor that will receive scroll events.
 	 * @return May be null. */
-	@Nullable public @Null Actor getScrollFocus () {
+	@Nullable
+	public @Null Actor getScrollFocus () {
 		return scrollFocus;
 	}
 
@@ -752,7 +754,8 @@ public class Stage extends InputAdapter implements Disposable {
 	 * {@link #screenToStageCoordinates(Vector2)}.
 	 * @param touchable If true, the hit detection will respect the {@link Actor#setTouchable(Touchable) touchability}.
 	 * @return May be null if no actor was hit. */
-	@Nullable public @Null Actor hit (float stageX, float stageY, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float stageX, float stageY, boolean touchable) {
 		root.parentToLocalCoordinates(tempCoords.set(stageX, stageY));
 		return root.hit(tempCoords.x, tempCoords.y, touchable);
 	}
@@ -885,11 +888,11 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Internal class for managing touch focus. Public only for GWT.
 	 * @author Nathan Sweet */
 	public static final class TouchFocus implements Poolable {
-		 EventListener listener;
+		EventListener listener;
 		@Nullable Actor listenerActor, target;
 		int pointer, button;
 
-		 public void reset () {
+		public void reset () {
 			listenerActor = null;
 			listener = null;
 			target = null;

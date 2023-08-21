@@ -24,7 +24,6 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
 
-
 public class FileTextureData implements TextureData {
 
 	final FileHandle file;
@@ -67,7 +66,8 @@ public class FileTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	 @Nullable @Override
+	@Nullable
+	@Override
 	public Pixmap consumePixmap () {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling getPixmap()");
 		isPrepared = false;
@@ -91,7 +91,8 @@ public class FileTextureData implements TextureData {
 		return height;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Format getFormat () {
 		return format;
 	}

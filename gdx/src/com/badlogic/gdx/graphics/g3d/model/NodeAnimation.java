@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
  * @author badlogic, Xoppa */
 public class NodeAnimation {
 	/** the Node affected by this animation **/
-	 public Node node;
+	public Node node;
 	/** the translation keyframes if any (might be null), sorted by time ascending **/
 	@Nullable public Array<NodeKeyframe<Vector3>> translation = null;
 	/** the rotation keyframes if any (might be null), sorted by time ascending **/
