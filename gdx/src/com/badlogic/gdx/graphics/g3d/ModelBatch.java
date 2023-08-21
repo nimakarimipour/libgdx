@@ -214,7 +214,8 @@ public class ModelBatch implements Disposable {
 			if (currentShader != renderable.shader) {
 				if (currentShader != null) currentShader.end();
 				currentShader = renderable.shader;
-				currentShader.begin(camera, context);
+				if(currentShader != null)
+					currentShader.begin(camera, context);
 			}
 			currentShader.render(renderable);
 		}
