@@ -335,8 +335,8 @@ public class PolygonSpriteBatch implements PolygonBatch {
 	}
 
 	@Override
-	public void draw (@Nullable Texture texture, @Nullable float[] polygonVertices, int verticesOffset, int verticesCount, short[] polygonTriangles,
-		int trianglesOffset, int trianglesCount) {
+	public void draw (@Nullable Texture texture, @Nullable float[] polygonVertices, int verticesOffset, int verticesCount,
+		short[] polygonTriangles, int trianglesOffset, int trianglesCount) {
 		if (!drawing) throw new IllegalStateException("PolygonSpriteBatch.begin must be called before draw.");
 
 		final short[] triangles = this.triangles;

@@ -28,7 +28,8 @@ public class GradientColorValue extends ParticleValue {
 	@Nullable private float[] colors = {1, 1, 1};
 	@Nullable public float[] timeline = {0};
 
-	@Nullable public float[] getTimeline () {
+	@Nullable
+	public float[] getTimeline () {
 		return timeline;
 	}
 
@@ -36,7 +37,8 @@ public class GradientColorValue extends ParticleValue {
 		this.timeline = timeline;
 	}
 
-	@Nullable public float[] getColors () {
+	@Nullable
+	public float[] getColors () {
 		return colors;
 	}
 

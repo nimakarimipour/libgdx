@@ -137,7 +137,8 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
 	/** Returns the old value associated with the specified key, or null. */
 
-	@Nullable public @Null V put (@Nullable K key, @Nullable @Null V value) {
+	@Nullable
+	public @Null V put (@Nullable K key, @Nullable @Null V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];
@@ -176,20 +177,23 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
 	/** Returns the value for the specified key, or null if the key is not in the map. */
 
-	@Nullable public @Null <T extends K> V get (@Nullable T key) {
+	@Nullable
+	public @Null <T extends K> V get (@Nullable T key) {
 		int i = locateKey(key);
 		return i < 0 ? null : valueTable[i];
 	}
 
 	/** Returns the value for the specified key, or the default value if the key is not in the map. */
-	@Nullable public V get (K key, @Nullable @Null V defaultValue) {
+	@Nullable
+	public V get (K key, @Nullable @Null V defaultValue) {
 		int i = locateKey(key);
 		return i < 0 ? defaultValue : valueTable[i];
 	}
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
 
-	@Nullable public @Null V remove (@Nullable K key) {
+	@Nullable
+	public @Null V remove (@Nullable K key) {
 		int i = locateKey(key);
 		if (i < 0) return null;
 		K[] keyTable = this.keyTable;
@@ -277,7 +281,8 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	 * @param identity If true, uses == to compare the specified value with values in the map. If false, uses
 	 *           {@link #equals(Object)}. */
 
-	@Nullable public @Null K findKey (@Null Object value, boolean identity) {
+	@Nullable
+	public @Null K findKey (@Null Object value, boolean identity) {
 		V[] valueTable = this.valueTable;
 		if (value == null) {
 			K[] keyTable = this.keyTable;
@@ -579,7 +584,8 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			return hasNext;
 		}
 
-		@Nullable public @Null V next () {
+		@Nullable
+		public @Null V next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			V value = map.valueTable[nextIndex];

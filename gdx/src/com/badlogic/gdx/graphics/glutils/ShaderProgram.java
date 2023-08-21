@@ -896,12 +896,14 @@ public class ShaderProgram implements Disposable {
 	}
 
 	/** @return the attributes */
-	@Nullable public String[] getAttributes () {
+	@Nullable
+	public String[] getAttributes () {
 		return attributeNames;
 	}
 
 	/** @return the uniforms */
-	@Nullable public String[] getUniforms () {
+	@Nullable
+	public String[] getUniforms () {
 		return uniformNames;
 	}
 

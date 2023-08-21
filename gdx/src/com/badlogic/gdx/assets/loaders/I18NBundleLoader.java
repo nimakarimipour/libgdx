@@ -52,7 +52,8 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 	@Nullable I18NBundle bundle;
 
 	@Override
-	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
+	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file,
+		@Nullable I18NBundleParameter parameter) {
 		this.bundle = null;
 		Locale locale;
 		String encoding;
@@ -70,15 +71,19 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 		}
 	}
 
-	@Nullable @Override
-	public I18NBundle loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
+	@Nullable
+	@Override
+	public I18NBundle loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
+		@Nullable I18NBundleParameter parameter) {
 		I18NBundle bundle = this.bundle;
 		this.bundle = null;
 		return bundle;
 	}
 
-	@Nullable @Override
-	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file, @Nullable I18NBundleParameter parameter) {
+	@Nullable
+	@Override
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
+		@Nullable I18NBundleParameter parameter) {
 		return null;
 	}
 

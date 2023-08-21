@@ -26,7 +26,8 @@ import javax.annotation.Nullable;
 /** Used by {@link Model} to load textures from {@link ModelData}.
  * @author badlogic */
 public interface TextureProvider {
-	@Nullable public Texture load (@Nullable String fileName);
+	@Nullable
+	public Texture load (@Nullable String fileName);
 
 	public static class FileTextureProvider implements TextureProvider {
 		private Texture.TextureFilter minFilter, magFilter;
@@ -64,7 +65,8 @@ public interface TextureProvider {
 			this.assetManager = assetManager;
 		}
 
-		@Nullable @Override
+		@Nullable
+		@Override
 		public Texture load (@Nullable String fileName) {
 			return assetManager.get(fileName, Texture.class);
 		}

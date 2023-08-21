@@ -290,12 +290,14 @@ public class I18NBundle {
 	 * @return a <code>Locale</code> for the fallback search, or <code>null</code> if no further fallback search is needed.
 	 * @exception NullPointerException if <code>locale</code> is <code>null</code> */
 
-	@Nullable private static Locale getFallbackLocale (Locale locale) {
+	@Nullable
+	private static Locale getFallbackLocale (Locale locale) {
 		Locale defaultLocale = Locale.getDefault();
 		return locale.equals(defaultLocale) ? null : defaultLocale;
 	}
 
-	@Nullable private static I18NBundle loadBundleChain (FileHandle baseFileHandle, String encoding, List<Locale> candidateLocales,
+	@Nullable
+	private static I18NBundle loadBundleChain (FileHandle baseFileHandle, String encoding, List<Locale> candidateLocales,
 		int candidateIndex, @Nullable I18NBundle baseBundle) {
 		Locale targetLocale = candidateLocales.get(candidateIndex);
 		I18NBundle parent = null;
@@ -318,7 +320,8 @@ public class I18NBundle {
 
 	// Tries to load the bundle for the given locale.
 
-	@Nullable private static I18NBundle loadBundle (FileHandle baseFileHandle, String encoding, Locale targetLocale) {
+	@Nullable
+	private static I18NBundle loadBundle (FileHandle baseFileHandle, String encoding, Locale targetLocale) {
 		I18NBundle bundle = null;
 		Reader reader = null;
 		try {
@@ -418,7 +421,8 @@ public class I18NBundle {
 	 * 
 	 * @param locale */
 
-	@Initializer private void setLocale (Locale locale) {
+	@Initializer
+	private void setLocale (Locale locale) {
 		this.locale = locale;
 		this.formatter = new TextFormatter(locale, !simpleFormatter);
 	}

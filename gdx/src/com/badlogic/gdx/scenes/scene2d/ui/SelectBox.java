@@ -137,7 +137,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 
 	/** Returns the select box's style. Modifying the returned style may not have an effect until {@link #setStyle(SelectBoxStyle)}
 	 * is called. */
-	@Nullable public SelectBoxStyle getStyle () {
+	@Nullable
+	public SelectBoxStyle getStyle () {
 		return style;
 	}
 
@@ -229,7 +230,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 	}
 
 	/** Returns appropriate background drawable from the style based on the current select box state. */
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		if (isDisabled() && style.backgroundDisabled != null) return style.backgroundDisabled;
 		if (scrollPane.hasParent() && style.backgroundOpen != null) return style.backgroundOpen;
 		if (isOver() && style.backgroundOver != null) return style.backgroundOver;
@@ -291,7 +293,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 	}
 
 	/** Returns the first selected item, or null. For multiple selections use {@link SelectBox#getSelection()}. */
-	@Nullable public @Null T getSelected () {
+	@Nullable
+	public @Null T getSelected () {
 		return selection.first();
 	}
 

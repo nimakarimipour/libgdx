@@ -78,7 +78,8 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 	}
 
 	@Override
-	public TiledMap load (AssetManager assetManager, @Nullable String fileName, FileHandle tideFile, @Nullable Parameters parameter) {
+	public TiledMap load (AssetManager assetManager, @Nullable String fileName, FileHandle tideFile,
+		@Nullable Parameters parameter) {
 		try {
 			return loadMap(root, tideFile, new AssetManagerImageResolver(assetManager));
 		} catch (Exception e) {

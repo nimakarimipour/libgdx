@@ -1164,7 +1164,8 @@ public final class Intersector {
 	}
 
 	/** @see #overlapConvexPolygons(float[], int, int, float[], int, int, MinimumTranslationVector) */
-	public static boolean overlapConvexPolygons (@Nullable float[] verts1, @Nullable float[] verts2, @Nullable MinimumTranslationVector mtv) {
+	public static boolean overlapConvexPolygons (@Nullable float[] verts1, @Nullable float[] verts2,
+		@Nullable MinimumTranslationVector mtv) {
 		return overlapConvexPolygons(verts1, 0, verts1.length, verts2, 0, verts2.length, mtv);
 	}
 
@@ -1179,8 +1180,8 @@ public final class Intersector {
 	 * @param count2 the amount that is added to the offset2
 	 * @param mtv A Minimum Translation Vector to fill in the case of a collision, or null (optional).
 	 * @return Whether polygons overlap. */
-	public static boolean overlapConvexPolygons (@Nullable float[] verts1, int offset1, int count1, @Nullable float[] verts2, int offset2, int count2,
-		@Nullable MinimumTranslationVector mtv) {
+	public static boolean overlapConvexPolygons (@Nullable float[] verts1, int offset1, int count1, @Nullable float[] verts2,
+		int offset2, int count2, @Nullable MinimumTranslationVector mtv) {
 		boolean overlaps;
 		if (mtv != null) {
 			mtv.depth = Float.MAX_VALUE;
@@ -1208,8 +1209,8 @@ public final class Intersector {
 	 * @param count2 count of verts2
 	 * @param mtv the minimum translation vector
 	 * @param shapesShifted states if shape a and b are shifted. Important for calculating the axis translation for verts1. */
-	private static boolean overlapsOnAxisOfShape (@Nullable float[] verts1, int offset1, int count1, @Nullable float[] verts2, int offset2, int count2,
-		@Nullable MinimumTranslationVector mtv, boolean shapesShifted) {
+	private static boolean overlapsOnAxisOfShape (@Nullable float[] verts1, int offset1, int count1, @Nullable float[] verts2,
+		int offset2, int count2, @Nullable MinimumTranslationVector mtv, boolean shapesShifted) {
 		int endA = offset1 + count1;
 		int endB = offset2 + count2;
 		// get axis of polygon A

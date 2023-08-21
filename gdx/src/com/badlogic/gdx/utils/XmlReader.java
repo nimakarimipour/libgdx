@@ -41,12 +41,14 @@ public class XmlReader {
 	private final StringBuilder textBuffer = new StringBuilder(64);
 	@Nullable private String entitiesText;
 
-	@Nullable public Element parse (String xml) {
+	@Nullable
+	public Element parse (String xml) {
 		char[] data = xml.toCharArray();
 		return parse(data, 0, data.length);
 	}
 
-	@Nullable public Element parse (Reader reader) {
+	@Nullable
+	public Element parse (Reader reader) {
 		try {
 			char[] data = new char[1024];
 			int offset = 0;
@@ -68,7 +70,8 @@ public class XmlReader {
 		}
 	}
 
-	@Nullable public Element parse (InputStream input) {
+	@Nullable
+	public Element parse (InputStream input) {
 		try {
 			return parse(new InputStreamReader(input, "UTF-8"));
 		} catch (IOException ex) {
@@ -78,7 +81,8 @@ public class XmlReader {
 		}
 	}
 
-	@Nullable public Element parse (FileHandle file) {
+	@Nullable
+	public Element parse (FileHandle file) {
 		try {
 			return parse(file.reader("UTF-8"));
 		} catch (Exception ex) {
@@ -86,7 +90,8 @@ public class XmlReader {
 		}
 	}
 
-	@Nullable public Element parse (char[] data, int offset, int length) {
+	@Nullable
+	public Element parse (char[] data, int offset, int length) {
 		int cs, p = offset, pe = length;
 
 		int s = 0;
@@ -438,7 +443,8 @@ public class XmlReader {
 		current.setAttribute(name, value);
 	}
 
-	@Nullable protected @Null String entity (String name) {
+	@Nullable
+	protected @Null String entity (String name) {
 		if (name.equals("lt")) return "<";
 		if (name.equals("gt")) return ">";
 		if (name.equals("amp")) return "&";
@@ -476,7 +482,8 @@ public class XmlReader {
 			return name;
 		}
 
-		@Nullable public ObjectMap<String, String> getAttributes () {
+		@Nullable
+		public ObjectMap<String, String> getAttributes () {
 			return attributes;
 		}
 
@@ -488,7 +495,8 @@ public class XmlReader {
 			return value;
 		}
 
-		@Nullable public String getAttribute (String name, @Nullable String defaultValue) {
+		@Nullable
+		public String getAttribute (String name, @Nullable String defaultValue) {
 			if (attributes == null) return defaultValue;
 			String value = attributes.get(name);
 			if (value == null) return defaultValue;
@@ -521,7 +529,8 @@ public class XmlReader {
 			children.add(element);
 		}
 
-		@Nullable public String getText () {
+		@Nullable
+		public String getText () {
 			return text;
 		}
 
@@ -541,7 +550,8 @@ public class XmlReader {
 			parent.removeChild(this);
 		}
 
-		@Nullable public Element getParent () {
+		@Nullable
+		public Element getParent () {
 			return parent;
 		}
 
@@ -590,7 +600,8 @@ public class XmlReader {
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, does not recurse */
 
-		@Nullable public @Null Element getChildByName (String name) {
+		@Nullable
+		public @Null Element getChildByName (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);
@@ -607,7 +618,8 @@ public class XmlReader {
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, recurses */
 
-		@Nullable public @Null Element getChildByNameRecursive (String name) {
+		@Nullable
+		public @Null Element getChildByNameRecursive (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);
@@ -696,7 +708,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@Nullable public String get (String name, @Nullable String defaultValue) {
+		@Nullable
+		public String get (String name, @Nullable String defaultValue) {
 			if (attributes != null) {
 				String value = attributes.get(name);
 				if (value != null) return value;

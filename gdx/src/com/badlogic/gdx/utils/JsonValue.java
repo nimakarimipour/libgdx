@@ -87,7 +87,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Returns the child at the specified index. This requires walking the linked list to the specified entry, see
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
-	@Nullable public @Null JsonValue get (int index) {
+	@Nullable
+	public @Null JsonValue get (int index) {
 		JsonValue current = child;
 		while (current != null && index > 0) {
 			index--;
@@ -98,7 +99,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the child with the specified name.
 	 * @return May be null. */
-	@Nullable public @Null JsonValue get (String name) {
+	@Nullable
+	public @Null JsonValue get (String name) {
 		JsonValue current = child;
 		while (current != null && (current.name == null || !current.name.equalsIgnoreCase(name)))
 			current = current.next;
@@ -143,7 +145,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
 
-	@Nullable public @Null JsonValue remove (int index) {
+	@Nullable
+	public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -160,7 +163,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified name.
 	 * @return May be null. */
 
-	@Nullable public @Null JsonValue remove (String name) {
+	@Nullable
+	public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -208,7 +212,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
 
-	@Nullable public @Null String asString () {
+	@Nullable
+	public @Null String asString () {
 		switch (type) {
 		case stringValue:
 			return stringValue;
@@ -624,14 +629,16 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
 
-	@Nullable public @Null JsonValue getChild (String name) {
+	@Nullable
+	public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
 	}
 
 	/** Finds the child with the specified name and returns it as a string. Returns defaultValue if not found.
 	 * @param defaultValue May be null. */
-	@Nullable public String getString (String name, @Nullable @Null String defaultValue) {
+	@Nullable
+	public String getString (String name, @Nullable @Null String defaultValue) {
 		JsonValue child = get(name);
 		return (child == null || !child.isValue() || child.isNull()) ? defaultValue : child.asString();
 	}
@@ -686,7 +693,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Finds the child with the specified name and returns it as a string.
 	 * @throws IllegalArgumentException if the child was not found. */
-	@Nullable public String getString (String name) {
+	@Nullable
+	public String getString (String name) {
 		JsonValue child = get(name);
 		if (child == null) throw new IllegalArgumentException("Named value not found: " + name);
 		return child.asString();
@@ -758,7 +766,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Finds the child with the specified index and returns it as a string.
 	 * @throws IllegalArgumentException if the child was not found. */
-	@Nullable public String getString (int index) {
+	@Nullable
+	public String getString (int index) {
 		JsonValue child = get(index);
 		if (child == null) throw new IllegalArgumentException("Indexed value not found: " + name);
 		return child.asString();
@@ -828,7 +837,8 @@ public class JsonValue implements Iterable<JsonValue> {
 		return child.asChar();
 	}
 
-	@Nullable public ValueType type () {
+	@Nullable
+	public ValueType type () {
 		return type;
 	}
 
@@ -885,7 +895,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the name for this object value.
 	 * @return May be null. */
-	@Nullable public @Null String name () {
+	@Nullable
+	public @Null String name () {
 		return name;
 	}
 
@@ -896,13 +907,15 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the parent for this value.
 	 * @return May be null. */
-	@Nullable public @Null JsonValue parent () {
+	@Nullable
+	public @Null JsonValue parent () {
 		return parent;
 	}
 
 	/** Returns the first child for this object or array.
 	 * @return May be null. */
-	@Nullable public @Null JsonValue child () {
+	@Nullable
+	public @Null JsonValue child () {
 		return child;
 	}
 
@@ -937,7 +950,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the next sibling of this value.
 	 * @return May be null. */
-	@Nullable public @Null JsonValue next () {
+	@Nullable
+	public @Null JsonValue next () {
 		return next;
 	}
 
@@ -949,7 +963,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns the previous sibling of this value.
 	 * @return May be null. */
-	@Nullable public @Null JsonValue prev () {
+	@Nullable
+	public @Null JsonValue prev () {
 		return prev;
 	}
 
@@ -986,7 +1001,8 @@ public class JsonValue implements Iterable<JsonValue> {
 		type = ValueType.booleanValue;
 	}
 
-	@Nullable public String toJson (OutputType outputType) {
+	@Nullable
+	public String toJson (OutputType outputType) {
 		if (isValue()) return asString();
 		StringBuilder buffer = new StringBuilder(512);
 		json(this, buffer, outputType);
@@ -1048,7 +1064,8 @@ public class JsonValue implements Iterable<JsonValue> {
 		return new JsonIterator();
 	}
 
-	@Nullable public String toString () {
+	@Nullable
+	public String toString () {
 		if (isValue()) return name == null ? asString() : name + ": " + asString();
 		return (name == null ? "" : name + ": ") + prettyPrint(OutputType.minimal, 0);
 	}

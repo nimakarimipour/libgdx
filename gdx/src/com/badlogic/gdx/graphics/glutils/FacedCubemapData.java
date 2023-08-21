@@ -74,8 +74,8 @@ public class FacedCubemapData implements CubemapData {
 	}
 
 	/** Construct a Cubemap with the specified {@link TextureData}'s for the sides */
-	public FacedCubemapData (@Nullable TextureData positiveX, @Nullable TextureData negativeX, @Nullable TextureData positiveY, @Nullable TextureData negativeY,
-		@Nullable TextureData positiveZ, @Nullable TextureData negativeZ) {
+	public FacedCubemapData (@Nullable TextureData positiveX, @Nullable TextureData negativeX, @Nullable TextureData positiveY,
+		@Nullable TextureData negativeY, @Nullable TextureData positiveZ, @Nullable TextureData negativeZ) {
 		data[0] = positiveX;
 		data[1] = negativeX;
 		data[2] = positiveY;

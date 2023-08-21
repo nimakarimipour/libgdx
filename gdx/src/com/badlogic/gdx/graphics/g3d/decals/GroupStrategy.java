@@ -46,7 +46,8 @@ public interface GroupStrategy {
 	/** Returns the shader to be used for the group. Can be null in which case the GroupStrategy doesn't support GLES 2.0
 	 * @param group the group
 	 * @return the {@link ShaderProgram} */
-	@Nullable public ShaderProgram getGroupShader (int group);
+	@Nullable
+	public ShaderProgram getGroupShader (int group);
 
 	/** Assigns a group to a decal
 	 * 

@@ -555,7 +555,8 @@ public class Decal {
 	}
 
 	/** @return the texture region this Decal uses. Do not modify it! */
-	@Nullable public TextureRegion getTextureRegion () {
+	@Nullable
+	public TextureRegion getTextureRegion () {
 		return this.material.textureRegion;
 	}
 

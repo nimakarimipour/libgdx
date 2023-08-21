@@ -58,7 +58,8 @@ public class InputEvent extends Event {
 	}
 
 	/** The type of input event. */
-	@Nullable public Type getType () {
+	@Nullable
+	public Type getType () {
 		return type;
 	}
 
@@ -124,7 +125,8 @@ public class InputEvent extends Event {
 
 	/** The actor related to the event. Valid for: enter and exit. For enter, this is the actor being exited, or null. For exit,
 	 * this is the actor being entered, or null. */
-	@Nullable public @Null Actor getRelatedActor () {
+	@Nullable
+	public @Null Actor getRelatedActor () {
 		return relatedActor;
 	}
 

@@ -42,35 +42,41 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends
 	protected ModelParameters defaultParameters = new ModelParameters();
 
 	/** Directly load the raw model data on the calling thread. */
-	@Nullable public abstract ModelData loadModelData (final FileHandle fileHandle, @Nullable P parameters);
+	@Nullable
+	public abstract ModelData loadModelData (final FileHandle fileHandle, @Nullable P parameters);
 
 	/** Directly load the raw model data on the calling thread. */
 
-	@Nullable public ModelData loadModelData (final FileHandle fileHandle) {
+	@Nullable
+	public ModelData loadModelData (final FileHandle fileHandle) {
 		return loadModelData(fileHandle, null);
 	}
 
 	/** Directly load the model on the calling thread. The model with not be managed by an {@link AssetManager}. */
 
-	@Nullable public Model loadModel (final FileHandle fileHandle, TextureProvider textureProvider, @Nullable P parameters) {
+	@Nullable
+	public Model loadModel (final FileHandle fileHandle, TextureProvider textureProvider, @Nullable P parameters) {
 		final ModelData data = loadModelData(fileHandle, parameters);
 		return data == null ? null : new Model(data, textureProvider);
 	}
 
 	/** Directly load the model on the calling thread. The model with not be managed by an {@link AssetManager}. */
-	@Nullable public Model loadModel (final FileHandle fileHandle, P parameters) {
+	@Nullable
+	public Model loadModel (final FileHandle fileHandle, P parameters) {
 		return loadModel(fileHandle, new TextureProvider.FileTextureProvider(), parameters);
 	}
 
 	/** Directly load the model on the calling thread. The model with not be managed by an {@link AssetManager}. */
 
-	@Nullable public Model loadModel (final FileHandle fileHandle, TextureProvider textureProvider) {
+	@Nullable
+	public Model loadModel (final FileHandle fileHandle, TextureProvider textureProvider) {
 		return loadModel(fileHandle, textureProvider, null);
 	}
 
 	/** Directly load the model on the calling thread. The model with not be managed by an {@link AssetManager}. */
 
-	@Nullable public Model loadModel (final FileHandle fileHandle) {
+	@Nullable
+	public Model loadModel (final FileHandle fileHandle) {
 		return loadModel(fileHandle, new TextureProvider.FileTextureProvider(), null);
 	}
 
@@ -103,7 +109,8 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends
 	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameters) {
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Model loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable P parameters) {
 		ModelData data = null;
 		synchronized (items) {

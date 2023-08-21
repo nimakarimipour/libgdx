@@ -56,7 +56,8 @@ public class TiledMapTileMapObject extends TextureMapObject {
 		this.flipVertically = flipVertically;
 	}
 
-	@Nullable public TiledMapTile getTile () {
+	@Nullable
+	public TiledMapTile getTile () {
 		return tile;
 	}
 

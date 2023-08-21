@@ -67,7 +67,8 @@ public class CheckBox extends TextButton {
 
 	/** Returns the checkbox's style. Modifying the returned style may not have an effect until {@link #setStyle(ButtonStyle)} is
 	 * called. */
-	@Nullable public CheckBoxStyle getStyle () {
+	@Nullable
+	public CheckBoxStyle getStyle () {
 		return style;
 	}
 
@@ -76,7 +77,8 @@ public class CheckBox extends TextButton {
 		super.draw(batch, parentAlpha);
 	}
 
-	@Nullable protected @Null Drawable getImageDrawable () {
+	@Nullable
+	protected @Null Drawable getImageDrawable () {
 		if (isDisabled()) {
 			if (isChecked && style.checkboxOnDisabled != null) return style.checkboxOnDisabled;
 			return style.checkboxOffDisabled;

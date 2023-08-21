@@ -91,7 +91,8 @@ public class ProgressBar extends Widget implements Disableable {
 
 	/** Returns the progress bar's style. Modifying the returned style may not have an effect until
 	 * {@link #setStyle(ProgressBarStyle)} is called. */
-	@Nullable public ProgressBarStyle getStyle () {
+	@Nullable
+	public ProgressBarStyle getStyle () {
 		return style;
 	}
 
@@ -226,22 +227,26 @@ public class ProgressBar extends Widget implements Disableable {
 		return visualInterpolation.apply((getVisualValue() - min) / (max - min));
 	}
 
-	@Nullable protected @Null Drawable getBackgroundDrawable () {
+	@Nullable
+	protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		return style.background;
 	}
 
-	@Nullable protected @Null Drawable getKnobDrawable () {
+	@Nullable
+	protected @Null Drawable getKnobDrawable () {
 		if (disabled && style.disabledKnob != null) return style.disabledKnob;
 		return style.knob;
 	}
 
-	@Nullable protected Drawable getKnobBeforeDrawable () {
+	@Nullable
+	protected Drawable getKnobBeforeDrawable () {
 		if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
 		return style.knobBefore;
 	}
 
-	@Nullable protected Drawable getKnobAfterDrawable () {
+	@Nullable
+	protected Drawable getKnobAfterDrawable () {
 		if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
 		return style.knobAfter;
 	}

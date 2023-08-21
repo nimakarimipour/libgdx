@@ -31,13 +31,15 @@ import javax.annotation.Nullable;
 
 public interface MeshPartBuilder {
 	/** @return The {@link MeshPart} currently building. */
-	@Nullable public MeshPart getMeshPart ();
+	@Nullable
+	public MeshPart getMeshPart ();
 
 	/** @return The primitive type used for building, e.g. {@link GL20#GL_TRIANGLES} or {@link GL20#GL_LINES}. */
 	public int getPrimitiveType ();
 
 	/** @return The {@link VertexAttributes} available for building. */
-	@Nullable public VertexAttributes getAttributes ();
+	@Nullable
+	public VertexAttributes getAttributes ();
 
 	/** Set the color used to tint the vertex color, defaults to white. Only applicable for {@link Usage#ColorPacked} or
 	 * {@link Usage#ColorUnpacked}. */

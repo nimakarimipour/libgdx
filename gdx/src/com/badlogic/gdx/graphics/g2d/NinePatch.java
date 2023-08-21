@@ -521,7 +521,8 @@ public class NinePatch {
 		if (padBottom != -1) padBottom *= scaleY;
 	}
 
-	@Nullable public Texture getTexture () {
+	@Nullable
+	public Texture getTexture () {
 		return texture;
 	}
 }

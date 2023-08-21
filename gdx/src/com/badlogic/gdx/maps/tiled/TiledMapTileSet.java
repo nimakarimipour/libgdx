@@ -31,7 +31,8 @@ public class TiledMapTileSet implements Iterable<TiledMapTile> {
 	private MapProperties properties;
 
 	/** @return tileset's name */
-	@Nullable public String getName () {
+	@Nullable
+	public String getName () {
 		return name;
 	}
 
@@ -55,7 +56,8 @@ public class TiledMapTileSet implements Iterable<TiledMapTile> {
 	 * 
 	 * @param id the id of the {@link TiledMapTile} to retrieve.
 	 * @return tile matching id, null if it doesn't exist */
-	@Nullable public TiledMapTile getTile (int id) {
+	@Nullable
+	public TiledMapTile getTile (int id) {
 		return tiles.get(id);
 	}
 

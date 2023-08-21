@@ -173,7 +173,8 @@ public class Node {
 
 	/** @param recursive false to fetch a root child only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
-	@Nullable public Node getChild (final String id, boolean recursive, boolean ignoreCase) {
+	@Nullable
+	public Node getChild (final String id, boolean recursive, boolean ignoreCase) {
 		return getNode(children, id, recursive, ignoreCase);
 	}
 
@@ -246,7 +247,8 @@ public class Node {
 	}
 
 	/** @return The parent node that holds this node as child node, may be null. */
-	@Nullable public Node getParent () {
+	@Nullable
+	public Node getParent () {
 		return parent;
 	}
 
@@ -299,7 +301,8 @@ public class Node {
 	 * @param recursive false to fetch a root node only, true to search the entire node tree for the specified node.
 	 * @return The node with the specified id, or null if not found. */
 
-	@Nullable public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
+	@Nullable
+	public static Node getNode (final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
 		final int n = nodes.size;
 		Node node;
 		if (ignoreCase) {

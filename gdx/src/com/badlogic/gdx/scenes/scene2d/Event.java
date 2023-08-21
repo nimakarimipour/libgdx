@@ -78,7 +78,8 @@ public class Event implements Poolable {
 	}
 
 	/** Returns the actor that the event originated from. */
-	@Nullable public Actor getTarget () {
+	@Nullable
+	public Actor getTarget () {
 		return targetActor;
 	}
 
@@ -87,7 +88,8 @@ public class Event implements Poolable {
 	}
 
 	/** Returns the actor that this listener is attached to. */
-	@Nullable public Actor getListenerActor () {
+	@Nullable
+	public Actor getListenerActor () {
 		return listenerActor;
 	}
 
@@ -135,7 +137,8 @@ public class Event implements Poolable {
 	}
 
 	/** The stage for the actor the event was fired on. */
-	@Nullable public Stage getStage () {
+	@Nullable
+	public Stage getStage () {
 		return stage;
 	}
 }

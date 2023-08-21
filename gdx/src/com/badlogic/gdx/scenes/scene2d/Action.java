@@ -67,7 +67,8 @@ abstract public class Action implements Poolable {
 	}
 
 	/** @return null if the action is not attached to an actor. */
-	@Nullable public Actor getActor () {
+	@Nullable
+	public Actor getActor () {
 		return actor;
 	}
 
@@ -78,7 +79,8 @@ abstract public class Action implements Poolable {
 	}
 
 	/** @return null if the action has no target. */
-	@Nullable public Actor getTarget () {
+	@Nullable
+	public Actor getTarget () {
 		return target;
 	}
 
@@ -96,7 +98,8 @@ abstract public class Action implements Poolable {
 		restart();
 	}
 
-	@Nullable public @Null Pool getPool () {
+	@Nullable
+	public @Null Pool getPool () {
 		return pool;
 	}
 

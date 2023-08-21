@@ -118,7 +118,8 @@ public class SimpleOrthoGroupStrategy implements GroupStrategy {
 		}
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public ShaderProgram getGroupShader (int group) {
 		return null;
 	}

@@ -48,11 +48,13 @@ public class ParticleEffectLoader
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable ParticleEffectLoadParameter parameter) {
+	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file,
+		@Nullable ParticleEffectLoadParameter parameter) {
 	}
 
 	@Override
-	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file, @Nullable ParticleEffectLoadParameter parameter) {
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
+		@Nullable ParticleEffectLoadParameter parameter) {
 		Json json = new Json();
 		ResourceData<ParticleEffect> data = json.fromJson(ResourceData.class, file);
 		Array<AssetData> assets = null;
@@ -136,7 +138,8 @@ public class ParticleEffectLoader
 		return effectData.resource;
 	}
 
-	@Nullable private <T> T find (Array<?> array, Class<T> type) {
+	@Nullable
+	private <T> T find (Array<?> array, Class<T> type) {
 		for (Object object : array) {
 			if (ClassReflection.isAssignableFrom(type, object.getClass())) return (T)object;
 		}

@@ -284,7 +284,8 @@ public class NetJavaImpl {
 		listeners.put(httpRequest, httpResponseListener);
 	}
 
-	@Nullable synchronized HttpResponseListener getFromListeners (HttpRequest httpRequest) {
+	@Nullable
+	synchronized HttpResponseListener getFromListeners (HttpRequest httpRequest) {
 		HttpResponseListener httpResponseListener = listeners.get(httpRequest);
 		return httpResponseListener;
 	}

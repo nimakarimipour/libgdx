@@ -50,7 +50,8 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 
 	protected interface AtlasResolver extends ImageResolver {
 
-		@Nullable public TextureAtlas getAtlas ();
+		@Nullable
+		public TextureAtlas getAtlas ();
 
 		public static class DirectAtlasResolver implements AtlasTmxMapLoader.AtlasResolver {
 			private final TextureAtlas atlas;
@@ -64,7 +65,8 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 				return atlas;
 			}
 
-			@Nullable @Override
+			@Nullable
+			@Override
 			public TextureRegion getImage (String name) {
 				return atlas.findRegion(name);
 			}
@@ -79,12 +81,14 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 				this.atlasName = atlasName;
 			}
 
-			@Nullable @Override
+			@Nullable
+			@Override
 			public TextureAtlas getAtlas () {
 				return assetManager.get(atlasName, TextureAtlas.class);
 			}
 
-			@Nullable @Override
+			@Nullable
+			@Override
 			public TextureRegion getImage (String name) {
 				return getAtlas().findRegion(name);
 			}
@@ -123,15 +127,18 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle tmxFile, @Nullable AtlasTiledMapLoaderParameters parameter) {
+	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle tmxFile,
+		@Nullable AtlasTiledMapLoaderParameters parameter) {
 		FileHandle atlasHandle = getAtlasFileHandle(tmxFile);
 		this.atlasResolver = new AtlasResolver.AssetManagerAtlasResolver(manager, atlasHandle.path());
 
 		this.map = loadTiledMap(tmxFile, parameter, atlasResolver);
 	}
 
-	@Nullable @Override
-	public TiledMap loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable AtlasTiledMapLoaderParameters parameter) {
+	@Nullable
+	@Override
+	public TiledMap loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
+		@Nullable AtlasTiledMapLoaderParameters parameter) {
 		if (parameter != null) {
 			setTextureFilters(parameter.textureMinFilter, parameter.textureMagFilter);
 		}
@@ -156,7 +163,8 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 	@Override
 	protected void addStaticTiles (FileHandle tmxFile, ImageResolver imageResolver, TiledMapTileSet tileSet, Element element,
 		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
-		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, @Nullable FileHandle image) {
+		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight,
+		@Nullable FileHandle image) {
 		if (atlasResolver == null) return;
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;

@@ -54,7 +54,8 @@ public class Tooltip<T extends Actor> extends InputListener {
 		container.setTouchable(Touchable.disabled);
 	}
 
-	@Nullable public TooltipManager getManager () {
+	@Nullable
+	public TooltipManager getManager () {
 		return manager;
 	}
 
@@ -66,7 +67,8 @@ public class Tooltip<T extends Actor> extends InputListener {
 		container.setActor(contents);
 	}
 
-	@Nullable public @Null T getActor () {
+	@Nullable
+	public @Null T getActor () {
 		return container.getActor();
 	}
 

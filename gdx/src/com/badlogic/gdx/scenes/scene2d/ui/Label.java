@@ -87,7 +87,8 @@ public class Label extends Widget {
 
 	/** Returns the label's style. Modifying the returned style may not have an effect until {@link #setStyle(LabelStyle)} is
 	 * called. */
-	@Nullable public LabelStyle getStyle () {
+	@Nullable
+	public LabelStyle getStyle () {
 		return style;
 	}
 
@@ -356,7 +357,8 @@ public class Label extends Widget {
 	}
 
 	/** Allows subclasses to access the cache in {@link #draw(Batch, float)}. */
-	@Nullable protected BitmapFontCache getBitmapFontCache () {
+	@Nullable
+	protected BitmapFontCache getBitmapFontCache () {
 		return cache;
 	}
 

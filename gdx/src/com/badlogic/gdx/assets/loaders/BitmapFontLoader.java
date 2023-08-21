@@ -44,7 +44,8 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 	@Nullable BitmapFontData data;
 
 	@Override
-	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file, @Nullable BitmapFontParameter parameter) {
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
+		@Nullable BitmapFontParameter parameter) {
 		Array<AssetDescriptor> deps = new Array();
 		if (parameter != null && parameter.bitmapFontData != null) {
 			data = parameter.bitmapFontData;
@@ -76,11 +77,13 @@ public class BitmapFontLoader extends AsynchronousAssetLoader<BitmapFont, Bitmap
 	}
 
 	@Override
-	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable BitmapFontParameter parameter) {
+	public void loadAsync (AssetManager manager, @Nullable String fileName, FileHandle file,
+		@Nullable BitmapFontParameter parameter) {
 	}
 
 	@Override
-	public BitmapFont loadSync (AssetManager manager, @Nullable String fileName, FileHandle file, @Nullable BitmapFontParameter parameter) {
+	public BitmapFont loadSync (AssetManager manager, @Nullable String fileName, FileHandle file,
+		@Nullable BitmapFontParameter parameter) {
 		if (parameter != null && parameter.atlasName != null) {
 			TextureAtlas atlas = manager.get(parameter.atlasName, TextureAtlas.class);
 			String name = file.sibling(data.imagePaths[0]).nameWithoutExtension().toString();

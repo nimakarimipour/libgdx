@@ -104,7 +104,8 @@ public class BaseDrawable implements Drawable {
 		setMinHeight(minHeight);
 	}
 
-	@Nullable public @Null String getName () {
+	@Nullable
+	public @Null String getName () {
 		return name;
 	}
 

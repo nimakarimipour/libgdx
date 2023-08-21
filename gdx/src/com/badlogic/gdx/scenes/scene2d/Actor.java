@@ -58,7 +58,8 @@ import javax.annotation.Nullable;
 public class Actor {
 	@Nullable private @Null Stage stage;
 
-	@Nullable @Null Group parent;
+	@Nullable
+	@Null Group parent;
 	private final DelayedRemovalArray<EventListener> listeners = new DelayedRemovalArray(0);
 	private final DelayedRemovalArray<EventListener> captureListeners = new DelayedRemovalArray(0);
 	private final Array<Action> actions = new Array(0);
@@ -209,7 +210,8 @@ public class Actor {
 	 * @param touchable If true, hit detection will respect the {@link #setTouchable(Touchable) touchability}.
 	 * @see Touchable */
 
-	@Nullable public @Null Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.touchable != Touchable.enabled) return null;
 		if (!isVisible()) return null;
 		return x >= 0 && x < width && y >= 0 && y < height ? this : null;
@@ -303,7 +305,8 @@ public class Actor {
 	}
 
 	/** Returns the stage that this actor is currently in, or null if not in a stage. */
-	@Nullable public @Null Stage getStage () {
+	@Nullable
+	public @Null Stage getStage () {
 		return stage;
 	}
 
@@ -337,7 +340,8 @@ public class Actor {
 	/** Returns this actor or the first ascendant of this actor that is assignable with the specified type, or null if none were
 	 * found. */
 
-	@Nullable public @Null <T extends Actor> T firstAscendant (Class<T> type) {
+	@Nullable
+	public @Null <T extends Actor> T firstAscendant (Class<T> type) {
 		if (type == null) throw new IllegalArgumentException("actor cannot be null.");
 		Actor actor = this;
 		do {
@@ -353,7 +357,8 @@ public class Actor {
 	}
 
 	/** Returns the parent actor, or null if not in a group. */
-	@Nullable public @Null Group getParent () {
+	@Nullable
+	public @Null Group getParent () {
 		return parent;
 	}
 
@@ -368,7 +373,8 @@ public class Actor {
 		return touchable == Touchable.enabled;
 	}
 
-	@Nullable public Touchable getTouchable () {
+	@Nullable
+	public Touchable getTouchable () {
 		return touchable;
 	}
 
@@ -435,7 +441,8 @@ public class Actor {
 	}
 
 	/** Returns an application specific object for convenience, or null. */
-	@Nullable public @Null Object getUserObject () {
+	@Nullable
+	public @Null Object getUserObject () {
 		return userObject;
 	}
 
@@ -776,7 +783,8 @@ public class Actor {
 
 	/** @see #setName(String)
 	 * @return May be null. */
-	@Nullable public @Null String getName () {
+	@Nullable
+	public @Null String getName () {
 		return name;
 	}
 

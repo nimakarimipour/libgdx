@@ -140,8 +140,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T calculate (@Nullable final T out, final int i, final float u, @Nullable final T[] points, final int degree,
-		final boolean continuous, @Nullable final T tmp) {
+	public static <T extends Vector<T>> T calculate (@Nullable final T out, final int i, final float u, @Nullable final T[] points,
+		final int degree, final boolean continuous, @Nullable final T tmp) {
 		switch (degree) {
 		case 3:
 			return cubic(out, i, u, points, continuous, tmp);
@@ -158,8 +158,8 @@ public class BSpline<T extends Vector<T>> implements Path<T> {
 	 * @param continuous If true the b-spline restarts at 0 when reaching 1
 	 * @param tmp A temporary vector used for the calculation
 	 * @return The value of out */
-	public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, @Nullable final T[] points, final int degree,
-		final boolean continuous, @Nullable final T tmp) {
+	public static <T extends Vector<T>> T derivative (final T out, final int i, final float u, @Nullable final T[] points,
+		final int degree, final boolean continuous, @Nullable final T tmp) {
 		switch (degree) {
 		case 3:
 			return cubic_derivative(out, i, u, points, continuous, tmp);

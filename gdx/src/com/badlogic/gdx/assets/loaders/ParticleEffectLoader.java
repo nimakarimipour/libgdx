@@ -34,7 +34,8 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 	}
 
 	@Override
-	public ParticleEffect load (AssetManager am, @Nullable String fileName, FileHandle file, @Nullable ParticleEffectParameter param) {
+	public ParticleEffect load (AssetManager am, @Nullable String fileName, FileHandle file,
+		@Nullable ParticleEffectParameter param) {
 		ParticleEffect effect = new ParticleEffect();
 		if (param != null && param.atlasFile != null)
 			effect.load(file, am.get(param.atlasFile, TextureAtlas.class), param.atlasPrefix);
@@ -45,8 +46,10 @@ public class ParticleEffectLoader extends SynchronousAssetLoader<ParticleEffect,
 		return effect;
 	}
 
-	@Nullable @Override
-	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file, @Nullable ParticleEffectParameter param) {
+	@Nullable
+	@Override
+	public Array<AssetDescriptor> getDependencies (@Nullable String fileName, FileHandle file,
+		@Nullable ParticleEffectParameter param) {
 		Array<AssetDescriptor> deps = null;
 		if (param != null && param.atlasFile != null) {
 			deps = new Array();

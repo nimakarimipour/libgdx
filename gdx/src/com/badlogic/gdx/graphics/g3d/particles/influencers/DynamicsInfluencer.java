@@ -31,7 +31,8 @@ import javax.annotation.Nullable;
  * @author Inferno */
 public class DynamicsInfluencer extends Influencer {
 	public Array<DynamicsModifier> velocities;
-	@Nullable private FloatChannel accellerationChannel, positionChannel, previousPositionChannel, rotationChannel, angularVelocityChannel;
+	@Nullable private FloatChannel accellerationChannel, positionChannel, previousPositionChannel, rotationChannel,
+		angularVelocityChannel;
 	boolean hasAcceleration, has2dAngularVelocity, has3dAngularVelocity;
 
 	public DynamicsInfluencer () {

@@ -127,11 +127,13 @@ public class Touchpad extends Widget {
 
 	/** Returns the touchpad's style. Modifying the returned style may not have an effect until {@link #setStyle(TouchpadStyle)} is
 	 * called. */
-	@Nullable public TouchpadStyle getStyle () {
+	@Nullable
+	public TouchpadStyle getStyle () {
 		return style;
 	}
 
-	@Nullable public Actor hit (float x, float y, boolean touchable) {
+	@Nullable
+	public Actor hit (float x, float y, boolean touchable) {
 		if (touchable && this.getTouchable() != Touchable.enabled) return null;
 		if (!isVisible()) return null;
 		return touchBounds.contains(x, y) ? this : null;

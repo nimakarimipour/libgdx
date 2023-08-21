@@ -61,7 +61,8 @@ public interface TextureData {
 	 * internal data structures created in {@link #prepare()} should be disposed of here.
 	 * 
 	 * @return the pixmap. */
-	@Nullable public Pixmap consumePixmap ();
+	@Nullable
+	public Pixmap consumePixmap ();
 
 	/** @return whether the caller of {@link #consumePixmap()} should dispose the Pixmap returned by {@link #consumePixmap()} */
 	public boolean disposePixmap ();
@@ -78,7 +79,8 @@ public interface TextureData {
 	public int getHeight ();
 
 	/** @return the {@link Format} of the pixel data */
-	@Nullable public Format getFormat ();
+	@Nullable
+	public Format getFormat ();
 
 	/** @return whether to generate mipmaps or not. */
 	public boolean useMipMaps ();
@@ -90,11 +92,13 @@ public interface TextureData {
 	 * @author Vincent Bousquet */
 	public static class Factory {
 
-		@Nullable public static TextureData loadFromFile (FileHandle file, boolean useMipMaps) {
+		@Nullable
+		public static TextureData loadFromFile (FileHandle file, boolean useMipMaps) {
 			return loadFromFile(file, null, useMipMaps);
 		}
 
-		@Nullable public static TextureData loadFromFile (@Nullable FileHandle file, @Nullable Format format, boolean useMipMaps) {
+		@Nullable
+		public static TextureData loadFromFile (@Nullable FileHandle file, @Nullable Format format, boolean useMipMaps) {
 			if (file == null) return null;
 			if (file.name().endsWith(".cim")) return new FileTextureData(file, PixmapIO.readCIM(file), format, useMipMaps);
 			if (file.name().endsWith(".etc1")) return new ETC1TextureData(file, useMipMaps);

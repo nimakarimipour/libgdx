@@ -122,7 +122,8 @@ public class ShapeCache implements Disposable, RenderableProvider {
 
 	/** Allows to customize the material.
 	 * @return material */
-	@Nullable public Material getMaterial () {
+	@Nullable
+	public Material getMaterial () {
 		return renderable.material;
 	}
 

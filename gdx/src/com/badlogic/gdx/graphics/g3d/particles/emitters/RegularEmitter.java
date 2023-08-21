@@ -183,23 +183,28 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		controller.particles.size += count;
 	}
 
-	@Nullable public ScaledNumericValue getLife () {
+	@Nullable
+	public ScaledNumericValue getLife () {
 		return lifeValue;
 	}
 
-	@Nullable public ScaledNumericValue getEmission () {
+	@Nullable
+	public ScaledNumericValue getEmission () {
 		return emissionValue;
 	}
 
-	@Nullable public RangedNumericValue getDuration () {
+	@Nullable
+	public RangedNumericValue getDuration () {
 		return durationValue;
 	}
 
-	@Nullable public RangedNumericValue getDelay () {
+	@Nullable
+	public RangedNumericValue getDelay () {
 		return delayValue;
 	}
 
-	@Nullable public ScaledNumericValue getLifeOffset () {
+	@Nullable
+	public ScaledNumericValue getLifeOffset () {
 		return lifeOffsetValue;
 	}
 

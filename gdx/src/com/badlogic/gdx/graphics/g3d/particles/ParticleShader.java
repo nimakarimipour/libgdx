@@ -120,7 +120,8 @@ public class ParticleShader extends BaseShader {
 			}
 
 			@Override
-			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable, @Nullable Attributes combinedAttributes) {
+			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
+				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, TMP_VECTOR3.set(shader.camera.direction).crs(shader.camera.up).nor());
 			}
 		};
@@ -132,7 +133,8 @@ public class ParticleShader extends BaseShader {
 			}
 
 			@Override
-			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable, @Nullable Attributes combinedAttributes) {
+			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
+				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, TMP_VECTOR3.set(shader.camera.up).nor());
 			}
 		};
@@ -144,7 +146,8 @@ public class ParticleShader extends BaseShader {
 			}
 
 			@Override
-			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable, @Nullable Attributes combinedAttributes) {
+			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
+				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID,
 					TMP_VECTOR3.set(-shader.camera.direction.x, -shader.camera.direction.y, -shader.camera.direction.z).nor());
 			}
@@ -156,7 +159,8 @@ public class ParticleShader extends BaseShader {
 			}
 
 			@Override
-			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable, @Nullable Attributes combinedAttributes) {
+			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
+				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, shader.camera.position);
 			}
 		};
@@ -167,7 +171,8 @@ public class ParticleShader extends BaseShader {
 			}
 
 			@Override
-			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable, @Nullable Attributes combinedAttributes) {
+			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
+				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, (float)Gdx.graphics.getWidth());
 			}
 		};
@@ -180,7 +185,8 @@ public class ParticleShader extends BaseShader {
 			}
 
 			@Override
-			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable, @Nullable Attributes combinedAttributes) {
+			public void set (BaseShader shader, int inputID, @Nullable Renderable renderable,
+				@Nullable Attributes combinedAttributes) {
 				shader.set(inputID, temp.set(shader.camera.view).mul(renderable.worldTransform));
 			}
 		};

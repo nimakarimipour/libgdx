@@ -157,7 +157,8 @@ public class MeshBuilder implements MeshPartBuilder {
 
 	/** Begin building a mesh */
 
-	@Initializer public void begin (@Nullable final VertexAttributes attributes, int primitiveType) {
+	@Initializer
+	public void begin (@Nullable final VertexAttributes attributes, int primitiveType) {
 		if (this.attributes != null) throw new RuntimeException("Call end() first");
 		this.attributes = attributes;
 		this.vertices.clear();
@@ -333,12 +334,14 @@ public class MeshBuilder implements MeshPartBuilder {
 		return indices.items;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public VertexAttributes getAttributes () {
 		return attributes;
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public MeshPart getMeshPart () {
 		return part;
 	}

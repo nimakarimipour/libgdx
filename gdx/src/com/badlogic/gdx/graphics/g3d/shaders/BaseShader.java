@@ -52,7 +52,8 @@ public abstract class BaseShader implements Shader {
 		 *         renderable. */
 		boolean isGlobal (final BaseShader shader, final int inputID);
 
-		void set (final BaseShader shader, final int inputID, @Nullable final Renderable renderable, @Nullable final Attributes combinedAttributes);
+		void set (final BaseShader shader, final int inputID, @Nullable final Renderable renderable,
+			@Nullable final Attributes combinedAttributes);
 	}
 
 	public abstract static class GlobalSetter implements Setter {
@@ -166,7 +167,8 @@ public abstract class BaseShader implements Shader {
 
 	/** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
 
-	@Initializer public void init (@Nullable final ShaderProgram program, @Nullable final Renderable renderable) {
+	@Initializer
+	public void init (@Nullable final ShaderProgram program, @Nullable final Renderable renderable) {
 		if (locations != null) throw new GdxRuntimeException("Already initialized");
 		if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
 		this.program = program;

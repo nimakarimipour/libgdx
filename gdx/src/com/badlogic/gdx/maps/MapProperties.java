@@ -40,7 +40,8 @@ public class MapProperties {
 
 	/** @param key property name
 	 * @return the value for that property if it exists, otherwise, null */
-	@Nullable public Object get (String key) {
+	@Nullable
+	public Object get (String key) {
 		return properties.get(key);
 	}
 
@@ -49,7 +50,8 @@ public class MapProperties {
 	 * @param clazz the class of the object
 	 * @return the object or null if the object is not in the map
 	 * @throws ClassCastException if the object with the given key is not of type clazz */
-	@Nullable public <T> T get (String key, Class<T> clazz) {
+	@Nullable
+	public <T> T get (String key, Class<T> clazz) {
 		return (T)get(key);
 	}
 
