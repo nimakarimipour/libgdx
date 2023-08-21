@@ -205,7 +205,7 @@ public class Pixmap implements Disposable {
 	public static void downloadFromUrl (String url, final DownloadPixmapResponseListener responseListener) {
 		Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
 		request.setUrl(url);
-		if(Gdx.net == null) {
+		if (Gdx.net == null) {
 			return;
 		}
 		Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
