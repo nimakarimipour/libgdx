@@ -141,6 +141,10 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 			FloatChannel colorChannel = data.colorChannel;
 			FloatChannel rotationChannel = data.rotationChannel;
 
+			if(regionChannel == null || colorChannel == null || rotationChannel == null){
+				return;
+			}
+
 			for (int p = 0; p < data.controller.particles.size; ++p, ++tp) {
 				int offset = offsets[tp] * CPU_VERTEX_SIZE;
 				int regionOffset = p * regionChannel.strideSize;
@@ -155,7 +159,7 @@ public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteC
 				vertices[offset + CPU_COLOR_OFFSET + 1] = colorChannel.data[colorOffset + ParticleChannels.GreenOffset];
 				vertices[offset + CPU_COLOR_OFFSET + 2] = colorChannel.data[colorOffset + ParticleChannels.BlueOffset];
 				vertices[offset + CPU_COLOR_OFFSET + 3] = colorChannel.data[colorOffset + ParticleChannels.AlphaOffset];
-				vertices[offset + CPU_SIZE_AND_ROTATION_OFFSET] = scaleChannel.data[p * scaleChannel.strideSize];
+				vertices[offset + CPU_SIZE_AND_ROTATION_OFFSET] = scaleChannel != null ? scaleChannel.data[p * scaleChannel.strideSize] : 0;
 				vertices[offset + CPU_SIZE_AND_ROTATION_OFFSET + 1] = rotationChannel.data[rotationOffset
 					+ ParticleChannels.CosineOffset];
 				vertices[offset + CPU_SIZE_AND_ROTATION_OFFSET + 2] = rotationChannel.data[rotationOffset

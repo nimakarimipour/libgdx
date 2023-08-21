@@ -106,7 +106,7 @@ public class ModelBuilder {
 	public Node node () {
 		final Node node = new Node();
 		node(node);
-		node.id = "node" + model.nodes.size;
+		node.id = "node" + model != null ? model.nodes.size + "" : "";
 		return node;
 	}
 
@@ -133,8 +133,12 @@ public class ModelBuilder {
 	 * disposed. The resources the Material might contain are not managed, use {@link #manage(Disposable)} to add those to the
 	 * model. */
 	public void part (final MeshPart meshpart, final Material material) {
-		if (node == null) node();
-		node.parts.add(new NodePart(meshpart, material));
+		if (node == null) {
+			node();
+		}
+		else{
+			node.parts.add(new NodePart(meshpart, material));
+		}
 	}
 
 	/** Adds the specified mesh part to the current node. The Mesh will be managed by the model and disposed when the model is

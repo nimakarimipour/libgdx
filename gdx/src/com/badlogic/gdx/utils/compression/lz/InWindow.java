@@ -38,7 +38,7 @@ public class InWindow {
 		while (true) {
 			int size = (0 - _bufferOffset) + _blockSize - _streamPos;
 			if (size == 0) return;
-			int numReadBytes = _stream.read(_bufferBase, _bufferOffset + _streamPos, size);
+			int numReadBytes = _stream != null ? _stream.read(_bufferBase, _bufferOffset + _streamPos, size) : 0;
 			if (numReadBytes == -1) {
 				_posLimit = _streamPos;
 				int pointerToPostion = _bufferOffset + _posLimit;

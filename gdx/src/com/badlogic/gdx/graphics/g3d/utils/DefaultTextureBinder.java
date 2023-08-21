@@ -152,6 +152,7 @@ public final class DefaultTextureBinder implements TextureBinder {
 	}
 
 	private final int bindTextureLRU (final GLTexture texture) {
+		if(unitsLRU==null) {return 0;}
 		int i;
 		for (i = 0; i < count; i++) {
 			final int idx = unitsLRU[i];

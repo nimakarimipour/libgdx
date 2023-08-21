@@ -64,7 +64,7 @@ public class ModelInstanceRenderer
 			float scale = hasScale ? renderData.scaleChannel.data[i] : 1;
 			float qx = 0, qy = 0, qz = 0, qw = 1;
 			if (hasRotation) {
-				int rotationOffset = i * renderData.rotationChannel.strideSize;
+				int rotationOffset = renderData.rotationChannel != null ? i * renderData.rotationChannel.strideSize : 0;
 				qx = renderData.rotationChannel.data[rotationOffset + ParticleChannels.XOffset];
 				qy = renderData.rotationChannel.data[rotationOffset + ParticleChannels.YOffset];
 				qz = renderData.rotationChannel.data[rotationOffset + ParticleChannels.ZOffset];
@@ -75,7 +75,7 @@ public class ModelInstanceRenderer
 				renderData.positionChannel.data[positionOffset + ParticleChannels.YOffset],
 				renderData.positionChannel.data[positionOffset + ParticleChannels.ZOffset], qx, qy, qz, qw, scale, scale, scale);
 			if (hasColor) {
-				int colorOffset = i * renderData.colorChannel.strideSize;
+				int colorOffset = renderData.colorChannel != null ? i * renderData.colorChannel.strideSize : 0;
 				ColorAttribute colorAttribute = (ColorAttribute)instance.materials.get(0).get(ColorAttribute.Diffuse);
 				BlendingAttribute blendingAttribute = (BlendingAttribute)instance.materials.get(0).get(BlendingAttribute.Type);
 				colorAttribute.color.r = renderData.colorChannel.data[colorOffset + ParticleChannels.RedOffset];

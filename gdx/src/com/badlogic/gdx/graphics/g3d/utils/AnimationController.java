@@ -142,7 +142,7 @@ public class AnimationController extends BaseAnimationController {
 
 	private AnimationDesc obtain (final Animation anim, float offset, float duration, int loopCount, float speed,
 		final AnimationListener listener) {
-		if (anim == null) return null;
+		if (anim == null) {throw new IllegalArgumentException("anim is null");}
 		final AnimationDesc result = animationPool.obtain();
 		result.animation = anim;
 		result.listener = listener;
