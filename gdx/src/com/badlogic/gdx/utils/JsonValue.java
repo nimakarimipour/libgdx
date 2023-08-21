@@ -143,7 +143,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
 
-	@Nullable public @Null JsonValue remove (int index) {
+	@Nullable
+	public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -160,7 +161,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified name.
 	 * @return May be null. */
 
-	@Nullable public @Null JsonValue remove (String name) {
+	@Nullable
+	public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -624,14 +626,16 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
 
-	@Nullable public @Null JsonValue getChild (String name) {
+	@Nullable
+	public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
 	}
 
 	/** Finds the child with the specified name and returns it as a string. Returns defaultValue if not found.
 	 * @param defaultValue May be null. */
-	@Nullable public String getString (String name, @Nullable @Null String defaultValue) {
+	@Nullable
+	public String getString (String name, @Nullable @Null String defaultValue) {
 		JsonValue child = get(name);
 		return (child == null || !child.isValue() || child.isNull()) ? defaultValue : child.asString();
 	}

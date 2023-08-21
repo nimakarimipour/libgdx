@@ -93,7 +93,8 @@ public class MapLayer {
 	}
 
 	/** @return the layer's parent {@link MapLayer}, or null if the layer does not have a parent **/
-	@Nullable public MapLayer getParent () {
+	@Nullable
+	public MapLayer getParent () {
 		return parent;
 	}
 

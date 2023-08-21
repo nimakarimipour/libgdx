@@ -44,7 +44,8 @@ public class ReflectionPool<T> extends Pool<T> {
 		constructor = c;
 	}
 
-	@Nullable private @Null Constructor findConstructor (Class<T> type) {
+	@Nullable
+	private @Null Constructor findConstructor (Class<T> type) {
 		try {
 			return ClassReflection.getConstructor(type, (Class[])null);
 		} catch (Exception ex1) {

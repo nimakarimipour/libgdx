@@ -244,7 +244,8 @@ public class ObjectSet<T> implements Iterable<T> {
 		return locateKey(key) >= 0;
 	}
 
-	@Nullable public @Null T get (T key) {
+	@Nullable
+	public @Null T get (T key) {
 		int i = locateKey(key);
 		return i < 0 ? null : keyTable[i];
 	}

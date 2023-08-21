@@ -42,11 +42,13 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends
 	protected ModelParameters defaultParameters = new ModelParameters();
 
 	/** Directly load the raw model data on the calling thread. */
-	@Nullable public abstract ModelData loadModelData (final FileHandle fileHandle, @Nullable P parameters);
+	@Nullable
+	public abstract ModelData loadModelData (final FileHandle fileHandle, @Nullable P parameters);
 
 	/** Directly load the raw model data on the calling thread. */
 
-	@Nullable public ModelData loadModelData (final FileHandle fileHandle) {
+	@Nullable
+	public ModelData loadModelData (final FileHandle fileHandle) {
 		return loadModelData(fileHandle, null);
 	}
 
@@ -103,7 +105,8 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters> extends
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, P parameters) {
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Model loadSync (AssetManager manager, String fileName, FileHandle file, P parameters) {
 		ModelData data = null;
 		synchronized (items) {

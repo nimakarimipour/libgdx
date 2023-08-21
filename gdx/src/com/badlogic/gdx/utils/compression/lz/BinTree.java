@@ -3,7 +3,6 @@
 package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
-import javax.annotation.Nullable;
 
 public class BinTree extends InWindow {
 	int _cyclicBufferPos;

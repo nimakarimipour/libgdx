@@ -438,7 +438,8 @@ public class XmlReader {
 		current.setAttribute(name, value);
 	}
 
-	@Nullable protected @Null String entity (String name) {
+	@Nullable
+	protected @Null String entity (String name) {
 		if (name.equals("lt")) return "<";
 		if (name.equals("gt")) return ">";
 		if (name.equals("amp")) return "&";
@@ -607,7 +608,8 @@ public class XmlReader {
 		/** @param name the name of the child {@link Element}
 		 * @return the first child having the given name or null, recurses */
 
-		@Nullable public @Null Element getChildByNameRecursive (String name) {
+		@Nullable
+		public @Null Element getChildByNameRecursive (String name) {
 			if (children == null) return null;
 			for (int i = 0; i < children.size; i++) {
 				Element element = children.get(i);
@@ -696,7 +698,8 @@ public class XmlReader {
 
 		/** Returns the attribute value with the specified name, or if no attribute is found, the text of a child with the name.
 		 * @throws GdxRuntimeException if no attribute or child was not found. */
-		@Nullable public String get (String name, @Nullable String defaultValue) {
+		@Nullable
+		public String get (String name, @Nullable String defaultValue) {
 			if (attributes != null) {
 				String value = attributes.get(name);
 				if (value != null) return value;

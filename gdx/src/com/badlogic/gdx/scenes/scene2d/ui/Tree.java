@@ -289,8 +289,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	/** Draws selection, icons, and expand icons.
 	 * @param parent null for the root nodes.
 	 * @return The Y position of the last visible actor for the nodes. */
-	protected float drawIcons (Batch batch, float r, float g, float b, float a, @Nullable @Null N parent, Array<N> nodes, float indent,
-		float plusMinusWidth) {
+	protected float drawIcons (Batch batch, float r, float g, float b, float a, @Nullable @Null N parent, Array<N> nodes,
+		float indent, float plusMinusWidth) {
 
 		Rectangle cullingArea = getCullingArea();
 		float cullBottom = 0, cullTop = 0;
@@ -369,7 +369,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 	/** @return May be null. */
 
-	@Nullable public @Null N getNodeAt (float y) {
+	@Nullable
+	public @Null N getNodeAt (float y) {
 		foundNode = null;
 		getNodeAt(rootNodes, y, getHeight());
 		try {
@@ -418,7 +419,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 
 	/** Returns the first selected value, or null. */
 
-	@Nullable public @Null V getSelectedValue () {
+	@Nullable
+	public @Null V getSelectedValue () {
 		N node = selection.first();
 		return node == null ? null : (V)node.getValue();
 	}
@@ -453,13 +455,15 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** @return May be null. */
-	@Nullable public @Null N getOverNode () {
+	@Nullable
+	public @Null N getOverNode () {
 		return overNode;
 	}
 
 	/** @return May be null. */
 
-	@Nullable public @Null V getOverValue () {
+	@Nullable
+	public @Null V getOverValue () {
 		if (overNode == null) return null;
 		return (V)overNode.getValue();
 	}
@@ -721,7 +725,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		/** Returns the tree this node's actor is currently in, or null. The actor is only in the tree when all of its parent nodes
 		 * are expanded. */
 
-		@Nullable public @Null Tree<N, V> getTree () {
+		@Nullable
+		public @Null Tree<N, V> getTree () {
 			Group parent = actor.getParent();
 			if (parent instanceof Tree) return (Tree)parent;
 			return null;
@@ -775,7 +780,8 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 		}
 
 		/** @return May be null. */
-		@Nullable public @Null N getParent () {
+		@Nullable
+		public @Null N getParent () {
 			return parent;
 		}
 

@@ -822,7 +822,8 @@ public class BitmapFont implements Disposable {
 		 * {@link #getGlyphs(GlyphRun, CharSequence, int, int, Glyph)} should be be used to shape a string of characters into a list
 		 * of glyphs. */
 
-		@Nullable public Glyph getGlyph (char ch) {
+		@Nullable
+		public Glyph getGlyph (char ch) {
 			Glyph[] page = glyphs[ch / PAGE_SIZE];
 			if (page != null) return page[ch & PAGE_SIZE - 1];
 			return null;

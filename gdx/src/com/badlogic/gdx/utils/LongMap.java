@@ -137,7 +137,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		}
 	}
 
-	@Nullable public @Null V put (long key, @Null V value) {
+	@Nullable
+	public @Null V put (long key, @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
 			zeroValue = value;
@@ -183,7 +184,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 		}
 	}
 
-	@Nullable public @Null V get (long key) {
+	@Nullable
+	public @Null V get (long key) {
 		if (key == 0) return hasZeroValue ? zeroValue : null;
 		int i = locateKey(key);
 		return i >= 0 ? valueTable[i] : null;
@@ -197,7 +199,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
 
-	@Nullable public @Null V remove (long key) {
+	@Nullable
+	public @Null V remove (long key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
 			hasZeroValue = false;

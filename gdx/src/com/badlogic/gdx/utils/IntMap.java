@@ -138,7 +138,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 	}
 
-	@Nullable public @Null V put (int key, @Null V value) {
+	@Nullable
+	public @Null V put (int key, @Null V value) {
 		if (key == 0) {
 			V oldValue = zeroValue;
 			zeroValue = value;
@@ -198,7 +199,8 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 
 	/** Returns the value for the removed key, or null if the key is not in the map. */
 
-	@Nullable public @Null V remove (int key) {
+	@Nullable
+	public @Null V remove (int key) {
 		if (key == 0) {
 			if (!hasZeroValue) return null;
 			hasZeroValue = false;

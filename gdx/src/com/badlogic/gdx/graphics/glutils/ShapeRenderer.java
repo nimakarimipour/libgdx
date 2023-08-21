@@ -1224,7 +1224,8 @@ public class ShapeRenderer implements Disposable {
 	}
 
 	/** Returns the current shape type. */
-	@Nullable public ShapeType getCurrentType () {
+	@Nullable
+	public ShapeType getCurrentType () {
 		return shapeType;
 	}
 

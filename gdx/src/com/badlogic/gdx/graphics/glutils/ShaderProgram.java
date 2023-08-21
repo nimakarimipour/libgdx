@@ -37,7 +37,6 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectIntMap;
 import com.badlogic.gdx.utils.ObjectMap;
-import javax.annotation.Nullable;
 
 /**
  * <p>

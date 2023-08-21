@@ -344,7 +344,8 @@ public class Json {
 		}
 	}
 
-	@Nullable private @Null Object[] getDefaultValues (Class type) {
+	@Nullable
+	private @Null Object[] getDefaultValues (Class type) {
 		if (!usePrototypes) return null;
 		if (classToDefaultValues.containsKey(type)) return classToDefaultValues.get(type);
 		Object object;
@@ -870,7 +871,8 @@ public class Json {
 	}
 
 	/** @param elementType May be null if the type is unknown. */
-	public void readField (Object object, String fieldName, String jsonName, @Nullable @Null Class elementType, JsonValue jsonMap) {
+	public void readField (Object object, String fieldName, String jsonName, @Nullable @Null Class elementType,
+		JsonValue jsonMap) {
 		Class type = object.getClass();
 		FieldMetadata metadata = getFields(type).get(fieldName);
 		if (metadata == null) throw new SerializationException("Field not found: " + fieldName + " (" + type.getName() + ")");

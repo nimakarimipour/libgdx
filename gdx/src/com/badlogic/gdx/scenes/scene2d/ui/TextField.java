@@ -91,7 +91,8 @@ public class TextField extends Widget implements Disableable {
 	Clipboard clipboard;
 	InputListener inputListener;
 
-	@Nullable @Null TextFieldListener listener;
+	@Nullable
+	@Null TextFieldListener listener;
 
 	@Null TextFieldFilter filter;
 	OnscreenKeyboard keyboard = new DefaultOnscreenKeyboard();
@@ -543,7 +544,8 @@ public class TextField extends Widget implements Disableable {
 	}
 
 	/** @return May be null. */
-	@Nullable private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
+	@Nullable
+	private @Null TextField findNextTextField (Array<Actor> actors, @Nullable @Null TextField best, Vector2 bestCoords,
 		Vector2 currentCoords, boolean up) {
 		for (int i = 0, n = actors.size; i < n; i++) {
 			Actor actor = actors.get(i);
