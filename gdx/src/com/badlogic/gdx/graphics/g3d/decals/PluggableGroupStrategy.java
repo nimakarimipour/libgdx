@@ -32,7 +32,9 @@ public abstract class PluggableGroupStrategy implements GroupStrategy {
 
 	@Override
 	public void afterGroup (int group) {
-		plugs.get(group).afterGroup();
+		if (plugs.containsKey(group)) {
+			plugs.get(group).afterGroup();
+		}
 	}
 
 	/** Set the plug used for a specific group. The plug will automatically be invoked.

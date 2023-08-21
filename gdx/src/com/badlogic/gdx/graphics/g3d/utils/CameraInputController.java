@@ -111,7 +111,7 @@ public class CameraInputController extends GestureDetector {
 			float amount = newZoom - previousZoom;
 			previousZoom = newZoom;
 			float w = Gdx.graphics.getWidth(), h = Gdx.graphics.getHeight();
-			return controller.pinchZoom(amount / ((w > h) ? h : w));
+			return controller == null ? false : controller.pinchZoom(amount / ((w > h) ? h : w));
 		}
 
 		@Override

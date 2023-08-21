@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,10 +30,10 @@ import javax.annotation.Nullable;
  * current animation. Use the {@link #queue(String, int, float, AnimationListener, float)} method to queue an animation to be
  * played when the current animation is finished. Use the {@link #action(String, int, float, AnimationListener, float)} method to
  * play a (short) animation on top of the current animation.
- * 
+ *
  * You can use multiple AnimationControllers on the same ModelInstance, as long as they don't interfere with each other (don't
  * affect the same {@link Node}s).
- * 
+ *
  * @author Xoppa */
 public class AnimationController extends BaseAnimationController {
 
@@ -143,7 +143,9 @@ public class AnimationController extends BaseAnimationController {
 
 	private AnimationDesc obtain (final Animation anim, float offset, float duration, int loopCount, float speed,
 		@Nullable final AnimationListener listener) {
-		if (anim == null) return null;
+		if (anim == null) {
+			throw new IllegalArgumentException("anim is null");
+		}
 		final AnimationDesc result = animationPool.obtain();
 		result.animation = anim;
 		result.listener = listener;

@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -550,7 +550,7 @@ public class MeshBuilder implements MeshPartBuilder {
 
 	@Override
 	public short vertex (@Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
-		if (vindex > MAX_INDEX) throw new GdxRuntimeException("Too many vertices used");
+		if (vindex > MAX_INDEX || pos == null) throw new GdxRuntimeException("Too many vertices used");
 
 		vertex[posOffset] = pos.x;
 		if (posSize > 1) vertex[posOffset + 1] = pos.y;
