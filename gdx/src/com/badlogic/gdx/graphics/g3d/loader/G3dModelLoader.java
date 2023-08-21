@@ -48,7 +48,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	public static final short VERSION_LO = 1;
 	protected final BaseJsonReader reader;
 
-	@NullUnmarked public G3dModelLoader (final BaseJsonReader reader) {
+	@NullUnmarked
+	public G3dModelLoader (final BaseJsonReader reader) {
 		this(reader, null);
 	}
 
@@ -79,7 +80,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return model;
 	}
 
-	@NullUnmarked protected void parseMeshes (ModelData model, JsonValue json) {
+	@NullUnmarked
+	protected void parseMeshes (ModelData model, JsonValue json) {
 		JsonValue meshes = json.get("meshes");
 		if (meshes != null) {
 
@@ -172,7 +174,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		return vertexAttributes.toArray(VertexAttribute.class);
 	}
 
-	@NullUnmarked protected void parseMaterials (ModelData model, JsonValue json, String materialDir) {
+	@NullUnmarked
+	protected void parseMaterials (ModelData model, JsonValue json, String materialDir) {
 		JsonValue materials = json.get("materials");
 		if (materials == null) {
 			// we should probably create some default material in this case
@@ -288,7 +291,8 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 
 	protected final Quaternion tempQ = new Quaternion();
 
-	@NullUnmarked protected ModelNode parseNodesRecursively (JsonValue json) {
+	@NullUnmarked
+	protected ModelNode parseNodesRecursively (JsonValue json) {
 		ModelNode jsonNode = new ModelNode();
 
 		String id = json.getString("id", null);

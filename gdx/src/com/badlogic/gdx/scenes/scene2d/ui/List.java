@@ -76,7 +76,8 @@ public class List<T> extends Widget implements Cullable {
 			long typeTimeout;
 			@SuppressWarnings("NullAway.Init") String prefix;
 
-			@NullUnmarked public boolean keyDown (InputEvent event, int keycode) {
+			@NullUnmarked
+			public boolean keyDown (InputEvent event, int keycode) {
 				if (items.isEmpty()) return false;
 				int index;
 				switch (keycode) {
@@ -197,7 +198,8 @@ public class List<T> extends Widget implements Cullable {
 		}
 	}
 
-	@NullUnmarked public void draw (Batch batch, float parentAlpha) {
+	@NullUnmarked
+	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
 		drawBackground(batch, parentAlpha);
@@ -312,19 +314,22 @@ public class List<T> extends Widget implements Cullable {
 
 	/** @return May be null. */
 
-	@NullUnmarked public T getOverItem () {
+	@NullUnmarked
+	public T getOverItem () {
 		return overIndex == -1 ? null : items.get(overIndex);
 	}
 
 	/** @return May be null. */
 
-	@NullUnmarked public T getPressedItem () {
+	@NullUnmarked
+	public T getPressedItem () {
 		return pressedIndex == -1 ? null : items.get(pressedIndex);
 	}
 
 	/** @return null if not over an item. */
 
-	@NullUnmarked public @Null T getItemAt (float y) {
+	@NullUnmarked
+	public @Null T getItemAt (float y) {
 		int index = getItemIndexAt(y);
 		if (index == -1) return null;
 		return items.get(index);
@@ -446,10 +451,12 @@ public class List<T> extends Widget implements Cullable {
 		@SuppressWarnings("NullAway.Init") public Drawable selection;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable down, over, background;
 
-		@NullUnmarked public ListStyle () {
+		@NullUnmarked
+		public ListStyle () {
 		}
 
-		@NullUnmarked public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
+		@NullUnmarked
+		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
 			this.font = font;
 			this.fontColorSelected.set(fontColorSelected);
 			this.fontColorUnselected.set(fontColorUnselected);

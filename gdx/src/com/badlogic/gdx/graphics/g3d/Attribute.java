@@ -36,7 +36,8 @@ public abstract class Attribute implements Comparable<Attribute> {
 
 	/** @return The alias of the specified attribute type, or null if not available. */
 
-	@NullUnmarked public final static String getAttributeAlias (final long type) {
+	@NullUnmarked
+	public final static String getAttributeAlias (final long type) {
 		int idx = -1;
 		while (type != 0 && ++idx < 63 && (((type >> idx) & 1) == 0))
 			;

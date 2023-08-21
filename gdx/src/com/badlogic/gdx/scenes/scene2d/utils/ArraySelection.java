@@ -56,7 +56,8 @@ public class ArraySelection<T> extends Selection<T> {
 
 	/** Called after the selection changes, clears the range start item. */
 
-	@NullUnmarked protected void changed () {
+	@NullUnmarked
+	protected void changed () {
 		rangeStart = null;
 	}
 

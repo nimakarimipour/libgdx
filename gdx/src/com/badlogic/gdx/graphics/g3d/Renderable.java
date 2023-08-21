@@ -94,7 +94,8 @@ public class Renderable {
 	/** User definable value, may be null. */
 	public Object userData;
 
-	@Initializer public Renderable set (Renderable renderable) {
+	@Initializer
+	public Renderable set (Renderable renderable) {
 		worldTransform.set(renderable.worldTransform);
 		material = renderable.material;
 		meshPart.set(renderable.meshPart);

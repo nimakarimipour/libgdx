@@ -223,7 +223,8 @@ public class Gdx2DPixmap implements Disposable {
 		setScale(basePtr, scale);
 	}
 
-	@NullUnmarked public static Gdx2DPixmap newPixmap (InputStream in, int requestedFormat) {
+	@NullUnmarked
+	public static Gdx2DPixmap newPixmap (InputStream in, int requestedFormat) {
 		try {
 			return new Gdx2DPixmap(in, requestedFormat);
 		} catch (IOException e) {
@@ -231,7 +232,8 @@ public class Gdx2DPixmap implements Disposable {
 		}
 	}
 
-	@NullUnmarked public static Gdx2DPixmap newPixmap (int width, int height, int format) {
+	@NullUnmarked
+	public static Gdx2DPixmap newPixmap (int width, int height, int format) {
 		try {
 			return new Gdx2DPixmap(width, height, format);
 		} catch (IllegalArgumentException e) {

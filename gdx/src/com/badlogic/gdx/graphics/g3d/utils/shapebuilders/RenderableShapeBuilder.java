@@ -40,7 +40,8 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
 			return new Renderable();
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public Renderable obtain () {
 			Renderable renderable = super.obtain();
 			renderable.environment = null;

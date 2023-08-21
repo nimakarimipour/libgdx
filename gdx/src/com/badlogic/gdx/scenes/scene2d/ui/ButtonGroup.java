@@ -42,7 +42,8 @@ public class ButtonGroup<T extends Button> {
 		minCheckCount = 1;
 	}
 
-	@NullUnmarked public void add (T button) {
+	@NullUnmarked
+	public void add (T button) {
 		if (button == null) throw new IllegalArgumentException("button cannot be null.");
 		button.buttonGroup = null;
 		boolean shouldCheck = button.isChecked() || buttons.size < minCheckCount;
@@ -58,7 +59,8 @@ public class ButtonGroup<T extends Button> {
 			add(buttons[i]);
 	}
 
-	@NullUnmarked public void remove (T button) {
+	@NullUnmarked
+	public void remove (T button) {
 		if (button == null) throw new IllegalArgumentException("button cannot be null.");
 		button.buttonGroup = null;
 		buttons.removeValue(button, true);
@@ -132,7 +134,8 @@ public class ButtonGroup<T extends Button> {
 
 	/** @return The first checked button, or null. */
 
-	@NullUnmarked public @Null T getChecked () {
+	@NullUnmarked
+	public @Null T getChecked () {
 		if (checkedButtons.size > 0) return checkedButtons.get(0);
 		return null;
 	}

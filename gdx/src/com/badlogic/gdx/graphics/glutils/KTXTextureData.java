@@ -71,7 +71,8 @@ public class KTXTextureData implements TextureData, CubemapData {
 		return compressedData != null;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void prepare () {
 		if (compressedData != null) throw new GdxRuntimeException("Already prepared");
 		if (file == null) throw new GdxRuntimeException("Need a file to load from");
@@ -283,7 +284,8 @@ public class KTXTextureData implements TextureData, CubemapData {
 		disposePreparedData();
 	}
 
-	@NullUnmarked public void disposePreparedData () {
+	@NullUnmarked
+	public void disposePreparedData () {
 		if (compressedData != null) BufferUtils.disposeUnsafeByteBuffer(compressedData);
 		compressedData = null;
 	}
@@ -320,7 +322,8 @@ public class KTXTextureData implements TextureData, CubemapData {
 		return glInternalFormat;
 	}
 
-	@NullUnmarked public ByteBuffer getData (int requestedLevel, int requestedFace) {
+	@NullUnmarked
+	public ByteBuffer getData (int requestedLevel, int requestedFace) {
 		int pos = imagePos;
 		for (int level = 0; level < numberOfMipmapLevels; level++) {
 			int faceLodSize = compressedData != null ? compressedData.getInt(pos) : 0;

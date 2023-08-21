@@ -56,7 +56,8 @@ public class DataInput extends DataInputStream {
 	/** Reads the length and string of UTF8 characters, or null.
 	 * @return May be null. */
 
-	@NullUnmarked public @Null String readString () throws IOException {
+	@NullUnmarked
+	public @Null String readString () throws IOException {
 		int charCount = readInt(true);
 		switch (charCount) {
 		case 0:

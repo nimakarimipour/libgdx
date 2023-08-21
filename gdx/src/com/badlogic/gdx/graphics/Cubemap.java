@@ -118,7 +118,8 @@ public class Cubemap extends GLTexture {
 
 	/** Construct a Cubemap with the specified {@link Pixmap}s for the sides, optionally generating mipmaps. */
 
-	@NullUnmarked public Cubemap (Pixmap positiveX, Pixmap negativeX, Pixmap positiveY, Pixmap negativeY, Pixmap positiveZ, Pixmap negativeZ,
+	@NullUnmarked
+	public Cubemap (Pixmap positiveX, Pixmap negativeX, Pixmap positiveY, Pixmap negativeY, Pixmap positiveZ, Pixmap negativeZ,
 		boolean useMipMaps) {
 		this(positiveX == null ? null : new PixmapTextureData(positiveX, null, useMipMaps, false),
 			negativeX == null ? null : new PixmapTextureData(negativeX, null, useMipMaps, false),
@@ -130,7 +131,8 @@ public class Cubemap extends GLTexture {
 
 	/** Construct a Cubemap with {@link Pixmap}s for each side of the specified size. */
 
-	@NullUnmarked public Cubemap (int width, int height, int depth, Format format) {
+	@NullUnmarked
+	public Cubemap (int width, int height, int depth, Format format) {
 		this(new PixmapTextureData(new Pixmap(depth, height, format), null, false, true),
 			new PixmapTextureData(new Pixmap(depth, height, format), null, false, true),
 			new PixmapTextureData(new Pixmap(width, depth, format), null, false, true),
@@ -291,7 +293,8 @@ public class Cubemap extends GLTexture {
 
 	/** @return the number of managed cubemaps currently loaded */
 
-	@NullUnmarked public static int getNumManagedCubemaps () {
+	@NullUnmarked
+	public static int getNumManagedCubemaps () {
 		return managedCubemaps.get(Gdx.app).size;
 	}
 

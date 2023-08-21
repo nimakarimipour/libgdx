@@ -78,7 +78,8 @@ public class VertexBufferObjectSubData implements VertexData {
 		((Buffer)byteBuffer).flip();
 	}
 
-	@NullUnmarked private int createBufferObject () {
+	@NullUnmarked
+	private int createBufferObject () {
 		int result = Gdx.gl20.glGenBuffer();
 		Gdx.gl20.glBindBuffer(GL20.GL_ARRAY_BUFFER, result);
 		Gdx.gl20.glBufferData(GL20.GL_ARRAY_BUFFER, byteBuffer.capacity(), null, usage);
@@ -150,7 +151,8 @@ public class VertexBufferObjectSubData implements VertexData {
 	 *
 	 * @param shader the shader */
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void bind (final ShaderProgram shader) {
 		bind(shader, null);
 	}
@@ -195,7 +197,8 @@ public class VertexBufferObjectSubData implements VertexData {
 	 *
 	 * @param shader the shader */
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void unbind (final ShaderProgram shader) {
 		unbind(shader, null);
 	}

@@ -111,11 +111,13 @@ public class Texture extends GLTexture {
 		this(Gdx.files.internal(internalPath));
 	}
 
-	@NullUnmarked public Texture (FileHandle file) {
+	@NullUnmarked
+	public Texture (FileHandle file) {
 		this(file, null, false);
 	}
 
-	@NullUnmarked public Texture (FileHandle file, boolean useMipMaps) {
+	@NullUnmarked
+	public Texture (FileHandle file, boolean useMipMaps) {
 		this(file, null, useMipMaps);
 	}
 
@@ -123,11 +125,13 @@ public class Texture extends GLTexture {
 		this(TextureData.Factory.loadFromFile(file, format, useMipMaps));
 	}
 
-	@NullUnmarked public Texture (Pixmap pixmap) {
+	@NullUnmarked
+	public Texture (Pixmap pixmap) {
 		this(new PixmapTextureData(pixmap, null, false, false));
 	}
 
-	@NullUnmarked public Texture (Pixmap pixmap, boolean useMipMaps) {
+	@NullUnmarked
+	public Texture (Pixmap pixmap, boolean useMipMaps) {
 		this(new PixmapTextureData(pixmap, null, useMipMaps, false));
 	}
 
@@ -135,7 +139,8 @@ public class Texture extends GLTexture {
 		this(new PixmapTextureData(pixmap, format, useMipMaps, false));
 	}
 
-	@NullUnmarked public Texture (int width, int height, Format format) {
+	@NullUnmarked
+	public Texture (int width, int height, Format format) {
 		this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
 	}
 
@@ -321,7 +326,8 @@ public class Texture extends GLTexture {
 
 	/** @return the number of managed textures currently loaded */
 
-	@NullUnmarked public static int getNumManagedTextures () {
+	@NullUnmarked
+	public static int getNumManagedTextures () {
 		return managedTextures.get(Gdx.app).size;
 	}
 }

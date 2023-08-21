@@ -1,5 +1,6 @@
 
 package com.badlogic.gdx.utils.reflect;
+
 import org.jspecify.annotations.NullUnmarked;
 
 /** Provides information about, and access to, an annotation of a field, class or interface.
@@ -12,7 +13,8 @@ public final class Annotation {
 		this.annotation = annotation;
 	}
 
-	@NullUnmarked @SuppressWarnings("unchecked")
+	@NullUnmarked
+	@SuppressWarnings("unchecked")
 	public <T extends java.lang.annotation.Annotation> T getAnnotation (Class<T> annotationType) {
 		if (annotation.annotationType().equals(annotationType)) {
 			return (T)annotation;

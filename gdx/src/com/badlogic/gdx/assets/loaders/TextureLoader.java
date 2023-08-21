@@ -46,7 +46,8 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		super(resolver);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, TextureParameter parameter) {
 		info.filename = fileName;
 		if (parameter == null || parameter.textureData == null) {
@@ -68,7 +69,8 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		if (info.data != null && !info.data.isPrepared()) info.data.prepare();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Texture loadSync (AssetManager manager, String fileName, FileHandle file, TextureParameter parameter) {
 		if (info == null) return null;
 		Texture texture = info.texture;
@@ -84,7 +86,8 @@ public class TextureLoader extends AsynchronousAssetLoader<Texture, TextureLoade
 		return texture;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, TextureParameter parameter) {
 		return null;
 	}

@@ -176,7 +176,8 @@ public interface Net {
 
 		private boolean includeCredentials = false;
 
-		@NullUnmarked public HttpRequest () {
+		@NullUnmarked
+		public HttpRequest () {
 			this.headers = new HashMap<String, String>();
 		}
 
@@ -291,7 +292,8 @@ public interface Net {
 			return includeCredentials;
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public void reset () {
 			httpMethod = null;
 			url = null;

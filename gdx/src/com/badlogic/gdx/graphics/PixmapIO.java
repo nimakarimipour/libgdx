@@ -87,7 +87,8 @@ public class PixmapIO {
 		static private final byte[] writeBuffer = new byte[BUFFER_SIZE];
 		static private final byte[] readBuffer = new byte[BUFFER_SIZE];
 
-		@NullUnmarked static public void write (FileHandle file, Pixmap pixmap) {
+		@NullUnmarked
+		static public void write (FileHandle file, Pixmap pixmap) {
 			DataOutputStream out = null;
 
 			try {
@@ -123,7 +124,8 @@ public class PixmapIO {
 			}
 		}
 
-		@NullUnmarked static public Pixmap read (FileHandle file) {
+		@NullUnmarked
+		static public Pixmap read (FileHandle file) {
 			DataInputStream in = null;
 
 			try {
@@ -201,7 +203,8 @@ public class PixmapIO {
 			this(128 * 128);
 		}
 
-		@NullUnmarked public PNG (int initialBufferSize) {
+		@NullUnmarked
+		public PNG (int initialBufferSize) {
 			buffer = new ChunkBuffer(initialBufferSize);
 			deflater = new Deflater();
 		}

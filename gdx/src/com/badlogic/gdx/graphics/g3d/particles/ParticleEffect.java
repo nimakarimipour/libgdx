@@ -137,7 +137,8 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 
 	/** Returns the controller with the specified name, or null. */
 
-	@NullUnmarked public ParticleController findController (String name) {
+	@NullUnmarked
+	public ParticleController findController (String name) {
 		for (int i = 0, n = controllers.size; i < n; i++) {
 			ParticleController emitter = controllers.get(i);
 			if (emitter.name.equals(name)) return emitter;

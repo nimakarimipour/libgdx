@@ -428,7 +428,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 		private InputListener hideListener;
 		@SuppressWarnings("NullAway.Init") private Actor previousScrollFocus;
 
-		@NullUnmarked public SelectBoxScrollPane (final SelectBox<T> selectBox) {
+		@NullUnmarked
+		public SelectBoxScrollPane (final SelectBox<T> selectBox) {
 			super(null, selectBox.style.scrollStyle);
 			this.selectBox = selectBox;
 
@@ -501,7 +502,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 			};
 		}
 
-		@NullUnmarked public void show (Stage stage) {
+		@NullUnmarked
+		public void show (Stage stage) {
 			if (list.isTouchable()) return;
 
 			stage.addActor(this);
@@ -554,7 +556,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 			selectBox.onShow(this, below);
 		}
 
-		@NullUnmarked public void hide () {
+		@NullUnmarked
+		public void hide () {
 			if (!list.isTouchable() || !hasParent()) return;
 			list.setTouchable(Touchable.disabled);
 
@@ -612,10 +615,12 @@ public class SelectBox<T> extends Widget implements Disableable {
 		@SuppressWarnings("NullAway.Init") public ListStyle listStyle;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
-		@NullUnmarked public SelectBoxStyle () {
+		@NullUnmarked
+		public SelectBoxStyle () {
 		}
 
-		@NullUnmarked public SelectBoxStyle (BitmapFont font, Color fontColor, @Null Drawable background, ScrollPaneStyle scrollStyle,
+		@NullUnmarked
+		public SelectBoxStyle (BitmapFont font, Color fontColor, @Null Drawable background, ScrollPaneStyle scrollStyle,
 			ListStyle listStyle) {
 			this.font = font;
 			this.fontColor.set(fontColor);
@@ -624,7 +629,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 			this.listStyle = listStyle;
 		}
 
-		@NullUnmarked public SelectBoxStyle (SelectBoxStyle style) {
+		@NullUnmarked
+		public SelectBoxStyle (SelectBoxStyle style) {
 			font = style.font;
 			fontColor.set(style.fontColor);
 

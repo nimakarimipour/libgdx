@@ -109,7 +109,8 @@ public class ParticleEffectLoader
 		json.toJson(data, parameter.file);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public ParticleEffect loadSync (AssetManager manager, String fileName, FileHandle file,
 		ParticleEffectLoadParameter parameter) {
 		ResourceData<ParticleEffect> effectData = null;
@@ -136,7 +137,8 @@ public class ParticleEffectLoader
 		return effectData.resource;
 	}
 
-	@NullUnmarked private <T> T find (Array<?> array, Class<T> type) {
+	@NullUnmarked
+	private <T> T find (Array<?> array, Class<T> type) {
 		for (Object object : array) {
 			if (ClassReflection.isAssignableFrom(type, object.getClass())) return (T)object;
 		}

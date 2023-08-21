@@ -41,7 +41,8 @@ public class AddAction extends Action {
 		if (action != null) action.restart();
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		super.reset();
 		action = null;
 	}

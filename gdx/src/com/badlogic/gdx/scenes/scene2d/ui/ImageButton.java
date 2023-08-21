@@ -49,19 +49,23 @@ public class ImageButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
-	@NullUnmarked public ImageButton (@Null Drawable imageUp) {
+	@NullUnmarked
+	public ImageButton (@Null Drawable imageUp) {
 		this(new ImageButtonStyle(null, null, null, imageUp, null, null));
 	}
 
-	@NullUnmarked public ImageButton (@Null Drawable imageUp, @Null Drawable imageDown) {
+	@NullUnmarked
+	public ImageButton (@Null Drawable imageUp, @Null Drawable imageDown) {
 		this(new ImageButtonStyle(null, null, null, imageUp, imageDown, null));
 	}
 
-	@NullUnmarked public ImageButton (@Null Drawable imageUp, @Null Drawable imageDown, @Null Drawable imageChecked) {
+	@NullUnmarked
+	public ImageButton (@Null Drawable imageUp, @Null Drawable imageDown, @Null Drawable imageChecked) {
 		this(new ImageButtonStyle(null, null, null, imageUp, imageDown, imageChecked));
 	}
 
-	@NullUnmarked protected Image newImage () {
+	@NullUnmarked
+	protected Image newImage () {
 		return new Image((Drawable)null, Scaling.fit);
 	}
 
@@ -132,10 +136,12 @@ public class ImageButton extends Button {
 		@SuppressWarnings("NullAway.Init") public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
-		@NullUnmarked public ImageButtonStyle () {
+		@NullUnmarked
+		public ImageButtonStyle () {
 		}
 
-		@NullUnmarked public ImageButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null Drawable imageUp,
+		@NullUnmarked
+		public ImageButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null Drawable imageUp,
 			@Null Drawable imageDown, @Null Drawable imageChecked) {
 			super(up, down, checked);
 			this.imageUp = imageUp;
@@ -155,7 +161,8 @@ public class ImageButton extends Button {
 			imageCheckedOver = style.imageCheckedOver;
 		}
 
-		@NullUnmarked public ImageButtonStyle (ButtonStyle style) {
+		@NullUnmarked
+		public ImageButtonStyle (ButtonStyle style) {
 			super(style);
 		}
 	}

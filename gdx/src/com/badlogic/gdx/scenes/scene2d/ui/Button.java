@@ -96,11 +96,13 @@ public class Button extends Table implements Disableable {
 		});
 	}
 
-	@NullUnmarked public Button (@Null Drawable up) {
+	@NullUnmarked
+	public Button (@Null Drawable up) {
 		this(new ButtonStyle(up, null, null));
 	}
 
-	@NullUnmarked public Button (@Null Drawable up, @Null Drawable down) {
+	@NullUnmarked
+	public Button (@Null Drawable up, @Null Drawable down) {
 		this(new ButtonStyle(up, down, null));
 	}
 
@@ -272,10 +274,12 @@ public class Button extends Table implements Disableable {
 		@SuppressWarnings("NullAway.Init") public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;
 		public float pressedOffsetX, pressedOffsetY, unpressedOffsetX, unpressedOffsetY, checkedOffsetX, checkedOffsetY;
 
-		@NullUnmarked public ButtonStyle () {
+		@NullUnmarked
+		public ButtonStyle () {
 		}
 
-		@NullUnmarked public ButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked) {
+		@NullUnmarked
+		public ButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked) {
 			this.up = up;
 			this.down = down;
 			this.checked = checked;

@@ -251,7 +251,8 @@ public class QuadTreeFloat implements Poolable {
 		}
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		if (count == -1) {
 			if (nw != null) {
 				pool.free(nw);

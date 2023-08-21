@@ -103,7 +103,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	public static class Config {
 
-		@NullUnmarked public Config () {
+		@NullUnmarked
+		public Config () {
 		}
 
 		public Config (boolean useGPU, AlignMode mode) {
@@ -153,7 +154,8 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 		setAlignMode(mode);
 	}
 
-	@NullUnmarked public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity) {
+	@NullUnmarked
+	public BillboardParticleBatch (AlignMode mode, boolean useGPU, int capacity) {
 		this(mode, useGPU, capacity, null, null);
 	}
 

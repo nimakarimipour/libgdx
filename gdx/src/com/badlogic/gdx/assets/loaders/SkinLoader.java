@@ -88,15 +88,18 @@ public class SkinLoader extends AsynchronousAssetLoader<Skin, SkinLoader.SkinPar
 		public final String textureAtlasPath;
 		public final ObjectMap<String, Object> resources;
 
-		@NullUnmarked public SkinParameter () {
+		@NullUnmarked
+		public SkinParameter () {
 			this(null, null);
 		}
 
-		@NullUnmarked public SkinParameter (ObjectMap<String, Object> resources) {
+		@NullUnmarked
+		public SkinParameter (ObjectMap<String, Object> resources) {
 			this(null, resources);
 		}
 
-		@NullUnmarked public SkinParameter (String textureAtlasPath) {
+		@NullUnmarked
+		public SkinParameter (String textureAtlasPath) {
 			this(textureAtlasPath, null);
 		}
 

@@ -50,7 +50,8 @@ public class AddListenerAction extends Action {
 		this.capture = capture;
 	}
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		super.reset();
 		listener = null;
 	}

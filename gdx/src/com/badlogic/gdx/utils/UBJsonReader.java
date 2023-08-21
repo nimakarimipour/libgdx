@@ -33,7 +33,8 @@ public class UBJsonReader implements BaseJsonReader {
 	/** Parses the UBJSON from the given stream. <br>
 	 * For best performance you should provide buffered streams to this method! */
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public JsonValue parse (InputStream input) {
 		DataInputStream din = null;
 		try {

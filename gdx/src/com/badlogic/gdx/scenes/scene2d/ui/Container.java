@@ -201,21 +201,24 @@ public class Container<T extends Actor> extends WidgetGroup {
 		throw new UnsupportedOperationException("Use Container#setActor.");
 	}
 
-	@NullUnmarked public boolean removeActor (Actor actor) {
+	@NullUnmarked
+	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
 		setActor(null);
 		return true;
 	}
 
-	@NullUnmarked public boolean removeActor (Actor actor, boolean unfocus) {
+	@NullUnmarked
+	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
 		this.actor = null;
 		return super.removeActor(actor, unfocus);
 	}
 
-	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked
+	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = super.removeActorAt(index, unfocus);
 		if (actor == this.actor) this.actor = null;
 		return actor;
@@ -739,7 +742,8 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return clip;
 	}
 
-	@NullUnmarked public @Null Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
 			if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;

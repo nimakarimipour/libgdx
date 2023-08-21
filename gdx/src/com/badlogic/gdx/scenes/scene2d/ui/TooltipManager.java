@@ -104,7 +104,8 @@ public class TooltipManager {
 		}
 	}
 
-	@NullUnmarked public void hide (Tooltip tooltip) {
+	@NullUnmarked
+	public void hide (Tooltip tooltip) {
 		showTooltip = null;
 		showTask.cancel();
 		if (tooltip.container.hasParent()) {
@@ -131,7 +132,8 @@ public class TooltipManager {
 			.addAction(sequence(parallel(alpha(0.2f, 0.2f, fade), scaleTo(0.05f, 0.05f, 0.2f, Interpolation.fade)), removeActor()));
 	}
 
-	@NullUnmarked public void hideAll () {
+	@NullUnmarked
+	public void hideAll () {
 		resetTask.cancel();
 		showTask.cancel();
 		time = initialTime;

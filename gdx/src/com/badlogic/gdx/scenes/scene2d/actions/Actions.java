@@ -66,11 +66,13 @@ public class Actions {
 
 	/** Moves the actor instantly. */
 
-	@NullUnmarked static public MoveToAction moveTo (float x, float y) {
+	@NullUnmarked
+	static public MoveToAction moveTo (float x, float y) {
 		return moveTo(x, y, 0, null);
 	}
 
-	@NullUnmarked static public MoveToAction moveTo (float x, float y, float duration) {
+	@NullUnmarked
+	static public MoveToAction moveTo (float x, float y, float duration) {
 		return moveTo(x, y, duration, null);
 	}
 
@@ -82,11 +84,13 @@ public class Actions {
 		return action;
 	}
 
-	@NullUnmarked static public MoveToAction moveToAligned (float x, float y, int alignment) {
+	@NullUnmarked
+	static public MoveToAction moveToAligned (float x, float y, int alignment) {
 		return moveToAligned(x, y, alignment, 0, null);
 	}
 
-	@NullUnmarked static public MoveToAction moveToAligned (float x, float y, int alignment, float duration) {
+	@NullUnmarked
+	static public MoveToAction moveToAligned (float x, float y, int alignment, float duration) {
 		return moveToAligned(x, y, alignment, duration, null);
 	}
 
@@ -100,11 +104,13 @@ public class Actions {
 
 	/** Moves the actor instantly. */
 
-	@NullUnmarked static public MoveByAction moveBy (float amountX, float amountY) {
+	@NullUnmarked
+	static public MoveByAction moveBy (float amountX, float amountY) {
 		return moveBy(amountX, amountY, 0, null);
 	}
 
-	@NullUnmarked static public MoveByAction moveBy (float amountX, float amountY, float duration) {
+	@NullUnmarked
+	static public MoveByAction moveBy (float amountX, float amountY, float duration) {
 		return moveBy(amountX, amountY, duration, null);
 	}
 
@@ -118,11 +124,13 @@ public class Actions {
 
 	/** Sizes the actor instantly. */
 
-	@NullUnmarked static public SizeToAction sizeTo (float x, float y) {
+	@NullUnmarked
+	static public SizeToAction sizeTo (float x, float y) {
 		return sizeTo(x, y, 0, null);
 	}
 
-	@NullUnmarked static public SizeToAction sizeTo (float x, float y, float duration) {
+	@NullUnmarked
+	static public SizeToAction sizeTo (float x, float y, float duration) {
 		return sizeTo(x, y, duration, null);
 	}
 
@@ -136,11 +144,13 @@ public class Actions {
 
 	/** Sizes the actor instantly. */
 
-	@NullUnmarked static public SizeByAction sizeBy (float amountX, float amountY) {
+	@NullUnmarked
+	static public SizeByAction sizeBy (float amountX, float amountY) {
 		return sizeBy(amountX, amountY, 0, null);
 	}
 
-	@NullUnmarked static public SizeByAction sizeBy (float amountX, float amountY, float duration) {
+	@NullUnmarked
+	static public SizeByAction sizeBy (float amountX, float amountY, float duration) {
 		return sizeBy(amountX, amountY, duration, null);
 	}
 
@@ -154,11 +164,13 @@ public class Actions {
 
 	/** Scales the actor instantly. */
 
-	@NullUnmarked static public ScaleToAction scaleTo (float x, float y) {
+	@NullUnmarked
+	static public ScaleToAction scaleTo (float x, float y) {
 		return scaleTo(x, y, 0, null);
 	}
 
-	@NullUnmarked static public ScaleToAction scaleTo (float x, float y, float duration) {
+	@NullUnmarked
+	static public ScaleToAction scaleTo (float x, float y, float duration) {
 		return scaleTo(x, y, duration, null);
 	}
 
@@ -172,11 +184,13 @@ public class Actions {
 
 	/** Scales the actor instantly. */
 
-	@NullUnmarked static public ScaleByAction scaleBy (float amountX, float amountY) {
+	@NullUnmarked
+	static public ScaleByAction scaleBy (float amountX, float amountY) {
 		return scaleBy(amountX, amountY, 0, null);
 	}
 
-	@NullUnmarked static public ScaleByAction scaleBy (float amountX, float amountY, float duration) {
+	@NullUnmarked
+	static public ScaleByAction scaleBy (float amountX, float amountY, float duration) {
 		return scaleBy(amountX, amountY, duration, null);
 	}
 
@@ -190,11 +204,13 @@ public class Actions {
 
 	/** Rotates the actor instantly. */
 
-	@NullUnmarked static public RotateToAction rotateTo (float rotation) {
+	@NullUnmarked
+	static public RotateToAction rotateTo (float rotation) {
 		return rotateTo(rotation, 0, null);
 	}
 
-	@NullUnmarked static public RotateToAction rotateTo (float rotation, float duration) {
+	@NullUnmarked
+	static public RotateToAction rotateTo (float rotation, float duration) {
 		return rotateTo(rotation, duration, null);
 	}
 
@@ -208,11 +224,13 @@ public class Actions {
 
 	/** Rotates the actor instantly. */
 
-	@NullUnmarked static public RotateByAction rotateBy (float rotationAmount) {
+	@NullUnmarked
+	static public RotateByAction rotateBy (float rotationAmount) {
 		return rotateBy(rotationAmount, 0, null);
 	}
 
-	@NullUnmarked static public RotateByAction rotateBy (float rotationAmount, float duration) {
+	@NullUnmarked
+	static public RotateByAction rotateBy (float rotationAmount, float duration) {
 		return rotateBy(rotationAmount, duration, null);
 	}
 
@@ -226,13 +244,15 @@ public class Actions {
 
 	/** Sets the actor's color instantly. */
 
-	@NullUnmarked static public ColorAction color (Color color) {
+	@NullUnmarked
+	static public ColorAction color (Color color) {
 		return color(color, 0, null);
 	}
 
 	/** Transitions from the color at the time this action starts to the specified color. */
 
-	@NullUnmarked static public ColorAction color (Color color, float duration) {
+	@NullUnmarked
+	static public ColorAction color (Color color, float duration) {
 		return color(color, duration, null);
 	}
 
@@ -247,13 +267,15 @@ public class Actions {
 
 	/** Sets the actor's alpha instantly. */
 
-	@NullUnmarked static public AlphaAction alpha (float a) {
+	@NullUnmarked
+	static public AlphaAction alpha (float a) {
 		return alpha(a, 0, null);
 	}
 
 	/** Transitions from the alpha at the time this action starts to the specified alpha. */
 
-	@NullUnmarked static public AlphaAction alpha (float a, float duration) {
+	@NullUnmarked
+	static public AlphaAction alpha (float a, float duration) {
 		return alpha(a, duration, null);
 	}
 
@@ -268,7 +290,8 @@ public class Actions {
 
 	/** Transitions from the alpha at the time this action starts to an alpha of 0. */
 
-	@NullUnmarked static public AlphaAction fadeOut (float duration) {
+	@NullUnmarked
+	static public AlphaAction fadeOut (float duration) {
 		return alpha(0, duration, null);
 	}
 
@@ -283,7 +306,8 @@ public class Actions {
 
 	/** Transitions from the alpha at the time this action starts to an alpha of 1. */
 
-	@NullUnmarked static public AlphaAction fadeIn (float duration) {
+	@NullUnmarked
+	static public AlphaAction fadeIn (float duration) {
 		return alpha(1, duration, null);
 	}
 

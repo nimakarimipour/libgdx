@@ -24,7 +24,8 @@ public class FacedCubemapData implements CubemapData {
 	/** Construct an empty Cubemap. Use the load(...) methods to set the texture of each side. Every side of the cubemap must be
 	 * set before it can be used. */
 
-	@NullUnmarked public FacedCubemapData () {
+	@NullUnmarked
+	public FacedCubemapData () {
 		this((TextureData)null, (TextureData)null, (TextureData)null, (TextureData)null, (TextureData)null, (TextureData)null);
 	}
 
@@ -52,7 +53,8 @@ public class FacedCubemapData implements CubemapData {
 
 	/** Construct a Cubemap with the specified {@link Pixmap}s for the sides, optionally generating mipmaps. */
 
-	@NullUnmarked public FacedCubemapData (Pixmap positiveX, Pixmap negativeX, Pixmap positiveY, Pixmap negativeY, Pixmap positiveZ,
+	@NullUnmarked
+	public FacedCubemapData (Pixmap positiveX, Pixmap negativeX, Pixmap positiveY, Pixmap negativeY, Pixmap positiveZ,
 		Pixmap negativeZ, boolean useMipMaps) {
 		this(positiveX == null ? null : new PixmapTextureData(positiveX, null, useMipMaps, false),
 			negativeX == null ? null : new PixmapTextureData(negativeX, null, useMipMaps, false),
@@ -64,7 +66,8 @@ public class FacedCubemapData implements CubemapData {
 
 	/** Construct a Cubemap with {@link Pixmap}s for each side of the specified size. */
 
-	@NullUnmarked public FacedCubemapData (int width, int height, int depth, Format format) {
+	@NullUnmarked
+	public FacedCubemapData (int width, int height, int depth, Format format) {
 		this(new PixmapTextureData(new Pixmap(depth, height, format), null, false, true),
 			new PixmapTextureData(new Pixmap(depth, height, format), null, false, true),
 			new PixmapTextureData(new Pixmap(width, depth, format), null, false, true),
@@ -106,7 +109,8 @@ public class FacedCubemapData implements CubemapData {
 	 * @param side The {@link CubemapSide}
 	 * @param pixmap The {@link Pixmap} */
 
-	@NullUnmarked public void load (CubemapSide side, Pixmap pixmap) {
+	@NullUnmarked
+	public void load (CubemapSide side, Pixmap pixmap) {
 		data[side.index] = pixmap == null ? null : new PixmapTextureData(pixmap, null, false, false);
 	}
 

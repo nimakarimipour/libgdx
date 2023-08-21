@@ -47,14 +47,16 @@ public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.Musi
 		music = Gdx.audio.newMusic(file);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Music loadSync (AssetManager manager, String fileName, FileHandle file, MusicParameter parameter) {
 		Music music = this.music;
 		this.music = null;
 		return music;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, MusicParameter parameter) {
 		return null;
 	}

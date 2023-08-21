@@ -69,7 +69,8 @@ public class AnimationController extends BaseAnimationController {
 		/** The number of remaining loops, negative for continuous, zero if stopped. */
 		public int loopCount;
 
-		@NullUnmarked protected AnimationDesc () {
+		@NullUnmarked
+		protected AnimationDesc () {
 		}
 
 		/** @param delta delta time, must be positive.
@@ -157,7 +158,8 @@ public class AnimationController extends BaseAnimationController {
 		return result;
 	}
 
-	@NullUnmarked private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
+	@NullUnmarked
+	private AnimationDesc obtain (final String id, float offset, float duration, int loopCount, float speed,
 		final AnimationListener listener) {
 		if (id == null) return null;
 		final Animation anim = target.getAnimation(id);
@@ -172,7 +174,8 @@ public class AnimationController extends BaseAnimationController {
 	/** Update any animations currently being played.
 	 * @param delta The time elapsed since last update, change this to alter the overall speed (can be negative). */
 
-	@NullUnmarked public void update (float delta) {
+	@NullUnmarked
+	public void update (float delta) {
 		if (paused) return;
 		if (previous != null && ((transitionCurrentTime += delta) >= transitionTargetTime)) {
 			removeAnimation(previous.animation);
@@ -205,7 +208,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
 
-	@NullUnmarked public AnimationDesc setAnimation (final String id) {
+	@NullUnmarked
+	public AnimationDesc setAnimation (final String id) {
 		return setAnimation(id, 1, 1.0f, null);
 	}
 
@@ -216,7 +220,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
 
-	@NullUnmarked public AnimationDesc setAnimation (final String id, int loopCount) {
+	@NullUnmarked
+	public AnimationDesc setAnimation (final String id, int loopCount) {
 		return setAnimation(id, loopCount, 1.0f, null);
 	}
 
@@ -299,7 +304,8 @@ public class AnimationController extends BaseAnimationController {
 	 * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will be invalid when the animation
 	 *         is completed. */
 
-	@NullUnmarked public AnimationDesc animate (final String id, float transitionTime) {
+	@NullUnmarked
+	public AnimationDesc animate (final String id, float transitionTime) {
 		return animate(id, 1, 1.0f, null, transitionTime);
 	}
 

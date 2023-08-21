@@ -515,7 +515,8 @@ public class Array<T> implements Iterable<T> {
 
 	/** Returns a random item from the array, or null if the array is empty. */
 
-	@NullUnmarked public @Null T random () {
+	@NullUnmarked
+	public @Null T random () {
 		if (size == 0) return null;
 		return items[MathUtils.random(0, size - 1)];
 	}
@@ -677,7 +678,8 @@ public class Array<T> implements Iterable<T> {
 			this(array, true);
 		}
 
-		@NullUnmarked public ArrayIterable (Array<T> array, boolean allowRemove) {
+		@NullUnmarked
+		public ArrayIterable (Array<T> array, boolean allowRemove) {
 			this.array = array;
 			this.allowRemove = allowRemove;
 		}

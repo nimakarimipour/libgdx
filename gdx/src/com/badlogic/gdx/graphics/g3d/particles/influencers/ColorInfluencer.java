@@ -64,7 +64,8 @@ public abstract class ColorInfluencer extends Influencer {
 		public ScaledNumericValue alphaValue;
 		public GradientColorValue colorValue;
 
-		@NullUnmarked public Single () {
+		@NullUnmarked
+		public Single () {
 			colorValue = new GradientColorValue();
 			alphaValue = new ScaledNumericValue();
 			alphaValue.setHigh(1);

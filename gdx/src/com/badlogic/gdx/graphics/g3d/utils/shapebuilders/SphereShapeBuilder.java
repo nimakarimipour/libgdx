@@ -50,7 +50,8 @@ public class SphereShapeBuilder extends BaseShapeBuilder {
 	/** @deprecated use {@link MeshPartBuilder#setVertexTransform(Matrix4)} instead of using the method signature taking a
 	 *             matrix. */
 
-	@NullUnmarked @Deprecated
+	@NullUnmarked
+	@Deprecated
 	public static void build (MeshPartBuilder builder, final Matrix4 transform, float width, float height, float depth,
 		int divisionsU, int divisionsV, float angleUFrom, float angleUTo, float angleVFrom, float angleVTo) {
 		final boolean closedVFrom = MathUtils.isEqual(angleVFrom, 0f);

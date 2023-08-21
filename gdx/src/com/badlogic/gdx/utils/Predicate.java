@@ -37,7 +37,8 @@ public interface Predicate<T> {
 			this(iterable.iterator(), predicate);
 		}
 
-		@NullUnmarked public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
+		@NullUnmarked
+		public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
 			set(iterator, predicate);
 		}
 
@@ -45,7 +46,8 @@ public interface Predicate<T> {
 			set(iterable.iterator(), predicate);
 		}
 
-		@NullUnmarked public void set (final Iterator<T> iterator, final Predicate<T> predicate) {
+		@NullUnmarked
+		public void set (final Iterator<T> iterator, final Predicate<T> predicate) {
 			this.iterator = iterator;
 			this.predicate = predicate;
 			end = peeked = false;
@@ -68,7 +70,8 @@ public interface Predicate<T> {
 			return false;
 		}
 
-		@NullUnmarked @Override
+		@NullUnmarked
+		@Override
 		public T next () {
 			if (next == null && !hasNext()) return null;
 			final T result = next;
@@ -89,7 +92,8 @@ public interface Predicate<T> {
 		@SuppressWarnings("NullAway.Init") public Predicate<T> predicate;
 		@SuppressWarnings("NullAway") public PredicateIterator<T> iterator = null;
 
-		@NullUnmarked public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
+		@NullUnmarked
+		public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
 			set(iterable, predicate);
 		}
 

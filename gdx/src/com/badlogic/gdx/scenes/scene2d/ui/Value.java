@@ -27,7 +27,8 @@ import org.jspecify.annotations.NullUnmarked;
 abstract public class Value {
 	/** Calls {@link #get(Actor)} with null. */
 
-	@NullUnmarked public float get () {
+	@NullUnmarked
+	public float get () {
 		return get(null);
 	}
 

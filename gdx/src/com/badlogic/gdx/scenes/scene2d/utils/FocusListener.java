@@ -54,7 +54,8 @@ abstract public class FocusListener implements EventListener {
 		@SuppressWarnings("NullAway.Init") private Type type;
 		@SuppressWarnings("NullAway.Init") private Actor relatedActor;
 
-		@NullUnmarked public void reset () {
+		@NullUnmarked
+		public void reset () {
 			super.reset();
 			relatedActor = null;
 		}

@@ -127,7 +127,8 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	/** Returns the value (which may be null) for the specified key, or null if the key is not in the map. Note this does a
 	 * .equals() comparison of each key in reverse order until the specified key is found. */
 
-	@NullUnmarked public @Null V get (K key) {
+	@NullUnmarked
+	public @Null V get (K key) {
 		return get(key, null);
 	}
 
@@ -150,7 +151,8 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	 * value is found.
 	 * @param identity If true, == comparison will be used. If false, .equals() comparison will be used. */
 
-	@NullUnmarked public @Null K getKey (V value, boolean identity) {
+	@NullUnmarked
+	public @Null K getKey (V value, boolean identity) {
 		Object[] values = this.values;
 		int i = size - 1;
 		if (identity || value == null) {
@@ -259,7 +261,8 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return -1;
 	}
 
-	@NullUnmarked public @Null V removeKey (K key) {
+	@NullUnmarked
+	public @Null V removeKey (K key) {
 		Object[] keys = this.keys;
 		if (key == null) {
 			for (int i = 0, n = size; i < n; i++) {

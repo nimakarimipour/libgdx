@@ -94,7 +94,8 @@ class TimSort<T> {
 		runLen = new int[40];
 	}
 
-	@NullUnmarked public void doSort (T[] a, Comparator<T> c, int lo, int hi) {
+	@NullUnmarked
+	public void doSort (T[] a, Comparator<T> c, int lo, int hi) {
 		stackSize = 0;
 		rangeCheck(a.length, lo, hi);
 		int nRemaining = hi - lo;

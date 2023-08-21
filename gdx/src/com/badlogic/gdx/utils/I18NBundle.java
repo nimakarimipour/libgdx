@@ -158,7 +158,8 @@ public class I18NBundle {
 		return createBundleImpl(baseFileHandle, locale, encoding);
 	}
 
-	@NullUnmarked private static I18NBundle createBundleImpl (FileHandle baseFileHandle, Locale locale, String encoding) {
+	@NullUnmarked
+	private static I18NBundle createBundleImpl (FileHandle baseFileHandle, Locale locale, String encoding) {
 		if (baseFileHandle == null || locale == null || encoding == null) throw new NullPointerException();
 
 		I18NBundle bundle = null;
@@ -290,12 +291,14 @@ public class I18NBundle {
 	 * @return a <code>Locale</code> for the fallback search, or <code>null</code> if no further fallback search is needed.
 	 * @exception NullPointerException if <code>locale</code> is <code>null</code> */
 
-	@NullUnmarked private static Locale getFallbackLocale (Locale locale) {
+	@NullUnmarked
+	private static Locale getFallbackLocale (Locale locale) {
 		Locale defaultLocale = Locale.getDefault();
 		return locale.equals(defaultLocale) ? null : defaultLocale;
 	}
 
-	@NullUnmarked private static I18NBundle loadBundleChain (FileHandle baseFileHandle, String encoding, List<Locale> candidateLocales,
+	@NullUnmarked
+	private static I18NBundle loadBundleChain (FileHandle baseFileHandle, String encoding, List<Locale> candidateLocales,
 		int candidateIndex, I18NBundle baseBundle) {
 		Locale targetLocale = candidateLocales.get(candidateIndex);
 		I18NBundle parent = null;
@@ -318,7 +321,8 @@ public class I18NBundle {
 
 	// Tries to load the bundle for the given locale.
 
-	@NullUnmarked private static I18NBundle loadBundle (FileHandle baseFileHandle, String encoding, Locale targetLocale) {
+	@NullUnmarked
+	private static I18NBundle loadBundle (FileHandle baseFileHandle, String encoding, Locale targetLocale) {
 		I18NBundle bundle = null;
 		Reader reader = null;
 		try {
@@ -418,7 +422,9 @@ public class I18NBundle {
 	 * 
 	 * @param locale */
 
-	@NullUnmarked @Initializer private void setLocale (Locale locale) {
+	@NullUnmarked
+	@Initializer
+	private void setLocale (Locale locale) {
 		this.locale = locale;
 		this.formatter = new TextFormatter(locale, !simpleFormatter);
 	}

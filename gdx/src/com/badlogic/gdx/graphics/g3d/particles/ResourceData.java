@@ -57,7 +57,8 @@ public class ResourceData<T> implements Json.Serializable {
 		private int loadIndex;
 		@SuppressWarnings("NullAway.Init") protected ResourceData resources;
 
-		@NullUnmarked public SaveData () {
+		@NullUnmarked
+		public SaveData () {
 			data = new ObjectMap<String, Object>();
 			assets = new IntArray();
 			loadIndex = 0;
@@ -83,7 +84,8 @@ public class ResourceData<T> implements Json.Serializable {
 			data.put(key, value);
 		}
 
-		@NullUnmarked public AssetDescriptor loadAsset () {
+		@NullUnmarked
+		public AssetDescriptor loadAsset () {
 			if (loadIndex == assets.size) return null;
 			AssetData data = (AssetData)resources.sharedAssets.get(assets.get(loadIndex++));
 			return new AssetDescriptor(data.filename, data.type);
@@ -111,7 +113,8 @@ public class ResourceData<T> implements Json.Serializable {
 		@SuppressWarnings("NullAway.Init") public String filename;
 		@SuppressWarnings("NullAway.Init") public Class<T> type;
 
-		@NullUnmarked public AssetData () {
+		@NullUnmarked
+		public AssetData () {
 		}
 
 		public AssetData (String filename, Class<T> type) {
@@ -209,7 +212,8 @@ public class ResourceData<T> implements Json.Serializable {
 		return uniqueData.get(key);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void write (Json json) {
 		json.writeValue("unique", uniqueData, ObjectMap.class);
 		json.writeValue("data", data, Array.class, SaveData.class);
@@ -217,7 +221,8 @@ public class ResourceData<T> implements Json.Serializable {
 		json.writeValue("resource", resource, null);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void read (Json json, JsonValue jsonData) {
 		uniqueData = json.readValue("unique", ObjectMap.class, jsonData);
 		for (Entry<String, SaveData> entry : uniqueData.entries()) {

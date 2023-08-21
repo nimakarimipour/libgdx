@@ -37,7 +37,8 @@ public class DepthShaderProvider extends BaseShaderProvider {
 		this(vertexShader.readString(), fragmentShader.readString());
 	}
 
-	@NullUnmarked public DepthShaderProvider () {
+	@NullUnmarked
+	public DepthShaderProvider () {
 		this(null);
 	}
 

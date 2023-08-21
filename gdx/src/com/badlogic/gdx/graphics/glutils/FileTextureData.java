@@ -66,7 +66,8 @@ public class FileTextureData implements TextureData {
 		isPrepared = true;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Pixmap consumePixmap () {
 		if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling getPixmap()");
 		isPrepared = false;

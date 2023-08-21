@@ -51,7 +51,8 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 
 	@SuppressWarnings("NullAway.Init") I18NBundle bundle;
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
 		this.bundle = null;
 		Locale locale;
@@ -70,14 +71,16 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 		}
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public I18NBundle loadSync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
 		I18NBundle bundle = this.bundle;
 		this.bundle = null;
 		return bundle;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, I18NBundleParameter parameter) {
 		return null;
 	}
@@ -86,11 +89,13 @@ public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBu
 		public final Locale locale;
 		public final String encoding;
 
-		@NullUnmarked public I18NBundleParameter () {
+		@NullUnmarked
+		public I18NBundleParameter () {
 			this(null, null);
 		}
 
-		@NullUnmarked public I18NBundleParameter (Locale locale) {
+		@NullUnmarked
+		public I18NBundleParameter (Locale locale) {
 			this(locale, null);
 		}
 

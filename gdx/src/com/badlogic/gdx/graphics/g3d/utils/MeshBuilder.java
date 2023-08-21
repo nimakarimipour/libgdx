@@ -157,7 +157,9 @@ public class MeshBuilder implements MeshPartBuilder {
 
 	/** Begin building a mesh */
 
-	@NullUnmarked @Initializer public void begin (final VertexAttributes attributes, int primitiveType) {
+	@NullUnmarked
+	@Initializer
+	public void begin (final VertexAttributes attributes, int primitiveType) {
 		if (this.attributes != null) throw new RuntimeException("Call end() first");
 		this.attributes = attributes;
 		this.vertices.clear();
@@ -193,7 +195,8 @@ public class MeshBuilder implements MeshPartBuilder {
 		bounds.inf();
 	}
 
-	@NullUnmarked private void endpart () {
+	@NullUnmarked
+	private void endpart () {
 		if (part != null) {
 			bounds.getCenter(part.center);
 			bounds.getDimensions(part.halfExtents).scl(0.5f);
@@ -219,7 +222,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	 * @param primitiveType e.g. {@link GL20#GL_TRIANGLES} or {@link GL20#GL_LINES}
 	 * @param meshPart The part to receive the result */
 
-	@NullUnmarked public MeshPart part (final String id, final int primitiveType, MeshPart meshPart) {
+	@NullUnmarked
+	public MeshPart part (final String id, final int primitiveType, MeshPart meshPart) {
 		if (this.attributes == null) throw new RuntimeException("Call begin() first");
 		endpart();
 
@@ -239,7 +243,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	 * @param mesh The mesh to receive the built vertices and indices, must have the same attributes and must be big enough to hold
 	 *           the data, any existing data will be overwritten. */
 
-	@NullUnmarked public Mesh end (Mesh mesh) {
+	@NullUnmarked
+	public Mesh end (Mesh mesh) {
 		endpart();
 
 		if (attributes == null) throw new GdxRuntimeException("Call begin() first");
@@ -272,7 +277,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	 * to #begin and #end. Any builder calls made from the last call to #begin up until now are practically discarded. The state
 	 * (e.g. UV region, color, vertex transform) will remain unchanged. */
 
-	@NullUnmarked public void clear () {
+	@NullUnmarked
+	public void clear () {
 		this.vertices.clear();
 		this.indices.clear();
 		this.parts.clear();
@@ -589,7 +595,8 @@ public class MeshBuilder implements MeshPartBuilder {
 		return (short)lastIndex;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public short vertex (final VertexInfo info) {
 		return vertex(info.hasPosition ? info.position : null, info.hasNormal ? info.normal : null,
 			info.hasColor ? info.color : null, info.hasUV ? info.uv : null);
@@ -661,17 +668,20 @@ public class MeshBuilder implements MeshPartBuilder {
 		line(vertex(p1), vertex(p2));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void line (Vector3 p1, Vector3 p2) {
 		line(vertTmp1.set(p1, null, null, null), vertTmp2.set(p2, null, null, null));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void line (float x1, float y1, float z1, float x2, float y2, float z2) {
 		line(vertTmp1.set(null, null, null, null).setPos(x1, y1, z1), vertTmp2.set(null, null, null, null).setPos(x2, y2, z2));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void line (Vector3 p1, Color c1, Vector3 p2, Color c2) {
 		line(vertTmp1.set(p1, null, c1, null), vertTmp2.set(p2, null, c2, null));
 	}
@@ -692,12 +702,14 @@ public class MeshBuilder implements MeshPartBuilder {
 		triangle(vertex(p1), vertex(p2), vertex(p3));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void triangle (Vector3 p1, Vector3 p2, Vector3 p3) {
 		triangle(vertTmp1.set(p1, null, null, null), vertTmp2.set(p2, null, null, null), vertTmp3.set(p3, null, null, null));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void triangle (Vector3 p1, Color c1, Vector3 p2, Color c2, Vector3 p3, Color c3) {
 		triangle(vertTmp1.set(p1, null, c1, null), vertTmp2.set(p2, null, c2, null), vertTmp3.set(p3, null, c3, null));
 	}
@@ -720,13 +732,15 @@ public class MeshBuilder implements MeshPartBuilder {
 		rect(vertex(corner00), vertex(corner10), vertex(corner11), vertex(corner01));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void rect (Vector3 corner00, Vector3 corner10, Vector3 corner11, Vector3 corner01, Vector3 normal) {
 		rect(vertTmp1.set(corner00, normal, null, null).setUV(0f, 1f), vertTmp2.set(corner10, normal, null, null).setUV(1f, 1f),
 			vertTmp3.set(corner11, normal, null, null).setUV(1f, 0f), vertTmp4.set(corner01, normal, null, null).setUV(0f, 0f));
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void rect (float x00, float y00, float z00, float x10, float y10, float z10, float x11, float y11, float z11, float x01,
 		float y01, float z01, float normalX, float normalY, float normalZ) {
 		rect(vertTmp1.set(null, null, null, null).setPos(x00, y00, z00).setNor(normalX, normalY, normalZ).setUV(0f, 1f),

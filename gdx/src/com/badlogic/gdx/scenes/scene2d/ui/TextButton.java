@@ -137,18 +137,23 @@ public class TextButton extends Button {
 	 * @author Nathan Sweet */
 	static public class TextButtonStyle extends ButtonStyle {
 		@SuppressWarnings("NullAway.Init") public BitmapFont font;
-		@SuppressWarnings("NullAway.Init") public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
-		@SuppressWarnings("NullAway.Init") public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor, checkedFocusedFontColor;
+		@SuppressWarnings("NullAway.Init") public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor,
+			disabledFontColor;
+		@SuppressWarnings("NullAway.Init") public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor,
+			checkedFocusedFontColor;
 
-		@NullUnmarked public TextButtonStyle () {
+		@NullUnmarked
+		public TextButtonStyle () {
 		}
 
-		@NullUnmarked public TextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null BitmapFont font) {
+		@NullUnmarked
+		public TextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null BitmapFont font) {
 			super(up, down, checked);
 			this.font = font;
 		}
 
-		@NullUnmarked public TextButtonStyle (TextButtonStyle style) {
+		@NullUnmarked
+		public TextButtonStyle (TextButtonStyle style) {
 			super(style);
 			font = style.font;
 

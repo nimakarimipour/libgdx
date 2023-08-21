@@ -94,7 +94,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	 * @param imageResolver
 	 * @return the {@link TiledMap} */
 
-	@NullUnmarked protected TiledMap loadTiledMap (FileHandle tmxFile, P parameter, ImageResolver imageResolver) {
+	@NullUnmarked
+	protected TiledMap loadTiledMap (FileHandle tmxFile, P parameter, ImageResolver imageResolver) {
 		this.map = new TiledMap();
 
 		if (parameter != null) {
@@ -256,7 +257,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@NullUnmarked protected void loadImageLayer (TiledMap map, MapLayers parentLayers, Element element, FileHandle tmxFile,
+	@NullUnmarked
+	protected void loadImageLayer (TiledMap map, MapLayers parentLayers, Element element, FileHandle tmxFile,
 		ImageResolver imageResolver) {
 		if (element.getName().equals("imagelayer")) {
 			float x = 0;
@@ -297,7 +299,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@NullUnmarked protected void loadBasicLayerInfo (MapLayer layer, Element element) {
+	@NullUnmarked
+	protected void loadBasicLayerInfo (MapLayer layer, Element element) {
 		String name = element.getAttribute("name", null);
 		float opacity = Float.parseFloat(element.getAttribute("opacity", "1.0"));
 		boolean visible = element.getIntAttribute("visible", 1) == 1;
@@ -319,7 +322,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		loadObject(map, tile.getObjects(), element, tile.getTextureRegion().getRegionHeight());
 	}
 
-	@NullUnmarked protected void loadObject (TiledMap map, MapObjects objects, Element element, float heightInPixels) {
+	@NullUnmarked
+	protected void loadObject (TiledMap map, MapObjects objects, Element element, float heightInPixels) {
 		if (element.getName().equals("object")) {
 			MapObject object = null;
 
@@ -414,7 +418,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@NullUnmarked protected void loadProperties (MapProperties properties, Element element) {
+	@NullUnmarked
+	protected void loadProperties (MapProperties properties, Element element) {
 		if (element == null) return;
 		if (element.getName().equals("properties")) {
 			for (Element property : element.getChildrenByName("property")) {
@@ -471,7 +476,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		return cell;
 	}
 
-	@NullUnmarked static public int[] getTileIds (Element element, int width, int height) {
+	@NullUnmarked
+	static public int[] getTileIds (Element element, int width, int height) {
 		Element data = element.getChildByName("data");
 		String encoding = data.getAttribute("encoding", null);
 		if (encoding == null) { // no 'encoding' attribute means that the encoding is XML
@@ -544,7 +550,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		return result;
 	}
 
-	@NullUnmarked protected void loadTileSet (Element element, FileHandle tmxFile, ImageResolver imageResolver) {
+	@NullUnmarked
+	protected void loadTileSet (Element element, FileHandle tmxFile, ImageResolver imageResolver) {
 		if (element.getName().equals("tileset")) {
 			int firstgid = element.getIntAttribute("firstgid", 1);
 			String imageSource = "";
@@ -635,7 +642,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		Element element, Array<Element> tileElements, String name, int firstgid, int tilewidth, int tileheight, int spacing,
 		int margin, String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight, FileHandle image);
 
-	@NullUnmarked protected void addTileProperties (TiledMapTile tile, Element tileElement) {
+	@NullUnmarked
+	protected void addTileProperties (TiledMapTile tile, Element tileElement) {
 		String terrain = tileElement.getAttribute("terrain", null);
 		if (terrain != null) {
 			tile.getProperties().put("terrain", terrain);
@@ -663,7 +671,8 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		}
 	}
 
-	@NullUnmarked protected AnimatedTiledMapTile createAnimatedTile (TiledMapTileSet tileSet, TiledMapTile tile, Element tileElement,
+	@NullUnmarked
+	protected AnimatedTiledMapTile createAnimatedTile (TiledMapTileSet tileSet, TiledMapTile tile, Element tileElement,
 		int firstgid) {
 		Element animationElement = tileElement.getChildByName("animation");
 		if (animationElement != null) {

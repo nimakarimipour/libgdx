@@ -72,7 +72,8 @@ public class NodePart {
 		return new NodePart().set(this);
 	}
 
-	@NullUnmarked protected NodePart set (NodePart other) {
+	@NullUnmarked
+	protected NodePart set (NodePart other) {
 		meshPart = new MeshPart(other.meshPart);
 		material = other.material;
 		enabled = other.enabled;

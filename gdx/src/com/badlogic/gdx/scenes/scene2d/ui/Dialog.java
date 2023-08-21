@@ -154,7 +154,8 @@ public class Dialog extends Window {
 	/** Adds a text button to the button table. Null will be passed to {@link #result(Object)} if this button is clicked. The
 	 * dialog must have been constructed with a skin to use this method. */
 
-	@NullUnmarked public Dialog button (@Null String text) {
+	@NullUnmarked
+	public Dialog button (@Null String text) {
 		return button(text, null);
 	}
 
@@ -174,7 +175,8 @@ public class Dialog extends Window {
 
 	/** Adds the given button to the button table. */
 
-	@NullUnmarked public Dialog button (Button button) {
+	@NullUnmarked
+	public Dialog button (Button button) {
 		return button(button, null);
 	}
 
@@ -191,7 +193,8 @@ public class Dialog extends Window {
 	 * remembered so they can be restored when the dialog is hidden.
 	 * @param action May be null. */
 
-	@NullUnmarked public Dialog show (Stage stage, @Null Action action) {
+	@NullUnmarked
+	public Dialog show (Stage stage, @Null Action action) {
 		clearActions();
 		removeCaptureListener(ignoreTouchDown);
 
@@ -226,7 +229,8 @@ public class Dialog extends Window {
 	 * @param action If null, the dialog is removed immediately. Otherwise, the dialog is removed when the action completes. The
 	 *           dialog will not respond to touch down events during the action. */
 
-	@NullUnmarked public void hide (@Null Action action) {
+	@NullUnmarked
+	public void hide (@Null Action action) {
 		Stage stage = getStage();
 		if (stage != null) {
 			removeListener(focusListener);

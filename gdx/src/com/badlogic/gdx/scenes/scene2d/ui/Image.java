@@ -42,7 +42,8 @@ public class Image extends Widget {
 
 	/** Creates an image with no drawable, stretched, and aligned center. */
 
-	@NullUnmarked public Image () {
+	@NullUnmarked
+	public Image () {
 		this((Drawable)null);
 	}
 

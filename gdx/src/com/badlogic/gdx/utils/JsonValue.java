@@ -64,11 +64,13 @@ public class JsonValue implements Iterable<JsonValue> {
 		set(value);
 	}
 
-	@NullUnmarked public JsonValue (double value) {
+	@NullUnmarked
+	public JsonValue (double value) {
 		set(value, null);
 	}
 
-	@NullUnmarked public JsonValue (long value) {
+	@NullUnmarked
+	public JsonValue (long value) {
 		set(value, null);
 	}
 
@@ -112,7 +114,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Returns an iterator for the child with the specified name, or an empty iterator if no child is found. */
 
-	@NullUnmarked public JsonIterator iterator (String name) {
+	@NullUnmarked
+	public JsonIterator iterator (String name) {
 		JsonValue current = get(name);
 		if (current == null) {
 			JsonIterator iter = new JsonIterator();
@@ -143,7 +146,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * {@link JsonValue} for how to iterate efficiently.
 	 * @return May be null. */
 
-	@NullUnmarked public @Null JsonValue remove (int index) {
+	@NullUnmarked
+	public @Null JsonValue remove (int index) {
 		JsonValue child = get(index);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -160,7 +164,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Removes the child with the specified name.
 	 * @return May be null. */
 
-	@NullUnmarked public @Null JsonValue remove (String name) {
+	@NullUnmarked
+	public @Null JsonValue remove (String name) {
 		JsonValue child = get(name);
 		if (child == null) return null;
 		if (child.prev == null) {
@@ -176,7 +181,8 @@ public class JsonValue implements Iterable<JsonValue> {
 
 	/** Removes this value from its parent. */
 
-	@NullUnmarked public void remove () {
+	@NullUnmarked
+	public void remove () {
 		if (parent == null) throw new IllegalStateException();
 		if (prev == null) {
 			parent.child = next;
@@ -208,7 +214,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
 
-	@NullUnmarked public @Null String asString () {
+	@NullUnmarked
+	public @Null String asString () {
 		switch (type) {
 		case stringValue:
 			return stringValue;
@@ -624,7 +631,8 @@ public class JsonValue implements Iterable<JsonValue> {
 	/** Finds the child with the specified name and returns its first child.
 	 * @return May be null. */
 
-	@NullUnmarked public @Null JsonValue getChild (String name) {
+	@NullUnmarked
+	public @Null JsonValue getChild (String name) {
 		JsonValue child = get(name);
 		return child == null ? null : child.child;
 	}
@@ -1259,7 +1267,8 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
-		@NullUnmarked public void remove () {
+		@NullUnmarked
+		public void remove () {
 			if (current.prev == null) {
 				child = current.next;
 				if (child != null) child.prev = null;

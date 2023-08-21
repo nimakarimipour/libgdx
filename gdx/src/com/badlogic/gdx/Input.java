@@ -276,7 +276,8 @@ public interface Input {
 		/** @return a human readable representation of the keycode. The returned value can be used in
 		 *         {@link Input.Keys#valueOf(String)} */
 
-		@NullUnmarked public static String toString (int keycode) {
+		@NullUnmarked
+		public static String toString (int keycode) {
 			if (keycode < 0) throw new IllegalArgumentException("keycode cannot be negative, keycode: " + keycode);
 			if (keycode > MAX_KEYCODE) throw new IllegalArgumentException("keycode cannot be greater than 255, keycode: " + keycode);
 			switch (keycode) {

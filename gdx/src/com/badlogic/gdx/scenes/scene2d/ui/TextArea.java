@@ -208,7 +208,8 @@ public class TextArea extends TextField {
 
 	// OVERRIDE from TextField
 
-	@NullUnmarked protected void sizeChanged () {
+	@NullUnmarked
+	protected void sizeChanged () {
 		lastText = null; // Cause calculateOffsets to recalculate the line breaks.
 
 		// The number of lines showed must be updated whenever the height is updated

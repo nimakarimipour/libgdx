@@ -32,7 +32,8 @@ public class Cell<T extends Actor> implements Poolable {
 	@SuppressWarnings("NullAway.Init") Integer colspan;
 	@SuppressWarnings("NullAway.Init") Boolean uniformX, uniformY;
 
-	@SuppressWarnings("NullAway.Init") @Null Actor actor;
+	@SuppressWarnings("NullAway.Init")
+	@Null Actor actor;
 	float actorX, actorY;
 	float actorWidth, actorHeight;
 
@@ -64,7 +65,8 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Removes the current actor for the cell, if any. */
 
-	@NullUnmarked public Cell<T> clearActor () {
+	@NullUnmarked
+	public Cell<T> clearActor () {
 		setActor(null);
 		return this;
 	}
@@ -900,7 +902,8 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Sets all constraint fields to null. */
 
-	@NullUnmarked void clear () {
+	@NullUnmarked
+	void clear () {
 		minWidth = null;
 		minHeight = null;
 		prefWidth = null;
@@ -927,7 +930,8 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Reset state so the cell can be reused, setting all constraints to their {@link #defaults() default} values. */
 
-	@NullUnmarked public void reset () {
+	@NullUnmarked
+	public void reset () {
 		actor = null;
 		table = null;
 		endRow = false;
@@ -993,7 +997,8 @@ public class Cell<T extends Actor> implements Poolable {
 	/** Returns the defaults to use for all cells. This can be used to avoid needing to set the same defaults for every table (eg,
 	 * for spacing). */
 
-	@NullUnmarked static public Cell defaults () {
+	@NullUnmarked
+	static public Cell defaults () {
 		if (files == null || files != Gdx.files) {
 			files = Gdx.files;
 			defaults = new Cell();

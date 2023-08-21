@@ -105,7 +105,8 @@ public class NetJavaSocketImpl implements Socket {
 		return socket.getRemoteSocketAddress().toString();
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void dispose () {
 		if (socket != null) {
 			try {

@@ -33,20 +33,23 @@ public class PixmapLoader extends AsynchronousAssetLoader<Pixmap, PixmapLoader.P
 
 	@SuppressWarnings("NullAway.Init") Pixmap pixmap;
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void loadAsync (AssetManager manager, String fileName, FileHandle file, PixmapParameter parameter) {
 		pixmap = null;
 		pixmap = new Pixmap(file);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Pixmap loadSync (AssetManager manager, String fileName, FileHandle file, PixmapParameter parameter) {
 		Pixmap pixmap = this.pixmap;
 		this.pixmap = null;
 		return pixmap;
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public Array<AssetDescriptor> getDependencies (String fileName, FileHandle file, PixmapParameter parameter) {
 		return null;
 	}

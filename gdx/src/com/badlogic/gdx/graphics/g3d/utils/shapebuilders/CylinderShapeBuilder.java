@@ -37,7 +37,8 @@ public class CylinderShapeBuilder extends BaseShapeBuilder {
 
 	/** Build a cylinder */
 
-	@NullUnmarked public static void build (MeshPartBuilder builder, float width, float height, float depth, int divisions, float angleFrom,
+	@NullUnmarked
+	public static void build (MeshPartBuilder builder, float width, float height, float depth, int divisions, float angleFrom,
 		float angleTo, boolean close) {
 		// FIXME create better cylinder method (- axis on which to create the cylinder (matrix?))
 		final float hw = width * 0.5f;

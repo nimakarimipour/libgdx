@@ -41,7 +41,8 @@ public class BlendingAttribute extends Attribute {
 	/** The opacity used as source alpha value, ranging from 0 (fully transparent) to 1 (fully opaque), (default: 1). */
 	public float opacity = 1.f;
 
-	@NullUnmarked public BlendingAttribute () {
+	@NullUnmarked
+	public BlendingAttribute () {
 		this(null);
 	}
 

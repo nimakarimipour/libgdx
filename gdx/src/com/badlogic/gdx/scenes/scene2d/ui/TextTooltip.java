@@ -44,7 +44,8 @@ public class TextTooltip extends Tooltip<Label> {
 		this(text, manager, skin.get(styleName, TextTooltipStyle.class));
 	}
 
-	@NullUnmarked public TextTooltip (@Null String text, final TooltipManager manager, TextTooltipStyle style) {
+	@NullUnmarked
+	public TextTooltip (@Null String text, final TooltipManager manager, TextTooltipStyle style) {
 		super(null, manager);
 
 		container.setActor(newLabel(text, style.label));
@@ -77,7 +78,8 @@ public class TextTooltip extends Tooltip<Label> {
 		/** 0 means don't wrap. */
 		public float wrapWidth;
 
-		@NullUnmarked public TextTooltipStyle () {
+		@NullUnmarked
+		public TextTooltipStyle () {
 		}
 
 		public TextTooltipStyle (LabelStyle label, @Null Drawable background) {

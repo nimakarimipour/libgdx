@@ -53,7 +53,8 @@ public class InWindow {
 		}
 	}
 
-	@NullUnmarked void Free () {
+	@NullUnmarked
+	void Free () {
 		_bufferBase = null;
 	}
 
@@ -73,7 +74,8 @@ public class InWindow {
 		_stream = stream;
 	}
 
-	@NullUnmarked public void ReleaseStream () {
+	@NullUnmarked
+	public void ReleaseStream () {
 		_stream = null;
 	}
 

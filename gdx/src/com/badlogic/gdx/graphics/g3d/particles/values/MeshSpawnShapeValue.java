@@ -85,7 +85,8 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
 		this.mesh = mesh;
 	}
 
-	@NullUnmarked public void setMesh (Mesh mesh) {
+	@NullUnmarked
+	public void setMesh (Mesh mesh) {
 		this.setMesh(mesh, null);
 	}
 

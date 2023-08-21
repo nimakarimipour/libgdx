@@ -206,7 +206,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 	 * cache is not valid until the call to {@link #end()} is made. Use one of the add methods (e.g. {@link #add(Renderable)} or
 	 * {@link #add(RenderableProvider)}) to add renderables to the cache. */
 
-	@NullUnmarked public void begin () {
+	@NullUnmarked
+	public void begin () {
 		begin(null);
 	}
 
@@ -227,7 +228,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 		meshPool.flush();
 	}
 
-	@NullUnmarked private Renderable obtainRenderable (Material material, int primitiveType) {
+	@NullUnmarked
+	private Renderable obtainRenderable (Material material, int primitiveType) {
 		Renderable result = renderablesPool.obtain();
 		result.bones = null;
 		result.environment = null;
@@ -342,7 +344,8 @@ public class ModelCache implements Disposable, RenderableProvider {
 			add(renderableProvider);
 	}
 
-	@NullUnmarked @Override
+	@NullUnmarked
+	@Override
 	public void getRenderables (Array<Renderable> renderables, Pool<Renderable> pool) {
 		if (building) throw new GdxRuntimeException("Cannot render a ModelCache in between .begin() and .end()");
 		for (Renderable r : this.renderables) {

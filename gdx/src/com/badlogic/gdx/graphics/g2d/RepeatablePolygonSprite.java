@@ -58,7 +58,8 @@ public class RepeatablePolygonSprite {
 	 * @param vertices - cw vertices of polygon
 	 * @param density - number of regions per polygon width bound */
 
-	@NullUnmarked public void setPolygon (TextureRegion region, float[] vertices, float density) {
+	@NullUnmarked
+	public void setPolygon (TextureRegion region, float[] vertices, float density) {
 
 		this.region = region;
 

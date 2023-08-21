@@ -240,7 +240,8 @@ public class Group extends Actor implements Cullable {
 		return cullingArea;
 	}
 
-	@NullUnmarked public @Null Actor hit (float x, float y, boolean touchable) {
+	@NullUnmarked
+	public @Null Actor hit (float x, float y, boolean touchable) {
 		if (touchable && getTouchable() == Touchable.disabled) return null;
 		if (!isVisible()) return null;
 		Vector2 point = tmp;
@@ -339,7 +340,8 @@ public class Group extends Actor implements Cullable {
 	 * @param unfocus If true, {@link Stage#unfocus(Actor)} is called.
 	 * @return the actor removed from this group. */
 
-	@NullUnmarked public Actor removeActorAt (int index, boolean unfocus) {
+	@NullUnmarked
+	public Actor removeActorAt (int index, boolean unfocus) {
 		Actor actor = children.removeIndex(index);
 		Stage stage = getStage();
 		if (stage != null) {
@@ -359,7 +361,8 @@ public class Group extends Actor implements Cullable {
 
 	/** Removes all actors from this group. */
 
-	@NullUnmarked public void clearChildren (boolean unfocus) {
+	@NullUnmarked
+	public void clearChildren (boolean unfocus) {
 		Actor[] actors = children.begin();
 		for (int i = 0, n = children.size; i < n; i++) {
 			Actor child = actors[i];
@@ -390,7 +393,8 @@ public class Group extends Actor implements Cullable {
 	/** Returns the first actor found with the specified name. Note this recursively compares the name of every actor in the
 	 * group. */
 
-	@NullUnmarked public @Null <T extends Actor> T findActor (String name) {
+	@NullUnmarked
+	public @Null <T extends Actor> T findActor (String name) {
 		Array<Actor> children = this.children;
 		for (int i = 0, n = children.size; i < n; i++)
 			if (name.equals(children.get(i).getName())) return (T)children.get(i);

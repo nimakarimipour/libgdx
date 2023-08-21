@@ -70,7 +70,8 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 		keys = new Array(map.keys);
 	}
 
-	@NullUnmarked public V put (K key, V value) {
+	@NullUnmarked
+	public V put (K key, V value) {
 		int i = locateKey(key);
 		if (i >= 0) { // Existing key was found.
 			V oldValue = valueTable[i];

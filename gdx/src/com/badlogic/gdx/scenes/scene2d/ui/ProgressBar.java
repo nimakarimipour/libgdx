@@ -389,10 +389,12 @@ public class ProgressBar extends Widget implements Disableable {
 		@SuppressWarnings("NullAway.Init") public @Null Drawable knobBefore, disabledKnobBefore;
 		@SuppressWarnings("NullAway.Init") public @Null Drawable knobAfter, disabledKnobAfter;
 
-		@NullUnmarked public ProgressBarStyle () {
+		@NullUnmarked
+		public ProgressBarStyle () {
 		}
 
-		@NullUnmarked public ProgressBarStyle (@Null Drawable background, @Null Drawable knob) {
+		@NullUnmarked
+		public ProgressBarStyle (@Null Drawable background, @Null Drawable knob) {
 			this.background = background;
 			this.knob = knob;
 		}

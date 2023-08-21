@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.utils;
+
 import org.jspecify.annotations.NullUnmarked;
 
 /** A simple linked list that pools its nodes.
@@ -45,7 +46,8 @@ public class PooledLinkedList<T> {
 
 	/** Adds the specified object to the end of the list regardless of iteration status */
 
-	@NullUnmarked public void add (T object) {
+	@NullUnmarked
+	public void add (T object) {
 		Item<T> item = pool.obtain();
 		item.payload = object;
 		item.next = null;
@@ -66,7 +68,8 @@ public class PooledLinkedList<T> {
 
 	/** Adds the specified object to the head of the list regardless of iteration status */
 
-	@NullUnmarked public void addFirst (T object) {
+	@NullUnmarked
+	public void addFirst (T object) {
 		Item<T> item = pool.obtain();
 		item.payload = object;
 		item.next = head;
@@ -102,7 +105,8 @@ public class PooledLinkedList<T> {
 	 * 
 	 * @return the next item in the list or null if there are no more items */
 
-	@NullUnmarked public @Null T next () {
+	@NullUnmarked
+	public @Null T next () {
 		if (iter == null) return null;
 
 		T payload = iter.payload;
@@ -115,7 +119,8 @@ public class PooledLinkedList<T> {
 	 * 
 	 * @return the previous item in the list or null if there are no more items */
 
-	@NullUnmarked public @Null T previous () {
+	@NullUnmarked
+	public @Null T previous () {
 		if (iter == null) return null;
 
 		T payload = iter.payload;
@@ -126,7 +131,8 @@ public class PooledLinkedList<T> {
 
 	/** Removes the current list item based on the iterator position. */
 
-	@NullUnmarked public void remove () {
+	@NullUnmarked
+	public void remove () {
 		if (curr == null) return;
 
 		size--;
@@ -161,7 +167,8 @@ public class PooledLinkedList<T> {
 
 	/** Removes the tail of the list regardless of iteration status */
 
-	@NullUnmarked public @Null T removeLast () {
+	@NullUnmarked
+	public @Null T removeLast () {
 		if (tail == null) {
 			return null;
 		}
