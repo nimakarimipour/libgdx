@@ -327,8 +327,7 @@ public class KTXTextureData implements TextureData, CubemapData {
 			pos += 4;
 			if (level == requestedLevel) {
 				for (int face = 0; face < numberOfFaces; face++) {
-					if (face == requestedFace) {
-						((Buffer)compressedData).position(pos);
+					if (face == requestedFace && compressedData != null) {
 						ByteBuffer data = compressedData.slice();
 						((Buffer)data).limit(faceLodSizeRounded);
 						return data;
