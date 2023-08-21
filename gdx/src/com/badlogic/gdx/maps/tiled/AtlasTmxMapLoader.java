@@ -160,7 +160,7 @@ public class AtlasTmxMapLoader extends BaseTmxMapLoader<AtlasTmxMapLoader.AtlasT
 		Array<Element> tileElements, @Nullable String name, int firstgid, int tilewidth, int tileheight, int spacing, int margin,
 		@Nullable String source, int offsetX, int offsetY, String imageSource, int imageWidth, int imageHeight,
 		@Nullable FileHandle image) {
-		if(atlasResolver == null) return;
+		if (atlasResolver == null) return;
 		TextureAtlas atlas = atlasResolver.getAtlas();
 		String regionsName = name;
 

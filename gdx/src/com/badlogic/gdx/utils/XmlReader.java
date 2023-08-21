@@ -450,7 +450,7 @@ public class XmlReader {
 	}
 
 	protected void text (@Nullable String text) {
-		if(current != null){
+		if (current != null) {
 			String existing = current.getText();
 			current.setText(existing != null ? existing + text : text);
 		}
