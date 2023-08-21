@@ -426,10 +426,10 @@ public abstract class DynamicsModifier extends Influencer {
 				float cosTheta = MathUtils.cosDeg(theta), sinTheta = MathUtils.sinDeg(theta), cosPhi = MathUtils.cosDeg(phi),
 					sinPhi = MathUtils.sinDeg(phi);
 				TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi);
-				if(positionChannel != null){
-				TMP_V1.set(positionChannel.data[positionOffset + ParticleChannels.XOffset],
-					positionChannel.data[positionOffset + ParticleChannels.YOffset],
-					positionChannel.data[positionOffset + ParticleChannels.ZOffset]);
+				if (positionChannel != null) {
+					TMP_V1.set(positionChannel.data[positionOffset + ParticleChannels.XOffset],
+						positionChannel.data[positionOffset + ParticleChannels.YOffset],
+						positionChannel.data[positionOffset + ParticleChannels.ZOffset]);
 				}
 				if (!isGlobal) {
 					controller.transform.getTranslation(TMP_V2);
@@ -476,11 +476,11 @@ public abstract class DynamicsModifier extends Influencer {
 					+ strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
 						* strengthValue.getScale(lifeChannel.data[lifeOffset]);
 				TMP_V3.set(MathUtils.random(-1, 1f), MathUtils.random(-1, 1f), MathUtils.random(-1, 1f)).nor().scl(strength);
-				if(accelerationChannel != null){
+				if (accelerationChannel != null) {
 					accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
-				accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
-				accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
-				}	
+					accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
+					accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
+				}
 			}
 		}
 

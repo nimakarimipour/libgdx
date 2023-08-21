@@ -39,7 +39,9 @@ public class ParticleControllerControllerRenderer extends ParticleControllerRend
 	@Override
 	public void update () {
 		for (int i = 0, c = controller.particles.size; i < c; ++i) {
-			if(controllerChannel != null){controllerChannel.data[i].draw();}
+			if (controllerChannel != null) {
+				controllerChannel.data[i].draw();
+			}
 
 		}
 	}

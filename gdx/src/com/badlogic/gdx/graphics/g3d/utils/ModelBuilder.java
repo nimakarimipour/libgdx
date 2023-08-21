@@ -135,8 +135,7 @@ public class ModelBuilder {
 	public void part (final MeshPart meshpart, final Material material) {
 		if (node == null) {
 			node();
-		}
-		else{
+		} else {
 			node.parts.add(new NodePart(meshpart, material));
 		}
 	}

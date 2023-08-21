@@ -58,7 +58,8 @@ public class DefaultRenderableSorter implements RenderableSorter, Comparator<Ren
 		// o1.material.equals(o2.material);
 		getTranslation(o1.worldTransform, o1.meshPart.center, tmpV1);
 		getTranslation(o2.worldTransform, o2.meshPart.center, tmpV2);
-		final float dst = camera != null ? (int)(1000f * camera.position.dst2(tmpV1)) - (int)(1000f * camera.position.dst2(tmpV2)) : 0;
+		final float dst = camera != null ? (int)(1000f * camera.position.dst2(tmpV1)) - (int)(1000f * camera.position.dst2(tmpV2))
+			: 0;
 		final int result = dst < 0 ? -1 : (dst > 0 ? 1 : 0);
 		return b1 ? -result : result;
 	}

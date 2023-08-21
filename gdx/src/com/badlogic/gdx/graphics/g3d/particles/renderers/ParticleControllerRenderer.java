@@ -37,7 +37,7 @@ public abstract class ParticleControllerRenderer<D extends ParticleControllerRen
 
 	@Override
 	public void update () {
-		if(batch != null) {
+		if (batch != null) {
 			batch.draw(renderData);
 		}
 	}
