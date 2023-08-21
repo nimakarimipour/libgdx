@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A text label, with optional word wrapping.
  * <p>
@@ -36,12 +36,12 @@ public class Label extends Widget {
 	static private final Color tempColor = new Color();
 	static private final GlyphLayout prefSizeLayout = new GlyphLayout();
 
-	@SuppressWarnings("NullAway.Init") private LabelStyle style;
+	 private LabelStyle style;
 	private final GlyphLayout layout = new GlyphLayout();
 	private float prefWidth, prefHeight;
 	private final StringBuilder text = new StringBuilder();
 	private int intValue = Integer.MIN_VALUE;
-	@SuppressWarnings("NullAway.Init") private BitmapFontCache cache;
+	 private BitmapFontCache cache;
 	private int labelAlign = Align.left;
 	private int lineAlign = Align.left;
 	private boolean wrap;
@@ -373,11 +373,11 @@ public class Label extends Widget {
 	/** The style for a label, see {@link Label}.
 	 * @author Nathan Sweet */
 	static public class LabelStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		 public BitmapFont font;
 		@Nullable public @Null Color fontColor;
 		@Nullable public @Null Drawable background;
 
-		@NullUnmarked public LabelStyle () {
+		 public LabelStyle () {
 		}
 
 		public LabelStyle (BitmapFont font, @Nullable @Null Color fontColor) {

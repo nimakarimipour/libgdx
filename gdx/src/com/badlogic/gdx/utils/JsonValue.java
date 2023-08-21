@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Container for a JSON object, array, string, double, long, boolean, or null.
  * <p>
@@ -42,14 +42,14 @@ import org.jspecify.annotations.NullUnmarked;
  * 
  * @author Nathan Sweet */
 public class JsonValue implements Iterable<JsonValue> {
-	@SuppressWarnings("NullAway.Init") private ValueType type;
+	 private ValueType type;
 
 	/** May be null. */
-	@SuppressWarnings("NullAway.Init") private String stringValue;
+	 private String stringValue;
 	private double doubleValue;
 	private long longValue;
 
-	@SuppressWarnings("NullAway.Init") public String name;
+	 public String name;
 	/** May be null. */
 	@Nullable public JsonValue child, parent;
 	/** May be null. When changing this field the parent {@link #size()} may need to be changed. */
@@ -209,7 +209,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	 * @return May be null if this value is null.
 	 * @throws IllegalStateException if this an array or object. */
 
-	@NullUnmarked public @Null String asString () {
+	 public @Null String asString () {
 		switch (type) {
 		case stringValue:
 			return stringValue;
@@ -891,7 +891,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param name May be null. */
-	@NullUnmarked public void setName (@Nullable @Null String name) {
+	 public void setName (@Nullable @Null String name) {
 		this.name = name;
 	}
 
@@ -961,13 +961,13 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param value May be null. */
-	@NullUnmarked public void set (@Nullable @Null String value) {
+	 public void set (@Nullable @Null String value) {
 		stringValue = value;
 		type = value == null ? ValueType.nullValue : ValueType.stringValue;
 	}
 
 	/** @param stringValue May be null if the string representation is the string value of the double (eg, no leading zeros). */
-	@NullUnmarked public void set (double value, @Nullable @Null String stringValue) {
+	 public void set (double value, @Nullable @Null String stringValue) {
 		doubleValue = value;
 		longValue = (long)value;
 		this.stringValue = stringValue;
@@ -975,7 +975,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	/** @param stringValue May be null if the string representation is the string value of the long (eg, no leading zeros). */
-	@NullUnmarked public void set (long value, @Nullable @Null String stringValue) {
+	 public void set (long value, @Nullable @Null String stringValue) {
 		longValue = value;
 		doubleValue = value;
 		this.stringValue = stringValue;
@@ -1260,7 +1260,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
-		@NullUnmarked public void remove () {
+		 public void remove () {
 			if (current.prev == null) {
 				child = current.next;
 				if (child != null) child.prev = null;
@@ -1281,7 +1281,7 @@ public class JsonValue implements Iterable<JsonValue> {
 	}
 
 	static public class PrettyPrintSettings {
-		@SuppressWarnings("NullAway.Init") public OutputType outputType;
+		 public OutputType outputType;
 
 		/** If an object on a single line fits this many columns, it won't wrap. */
 		public int singleLineColumns;

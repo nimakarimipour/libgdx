@@ -52,7 +52,7 @@ public class BitmapFontCache {
 	private int[] idx;
 	/** For each page, an array with a value for each glyph from that page, where the value is the index of the character in the
 	 * full text being cached. */
-	@SuppressWarnings("NullAway.Init") private IntArray[] pageGlyphIndices;
+	 private IntArray[] pageGlyphIndices;
 	/** Used internally to ensure a correct capacity for multi-page font vertex data. */
 	private int[] tempGlyphCount;
 

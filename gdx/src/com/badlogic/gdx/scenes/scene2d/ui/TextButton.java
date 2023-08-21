@@ -24,13 +24,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A button with a child {@link Label} to display text.
  * @author Nathan Sweet */
 public class TextButton extends Button {
 	private Label label;
-	@SuppressWarnings("NullAway.Init") private TextButtonStyle style;
+	 private TextButtonStyle style;
 
 	public TextButton (@Null String text, Skin skin) {
 		this(text, skin.get(TextButtonStyle.class));
@@ -137,11 +137,11 @@ public class TextButton extends Button {
 	/** The style for a text button, see {@link TextButton}.
 	 * @author Nathan Sweet */
 	static public class TextButtonStyle extends ButtonStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		 public BitmapFont font;
 		@Nullable public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
 		@Nullable public @Null Color checkedFontColor, checkedDownFontColor, checkedOverFontColor, checkedFocusedFontColor;
 
-		@NullUnmarked public TextButtonStyle () {
+		 public TextButtonStyle () {
 		}
 
 		public TextButtonStyle (@Null Drawable up, @Null Drawable down, @Null Drawable checked, @Null BitmapFont font) {

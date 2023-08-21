@@ -116,9 +116,9 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	}
 
 	public Array<T> points = new Array<T>();
-	@SuppressWarnings("NullAway.Init") private T tmp;
-	@SuppressWarnings("NullAway.Init") private T tmp2;
-	@SuppressWarnings("NullAway.Init") private T tmp3;
+	 private T tmp;
+	 private T tmp2;
+	 private T tmp3;
 
 	public Bezier () {
 	}

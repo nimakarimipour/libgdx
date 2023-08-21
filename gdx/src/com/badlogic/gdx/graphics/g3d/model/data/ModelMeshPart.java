@@ -19,6 +19,6 @@ import javax.annotation.Nullable;
 
 public class ModelMeshPart {
 	@Nullable public String id;
-	@SuppressWarnings("NullAway.Init") public short[] indices;
+	 public short[] indices;
 	public int primitiveType;
 }

@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.Texture;
 import javax.annotation.Nullable;
 
 public class TextureDescriptor<T extends GLTexture> implements Comparable<TextureDescriptor<T>> {
-	@SuppressWarnings("NullAway") public T texture = null;
+	 public T texture = null;
 	@Nullable public Texture.TextureFilter minFilter;
 	@Nullable public Texture.TextureFilter magFilter;
 	@Nullable public Texture.TextureWrap uWrap;

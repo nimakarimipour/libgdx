@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
  * @author Nathan Sweet */
 public class ImageButton extends Button {
 	private final Image image;
-	@SuppressWarnings("NullAway.Init") private ImageButtonStyle style;
+	 private ImageButtonStyle style;
 
 	public ImageButton (Skin skin) {
 		this(skin.get(ImageButtonStyle.class));

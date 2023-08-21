@@ -16,7 +16,7 @@
 
 package com.badlogic.gdx.utils;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A simple linked list that pools its nodes.
  * @author mzechner */
@@ -46,7 +46,7 @@ public class PooledLinkedList<T> {
 
 	/** Adds the specified object to the end of the list regardless of iteration status */
 
-	@NullUnmarked public void add (T object) {
+	 public void add (T object) {
 		Item<T> item = pool.obtain();
 		item.payload = object;
 		item.next = null;
@@ -127,7 +127,7 @@ public class PooledLinkedList<T> {
 
 	/** Removes the current list item based on the iterator position. */
 
-	@NullUnmarked public void remove () {
+	 public void remove () {
 		if (curr == null) return;
 
 		size--;
@@ -162,7 +162,7 @@ public class PooledLinkedList<T> {
 
 	/** Removes the tail of the list regardless of iteration status */
 
-	@NullUnmarked @Nullable public @Null T removeLast () {
+	 @Nullable public @Null T removeLast () {
 		if (tail == null) {
 			return null;
 		}

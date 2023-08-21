@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  * @author Avetis Zakharyan */
 public class RepeatablePolygonSprite {
 
-	@SuppressWarnings("NullAway.Init") private TextureRegion region;
+	 private TextureRegion region;
 	private float density;
 
 	private boolean dirty = true;

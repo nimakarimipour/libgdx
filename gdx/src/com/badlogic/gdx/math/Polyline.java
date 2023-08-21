@@ -16,7 +16,7 @@
 
 package com.badlogic.gdx.math;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 public class Polyline implements Shape2D {
 	private float[] localVertices;
@@ -47,7 +47,7 @@ public class Polyline implements Shape2D {
 	}
 
 	/** Returns vertices scaled, rotated, and offset by the polygon position. */
-	@NullUnmarked public float[] getTransformedVertices () {
+	 public float[] getTransformedVertices () {
 		if (!dirty) return worldVertices;
 		dirty = false;
 

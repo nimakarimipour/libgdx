@@ -37,7 +37,7 @@ import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A list (aka list box) displays textual items and highlights the currently selected item.
  * <p>
@@ -47,7 +47,7 @@ import org.jspecify.annotations.NullUnmarked;
  * @author mzechner
  * @author Nathan Sweet */
 public class List<T> extends Widget implements Cullable {
-	@SuppressWarnings("NullAway.Init") ListStyle style;
+	 ListStyle style;
 	final Array<T> items = new Array();
 	ArraySelection<T> selection = new ArraySelection(items);
 	@Nullable private Rectangle cullingArea;
@@ -441,13 +441,13 @@ public class List<T> extends Widget implements Cullable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class ListStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		 public BitmapFont font;
 		public Color fontColorSelected = new Color(1, 1, 1, 1);
 		public Color fontColorUnselected = new Color(1, 1, 1, 1);
-		@SuppressWarnings("NullAway.Init") public Drawable selection;
+		 public Drawable selection;
 		@Nullable public @Null Drawable down, over, background;
 
-		@NullUnmarked public ListStyle () {
+		 public ListStyle () {
 		}
 
 		public ListStyle (BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {

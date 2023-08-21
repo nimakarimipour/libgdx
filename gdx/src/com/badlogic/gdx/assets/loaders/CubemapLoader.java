@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
 public class CubemapLoader extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
 	static public class CubemapLoaderInfo {
 		@Nullable String filename;
-		@SuppressWarnings("NullAway.Init") CubemapData data;
+		 CubemapData data;
 		@Nullable Cubemap cubemap;
 	};
 

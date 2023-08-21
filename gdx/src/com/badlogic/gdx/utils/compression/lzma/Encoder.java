@@ -21,7 +21,7 @@ import java.io.IOException;
 import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 public class Encoder {
 	public static final int EMatchFinderTypeBT2 = 0;
@@ -129,7 +129,7 @@ public class Encoder {
 			}
 		}
 
-		@SuppressWarnings("NullAway.Init") Encoder2[] m_Coders;
+		 Encoder2[] m_Coders;
 		int m_NumPrevBits;
 		int m_NumPosBits;
 		int m_PosMask;
@@ -285,7 +285,7 @@ public class Encoder {
 	};
 
 	Optimal[] _optimum = new Optimal[kNumOpts];
-	@SuppressWarnings("NullAway") com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
+	 com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
 	com.badlogic.gdx.utils.compression.rangecoder.Encoder _rangeEncoder = new com.badlogic.gdx.utils.compression.rangecoder.Encoder();
 
 	short[] _isMatch = new short[Base.kNumStates << Base.kNumPosStatesBitsMax];
@@ -1210,7 +1210,7 @@ public class Encoder {
 		return true;
 	}
 
-	@NullUnmarked public boolean SetMatchFinder (int matchFinderIndex) {
+	 public boolean SetMatchFinder (int matchFinderIndex) {
 		if (matchFinderIndex < 0 || matchFinderIndex > 2) return false;
 		int matchFinderIndexPrev = _matchFinderType;
 		_matchFinderType = matchFinderIndex;

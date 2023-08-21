@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Encapsulate the formulas to spawn a particle on a mesh shape.
  * @author Inferno */
@@ -56,7 +56,7 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
 		mesh.getVertices(vertices);
 	}
 
-	@NullUnmarked @Override
+	 @Override
 	public void spawnAux (Vector3 vector, float percent) {
 		if (indices == null) {
 			// Triangles

@@ -22,5 +22,5 @@ import javax.annotation.Nullable;
 /** Render data used by billboard particle batches
  * @author Inferno */
 public class BillboardControllerRenderData extends ParticleControllerRenderData {
-	@SuppressWarnings("NullAway.Init") public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
+	 public FloatChannel regionChannel, colorChannel, scaleChannel, rotationChannel;
 }

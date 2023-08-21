@@ -23,6 +23,6 @@ import javax.annotation.Nullable;
 /** Render data used by particle controller renderer
  * @author Inferno */
 public abstract class ParticleControllerRenderData {
-	@SuppressWarnings("NullAway.Init") public ParticleController controller;
-	@SuppressWarnings("NullAway.Init") public FloatChannel positionChannel;
+	 public ParticleController controller;
+	 public FloatChannel positionChannel;
 }

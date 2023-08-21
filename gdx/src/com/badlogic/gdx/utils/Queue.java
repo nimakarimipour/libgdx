@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A resizable, ordered array of objects with efficient add and remove at the beginning and end. Values in the backing array may
  * wrap back to the beginning, making add and remove at the beginning and end O(1) (unless the backing array needs to resize when
@@ -498,7 +498,7 @@ public class Queue<T> implements Iterable<T> {
 	static public class QueueIterable<T> implements Iterable<T> {
 		private final Queue<T> queue;
 		private final boolean allowRemove;
-		@SuppressWarnings("NullAway.Init") private QueueIterator iterator1, iterator2;
+		 private QueueIterator iterator1, iterator2;
 
 // java.io.StringWriter lastAcquire = new java.io.StringWriter();
 
@@ -506,7 +506,7 @@ public class Queue<T> implements Iterable<T> {
 			this(queue, true);
 		}
 
-		@NullUnmarked public QueueIterable (Queue<T> queue, boolean allowRemove) {
+		 public QueueIterable (Queue<T> queue, boolean allowRemove) {
 			this.queue = queue;
 			this.allowRemove = allowRemove;
 		}

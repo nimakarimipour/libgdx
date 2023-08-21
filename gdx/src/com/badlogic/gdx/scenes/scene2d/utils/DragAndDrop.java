@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Manages drag and drop operations through registered drag sources and drop targets.
  * @author Nathan Sweet */
@@ -73,7 +73,7 @@ public class DragAndDrop {
 				}
 			}
 
-			@NullUnmarked public void drag (InputEvent event, float x, float y, int pointer) {
+			 public void drag (InputEvent event, float x, float y, int pointer) {
 				if (payload == null) return;
 				if (pointer != activePointer) return;
 
@@ -142,7 +142,7 @@ public class DragAndDrop {
 				actor.setPosition(actorX, actorY);
 			}
 
-			@NullUnmarked public void dragStop (InputEvent event, float x, float y, int pointer) {
+			 public void dragStop (InputEvent event, float x, float y, int pointer) {
 				if (pointer != activePointer) return;
 				activePointer = -1;
 				if (payload == null) return;

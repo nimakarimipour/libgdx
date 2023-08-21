@@ -41,7 +41,7 @@ import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Renders bitmap fonts. The font consists of 2 files: an image file or {@link TextureRegion} containing the glyphs and a file in
  * the AngleCode BMFont text format that describes where each glyph is on the image.
@@ -440,7 +440,7 @@ public class BitmapFont implements Disposable {
 		/** The name of the font, or null. */
 		@Nullable public String name;
 		/** An array of the image paths, for multiple texture pages. */
-		@SuppressWarnings("NullAway.Init") public String[] imagePaths;
+		 public String[] imagePaths;
 		@Nullable public FileHandle fontFile;
 		public boolean flipped;
 		public float padTop, padRight, padBottom, padLeft;
@@ -482,10 +482,10 @@ public class BitmapFont implements Disposable {
 		/** Creates an empty BitmapFontData for configuration before calling {@link #load(FileHandle, boolean)}, to subclass, or to
 		 * populate yourself, e.g. using stb-truetype or FreeType. */
 
-		@NullUnmarked public BitmapFontData () {
+		 public BitmapFontData () {
 		}
 
-		@NullUnmarked public BitmapFontData (FileHandle fontFile, boolean flip) {
+		 public BitmapFontData (FileHandle fontFile, boolean flip) {
 			this.fontFile = fontFile;
 			this.flipped = flip;
 			load(fontFile, flip);

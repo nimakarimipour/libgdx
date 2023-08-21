@@ -29,7 +29,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** An instance of a {@link Model}, allows to specify global transform and modify the materials, as it has a copy of the model's
  * materials. Multiple instances can be created from the same Model, all sharing the meshes and textures of the Model. The Model
@@ -130,7 +130,7 @@ public class ModelInstance implements RenderableProvider {
 	 * @param recursive True to recursively search the Model's node tree, false to only search for a root node
 	 * @param parentTransform True to apply the parent's node transform to the instance (only applicable if recursive is true).
 	 * @param mergeTransform True to apply the source node transform to the instance transform, resetting the node transform. */
-	@NullUnmarked public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
+	 public ModelInstance (final Model model, @Nullable final Matrix4 transform, final String nodeId, boolean recursive,
 		boolean parentTransform, boolean mergeTransform, boolean shareKeyframes) {
 		this.model = model;
 		this.transform = transform == null ? new Matrix4() : transform;
@@ -263,7 +263,7 @@ public class ModelInstance implements RenderableProvider {
 
 	/** Makes sure that each {@link NodePart} of the {@link Node} and its sub-nodes, doesn't reference a node outside this node
 	 * tree and that all materials are listed in the {@link #materials} array. */
-	@NullUnmarked private void invalidate (Node node) {
+	 private void invalidate (Node node) {
 		for (int i = 0, n = node.parts.size; i < n; ++i) {
 			NodePart part = node.parts.get(i);
 			ArrayMap<Node, Matrix4> bindPose = part.invBoneBindTransforms;
@@ -319,7 +319,7 @@ public class ModelInstance implements RenderableProvider {
 	/** Copy the source animation to this ModelInstance
 	 * @param sourceAnim The source animation {@link Animation}
 	 * @param shareKeyframes Shallow copy of {@link NodeKeyframe}'s if it's true, otherwise make a deep copy. */
-	@NullUnmarked public void copyAnimation (Animation sourceAnim, boolean shareKeyframes) {
+	 public void copyAnimation (Animation sourceAnim, boolean shareKeyframes) {
 		Animation animation = new Animation();
 		animation.id = sourceAnim.id;
 		animation.duration = sourceAnim.duration;

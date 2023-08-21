@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 /** Event for actor input: touch, mouse, touch/mouse actor enter/exit, mouse scroll, and keyboard events.
  * @see InputListener */
 public class InputEvent extends Event {
-	@SuppressWarnings("NullAway.Init") private Type type;
+	 private Type type;
 	private float stageX, stageY, scrollAmountX, scrollAmountY;
 	private int pointer, button, keyCode;
 	private char character;

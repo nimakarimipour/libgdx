@@ -25,7 +25,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 public class CameraInputController extends GestureDetector {
 	/** The button for rotating the camera. */
@@ -106,7 +106,7 @@ public class CameraInputController extends GestureDetector {
 			return false;
 		}
 
-		@NullUnmarked @Override
+		 @Override
 		public boolean zoom (float initialDistance, float distance) {
 			float newZoom = distance - initialDistance;
 			float amount = newZoom - previousZoom;

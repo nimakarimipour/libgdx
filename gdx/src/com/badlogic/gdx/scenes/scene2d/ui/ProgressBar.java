@@ -30,7 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A progress bar is a widget that visually displays the progress of some activity or a value within given range. The progress
  * bar has a range (min, max) and a stepping between each value it represents. The percentage of completeness typically starts out
@@ -44,7 +44,7 @@ import org.jspecify.annotations.NullUnmarked;
  * @author mzechner
  * @author Nathan Sweet */
 public class ProgressBar extends Widget implements Disableable {
-	@SuppressWarnings("NullAway.Init") private ProgressBarStyle style;
+	 private ProgressBarStyle style;
 	float min, max, stepSize;
 	private float value, animateFromValue;
 	float position;
@@ -227,7 +227,7 @@ public class ProgressBar extends Widget implements Disableable {
 		return visualInterpolation.apply((getVisualValue() - min) / (max - min));
 	}
 
-	@NullUnmarked protected @Null Drawable getBackgroundDrawable () {
+	 protected @Null Drawable getBackgroundDrawable () {
 		if (disabled && style.disabledBackground != null) return style.disabledBackground;
 		return style.background;
 	}

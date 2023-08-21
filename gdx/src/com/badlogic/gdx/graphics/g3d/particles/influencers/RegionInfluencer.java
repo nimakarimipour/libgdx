@@ -28,7 +28,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
  * @author Inferno */
@@ -134,7 +134,7 @@ public abstract class RegionInfluencer extends Influencer {
 			lifeChannel = controller.particles.addChannel(ParticleChannels.Life);
 		}
 
-		@NullUnmarked @Override
+		 @Override
 		public void update () {
 			for (int i = 0, l = ParticleChannels.LifePercentOffset, c = controller.particles.size
 				* regionChannel.strideSize; i < c; i += regionChannel.strideSize, l += lifeChannel.strideSize) {
@@ -206,7 +206,7 @@ public abstract class RegionInfluencer extends Influencer {
 	}
 
 	public Array<AspectTextureRegion> regions;
-	@SuppressWarnings("NullAway.Init") FloatChannel regionChannel;
+	 FloatChannel regionChannel;
 	@Nullable public String atlasName;
 
 	public RegionInfluencer (int regionsCount) {

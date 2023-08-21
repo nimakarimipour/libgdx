@@ -32,7 +32,7 @@ import java.util.StringTokenizer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> extends AsynchronousAssetLoader<TiledMap, P> {
 
@@ -56,7 +56,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	protected static final int MASK_CLEAR = 0xE0000000;
 
 	protected XmlReader xml = new XmlReader();
-	@SuppressWarnings("NullAway.Init") protected Element root;
+	 protected Element root;
 	protected boolean convertObjectToTileSpace;
 	protected boolean flipY = true;
 
@@ -65,7 +65,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	protected int mapWidthInPixels;
 	protected int mapHeightInPixels;
 
-	@SuppressWarnings("NullAway.Init") protected TiledMap map;
+	 protected TiledMap map;
 
 	public BaseTmxMapLoader (FileHandleResolver resolver) {
 		super(resolver);
@@ -320,7 +320,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		loadObject(map, tile.getObjects(), element, tile.getTextureRegion().getRegionHeight());
 	}
 
-	@NullUnmarked protected void loadObject (TiledMap map, MapObjects objects, Element element, float heightInPixels) {
+	 protected void loadObject (TiledMap map, MapObjects objects, Element element, float heightInPixels) {
 		if (element.getName().equals("object")) {
 			MapObject object = null;
 

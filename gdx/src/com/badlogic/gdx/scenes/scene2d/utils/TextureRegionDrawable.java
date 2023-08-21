@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 /** Drawable for a {@link TextureRegion}.
  * @author Nathan Sweet */
 public class TextureRegionDrawable extends BaseDrawable implements TransformDrawable {
-	@SuppressWarnings("NullAway.Init") private TextureRegion region;
+	 private TextureRegion region;
 
 	/** Creates an uninitialized TextureRegionDrawable. The texture region must be set before use. */
 	public TextureRegionDrawable () {

@@ -117,13 +117,13 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
 	private RenderablePool renderablePool;
 	private Array<Renderable> renderables;
-	@SuppressWarnings("NullAway.Init") private float[] vertices;
+	 private float[] vertices;
 	private short[] indices;
 	private int currentVertexSize = 0;
-	@SuppressWarnings("NullAway.Init") private VertexAttributes currentAttributes;
+	 private VertexAttributes currentAttributes;
 	protected boolean useGPU = false;
 	@Nullable protected AlignMode mode = AlignMode.Screen;
-	@SuppressWarnings("NullAway.Init") protected Texture texture;
+	 protected Texture texture;
 	@Nullable protected BlendingAttribute blendingAttribute;
 	@Nullable protected DepthTestAttribute depthTestAttribute;
 	@Nullable Shader shader;

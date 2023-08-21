@@ -37,7 +37,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** This is a custom shader to render the particles. Usually is not required, because the {@link DefaultShader} will be used
  * instead. This shader will be used when dealing with billboards using GPU mode or point sprites.
@@ -237,7 +237,7 @@ public class ParticleShader extends BaseShader {
 		register(DefaultShader.Inputs.diffuseTexture, DefaultShader.Setters.diffuseTexture);
 	}
 
-	@NullUnmarked @Override
+	 @Override
 	public void init () {
 		final ShaderProgram program = this.program;
 		this.program = null;

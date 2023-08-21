@@ -55,8 +55,8 @@ import javax.annotation.Nullable;
  * @author mzechner
  * @author Nathan Sweet */
 public class FileHandle {
-	@SuppressWarnings("NullAway.Init") protected File file;
-	@SuppressWarnings("NullAway.Init") protected FileType type;
+	 protected File file;
+	 protected FileType type;
 
 	protected FileHandle () {
 	}

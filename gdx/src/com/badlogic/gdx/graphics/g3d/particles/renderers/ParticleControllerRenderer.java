@@ -20,7 +20,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** It's a {@link ParticleControllerComponent} which determines how the particles are rendered. It's the base class of every
  * particle renderer.
@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullUnmarked;
 public abstract class ParticleControllerRenderer<D extends ParticleControllerRenderData, T extends ParticleBatch<D>>
 	extends ParticleControllerComponent {
 	@Nullable protected T batch;
-	@SuppressWarnings("NullAway.Init") protected D renderData;
+	 protected D renderData;
 
 	protected ParticleControllerRenderer () {
 	}
@@ -37,7 +37,7 @@ public abstract class ParticleControllerRenderer<D extends ParticleControllerRen
 		this.renderData = renderData;
 	}
 
-	@NullUnmarked @Override
+	 @Override
 	public void update () {
 		batch.draw(renderData);
 	}

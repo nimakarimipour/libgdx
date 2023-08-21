@@ -57,7 +57,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import java.nio.Buffer;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A model represents a 3D assets. It stores a hierarchy of nodes. A node has a transform and optionally a graphical part in form
  * of a {@link MeshPart} and {@link Material}. Mesh parts reference subsets of vertices in one of the meshes of the model.
@@ -116,7 +116,7 @@ public class Model implements Disposable {
 		calculateTransforms();
 	}
 
-	@NullUnmarked protected void loadAnimations (Iterable<ModelAnimation> modelAnimations) {
+	 protected void loadAnimations (Iterable<ModelAnimation> modelAnimations) {
 		for (final ModelAnimation anim : modelAnimations) {
 			Animation animation = new Animation();
 			animation.id = anim.id;
@@ -236,7 +236,7 @@ public class Model implements Disposable {
 		}
 	}
 
-	@NullUnmarked protected void convertMesh (ModelMesh modelMesh) {
+	 protected void convertMesh (ModelMesh modelMesh) {
 		int numIndices = 0;
 		for (ModelMeshPart part : modelMesh.parts) {
 			numIndices += part.indices.length;

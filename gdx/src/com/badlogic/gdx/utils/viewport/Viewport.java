@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
  * @author Daniel Holderbaum
  * @author Nathan Sweet */
 public abstract class Viewport {
-	@SuppressWarnings("NullAway.Init") private Camera camera;
+	 private Camera camera;
 	private float worldWidth, worldHeight;
 	private int screenX, screenY, screenWidth, screenHeight;
 

@@ -63,9 +63,9 @@ public class ObjectLongMap<K> implements Iterable<ObjectLongMap.Entry<K>> {
 	 * hash. */
 	protected int mask;
 
-	@SuppressWarnings("NullAway.Init") transient Entries entries1, entries2;
-	@SuppressWarnings("NullAway.Init") transient Values values1, values2;
-	@SuppressWarnings("NullAway.Init") transient Keys keys1, keys2;
+	 transient Entries entries1, entries2;
+	 transient Values values1, values2;
+	 transient Keys keys1, keys2;
 
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public ObjectLongMap () {

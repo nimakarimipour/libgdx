@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A cell for a {@link Table}.
  * @author Nathan Sweet */
@@ -22,22 +22,22 @@ public class Cell<T extends Actor> implements Poolable {
 	@Nullable static private Files files;
 	@Nullable static private Cell defaults;
 
-	@SuppressWarnings("NullAway.Init") Value minWidth, minHeight;
-	@SuppressWarnings("NullAway.Init") Value prefWidth, prefHeight;
-	@SuppressWarnings("NullAway.Init") Value maxWidth, maxHeight;
-	@SuppressWarnings("NullAway.Init") Value spaceTop, spaceLeft, spaceBottom, spaceRight;
-	@SuppressWarnings("NullAway.Init") Value padTop, padLeft, padBottom, padRight;
+	 Value minWidth, minHeight;
+	 Value prefWidth, prefHeight;
+	 Value maxWidth, maxHeight;
+	 Value spaceTop, spaceLeft, spaceBottom, spaceRight;
+	 Value padTop, padLeft, padBottom, padRight;
 	@Nullable Float fillX, fillY;
 	@Nullable Integer align;
-	@SuppressWarnings("NullAway.Init") Integer expandX, expandY;
-	@SuppressWarnings("NullAway.Init") Integer colspan;
+	 Integer expandX, expandY;
+	 Integer colspan;
 	@Nullable Boolean uniformX, uniformY;
 
 	@Nullable @Null Actor actor;
 	float actorX, actorY;
 	float actorWidth, actorHeight;
 
-	@SuppressWarnings("NullAway.Init") private Table table;
+	 private Table table;
 	boolean endRow;
 	int column, row;
 	int cellAboveIndex;
@@ -71,7 +71,7 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Returns the actor for this cell, or null. */
-	@NullUnmarked public @Null T getActor () {
+	 public @Null T getActor () {
 		return (T)actor;
 	}
 
@@ -703,7 +703,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return minWidth;
 	}
 
-	@NullUnmarked public float getMinWidth () {
+	 public float getMinWidth () {
 		return minWidth.get(actor);
 	}
 
@@ -712,7 +712,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return minHeight;
 	}
 
-	@NullUnmarked public float getMinHeight () {
+	 public float getMinHeight () {
 		return minHeight.get(actor);
 	}
 
@@ -721,7 +721,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return prefWidth;
 	}
 
-	@NullUnmarked public float getPrefWidth () {
+	 public float getPrefWidth () {
 		return prefWidth.get(actor);
 	}
 
@@ -730,7 +730,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return prefHeight;
 	}
 
-	@NullUnmarked public float getPrefHeight () {
+	 public float getPrefHeight () {
 		return prefHeight.get(actor);
 	}
 
@@ -739,7 +739,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return maxWidth;
 	}
 
-	@NullUnmarked public float getMaxWidth () {
+	 public float getMaxWidth () {
 		return maxWidth.get(actor);
 	}
 
@@ -748,7 +748,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return maxHeight;
 	}
 
-	@NullUnmarked public float getMaxHeight () {
+	 public float getMaxHeight () {
 		return maxHeight.get(actor);
 	}
 
@@ -757,7 +757,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return spaceTop;
 	}
 
-	@NullUnmarked public float getSpaceTop () {
+	 public float getSpaceTop () {
 		return spaceTop.get(actor);
 	}
 
@@ -766,7 +766,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return spaceLeft;
 	}
 
-	@NullUnmarked public float getSpaceLeft () {
+	 public float getSpaceLeft () {
 		return spaceLeft.get(actor);
 	}
 
@@ -775,7 +775,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return spaceBottom;
 	}
 
-	@NullUnmarked public float getSpaceBottom () {
+	 public float getSpaceBottom () {
 		return spaceBottom.get(actor);
 	}
 
@@ -784,7 +784,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return spaceRight;
 	}
 
-	@NullUnmarked public float getSpaceRight () {
+	 public float getSpaceRight () {
 		return spaceRight.get(actor);
 	}
 
@@ -793,7 +793,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return padTop;
 	}
 
-	@NullUnmarked public float getPadTop () {
+	 public float getPadTop () {
 		return padTop.get(actor);
 	}
 
@@ -802,7 +802,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return padLeft;
 	}
 
-	@NullUnmarked public float getPadLeft () {
+	 public float getPadLeft () {
 		return padLeft.get(actor);
 	}
 
@@ -811,7 +811,7 @@ public class Cell<T extends Actor> implements Poolable {
 		return padBottom;
 	}
 
-	@NullUnmarked public float getPadBottom () {
+	 public float getPadBottom () {
 		return padBottom.get(actor);
 	}
 
@@ -820,17 +820,17 @@ public class Cell<T extends Actor> implements Poolable {
 		return padRight;
 	}
 
-	@NullUnmarked public float getPadRight () {
+	 public float getPadRight () {
 		return padRight.get(actor);
 	}
 
 	/** Returns {@link #getPadLeft()} plus {@link #getPadRight()}. */
-	@NullUnmarked public float getPadX () {
+	 public float getPadX () {
 		return padLeft.get(actor) + padRight.get(actor);
 	}
 
 	/** Returns {@link #getPadTop()} plus {@link #getPadBottom()}. */
-	@NullUnmarked public float getPadY () {
+	 public float getPadY () {
 		return padTop.get(actor) + padBottom.get(actor);
 	}
 
@@ -901,7 +901,7 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Sets all constraint fields to null. */
 
-	@NullUnmarked void clear () {
+	 void clear () {
 		minWidth = null;
 		minHeight = null;
 		prefWidth = null;
@@ -928,7 +928,7 @@ public class Cell<T extends Actor> implements Poolable {
 
 	/** Reset state so the cell can be reused, setting all constraints to their {@link #defaults() default} values. */
 
-	@NullUnmarked public void reset () {
+	 public void reset () {
 		actor = null;
 		table = null;
 		endRow = false;
@@ -936,7 +936,7 @@ public class Cell<T extends Actor> implements Poolable {
 		set(defaults());
 	}
 
-	@NullUnmarked void set (@Nullable Cell cell) {
+	 void set (@Nullable Cell cell) {
 		minWidth = cell.minWidth;
 		minHeight = cell.minHeight;
 		prefWidth = cell.prefWidth;

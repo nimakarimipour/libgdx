@@ -32,7 +32,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
@@ -106,7 +106,7 @@ public class Texture extends GLTexture {
 		}
 	}
 
-	@SuppressWarnings("NullAway.Init") TextureData data;
+	 TextureData data;
 
 	public Texture (String internalPath) {
 		this(Gdx.files.internal(internalPath));
@@ -140,7 +140,7 @@ public class Texture extends GLTexture {
 		this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
 	}
 
-	@NullUnmarked public Texture (@Nullable TextureData data) {
+	 public Texture (@Nullable TextureData data) {
 		this(GL20.GL_TEXTURE_2D, Gdx.gl.glGenTexture(), data);
 	}
 
@@ -322,7 +322,7 @@ public class Texture extends GLTexture {
 
 	/** @return the number of managed textures currently loaded */
 
-	@NullUnmarked public static int getNumManagedTextures () {
+	 public static int getNumManagedTextures () {
 		return managedTextures.get(Gdx.app).size;
 	}
 }

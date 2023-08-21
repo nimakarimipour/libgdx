@@ -21,7 +21,7 @@ import java.io.Serializable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Encapsulates a 2D vector. Allows chaining methods by returning a reference to itself
  * @author badlogicgames@gmail.com */
@@ -78,7 +78,7 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 		return x * x + y * y;
 	}
 
-	@NullUnmarked @Override
+	 @Override
 	public Vector2 set (@Nullable Vector2 v) {
 		x = v.x;
 		y = v.y;

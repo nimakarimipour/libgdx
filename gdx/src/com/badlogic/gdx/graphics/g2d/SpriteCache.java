@@ -38,7 +38,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Draws 2D images, optimized for geometry that does not change. Sprites and/or textures are cached and given an ID, which can
  * later be used for drawing. The size, color, and texture region for each cached image cannot be modified. This information is
@@ -970,10 +970,10 @@ public class SpriteCache implements Disposable {
 		final int offset;
 		int maxCount;
 		int textureCount;
-		@SuppressWarnings("NullAway.Init") Texture[] textures;
-		@SuppressWarnings("NullAway.Init") int[] counts;
+		 Texture[] textures;
+		 int[] counts;
 
-		@NullUnmarked public Cache (int id, int offset) {
+		 public Cache (int id, int offset) {
 			this.id = id;
 			this.offset = offset;
 		}

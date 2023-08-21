@@ -23,5 +23,5 @@ public class ModelMesh {
 	@Nullable public String id;
 	@Nullable public VertexAttribute[] attributes;
 	@Nullable public float[] vertices;
-	@SuppressWarnings("NullAway.Init") public ModelMeshPart[] parts;
+	 public ModelMeshPart[] parts;
 }

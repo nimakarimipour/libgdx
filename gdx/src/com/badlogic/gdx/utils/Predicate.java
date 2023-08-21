@@ -18,7 +18,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Iterator;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Interface used to select items within an iterator against a predicate.
  * @author Xoppa */
@@ -28,8 +28,8 @@ public interface Predicate<T> {
 	boolean evaluate (T arg0);
 
 	public class PredicateIterator<T> implements Iterator<T> {
-		@SuppressWarnings("NullAway.Init") public Iterator<T> iterator;
-		@SuppressWarnings("NullAway.Init") public Predicate<T> predicate;
+		 public Iterator<T> iterator;
+		 public Predicate<T> predicate;
 		public boolean end = false;
 		public boolean peeked = false;
 		@Nullable public T next = null;
@@ -38,7 +38,7 @@ public interface Predicate<T> {
 			this(iterable.iterator(), predicate);
 		}
 
-		@NullUnmarked public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
+		 public PredicateIterator (final Iterator<T> iterator, final Predicate<T> predicate) {
 			set(iterator, predicate);
 		}
 
@@ -86,11 +86,11 @@ public interface Predicate<T> {
 	}
 
 	public static class PredicateIterable<T> implements Iterable<T> {
-		@SuppressWarnings("NullAway.Init") public Iterable<T> iterable;
-		@SuppressWarnings("NullAway.Init") public Predicate<T> predicate;
+		 public Iterable<T> iterable;
+		 public Predicate<T> predicate;
 		@Nullable public PredicateIterator<T> iterator = null;
 
-		@NullUnmarked public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
+		 public PredicateIterable (Iterable<T> iterable, Predicate<T> predicate) {
 			set(iterable, predicate);
 		}
 

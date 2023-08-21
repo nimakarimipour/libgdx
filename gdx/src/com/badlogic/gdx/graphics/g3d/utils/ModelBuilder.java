@@ -31,7 +31,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Helper class to create {@link Model}s from code. To start building use the {@link #begin()} method, when finished building use
  * the {@link #end()} method. The end method returns the model just build. Building cannot be nested, only one model (per
@@ -105,7 +105,7 @@ public class ModelBuilder {
 
 	/** Add a node to the model. Use any of the part(...) method to add a NodePart.
 	 * @return The node being created. */
-	@NullUnmarked public Node node () {
+	 public Node node () {
 		final Node node = new Node();
 		node(node);
 		node.id = "node" + model.nodes.size;
@@ -134,7 +134,7 @@ public class ModelBuilder {
 	/** Adds the specified MeshPart to the current Node. The Mesh will be managed by the model and disposed when the model is
 	 * disposed. The resources the Material might contain are not managed, use {@link #manage(Disposable)} to add those to the
 	 * model. */
-	@NullUnmarked public void part (final MeshPart meshpart, final Material material) {
+	 public void part (final MeshPart meshpart, final Material material) {
 		if (node == null) node();
 		node.parts.add(new NodePart(meshpart, material));
 	}

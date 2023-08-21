@@ -27,8 +27,8 @@ import javax.annotation.Nullable;
  * influencer to be updated, so it has to be placed at the end of the influencers list when creating a {@link ParticleController}.
  * @author Inferno */
 public class ParticleControllerFinalizerInfluencer extends Influencer {
-	@SuppressWarnings("NullAway.Init") FloatChannel positionChannel, scaleChannel, rotationChannel;
-	@SuppressWarnings("NullAway.Init") ObjectChannel<ParticleController> controllerChannel;
+	 FloatChannel positionChannel, scaleChannel, rotationChannel;
+	 ObjectChannel<ParticleController> controllerChannel;
 	boolean hasScale, hasRotation;
 
 	public ParticleControllerFinalizerInfluencer () {

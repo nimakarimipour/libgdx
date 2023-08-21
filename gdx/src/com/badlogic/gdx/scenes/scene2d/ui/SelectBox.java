@@ -44,7 +44,7 @@ import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A select box (aka a drop-down list) allows a user to choose one of a number of values from a list. When inactive, the selected
  * value is displayed. When activated, it shows the list of values that may be selected.
@@ -58,7 +58,7 @@ import org.jspecify.annotations.NullUnmarked;
 public class SelectBox<T> extends Widget implements Disableable {
 	static final Vector2 temp = new Vector2();
 
-	@SuppressWarnings("NullAway.Init") SelectBoxStyle style;
+	 SelectBoxStyle style;
 	final Array<T> items = new Array();
 	SelectBoxScrollPane<T> scrollPane;
 	private float prefWidth, prefHeight;
@@ -476,7 +476,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 					return false;
 				}
 
-				@NullUnmarked public boolean keyDown (@Nullable InputEvent event, int keycode) {
+				 public boolean keyDown (@Nullable InputEvent event, int keycode) {
 					switch (keycode) {
 					case Keys.NUMPAD_ENTER:
 					case Keys.ENTER:
@@ -605,15 +605,15 @@ public class SelectBox<T> extends Widget implements Disableable {
 	 * @author mzechner
 	 * @author Nathan Sweet */
 	static public class SelectBoxStyle {
-		@SuppressWarnings("NullAway.Init") public BitmapFont font;
+		 public BitmapFont font;
 		public Color fontColor = new Color(1, 1, 1, 1);
 		@Nullable public @Null Color overFontColor, disabledFontColor;
 		@Nullable public @Null Drawable background;
-		@SuppressWarnings("NullAway.Init") public ScrollPaneStyle scrollStyle;
-		@SuppressWarnings("NullAway.Init") public ListStyle listStyle;
+		 public ScrollPaneStyle scrollStyle;
+		 public ListStyle listStyle;
 		@Nullable public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
-		@NullUnmarked public SelectBoxStyle () {
+		 public SelectBoxStyle () {
 		}
 
 		public SelectBoxStyle (BitmapFont font, Color fontColor, @Null Drawable background, ScrollPaneStyle scrollStyle,

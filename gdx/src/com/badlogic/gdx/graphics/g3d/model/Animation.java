@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
  * @author badlogic */
 public class Animation {
 	/** the unique id of the animation **/
-	@SuppressWarnings("NullAway.Init") public String id;
+	 public String id;
 	/** the duration in seconds **/
 	public float duration;
 	/** the animation curves for individual nodes **/

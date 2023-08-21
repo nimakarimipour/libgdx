@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SortedIntList;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /**
  * <p>
@@ -53,11 +53,11 @@ import org.jspecify.annotations.NullUnmarked;
  */
 public class DecalBatch implements Disposable {
 	private static final int DEFAULT_SIZE = 1000;
-	@SuppressWarnings("NullAway.Init") private float[] vertices;
-	@SuppressWarnings("NullAway.Init") private Mesh mesh;
+	 private float[] vertices;
+	 private Mesh mesh;
 
 	private final SortedIntList<Array<Decal>> groupList = new SortedIntList<Array<Decal>>();
-	@SuppressWarnings("NullAway.Init") private GroupStrategy groupStrategy;
+	 private GroupStrategy groupStrategy;
 	private final Pool<Array<Decal>> groupPool = new Pool<Array<Decal>>(16) {
 		@Override
 		protected Array<Decal> newObject () {
@@ -199,7 +199,7 @@ public class DecalBatch implements Disposable {
 	/** Frees up memory by dropping the buffer and underlying resources. If the batch is needed again after disposing it can be
 	 * {@link #initialize(int) initialized} again. */
 
-	@NullUnmarked public void dispose () {
+	 public void dispose () {
 		clear();
 		vertices = null;
 		mesh.dispose();

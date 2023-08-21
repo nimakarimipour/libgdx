@@ -21,7 +21,7 @@ import java.net.InetSocketAddress;
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Server socket implementation using java.net.ServerSocket.
  * 
@@ -75,7 +75,7 @@ public class NetJavaServerSocketImpl implements ServerSocket {
 		return protocol;
 	}
 
-	@NullUnmarked @Override
+	 @Override
 	public Socket accept (SocketHints hints) {
 		try {
 			return new NetJavaSocketImpl(server.accept(), hints);

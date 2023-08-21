@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 public class ParticleEmitter {
 	static private final int UPDATE_SCALE = 1 << 0;
@@ -67,13 +67,13 @@ public class ParticleEmitter {
 	private float accumulator;
 	private Array<Sprite> sprites;
 	private SpriteMode spriteMode = SpriteMode.single;
-	@SuppressWarnings("NullAway.Init") private Particle[] particles;
+	 private Particle[] particles;
 	private int minParticleCount, maxParticleCount = 4;
 	private float x, y;
-	@SuppressWarnings("NullAway.Init") private String name;
+	 private String name;
 	private Array<String> imagePaths;
 	private int activeCount;
-	@SuppressWarnings("NullAway.Init") private boolean[] active;
+	 private boolean[] active;
 	private boolean firstUpdate;
 	private boolean flipX, flipY;
 	private int updateFlags;
@@ -396,7 +396,7 @@ public class ParticleEmitter {
 		return particles;
 	}
 
-	@NullUnmarked private void activateParticle (int index) {
+	 private void activateParticle (int index) {
 		Sprite sprite = null;
 		switch (spriteMode) {
 		case single:
@@ -676,7 +676,7 @@ public class ParticleEmitter {
 		this.y = y;
 	}
 
-	@NullUnmarked public void setSprites (Array<Sprite> sprites) {
+	 public void setSprites (Array<Sprite> sprites) {
 		this.sprites = sprites;
 		if (sprites.size == 0) return;
 		for (int i = 0, n = particles.length; i < n; i++) {
@@ -1230,10 +1230,10 @@ public class ParticleEmitter {
 		protected float transparency, transparencyDiff;
 		protected float wind, windDiff;
 		protected float gravity, gravityDiff;
-		@SuppressWarnings("NullAway.Init") protected float[] tint;
+		 protected float[] tint;
 		protected int frame;
 
-		@NullUnmarked public Particle (@Nullable Sprite sprite) {
+		 public Particle (@Nullable Sprite sprite) {
 			super(sprite);
 		}
 	}

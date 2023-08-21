@@ -26,7 +26,7 @@ import java.util.MissingResourceException;
 import com.badlogic.gdx.files.FileHandle;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A {@code I18NBundle} provides {@code Locale}-specific resources loaded from property files. A bundle contains a number of
  * named resources, whose names and values are {@code Strings}. A bundle may have a parent bundle, and when a resource is not
@@ -81,7 +81,7 @@ public class I18NBundle {
 	private Locale locale;
 
 	/** The properties for this bundle. */
-	@SuppressWarnings("NullAway.Init") private ObjectMap<String, String> properties;
+	 private ObjectMap<String, String> properties;
 
 	/** The formatter used for argument replacement. */
 	private TextFormatter formatter;
@@ -419,7 +419,7 @@ public class I18NBundle {
 	 * 
 	 * @param locale */
 
-	@NullUnmarked @Initializer private void setLocale (Locale locale) {
+	 @Initializer private void setLocale (Locale locale) {
 		this.locale = locale;
 		this.formatter = new TextFormatter(locale, !simpleFormatter);
 	}

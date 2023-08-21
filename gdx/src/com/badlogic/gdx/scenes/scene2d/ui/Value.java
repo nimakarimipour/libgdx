@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** Value placeholder, allowing the value to be computed on request. Values can be provided an actor for context to reduce the
  * number of value instances that need to be created and reduce verbosity in code that specifies values.
@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullUnmarked;
 abstract public class Value {
 	/** Calls {@link #get(Actor)} with null. */
 
-	@NullUnmarked public float get () {
+	 public float get () {
 		return get(null);
 	}
 

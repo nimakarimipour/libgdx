@@ -48,7 +48,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /** A 2D scene graph containing hierarchies of {@link Actor actors}. Stage handles the viewport and distributes input events.
  * <p>
@@ -885,11 +885,11 @@ public class Stage extends InputAdapter implements Disposable {
 	/** Internal class for managing touch focus. Public only for GWT.
 	 * @author Nathan Sweet */
 	public static final class TouchFocus implements Poolable {
-		@SuppressWarnings("NullAway.Init") EventListener listener;
+		 EventListener listener;
 		@Nullable Actor listenerActor, target;
 		int pointer, button;
 
-		@NullUnmarked public void reset () {
+		 public void reset () {
 			listenerActor = null;
 			listener = null;
 			target = null;

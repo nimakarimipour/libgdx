@@ -46,7 +46,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
+
 
 /**
  * <p>
@@ -208,7 +208,7 @@ public class Mesh implements Disposable {
 		return this;
 	}
 
-	@NullUnmarked public Mesh disableInstancedRendering () {
+	 public Mesh disableInstancedRendering () {
 		if (isInstanced) {
 			isInstanced = false;
 			instances.dispose();
@@ -285,7 +285,7 @@ public class Mesh implements Disposable {
 	 * @param source the instance data to update the mesh part with
 	 * @param sourceOffset the offset in number of floats within the source array
 	 * @param count the number of floats to update */
-	@NullUnmarked public Mesh updateInstanceData (int targetOffset, float[] source, int sourceOffset, int count) {
+	 public Mesh updateInstanceData (int targetOffset, float[] source, int sourceOffset, int count) {
 		this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
 		return this;
 	}
@@ -302,7 +302,7 @@ public class Mesh implements Disposable {
 	 * @param source the instance data to update the mesh part with
 	 * @param sourceOffset the offset in number of floats within the source array
 	 * @param count the number of floats to update */
-	@NullUnmarked public Mesh updateInstanceData (int targetOffset, FloatBuffer source, int sourceOffset, int count) {
+	 public Mesh updateInstanceData (int targetOffset, FloatBuffer source, int sourceOffset, int count) {
 		this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
 		return this;
 	}
@@ -585,7 +585,7 @@ public class Mesh implements Disposable {
 	 * @param primitiveType the primitive type
 	 * @param offset the offset into the vertex or index buffer
 	 * @param count number of vertices or indices to use */
-	@NullUnmarked public void render (@Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
+	 public void render (@Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
 		render(shader, primitiveType, offset, count, autoBind);
 	}
 
@@ -614,7 +614,7 @@ public class Mesh implements Disposable {
 	 * @param offset the offset into the vertex or index buffer
 	 * @param count number of vertices or indices to use
 	 * @param autoBind overrides the autoBind member of this Mesh */
-	@NullUnmarked public void render (ShaderProgram shader, int primitiveType, int offset, int count, boolean autoBind) {
+	 public void render (ShaderProgram shader, int primitiveType, int offset, int count, boolean autoBind) {
 		if (count == 0) return;
 
 		if (autoBind) bind(shader);
@@ -670,7 +670,7 @@ public class Mesh implements Disposable {
 	 * @param usage the Usage.
 	 * @return the VertexAttribute or null if no attribute with that usage was found. */
 
-	@NullUnmarked public VertexAttribute getVertexAttribute (int usage) {
+	 public VertexAttribute getVertexAttribute (int usage) {
 		VertexAttributes attributes = vertices.getAttributes();
 		int len = attributes.size();
 		for (int i = 0; i < len; i++)
