@@ -89,3 +89,6 @@ natives.zip
 .classpath
 .project
 .settings
+
+annotator-out/
+*.log
