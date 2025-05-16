@@ -17,17 +17,17 @@
 package com.badlogic.gdx.utils;
 
 public class GdxNativesLoader {
-	public static boolean disableNativesLoading = false;
+  public static boolean disableNativesLoading = false;
 
-	private static boolean nativesLoaded;
+  private static boolean nativesLoaded;
 
-	/** Loads the libgdx native libraries if they have not already been loaded. */
-	public static synchronized void load () {
-		if (nativesLoaded) return;
+  /** Loads the libgdx native libraries if they have not already been loaded. */
+  public static synchronized void load() {
+    if (nativesLoaded) return;
 
-		if (disableNativesLoading) return;
+    if (disableNativesLoading) return;
 
-		new SharedLibraryLoader().load("gdx");
-		nativesLoaded = true;
-	}
+    new SharedLibraryLoader().load("gdx");
+    nativesLoaded = true;
+  }
 }

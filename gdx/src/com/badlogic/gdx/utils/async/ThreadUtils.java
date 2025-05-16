@@ -16,11 +16,13 @@
 
 package com.badlogic.gdx.utils.async;
 
-/** Utilities for threaded programming.
+/**
+ * Utilities for threaded programming.
  *
- * @author badlogic */
+ * @author badlogic
+ */
 public class ThreadUtils {
-	public static void yield () {
-		Thread.yield();
-	}
+  public static void yield() {
+    Thread.yield();
+  }
 }

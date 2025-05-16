@@ -1,5 +1,3 @@
-
 package com.badlogic.gdx;
 
-public @interface NullUnmarked {
-}
+public @interface NullUnmarked {}

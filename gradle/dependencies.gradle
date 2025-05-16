@@ -21,8 +21,8 @@ ext {
     gdxnatives = [:]
 }
 
-versions.java = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 8
-versions.javaLwjgl3 = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 8
+versions.java = 17
+versions.javaLwjgl3 = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 17
 versions.robovm = "2.3.16"
 versions.gwt = "2.8.2"
 versions.gwtPlugin = "1.1.16"

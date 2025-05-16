@@ -16,20 +16,22 @@
 
 package com.badlogic.gdx.scenes.scene2d.actions;
 
-/** Base class for actions that transition over time using the percent complete since the last frame.
+/**
+ * Base class for actions that transition over time using the percent complete since the last frame.
  *
- * @author Nathan Sweet */
+ * @author Nathan Sweet
+ */
 public abstract class RelativeTemporalAction extends TemporalAction {
-	private float lastPercent;
+  private float lastPercent;
 
-	protected void begin () {
-		lastPercent = 0;
-	}
+  protected void begin() {
+    lastPercent = 0;
+  }
 
-	protected void update (float percent) {
-		updateRelative(percent - lastPercent);
-		lastPercent = percent;
-	}
+  protected void update(float percent) {
+    updateRelative(percent - lastPercent);
+    lastPercent = percent;
+  }
 
-	protected abstract void updateRelative (float percentDelta);
+  protected abstract void updateRelative(float percentDelta);
 }

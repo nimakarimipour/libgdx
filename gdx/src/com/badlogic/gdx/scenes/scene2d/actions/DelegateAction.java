@@ -20,53 +20,55 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Pool;
 
-/** Base class for an action that wraps another action.
+/**
+ * Base class for an action that wraps another action.
  *
- * @author Nathan Sweet */
+ * @author Nathan Sweet
+ */
 public abstract class DelegateAction extends Action {
-	protected Action action;
+  protected Action action;
 
-	/** Sets the wrapped action. */
-	public void setAction (Action action) {
-		this.action = action;
-	}
+  /** Sets the wrapped action. */
+  public void setAction(Action action) {
+    this.action = action;
+  }
 
-	public Action getAction () {
-		return action;
-	}
+  public Action getAction() {
+    return action;
+  }
 
-	protected abstract boolean delegate (float delta);
+  protected abstract boolean delegate(float delta);
 
-	public final boolean act (float delta) {
-		Pool pool = getPool();
-		setPool(null); // Ensure this action can't be returned to the pool inside the delegate action.
-		try {
-			return delegate(delta);
-		} finally {
-			setPool(pool);
-		}
-	}
+  public final boolean act(float delta) {
+    Pool pool = getPool();
+    setPool(null); // Ensure this action can't be returned to the pool inside the delegate action.
+    try {
+      return delegate(delta);
+    } finally {
+      setPool(pool);
+    }
+  }
 
-	public void restart () {
-		if (action != null) action.restart();
-	}
+  public void restart() {
+    if (action != null) action.restart();
+  }
 
-	public void reset () {
-		super.reset();
-		action = null;
-	}
+  public void reset() {
+    super.reset();
+    action = null;
+  }
 
-	public void setActor (Actor actor) {
-		if (action != null) action.setActor(actor);
-		super.setActor(actor);
-	}
+  public void setActor(Actor actor) {
+    if (action != null) action.setActor(actor);
+    super.setActor(actor);
+  }
 
-	public void setTarget (Actor target) {
-		if (action != null) action.setTarget(target);
-		super.setTarget(target);
-	}
+  public void setTarget(Actor target) {
+    if (action != null) action.setTarget(target);
+    super.setTarget(target);
+  }
 
-	public String toString () {
-		return super.toString() + (action == null ? "" : "(" + action + ")");
-	}
+  public String toString() {
+    return super.toString() + (action == null ? "" : "(" + action + ")");
+  }
 }

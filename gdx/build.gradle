@@ -14,19 +14,26 @@
  * limitations under the License.
  ******************************************************************************/
 
+plugins{
+	id 'com.diffplug.spotless'
+}
+
 apply plugin: "java"
 apply plugin: "net.ltgt.errorprone"
 
 println(versions)
 
-if(JavaVersion.current().isJava9Compatible()) {
-	compileJava {
-		options.release = versions.java
+spotless {
+	java {
+		googleJavaFormat('1.17.0') // or latest compatible with Java 17
+		target 'src/**/*.java'
 	}
-} else {
-	sourceCompatibility = versions.java
-	targetCompatibility = versions.java
 }
+
+
+sourceCompatibility = versions.java
+targetCompatibility = versions.java
+
 
 sourceSets.main.java.srcDirs = ["src"]
 sourceSets.main.resources.srcDirs = ["res"]
@@ -51,12 +58,13 @@ dependencies {
 	// Optional, some source of nullability annotations.
 	// Not required on Android if you use the support
 	// library nullability annotations.
+	annotationProcessor "com.uber.nullaway:nullaway:0.12.4-SNAPSHOT"
+	annotationProcessor "edu.ucr.cs.riple.annotator:annotator-scanner:1.3.16-SNAPSHOT"
+	implementation "edu.ucr.cs.riple.annotator:annotation-util:1.3.16-SNAPSHOT"
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-	compileOnly "com.uber.nullaway:nullaway-annotations:0.10.8"
-
-	errorprone "com.google.errorprone:error_prone_core:2.16"
+	errorprone "com.google.errorprone:error_prone_core:2.35.1"
 	errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
-	compileOnly "com.uber.nullaway:nullaway-annotations:0.10.10"
+	compileOnly "com.uber.nullaway:nullaway-annotations:0.12.4-SNAPSHOT"
 
 }
 
@@ -95,22 +103,32 @@ jnigen {
 	}
 }
 
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs += [
+		'--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED',
+		'--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED',
+		'--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED',
+		'--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED',
+		'--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED',
+		'--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED'
+	]
+}
+def scanner_path = project.rootProject.projectDir.toString() + "/annotator-out/scanner.xml"
+def nullaway_path = project.rootProject.projectDir.toString() + "/annotator-out/nullaway.xml"
 import net.ltgt.gradle.errorprone.CheckSeverity
-
 tasks.withType(JavaCompile) {
 	// remove the if condition if you want to run NullAway on test code
 	if (!name.toLowerCase().contains("test")) {
 		options.errorprone.disableAllChecks = true
-		options.errorprone.disableAllWarnings = true
 		options.errorprone {
 			check("NullAway", CheckSeverity.ERROR)
 			check("AnnotatorScanner", CheckSeverity.ERROR)
 			option("NullAway:AnnotatedPackages", "com.badlogic.gdx")
 			option("NullAway:SerializeFixMetadata", "true")
-			option("NullAway:FixSerializationConfigPath", "/tmp/annotator/checker.xml")
-			option("AnnotatorScanner:ConfigPath", "/tmp/annotator/scanner.xml")
+			option("NullAway:FixSerializationConfigPath", nullaway_path)
+			option("AnnotatorScanner:ConfigPath", scanner_path)
 		}
+		options.compilerArgs << "-Xmaxerrs" << "100000"
+		options.compilerArgs << "-Xmaxwarns" << "100000"
 	}
-	options.compilerArgs << "-Xmaxerrs" << "100000"
-	options.compilerArgs << "-Xmaxwarns" << "100000"
 }

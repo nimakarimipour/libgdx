@@ -19,22 +19,24 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-/** Sets the actor's {@link Actor#setVisible(boolean) visibility}.
+/**
+ * Sets the actor's {@link Actor#setVisible(boolean) visibility}.
  *
- * @author Nathan Sweet */
+ * @author Nathan Sweet
+ */
 public class VisibleAction extends Action {
-	private boolean visible;
+  private boolean visible;
 
-	public boolean act (float delta) {
-		target.setVisible(visible);
-		return true;
-	}
+  public boolean act(float delta) {
+    target.setVisible(visible);
+    return true;
+  }
 
-	public boolean isVisible () {
-		return visible;
-	}
+  public boolean isVisible() {
+    return visible;
+  }
 
-	public void setVisible (boolean visible) {
-		this.visible = visible;
-	}
+  public void setVisible(boolean visible) {
+    this.visible = visible;
+  }
 }

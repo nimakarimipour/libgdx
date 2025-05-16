@@ -20,22 +20,28 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 
-/** Listener for {@link ChangeEvent}.
+/**
+ * Listener for {@link ChangeEvent}.
  *
- * @author Nathan Sweet */
+ * @author Nathan Sweet
+ */
 public abstract class ChangeListener implements EventListener {
-	public boolean handle (Event event) {
-		if (!(event instanceof ChangeEvent)) return false;
-		changed((ChangeEvent)event, event.getTarget());
-		return false;
-	}
+  public boolean handle(Event event) {
+    if (!(event instanceof ChangeEvent)) return false;
+    changed((ChangeEvent) event, event.getTarget());
+    return false;
+  }
 
-	/** @param actor The event target, which is the actor that emitted the change event. */
-	public abstract void changed (ChangeEvent event, Actor actor);
+  /**
+   * @param actor The event target, which is the actor that emitted the change event.
+   */
+  public abstract void changed(ChangeEvent event, Actor actor);
 
-	/** Fired when something in an actor has changed. This is a generic event, exactly what changed in an actor will vary.
-	 *
-	 * @author Nathan Sweet */
-	public static class ChangeEvent extends Event {
-	}
+  /**
+   * Fired when something in an actor has changed. This is a generic event, exactly what changed in
+   * an actor will vary.
+   *
+   * @author Nathan Sweet
+   */
+  public static class ChangeEvent extends Event {}
 }
