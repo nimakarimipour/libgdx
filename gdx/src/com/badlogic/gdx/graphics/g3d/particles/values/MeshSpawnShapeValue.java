@@ -26,6 +26,8 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * The base class of all the {@link ParticleValue} values which spawn a particle on a mesh shape.
@@ -82,7 +84,7 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
    * the model this mesh belongs to. It can be null, but this means the mesh will not be able to be
    * serialized correctly.
    */
-  protected Model model;
+  @Nullable protected Model model;
 
   public MeshSpawnShapeValue(MeshSpawnShapeValue value) {
     super(value);
@@ -97,7 +99,8 @@ public abstract class MeshSpawnShapeValue extends SpawnShapeValue {
     setMesh(spawnShapeValue.mesh, spawnShapeValue.model);
   }
 
-  public void setMesh(Mesh mesh, Model model) {
+  @Initializer
+  public void setMesh(Mesh mesh, @Nullable Model model) {
     if (mesh.getVertexAttribute(Usage.Position) == null)
       throw new GdxRuntimeException("Mesh vertices must have Usage.Position");
     this.model = model;

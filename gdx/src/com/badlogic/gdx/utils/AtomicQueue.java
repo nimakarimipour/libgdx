@@ -24,6 +24,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceArray;
+import javax.annotation.Nullable;
 
 /**
  * A queue that allows one thread to call {@link #put(Object)} and another thread to call {@link
@@ -54,6 +55,7 @@ public class AtomicQueue<T> {
     return true;
   }
 
+  @Nullable
   public @Null T poll() {
     int read = readIndex.get();
     int write = writeIndex.get();

@@ -11,6 +11,7 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import javax.annotation.Nullable;
 
 /**
  * A {@link VertexData} implementation that uses vertex buffer objects and vertex array objects.
@@ -120,7 +121,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
   }
 
   @Override
-  public void setVertices(float[] vertices, int offset, int count) {
+  public void setVertices(@Nullable float[] vertices, int offset, int count) {
     isDirty = true;
     BufferUtils.copy(vertices, byteBuffer, count, offset);
     ((Buffer) buffer).position(0);
@@ -150,7 +151,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
   }
 
   @Override
-  public void bind(ShaderProgram shader, int[] locations) {
+  public void bind(ShaderProgram shader, @Nullable int[] locations) {
     GL30 gl = Gdx.gl30;
 
     gl.glBindVertexArray(vaoHandle);
@@ -163,7 +164,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
     isBound = true;
   }
 
-  private void bindAttributes(ShaderProgram shader, int[] locations) {
+  private void bindAttributes(ShaderProgram shader, @Nullable int[] locations) {
     boolean stillValid = this.cachedLocations.size != 0;
     final int numAttributes = attributes.size();
 
@@ -246,7 +247,7 @@ public class VertexBufferObjectWithVAO implements VertexData {
   }
 
   @Override
-  public void unbind(final ShaderProgram shader, final int[] locations) {
+  public void unbind(final ShaderProgram shader, @Nullable final int[] locations) {
     GL30 gl = Gdx.gl30;
     gl.glBindVertexArray(0);
     isBound = false;

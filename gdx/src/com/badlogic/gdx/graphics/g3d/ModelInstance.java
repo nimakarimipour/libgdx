@@ -28,6 +28,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * An instance of a {@link Model}, allows to specify global transform and modify the materials, as
@@ -64,7 +65,7 @@ public class ModelInstance implements RenderableProvider {
   public Matrix4 transform;
 
   /** user definable value, which is passed to the {@link Shader}. */
-  public Object userData;
+  @Nullable public Object userData;
 
   /**
    * Constructs a new ModelInstance with all nodes and materials of the given model.
@@ -167,7 +168,7 @@ public class ModelInstance implements RenderableProvider {
    */
   public ModelInstance(
       final Model model,
-      final Matrix4 transform,
+      @Nullable final Matrix4 transform,
       final String nodeId,
       boolean recursive,
       boolean parentTransform,
@@ -196,7 +197,7 @@ public class ModelInstance implements RenderableProvider {
    */
   public ModelInstance(
       final Model model,
-      final Matrix4 transform,
+      @Nullable final Matrix4 transform,
       final String nodeId,
       boolean recursive,
       boolean parentTransform,
@@ -221,14 +222,15 @@ public class ModelInstance implements RenderableProvider {
   /**
    * Constructs a new ModelInstance with only the specified nodes and materials of the given model.
    */
-  public ModelInstance(final Model model, final String... rootNodeIds) {
+  public ModelInstance(final Model model, @Nullable final String... rootNodeIds) {
     this(model, null, rootNodeIds);
   }
 
   /**
    * Constructs a new ModelInstance with only the specified nodes and materials of the given model.
    */
-  public ModelInstance(final Model model, final Matrix4 transform, final String... rootNodeIds) {
+  public ModelInstance(
+      final Model model, @Nullable final Matrix4 transform, @Nullable final String... rootNodeIds) {
     this.model = model;
     this.transform = transform == null ? new Matrix4() : transform;
     if (rootNodeIds == null) copyNodes(model.nodes);
@@ -248,7 +250,7 @@ public class ModelInstance implements RenderableProvider {
    * Constructs a new ModelInstance with only the specified nodes and materials of the given model.
    */
   public ModelInstance(
-      final Model model, final Matrix4 transform, final Array<String> rootNodeIds) {
+      final Model model, @Nullable final Matrix4 transform, final Array<String> rootNodeIds) {
     this(model, transform, rootNodeIds, defaultShareKeyframes);
   }
 
@@ -257,7 +259,7 @@ public class ModelInstance implements RenderableProvider {
    */
   public ModelInstance(
       final Model model,
-      final Matrix4 transform,
+      @Nullable final Matrix4 transform,
       final Array<String> rootNodeIds,
       boolean shareKeyframes) {
     this.model = model;
@@ -553,6 +555,7 @@ public class ModelInstance implements RenderableProvider {
    * @param id The ID of the animation to fetch (case sensitive).
    * @return The {@link Animation} with the specified id, or null if not available.
    */
+  @Nullable
   public Animation getAnimation(final String id) {
     return getAnimation(id, false);
   }
@@ -562,6 +565,7 @@ public class ModelInstance implements RenderableProvider {
    * @param ignoreCase whether to use case sensitivity when comparing the animation id.
    * @return The {@link Animation} with the specified id, or null if not available.
    */
+  @Nullable
   public Animation getAnimation(final String id, boolean ignoreCase) {
     final int n = animations.size;
     Animation animation;
@@ -579,6 +583,7 @@ public class ModelInstance implements RenderableProvider {
    * @param id The ID of the material to fetch.
    * @return The {@link Material} with the specified id, or null if not available.
    */
+  @Nullable
   public Material getMaterial(final String id) {
     return getMaterial(id, true);
   }
@@ -588,6 +593,7 @@ public class ModelInstance implements RenderableProvider {
    * @param ignoreCase whether to use case sensitivity when comparing the material id.
    * @return The {@link Material} with the specified id, or null if not available.
    */
+  @Nullable
   public Material getMaterial(final String id, boolean ignoreCase) {
     final int n = materials.size;
     Material material;
@@ -604,6 +610,7 @@ public class ModelInstance implements RenderableProvider {
    * @param id The ID of the node to fetch.
    * @return The {@link Node} with the specified id, or null if not found.
    */
+  @Nullable
   public Node getNode(final String id) {
     return getNode(id, true);
   }
@@ -614,6 +621,7 @@ public class ModelInstance implements RenderableProvider {
    *     specified node.
    * @return The {@link Node} with the specified id, or null if not found.
    */
+  @Nullable
   public Node getNode(final String id, boolean recursive) {
     return getNode(id, recursive, false);
   }
@@ -625,6 +633,7 @@ public class ModelInstance implements RenderableProvider {
    * @param ignoreCase whether to use case sensitivity when comparing the node id.
    * @return The {@link Node} with the specified id, or null if not found.
    */
+  @Nullable
   public Node getNode(final String id, boolean recursive, boolean ignoreCase) {
     return Node.getNode(nodes, id, recursive, ignoreCase);
   }

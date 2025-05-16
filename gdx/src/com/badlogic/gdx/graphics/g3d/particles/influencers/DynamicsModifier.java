@@ -26,6 +26,8 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * It's the base class for any kind of influencer which operates on angular velocity and
@@ -49,6 +51,7 @@ public abstract class DynamicsModifier extends Influencer {
       super(rotation);
     }
 
+    @Initializer
     @Override
     public void allocateChannels() {
       rotationChannel = controller.particles.addChannel(ParticleChannels.Rotation3D);
@@ -207,7 +210,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class Rotational2D extends Strength {
-    FloatChannel rotationalVelocity2dChannel;
+    @Nullable FloatChannel rotationalVelocity2dChannel;
 
     public Rotational2D() {}
 
@@ -253,6 +256,7 @@ public abstract class DynamicsModifier extends Influencer {
       super(rotation);
     }
 
+    @Initializer
     @Override
     public void allocateChannels() {
       super.allocateChannels();
@@ -342,6 +346,7 @@ public abstract class DynamicsModifier extends Influencer {
       super(rotation);
     }
 
+    @Initializer
     @Override
     public void allocateChannels() {
       super.allocateChannels();
@@ -393,7 +398,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class PolarAcceleration extends Angular {
-    FloatChannel directionalVelocityChannel;
+    @Nullable FloatChannel directionalVelocityChannel;
 
     public PolarAcceleration() {}
 
@@ -464,6 +469,7 @@ public abstract class DynamicsModifier extends Influencer {
       super(rotation);
     }
 
+    @Initializer
     @Override
     public void allocateChannels() {
       super.allocateChannels();
@@ -527,7 +533,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public static class BrownianAcceleration extends Strength {
-    FloatChannel accelerationChannel;
+    @Nullable FloatChannel accelerationChannel;
 
     public BrownianAcceleration() {}
 

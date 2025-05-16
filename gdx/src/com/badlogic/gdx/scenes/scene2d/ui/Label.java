@@ -25,6 +25,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * A text label, with optional word wrapping.
@@ -51,7 +53,7 @@ public class Label extends Widget {
   private boolean prefSizeInvalid = true;
   private float fontScaleX = 1, fontScaleY = 1;
   private boolean fontScaleChanged = false;
-  private @Null String ellipsis;
+  @Nullable private @Null String ellipsis;
 
   public Label(@Null CharSequence text, Skin skin) {
     this(text, skin.get(LabelStyle.class));
@@ -83,6 +85,7 @@ public class Label extends Widget {
     if (text != null && text.length() > 0) setSize(getPrefWidth(), getPrefHeight());
   }
 
+  @Initializer
   public void setStyle(LabelStyle style) {
     if (style == null) throw new IllegalArgumentException("style cannot be null.");
     if (style.font == null) throw new IllegalArgumentException("Missing LabelStyle font.");
@@ -400,12 +403,12 @@ public class Label extends Widget {
    */
   public static class LabelStyle {
     public BitmapFont font;
-    public @Null Color fontColor;
-    public @Null Drawable background;
+    @Nullable public @Null Color fontColor;
+    @Nullable public @Null Drawable background;
 
     public LabelStyle() {}
 
-    public LabelStyle(BitmapFont font, @Null Color fontColor) {
+    public LabelStyle(BitmapFont font, @Nullable @Null Color fontColor) {
       this.font = font;
       this.fontColor = fontColor;
     }

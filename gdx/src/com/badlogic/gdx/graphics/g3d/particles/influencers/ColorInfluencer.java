@@ -23,6 +23,8 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * It's an {@link Influencer} which controls particles color and transparency.
@@ -33,7 +35,7 @@ public abstract class ColorInfluencer extends Influencer {
 
   /** It's an {@link Influencer} which assigns a random color when a particle is activated. */
   public static class Random extends ColorInfluencer {
-    FloatChannel colorChannel;
+    @Nullable FloatChannel colorChannel;
 
     @Override
     public void allocateChannels() {
@@ -81,6 +83,7 @@ public abstract class ColorInfluencer extends Influencer {
       this.alphaValue.load(colorInfluencer.alphaValue);
     }
 
+    @Initializer
     @Override
     public void allocateChannels() {
       super.allocateChannels();

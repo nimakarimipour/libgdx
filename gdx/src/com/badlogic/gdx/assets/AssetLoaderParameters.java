@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.assets;
 
+import javax.annotation.Nullable;
+
 public class AssetLoaderParameters<T> {
 
   /**
@@ -27,5 +29,5 @@ public class AssetLoaderParameters<T> {
     public void finishedLoading(AssetManager assetManager, String fileName, Class type);
   }
 
-  public LoadedCallback loadedCallback;
+  @Nullable public LoadedCallback loadedCallback;
 }

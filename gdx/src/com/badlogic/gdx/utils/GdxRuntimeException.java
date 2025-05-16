@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.utils;
 
+import javax.annotation.Nullable;
+
 /**
  * Typed runtime exception used throughout libGDX
  *
@@ -28,7 +30,7 @@ public class GdxRuntimeException extends RuntimeException {
     super(message);
   }
 
-  public GdxRuntimeException(Throwable t) {
+  public GdxRuntimeException(@Nullable Throwable t) {
     super(t);
   }
 

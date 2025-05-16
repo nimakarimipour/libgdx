@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /**
  * Static convenience methods for using pooled actions, intended for static import.
@@ -76,7 +77,7 @@ public class Actions {
   }
 
   public static MoveToAction moveTo(
-      float x, float y, float duration, @Null Interpolation interpolation) {
+      float x, float y, float duration, @Nullable @Null Interpolation interpolation) {
     MoveToAction action = action(MoveToAction.class);
     action.setPosition(x, y);
     action.setDuration(duration);
@@ -93,7 +94,11 @@ public class Actions {
   }
 
   public static MoveToAction moveToAligned(
-      float x, float y, int alignment, float duration, @Null Interpolation interpolation) {
+      float x,
+      float y,
+      int alignment,
+      float duration,
+      @Nullable @Null Interpolation interpolation) {
     MoveToAction action = action(MoveToAction.class);
     action.setPosition(x, y, alignment);
     action.setDuration(duration);
@@ -111,7 +116,7 @@ public class Actions {
   }
 
   public static MoveByAction moveBy(
-      float amountX, float amountY, float duration, @Null Interpolation interpolation) {
+      float amountX, float amountY, float duration, @Nullable @Null Interpolation interpolation) {
     MoveByAction action = action(MoveByAction.class);
     action.setAmount(amountX, amountY);
     action.setDuration(duration);
@@ -129,7 +134,7 @@ public class Actions {
   }
 
   public static SizeToAction sizeTo(
-      float x, float y, float duration, @Null Interpolation interpolation) {
+      float x, float y, float duration, @Nullable @Null Interpolation interpolation) {
     SizeToAction action = action(SizeToAction.class);
     action.setSize(x, y);
     action.setDuration(duration);
@@ -147,7 +152,7 @@ public class Actions {
   }
 
   public static SizeByAction sizeBy(
-      float amountX, float amountY, float duration, @Null Interpolation interpolation) {
+      float amountX, float amountY, float duration, @Nullable @Null Interpolation interpolation) {
     SizeByAction action = action(SizeByAction.class);
     action.setAmount(amountX, amountY);
     action.setDuration(duration);
@@ -165,7 +170,7 @@ public class Actions {
   }
 
   public static ScaleToAction scaleTo(
-      float x, float y, float duration, @Null Interpolation interpolation) {
+      float x, float y, float duration, @Nullable @Null Interpolation interpolation) {
     ScaleToAction action = action(ScaleToAction.class);
     action.setScale(x, y);
     action.setDuration(duration);
@@ -183,7 +188,7 @@ public class Actions {
   }
 
   public static ScaleByAction scaleBy(
-      float amountX, float amountY, float duration, @Null Interpolation interpolation) {
+      float amountX, float amountY, float duration, @Nullable @Null Interpolation interpolation) {
     ScaleByAction action = action(ScaleByAction.class);
     action.setAmount(amountX, amountY);
     action.setDuration(duration);
@@ -201,7 +206,7 @@ public class Actions {
   }
 
   public static RotateToAction rotateTo(
-      float rotation, float duration, @Null Interpolation interpolation) {
+      float rotation, float duration, @Nullable @Null Interpolation interpolation) {
     RotateToAction action = action(RotateToAction.class);
     action.setRotation(rotation);
     action.setDuration(duration);
@@ -219,7 +224,7 @@ public class Actions {
   }
 
   public static RotateByAction rotateBy(
-      float rotationAmount, float duration, @Null Interpolation interpolation) {
+      float rotationAmount, float duration, @Nullable @Null Interpolation interpolation) {
     RotateByAction action = action(RotateByAction.class);
     action.setAmount(rotationAmount);
     action.setDuration(duration);
@@ -238,7 +243,8 @@ public class Actions {
   }
 
   /** Transitions from the color at the time this action starts to the specified color. */
-  public static ColorAction color(Color color, float duration, @Null Interpolation interpolation) {
+  public static ColorAction color(
+      Color color, float duration, @Nullable @Null Interpolation interpolation) {
     ColorAction action = action(ColorAction.class);
     action.setEndColor(color);
     action.setDuration(duration);
@@ -257,7 +263,8 @@ public class Actions {
   }
 
   /** Transitions from the alpha at the time this action starts to the specified alpha. */
-  public static AlphaAction alpha(float a, float duration, @Null Interpolation interpolation) {
+  public static AlphaAction alpha(
+      float a, float duration, @Nullable @Null Interpolation interpolation) {
     AlphaAction action = action(AlphaAction.class);
     action.setAlpha(a);
     action.setDuration(duration);

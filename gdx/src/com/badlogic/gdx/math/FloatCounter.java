@@ -17,6 +17,7 @@
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 /**
  * Track properties of a stream of float values. The properties (total value, minimum, etc) are
@@ -47,7 +48,7 @@ public class FloatCounter implements Poolable {
   public float value;
 
   /** Provides access to the WindowedMean if any (can be null) */
-  public final WindowedMean mean;
+  @Nullable public final WindowedMean mean;
 
   /**
    * Construct a new FloatCounter

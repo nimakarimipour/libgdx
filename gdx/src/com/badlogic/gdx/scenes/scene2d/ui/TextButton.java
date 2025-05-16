@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /**
  * A button with a child {@link Label} to display text.
@@ -77,6 +78,7 @@ public class TextButton extends Button {
   }
 
   /** Returns the appropriate label font color from the style based on the current button state. */
+  @Nullable
   protected @Null Color getFontColor() {
     if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
     if (isPressed()) {
@@ -143,7 +145,9 @@ public class TextButton extends Button {
    */
   public static class TextButtonStyle extends ButtonStyle {
     public BitmapFont font;
+    @Nullable
     public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
+    @Nullable
     public @Null Color checkedFontColor,
         checkedDownFontColor,
         checkedOverFontColor,

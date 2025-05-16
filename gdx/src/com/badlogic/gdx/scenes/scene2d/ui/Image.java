@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TransformDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
+import javax.annotation.Nullable;
 
 /**
  * Displays a {@link Drawable}, scaled various way within the widgets bounds. The preferred size is
@@ -41,7 +42,7 @@ public class Image extends Widget {
   private Scaling scaling;
   private int align = Align.center;
   private float imageX, imageY, imageWidth, imageHeight;
-  private Drawable drawable;
+  @Nullable private Drawable drawable;
 
   /** Creates an image with no drawable, stretched, and aligned center. */
   public Image() {
@@ -81,7 +82,7 @@ public class Image extends Widget {
    *
    * @param drawable May be null.
    */
-  public Image(@Null Drawable drawable) {
+  public Image(@Nullable @Null Drawable drawable) {
     this(drawable, Scaling.stretch, Align.center);
   }
 
@@ -90,14 +91,14 @@ public class Image extends Widget {
    *
    * @param drawable May be null.
    */
-  public Image(@Null Drawable drawable, Scaling scaling) {
+  public Image(@Nullable @Null Drawable drawable, Scaling scaling) {
     this(drawable, scaling, Align.center);
   }
 
   /**
    * @param drawable May be null.
    */
-  public Image(@Null Drawable drawable, Scaling scaling, int align) {
+  public Image(@Nullable @Null Drawable drawable, Scaling scaling, int align) {
     setDrawable(drawable);
     this.scaling = scaling;
     this.align = align;
@@ -169,7 +170,7 @@ public class Image extends Widget {
    *
    * @param drawable May be null.
    */
-  public void setDrawable(@Null Drawable drawable) {
+  public void setDrawable(@Nullable @Null Drawable drawable) {
     if (this.drawable == drawable) return;
     if (drawable != null) {
       if (getPrefWidth() != drawable.getMinWidth() || getPrefHeight() != drawable.getMinHeight())
@@ -181,6 +182,7 @@ public class Image extends Widget {
   /**
    * @return May be null.
    */
+  @Nullable
   public @Null Drawable getDrawable() {
     return drawable;
   }

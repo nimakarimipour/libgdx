@@ -18,6 +18,7 @@ package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.uber.nullaway.annotations.Initializer;
 
 /**
  * Implementation of the Bezier curve.
@@ -181,6 +182,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
     return this;
   }
 
+  @Initializer
   public Bezier set(final Array<T> points, final int offset, final int length) {
     if (length < 2 || length > 4)
       throw new GdxRuntimeException(

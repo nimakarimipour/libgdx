@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import javax.annotation.Nullable;
 
 /**
  * See <a href=
@@ -39,7 +40,7 @@ import java.io.Writer;
  */
 public class ParticleEffect implements Disposable {
   private final Array<ParticleEmitter> emitters;
-  private BoundingBox bounds;
+  @Nullable private BoundingBox bounds;
   private boolean ownsTexture;
   protected float xSizeScale = 1f;
   protected float ySizeScale = 1f;
@@ -131,6 +132,7 @@ public class ParticleEffect implements Disposable {
   }
 
   /** Returns the emitter with the specified name, or null. */
+  @Nullable
   public ParticleEmitter findEmitter(String name) {
     for (int i = 0, n = emitters.size; i < n; i++) {
       ParticleEmitter emitter = emitters.get(i);
@@ -167,7 +169,7 @@ public class ParticleEffect implements Disposable {
     load(effectFile, atlas, null);
   }
 
-  public void load(FileHandle effectFile, TextureAtlas atlas, String atlasPrefix) {
+  public void load(FileHandle effectFile, TextureAtlas atlas, @Nullable String atlasPrefix) {
     loadEmitters(effectFile);
     loadEmitterImages(atlas, atlasPrefix);
   }
@@ -194,7 +196,7 @@ public class ParticleEffect implements Disposable {
     loadEmitterImages(atlas, null);
   }
 
-  public void loadEmitterImages(TextureAtlas atlas, String atlasPrefix) {
+  public void loadEmitterImages(TextureAtlas atlas, @Nullable String atlasPrefix) {
     for (int i = 0, n = emitters.size; i < n; i++) {
       ParticleEmitter emitter = emitters.get(i);
       if (emitter.getImagePaths().size == 0) continue;

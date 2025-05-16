@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /**
  * Stores {@link GlyphRun runs} of glyphs for a piece of text. The text may contain newlines and
@@ -155,7 +156,7 @@ public class GlyphLayout implements Poolable {
       float targetWidth,
       int halign,
       boolean wrap,
-      @Null String truncate) {
+      @Nullable @Null String truncate) {
 
     reset();
 
@@ -421,6 +422,7 @@ public class GlyphLayout implements Poolable {
    *
    * @return May be null if second run is all whitespace.
    */
+  @Nullable
   private GlyphRun wrap(BitmapFontData fontData, GlyphRun first, int wrapIndex) {
     Array<Glyph> glyphs2 = first.glyphs; // Starts with all the glyphs.
     int glyphCount = first.glyphs.size;

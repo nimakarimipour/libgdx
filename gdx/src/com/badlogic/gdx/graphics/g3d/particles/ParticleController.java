@@ -30,6 +30,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * Base class of all the particle controllers. Encapsulate the generic structure of a controller and
@@ -330,6 +332,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
   /**
    * @return the influencer having the given type.
    */
+  @Nullable
   public <K extends Influencer> K findInfluencer(Class<K> influencerClass) {
     int index = findIndex(influencerClass);
     return index > -1 ? (K) influencers.get(index) : null;
@@ -360,6 +363,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
     json.writeValue("renderer", renderer, ParticleControllerRenderer.class);
   }
 
+  @Initializer
   @Override
   public void read(Json json, JsonValue jsonMap) {
     name = json.readValue("name", String.class, jsonMap);

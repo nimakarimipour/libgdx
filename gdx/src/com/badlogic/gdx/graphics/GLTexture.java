@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
+import javax.annotation.Nullable;
 
 /**
  * Class representing an OpenGL texture by its target and handle. Keeps track of its state like the
@@ -140,7 +141,7 @@ public abstract class GLTexture implements Disposable {
    * @param u the u wrap
    * @param v the v wrap
    */
-  public void unsafeSetWrap(TextureWrap u, TextureWrap v) {
+  public void unsafeSetWrap(@Nullable TextureWrap u, @Nullable TextureWrap v) {
     unsafeSetWrap(u, v, false);
   }
 
@@ -152,7 +153,7 @@ public abstract class GLTexture implements Disposable {
    * @param v the v wrap
    * @param force True to always set the values, even if they are the same as the current values.
    */
-  public void unsafeSetWrap(TextureWrap u, TextureWrap v, boolean force) {
+  public void unsafeSetWrap(@Nullable TextureWrap u, @Nullable TextureWrap v, boolean force) {
     if (u != null && (force || uWrap != u)) {
       Gdx.gl.glTexParameteri(glTarget, GL20.GL_TEXTURE_WRAP_S, u.getGLEnum());
       uWrap = u;
@@ -184,7 +185,8 @@ public abstract class GLTexture implements Disposable {
    * @param minFilter the minification filter
    * @param magFilter the magnification filter
    */
-  public void unsafeSetFilter(TextureFilter minFilter, TextureFilter magFilter) {
+  public void unsafeSetFilter(
+      @Nullable TextureFilter minFilter, @Nullable TextureFilter magFilter) {
     unsafeSetFilter(minFilter, magFilter, false);
   }
 
@@ -196,7 +198,8 @@ public abstract class GLTexture implements Disposable {
    * @param magFilter the magnification filter
    * @param force True to always set the values, even if they are the same as the current values.
    */
-  public void unsafeSetFilter(TextureFilter minFilter, TextureFilter magFilter, boolean force) {
+  public void unsafeSetFilter(
+      @Nullable TextureFilter minFilter, @Nullable TextureFilter magFilter, boolean force) {
     if (minFilter != null && (force || this.minFilter != minFilter)) {
       Gdx.gl.glTexParameteri(glTarget, GL20.GL_TEXTURE_MIN_FILTER, minFilter.getGLEnum());
       this.minFilter = minFilter;

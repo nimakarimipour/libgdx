@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
+import javax.annotation.Nullable;
 
 /**
  * A button with a child {@link Image} to display an image. This is useful when the button must be
@@ -83,6 +84,7 @@ public class ImageButton extends Button {
   }
 
   /** Returns the appropriate image drawable from the style based on the current button state. */
+  @Nullable
   protected @Null Drawable getImageDrawable() {
     if (isDisabled() && style.imageDisabled != null) return style.imageDisabled;
     if (isPressed()) {
@@ -142,18 +144,18 @@ public class ImageButton extends Button {
    * @author Nathan Sweet
    */
   public static class ImageButtonStyle extends ButtonStyle {
-    public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
-    public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
+    @Nullable public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
+    @Nullable public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;
 
     public ImageButtonStyle() {}
 
     public ImageButtonStyle(
-        @Null Drawable up,
-        @Null Drawable down,
-        @Null Drawable checked,
+        @Nullable @Null Drawable up,
+        @Nullable @Null Drawable down,
+        @Nullable @Null Drawable checked,
         @Null Drawable imageUp,
-        @Null Drawable imageDown,
-        @Null Drawable imageChecked) {
+        @Nullable @Null Drawable imageDown,
+        @Nullable @Null Drawable imageChecked) {
       super(up, down, checked);
       this.imageUp = imageUp;
       this.imageDown = imageDown;

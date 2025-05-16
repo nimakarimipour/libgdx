@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.uber.nullaway.annotations.Initializer;
 import java.util.Arrays;
 
 /**
@@ -54,6 +55,7 @@ public class DynamicsInfluencer extends Influencer {
     this((DynamicsModifier[]) velocityInfluencer.velocities.toArray(DynamicsModifier.class));
   }
 
+  @Initializer
   @Override
   public void allocateChannels() {
     for (int k = 0; k < velocities.size; ++k) {

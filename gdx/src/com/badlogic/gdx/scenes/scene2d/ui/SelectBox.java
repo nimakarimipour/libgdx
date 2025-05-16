@@ -43,6 +43,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /**
  * A select box (aka a drop-down list) allows a user to choose one of a number of values from a
@@ -128,7 +129,7 @@ public class SelectBox<T> extends Widget implements Disableable {
     return scrollPane.maxListCount;
   }
 
-  protected void setStage(Stage stage) {
+  protected void setStage(@Nullable Stage stage) {
     if (stage == null) scrollPane.hide();
     super.setStage(stage);
   }
@@ -257,6 +258,7 @@ public class SelectBox<T> extends Widget implements Disableable {
   /**
    * Returns appropriate background drawable from the style based on the current select box state.
    */
+  @Nullable
   protected @Null Drawable getBackgroundDrawable() {
     if (isDisabled() && style.backgroundDisabled != null) return style.backgroundDisabled;
     if (scrollPane.hasParent() && style.backgroundOpen != null) return style.backgroundOpen;
@@ -330,6 +332,7 @@ public class SelectBox<T> extends Widget implements Disableable {
    * Returns the first selected item, or null. For multiple selections use {@link
    * SelectBox#getSelection()}.
    */
+  @Nullable
   public @Null T getSelected() {
     return selection.first();
   }
@@ -478,7 +481,7 @@ public class SelectBox<T> extends Widget implements Disableable {
     private final Vector2 stagePosition = new Vector2();
     final List<T> list;
     private InputListener hideListener;
-    private Actor previousScrollFocus;
+    @Nullable private Actor previousScrollFocus;
 
     public SelectBoxScrollPane(final SelectBox<T> selectBox) {
       super(null, selectBox.style.scrollStyle);
@@ -512,7 +515,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 
       addListener(
           new InputListener() {
-            public void exit(InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
+            public void exit(
+                InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {
               if (toActor == null || !isAscendantOf(toActor)) {
                 T selected = selectBox.getSelected();
                 if (selected != null) list.selection.set(selected);
@@ -530,7 +534,7 @@ public class SelectBox<T> extends Widget implements Disableable {
               return false;
             }
 
-            public boolean keyDown(InputEvent event, int keycode) {
+            public boolean keyDown(@Nullable InputEvent event, int keycode) {
               switch (keycode) {
                 case Keys.NUMPAD_ENTER:
                 case Keys.ENTER:
@@ -650,7 +654,7 @@ public class SelectBox<T> extends Widget implements Disableable {
       toFront();
     }
 
-    protected void setStage(Stage stage) {
+    protected void setStage(@Nullable Stage stage) {
       Stage oldStage = getStage();
       if (oldStage != null) {
         oldStage.removeCaptureListener(hideListener);
@@ -677,11 +681,11 @@ public class SelectBox<T> extends Widget implements Disableable {
   public static class SelectBoxStyle {
     public BitmapFont font;
     public Color fontColor = new Color(1, 1, 1, 1);
-    public @Null Color overFontColor, disabledFontColor;
-    public @Null Drawable background;
+    @Nullable public @Null Color overFontColor, disabledFontColor;
+    @Nullable public @Null Drawable background;
     public ScrollPaneStyle scrollStyle;
     public ListStyle listStyle;
-    public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
+    @Nullable public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
     public SelectBoxStyle() {}
 

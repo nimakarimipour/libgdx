@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.BooleanArray;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.ShortArray;
+import javax.annotation.Nullable;
 
 /**
  * Delaunay triangulation. Adapted from Paul Bourke's triangulate:
@@ -34,7 +35,7 @@ public class DelaunayTriangulator {
   private static final int INCOMPLETE = 2;
 
   private final IntArray quicksortStack = new IntArray();
-  private float[] sortedPoints;
+  @Nullable private float[] sortedPoints;
   private final ShortArray triangles = new ShortArray(false, 16);
   private final ShortArray originalIndices = new ShortArray(false, 0);
   private final IntArray edges = new IntArray();

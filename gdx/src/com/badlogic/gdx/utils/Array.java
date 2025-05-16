@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * A resizable, ordered or unordered array of objects. If unordered, this class avoids a memory copy
@@ -40,8 +41,8 @@ public class Array<T> implements Iterable<T> {
   public int size;
   public boolean ordered;
 
-  private ArrayIterable iterable;
-  private Predicate.PredicateIterable<T> predicateIterable;
+  @Nullable private ArrayIterable iterable;
+  @Nullable private Predicate.PredicateIterable<T> predicateIterable;
 
   /** Creates an ordered array with a capacity of 16. */
   public Array() {
@@ -115,7 +116,7 @@ public class Array<T> implements Iterable<T> {
     System.arraycopy(array, start, items, 0, size);
   }
 
-  public void add(T value) {
+  public void add(@Nullable T value) {
     T[] items = this.items;
     if (size == items.length) items = resize(Math.max(8, (int) (size * 1.75f)));
     items[size++] = value;
@@ -179,7 +180,7 @@ public class Array<T> implements Iterable<T> {
     return items[index];
   }
 
-  public void set(int index, T value) {
+  public void set(int index, @Nullable T value) {
     if (index >= size)
       throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
     items[index] = value;
@@ -273,7 +274,7 @@ public class Array<T> implements Iterable<T> {
    *     used.
    * @return An index of first occurrence of value in array or -1 if no such value exists
    */
-  public int indexOf(@Null T value, boolean identity) {
+  public int indexOf(@Nullable @Null T value, boolean identity) {
     T[] items = this.items;
     if (identity || value == null) {
       for (int i = 0, n = size; i < n; i++) if (items[i] == value) return i;

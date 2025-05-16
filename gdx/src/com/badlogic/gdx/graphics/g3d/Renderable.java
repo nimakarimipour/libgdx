@@ -22,6 +22,8 @@ import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * A Renderable contains all information about a single render instruction (typically a draw call).
@@ -82,7 +84,7 @@ public class Renderable {
    * environment contain an attribute of the same type, the attribute of the material will be used.
    * *
    */
-  public Environment environment;
+  @Nullable public Environment environment;
 
   /**
    * The bone transformations used for skinning, or null if not applicable. When specified and the
@@ -93,18 +95,19 @@ public class Renderable {
    * model space. In other words: the bone transformation is applied prior to the {@link
    * #worldTransform}.
    */
-  public Matrix4 bones[];
+  @Nullable public Matrix4 bones[];
 
   /**
    * The {@link Shader} to be used to render this Renderable using a {@link ModelBatch}, may be
    * null. It is not guaranteed that the shader will be used, the used {@link ShaderProvider} is
    * responsible for actually choosing the correct shader to use. *
    */
-  public Shader shader;
+  @Nullable public Shader shader;
 
   /** User definable value, may be null. */
-  public Object userData;
+  @Nullable public Object userData;
 
+  @Initializer
   public Renderable set(Renderable renderable) {
     worldTransform.set(renderable.worldTransform);
     material = renderable.material;

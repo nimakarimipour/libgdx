@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /**
  * A button is a {@link Table} with a checked state and additional {@link ButtonStyle style} fields
@@ -48,7 +49,7 @@ import com.badlogic.gdx.utils.Pools;
 public class Button extends Table implements Disableable {
   private ButtonStyle style;
   boolean isChecked, isDisabled;
-  ButtonGroup buttonGroup;
+  @Nullable ButtonGroup buttonGroup;
   private ClickListener clickListener;
   private boolean programmaticChangeEvents = true;
 
@@ -199,11 +200,13 @@ public class Button extends Table implements Disableable {
   /**
    * @return May be null.
    */
+  @Nullable
   public @Null ButtonGroup getButtonGroup() {
     return buttonGroup;
   }
 
   /** Returns appropriate background drawable from the style based on the current button state. */
+  @Nullable
   protected @Null Drawable getBackgroundDrawable() {
     if (isDisabled() && style.disabled != null) return style.disabled;
     if (isPressed()) {
@@ -290,8 +293,8 @@ public class Button extends Table implements Disableable {
    * @author mzechner
    */
   public static class ButtonStyle {
-    public @Null Drawable up, down, over, focused, disabled;
-    public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;
+    @Nullable public @Null Drawable up, down, over, focused, disabled;
+    @Nullable public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;
     public float pressedOffsetX,
         pressedOffsetY,
         unpressedOffsetX,
@@ -301,7 +304,10 @@ public class Button extends Table implements Disableable {
 
     public ButtonStyle() {}
 
-    public ButtonStyle(@Null Drawable up, @Null Drawable down, @Null Drawable checked) {
+    public ButtonStyle(
+        @Nullable @Null Drawable up,
+        @Nullable @Null Drawable down,
+        @Nullable @Null Drawable checked) {
       this.up = up;
       this.down = down;
       this.checked = checked;

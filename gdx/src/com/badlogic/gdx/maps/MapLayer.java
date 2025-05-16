@@ -17,10 +17,11 @@
 package com.badlogic.gdx.maps;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /** Map layer containing a set of objects and properties */
 public class MapLayer {
-  private String name = "";
+  @Nullable private String name = "";
   private float opacity = 1.0f;
   private boolean visible = true;
   private float offsetX;
@@ -28,13 +29,14 @@ public class MapLayer {
   private float renderOffsetX;
   private float renderOffsetY;
   private boolean renderOffsetDirty = true;
-  private MapLayer parent;
+  @Nullable private MapLayer parent;
   private MapObjects objects = new MapObjects();
   private MapProperties properties = new MapProperties();
 
   /**
    * @return layer's name
    */
+  @Nullable
   public String getName() {
     return name;
   }
@@ -42,7 +44,7 @@ public class MapLayer {
   /**
    * @param name new name for the layer
    */
-  public void setName(String name) {
+  public void setName(@Nullable String name) {
     this.name = name;
   }
 
@@ -116,6 +118,7 @@ public class MapLayer {
   /**
    * @return the layer's parent {@link MapLayer}, or null if the layer does not have a parent *
    */
+  @Nullable
   public MapLayer getParent() {
     return parent;
   }

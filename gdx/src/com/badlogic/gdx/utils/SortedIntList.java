@@ -16,6 +16,9 @@
 
 package com.badlogic.gdx.utils;
 
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
+
 /**
  * A sorted double linked list which uses ints for indexing
  *
@@ -23,10 +26,10 @@ package com.badlogic.gdx.utils;
  */
 public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
   private NodePool<E> nodePool = new NodePool<E>(); // avoid allocating nodes
-  private transient Iterator iterator;
+  @Nullable private transient Iterator iterator;
   int size = 0;
 
-  Node<E> first;
+  @Nullable Node<E> first;
 
   /** Creates an ascending list */
   public SortedIntList() {}
@@ -38,6 +41,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
    * @param value Element to insert
    * @return Element replaced by newly inserted element, null if nothing was replaced
    */
+  @Nullable
   public @Null E insert(int index, E value) {
     if (first != null) {
       Node<E> c = first;
@@ -78,6 +82,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
    * @param index Index of the element to retrieve
    * @return Matching element, null otherwise
    */
+  @Nullable
   public E get(int index) {
     E match = null;
     if (first != null) {
@@ -131,8 +136,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
   }
 
   public class Iterator implements java.util.Iterator<Node<E>> {
-    private Node<E> position;
-    private Node<E> previousPosition;
+    @Nullable private Node<E> position;
+    @Nullable private Node<E> previousPosition;
 
     public Iterator() {
       reset();
@@ -143,6 +148,8 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
       return position != null;
     }
 
+    @Nullable
+    @Initializer
     @Override
     public Node<E> next() {
       previousPosition = position;
@@ -179,10 +186,10 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
 
   public static class Node<E> {
     /** Node previous to this */
-    protected Node<E> p;
+    @Nullable protected Node<E> p;
 
     /** Node next to this */
-    protected Node<E> n;
+    @Nullable protected Node<E> n;
 
     /** Value held */
     public E value;
@@ -197,7 +204,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
       return new Node<E>();
     }
 
-    public Node<E> obtain(Node<E> p, Node<E> n, E value, int index) {
+    public Node<E> obtain(@Nullable Node<E> p, @Nullable Node<E> n, E value, int index) {
       Node<E> newNode = super.obtain();
       newNode.p = p;
       newNode.n = n;

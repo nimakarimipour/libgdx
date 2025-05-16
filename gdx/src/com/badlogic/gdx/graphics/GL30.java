@@ -20,6 +20,7 @@
 package com.badlogic.gdx.graphics;
 
 import java.nio.Buffer;
+import javax.annotation.Nullable;
 
 /** OpenGL ES 3.0 */
 public interface GL30 extends GL20 {
@@ -361,7 +362,7 @@ public interface GL30 extends GL20 {
       int border,
       int format,
       int type,
-      java.nio.Buffer pixels);
+      @Nullable java.nio.Buffer pixels);
 
   // C function void glTexImage3D ( GLenum target, GLint level, GLint internalformat, GLsizei width,
   // GLsizei height, GLsizei

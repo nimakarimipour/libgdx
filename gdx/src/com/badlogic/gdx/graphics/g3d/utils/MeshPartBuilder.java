@@ -27,11 +27,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import javax.annotation.Nullable;
 
 public interface MeshPartBuilder {
   /**
    * @return The {@link MeshPart} currently building.
    */
+  @Nullable
   public MeshPart getMeshPart();
 
   /**
@@ -301,7 +303,8 @@ public interface MeshPartBuilder {
       uv.set(0, 0);
     }
 
-    public VertexInfo set(Vector3 pos, Vector3 nor, Color col, Vector2 uv) {
+    public VertexInfo set(
+        @Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
       reset();
       hasPosition = pos != null;
       if (hasPosition) position.set(pos);
@@ -314,7 +317,7 @@ public interface MeshPartBuilder {
       return this;
     }
 
-    public VertexInfo set(final VertexInfo other) {
+    public VertexInfo set(@Nullable final VertexInfo other) {
       if (other == null) return set(null, null, null, null);
       hasPosition = other.hasPosition;
       position.set(other.position);

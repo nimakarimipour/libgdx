@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /**
  * Listener for {@link FocusEvent}.
@@ -59,8 +60,8 @@ public abstract class FocusListener implements EventListener {
    */
   public static class FocusEvent extends Event {
     private boolean focused;
-    private Type type;
-    private Actor relatedActor;
+    @Nullable private Type type;
+    @Nullable private Actor relatedActor;
 
     public void reset() {
       super.reset();
@@ -75,6 +76,7 @@ public abstract class FocusListener implements EventListener {
       this.focused = focused;
     }
 
+    @Nullable
     public Type getType() {
       return type;
     }
@@ -87,6 +89,7 @@ public abstract class FocusListener implements EventListener {
      * The actor related to the event. When focus is lost, this is the new actor being focused, or
      * null. When focus is gained, this is the previous actor that was focused, or null.
      */
+    @Nullable
     public @Null Actor getRelatedActor() {
       return relatedActor;
     }
@@ -94,7 +97,7 @@ public abstract class FocusListener implements EventListener {
     /**
      * @param relatedActor May be null.
      */
-    public void setRelatedActor(@Null Actor relatedActor) {
+    public void setRelatedActor(@Nullable @Null Actor relatedActor) {
       this.relatedActor = relatedActor;
     }
 

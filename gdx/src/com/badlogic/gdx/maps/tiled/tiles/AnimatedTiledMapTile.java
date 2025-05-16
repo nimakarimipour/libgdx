@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.TimeUtils;
+import javax.annotation.Nullable;
 
 /**
  * @brief Represents a changing {@link TiledMapTile}.
@@ -36,9 +37,9 @@ public class AnimatedTiledMapTile implements TiledMapTile {
 
   private BlendMode blendMode = BlendMode.ALPHA;
 
-  private MapProperties properties;
+  @Nullable private MapProperties properties;
 
-  private MapObjects objects;
+  @Nullable private MapObjects objects;
 
   private StaticTiledMapTile[] frameTiles;
 

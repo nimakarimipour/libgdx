@@ -30,10 +30,11 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import java.util.Iterator;
+import javax.annotation.Nullable;
 
 public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
     extends AsynchronousAssetLoader<Model, P> {
-  public ModelLoader(FileHandleResolver resolver) {
+  public ModelLoader(@Nullable FileHandleResolver resolver) {
     super(resolver);
   }
 
@@ -42,9 +43,11 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
   protected ModelParameters defaultParameters = new ModelParameters();
 
   /** Directly load the raw model data on the calling thread. */
-  public abstract ModelData loadModelData(final FileHandle fileHandle, P parameters);
+  @Nullable
+  public abstract ModelData loadModelData(final FileHandle fileHandle, @Nullable P parameters);
 
   /** Directly load the raw model data on the calling thread. */
+  @Nullable
   public ModelData loadModelData(final FileHandle fileHandle) {
     return loadModelData(fileHandle, null);
   }
@@ -53,8 +56,9 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
    * Directly load the model on the calling thread. The model with not be managed by an {@link
    * AssetManager}.
    */
+  @Nullable
   public Model loadModel(
-      final FileHandle fileHandle, TextureProvider textureProvider, P parameters) {
+      final FileHandle fileHandle, TextureProvider textureProvider, @Nullable P parameters) {
     final ModelData data = loadModelData(fileHandle, parameters);
     return data == null ? null : new Model(data, textureProvider);
   }
@@ -63,6 +67,7 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
    * Directly load the model on the calling thread. The model with not be managed by an {@link
    * AssetManager}.
    */
+  @Nullable
   public Model loadModel(final FileHandle fileHandle, P parameters) {
     return loadModel(fileHandle, new TextureProvider.FileTextureProvider(), parameters);
   }
@@ -71,6 +76,7 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
    * Directly load the model on the calling thread. The model with not be managed by an {@link
    * AssetManager}.
    */
+  @Nullable
   public Model loadModel(final FileHandle fileHandle, TextureProvider textureProvider) {
     return loadModel(fileHandle, textureProvider, null);
   }
@@ -79,12 +85,14 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
    * Directly load the model on the calling thread. The model with not be managed by an {@link
    * AssetManager}.
    */
+  @Nullable
   public Model loadModel(final FileHandle fileHandle) {
     return loadModel(fileHandle, new TextureProvider.FileTextureProvider(), null);
   }
 
   @Override
-  public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, P parameters) {
+  public Array<AssetDescriptor> getDependencies(
+      String fileName, FileHandle file, @Nullable P parameters) {
     final Array<AssetDescriptor> deps = new Array();
     ModelData data = loadModelData(file, parameters);
     if (data == null) return deps;
@@ -109,10 +117,13 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
   }
 
   @Override
-  public void loadAsync(AssetManager manager, String fileName, FileHandle file, P parameters) {}
+  public void loadAsync(
+      AssetManager manager, String fileName, FileHandle file, @Nullable P parameters) {}
 
+  @Nullable
   @Override
-  public Model loadSync(AssetManager manager, String fileName, FileHandle file, P parameters) {
+  public Model loadSync(
+      AssetManager manager, String fileName, FileHandle file, @Nullable P parameters) {
     ModelData data = null;
     synchronized (items) {
       for (int i = 0; i < items.size; i++) {

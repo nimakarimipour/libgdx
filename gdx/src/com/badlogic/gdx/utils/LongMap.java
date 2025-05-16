@@ -21,6 +21,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An unordered map where the keys are unboxed longs and values are objects. No allocation is done
@@ -50,7 +51,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
   long[] keyTable;
   V[] valueTable;
 
-  V zeroValue;
+  @Nullable V zeroValue;
   boolean hasZeroValue;
 
   private final float loadFactor;
@@ -162,7 +163,8 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
     }
   }
 
-  public @Null V put(long key, @Null V value) {
+  @Nullable
+  public @Null V put(long key, @Nullable @Null V value) {
     if (key == 0) {
       V oldValue = zeroValue;
       zeroValue = value;
@@ -208,12 +210,14 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
     }
   }
 
+  @Nullable
   public @Null V get(long key) {
     if (key == 0) return hasZeroValue ? zeroValue : null;
     int i = locateKey(key);
     return i >= 0 ? valueTable[i] : null;
   }
 
+  @Nullable
   public V get(long key, @Null V defaultValue) {
     if (key == 0) return hasZeroValue ? zeroValue : defaultValue;
     int i = locateKey(key);
@@ -221,6 +225,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
   }
 
   /** Returns the value for the removed key, or null if the key is not in the map. */
+  @Nullable
   public @Null V remove(long key) {
     if (key == 0) {
       if (!hasZeroValue) return null;
@@ -558,7 +563,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
 
   public static class Entry<V> {
     public long key;
-    public @Null V value;
+    @Nullable public @Null V value;
 
     public String toString() {
       return key + "=" + value;
@@ -673,6 +678,7 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
       return hasNext;
     }
 
+    @Nullable
     public @Null V next() {
       if (!hasNext) throw new NoSuchElementException();
       if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");

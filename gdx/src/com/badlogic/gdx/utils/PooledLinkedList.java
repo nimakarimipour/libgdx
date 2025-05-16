@@ -16,6 +16,9 @@
 
 package com.badlogic.gdx.utils;
 
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
+
 /**
  * A simple linked list that pools its nodes.
  *
@@ -23,15 +26,15 @@ package com.badlogic.gdx.utils;
  */
 public class PooledLinkedList<T> {
   static final class Item<T> {
-    public T payload;
-    public Item<T> next;
-    public Item<T> prev;
+    @Nullable public T payload;
+    @Nullable public Item<T> next;
+    @Nullable public Item<T> prev;
   }
 
-  private Item<T> head;
-  private Item<T> tail;
-  private Item<T> iter;
-  private Item<T> curr;
+  @Nullable private Item<T> head;
+  @Nullable private Item<T> tail;
+  @Nullable private Item<T> iter;
+  @Nullable private Item<T> curr;
   private int size = 0;
 
   private final Pool<Item<T>> pool;
@@ -47,6 +50,7 @@ public class PooledLinkedList<T> {
   }
 
   /** Adds the specified object to the end of the list regardless of iteration status */
+  @Initializer
   public void add(T object) {
     Item<T> item = pool.obtain();
     item.payload = object;
@@ -104,6 +108,7 @@ public class PooledLinkedList<T> {
    *
    * @return the next item in the list or null if there are no more items
    */
+  @Nullable
   public @Null T next() {
     if (iter == null) return null;
 
@@ -118,6 +123,7 @@ public class PooledLinkedList<T> {
    *
    * @return the previous item in the list or null if there are no more items
    */
+  @Nullable
   public @Null T previous() {
     if (iter == null) return null;
 
@@ -162,6 +168,7 @@ public class PooledLinkedList<T> {
   }
 
   /** Removes the tail of the list regardless of iteration status */
+  @Nullable
   public @Null T removeLast() {
     if (tail == null) {
       return null;

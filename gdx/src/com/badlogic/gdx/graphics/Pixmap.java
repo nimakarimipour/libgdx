@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import javax.annotation.Nullable;
 
 /**
  * A Pixmap represents an image in memory. It has a width and height expressed in pixels as well as
@@ -58,7 +59,7 @@ public class Pixmap implements Disposable {
     RGB888,
     RGBA8888;
 
-    public static int toGdx2DPixmapFormat(Format format) {
+    public static int toGdx2DPixmapFormat(@Nullable Format format) {
       if (format == Alpha) return Gdx2DPixmap.GDX2D_FORMAT_ALPHA;
       if (format == Intensity) return Gdx2DPixmap.GDX2D_FORMAT_ALPHA;
       if (format == LuminanceAlpha) return Gdx2DPixmap.GDX2D_FORMAT_LUMINANCE_ALPHA;
@@ -168,7 +169,7 @@ public class Pixmap implements Disposable {
    * @param height the height in pixels
    * @param format the {@link Format}
    */
-  public Pixmap(int width, int height, Format format) {
+  public Pixmap(int width, int height, @Nullable Format format) {
     pixmap = new Gdx2DPixmap(width, height, Format.toGdx2DPixmapFormat(format));
     setColor(0, 0, 0, 0);
     fill();

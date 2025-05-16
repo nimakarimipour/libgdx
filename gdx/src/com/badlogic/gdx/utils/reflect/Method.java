@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils.reflect;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import javax.annotation.Nullable;
 
 /**
  * Provides information about, and access to, a single method on a class or interface.
@@ -149,6 +150,7 @@ public final class Method {
    * doesn't have such an annotation. This is a convenience function if the caller knows already
    * which annotation type he's looking for.
    */
+  @Nullable
   public Annotation getDeclaredAnnotation(
       Class<? extends java.lang.annotation.Annotation> annotationType) {
     java.lang.annotation.Annotation[] annotations = method.getDeclaredAnnotations();

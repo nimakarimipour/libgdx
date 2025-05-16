@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /**
  * A group with a single child that sizes and positions the child using constraints. This provides
@@ -30,7 +31,7 @@ public class Container<T extends Actor> extends WidgetGroup {
       padRight = Value.zero;
   private float fillX, fillY;
   private int align;
-  private @Null Drawable background;
+  @Nullable private @Null Drawable background;
   private boolean clip;
   private boolean round = true;
 
@@ -40,7 +41,7 @@ public class Container<T extends Actor> extends WidgetGroup {
     setTransform(false);
   }
 
-  public Container(@Null T actor) {
+  public Container(@Nullable @Null T actor) {
     this();
     setActor(actor);
   }
@@ -86,7 +87,7 @@ public class Container<T extends Actor> extends WidgetGroup {
    *
    * @see #setBackground(Drawable, boolean)
    */
-  public void setBackground(@Null Drawable background) {
+  public void setBackground(@Nullable @Null Drawable background) {
     setBackground(background, true);
   }
 
@@ -97,7 +98,7 @@ public class Container<T extends Actor> extends WidgetGroup {
    *
    * @param background If null, the background will be cleared and padding removed.
    */
-  public void setBackground(@Null Drawable background, boolean adjustPadding) {
+  public void setBackground(@Nullable @Null Drawable background, boolean adjustPadding) {
     if (this.background == background) return;
     this.background = background;
     if (adjustPadding) {
@@ -120,6 +121,7 @@ public class Container<T extends Actor> extends WidgetGroup {
     return this;
   }
 
+  @Nullable
   public @Null Drawable getBackground() {
     return background;
   }
@@ -176,7 +178,7 @@ public class Container<T extends Actor> extends WidgetGroup {
   /**
    * @param actor May be null.
    */
-  public void setActor(@Null T actor) {
+  public void setActor(@Nullable @Null T actor) {
     if (actor == this) throw new IllegalArgumentException("actor cannot be the Container.");
     if (actor == this.actor) return;
     if (this.actor != null) super.removeActor(this.actor);
@@ -797,6 +799,7 @@ public class Container<T extends Actor> extends WidgetGroup {
     return clip;
   }
 
+  @Nullable
   public @Null Actor hit(float x, float y, boolean touchable) {
     if (clip) {
       if (touchable && getTouchable() == Touchable.disabled) return null;

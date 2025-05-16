@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 
 /**
  * Packs {@link Pixmap pixmaps} into one or more {@link Page pages} to generate an atlas of pixmap
@@ -189,6 +190,7 @@ public class PixmapPacker implements Disposable {
    *
    * @see #pack(String, Pixmap)
    */
+  @Nullable
   public synchronized Rectangle pack(Pixmap image) {
     return pack(null, image);
   }
@@ -202,7 +204,8 @@ public class PixmapPacker implements Disposable {
    * @throws GdxRuntimeException in case the image did not fit due to the page size being too small
    *     or providing a duplicate name.
    */
-  public synchronized Rectangle pack(String name, Pixmap image) {
+  @Nullable
+  public synchronized Rectangle pack(@Nullable String name, Pixmap image) {
     if (disposed) return null;
     if (name != null && getRect(name) != null)
       throw new GdxRuntimeException("Pixmap has already been packed with name: " + name);
@@ -360,6 +363,7 @@ public class PixmapPacker implements Disposable {
    * @param name the name of the image
    * @return the rectangle for the image in the page it's stored in or null
    */
+  @Nullable
   public synchronized Rectangle getRect(String name) {
     for (Page page : pages) {
       Rectangle rect = page.rects.get(name);
@@ -372,6 +376,7 @@ public class PixmapPacker implements Disposable {
    * @param name the name of the image
    * @return the page the image is stored in or null
    */
+  @Nullable
   public synchronized Page getPage(String name) {
     for (Page page : pages) {
       Rectangle rect = page.rects.get(name);
@@ -569,7 +574,7 @@ public class PixmapPacker implements Disposable {
   public static class Page {
     OrderedMap<String, PixmapPackerRectangle> rects = new OrderedMap();
     Pixmap image;
-    Texture texture;
+    @Nullable Texture texture;
     final Array<String> addedRects = new Array();
     boolean dirty;
 
@@ -640,7 +645,7 @@ public class PixmapPacker implements Disposable {
      * Returns the page the rectangle should be placed in and modifies the specified rectangle
      * position.
      */
-    public Page pack(PixmapPacker packer, String name, Rectangle rect);
+    public Page pack(PixmapPacker packer, @Nullable String name, Rectangle rect);
   }
 
   /**
@@ -652,7 +657,7 @@ public class PixmapPacker implements Disposable {
    * @author Rob Rendell
    */
   public static class GuillotineStrategy implements PackStrategy {
-    Comparator<Pixmap> comparator;
+    @Nullable Comparator<Pixmap> comparator;
 
     public void sort(Array<Pixmap> pixmaps) {
       if (comparator == null) {
@@ -667,7 +672,7 @@ public class PixmapPacker implements Disposable {
       pixmaps.sort(comparator);
     }
 
-    public Page pack(PixmapPacker packer, String name, Rectangle rect) {
+    public Page pack(PixmapPacker packer, @Nullable String name, Rectangle rect) {
       GuillotinePage page;
       if (packer.pages.size == 0) {
         // Add a page if empty.
@@ -693,6 +698,7 @@ public class PixmapPacker implements Disposable {
       return page;
     }
 
+    @Nullable
     private Node insert(Node node, Rectangle rect) {
       if (!node.full && node.leftChild != null && node.rightChild != null) {
         Node newNode = insert(node.leftChild, rect);
@@ -735,8 +741,8 @@ public class PixmapPacker implements Disposable {
     }
 
     static final class Node {
-      public Node leftChild;
-      public Node rightChild;
+      @Nullable public Node leftChild;
+      @Nullable public Node rightChild;
       public final Rectangle rect = new Rectangle();
       public boolean full;
     }
@@ -762,7 +768,7 @@ public class PixmapPacker implements Disposable {
    * @author Nathan Sweet
    */
   public static class SkylineStrategy implements PackStrategy {
-    Comparator<Pixmap> comparator;
+    @Nullable Comparator<Pixmap> comparator;
 
     public void sort(Array<Pixmap> images) {
       if (comparator == null) {
@@ -776,7 +782,7 @@ public class PixmapPacker implements Disposable {
       images.sort(comparator);
     }
 
-    public Page pack(PixmapPacker packer, String name, Rectangle rect) {
+    public Page pack(PixmapPacker packer, @Nullable String name, Rectangle rect) {
       int padding = packer.padding;
       int pageWidth = packer.pageWidth - padding * 2, pageHeight = packer.pageHeight - padding * 2;
       int rectWidth = (int) rect.width + padding, rectHeight = (int) rect.height + padding;
@@ -856,6 +862,7 @@ public class PixmapPacker implements Disposable {
     this.transparentColor.set(color);
   }
 
+  @Nullable
   private int[] getSplits(Pixmap raster) {
 
     int startX = getSplitPoint(raster, 1, 0, true, true);
@@ -889,7 +896,8 @@ public class PixmapPacker implements Disposable {
     return new int[] {startX, endX, startY, endY};
   }
 
-  private int[] getPads(Pixmap raster, int[] splits) {
+  @Nullable
+  private int[] getPads(Pixmap raster, @Nullable int[] splits) {
 
     int bottom = raster.getHeight() - 1;
     int right = raster.getWidth() - 1;
@@ -981,8 +989,8 @@ public class PixmapPacker implements Disposable {
   }
 
   public static class PixmapPackerRectangle extends Rectangle {
-    int[] splits;
-    int[] pads;
+    @Nullable int[] splits;
+    @Nullable int[] pads;
     int offsetX, offsetY;
     int originalWidth, originalHeight;
 

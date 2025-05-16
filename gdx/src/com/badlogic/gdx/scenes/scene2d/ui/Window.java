@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /**
  * A table that can be dragged and act as a modal window. The top padding is used as the window's
@@ -199,7 +200,7 @@ public class Window extends Table {
             return isModal;
           }
 
-          public boolean keyDown(InputEvent event, int keycode) {
+          public boolean keyDown(@Nullable InputEvent event, int keycode) {
             return isModal;
           }
 
@@ -315,6 +316,7 @@ public class Window extends Table {
     drawTitleTable = false; // Avoid drawing the title table again in drawChildren.
   }
 
+  @Nullable
   public @Null Actor hit(float x, float y, boolean touchable) {
     if (!isVisible()) return null;
     Actor hit = super.hit(x, y, touchable);
@@ -384,10 +386,10 @@ public class Window extends Table {
    * @author Nathan Sweet
    */
   public static class WindowStyle {
-    public @Null Drawable background;
+    @Nullable public @Null Drawable background;
     public BitmapFont titleFont;
     public @Null Color titleFontColor = new Color(1, 1, 1, 1);
-    public @Null Drawable stageBackground;
+    @Nullable public @Null Drawable stageBackground;
 
     public WindowStyle() {}
 

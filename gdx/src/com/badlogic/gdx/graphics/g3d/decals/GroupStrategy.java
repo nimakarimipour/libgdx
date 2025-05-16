@@ -18,6 +18,7 @@ package com.badlogic.gdx.graphics.g3d.decals;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * This class provides hooks which are invoked by {@link DecalBatch} to evaluate the group a sprite
@@ -46,6 +47,7 @@ public interface GroupStrategy {
    * @param group the group
    * @return the {@link ShaderProgram}
    */
+  @Nullable
   public ShaderProgram getGroupShader(int group);
 
   /**

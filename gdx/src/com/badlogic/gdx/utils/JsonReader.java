@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import javax.annotation.Nullable;
 
 /**
  * Lightweight JSON parser.<br>
@@ -693,12 +694,12 @@ public class JsonReader implements BaseJsonReader {
 
   private final Array<JsonValue> elements = new Array(8);
   private final Array<JsonValue> lastChild = new Array(8);
-  private JsonValue root, current;
+  @Nullable private JsonValue root, current;
 
   /**
    * @param name May be null.
    */
-  private void addChild(@Null String name, JsonValue child) {
+  private void addChild(@Nullable @Null String name, JsonValue child) {
     child.setName(name);
     if (current == null) {
       current = child;
@@ -719,7 +720,7 @@ public class JsonReader implements BaseJsonReader {
   /**
    * @param name May be null.
    */
-  protected void startObject(@Null String name) {
+  protected void startObject(@Nullable @Null String name) {
     JsonValue value = new JsonValue(ValueType.object);
     if (current != null) addChild(name, value);
     elements.add(value);
@@ -729,7 +730,7 @@ public class JsonReader implements BaseJsonReader {
   /**
    * @param name May be null.
    */
-  protected void startArray(@Null String name) {
+  protected void startArray(@Nullable @Null String name) {
     JsonValue value = new JsonValue(ValueType.array);
     if (current != null) addChild(name, value);
     elements.add(value);
@@ -742,19 +743,19 @@ public class JsonReader implements BaseJsonReader {
     current = elements.size > 0 ? elements.peek() : null;
   }
 
-  protected void string(String name, String value) {
+  protected void string(@Nullable String name, @Nullable String value) {
     addChild(name, new JsonValue(value));
   }
 
-  protected void number(String name, double value, String stringValue) {
+  protected void number(@Nullable String name, double value, String stringValue) {
     addChild(name, new JsonValue(value, stringValue));
   }
 
-  protected void number(String name, long value, String stringValue) {
+  protected void number(@Nullable String name, long value, String stringValue) {
     addChild(name, new JsonValue(value, stringValue));
   }
 
-  protected void bool(String name, boolean value) {
+  protected void bool(@Nullable String name, boolean value) {
     addChild(name, new JsonValue(value));
   }
 

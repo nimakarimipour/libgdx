@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
+import javax.annotation.Nullable;
 
 /**
  * Manages drag and drop operations through registered drag sources and drop targets.
@@ -35,11 +36,11 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 public class DragAndDrop {
   static final Vector2 tmpVector = new Vector2();
 
-  Source dragSource;
-  Payload payload;
-  Actor dragActor;
+  @Nullable Source dragSource;
+  @Nullable Payload payload;
+  @Nullable Actor dragActor;
   boolean removeDragActor;
-  Target target;
+  @Nullable Target target;
   boolean isValidTarget;
   final Array<Target> targets = new Array(8);
   final ObjectMap<Source, DragListener> sourceListeners = new ObjectMap(8);
@@ -246,16 +247,19 @@ public class DragAndDrop {
   }
 
   /** Returns the current drag actor, or null. */
+  @Nullable
   public @Null Actor getDragActor() {
     return dragActor;
   }
 
   /** Returns the current drag payload, or null. */
+  @Nullable
   public @Null Payload getDragPayload() {
     return payload;
   }
 
   /** Returns the current drag source, or null. */
+  @Nullable
   public @Null Source getDragSource() {
     return dragSource;
   }
@@ -331,7 +335,7 @@ public class DragAndDrop {
         float y,
         int pointer,
         @Null Payload payload,
-        @Null Target target) {}
+        @Nullable @Null Target target) {}
 
     public Actor getActor() {
       return actor;
@@ -388,13 +392,14 @@ public class DragAndDrop {
    * automatically. A source actor can be used as a payload drag actor.
    */
   public static class Payload {
-    @Null Actor dragActor, validDragActor, invalidDragActor;
-    @Null Object object;
+    @Nullable @Null Actor dragActor, validDragActor, invalidDragActor;
+    @Nullable @Null Object object;
 
     public void setDragActor(@Null Actor dragActor) {
       this.dragActor = dragActor;
     }
 
+    @Nullable
     public @Null Actor getDragActor() {
       return dragActor;
     }
@@ -403,6 +408,7 @@ public class DragAndDrop {
       this.validDragActor = validDragActor;
     }
 
+    @Nullable
     public @Null Actor getValidDragActor() {
       return validDragActor;
     }
@@ -411,10 +417,12 @@ public class DragAndDrop {
       this.invalidDragActor = invalidDragActor;
     }
 
+    @Nullable
     public @Null Actor getInvalidDragActor() {
       return invalidDragActor;
     }
 
+    @Nullable
     public @Null Object getObject() {
       return object;
     }

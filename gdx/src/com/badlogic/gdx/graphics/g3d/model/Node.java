@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import javax.annotation.Nullable;
 
 /**
  * A node is part of a hierarchy of Nodes in a {@link Model}. A Node encodes a transform relative to
@@ -34,7 +35,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  */
 public class Node {
   /** the id, may be null, FIXME is this unique? * */
-  public String id;
+  @Nullable public String id;
 
   /**
    * Whether this node should inherit the transformation of its parent node, defaults to true. When
@@ -72,7 +73,7 @@ public class Node {
 
   public Array<NodePart> parts = new Array<NodePart>(2);
 
-  protected Node parent;
+  @Nullable protected Node parent;
   private final Array<Node> children = new Array<Node>(2);
 
   /**
@@ -228,6 +229,7 @@ public class Node {
    *     specified node.
    * @return The node with the specified id, or null if not found.
    */
+  @Nullable
   public Node getChild(final String id, boolean recursive, boolean ignoreCase) {
     return getNode(children, id, recursive, ignoreCase);
   }
@@ -321,6 +323,7 @@ public class Node {
   /**
    * @return The parent node that holds this node as child node, may be null.
    */
+  @Nullable
   public Node getParent() {
     return parent;
   }
@@ -386,8 +389,9 @@ public class Node {
    *     specified node.
    * @return The node with the specified id, or null if not found.
    */
+  @Nullable
   public static Node getNode(
-      final Array<Node> nodes, final String id, boolean recursive, boolean ignoreCase) {
+      final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
     final int n = nodes.size;
     Node node;
     if (ignoreCase) {

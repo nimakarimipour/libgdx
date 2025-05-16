@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * Class to control one or more {@link Animation}s on a {@link ModelInstance}. Use the {@link
@@ -70,7 +71,7 @@ public class AnimationController extends BaseAnimationController {
    */
   public static class AnimationDesc {
     /** Listener which will be informed when the animation is looped or ended. */
-    public AnimationListener listener;
+    @Nullable public AnimationListener listener;
 
     /** The animation to be applied. */
     public Animation animation;
@@ -137,13 +138,13 @@ public class AnimationController extends BaseAnimationController {
       };
 
   /** The animation currently playing. Do not alter this value. */
-  public AnimationDesc current;
+  @Nullable public AnimationDesc current;
 
   /**
    * The animation queued to be played when the {@link #current} animation is completed. Do not
    * alter this value.
    */
-  public AnimationDesc queued;
+  @Nullable public AnimationDesc queued;
 
   /**
    * The transition time which should be applied to the queued animation. Do not alter this value.
@@ -151,7 +152,7 @@ public class AnimationController extends BaseAnimationController {
   public float queuedTransitionTime;
 
   /** The animation which previously played. Do not alter this value. */
-  public AnimationDesc previous;
+  @Nullable public AnimationDesc previous;
 
   /** The current transition time. Do not alter this value. */
   public float transitionCurrentTime;
@@ -179,13 +180,14 @@ public class AnimationController extends BaseAnimationController {
     super(target);
   }
 
+  @Nullable
   private AnimationDesc obtain(
       final Animation anim,
       float offset,
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener) {
+      @Nullable final AnimationListener listener) {
     if (anim == null) return null;
     final AnimationDesc result = animationPool.obtain();
     result.animation = anim;
@@ -198,19 +200,21 @@ public class AnimationController extends BaseAnimationController {
     return result;
   }
 
+  @Nullable
   private AnimationDesc obtain(
       final String id,
       float offset,
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener) {
+      @Nullable final AnimationListener listener) {
     if (id == null) return null;
     final Animation anim = target.getAnimation(id);
     if (anim == null) throw new GdxRuntimeException("Unknown animation: " + id);
     return obtain(anim, offset, duration, loopCount, speed, listener);
   }
 
+  @Nullable
   private AnimationDesc obtain(final AnimationDesc anim) {
     return obtain(
         anim.animation, anim.offset, anim.duration, anim.loopCount, anim.speed, anim.listener);
@@ -260,6 +264,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc setAnimation(final String id) {
     return setAnimation(id, 1, 1.0f, null);
   }
@@ -273,6 +278,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc setAnimation(final String id, int loopCount) {
     return setAnimation(id, loopCount, 1.0f, null);
   }
@@ -286,6 +292,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc setAnimation(final String id, final AnimationListener listener) {
     return setAnimation(id, 1, 1.0f, listener);
   }
@@ -301,6 +308,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc setAnimation(
       final String id, int loopCount, final AnimationListener listener) {
     return setAnimation(id, loopCount, 1.0f, listener);
@@ -321,8 +329,9 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc setAnimation(
-      final String id, int loopCount, float speed, final AnimationListener listener) {
+      final String id, int loopCount, float speed, @Nullable final AnimationListener listener) {
     return setAnimation(id, 0f, -1f, loopCount, speed, listener);
   }
 
@@ -344,17 +353,19 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc setAnimation(
       final String id,
       float offset,
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener) {
+      @Nullable final AnimationListener listener) {
     return setAnimation(obtain(id, offset, duration, loopCount, speed, listener));
   }
 
   /** Set the active animation, replacing any current animation. */
+  @Nullable
   protected AnimationDesc setAnimation(
       final Animation anim,
       float offset,
@@ -366,7 +377,8 @@ public class AnimationController extends BaseAnimationController {
   }
 
   /** Set the active animation, replacing any current animation. */
-  protected AnimationDesc setAnimation(final AnimationDesc anim) {
+  @Nullable
+  protected AnimationDesc setAnimation(@Nullable final AnimationDesc anim) {
     if (current == null) current = anim;
     else {
       if (!allowSameAnimation && anim != null && current.animation == anim.animation)
@@ -388,6 +400,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc animate(final String id, float transitionTime) {
     return animate(id, 1, 1.0f, null, transitionTime);
   }
@@ -403,6 +416,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc animate(
       final String id, final AnimationListener listener, float transitionTime) {
     return animate(id, 1, 1.0f, listener, transitionTime);
@@ -421,6 +435,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc animate(
       final String id, int loopCount, final AnimationListener listener, float transitionTime) {
     return animate(id, loopCount, 1.0f, listener, transitionTime);
@@ -443,11 +458,12 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc animate(
       final String id,
       int loopCount,
       float speed,
-      final AnimationListener listener,
+      @Nullable final AnimationListener listener,
       float transitionTime) {
     return animate(id, 0f, -1f, loopCount, speed, listener, transitionTime);
   }
@@ -472,13 +488,14 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc animate(
       final String id,
       float offset,
       float duration,
       int loopCount,
       float speed,
-      final AnimationListener listener,
+      @Nullable final AnimationListener listener,
       float transitionTime) {
     return animate(obtain(id, offset, duration, loopCount, speed, listener), transitionTime);
   }
@@ -486,6 +503,7 @@ public class AnimationController extends BaseAnimationController {
   /**
    * Changes the current animation by blending the new on top of the old during the transition time.
    */
+  @Nullable
   protected AnimationDesc animate(
       final Animation anim,
       float offset,
@@ -500,7 +518,8 @@ public class AnimationController extends BaseAnimationController {
   /**
    * Changes the current animation by blending the new on top of the old during the transition time.
    */
-  protected AnimationDesc animate(final AnimationDesc anim, float transitionTime) {
+  @Nullable
+  protected AnimationDesc animate(@Nullable final AnimationDesc anim, float transitionTime) {
     if (current == null || current.loopCount == 0) current = anim;
     else if (inAction) queue(anim, transitionTime);
     else if (!allowSameAnimation && anim != null && current.animation == anim.animation) {
@@ -538,6 +557,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc queue(
       final String id,
       int loopCount,
@@ -568,6 +588,7 @@ public class AnimationController extends BaseAnimationController {
    * @return The {@link AnimationDesc} which can be read to get the progress of the animation. Will
    *     be invalid when the animation is completed.
    */
+  @Nullable
   public AnimationDesc queue(
       final String id,
       float offset,
@@ -583,6 +604,7 @@ public class AnimationController extends BaseAnimationController {
    * Queue an animation to be applied when the current is finished. If current is continuous it will
    * be synced on next loop.
    */
+  @Nullable
   protected AnimationDesc queue(
       final Animation anim,
       float offset,
@@ -598,7 +620,8 @@ public class AnimationController extends BaseAnimationController {
    * Queue an animation to be applied when the current is finished. If current is continuous it will
    * be synced on next loop.
    */
-  protected AnimationDesc queue(final AnimationDesc anim, float transitionTime) {
+  @Nullable
+  protected AnimationDesc queue(@Nullable final AnimationDesc anim, float transitionTime) {
     if (current == null || current.loopCount == 0) animate(anim, transitionTime);
     else {
       if (queued != null) animationPool.free(queued);
@@ -679,7 +702,7 @@ public class AnimationController extends BaseAnimationController {
   }
 
   /** Apply an action animation on top of the current animation. */
-  protected AnimationDesc action(final AnimationDesc anim, float transitionTime) {
+  protected AnimationDesc action(@Nullable final AnimationDesc anim, float transitionTime) {
     if (anim.loopCount < 0) throw new GdxRuntimeException("An action cannot be continuous");
     if (current == null || current.loopCount == 0) animate(anim, transitionTime);
     else {

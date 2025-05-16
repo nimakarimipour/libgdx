@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ModelInstanceParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
+import javax.annotation.Nullable;
 
 /**
  * A {@link ParticleControllerRenderer} which will render particles as {@link ModelInstance} to a
@@ -39,7 +40,7 @@ public class ModelInstanceRenderer
     super(new ModelInstanceControllerRenderData());
   }
 
-  public ModelInstanceRenderer(ModelInstanceParticleBatch batch) {
+  public ModelInstanceRenderer(@Nullable ModelInstanceParticleBatch batch) {
     this();
     setBatch(batch);
   }
@@ -114,7 +115,7 @@ public class ModelInstanceRenderer
   }
 
   @Override
-  public boolean isCompatible(ParticleBatch<?> batch) {
+  public boolean isCompatible(@Nullable ParticleBatch<?> batch) {
     return batch instanceof ModelInstanceParticleBatch;
   }
 }

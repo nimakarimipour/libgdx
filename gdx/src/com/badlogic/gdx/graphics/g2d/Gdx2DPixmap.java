@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import javax.annotation.Nullable;
 
 /**
  * @author mzechner
@@ -243,6 +244,7 @@ public class Gdx2DPixmap implements Disposable {
     setScale(basePtr, scale);
   }
 
+  @Nullable
   public static Gdx2DPixmap newPixmap(InputStream in, int requestedFormat) {
     try {
       return new Gdx2DPixmap(in, requestedFormat);
@@ -251,6 +253,7 @@ public class Gdx2DPixmap implements Disposable {
     }
   }
 
+  @Nullable
   public static Gdx2DPixmap newPixmap(int width, int height, int format) {
     try {
       return new Gdx2DPixmap(width, height, format);

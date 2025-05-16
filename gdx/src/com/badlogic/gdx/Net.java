@@ -32,6 +32,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * Provides methods to perform networking operations, such as simple HTTP get and post requests, and
@@ -195,13 +196,13 @@ public interface Net {
    */
   public static class HttpRequest implements Poolable {
 
-    private String httpMethod;
-    private String url;
+    @Nullable private String httpMethod;
+    @Nullable private String url;
     private Map<String, String> headers;
     private int timeOut = 0;
 
-    private String content;
-    private InputStream contentStream;
+    @Nullable private String content;
+    @Nullable private InputStream contentStream;
     private long contentLength;
 
     private boolean followRedirects = true;
@@ -315,21 +316,25 @@ public interface Net {
     }
 
     /** Returns the HTTP method of the HttpRequest. */
+    @Nullable
     public String getMethod() {
       return httpMethod;
     }
 
     /** Returns the URL of the HTTP request. */
+    @Nullable
     public String getUrl() {
       return url;
     }
 
     /** Returns the content string to be used for the HTTP request. */
+    @Nullable
     public String getContent() {
       return content;
     }
 
     /** Returns the content stream. */
+    @Nullable
     public InputStream getContentStream() {
       return contentStream;
     }

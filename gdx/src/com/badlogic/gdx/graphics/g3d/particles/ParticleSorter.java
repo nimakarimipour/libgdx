@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRende
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * This class is used by particle batches to sort the particles before rendering.
@@ -33,7 +34,7 @@ public abstract class ParticleSorter {
   /** Using this class will not apply sorting */
   public static class None extends ParticleSorter {
     int currentCapacity = 0;
-    int[] indices;
+    @Nullable int[] indices;
 
     @Override
     public void ensureCapacity(int capacity) {
@@ -44,6 +45,7 @@ public abstract class ParticleSorter {
       }
     }
 
+    @Nullable
     @Override
     public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
       return indices;
@@ -149,13 +151,14 @@ public abstract class ParticleSorter {
     }
   }
 
-  protected Camera camera;
+  @Nullable protected Camera camera;
 
   /**
    * @return an array of offsets where each particle should be put in the resulting mesh (also if
    *     more than one mesh will be generated, this is an absolute offset considering a BIG output
    *     array).
    */
+  @Nullable
   public abstract <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData);
 
   public void setCamera(Camera camera) {

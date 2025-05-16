@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 /**
  * This class can save and load a {@link ParticleEffect}. It should be added as {@link
@@ -58,11 +59,11 @@ public class ParticleEffectLoader
       AssetManager manager,
       String fileName,
       FileHandle file,
-      ParticleEffectLoadParameter parameter) {}
+      @Nullable ParticleEffectLoadParameter parameter) {}
 
   @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, ParticleEffectLoadParameter parameter) {
+      String fileName, FileHandle file, @Nullable ParticleEffectLoadParameter parameter) {
     Json json = new Json();
     ResourceData<ParticleEffect> data = json.fromJson(ResourceData.class, file);
     Array<AssetData> assets = null;
@@ -125,7 +126,7 @@ public class ParticleEffectLoader
       AssetManager manager,
       String fileName,
       FileHandle file,
-      ParticleEffectLoadParameter parameter) {
+      @Nullable ParticleEffectLoadParameter parameter) {
     ResourceData<ParticleEffect> effectData = null;
     synchronized (items) {
       for (int i = 0; i < items.size; ++i) {
@@ -150,6 +151,7 @@ public class ParticleEffectLoader
     return effectData.resource;
   }
 
+  @Nullable
   private <T> T find(Array<?> array, Class<T> type) {
     for (Object object : array) {
       if (ClassReflection.isAssignableFrom(type, object.getClass())) return (T) object;

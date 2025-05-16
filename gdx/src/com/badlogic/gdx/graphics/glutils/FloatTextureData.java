@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.nio.FloatBuffer;
+import javax.annotation.Nullable;
 
 /** A {@link TextureData} implementation which should be used to create float textures. */
 public class FloatTextureData implements TextureData {
@@ -40,7 +41,7 @@ public class FloatTextureData implements TextureData {
   boolean isGpuOnly;
 
   boolean isPrepared = false;
-  FloatBuffer buffer;
+  @Nullable FloatBuffer buffer;
 
   public FloatTextureData(
       int w, int h, int internalFormat, int format, int type, boolean isGpuOnly) {
@@ -141,6 +142,7 @@ public class FloatTextureData implements TextureData {
     return true;
   }
 
+  @Nullable
   public FloatBuffer getBuffer() {
     return buffer;
   }

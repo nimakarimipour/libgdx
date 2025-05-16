@@ -23,6 +23,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * {@link AssetLoader} for {@link Music} instances. The Music instance is loaded synchronously.
@@ -31,7 +32,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.MusicParameter> {
 
-  private Music music;
+  @Nullable private Music music;
 
   public MusicLoader(FileHandleResolver resolver) {
     super(resolver);
@@ -43,27 +44,30 @@ public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.Musi
    * @return the currently loaded {@link Music}, otherwise {@code null} if no {@link Music} has been
    *     loaded yet.
    */
+  @Nullable
   protected Music getLoadedMusic() {
     return music;
   }
 
   @Override
   public void loadAsync(
-      AssetManager manager, String fileName, FileHandle file, MusicParameter parameter) {
+      AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
     music = Gdx.audio.newMusic(file);
   }
 
+  @Nullable
   @Override
   public Music loadSync(
-      AssetManager manager, String fileName, FileHandle file, MusicParameter parameter) {
+      AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
     Music music = this.music;
     this.music = null;
     return music;
   }
 
+  @Nullable
   @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, MusicParameter parameter) {
+      String fileName, FileHandle file, @Nullable MusicParameter parameter) {
     return null;
   }
 

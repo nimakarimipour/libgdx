@@ -18,6 +18,7 @@ package com.badlogic.gdx.scenes.scene2d;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Null;
+import javax.annotation.Nullable;
 
 /**
  * EventListener for low-level input events. Unpacks {@link InputEvent}s and calls the appropriate
@@ -148,7 +149,8 @@ public class InputListener implements EventListener {
    * @param fromActor May be null.
    * @see InputEvent
    */
-  public void enter(InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {}
+  public void enter(
+      InputEvent event, float x, float y, int pointer, @Nullable @Null Actor fromActor) {}
 
   /**
    * Called any time the mouse cursor or a finger touch is moved out of an actor. On the desktop,
@@ -157,7 +159,8 @@ public class InputListener implements EventListener {
    * @param toActor May be null.
    * @see InputEvent
    */
-  public void exit(InputEvent event, float x, float y, int pointer, @Null Actor toActor) {}
+  public void exit(
+      InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {}
 
   /**
    * Called when the mouse wheel has been scrolled. When true is returned, the event is {@link
@@ -171,7 +174,7 @@ public class InputListener implements EventListener {
    * Called when a key goes down. When true is returned, the event is {@link Event#handle()
    * handled}.
    */
-  public boolean keyDown(InputEvent event, int keycode) {
+  public boolean keyDown(@Nullable InputEvent event, int keycode) {
     return false;
   }
 

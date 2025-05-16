@@ -16,18 +16,20 @@
 
 package com.badlogic.gdx.math;
 
+import javax.annotation.Nullable;
+
 /**
  * Encapsulates a 2D polygon defined by it's vertices relative to an origin point (default of 0, 0).
  */
 public class Polygon implements Shape2D {
   private float[] localVertices;
-  private float[] worldVertices;
+  @Nullable private float[] worldVertices;
   private float x, y;
   private float originX, originY;
   private float rotation;
   private float scaleX = 1, scaleY = 1;
   private boolean dirty = true;
-  private Rectangle bounds;
+  @Nullable private Rectangle bounds;
 
   /** Constructs a new polygon with no vertices. */
   public Polygon() {

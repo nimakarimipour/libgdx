@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g2d;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.uber.nullaway.annotations.Initializer;
 
 /**
  * @author Stefan Bachmann
@@ -354,6 +355,7 @@ public class PolygonSprite {
     return color;
   }
 
+  @Initializer
   public void setRegion(PolygonRegion region) {
     this.region = region;
 

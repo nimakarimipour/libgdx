@@ -28,6 +28,7 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The
@@ -41,9 +42,9 @@ import com.badlogic.gdx.utils.Array;
 public class CubemapLoader
     extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
   public static class CubemapLoaderInfo {
-    String filename;
+    @Nullable String filename;
     CubemapData data;
-    Cubemap cubemap;
+    @Nullable Cubemap cubemap;
   }
   ;
 
@@ -55,7 +56,10 @@ public class CubemapLoader
 
   @Override
   public void loadAsync(
-      AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
+      AssetManager manager,
+      String fileName,
+      FileHandle file,
+      @Nullable CubemapParameter parameter) {
     info.filename = fileName;
     if (parameter == null || parameter.cubemapData == null) {
       Format format = null;
@@ -77,9 +81,13 @@ public class CubemapLoader
     if (!info.data.isPrepared()) info.data.prepare();
   }
 
+  @Nullable
   @Override
   public Cubemap loadSync(
-      AssetManager manager, String fileName, FileHandle file, CubemapParameter parameter) {
+      AssetManager manager,
+      String fileName,
+      FileHandle file,
+      @Nullable CubemapParameter parameter) {
     if (info == null) return null;
     Cubemap cubemap = info.cubemap;
     if (cubemap != null) {
@@ -94,24 +102,25 @@ public class CubemapLoader
     return cubemap;
   }
 
+  @Nullable
   @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, CubemapParameter parameter) {
+      String fileName, FileHandle file, @Nullable CubemapParameter parameter) {
     return null;
   }
 
   public static class CubemapParameter extends AssetLoaderParameters<Cubemap> {
     /** the format of the final Texture. Uses the source images format if null * */
-    public Format format = null;
+    @Nullable public Format format = null;
 
     /** The texture to put the {@link TextureData} in, optional. * */
-    public Cubemap cubemap = null;
+    @Nullable public Cubemap cubemap = null;
 
     /**
      * CubemapData for textures created on the fly, optional. When set, all format and genMipMaps
      * are ignored
      */
-    public CubemapData cubemapData = null;
+    @Nullable public CubemapData cubemapData = null;
 
     public TextureFilter minFilter = TextureFilter.Nearest;
     public TextureFilter magFilter = TextureFilter.Nearest;

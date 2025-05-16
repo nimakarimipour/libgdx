@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An {@link ObjectMap} that also stores keys in an {@link Array} using the insertion order. Null
@@ -84,7 +85,8 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
     keys = new Array(map.keys);
   }
 
-  public V put(K key, V value) {
+  @Nullable
+  public V put(@Nullable K key, @Nullable V value) {
     int i = locateKey(key);
     if (i >= 0) { // Existing key was found.
       V oldValue = valueTable[i];
@@ -108,11 +110,13 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
     }
   }
 
+  @Nullable
   public V remove(K key) {
     keys.removeValue(key, false);
     return super.remove(key);
   }
 
+  @Nullable
   public V removeIndex(int index) {
     return super.remove(keys.removeIndex(index));
   }

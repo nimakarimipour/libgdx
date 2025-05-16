@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParallelArray.ObjectChannel;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.uber.nullaway.annotations.Initializer;
 
 /**
  * It's an {@link Influencer} which updates the simulation of particles containing a {@link
@@ -36,6 +37,7 @@ public class ParticleControllerFinalizerInfluencer extends Influencer {
 
   public ParticleControllerFinalizerInfluencer() {}
 
+  @Initializer
   @Override
   public void init() {
     controllerChannel = controller.particles.getChannel(ParticleChannels.ParticleController);

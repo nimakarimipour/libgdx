@@ -14,6 +14,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /**
  * Provides methods to sort arrays of objects. Sorting requires working memory and this class allows
@@ -26,10 +27,10 @@ import java.util.Comparator;
  * @author Nathan Sweet
  */
 public class Sort {
-  private static Sort instance;
+  @Nullable private static Sort instance;
 
-  private TimSort timSort;
-  private ComparableTimSort comparableTimSort;
+  @Nullable private TimSort timSort;
+  @Nullable private ComparableTimSort comparableTimSort;
 
   public <T extends Comparable> void sort(Array<T> a) {
     if (comparableTimSort == null) comparableTimSort = new ComparableTimSort();

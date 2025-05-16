@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils.reflect;
 
 import java.lang.reflect.Modifier;
+import javax.annotation.Nullable;
 
 /**
  * Utilities for Class reflection.
@@ -54,7 +55,7 @@ public final class ClassReflection {
    * as, or is a superclass or superinterface of, the class or interface represented by the second
    * Class parameter.
    */
-  public static boolean isAssignableFrom(Class c1, Class c2) {
+  public static boolean isAssignableFrom(Class c1, @Nullable Class c2) {
     return c1.isAssignableFrom(c2);
   }
 
@@ -134,7 +135,7 @@ public final class ClassReflection {
    * Returns a {@link Constructor} that represents the public constructor for the supplied class
    * which takes the supplied parameter types.
    */
-  public static Constructor getConstructor(Class c, Class... parameterTypes)
+  public static Constructor getConstructor(Class c, @Nullable Class... parameterTypes)
       throws ReflectionException {
     try {
       return new Constructor(c.getConstructor(parameterTypes));
@@ -151,7 +152,7 @@ public final class ClassReflection {
    * Returns a {@link Constructor} that represents the constructor for the supplied class which
    * takes the supplied parameter types.
    */
-  public static Constructor getDeclaredConstructor(Class c, Class... parameterTypes)
+  public static Constructor getDeclaredConstructor(Class c, @Nullable Class... parameterTypes)
       throws ReflectionException {
     try {
       return new Constructor(c.getDeclaredConstructor(parameterTypes));
@@ -308,6 +309,7 @@ public final class ClassReflection {
    * doesn't have such an annotation. This is a convenience function if the caller knows already
    * which annotation type he's looking for.
    */
+  @Nullable
   public static Annotation getAnnotation(
       Class c, Class<? extends java.lang.annotation.Annotation> annotationType) {
     java.lang.annotation.Annotation annotation = c.getAnnotation(annotationType);
@@ -333,6 +335,7 @@ public final class ClassReflection {
    * doesn't have such an annotation. This is a convenience function if the caller knows already
    * which annotation type he's looking for.
    */
+  @Nullable
   public static Annotation getDeclaredAnnotation(
       Class c, Class<? extends java.lang.annotation.Annotation> annotationType) {
     java.lang.annotation.Annotation[] annotations = c.getDeclaredAnnotations();

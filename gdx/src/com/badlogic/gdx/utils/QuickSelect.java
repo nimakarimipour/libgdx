@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.utils;
 
+import com.uber.nullaway.annotations.Initializer;
 import java.util.Comparator;
 
 /**
@@ -29,6 +30,7 @@ public class QuickSelect<T> {
   private T[] array;
   private Comparator<? super T> comp;
 
+  @Initializer
   public int select(T[] items, Comparator<T> comp, int n, int size) {
     this.array = items;
     this.comp = comp;

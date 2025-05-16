@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An ordered or unordered map of objects. This implementation uses arrays to store the keys and
@@ -102,7 +103,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     System.arraycopy(array.values, 0, values, 0, size);
   }
 
-  public int put(K key, V value) {
+  public int put(@Nullable K key, V value) {
     int index = indexOfKey(key);
     if (index == -1) {
       if (size == keys.length) resize(Math.max(8, (int) (size * 1.75f)));
@@ -146,6 +147,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
    * map. Note this does a .equals() comparison of each key in reverse order until the specified key
    * is found.
    */
+  @Nullable
   public @Null V get(K key) {
     return get(key, null);
   }
@@ -155,7 +157,8 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
    * not in the map. Note this does a .equals() comparison of each key in reverse order until the
    * specified key is found.
    */
-  public @Null V get(K key, @Null V defaultValue) {
+  @Nullable
+  public @Null V get(K key, @Nullable @Null V defaultValue) {
     Object[] keys = this.keys;
     int i = size - 1;
     if (key == null) {
@@ -173,6 +176,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
    * @param identity If true, == comparison will be used. If false, .equals() comparison will be
    *     used.
    */
+  @Nullable
   public @Null K getKey(V value, boolean identity) {
     Object[] values = this.values;
     int i = size - 1;
@@ -255,7 +259,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     return false;
   }
 
-  public int indexOfKey(K key) {
+  public int indexOfKey(@Nullable K key) {
     Object[] keys = this.keys;
     if (key == null) {
       for (int i = 0, n = size; i < n; i++) if (keys[i] == key) return i;
@@ -275,6 +279,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     return -1;
   }
 
+  @Nullable
   public @Null V removeKey(K key) {
     Object[] keys = this.keys;
     if (key == null) {

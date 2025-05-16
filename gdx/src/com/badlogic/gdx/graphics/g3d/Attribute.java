@@ -17,6 +17,7 @@
 package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
+import javax.annotation.Nullable;
 
 /**
  * Extend this class to implement a material attribute. Register the attribute type by statically
@@ -40,6 +41,7 @@ public abstract class Attribute implements Comparable<Attribute> {
   /**
    * @return The alias of the specified attribute type, or null if not available.
    */
+  @Nullable
   public static final String getAttributeAlias(final long type) {
     int idx = -1;
     while (type != 0 && ++idx < 63 && (((type >> idx) & 1) == 0))
@@ -93,6 +95,7 @@ public abstract class Attribute implements Comparable<Attribute> {
     return equals(other);
   }
 
+  @Nullable
   @Override
   public String toString() {
     return getAttributeAlias(type);

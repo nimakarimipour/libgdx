@@ -16,7 +16,9 @@
 
 package com.badlogic.gdx.utils;
 
+import com.uber.nullaway.annotations.Initializer;
 import java.util.Iterator;
+import javax.annotation.Nullable;
 
 /**
  * Interface used to select items within an iterator against a predicate.
@@ -35,7 +37,7 @@ public interface Predicate<T> {
     public Predicate<T> predicate;
     public boolean end = false;
     public boolean peeked = false;
-    public T next = null;
+    @Nullable public T next = null;
 
     public PredicateIterator(final Iterable<T> iterable, final Predicate<T> predicate) {
       this(iterable.iterator(), predicate);
@@ -49,6 +51,7 @@ public interface Predicate<T> {
       set(iterable.iterator(), predicate);
     }
 
+    @Initializer
     public void set(final Iterator<T> iterator, final Predicate<T> predicate) {
       this.iterator = iterator;
       this.predicate = predicate;
@@ -72,6 +75,7 @@ public interface Predicate<T> {
       return false;
     }
 
+    @Nullable
     @Override
     public T next() {
       if (next == null && !hasNext()) return null;
@@ -92,12 +96,13 @@ public interface Predicate<T> {
   public static class PredicateIterable<T> implements Iterable<T> {
     public Iterable<T> iterable;
     public Predicate<T> predicate;
-    public PredicateIterator<T> iterator = null;
+    @Nullable public PredicateIterator<T> iterator = null;
 
     public PredicateIterable(Iterable<T> iterable, Predicate<T> predicate) {
       set(iterable, predicate);
     }
 
+    @Initializer
     public void set(Iterable<T> iterable, Predicate<T> predicate) {
       this.iterable = iterable;
       this.predicate = predicate;

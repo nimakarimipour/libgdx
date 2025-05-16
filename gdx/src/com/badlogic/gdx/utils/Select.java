@@ -17,6 +17,7 @@
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /**
  * This class is for selecting a ranked element (kth ordered statistic) from an unordered list in
@@ -34,8 +35,8 @@ import java.util.Comparator;
  * @author Jon Renner
  */
 public class Select {
-  private static Select instance;
-  private QuickSelect quickSelect;
+  @Nullable private static Select instance;
+  @Nullable private QuickSelect quickSelect;
 
   /** Provided for convenience */
   public static Select instance() {

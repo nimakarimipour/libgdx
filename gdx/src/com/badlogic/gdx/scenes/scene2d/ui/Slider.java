@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import javax.annotation.Nullable;
 
 /**
  * A slider is a horizontal indicator that allows a user to set a value. The slider has a range
@@ -48,7 +49,7 @@ public class Slider extends ProgressBar {
   int draggingPointer = -1;
   boolean mouseOver;
   private Interpolation visualInterpolationInverse = Interpolation.linear;
-  private float[] snapValues;
+  @Nullable private float[] snapValues;
   private float threshold;
 
   public Slider(float min, float max, float stepSize, boolean vertical, Skin skin) {
@@ -110,11 +111,12 @@ public class Slider extends ProgressBar {
           }
 
           public void enter(
-              InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
+              InputEvent event, float x, float y, int pointer, @Nullable @Null Actor fromActor) {
             if (pointer == -1) mouseOver = true;
           }
 
-          public void exit(InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
+          public void exit(
+              InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {
             if (pointer == -1) mouseOver = false;
           }
         });
@@ -140,6 +142,7 @@ public class Slider extends ProgressBar {
     return style.background;
   }
 
+  @Nullable
   protected @Null Drawable getKnobDrawable() {
     SliderStyle style = (SliderStyle) super.getStyle();
     if (disabled && style.disabledKnob != null) return style.disabledKnob;
@@ -148,6 +151,7 @@ public class Slider extends ProgressBar {
     return style.knob;
   }
 
+  @Nullable
   protected Drawable getKnobBeforeDrawable() {
     SliderStyle style = (SliderStyle) super.getStyle();
     if (disabled && style.disabledKnobBefore != null) return style.disabledKnobBefore;
@@ -156,6 +160,7 @@ public class Slider extends ProgressBar {
     return style.knobBefore;
   }
 
+  @Nullable
   protected Drawable getKnobAfterDrawable() {
     SliderStyle style = (SliderStyle) super.getStyle();
     if (disabled && style.disabledKnobAfter != null) return style.disabledKnobAfter;
@@ -264,10 +269,10 @@ public class Slider extends ProgressBar {
    * @author Nathan Sweet
    */
   public static class SliderStyle extends ProgressBarStyle {
-    public @Null Drawable backgroundOver, backgroundDown;
-    public @Null Drawable knobOver, knobDown;
-    public @Null Drawable knobBeforeOver, knobBeforeDown;
-    public @Null Drawable knobAfterOver, knobAfterDown;
+    @Nullable public @Null Drawable backgroundOver, backgroundDown;
+    @Nullable public @Null Drawable knobOver, knobDown;
+    @Nullable public @Null Drawable knobBeforeOver, knobBeforeDown;
+    @Nullable public @Null Drawable knobAfterOver, knobAfterDown;
 
     public SliderStyle() {}
 

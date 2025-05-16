@@ -22,10 +22,12 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
+import com.uber.nullaway.annotations.Initializer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
+import javax.annotation.Nullable;
 
 public class ParticleEmitter {
   private static final int UPDATE_SCALE = 1 << 0;
@@ -57,9 +59,9 @@ public class ParticleEmitter {
   private ScaledNumericValue spawnHeightValue = new ScaledNumericValue();
   private SpawnShapeValue spawnShapeValue = new SpawnShapeValue();
 
-  private RangedNumericValue[] xSizeValues;
-  private RangedNumericValue[] ySizeValues;
-  private RangedNumericValue[] motionValues;
+  @Nullable private RangedNumericValue[] xSizeValues;
+  @Nullable private RangedNumericValue[] ySizeValues;
+  @Nullable private RangedNumericValue[] motionValues;
 
   private float accumulator;
   private Array<Sprite> sprites;
@@ -67,7 +69,7 @@ public class ParticleEmitter {
   private Particle[] particles;
   private int minParticleCount, maxParticleCount = 4;
   private float x, y;
-  private String name;
+  @Nullable private String name;
   private Array<String> imagePaths;
   private int activeCount;
   private boolean[] active;
@@ -75,7 +77,7 @@ public class ParticleEmitter {
   private boolean flipX, flipY;
   private int updateFlags;
   private boolean allowCompletion;
-  private BoundingBox bounds;
+  @Nullable private BoundingBox bounds;
 
   private int emission, emissionDiff, emissionDelta;
   private int lifeOffset, lifeOffsetDiff;
@@ -151,6 +153,7 @@ public class ParticleEmitter {
     spawnHeightValue.setAlwaysActive(true);
   }
 
+  @Initializer
   public void setMaxParticleCount(int maxParticleCount) {
     this.maxParticleCount = maxParticleCount;
     active = new boolean[maxParticleCount];
@@ -382,7 +385,7 @@ public class ParticleEmitter {
     if (spriteMode == SpriteMode.animated) updateFlags |= UPDATE_SPRITE;
   }
 
-  protected Particle newParticle(Sprite sprite) {
+  protected Particle newParticle(@Nullable Sprite sprite) {
     return new Particle(sprite);
   }
 
@@ -1256,7 +1259,7 @@ public class ParticleEmitter {
     protected float[] tint;
     protected int frame;
 
-    public Particle(Sprite sprite) {
+    public Particle(@Nullable Sprite sprite) {
       super(sprite);
     }
   }

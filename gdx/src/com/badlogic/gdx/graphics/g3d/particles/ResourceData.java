@@ -27,6 +27,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
+import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * This class handles the assets and configurations required by a given resource when de/serialized.
@@ -78,7 +80,7 @@ public class ResourceData<T> implements Json.Serializable {
       this.resources = resources;
     }
 
-    public <K> void saveAsset(String filename, Class<K> type) {
+    public <K> void saveAsset(@Nullable String filename, Class<K> type) {
       int i = resources.getAssetData(filename, type);
       if (i == -1) {
         resources.sharedAssets.add(new AssetData(filename, type));
@@ -91,6 +93,7 @@ public class ResourceData<T> implements Json.Serializable {
       data.put(key, value);
     }
 
+    @Nullable
     public AssetDescriptor loadAsset() {
       if (loadIndex == assets.size) return null;
       AssetData data = (AssetData) resources.sharedAssets.get(assets.get(loadIndex++));
@@ -121,7 +124,7 @@ public class ResourceData<T> implements Json.Serializable {
 
     public AssetData() {}
 
-    public AssetData(String filename, Class<T> type) {
+    public AssetData(@Nullable String filename, Class<T> type) {
       this.filename = filename;
       this.type = type;
     }
@@ -132,6 +135,7 @@ public class ResourceData<T> implements Json.Serializable {
       json.writeValue("type", type.getName());
     }
 
+    @Initializer
     @Override
     public void read(Json json, JsonValue jsonData) {
       filename = json.readValue("filename", String.class, jsonData);
@@ -158,7 +162,7 @@ public class ResourceData<T> implements Json.Serializable {
   Array<AssetData> sharedAssets;
 
   private int currentLoadIndex;
-  public T resource;
+  @Nullable public T resource;
 
   public ResourceData() {
     uniqueData = new ObjectMap<String, SaveData>();
@@ -172,7 +176,7 @@ public class ResourceData<T> implements Json.Serializable {
     this.resource = resource;
   }
 
-  <K> int getAssetData(String filename, Class<K> type) {
+  <K> int getAssetData(@Nullable String filename, Class<K> type) {
     int i = 0;
     for (AssetData data : sharedAssets) {
       if (data.filename.equals(filename) && data.type.equals(type)) {

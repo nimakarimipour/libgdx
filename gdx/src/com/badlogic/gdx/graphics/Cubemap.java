@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
@@ -38,7 +39,7 @@ import java.util.Map;
  * @author Xoppa
  */
 public class Cubemap extends GLTexture {
-  private static AssetManager assetManager;
+  @Nullable private static AssetManager assetManager;
   static final Map<Application, Array<Cubemap>> managedCubemaps =
       new HashMap<Application, Array<Cubemap>>();
 
@@ -198,12 +199,12 @@ public class Cubemap extends GLTexture {
 
   /** Construct a Cubemap with the specified {@link TextureData}'s for the sides */
   public Cubemap(
-      TextureData positiveX,
-      TextureData negativeX,
-      TextureData positiveY,
-      TextureData negativeY,
-      TextureData positiveZ,
-      TextureData negativeZ) {
+      @Nullable TextureData positiveX,
+      @Nullable TextureData negativeX,
+      @Nullable TextureData positiveY,
+      @Nullable TextureData negativeY,
+      @Nullable TextureData positiveZ,
+      @Nullable TextureData negativeZ) {
     this(new FacedCubemapData(positiveX, negativeX, positiveY, negativeY, positiveZ, negativeZ));
   }
 

@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils;
 
 import java.text.MessageFormat;
 import java.util.Locale;
+import javax.annotation.Nullable;
 
 /**
  * {@code TextFormatter} is used by {@link I18NBundle} to perform argument replacement.
@@ -26,7 +27,7 @@ import java.util.Locale;
  */
 class TextFormatter {
 
-  private MessageFormat messageFormat;
+  @Nullable private MessageFormat messageFormat;
   private StringBuilder buffer;
 
   public TextFormatter(Locale locale, boolean useMessageFormat) {

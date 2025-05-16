@@ -19,6 +19,7 @@ package com.badlogic.gdx.utils.async;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import javax.annotation.Nullable;
 
 /**
  * Returned by {@link AsyncExecutor#submit(AsyncTask)}, allows to poll for the result of the asynch
@@ -44,6 +45,7 @@ public class AsyncResult<T> {
    * @return waits if necessary for the computation to complete and then returns the result
    * @throws GdxRuntimeException if there was an error
    */
+  @Nullable
   public T get() {
     try {
       return future.get();

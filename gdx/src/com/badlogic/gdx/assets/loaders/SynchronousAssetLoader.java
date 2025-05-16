@@ -19,6 +19,7 @@ package com.badlogic.gdx.assets.loaders;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
+import javax.annotation.Nullable;
 
 public abstract class SynchronousAssetLoader<T, P extends AssetLoaderParameters<T>>
     extends AssetLoader<T, P> {
@@ -26,5 +27,6 @@ public abstract class SynchronousAssetLoader<T, P extends AssetLoaderParameters<
     super(resolver);
   }
 
-  public abstract T load(AssetManager assetManager, String fileName, FileHandle file, P parameter);
+  public abstract T load(
+      AssetManager assetManager, String fileName, FileHandle file, @Nullable P parameter);
 }

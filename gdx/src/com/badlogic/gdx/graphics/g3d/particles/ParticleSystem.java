@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import javax.annotation.Nullable;
 
 /**
  * Singleton class which manages the particle effects. It's a utility class to ease particle batches
@@ -29,7 +30,7 @@ import com.badlogic.gdx.utils.Pool;
  * @author inferno
  */
 public final class ParticleSystem implements RenderableProvider {
-  private static ParticleSystem instance;
+  @Nullable private static ParticleSystem instance;
 
   /**
    * @deprecated Please directly use the constructor

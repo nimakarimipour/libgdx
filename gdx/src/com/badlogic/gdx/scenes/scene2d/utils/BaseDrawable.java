@@ -19,6 +19,7 @@ package com.badlogic.gdx.scenes.scene2d.utils;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import javax.annotation.Nullable;
 
 /**
  * Drawable that stores the size information but doesn't draw anything.
@@ -26,7 +27,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
  * @author Nathan Sweet
  */
 public class BaseDrawable implements Drawable {
-  private @Null String name;
+  @Nullable private @Null String name;
   private float leftWidth, rightWidth, topHeight, bottomHeight, minWidth, minHeight;
 
   public BaseDrawable() {}
@@ -104,6 +105,7 @@ public class BaseDrawable implements Drawable {
     setMinHeight(minHeight);
   }
 
+  @Nullable
   public @Null String getName() {
     return name;
   }
