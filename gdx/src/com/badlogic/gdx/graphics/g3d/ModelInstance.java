@@ -73,7 +73,7 @@ public class ModelInstance implements RenderableProvider {
    * @param model The {@link Model} to create an instance of.
    */
   public ModelInstance(final Model model) {
-    this(model, new String[0]);
+    this(model, (String[]) null);
   }
 
   /**
