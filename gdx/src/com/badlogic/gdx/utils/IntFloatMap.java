@@ -114,6 +114,12 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
 
     keyTable = new int[tableSize];
     valueTable = new float[tableSize];
+    entries1 = new Entry[tableSize];
+    entries2 = new Entry[tableSize];
+    values1 = new Value[tableSize];
+    values2 = new Value[tableSize];
+    keys1 = new Key[tableSize];
+    keys2 = new Key[tableSize];
   }
 
   /** Creates a new map identical to the specified map. */
