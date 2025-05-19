@@ -157,10 +157,7 @@ public class Texture extends GLTexture {
     this(new PixmapTextureData(new Pixmap(width, height, format), null, false, true));
   }
 
-  public Texture(TextureData data) {
-    if (data == null) {
-      throw new IllegalArgumentException("TextureData must not be null");
-    }
+  public Texture(@Nullable TextureData data) {
     this(GL20.GL_TEXTURE_2D, Gdx.gl.glGenTexture(), data);
   }
 
