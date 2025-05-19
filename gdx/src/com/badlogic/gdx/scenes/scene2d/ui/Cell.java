@@ -752,9 +752,6 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getMinWidth() {
-    if (actor == null) {
-      throw new IllegalArgumentException("Actor must not be null");
-    }
     return minWidth.get(actor);
   }
 
