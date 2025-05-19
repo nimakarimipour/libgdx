@@ -17,7 +17,6 @@
 package com.badlogic.gdx.graphics;
 
 import com.badlogic.gdx.utils.NumberUtils;
-import javax.annotation.Nullable;
 
 /**
  * A color class, holding the r, g, b and alpha component as floats in the range [0,1]. All methods
@@ -114,7 +113,10 @@ public class Color {
    *
    * @param color the Color
    */
-  public Color set(@Nullable Color color) {
+  public Color set(Color color) {
+    if (color == null) {
+      throw new IllegalArgumentException("color cannot be null");
+    }
     this.r = color.r;
     this.g = color.g;
     this.b = color.b;
