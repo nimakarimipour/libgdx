@@ -669,10 +669,7 @@ public class TextureAtlas implements Disposable {
      */
     public @Null int[][] values;
 
-    public AtlasRegion(Texture texture, int x, int y, int width, int height) {
-      if (texture == null) {
-        throw new IllegalArgumentException("Texture cannot be null");
-      }
+    public AtlasRegion(@Nullable Texture texture, int x, int y, int width, int height) {
       super(texture, x, y, width, height);
       originalWidth = width;
       originalHeight = height;
