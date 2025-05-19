@@ -232,7 +232,9 @@ public class DecalBatch implements Disposable {
    */
   public void dispose() {
     clear();
-    vertices = null;
+    if (vertices != null) {
+      Arrays.fill(vertices, 0, vertices.length, 0);
+    }
     mesh.dispose();
   }
 }
