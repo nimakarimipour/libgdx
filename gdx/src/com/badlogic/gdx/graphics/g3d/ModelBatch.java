@@ -229,6 +229,7 @@ public class ModelBatch implements Disposable {
    *     {@link #end()}.
    */
   public Camera getCamera() {
+    if (camera == null) throw new GdxRuntimeException("Camera is not set. Call begin() first.");
     return camera;
   }
 
