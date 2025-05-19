@@ -19,6 +19,7 @@ package com.badlogic.gdx.math;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
 import java.io.Serializable;
+import javax.annotation.Nullable;
 
 /**
  * Encapsulates a 2D vector. Allows chaining methods by returning a reference to itself
@@ -85,10 +86,7 @@ public class Vector2 implements Serializable, Vector<Vector2> {
   }
 
   @Override
-  public Vector2 set(Vector2 v) {
-    if (v == null) {
-      throw new IllegalArgumentException("Vector2 argument cannot be null");
-    }
+  public Vector2 set(@Nullable Vector2 v) {
     x = v.x;
     y = v.y;
     return this;
