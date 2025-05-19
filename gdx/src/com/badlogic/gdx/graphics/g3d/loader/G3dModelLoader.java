@@ -101,10 +101,10 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
           ModelMeshPart jsonPart = new ModelMeshPart();
           String partId = meshPart.getString("id", null);
           if (partId == null) {
-            throw new GdxRuntimeException("Not id given for mesh part");
+            throw new GdxRuntimeException("No id given for mesh part");
           }
           for (ModelMeshPart other : parts) {
-            if (other.id.equals(partId)) {
+            if (other.id != null && other.id.equals(partId)) {
               throw new GdxRuntimeException(
                   "Mesh part with id '" + partId + "' already in defined");
             }
