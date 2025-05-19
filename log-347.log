@@ -1,0 +1,110 @@
+====================
+Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/VertexAttributes.java:101
+    return null;
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/VertexAttributes.java:101
+    return null;
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "RETURN_NULLABLE" and the full error message is: "returning @Nullable expression from method with @NonNull return type".
+The line with the error is: "    return null;".
+
+The error is within "the method: findByUsage(int)" and the code surrounding the error is:
+```java
+    return vertexAttribute.offset / 4;
+  }
+
+  /**
+   * Returns the offset for the first VertexAttribute with the specified usage.
+   *
+   * @param usage The usage of the VertexAttribute.
+   */
+  public int getOffset(int usage) {
+    return getOffset(usage, 0);
+  }
+
+  /**
+   * Returns the first VertexAttribute for the given usage.
+   *
+   * @param usage The usage of the VertexAttribute to find.
+   */
+  public VertexAttribute findByUsage(int usage) {
+    int len = size();
+    for (int i = 0; i < len; i++) if (get(i).usage == usage) return get(i);
+    return null;
+  }
+
+  private int calculateOffsets() {
+    int count = 0;
+    for (int i = 0; i < attributes.length; i++) {
+      VertexAttribute attribute = attributes[i];
+      attribute.offset = count;
+      count += attribute.getSizeInBytes();
+    }
+
+    return count;
+  }
+
+  /**
+   * @return the number of attributes
+   */
+  public int size() {
+    return attributes.length;
+  }
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "findByUsage(int)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public VertexAttribute findByUsage(int usage) {
+    int len = size();
+    for (int i = 0; i < len; i++) {
+      if (get(i).usage == usage) {
+        return get(i);
+      }
+    }
+    throw new RuntimeException("VertexAttribute with the given usage not found");
+  }
+  ```
+  ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public VertexAttribute findByUsage(int usage) {
+    int len = size();
+    for (int i = 0; i < len; i++) {
+      if (get(i).usage == usage) {
+        return get(i);
+      }
+    }
+    throw new RuntimeException("VertexAttribute with the given usage not found");
+  }
