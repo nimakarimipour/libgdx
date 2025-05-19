@@ -179,7 +179,7 @@ public class HttpRequestBuilder {
   public HttpRequest build() {
     validate();
     HttpRequest request = httpRequest;
-    httpRequest = new HttpRequest(); // or any appropriate non-null value
+    httpRequest = null;
     return request;
   }
 
