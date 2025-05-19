@@ -406,9 +406,7 @@ public class Label extends Widget {
     @Nullable public @Null Color fontColor;
     @Nullable public @Null Drawable background;
 
-    public LabelStyle() {
-      this.font = new BitmapFont(); // Initialize font with a default BitmapFont
-    }
+    public LabelStyle() {}
 
     public LabelStyle(BitmapFont font, @Nullable @Null Color fontColor) {
       this.font = font;
