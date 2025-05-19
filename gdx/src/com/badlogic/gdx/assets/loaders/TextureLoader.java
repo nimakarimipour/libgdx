@@ -78,14 +78,10 @@ public class TextureLoader
     if (!info.data.isPrepared()) info.data.prepare();
   }
 
-  @Nullable
   @Override
   public Texture loadSync(
-      AssetManager manager,
-      String fileName,
-      FileHandle file,
-      @Nullable TextureParameter parameter) {
-    if (info == null) return null;
+      AssetManager manager, String fileName, FileHandle file, TextureParameter parameter) {
+    if (info == null || info.data == null) return null;
     Texture texture = info.texture;
     if (texture != null) {
       texture.load(info.data);

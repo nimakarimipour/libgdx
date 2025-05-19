@@ -1,0 +1,130 @@
+====================
+Type='PASS_NULLABLE', message='passing @Nullable parameter 'info.data' where @NonNull is required'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/TextureLoader.java:91
+      texture.load(info.data);
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='PASS_NULLABLE', message='passing @Nullable parameter 'info.data' where @NonNull is required'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/loaders/TextureLoader.java:91
+      texture.load(info.data);
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "PASS_NULLABLE" and the full error message is: "passing @Nullable parameter 'info.data' where @NonNull is required".
+The line with the error is: "      texture.load(info.data);".
+
+The error is within "the method: loadSync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)" and the code surrounding the error is:
+```java
+      }
+
+      info.data = TextureData.Factory.loadFromFile(file, format, genMipMaps);
+    } else {
+      info.data = parameter.textureData;
+      info.texture = parameter.texture;
+    }
+    if (!info.data.isPrepared()) info.data.prepare();
+  }
+
+  @Nullable
+  @Override
+  public Texture loadSync(
+      AssetManager manager,
+      String fileName,
+      FileHandle file,
+      @Nullable TextureParameter parameter) {
+    if (info == null) return null;
+    Texture texture = info.texture;
+    if (texture != null) {
+      texture.load(info.data);
+    } else {
+      texture = new Texture(info.data);
+    }
+    if (parameter != null) {
+      texture.setFilter(parameter.minFilter, parameter.magFilter);
+      texture.setWrap(parameter.wrapU, parameter.wrapV);
+    }
+    return texture;
+  }
+
+  @Nullable
+  @Override
+  public Array<AssetDescriptor> getDependencies(
+      String fileName, FileHandle file, @Nullable TextureParameter parameter) {
+    return null;
+  }
+
+  public static class TextureParameter extends AssetLoaderParameters<Texture> {
+    /** the format of the final Texture. Uses the source images format if null * */
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "loadSync(com.badlogic.gdx.assets.AssetManager,java.lang.String,com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  @Override
+  public Texture loadSync(
+      AssetManager manager,
+      String fileName,
+      FileHandle file,
+       TextureParameter parameter) {
+    if (info == null || info.data == null) return null;
+    Texture texture = info.texture;
+    if (texture != null) {
+      texture.load(info.data);
+    } else {
+      texture = new Texture(info.data);
+    }
+    if (parameter != null) {
+      texture.setFilter(parameter.minFilter, parameter.magFilter);
+      texture.setWrap(parameter.wrapU, parameter.wrapV);
+    }
+    return texture;
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+@Override
+  public Texture loadSync(
+      AssetManager manager,
+      String fileName,
+      FileHandle file,
+       TextureParameter parameter) {
+    if (info == null || info.data == null) return null;
+    Texture texture = info.texture;
+    if (texture != null) {
+      texture.load(info.data);
+    } else {
+      texture = new Texture(info.data);
+    }
+    if (parameter != null) {
+      texture.setFilter(parameter.minFilter, parameter.magFilter);
+      texture.setWrap(parameter.wrapU, parameter.wrapV);
+    }
+    return texture;
+  }
