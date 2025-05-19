@@ -1469,6 +1469,9 @@ public class JsonValue implements Iterable<JsonValue> {
     }
 
     public void remove() {
+      if (current == null) {
+        throw new IllegalStateException("No current element to remove");
+      }
       if (current.prev == null) {
         child = current.next;
         if (child != null) child.prev = null;
@@ -1477,6 +1480,7 @@ public class JsonValue implements Iterable<JsonValue> {
         if (current.next != null) current.next.prev = current.prev;
       }
       size--;
+      current = null; // Reset current after removal
     }
 
     public Iterator<JsonValue> iterator() {
