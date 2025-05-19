@@ -687,7 +687,7 @@ public class ParticleEmitter {
 
   public void setSprites(Array<Sprite> sprites) {
     this.sprites = sprites;
-    if (sprites.size == 0) return;
+    if (sprites == null || sprites.size == 0) return;
     for (int i = 0, n = particles.length; i < n; i++) {
       Particle particle = particles[i];
       if (particle == null) break;
@@ -705,8 +705,10 @@ public class ParticleEmitter {
           sprite = sprites.get(particle.frame);
           break;
       }
-      particle.setRegion(sprite);
-      particle.setOrigin(sprite.getOriginX(), sprite.getOriginY());
+      if (sprite != null) {
+        particle.setRegion(sprite);
+        particle.setOrigin(sprite.getOriginX(), sprite.getOriginY());
+      }
     }
   }
 
