@@ -1259,8 +1259,10 @@ public class ParticleEmitter {
     protected float[] tint;
     protected int frame;
 
-    public Particle(@Nullable Sprite sprite) {
+    public Particle(Sprite sprite) {
       super(sprite);
+      this.tint =
+          new float[] {1.0f, 1.0f, 1.0f, 1.0f}; // Initialize the tint field with default values
     }
   }
 
