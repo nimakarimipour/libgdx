@@ -170,13 +170,10 @@ public class NetJavaImpl {
 
     try {
       final String method = httpRequest.getMethod();
-      if (method == null) {
-        httpResponseListener.failed(new GdxRuntimeException("HTTP request method is not set"));
-        return;
-      }
       URL url;
 
       final boolean doInput = !method.equalsIgnoreCase(HttpMethods.HEAD);
+      // should be enabled to upload data.
       final boolean doingOutPut =
           method.equalsIgnoreCase(HttpMethods.POST)
               || method.equalsIgnoreCase(HttpMethods.PUT)
@@ -199,9 +196,11 @@ public class NetJavaImpl {
 
       putIntoConnectionsAndListeners(httpRequest, httpResponseListener, connection);
 
+      // Headers get set regardless of the method
       for (Map.Entry<String, String> header : httpRequest.getHeaders().entrySet())
         connection.addRequestProperty(header.getKey(), header.getValue());
 
+      // Set Timeouts
       connection.setConnectTimeout(httpRequest.getTimeOut());
       connection.setReadTimeout(httpRequest.getTimeOut());
 
@@ -212,7 +211,11 @@ public class NetJavaImpl {
                 @Override
                 public void run() {
                   try {
+                    // Set the content for POST and PUT (GET has the information embedded in the
+                    // URL)
                     if (doingOutPut) {
+                      // we probably need to use the content as stream here instead of using it as a
+                      // string.
                       String contentAsString = httpRequest.getContent();
                       if (contentAsString != null) {
                         OutputStreamWriter writer =
