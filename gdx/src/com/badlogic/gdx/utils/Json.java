@@ -335,16 +335,13 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    */
   public void toJson(
-      @Null Object object,
-      @Nullable @Null Class knownType,
-      @Nullable @Null Class elementType,
-      Writer writer) {
+      @Null Object object, @Null Class knownType, @Null Class elementType, Writer writer) {
     setWriter(writer);
     try {
       writeValue(object, knownType, elementType);
     } finally {
       StreamUtils.closeQuietly(this.writer);
-      this.writer = null;
+      this.writer = new JsonWriter(new StringWriter());
     }
   }
 
