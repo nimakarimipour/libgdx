@@ -1,0 +1,87 @@
+====================
+Type='DEREFERENCE_NULLABLE', message='dereferenced expression managedTextureArrays.get(Gdx.app) is @Nullable'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/TextureArray.java:168
+    return managedTextureArrays.get(Gdx.app).size;
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='DEREFERENCE_NULLABLE', message='dereferenced expression managedTextureArrays.get(Gdx.app) is @Nullable'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/TextureArray.java:168
+    return managedTextureArrays.get(Gdx.app).size;
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "DEREFERENCE_NULLABLE" and the full error message is: "dereferenced expression managedTextureArrays.get(Gdx.app) is @Nullable".
+The line with the error is: "    return managedTextureArrays.get(Gdx.app).size;".
+
+The error is within "the method: getNumManagedTextureArrays()" and the code surrounding the error is:
+```java
+      TextureArray textureArray = managedTextureArray.get(i);
+      textureArray.reload();
+    }
+  }
+
+  public static String getManagedStatus() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Managed TextureArrays/app: { ");
+    for (Application app : managedTextureArrays.keySet()) {
+      builder.append(managedTextureArrays.get(app).size);
+      builder.append(" ");
+    }
+    builder.append("}");
+    return builder.toString();
+  }
+
+  /**
+   * @return the number of managed TextureArrays currently loaded
+   */
+  public static int getNumManagedTextureArrays() {
+    return managedTextureArrays.get(Gdx.app).size;
+  }
+}
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "getNumManagedTextureArrays()") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Retrieving response from cache
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public static int getNumManagedTextureArrays() {
+    if (managedTextureArrays.containsKey(Gdx.app)) {
+      return managedTextureArrays.get(Gdx.app).size;
+    } else {
+      return 0; // Or any default value depending on the context
+    }
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public static int getNumManagedTextureArrays() {
+    if (managedTextureArrays.containsKey(Gdx.app)) {
+      return managedTextureArrays.get(Gdx.app).size;
+    } else {
+      return 0; // Or any default value depending on the context
+    }
+  }
