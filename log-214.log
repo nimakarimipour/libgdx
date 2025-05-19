@@ -1,0 +1,126 @@
+====================
+Type='METHOD_NO_INIT', message='initializer method does not guarantee @NonNull field out (line 32) is initialized along all control-flow paths (remember to check for exceptions or early returns).'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/input/RemoteSender.java:48
+  public RemoteSender(String ip, int port) {
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='METHOD_NO_INIT', message='initializer method does not guarantee @NonNull field out (line 32) is initialized along all control-flow paths (remember to check for exceptions or early returns).'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/input/RemoteSender.java:48
+  public RemoteSender(String ip, int port) {
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "METHOD_NO_INIT" and the full error message is: "initializer method does not guarantee @NonNull field out (line 32) is initialized along all control-flow paths (remember to check for exceptions or early returns).".
+The line with the error is: "  public RemoteSender(String ip, int port) {".
+
+The error is within "the method: RemoteSender(java.lang.String,int)" and the code surrounding the error is:
+```java
+ *
+ * @author mzechner
+ */
+public class RemoteSender implements InputProcessor {
+  private DataOutputStream out;
+  private boolean connected = false;
+
+  public static final int KEY_DOWN = 0;
+  public static final int KEY_UP = 1;
+  public static final int KEY_TYPED = 2;
+
+  public static final int TOUCH_DOWN = 3;
+  public static final int TOUCH_UP = 4;
+  public static final int TOUCH_DRAGGED = 5;
+
+  public static final int ACCEL = 6;
+  public static final int COMPASS = 7;
+  public static final int SIZE = 8;
+  public static final int GYRO = 9;
+
+  public RemoteSender(String ip, int port) {
+    try {
+      Socket socket = new Socket(ip, port);
+      socket.setTcpNoDelay(true);
+      socket.setSoTimeout(3000);
+      out = new DataOutputStream(socket.getOutputStream());
+      out.writeBoolean(Gdx.input.isPeripheralAvailable(Peripheral.MultitouchScreen));
+      connected = true;
+      Gdx.input.setInputProcessor(this);
+    } catch (Exception e) {
+      Gdx.app.log("RemoteSender", "couldn't connect to " + ip + ":" + port);
+    }
+  }
+
+  public void sendUpdate() {
+    synchronized (this) {
+      if (!connected) return;
+    }
+    try {
+      out.writeInt(ACCEL);
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "RemoteSender(java.lang.String,int)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public RemoteSender(String ip, int port) {
+    Socket socket = null;
+    DataOutputStream tempOut = null;
+    try {
+      socket = new Socket(ip, port);
+      socket.setTcpNoDelay(true);
+      socket.setSoTimeout(3000);
+      tempOut = new DataOutputStream(socket.getOutputStream());
+      tempOut.writeBoolean(Gdx.input.isPeripheralAvailable(Peripheral.MultitouchScreen));
+      connected = true;
+      Gdx.input.setInputProcessor(this);
+    } catch (Exception e) {
+      Gdx.app.log("RemoteSender", "couldn't connect to " + ip + ":" + port);
+    } finally {
+      out = tempOut;
+    }
+  }
+  ```
+  ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public RemoteSender(String ip, int port) {
+    Socket socket = null;
+    DataOutputStream tempOut = null;
+    try {
+      socket = new Socket(ip, port);
+      socket.setTcpNoDelay(true);
+      socket.setSoTimeout(3000);
+      tempOut = new DataOutputStream(socket.getOutputStream());
+      tempOut.writeBoolean(Gdx.input.isPeripheralAvailable(Peripheral.MultitouchScreen));
+      connected = true;
+      Gdx.input.setInputProcessor(this);
+    } catch (Exception e) {
+      Gdx.app.log("RemoteSender", "couldn't connect to " + ip + ":" + port);
+    } finally {
+      out = tempOut;
+    }
+  }
