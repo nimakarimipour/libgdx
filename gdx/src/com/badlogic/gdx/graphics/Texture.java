@@ -163,6 +163,10 @@ public class Texture extends GLTexture {
 
   protected Texture(int glTarget, int glHandle, TextureData data) {
     super(glTarget, glHandle);
+    if (data == null) {
+      throw new NullPointerException("TextureData must not be null");
+    }
+    this.data = data;
     load(data);
     if (data.isManaged()) addManagedTexture(Gdx.app, this);
   }
