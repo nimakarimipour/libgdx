@@ -104,26 +104,18 @@ public class LongMap<V> implements Iterable<LongMap.Entry<V>> {
    *     next power of two.
    */
   public LongMap(int initialCapacity, float loadFactor) {
-      if (loadFactor <= 0f || loadFactor >= 1f)
-        throw new IllegalArgumentException("loadFactor must be > 0 and < 1: " + loadFactor);
-      this.loadFactor = loadFactor;
-  
-      int tableSize = tableSize(initialCapacity, loadFactor);
-      threshold = (int) (tableSize * loadFactor);
-      mask = tableSize - 1;
-      shift = Long.numberOfLeadingZeros(mask);
-  
-      // Ensure initialization of all required fields is done before any potential exception.
-      keyTable = new long[tableSize];
-      valueTable = (V[]) new Object[tableSize];
-      
-      entries1 = /* assign appropriate value */;
-      entries2 = /* assign appropriate value */;
-      values1 = /* assign appropriate value */;
-      values2 = /* assign appropriate value */;
-      keys1 = /* assign appropriate value */;
-      keys2 = /* assign appropriate value */;
-    }
+    if (loadFactor <= 0f || loadFactor >= 1f)
+      throw new IllegalArgumentException("loadFactor must be > 0 and < 1: " + loadFactor);
+    this.loadFactor = loadFactor;
+
+    int tableSize = tableSize(initialCapacity, loadFactor);
+    threshold = (int) (tableSize * loadFactor);
+    mask = tableSize - 1;
+    shift = Long.numberOfLeadingZeros(mask);
+
+    keyTable = new long[tableSize];
+    valueTable = (V[]) new Object[tableSize];
+  }
 
   /** Creates a new map identical to the specified map. */
   public LongMap(LongMap<? extends V> map) {
