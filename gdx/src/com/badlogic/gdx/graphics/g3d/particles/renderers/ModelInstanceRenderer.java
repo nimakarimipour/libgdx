@@ -68,9 +68,12 @@ public class ModelInstanceRenderer
         i < c;
         ++i, positionOffset += renderData.positionChannel.strideSize) {
       ModelInstance instance = renderData.modelInstanceChannel.data[i];
-      float scale = hasScale ? renderData.scaleChannel.data[i] : 1;
+      float scale = 1;
+      if (hasScale && renderData.scaleChannel != null) {
+        scale = renderData.scaleChannel.data[i];
+      }
       float qx = 0, qy = 0, qz = 0, qw = 1;
-      if (hasRotation) {
+      if (hasRotation && renderData.rotationChannel != null) {
         int rotationOffset = i * renderData.rotationChannel.strideSize;
         qx = renderData.rotationChannel.data[rotationOffset + ParticleChannels.XOffset];
         qy = renderData.rotationChannel.data[rotationOffset + ParticleChannels.YOffset];
@@ -89,7 +92,7 @@ public class ModelInstanceRenderer
           scale,
           scale,
           scale);
-      if (hasColor) {
+      if (hasColor && renderData.colorChannel != null) {
         int colorOffset = i * renderData.colorChannel.strideSize;
         ColorAttribute colorAttribute =
             (ColorAttribute) instance.materials.get(0).get(ColorAttribute.Diffuse);
