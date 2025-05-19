@@ -171,7 +171,6 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 
   public ParticleControllerInfluencer() {
     this.templates = new Array<ParticleController>(true, 1, ParticleController.class);
-    particleControllerChannel = null; // or initialize it with a default value if possible
   }
 
   public ParticleControllerInfluencer(ParticleController... templates) {
