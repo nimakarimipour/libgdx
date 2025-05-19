@@ -1044,8 +1044,6 @@ public class Table extends WidgetGroup {
     float padLeft = this.padLeft.get(this), hpadding = padLeft + padRight.get(this);
     float padTop = this.padTop.get(this), vpadding = padTop + padBottom.get(this);
 
-    // Size columns and rows between min and pref size using (preferred - min) size to weight
-    // distribution of extra space.
     float[] columnWeightedWidth;
     float totalGrowWidth = tablePrefWidth - tableMinWidth;
     if (totalGrowWidth == 0) columnWeightedWidth = columnMinWidth;
@@ -1075,7 +1073,6 @@ public class Table extends WidgetGroup {
       }
     }
 
-    // Determine actor and cell sizes (before expand or fill).
     Object[] cells = this.cells.items;
     int cellCount = this.cells.size;
     for (int i = 0; i < cellCount; i++) {
@@ -1105,14 +1102,13 @@ public class Table extends WidgetGroup {
       rowHeight[row] = Math.max(rowHeight[row], weightedHeight);
     }
 
-    // Distribute remaining space to any expanding columns/rows.
     float[] expandWidth = this.expandWidth, expandHeight = this.expandHeight;
     float totalExpand = 0;
     for (int i = 0; i < columns; i++) totalExpand += expandWidth[i];
     if (totalExpand > 0) {
       float extra = layoutWidth - hpadding;
       for (int i = 0; i < columns; i++) extra -= columnWidth[i];
-      if (extra > 0) { // layoutWidth < tableMinWidth.
+      if (extra > 0) {
         float used = 0;
         int lastIndex = 0;
         for (int i = 0; i < columns; i++) {
@@ -1131,7 +1127,7 @@ public class Table extends WidgetGroup {
     if (totalExpand > 0) {
       float extra = layoutHeight - vpadding;
       for (int i = 0; i < rows; i++) extra -= rowHeight[i];
-      if (extra > 0) { // layoutHeight < tableMinHeight.
+      if (extra > 0) {
         float used = 0;
         int lastIndex = 0;
         for (int i = 0; i < rows; i++) {
@@ -1145,7 +1141,6 @@ public class Table extends WidgetGroup {
       }
     }
 
-    // Distribute any additional width added by colspanned cells to the columns spanned.
     for (int i = 0; i < cellCount; i++) {
       Cell c = (Cell) cells[i];
       int colspan = c.colspan;
@@ -1163,24 +1158,19 @@ public class Table extends WidgetGroup {
       }
     }
 
-    // Determine table size.
     float tableWidth = hpadding, tableHeight = vpadding;
     for (int i = 0; i < columns; i++) tableWidth += columnWidth[i];
     for (int i = 0; i < rows; i++) tableHeight += rowHeight[i];
 
-    // Position table within the container.
     int align = this.align;
     float x = padLeft;
     if ((align & Align.right) != 0) x += layoutWidth - tableWidth;
-    else if ((align & Align.left) == 0) // Center
-    x += (layoutWidth - tableWidth) / 2;
+    else if ((align & Align.left) == 0) x += (layoutWidth - tableWidth) / 2;
 
     float y = padTop;
     if ((align & Align.bottom) != 0) y += layoutHeight - tableHeight;
-    else if ((align & Align.top) == 0) // Center
-    y += (layoutHeight - tableHeight) / 2;
+    else if ((align & Align.top) == 0) y += (layoutHeight - tableHeight) / 2;
 
-    // Size and position actors within cells.
     float currentX = x, currentY = y;
     for (int i = 0; i < cellCount; i++) {
       Cell c = (Cell) cells[i];
@@ -1202,7 +1192,7 @@ public class Table extends WidgetGroup {
         c.actorHeight =
             Math.max(
                 rowHeight[c.row] * fillY - c.computedPadTop - c.computedPadBottom,
-                c.minHeight.get(c.actor));
+                c.actor != null ? c.minHeight.get(c.actor) : 0);
         float maxHeight = c.maxHeight.get(c.actor);
         if (maxHeight > 0) c.actorHeight = Math.min(c.actorHeight, maxHeight);
       }
@@ -1234,7 +1224,6 @@ public class Table extends WidgetGroup {
       } else currentX += spannedCellWidth + c.computedPadRight;
     }
 
-    // Validate all children (some may not be in cells).
     Array<Actor> childrenArray = getChildren();
     Actor[] children = childrenArray.items;
     for (int i = 0, n = childrenArray.size; i < n; i++) {
@@ -1242,7 +1231,6 @@ public class Table extends WidgetGroup {
       if (child instanceof Layout) ((Layout) child).validate();
     }
 
-    // Store debug rectangles.
     if (debug != Debug.none) addDebugRects(x, y, tableWidth - hpadding, tableHeight - vpadding);
   }
 
