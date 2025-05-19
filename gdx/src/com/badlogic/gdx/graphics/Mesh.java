@@ -707,7 +707,10 @@ public class Mesh implements Disposable {
    * @param offset the offset into the vertex or index buffer
    * @param count number of vertices or indices to use
    */
-  public void render(@Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
+  public void render(ShaderProgram shader, int primitiveType, int offset, int count) {
+    if (shader == null) {
+      throw new IllegalArgumentException("ShaderProgram cannot be null");
+    }
     render(shader, primitiveType, offset, count, autoBind);
   }
 
