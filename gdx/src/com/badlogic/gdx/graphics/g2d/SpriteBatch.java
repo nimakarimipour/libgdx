@@ -1034,7 +1034,7 @@ public class SpriteBatch implements Batch {
 
   @Override
   public void flush() {
-    if (idx == 0 || lastTexture == null) return;
+    if (idx == 0) return;
 
     renderCalls++;
     totalRenderCalls++;
