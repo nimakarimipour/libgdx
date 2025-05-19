@@ -39,14 +39,16 @@ public class TiledMapTileMapObject extends TextureMapObject {
   @Nullable private TiledMapTile tile;
 
   public TiledMapTileMapObject(
-      @Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
+      TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
     this.flipHorizontally = flipHorizontally;
     this.flipVertically = flipVertically;
     this.tile = tile;
 
-    TextureRegion textureRegion = new TextureRegion(tile.getTextureRegion());
-    textureRegion.flip(flipHorizontally, flipVertically);
-    setTextureRegion(textureRegion);
+    if (tile != null && tile.getTextureRegion() != null) {
+      TextureRegion textureRegion = new TextureRegion(tile.getTextureRegion());
+      textureRegion.flip(flipHorizontally, flipVertically);
+      setTextureRegion(textureRegion);
+    }
   }
 
   public boolean isFlipHorizontally() {
