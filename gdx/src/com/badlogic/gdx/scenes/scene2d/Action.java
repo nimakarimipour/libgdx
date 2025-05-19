@@ -64,9 +64,9 @@ public abstract class Action implements Poolable {
    * The actor's state is best queried in the first call to {@link #act(float)}. For a {@link
    * TemporalAction}, use TemporalAction#begin().
    */
-  public void setActor(@Nullable Actor actor) {
+  public void setActor(Actor actor) {
     this.actor = actor;
-    if (target == null) setTarget(actor);
+    if (target == null && actor != null) setTarget(actor);
     if (actor == null) {
       if (pool != null) {
         pool.free(this);
