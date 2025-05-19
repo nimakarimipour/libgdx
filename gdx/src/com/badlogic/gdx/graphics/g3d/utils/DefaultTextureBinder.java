@@ -160,9 +160,6 @@ public final class DefaultTextureBinder implements TextureBinder {
   }
 
   private final int bindTextureLRU(final GLTexture texture) {
-    if (unitsLRU == null) {
-      throw new NullPointerException("unitsLRU is null");
-    }
     int i;
     for (i = 0; i < count; i++) {
       final int idx = unitsLRU[i];
