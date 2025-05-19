@@ -68,6 +68,7 @@ public class Json {
   private final Object[] equals1 = {null}, equals2 = {null};
 
   public Json() {
+    this.writer = new JsonWriter(); // Assuming default initialization
     outputType = OutputType.minimal;
   }
 
