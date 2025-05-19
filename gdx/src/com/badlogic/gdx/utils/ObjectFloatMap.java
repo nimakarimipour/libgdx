@@ -110,14 +110,6 @@ public class ObjectFloatMap<K> implements Iterable<ObjectFloatMap.Entry<K>> {
     mask = tableSize - 1;
     shift = Long.numberOfLeadingZeros(mask);
 
-    // Ensure entries1, entries2, keys1, keys2, values1, and values2 are initialized
-    entries1 = new Object[tableSize];
-    entries2 = new Object[tableSize];
-    keys1 = (K[]) new Object[tableSize];
-    keys2 = (K[]) new Object[tableSize];
-    values1 = new float[tableSize];
-    values2 = new float[tableSize];
-
     keyTable = (K[]) new Object[tableSize];
     valueTable = new float[tableSize];
   }
