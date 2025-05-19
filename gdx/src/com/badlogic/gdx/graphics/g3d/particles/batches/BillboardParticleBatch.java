@@ -154,23 +154,18 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
       AlignMode mode,
       boolean useGPU,
       int capacity,
-      BlendingAttribute blendingAttribute,
-      DepthTestAttribute depthTestAttribute) {
+      @Nullable BlendingAttribute blendingAttribute,
+      @Nullable DepthTestAttribute depthTestAttribute) {
     super(BillboardControllerRenderData.class);
     renderables = new Array<Renderable>();
     renderablePool = new RenderablePool();
-    this.blendingAttribute =
-        blendingAttribute != null
-            ? blendingAttribute
-            : new BlendingAttribute(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA, 1f);
-    this.depthTestAttribute =
-        depthTestAttribute != null
-            ? depthTestAttribute
-            : new DepthTestAttribute(GL20.GL_LEQUAL, false);
-    this.vertices = new float[0]; // Initialize vertices with an appropriate size for your use case
-    this.currentAttributes =
-        new VertexAttributes(); // Assuming default constructor exists or initialize as needed
-    this.texture = new Texture(); // Assuming default constructor exists or initialize as needed
+    this.blendingAttribute = blendingAttribute;
+    this.depthTestAttribute = depthTestAttribute;
+
+    if (this.blendingAttribute == null)
+      this.blendingAttribute = new BlendingAttribute(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA, 1f);
+    if (this.depthTestAttribute == null)
+      this.depthTestAttribute = new DepthTestAttribute(GL20.GL_LEQUAL, false);
 
     allocIndices();
     initRenderData();
