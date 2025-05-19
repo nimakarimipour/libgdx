@@ -365,9 +365,6 @@ public class Texture extends GLTexture {
    * @return the number of managed textures currently loaded
    */
   public static int getNumManagedTextures() {
-    if (managedTextures.containsKey(Gdx.app) && managedTextures.get(Gdx.app) != null) {
-      return managedTextures.get(Gdx.app).size;
-    }
-    return 0;
+    return managedTextures.get(Gdx.app).size;
   }
 }
