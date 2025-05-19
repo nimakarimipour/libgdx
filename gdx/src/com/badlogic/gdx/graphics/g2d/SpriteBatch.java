@@ -1156,7 +1156,10 @@ public class SpriteBatch implements Batch {
     }
   }
 
-  protected void switchTexture(@Nullable Texture texture) {
+  protected void switchTexture(Texture texture) {
+    if (texture == null) {
+      throw new IllegalArgumentException("Texture cannot be null");
+    }
     flush();
     lastTexture = texture;
     invTexWidth = 1.0f / texture.getWidth();
