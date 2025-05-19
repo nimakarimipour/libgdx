@@ -149,6 +149,9 @@ public class PointSpriteParticleBatch
 
   @Override
   protected void flush(int[] offsets) {
+    if (vertices == null) {
+      throw new IllegalStateException("vertices array is null");
+    }
     int tp = 0;
     for (PointSpriteControllerRenderData data : renderData) {
       FloatChannel scaleChannel = data.scaleChannel;
