@@ -17,7 +17,6 @@
 package com.badlogic.gdx.math;
 
 import java.io.Serializable;
-import javax.annotation.Nullable;
 
 /**
  * Encapsulates a <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column
@@ -191,7 +190,10 @@ public class Matrix4 implements Serializable {
    * @param matrix The matrix that is to be copied. (The given matrix is not modified)
    * @return This matrix for the purpose of chaining methods together.
    */
-  public Matrix4 set(@Nullable Matrix4 matrix) {
+  public Matrix4 set(Matrix4 matrix) {
+    if (matrix == null) {
+      throw new NullPointerException("Matrix cannot be null");
+    }
     return set(matrix.val);
   }
 
