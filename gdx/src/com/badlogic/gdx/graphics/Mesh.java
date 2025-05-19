@@ -801,12 +801,9 @@ public class Mesh implements Disposable {
   public VertexAttribute getVertexAttribute(int usage) {
     VertexAttributes attributes = vertices.getAttributes();
     int len = attributes.size();
-    for (int i = 0; i < len; i++) {
-      if (attributes.get(i).usage == usage) {
-        return attributes.get(i);
-      }
-    }
-    throw new IllegalArgumentException("No VertexAttribute found for the given usage: " + usage);
+    for (int i = 0; i < len; i++) if (attributes.get(i).usage == usage) return attributes.get(i);
+
+    return null;
   }
 
   /**
