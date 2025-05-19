@@ -480,6 +480,8 @@ public class TextureAtlas implements Disposable {
               else {
                 if (names == null) {
                   names = new Array(8);
+                }
+                if (values == null) {
                   values = new Array(8);
                 }
                 names.add(entry[0]);
