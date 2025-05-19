@@ -1,0 +1,106 @@
+====================
+Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ResourceData.java:128
+      this.filename = filename;
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/ResourceData.java:128
+      this.filename = filename;
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "ASSIGN_FIELD_NULLABLE" and the full error message is: "assigning @Nullable expression to @NonNull field".
+The line with the error is: "      this.filename = filename;".
+
+The error is within "the method: AssetData(java.lang.String,java.lang.Class)" and the code surrounding the error is:
+```java
+    public void write(Json json) {
+      json.writeValue("data", data, ObjectMap.class);
+      json.writeValue("indices", assets.toArray(), int[].class);
+    }
+
+    @Override
+    public void read(Json json, JsonValue jsonData) {
+      data = json.readValue("data", ObjectMap.class, jsonData);
+      assets.addAll(json.readValue("indices", int[].class, jsonData));
+    }
+  }
+
+  /** This class contains all the information related to a given asset */
+  public static class AssetData<T> implements Json.Serializable {
+    public String filename;
+    public Class<T> type;
+
+    public AssetData() {}
+
+    public AssetData(@Nullable String filename, Class<T> type) {
+      this.filename = filename;
+      this.type = type;
+    }
+
+    @Override
+    public void write(Json json) {
+      json.writeValue("filename", filename);
+      json.writeValue("type", type.getName());
+    }
+
+    @Initializer
+    @Override
+    public void read(Json json, JsonValue jsonData) {
+      filename = json.readValue("filename", String.class, jsonData);
+      String className = json.readValue("type", String.class, jsonData);
+      try {
+        type = (Class<T>) ClassReflection.forName(className);
+      } catch (ReflectionException e) {
+        throw new GdxRuntimeException("Class not found: " + className, e);
+      }
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "AssetData(java.lang.String,java.lang.Class)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public AssetData(String filename, Class<T> type) {
+      if (filename == null) {
+          throw new IllegalArgumentException("filename cannot be null");
+      }
+      this.filename = filename;
+      this.type = type;
+  }
+  ```
+  ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public AssetData(String filename, Class<T> type) {
+      if (filename == null) {
+          throw new IllegalArgumentException("filename cannot be null");
+      }
+      this.filename = filename;
+      this.type = type;
+  }
