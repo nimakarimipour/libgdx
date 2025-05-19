@@ -1435,10 +1435,7 @@ public class PolygonSpriteBatch implements PolygonBatch {
     }
   }
 
-  private void switchTexture(Texture texture) {
-    if (texture == null) {
-      throw new IllegalArgumentException("Texture cannot be null");
-    }
+  private void switchTexture(@Nullable Texture texture) {
     flush();
     lastTexture = texture;
     invTexWidth = 1.0f / texture.getWidth();
