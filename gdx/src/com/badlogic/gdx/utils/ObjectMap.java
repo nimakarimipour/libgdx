@@ -201,7 +201,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
   }
 
   /** Returns the value for the specified key, or null if the key is not in the map. */
-  public @Null <T extends K> V get(T key) {
+  public @Null V get(K key) {
     int i = locateKey(key);
     return i < 0 ? null : valueTable[i];
   }
