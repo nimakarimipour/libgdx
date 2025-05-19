@@ -99,7 +99,6 @@ public class ObjectSet<T> implements Iterable<T> {
   public ObjectSet(int initialCapacity, float loadFactor) {
     if (loadFactor <= 0f || loadFactor >= 1f)
       throw new IllegalArgumentException("loadFactor must be > 0 and < 1: " + loadFactor);
-
     this.loadFactor = loadFactor;
 
     int tableSize = tableSize(initialCapacity, loadFactor);
@@ -108,8 +107,6 @@ public class ObjectSet<T> implements Iterable<T> {
     shift = Long.numberOfLeadingZeros(mask);
 
     keyTable = (T[]) new Object[tableSize];
-    iterator1 = new ObjectSetIterator();
-    iterator2 = new ObjectSetIterator();
   }
 
   /** Creates a new set identical to the specified set. */
