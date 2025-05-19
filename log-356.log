@@ -1,0 +1,98 @@
+====================
+Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Event.java:107
+    return listenerActor;
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/Event.java:107
+    return listenerActor;
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "RETURN_NULLABLE" and the full error message is: "returning @Nullable expression from method with @NonNull return type".
+The line with the error is: "    return listenerActor;".
+
+The error is within "the method: getListenerActor()" and the code surrounding the error is:
+```java
+    targetActor = null;
+    listenerActor = null;
+    capture = false;
+    bubbles = true;
+    handled = false;
+    stopped = false;
+    cancelled = false;
+  }
+
+  /** Returns the actor that the event originated from. */
+  public Actor getTarget() {
+    return targetActor;
+  }
+
+  public void setTarget(@Nullable Actor targetActor) {
+    this.targetActor = targetActor;
+  }
+
+  /** Returns the actor that this listener is attached to. */
+  public Actor getListenerActor() {
+    return listenerActor;
+  }
+
+  public void setListenerActor(@Nullable Actor listenerActor) {
+    this.listenerActor = listenerActor;
+  }
+
+  public boolean getBubbles() {
+    return bubbles;
+  }
+
+  /**
+   * If true, after the event is fired on the target actor, it will also be fired on each of the
+   * parent actors, all the way to the root.
+   */
+  public void setBubbles(boolean bubbles) {
+    this.bubbles = bubbles;
+  }
+
+  /** {@link #handle()} */
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "getListenerActor()") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public @Nullable Actor getListenerActor() {
+    return listenerActor;
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public @Nullable Actor getListenerActor() {
+    return listenerActor;
+  }
