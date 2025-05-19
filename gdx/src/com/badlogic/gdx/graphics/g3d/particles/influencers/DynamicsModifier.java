@@ -152,6 +152,7 @@ public abstract class DynamicsModifier extends Influencer {
     public Angular() {
       thetaValue = new ScaledNumericValue();
       phiValue = new ScaledNumericValue();
+      angularChannel = new FloatChannel(); // Initialize the angularChannel
     }
 
     public Angular(Angular value) {
