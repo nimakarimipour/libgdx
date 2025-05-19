@@ -245,35 +245,43 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
           String name = currentChild.getName();
           if (name.equals("TileSheet")) {
             currentTileSet = tilesets.getTileSet(currentChild.getAttribute("Ref"));
-            firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
+            if (currentTileSet != null) {
+              firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
+            }
           } else if (name.equals("Null")) {
             x += currentChild.getIntAttribute("Count");
           } else if (name.equals("Static")) {
-            Cell cell = new Cell();
-            cell.setTile(currentTileSet.getTile(firstgid + currentChild.getIntAttribute("Index")));
-            layer.setCell(x++, y, cell);
-          } else if (name.equals("Animated")) {
-            // Create an AnimatedTile
-            int interval = currentChild.getInt("Interval");
-            Element frames = currentChild.getChildByName("Frames");
-            Array<StaticTiledMapTile> frameTiles = new Array<StaticTiledMapTile>();
-            for (int frameChild = 0, frameChildCount = frames.getChildCount();
-                frameChild < frameChildCount;
-                frameChild++) {
-              Element frame = frames.getChild(frameChild);
-              String frameName = frame.getName();
-              if (frameName.equals("TileSheet")) {
-                currentTileSet = tilesets.getTileSet(frame.getAttribute("Ref"));
-                firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
-              } else if (frameName.equals("Static")) {
-                frameTiles.add(
-                    (StaticTiledMapTile)
-                        currentTileSet.getTile(firstgid + frame.getIntAttribute("Index")));
-              }
+            if (currentTileSet != null) {
+              Cell cell = new Cell();
+              cell.setTile(
+                  currentTileSet.getTile(firstgid + currentChild.getIntAttribute("Index")));
+              layer.setCell(x++, y, cell);
             }
-            Cell cell = new Cell();
-            cell.setTile(new AnimatedTiledMapTile(interval / 1000f, frameTiles));
-            layer.setCell(x++, y, cell); // TODO: Reuse existing animated tiles
+          } else if (name.equals("Animated")) {
+            if (currentTileSet != null) {
+              int interval = currentChild.getInt("Interval");
+              Element frames = currentChild.getChildByName("Frames");
+              Array<StaticTiledMapTile> frameTiles = new Array<StaticTiledMapTile>();
+              for (int frameChild = 0, frameChildCount = frames.getChildCount();
+                  frameChild < frameChildCount;
+                  frameChild++) {
+                Element frame = frames.getChild(frameChild);
+                String frameName = frame.getName();
+                if (frameName.equals("TileSheet")) {
+                  currentTileSet = tilesets.getTileSet(frame.getAttribute("Ref"));
+                  if (currentTileSet != null) {
+                    firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
+                  }
+                } else if (currentTileSet != null && frameName.equals("Static")) {
+                  frameTiles.add(
+                      (StaticTiledMapTile)
+                          currentTileSet.getTile(firstgid + frame.getIntAttribute("Index")));
+                }
+              }
+              Cell cell = new Cell();
+              cell.setTile(new AnimatedTiledMapTile(interval / 1000f, frameTiles));
+              layer.setCell(x++, y, cell);
+            }
           }
         }
       }
