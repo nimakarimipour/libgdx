@@ -172,19 +172,23 @@ public class AtlasTmxMapLoader
       TiledMapTileSet tileSet,
       Element element,
       Array<Element> tileElements,
-      @Nullable String name,
+      String name,
       int firstgid,
       int tilewidth,
       int tileheight,
       int spacing,
       int margin,
-      @Nullable String source,
+      String source,
       int offsetX,
       int offsetY,
       String imageSource,
       int imageWidth,
       int imageHeight,
-      @Nullable FileHandle image) {
+      FileHandle image) {
+
+    if (atlasResolver == null) {
+      throw new NullPointerException("AtlasResolver is null.");
+    }
 
     TextureAtlas atlas = atlasResolver.getAtlas();
     String regionsName = name;
