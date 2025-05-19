@@ -115,6 +115,12 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 
     keyTable = new int[tableSize];
     valueTable = (V[]) new Object[tableSize];
+    entries1 = new int[tableSize];
+    entries2 = new int[tableSize];
+    values1 = (V[]) new Object[tableSize];
+    values2 = (V[]) new Object[tableSize];
+    keys1 = new int[tableSize];
+    keys2 = new int[tableSize];
   }
 
   /** Creates a new map identical to the specified map. */
