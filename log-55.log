@@ -1,0 +1,112 @@
+====================
+Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ReflectionPool.java:44
+    constructor = findConstructor(type);
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ReflectionPool.java:44
+    constructor = findConstructor(type);
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "ASSIGN_FIELD_NULLABLE" and the full error message is: "assigning @Nullable expression to @NonNull field".
+The line with the error is: "    constructor = findConstructor(type);".
+
+The error is within "the method: ReflectionPool(java.lang.Class,int,int)" and the code surrounding the error is:
+```java
+/**
+ * Pool that creates new instances of a type using reflection. The type must have a zero argument
+ * constructor. {@link Constructor#setAccessible(boolean)} will be used if the class and/or
+ * constructor is not visible.
+ *
+ * @author Nathan Sweet
+ */
+public class ReflectionPool<T> extends Pool<T> {
+  private final Constructor constructor;
+
+  public ReflectionPool(Class<T> type) {
+    this(type, 16, Integer.MAX_VALUE);
+  }
+
+  public ReflectionPool(Class<T> type, int initialCapacity) {
+    this(type, initialCapacity, Integer.MAX_VALUE);
+  }
+
+  public ReflectionPool(Class<T> type, int initialCapacity, int max) {
+    super(initialCapacity, max);
+    constructor = findConstructor(type);
+    if (constructor == null)
+      throw new RuntimeException(
+          "Class cannot be created (missing no-arg constructor): " + type.getName());
+  }
+
+  @Nullable
+  private @Null Constructor findConstructor(Class<T> type) {
+    try {
+      return ClassReflection.getConstructor(type, (Class[]) null);
+    } catch (Exception ex1) {
+      try {
+        Constructor constructor = ClassReflection.getDeclaredConstructor(type, (Class[]) null);
+        constructor.setAccessible(true);
+        return constructor;
+      } catch (ReflectionException ex2) {
+        return null;
+      }
+    }
+  }
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "ReflectionPool(java.lang.Class,int,int)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+Here's the fixed code snippet in the format you requested:
+
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public ReflectionPool(Class<T> type, int initialCapacity, int max) {
+    super(initialCapacity, max);
+    Constructor tempConstructor = findConstructor(type);
+    if (tempConstructor == null) {
+      throw new RuntimeException(
+          "Class cannot be created (missing no-arg constructor): " + type.getName());
+    }
+    constructor = tempConstructor;
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public ReflectionPool(Class<T> type, int initialCapacity, int max) {
+    super(initialCapacity, max);
+    Constructor tempConstructor = findConstructor(type);
+    if (tempConstructor == null) {
+      throw new RuntimeException(
+          "Class cannot be created (missing no-arg constructor): " + type.getName());
+    }
+    constructor = tempConstructor;
+  }
