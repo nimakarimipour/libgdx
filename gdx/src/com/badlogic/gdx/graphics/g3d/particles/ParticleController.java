@@ -368,8 +368,12 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
   public void read(Json json, JsonValue jsonMap) {
     name = json.readValue("name", String.class, jsonMap);
     emitter = json.readValue("emitter", Emitter.class, jsonMap);
+    influencers = new Array<>();
     influencers.addAll(json.readValue("influencers", Array.class, Influencer.class, jsonMap));
     renderer = json.readValue("renderer", ParticleControllerRenderer.class, jsonMap);
+    particles = new Particles(); // Assuming Particles is the correct data type
+    particleChannels = new ParticleChannels(); // Assuming ParticleChannels is the correct data type
+    boundingBox = new BoundingBox(); // Assuming BoundingBox is the correct data type
   }
 
   @Override
