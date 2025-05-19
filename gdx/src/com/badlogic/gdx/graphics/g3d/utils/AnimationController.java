@@ -91,7 +91,17 @@ public class AnimationController extends BaseAnimationController {
     /** The number of remaining loops, negative for continuous, zero if stopped. */
     public int loopCount;
 
-    protected AnimationDesc() {}
+    protected AnimationDesc(Animation animation) {
+      if (animation == null) {
+        throw new IllegalArgumentException("Animation must not be null");
+      }
+      this.animation = animation;
+      this.speed = 1.0f; // Assigning default value for other fields
+      this.time = 0.0f;
+      this.offset = 0.0f;
+      this.duration = 0.0f;
+      this.loopCount = 0;
+    }
 
     /**
      * @param delta delta time, must be positive.
