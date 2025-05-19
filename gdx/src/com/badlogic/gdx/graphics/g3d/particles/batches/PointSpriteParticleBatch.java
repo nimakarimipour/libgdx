@@ -94,8 +94,8 @@ public class PointSpriteParticleBatch
   public PointSpriteParticleBatch(
       int capacity,
       ParticleShader.Config shaderConfig,
-      BlendingAttribute blendingAttribute,
-      DepthTestAttribute depthTestAttribute) {
+      @Nullable BlendingAttribute blendingAttribute,
+      @Nullable DepthTestAttribute depthTestAttribute) {
     super(PointSpriteControllerRenderData.class);
 
     if (!pointSpritesEnabled) enablePointSprites();
@@ -110,11 +110,6 @@ public class PointSpriteParticleBatch
 
     allocRenderable();
     ensureCapacity(capacity);
-
-    if (renderable == null) {
-      throw new IllegalStateException("Renderable must be initialized before usage.");
-    }
-
     renderable.shader = new ParticleShader(renderable, shaderConfig);
     renderable.shader.init();
   }
