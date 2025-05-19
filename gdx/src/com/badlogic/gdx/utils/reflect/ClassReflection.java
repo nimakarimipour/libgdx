@@ -55,10 +55,7 @@ public final class ClassReflection {
    * as, or is a superclass or superinterface of, the class or interface represented by the second
    * Class parameter.
    */
-  public static boolean isAssignableFrom(Class c1, Class c2) {
-    if (c2 == null) {
-      throw new IllegalArgumentException("Parameter 'c2' cannot be null");
-    }
+  public static boolean isAssignableFrom(Class c1, @Nullable Class c2) {
     return c1.isAssignableFrom(c2);
   }
 
