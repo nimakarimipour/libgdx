@@ -176,10 +176,7 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
    *
    * @param side The side to bind
    */
-  protected void bindSide(final Cubemap.CubemapSide side) {
-    if (side == null) {
-      throw new GdxRuntimeException("Cubemap side cannot be null.");
-    }
+  protected void bindSide(@Nullable final Cubemap.CubemapSide side) {
     Gdx.gl20.glFramebufferTexture2D(
         GL20.GL_FRAMEBUFFER,
         GL20.GL_COLOR_ATTACHMENT0,
