@@ -74,8 +74,12 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
    */
   public ArrayMap(boolean ordered, int capacity, Class keyArrayType, Class valueArrayType) {
     this.ordered = ordered;
-    keys = (K[]) ArrayReflection.newInstance(keyArrayType, capacity);
-    values = (V[]) ArrayReflection.newInstance(valueArrayType, capacity);
+    try {
+      keys = (K[]) ArrayReflection.newInstance(keyArrayType, capacity);
+      values = (V[]) ArrayReflection.newInstance(valueArrayType, capacity);
+    } catch (Exception e) {
+      throw new RuntimeException("Failed to initialize arrays", e);
+    }
   }
 
   /**
