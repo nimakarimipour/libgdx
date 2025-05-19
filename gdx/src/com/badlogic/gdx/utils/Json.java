@@ -72,6 +72,9 @@ public class Json {
   }
 
   public Json(OutputType outputType) {
+    if (outputType == null) {
+      throw new IllegalArgumentException("outputType cannot be null");
+    }
     this.outputType = outputType;
   }
 
