@@ -126,7 +126,7 @@ public class ParticleEffectLoader
       AssetManager manager,
       String fileName,
       FileHandle file,
-      @Nullable ParticleEffectLoadParameter parameter) {
+      ParticleEffectLoadParameter parameter) {
     ResourceData<ParticleEffect> effectData = null;
     synchronized (items) {
       for (int i = 0; i < items.size; ++i) {
@@ -137,6 +137,10 @@ public class ParticleEffectLoader
           break;
         }
       }
+    }
+
+    if (effectData == null) {
+      throw new IllegalStateException("Effect data not found for file: " + fileName);
     }
 
     effectData.resource.load(manager, effectData);
