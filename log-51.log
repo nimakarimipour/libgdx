@@ -1,0 +1,144 @@
+====================
+Type='NONNULL_FIELD_READ_BEFORE_INIT', message='read of @NonNull field renderable before initialization'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:113
+    renderable.shader = new ParticleShader(renderable, shaderConfig);
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='NONNULL_FIELD_READ_BEFORE_INIT', message='read of @NonNull field renderable before initialization'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g3d/particles/batches/PointSpriteParticleBatch.java:113
+    renderable.shader = new ParticleShader(renderable, shaderConfig);
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "NONNULL_FIELD_READ_BEFORE_INIT" and the full error message is: "read of @NonNull field renderable before initialization".
+The line with the error is: "    renderable.shader = new ParticleShader(renderable, shaderConfig);".
+
+The error is within "the method: PointSpriteParticleBatch(int,com.badlogic.gdx.graphics.g3d.particles.ParticleShader.Config,com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute,com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute)" and the code surrounding the error is:
+```java
+
+  public PointSpriteParticleBatch(
+      int capacity,
+      ParticleShader.Config shaderConfig,
+      @Nullable BlendingAttribute blendingAttribute,
+      @Nullable DepthTestAttribute depthTestAttribute) {
+    super(PointSpriteControllerRenderData.class);
+
+    if (!pointSpritesEnabled) enablePointSprites();
+
+    this.blendingAttribute = blendingAttribute;
+    this.depthTestAttribute = depthTestAttribute;
+
+    if (this.blendingAttribute == null)
+      this.blendingAttribute = new BlendingAttribute(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA, 1f);
+    if (this.depthTestAttribute == null)
+      this.depthTestAttribute = new DepthTestAttribute(GL20.GL_LEQUAL, false);
+
+    allocRenderable();
+    ensureCapacity(capacity);
+    renderable.shader = new ParticleShader(renderable, shaderConfig);
+    renderable.shader.init();
+  }
+
+  @Override
+  protected void allocParticlesData(int capacity) {
+    vertices = new float[capacity * CPU_VERTEX_SIZE];
+    if (renderable.meshPart.mesh != null) renderable.meshPart.mesh.dispose();
+    renderable.meshPart.mesh = new Mesh(false, capacity, 0, CPU_ATTRIBUTES);
+  }
+
+  protected void allocRenderable() {
+    renderable = new Renderable();
+    renderable.meshPart.primitiveType = GL20.GL_POINTS;
+    renderable.meshPart.offset = 0;
+    renderable.material =
+        new Material(
+            blendingAttribute, depthTestAttribute, TextureAttribute.createDiffuse((Texture) null));
+  }
+
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "PointSpriteParticleBatch(int,com.badlogic.gdx.graphics.g3d.particles.ParticleShader.Config,com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute,com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Retrieving response from cache
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public PointSpriteParticleBatch(
+      int capacity,
+      ParticleShader.Config shaderConfig,
+      BlendingAttribute blendingAttribute,
+      DepthTestAttribute depthTestAttribute) {
+    super(PointSpriteControllerRenderData.class);
+
+    if (!pointSpritesEnabled) enablePointSprites();
+
+    this.blendingAttribute = blendingAttribute;
+    this.depthTestAttribute = depthTestAttribute;
+
+    if (this.blendingAttribute == null)
+      this.blendingAttribute = new BlendingAttribute(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA, 1f);
+    if (this.depthTestAttribute == null)
+      this.depthTestAttribute = new DepthTestAttribute(GL20.GL_LEQUAL, false);
+
+    allocRenderable();
+    ensureCapacity(capacity);
+
+    if (renderable == null) {
+      throw new IllegalStateException("Renderable must be initialized before usage.");
+    }
+    
+    renderable.shader = new ParticleShader(renderable, shaderConfig);
+    renderable.shader.init();
+  }
+  ```
+  ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public PointSpriteParticleBatch(
+      int capacity,
+      ParticleShader.Config shaderConfig,
+      BlendingAttribute blendingAttribute,
+      DepthTestAttribute depthTestAttribute) {
+    super(PointSpriteControllerRenderData.class);
+
+    if (!pointSpritesEnabled) enablePointSprites();
+
+    this.blendingAttribute = blendingAttribute;
+    this.depthTestAttribute = depthTestAttribute;
+
+    if (this.blendingAttribute == null)
+      this.blendingAttribute = new BlendingAttribute(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA, 1f);
+    if (this.depthTestAttribute == null)
+      this.depthTestAttribute = new DepthTestAttribute(GL20.GL_LEQUAL, false);
+
+    allocRenderable();
+    ensureCapacity(capacity);
+
+    if (renderable == null) {
+      throw new IllegalStateException("Renderable must be initialized before usage.");
+    }
+    
+    renderable.shader = new ParticleShader(renderable, shaderConfig);
+    renderable.shader.init();
+  }
