@@ -294,7 +294,9 @@ public abstract class BaseShader implements Shader {
     setters.clear();
     localUniforms.clear();
     globalUniforms.clear();
-    locations = null;
+    if (locations != null) {
+      Arrays.fill(locations, -1);
+    }
   }
 
   /**
