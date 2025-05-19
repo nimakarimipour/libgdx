@@ -1,0 +1,114 @@
+====================
+Type='PASS_NULLABLE', message='passing @Nullable parameter 'style.label' where @NonNull is required'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextTooltip.java:54
+    container.setActor(newLabel(text, style.label));
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='PASS_NULLABLE', message='passing @Nullable parameter 'style.label' where @NonNull is required'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextTooltip.java:54
+    container.setActor(newLabel(text, style.label));
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "PASS_NULLABLE" and the full error message is: "passing @Nullable parameter 'style.label' where @NonNull is required".
+The line with the error is: "    container.setActor(newLabel(text, style.label));".
+
+The error is within "the method: TextTooltip(java.lang.String,com.badlogic.gdx.scenes.scene2d.ui.TooltipManager,com.badlogic.gdx.scenes.scene2d.ui.TextTooltip.TextTooltipStyle)" and the code surrounding the error is:
+```java
+  public TextTooltip(@Null String text, Skin skin, String styleName) {
+    this(text, TooltipManager.getInstance(), skin.get(styleName, TextTooltipStyle.class));
+  }
+
+  public TextTooltip(@Null String text, TextTooltipStyle style) {
+    this(text, TooltipManager.getInstance(), style);
+  }
+
+  public TextTooltip(@Null String text, TooltipManager manager, Skin skin) {
+    this(text, manager, skin.get(TextTooltipStyle.class));
+  }
+
+  public TextTooltip(@Null String text, TooltipManager manager, Skin skin, String styleName) {
+    this(text, manager, skin.get(styleName, TextTooltipStyle.class));
+  }
+
+  public TextTooltip(
+      @Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
+    super(null, manager);
+
+    container.setActor(newLabel(text, style.label));
+
+    setStyle(style);
+  }
+
+  protected Label newLabel(String text, LabelStyle style) {
+    return new Label(text, style);
+  }
+
+  public void setStyle(TextTooltipStyle style) {
+    if (style == null) throw new NullPointerException("style cannot be null");
+    container.setBackground(style.background);
+    container.maxWidth(style.wrapWidth);
+
+    boolean wrap = style.wrapWidth != 0;
+    container.fill(wrap);
+
+    Label label = container.getActor();
+    label.setStyle(style.label);
+    label.setWrap(wrap);
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "TextTooltip(java.lang.String,com.badlogic.gdx.scenes.scene2d.ui.TooltipManager,com.badlogic.gdx.scenes.scene2d.ui.TextTooltip.TextTooltipStyle)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public TextTooltip(
+      @Null String text,  final TooltipManager manager, TextTooltipStyle style) {
+    super(null, manager);
+
+    if (style.label == null) {
+      throw new NullPointerException("style.label cannot be null");
+    }
+
+    container.setActor(newLabel(text, style.label));
+
+    setStyle(style);
+  }
+  ```
+    ]]>
+  </code>
+</response>
+---Response.<init>---
+Response created:
+public TextTooltip(
+      @Null String text,  final TooltipManager manager, TextTooltipStyle style) {
+    super(null, manager);
+
+    if (style.label == null) {
+      throw new NullPointerException("style.label cannot be null");
+    }
+
+    container.setActor(newLabel(text, style.label));
+
+    setStyle(style);
+  }

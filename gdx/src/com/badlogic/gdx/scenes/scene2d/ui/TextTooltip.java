@@ -47,9 +47,12 @@ public class TextTooltip extends Tooltip<Label> {
     this(text, manager, skin.get(styleName, TextTooltipStyle.class));
   }
 
-  public TextTooltip(
-      @Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
+  public TextTooltip(@Null String text, final TooltipManager manager, TextTooltipStyle style) {
     super(null, manager);
+
+    if (style.label == null) {
+      throw new NullPointerException("style.label cannot be null");
+    }
 
     container.setActor(newLabel(text, style.label));
 
