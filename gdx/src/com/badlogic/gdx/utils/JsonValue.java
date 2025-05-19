@@ -242,7 +242,7 @@ public class JsonValue implements Iterable<JsonValue> {
    * @return May be null if this value is null.
    * @throws IllegalStateException if this an array or object.
    */
-  public @Null String asString() {
+  public String asString() {
     switch (type) {
       case stringValue:
         return stringValue;
@@ -253,7 +253,7 @@ public class JsonValue implements Iterable<JsonValue> {
       case booleanValue:
         return longValue != 0 ? "true" : "false";
       case nullValue:
-        return null;
+        return "null";
     }
     throw new IllegalStateException("Value cannot be converted to string: " + type);
   }
