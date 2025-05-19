@@ -1017,7 +1017,10 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   @Initializer
-  void set(@Nullable Cell cell) {
+  void set(Cell cell) {
+    if (cell == null) {
+      throw new IllegalArgumentException("cell cannot be null");
+    }
     minWidth = cell.minWidth;
     minHeight = cell.minHeight;
     prefWidth = cell.prefWidth;
@@ -1040,6 +1043,7 @@ public class Cell<T extends Actor> implements Poolable {
     colspan = cell.colspan;
     uniformX = cell.uniformX;
     uniformY = cell.uniformY;
+    table = cell.table;
   }
 
   void merge(@Nullable @Null Cell cell) {
