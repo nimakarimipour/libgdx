@@ -46,20 +46,16 @@ public class RemoteSender implements InputProcessor {
   public static final int GYRO = 9;
 
   public RemoteSender(String ip, int port) {
-    Socket socket = null;
-    DataOutputStream tempOut = null;
     try {
-      socket = new Socket(ip, port);
+      Socket socket = new Socket(ip, port);
       socket.setTcpNoDelay(true);
       socket.setSoTimeout(3000);
-      tempOut = new DataOutputStream(socket.getOutputStream());
-      tempOut.writeBoolean(Gdx.input.isPeripheralAvailable(Peripheral.MultitouchScreen));
+      out = new DataOutputStream(socket.getOutputStream());
+      out.writeBoolean(Gdx.input.isPeripheralAvailable(Peripheral.MultitouchScreen));
       connected = true;
       Gdx.input.setInputProcessor(this);
     } catch (Exception e) {
       Gdx.app.log("RemoteSender", "couldn't connect to " + ip + ":" + port);
-    } finally {
-      out = tempOut;
     }
   }
 
