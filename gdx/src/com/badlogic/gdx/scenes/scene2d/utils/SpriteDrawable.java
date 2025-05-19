@@ -80,10 +80,12 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
     sprite.setPackedColor(oldColor);
   }
 
-  public void setSprite(@Nullable Sprite sprite) {
-    this.sprite = sprite;
-    setMinWidth(sprite.getWidth());
-    setMinHeight(sprite.getHeight());
+  public void setSprite(Sprite sprite) {
+    if (sprite != null) {
+      this.sprite = sprite;
+      setMinWidth(sprite.getWidth());
+      setMinHeight(sprite.getHeight());
+    }
   }
 
   @Nullable
