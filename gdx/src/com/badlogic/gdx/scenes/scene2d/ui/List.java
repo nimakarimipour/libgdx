@@ -505,12 +505,7 @@ public class List<T> extends Widget implements Cullable {
     public Drawable selection;
     @Nullable public @Null Drawable down, over, background;
 
-    public ListStyle(BitmapFont font, Drawable selection) {
-      this.font = font;
-      this.fontColorSelected = new Color(1, 1, 1, 1);
-      this.fontColorUnselected = new Color(1, 1, 1, 1);
-      this.selection = selection;
-    }
+    public ListStyle() {}
 
     public ListStyle(
         BitmapFont font, Color fontColorSelected, Color fontColorUnselected, Drawable selection) {
