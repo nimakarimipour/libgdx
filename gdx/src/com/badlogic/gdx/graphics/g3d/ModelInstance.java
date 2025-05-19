@@ -197,7 +197,7 @@ public class ModelInstance implements RenderableProvider {
    */
   public ModelInstance(
       final Model model,
-      final Matrix4 transform,
+      @Nullable final Matrix4 transform,
       final String nodeId,
       boolean recursive,
       boolean parentTransform,
@@ -212,9 +212,8 @@ public class ModelInstance implements RenderableProvider {
       copy.translation.set(0, 0, 0);
       copy.rotation.idt();
       copy.scale.set(1, 1, 1);
-    } else if (parentTransform && copy.hasParent() && node.getParent() != null) {
+    } else if (parentTransform && copy.hasParent())
       this.transform.mul(node.getParent().globalTransform);
-    }
     invalidate();
     copyAnimations(model.animations, shareKeyframes);
     calculateTransforms();
