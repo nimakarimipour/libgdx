@@ -178,13 +178,12 @@ public class Container<T extends Actor> extends WidgetGroup {
   /**
    * @param actor May be null.
    */
-  public void setActor(@Null T actor) {
+  public void setActor(@Nullable @Null T actor) {
     if (actor == this) throw new IllegalArgumentException("actor cannot be the Container.");
     if (actor == this.actor) return;
     if (this.actor != null) super.removeActor(this.actor);
     this.actor = actor;
     if (actor != null) super.addActor(actor);
-    else this.actor = null; // Ensure the @NonNull field is not assigned a null value
   }
 
   /**
