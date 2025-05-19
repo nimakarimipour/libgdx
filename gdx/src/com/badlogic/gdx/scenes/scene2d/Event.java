@@ -95,7 +95,7 @@ public class Event implements Poolable {
 
   /** Returns the actor that the event originated from. */
   public Actor getTarget() {
-    return targetActor != null ? targetActor : new Actor(); // Provide a default non-null Actor
+    return targetActor;
   }
 
   public void setTarget(@Nullable Actor targetActor) {
