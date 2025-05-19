@@ -101,10 +101,6 @@ public abstract class DynamicsModifier extends Influencer {
 
     public Strength(Strength rotation) {
       super(rotation);
-      if (rotation == null || rotation.strengthValue == null) {
-        throw new IllegalArgumentException(
-            "The provided Strength instance or its strengthValue cannot be null.");
-      }
       strengthValue = new ScaledNumericValue();
       strengthValue.load(rotation.strengthValue);
     }
