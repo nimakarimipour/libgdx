@@ -175,6 +175,11 @@ public abstract class ParticleControllerInfluencer extends Influencer {
 
   public ParticleControllerInfluencer(ParticleController... templates) {
     this.templates = new Array<ParticleController>(templates);
+    if (templates == null || templates.length == 0) {
+      throw new IllegalArgumentException("Templates must not be null or empty");
+    }
+    // Ensure `particleControllerChannel` is initialized in some way
+    particleControllerChannel = new ObjectChannel<>(); // example initialization
   }
 
   public ParticleControllerInfluencer(ParticleControllerInfluencer influencer) {
