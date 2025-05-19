@@ -22,7 +22,6 @@ import com.badlogic.gdx.utils.ByteArray;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-import com.uber.nullaway.annotations.Initializer;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -249,7 +248,6 @@ public class PixmapIO {
     }
 
     /** Writes the pixmap to the stream without closing the stream. */
-    @Initializer
     public void write(OutputStream output, Pixmap pixmap) throws IOException {
       DeflaterOutputStream deflaterOutput = new DeflaterOutputStream(buffer, deflater);
       DataOutputStream dataOutput = new DataOutputStream(output);
@@ -269,7 +267,7 @@ public class PixmapIO {
       deflater.reset();
 
       int lineLen = pixmap.getWidth() * 4;
-      byte[] lineOut, curLine, prevLine;
+      byte[] lineOut, curLine = null, prevLine;
       if (lineOutBytes == null) {
         lineOut = (lineOutBytes = new ByteArray(lineLen)).items;
         curLine = (curLineBytes = new ByteArray(lineLen)).items;
