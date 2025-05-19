@@ -158,17 +158,13 @@ public class PooledLinkedList<T> {
     }
 
     if (c == tail) {
-      if (p != null) {
-        p.next = null;
-      }
+      p.next = null;
       tail = p;
       return;
     }
 
-    if (p != null && n != null) {
-      p.next = n;
-      n.prev = p;
-    }
+    p.next = n;
+    n.prev = p;
   }
 
   /** Removes the tail of the list regardless of iteration status */
