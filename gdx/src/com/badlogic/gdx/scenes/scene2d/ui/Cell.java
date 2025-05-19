@@ -992,9 +992,7 @@ public class Cell<T extends Actor> implements Poolable {
     spaceRight = null;
     padTop = null;
     padLeft = null;
-    if (yourConditionForPadBottom) { // Replace with appropriate condition
-      padBottom = nonNullDefaultValue; // Replace with appropriate default value
-    }
+    padBottom = null;
     padRight = null;
     fillX = null;
     fillY = null;
