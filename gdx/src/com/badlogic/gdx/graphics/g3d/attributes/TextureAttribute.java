@@ -155,9 +155,11 @@ public class TextureAttribute extends Attribute {
     this(type, textureDescription, offsetU, offsetV, scaleU, scaleV, 0);
   }
 
-  public TextureAttribute(final long type, @Nullable final Texture texture) {
+  public TextureAttribute(final long type, final Texture texture) {
     this(type);
-    textureDescription.texture = texture;
+    if (texture != null) {
+      textureDescription.texture = texture;
+    }
   }
 
   public TextureAttribute(final long type, final TextureRegion region) {
