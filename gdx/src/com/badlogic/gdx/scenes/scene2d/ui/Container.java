@@ -39,7 +39,6 @@ public class Container<T extends Actor> extends WidgetGroup {
   public Container() {
     setTouchable(Touchable.childrenOnly);
     setTransform(false);
-    this.actor = null; // Ensure actor is initialized
   }
 
   public Container(@Nullable @Null T actor) {
