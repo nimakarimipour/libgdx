@@ -114,6 +114,9 @@ public class IntIntMap implements Iterable<IntIntMap.Entry> {
 
     keyTable = new int[tableSize];
     valueTable = new int[tableSize];
+    if (keyTable == null || valueTable == null) {
+      throw new IllegalStateException("Initialization failed for keyTable or valueTable.");
+    }
   }
 
   /** Creates a new map identical to the specified map. */
