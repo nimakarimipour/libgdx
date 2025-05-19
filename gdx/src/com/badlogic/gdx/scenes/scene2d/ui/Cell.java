@@ -829,6 +829,9 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getSpaceLeft() {
+    if (actor == null) {
+      throw new IllegalArgumentException("actor must not be null");
+    }
     return spaceLeft.get(actor);
   }
 
