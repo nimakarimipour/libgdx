@@ -483,7 +483,9 @@ public class SplitPane extends WidgetGroup {
   public static class SplitPaneStyle {
     public Drawable handle;
 
-    public SplitPaneStyle() {}
+    public SplitPaneStyle() {
+      handle = new Drawable(); // Assuming default constructor for Drawable is available.
+    }
 
     public SplitPaneStyle(Drawable handle) {
       this.handle = handle;
