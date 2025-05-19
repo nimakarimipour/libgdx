@@ -48,11 +48,6 @@ public class ParticleControllerFinalizerInfluencer extends Influencer {
     rotationChannel = controller.particles.getChannel(ParticleChannels.Rotation3D);
     hasScale = scaleChannel != null;
     hasRotation = rotationChannel != null;
-
-    // Initialize positionChannel to avoid METHOD_NO_INIT
-    positionChannel = controller.particles.getChannel(ParticleChannels.Position);
-    if (positionChannel == null)
-      throw new GdxRuntimeException("Position channel not found, allocation is required.");
   }
 
   @Override
