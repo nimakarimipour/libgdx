@@ -1,0 +1,122 @@
+====================
+Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tooltip.java:53
+    this.manager = manager;
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tooltip.java:53
+    this.manager = manager;
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "ASSIGN_FIELD_NULLABLE" and the full error message is: "assigning @Nullable expression to @NonNull field".
+The line with the error is: "    this.manager = manager;".
+
+The error is within "the method: Tooltip(T,com.badlogic.gdx.scenes.scene2d.ui.TooltipManager)" and the code surrounding the error is:
+```java
+ */
+public class Tooltip<T extends Actor> extends InputListener {
+  static Vector2 tmp = new Vector2();
+
+  private final TooltipManager manager;
+  final Container<T> container;
+  boolean instant, always, touchIndependent;
+  @Nullable Actor targetActor;
+
+  /**
+   * @param contents May be null.
+   */
+  public Tooltip(@Null T contents) {
+    this(contents, TooltipManager.getInstance());
+  }
+
+  /**
+   * @param contents May be null.
+   */
+  public Tooltip(@Nullable @Null T contents, @Nullable TooltipManager manager) {
+    this.manager = manager;
+
+    container =
+        new Container(contents) {
+          public void act(float delta) {
+            super.act(delta);
+            if (targetActor != null && targetActor.getStage() == null) remove();
+          }
+        };
+    container.setTouchable(Touchable.disabled);
+  }
+
+  public TooltipManager getManager() {
+    return manager;
+  }
+
+  public Container<T> getContainer() {
+    return container;
+  }
+
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "Tooltip(T,com.badlogic.gdx.scenes.scene2d.ui.TooltipManager)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public Tooltip(@Null T contents, @NonNull TooltipManager manager) {
+    if (manager == null) {
+      throw new NullPointerException("manager cannot be null");
+    }
+    this.manager = manager;
+
+    container =
+        new Container(contents) {
+          public void act(float delta) {
+            super.act(delta);
+            if (targetActor != null && targetActor.getStage() == null) remove();
+          }
+        };
+    container.setTouchable(Touchable.disabled);
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+public Tooltip(@Null T contents, @NonNull TooltipManager manager) {
+    if (manager == null) {
+      throw new NullPointerException("manager cannot be null");
+    }
+    this.manager = manager;
+
+    container =
+        new Container(contents) {
+          public void act(float delta) {
+            super.act(delta);
+            if (targetActor != null && targetActor.getStage() == null) remove();
+          }
+        };
+    container.setTouchable(Touchable.disabled);
+  }
