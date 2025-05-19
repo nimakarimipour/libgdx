@@ -807,9 +807,6 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getMaxHeight() {
-    if (actor == null) {
-      throw new IllegalArgumentException("actor cannot be null");
-    }
     return maxHeight.get(actor);
   }
 
