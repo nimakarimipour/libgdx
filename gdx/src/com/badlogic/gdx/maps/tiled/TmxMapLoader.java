@@ -176,19 +176,19 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
       TiledMapTileSet tileSet,
       Element element,
       Array<Element> tileElements,
-      String name,
+      @Nullable String name,
       int firstgid,
       int tilewidth,
       int tileheight,
       int spacing,
       int margin,
-      String source,
+      @Nullable String source,
       int offsetX,
       int offsetY,
       String imageSource,
       int imageWidth,
       int imageHeight,
-      FileHandle image) {
+      @Nullable FileHandle image) {
 
     MapProperties props = tileSet.getProperties();
     if (image != null) {
@@ -227,13 +227,10 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
           } else {
             image = getRelativeFileHandle(tmxFile, imageSource);
           }
-
-          if (image != null) {
-            TextureRegion texture = imageResolver.getImage(image.path());
-            int tileId = firstgid + tileElement.getIntAttribute("id");
-            addStaticTiledMapTile(tileSet, texture, tileId, offsetX, offsetY);
-          }
         }
+        TextureRegion texture = imageResolver.getImage(image.path());
+        int tileId = firstgid + tileElement.getIntAttribute("id");
+        addStaticTiledMapTile(tileSet, texture, tileId, offsetX, offsetY);
       }
     }
   }
