@@ -534,7 +534,8 @@ public class SelectBox<T> extends Widget implements Disableable {
               return false;
             }
 
-            public boolean keyDown(@Nullable InputEvent event, int keycode) {
+            public boolean keyDown(InputEvent event, int keycode) {
+              if (event == null) return false;
               switch (keycode) {
                 case Keys.NUMPAD_ENTER:
                 case Keys.ENTER:
