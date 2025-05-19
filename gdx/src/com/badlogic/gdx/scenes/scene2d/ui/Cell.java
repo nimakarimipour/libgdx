@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value.Fixed;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
-import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
 
 /**
@@ -1016,8 +1015,10 @@ public class Cell<T extends Actor> implements Poolable {
     set(defaults());
   }
 
-  @Initializer
-  void set(@Nullable Cell cell) {
+  void set(Cell cell) {
+    if (cell == null) {
+      throw new IllegalArgumentException("Cell must not be null");
+    }
     minWidth = cell.minWidth;
     minHeight = cell.minHeight;
     prefWidth = cell.prefWidth;
