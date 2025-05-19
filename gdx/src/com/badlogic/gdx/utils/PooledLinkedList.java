@@ -168,7 +168,6 @@ public class PooledLinkedList<T> {
   }
 
   /** Removes the tail of the list regardless of iteration status */
-  @Nullable
   public @Null T removeLast() {
     if (tail == null) {
       return null;
@@ -186,7 +185,9 @@ public class PooledLinkedList<T> {
       tail = null;
     } else {
       tail = p;
-      tail.next = null;
+      if (tail != null) {
+        tail.next = null;
+      }
     }
 
     return payload;
