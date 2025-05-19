@@ -472,11 +472,9 @@ public class XmlReader {
     return null;
   }
 
-  protected void text(String text) {
-    if (current != null) {
-      String existing = current.getText();
-      current.setText(existing != null ? existing + text : text);
-    }
+  protected void text(@Nullable String text) {
+    String existing = current.getText();
+    current.setText(existing != null ? existing + text : text);
   }
 
   protected void close() {
