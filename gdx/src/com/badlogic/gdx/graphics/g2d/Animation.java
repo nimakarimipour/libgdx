@@ -68,6 +68,9 @@ public class Animation<T> {
    */
   public Animation(float frameDuration, Array<? extends T> keyFrames) {
     this.frameDuration = frameDuration;
+    if (keyFrames == null) {
+      throw new IllegalArgumentException("keyFrames cannot be null");
+    }
     Class arrayType = keyFrames.items.getClass().getComponentType();
     T[] frames = (T[]) ArrayReflection.newInstance(arrayType, keyFrames.size);
     for (int i = 0, n = keyFrames.size; i < n; i++) {
