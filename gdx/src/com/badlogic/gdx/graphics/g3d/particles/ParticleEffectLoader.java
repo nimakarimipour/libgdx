@@ -126,7 +126,7 @@ public class ParticleEffectLoader
       AssetManager manager,
       String fileName,
       FileHandle file,
-      ParticleEffectLoadParameter parameter) {
+      @Nullable ParticleEffectLoadParameter parameter) {
     ResourceData<ParticleEffect> effectData = null;
     synchronized (items) {
       for (int i = 0; i < items.size; ++i) {
@@ -137,10 +137,6 @@ public class ParticleEffectLoader
           break;
         }
       }
-    }
-
-    if (effectData == null || effectData.resource == null) {
-      throw new NullPointerException("EffectData or resource is null");
     }
 
     effectData.resource.load(manager, effectData);
