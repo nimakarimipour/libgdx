@@ -45,9 +45,6 @@ public class AlphaAction extends TemporalAction {
   public void reset() {
     super.reset();
     color = null;
-    if (target != null) {
-      color = target.getColor();
-    }
   }
 
   public @Null Color getColor() {
