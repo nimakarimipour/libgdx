@@ -1183,7 +1183,7 @@ public class JsonValue implements Iterable<JsonValue> {
    * @param stringValue May be null if the string representation is the string value of the long
    *     (eg, no leading zeros).
    */
-  public void set(long value, @Nullable @Null String stringValue) {
+  public void set(long value, @Nullable String stringValue) {
     longValue = value;
     doubleValue = value;
     this.stringValue = stringValue;
