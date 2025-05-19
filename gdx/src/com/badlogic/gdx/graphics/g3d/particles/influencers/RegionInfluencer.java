@@ -231,6 +231,7 @@ public abstract class RegionInfluencer extends Influencer {
 
   /** All the regions must be defined on the same Texture */
   public RegionInfluencer(TextureRegion... regions) {
+    this.regionChannel = new FloatChannel(); // Initialize regionChannel
     setAtlasName(null);
     this.regions = new Array<AspectTextureRegion>(false, regions.length, AspectTextureRegion.class);
     add(regions);
