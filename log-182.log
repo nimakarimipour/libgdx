@@ -1,0 +1,95 @@
+====================
+Type='PASS_NULLABLE', message='passing @Nullable parameter '(Object[]) null' where @NonNull is required'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ReflectionPool.java:67
+      return (T) constructor.newInstance((Object[]) null);
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+TOP LEVEL CALL TO FIX ERROR: Type='PASS_NULLABLE', message='passing @Nullable parameter '(Object[]) null' where @NonNull is required'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/utils/ReflectionPool.java:67
+      return (T) constructor.newInstance((Object[]) null);
+---ChatGPT.ask---
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "PASS_NULLABLE" and the full error message is: "passing @Nullable parameter '(Object[]) null' where @NonNull is required".
+The line with the error is: "      return (T) constructor.newInstance((Object[]) null);".
+
+The error is within "the method: newObject()" and the code surrounding the error is:
+```java
+          "Class cannot be created (missing no-arg constructor): " + type.getName());
+  }
+
+  @Nullable
+  private @Null Constructor findConstructor(Class<T> type) {
+    try {
+      return ClassReflection.getConstructor(type, (Class[]) null);
+    } catch (Exception ex1) {
+      try {
+        Constructor constructor = ClassReflection.getDeclaredConstructor(type, (Class[]) null);
+        constructor.setAccessible(true);
+        return constructor;
+      } catch (ReflectionException ex2) {
+        return null;
+      }
+    }
+  }
+
+  protected T newObject() {
+    try {
+      return (T) constructor.newInstance((Object[]) null);
+    } catch (Exception ex) {
+      throw new GdxRuntimeException(
+          "Unable to create new instance: " + constructor.getDeclaringClass().getName(), ex);
+    }
+  }
+}
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "newObject()") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+---ChatGPT.sendRequestToOpenAI---
+Sending request to OpenAI...
+---ChatGPT.sendRequestToOpenAI---
+Response received from OpenAI.
+---Response.<init>---
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  protected T newObject() {
+    try {
+      return (T) constructor.newInstance();
+    } catch (Exception ex) {
+      throw new GdxRuntimeException(
+          "Unable to create new instance: " + constructor.getDeclaringClass().getName(), ex);
+    }
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+---Response.<init>---
+Response created:
+protected T newObject() {
+    try {
+      return (T) constructor.newInstance();
+    } catch (Exception ex) {
+      throw new GdxRuntimeException(
+          "Unable to create new instance: " + constructor.getDeclaringClass().getName(), ex);
+    }
+  }
