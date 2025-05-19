@@ -105,6 +105,9 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
   public ObjectMap(int initialCapacity, float loadFactor) {
     if (loadFactor <= 0f || loadFactor >= 1f)
       throw new IllegalArgumentException("loadFactor must be > 0 and < 1: " + loadFactor);
+    if (initialCapacity < 0)
+      throw new IllegalArgumentException("initialCapacity must be >= 0: " + initialCapacity);
+
     this.loadFactor = loadFactor;
 
     int tableSize = tableSize(initialCapacity, loadFactor);
@@ -114,6 +117,12 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 
     keyTable = (K[]) new Object[tableSize];
     valueTable = (V[]) new Object[tableSize];
+    entries1 = new Entry<K, V>[tableSize];
+    entries2 = new Entry<K, V>[tableSize];
+    values1 = new Value<V>[tableSize];
+    values2 = new Value<V>[tableSize];
+    keys1 = new Key<K>[tableSize];
+    keys2 = new Key<K>[tableSize];
   }
 
   /** Creates a new map identical to the specified map. */
