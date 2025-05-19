@@ -54,10 +54,7 @@ public class TextureLoader
 
   @Override
   public void loadAsync(
-      AssetManager manager,
-      String fileName,
-      FileHandle file,
-      @Nullable TextureParameter parameter) {
+      AssetManager manager, String fileName, FileHandle file, TextureParameter parameter) {
     info.filename = fileName;
     if (parameter == null || parameter.textureData == null) {
       Format format = null;
@@ -75,7 +72,9 @@ public class TextureLoader
       info.data = parameter.textureData;
       info.texture = parameter.texture;
     }
-    if (!info.data.isPrepared()) info.data.prepare();
+    if (info.data != null && !info.data.isPrepared()) {
+      info.data.prepare();
+    }
   }
 
   @Nullable
