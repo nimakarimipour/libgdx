@@ -44,9 +44,6 @@ public abstract class ColorInfluencer extends Influencer {
 
     @Override
     public void activateParticles(int startIndex, int count) {
-      if (colorChannel == null) {
-        throw new NullPointerException("colorChannel is not allocated.");
-      }
       for (int i = startIndex * colorChannel.strideSize, c = i + count * colorChannel.strideSize;
           i < c;
           i += colorChannel.strideSize) {
