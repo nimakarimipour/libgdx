@@ -312,11 +312,10 @@ public class TextField extends Widget implements Disableable {
     }
   }
 
-  protected @NonNull Drawable getBackgroundDrawable() {
+  protected @Null Drawable getBackgroundDrawable() {
     if (disabled && style.disabledBackground != null) return style.disabledBackground;
     if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
-    if (style.background != null) return style.background;
-    throw new IllegalStateException("Background drawable must not be null");
+    return style.background;
   }
 
   public void draw(Batch batch, float parentAlpha) {
