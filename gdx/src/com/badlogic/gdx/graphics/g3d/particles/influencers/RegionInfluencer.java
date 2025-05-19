@@ -218,6 +218,8 @@ public abstract class RegionInfluencer extends Influencer {
 
   public RegionInfluencer(int regionsCount) {
     this.regions = new Array<AspectTextureRegion>(false, regionsCount, AspectTextureRegion.class);
+    this.regionChannel =
+        new FloatChannel(); // or an appropriate initialization based on your code context
   }
 
   public RegionInfluencer() {
