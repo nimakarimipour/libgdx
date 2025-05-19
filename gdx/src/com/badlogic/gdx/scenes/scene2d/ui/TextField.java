@@ -142,13 +142,8 @@ public class TextField extends Widget implements Disableable {
   }
 
   public TextField(@Null String text, TextFieldStyle style) {
-    if (style == null) {
-      throw new IllegalArgumentException("style cannot be null.");
-    }
-    this.style = style;
-
+    setStyle(style);
     clipboard = Gdx.app.getClipboard();
-    text = text != null ? text : ""; // Ensure text is not null
     initialize();
     setText(text);
     setSize(getPrefWidth(), getPrefHeight());
