@@ -53,7 +53,7 @@ public class ColorAction extends TemporalAction {
 
   public void reset() {
     super.reset();
-    color = new Color(); // assign a default non-null Color object
+    color = null;
   }
 
   public @Null Color getColor() {
