@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
  * @author Nathan Sweet
  */
 public class Button extends Table implements Disableable {
-  private ButtonStyle style;
+  @Nullable private ButtonStyle style;
   boolean isChecked, isDisabled;
   @Nullable ButtonGroup buttonGroup;
   private ClickListener clickListener;
@@ -193,6 +193,7 @@ public class Button extends Table implements Disableable {
    * Returns the button's style. Modifying the returned style may not have an effect until {@link
    * #setStyle(ButtonStyle)} is called.
    */
+  @Nullable
   public ButtonStyle getStyle() {
     return style;
   }
@@ -206,9 +207,11 @@ public class Button extends Table implements Disableable {
   }
 
   /** Returns appropriate background drawable from the style based on the current button state. */
-  @Nullable
   protected @Null Drawable getBackgroundDrawable() {
-    if (isDisabled() && style.disabled != null) return style.disabled;
+    if (style == null) return null;
+    if (isDisabled()
+        && NullabilityUtil.castToNonnull(style, "preceding null check").disabled != null)
+      return style.disabled;
     if (isPressed()) {
       if (isChecked() && style.checkedDown != null) return style.checkedDown;
       if (style.down != null) return style.down;
@@ -234,6 +237,8 @@ public class Button extends Table implements Disableable {
     validate();
 
     setBackground(getBackgroundDrawable());
+
+    if (style == null) throw new IllegalStateException("style cannot be null.");
 
     float offsetX = 0, offsetY = 0;
     if (isPressed() && !isDisabled()) {
@@ -265,13 +270,16 @@ public class Button extends Table implements Disableable {
 
   public float getPrefWidth() {
     float width = super.getPrefWidth();
-    if (style.up != null) width = Math.max(width, style.up.getMinWidth());
-    if (style.down != null) width = Math.max(width, style.down.getMinWidth());
-    if (style.checked != null) width = Math.max(width, style.checked.getMinWidth());
+    if (style != null) {
+      if (style.up != null) width = Math.max(width, style.up.getMinWidth());
+      if (style.down != null) width = Math.max(width, style.down.getMinWidth());
+      if (style.checked != null) width = Math.max(width, style.checked.getMinWidth());
+    }
     return width;
   }
 
   public float getPrefHeight() {
+    if (style == null) throw new IllegalStateException("style cannot be null.");
     float height = super.getPrefHeight();
     if (style.up != null) height = Math.max(height, style.up.getMinHeight());
     if (style.down != null) height = Math.max(height, style.down.getMinHeight());
