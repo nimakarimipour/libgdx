@@ -387,7 +387,7 @@ public class Window extends Table {
    */
   public static class WindowStyle {
     @Nullable public @Null Drawable background;
-    @Nullable public BitmapFont titleFont;
+    public BitmapFont titleFont;
     public @Null Color titleFontColor = new Color(1, 1, 1, 1);
     @Nullable public @Null Drawable stageBackground;
 
