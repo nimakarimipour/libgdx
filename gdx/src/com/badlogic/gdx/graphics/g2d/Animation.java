@@ -19,7 +19,6 @@ package com.badlogic.gdx.graphics.g2d;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
-import javax.annotation.Nullable;
 
 /**
  * An Animation stores a list of objects representing an animated sequence, e.g. for running or
@@ -51,7 +50,7 @@ public class Animation<T> {
    * Length must not be modified without updating {@link #animationDuration}. See {@link
    * #setKeyFrames(T[])}.
    */
-  @Nullable T[] keyFrames;
+  T[] keyFrames;
 
   private float frameDuration;
   private float animationDuration;
@@ -135,9 +134,6 @@ public class Animation<T> {
    * @return the frame of animation for the given state time.
    */
   public T getKeyFrame(float stateTime) {
-    if (keyFrames == null) {
-      throw new NullPointerException("KeyFrames array is null");
-    }
     int frameNumber = getKeyFrameIndex(stateTime);
     return keyFrames[frameNumber];
   }
@@ -149,10 +145,6 @@ public class Animation<T> {
    * @return current frame number
    */
   public int getKeyFrameIndex(float stateTime) {
-    if (keyFrames == null || keyFrames.length == 0) {
-      throw new IllegalStateException("KeyFrames cannot be null or empty");
-    }
-
     if (keyFrames.length == 1) return 0;
 
     int frameNumber = (int) (stateTime / frameDuration);
@@ -197,7 +189,6 @@ public class Animation<T> {
    * @return The keyframes[] field. This array is an Object[] if the animation was instantiated with
    *     an Array that was not type-aware.
    */
-  @Nullable
   public T[] getKeyFrames() {
     return keyFrames;
   }
@@ -229,9 +220,6 @@ public class Animation<T> {
    * @return whether the animation is finished.
    */
   public boolean isAnimationFinished(float stateTime) {
-    if (keyFrames == null) {
-      throw new IllegalStateException("Key frames have not been set");
-    }
     int frameNumber = (int) (stateTime / frameDuration);
     return keyFrames.length - 1 < frameNumber;
   }
@@ -243,9 +231,7 @@ public class Animation<T> {
    */
   public void setFrameDuration(float frameDuration) {
     this.frameDuration = frameDuration;
-    if (this.keyFrames != null) {
-      this.animationDuration = keyFrames.length * frameDuration;
-    }
+    this.animationDuration = keyFrames.length * frameDuration;
   }
 
   /**
