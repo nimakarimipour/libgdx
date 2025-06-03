@@ -164,7 +164,7 @@ public class PooledLinkedList<T> {
     }
 
     p.next = n;
-    n.prev = p;
+    NullabilityUtil.castToNonnull(n, "size greater than zero").prev = p;
   }
 
   /** Removes the tail of the list regardless of iteration status */
