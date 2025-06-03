@@ -130,7 +130,7 @@ public class PointSpriteParticleBatch
             blendingAttribute, depthTestAttribute, TextureAttribute.createDiffuse((Texture) null));
   }
 
-  public void setTexture(Texture texture) {
+  public void setTexture(@Nullable Texture texture) {
     TextureAttribute attribute =
         (TextureAttribute) renderable.material.get(TextureAttribute.Diffuse);
     attribute.textureDescription.texture = texture;
