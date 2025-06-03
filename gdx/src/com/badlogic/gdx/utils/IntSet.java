@@ -20,6 +20,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An unordered set where the items are unboxed ints. No allocation is done except when growing the
@@ -72,7 +73,7 @@ public class IntSet {
    */
   protected int mask;
 
-  private transient IntSetIterator iterator1, iterator2;
+  @Nullable private transient IntSetIterator iterator1, iterator2;
 
   /** Creates a new set with an initial capacity of 51 and a load factor of 0.8. */
   public IntSet() {
@@ -384,7 +385,7 @@ public class IntSet {
       iterator2.valid = false;
       return iterator1;
     }
-    iterator2.reset();
+    NullabilityUtil.castToNonnull(iterator2, "instantiated if null").reset();
     iterator2.valid = true;
     iterator1.valid = false;
     return iterator2;
