@@ -123,7 +123,7 @@ public class Texture extends GLTexture {
     }
   }
 
-  TextureData data;
+  @Nullable TextureData data;
 
   public Texture(String internalPath) {
     this(Gdx.files.internal(internalPath));
@@ -167,7 +167,7 @@ public class Texture extends GLTexture {
     if (data.isManaged()) addManagedTexture(Gdx.app, this);
   }
 
-  public void load(TextureData data) {
+  public void load(@Nullable TextureData data) {
     if (this.data != null && data.isManaged() != this.data.isManaged())
       throw new GdxRuntimeException("New data must have the same managed status as the old data");
     this.data = data;
@@ -190,6 +190,7 @@ public class Texture extends GLTexture {
   @Override
   protected void reload() {
     if (!isManaged()) throw new GdxRuntimeException("Tried to reload unmanaged Texture");
+    if (data == null) throw new GdxRuntimeException("Data is null and cannot be loaded");
     glHandle = Gdx.gl.glGenTexture();
     load(data);
   }
@@ -204,6 +205,8 @@ public class Texture extends GLTexture {
    * @param y The y coordinate in pixels
    */
   public void draw(Pixmap pixmap, int x, int y) {
+    if (data == null) throw new GdxRuntimeException("Texture data is not initialized");
+
     if (data.isManaged()) throw new GdxRuntimeException("can't draw to a managed texture");
 
     bind();
@@ -221,11 +224,17 @@ public class Texture extends GLTexture {
 
   @Override
   public int getWidth() {
+    if (this.data == null) {
+      throw new IllegalStateException("Texture data is not loaded.");
+    }
     return data.getWidth();
   }
 
   @Override
   public int getHeight() {
+    if (data == null) {
+      throw new NullPointerException("Texture data is not initialized");
+    }
     return data.getHeight();
   }
 
@@ -234,6 +243,7 @@ public class Texture extends GLTexture {
     return 0;
   }
 
+  @Nullable
   public TextureData getTextureData() {
     return data;
   }
@@ -242,6 +252,9 @@ public class Texture extends GLTexture {
    * @return whether this texture is managed or not.
    */
   public boolean isManaged() {
+    if (data == null) {
+      throw new IllegalStateException("Data is not initialized");
+    }
     return data.isManaged();
   }
 
@@ -253,7 +266,7 @@ public class Texture extends GLTexture {
     // removal from the asset manager.
     if (glHandle == 0) return;
     delete();
-    if (data.isManaged())
+    if (data != null && data.isManaged())
       if (managedTextures.get(Gdx.app) != null)
         managedTextures.get(Gdx.app).removeValue(this, true);
   }
@@ -315,7 +328,10 @@ public class Texture extends GLTexture {
           params.magFilter = texture.getMagFilter();
           params.wrapU = texture.getUWrap();
           params.wrapV = texture.getVWrap();
-          params.genMipMaps = texture.data.useMipMaps(); // not sure about this?
+          // Ensure texture.data is not null
+          if (texture.data != null) {
+            params.genMipMaps = texture.data.useMipMaps();
+          }
           params.texture =
               texture; // special parameter which will ensure that the references stay the same.
           params.loadedCallback =
