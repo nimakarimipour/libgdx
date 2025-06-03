@@ -47,7 +47,7 @@ public class JsonValue implements Iterable<JsonValue> {
   private ValueType type;
 
   /** May be null. */
-  private String stringValue;
+  @Nullable private String stringValue;
 
   private double doubleValue;
   private long longValue;
@@ -242,6 +242,7 @@ public class JsonValue implements Iterable<JsonValue> {
    * @return May be null if this value is null.
    * @throws IllegalStateException if this an array or object.
    */
+  @Nullable
   public @Null String asString() {
     switch (type) {
       case stringValue:
@@ -342,7 +343,7 @@ public class JsonValue implements Iterable<JsonValue> {
   public boolean asBoolean() {
     switch (type) {
       case stringValue:
-        return stringValue.equalsIgnoreCase("true");
+        return stringValue != null && stringValue.equalsIgnoreCase("true");
       case doubleValue:
         return doubleValue != 0;
       case longValue:
@@ -399,6 +400,8 @@ public class JsonValue implements Iterable<JsonValue> {
   public char asChar() {
     switch (type) {
       case stringValue:
+        if (stringValue == null)
+          throw new IllegalStateException("String value is null for type: " + type);
         return stringValue.length() == 0 ? 0 : stringValue.charAt(0);
       case doubleValue:
         return (char) doubleValue;
@@ -682,7 +685,10 @@ public class JsonValue implements Iterable<JsonValue> {
       char v;
       switch (value.type) {
         case stringValue:
-          v = value.stringValue.length() == 0 ? 0 : value.stringValue.charAt(0);
+          v =
+              (value.stringValue != null && value.stringValue.length() == 0)
+                  ? 0
+                  : value.stringValue.charAt(0);
           break;
         case doubleValue:
           v = (char) value.doubleValue;
