@@ -51,9 +51,7 @@ public class RemoteSender implements InputProcessor {
       socket.setTcpNoDelay(true);
       socket.setSoTimeout(3000);
       out = new DataOutputStream(socket.getOutputStream());
-      out.writeBoolean(
-          NullabilityUtil.castToNonnull(Gdx.input, "initialized on start")
-              .isPeripheralAvailable(Peripheral.MultitouchScreen));
+      out.writeBoolean(Gdx.input.isPeripheralAvailable(Peripheral.MultitouchScreen));
       connected = true;
       Gdx.input.setInputProcessor(this);
     } catch (Exception e) {
@@ -67,8 +65,7 @@ public class RemoteSender implements InputProcessor {
     }
     try {
       out.writeInt(ACCEL);
-      out.writeFloat(
-          NullabilityUtil.castToNonnull(Gdx.input, "properly initialized").getAccelerometerX());
+      out.writeFloat(Gdx.input.getAccelerometerX());
       out.writeFloat(Gdx.input.getAccelerometerY());
       out.writeFloat(Gdx.input.getAccelerometerZ());
       out.writeInt(COMPASS);

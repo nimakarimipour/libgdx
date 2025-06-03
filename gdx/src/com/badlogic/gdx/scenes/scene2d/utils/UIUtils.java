@@ -16,10 +16,7 @@ public final class UIUtils {
   public static boolean isIos = !isAndroid && (!(isWindows || isLinux || isMac));
 
   public static boolean left() {
-    if (Gdx.input != null) {
-      return Gdx.input.isButtonPressed(Buttons.LEFT);
-    }
-    return false;
+    return Gdx.input.isButtonPressed(Buttons.LEFT);
   }
 
   public static boolean left(int button) {
@@ -27,8 +24,7 @@ public final class UIUtils {
   }
 
   public static boolean right() {
-    return NullabilityUtil.castToNonnull(Gdx.input, "properly managed lifecycle")
-        .isButtonPressed(Buttons.RIGHT);
+    return Gdx.input.isButtonPressed(Buttons.RIGHT);
   }
 
   public static boolean right(int button) {
@@ -36,10 +32,7 @@ public final class UIUtils {
   }
 
   public static boolean middle() {
-    if (Gdx.input != null) {
-      return Gdx.input.isButtonPressed(Buttons.MIDDLE);
-    }
-    return false;
+    return Gdx.input.isButtonPressed(Buttons.MIDDLE);
   }
 
   public static boolean middle(int button) {
@@ -47,8 +40,7 @@ public final class UIUtils {
   }
 
   public static boolean shift() {
-    return Gdx.input != null
-        && (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT));
+    return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
   }
 
   public static boolean shift(int keycode) {
@@ -56,7 +48,6 @@ public final class UIUtils {
   }
 
   public static boolean ctrl() {
-    if (Gdx.input == null) return false;
     if (isMac) return Gdx.input.isKeyPressed(Keys.SYM);
     else
       return Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)
@@ -69,9 +60,6 @@ public final class UIUtils {
   }
 
   public static boolean alt() {
-    if (Gdx.input == null) {
-      return false;
-    }
     return Gdx.input.isKeyPressed(Keys.ALT_LEFT) || Gdx.input.isKeyPressed(Keys.ALT_RIGHT);
   }
 

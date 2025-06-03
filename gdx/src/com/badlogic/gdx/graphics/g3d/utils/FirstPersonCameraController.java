@@ -78,15 +78,12 @@ public class FirstPersonCameraController extends InputAdapter {
 
   @Override
   public boolean touchDragged(int screenX, int screenY, int pointer) {
-    if (Gdx.input != null) {
-      float deltaX = -Gdx.input.getDeltaX() * degreesPerPixel;
-      float deltaY = -Gdx.input.getDeltaY() * degreesPerPixel;
-      camera.direction.rotate(camera.up, deltaX);
-      tmp.set(camera.direction).crs(camera.up).nor();
-      camera.direction.rotate(tmp, deltaY);
-      return true;
-    }
-    return false;
+    float deltaX = -Gdx.input.getDeltaX() * degreesPerPixel;
+    float deltaY = -Gdx.input.getDeltaY() * degreesPerPixel;
+    camera.direction.rotate(camera.up, deltaX);
+    tmp.set(camera.direction).crs(camera.up).nor();
+    camera.direction.rotate(tmp, deltaY);
+    return true;
   }
 
   public void update() {

@@ -472,16 +472,13 @@ public class TextArea extends TextField {
       updateCurrentLine();
     }
 
-    public boolean keyDown(InputEvent event, int keycode) {
+    public boolean keyDown(@Nullable InputEvent event, int keycode) {
       boolean result = super.keyDown(event, keycode);
       if (hasKeyboardFocus()) {
         boolean repeat = false;
-        boolean shift = false;
-        if (Gdx.input != null) {
-          shift =
-              Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)
-                  || Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT);
-        }
+        boolean shift =
+            Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)
+                || Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT);
         if (keycode == Input.Keys.DOWN) {
           if (shift) {
             if (!hasSelection) {
