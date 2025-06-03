@@ -304,19 +304,17 @@ public class Dialog extends Window {
   public Dialog key(final int keycode, final @Null Object object) {
     addListener(
         new InputListener() {
-          public boolean keyDown(InputEvent event, int keycode2) {
+          public boolean keyDown(@Nullable InputEvent event, int keycode2) {
             if (keycode == keycode2) {
               // Delay a frame to eat the keyTyped event.
-              if (Gdx.app != null) {
-                Gdx.app.postRunnable(
-                    new Runnable() {
-                      public void run() {
-                        result(object);
-                        if (!cancelHide) hide();
-                        cancelHide = false;
-                      }
-                    });
-              }
+              Gdx.app.postRunnable(
+                  new Runnable() {
+                    public void run() {
+                      result(object);
+                      if (!cancelHide) hide();
+                      cancelHide = false;
+                    }
+                  });
             }
             return false;
           }

@@ -45,37 +45,27 @@ public class Logger {
   }
 
   public void debug(String message) {
-    if (level >= DEBUG && Gdx.app != null) {
-      Gdx.app.debug(tag, message);
-    }
+    if (level >= DEBUG) Gdx.app.debug(tag, message);
   }
 
   public void debug(String message, Exception exception) {
-    if (level >= DEBUG && Gdx.app != null) {
-      Gdx.app.debug(tag, message, exception);
-    }
+    if (level >= DEBUG) Gdx.app.debug(tag, message, exception);
   }
 
   public void info(String message) {
-    if (level >= INFO && Gdx.app != null) Gdx.app.log(tag, message);
+    if (level >= INFO) Gdx.app.log(tag, message);
   }
 
   public void info(String message, Exception exception) {
-    if (Gdx.app != null && level >= INFO) {
-      Gdx.app.log(tag, message, exception);
-    }
+    if (level >= INFO) Gdx.app.log(tag, message, exception);
   }
 
   public void error(String message) {
-    if (level >= ERROR && Gdx.app != null) {
-      Gdx.app.error(tag, message);
-    }
+    if (level >= ERROR) Gdx.app.error(tag, message);
   }
 
   public void error(String message, Throwable exception) {
-    if (level >= ERROR && Gdx.app != null) {
-      Gdx.app.error(tag, message, exception);
-    }
+    if (level >= ERROR) Gdx.app.error(tag, message, exception);
   }
 
   /**

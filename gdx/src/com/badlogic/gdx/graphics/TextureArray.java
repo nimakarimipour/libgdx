@@ -62,11 +62,7 @@ public class TextureArray extends GLTexture {
 
     load(data);
 
-    if (data.isManaged()) {
-      if (managedTextures.get(Gdx.app) != null) {
-        addManagedTexture(Gdx.app, this);
-      }
-    }
+    if (data.isManaged()) addManagedTexture(Gdx.app, this);
   }
 
   private static FileHandle[] getInternalHandles(String... internalPaths) {

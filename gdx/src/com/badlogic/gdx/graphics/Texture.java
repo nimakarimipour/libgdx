@@ -164,11 +164,7 @@ public class Texture extends GLTexture {
   protected Texture(int glTarget, int glHandle, TextureData data) {
     super(glTarget, glHandle);
     load(data);
-    if (data.isManaged()) {
-      if (Gdx.app != null) {
-        addManagedTexture(Gdx.app, this);
-      }
-    }
+    if (data.isManaged()) addManagedTexture(Gdx.app, this);
   }
 
   public void load(TextureData data) {

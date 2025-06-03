@@ -310,7 +310,7 @@ public class ParticleShader extends BaseShader {
 
   public static String createPrefix(final Renderable renderable, final Config config) {
     String prefix = "";
-    if (Gdx.app != null && Gdx.app.getType() == ApplicationType.Desktop) prefix += "#version 120\n";
+    if (Gdx.app.getType() == ApplicationType.Desktop) prefix += "#version 120\n";
     else prefix += "#version 100\n";
     if (config.type == ParticleType.Billboard) {
       prefix += "#define billboard\n";

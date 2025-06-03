@@ -1586,9 +1586,7 @@ public class ParticleEmitter {
             "The loaded particle effect descriptor file uses an old invalid format. "
                 + "Please download the latest version of the Particle Editor tool and recreate the file by"
                 + " loading and saving it again.";
-        if (Gdx.app != null) {
-          Gdx.app.error("ParticleEmitter", errorMessage);
-        }
+        Gdx.app.error("ParticleEmitter", errorMessage);
         throw new IOException(errorMessage);
       }
     }

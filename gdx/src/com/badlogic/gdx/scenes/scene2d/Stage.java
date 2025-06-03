@@ -228,13 +228,11 @@ public class Stage extends InputAdapter implements Disposable {
     }
 
     // Update over actor for the mouse on the desktop.
-    if (Gdx.app != null) { // Check for null before using Gdx.app
-      ApplicationType type = Gdx.app.getType();
-      if (type == ApplicationType.Desktop
-          || type == ApplicationType.Applet
-          || type == ApplicationType.WebGL)
-        mouseOverActor = fireEnterAndExit(mouseOverActor, mouseScreenX, mouseScreenY, -1);
-    }
+    ApplicationType type = Gdx.app.getType();
+    if (type == ApplicationType.Desktop
+        || type == ApplicationType.Applet
+        || type == ApplicationType.WebGL)
+      mouseOverActor = fireEnterAndExit(mouseOverActor, mouseScreenX, mouseScreenY, -1);
 
     root.act(delta);
   }

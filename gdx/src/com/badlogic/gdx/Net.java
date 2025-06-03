@@ -284,9 +284,9 @@ public interface Net {
      * @exception IllegalArgumentException if redirection is disabled on the GWT backend.
      */
     public void setFollowRedirects(boolean followRedirects) throws IllegalArgumentException {
-      if (Gdx.app != null && (followRedirects || Gdx.app.getType() != ApplicationType.WebGL)) {
+      if (followRedirects || Gdx.app.getType() != ApplicationType.WebGL) {
         this.followRedirects = followRedirects;
-      } else if (Gdx.app != null) {
+      } else {
         throw new IllegalArgumentException(
             "Following redirects can't be disabled using the GWT/WebGL backend!");
       }

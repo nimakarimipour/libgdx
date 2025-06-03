@@ -177,9 +177,7 @@ public class ShaderProgram implements Disposable {
     if (isCompiled()) {
       fetchAttributes();
       fetchUniforms();
-      if (Gdx.app != null) {
-        addManagedShader(Gdx.app, this);
-      }
+      addManagedShader(Gdx.app, this);
     }
   }
 
@@ -777,14 +775,12 @@ public class ShaderProgram implements Disposable {
    * used.
    */
   public void dispose() {
-    if (Gdx.app != null) { // Check if Gdx.app is not null before proceeding
-      GL20 gl = Gdx.gl20;
-      gl.glUseProgram(0);
-      gl.glDeleteShader(vertexShaderHandle);
-      gl.glDeleteShader(fragmentShaderHandle);
-      gl.glDeleteProgram(program);
-      if (shaders.get(Gdx.app) != null) shaders.get(Gdx.app).removeValue(this, true);
-    }
+    GL20 gl = Gdx.gl20;
+    gl.glUseProgram(0);
+    gl.glDeleteShader(vertexShaderHandle);
+    gl.glDeleteShader(fragmentShaderHandle);
+    gl.glDeleteProgram(program);
+    if (shaders.get(Gdx.app) != null) shaders.get(Gdx.app).removeValue(this, true);
   }
 
   /**
@@ -876,11 +872,7 @@ public class ShaderProgram implements Disposable {
    * @return the number of managed shader programs currently loaded
    */
   public static int getNumManagedShaderPrograms() {
-    if (shaders.get(Gdx.app) != null) {
-      return shaders.get(Gdx.app).size;
-    } else {
-      return 0; // or any appropriate default value
-    }
+    return shaders.get(Gdx.app).size;
   }
 
   /**

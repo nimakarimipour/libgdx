@@ -317,9 +317,7 @@ public class RemoteInput implements Runnable, Input {
               break;
           }
 
-          if (Gdx.app != null) {
-            Gdx.app.postRunnable(new EventTrigger(touchEvent, keyEvent));
-          }
+          Gdx.app.postRunnable(new EventTrigger(touchEvent, keyEvent));
         }
       } catch (IOException e) {
         e.printStackTrace();
@@ -447,9 +445,7 @@ public class RemoteInput implements Runnable, Input {
 
   @Override
   public void getTextInput(TextInputListener listener, String title, String text, String hint) {
-    if (Gdx.app != null) {
-      Gdx.app.getInput().getTextInput(listener, title, text, hint);
-    }
+    Gdx.app.getInput().getTextInput(listener, title, text, hint);
   }
 
   @Override
@@ -459,9 +455,7 @@ public class RemoteInput implements Runnable, Input {
       String text,
       String hint,
       OnscreenKeyboardType type) {
-    if (Gdx.app != null) {
-      Gdx.app.getInput().getTextInput(listener, title, text, hint, type);
-    }
+    Gdx.app.getInput().getTextInput(listener, title, text, hint, type);
   }
 
   @Override

@@ -525,7 +525,7 @@ public class AssetManager implements Disposable {
    * @return true if all loading is finished.
    */
   public boolean update(int millis) {
-    if (Gdx.app != null && Gdx.app.getType() == Application.ApplicationType.WebGL) return update();
+    if (Gdx.app.getType() == Application.ApplicationType.WebGL) return update();
     long endTime = TimeUtils.millis() + millis;
     while (true) {
       boolean done = update();

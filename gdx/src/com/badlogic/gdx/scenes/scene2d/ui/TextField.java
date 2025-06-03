@@ -143,9 +143,7 @@ public class TextField extends Widget implements Disableable {
 
   public TextField(@Null String text, TextFieldStyle style) {
     setStyle(style);
-    if (Gdx.app != null) {
-      clipboard = Gdx.app.getClipboard();
-    }
+    clipboard = Gdx.app.getClipboard();
     initialize();
     setText(text);
     setSize(getPrefWidth(), getPrefHeight());

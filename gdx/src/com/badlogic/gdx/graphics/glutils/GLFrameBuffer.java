@@ -122,7 +122,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
     // iOS uses a different framebuffer handle! (not necessarily 0)
     if (!defaultFramebufferHandleInitialized) {
       defaultFramebufferHandleInitialized = true;
-      if (Gdx.app != null && Gdx.app.getType() == ApplicationType.iOS) {
+      if (Gdx.app.getType() == ApplicationType.iOS) {
         IntBuffer intbuf =
             ByteBuffer.allocateDirect(16 * Integer.SIZE / 8)
                 .order(ByteOrder.nativeOrder())
@@ -310,9 +310,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
           "Frame buffer couldn't be constructed: unknown error " + result);
     }
 
-    if (Gdx.app != null) {
-      addManagedFrameBuffer(Gdx.app, this);
-    }
+    addManagedFrameBuffer(Gdx.app, this);
   }
 
   private void checkValidBuilder() {

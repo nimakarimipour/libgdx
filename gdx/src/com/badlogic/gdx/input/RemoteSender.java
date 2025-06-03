@@ -55,9 +55,7 @@ public class RemoteSender implements InputProcessor {
       connected = true;
       Gdx.input.setInputProcessor(this);
     } catch (Exception e) {
-      if (Gdx.app != null) {
-        Gdx.app.log("RemoteSender", "couldn't connect to " + ip + ":" + port);
-      }
+      Gdx.app.log("RemoteSender", "couldn't connect to " + ip + ":" + port);
     }
   }
 
