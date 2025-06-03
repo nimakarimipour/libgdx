@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.utils.reflect;
 
+import javax.annotation.Nullable;
+
 /**
  * Utilities for Array reflection.
  *
@@ -39,7 +41,7 @@ public final class ArrayReflection {
   }
 
   /** Sets the value of the indexed component in the supplied array to the supplied value. */
-  public static void set(Object array, int index, Object value) {
+  public static void set(Object array, int index, @Nullable Object value) {
     java.lang.reflect.Array.set(array, index, value);
   }
 }

@@ -103,7 +103,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     System.arraycopy(array.values, 0, values, 0, size);
   }
 
-  public int put(@Nullable K key, V value) {
+  public int put(@Nullable K key, @Nullable V value) {
     int index = indexOfKey(key);
     if (index == -1) {
       if (size == keys.length) resize(Math.max(8, (int) (size * 1.75f)));
