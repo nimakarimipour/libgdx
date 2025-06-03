@@ -163,7 +163,7 @@ public class PooledLinkedList<T> {
       return;
     }
 
-    NullabilityUtil.castToNonnull(p, "not head or tail").next = n;
+    p.next = n;
     n.prev = p;
   }
 
