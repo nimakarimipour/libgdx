@@ -582,7 +582,8 @@ public class TextField extends Widget implements Disableable {
             current.findNextTextField(stage.getActors(), null, bestCoords, currentCoords, up);
       }
       if (textField == null) {
-        Gdx.input.setOnscreenKeyboardVisible(false);
+        NullabilityUtil.castToNonnull(Gdx.input, "standard setup")
+            .setOnscreenKeyboardVisible(false);
         break;
       }
       if (stage.setKeyboardFocus(textField)) {
@@ -940,7 +941,8 @@ public class TextField extends Widget implements Disableable {
    */
   public static class DefaultOnscreenKeyboard implements OnscreenKeyboard {
     public void show(boolean visible) {
-      Gdx.input.setOnscreenKeyboardVisible(visible);
+      NullabilityUtil.castToNonnull(Gdx.input, "proper initialization ensured")
+          .setOnscreenKeyboardVisible(visible);
     }
   }
 
@@ -1144,8 +1146,6 @@ public class TextField extends Widget implements Disableable {
     public boolean keyTyped(InputEvent event, char character) {
       if (disabled) return false;
 
-      // Disallow "typing" most ASCII control characters, which would show up as a space when
-      // onlyFontChars is true.
       switch (character) {
         case BACKSPACE:
         case TAB:
@@ -1158,7 +1158,9 @@ public class TextField extends Widget implements Disableable {
 
       if (!hasKeyboardFocus()) return false;
 
-      if (UIUtils.isMac && Gdx.input.isKeyPressed(Keys.SYM)) return true;
+      if (UIUtils.isMac
+          && NullabilityUtil.castToNonnull(Gdx.input, "properly initialized")
+              .isKeyPressed(Keys.SYM)) return true;
 
       if (checkFocusTraversal(character)) next(UIUtils.shift());
       else {
@@ -1184,7 +1186,6 @@ public class TextField extends Widget implements Disableable {
             }
           }
           if (add && !remove) {
-            // Character may be added to the text.
             if (!enter && filter != null && !filter.acceptChar(TextField.this, character))
               return true;
             if (!withinMaxLength(
@@ -1200,8 +1201,7 @@ public class TextField extends Widget implements Disableable {
             if (time - 750 > lastChangeTime) undoText = oldText;
             lastChangeTime = time;
             updateDisplayText();
-          } else if (!text.equals(oldText)) // Keep cursor movement if the text is the same.
-          cursor = oldCursor;
+          } else if (!text.equals(oldText)) cursor = oldCursor;
         }
       }
       if (listener != null) listener.keyTyped(TextField.this, character);

@@ -394,10 +394,13 @@ public class Tree<N extends Node, V> extends WidgetGroup {
         && Gdx.app.getType() == ApplicationType.Desktop //
         && (!selection.getMultiple() || (!UIUtils.ctrl() && !UIUtils.shift())) //
     ) {
-      float mouseX = screenToLocalCoordinates(tmp.set(Gdx.input.getX(), 0)).x + getX();
-      if (mouseX >= 0 && mouseX < iconX) {
-        Drawable icon = node.expanded ? style.minusOver : style.plusOver;
-        if (icon != null) return icon;
+      // Check if Gdx.input is not null before using it
+      if (Gdx.input != null) {
+        float mouseX = screenToLocalCoordinates(tmp.set(Gdx.input.getX(), 0)).x + getX();
+        if (mouseX >= 0 && mouseX < iconX) {
+          Drawable icon = node.expanded ? style.minusOver : style.plusOver;
+          if (icon != null) return icon;
+        }
       }
     }
     return node.expanded ? style.minus : style.plus;

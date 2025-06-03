@@ -137,10 +137,11 @@ public class Tooltip<T extends Actor> extends InputListener {
     container.setOrigin(point.x, point.y);
   }
 
-  public void enter(
-      InputEvent event, float x, float y, int pointer, @Nullable @Null Actor fromActor) {
+  public void enter(InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
     if (pointer != -1) return;
-    if (touchIndependent && Gdx.input.isTouched()) return;
+    if (touchIndependent
+        && NullabilityUtil.castToNonnull(Gdx.input, "initialized during application").isTouched())
+      return;
     Actor actor = event.getListenerActor();
     if (fromActor != null && fromActor.isDescendantOf(actor)) return;
     setContainerPosition(actor, x, y);

@@ -198,8 +198,10 @@ public class Slider extends ProgressBar {
     }
 
     float oldValue = value;
-    if (!Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && !Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
-      value = snap(value);
+    if (!NullabilityUtil.castToNonnull(Gdx.input, "provided by LibGDX framework")
+            .isKeyPressed(Keys.SHIFT_LEFT)
+        && !NullabilityUtil.castToNonnull(Gdx.input, "provided by LibGDX framework")
+            .isKeyPressed(Keys.SHIFT_RIGHT)) value = snap(value);
     boolean valueSet = setValue(value);
     if (value == oldValue) position = oldPosition;
     return valueSet;

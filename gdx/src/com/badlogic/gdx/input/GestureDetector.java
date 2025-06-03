@@ -132,34 +132,36 @@ public class GestureDetector extends InputAdapter {
   public boolean touchDown(float x, float y, int pointer, int button) {
     if (pointer > 1) return false;
 
-    if (pointer == 0) {
-      pointer1.set(x, y);
-      touchDownTime = Gdx.input.getCurrentEventTime();
-      tracker.start(x, y, touchDownTime);
-      if (Gdx.input.isTouched(1)) {
+    if (Gdx.input != null) { // Add null check
+      if (pointer == 0) {
+        pointer1.set(x, y);
+        touchDownTime = Gdx.input.getCurrentEventTime();
+        tracker.start(x, y, touchDownTime);
+        if (Gdx.input.isTouched(1)) {
+          // Start pinch.
+          inTapRectangle = false;
+          pinching = true;
+          initialPointer1.set(pointer1);
+          initialPointer2.set(pointer2);
+          longPressTask.cancel();
+        } else {
+          // Normal touch down.
+          inTapRectangle = true;
+          pinching = false;
+          longPressFired = false;
+          tapRectangleCenterX = x;
+          tapRectangleCenterY = y;
+          if (!longPressTask.isScheduled()) Timer.schedule(longPressTask, longPressSeconds);
+        }
+      } else {
         // Start pinch.
+        pointer2.set(x, y);
         inTapRectangle = false;
         pinching = true;
         initialPointer1.set(pointer1);
         initialPointer2.set(pointer2);
         longPressTask.cancel();
-      } else {
-        // Normal touch down.
-        inTapRectangle = true;
-        pinching = false;
-        longPressFired = false;
-        tapRectangleCenterX = x;
-        tapRectangleCenterY = y;
-        if (!longPressTask.isScheduled()) Timer.schedule(longPressTask, longPressSeconds);
       }
-    } else {
-      // Start pinch.
-      pointer2.set(x, y);
-      inTapRectangle = false;
-      pinching = true;
-      initialPointer1.set(pointer1);
-      initialPointer2.set(pointer2);
-      longPressTask.cancel();
     }
     return listener.touchDown(x, y, pointer, button);
   }
@@ -187,7 +189,9 @@ public class GestureDetector extends InputAdapter {
     }
 
     // update tracker
-    tracker.update(x, y, Gdx.input.getCurrentEventTime());
+    if (Gdx.input != null) {
+      tracker.update(x, y, Gdx.input.getCurrentEventTime());
+    }
 
     // check if we are still tapping.
     if (inTapRectangle && !isWithinTapRectangle(x, y, tapRectangleCenterX, tapRectangleCenterY)) {
@@ -246,10 +250,14 @@ public class GestureDetector extends InputAdapter {
       // we are in pan mode again, reset velocity tracker
       if (pointer == 0) {
         // first pointer has lifted off, set up panning to use the second pointer...
-        tracker.start(pointer2.x, pointer2.y, Gdx.input.getCurrentEventTime());
+        if (Gdx.input != null) {
+          tracker.start(pointer2.x, pointer2.y, Gdx.input.getCurrentEventTime());
+        }
       } else {
         // second pointer has lifted off, set up panning to use the first pointer...
-        tracker.start(pointer1.x, pointer1.y, Gdx.input.getCurrentEventTime());
+        if (Gdx.input != null) {
+          tracker.start(pointer1.x, pointer1.y, Gdx.input.getCurrentEventTime());
+        }
       }
       return false;
     }
@@ -259,10 +267,12 @@ public class GestureDetector extends InputAdapter {
     if (wasPanning && !panning) handled = listener.panStop(x, y, pointer, button);
 
     // handle fling
-    long time = Gdx.input.getCurrentEventTime();
-    if (time - touchDownTime <= maxFlingDelay) {
-      tracker.update(x, y, time);
-      handled = listener.fling(tracker.getVelocityX(), tracker.getVelocityY(), button) || handled;
+    if (Gdx.input != null) {
+      long time = Gdx.input.getCurrentEventTime();
+      if (time - touchDownTime <= maxFlingDelay) {
+        tracker.update(x, y, time);
+        handled = listener.fling(tracker.getVelocityX(), tracker.getVelocityY(), button) || handled;
+      }
     }
     touchDownTime = 0;
     return handled;

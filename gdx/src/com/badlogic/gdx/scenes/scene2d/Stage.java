@@ -157,7 +157,10 @@ public class Stage extends InputAdapter implements Disposable {
     }
 
     if (debugUnderMouse || debugParentUnderMouse || debugTableUnderMouse != Debug.none) {
-      screenToStageCoordinates(tempCoords.set(Gdx.input.getX(), Gdx.input.getY()));
+      screenToStageCoordinates(
+          tempCoords.set(
+              NullabilityUtil.castToNonnull(Gdx.input, "static and always initialized").getX(),
+              Gdx.input.getY()));
       Actor actor = hit(tempCoords.x, tempCoords.y, true);
       if (actor == null) return;
 
