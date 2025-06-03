@@ -227,7 +227,7 @@ public class UBJsonWriter implements Closeable {
    *
    * @return this writer, for chaining
    */
-  public UBJsonWriter value(@Nullable String value) throws IOException {
+  public UBJsonWriter value(String value) throws IOException {
     checkName();
     byte[] bytes = value.getBytes("UTF-8");
     out.writeByte('S');

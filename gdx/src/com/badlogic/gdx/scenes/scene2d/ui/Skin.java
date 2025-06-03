@@ -173,7 +173,7 @@ public class Skin implements Disposable {
    *
    * @throws GdxRuntimeException if the resource was not found.
    */
-  public <T> T get(@Nullable String name, @Nullable Class<T> type) {
+  public <T> T get(String name, @Nullable Class<T> type) {
     if (name == null) throw new IllegalArgumentException("name cannot be null.");
     if (type == null) throw new IllegalArgumentException("type cannot be null.");
 
