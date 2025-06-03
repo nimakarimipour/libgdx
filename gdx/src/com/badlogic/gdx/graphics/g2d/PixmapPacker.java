@@ -672,7 +672,7 @@ public class PixmapPacker implements Disposable {
       pixmaps.sort(comparator);
     }
 
-    public Page pack(PixmapPacker packer, String name, Rectangle rect) {
+    public Page pack(PixmapPacker packer, @Nullable String name, Rectangle rect) {
       GuillotinePage page;
       if (packer.pages.size == 0) {
         // Add a page if empty.
@@ -693,12 +693,8 @@ public class PixmapPacker implements Disposable {
         packer.pages.add(page);
         node = insert(page.root, rect);
       }
-
-      // Ensure node is not null before dereferencing
-      if (node != null) {
-        node.full = true;
-        rect.set(node.rect.x, node.rect.y, node.rect.width - padding, node.rect.height - padding);
-      }
+      node.full = true;
+      rect.set(node.rect.x, node.rect.y, node.rect.width - padding, node.rect.height - padding);
       return page;
     }
 
