@@ -386,7 +386,7 @@ public class Model implements Disposable {
    *
    * @param disposable the Disposable
    */
-  public void manageDisposable(@Nullable Disposable disposable) {
+  public void manageDisposable(Disposable disposable) {
     if (!disposables.contains(disposable, true)) disposables.add(disposable);
   }
 

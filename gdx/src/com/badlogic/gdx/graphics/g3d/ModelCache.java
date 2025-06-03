@@ -169,9 +169,6 @@ public class ModelCache implements Disposable, RenderableProvider {
 
     @Override
     public int compare(Renderable arg0, Renderable arg1) {
-      if (arg0.meshPart.mesh == null || arg1.meshPart.mesh == null) {
-        throw new NullPointerException("Mesh part mesh cannot be null");
-      }
       final VertexAttributes va0 = arg0.meshPart.mesh.getVertexAttributes();
       final VertexAttributes va1 = arg1.meshPart.mesh.getVertexAttributes();
       final int vc = va0.compareTo(va1);
@@ -300,69 +297,63 @@ public class ModelCache implements Disposable, RenderableProvider {
     int initCount = renderables.size;
 
     final Renderable first = items.get(0);
-    if (first.meshPart != null && first.meshPart.mesh != null) {
-      VertexAttributes vertexAttributes = first.meshPart.mesh.getVertexAttributes();
-      Material material = first.material;
-      int primitiveType = first.meshPart.primitiveType;
-      int offset = renderables.size;
+    VertexAttributes vertexAttributes = first.meshPart.mesh.getVertexAttributes();
+    Material material = first.material;
+    int primitiveType = first.meshPart.primitiveType;
+    int offset = renderables.size;
 
-      meshBuilder.begin(vertexAttributes);
-      MeshPart part = meshBuilder.part("", primitiveType, meshPartPool.obtain());
-      renderables.add(obtainRenderable(material, primitiveType));
+    meshBuilder.begin(vertexAttributes);
+    MeshPart part = meshBuilder.part("", primitiveType, meshPartPool.obtain());
+    renderables.add(obtainRenderable(material, primitiveType));
 
-      for (int i = 0, n = items.size; i < n; ++i) {
-        final Renderable renderable = items.get(i);
-        if (renderable.meshPart != null && renderable.meshPart.mesh != null) {
-          final VertexAttributes va = renderable.meshPart.mesh.getVertexAttributes();
-          final Material mat = renderable.material;
-          final int pt = renderable.meshPart.primitiveType;
+    for (int i = 0, n = items.size; i < n; ++i) {
+      final Renderable renderable = items.get(i);
+      final VertexAttributes va = renderable.meshPart.mesh.getVertexAttributes();
+      final Material mat = renderable.material;
+      final int pt = renderable.meshPart.primitiveType;
 
-          final boolean sameAttributes = va.equals(vertexAttributes);
-          final boolean indexedMesh = renderable.meshPart.mesh.getNumIndices() > 0;
-          final int verticesToAdd =
-              indexedMesh ? renderable.meshPart.mesh.getNumVertices() : renderable.meshPart.size;
-          final boolean canHoldVertices =
-              meshBuilder.getNumVertices() + verticesToAdd <= MeshBuilder.MAX_VERTICES;
-          final boolean sameMesh = sameAttributes && canHoldVertices;
-          final boolean samePart = sameMesh && pt == primitiveType && mat.same(material, true);
+      final boolean sameAttributes = va.equals(vertexAttributes);
+      final boolean indexedMesh = renderable.meshPart.mesh.getNumIndices() > 0;
+      final int verticesToAdd =
+          indexedMesh ? renderable.meshPart.mesh.getNumVertices() : renderable.meshPart.size;
+      final boolean canHoldVertices =
+          meshBuilder.getNumVertices() + verticesToAdd <= MeshBuilder.MAX_VERTICES;
+      final boolean sameMesh = sameAttributes && canHoldVertices;
+      final boolean samePart = sameMesh && pt == primitiveType && mat.same(material, true);
 
-          if (!samePart) {
-            if (!sameMesh) {
-              final Mesh mesh =
-                  meshBuilder.end(
-                      meshPool.obtain(
-                          vertexAttributes,
-                          meshBuilder.getNumVertices(),
-                          meshBuilder.getNumIndices()));
-              while (offset < renderables.size) renderables.get(offset++).meshPart.mesh = mesh;
-              meshBuilder.begin(vertexAttributes = va);
-            }
-
-            final MeshPart newPart = meshBuilder.part("", pt, meshPartPool.obtain());
-            final Renderable previous = renderables.get(renderables.size - 1);
-            previous.meshPart.offset = part.offset;
-            previous.meshPart.size = part.size;
-            part = newPart;
-
-            renderables.add(obtainRenderable(material = mat, primitiveType = pt));
-          }
-
-          meshBuilder.setVertexTransform(renderable.worldTransform);
-          meshBuilder.addMesh(
-              renderable.meshPart.mesh, renderable.meshPart.offset, renderable.meshPart.size);
+      if (!samePart) {
+        if (!sameMesh) {
+          final Mesh mesh =
+              meshBuilder.end(
+                  meshPool.obtain(
+                      vertexAttributes, meshBuilder.getNumVertices(), meshBuilder.getNumIndices()));
+          while (offset < renderables.size) renderables.get(offset++).meshPart.mesh = mesh;
+          meshBuilder.begin(vertexAttributes = va);
         }
+
+        final MeshPart newPart = meshBuilder.part("", pt, meshPartPool.obtain());
+        final Renderable previous = renderables.get(renderables.size - 1);
+        previous.meshPart.offset = part.offset;
+        previous.meshPart.size = part.size;
+        part = newPart;
+
+        renderables.add(obtainRenderable(material = mat, primitiveType = pt));
       }
 
-      final Mesh mesh =
-          meshBuilder.end(
-              meshPool.obtain(
-                  vertexAttributes, meshBuilder.getNumVertices(), meshBuilder.getNumIndices()));
-      while (offset < renderables.size) renderables.get(offset++).meshPart.mesh = mesh;
-
-      final Renderable previous = renderables.get(renderables.size - 1);
-      previous.meshPart.offset = part.offset;
-      previous.meshPart.size = part.size;
+      meshBuilder.setVertexTransform(renderable.worldTransform);
+      meshBuilder.addMesh(
+          renderable.meshPart.mesh, renderable.meshPart.offset, renderable.meshPart.size);
     }
+
+    final Mesh mesh =
+        meshBuilder.end(
+            meshPool.obtain(
+                vertexAttributes, meshBuilder.getNumVertices(), meshBuilder.getNumIndices()));
+    while (offset < renderables.size) renderables.get(offset++).meshPart.mesh = mesh;
+
+    final Renderable previous = renderables.get(renderables.size - 1);
+    previous.meshPart.offset = part.offset;
+    previous.meshPart.size = part.size;
   }
 
   /**

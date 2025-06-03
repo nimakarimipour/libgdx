@@ -229,7 +229,7 @@ public class Array<T> implements Iterable<T> {
    * @param identity If true, == comparison will be used. If false, .equals() comparison will be
    *     used.
    */
-  public boolean contains(@Nullable @Null T value, boolean identity) {
+  public boolean contains(@Null T value, boolean identity) {
     T[] items = this.items;
     int i = size - 1;
     if (identity || value == null) {

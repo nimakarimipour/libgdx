@@ -116,11 +116,6 @@ public class DepthShader extends DefaultShader {
 
     this.numBones = renderable.bones == null ? 0 : config.numBones;
     int w = 0;
-
-    if (renderable.meshPart.mesh == null) {
-      throw new GdxRuntimeException("Mesh is not initialized");
-    }
-
     final int n = renderable.meshPart.mesh.getVertexAttributes().size();
     for (int i = 0; i < n; i++) {
       final VertexAttribute attr = renderable.meshPart.mesh.getVertexAttributes().get(i);
@@ -153,7 +148,6 @@ public class DepthShader extends DefaultShader {
           != ((attributesMask & TextureAttribute.Diffuse) == TextureAttribute.Diffuse))
         return false;
     }
-    if (renderable.meshPart.mesh == null) return false;
     final boolean skinned =
         ((renderable.meshPart.mesh.getVertexAttributes().getMask() & Usage.BoneWeight)
             == Usage.BoneWeight);

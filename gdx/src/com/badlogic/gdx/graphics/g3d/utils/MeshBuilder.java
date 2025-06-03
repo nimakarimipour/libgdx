@@ -883,17 +883,13 @@ public class MeshBuilder implements MeshPartBuilder {
 
   @Override
   public void addMesh(MeshPart meshpart) {
-    if (meshpart.mesh == null) {
-      throw new GdxRuntimeException("MeshPart.mesh must not be null");
-    }
-    if (meshpart.primitiveType != primitiveType) {
+    if (meshpart.primitiveType != primitiveType)
       throw new GdxRuntimeException("Primitive type doesn't match");
-    }
     addMesh(meshpart.mesh, meshpart.offset, meshpart.size);
   }
 
   @Override
-  public void addMesh(@Nullable Mesh mesh, int indexOffset, int numIndices) {
+  public void addMesh(Mesh mesh, int indexOffset, int numIndices) {
     if (!attributes.equals(mesh.getVertexAttributes()))
       throw new GdxRuntimeException("Vertex attributes do not match");
     if (numIndices <= 0) return; // silently ignore an empty mesh part

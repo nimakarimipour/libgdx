@@ -697,12 +697,8 @@ public class ModelBuilder {
       if (!model.materials.contains(mpm.material, true)) model.materials.add(mpm.material);
       if (!model.meshParts.contains(mpm.meshPart, true)) {
         model.meshParts.add(mpm.meshPart);
-        if (mpm.meshPart.mesh != null && !model.meshes.contains(mpm.meshPart.mesh, true)) {
-          model.meshes.add(mpm.meshPart.mesh);
-        }
-        if (mpm.meshPart.mesh != null) {
-          model.manageDisposable(mpm.meshPart.mesh);
-        }
+        if (!model.meshes.contains(mpm.meshPart.mesh, true)) model.meshes.add(mpm.meshPart.mesh);
+        model.manageDisposable(mpm.meshPart.mesh);
       }
     }
     for (final Node child : node.getChildren()) rebuildReferences(model, child);

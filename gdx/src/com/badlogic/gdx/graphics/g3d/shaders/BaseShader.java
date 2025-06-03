@@ -197,7 +197,7 @@ public abstract class BaseShader implements Shader {
 
   /** Initialize this shader, causing all registered uniforms/attributes to be fetched. */
   @Initializer
-  public void init(final ShaderProgram program, final Renderable renderable) {
+  public void init(final ShaderProgram program, @Nullable final Renderable renderable) {
     if (locations != null) throw new GdxRuntimeException("Already initialized");
     if (!program.isCompiled()) throw new GdxRuntimeException(program.getLog());
     this.program = program;
@@ -221,7 +221,7 @@ public abstract class BaseShader implements Shader {
         setters.set(i, null);
       }
     }
-    if (renderable != null && renderable.meshPart != null && renderable.meshPart.mesh != null) {
+    if (renderable != null) {
       final VertexAttributes attrs = renderable.meshPart.mesh.getVertexAttributes();
       final int c = attrs.size();
       for (int i = 0; i < c; i++) {
@@ -238,13 +238,8 @@ public abstract class BaseShader implements Shader {
     this.context = context;
     program.bind();
     currentMesh = null;
-    for (int u, i = 0; i < globalUniforms.size; ++i) {
-      u = globalUniforms.get(i);
-      Setter setter = setters.get(u);
-      if (setter != null) {
-        setter.set(this, u, null, null);
-      }
-    }
+    for (int u, i = 0; i < globalUniforms.size; ++i)
+      if (setters.get(u = globalUniforms.get(i)) != null) setters.get(u).set(this, u, null, null);
   }
 
   private final IntArray tempArray = new IntArray();
@@ -274,7 +269,7 @@ public abstract class BaseShader implements Shader {
     for (int u, i = 0; i < localUniforms.size; ++i)
       if (setters.get(u = localUniforms.get(i)) != null)
         setters.get(u).set(this, u, renderable, combinedAttributes);
-    if (renderable.meshPart.mesh != null && currentMesh != renderable.meshPart.mesh) {
+    if (currentMesh != renderable.meshPart.mesh) {
       if (currentMesh != null) currentMesh.unbind(program, tempArray.items);
       currentMesh = renderable.meshPart.mesh;
       currentMesh.bind(

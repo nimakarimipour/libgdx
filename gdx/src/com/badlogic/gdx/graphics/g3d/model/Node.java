@@ -169,13 +169,9 @@ public class Node {
       final NodePart part = parts.get(i);
       if (part.enabled) {
         final MeshPart meshPart = part.meshPart;
-        if (meshPart.mesh != null) {
-          if (transform) {
-            meshPart.mesh.extendBoundingBox(out, meshPart.offset, meshPart.size, globalTransform);
-          } else {
-            meshPart.mesh.extendBoundingBox(out, meshPart.offset, meshPart.size);
-          }
-        }
+        if (transform)
+          meshPart.mesh.extendBoundingBox(out, meshPart.offset, meshPart.size, globalTransform);
+        else meshPart.mesh.extendBoundingBox(out, meshPart.offset, meshPart.size);
       }
     }
     final int childCount = children.size;

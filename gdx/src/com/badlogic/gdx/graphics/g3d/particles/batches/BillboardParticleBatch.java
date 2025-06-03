@@ -250,9 +250,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
     renderablePool.freeAll(renderables);
     for (int i = 0, free = renderablePool.getFree(); i < free; ++i) {
       Renderable renderable = renderablePool.obtain();
-      if (renderable.meshPart != null && renderable.meshPart.mesh != null) {
-        renderable.meshPart.mesh.dispose();
-      }
+      renderable.meshPart.mesh.dispose();
     }
     renderables.clear();
   }
@@ -881,16 +879,6 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
     for (int v = 0; v < vCount; v += addedVertexCount) {
       addedVertexCount = Math.min(vCount - v, MAX_VERTICES_PER_MESH);
       Renderable renderable = renderablePool.obtain();
-
-      // Ensure that meshPart and mesh are not null
-      if (renderable.meshPart == null) {
-        renderable.meshPart = new MeshPart();
-      }
-      if (renderable.meshPart.mesh == null) {
-        renderable.meshPart.mesh =
-            new Mesh(false, MAX_VERTICES_PER_MESH, MAX_PARTICLES_PER_MESH * 6, currentAttributes);
-      }
-
       renderable.meshPart.size = (addedVertexCount / 4) * 6;
       renderable.meshPart.mesh.setVertices(
           vertices, currentVertexSize * v, currentVertexSize * addedVertexCount);
