@@ -56,10 +56,16 @@ public class Encoder {
   }
 
   public void FlushStream() throws IOException {
-    Stream.flush();
+    if (Stream != null) {
+      Stream.flush();
+    }
   }
 
   public void ShiftLow() throws IOException {
+    if (Stream == null) {
+      throw new IOException("Stream is not set");
+    }
+
     int LowHi = (int) (Low >>> 32);
     if (LowHi != 0 || Low < 0xFF000000L) {
       _position += _cacheSize;
