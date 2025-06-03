@@ -63,7 +63,7 @@ public class ParticleEffectLoader
 
   @Override
   public Array<AssetDescriptor> getDependencies(
-      String fileName, FileHandle file, ParticleEffectLoadParameter parameter) {
+      String fileName, FileHandle file, @Nullable ParticleEffectLoadParameter parameter) {
     Json json = new Json();
     ResourceData<ParticleEffect> data = json.fromJson(ResourceData.class, file);
     Array<AssetData> assets = null;
@@ -78,11 +78,6 @@ public class ParticleEffectLoader
 
     Array<AssetDescriptor> descriptors = new Array<AssetDescriptor>();
     for (AssetData<?> assetData : assets) {
-      // Add null check for assetData.filename
-      if (assetData.filename == null) {
-        throw new GdxRuntimeException(
-            "Asset filename cannot be null for asset type: " + assetData.type);
-      }
 
       // If the asset doesn't exist try to load it from loading effect directory
       if (!resolve(assetData.filename).exists()) {
