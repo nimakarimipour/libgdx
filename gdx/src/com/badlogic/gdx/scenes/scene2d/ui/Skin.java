@@ -127,9 +127,6 @@ public class Skin implements Disposable {
     for (int i = 0, n = regions.size; i < n; i++) {
       AtlasRegion region = regions.get(i);
       String name = region.name;
-      if (name == null) {
-        continue; // or handle the null case appropriately
-      }
       if (region.index != -1) {
         name += "_" + region.index;
       }
