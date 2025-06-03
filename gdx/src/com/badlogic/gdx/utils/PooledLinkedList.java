@@ -65,7 +65,7 @@ public class PooledLinkedList<T> {
     }
 
     item.prev = tail;
-    tail.next = item;
+    NullabilityUtil.castToNonnull(tail, "initialized with first item").next = item;
     tail = item;
     size++;
   }
