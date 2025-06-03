@@ -160,6 +160,9 @@ public final class DefaultTextureBinder implements TextureBinder {
   }
 
   private final int bindTextureLRU(final GLTexture texture) {
+    if (unitsLRU == null) {
+      throw new IllegalStateException("unitsLRU is not initialized");
+    }
     int i;
     for (i = 0; i < count; i++) {
       final int idx = unitsLRU[i];
