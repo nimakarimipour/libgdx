@@ -130,7 +130,7 @@ public class BitmapFont implements Disposable {
    * @param flip If true, the glyphs will be flipped for use with a perspective where 0,0 is the
    *     upper left corner.
    */
-  public BitmapFont(FileHandle fontFile, TextureRegion region, @Nullable boolean flip) {
+  public BitmapFont(FileHandle fontFile, TextureRegion region, boolean flip) {
     this(new BitmapFontData(fontFile, flip), region, true);
   }
 
@@ -149,7 +149,7 @@ public class BitmapFont implements Disposable {
    * @param flip If true, the glyphs will be flipped for use with a perspective where 0,0 is the
    *     upper left corner.
    */
-  public BitmapFont(FileHandle fontFile, @Nullable boolean flip) {
+  public BitmapFont(FileHandle fontFile, boolean flip) {
     this(new BitmapFontData(fontFile, flip), (TextureRegion) null, true);
   }
 
@@ -160,7 +160,7 @@ public class BitmapFont implements Disposable {
    * @param flip If true, the glyphs will be flipped for use with a perspective where 0,0 is the
    *     upper left corner.
    */
-  public BitmapFont(FileHandle fontFile, FileHandle imageFile, @Nullable boolean flip) {
+  public BitmapFont(FileHandle fontFile, FileHandle imageFile, boolean flip) {
     this(fontFile, imageFile, flip, true);
   }
 
@@ -615,7 +615,7 @@ public class BitmapFont implements Disposable {
     public float blankLineScale = 1;
 
     public float scaleX = 1, scaleY = 1;
-    @Nullable public boolean markupEnabled;
+    public boolean markupEnabled;
 
     /**
      * The amount to add to the glyph X position when drawing a cursor between glyphs. This field is
@@ -653,7 +653,7 @@ public class BitmapFont implements Disposable {
      */
     public BitmapFontData() {}
 
-    public BitmapFontData(FileHandle fontFile, @Nullable boolean flip) {
+    public BitmapFontData(FileHandle fontFile, boolean flip) {
       this.fontFile = fontFile;
       this.flipped = flip;
       load(fontFile, flip);
