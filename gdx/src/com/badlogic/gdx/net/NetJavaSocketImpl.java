@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import javax.annotation.Nullable;
 
 /**
  * Socket implementation using java.net.Socket.
@@ -30,7 +31,7 @@ import java.net.InetSocketAddress;
 public class NetJavaSocketImpl implements Socket {
 
   /** Our socket or null for disposed, aka closed. */
-  private java.net.Socket socket;
+  @Nullable private java.net.Socket socket;
 
   public NetJavaSocketImpl(Protocol protocol, String host, int port, SocketHints hints) {
     try {
@@ -56,7 +57,7 @@ public class NetJavaSocketImpl implements Socket {
   }
 
   private void applyHints(SocketHints hints) {
-    if (hints != null) {
+    if (socket != null && hints != null) {
       try {
         socket.setPerformancePreferences(
             hints.performancePrefConnectionTime,
@@ -86,25 +87,37 @@ public class NetJavaSocketImpl implements Socket {
 
   @Override
   public InputStream getInputStream() {
-    try {
-      return socket.getInputStream();
-    } catch (Exception e) {
-      throw new GdxRuntimeException("Error getting input stream from socket.", e);
+    if (socket != null) {
+      try {
+        return socket.getInputStream();
+      } catch (Exception e) {
+        throw new GdxRuntimeException("Error getting input stream from socket.", e);
+      }
+    } else {
+      throw new GdxRuntimeException("Socket is null, cannot get input stream.");
     }
   }
 
   @Override
   public OutputStream getOutputStream() {
-    try {
-      return socket.getOutputStream();
-    } catch (Exception e) {
-      throw new GdxRuntimeException("Error getting output stream from socket.", e);
+    if (socket != null) {
+      try {
+        return socket.getOutputStream();
+      } catch (Exception e) {
+        throw new GdxRuntimeException("Error getting output stream from socket.", e);
+      }
+    } else {
+      throw new GdxRuntimeException("Socket is null, cannot get output stream.");
     }
   }
 
   @Override
   public String getRemoteAddress() {
-    return socket.getRemoteSocketAddress().toString();
+    if (socket != null) {
+      return socket.getRemoteSocketAddress().toString();
+    } else {
+      return "Socket is null";
+    }
   }
 
   @Override
