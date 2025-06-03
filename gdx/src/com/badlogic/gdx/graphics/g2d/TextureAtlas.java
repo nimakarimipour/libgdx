@@ -161,8 +161,10 @@ public class TextureAtlas implements Disposable {
    * find the region, so the result should be cached rather than calling this method multiple times.
    */
   public @Null AtlasRegion findRegion(String name) {
-    for (int i = 0, n = regions.size; i < n; i++)
-      if (regions.get(i).name.equals(name)) return regions.get(i);
+    for (int i = 0, n = regions.size; i < n; i++) {
+      AtlasRegion region = regions.get(i);
+      if (region.name != null && region.name.equals(name)) return region;
+    }
     return null;
   }
 
@@ -171,10 +173,10 @@ public class TextureAtlas implements Disposable {
    * comparison to find the region, so the result should be cached rather than calling this method
    * multiple times.
    */
-  @Nullable
   public @Null AtlasRegion findRegion(String name, int index) {
     for (int i = 0, n = regions.size; i < n; i++) {
       AtlasRegion region = regions.get(i);
+      if (region.name == null) continue;
       if (!region.name.equals(name)) continue;
       if (region.index != index) continue;
       return region;
@@ -187,11 +189,13 @@ public class TextureAtlas implements Disposable {
    * AtlasRegion#index index}. This method uses string comparison to find the regions, so the result
    * should be cached rather than calling this method multiple times.
    */
-  public Array<AtlasRegion> findRegions(@Nullable String name) {
-    Array<AtlasRegion> matched = new Array(AtlasRegion.class);
+  public Array<AtlasRegion> findRegions(String name) {
+    Array<AtlasRegion> matched = new Array<>(AtlasRegion.class);
     for (int i = 0, n = regions.size; i < n; i++) {
       AtlasRegion region = regions.get(i);
-      if (region.name.equals(name)) matched.add(new AtlasRegion(region));
+      if (region.name != null && region.name.equals(name)) {
+        matched.add(new AtlasRegion(region));
+      }
     }
     return matched;
   }
@@ -214,10 +218,13 @@ public class TextureAtlas implements Disposable {
    * not been stripped. This method uses string comparison to find the region and constructs a new
    * sprite, so the result should be cached rather than calling this method multiple times.
    */
-  @Nullable
   public @Null Sprite createSprite(String name) {
-    for (int i = 0, n = regions.size; i < n; i++)
-      if (regions.get(i).name.equals(name)) return newSprite(regions.get(i));
+    for (int i = 0, n = regions.size; i < n; i++) {
+      AtlasRegion region = regions.get(i);
+      if (region != null && region.name != null && region.name.equals(name)) {
+        return newSprite(region);
+      }
+    }
     return null;
   }
 
@@ -228,11 +235,11 @@ public class TextureAtlas implements Disposable {
    *
    * @see #createSprite(String)
    */
-  @Nullable
   public @Null Sprite createSprite(String name, int index) {
     for (int i = 0, n = regions.size; i < n; i++) {
       AtlasRegion region = regions.get(i);
       if (region.index != index) continue;
+      if (region.name == null) return null;
       if (!region.name.equals(name)) continue;
       return newSprite(regions.get(i));
     }
@@ -247,10 +254,15 @@ public class TextureAtlas implements Disposable {
    * @see #createSprite(String)
    */
   public Array<Sprite> createSprites(String name) {
+    if (name == null) {
+      throw new IllegalArgumentException("name cannot be null");
+    }
     Array<Sprite> matched = new Array(Sprite.class);
     for (int i = 0, n = regions.size; i < n; i++) {
       AtlasRegion region = regions.get(i);
-      if (region.name.equals(name)) matched.add(newSprite(region));
+      if (region.name != null && region.name.equals(name)) {
+        matched.add(newSprite(region));
+      }
     }
     return matched;
   }
@@ -275,14 +287,15 @@ public class TextureAtlas implements Disposable {
    * and constructs a new ninepatch, so the result should be cached rather than calling this method
    * multiple times.
    */
-  @Nullable
   public @Null NinePatch createPatch(String name) {
     for (int i = 0, n = regions.size; i < n; i++) {
       AtlasRegion region = regions.get(i);
+      if (region.name == null) continue;
       if (region.name.equals(name)) {
         int[] splits = region.findValue("split");
-        if (splits == null)
+        if (splits == null) {
           throw new IllegalArgumentException("Region does not have ninepatch splits: " + name);
+        }
         NinePatch patch = new NinePatch(region, splits[0], splits[1], splits[2], splits[3]);
         int[] pads = region.findValue("pad");
         if (pads != null) patch.setPadding(pads[0], pads[1], pads[2], pads[3]);
@@ -619,7 +632,7 @@ public class TextureAtlas implements Disposable {
      * If the name ends with an underscore followed by only numbers, that part is excluded:
      * underscores denote special instructions to the texture packer.
      */
-    public String name;
+    @Nullable public String name;
 
     /**
      * The offset from the left of the original image to the left of the packed image, after
@@ -667,7 +680,7 @@ public class TextureAtlas implements Disposable {
      * Values for name/value pairs other than the fields provided on this class, each entry
      * corresponding to {@link #names}.
      */
-    public @Null int[][] values;
+    @Nullable public @Null int[][] values;
 
     public AtlasRegion(@Nullable Texture texture, int x, int y, int width, int height) {
       super(texture, x, y, width, height);
@@ -730,12 +743,17 @@ public class TextureAtlas implements Disposable {
 
     @Nullable
     public @Null int[] findValue(String name) {
-      if (names != null) {
-        for (int i = 0, n = names.length; i < n; i++) if (name.equals(names[i])) return values[i];
+      if (names != null && values != null) {
+        for (int i = 0, n = names.length; i < n; i++) {
+          if (name.equals(names[i])) {
+            return values[i];
+          }
+        }
       }
       return null;
     }
 
+    @Nullable
     public String toString() {
       return name;
     }
@@ -913,6 +931,7 @@ public class TextureAtlas implements Disposable {
       return region;
     }
 
+    @Nullable
     public String toString() {
       return region.toString();
     }
