@@ -83,6 +83,7 @@ public class AtlasTmxMapLoader
         this.atlasName = atlasName;
       }
 
+      @Nullable
       @Override
       public TextureAtlas getAtlas() {
         return assetManager.get(atlasName, TextureAtlas.class);

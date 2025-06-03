@@ -169,7 +169,8 @@ public class ParticleEffect implements Disposable {
     load(effectFile, atlas, null);
   }
 
-  public void load(FileHandle effectFile, TextureAtlas atlas, @Nullable String atlasPrefix) {
+  public void load(
+      FileHandle effectFile, @Nullable TextureAtlas atlas, @Nullable String atlasPrefix) {
     loadEmitters(effectFile);
     loadEmitterImages(atlas, atlasPrefix);
   }

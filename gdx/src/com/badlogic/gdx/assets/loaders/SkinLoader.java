@@ -90,7 +90,7 @@ public class SkinLoader extends AsynchronousAssetLoader<Skin, SkinLoader.SkinPar
    * @param atlas The TextureAtlas that the skin will use.
    * @return A new Skin (or subclass of Skin) instance based on the provided TextureAtlas.
    */
-  protected Skin newSkin(TextureAtlas atlas) {
+  protected Skin newSkin(@Nullable TextureAtlas atlas) {
     return new Skin(atlas);
   }
 
