@@ -532,7 +532,6 @@ public class Skin implements Disposable {
         new Json() {
           private static final String parentFieldName = "parent";
 
-          @Nullable
           public <T> T readValue(
               @Nullable Class<T> type, @Nullable Class elementType, @Nullable JsonValue jsonData) {
             // If the JSON is a string but the type is not, look up the actual value by name.

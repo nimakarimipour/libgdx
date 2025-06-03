@@ -903,7 +903,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, Reader reader) {
     return readValue(type, null, new JsonReader().parse(reader));
   }
@@ -913,7 +912,6 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, Class elementType, Reader reader) {
     return readValue(type, elementType, new JsonReader().parse(reader));
   }
@@ -922,7 +920,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, InputStream input) {
     return readValue(type, null, new JsonReader().parse(input));
   }
@@ -932,7 +929,6 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, Class elementType, InputStream input) {
     return readValue(type, elementType, new JsonReader().parse(input));
   }
@@ -941,7 +937,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, FileHandle file) {
     try {
       return readValue(type, null, new JsonReader().parse(file));
@@ -955,7 +950,6 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, Class elementType, FileHandle file) {
     try {
       return readValue(type, elementType, new JsonReader().parse(file));
@@ -968,7 +962,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, char[] data, int offset, int length) {
     return readValue(type, null, new JsonReader().parse(data, offset, length));
   }
@@ -978,7 +971,6 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(
       Class<T> type, Class elementType, char[] data, int offset, int length) {
     return readValue(type, elementType, new JsonReader().parse(data, offset, length));
@@ -988,7 +980,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, String json) {
     return readValue(type, null, new JsonReader().parse(json));
   }
@@ -997,7 +988,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T fromJson(Class<T> type, Class elementType, String json) {
     return readValue(type, elementType, new JsonReader().parse(json));
   }
@@ -1125,7 +1115,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T readValue(String name, @Nullable @Null Class<T> type, JsonValue jsonMap) {
     return readValue(type, null, jsonMap.get(name));
   }
@@ -1134,7 +1123,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T readValue(
       String name, @Null Class<T> type, @Nullable T defaultValue, JsonValue jsonMap) {
     JsonValue jsonValue = jsonMap.get(name);
@@ -1147,7 +1135,6 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T readValue(
       String name, @Null Class<T> type, @Null Class elementType, JsonValue jsonMap) {
     return readValue(type, elementType, jsonMap.get(name));
@@ -1173,7 +1160,6 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T readValue(
       @Null Class<T> type, @Null Class elementType, T defaultValue, @Nullable JsonValue jsonData) {
     if (jsonData == null) return defaultValue;
@@ -1184,7 +1170,6 @@ public class Json {
    * @param type May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T readValue(@Null Class<T> type, JsonValue jsonData) {
     return readValue(type, null, jsonData);
   }
@@ -1194,7 +1179,6 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  @Nullable
   public @Null <T> T readValue(
       @Nullable @Null Class<T> type,
       @Nullable @Null Class elementType,

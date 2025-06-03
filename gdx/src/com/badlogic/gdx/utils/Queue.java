@@ -81,7 +81,7 @@ public class Queue<T> implements Iterable<T> {
    *
    * @param object can be null
    */
-  public void addLast(@Nullable @Null T object) {
+  public void addLast(@Null T object) {
     T[] values = this.values;
 
     if (size == values.length) {

@@ -181,7 +181,7 @@ public final class Field {
   }
 
   /** Sets the value of the field on the supplied object. */
-  public void set(Object obj, @Nullable Object value) throws ReflectionException {
+  public void set(Object obj, Object value) throws ReflectionException {
     try {
       field.set(obj, value);
     } catch (IllegalArgumentException e) {
