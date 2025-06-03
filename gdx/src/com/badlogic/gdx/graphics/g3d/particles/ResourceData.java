@@ -93,10 +93,12 @@ public class ResourceData<T> implements Json.Serializable {
       data.put(key, value);
     }
 
-    @Nullable
     public AssetDescriptor loadAsset() {
       if (loadIndex == assets.size) return null;
       AssetData data = (AssetData) resources.sharedAssets.get(assets.get(loadIndex++));
+      if (data == null || data.filename == null || data.type == null) {
+        return null;
+      }
       return new AssetDescriptor(data.filename, data.type);
     }
 
@@ -119,7 +121,7 @@ public class ResourceData<T> implements Json.Serializable {
 
   /** This class contains all the information related to a given asset */
   public static class AssetData<T> implements Json.Serializable {
-    public String filename;
+    @Nullable public String filename;
     public Class<T> type;
 
     public AssetData() {}
@@ -131,7 +133,11 @@ public class ResourceData<T> implements Json.Serializable {
 
     @Override
     public void write(Json json) {
-      json.writeValue("filename", filename);
+      if (filename != null) {
+        json.writeValue("filename", filename);
+      } else {
+        throw new IllegalStateException("filename cannot be null");
+      }
       json.writeValue("type", type.getName());
     }
 
@@ -176,10 +182,13 @@ public class ResourceData<T> implements Json.Serializable {
     this.resource = resource;
   }
 
-  <K> int getAssetData(@Nullable String filename, Class<K> type) {
+  <K> int getAssetData(String filename, Class<K> type) {
     int i = 0;
     for (AssetData data : sharedAssets) {
-      if (data.filename.equals(filename) && data.type.equals(type)) {
+      if (data.filename != null
+          && data.filename.equals(filename)
+          && data.type != null
+          && data.type.equals(type)) {
         return i;
       }
       ++i;
@@ -190,7 +199,9 @@ public class ResourceData<T> implements Json.Serializable {
   public Array<AssetDescriptor> getAssetDescriptors() {
     Array<AssetDescriptor> descriptors = new Array<AssetDescriptor>();
     for (AssetData data : sharedAssets) {
-      descriptors.add(new AssetDescriptor<T>(data.filename, data.type));
+      if (data.filename != null && data.type != null) {
+        descriptors.add(new AssetDescriptor<T>(data.filename, data.type));
+      }
     }
     return descriptors;
   }
