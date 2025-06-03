@@ -15,6 +15,7 @@ package com.badlogic.gdx.utils;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import javax.annotation.Nullable;
 
 /**
  * A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when
@@ -63,7 +64,7 @@ class TimSort<T> {
   private T[] a;
 
   /** The comparator for this sort. */
-  private Comparator<? super T> c;
+  @Nullable private Comparator<? super T> c;
 
   /**
    * When we get into galloping mode, we stay there until both runs win less often than MIN_GALLOP
@@ -483,19 +484,21 @@ class TimSort<T> {
      * Find where the first element of run2 goes in run1. Prior elements in run1 can be ignored (because they're already in
      * place).
      */
-    int k = gallopRight(a[base2], a, base1, len1, 0, c);
-    if (DEBUG) assert k >= 0;
-    base1 += k;
-    len1 -= k;
-    if (len1 == 0) return;
+    if (c != null) {
+      int k = gallopRight(a[base2], a, base1, len1, 0, c);
+      if (DEBUG) assert k >= 0;
+      base1 += k;
+      len1 -= k;
+      if (len1 == 0) return;
 
-    /*
-     * Find where the last element of run1 goes in run2. Subsequent elements in run2 can be ignored (because they're already in
-     * place).
-     */
-    len2 = gallopLeft(a[base1 + len1 - 1], a, base2, len2, len2 - 1, c);
-    if (DEBUG) assert len2 >= 0;
-    if (len2 == 0) return;
+      /*
+       * Find where the last element of run1 goes in run2. Subsequent elements in run2 can be ignored (because they're already
+       * in place).
+       */
+      len2 = gallopLeft(a[base1 + len1 - 1], a, base2, len2, len2 - 1, c);
+      if (DEBUG) assert len2 >= 0;
+      if (len2 == 0) return;
+    }
 
     // Merge remaining runs, using tmp array with min(len1, len2) elements
     if (len1 <= len2) mergeLo(base1, len1, base2, len2);
@@ -519,7 +522,7 @@ class TimSort<T> {
    *     follow it.
    */
   private static <T> int gallopLeft(
-      T key, T[] a, int base, int len, int hint, Comparator<? super T> c) {
+      T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
     if (DEBUG) assert len > 0 && hint >= 0 && hint < len;
     int lastOfs = 0;
     int ofs = 1;
@@ -584,7 +587,7 @@ class TimSort<T> {
    * @return the int k, 0 <= k <= n such that a[b + k - 1] <= key < a[b + k]
    */
   private static <T> int gallopRight(
-      T key, T[] a, int base, int len, int hint, Comparator<? super T> c) {
+      T key, T[] a, int base, int len, int hint, @Nullable Comparator<? super T> c) {
     if (DEBUG) assert len > 0 && hint >= 0 && hint < len;
 
     int ofs = 1;
@@ -674,6 +677,9 @@ class TimSort<T> {
     }
 
     Comparator<? super T> c = this.c; // Use local variable for performance
+    if (c == null) {
+      throw new IllegalStateException("Comparator is null");
+    }
     int minGallop = this.minGallop; // " " " " "
     outer:
     while (true) {
@@ -782,6 +788,12 @@ class TimSort<T> {
     }
 
     Comparator<? super T> c = this.c; // Use local variable for performance
+
+    // Check for null before use
+    if (c == null) {
+      throw new NullPointerException("Comparator is null");
+    }
+
     int minGallop = this.minGallop; // " " " " "
     outer:
     while (true) {
