@@ -242,6 +242,7 @@ public class JsonValue implements Iterable<JsonValue> {
    * @return May be null if this value is null.
    * @throws IllegalStateException if this an array or object.
    */
+  @Nullable
   public @Null String asString() {
     switch (type) {
       case stringValue:
@@ -806,6 +807,7 @@ public class JsonValue implements Iterable<JsonValue> {
    *
    * @throws IllegalArgumentException if the child was not found.
    */
+  @Nullable
   public String getString(String name) {
     JsonValue child = get(name);
     if (child == null) throw new IllegalArgumentException("Named value not found: " + name);
@@ -905,6 +907,7 @@ public class JsonValue implements Iterable<JsonValue> {
    *
    * @throws IllegalArgumentException if the child was not found.
    */
+  @Nullable
   public String getString(int index) {
     JsonValue child = get(index);
     if (child == null) throw new IllegalArgumentException("Indexed value not found: " + name);
@@ -1195,6 +1198,7 @@ public class JsonValue implements Iterable<JsonValue> {
     type = ValueType.booleanValue;
   }
 
+  @Nullable
   public String toJson(OutputType outputType) {
     if (isValue()) return asString();
     StringBuilder buffer = new StringBuilder(512);
@@ -1254,6 +1258,7 @@ public class JsonValue implements Iterable<JsonValue> {
     return new JsonIterator();
   }
 
+  @Nullable
   public String toString() {
     if (isValue()) return name == null ? asString() : name + ": " + asString();
     return (name == null ? "" : name + ": ") + prettyPrint(OutputType.minimal, 0);

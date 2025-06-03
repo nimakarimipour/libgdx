@@ -1179,10 +1179,7 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
-  public @Null <T> T readValue(
-      @Nullable @Null Class<T> type,
-      @Nullable @Null Class elementType,
-      @Nullable JsonValue jsonData) {
+  public @Null <T> T readValue(@Null Class<T> type, @Null Class elementType, JsonValue jsonData) {
     if (jsonData == null) return null;
 
     if (jsonData.isObject()) {
@@ -1204,7 +1201,6 @@ public class Json {
       }
 
       if (typeName != null && ClassReflection.isAssignableFrom(Collection.class, type)) {
-        // JSON object wrapper to specify type.
         jsonData = jsonData.get("items");
         if (jsonData == null)
           throw new SerializationException(
@@ -1233,7 +1229,6 @@ public class Json {
           return (T) object;
         }
 
-        // JSON object special cases.
         if (object instanceof ObjectMap) {
           ObjectMap result = (ObjectMap) object;
           for (JsonValue child = jsonData.child; child != null; child = child.next)
@@ -1301,8 +1296,6 @@ public class Json {
       if (serializer != null) return (T) serializer.read(this, jsonData, type);
 
       if (ClassReflection.isAssignableFrom(Serializable.class, type)) {
-        // A Serializable may be read as an array, string, etc, even though it will be written as an
-        // object.
         Object object = newInstance(type);
         ((Serializable) object).read(this, jsonData);
         return (T) object;
@@ -1310,7 +1303,6 @@ public class Json {
     }
 
     if (jsonData.isArray()) {
-      // JSON array special cases.
       if (type == null || type == Object.class) type = (Class<T>) Array.class;
       if (ClassReflection.isAssignableFrom(Array.class, type)) {
         Array result = type == Array.class ? new Array() : (Array) newInstance(type);
@@ -1385,7 +1377,8 @@ public class Json {
         Enum[] constants = (Enum[]) type.getEnumConstants();
         for (int i = 0, n = constants.length; i < n; i++) {
           Enum e = constants[i];
-          if (string.equals(convertToString(e))) return (T) e;
+          if (NullabilityUtil.castToNonnull(string, "unlikely to be null")
+              .equals(convertToString(e))) return (T) e;
         }
       }
       if (type == CharSequence.class) return (T) string;
