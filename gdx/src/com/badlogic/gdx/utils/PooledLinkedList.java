@@ -158,7 +158,7 @@ public class PooledLinkedList<T> {
     }
 
     if (c == tail) {
-      p.next = null;
+      NullabilityUtil.castToNonnull(p, "c is tail node").next = null;
       tail = p;
       return;
     }
