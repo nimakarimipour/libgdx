@@ -296,7 +296,7 @@ public class Encoder {
   ;
 
   Optimal[] _optimum = new Optimal[kNumOpts];
-  @Nullable com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
+  com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
   com.badlogic.gdx.utils.compression.rangecoder.Encoder _rangeEncoder =
       new com.badlogic.gdx.utils.compression.rangecoder.Encoder();
 
@@ -410,24 +410,22 @@ public class Encoder {
 
   int ReadMatchDistances() throws java.io.IOException {
     int lenRes = 0;
-    if (_matchFinder != null) {
-      _numDistancePairs = _matchFinder.GetMatches(_matchDistances);
-      if (_numDistancePairs > 0) {
-        lenRes = _matchDistances[_numDistancePairs - 2];
-        if (lenRes == _numFastBytes)
-          lenRes +=
-              _matchFinder.GetMatchLen(
-                  (int) lenRes - 1,
-                  _matchDistances[_numDistancePairs - 1],
-                  Base.kMatchMaxLen - lenRes);
-      }
+    _numDistancePairs = _matchFinder.GetMatches(_matchDistances);
+    if (_numDistancePairs > 0) {
+      lenRes = _matchDistances[_numDistancePairs - 2];
+      if (lenRes == _numFastBytes)
+        lenRes +=
+            _matchFinder.GetMatchLen(
+                (int) lenRes - 1,
+                _matchDistances[_numDistancePairs - 1],
+                Base.kMatchMaxLen - lenRes);
     }
     _additionalOffset++;
     return lenRes;
   }
 
   void MovePos(int num) throws java.io.IOException {
-    if (num > 0 && _matchFinder != null) {
+    if (num > 0) {
       _matchFinder.Skip(num);
       _additionalOffset += num;
     }
@@ -528,9 +526,6 @@ public class Encoder {
     }
     numDistancePairs = _numDistancePairs;
 
-    if (_matchFinder == null) {
-      throw new IllegalStateException("_matchFinder is not initialized.");
-    }
     int numAvailableBytes = _matchFinder.GetNumAvailableBytes() + 1;
     if (numAvailableBytes < 2) {
       backRes = -1;
@@ -1005,7 +1000,7 @@ public class Encoder {
 
     long progressPosValuePrev = nowPos64;
     if (nowPos64 == 0) {
-      if (_matchFinder != null && _matchFinder.GetNumAvailableBytes() == 0) {
+      if (_matchFinder.GetNumAvailableBytes() == 0) {
         Flush((int) nowPos64);
         return;
       }
@@ -1020,7 +1015,7 @@ public class Encoder {
       _additionalOffset--;
       nowPos64++;
     }
-    if (_matchFinder != null && _matchFinder.GetNumAvailableBytes() == 0) {
+    if (_matchFinder.GetNumAvailableBytes() == 0) {
       Flush((int) nowPos64);
       return;
     }
@@ -1108,7 +1103,7 @@ public class Encoder {
         if (_alignPriceCount >= Base.kAlignTableSize) FillAlignPrices();
         inSize[0] = nowPos64;
         outSize[0] = _rangeEncoder.GetProcessedSizeAdd();
-        if (_matchFinder != null && _matchFinder.GetNumAvailableBytes() == 0) {
+        if (_matchFinder.GetNumAvailableBytes() == 0) {
           Flush((int) nowPos64);
           return;
         }
