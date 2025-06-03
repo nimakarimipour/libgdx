@@ -54,7 +54,7 @@ public abstract class ParticleSorter {
 
   /** This class will sort all the particles using the distance from camera. */
   public static class Distance extends ParticleSorter {
-    private float[] distances;
+    @Nullable private float[] distances;
     private int[] particleIndices, particleOffsets;
     private int currentSize = 0;
 
@@ -70,6 +70,7 @@ public abstract class ParticleSorter {
 
     @Override
     public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
+      ensureCapacityIfNeeded(renderData); // Ensure capacity and initialization
       float[] val = camera.view.val;
       float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
       int count = 0, i = 0;
@@ -94,20 +95,30 @@ public abstract class ParticleSorter {
       return particleOffsets;
     }
 
+    private <T extends ParticleControllerRenderData> void ensureCapacityIfNeeded(
+        Array<T> renderData) {
+      int totalSize = 0;
+      for (ParticleControllerRenderData data : renderData) {
+        totalSize += data.controller.particles.size;
+      }
+      ensureCapacity(totalSize);
+    }
+
     public void qsort(int si, int ei) {
-      // base case
       if (si < ei) {
         float tmp;
         int tmpIndex, particlesPivotIndex;
-        // insertion
         if (ei - si <= 8) {
           for (int i = si; i <= ei; i++)
-            for (int j = i; j > si && distances[j - 1] > distances[j]; j--) {
+            for (int j = i;
+                j > si
+                    && NullabilityUtil.castToNonnull(distances, "assumed to be initialized")[j - 1]
+                        > NullabilityUtil.castToNonnull(distances, "assumed to be initialized")[j];
+                j--) {
               tmp = distances[j];
               distances[j] = distances[j - 1];
               distances[j - 1] = tmp;
 
-              // Swap indices
               tmpIndex = particleIndices[j];
               particleIndices[j] = particleIndices[j - 1];
               particleIndices[j - 1] = tmpIndex;
@@ -115,21 +126,17 @@ public abstract class ParticleSorter {
           return;
         }
 
-        // Quick
         float pivot = distances[si];
         int i = si + 1;
         particlesPivotIndex = particleIndices[si];
 
-        // partition array
         for (int j = si + 1; j <= ei; j++) {
           if (pivot > distances[j]) {
             if (j > i) {
-              // Swap distances
               tmp = distances[j];
               distances[j] = distances[i];
               distances[i] = tmp;
 
-              // Swap indices
               tmpIndex = particleIndices[j];
               particleIndices[j] = particleIndices[i];
               particleIndices[i] = tmpIndex;
@@ -138,13 +145,11 @@ public abstract class ParticleSorter {
           }
         }
 
-        // put pivot in right position
         distances[si] = distances[i - 1];
         distances[i - 1] = pivot;
         particleIndices[si] = particleIndices[i - 1];
         particleIndices[i - 1] = particlesPivotIndex;
 
-        // call qsort on right and left sides of pivot
         qsort(si, i - 2);
         qsort(i, ei);
       }
