@@ -773,7 +773,13 @@ public class DefaultShader extends BaseShader {
     this.shadowMap = lighting && renderable.environment.shadowMap != null;
     this.renderable = renderable;
     attributesMask = attributes.getMask() | optionalAttributes;
-    vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked();
+
+    // Check for null mesh before dereferencing to avoid NullPointerException
+    if (renderable.meshPart.mesh != null) {
+      vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked();
+    } else {
+      throw new GdxRuntimeException("Mesh in Renderable is null");
+    }
 
     this.directionalLights =
         new DirectionalLight
@@ -906,34 +912,40 @@ public class DefaultShader extends BaseShader {
     final Attributes attributes = combineAttributes(renderable);
     String prefix = "";
     final long attributesMask = attributes.getMask();
-    final long vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMask();
-    if (and(vertexMask, Usage.Position)) prefix += "#define positionFlag\n";
-    if (or(vertexMask, Usage.ColorUnpacked | Usage.ColorPacked)) prefix += "#define colorFlag\n";
-    if (and(vertexMask, Usage.BiNormal)) prefix += "#define binormalFlag\n";
-    if (and(vertexMask, Usage.Tangent)) prefix += "#define tangentFlag\n";
-    if (and(vertexMask, Usage.Normal)) prefix += "#define normalFlag\n";
-    if (and(vertexMask, Usage.Normal) || and(vertexMask, Usage.Tangent | Usage.BiNormal)) {
-      if (renderable.environment != null) {
-        prefix += "#define lightingFlag\n";
-        prefix += "#define ambientCubemapFlag\n";
-        prefix += "#define numDirectionalLights " + config.numDirectionalLights + "\n";
-        prefix += "#define numPointLights " + config.numPointLights + "\n";
-        prefix += "#define numSpotLights " + config.numSpotLights + "\n";
-        if (attributes.has(ColorAttribute.Fog)) {
-          prefix += "#define fogFlag\n";
+
+    // Check if the mesh is not null before accessing it
+    if (renderable.meshPart.mesh != null) {
+      final long vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMask();
+
+      if (and(vertexMask, Usage.Position)) prefix += "#define positionFlag\n";
+      if (or(vertexMask, Usage.ColorUnpacked | Usage.ColorPacked)) prefix += "#define colorFlag\n";
+      if (and(vertexMask, Usage.BiNormal)) prefix += "#define binormalFlag\n";
+      if (and(vertexMask, Usage.Tangent)) prefix += "#define tangentFlag\n";
+      if (and(vertexMask, Usage.Normal)) prefix += "#define normalFlag\n";
+      if (and(vertexMask, Usage.Normal) || and(vertexMask, Usage.Tangent | Usage.BiNormal)) {
+        if (renderable.environment != null) {
+          prefix += "#define lightingFlag\n";
+          prefix += "#define ambientCubemapFlag\n";
+          prefix += "#define numDirectionalLights " + config.numDirectionalLights + "\n";
+          prefix += "#define numPointLights " + config.numPointLights + "\n";
+          prefix += "#define numSpotLights " + config.numSpotLights + "\n";
+          if (attributes.has(ColorAttribute.Fog)) {
+            prefix += "#define fogFlag\n";
+          }
+          if (renderable.environment.shadowMap != null) prefix += "#define shadowMapFlag\n";
+          if (attributes.has(CubemapAttribute.EnvironmentMap))
+            prefix += "#define environmentCubemapFlag\n";
         }
-        if (renderable.environment.shadowMap != null) prefix += "#define shadowMapFlag\n";
-        if (attributes.has(CubemapAttribute.EnvironmentMap))
-          prefix += "#define environmentCubemapFlag\n";
+      }
+      final int n = renderable.meshPart.mesh.getVertexAttributes().size();
+      for (int i = 0; i < n; i++) {
+        final VertexAttribute attr = renderable.meshPart.mesh.getVertexAttributes().get(i);
+        if (attr.usage == Usage.BoneWeight) prefix += "#define boneWeight" + attr.unit + "Flag\n";
+        else if (attr.usage == Usage.TextureCoordinates)
+          prefix += "#define texCoord" + attr.unit + "Flag\n";
       }
     }
-    final int n = renderable.meshPart.mesh.getVertexAttributes().size();
-    for (int i = 0; i < n; i++) {
-      final VertexAttribute attr = renderable.meshPart.mesh.getVertexAttributes().get(i);
-      if (attr.usage == Usage.BoneWeight) prefix += "#define boneWeight" + attr.unit + "Flag\n";
-      else if (attr.usage == Usage.TextureCoordinates)
-        prefix += "#define texCoord" + attr.unit + "Flag\n";
-    }
+
     if ((attributesMask & BlendingAttribute.Type) == BlendingAttribute.Type)
       prefix += "#define " + BlendingAttribute.Alias + "Flag\n";
     if ((attributesMask & TextureAttribute.Diffuse) == TextureAttribute.Diffuse) {

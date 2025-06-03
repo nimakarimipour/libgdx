@@ -67,7 +67,7 @@ public class MeshPart {
   public int size;
 
   /** The Mesh the part references, also stored in {@link Model} * */
-  public Mesh mesh;
+  @Nullable public Mesh mesh;
 
   /**
    * The offset to the center of the bounding box of the shape, only valid after the call to {@link
@@ -171,6 +171,9 @@ public class MeshPart {
    * rendering. It calculates the untransformed (not moved, not scaled, not rotated) values.
    */
   public void update() {
+    if (mesh == null) {
+      throw new NullPointerException("Mesh is null");
+    }
     mesh.calculateBoundingBox(bounds, offset, size);
     bounds.getCenter(center);
     bounds.getDimensions(halfExtents).scl(0.5f);
@@ -211,6 +214,9 @@ public class MeshPart {
    * @param autoBind overrides the autoBind member of the Mesh
    */
   public void render(ShaderProgram shader, boolean autoBind) {
+    if (mesh == null) {
+      throw new IllegalStateException("Mesh must not be null");
+    }
     mesh.render(shader, primitiveType, offset, size, autoBind);
   }
 
@@ -221,6 +227,10 @@ public class MeshPart {
    * @param shader the shader to be used
    */
   public void render(ShaderProgram shader) {
-    mesh.render(shader, primitiveType, offset, size);
+    if (mesh != null) {
+      mesh.render(shader, primitiveType, offset, size);
+    } else {
+      throw new NullPointerException("Mesh is null");
+    }
   }
 }

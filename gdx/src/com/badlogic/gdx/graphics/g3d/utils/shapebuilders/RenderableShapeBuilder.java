@@ -124,6 +124,12 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
       Color normalColor,
       Color tangentColor,
       Color binormalColor) {
+
+    if (renderable == null || renderable.meshPart.mesh == null) {
+      // You can throw an exception or log this case, depending on how you want to handle it
+      return;
+    }
+
     Mesh mesh = renderable.meshPart.mesh;
 
     // Position

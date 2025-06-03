@@ -195,6 +195,9 @@ public class PointSpriteParticleBatch
       }
     }
 
+    if (renderable.meshPart.mesh == null) {
+      renderable.meshPart.mesh = new Mesh(false, bufferedParticlesCount, 0, CPU_ATTRIBUTES);
+    }
     renderable.meshPart.size = bufferedParticlesCount;
     renderable.meshPart.mesh.setVertices(vertices, 0, bufferedParticlesCount * CPU_VERTEX_SIZE);
     renderable.meshPart.update();
