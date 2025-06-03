@@ -199,7 +199,7 @@ public abstract class RegionInfluencer extends Influencer {
       imageName = aspectTextureRegion.imageName;
     }
 
-    public void updateUV(@Nullable TextureAtlas atlas) {
+    public void updateUV(TextureAtlas atlas) {
       if (imageName == null) {
         return;
       }
