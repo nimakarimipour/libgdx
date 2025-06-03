@@ -1,0 +1,23 @@
+====================
+Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java:248
+    if (actor == this.actor) this.actor = null;
+Log:
+---NullAway.lambda$resolveRemainingErrors$17---
+==============================
+---NullAway.lambda$resolveRemainingErrors$17---
+26 : TOP LEVEL CALL TO FIX ERROR: Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java:248
+    if (actor == this.actor) this.actor = null;
+---AdvancedNullAwayCodeFix.fix---
+Fixing error: Type='ASSIGN_FIELD_NULLABLE', message='assigning @Nullable expression to @NonNull field'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java:248
+    if (actor == this.actor) this.actor = null;
+---AdvancedNullAwayCodeFix.resolveAssignFieldNullableError---
+Resolving assign field nullable error.
+---AdvancedNullAwayCodeFix.resolveAssignFieldNullableError---
+Making the field nullable.
+---AdvancedNullAwayCodeFix.resolveAssignFieldNullableError---
+Adding all triggered annotations.
+---AdvancedNullAwayCodeFix.resolveAssignFieldNullableError---
+Resolving unresolvable errors.
