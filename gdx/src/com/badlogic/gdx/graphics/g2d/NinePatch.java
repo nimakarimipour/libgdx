@@ -208,7 +208,7 @@ public class NinePatch {
     this(ninePatch, ninePatch.color);
   }
 
-  public NinePatch(NinePatch ninePatch, Color color) {
+  public NinePatch(@Nullable NinePatch ninePatch, Color color) {
     texture = ninePatch.texture;
 
     bottomLeft = ninePatch.bottomLeft;
