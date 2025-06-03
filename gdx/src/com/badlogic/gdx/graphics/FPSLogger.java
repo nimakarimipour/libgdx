@@ -46,7 +46,7 @@ public class FPSLogger {
     final long nanoTime = TimeUtils.nanoTime();
     if (nanoTime - startTime > 1000000000) /* 1,000,000,000ns == one second */ {
       final int fps = Gdx.graphics.getFramesPerSecond();
-      if (fps < bound) {
+      if (fps < bound && Gdx.app != null) {
         Gdx.app.log("FPSLogger", "fps: " + fps);
         startTime = nanoTime;
       }

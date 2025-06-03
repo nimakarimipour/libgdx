@@ -109,12 +109,15 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
     return loadModelData(file, parameters != null && parameters.flipV);
   }
 
-  @Nullable
   protected ModelData loadModelData(FileHandle file, boolean flipV) {
-    if (logWarning)
+    if (Gdx.app != null && logWarning) {
       Gdx.app.error(
           "ObjLoader",
           "Wavefront (OBJ) is not fully supported, consult the documentation for more information");
+    }
+    if (Gdx.app == null) {
+      return null;
+    }
     String line;
     String[] tokens;
     char firstChar;

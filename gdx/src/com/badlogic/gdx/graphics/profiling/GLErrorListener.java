@@ -58,12 +58,14 @@ public interface GLErrorListener {
           } catch (Exception ignored) {
           }
 
-          if (place != null) {
-            Gdx.app.error("GLProfiler", "Error " + resolveErrorNumber(error) + " from " + place);
-          } else {
-            Gdx.app.error(
-                "GLProfiler", "Error " + resolveErrorNumber(error) + " at: ", new Exception());
-            // This will capture current stack trace for logging, if possible
+          if (Gdx.app != null) { // Ensure Gdx.app is not null
+            if (place != null) {
+              Gdx.app.error("GLProfiler", "Error " + resolveErrorNumber(error) + " from " + place);
+            } else {
+              Gdx.app.error(
+                  "GLProfiler", "Error " + resolveErrorNumber(error) + " at: ", new Exception());
+              // This will capture the current stack trace for logging, if possible
+            }
           }
         }
       };

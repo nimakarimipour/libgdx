@@ -83,6 +83,10 @@ public class PerformanceCounter {
    * @param delta The time since the last call to this method
    */
   public void tick(final float delta) {
+    if (Gdx.app == null) {
+      return;
+    }
+
     if (!valid) {
       Gdx.app.error(
           "PerformanceCounter", "Invalid data, check if you called PerformanceCounter#stop()");

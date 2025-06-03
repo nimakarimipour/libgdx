@@ -391,6 +391,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
    */
   protected Drawable getExpandIcon(N node, float iconX) {
     if (node == overNode //
+        && Gdx.app != null
         && Gdx.app.getType() == ApplicationType.Desktop //
         && (!selection.getMultiple() || (!UIUtils.ctrl() && !UIUtils.shift())) //
     ) {

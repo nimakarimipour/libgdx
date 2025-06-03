@@ -114,7 +114,11 @@ public class Cubemap extends GLTexture {
     super(GL20.GL_TEXTURE_CUBE_MAP);
     this.data = data;
     load(data);
-    if (data.isManaged()) addManagedCubemap(Gdx.app, this);
+    if (data.isManaged()) {
+      if (Gdx.app != null) {
+        addManagedCubemap(Gdx.app, this);
+      }
+    }
   }
 
   /**

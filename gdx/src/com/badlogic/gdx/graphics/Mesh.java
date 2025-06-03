@@ -90,7 +90,9 @@ public class Mesh implements Disposable {
     this.indices = indices;
     this.isVertexArray = isVertexArray;
 
-    addManagedMesh(Gdx.app, this);
+    if (Gdx.app != null) {
+      addManagedMesh(Gdx.app, this);
+    }
   }
 
   /**
@@ -107,7 +109,9 @@ public class Mesh implements Disposable {
     indices = new IndexBufferObject(isStatic, maxIndices);
     isVertexArray = false;
 
-    addManagedMesh(Gdx.app, this);
+    if (Gdx.app != null) {
+      addManagedMesh(Gdx.app, this);
+    }
   }
 
   /**
@@ -124,7 +128,9 @@ public class Mesh implements Disposable {
     indices = new IndexBufferObject(isStatic, maxIndices);
     isVertexArray = false;
 
-    addManagedMesh(Gdx.app, this);
+    if (Gdx.app != null) {
+      addManagedMesh(Gdx.app, this);
+    }
   }
 
   /**
@@ -151,7 +157,9 @@ public class Mesh implements Disposable {
     indices = new IndexBufferObject(staticIndices, maxIndices);
     isVertexArray = false;
 
-    addManagedMesh(Gdx.app, this);
+    if (Gdx.app != null) {
+      addManagedMesh(Gdx.app, this);
+    }
   }
 
   private VertexData makeVertexBuffer(
@@ -212,7 +220,7 @@ public class Mesh implements Disposable {
         break;
       case VertexBufferObjectWithVAO:
         vertices = new VertexBufferObjectWithVAO(isStatic, maxVertices, attributes);
-        indices = new IndexBufferObjectSubData(isStatic, maxIndices);
+        indices = new VertexBufferObjectSubData(isStatic, maxIndices);
         isVertexArray = false;
         break;
       case VertexArray:
@@ -223,7 +231,9 @@ public class Mesh implements Disposable {
         break;
     }
 
-    addManagedMesh(Gdx.app, this);
+    if (Gdx.app != null) {
+      addManagedMesh(Gdx.app, this);
+    }
   }
 
   public Mesh enableInstancedRendering(

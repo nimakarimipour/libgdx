@@ -263,18 +263,20 @@ public class Pixmap implements Disposable {
           @Override
           public void handleHttpResponse(Net.HttpResponse httpResponse) {
             final byte[] result = httpResponse.getResult();
-            Gdx.app.postRunnable(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    try {
-                      Pixmap pixmap = new Pixmap(result, 0, result.length);
-                      responseListener.downloadComplete(pixmap);
-                    } catch (Throwable t) {
-                      failed(t);
+            if (Gdx.app != null) {
+              Gdx.app.postRunnable(
+                  new Runnable() {
+                    @Override
+                    public void run() {
+                      try {
+                        Pixmap pixmap = new Pixmap(result, 0, result.length);
+                        responseListener.downloadComplete(pixmap);
+                      } catch (Throwable t) {
+                        failed(t);
+                      }
                     }
-                  }
-                });
+                  });
+            }
           }
 
           @Override

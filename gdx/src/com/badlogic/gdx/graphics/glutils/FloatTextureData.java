@@ -83,9 +83,10 @@ public class FloatTextureData implements TextureData {
 
   @Override
   public void consumeCustomData(int target) {
-    if (Gdx.app.getType() == ApplicationType.Android
-        || Gdx.app.getType() == ApplicationType.iOS
-        || Gdx.app.getType() == ApplicationType.WebGL) {
+    if (Gdx.app != null
+        && (Gdx.app.getType() == ApplicationType.Android
+            || Gdx.app.getType() == ApplicationType.iOS
+            || Gdx.app.getType() == ApplicationType.WebGL)) {
 
       if (!Gdx.graphics.supportsExtension("OES_texture_float"))
         throw new GdxRuntimeException("Extension OES_texture_float not supported!");
@@ -95,7 +96,7 @@ public class FloatTextureData implements TextureData {
       Gdx.gl.glTexImage2D(
           target, 0, GL20.GL_RGBA, width, height, 0, GL20.GL_RGBA, GL20.GL_FLOAT, buffer);
 
-    } else {
+    } else if (Gdx.app != null) {
       if (!Gdx.graphics.isGL30Available()) {
         if (!Gdx.graphics.supportsExtension("GL_ARB_texture_float"))
           throw new GdxRuntimeException("Extension GL_ARB_texture_float not supported!");

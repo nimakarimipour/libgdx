@@ -229,7 +229,7 @@ public class Timer {
    * @author Nathan Sweet
    */
   public abstract static class Task implements Runnable {
-    final Application app;
+    @Nullable final Application app;
     long executeTimeMillis, intervalMillis;
     int repeatCount;
     @Nullable volatile Timer timer;
@@ -296,7 +296,7 @@ public class Timer {
    */
   static class TimerThread implements Runnable, LifecycleListener {
     final Files files;
-    final Application app;
+    @Nullable final Application app;
     final Array<Timer> instances = new Array(1);
     @Nullable Timer instance;
     long pauseTimeMillis;
@@ -304,7 +304,9 @@ public class Timer {
     public TimerThread() {
       files = Gdx.files;
       app = Gdx.app;
-      app.addLifecycleListener(this);
+      if (app != null) {
+        app.addLifecycleListener(this);
+      }
       resume();
 
       Thread thread = new Thread(this, "Timer");
@@ -363,7 +365,9 @@ public class Timer {
         instances.clear();
         threadLock.notifyAll();
       }
-      app.removeLifecycleListener(this);
+      if (app != null) {
+        app.removeLifecycleListener(this);
+      }
     }
   }
 }
