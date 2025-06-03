@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
  * @author Nathan Sweet
  */
 public class ReflectionPool<T> extends Pool<T> {
-  @Nullable private final Constructor constructor;
+  private final Constructor constructor;
 
   public ReflectionPool(Class<T> type) {
     this(type, 16, Integer.MAX_VALUE);
@@ -64,9 +64,6 @@ public class ReflectionPool<T> extends Pool<T> {
 
   protected T newObject() {
     try {
-      if (constructor == null) {
-        throw new IllegalStateException("Constructor is not initialized.");
-      }
       return (T) constructor.newInstance((Object[]) null);
     } catch (Exception ex) {
       throw new GdxRuntimeException(
