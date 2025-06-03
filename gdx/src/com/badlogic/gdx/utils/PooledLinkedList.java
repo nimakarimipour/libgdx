@@ -152,7 +152,7 @@ public class PooledLinkedList<T> {
     }
 
     if (c == head) {
-      NullabilityUtil.castToNonnull(n, "head case handled").prev = null;
+      n.prev = null;
       head = n;
       return;
     }
