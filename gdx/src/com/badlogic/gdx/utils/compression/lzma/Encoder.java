@@ -133,7 +133,7 @@ public class Encoder {
       }
     }
 
-    @Nullable Encoder2[] m_Coders;
+    Encoder2[] m_Coders;
     int m_NumPrevBits;
     int m_NumPosBits;
     int m_PosMask;
@@ -149,17 +149,11 @@ public class Encoder {
     }
 
     public void Init() {
-      if (m_Coders == null) {
-        throw new IllegalStateException("m_Coders is not initialized.");
-      }
       int numStates = 1 << (m_NumPrevBits + m_NumPosBits);
       for (int i = 0; i < numStates; i++) m_Coders[i].Init();
     }
 
     public Encoder2 GetSubCoder(int pos, byte prevByte) {
-      if (m_Coders == null) {
-        throw new NullPointerException("m_Coders is not initialized");
-      }
       return m_Coders[
           ((pos & m_PosMask) << m_NumPrevBits) + ((prevByte & 0xFF) >>> (8 - m_NumPrevBits))];
     }
