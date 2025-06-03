@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
-import javax.annotation.Nullable;
 
 /**
  * A group that lays out its children top to bottom vertically, with optional wrapping. {@link
@@ -45,7 +44,7 @@ import javax.annotation.Nullable;
 public class VerticalGroup extends WidgetGroup {
   private float prefWidth, prefHeight, lastPrefWidth;
   private boolean sizeInvalid = true;
-  @Nullable private FloatArray columnSizes; // column height, column width, ...
+  private FloatArray columnSizes; // column height, column width, ...
 
   private int align = Align.top, columnAlign;
   private boolean reverse, round = true, wrap, expand;
@@ -229,10 +228,7 @@ public class VerticalGroup extends WidgetGroup {
     groupHeight -= padTop;
     align = columnAlign;
 
-    // Ensure columnSizes is initialized
-    if (columnSizes == null) columnSizes = new FloatArray();
     FloatArray columnSizes = this.columnSizes;
-
     SnapshotArray<Actor> children = getChildren();
     int i = 0, n = children.size, incr = 1;
     if (reverse) {
@@ -308,13 +304,7 @@ public class VerticalGroup extends WidgetGroup {
 
   /** When wrapping is enabled, the number of columns may be > 1. */
   public int getColumns() {
-    if (wrap) {
-      if (columnSizes == null) {
-        columnSizes = new FloatArray();
-      }
-      return columnSizes.size >> 1;
-    }
-    return 1;
+    return wrap ? columnSizes.size >> 1 : 1;
   }
 
   /** If true (the default), positions and sizes are rounded to integers. */
