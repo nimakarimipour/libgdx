@@ -54,10 +54,6 @@ public abstract class RegionInfluencer extends Influencer {
 
     @Override
     public void init() {
-      // Ensure that regionChannel is initialized before use.
-      if (regionChannel == null) {
-        allocateChannels();
-      }
       AspectTextureRegion region = regions.items[0];
       for (int i = 0, c = controller.emitter.maxParticleCount * regionChannel.strideSize;
           i < c;
@@ -95,10 +91,6 @@ public abstract class RegionInfluencer extends Influencer {
 
     @Override
     public void activateParticles(int startIndex, int count) {
-      if (regionChannel == null) {
-        throw new IllegalStateException("regionChannel is not initialized");
-      }
-
       for (int i = startIndex * regionChannel.strideSize, c = i + count * regionChannel.strideSize;
           i < c;
           i += regionChannel.strideSize) {
@@ -147,9 +139,6 @@ public abstract class RegionInfluencer extends Influencer {
 
     @Override
     public void update() {
-      if (regionChannel == null) {
-        allocateChannels();
-      }
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               c = controller.particles.size * regionChannel.strideSize;
@@ -224,7 +213,7 @@ public abstract class RegionInfluencer extends Influencer {
   }
 
   public Array<AspectTextureRegion> regions;
-  @Nullable FloatChannel regionChannel;
+  FloatChannel regionChannel;
   @Nullable public String atlasName;
 
   public RegionInfluencer(int regionsCount) {
