@@ -103,7 +103,7 @@ public class Event implements Poolable {
   }
 
   /** Returns the actor that this listener is attached to. */
-  public Actor getListenerActor() {
+  public @Nullable Actor getListenerActor() {
     return listenerActor;
   }
 
