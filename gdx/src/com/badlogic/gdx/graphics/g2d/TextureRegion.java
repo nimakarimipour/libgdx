@@ -33,9 +33,7 @@ public class TextureRegion {
   int regionWidth, regionHeight;
 
   /** Constructs a region that cannot be used until a texture and texture coordinates are set. */
-  public TextureRegion() {
-    this.texture = new Texture(); // ensure non-null initialization
-  }
+  public TextureRegion() {}
 
   /** Constructs a region the size of the specified texture. */
   public TextureRegion(@Nullable Texture texture) {
