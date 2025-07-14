@@ -50,7 +50,7 @@ public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
         return tileset;
       }
     }
-    throw new RuntimeException("TileSet with name " + name + " does not exist");
+    return null;
   }
 
   /**
