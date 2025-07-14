@@ -1268,8 +1268,7 @@ public class Encoder {
     _matchFinderType = matchFinderIndex;
     if (_matchFinder != null && matchFinderIndexPrev != _matchFinderType) {
       _dictionarySizePrev = -1;
-      // Properly handle resetting _matchFinder instead of setting it to null
-      _matchFinder.reset(); // assuming _matchFinder has a reset method
+      _matchFinder = null;
     }
     return true;
   }
