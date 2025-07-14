@@ -1091,7 +1091,7 @@ public class Table extends WidgetGroup {
 
       float prefWidth = c.prefWidth.get(a), prefHeight = c.prefHeight.get(a);
       float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
-      float maxWidth = c.maxWidth.get(a), maxHeight = c.maxHeight.get(a);
+      float maxWidth = a != null ? c.maxWidth.get(a) : 0, maxHeight = c.maxHeight.get(a);
       if (prefWidth < minWidth) prefWidth = minWidth;
       if (prefHeight < minHeight) prefHeight = minHeight;
       if (maxWidth > 0 && prefWidth > maxWidth) prefWidth = maxWidth;
@@ -1195,7 +1195,7 @@ public class Table extends WidgetGroup {
       float fillX = c.fillX, fillY = c.fillY;
       if (fillX > 0) {
         c.actorWidth = Math.max(spannedCellWidth * fillX, c.minWidth.get(c.actor));
-        float maxWidth = c.maxWidth.get(c.actor);
+        float maxWidth = a != null ? c.maxWidth.get(a) : 0;
         if (maxWidth > 0) c.actorWidth = Math.min(c.actorWidth, maxWidth);
       }
       if (fillY > 0) {
