@@ -89,7 +89,8 @@ class ComparableTimSort {
    */
   private static final boolean DEBUG = false;
 
-  ComparableTimSort() {
+  ComparableTimSort(Object[] a) {
+    this.a = Objects.requireNonNull(a, "Array must not be null");
     tmp = new Object[INITIAL_TMP_STORAGE_LENGTH];
     runBase = new int[40];
     runLen = new int[40];
