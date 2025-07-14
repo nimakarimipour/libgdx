@@ -1,0 +1,135 @@
+====================
+Type='DEREFERENCE_NULLABLE', message='dereferenced expression texture is @Nullable'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteBatch.java:1162
+    invTexWidth = 1.0f / texture.getWidth();
+Log:
+16:27:37.108 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+==============================
+16:27:37.108 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.COUNT = 1
+16:27:37.108 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.PROMPTS SIZE = 1
+16:27:37.108 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+Both set to 0 and cleared 0
+16:27:37.108 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+238 : TOP LEVEL CALL TO FIX ERROR: Type='DEREFERENCE_NULLABLE', message='dereferenced expression texture is @Nullable'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteBatch.java:1162
+    invTexWidth = 1.0f / texture.getWidth();
+16:27:41.524 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "DEREFERENCE_NULLABLE" and the full error message is: "dereferenced expression texture is @Nullable".
+The line with the error is: "    invTexWidth = 1.0f / texture.getWidth();".
+
+The error is within "the method: switchTexture(com.badlogic.gdx.graphics.Texture)" and the code surrounding the error is:
+```java
+  public void setTransformMatrix(Matrix4 transform) {
+    if (drawing) flush();
+    transformMatrix.set(transform);
+    if (drawing) setupMatrices();
+  }
+
+  protected void setupMatrices() {
+    combinedMatrix.set(projectionMatrix).mul(transformMatrix);
+    if (customShader != null) {
+      customShader.setUniformMatrix("u_projTrans", combinedMatrix);
+      customShader.setUniformi("u_texture", 0);
+    } else {
+      shader.setUniformMatrix("u_projTrans", combinedMatrix);
+      shader.setUniformi("u_texture", 0);
+    }
+  }
+
+  protected void switchTexture(@Nullable Texture texture) {
+    flush();
+    lastTexture = texture;
+    invTexWidth = 1.0f / texture.getWidth();
+    invTexHeight = 1.0f / texture.getHeight();
+  }
+
+  @Override
+  public void setShader(ShaderProgram shader) {
+    if (drawing) {
+      flush();
+    }
+    customShader = shader;
+    if (drawing) {
+      if (customShader != null) customShader.bind();
+      else this.shader.bind();
+      setupMatrices();
+    }
+  }
+
+  @Override
+  public ShaderProgram getShader() {
+    if (customShader == null) {
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "switchTexture(com.badlogic.gdx.graphics.Texture)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+16:27:41.525 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Retrieving response from cache
+16:27:41.525 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.tryCreate
+Trying to create Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  protected void switchTexture(Texture texture) {
+    if (texture == null) {
+      throw new IllegalArgumentException("Texture cannot be null");
+    }
+    flush();
+    lastTexture = texture;
+    invTexWidth = 1.0f / texture.getWidth();
+    invTexHeight = 1.0f / texture.getHeight();
+  }
+  ```
+  ]]>
+  </code>
+</response>
+```
+16:27:41.525 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  protected void switchTexture(Texture texture) {
+    if (texture == null) {
+      throw new IllegalArgumentException("Texture cannot be null");
+    }
+    flush();
+    lastTexture = texture;
+    invTexWidth = 1.0f / texture.getWidth();
+    invTexHeight = 1.0f / texture.getHeight();
+  }
+  ```
+  ]]>
+  </code>
+</response>
+```
+16:27:41.526 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Response created:
+protected void switchTexture(Texture texture) {
+    if (texture == null) {
+      throw new IllegalArgumentException("Texture cannot be null");
+    }
+    flush();
+    lastTexture = texture;
+    invTexWidth = 1.0f / texture.getWidth();
+    invTexHeight = 1.0f / texture.getHeight();
+  }
