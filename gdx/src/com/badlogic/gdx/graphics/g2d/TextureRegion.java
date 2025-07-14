@@ -78,12 +78,7 @@ public class TextureRegion {
    * @param height The height of the texture region. May be negative to flip the sprite when drawn.
    */
   public TextureRegion(TextureRegion region, int x, int y, int width, int height) {
-    if (region.texture != null) {
-      this.texture = region.texture;
-      setRegion(region, x, y, width, height);
-    } else {
-      throw new IllegalArgumentException("Provided region must have a non-null texture");
-    }
+    setRegion(region, x, y, width, height);
   }
 
   /** Sets the texture and sets the coordinates to the size of the specified texture. */
