@@ -990,10 +990,10 @@ public class Cell<T extends Actor> implements Poolable {
     spaceLeft = null;
     spaceBottom = null;
     spaceRight = null;
-    padTop = 0f;
-    padLeft = 0f;
-    padBottom = 0f;
-    padRight = 0f;
+    padTop = null;
+    padLeft = null;
+    padBottom = null;
+    padRight = null;
     fillX = null;
     fillY = null;
     align = null;
