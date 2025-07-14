@@ -414,9 +414,6 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
-      if (directionalVelocityChannel == null) {
-        return; // or handle the error according to your program's logic
-      }
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               s = 0,
