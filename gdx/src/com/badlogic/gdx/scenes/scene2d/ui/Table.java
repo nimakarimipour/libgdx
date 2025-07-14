@@ -32,7 +32,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-import com.uber.nullaway.annotations.Initializer;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
@@ -855,7 +854,6 @@ public class Table extends WidgetGroup {
     return array;
   }
 
-  @Initializer
   private void computeSize() {
     sizeInvalid = false;
 
@@ -869,6 +867,7 @@ public class Table extends WidgetGroup {
     }
 
     int columns = this.columns, rows = this.rows;
+    if (this.rowMinHeight == null) this.rowMinHeight = ensureSize(null, rows);
     float[] columnMinWidth = this.columnMinWidth = ensureSize(this.columnMinWidth, columns);
     float[] rowMinHeight = this.rowMinHeight = ensureSize(this.rowMinHeight, rows);
     float[] columnPrefWidth = this.columnPrefWidth = ensureSize(this.columnPrefWidth, columns);
