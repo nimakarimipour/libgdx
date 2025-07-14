@@ -186,6 +186,10 @@ public class AtlasTmxMapLoader
       int imageHeight,
       @Nullable FileHandle image) {
 
+    if (atlasResolver == null) {
+      throw new NullPointerException("AtlasResolver is null.");
+    }
+
     TextureAtlas atlas = atlasResolver.getAtlas();
     String regionsName = name;
 
