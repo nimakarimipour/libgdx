@@ -1175,11 +1175,7 @@ public class JsonValue implements Iterable<JsonValue> {
   public void set(double value, @Nullable @Null String stringValue) {
     doubleValue = value;
     longValue = (long) value;
-    if (stringValue == null) {
-      this.stringValue = String.valueOf(value);
-    } else {
-      this.stringValue = stringValue;
-    }
+    this.stringValue = stringValue;
     type = ValueType.doubleValue;
   }
 
