@@ -70,7 +70,6 @@ public class FileTextureData implements TextureData {
   public Pixmap consumePixmap() {
     if (!isPrepared) throw new GdxRuntimeException("Call prepare() before calling getPixmap()");
     isPrepared = false;
-    if (this.pixmap == null) throw new GdxRuntimeException("Pixmap cannot be null");
     Pixmap pixmap = this.pixmap;
     this.pixmap = null;
     return pixmap;
