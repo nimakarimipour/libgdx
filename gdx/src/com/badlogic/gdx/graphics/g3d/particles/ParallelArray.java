@@ -275,11 +275,12 @@ public class ParallelArray {
   /**
    * @return the channel with the same id as the one in the descriptor
    */
-  public <T extends Channel> Optional<T> getChannel(ChannelDescriptor descriptor) {
+  @SuppressWarnings("unchecked")
+  public <T extends Channel> T getChannel(ChannelDescriptor descriptor) {
     for (Channel array : arrays) {
-      if (array.id == descriptor.id) return Optional.of((T) array);
+      if (array.id == descriptor.id) return (T) array;
     }
-    return Optional.empty();
+    return null;
   }
 
   /** Removes all the channels and sets size to 0 */
