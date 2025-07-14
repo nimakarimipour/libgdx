@@ -270,6 +270,9 @@ public class ModelBatch implements Disposable {
    * called after the call to {@link #begin(Camera)} and before the call to {@link #end()}.
    */
   public void flush() {
+    if (camera == null) {
+      throw new IllegalStateException("Camera must not be null when calling flush()");
+    }
     sorter.sort(camera, renderables);
     Shader currentShader = null;
     for (int i = 0; i < renderables.size; i++) {
