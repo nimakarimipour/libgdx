@@ -238,8 +238,10 @@ public abstract class BaseShader implements Shader {
     this.context = context;
     program.bind();
     currentMesh = null;
-    for (int u, i = 0; i < globalUniforms.size; ++i)
-      if (setters.get(u = globalUniforms.get(i)) != null) setters.get(u).set(this, u, null, null);
+    for (int u, i = 0; i < globalUniforms.size; ++i) {
+      Setter setter = setters.get(u = globalUniforms.get(i));
+      if (setter != null) setter.set(this, u, new Object(), new Object());
+    }
   }
 
   private final IntArray tempArray = new IntArray();
