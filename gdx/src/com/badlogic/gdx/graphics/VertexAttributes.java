@@ -97,12 +97,8 @@ public final class VertexAttributes
    */
   public VertexAttribute findByUsage(int usage) {
     int len = size();
-    for (int i = 0; i < len; i++) {
-      if (get(i).usage == usage) {
-        return get(i);
-      }
-    }
-    throw new RuntimeException("VertexAttribute with the given usage not found");
+    for (int i = 0; i < len; i++) if (get(i).usage == usage) return get(i);
+    return null;
   }
 
   private int calculateOffsets() {
