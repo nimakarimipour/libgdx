@@ -90,6 +90,9 @@ public class Tree<N extends Node, V> extends WidgetGroup {
         };
     selection.setActor(this);
     selection.setMultiple(true);
+    if (style == null) {
+      throw new IllegalArgumentException("style cannot be null");
+    }
     setStyle(style);
     initialize();
   }
