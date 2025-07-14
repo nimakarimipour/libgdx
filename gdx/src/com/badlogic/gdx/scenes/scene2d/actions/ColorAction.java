@@ -28,7 +28,7 @@ import com.badlogic.gdx.utils.Null;
  */
 public class ColorAction extends TemporalAction {
   private float startR, startG, startB, startA;
-  private Color color = new Color();
+  private @Null Color color;
   private final Color end = new Color();
 
   protected void begin() {
