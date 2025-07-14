@@ -402,11 +402,15 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
           tiledMapTileMapObject.getProperties().put("gid", id);
           tiledMapTileMapObject.setX(x);
           tiledMapTileMapObject.setY(flipY ? y : y - height);
-          float objectWidth = element.getFloatAttribute("width", textureRegion.getRegionWidth());
-          float objectHeight = element.getFloatAttribute("height", textureRegion.getRegionHeight());
-          tiledMapTileMapObject.setScaleX(scaleX * (objectWidth / textureRegion.getRegionWidth()));
-          tiledMapTileMapObject.setScaleY(
-              scaleY * (objectHeight / textureRegion.getRegionHeight()));
+          if (textureRegion != null) {
+            float objectWidth = element.getFloatAttribute("width", textureRegion.getRegionWidth());
+            float objectHeight =
+                element.getFloatAttribute("height", textureRegion.getRegionHeight());
+            tiledMapTileMapObject.setScaleX(
+                scaleX * (objectWidth / textureRegion.getRegionWidth()));
+            tiledMapTileMapObject.setScaleY(
+                scaleY * (objectHeight / textureRegion.getRegionHeight()));
+          }
           tiledMapTileMapObject.setRotation(element.getFloatAttribute("rotation", 0));
           object = tiledMapTileMapObject;
         } else {
