@@ -487,6 +487,9 @@ public class I18NBundle {
    */
   @Initializer
   private void setLocale(Locale locale) {
+    if (locale == null) {
+      throw new IllegalArgumentException("Locale cannot be null");
+    }
     this.locale = locale;
     this.formatter = new TextFormatter(locale, !simpleFormatter);
   }
