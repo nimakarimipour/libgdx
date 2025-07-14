@@ -49,10 +49,7 @@ public class Tooltip<T extends Actor> extends InputListener {
   /**
    * @param contents May be null.
    */
-  public Tooltip(@Nullable @Null T contents, @Nullable @NonNull TooltipManager manager) {
-    if (manager == null) {
-      throw new NullPointerException("manager cannot be null");
-    }
+  public Tooltip(@Nullable @Null T contents, @Nullable TooltipManager manager) {
     this.manager = manager;
 
     container =
