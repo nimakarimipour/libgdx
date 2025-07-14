@@ -28,7 +28,7 @@ public class Decoder {
   int Range;
   int Code;
 
-  java.io.InputStream Stream = null;
+  java.io.InputStream Stream;
 
   public final void SetStream(java.io.InputStream stream) {
     Stream = stream;
