@@ -1,0 +1,128 @@
+====================
+Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTileSets.java:53
+    return null;
+Log:
+16:37:20.483 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+==============================
+16:37:20.484 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.COUNT = 1
+16:37:20.484 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.PROMPTS SIZE = 1
+16:37:20.484 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+Both set to 0 and cleared 0
+16:37:20.484 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+295 : TOP LEVEL CALL TO FIX ERROR: Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTileSets.java:53
+    return null;
+16:37:24.918 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "RETURN_NULLABLE" and the full error message is: "returning @Nullable expression from method with @NonNull return type".
+The line with the error is: "    return null;".
+
+The error is within "the method: getTileSet(java.lang.String)" and the code surrounding the error is:
+```java
+  }
+
+  /**
+   * @param index index to get the desired {@link TiledMapTileSet} at.
+   * @return tileset at index
+   */
+  public TiledMapTileSet getTileSet(int index) {
+    return tilesets.get(index);
+  }
+
+  /**
+   * @param name Name of the {@link TiledMapTileSet} to retrieve.
+   * @return tileset with matching name, null if it doesn't exist
+   */
+  public TiledMapTileSet getTileSet(String name) {
+    for (TiledMapTileSet tileset : tilesets) {
+      if (name.equals(tileset.getName())) {
+        return tileset;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * @param tileset set to be added to the collection
+   */
+  public void addTileSet(TiledMapTileSet tileset) {
+    tilesets.add(tileset);
+  }
+
+  /**
+   * Removes tileset at index
+   *
+   * @param index index at which to remove a tileset.
+   */
+  public void removeTileSet(int index) {
+    tilesets.removeIndex(index);
+  }
+
+  /**
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "getTileSet(java.lang.String)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+16:37:24.919 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Retrieving response from cache
+16:37:24.919 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.tryCreate
+Trying to create Response:
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public TiledMapTileSet getTileSet(String name) {
+    for (TiledMapTileSet tileset : tilesets) {
+      if (name.equals(tileset.getName())) {
+        return tileset;
+      }
+    }
+    throw new RuntimeException("TileSet with name " + name + " does not exist");
+  }
+  ```
+    ]]>
+  </code>
+</response>
+16:37:24.919 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Creating Response:
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public TiledMapTileSet getTileSet(String name) {
+    for (TiledMapTileSet tileset : tilesets) {
+      if (name.equals(tileset.getName())) {
+        return tileset;
+      }
+    }
+    throw new RuntimeException("TileSet with name " + name + " does not exist");
+  }
+  ```
+    ]]>
+  </code>
+</response>
+16:37:24.920 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Response created:
+public TiledMapTileSet getTileSet(String name) {
+    for (TiledMapTileSet tileset : tilesets) {
+      if (name.equals(tileset.getName())) {
+        return tileset;
+      }
+    }
+    throw new RuntimeException("TileSet with name " + name + " does not exist");
+  }
