@@ -95,12 +95,10 @@ public class XmlReader {
     String attributeName = null;
     boolean hasBody = false;
 
-    // line 3 "XmlReader.java"
     {
       cs = xml_start;
     }
 
-    // line 7 "XmlReader.java"
     {
       int _klen;
       int _trans = 0;
@@ -175,13 +173,11 @@ public class XmlReader {
               while (_nacts-- > 0) {
                 switch (_xml_actions[_acts++]) {
                   case 0:
-                    // line 97 "XmlReader.rl"
                     {
                       s = p;
                     }
                     break;
                   case 1:
-                    // line 98 "XmlReader.rl"
                     {
                       char c = data[s];
                       if (c == '?' || c == '!') {
@@ -218,7 +214,6 @@ public class XmlReader {
                     }
                     break;
                   case 2:
-                    // line 127 "XmlReader.rl"
                     {
                       hasBody = false;
                       close();
@@ -230,7 +225,6 @@ public class XmlReader {
                     }
                     break;
                   case 3:
-                    // line 132 "XmlReader.rl"
                     {
                       close();
                       {
@@ -241,7 +235,6 @@ public class XmlReader {
                     }
                     break;
                   case 4:
-                    // line 136 "XmlReader.rl"
                     {
                       if (hasBody) {
                         cs = 15;
@@ -251,13 +244,11 @@ public class XmlReader {
                     }
                     break;
                   case 5:
-                    // line 139 "XmlReader.rl"
                     {
                       attributeName = new String(data, s, p - s);
                     }
                     break;
                   case 6:
-                    // line 142 "XmlReader.rl"
                     {
                       int end = p;
                       while (end != s) {
@@ -295,18 +286,15 @@ public class XmlReader {
                     }
                     break;
                   case 7:
-                    // line 178 "XmlReader.rl"
                     {
                       attribute(attributeName, entitiesText);
                     }
                     break;
                   case 8:
-                    // line 181 "XmlReader.rl"
                     {
                       text(entitiesText);
                     }
                     break;
-                    // line 201 "XmlReader.java"
                 }
               }
             }
@@ -327,8 +315,6 @@ public class XmlReader {
       }
     }
 
-    // line 195 "XmlReader.rl"
-
     entitiesText = null;
 
     if (p < pe) {
@@ -345,6 +331,9 @@ public class XmlReader {
       throw new SerializationException("Error parsing XML, unclosed element: " + element.getName());
     }
     Element root = this.root;
+    if (root == null) {
+      throw new NullPointerException("Root element is null");
+    }
     this.root = null;
     return root;
   }
