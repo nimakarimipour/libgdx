@@ -110,11 +110,6 @@ public class PointSpriteParticleBatch
 
     allocRenderable();
     ensureCapacity(capacity);
-
-    if (renderable == null) {
-      throw new IllegalStateException("Renderable must be initialized before usage.");
-    }
-
     renderable.shader = new ParticleShader(renderable, shaderConfig);
     renderable.shader.init();
   }
