@@ -1019,7 +1019,14 @@ public class Stage extends InputAdapter implements Disposable {
 
     public void reset() {
       listenerActor = null;
-      listener = null;
+      // Instead of setting listener to null, consider using a default or no-op object
+      listener =
+          new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+              return false;
+            }
+          };
       target = null;
     }
   }
