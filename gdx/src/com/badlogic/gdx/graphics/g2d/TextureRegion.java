@@ -124,6 +124,9 @@ public class TextureRegion {
 
   /** Sets the texture and coordinates to the specified region. */
   public void setRegion(@Nullable TextureRegion region) {
+    if (region == null || region.texture == null) {
+      throw new IllegalArgumentException("Region or its texture cannot be null");
+    }
     texture = region.texture;
     setRegion(region.u, region.v, region.u2, region.v2);
   }
