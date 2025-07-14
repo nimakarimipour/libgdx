@@ -1183,7 +1183,7 @@ public class Json {
       @Nullable @Null Class<T> type,
       @Nullable @Null Class elementType,
       @Nullable JsonValue jsonData) {
-    if (jsonData == null) throw new SerializationException("jsonData cannot be null");
+    if (jsonData == null) return null;
 
     if (jsonData.isObject()) {
       String className = typeName == null ? null : jsonData.getString(typeName, null);
@@ -1204,6 +1204,7 @@ public class Json {
       }
 
       if (typeName != null && ClassReflection.isAssignableFrom(Collection.class, type)) {
+        // JSON object wrapper to specify type.
         jsonData = jsonData.get("items");
         if (jsonData == null)
           throw new SerializationException(
@@ -1232,6 +1233,7 @@ public class Json {
           return (T) object;
         }
 
+        // JSON object special cases.
         if (object instanceof ObjectMap) {
           ObjectMap result = (ObjectMap) object;
           for (JsonValue child = jsonData.child; child != null; child = child.next)
@@ -1299,6 +1301,8 @@ public class Json {
       if (serializer != null) return (T) serializer.read(this, jsonData, type);
 
       if (ClassReflection.isAssignableFrom(Serializable.class, type)) {
+        // A Serializable may be read as an array, string, etc, even though it will be written as an
+        // object.
         Object object = newInstance(type);
         ((Serializable) object).read(this, jsonData);
         return (T) object;
@@ -1306,6 +1310,7 @@ public class Json {
     }
 
     if (jsonData.isArray()) {
+      // JSON array special cases.
       if (type == null || type == Object.class) type = (Class<T>) Array.class;
       if (ClassReflection.isAssignableFrom(Array.class, type)) {
         Array result = type == Array.class ? new Array() : (Array) newInstance(type);
@@ -1388,7 +1393,7 @@ public class Json {
           "Unable to convert value to required type: " + jsonData + " (" + type.getName() + ")");
     }
 
-    throw new SerializationException("Unable to determine value to return");
+    return null;
   }
 
   /**
