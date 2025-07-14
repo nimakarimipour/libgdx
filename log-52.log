@@ -1,0 +1,129 @@
+====================
+Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/AssetManager.java:161
+    return get(fileName, type, true);
+Log:
+15:56:02.540 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+==============================
+15:56:02.540 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.COUNT = 1
+15:56:02.541 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.PROMPTS SIZE = 1
+15:56:02.541 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+Both set to 0 and cleared 0
+15:56:02.541 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+52 : TOP LEVEL CALL TO FIX ERROR: Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/assets/AssetManager.java:161
+    return get(fileName, type, true);
+15:56:07.055 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "RETURN_NULLABLE" and the full error message is: "returning @Nullable expression from method with @NonNull return type".
+The line with the error is: "    return get(fileName, type, true);".
+
+The error is within "the method: get(java.lang.String,java.lang.Class)" and the code surrounding the error is:
+```java
+    return resolver;
+  }
+
+  /**
+   * @param fileName the asset file name
+   * @return the asset
+   * @throws GdxRuntimeException if the asset is not loaded
+   */
+  @Nullable
+  public synchronized <T> T get(String fileName) {
+    return get(fileName, true);
+  }
+
+  /**
+   * @param fileName the asset file name
+   * @param type the asset type
+   * @return the asset
+   * @throws GdxRuntimeException if the asset is not loaded
+   */
+  public synchronized <T> T get(String fileName, Class<T> type) {
+    return get(fileName, type, true);
+  }
+
+  /**
+   * @param fileName the asset file name
+   * @param required true to throw GdxRuntimeException if the asset is not loaded, else null is
+   *     returned
+   * @return the asset or null if it is not loaded and required is false
+   */
+  @Nullable
+  public synchronized @Null <T> T get(String fileName, boolean required) {
+    Class<T> type = assetTypes.get(fileName);
+    if (type != null) {
+      ObjectMap<String, RefCountedContainer> assetsByType = assets.get(type);
+      if (assetsByType != null) {
+        RefCountedContainer assetContainer = assetsByType.get(fileName);
+        if (assetContainer != null) return (T) assetContainer.object;
+      }
+    }
+    if (required) throw new GdxRuntimeException("Asset not loaded: " + fileName);
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "get(java.lang.String,java.lang.Class)") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+15:56:07.055 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Retrieving response from cache
+15:56:07.055 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.tryCreate
+Trying to create Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public synchronized <T> T get(String fileName, Class<T> type) {
+    T result = get(fileName, type, true);
+    if (result == null) {
+      throw new GdxRuntimeException("Asset not loaded: " + fileName);
+    }
+    return result;
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+15:56:07.056 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  public synchronized <T> T get(String fileName, Class<T> type) {
+    T result = get(fileName, type, true);
+    if (result == null) {
+      throw new GdxRuntimeException("Asset not loaded: " + fileName);
+    }
+    return result;
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+15:56:07.057 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Response created:
+public synchronized <T> T get(String fileName, Class<T> type) {
+    T result = get(fileName, type, true);
+    if (result == null) {
+      throw new GdxRuntimeException("Asset not loaded: " + fileName);
+    }
+    return result;
+  }
