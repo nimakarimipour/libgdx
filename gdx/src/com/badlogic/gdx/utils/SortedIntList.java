@@ -192,7 +192,7 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
     @Nullable protected Node<E> n;
 
     /** Value held */
-    public E value;
+    public @NonNull E value;
 
     /** Index value in list */
     public int index;
