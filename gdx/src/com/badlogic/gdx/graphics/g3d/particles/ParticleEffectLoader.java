@@ -139,10 +139,6 @@ public class ParticleEffectLoader
       }
     }
 
-    if (effectData == null) {
-      throw new IllegalStateException("Effect data not found for file: " + fileName);
-    }
-
     effectData.resource.load(manager, effectData);
     if (parameter != null) {
       if (parameter.batches != null) {
