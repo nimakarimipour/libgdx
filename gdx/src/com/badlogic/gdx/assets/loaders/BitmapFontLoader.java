@@ -44,6 +44,7 @@ public class BitmapFontLoader
     extends AsynchronousAssetLoader<BitmapFont, BitmapFontLoader.BitmapFontParameter> {
   public BitmapFontLoader(FileHandleResolver resolver) {
     super(resolver);
+    this.data = null; // Initialize the data field to null to handle all control-flow paths
   }
 
   BitmapFontData data;
