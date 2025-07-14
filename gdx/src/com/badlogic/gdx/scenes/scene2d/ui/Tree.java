@@ -106,18 +106,16 @@ public class Tree<N extends Node, V> extends WidgetGroup {
                   // Select range (shift).
                   if (rangeStart == null) rangeStart = node;
                   N rangeStart = Tree.this.rangeStart;
-                  if (rangeStart != null) {
-                    if (!UIUtils.ctrl()) selection.clear();
-                    float start = rangeStart.actor.getY(), end = node.actor.getY();
-                    if (start > end) selectNodes(rootNodes, end, start);
-                    else {
-                      selectNodes(rootNodes, start, end);
-                      selection.items().orderedItems().reverse();
-                    }
-
-                    selection.fireChangeEvent();
-                    Tree.this.rangeStart = rangeStart;
+                  if (!UIUtils.ctrl()) selection.clear();
+                  float start = rangeStart.actor.getY(), end = node.actor.getY();
+                  if (start > end) selectNodes(rootNodes, end, start);
+                  else {
+                    selectNodes(rootNodes, start, end);
+                    selection.items().orderedItems().reverse();
                   }
+
+                  selection.fireChangeEvent();
+                  Tree.this.rangeStart = rangeStart;
                   return;
                 }
                 if (node.children.size > 0 && (!selection.getMultiple() || !UIUtils.ctrl())) {
