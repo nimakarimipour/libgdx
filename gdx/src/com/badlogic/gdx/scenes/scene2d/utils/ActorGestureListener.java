@@ -56,6 +56,8 @@ public class ActorGestureListener implements EventListener {
       float tapCountInterval,
       float longPressDuration,
       float maxFlingDelay) {
+    this.actor = new Actor();
+    this.touchDownTarget = new Actor();
     detector =
         new GestureDetector(
             halfTapSquareSize,
