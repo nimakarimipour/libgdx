@@ -71,6 +71,7 @@ public class ResourceData<T> implements Json.Serializable {
       data = new ObjectMap<String, Object>();
       assets = new IntArray();
       loadIndex = 0;
+      resources = new ResourceData();
     }
 
     public SaveData(ResourceData resources) {
