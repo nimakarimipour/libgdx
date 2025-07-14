@@ -1169,16 +1169,18 @@ public class Table extends WidgetGroup {
     for (int i = 0; i < rows; i++) tableHeight += rowHeight[i];
 
     // Position table within the container.
-    int align = this.align;
+    Integer align = this.align;
     float x = padLeft;
-    if ((align & Align.right) != 0) x += layoutWidth - tableWidth;
-    else if ((align & Align.left) == 0) // Center
-    x += (layoutWidth - tableWidth) / 2;
+    if (align != null) {
+      if ((align & Align.right) != 0) x += layoutWidth - tableWidth;
+      else if ((align & Align.left) == 0) x += (layoutWidth - tableWidth) / 2;
+    }
 
     float y = padTop;
-    if ((align & Align.bottom) != 0) y += layoutHeight - tableHeight;
-    else if ((align & Align.top) == 0) // Center
-    y += (layoutHeight - tableHeight) / 2;
+    if (align != null) {
+      if ((align & Align.bottom) != 0) y += layoutHeight - tableHeight;
+      else if ((align & Align.top) == 0) y += (layoutHeight - tableHeight) / 2;
+    }
 
     // Size and position actors within cells.
     float currentX = x, currentY = y;
@@ -1208,16 +1210,19 @@ public class Table extends WidgetGroup {
       }
 
       align = c.align;
-      if ((align & Align.left) != 0) c.actorX = currentX;
-      else if ((align & Align.right) != 0) c.actorX = currentX + spannedCellWidth - c.actorWidth;
-      else c.actorX = currentX + (spannedCellWidth - c.actorWidth) / 2;
+      if (align != null) {
+        if ((align & Align.left) != 0) c.actorX = currentX;
+        else if ((align & Align.right) != 0) c.actorX = currentX + spannedCellWidth - c.actorWidth;
+        else c.actorX = currentX + (spannedCellWidth - c.actorWidth) / 2;
 
-      if ((align & Align.top) != 0) c.actorY = c.computedPadTop;
-      else if ((align & Align.bottom) != 0)
-        c.actorY = rowHeight[c.row] - c.actorHeight - c.computedPadBottom;
-      else
-        c.actorY = (rowHeight[c.row] - c.actorHeight + c.computedPadTop - c.computedPadBottom) / 2;
-      c.actorY = layoutHeight - currentY - c.actorY - c.actorHeight;
+        if ((align & Align.top) != 0) c.actorY = c.computedPadTop;
+        else if ((align & Align.bottom) != 0)
+          c.actorY = rowHeight[c.row] - c.actorHeight - c.computedPadBottom;
+        else
+          c.actorY =
+              (rowHeight[c.row] - c.actorHeight + c.computedPadTop - c.computedPadBottom) / 2;
+        c.actorY = layoutHeight - currentY - c.actorY - c.actorHeight;
+      }
 
       if (round) {
         c.actorWidth = (float) Math.ceil(c.actorWidth);
