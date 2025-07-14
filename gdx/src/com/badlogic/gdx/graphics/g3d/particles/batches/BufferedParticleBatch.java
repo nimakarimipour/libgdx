@@ -55,10 +55,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
   public void end() {
     if (bufferedParticlesCount > 0) {
       ensureCapacity(bufferedParticlesCount);
-      com.badlogic.gdx.utils.Array<T> sortedRenderData = sorter.sort(renderData);
-      if (sortedRenderData != null) {
-        flush(sortedRenderData);
-      }
+      flush(sorter.sort(renderData));
     }
   }
 
