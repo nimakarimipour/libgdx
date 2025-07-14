@@ -139,6 +139,10 @@ public class ParticleEffectLoader
       }
     }
 
+    if (effectData == null || effectData.resource == null) {
+      throw new NullPointerException("EffectData or resource is null");
+    }
+
     effectData.resource.load(manager, effectData);
     if (parameter != null) {
       if (parameter.batches != null) {
