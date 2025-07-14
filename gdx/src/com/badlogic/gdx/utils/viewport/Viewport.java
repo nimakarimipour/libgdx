@@ -35,8 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
  * @author Nathan Sweet
  */
 public abstract class Viewport {
-  private Camera camera =
-      new Camera(); // Make sure to replace 'Camera()' with the actual implementation.
+  private Camera camera;
   private float worldWidth, worldHeight;
   private int screenX, screenY, screenWidth, screenHeight;
 
