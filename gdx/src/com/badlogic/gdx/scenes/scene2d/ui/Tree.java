@@ -975,10 +975,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
     @Nullable public @Null Drawable plusOver, minusOver;
     @Nullable public @Null Drawable over, selection, background;
 
-    public TreeStyle() {
-      this.plus = new Drawable();
-      this.minus = new Drawable();
-    }
+    public TreeStyle() {}
 
     public TreeStyle(Drawable plus, Drawable minus, @Null Drawable selection) {
       this.plus = plus;
