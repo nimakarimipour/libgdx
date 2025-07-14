@@ -35,7 +35,7 @@ public class Decoder {
   }
 
   public final void ReleaseStream() {
-    Stream = java.util.Objects.requireNonNullElse(Stream, null);
+    Stream = null;
   }
 
   public final void Init() throws IOException {
