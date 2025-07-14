@@ -35,7 +35,8 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 
   protected BufferedParticleBatch(Class<T> type) {
     this.sorter = new ParticleSorter.Distance();
-    renderData = new com.badlogic.gdx.utils.Array<T>(false, 10, type);
+    this.renderData = new com.badlogic.gdx.utils.Array<T>(false, 10, type);
+    this.camera = new Camera(); // Ensure camera is initialized
   }
 
   public void begin() {
