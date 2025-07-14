@@ -67,6 +67,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
     lifeValue.setActive(true);
     continuous = true;
     emissionMode = EmissionMode.Enabled;
+    lifeChannel = new FloatChannel(); // Initialize lifeChannel to a non-null value
   }
 
   public RegularEmitter(RegularEmitter regularEmitter) {
