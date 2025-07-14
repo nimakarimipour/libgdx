@@ -883,7 +883,10 @@ public class Cell<T extends Actor> implements Poolable {
     return padBottom;
   }
 
-  public float getPadBottom() {
+  public float getPadBottom(Actor actor) {
+    if (actor == null) {
+      throw new IllegalArgumentException("actor cannot be null");
+    }
     return padBottom.get(actor);
   }
 
