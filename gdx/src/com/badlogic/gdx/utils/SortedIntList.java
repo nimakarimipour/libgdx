@@ -152,6 +152,9 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
     @Initializer
     @Override
     public Node<E> next() {
+      if (position == null) {
+        throw new NoSuchElementException("No more elements in the iterator.");
+      }
       previousPosition = position;
       position = position.n;
       return previousPosition;
