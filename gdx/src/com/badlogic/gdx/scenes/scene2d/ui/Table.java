@@ -862,28 +862,21 @@ public class Table extends WidgetGroup {
     Object[] cells = this.cells.items;
     int cellCount = this.cells.size;
 
+    // Implicitly end the row for layout purposes.
     if (cellCount > 0 && !((Cell) cells[cellCount - 1]).endRow) {
       endRow();
       implicitEndRow = true;
     }
 
     int columns = this.columns, rows = this.rows;
-    this.columnMinWidth = ensureSize(this.columnMinWidth, columns);
-    float[] columnMinWidth = this.columnMinWidth;
-    this.rowMinHeight = ensureSize(this.rowMinHeight, rows);
-    float[] rowMinHeight = this.rowMinHeight;
-    this.columnPrefWidth = ensureSize(this.columnPrefWidth, columns);
-    float[] columnPrefWidth = this.columnPrefWidth;
-    this.rowPrefHeight = ensureSize(this.rowPrefHeight, rows);
-    float[] rowPrefHeight = this.rowPrefHeight;
-    this.columnWidth = ensureSize(this.columnWidth, columns);
-    float[] columnWidth = this.columnWidth;
-    this.rowHeight = ensureSize(this.rowHeight, rows);
-    float[] rowHeight = this.rowHeight;
-    this.expandWidth = ensureSize(this.expandWidth, columns);
-    float[] expandWidth = this.expandWidth;
-    this.expandHeight = ensureSize(this.expandHeight, rows);
-    float[] expandHeight = this.expandHeight;
+    float[] columnMinWidth = this.columnMinWidth = ensureSize(this.columnMinWidth, columns);
+    float[] rowMinHeight = this.rowMinHeight = ensureSize(this.rowMinHeight, rows);
+    float[] columnPrefWidth = this.columnPrefWidth = ensureSize(this.columnPrefWidth, columns);
+    float[] rowPrefHeight = this.rowPrefHeight = ensureSize(this.rowPrefHeight, rows);
+    float[] columnWidth = this.columnWidth = ensureSize(this.columnWidth, columns);
+    float[] rowHeight = this.rowHeight = ensureSize(this.rowHeight, rows);
+    float[] expandWidth = this.expandWidth = ensureSize(this.expandWidth, columns);
+    float[] expandHeight = this.expandHeight = ensureSize(this.expandHeight, rows);
 
     float spaceRightLast = 0;
     for (int i = 0; i < cellCount; i++) {
@@ -891,10 +884,13 @@ public class Table extends WidgetGroup {
       int column = c.column, row = c.row, colspan = c.colspan;
       Actor a = c.actor;
 
+      // Collect rows that expand and colspan=1 columns that expand.
       if (c.expandY != 0 && expandHeight[row] == 0) expandHeight[row] = c.expandY;
       if (colspan == 1 && c.expandX != 0 && expandWidth[column] == 0)
         expandWidth[column] = c.expandX;
 
+      // Compute combined padding/spacing for cells.
+      // Spacing between actors isn't additive, the larger is used. Also, no spacing around edges.
       c.computedPadLeft =
           c.padLeft.get(a) + (column == 0 ? 0 : Math.max(0, c.spaceLeft.get(a) - spaceRightLast));
       c.computedPadTop = c.padTop.get(a);
@@ -907,6 +903,7 @@ public class Table extends WidgetGroup {
       c.computedPadBottom = c.padBottom.get(a) + (row == rows - 1 ? 0 : c.spaceBottom.get(a));
       spaceRightLast = spaceRight;
 
+      // Determine minimum and preferred cell sizes.
       float prefWidth = c.prefWidth.get(a), prefHeight = c.prefHeight.get(a);
       float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
       float maxWidth = c.maxWidth.get(a), maxHeight = c.maxHeight.get(a);
@@ -921,7 +918,7 @@ public class Table extends WidgetGroup {
         prefHeight = (float) Math.ceil(prefHeight);
       }
 
-      if (colspan == 1) {
+      if (colspan == 1) { // Spanned column min and pref width is added later.
         float hpadding = c.computedPadLeft + c.computedPadRight;
         columnPrefWidth[column] = Math.max(columnPrefWidth[column], prefWidth + hpadding);
         columnMinWidth[column] = Math.max(columnMinWidth[column], minWidth + hpadding);
@@ -937,6 +934,8 @@ public class Table extends WidgetGroup {
       Cell c = (Cell) cells[i];
       int column = c.column;
 
+      // Colspan with expand will expand all spanned columns if none of the spanned columns have
+      // expand.
       int expandX = c.expandX;
       outer:
       if (expandX != 0) {
@@ -945,6 +944,7 @@ public class Table extends WidgetGroup {
         for (int ii = column; ii < nn; ii++) expandWidth[ii] = expandX;
       }
 
+      // Collect uniform sizes.
       if (c.uniformX == Boolean.TRUE && c.colspan == 1) {
         float hpadding = c.computedPadLeft + c.computedPadRight;
         uniformMinWidth = Math.max(uniformMinWidth, columnMinWidth[column] - hpadding);
@@ -957,6 +957,7 @@ public class Table extends WidgetGroup {
       }
     }
 
+    // Size uniform cells to the same width/height.
     if (uniformPrefWidth > 0 || uniformPrefHeight > 0) {
       for (int i = 0; i < cellCount; i++) {
         Cell c = (Cell) cells[i];
@@ -973,6 +974,8 @@ public class Table extends WidgetGroup {
       }
     }
 
+    // Distribute any additional min and pref width added by colspanned cells to the columns
+    // spanned.
     for (int i = 0; i < cellCount; i++) {
       Cell c = (Cell) cells[i];
       int colspan = c.colspan;
@@ -996,7 +999,8 @@ public class Table extends WidgetGroup {
       for (int ii = column, nn = ii + colspan; ii < nn; ii++) {
         spannedMinWidth += columnMinWidth[ii];
         spannedPrefWidth += columnPrefWidth[ii];
-        totalExpandWidth += expandWidth[ii];
+        totalExpandWidth +=
+            expandWidth[ii]; // Distribute extra space using expand, if any columns have expand.
       }
 
       float extraMinWidth = Math.max(0, minWidth - spannedMinWidth);
@@ -1008,6 +1012,7 @@ public class Table extends WidgetGroup {
       }
     }
 
+    // Determine table min and pref size.
     float hpadding = padLeft.get(this) + padRight.get(this);
     float vpadding = padTop.get(this) + padBottom.get(this);
     tableMinWidth = hpadding;
