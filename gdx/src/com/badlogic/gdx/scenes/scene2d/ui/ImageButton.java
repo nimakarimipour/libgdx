@@ -48,6 +48,10 @@ public class ImageButton extends Button {
   public ImageButton(ImageButtonStyle style) {
     super(style);
     image = newImage();
+    if (style == null) {
+      throw new IllegalArgumentException("style cannot be null");
+    }
+    this.style = style;
     add(image);
     setStyle(style);
     setSize(getPrefWidth(), getPrefHeight());
