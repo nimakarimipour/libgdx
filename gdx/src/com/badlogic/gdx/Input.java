@@ -636,12 +636,7 @@ public interface Input {
      * @return the int keycode
      */
     public static int valueOf(String keyname) {
-      if (keyNames == null) {
-        initializeKeyNames();
-        if (keyNames == null) {
-          return -1;
-        }
-      }
+      if (keyNames == null) initializeKeyNames();
       return keyNames.get(keyname, -1);
     }
 
