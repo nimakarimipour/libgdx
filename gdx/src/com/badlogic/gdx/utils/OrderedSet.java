@@ -169,6 +169,8 @@ public class OrderedSet<T> extends ObjectSet<T> {
     if (Collections.allocateIterators) return new OrderedSetIterator(this);
     if (iterator1 == null) {
       iterator1 = new OrderedSetIterator(this);
+    }
+    if (iterator2 == null) {
       iterator2 = new OrderedSetIterator(this);
     }
     if (!iterator1.valid) {
