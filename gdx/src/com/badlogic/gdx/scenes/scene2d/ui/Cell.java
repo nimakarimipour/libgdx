@@ -998,7 +998,7 @@ public class Cell<T extends Actor> implements Poolable {
     fillY = null;
     align = null;
     expandX = null;
-    expandY = 0; // Assuming 0 is the non-null default value for expandY
+    expandY = null;
     colspan = null;
     uniformX = null;
     uniformY = null;
