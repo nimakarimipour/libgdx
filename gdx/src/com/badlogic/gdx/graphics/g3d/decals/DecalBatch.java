@@ -97,10 +97,6 @@ public class DecalBatch implements Disposable {
    */
   @Initializer
   public void initialize(int size) {
-    if (size <= 0) {
-      throw new IllegalArgumentException("Size must be greater than zero");
-    }
-
     vertices = new float[size * Decal.SIZE];
 
     Mesh.VertexDataType vertexDataType = Mesh.VertexDataType.VertexArray;
