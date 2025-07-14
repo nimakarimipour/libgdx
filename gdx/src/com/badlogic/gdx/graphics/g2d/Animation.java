@@ -96,9 +96,6 @@ public class Animation<T> {
    */
   public Animation(float frameDuration, T... keyFrames) {
     this.frameDuration = frameDuration;
-    if (keyFrames == null) {
-      throw new IllegalArgumentException("keyFrames cannot be null");
-    }
     setKeyFrames(keyFrames);
   }
 
