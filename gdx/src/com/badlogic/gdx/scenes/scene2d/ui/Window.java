@@ -391,10 +391,7 @@ public class Window extends Table {
     public @Null Color titleFontColor = new Color(1, 1, 1, 1);
     @Nullable public @Null Drawable stageBackground;
 
-    public WindowStyle() {
-      this.titleFont =
-          new BitmapFont(); // Or another default initialization relevant to your application
-    }
+    public WindowStyle() {}
 
     public WindowStyle(BitmapFont titleFont, Color titleFontColor, @Null Drawable background) {
       this.titleFont = titleFont;
