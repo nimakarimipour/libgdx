@@ -227,13 +227,6 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
-      if (rotationalVelocity2dChannel == null) {
-        // Handle the case where rotationalVelocity2dChannel is not initialized.
-        // This might include returning early, throwing an exception, or any other logic appropriate
-        // for your application.
-        return;
-      }
-
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               s = 0,
