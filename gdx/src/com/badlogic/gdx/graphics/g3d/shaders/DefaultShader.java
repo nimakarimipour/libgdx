@@ -847,6 +847,9 @@ public class DefaultShader extends BaseShader {
   @Override
   public void init() {
     final ShaderProgram program = this.program;
+    if (program == null) {
+      return; // or handle the null case appropriately instead of setting this.program to null
+    }
     this.program = null;
     init(program, renderable);
     renderable = null;
