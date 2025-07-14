@@ -186,9 +186,7 @@ public class PooledLinkedList<T> {
       tail = null;
     } else {
       tail = p;
-      if (tail != null) {
-        tail.next = null;
-      }
+      tail.next = null;
     }
 
     return payload;
