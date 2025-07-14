@@ -39,8 +39,12 @@ public class ETC1TextureData implements TextureData {
   }
 
   public ETC1TextureData(FileHandle file, boolean useMipMaps) {
+    if (file == null) {
+      throw new IllegalArgumentException("FileHandle cannot be null");
+    }
     this.file = file;
     this.useMipMaps = useMipMaps;
+    this.data = new ETC1Data(); // Assuming ETC1Data can be initialized like this
   }
 
   public ETC1TextureData(ETC1Data encodedImage, boolean useMipMaps) {
