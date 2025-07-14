@@ -1,0 +1,126 @@
+====================
+Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java:318
+    return style.background;
+Log:
+16:16:35.501 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+==============================
+16:16:35.501 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.COUNT = 1
+16:16:35.501 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.PROMPTS SIZE = 1
+16:16:35.501 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+Both set to 0 and cleared 0
+16:16:35.501 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+172 : TOP LEVEL CALL TO FIX ERROR: Type='RETURN_NULLABLE', message='returning @Nullable expression from method with @NonNull return type'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java:318
+    return style.background;
+16:16:40.081 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Asking ChatGPT:
+I want to resolve a warning reported by NullAway.
+The error is of the type of "RETURN_NULLABLE" and the full error message is: "returning @Nullable expression from method with @NonNull return type".
+The line with the error is: "    return style.background;".
+
+The error is within "the method: getBackgroundDrawable()" and the code surrounding the error is:
+```java
+    } else textOffset = startX + renderOffset;
+
+    // calculate selection x position and width
+    if (hasSelection) {
+      int minIndex = Math.min(cursor, selectionStart);
+      int maxIndex = Math.max(cursor, selectionStart);
+      float minX =
+          Math.max(glyphPositions[minIndex] - glyphPositions[visibleTextStart], -textOffset);
+      float maxX =
+          Math.min(
+              glyphPositions[maxIndex] - glyphPositions[visibleTextStart],
+              visibleWidth - textOffset);
+      selectionX = minX;
+      selectionWidth = maxX - minX - style.font.getData().cursorX;
+    }
+  }
+
+  protected @Null Drawable getBackgroundDrawable() {
+    if (disabled && style.disabledBackground != null) return style.disabledBackground;
+    if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
+    return style.background;
+  }
+
+  public void draw(Batch batch, float parentAlpha) {
+    boolean focused = hasKeyboardFocus();
+    if (focused != this.focused || (focused && !blinkTask.isScheduled())) {
+      this.focused = focused;
+      blinkTask.cancel();
+      cursorOn = focused;
+      if (focused) Timer.schedule(blinkTask, blinkTime, blinkTime);
+      else keyRepeatTask.cancel();
+    } else if (!focused) //
+    cursorOn = false;
+
+    final BitmapFont font = style.font;
+    final Color fontColor =
+        (disabled && style.disabledFontColor != null)
+            ? style.disabledFontColor
+            : ((focused && style.focusedFontColor != null)
+                ? style.focusedFontColor
+```
+
+Give me the fixed code snippet (ONLY THE METHOD REWRITE OF "getBackgroundDrawable()") in XML format in <response> tag like the example below. I will apply the fix to my codebase.
+Do not import any additional libraries or classes or java comments.
+If you can provide the fixed code snippet, provide it in the following format and place the code snippet in the <code> tag within ```java block.
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  Your fixed code snippet here
+  ```
+    ]]>
+  </code>
+</response>
+
+16:16:40.082 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.ChatGPT.ask
+Retrieving response from cache
+16:16:40.082 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.tryCreate
+Trying to create Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  protected @NonNull Drawable getBackgroundDrawable() {
+    if (disabled && style.disabledBackground != null) return style.disabledBackground;
+    if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
+    if (style.background != null) return style.background;
+    throw new IllegalStateException("Background drawable must not be null");
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+16:16:40.083 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Creating Response:
+```xml
+<response>
+  <success>true</success>
+  <code><![CDATA[
+  ```java
+  protected @NonNull Drawable getBackgroundDrawable() {
+    if (disabled && style.disabledBackground != null) return style.disabledBackground;
+    if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
+    if (style.background != null) return style.background;
+    throw new IllegalStateException("Background drawable must not be null");
+  }
+  ```
+    ]]>
+  </code>
+</response>
+```
+16:16:40.083 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.Response.<init>
+Response created:
+protected @NonNull Drawable getBackgroundDrawable() {
+    if (disabled && style.disabledBackground != null) return style.disabledBackground;
+    if (style.focusedBackground != null && hasKeyboardFocus()) return style.focusedBackground;
+    if (style.background != null) return style.background;
+    throw new IllegalStateException("Background drawable must not be null");
+  }
