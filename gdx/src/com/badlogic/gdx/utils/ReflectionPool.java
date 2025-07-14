@@ -50,10 +50,10 @@ public class ReflectionPool<T> extends Pool<T> {
   @Nullable
   private @Null Constructor findConstructor(Class<T> type) {
     try {
-      return ClassReflection.getConstructor(type, new Class<?>[0]);
+      return ClassReflection.getConstructor(type, (Class[]) null);
     } catch (Exception ex1) {
       try {
-        Constructor constructor = ClassReflection.getDeclaredConstructor(type, new Class<?>[0]);
+        Constructor constructor = ClassReflection.getDeclaredConstructor(type, (Class[]) null);
         constructor.setAccessible(true);
         return constructor;
       } catch (ReflectionException ex2) {
