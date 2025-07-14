@@ -101,9 +101,8 @@ public class ObjectLongMap<K> implements Iterable<ObjectLongMap.Entry<K>> {
    *     next power of two.
    */
   public ObjectLongMap(int initialCapacity, float loadFactor) {
-    if (loadFactor <= 0f || loadFactor >= 1f) {
+    if (loadFactor <= 0f || loadFactor >= 1f)
       throw new IllegalArgumentException("loadFactor must be > 0 and < 1: " + loadFactor);
-    }
     this.loadFactor = loadFactor;
 
     int tableSize = tableSize(initialCapacity, loadFactor);
@@ -113,13 +112,6 @@ public class ObjectLongMap<K> implements Iterable<ObjectLongMap.Entry<K>> {
 
     keyTable = (K[]) new Object[tableSize];
     valueTable = new long[tableSize];
-
-    entries1 = null; // Assign default values
-    entries2 = null;
-    values1 = null;
-    values2 = null;
-    keys1 = null;
-    keys2 = null;
   }
 
   /** Creates a new map identical to the specified map. */
