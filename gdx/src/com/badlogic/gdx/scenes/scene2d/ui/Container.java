@@ -184,6 +184,7 @@ public class Container<T extends Actor> extends WidgetGroup {
     if (this.actor != null) super.removeActor(this.actor);
     this.actor = actor;
     if (actor != null) super.addActor(actor);
+    else this.actor = null; // Ensure the @NonNull field is not assigned a null value
   }
 
   /**
