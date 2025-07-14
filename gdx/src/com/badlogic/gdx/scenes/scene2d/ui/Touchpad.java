@@ -73,7 +73,6 @@ public class Touchpad extends Widget {
    *     knob to be moved.
    */
   public Touchpad(float deadzoneRadius, TouchpadStyle style) {
-    if (style == null) throw new IllegalArgumentException("style cannot be null");
     if (deadzoneRadius < 0) throw new IllegalArgumentException("deadzoneRadius must be > 0");
     this.deadzoneRadius = deadzoneRadius;
 
