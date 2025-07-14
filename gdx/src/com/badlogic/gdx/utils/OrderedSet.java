@@ -174,7 +174,9 @@ public class OrderedSet<T> extends ObjectSet<T> {
     if (!iterator1.valid) {
       iterator1.reset();
       iterator1.valid = true;
-      iterator2.valid = false;
+      if (iterator2 != null) {
+        iterator2.valid = false;
+      }
       return iterator1;
     }
     iterator2.reset();
