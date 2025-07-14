@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  * @see InputListener
  */
 public class InputEvent extends Event {
-  private Type type;
+  private Type type = Type.DEFAULT; // or other appropriate default value
   private float stageX, stageY, scrollAmountX, scrollAmountY;
   private int pointer, button, keyCode;
   private char character;
