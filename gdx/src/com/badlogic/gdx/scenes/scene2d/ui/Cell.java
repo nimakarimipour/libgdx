@@ -785,9 +785,6 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getPrefHeight() {
-    if (actor == null) {
-      throw new IllegalArgumentException("Actor cannot be null");
-    }
     return prefHeight.get(actor);
   }
 
