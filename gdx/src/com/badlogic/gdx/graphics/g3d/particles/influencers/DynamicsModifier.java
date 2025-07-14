@@ -160,9 +160,6 @@ public abstract class DynamicsModifier extends Influencer {
       phiValue = new ScaledNumericValue();
       thetaValue.load(value.thetaValue);
       phiValue.load(value.phiValue);
-      if (value.angularChannel != null) {
-        allocateChannels();
-      }
     }
 
     @Override
