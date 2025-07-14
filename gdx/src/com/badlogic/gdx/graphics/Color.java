@@ -115,9 +115,6 @@ public class Color {
    * @param color the Color
    */
   public Color set(@Nullable Color color) {
-    if (color == null) {
-      throw new IllegalArgumentException("color cannot be null");
-    }
     this.r = color.r;
     this.g = color.g;
     this.b = color.b;
