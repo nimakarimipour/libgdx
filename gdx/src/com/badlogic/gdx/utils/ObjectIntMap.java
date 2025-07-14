@@ -101,8 +101,9 @@ public class ObjectIntMap<K> implements Iterable<ObjectIntMap.Entry<K>> {
    *     next power of two.
    */
   public ObjectIntMap(int initialCapacity, float loadFactor) {
-    if (loadFactor <= 0f || loadFactor >= 1f)
+    if (loadFactor <= 0f || loadFactor >= 1f) {
       throw new IllegalArgumentException("loadFactor must be > 0 and < 1: " + loadFactor);
+    }
     this.loadFactor = loadFactor;
 
     int tableSize = tableSize(initialCapacity, loadFactor);
@@ -112,6 +113,14 @@ public class ObjectIntMap<K> implements Iterable<ObjectIntMap.Entry<K>> {
 
     keyTable = (K[]) new Object[tableSize];
     valueTable = new int[tableSize];
+
+    // Initialize the entries and keys arrays to ensure all @NonNull fields are properly initialized
+    entries1 = (K[]) new Object[0];
+    entries2 = (K[]) new Object[0];
+    values1 = new int[0];
+    values2 = new int[0];
+    keys1 = (K[]) new Object[0];
+    keys2 = (K[]) new Object[0];
   }
 
   /** Creates a new map identical to the specified map. */
