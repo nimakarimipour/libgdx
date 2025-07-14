@@ -1010,9 +1010,7 @@ public class Cell<T extends Actor> implements Poolable {
    */
   public void reset() {
     actor = null;
-    if (table != null) {
-      table = null;
-    }
+    table = null;
     endRow = false;
     cellAboveIndex = -1;
     set(defaults());
