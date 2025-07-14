@@ -153,7 +153,7 @@ public class MeshPart {
       final int size,
       final int type) {
     this.id = id;
-    this.mesh = mesh != null ? mesh : new Mesh();
+    this.mesh = mesh;
     this.offset = offset;
     this.size = size;
     this.primitiveType = type;
