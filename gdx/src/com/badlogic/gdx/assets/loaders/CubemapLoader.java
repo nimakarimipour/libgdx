@@ -43,7 +43,7 @@ public class CubemapLoader
     extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
   public static class CubemapLoaderInfo {
     @Nullable String filename;
-    CubemapData data;
+    CubemapData data = new KTXTextureData(file, false);
     @Nullable Cubemap cubemap;
   }
   ;
