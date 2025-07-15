@@ -159,7 +159,7 @@ public class PointSpriteParticleBatch
 
       for (int p = 0; p < data.controller.particles.size; ++p, ++tp) {
         int offset = offsets[tp] * CPU_VERTEX_SIZE;
-        int regionOffset = (regionChannel != null) ? p * regionChannel.strideSize : 0;
+        int regionOffset = p * regionChannel.strideSize;
         int positionOffset = p * positionChannel.strideSize;
         int colorOffset = p * colorChannel.strideSize;
         int rotationOffset = p * rotationChannel.strideSize;
@@ -184,16 +184,14 @@ public class PointSpriteParticleBatch
             rotationChannel.data[rotationOffset + ParticleChannels.CosineOffset];
         vertices[offset + CPU_SIZE_AND_ROTATION_OFFSET + 2] =
             rotationChannel.data[rotationOffset + ParticleChannels.SineOffset];
-        if (regionChannel != null) {
-          vertices[offset + CPU_REGION_OFFSET] =
-              regionChannel.data[regionOffset + ParticleChannels.UOffset];
-          vertices[offset + CPU_REGION_OFFSET + 1] =
-              regionChannel.data[regionOffset + ParticleChannels.VOffset];
-          vertices[offset + CPU_REGION_OFFSET + 2] =
-              regionChannel.data[regionOffset + ParticleChannels.U2Offset];
-          vertices[offset + CPU_REGION_OFFSET + 3] =
-              regionChannel.data[regionOffset + ParticleChannels.V2Offset];
-        }
+        vertices[offset + CPU_REGION_OFFSET] =
+            regionChannel.data[regionOffset + ParticleChannels.UOffset];
+        vertices[offset + CPU_REGION_OFFSET + 1] =
+            regionChannel.data[regionOffset + ParticleChannels.VOffset];
+        vertices[offset + CPU_REGION_OFFSET + 2] =
+            regionChannel.data[regionOffset + ParticleChannels.U2Offset];
+        vertices[offset + CPU_REGION_OFFSET + 3] =
+            regionChannel.data[regionOffset + ParticleChannels.V2Offset];
       }
     }
 
