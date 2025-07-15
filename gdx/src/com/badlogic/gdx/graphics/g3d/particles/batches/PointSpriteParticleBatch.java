@@ -157,11 +157,6 @@ public class PointSpriteParticleBatch
       FloatChannel colorChannel = data.colorChannel;
       FloatChannel rotationChannel = data.rotationChannel;
 
-      // Check if scaleChannel is null
-      if (scaleChannel == null) {
-        continue; // Skip this loop iteration if scaleChannel is null
-      }
-
       for (int p = 0; p < data.controller.particles.size; ++p, ++tp) {
         int offset = offsets[tp] * CPU_VERTEX_SIZE;
         int regionOffset = p * regionChannel.strideSize;
