@@ -475,7 +475,7 @@ public class Table extends WidgetGroup {
       Cell c = (Cell) cells[i];
       if (c.actor == actor) return c;
     }
-    return null;
+    return obtainCell(); // Assuming obtainCell() will provide a non-null default Cell
   }
 
   /** Returns the cells for this table. */
