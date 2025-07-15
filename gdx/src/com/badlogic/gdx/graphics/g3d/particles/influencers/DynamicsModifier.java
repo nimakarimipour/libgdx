@@ -581,8 +581,9 @@ public abstract class DynamicsModifier extends Influencer {
   public DynamicsModifier() {}
 
   public DynamicsModifier(DynamicsModifier modifier) {
-    this.isGlobal = modifier.isGlobal;
-  }
+      this.isGlobal = modifier.isGlobal;
+      this.lifeChannel = modifier.lifeChannel; // Ensure lifeChannel is copied and not null
+    }
 
   @Override
   public void allocateChannels() {
