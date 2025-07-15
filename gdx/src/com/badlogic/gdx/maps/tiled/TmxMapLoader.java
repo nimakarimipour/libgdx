@@ -227,10 +227,13 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
           } else {
             image = getRelativeFileHandle(tmxFile, imageSource);
           }
+
+          if (image != null) {
+            TextureRegion texture = imageResolver.getImage(image.path());
+            int tileId = firstgid + tileElement.getIntAttribute("id");
+            addStaticTiledMapTile(tileSet, texture, tileId, offsetX, offsetY);
+          }
         }
-        TextureRegion texture = imageResolver.getImage(image.path());
-        int tileId = firstgid + tileElement.getIntAttribute("id");
-        addStaticTiledMapTile(tileSet, texture, tileId, offsetX, offsetY);
       }
     }
   }
