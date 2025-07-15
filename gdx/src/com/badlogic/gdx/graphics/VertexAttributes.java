@@ -261,8 +261,10 @@ public final class VertexAttributes
     private ReadonlyIterator iterator1, iterator2;
 
     public ReadonlyIterable(T[] array) {
-      this.array = array;
-    }
+        this.array = array;
+        this.iterator1 = new ReadonlyIterator(array);
+        this.iterator2 = new ReadonlyIterator(array);
+      }
 
     @Override
     public Iterator<T> iterator() {
