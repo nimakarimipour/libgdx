@@ -153,32 +153,32 @@ public class DragAndDrop {
           }
 
           public void dragStop(InputEvent event, float x, float y, int pointer) {
-            if (pointer != activePointer) return;
-            activePointer = -1;
-            if (payload == null) return;
-
-            if (System.currentTimeMillis() < dragValidTime) isValidTarget = false;
-            else if (!isValidTarget && target != null) {
-              float stageX = event.getStageX() + touchOffsetX,
-                  stageY = event.getStageY() + touchOffsetY;
-              target.actor.stageToLocalCoordinates(tmpVector.set(stageX, stageY));
-              isValidTarget = target.drag(source, payload, tmpVector.x, tmpVector.y, pointer);
+                if (pointer != activePointer) return;
+                activePointer = -1;
+                if (payload == null) return;
+          
+                if (System.currentTimeMillis() < dragValidTime) isValidTarget = false;
+                else if (!isValidTarget && target != null && target.actor != null) {
+                    float stageX = event.getStageX() + touchOffsetX,
+                        stageY = event.getStageY() + touchOffsetY;
+                    target.actor.stageToLocalCoordinates(tmpVector.set(stageX, stageY));
+                    isValidTarget = target.drag(source, payload, tmpVector.x, tmpVector.y, pointer);
+                }
+                if (dragActor != null && removeDragActor) dragActor.remove();
+                if (isValidTarget && target != null && target.actor != null) {
+                    float stageX = event.getStageX() + touchOffsetX,
+                        stageY = event.getStageY() + touchOffsetY;
+                    target.actor.stageToLocalCoordinates(tmpVector.set(stageX, stageY));
+                    target.drop(source, payload, tmpVector.x, tmpVector.y, pointer);
+                }
+                source.dragStop(event, x, y, pointer, payload, isValidTarget ? target : null);
+                if (target != null) target.reset(source, payload);
+                dragSource = null;
+                payload = null;
+                target = null;
+                isValidTarget = false;
+                dragActor = null;
             }
-            if (dragActor != null && removeDragActor) dragActor.remove();
-            if (isValidTarget) {
-              float stageX = event.getStageX() + touchOffsetX,
-                  stageY = event.getStageY() + touchOffsetY;
-              target.actor.stageToLocalCoordinates(tmpVector.set(stageX, stageY));
-              target.drop(source, payload, tmpVector.x, tmpVector.y, pointer);
-            }
-            source.dragStop(event, x, y, pointer, payload, isValidTarget ? target : null);
-            if (target != null) target.reset(source, payload);
-            dragSource = null;
-            payload = null;
-            target = null;
-            isValidTarget = false;
-            dragActor = null;
-          }
         };
     listener.setTapSquareSize(tapSquareSize);
     listener.setButton(button);
