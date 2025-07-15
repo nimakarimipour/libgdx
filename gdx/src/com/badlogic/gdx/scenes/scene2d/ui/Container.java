@@ -244,10 +244,10 @@ public class Container<T extends Actor> extends WidgetGroup {
   }
 
   public Actor removeActorAt(int index, boolean unfocus) {
-    Actor actor = super.removeActorAt(index, unfocus);
-    if (actor == this.actor) this.actor = null;
-    return actor;
-  }
+      Actor actor = super.removeActorAt(index, unfocus);
+      if (actor == this.actor) setActor(null);
+      return actor;
+    }
 
   /**
    * Sets the minWidth, prefWidth, maxWidth, minHeight, prefHeight, and maxHeight to the specified
