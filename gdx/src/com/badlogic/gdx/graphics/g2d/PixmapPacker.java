@@ -444,50 +444,52 @@ public class PixmapPacker implements Disposable {
    * longer dispose the page pixmaps.
    */
   public synchronized void updateTextureAtlas(
-      TextureAtlas atlas,
-      TextureFilter minFilter,
-      TextureFilter magFilter,
-      boolean useMipMaps,
-      boolean useIndexes) {
-    updatePageTextures(minFilter, magFilter, useMipMaps);
-    for (Page page : pages) {
-      if (page.addedRects.size > 0) {
-        for (String name : page.addedRects) {
-          PixmapPackerRectangle rect = page.rects.get(name);
-          TextureAtlas.AtlasRegion region =
-              new TextureAtlas.AtlasRegion(
-                  page.texture, (int) rect.x, (int) rect.y, (int) rect.width, (int) rect.height);
-
-          if (rect.splits != null) {
-            region.names = new String[] {"split", "pad"};
-            region.values = new int[][] {rect.splits, rect.pads};
-          }
-
-          int imageIndex = -1;
-          String imageName = name;
-
-          if (useIndexes) {
-            Matcher matcher = indexPattern.matcher(imageName);
-            if (matcher.matches()) {
-              imageName = matcher.group(1);
-              imageIndex = Integer.parseInt(matcher.group(2));
+        TextureAtlas atlas,
+        TextureFilter minFilter,
+        TextureFilter magFilter,
+        boolean useMipMaps,
+        boolean useIndexes) {
+      updatePageTextures(minFilter, magFilter, useMipMaps);
+      for (Page page : pages) {
+        if (page.addedRects.size > 0) {
+          for (String name : page.addedRects) {
+            PixmapPackerRectangle rect = page.rects.get(name);
+            TextureAtlas.AtlasRegion region =
+                new TextureAtlas.AtlasRegion(
+                    page.texture, (int) rect.x, (int) rect.y, (int) rect.width, (int) rect.height);
+  
+            if (rect.splits != null) {
+              region.names = new String[] {"split", "pad"};
+              region.values = new int[][] {rect.splits, rect.pads};
             }
+  
+            int imageIndex = -1;
+            String imageName = name;
+  
+            if (useIndexes) {
+              Matcher matcher = indexPattern.matcher(imageName);
+              if (matcher.matches()) {
+                imageName = matcher.group(1);
+                imageIndex = Integer.parseInt(matcher.group(2));
+              }
+            }
+  
+            region.name = imageName;
+            region.index = imageIndex;
+            region.offsetX = rect.offsetX;
+            region.offsetY = (int) (rect.originalHeight - rect.height - rect.offsetY);
+            region.originalWidth = rect.originalWidth;
+            region.originalHeight = rect.originalHeight;
+  
+            atlas.getRegions().add(region);
           }
-
-          region.name = imageName;
-          region.index = imageIndex;
-          region.offsetX = rect.offsetX;
-          region.offsetY = (int) (rect.originalHeight - rect.height - rect.offsetY);
-          region.originalWidth = rect.originalWidth;
-          region.originalHeight = rect.originalHeight;
-
-          atlas.getRegions().add(region);
+          page.addedRects.clear();
+          if (page.texture != null) {
+            atlas.getTextures().add(page.texture);
+          }
         }
-        page.addedRects.clear();
-        atlas.getTextures().add(page.texture);
       }
     }
-  }
 
   /**
    * Calls {@link Page#updateTexture(TextureFilter, TextureFilter, boolean) updateTexture} for each
