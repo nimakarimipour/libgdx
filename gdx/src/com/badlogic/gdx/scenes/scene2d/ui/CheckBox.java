@@ -47,12 +47,6 @@ public class CheckBox extends TextButton {
   public CheckBox(@Null String text, CheckBoxStyle style) {
     super(text, style);
 
-    if (style == null) {
-      throw new IllegalArgumentException("style cannot be null.");
-    }
-
-    this.style = style;
-
     Label label = getLabel();
     label.setAlignment(Align.left);
 
