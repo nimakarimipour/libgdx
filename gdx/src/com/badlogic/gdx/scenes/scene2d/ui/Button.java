@@ -90,8 +90,11 @@ public class Button extends Table implements Disableable {
    * this button.
    */
   public Button() {
-    initialize();
-  }
+      initialize();
+      if (style == null) {
+        throw new IllegalStateException("Button style cannot be null");
+      }
+    }
 
   private void initialize() {
     setTouchable(Touchable.enabled);
