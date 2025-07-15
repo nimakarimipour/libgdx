@@ -242,21 +242,21 @@ public class JsonValue implements Iterable<JsonValue> {
    * @return May be null if this value is null.
    * @throws IllegalStateException if this an array or object.
    */
-  public @Null String asString() {
-    switch (type) {
-      case stringValue:
-        return stringValue;
-      case doubleValue:
-        return stringValue != null ? stringValue : Double.toString(doubleValue);
-      case longValue:
-        return stringValue != null ? stringValue : Long.toString(longValue);
-      case booleanValue:
-        return longValue != 0 ? "true" : "false";
-      case nullValue:
-        return null;
+  public String asString() {
+      switch (type) {
+        case stringValue:
+          return stringValue;
+        case doubleValue:
+          return stringValue != null ? stringValue : Double.toString(doubleValue);
+        case longValue:
+          return stringValue != null ? stringValue : Long.toString(longValue);
+        case booleanValue:
+          return longValue != 0 ? "true" : "false";
+        case nullValue:
+          return "null";
+      }
+      throw new IllegalStateException("Value cannot be converted to string: " + type);
     }
-    throw new IllegalStateException("Value cannot be converted to string: " + type);
-  }
 
   /**
    * Returns this value as a float.
