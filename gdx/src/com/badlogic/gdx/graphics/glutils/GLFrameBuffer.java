@@ -531,9 +531,12 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
     protected boolean hasPackedStencilDepthRenderBuffer;
 
     public GLFrameBufferBuilder(int width, int height) {
-      this.width = width;
-      this.height = height;
-    }
+          this.width = width;
+          this.height = height;
+          this.stencilRenderBufferSpec = new FrameBufferRenderBufferAttachmentSpec(0);
+          this.depthRenderBufferSpec = new FrameBufferRenderBufferAttachmentSpec(0);
+          this.packedStencilDepthRenderBufferSpec = new FrameBufferRenderBufferAttachmentSpec(0);
+      }
 
     public GLFrameBufferBuilder<U> addColorTextureAttachment(
         int internalFormat, int format, int type) {
