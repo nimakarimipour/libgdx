@@ -46,8 +46,7 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
     public Renderable obtain() {
       Renderable renderable = super.obtain();
       renderable.environment = null;
-      // Assuming `material` needs to be non-null, you can assign a default value.
-      renderable.material = new Material();
+      renderable.material = null;
       renderable.meshPart.set("", null, 0, 0, 0);
       renderable.shader = null;
       renderable.userData = null;
