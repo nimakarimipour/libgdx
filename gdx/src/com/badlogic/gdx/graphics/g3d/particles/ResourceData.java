@@ -68,10 +68,11 @@ public class ResourceData<T> implements Json.Serializable {
     protected ResourceData resources;
 
     public SaveData() {
-      data = new ObjectMap<String, Object>();
-      assets = new IntArray();
-      loadIndex = 0;
-    }
+          data = new ObjectMap<String, Object>();
+          assets = new IntArray();
+          loadIndex = 0;
+          resources = new ResourceData();
+      }
 
     public SaveData(ResourceData resources) {
       data = new ObjectMap<String, Object>();
