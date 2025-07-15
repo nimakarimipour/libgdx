@@ -178,7 +178,8 @@ public class Octree<T> {
     int level;
     final BoundingBox bounds = new BoundingBox();
     boolean leaf;
-    private Octree.OctreeNode[] children; // May be null when leaf is true.
+    private Octree.OctreeNode[] children = new Octree.OctreeNode[0];
+    // May be null when leaf is true.
     private final Array<T> geometries = new Array<T>(Math.min(16, maxItemsPerNode));
 
     private void split() {
