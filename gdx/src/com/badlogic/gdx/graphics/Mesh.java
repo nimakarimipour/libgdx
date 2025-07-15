@@ -708,8 +708,11 @@ public class Mesh implements Disposable {
    * @param count number of vertices or indices to use
    */
   public void render(@Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
-    render(shader, primitiveType, offset, count, autoBind);
-  }
+      if (shader == null) {
+        throw new IllegalArgumentException("ShaderProgram cannot be null");
+      }
+      render(shader, primitiveType, offset, count, autoBind);
+    }
 
   /**
    * Renders the mesh using the given primitive type. offset specifies the offset into either the
