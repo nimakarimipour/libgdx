@@ -162,10 +162,14 @@ public class Texture extends GLTexture {
   }
 
   protected Texture(int glTarget, int glHandle, TextureData data) {
-    super(glTarget, glHandle);
-    load(data);
-    if (data.isManaged()) addManagedTexture(Gdx.app, this);
-  }
+      super(glTarget, glHandle);
+      if (data == null) {
+        throw new NullPointerException("TextureData must not be null");
+      }
+      this.data = data;
+      load(data);
+      if (data.isManaged()) addManagedTexture(Gdx.app, this);
+    }
 
   public void load(TextureData data) {
     if (this.data != null && data.isManaged() != this.data.isManaged())
