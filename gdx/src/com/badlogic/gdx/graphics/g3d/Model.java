@@ -135,7 +135,9 @@ public class Model implements Disposable {
   protected void loadAnimations(Iterable<ModelAnimation> modelAnimations) {
     for (final ModelAnimation anim : modelAnimations) {
       Animation animation = new Animation();
-      animation.id = anim.id;
+      if (anim.id != null) {
+        animation.id = anim.id;
+      }
       for (ModelNodeAnimation nanim : anim.nodeAnimations) {
         final Node node = getNode(nanim.nodeId);
         if (node == null) continue;
