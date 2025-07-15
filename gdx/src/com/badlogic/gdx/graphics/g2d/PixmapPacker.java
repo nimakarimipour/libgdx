@@ -673,30 +673,30 @@ public class PixmapPacker implements Disposable {
     }
 
     public Page pack(PixmapPacker packer, @Nullable String name, Rectangle rect) {
-      GuillotinePage page;
-      if (packer.pages.size == 0) {
-        // Add a page if empty.
-        page = new GuillotinePage(packer);
-        packer.pages.add(page);
-      } else {
-        // Always try to pack into the last page.
-        page = (GuillotinePage) packer.pages.peek();
-      }
-
-      int padding = packer.padding;
-      rect.width += padding;
-      rect.height += padding;
-      Node node = insert(page.root, rect);
-      if (node == null) {
-        // Didn't fit, pack into a new page.
-        page = new GuillotinePage(packer);
-        packer.pages.add(page);
-        node = insert(page.root, rect);
-      }
-      node.full = true;
-      rect.set(node.rect.x, node.rect.y, node.rect.width - padding, node.rect.height - padding);
-      return page;
-    }
+          GuillotinePage page;
+          if (packer.pages.size == 0) {
+            page = new GuillotinePage(packer);
+            packer.pages.add(page);
+          } else {
+            page = (GuillotinePage) packer.pages.peek();
+          }
+    
+          int padding = packer.padding;
+          rect.width += padding;
+          rect.height += padding;
+          Node node = insert(page.root, rect);
+          if (node == null) {
+            page = new GuillotinePage(packer);
+            packer.pages.add(page);
+            node = insert(page.root, rect);
+          }
+          
+          if (node != null) {
+            node.full = true;
+            rect.set(node.rect.x, node.rect.y, node.rect.width - padding, node.rect.height - padding);
+          }
+          return page;
+        }
 
     @Nullable
     private Node insert(Node node, Rectangle rect) {
