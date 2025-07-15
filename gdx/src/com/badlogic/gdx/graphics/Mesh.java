@@ -358,10 +358,12 @@ public class Mesh implements Disposable {
    * @param count the number of floats to update
    */
   public Mesh updateInstanceData(
-      int targetOffset, FloatBuffer source, int sourceOffset, int count) {
-    this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
-    return this;
-  }
+        int targetOffset, FloatBuffer source, int sourceOffset, int count) {
+      if (this.instances != null) {
+        this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
+      }
+      return this;
+    }
 
   /**
    * Sets the vertices of this Mesh. The attributes are assumed to be given in float format.
