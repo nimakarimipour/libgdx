@@ -330,12 +330,14 @@ public class TextField extends Widget implements Disableable {
     cursorOn = false;
 
     final BitmapFont font = style.font;
-    final Color fontColor =
-        (disabled && style.disabledFontColor != null)
-            ? style.disabledFontColor
-            : ((focused && style.focusedFontColor != null)
-                ? style.focusedFontColor
-                : style.fontColor);
+    Color fontColor = null;
+    if (disabled && style.disabledFontColor != null) {
+      fontColor = style.disabledFontColor;
+    } else if (focused && style.focusedFontColor != null) {
+      fontColor = style.focusedFontColor;
+    } else if (style.fontColor != null) {
+      fontColor = style.fontColor;
+    }
     final Drawable selection = style.selection;
     final Drawable cursorPatch = style.cursor;
     final Drawable background = getBackgroundDrawable();
@@ -379,7 +381,7 @@ public class TextField extends Widget implements Disableable {
             y + textY + yOffset,
             width - bgLeftWidth - bgRightWidth);
       }
-    } else {
+    } else if (fontColor != null) {
       font.setColor(fontColor.r, fontColor.g, fontColor.b, fontColor.a * color.a * parentAlpha);
       drawText(batch, font, x + bgLeftWidth, y + textY + yOffset);
     }
