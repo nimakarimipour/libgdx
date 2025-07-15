@@ -154,9 +154,7 @@ public class ModelBuilder {
    * use {@link #manage(Disposable)} to add those to the model.
    */
   public void part(final MeshPart meshpart, final Material material) {
-    if (node == null) {
-      node = new Node(); // Ensure node is initialized
-    }
+    if (node == null) node();
     node.parts.add(new NodePart(meshpart, material));
   }
 
