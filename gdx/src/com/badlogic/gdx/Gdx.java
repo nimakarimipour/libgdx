@@ -40,8 +40,5 @@ public class Gdx {
 
   public static GL20 gl;
   public static GL20 gl20;
-  public static GL30 gl30 = new GL30() {
-        // Implement necessary methods here as anonymous inner class, or if GL30 is an interface,
-        // consider initializing it properly with a concrete class instance.
-      };
+  public static GL30 gl30;
 }
