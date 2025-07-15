@@ -63,12 +63,6 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     this.ordered = ordered;
     keys = (K[]) new Object[capacity];
     values = (V[]) new Object[capacity];
-    entries1 = new Entries();
-    entries2 = new Entries();
-    values1 = new Values();
-    values2 = new Values();
-    keys1 = new Keys();
-    keys2 = new Keys();
   }
 
   /**
