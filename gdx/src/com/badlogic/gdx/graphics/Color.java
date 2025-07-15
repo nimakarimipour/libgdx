@@ -115,12 +115,15 @@ public class Color {
    * @param color the Color
    */
   public Color set(@Nullable Color color) {
-    this.r = color.r;
-    this.g = color.g;
-    this.b = color.b;
-    this.a = color.a;
-    return this;
-  }
+      if (color == null) {
+        throw new IllegalArgumentException("color cannot be null");
+      }
+      this.r = color.r;
+      this.g = color.g;
+      this.b = color.b;
+      this.a = color.a;
+      return this;
+    }
 
   /**
    * Multiplies the this color and the given color
