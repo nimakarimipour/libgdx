@@ -51,24 +51,26 @@ public class PooledLinkedList<T> {
 
   /** Adds the specified object to the end of the list regardless of iteration status */
   @Initializer
-  public void add(T object) {
-    Item<T> item = pool.obtain();
-    item.payload = object;
-    item.next = null;
-    item.prev = null;
-
-    if (head == null) {
-      head = item;
+    public void add(T object) {
+      Item<T> item = pool.obtain();
+      item.payload = object;
+      item.next = null;
+      item.prev = null;
+  
+      if (head == null) {
+        head = item;
+        tail = item;
+        size++;
+        return;
+      }
+  
+      if (tail != null) {
+        item.prev = tail;
+        tail.next = item;
+      }
       tail = item;
       size++;
-      return;
     }
-
-    item.prev = tail;
-    tail.next = item;
-    tail = item;
-    size++;
-  }
 
   /** Adds the specified object to the head of the list regardless of iteration status */
   public void addFirst(T object) {
