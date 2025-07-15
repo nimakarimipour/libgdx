@@ -177,11 +177,11 @@ public class HttpRequestBuilder {
    * request, it should be returned to the pool via {@code Pools.free(request)}.
    */
   public HttpRequest build() {
-    validate();
-    HttpRequest request = httpRequest;
-    httpRequest = null;
-    return request;
-  }
+      validate();
+      HttpRequest request = httpRequest;
+      httpRequest = new HttpRequest(); // or any appropriate non-null value
+      return request;
+    }
 
   private void validate() {
     if (httpRequest == null) {
