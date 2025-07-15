@@ -92,27 +92,32 @@ public class PointSpriteParticleBatch
   }
 
   public PointSpriteParticleBatch(
-      int capacity,
-      ParticleShader.Config shaderConfig,
-      @Nullable BlendingAttribute blendingAttribute,
-      @Nullable DepthTestAttribute depthTestAttribute) {
-    super(PointSpriteControllerRenderData.class);
-
-    if (!pointSpritesEnabled) enablePointSprites();
-
-    this.blendingAttribute = blendingAttribute;
-    this.depthTestAttribute = depthTestAttribute;
-
-    if (this.blendingAttribute == null)
-      this.blendingAttribute = new BlendingAttribute(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA, 1f);
-    if (this.depthTestAttribute == null)
-      this.depthTestAttribute = new DepthTestAttribute(GL20.GL_LEQUAL, false);
-
-    allocRenderable();
-    ensureCapacity(capacity);
-    renderable.shader = new ParticleShader(renderable, shaderConfig);
-    renderable.shader.init();
-  }
+        int capacity,
+        ParticleShader.Config shaderConfig,
+        @Nullable BlendingAttribute blendingAttribute,
+        @Nullable DepthTestAttribute depthTestAttribute) {
+      super(PointSpriteControllerRenderData.class);
+  
+      if (!pointSpritesEnabled) enablePointSprites();
+  
+      this.blendingAttribute = blendingAttribute;
+      this.depthTestAttribute = depthTestAttribute;
+  
+      if (this.blendingAttribute == null)
+        this.blendingAttribute = new BlendingAttribute(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA, 1f);
+      if (this.depthTestAttribute == null)
+        this.depthTestAttribute = new DepthTestAttribute(GL20.GL_LEQUAL, false);
+  
+      allocRenderable();
+      ensureCapacity(capacity);
+  
+      if (renderable == null) {
+        throw new IllegalStateException("Renderable must be initialized before usage.");
+      }
+      
+      renderable.shader = new ParticleShader(renderable, shaderConfig);
+      renderable.shader.init();
+    }
 
   @Override
   protected void allocParticlesData(int capacity) {
