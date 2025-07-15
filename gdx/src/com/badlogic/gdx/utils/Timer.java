@@ -91,25 +91,26 @@ public class Timer {
    * @param repeatCount If negative, the task will repeat forever.
    */
   public Task scheduleTask(Task task, float delaySeconds, float intervalSeconds, int repeatCount) {
-    synchronized (threadLock) {
-      synchronized (this) {
-        synchronized (task) {
-          if (task.timer != null)
-            throw new IllegalArgumentException("The same task may not be scheduled twice.");
-          task.timer = this;
-          long timeMillis = System.nanoTime() / 1000000;
-          long executeTimeMillis = timeMillis + (long) (delaySeconds * 1000);
-          if (thread.pauseTimeMillis > 0) executeTimeMillis -= timeMillis - thread.pauseTimeMillis;
-          task.executeTimeMillis = executeTimeMillis;
-          task.intervalMillis = (long) (intervalSeconds * 1000);
-          task.repeatCount = repeatCount;
-          tasks.add(task);
+      synchronized (threadLock) {
+        synchronized (this) {
+          synchronized (task) {
+            if (task.timer != null)
+              throw new IllegalArgumentException("The same task may not be scheduled twice.");
+            task.timer = this;
+            long timeMillis = System.nanoTime() / 1000000;
+            long executeTimeMillis = timeMillis + (long) (delaySeconds * 1000);
+            if (thread != null && thread.pauseTimeMillis > 0) 
+              executeTimeMillis -= timeMillis - thread.pauseTimeMillis;
+            task.executeTimeMillis = executeTimeMillis;
+            task.intervalMillis = (long) (intervalSeconds * 1000);
+            task.repeatCount = repeatCount;
+            tasks.add(task);
+          }
         }
+        threadLock.notifyAll();
       }
-      threadLock.notifyAll();
+      return task;
     }
-    return task;
-  }
 
   /**
    * Stops the timer, tasks will not be executed and time that passes will not be applied to the
