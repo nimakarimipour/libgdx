@@ -56,9 +56,6 @@ public final class ClassReflection {
    * Class parameter.
    */
   public static boolean isAssignableFrom(Class c1, @Nullable Class c2) {
-    if (c2 == null) {
-      throw new IllegalArgumentException("Parameter 'c2' cannot be null");
-    }
     return c1.isAssignableFrom(c2);
   }
 
