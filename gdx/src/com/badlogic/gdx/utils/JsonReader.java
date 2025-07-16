@@ -738,10 +738,10 @@ public class JsonReader implements BaseJsonReader {
   }
 
   protected void pop() {
-    root = elements.pop();
-    if (current.size > 0) lastChild.pop();
-    current = elements.size > 0 ? elements.peek() : null;
-  }
+      root = elements.pop();
+      if (current != null && current.size > 0) lastChild.pop();
+      current = elements.size > 0 ? elements.peek() : null;
+    }
 
   protected void string(@Nullable String name, @Nullable String value) {
     addChild(name, new JsonValue(value));
