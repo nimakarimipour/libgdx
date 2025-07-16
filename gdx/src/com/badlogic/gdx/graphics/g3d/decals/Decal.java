@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.NumberUtils;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Represents a sprite in 3d space. Typical 3d transformations such as translation, rotation and
@@ -638,19 +639,22 @@ public class Decal {
    * vertices array
    */
   protected void updateUVs() {
-    TextureRegion tr = material.textureRegion;
-    // left top
-    vertices[U1] = tr.getU();
-    vertices[V1] = tr.getV();
-    // right top
-    vertices[U2] = tr.getU2();
-    vertices[V2] = tr.getV();
-    // left bot
-    vertices[U3] = tr.getU();
-    vertices[V3] = tr.getV2();
-    // right bot
-    vertices[U4] = tr.getU2();
-    vertices[V4] = tr.getV2();
+          TextureRegion tr = material.textureRegion;
+          if (tr == null) {
+              return;
+          }
+          // left top
+          vertices[U1] = Nullability.castToNonnull(tr, "checked for null").getU();
+          vertices[V1] = tr.getV();
+          // right top
+          vertices[U2] = tr.getU2();
+          vertices[V2] = tr.getV();
+          // left bot
+          vertices[U3] = tr.getU();
+          vertices[V3] = tr.getV2();
+          // right bot
+          vertices[U4] = tr.getU2();
+          vertices[V4] = tr.getV2();
   }
 
   /**
@@ -666,7 +670,7 @@ public class Decal {
   /**
    * @return the texture region this Decal uses. Do not modify it!
    */
-  public TextureRegion getTextureRegion() {
+  @Nullable public TextureRegion getTextureRegion() {
     return this.material.textureRegion;
   }
 
