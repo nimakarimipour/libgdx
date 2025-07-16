@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -50,7 +51,7 @@ import javax.annotation.Nullable;
  * @author Nathan Sweet
  */
 public class List<T> extends Widget implements Cullable {
-  ListStyle style;
+  @Nullable ListStyle style;
   final Array<T> items = new Array();
   ArraySelection<T> selection = new ArraySelection(items);
   @Nullable private Rectangle cullingArea;
@@ -178,11 +179,14 @@ public class List<T> extends Widget implements Cullable {
    * Returns the list's style. Modifying the returned style may not have an effect until {@link
    * #setStyle(ListStyle)} is called.
    */
+  @Nullable
   public ListStyle getStyle() {
     return style;
   }
 
   public void layout() {
+    if (style == null) throw new IllegalStateException("style cannot be null.");
+
     BitmapFont font = style.font;
     Drawable selectedDrawable = style.selection;
 
@@ -218,7 +222,9 @@ public class List<T> extends Widget implements Cullable {
 
     drawBackground(batch, parentAlpha);
 
-    BitmapFont font = style.font;
+    if (style == null) throw new IllegalStateException("Style cannot be null.");
+
+    BitmapFont font = Nullability.castToNonnull(style, "style cannot be null").font;
     Drawable selectedDrawable = style.selection;
     Color fontColorSelected = style.fontColorSelected;
     Color fontColorUnselected = style.fontColorUnselected;
@@ -260,8 +266,7 @@ public class List<T> extends Widget implements Cullable {
               fontColorSelected.g,
               fontColorSelected.b,
               fontColorSelected.a * parentAlpha);
-        } else if (overIndex == i && style.over != null) //
-        drawable = style.over;
+        } else if (overIndex == i && style.over != null) drawable = style.over;
         drawSelection(batch, drawable, x, y + itemY - itemHeight, width, itemHeight);
         drawItem(batch, font, i, item, x + textOffsetX, y + itemY - textOffsetY, textWidth);
         if (selected) {
@@ -285,11 +290,12 @@ public class List<T> extends Widget implements Cullable {
 
   /** Called to draw the background. Default implementation draws the style background drawable. */
   protected void drawBackground(Batch batch, float parentAlpha) {
-    if (style.background != null) {
-      Color color = getColor();
-      batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-      style.background.draw(batch, getX(), getY(), getWidth(), getHeight());
-    }
+    if (style == null || style.background == null) return;
+    Color color = getColor();
+    batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+    Nullability.castToNonnull(style, "null check before use")
+        .background
+        .draw(batch, getX(), getY(), getWidth(), getHeight());
   }
 
   protected GlyphLayout drawItem(
@@ -378,6 +384,7 @@ public class List<T> extends Widget implements Cullable {
    */
   public int getItemIndexAt(float y) {
     float height = getHeight();
+    if (List.this.style == null) throw new IllegalStateException("Style is not set.");
     Drawable background = List.this.style.background;
     if (background != null) {
       height -= background.getTopHeight() + background.getBottomHeight();
