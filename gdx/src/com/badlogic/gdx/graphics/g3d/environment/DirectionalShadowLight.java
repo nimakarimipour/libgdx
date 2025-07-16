@@ -28,12 +28,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * @author Xoppa
  */
 public class DirectionalShadowLight extends DirectionalLight implements ShadowMap, Disposable {
-  protected FrameBuffer fbo;
+  @Nullable protected FrameBuffer fbo;
   protected Camera cam;
   protected float halfDepth;
   protected float halfHeight;
@@ -80,22 +81,24 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
   }
 
   public void begin() {
-    final int w = fbo.getWidth();
-    final int h = fbo.getHeight();
-    fbo.begin();
-    Gdx.gl.glViewport(0, 0, w, h);
-    Gdx.gl.glClearColor(1, 1, 1, 1);
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-    Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
-    Gdx.gl.glScissor(1, 1, w - 2, h - 2);
-  }
+        if (fbo != null) {
+            final int w = fbo.getWidth();
+            final int h = fbo.getHeight();
+            fbo.begin();
+            Gdx.gl.glViewport(0, 0, w, h);
+            Gdx.gl.glClearColor(1, 1, 1, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+            Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+            Gdx.gl.glScissor(1, 1, w - 2, h - 2);
+        }
+    }
 
   public void end() {
-    Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
-    fbo.end();
-  }
+          Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
+          if (fbo != null) Nullability.castToNonnull(fbo, "explicit null check").end();
+    }
 
-  public FrameBuffer getFrameBuffer() {
+  @Nullable public FrameBuffer getFrameBuffer() {
     return fbo;
   }
 
@@ -109,10 +112,12 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
   }
 
   @Override
-  public TextureDescriptor getDepthMap() {
-    textureDesc.texture = fbo.getColorBufferTexture();
-    return textureDesc;
-  }
+    public TextureDescriptor getDepthMap() {
+      if (fbo != null) {
+        textureDesc.texture = fbo.getColorBufferTexture();
+      }
+      return textureDesc;
+    }
 
   @Override
   public void dispose() {
