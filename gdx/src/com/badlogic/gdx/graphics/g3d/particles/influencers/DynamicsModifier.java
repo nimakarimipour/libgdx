@@ -27,7 +27,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.uber.nullaway.annotations.Initializer;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -142,7 +141,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public abstract static class Angular extends Strength {
-    @Nullable protected FloatChannel angularChannel;
+    protected FloatChannel angularChannel;
 
     /** Polar angle, XZ plane */
     public ScaledNumericValue thetaValue;
@@ -173,29 +172,25 @@ public abstract class DynamicsModifier extends Influencer {
     @Override
     public void activateParticles(int startIndex, int count) {
       super.activateParticles(startIndex, count);
+      float start, diff;
+      for (int i = startIndex * angularChannel.strideSize,
+              c = i + count * angularChannel.strideSize;
+          i < c;
+          i += angularChannel.strideSize) {
 
-      // Check if angularChannel is not null before proceeding
-      if (angularChannel != null) {
-        float start, diff;
-        for (int i = startIndex * angularChannel.strideSize,
-                c = i + count * angularChannel.strideSize;
-            i < c;
-            i += angularChannel.strideSize) {
+        // Theta
+        start = thetaValue.newLowValue();
+        diff = thetaValue.newHighValue();
+        if (!thetaValue.isRelative()) diff -= start;
+        angularChannel.data[i + ParticleChannels.VelocityThetaStartOffset] = start;
+        angularChannel.data[i + ParticleChannels.VelocityThetaDiffOffset] = diff;
 
-          // Theta
-          start = thetaValue.newLowValue();
-          diff = thetaValue.newHighValue();
-          if (!thetaValue.isRelative()) diff -= start;
-          angularChannel.data[i + ParticleChannels.VelocityThetaStartOffset] = start;
-          angularChannel.data[i + ParticleChannels.VelocityThetaDiffOffset] = diff;
-
-          // Phi
-          start = phiValue.newLowValue();
-          diff = phiValue.newHighValue();
-          if (!phiValue.isRelative()) diff -= start;
-          angularChannel.data[i + ParticleChannels.VelocityPhiStartOffset] = start;
-          angularChannel.data[i + ParticleChannels.VelocityPhiDiffOffset] = diff;
-        }
+        // Phi
+        start = phiValue.newLowValue();
+        diff = phiValue.newHighValue();
+        if (!phiValue.isRelative()) diff -= start;
+        angularChannel.data[i + ParticleChannels.VelocityPhiStartOffset] = start;
+        angularChannel.data[i + ParticleChannels.VelocityPhiDiffOffset] = diff;
       }
     }
 
@@ -271,9 +266,32 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
-      if (angularChannel == null) {
-        angularChannel = controller.particles.addChannel(ParticleChannels.Interpolation4);
-      }
+
+      // Matrix3 I_t = defined by the shape, it's the inertia tensor
+      // Vector3 r = position vector
+      // Vector3 L = r.cross(v.mul(m)), It's the angular momentum, where mv it's the linear momentum
+      // Inverse(I_t) = a diagonal matrix where the diagonal is IyIz, IxIz, IxIy
+      // Vector3 w = L/I_t = inverse(I_t)*L, It's the angular velocity
+      // Quaternion spin = 0.5f*Quaternion(w, 0)*currentRotation
+      // currentRotation += spin*dt
+      // normalize(currentRotation)
+
+      // Algorithm 1
+      // Consider a simple channel which represent an angular velocity w
+      // Sum each w for each rotation
+      // Update rotation
+
+      // Algorithm 2
+      // Consider a channel which represent a sort of angular momentum L (r, v)
+      // Sum each L for each rotation
+      // Multiply sum by constant quantity k = m*I_to(-1) , m could be optional while I is constant
+      // and can be calculated at
+      // start
+      // Update rotation
+
+      // Algorithm 3
+      // Consider a channel which represent a simple angular momentum L
+      // Proceed as Algorithm 2
 
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
@@ -290,8 +308,7 @@ public abstract class DynamicsModifier extends Influencer {
                     + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
                         * strengthValue.getScale(lifePercent),
             phi =
-                Nullability.castToNonnull(angularChannel, "initialized before loop")
-                        .data[a + ParticleChannels.VelocityPhiStartOffset]
+                angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
                     + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
                         * phiValue.getScale(lifePercent),
             theta =
@@ -397,9 +414,6 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
-      if (angularChannel == null) {
-        throw new IllegalStateException("angularChannel is not initialized");
-      }
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               s = 0,
@@ -415,8 +429,7 @@ public abstract class DynamicsModifier extends Influencer {
                     + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
                         * strengthValue.getScale(lifePercent),
             phi =
-                Nullability.castToNonnull(angularChannel, "checked for null")
-                        .data[a + ParticleChannels.VelocityPhiStartOffset]
+                angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
                     + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
                         * phiValue.getScale(lifePercent),
             theta =
@@ -466,10 +479,6 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
-      if (angularChannel == null) {
-        throw new IllegalStateException("angularChannel is not initialized");
-      }
-
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               s = 0,
@@ -487,8 +496,7 @@ public abstract class DynamicsModifier extends Influencer {
                     + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
                         * strengthValue.getScale(lifePercent),
             phi =
-                Nullability.castToNonnull(angularChannel, "not null in scope")
-                        .data[a + ParticleChannels.VelocityPhiStartOffset]
+                angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
                     + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
                         * phiValue.getScale(lifePercent),
             theta =
