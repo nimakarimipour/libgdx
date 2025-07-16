@@ -160,6 +160,9 @@ public final class DefaultTextureBinder implements TextureBinder {
   }
 
   private final int bindTextureLRU(final GLTexture texture) {
+    if (unitsLRU == null) {
+      throw new IllegalStateException("unitsLRU array is not initialized");
+    }
     int i;
     for (i = 0; i < count; i++) {
       final int idx = unitsLRU[i];
@@ -179,8 +182,10 @@ public final class DefaultTextureBinder implements TextureBinder {
     }
     unitsLRU[0] = idx;
     if (!reused) {
-      textures[idx] = texture;
-      texture.bind(offset + idx);
+      if (idx >= 0 && idx < textures.length) {
+        textures[idx] = texture;
+        texture.bind(offset + idx);
+      }
     }
     return idx;
   }
