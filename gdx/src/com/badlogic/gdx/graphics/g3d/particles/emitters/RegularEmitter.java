@@ -23,8 +23,6 @@ import com.badlogic.gdx.graphics.g3d.particles.values.RangedNumericValue;
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import edu.ucr.cs.riple.annotator.util.Nullability;
-import javax.annotation.Nullable;
 
 /**
  * It's a generic use {@link Emitter} which fits most of the particles simulation scenarios.
@@ -55,7 +53,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
   private boolean continuous;
   private EmissionMode emissionMode;
 
-  @Nullable private FloatChannel lifeChannel;
+  private FloatChannel lifeChannel;
 
   public RegularEmitter() {
     delayValue = new RangedNumericValue();
@@ -110,9 +108,6 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
   }
 
   public void activateParticles(int startIndex, int count) {
-    if (lifeChannel == null) {
-      throw new IllegalStateException("lifeChannel is not initialized.");
-    }
     int currentTotaLife = life + (int) (lifeDiff * lifeValue.getScale(percent)),
         currentLife = currentTotaLife;
     int offsetTime = (int) (lifeOffset + lifeOffsetDiff * lifeOffsetValue.getScale(percent));
@@ -122,11 +117,9 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
     }
     float lifePercent = 1 - currentLife / (float) currentTotaLife;
 
-    for (int
-            i = startIndex * Nullability.castToNonnull(lifeChannel, "null check passed").strideSize,
-            c = i + count * Nullability.castToNonnull(lifeChannel, "null check passed").strideSize;
+    for (int i = startIndex * lifeChannel.strideSize, c = i + count * lifeChannel.strideSize;
         i < c;
-        i += Nullability.castToNonnull(lifeChannel, "null check passed").strideSize) {
+        i += lifeChannel.strideSize) {
       lifeChannel.data[i + ParticleChannels.CurrentLifeOffset] = currentLife;
       lifeChannel.data[i + ParticleChannels.TotalLifeOffset] = currentTotaLife;
       lifeChannel.data[i + ParticleChannels.LifePercentOffset] = lifePercent;
@@ -169,26 +162,24 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
     }
 
     // Update particles
-    if (lifeChannel != null) {
-      int activeParticles = controller.particles.size;
-      for (int i = 0, k = 0; i < controller.particles.size; ) {
-        if ((lifeChannel.data[k + ParticleChannels.CurrentLifeOffset] -= deltaMillis) <= 0) {
-          controller.particles.removeElement(i);
-          continue;
-        } else {
-          lifeChannel.data[k + ParticleChannels.LifePercentOffset] =
-              1
-                  - lifeChannel.data[k + ParticleChannels.CurrentLifeOffset]
-                      / lifeChannel.data[k + ParticleChannels.TotalLifeOffset];
-        }
-        ++i;
-        k += lifeChannel.strideSize;
+    int activeParticles = controller.particles.size;
+    for (int i = 0, k = 0; i < controller.particles.size; ) {
+      if ((lifeChannel.data[k + ParticleChannels.CurrentLifeOffset] -= deltaMillis) <= 0) {
+        controller.particles.removeElement(i);
+        continue;
+      } else {
+        lifeChannel.data[k + ParticleChannels.LifePercentOffset] =
+            1
+                - lifeChannel.data[k + ParticleChannels.CurrentLifeOffset]
+                    / lifeChannel.data[k + ParticleChannels.TotalLifeOffset];
       }
+      ++i;
+      k += lifeChannel.strideSize;
+    }
 
-      if (controller.particles.size < activeParticles) {
-        controller.killParticles(
-            controller.particles.size, activeParticles - controller.particles.size);
-      }
+    if (controller.particles.size < activeParticles) {
+      controller.killParticles(
+          controller.particles.size, activeParticles - controller.particles.size);
     }
   }
 
