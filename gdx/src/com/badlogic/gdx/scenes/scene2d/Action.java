@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Actions attach to an {@link Actor} and perform some task, often over time.
@@ -64,15 +65,15 @@ public abstract class Action implements Poolable {
    * The actor's state is best queried in the first call to {@link #act(float)}. For a {@link
    * TemporalAction}, use TemporalAction#begin().
    */
-  public void setActor(@Nullable Actor actor) {
-    this.actor = actor;
-    if (target == null) setTarget(actor);
-    if (actor == null) {
-      if (pool != null) {
-        pool.free(this);
-        pool = null;
+  public void setActor( @Nullable Actor actor) {
+      this.actor = actor;
+      if (target == null) setTarget(Nullability.castToNonnull(actor));
+      if (actor == null) {
+        if (pool != null) {
+          pool.free(this);
+          pool = null;
+        }
       }
-    }
   }
 
   /**
