@@ -33,7 +33,6 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.uber.nullaway.annotations.Initializer;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
@@ -897,11 +896,7 @@ public class Table extends WidgetGroup {
       c.computedPadTop = c.padTop.get(a);
       if (c.cellAboveIndex != -1) {
         Cell above = (Cell) cells[c.cellAboveIndex];
-        c.computedPadTop +=
-            Math.max(
-                0,
-                c.spaceTop.get(Nullability.castToNonnull(a))
-                    - above.spaceBottom.get(Nullability.castToNonnull(a)));
+        c.computedPadTop += Math.max(0, c.spaceTop.get(a) - above.spaceBottom.get(a));
       }
       float spaceRight = c.spaceRight.get(a);
       c.computedPadRight = c.padRight.get(a) + ((column + colspan) == columns ? 0 : spaceRight);
