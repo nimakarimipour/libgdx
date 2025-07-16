@@ -46,11 +46,11 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
   }
 
   @Override
-  public void draw(T data) {
-    if (data.controller.particles.size > 0) {
-      renderData.add(data);
-      bufferedParticlesCount += data.controller.particles.size;
-    }
+      public void draw(T data) {
+        if (data != null && data.controller != null && Nullability.castToNonnull(data.controller, "checked for null").particles.size > 0) {
+          renderData.add(data);
+          bufferedParticlesCount += data.controller.particles.size;
+        }
   }
 
   /** */

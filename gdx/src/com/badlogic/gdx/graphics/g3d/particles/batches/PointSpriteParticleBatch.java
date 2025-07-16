@@ -152,6 +152,9 @@ public class PointSpriteParticleBatch
       protected void flush(int[] offsets) {
         int tp = 0;
         for (PointSpriteControllerRenderData data : renderData) {
+          if (data.controller == null) {
+            continue;
+          }
           FloatChannel scaleChannel = data.scaleChannel;
           FloatChannel regionChannel = data.regionChannel;
           FloatChannel positionChannel = data.positionChannel;
@@ -163,7 +166,7 @@ public class PointSpriteParticleBatch
             continue;
           }
     
-          for (int p = 0; p < data.controller.particles.size; ++p, ++tp) {
+          for (int p = 0; p < Nullability.castToNonnull(data.controller, "explicitly checked").particles.size; ++p, ++tp) {
             int offset = offsets[tp] * CPU_VERTEX_SIZE;
             int regionOffset = p * regionChannel.strideSize;
             int positionOffset = p * Nullability.castToNonnull(positionChannel, "explicitly checked for null").strideSize;

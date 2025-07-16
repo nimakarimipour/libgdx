@@ -69,24 +69,25 @@ public abstract class ParticleSorter {
       }
     }
 
-    @SuppressWarnings("NullAway") @Override
+    @SuppressWarnings("NullAway")
+          @Override
           public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
             if (camera == null || camera.view == null) {
               throw new NullPointerException("camera or camera.view is null");
             }
-        
+            
             ensureCapacity(renderData.size);
-        
+            
             float[] val = camera.view.val;
             float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
             int count = 0, i = 0;
-        
+            
             for (ParticleControllerRenderData data : renderData) {
-              if (data.positionChannel == null) {
-                throw new NullPointerException("positionChannel is null");
+              if (data == null || data.controller == null || data.positionChannel == null) {
+                throw new NullPointerException("Data, controller, or positionChannel is null");
               }
-        
-              for (int k = 0, c = i + data.controller.particles.size;
+              
+              for (int k = 0, c = i + Nullability.castToNonnull(data.controller, "checked for null").particles.size;
                   i < c;
                   ++i, k += data.positionChannel.strideSize) {
                 distances[i] =
@@ -97,9 +98,9 @@ public abstract class ParticleSorter {
               }
               count += data.controller.particles.size;
             }
-        
+            
             qsort(0, count - 1);
-        
+            
             if (particleOffsets == null || particleOffsets.length < count) {
               throw new IllegalStateException("particleOffsets array is not initialized or smaller than required.");
             }
@@ -107,9 +108,9 @@ public abstract class ParticleSorter {
             for (i = 0; i < count; ++i) {
               Nullability.castToNonnull(particleOffsets, "ensured by pre-check")[particleIndices[i]] = i;
             }
-        
+            
             return particleOffsets;
-    }
+      }
 
     public void qsort(int si, int ei) {
             if (particleIndices == null || distances == null) {
