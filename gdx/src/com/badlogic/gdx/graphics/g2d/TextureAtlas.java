@@ -161,7 +161,7 @@ public class TextureAtlas implements Disposable {
    * Returns the first region found with the specified name. This method uses string comparison to
    * find the region, so the result should be cached rather than calling this method multiple times.
    */
-  public @Null AtlasRegion findRegion(String name) {
+  @SuppressWarnings("NullAway") public @Null AtlasRegion findRegion(String name) {
         for (int i = 0, n = regions.size; i < n; i++) {
             AtlasRegion region = regions.get(i);
             if (region.name != null && region.name.equals(name)) return region;
