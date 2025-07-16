@@ -139,9 +139,6 @@ public abstract class RegionInfluencer extends Influencer {
 
     @Override
     public void update() {
-      if (lifeChannel == null) {
-        throw new IllegalStateException("lifeChannel is not initialized.");
-      }
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               c = controller.particles.size * regionChannel.strideSize;
