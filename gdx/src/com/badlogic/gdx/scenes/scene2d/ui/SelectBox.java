@@ -535,18 +535,19 @@ public class SelectBox<T> extends Widget implements Disableable {
             }
 
             public boolean keyDown(@Nullable InputEvent event, int keycode) {
-              switch (keycode) {
-                case Keys.NUMPAD_ENTER:
-                case Keys.ENTER:
-                  selectBox.selection.choose(list.getSelected());
-                  // Fall thru.
-                case Keys.ESCAPE:
-                  hide();
-                  event.stop();
-                  return true;
+                if (event == null) return false; 
+                switch (keycode) {
+                  case Keys.NUMPAD_ENTER:
+                  case Keys.ENTER:
+                    selectBox.selection.choose(list.getSelected());
+                    // Fall thru.
+                  case Keys.ESCAPE:
+                    hide();
+                    event.stop();
+                    return true;
+                }
+                return false;
               }
-              return false;
-            }
           };
     }
 
