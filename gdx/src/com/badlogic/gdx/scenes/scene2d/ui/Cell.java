@@ -32,7 +32,7 @@ public class Cell<T extends Actor> implements Poolable {
   @Nullable Value prefWidth, prefHeight;
   Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
-  Value padTop, padLeft, padBottom, padRight;
+  @Nullable Value padTop, padLeft, padBottom, padRight;
   @Nullable Float fillX, fillY;
   @Nullable Integer align;
   Integer expandX, expandY;
@@ -862,56 +862,65 @@ public class Cell<T extends Actor> implements Poolable {
   /**
    * @return May be null if this value is not set.
    */
-  public @Null Value getPadTopValue() {
+  @Nullable public @Null Value getPadTopValue() {
     return padTop;
   }
 
   public float getPadTop() {
-    return padTop.get(actor);
-  }
+        if (padTop == null) throw new IllegalArgumentException("padTop cannot be null.");
+        return padTop.get(actor);
+    }
 
   /**
    * @return May be null if this value is not set.
    */
-  public @Null Value getPadLeftValue() {
+  @Nullable public @Null Value getPadLeftValue() {
     return padLeft;
   }
 
   public float getPadLeft() {
-    return padLeft.get(actor);
-  }
+        if (padLeft == null) throw new IllegalArgumentException("padLeft cannot be null.");
+        return padLeft.get(actor);
+    }
 
   /**
    * @return May be null if this value is not set.
    */
-  public @Null Value getPadBottomValue() {
+  @Nullable public @Null Value getPadBottomValue() {
     return padBottom;
   }
 
   public float getPadBottom() {
-    return padBottom.get(actor);
-  }
+        if (padBottom == null) throw new IllegalArgumentException("padBottom cannot be null.");
+        return padBottom.get(actor);
+    }
 
   /**
    * @return May be null if this value is not set.
    */
-  public @Null Value getPadRightValue() {
+  @Nullable public @Null Value getPadRightValue() {
     return padRight;
   }
 
   public float getPadRight() {
-    return padRight.get(actor);
-  }
+        if (padRight == null) throw new IllegalStateException("padRight cannot be null.");
+        return padRight.get(actor);
+    }
 
   /** Returns {@link #getPadLeft()} plus {@link #getPadRight()}. */
   public float getPadX() {
-    return padLeft.get(actor) + padRight.get(actor);
-  }
+        if (padLeft == null) throw new IllegalArgumentException("padLeft cannot be null.");
+        if (padRight == null) throw new IllegalArgumentException("padRight cannot be null.");
+        return padLeft.get(actor) + Nullability.castToNonnull(padRight, "ensured non-nullability").get(actor);
+    }
 
   /** Returns {@link #getPadTop()} plus {@link #getPadBottom()}. */
   public float getPadY() {
-    return padTop.get(actor) + padBottom.get(actor);
-  }
+          if (padTop == null) throw new IllegalArgumentException("padTop cannot be null.");
+          if (padBottom == null) throw new IllegalArgumentException("padBottom cannot be null.");
+          return Nullability.castToNonnull(padTop, "padTop checked nonnull").get(actor) 
+                 + Nullability.castToNonnull(padBottom, "checked for null").get(actor);
+    }
 
   @Nullable
   public @Null Float getFillX() {

@@ -857,172 +857,184 @@ public class Table extends WidgetGroup {
   }
 
   private void computeSize() {
-              sizeInvalid = false;
-            
-              Object[] cells = this.cells.items;
-              int cellCount = this.cells.size;
-            
-              if (cellCount > 0 && !((Cell) cells[cellCount - 1]).endRow) {
-                  endRow();
-                  implicitEndRow = true;
-              }
-            
-              int columns = this.columns, rows = this.rows;
-              float[] columnMinWidth = this.columnMinWidth = ensureSize(this.columnMinWidth, columns);
-              float[] rowMinHeight = this.rowMinHeight = ensureSize(this.rowMinHeight, rows);
-              float[] columnPrefWidth = this.columnPrefWidth = ensureSize(this.columnPrefWidth, columns);
-              float[] rowPrefHeight = this.rowPrefHeight = ensureSize(this.rowPrefHeight, rows);
-              float[] columnWidth = this.columnWidth = ensureSize(this.columnWidth, columns);
-              float[] rowHeight = this.rowHeight = ensureSize(this.rowHeight, rows);
-              float[] expandWidth = this.expandWidth = ensureSize(this.expandWidth, columns);
-              float[] expandHeight = this.expandHeight = ensureSize(this.expandHeight, rows);
-            
-              float spaceRightLast = 0;
-              for (int i = 0; i < cellCount; i++) {
-                  Cell c = (Cell) cells[i];
-                  int column = c.column, row = c.row, colspan = c.colspan;
-                  Actor a = c.actor;
-            
-                  if (c.expandY != 0 && expandHeight[row] == 0) expandHeight[row] = c.expandY;
-                  if (colspan == 1 && c.expandX != 0 && expandWidth[column] == 0)
-                    expandWidth[column] = c.expandX;
-            
+          sizeInvalid = false;
+      
+          Object[] cells = this.cells.items;
+          int cellCount = this.cells.size;
+      
+          if (cellCount > 0 && !((Cell) cells[cellCount - 1]).endRow) {
+              endRow();
+              implicitEndRow = true;
+          }
+      
+          int columns = this.columns, rows = this.rows;
+          float[] columnMinWidth = this.columnMinWidth = ensureSize(this.columnMinWidth, columns);
+          float[] rowMinHeight = this.rowMinHeight = ensureSize(this.rowMinHeight, rows);
+          float[] columnPrefWidth = this.columnPrefWidth = ensureSize(this.columnPrefWidth, columns);
+          float[] rowPrefHeight = this.rowPrefHeight = ensureSize(this.rowPrefHeight, rows);
+          float[] columnWidth = this.columnWidth = ensureSize(this.columnWidth, columns);
+          float[] rowHeight = this.rowHeight = ensureSize(this.rowHeight, rows);
+          float[] expandWidth = this.expandWidth = ensureSize(this.expandWidth, columns);
+          float[] expandHeight = this.expandHeight = ensureSize(this.expandHeight, rows);
+      
+          float spaceRightLast = 0;
+          for (int i = 0; i < cellCount; i++) {
+              Cell c = (Cell) cells[i];
+              int column = c.column, row = c.row, colspan = c.colspan;
+              Actor a = c.actor;
+      
+              if (c.expandY != 0 && expandHeight[row] == 0) expandHeight[row] = c.expandY;
+              if (colspan == 1 && c.expandX != 0 && expandWidth[column] == 0)
+                  expandWidth[column] = c.expandX;
+      
+              if (c.padLeft != null && c.spaceLeft != null) {
                   c.computedPadLeft =
-                      c.padLeft.get(a) + (column == 0 ? 0 : Math.max(0, c.spaceLeft.get(a) - spaceRightLast));
-                  c.computedPadTop = c.padTop.get(a);
-                  if (c.cellAboveIndex != -1) {
-                    Cell above = (Cell) cells[c.cellAboveIndex];
-                    c.computedPadTop += Math.max(0, c.spaceTop.get(a) - above.spaceBottom.get(a));
-                  }
-                  float spaceRight = c.spaceRight.get(a);
-                  c.computedPadRight = c.padRight.get(a) + ((column + colspan) == columns ? 0 : spaceRight);
-                  c.computedPadBottom = c.padBottom.get(a) + (row == rows - 1 ? 0 : c.spaceBottom.get(a));
-                  spaceRightLast = spaceRight;
-            
-                  if (c.prefWidth == null) {
-                    c.prefWidth = Value.prefWidth;
-                  }
-                  if (c.prefHeight == null) {
-                    c.prefHeight = Value.prefHeight;
-                  }
-            
-                  float prefWidth = Nullability.castToNonnull(c.prefWidth, "default value assigned").get(a), prefHeight = Nullability.castToNonnull(c.prefHeight, "default value assigned").get(a);
-                  float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
-                  float maxWidth = c.maxWidth.get(Nullability.castToNonnull(a)), maxHeight = c.maxHeight.get(a);
-                  if (prefWidth < minWidth) prefWidth = minWidth;
-                  if (prefHeight < minHeight) prefHeight = minHeight;
-                  if (maxWidth > 0 && prefWidth > maxWidth) prefWidth = maxWidth;
-                  if (maxHeight > 0 && prefHeight > maxHeight) prefHeight = maxHeight;
-                  if (round) {
-                    minWidth = (float) Math.ceil(minWidth);
-                    minHeight = (float) Math.ceil(minHeight);
-                    prefWidth = (float) Math.ceil(prefWidth);
-                    prefHeight = (float) Math.ceil(prefHeight);
-                  }
-            
-                  if (colspan == 1) {
-                    float hpadding = c.computedPadLeft + c.computedPadRight;
-                    columnPrefWidth[column] = Math.max(columnPrefWidth[column], prefWidth + hpadding);
-                    columnMinWidth[column] = Math.max(columnMinWidth[column], minWidth + hpadding);
-                  }
-                  float vpadding = c.computedPadTop + c.computedPadBottom;
-                  rowPrefHeight[row] = Math.max(rowPrefHeight[row], prefHeight + vpadding);
-                  rowMinHeight[row] = Math.max(rowMinHeight[row], minHeight + vpadding);
+                      Nullability.castToNonnull(c.padLeft, "cannot be null here").get(a) + (column == 0 ? 0 : Math.max(0, c.spaceLeft.get(a) - spaceRightLast));
               }
-            
-              float uniformMinWidth = 0, uniformMinHeight = 0;
-              float uniformPrefWidth = 0, uniformPrefHeight = 0;
+              if (c.padTop != null) {
+                  c.computedPadTop = Nullability.castToNonnull(c.padTop, "checked for nullity").get(a);
+              }
+              if (c.cellAboveIndex != -1) {
+                  Cell above = (Cell) cells[c.cellAboveIndex];
+                  c.computedPadTop += Math.max(0, c.spaceTop.get(a) - above.spaceBottom.get(a));
+              }
+              float spaceRight = c.spaceRight.get(a);
+              if (c.padRight != null) {
+                  c.computedPadRight = Nullability.castToNonnull(c.padRight, "handled gracefully").get(a) + ((column + colspan) == columns ? 0 : spaceRight);
+              } else {
+                  c.computedPadRight = ((column + colspan) == columns ? 0 : spaceRight);
+              }
+              if (c.padBottom != null) {
+                  c.computedPadBottom = Nullability.castToNonnull(c.padBottom, "checked for null").get(a) + (row == rows - 1 ? 0 : c.spaceBottom.get(a));
+              } else {
+                  c.computedPadBottom = (row == rows - 1 ? 0 : c.spaceBottom.get(a));
+              }
+              spaceRightLast = spaceRight;
+      
+              if (c.prefWidth == null) {
+                  c.prefWidth = Value.prefWidth;
+              }
+              if (c.prefHeight == null) {
+                  c.prefHeight = Value.prefHeight;
+              }
+      
+              float prefWidth = Nullability.castToNonnull(c.prefWidth, "default value assigned").get(a), prefHeight = Nullability.castToNonnull(c.prefHeight, "default value assigned").get(a);
+              float minWidth = c.minWidth.get(a), minHeight = c.minHeight.get(a);
+              float maxWidth = c.maxWidth.get(Nullability.castToNonnull(a)), maxHeight = c.maxHeight.get(a);
+              if (prefWidth < minWidth) prefWidth = minWidth;
+              if (prefHeight < minHeight) prefHeight = minHeight;
+              if (maxWidth > 0 && prefWidth > maxWidth) prefWidth = maxWidth;
+              if (maxHeight > 0 && prefHeight > maxHeight) prefHeight = maxHeight;
+              if (round) {
+                  minWidth = (float) Math.ceil(minWidth);
+                  minHeight = (float) Math.ceil(minHeight);
+                  prefWidth = (float) Math.ceil(prefWidth);
+                  prefHeight = (float) Math.ceil(prefHeight);
+              }
+      
+              if (colspan == 1) {
+                  float hpadding = c.computedPadLeft + c.computedPadRight;
+                  columnPrefWidth[column] = Math.max(columnPrefWidth[column], prefWidth + hpadding);
+                  columnMinWidth[column] = Math.max(columnMinWidth[column], minWidth + hpadding);
+              }
+              float vpadding = c.computedPadTop + c.computedPadBottom;
+              rowPrefHeight[row] = Math.max(rowPrefHeight[row], prefHeight + vpadding);
+              rowMinHeight[row] = Math.max(rowMinHeight[row], minHeight + vpadding);
+          }
+      
+          float uniformMinWidth = 0, uniformMinHeight = 0;
+          float uniformPrefWidth = 0, uniformPrefHeight = 0;
+          for (int i = 0; i < cellCount; i++) {
+              Cell c = (Cell) cells[i];
+              int column = c.column;
+      
+              int expandX = c.expandX;
+              outer:
+              if (expandX != 0) {
+                  int nn = column + c.colspan;
+                  for (int ii = column; ii < nn; ii++) if (expandWidth[ii] != 0) break outer;
+                  for (int ii = column; ii < nn; ii++) expandWidth[ii] = expandX;
+              }
+      
+              if (c.uniformX == Boolean.TRUE && c.colspan == 1) {
+                  float hpadding = c.computedPadLeft + c.computedPadRight;
+                  uniformMinWidth = Math.max(uniformMinWidth, columnMinWidth[column] - hpadding);
+                  uniformPrefWidth = Math.max(uniformPrefWidth, columnPrefWidth[column] - hpadding);
+              }
+              if (c.uniformY == Boolean.TRUE) {
+                  float vpadding = c.computedPadTop + c.computedPadBottom;
+                  uniformMinHeight = Math.max(uniformMinHeight, rowMinHeight[c.row] - vpadding);
+                  uniformPrefHeight = Math.max(uniformPrefHeight, rowPrefHeight[c.row] - vpadding);
+              }
+          }
+      
+          if (uniformPrefWidth > 0 || uniformPrefHeight > 0) {
               for (int i = 0; i < cellCount; i++) {
                   Cell c = (Cell) cells[i];
-                  int column = c.column;
-            
-                  int expandX = c.expandX;
-                  outer:
-                  if (expandX != 0) {
-                    int nn = column + c.colspan;
-                    for (int ii = column; ii < nn; ii++) if (expandWidth[ii] != 0) break outer;
-                    for (int ii = column; ii < nn; ii++) expandWidth[ii] = expandX;
-                  }
-            
-                  if (c.uniformX == Boolean.TRUE && c.colspan == 1) {
-                    float hpadding = c.computedPadLeft + c.computedPadRight;
-                    uniformMinWidth = Math.max(uniformMinWidth, columnMinWidth[column] - hpadding);
-                    uniformPrefWidth = Math.max(uniformPrefWidth, columnPrefWidth[column] - hpadding);
-                  }
-                  if (c.uniformY == Boolean.TRUE) {
-                    float vpadding = c.computedPadTop + c.computedPadBottom;
-                    uniformMinHeight = Math.max(uniformMinHeight, rowMinHeight[c.row] - vpadding);
-                    uniformPrefHeight = Math.max(uniformPrefHeight, rowPrefHeight[c.row] - vpadding);
-                  }
-              }
-            
-              if (uniformPrefWidth > 0 || uniformPrefHeight > 0) {
-                  for (int i = 0; i < cellCount; i++) {
-                    Cell c = (Cell) cells[i];
-                    if (uniformPrefWidth > 0 && c.uniformX == Boolean.TRUE && c.colspan == 1) {
+                  if (uniformPrefWidth > 0 && c.uniformX == Boolean.TRUE && c.colspan == 1) {
                       float hpadding = c.computedPadLeft + c.computedPadRight;
                       columnMinWidth[c.column] = uniformMinWidth + hpadding;
                       columnPrefWidth[c.column] = uniformPrefWidth + hpadding;
-                    }
-                    if (uniformPrefHeight > 0 && c.uniformY == Boolean.TRUE) {
+                  }
+                  if (uniformPrefHeight > 0 && c.uniformY == Boolean.TRUE) {
                       float vpadding = c.computedPadTop + c.computedPadBottom;
                       rowMinHeight[c.row] = uniformMinHeight + vpadding;
                       rowPrefHeight[c.row] = uniformPrefHeight + vpadding;
-                    }
                   }
               }
-            
-              for (int i = 0; i < cellCount; i++) {
-                  Cell c = (Cell) cells[i];
-                  int colspan = c.colspan;
-                  if (colspan == 1) continue;
-                  int column = c.column;
-            
-                  Actor a = c.actor;
-                  float minWidth = c.minWidth.get(a),
-                      prefWidth = Nullability.castToNonnull(c.prefWidth, "default value assigned").get(a),
-                      maxWidth = c.maxWidth.get(Nullability.castToNonnull(a));
-                  if (prefWidth < minWidth) prefWidth = minWidth;
-                  if (maxWidth > 0 && prefWidth > maxWidth) prefWidth = maxWidth;
-                  if (round) {
-                    minWidth = (float) Math.ceil(minWidth);
-                    prefWidth = (float) Math.ceil(prefWidth);
-                  }
-            
-                  float spannedMinWidth = -(c.computedPadLeft + c.computedPadRight),
-                      spannedPrefWidth = spannedMinWidth;
-                  float totalExpandWidth = 0;
-                  for (int ii = column, nn = ii + colspan; ii < nn; ii++) {
-                    spannedMinWidth += columnMinWidth[ii];
-                    spannedPrefWidth += columnPrefWidth[ii];
-                    totalExpandWidth += expandWidth[ii];
-                  }
-            
-                  float extraMinWidth = Math.max(0, minWidth - spannedMinWidth);
-                  float extraPrefWidth = Math.max(0, prefWidth - spannedPrefWidth);
-                  for (int ii = column, nn = ii + colspan; ii < nn; ii++) {
-                    float ratio = totalExpandWidth == 0 ? 1f / colspan : expandWidth[ii] / totalExpandWidth;
-                    columnMinWidth[ii] += extraMinWidth * ratio;
-                    columnPrefWidth[ii] += extraPrefWidth * ratio;
-                  }
+          }
+      
+          for (int i = 0; i < cellCount; i++) {
+              Cell c = (Cell) cells[i];
+              int colspan = c.colspan;
+              if (colspan == 1) continue;
+              int column = c.column;
+      
+              Actor a = c.actor;
+              float minWidth = c.minWidth.get(a),
+                  prefWidth = Nullability.castToNonnull(c.prefWidth, "default value assigned").get(a),
+                  maxWidth = c.maxWidth.get(Nullability.castToNonnull(a));
+              if (prefWidth < minWidth) prefWidth = minWidth;
+              if (maxWidth > 0 && prefWidth > maxWidth) prefWidth = maxWidth;
+              if (round) {
+                  minWidth = (float) Math.ceil(minWidth);
+                  prefWidth = (float) Math.ceil(prefWidth);
               }
-            
-              float hpadding = padLeft.get(this) + padRight.get(this);
-              float vpadding = padTop.get(this) + padBottom.get(this);
-              tableMinWidth = hpadding;
-              tablePrefWidth = hpadding;
-              for (int i = 0; i < columns; i++) {
-                  tableMinWidth += columnMinWidth[i];
-                  tablePrefWidth += columnPrefWidth[i];
+      
+              float spannedMinWidth = -(c.computedPadLeft + c.computedPadRight),
+                  spannedPrefWidth = spannedMinWidth;
+              float totalExpandWidth = 0;
+              for (int ii = column, nn = ii + colspan; ii < nn; ii++) {
+                  spannedMinWidth += columnMinWidth[ii];
+                  spannedPrefWidth += columnPrefWidth[ii];
+                  totalExpandWidth += expandWidth[ii];
               }
-              tableMinHeight = vpadding;
-              tablePrefHeight = vpadding;
-              for (int i = 0; i < rows; i++) {
-                  tableMinHeight += rowMinHeight[i];
-                  tablePrefHeight += Math.max(rowMinHeight[i], rowPrefHeight[i]);
+      
+              float extraMinWidth = Math.max(0, minWidth - spannedMinWidth);
+              float extraPrefWidth = Math.max(0, prefWidth - spannedPrefWidth);
+              for (int ii = column, nn = ii + colspan; ii < nn; ii++) {
+                  float ratio = totalExpandWidth == 0 ? 1f / colspan : expandWidth[ii] / totalExpandWidth;
+                  columnMinWidth[ii] += extraMinWidth * ratio;
+                  columnPrefWidth[ii] += extraPrefWidth * ratio;
               }
-              tablePrefWidth = Math.max(tableMinWidth, tablePrefWidth);
-              tablePrefHeight = Math.max(tableMinHeight, tablePrefHeight);
+          }
+      
+          float hpadding = padLeft.get(this) + padRight.get(this);
+          float vpadding = padTop.get(this) + padBottom.get(this);
+          tableMinWidth = hpadding;
+          tablePrefWidth = hpadding;
+          for (int i = 0; i < columns; i++) {
+              tableMinWidth += columnMinWidth[i];
+              tablePrefWidth += columnPrefWidth[i];
+          }
+          tableMinHeight = vpadding;
+          tablePrefHeight = vpadding;
+          for (int i = 0; i < rows; i++) {
+              tableMinHeight += rowMinHeight[i];
+              tablePrefHeight += Math.max(rowMinHeight[i], rowPrefHeight[i]);
+          }
+          tablePrefWidth = Math.max(tableMinWidth, tablePrefWidth);
+          tablePrefHeight = Math.max(tableMinHeight, tablePrefHeight);
     }
 
   /**
