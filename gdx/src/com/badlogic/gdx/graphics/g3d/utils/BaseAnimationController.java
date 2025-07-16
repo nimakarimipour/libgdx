@@ -30,7 +30,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -212,9 +211,7 @@ public class BaseAnimationController {
 
   private static final Vector3 getTranslationAtTime(
       final NodeAnimation nodeAnim, final float time, final Vector3 out) {
-    if (nodeAnim.node == null) return out;
-    if (nodeAnim.translation == null)
-      return out.set(Nullability.castToNonnull(nodeAnim.node, "node is not null").translation);
+    if (nodeAnim.translation == null) return out.set(nodeAnim.node.translation);
     if (nodeAnim.translation.size == 1) return out.set(nodeAnim.translation.get(0).value);
 
     int index = getFirstKeyframeIndexAtTime(nodeAnim.translation, time);
@@ -232,12 +229,7 @@ public class BaseAnimationController {
 
   private static final Quaternion getRotationAtTime(
       final NodeAnimation nodeAnim, final float time, final Quaternion out) {
-    if (nodeAnim.rotation == null) {
-      if (nodeAnim.node != null && nodeAnim.node.rotation != null) {
-        return out.set(Nullability.castToNonnull(nodeAnim.node, "node not null").rotation);
-      }
-      return out;
-    }
+    if (nodeAnim.rotation == null) return out.set(nodeAnim.node.rotation);
     if (nodeAnim.rotation.size == 1) return out.set(nodeAnim.rotation.get(0).value);
 
     int index = getFirstKeyframeIndexAtTime(nodeAnim.rotation, time);
@@ -255,12 +247,7 @@ public class BaseAnimationController {
 
   private static final Vector3 getScalingAtTime(
       final NodeAnimation nodeAnim, final float time, final Vector3 out) {
-    if (nodeAnim.scaling == null) {
-      if (nodeAnim.node == null || nodeAnim.node.scale == null) {
-        return out; // Safeguard against potential null node or scale
-      }
-      return out.set(nodeAnim.node.scale);
-    }
+    if (nodeAnim.scaling == null) return out.set(nodeAnim.node.scale);
     if (nodeAnim.scaling.size == 1) return out.set(nodeAnim.scaling.get(0).value);
 
     int index = getFirstKeyframeIndexAtTime(nodeAnim.scaling, time);
@@ -288,8 +275,6 @@ public class BaseAnimationController {
   private static final void applyNodeAnimationDirectly(
       final NodeAnimation nodeAnim, final float time) {
     final Node node = nodeAnim.node;
-    if (node == null) return;
-    Nullability.castToNonnull(node, "checked for null");
     node.isAnimated = true;
     final Transform transform = getNodeAnimationTransform(nodeAnim, time);
     transform.toMatrix4(node.localTransform);
@@ -303,9 +288,7 @@ public class BaseAnimationController {
       final float time) {
 
     final Node node = nodeAnim.node;
-    if (node == null) return;
-
-    Nullability.castToNonnull(node, "null check before use").isAnimated = true;
+    node.isAnimated = true;
     final Transform transform = getNodeAnimationTransform(nodeAnim, time);
 
     Transform t = out.get(node, null);
@@ -354,9 +337,7 @@ public class BaseAnimationController {
    */
   protected void removeAnimation(final Animation animation) {
     for (final NodeAnimation nodeAnim : animation.nodeAnimations) {
-      if (nodeAnim.node != null) {
-        Nullability.castToNonnull(nodeAnim.node, "explicit null check").isAnimated = false;
-      }
+      nodeAnim.node.isAnimated = false;
     }
   }
 }
