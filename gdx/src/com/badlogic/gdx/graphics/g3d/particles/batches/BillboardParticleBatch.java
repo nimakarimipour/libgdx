@@ -131,13 +131,13 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 
   private RenderablePool renderablePool;
   private Array<Renderable> renderables;
-  private float[] vertices;
+  @Nullable private float[] vertices;
   private short[] indices;
   private int currentVertexSize = 0;
-  private VertexAttributes currentAttributes;
+  @Nullable private VertexAttributes currentAttributes;
   protected boolean useGPU = false;
   @Nullable protected AlignMode mode = AlignMode.Screen;
-  protected Texture texture;
+  @Nullable protected Texture texture;
   @Nullable protected BlendingAttribute blendingAttribute;
   @Nullable protected DepthTestAttribute depthTestAttribute;
   @Nullable Shader shader;
@@ -194,20 +194,20 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
   }
 
   protected Renderable allocRenderable() {
-    Renderable renderable = new Renderable();
-    renderable.meshPart.primitiveType = GL20.GL_TRIANGLES;
-    renderable.meshPart.offset = 0;
-    renderable.material =
-        new Material(
-            this.blendingAttribute,
-            this.depthTestAttribute,
-            TextureAttribute.createDiffuse(texture));
-    renderable.meshPart.mesh =
-        new Mesh(false, MAX_VERTICES_PER_MESH, MAX_PARTICLES_PER_MESH * 6, currentAttributes);
-    renderable.meshPart.mesh.setIndices(indices);
-    renderable.shader = shader;
-    return renderable;
-  }
+        Renderable renderable = new Renderable();
+        renderable.meshPart.primitiveType = GL20.GL_TRIANGLES;
+        renderable.meshPart.offset = 0;
+        renderable.material =
+            new Material(
+                this.blendingAttribute,
+                this.depthTestAttribute,
+                TextureAttribute.createDiffuse(texture));
+        renderable.meshPart.mesh =
+            new Mesh(false, MAX_VERTICES_PER_MESH, MAX_PARTICLES_PER_MESH * 6, Nullability.castToNonnull(currentAttributes));
+        renderable.meshPart.mesh.setIndices(indices);
+        renderable.shader = shader;
+        return renderable;
+    }
 
   private void allocIndices() {
     int indicesCount = MAX_PARTICLES_PER_MESH * 6;
@@ -323,7 +323,7 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
     this.texture = texture;
   }
 
-  public Texture getTexture() {
+  @Nullable public Texture getTexture() {
     return texture;
   }
 
@@ -416,79 +416,79 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
   }
 
   private void fillVerticesGPU(int[] particlesOffset) {
-          int tp = 0;
-          for (BillboardControllerRenderData data : renderData) {
-            FloatChannel scaleChannel = data.scaleChannel;
-            FloatChannel regionChannel = data.regionChannel;
-            FloatChannel positionChannel = data.positionChannel;
-            if (positionChannel == null) continue;
-            FloatChannel colorChannel = data.colorChannel;
-            FloatChannel rotationChannel = data.rotationChannel;
-            for (int p = 0, c = data.controller.particles.size; p < c; ++p, ++tp) {
-              int baseOffset = particlesOffset[tp] * currentVertexSize * 4;
-              float scale = scaleChannel.data[p * scaleChannel.strideSize];
-              int regionOffset = p * regionChannel.strideSize;
-              int positionOffset = p * Nullability.castToNonnull(positionChannel, "checked for null").strideSize;
-              int colorOffset = p * colorChannel.strideSize;
-              int rotationOffset = p * rotationChannel.strideSize;
-              float px = positionChannel.data[positionOffset + ParticleChannels.XOffset],
-                  py = positionChannel.data[positionOffset + ParticleChannels.YOffset],
-                  pz = positionChannel.data[positionOffset + ParticleChannels.ZOffset];
-              float u = regionChannel.data[regionOffset + ParticleChannels.UOffset];
-              float v = regionChannel.data[regionOffset + ParticleChannels.VOffset];
-              float u2 = regionChannel.data[regionOffset + ParticleChannels.U2Offset];
-              float v2 = regionChannel.data[regionOffset + ParticleChannels.V2Offset];
-              float sx = regionChannel.data[regionOffset + ParticleChannels.HalfWidthOffset] * scale,
-                  sy = regionChannel.data[regionOffset + ParticleChannels.HalfHeightOffset] * scale;
-              float r = colorChannel.data[colorOffset + ParticleChannels.RedOffset];
-              float g = colorChannel.data[colorOffset + ParticleChannels.GreenOffset];
-              float b = colorChannel.data[colorOffset + ParticleChannels.BlueOffset];
-              float a = colorChannel.data[colorOffset + ParticleChannels.AlphaOffset];
-              float cosRotation = rotationChannel.data[rotationOffset + ParticleChannels.CosineOffset];
-              float sinRotation = rotationChannel.data[rotationOffset + ParticleChannels.SineOffset];
-    
-              putVertex(
-                  vertices,
-                  baseOffset,
-                  px,
-                  py,
-                  pz,
-                  u,
-                  v2,
-                  -sx,
-                  -sy,
-                  cosRotation,
-                  sinRotation,
-                  r,
-                  g,
-                  b,
-                  a);
-              baseOffset += currentVertexSize;
-              putVertex(
-                  vertices,
-                  baseOffset,
-                  px,
-                  py,
-                  pz,
-                  u2,
-                  v2,
-                  sx,
-                  -sy,
-                  cosRotation,
-                  sinRotation,
-                  r,
-                  g,
-                  b,
-                  a);
-              baseOffset += currentVertexSize;
-              putVertex(
-                  vertices, baseOffset, px, py, pz, u2, v, sx, sy, cosRotation, sinRotation, r, g, b, a);
-              baseOffset += currentVertexSize;
-              putVertex(
-                  vertices, baseOffset, px, py, pz, u, v, -sx, sy, cosRotation, sinRotation, r, g, b, a);
-              baseOffset += currentVertexSize;
-            }
-          }
+              int tp = 0;
+              for (BillboardControllerRenderData data : renderData) {
+                FloatChannel scaleChannel = data.scaleChannel;
+                FloatChannel regionChannel = data.regionChannel;
+                FloatChannel positionChannel = data.positionChannel;
+                if (positionChannel == null) continue;
+                FloatChannel colorChannel = data.colorChannel;
+                FloatChannel rotationChannel = data.rotationChannel;
+                for (int p = 0, c = data.controller.particles.size; p < c; ++p, ++tp) {
+                  int baseOffset = particlesOffset[tp] * currentVertexSize * 4;
+                  float scale = scaleChannel.data[p * scaleChannel.strideSize];
+                  int regionOffset = p * regionChannel.strideSize;
+                  int positionOffset = p * Nullability.castToNonnull(positionChannel, "checked for null").strideSize;
+                  int colorOffset = p * colorChannel.strideSize;
+                  int rotationOffset = p * rotationChannel.strideSize;
+                  float px = positionChannel.data[positionOffset + ParticleChannels.XOffset],
+                      py = positionChannel.data[positionOffset + ParticleChannels.YOffset],
+                      pz = positionChannel.data[positionOffset + ParticleChannels.ZOffset];
+                  float u = regionChannel.data[regionOffset + ParticleChannels.UOffset];
+                  float v = regionChannel.data[regionOffset + ParticleChannels.VOffset];
+                  float u2 = regionChannel.data[regionOffset + ParticleChannels.U2Offset];
+                  float v2 = regionChannel.data[regionOffset + ParticleChannels.V2Offset];
+                  float sx = regionChannel.data[regionOffset + ParticleChannels.HalfWidthOffset] * scale,
+                      sy = regionChannel.data[regionOffset + ParticleChannels.HalfHeightOffset] * scale;
+                  float r = colorChannel.data[colorOffset + ParticleChannels.RedOffset];
+                  float g = colorChannel.data[colorOffset + ParticleChannels.GreenOffset];
+                  float b = colorChannel.data[colorOffset + ParticleChannels.BlueOffset];
+                  float a = colorChannel.data[colorOffset + ParticleChannels.AlphaOffset];
+                  float cosRotation = rotationChannel.data[rotationOffset + ParticleChannels.CosineOffset];
+                  float sinRotation = rotationChannel.data[rotationOffset + ParticleChannels.SineOffset];
+        
+                  putVertex(
+                      Nullability.castToNonnull(vertices, "checked for null"),
+                      baseOffset,
+                      px,
+                      py,
+                      pz,
+                      u,
+                      v2,
+                      -sx,
+                      -sy,
+                      cosRotation,
+                      sinRotation,
+                      r,
+                      g,
+                      b,
+                      a);
+                  baseOffset += currentVertexSize;
+                  putVertex(
+                      Nullability.castToNonnull(vertices, "checked for null"),
+                      baseOffset,
+                      px,
+                      py,
+                      pz,
+                      u2,
+                      v2,
+                      sx,
+                      -sy,
+                      cosRotation,
+                      sinRotation,
+                      r,
+                      g,
+                      b,
+                      a);
+                  baseOffset += currentVertexSize;
+                  putVertex(
+                      Nullability.castToNonnull(vertices, "checked for null"), baseOffset, px, py, pz, u2, v, sx, sy, cosRotation, sinRotation, r, g, b, a);
+                  baseOffset += currentVertexSize;
+                  putVertex(
+                      Nullability.castToNonnull(vertices, "checked for null"), baseOffset, px, py, pz, u, v, -sx, sy, cosRotation, sinRotation, r, g, b, a);
+                  baseOffset += currentVertexSize;
+                }
+              }
   }
 
   /*
@@ -564,25 +564,184 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
    */
 
   private void fillVerticesToViewPointCPU(int[] particlesOffset) {
-            if (camera == null) {
-                throw new IllegalStateException("Camera is not set");
-            }
-      
-            int tp = 0;
-            for (BillboardControllerRenderData data : renderData) {
-                if (data.scaleChannel == null || data.regionChannel == null ||
-                    data.positionChannel == null || data.colorChannel == null ||
-                    data.rotationChannel == null) {
-                    throw new IllegalStateException("Channels are not allocated");
+                if (camera == null) {
+                    throw new IllegalStateException("Camera is not set");
                 }
-    
-                FloatChannel scaleChannel = data.scaleChannel;
-                FloatChannel regionChannel = data.regionChannel;
-                FloatChannel positionChannel = data.positionChannel;
-                FloatChannel colorChannel = data.colorChannel;
-                FloatChannel rotationChannel = data.rotationChannel;
-      
-                for (int p = 0, c = data.controller.particles.size; p < c; ++p, ++tp) {
+          
+                int tp = 0;
+                for (BillboardControllerRenderData data : renderData) {
+                    if (data.scaleChannel == null || data.regionChannel == null ||
+                        data.positionChannel == null || data.colorChannel == null ||
+                        data.rotationChannel == null) {
+                        throw new IllegalStateException("Channels are not allocated");
+                    }
+        
+                    FloatChannel scaleChannel = data.scaleChannel;
+                    FloatChannel regionChannel = data.regionChannel;
+                    FloatChannel positionChannel = data.positionChannel;
+                    FloatChannel colorChannel = data.colorChannel;
+                    FloatChannel rotationChannel = data.rotationChannel;
+          
+                    for (int p = 0, c = data.controller.particles.size; p < c; ++p, ++tp) {
+                        int baseOffset = particlesOffset[tp] * currentVertexSize * 4;
+                        float scale = scaleChannel.data[p * scaleChannel.strideSize];
+                        int regionOffset = p * regionChannel.strideSize;
+                        int positionOffset = p * Nullability.castToNonnull(positionChannel, "checked not null").strideSize;
+                        int colorOffset = p * colorChannel.strideSize;
+                        int rotationOffset = p * rotationChannel.strideSize;
+                        float px = positionChannel.data[positionOffset + ParticleChannels.XOffset],
+                            py = positionChannel.data[positionOffset + ParticleChannels.YOffset],
+                            pz = positionChannel.data[positionOffset + ParticleChannels.ZOffset];
+                        float u = regionChannel.data[regionOffset + ParticleChannels.UOffset];
+                        float v = regionChannel.data[regionOffset + ParticleChannels.VOffset];
+                        float u2 = regionChannel.data[regionOffset + ParticleChannels.U2Offset];
+                        float v2 = regionChannel.data[regionOffset + ParticleChannels.V2Offset];
+                        float sx = regionChannel.data[regionOffset + ParticleChannels.HalfWidthOffset] * scale,
+                            sy = regionChannel.data[regionOffset + ParticleChannels.HalfHeightOffset] * scale;
+                        float r = colorChannel.data[colorOffset + ParticleChannels.RedOffset];
+                        float g = colorChannel.data[colorOffset + ParticleChannels.GreenOffset];
+                        float b = colorChannel.data[colorOffset + ParticleChannels.BlueOffset];
+                        float a = colorChannel.data[colorOffset + ParticleChannels.AlphaOffset];
+                        float cosRotation = rotationChannel.data[rotationOffset + ParticleChannels.CosineOffset];
+                        float sinRotation = rotationChannel.data[rotationOffset + ParticleChannels.SineOffset];
+                        Vector3 look = TMP_V3.set(camera.position).sub(px, py, pz).nor(),
+                            right = TMP_V1.set(camera.up).crs(look).nor(),
+                            up = TMP_V2.set(look).crs(right);
+                        right.scl(sx);
+                        up.scl(sy);
+          
+                        if (cosRotation != 1) {
+                            TMP_M3.setToRotation(look, cosRotation, sinRotation);
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6
+                                    .set(-TMP_V1.x - TMP_V2.x, -TMP_V1.y - TMP_V2.y, -TMP_V1.z - TMP_V2.z)
+                                    .mul(TMP_M3)
+                                    .add(px, py, pz),
+                                u,
+                                v2,
+                                r,
+                                g,
+                                b,
+                                a);
+                            baseOffset += currentVertexSize;
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6
+                                    .set(TMP_V1.x - TMP_V2.x, TMP_V1.y - TMP_V2.y, TMP_V1.z - TMP_V2.z)
+                                    .mul(TMP_M3)
+                                    .add(px, py, pz),
+                                u2,
+                                v2,
+                                r,
+                                g,
+                                b,
+                                a);
+                            baseOffset += currentVertexSize;
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6
+                                    .set(TMP_V1.x + TMP_V2.x, TMP_V1.y + TMP_V2.y, TMP_V1.z + TMP_V2.z)
+                                    .mul(TMP_M3)
+                                    .add(px, py, pz),
+                                u2,
+                                v,
+                                r,
+                                g,
+                                b,
+                                a);
+                            baseOffset += currentVertexSize;
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6
+                                    .set(-TMP_V1.x + TMP_V2.x, -TMP_V1.y + TMP_V2.y, -TMP_V1.z + TMP_V2.z)
+                                    .mul(TMP_M3)
+                                    .add(px, py, pz),
+                                u,
+                                v,
+                                r,
+                                g,
+                                b,
+                                a);
+                        } else {
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6.set(
+                                    -TMP_V1.x - TMP_V2.x + px, -TMP_V1.y - TMP_V2.y + py, -TMP_V1.z - TMP_V2.z + pz),
+                                u,
+                                v2,
+                                r,
+                                g,
+                                b,
+                                a);
+                            baseOffset += currentVertexSize;
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6.set(
+                                    TMP_V1.x - TMP_V2.x + px, TMP_V1.y - TMP_V2.y + py, TMP_V1.z - TMP_V2.z + pz),
+                                u2,
+                                v2,
+                                r,
+                                g,
+                                b,
+                                a);
+                            baseOffset += currentVertexSize;
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6.set(
+                                    TMP_V1.x + TMP_V2.x + px, TMP_V1.y + TMP_V2.y + py, TMP_V1.z + TMP_V2.z + pz),
+                                u2,
+                                v,
+                                r,
+                                g,
+                                b,
+                                a);
+                            baseOffset += currentVertexSize;
+                            putVertex(
+                                Nullability.castToNonnull(vertices),
+                                baseOffset,
+                                TMP_V6.set(
+                                    -TMP_V1.x + TMP_V2.x + px, -TMP_V1.y + TMP_V2.y + py, -TMP_V1.z + TMP_V2.z + pz),
+                                u,
+                                v,
+                                r,
+                                g,
+                                b,
+                                a);
+                        }
+                    }
+                }
+  }
+
+  private void fillVerticesToScreenCPU(int[] particlesOffset) {
+                if (camera == null) {
+                    throw new IllegalStateException("Camera must not be null. Please set a valid camera using setCamera().");
+                }
+        
+                Vector3 look = TMP_V3.set(camera.direction).scl(-1),
+                    right = TMP_V4.set(camera.up).crs(look).nor(),
+                    up = camera.up;
+                
+                int tp = 0;
+                for (BillboardControllerRenderData data : renderData) {
+                  FloatChannel scaleChannel = data.scaleChannel;
+                  FloatChannel regionChannel = data.regionChannel;
+                  FloatChannel positionChannel = data.positionChannel;
+                  FloatChannel colorChannel = data.colorChannel;
+                  FloatChannel rotationChannel = data.rotationChannel;
+        
+                  if (positionChannel == null) {
+                      throw new IllegalStateException("Position channel must not be null.");
+                  }
+              
+                  for (int p = 0, c = data.controller.particles.size; p < c; ++p, ++tp) {
                     int baseOffset = particlesOffset[tp] * currentVertexSize * 4;
                     float scale = scaleChannel.data[p * scaleChannel.strideSize];
                     int regionOffset = p * regionChannel.strideSize;
@@ -604,276 +763,117 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
                     float a = colorChannel.data[colorOffset + ParticleChannels.AlphaOffset];
                     float cosRotation = rotationChannel.data[rotationOffset + ParticleChannels.CosineOffset];
                     float sinRotation = rotationChannel.data[rotationOffset + ParticleChannels.SineOffset];
-                    Vector3 look = TMP_V3.set(camera.position).sub(px, py, pz).nor(),
-                        right = TMP_V1.set(camera.up).crs(look).nor(),
-                        up = TMP_V2.set(look).crs(right);
-                    right.scl(sx);
-                    up.scl(sy);
-      
+                    TMP_V1.set(right).scl(sx);
+                    TMP_V2.set(up).scl(sy);
+              
                     if (cosRotation != 1) {
-                        TMP_M3.setToRotation(look, cosRotation, sinRotation);
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6
-                                .set(-TMP_V1.x - TMP_V2.x, -TMP_V1.y - TMP_V2.y, -TMP_V1.z - TMP_V2.z)
-                                .mul(TMP_M3)
-                                .add(px, py, pz),
-                            u,
-                            v2,
-                            r,
-                            g,
-                            b,
-                            a);
-                        baseOffset += currentVertexSize;
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6
-                                .set(TMP_V1.x - TMP_V2.x, TMP_V1.y - TMP_V2.y, TMP_V1.z - TMP_V2.z)
-                                .mul(TMP_M3)
-                                .add(px, py, pz),
-                            u2,
-                            v2,
-                            r,
-                            g,
-                            b,
-                            a);
-                        baseOffset += currentVertexSize;
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6
-                                .set(TMP_V1.x + TMP_V2.x, TMP_V1.y + TMP_V2.y, TMP_V1.z + TMP_V2.z)
-                                .mul(TMP_M3)
-                                .add(px, py, pz),
-                            u2,
-                            v,
-                            r,
-                            g,
-                            b,
-                            a);
-                        baseOffset += currentVertexSize;
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6
-                                .set(-TMP_V1.x + TMP_V2.x, -TMP_V1.y + TMP_V2.y, -TMP_V1.z + TMP_V2.z)
-                                .mul(TMP_M3)
-                                .add(px, py, pz),
-                            u,
-                            v,
-                            r,
-                            g,
-                            b,
-                            a);
+                      TMP_M3.setToRotation(look, cosRotation, sinRotation);
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6
+                              .set(-TMP_V1.x - TMP_V2.x, -TMP_V1.y - TMP_V2.y, -TMP_V1.z - TMP_V2.z)
+                              .mul(TMP_M3)
+                              .add(px, py, pz),
+                          u,
+                          v2,
+                          r,
+                          g,
+                          b,
+                          a);
+                      baseOffset += currentVertexSize;
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6
+                              .set(TMP_V1.x - TMP_V2.x, TMP_V1.y - TMP_V2.y, TMP_V1.z - TMP_V2.z)
+                              .mul(TMP_M3)
+                              .add(px, py, pz),
+                          u2,
+                          v2,
+                          r,
+                          g,
+                          b,
+                          a);
+                      baseOffset += currentVertexSize;
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6
+                              .set(TMP_V1.x + TMP_V2.x, TMP_V1.y + TMP_V2.y, TMP_V1.z + TMP_V2.z)
+                              .mul(TMP_M3)
+                              .add(px, py, pz),
+                          u2,
+                          v,
+                          r,
+                          g,
+                          b,
+                          a);
+                      baseOffset += currentVertexSize;
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6
+                              .set(-TMP_V1.x + TMP_V2.x, -TMP_V1.y + TMP_V2.y, -TMP_V1.z + TMP_V2.z)
+                              .mul(TMP_M3)
+                              .add(px, py, pz),
+                          u,
+                          v,
+                          r,
+                          g,
+                          b,
+                          a);
                     } else {
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6.set(
-                                -TMP_V1.x - TMP_V2.x + px, -TMP_V1.y - TMP_V2.y + py, -TMP_V1.z - TMP_V2.z + pz),
-                            u,
-                            v2,
-                            r,
-                            g,
-                            b,
-                            a);
-                        baseOffset += currentVertexSize;
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6.set(
-                                TMP_V1.x - TMP_V2.x + px, TMP_V1.y - TMP_V2.y + py, TMP_V1.z - TMP_V2.z + pz),
-                            u2,
-                            v2,
-                            r,
-                            g,
-                            b,
-                            a);
-                        baseOffset += currentVertexSize;
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6.set(
-                                TMP_V1.x + TMP_V2.x + px, TMP_V1.y + TMP_V2.y + py, TMP_V1.z + TMP_V2.z + pz),
-                            u2,
-                            v,
-                            r,
-                            g,
-                            b,
-                            a);
-                        baseOffset += currentVertexSize;
-                        putVertex(
-                            vertices,
-                            baseOffset,
-                            TMP_V6.set(
-                                -TMP_V1.x + TMP_V2.x + px, -TMP_V1.y + TMP_V2.y + py, -TMP_V1.z + TMP_V2.z + pz),
-                            u,
-                            v,
-                            r,
-                            g,
-                            b,
-                            a);
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6.set(
+                              -TMP_V1.x - TMP_V2.x + px, -TMP_V1.y - TMP_V2.y + py, -TMP_V1.z - TMP_V2.z + pz),
+                          u,
+                          v2,
+                          r,
+                          g,
+                          b,
+                          a);
+                      baseOffset += currentVertexSize;
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6.set(
+                              TMP_V1.x - TMP_V2.x + px, TMP_V1.y - TMP_V2.y + py, TMP_V1.z - TMP_V2.z + pz),
+                          u2,
+                          v2,
+                          r,
+                          g,
+                          b,
+                          a);
+                      baseOffset += currentVertexSize;
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6.set(
+                              TMP_V1.x + TMP_V2.x + px, TMP_V1.y + TMP_V2.y + py, TMP_V1.z + TMP_V2.z + pz),
+                          u2,
+                          v,
+                          r,
+                          g,
+                          b,
+                          a);
+                      baseOffset += currentVertexSize;
+                      putVertex(
+                          Nullability.castToNonnull(vertices),
+                          baseOffset,
+                          TMP_V6.set(
+                              -TMP_V1.x + TMP_V2.x + px, -TMP_V1.y + TMP_V2.y + py, -TMP_V1.z + TMP_V2.z + pz),
+                          u,
+                          v,
+                          r,
+                          g,
+                          b,
+                          a);
                     }
+                  }
                 }
-            }
-    }
-
-  private void fillVerticesToScreenCPU(int[] particlesOffset) {
-            if (camera == null) {
-                throw new IllegalStateException("Camera must not be null. Please set a valid camera using setCamera().");
-            }
-    
-            Vector3 look = TMP_V3.set(camera.direction).scl(-1),
-                right = TMP_V4.set(camera.up).crs(look).nor(),
-                up = camera.up;
-            
-            int tp = 0;
-            for (BillboardControllerRenderData data : renderData) {
-              FloatChannel scaleChannel = data.scaleChannel;
-              FloatChannel regionChannel = data.regionChannel;
-              FloatChannel positionChannel = data.positionChannel;
-              FloatChannel colorChannel = data.colorChannel;
-              FloatChannel rotationChannel = data.rotationChannel;
-    
-              if (positionChannel == null) {
-                  throw new IllegalStateException("Position channel must not be null.");
-              }
-          
-              for (int p = 0, c = data.controller.particles.size; p < c; ++p, ++tp) {
-                int baseOffset = particlesOffset[tp] * currentVertexSize * 4;
-                float scale = scaleChannel.data[p * scaleChannel.strideSize];
-                int regionOffset = p * regionChannel.strideSize;
-                int positionOffset = p * Nullability.castToNonnull(positionChannel, "checked not null").strideSize;
-                int colorOffset = p * colorChannel.strideSize;
-                int rotationOffset = p * rotationChannel.strideSize;
-                float px = positionChannel.data[positionOffset + ParticleChannels.XOffset],
-                    py = positionChannel.data[positionOffset + ParticleChannels.YOffset],
-                    pz = positionChannel.data[positionOffset + ParticleChannels.ZOffset];
-                float u = regionChannel.data[regionOffset + ParticleChannels.UOffset];
-                float v = regionChannel.data[regionOffset + ParticleChannels.VOffset];
-                float u2 = regionChannel.data[regionOffset + ParticleChannels.U2Offset];
-                float v2 = regionChannel.data[regionOffset + ParticleChannels.V2Offset];
-                float sx = regionChannel.data[regionOffset + ParticleChannels.HalfWidthOffset] * scale,
-                    sy = regionChannel.data[regionOffset + ParticleChannels.HalfHeightOffset] * scale;
-                float r = colorChannel.data[colorOffset + ParticleChannels.RedOffset];
-                float g = colorChannel.data[colorOffset + ParticleChannels.GreenOffset];
-                float b = colorChannel.data[colorOffset + ParticleChannels.BlueOffset];
-                float a = colorChannel.data[colorOffset + ParticleChannels.AlphaOffset];
-                float cosRotation = rotationChannel.data[rotationOffset + ParticleChannels.CosineOffset];
-                float sinRotation = rotationChannel.data[rotationOffset + ParticleChannels.SineOffset];
-                TMP_V1.set(right).scl(sx);
-                TMP_V2.set(up).scl(sy);
-          
-                if (cosRotation != 1) {
-                  TMP_M3.setToRotation(look, cosRotation, sinRotation);
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6
-                          .set(-TMP_V1.x - TMP_V2.x, -TMP_V1.y - TMP_V2.y, -TMP_V1.z - TMP_V2.z)
-                          .mul(TMP_M3)
-                          .add(px, py, pz),
-                      u,
-                      v2,
-                      r,
-                      g,
-                      b,
-                      a);
-                  baseOffset += currentVertexSize;
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6
-                          .set(TMP_V1.x - TMP_V2.x, TMP_V1.y - TMP_V2.y, TMP_V1.z - TMP_V2.z)
-                          .mul(TMP_M3)
-                          .add(px, py, pz),
-                      u2,
-                      v2,
-                      r,
-                      g,
-                      b,
-                      a);
-                  baseOffset += currentVertexSize;
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6
-                          .set(TMP_V1.x + TMP_V2.x, TMP_V1.y + TMP_V2.y, TMP_V1.z + TMP_V2.z)
-                          .mul(TMP_M3)
-                          .add(px, py, pz),
-                      u2,
-                      v,
-                      r,
-                      g,
-                      b,
-                      a);
-                  baseOffset += currentVertexSize;
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6
-                          .set(-TMP_V1.x + TMP_V2.x, -TMP_V1.y + TMP_V2.y, -TMP_V1.z + TMP_V2.z)
-                          .mul(TMP_M3)
-                          .add(px, py, pz),
-                      u,
-                      v,
-                      r,
-                      g,
-                      b,
-                      a);
-                } else {
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6.set(
-                          -TMP_V1.x - TMP_V2.x + px, -TMP_V1.y - TMP_V2.y + py, -TMP_V1.z - TMP_V2.z + pz),
-                      u,
-                      v2,
-                      r,
-                      g,
-                      b,
-                      a);
-                  baseOffset += currentVertexSize;
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6.set(
-                          TMP_V1.x - TMP_V2.x + px, TMP_V1.y - TMP_V2.y + py, TMP_V1.z - TMP_V2.z + pz),
-                      u2,
-                      v2,
-                      r,
-                      g,
-                      b,
-                      a);
-                  baseOffset += currentVertexSize;
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6.set(
-                          TMP_V1.x + TMP_V2.x + px, TMP_V1.y + TMP_V2.y + py, TMP_V1.z + TMP_V2.z + pz),
-                      u2,
-                      v,
-                      r,
-                      g,
-                      b,
-                      a);
-                  baseOffset += currentVertexSize;
-                  putVertex(
-                      vertices,
-                      baseOffset,
-                      TMP_V6.set(
-                          -TMP_V1.x + TMP_V2.x + px, -TMP_V1.y + TMP_V2.y + py, -TMP_V1.z + TMP_V2.z + pz),
-                      u,
-                      v,
-                      r,
-                      g,
-                      b,
-                      a);
-                }
-              }
-            }
   }
 
   @Override
@@ -912,10 +912,10 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
   }
 
   @Override
-  public void save(AssetManager manager, ResourceData resources) {
-    SaveData data = resources.createSaveData("billboardBatch");
-    data.save("cfg", new Config(useGPU, mode));
-    data.saveAsset(manager.getAssetFileName(texture), Texture.class);
+    public void save(AssetManager manager, ResourceData resources) {
+      SaveData data = resources.createSaveData("billboardBatch");
+      data.save("cfg", new Config(useGPU, mode));
+      data.saveAsset(manager.getAssetFileName(Nullability.castToNonnull(texture)), Texture.class);
   }
 
   @Override
