@@ -16,7 +16,6 @@
 
 package com.badlogic.gdx.utils;
 
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.NoSuchElementException;
 import javax.annotation.Nullable;
 
@@ -178,7 +177,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
       iterator2.valid = false;
       return iterator1;
     }
-    Nullability.castToNonnull(iterator2, "conditional initialization").reset();
+    iterator2.reset();
     iterator2.valid = true;
     iterator1.valid = false;
     return iterator2;
