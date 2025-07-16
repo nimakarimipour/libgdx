@@ -45,19 +45,25 @@ public class CheckBox extends TextButton {
   }
 
   public CheckBox(@Null String text, CheckBoxStyle style) {
-    super(text, style);
-
-    Label label = getLabel();
-    label.setAlignment(Align.left);
-
-    image = newImage();
-    image.setDrawable(style.checkboxOff);
-
-    clearChildren();
-    imageCell = add(image);
-    add(label);
-    setSize(getPrefWidth(), getPrefHeight());
-  }
+      super(text, style);
+  
+      if (style == null) {
+        throw new IllegalArgumentException("style cannot be null.");
+      }
+  
+      this.style = style;
+  
+      Label label = getLabel();
+      label.setAlignment(Align.left);
+  
+      image = newImage();
+      image.setDrawable(style.checkboxOff);
+  
+      clearChildren();
+      imageCell = add(image);
+      add(label);
+      setSize(getPrefWidth(), getPrefHeight());
+    }
 
   protected Image newImage() {
     return new Image((Drawable) null, Scaling.none);
