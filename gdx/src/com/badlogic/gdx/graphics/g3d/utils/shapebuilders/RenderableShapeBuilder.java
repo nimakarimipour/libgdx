@@ -24,6 +24,8 @@ import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FlushablePool;
+import edu.ucr.cs.riple.annotator.util.Nullability;
+import javax.annotation.Nullable;
 
 /**
  * RenderableShapeBuilder builds various properties of a renderable.
@@ -55,7 +57,7 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
   }
 
   private static short[] indices;
-  private static float[] vertices;
+  @Nullable private static float[] vertices;
   private static final RenderablePool renderablesPool = new RenderablePool();
   private static final Array<Renderable> renderables = new Array<Renderable>();
   private static final int FLOAT_BYTES = 4;
@@ -126,22 +128,18 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
       Color binormalColor) {
     Mesh mesh = renderable.meshPart.mesh;
 
-    // Position
     int positionOffset = -1;
     if (mesh.getVertexAttribute(Usage.Position) != null)
       positionOffset = mesh.getVertexAttribute(Usage.Position).offset / FLOAT_BYTES;
 
-    // Normal
     int normalOffset = -1;
     if (mesh.getVertexAttribute(Usage.Normal) != null)
       normalOffset = mesh.getVertexAttribute(Usage.Normal).offset / FLOAT_BYTES;
 
-    // Tangent
     int tangentOffset = -1;
     if (mesh.getVertexAttribute(Usage.Tangent) != null)
       tangentOffset = mesh.getVertexAttribute(Usage.Tangent).offset / FLOAT_BYTES;
 
-    // Binormal
     int binormalOffset = -1;
     if (mesh.getVertexAttribute(Usage.BiNormal) != null)
       binormalOffset = mesh.getVertexAttribute(Usage.BiNormal).offset / FLOAT_BYTES;
@@ -151,7 +149,6 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
     int verticesQuantity = 0;
 
     if (mesh.getNumIndices() > 0) {
-      // Get min vertice to max vertice in indices array
       ensureIndicesCapacity(mesh.getNumIndices());
       mesh.getIndices(renderable.meshPart.offset, renderable.meshPart.size, indices, 0);
 
@@ -167,49 +164,48 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
 
     ensureVerticesCapacity(verticesQuantity * attributesSize);
     mesh.getVertices(
-        verticesOffset * attributesSize, verticesQuantity * attributesSize, vertices, 0);
+        verticesOffset * attributesSize,
+        verticesQuantity * attributesSize,
+        Nullability.castToNonnull(vertices),
+        0);
 
     for (int i = verticesOffset; i < verticesQuantity; i++) {
       int id = i * attributesSize;
 
-      // Vertex position
       tmpV0.set(
-          vertices[id + positionOffset],
-          vertices[id + positionOffset + 1],
-          vertices[id + positionOffset + 2]);
+          Nullability.castToNonnull(vertices, "properly initialized")[id + positionOffset],
+          Nullability.castToNonnull(vertices, "properly initialized")[id + positionOffset + 1],
+          Nullability.castToNonnull(vertices, "properly initialized")[id + positionOffset + 2]);
 
-      // Vertex normal, tangent, binormal
       if (normalOffset != -1) {
         tmpV1.set(
-            vertices[id + normalOffset],
-            vertices[id + normalOffset + 1],
-            vertices[id + normalOffset + 2]);
+            Nullability.castToNonnull(vertices, "properly initialized")[id + normalOffset],
+            Nullability.castToNonnull(vertices, "properly initialized")[id + normalOffset + 1],
+            Nullability.castToNonnull(vertices, "properly initialized")[id + normalOffset + 2]);
         tmpV2.set(tmpV0).add(tmpV1.scl(vectorSize));
       }
 
       if (tangentOffset != -1) {
         tmpV3.set(
-            vertices[id + tangentOffset],
-            vertices[id + tangentOffset + 1],
-            vertices[id + tangentOffset + 2]);
+            Nullability.castToNonnull(vertices, "properly initialized")[id + tangentOffset],
+            Nullability.castToNonnull(vertices, "properly initialized")[id + tangentOffset + 1],
+            Nullability.castToNonnull(vertices, "properly initialized")[id + tangentOffset + 2]);
         tmpV4.set(tmpV0).add(tmpV3.scl(vectorSize));
       }
 
       if (binormalOffset != -1) {
         tmpV5.set(
-            vertices[id + binormalOffset],
-            vertices[id + binormalOffset + 1],
-            vertices[id + binormalOffset + 2]);
+            Nullability.castToNonnull(vertices, "properly initialized")[id + binormalOffset],
+            Nullability.castToNonnull(vertices, "properly initialized")[id + binormalOffset + 1],
+            Nullability.castToNonnull(vertices, "properly initialized")[id + binormalOffset + 2]);
         tmpV6.set(tmpV0).add(tmpV5.scl(vectorSize));
       }
 
-      // World transform
       tmpV0.mul(renderable.worldTransform);
       tmpV2.mul(renderable.worldTransform);
       tmpV4.mul(renderable.worldTransform);
       tmpV6.mul(renderable.worldTransform);
 
-      // Draws normal, tangent, binormal
       if (normalOffset != -1) {
         builder.setColor(normalColor);
         builder.line(tmpV0, tmpV2);
