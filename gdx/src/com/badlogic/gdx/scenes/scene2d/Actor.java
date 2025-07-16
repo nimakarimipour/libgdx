@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * 2D scene graph node. An actor has a position, rectangular size, origin, scale, rotation, Z index,
@@ -303,12 +304,12 @@ public class Actor {
     return captureListeners;
   }
 
-  public void addAction(@Nullable Action action) {
-    action.setActor(this);
-    actions.add(action);
-
-    if (stage != null && stage.getActionsRequestRendering()) Gdx.graphics.requestRendering();
-  }
+  public void addAction( @Nullable Action action) {
+        Nullability.castToNonnull(action).setActor(this);
+        actions.add(action);
+  
+        if (stage != null && stage.getActionsRequestRendering()) Gdx.graphics.requestRendering();
+    }
 
   /**
    * @param action May be null, in which case nothing is done.
