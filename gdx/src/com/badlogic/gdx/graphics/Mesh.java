@@ -241,13 +241,15 @@ public class Mesh implements Disposable {
   }
 
   public Mesh disableInstancedRendering() {
-    if (isInstanced) {
-      isInstanced = false;
-      instances.dispose();
-      instances = null;
+        if (isInstanced) {
+            isInstanced = false;
+            if (instances != null) {
+                instances.dispose();
+            }
+            instances = null;
+        }
+        return this;
     }
-    return this;
-  }
 
   /**
    * Sets the instance data of this Mesh. The attributes are assumed to be given in float format.
@@ -336,9 +338,13 @@ public class Mesh implements Disposable {
    * @param count the number of floats to update
    */
   public Mesh updateInstanceData(int targetOffset, float[] source, int sourceOffset, int count) {
-    this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
-    return this;
-  }
+        if (this.instances != null) {
+            this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
+        } else {
+            throw new GdxRuntimeException("An InstanceBufferObject must be set before updating instance data!");
+        }
+        return this;
+    }
 
   /**
    * Update (a portion of) the instance data. Does not resize the backing buffer.
@@ -359,10 +365,14 @@ public class Mesh implements Disposable {
    * @param count the number of floats to update
    */
   public Mesh updateInstanceData(
-      int targetOffset, FloatBuffer source, int sourceOffset, int count) {
-    this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
-    return this;
-  }
+        int targetOffset, FloatBuffer source, int sourceOffset, int count) {
+      if (this.instances != null) {
+        this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
+      } else {
+        throw new GdxRuntimeException("An InstanceBufferObject must be set before updating instance data!");
+      }
+      return this;
+    }
 
   /**
    * Sets the vertices of this Mesh. The attributes are assumed to be given in float format.
@@ -735,55 +745,57 @@ public class Mesh implements Disposable {
    * @param autoBind overrides the autoBind member of this Mesh
    */
   public void render(
-      ShaderProgram shader, int primitiveType, int offset, int count, boolean autoBind) {
-    if (count == 0) return;
-
-    if (autoBind) bind(shader);
-
-    if (isVertexArray) {
-      if (indices.getNumIndices() > 0) {
-        ShortBuffer buffer = indices.getBuffer();
-        int oldPosition = buffer.position();
-        int oldLimit = buffer.limit();
-        ((Buffer) buffer).position(offset);
-        Gdx.gl20.glDrawElements(primitiveType, count, GL20.GL_UNSIGNED_SHORT, buffer);
-        ((Buffer) buffer).position(oldPosition);
-      } else {
-        Gdx.gl20.glDrawArrays(primitiveType, offset, count);
-      }
-    } else {
-      int numInstances = 0;
-      if (isInstanced) numInstances = instances.getNumInstances();
-
-      if (indices.getNumIndices() > 0) {
-        if (count + offset > indices.getNumMaxIndices()) {
-          throw new GdxRuntimeException(
-              "Mesh attempting to access memory outside of the index buffer (count: "
-                  + count
-                  + ", offset: "
-                  + offset
-                  + ", max: "
-                  + indices.getNumMaxIndices()
-                  + ")");
-        }
-
-        if (isInstanced && numInstances > 0) {
-          Gdx.gl30.glDrawElementsInstanced(
-              primitiveType, count, GL20.GL_UNSIGNED_SHORT, offset * 2, numInstances);
-        } else {
-          Gdx.gl20.glDrawElements(primitiveType, count, GL20.GL_UNSIGNED_SHORT, offset * 2);
-        }
-      } else {
-        if (isInstanced && numInstances > 0) {
-          Gdx.gl30.glDrawArraysInstanced(primitiveType, offset, count, numInstances);
+        ShaderProgram shader, int primitiveType, int offset, int count, boolean autoBind) {
+      if (count == 0) return;
+  
+      if (autoBind) bind(shader);
+  
+      if (isVertexArray) {
+        if (indices.getNumIndices() > 0) {
+          ShortBuffer buffer = indices.getBuffer();
+          int oldPosition = buffer.position();
+          int oldLimit = buffer.limit();
+          ((Buffer) buffer).position(offset);
+          Gdx.gl20.glDrawElements(primitiveType, count, GL20.GL_UNSIGNED_SHORT, buffer);
+          ((Buffer) buffer).position(oldPosition);
         } else {
           Gdx.gl20.glDrawArrays(primitiveType, offset, count);
         }
+      } else {
+        int numInstances = 0;
+        if (isInstanced && instances != null) {
+          numInstances = instances.getNumInstances();
+        }
+  
+        if (indices.getNumIndices() > 0) {
+          if (count + offset > indices.getNumMaxIndices()) {
+            throw new GdxRuntimeException(
+                "Mesh attempting to access memory outside of the index buffer (count: "
+                    + count
+                    + ", offset: "
+                    + offset
+                    + ", max: "
+                    + indices.getNumMaxIndices()
+                    + ")");
+          }
+  
+          if (isInstanced && numInstances > 0) {
+            Gdx.gl30.glDrawElementsInstanced(
+                primitiveType, count, GL20.GL_UNSIGNED_SHORT, offset * 2, numInstances);
+          } else {
+            Gdx.gl20.glDrawElements(primitiveType, count, GL20.GL_UNSIGNED_SHORT, offset * 2);
+          }
+        } else {
+          if (isInstanced && numInstances > 0) {
+            Gdx.gl30.glDrawArraysInstanced(primitiveType, offset, count, numInstances);
+          } else {
+            Gdx.gl20.glDrawArrays(primitiveType, offset, count);
+          }
+        }
       }
+  
+      if (autoBind) unbind(shader);
     }
-
-    if (autoBind) unbind(shader);
-  }
 
   /** Frees all resources associated with this Mesh */
   public void dispose() {
