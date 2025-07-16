@@ -44,16 +44,19 @@ public abstract class ColorInfluencer extends Influencer {
     }
 
     @Override
-    public void activateParticles(int startIndex, int count) {
-      for (int i = startIndex * colorChannel.strideSize, c = i + count * colorChannel.strideSize;
-          i < c;
-          i += colorChannel.strideSize) {
-        colorChannel.data[i + ParticleChannels.RedOffset] = MathUtils.random();
-        colorChannel.data[i + ParticleChannels.GreenOffset] = MathUtils.random();
-        colorChannel.data[i + ParticleChannels.BlueOffset] = MathUtils.random();
-        colorChannel.data[i + ParticleChannels.AlphaOffset] = MathUtils.random();
+      public void activateParticles(int startIndex, int count) {
+        if (colorChannel == null) {
+          throw new IllegalStateException("Color channel must be allocated before activating particles.");
+        }
+        for (int i = startIndex * colorChannel.strideSize, c = i + count * colorChannel.strideSize;
+            i < c;
+            i += colorChannel.strideSize) {
+          colorChannel.data[i + ParticleChannels.RedOffset] = MathUtils.random();
+          colorChannel.data[i + ParticleChannels.GreenOffset] = MathUtils.random();
+          colorChannel.data[i + ParticleChannels.BlueOffset] = MathUtils.random();
+          colorChannel.data[i + ParticleChannels.AlphaOffset] = MathUtils.random();
+        }
       }
-    }
 
     @Override
     public Random copy() {
