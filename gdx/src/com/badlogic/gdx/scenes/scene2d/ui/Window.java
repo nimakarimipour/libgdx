@@ -31,7 +31,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -325,10 +324,9 @@ public class Window extends Table {
     float height = getHeight();
     if (hit == null || hit == this) return hit;
     if (y <= height && y >= height - getPadTop() && x >= 0 && x <= getWidth()) {
+      // Hit the title bar, don't use the hit child if it is in the Window's table.
       Actor current = hit;
-      while (Nullability.castToNonnull(current.getParent(), "Assigned from non-null hit")
-              .getParent()
-          != this) current = current.getParent();
+      while (current.getParent() != this) current = current.getParent();
       if (getCell(current) != null) return this;
     }
     return hit;
