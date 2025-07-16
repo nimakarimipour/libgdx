@@ -28,7 +28,6 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
@@ -124,7 +123,7 @@ public class Texture extends GLTexture {
     }
   }
 
-  @Nullable TextureData data;
+  TextureData data;
 
   public Texture(String internalPath) {
     this(Gdx.files.internal(internalPath));
@@ -169,12 +168,11 @@ public class Texture extends GLTexture {
   }
 
   public void load(TextureData data) {
-    if (this.data != null
-        && Nullability.castToNonnull(data, "expected nonnull").isManaged() != this.data.isManaged())
+    if (this.data != null && data.isManaged() != this.data.isManaged())
       throw new GdxRuntimeException("New data must have the same managed status as the old data");
     this.data = data;
 
-    if (!Nullability.castToNonnull(data, "expected nonnull").isPrepared()) data.prepare();
+    if (!data.isPrepared()) data.prepare();
 
     bind();
     uploadImageData(GL20.GL_TEXTURE_2D, data);
@@ -193,11 +191,7 @@ public class Texture extends GLTexture {
   protected void reload() {
     if (!isManaged()) throw new GdxRuntimeException("Tried to reload unmanaged Texture");
     glHandle = Gdx.gl.glGenTexture();
-    if (data != null) {
-      load(Nullability.castToNonnull(data));
-    } else {
-      throw new GdxRuntimeException("Texture data is null");
-    }
+    load(data);
   }
 
   /**
@@ -210,11 +204,7 @@ public class Texture extends GLTexture {
    * @param y The y coordinate in pixels
    */
   public void draw(Pixmap pixmap, int x, int y) {
-    if (data == null) {
-      throw new IllegalStateException("Texture data should not be null");
-    }
-    if (Nullability.castToNonnull(data, "null check performed").isManaged())
-      throw new GdxRuntimeException("can't draw to a managed texture");
+    if (data.isManaged()) throw new GdxRuntimeException("can't draw to a managed texture");
 
     bind();
     Gdx.gl.glTexSubImage2D(
@@ -231,18 +221,12 @@ public class Texture extends GLTexture {
 
   @Override
   public int getWidth() {
-    if (data == null) {
-      throw new NullPointerException("TextureData is null");
-    }
-    return Nullability.castToNonnull(data, "explicitly checks null").getWidth();
+    return data.getWidth();
   }
 
   @Override
   public int getHeight() {
-    if (data == null) {
-      throw new NullPointerException("Texture data is null");
-    }
-    return Nullability.castToNonnull(data, "null check performed").getHeight();
+    return data.getHeight();
   }
 
   @Override
@@ -250,7 +234,6 @@ public class Texture extends GLTexture {
     return 0;
   }
 
-  @Nullable
   public TextureData getTextureData() {
     return data;
   }
@@ -259,20 +242,20 @@ public class Texture extends GLTexture {
    * @return whether this texture is managed or not.
    */
   public boolean isManaged() {
-    if (data == null) {
-      throw new NullPointerException("Data is not initialized");
-    }
-    return Nullability.castToNonnull(data, "explicit null check").isManaged();
+    return data.isManaged();
   }
 
   /** Disposes all resources associated with the texture */
   public void dispose() {
+    // this is a hack. reason: we have to set the glHandle to 0 for textures that are
+    // reloaded through the asset manager as we first remove (and thus dispose) the texture
+    // and then reload it. the glHandle is set to 0 in invalidateAllTextures prior to
+    // removal from the asset manager.
     if (glHandle == 0) return;
     delete();
-    if (data != null && Nullability.castToNonnull(data, "checked to be nonnull").isManaged()) {
+    if (data.isManaged())
       if (managedTextures.get(Gdx.app) != null)
         managedTextures.get(Gdx.app).removeValue(this, true);
-    }
   }
 
   public String toString() {
@@ -327,15 +310,12 @@ public class Texture extends GLTexture {
           // create the parameters, passing the reference to the texture as
           // well as a callback that sets the ref count.
           TextureParameter params = new TextureParameter();
-          TextureData textureData =
-              texture.getTextureData(); // Ensure that the data is retrieved through the getter
-          params.textureData = textureData;
+          params.textureData = texture.getTextureData();
           params.minFilter = texture.getMinFilter();
           params.magFilter = texture.getMagFilter();
           params.wrapU = texture.getUWrap();
           params.wrapV = texture.getVWrap();
-          params.genMipMaps =
-              textureData.useMipMaps(); // Use textureData to reduce nullability risk
+          params.genMipMaps = texture.data.useMipMaps(); // not sure about this?
           params.texture =
               texture; // special parameter which will ensure that the references stay the same.
           params.loadedCallback =
