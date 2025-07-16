@@ -754,7 +754,7 @@ public class ParticleEmitter {
     return spriteMode;
   }
 
-  public String getName() {
+  @Nullable public String getName() {
     return name;
   }
 

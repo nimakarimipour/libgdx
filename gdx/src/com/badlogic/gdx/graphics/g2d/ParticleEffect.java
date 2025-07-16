@@ -132,14 +132,14 @@ public class ParticleEffect implements Disposable {
   }
 
   /** Returns the emitter with the specified name, or null. */
-  @Nullable
-  public ParticleEmitter findEmitter(String name) {
-    for (int i = 0, n = emitters.size; i < n; i++) {
-      ParticleEmitter emitter = emitters.get(i);
-      if (emitter.getName().equals(name)) return emitter;
+  @Nullable public ParticleEmitter findEmitter(String name) {
+      for (int i = 0, n = emitters.size; i < n; i++) {
+        ParticleEmitter emitter = emitters.get(i);
+        String emitterName = emitter.getName();
+        if (emitterName != null && emitterName.equals(name)) return emitter;
+      }
+      return null;
     }
-    return null;
-  }
 
   /**
    * Allocates all emitters particles. See {@link
