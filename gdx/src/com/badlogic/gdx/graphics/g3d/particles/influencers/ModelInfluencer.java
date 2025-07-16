@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * It's an {@link Influencer} which controls which {@link Model} will be assigned to the particles
@@ -52,12 +53,16 @@ public abstract class ModelInfluencer extends Influencer {
     }
 
     @Override
-    public void init() {
-      Model first = models.first();
-      for (int i = 0, c = controller.emitter.maxParticleCount; i < c; ++i) {
-        modelChannel.data[i] = new ModelInstance(first);
+      public void init() {
+        // Ensure that modelChannel is initialized before dereferencing
+        if (modelChannel == null) {
+          allocateChannels();
+        }
+        Model first = models.first();
+        for (int i = 0, c = controller.emitter.maxParticleCount; i < c; ++i) {
+          modelChannel.data[i] = new ModelInstance(first);
+        }
       }
-    }
 
     @Override
     public Single copy() {
@@ -100,18 +105,22 @@ public abstract class ModelInfluencer extends Influencer {
 
     @Override
     public void activateParticles(int startIndex, int count) {
-      for (int i = startIndex, c = startIndex + count; i < c; ++i) {
-        modelChannel.data[i] = pool.obtain();
+      if (modelChannel != null) {
+        for (int i = startIndex, c = startIndex + count; i < c; ++i) {
+          Nullability.castToNonnull(modelChannel, "checked to be nonnull").data[i] = pool.obtain();
+        }
       }
     }
 
     @Override
-    public void killParticles(int startIndex, int count) {
-      for (int i = startIndex, c = startIndex + count; i < c; ++i) {
-        pool.free(modelChannel.data[i]);
-        modelChannel.data[i] = null;
+          public void killParticles(int startIndex, int count) {
+            if (modelChannel != null) {
+              for (int i = startIndex, c = startIndex + count; i < c; ++i) {
+                pool.free(Nullability.castToNonnull(modelChannel, "is not null").data[i]);
+                modelChannel.data[i] = null;
+              }
+            }
       }
-    }
 
     @Override
     public Random copy() {
@@ -120,7 +129,7 @@ public abstract class ModelInfluencer extends Influencer {
   }
 
   public Array<Model> models;
-  ObjectChannel<ModelInstance> modelChannel;
+  @Nullable ObjectChannel<ModelInstance> modelChannel;
 
   public ModelInfluencer() {
     this.models = new Array<Model>(true, 1, Model.class);
