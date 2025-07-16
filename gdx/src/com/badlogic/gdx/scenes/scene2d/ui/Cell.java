@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A cell for a {@link Table}.
@@ -777,7 +778,7 @@ public class Cell<T extends Actor> implements Poolable {
         if (prefWidth == null) {
             throw new IllegalStateException("prefWidth cannot be null.");
         }
-        return prefWidth.get(actor);
+        return Nullability.castToNonnull(prefWidth, "cannot be null").get(actor);
     }
 
   /**
@@ -788,8 +789,8 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getPrefHeight() {
-        if (prefHeight == null) throw new IllegalStateException("prefHeight cannot be null.");
-        return prefHeight.get(actor);
+          if (prefHeight == null) throw new IllegalStateException("prefHeight cannot be null.");
+          return Nullability.castToNonnull(prefHeight, "ensures not null").get(actor);
     }
 
   /**
