@@ -21,7 +21,6 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -58,8 +57,8 @@ import javax.annotation.Nullable;
  * @author Nathan Sweet
  */
 public class FileHandle {
-  @Nullable protected File file;
-  @Nullable protected FileType type;
+  protected File file;
+  protected FileType type;
 
   protected FileHandle() {}
 
@@ -103,17 +102,13 @@ public class FileHandle {
    *     forward slashes.
    */
   public String path() {
-    if (file == null) {
-      throw new NullPointerException("File is null");
-    }
-    return Nullability.castToNonnull(file, "not null after check").getPath().replace('\\', '/');
+    return file.getPath().replace('\\', '/');
   }
 
   /**
    * @return the name of the file, without any parent paths.
    */
   public String name() {
-    if (file == null) throw new NullPointerException("File is null");
     return file.getName();
   }
 
@@ -122,8 +117,7 @@ public class FileHandle {
    * contain a dot.
    */
   public String extension() {
-    if (file == null) throw new GdxRuntimeException("File is null");
-    String name = Nullability.castToNonnull(file, "file is not null").getName();
+    String name = file.getName();
     int dotIndex = name.lastIndexOf('.');
     if (dotIndex == -1) return "";
     return name.substring(dotIndex + 1);
@@ -133,10 +127,7 @@ public class FileHandle {
    * @return the name of the file, without parent paths or the extension.
    */
   public String nameWithoutExtension() {
-    if (file == null) {
-      throw new GdxRuntimeException("File is null!");
-    }
-    String name = Nullability.castToNonnull(file, "explicitly checked for null").getName();
+    String name = file.getName();
     int dotIndex = name.lastIndexOf('.');
     if (dotIndex == -1) return name;
     return name.substring(0, dotIndex);
@@ -147,16 +138,12 @@ public class FileHandle {
    *     backward slashes will be returned as forward slashes.
    */
   public String pathWithoutExtension() {
-    if (file == null) {
-      throw new NullPointerException("File reference is null");
-    }
-    String path = Nullability.castToNonnull(file, "null-checked").getPath().replace('\\', '/');
+    String path = file.getPath().replace('\\', '/');
     int dotIndex = path.lastIndexOf('.');
     if (dotIndex == -1) return path;
     return path.substring(0, dotIndex);
   }
 
-  @Nullable
   public FileType type() {
     return type;
   }
@@ -165,13 +152,9 @@ public class FileHandle {
    * Returns a java.io.File that represents this file handle. Note the returned file will only be
    * usable for {@link FileType#Absolute} and {@link FileType#External} file handles.
    */
-  @SuppressWarnings("NullAway")
   public File file() {
-    if (file == null) throw new GdxRuntimeException("File is null");
     if (type == FileType.External)
-      return new File(
-          Gdx.files.getExternalStoragePath(),
-          Nullability.castToNonnull(file, "checked if null").getPath());
+      return new File(Gdx.files.getExternalStoragePath(), file.getPath());
     return file;
   }
 
@@ -182,18 +165,11 @@ public class FileHandle {
    *     not be read.
    */
   public InputStream read() {
-    if (file == null) {
-      throw new GdxRuntimeException("File reference is null");
-    }
     if (type == FileType.Classpath
         || (type == FileType.Internal && !file().exists())
         || (type == FileType.Local && !file().exists())) {
       InputStream input =
-          FileHandle.class.getResourceAsStream(
-              "/"
-                  + Nullability.castToNonnull(file, "null check performed")
-                      .getPath()
-                      .replace('\\', '/'));
+          FileHandle.class.getResourceAsStream("/" + file.getPath().replace('\\', '/'));
       if (input == null)
         throw new GdxRuntimeException("File not found: " + file + " (" + type + ")");
       return input;
@@ -682,11 +658,8 @@ public class FileHandle {
 
   /** Returns a handle to the child with the specified name. */
   public FileHandle child(String name) {
-    if (file == null
-        || Nullability.castToNonnull(file, "checked for null first").getPath().length() == 0) {
-      return new FileHandle(new File(name), Nullability.castToNonnull(type));
-    }
-    return new FileHandle(new File(file, name), Nullability.castToNonnull(type));
+    if (file.getPath().length() == 0) return new FileHandle(new File(name), type);
+    return new FileHandle(new File(file, name), type);
   }
 
   /**
@@ -695,22 +668,18 @@ public class FileHandle {
    * @throws GdxRuntimeException if this file is the root.
    */
   public FileHandle sibling(String name) {
-    if (file == null
-        || Nullability.castToNonnull(file, "null check at start").getPath().length() == 0)
+    if (file.getPath().length() == 0)
       throw new GdxRuntimeException("Cannot get the sibling of the root.");
-    return new FileHandle(new File(file.getParent(), name), Nullability.castToNonnull(type));
+    return new FileHandle(new File(file.getParent(), name), type);
   }
 
   public FileHandle parent() {
-    if (file == null) {
-      throw new GdxRuntimeException("File is null");
-    }
-    File parent = Nullability.castToNonnull(file, "file is not null").getParentFile();
+    File parent = file.getParentFile();
     if (parent == null) {
       if (type == FileType.Absolute) parent = new File("/");
       else parent = new File("");
     }
-    return new FileHandle(parent, Nullability.castToNonnull(type));
+    return new FileHandle(parent, type);
   }
 
   /**
@@ -731,20 +700,14 @@ public class FileHandle {
    * slow for internal files on Android!
    */
   public boolean exists() {
-    switch (Nullability.castToNonnull(type)) {
+    switch (type) {
       case Internal:
         if (file().exists()) return true;
         // Fall through.
       case Classpath:
-        return file != null
-            && FileHandle.class.getResource(
-                    "/"
-                        + Nullability.castToNonnull(file, "checked in condition")
-                            .getPath()
-                            .replace('\\', '/'))
-                != null;
+        return FileHandle.class.getResource("/" + file.getPath().replace('\\', '/')) != null;
     }
-    return file != null && file().exists();
+    return file().exists();
   }
 
   /**
@@ -838,7 +801,7 @@ public class FileHandle {
    *     FileType#Classpath} or {@link FileType#Internal} file.
    */
   public void moveTo(FileHandle dest) {
-    switch (Nullability.castToNonnull(type)) {
+    switch (type) {
       case Classpath:
         throw new GdxRuntimeException("Cannot move a classpath file: " + file);
       case Internal:
@@ -858,12 +821,7 @@ public class FileHandle {
    * the size cannot otherwise be determined.
    */
   public long length() {
-    if (file == null) {
-      throw new IllegalStateException("File is null");
-    }
-    if (type == FileType.Classpath
-        || (type == FileType.Internal
-            && !Nullability.castToNonnull(file, "not null checked").exists())) {
+    if (type == FileType.Classpath || (type == FileType.Internal && !file.exists())) {
       InputStream input = read();
       try {
         return input.available();
@@ -894,15 +852,12 @@ public class FileHandle {
 
   public int hashCode() {
     int hash = 1;
-    hash = hash * 37 + (type == null ? 1 : type.hashCode());
+    hash = hash * 37 + type.hashCode();
     hash = hash * 67 + path().hashCode();
     return hash;
   }
 
   public String toString() {
-    if (file == null) {
-      return "null";
-    }
     return file.getPath().replace('\\', '/');
   }
 
