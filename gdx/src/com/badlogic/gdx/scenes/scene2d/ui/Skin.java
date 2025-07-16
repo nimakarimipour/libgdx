@@ -138,7 +138,7 @@ public class Skin implements Disposable {
     add(name, resource, resource.getClass());
   }
 
-  public void add(String name, Object resource, Class type) {
+  public void add(@Nullable String name, Object resource, Class type) {
     if (name == null) throw new IllegalArgumentException("name cannot be null.");
     if (resource == null) throw new IllegalArgumentException("resource cannot be null.");
     ObjectMap<String, Object> typeResources = resources.get(type);
@@ -598,13 +598,19 @@ public class Skin implements Disposable {
               Object object = json.readValue(type, valueEntry);
               if (object == null) continue;
               try {
-                add(valueEntry.name, object, addType);
+                String name = valueEntry.name;
+                if (name == null)
+                  throw new IllegalArgumentException("JsonValue name cannot be null.");
+                add(name, object, addType);
                 if (addType != Drawable.class
                     && ClassReflection.isAssignableFrom(Drawable.class, addType))
-                  add(valueEntry.name, object, Drawable.class);
+                  add(name, object, Drawable.class);
               } catch (Exception ex) {
                 throw new SerializationException(
-                    "Error reading " + ClassReflection.getSimpleName(type) + ": " + valueEntry.name,
+                    "Error reading "
+                        + ClassReflection.getSimpleName(type)
+                        + ": "
+                        + (valueEntry.name == null ? "null" : valueEntry.name),
                     ex);
               }
             }
