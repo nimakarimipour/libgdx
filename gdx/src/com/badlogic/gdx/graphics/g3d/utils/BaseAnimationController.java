@@ -211,58 +211,69 @@ public class BaseAnimationController {
   }
 
   private static final Vector3 getTranslationAtTime(
-      final NodeAnimation nodeAnim, final float time, final Vector3 out) {
-    if (nodeAnim.translation == null) return out.set(nodeAnim.node.translation);
-    if (nodeAnim.translation.size == 1) return out.set(nodeAnim.translation.get(0).value);
-
-    int index = getFirstKeyframeIndexAtTime(nodeAnim.translation, time);
-    final NodeKeyframe firstKeyframe = nodeAnim.translation.get(index);
-    out.set((Vector3) firstKeyframe.value);
-
-    if (++index < nodeAnim.translation.size) {
-      final NodeKeyframe<Vector3> secondKeyframe = nodeAnim.translation.get(index);
-      final float t =
-          (time - firstKeyframe.keytime) / (secondKeyframe.keytime - firstKeyframe.keytime);
-      out.lerp(secondKeyframe.value, t);
+            final NodeAnimation nodeAnim, final float time, final Vector3 out) {
+          if (nodeAnim.node == null) return out;
+          if (nodeAnim.translation == null) return out.set(Nullability.castToNonnull(nodeAnim.node, "node is not null").translation);
+          if (nodeAnim.translation.size == 1) return out.set(nodeAnim.translation.get(0).value);
+    
+          int index = getFirstKeyframeIndexAtTime(nodeAnim.translation, time);
+          final NodeKeyframe firstKeyframe = nodeAnim.translation.get(index);
+          out.set((Vector3) firstKeyframe.value);
+    
+          if (++index < nodeAnim.translation.size) {
+            final NodeKeyframe<Vector3> secondKeyframe = nodeAnim.translation.get(index);
+            final float t =
+                (time - firstKeyframe.keytime) / (secondKeyframe.keytime - firstKeyframe.keytime);
+            out.lerp(secondKeyframe.value, t);
+          }
+          return out;
     }
-    return out;
-  }
 
   private static final Quaternion getRotationAtTime(
-      final NodeAnimation nodeAnim, final float time, final Quaternion out) {
-    if (nodeAnim.rotation == null) return out.set(nodeAnim.node.rotation);
-    if (nodeAnim.rotation.size == 1) return out.set(nodeAnim.rotation.get(0).value);
-
-    int index = getFirstKeyframeIndexAtTime(nodeAnim.rotation, time);
-    final NodeKeyframe firstKeyframe = nodeAnim.rotation.get(index);
-    out.set((Quaternion) firstKeyframe.value);
-
-    if (++index < nodeAnim.rotation.size) {
-      final NodeKeyframe<Quaternion> secondKeyframe = nodeAnim.rotation.get(index);
-      final float t =
-          (time - firstKeyframe.keytime) / (secondKeyframe.keytime - firstKeyframe.keytime);
-      out.slerp(secondKeyframe.value, t);
+            final NodeAnimation nodeAnim, final float time, final Quaternion out) {
+          if (nodeAnim.rotation == null) {
+            if (nodeAnim.node != null && nodeAnim.node.rotation != null) {
+              return out.set(Nullability.castToNonnull(nodeAnim.node, "node not null").rotation);
+            }
+            return out;
+          }
+          if (nodeAnim.rotation.size == 1) return out.set(nodeAnim.rotation.get(0).value);
+      
+          int index = getFirstKeyframeIndexAtTime(nodeAnim.rotation, time);
+          final NodeKeyframe firstKeyframe = nodeAnim.rotation.get(index);
+          out.set((Quaternion) firstKeyframe.value);
+      
+          if (++index < nodeAnim.rotation.size) {
+            final NodeKeyframe<Quaternion> secondKeyframe = nodeAnim.rotation.get(index);
+            final float t =
+                (time - firstKeyframe.keytime) / (secondKeyframe.keytime - firstKeyframe.keytime);
+            out.slerp(secondKeyframe.value, t);
+          }
+          return out;
     }
-    return out;
-  }
 
   private static final Vector3 getScalingAtTime(
-      final NodeAnimation nodeAnim, final float time, final Vector3 out) {
-    if (nodeAnim.scaling == null) return out.set(nodeAnim.node.scale);
-    if (nodeAnim.scaling.size == 1) return out.set(nodeAnim.scaling.get(0).value);
-
-    int index = getFirstKeyframeIndexAtTime(nodeAnim.scaling, time);
-    final NodeKeyframe firstKeyframe = nodeAnim.scaling.get(index);
-    out.set((Vector3) firstKeyframe.value);
-
-    if (++index < nodeAnim.scaling.size) {
-      final NodeKeyframe<Vector3> secondKeyframe = nodeAnim.scaling.get(index);
-      final float t =
-          (time - firstKeyframe.keytime) / (secondKeyframe.keytime - firstKeyframe.keytime);
-      out.lerp(secondKeyframe.value, t);
+        final NodeAnimation nodeAnim, final float time, final Vector3 out) {
+      if (nodeAnim.scaling == null) {
+        if (nodeAnim.node == null || nodeAnim.node.scale == null) {
+          return out; // Safeguard against potential null node or scale
+        }
+        return out.set(nodeAnim.node.scale);
+      }
+      if (nodeAnim.scaling.size == 1) return out.set(nodeAnim.scaling.get(0).value);
+  
+      int index = getFirstKeyframeIndexAtTime(nodeAnim.scaling, time);
+      final NodeKeyframe firstKeyframe = nodeAnim.scaling.get(index);
+      out.set((Vector3) firstKeyframe.value);
+  
+      if (++index < nodeAnim.scaling.size) {
+        final NodeKeyframe<Vector3> secondKeyframe = nodeAnim.scaling.get(index);
+        final float t =
+            (time - firstKeyframe.keytime) / (secondKeyframe.keytime - firstKeyframe.keytime);
+        out.lerp(secondKeyframe.value, t);
+      }
+      return out;
     }
-    return out;
-  }
 
   private static final Transform getNodeAnimationTransform(
       final NodeAnimation nodeAnim, final float time) {
@@ -274,35 +285,39 @@ public class BaseAnimationController {
   }
 
   private static final void applyNodeAnimationDirectly(
-      final NodeAnimation nodeAnim, final float time) {
-    final Node node = nodeAnim.node;
-    node.isAnimated = true;
-    final Transform transform = getNodeAnimationTransform(nodeAnim, time);
-    transform.toMatrix4(node.localTransform);
-  }
+            final NodeAnimation nodeAnim, final float time) {
+          final Node node = nodeAnim.node;
+          if (node == null) return;
+          Nullability.castToNonnull(node, "checked for null");
+          node.isAnimated = true;
+          final Transform transform = getNodeAnimationTransform(nodeAnim, time);
+          transform.toMatrix4(node.localTransform);
+    }
 
   private static final void applyNodeAnimationBlending(
-      final NodeAnimation nodeAnim,
-      final ObjectMap<Node, Transform> out,
-      final Pool<Transform> pool,
-      final float alpha,
-      final float time) {
-
-    final Node node = nodeAnim.node;
-    node.isAnimated = true;
-    final Transform transform = getNodeAnimationTransform(nodeAnim, time);
-
-    Transform t = out.get(node, null);
-    if (t != null) {
-      if (alpha > 0.999999f) t.set(transform);
-      else t.lerp(transform, alpha);
-    } else {
-      if (alpha > 0.999999f) out.put(node, pool.obtain().set(transform));
-      else
-        out.put(
-            node,
-            pool.obtain().set(node.translation, node.rotation, node.scale).lerp(transform, alpha));
-    }
+        final NodeAnimation nodeAnim,
+        final ObjectMap<Node, Transform> out,
+        final Pool<Transform> pool,
+        final float alpha,
+        final float time) {
+  
+      final Node node = nodeAnim.node;
+      if (node == null) return;
+  
+      Nullability.castToNonnull(node, "null check before use").isAnimated = true;
+      final Transform transform = getNodeAnimationTransform(nodeAnim, time);
+  
+      Transform t = out.get(node, null);
+      if (t != null) {
+        if (alpha > 0.999999f) t.set(transform);
+        else t.lerp(transform, alpha);
+      } else {
+        if (alpha > 0.999999f) out.put(node, pool.obtain().set(transform));
+        else
+          out.put(
+              node,
+              pool.obtain().set(node.translation, node.rotation, node.scale).lerp(transform, alpha));
+      }
   }
 
   /**
@@ -337,8 +352,10 @@ public class BaseAnimationController {
    * animation, this should be call prior to applyAnimation(s).
    */
   protected void removeAnimation(final Animation animation) {
-    for (final NodeAnimation nodeAnim : animation.nodeAnimations) {
-      nodeAnim.node.isAnimated = false;
-    }
+          for (final NodeAnimation nodeAnim : animation.nodeAnimations) {
+              if (nodeAnim.node != null) {
+                  Nullability.castToNonnull(nodeAnim.node, "explicit null check").isAnimated = false;
+              }
+          }
   }
 }
