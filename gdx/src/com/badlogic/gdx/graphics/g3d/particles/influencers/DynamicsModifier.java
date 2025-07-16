@@ -552,31 +552,34 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-          public void update() {
-              if (lifeChannel == null) {
-                  throw new IllegalStateException("lifeChannel is not initialized");
-              }
-              if (strengthChannel == null) {
-                  throw new IllegalStateException("strengthChannel is not initialized");
-              }
-              int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
-              for (int i = 0, c = controller.particles.size;
-                   i < c;
-                   ++i, strengthOffset += strengthChannel.strideSize,
-                   forceOffset += accelerationChannel.strideSize, lifeOffset += lifeChannel.strideSize) {
-          
-                  float strength =
-                      Nullability.castToNonnull(strengthChannel, "not initialized if null").data[strengthOffset + ParticleChannels.VelocityStrengthStartOffset]
-                          + strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
-                              * strengthValue.getScale(Nullability.castToNonnull(lifeChannel, "not null if updated").data[lifeOffset]);
-                  TMP_V3
-                      .set(MathUtils.random(-1, 1f), MathUtils.random(-1, 1f), MathUtils.random(-1, 1f))
-                      .nor()
-                      .scl(strength);
-                  accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
-                  accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
-                  accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
-              }
+      public void update() {
+          if (lifeChannel == null) {
+              throw new IllegalStateException("lifeChannel is not initialized");
+          }
+          if (strengthChannel == null) {
+              throw new IllegalStateException("strengthChannel is not initialized");
+          }
+          if (accelerationChannel == null) {
+              throw new IllegalStateException("accelerationChannel is not initialized");
+          }
+          int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
+          for (int i = 0, c = controller.particles.size;
+               i < c;
+               ++i, strengthOffset += strengthChannel.strideSize,
+               forceOffset += accelerationChannel.strideSize, lifeOffset += lifeChannel.strideSize) {
+    
+              float strength =
+                  Nullability.castToNonnull(strengthChannel, "not initialized if null").data[strengthOffset + ParticleChannels.VelocityStrengthStartOffset]
+                      + strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
+                          * strengthValue.getScale(Nullability.castToNonnull(lifeChannel, "not null if updated").data[lifeOffset]);
+              TMP_V3
+                  .set(MathUtils.random(-1, 1f), MathUtils.random(-1, 1f), MathUtils.random(-1, 1f))
+                  .nor()
+                  .scl(strength);
+              accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
+              accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
+              accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
+          }
       }
 
     @Override
