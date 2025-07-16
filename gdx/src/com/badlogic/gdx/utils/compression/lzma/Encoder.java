@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils.compression.lzma;
 
 import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import javax.annotation.Nullable;
 
@@ -133,7 +134,7 @@ public class Encoder {
       }
     }
 
-    Encoder2[] m_Coders;
+    @Nullable Encoder2[] m_Coders;
     int m_NumPrevBits;
     int m_NumPosBits;
     int m_PosMask;
@@ -149,12 +150,18 @@ public class Encoder {
     }
 
     public void Init() {
+      if (m_Coders == null) {
+        throw new IllegalStateException("m_Coders is not initialized.");
+      }
       int numStates = 1 << (m_NumPrevBits + m_NumPosBits);
       for (int i = 0; i < numStates; i++) m_Coders[i].Init();
     }
 
     public Encoder2 GetSubCoder(int pos, byte prevByte) {
-      return m_Coders[
+      if (m_Coders == null) {
+        throw new NullPointerException("m_Coders is not initialized");
+      }
+      return Nullability.castToNonnull(m_Coders, "checked for null")[
           ((pos & m_PosMask) << m_NumPrevBits) + ((prevByte & 0xFF) >>> (8 - m_NumPrevBits))];
     }
   }
