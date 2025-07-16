@@ -753,8 +753,11 @@ public class ParticleEmitter {
   }
 
   public String getName() {
-    return name;
-  }
+      if (name == null) {
+        return "";
+      }
+      return name;
+    }
 
   public void setName(String name) {
     this.name = name;
