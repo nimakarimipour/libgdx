@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A group that lays out its children side by side horizontally, with optional wrapping. This can be
@@ -45,7 +46,7 @@ import javax.annotation.Nullable;
 public class HorizontalGroup extends WidgetGroup {
   private float prefWidth, prefHeight, lastPrefHeight;
   private boolean sizeInvalid = true;
-  private FloatArray rowSizes; // row width, row height, ...
+  @Nullable private FloatArray rowSizes; // row width, row height, ...
 
   private int align = Align.left, rowAlign;
   private boolean reverse, round = true, wrap, wrapReverse, expand;
@@ -200,97 +201,100 @@ public class HorizontalGroup extends WidgetGroup {
   }
 
   private void layoutWrapped() {
-    float prefHeight = getPrefHeight();
-    if (prefHeight != lastPrefHeight) {
-      lastPrefHeight = prefHeight;
-      invalidateHierarchy();
-    }
-
-    int align = this.align;
-    boolean round = this.round;
-    float space = this.space, fill = this.fill, wrapSpace = this.wrapSpace;
-    float maxWidth = prefWidth - padLeft - padRight;
-    float rowY = prefHeight - padTop,
-        groupWidth = getWidth(),
-        xStart = padLeft,
-        x = 0,
-        rowHeight = 0,
-        rowDir = -1;
-
-    if ((align & Align.top) != 0) rowY += getHeight() - prefHeight;
-    else if ((align & Align.bottom) == 0) // center
-    rowY += (getHeight() - prefHeight) / 2;
-    if (wrapReverse) {
-      rowY -= prefHeight + rowSizes.get(1);
-      rowDir = 1;
-    }
-
-    if ((align & Align.right) != 0) xStart += groupWidth - prefWidth;
-    else if ((align & Align.left) == 0) // center
-    xStart += (groupWidth - prefWidth) / 2;
-
-    groupWidth -= padRight;
-    align = this.rowAlign;
-
-    FloatArray rowSizes = this.rowSizes;
-    SnapshotArray<Actor> children = getChildren();
-    int i = 0, n = children.size, incr = 1;
-    if (reverse) {
-      i = n - 1;
-      n = -1;
-      incr = -1;
-    }
-    for (int r = 0; i != n; i += incr) {
-      Actor child = children.get(i);
-
-      float width, height;
-      Layout layout = null;
-      if (child instanceof Layout) {
-        layout = (Layout) child;
-        width = layout.getPrefWidth();
-        if (width > groupWidth) width = Math.max(groupWidth, layout.getMinWidth());
-        height = layout.getPrefHeight();
-      } else {
-        width = child.getWidth();
-        height = child.getHeight();
-      }
-
-      if (x + width > groupWidth || r == 0) {
-        r =
-            Math.min(
-                r,
-                rowSizes.size
-                    - 2); // In case an actor changed size without invalidating this layout.
-        x = xStart;
-        if ((align & Align.right) != 0) x += maxWidth - rowSizes.get(r);
-        else if ((align & Align.left) == 0) // center
-        x += (maxWidth - rowSizes.get(r)) / 2;
-        rowHeight = rowSizes.get(r + 1);
-        if (r > 0) rowY += wrapSpace * rowDir;
-        rowY += rowHeight * rowDir;
-        r += 2;
-      }
-
-      if (fill > 0) height = rowHeight * fill;
-
-      if (layout != null) {
-        height = Math.max(height, layout.getMinHeight());
-        float maxHeight = layout.getMaxHeight();
-        if (maxHeight > 0 && height > maxHeight) height = maxHeight;
-      }
-
-      float y = rowY;
-      if ((align & Align.top) != 0) y += rowHeight - height;
-      else if ((align & Align.bottom) == 0) // center
-      y += (rowHeight - height) / 2;
-
-      if (round)
-        child.setBounds(Math.round(x), Math.round(y), Math.round(width), Math.round(height));
-      else child.setBounds(x, y, width, height);
-      x += width + space;
-
-      if (layout != null) layout.validate();
-    }
+          float prefHeight = getPrefHeight();
+          if (prefHeight != lastPrefHeight) {
+            lastPrefHeight = prefHeight;
+            invalidateHierarchy();
+          }
+    
+          int align = this.align;
+          boolean round = this.round;
+          float space = this.space, fill = this.fill, wrapSpace = this.wrapSpace;
+          float maxWidth = prefWidth - padLeft - padRight;
+          float rowY = prefHeight - padTop,
+              groupWidth = getWidth(),
+              xStart = padLeft,
+              x = 0,
+              rowHeight = 0,
+              rowDir = -1;
+    
+          if ((align & Align.top) != 0) rowY += getHeight() - prefHeight;
+          else if ((align & Align.bottom) == 0) // center
+          rowY += (getHeight() - prefHeight) / 2;
+    
+          FloatArray rowSizes = this.rowSizes;
+          if (rowSizes == null) rowSizes = new FloatArray();
+    
+          if (wrapReverse) {
+            rowY -= prefHeight + Nullability.castToNonnull(rowSizes, "initialized if null").get(1);
+            rowDir = 1;
+          }
+    
+          if ((align & Align.right) != 0) xStart += groupWidth - prefWidth;
+          else if ((align & Align.left) == 0) // center
+          xStart += (groupWidth - prefWidth) / 2;
+    
+          groupWidth -= padRight;
+          align = this.rowAlign;
+    
+          SnapshotArray<Actor> children = getChildren();
+          int i = 0, n = children.size, incr = 1;
+          if (reverse) {
+            i = n - 1;
+            n = -1;
+            incr = -1;
+          }
+          for (int r = 0; i != n; i += incr) {
+            Actor child = children.get(i);
+    
+            float width, height;
+            Layout layout = null;
+            if (child instanceof Layout) {
+              layout = (Layout) child;
+              width = layout.getPrefWidth();
+              if (width > groupWidth) width = Math.max(groupWidth, layout.getMinWidth());
+              height = layout.getPrefHeight();
+            } else {
+              width = child.getWidth();
+              height = child.getHeight();
+            }
+    
+            if (x + width > groupWidth || r == 0) {
+              r =
+                  Math.min(
+                      r,
+                      Nullability.castToNonnull(rowSizes, "initialized if null").size
+                          - 2);
+              x = xStart;
+              if ((align & Align.right) != 0) x += maxWidth - rowSizes.get(r);
+              else if ((align & Align.left) == 0) // center
+              x += (maxWidth - rowSizes.get(r)) / 2;
+              rowHeight = rowSizes.get(r + 1);
+              if (r > 0) rowY += wrapSpace * rowDir;
+              rowY += rowHeight * rowDir;
+              r += 2;
+            }
+    
+            if (fill > 0) height = rowHeight * fill;
+    
+            if (layout != null) {
+              height = Math.max(height, layout.getMinHeight());
+              float maxHeight = layout.getMaxHeight();
+              if (maxHeight > 0 && height > maxHeight) height = maxHeight;
+            }
+    
+            float y = rowY;
+            if ((align & Align.top) != 0) y += rowHeight - height;
+            else if ((align & Align.bottom) == 0) // center
+            y += (rowHeight - height) / 2;
+    
+            if (round)
+              child.setBounds(Math.round(x), Math.round(y), Math.round(width), Math.round(height));
+            else child.setBounds(x, y, width, height);
+            x += width + space;
+    
+            if (layout != null) layout.validate();
+          }
   }
 
   public float getPrefWidth() {
@@ -306,8 +310,16 @@ public class HorizontalGroup extends WidgetGroup {
 
   /** When wrapping is enabled, the number of rows may be > 1. */
   public int getRows() {
-    return wrap ? rowSizes.size >> 1 : 1;
-  }
+        if (wrap) {
+            if (rowSizes == null) {
+                // Handle the null case appropriately, possibly return a default value or throw an exception
+                return 0; // or handle as needed
+            }
+            return rowSizes.size >> 1;
+        } else {
+            return 1;
+        }
+    }
 
   /** If true (the default), positions and sizes are rounded to integers. */
   public void setRound(boolean round) {
