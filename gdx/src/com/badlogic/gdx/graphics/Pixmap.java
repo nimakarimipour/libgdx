@@ -254,40 +254,44 @@ public class Pixmap implements Disposable {
    * @param responseListener the listener to call once the image is available as a {@link Pixmap}
    */
   public static void downloadFromUrl(
-      String url, final DownloadPixmapResponseListener responseListener) {
-    Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
-    request.setUrl(url);
-    Gdx.net.sendHttpRequest(
-        request,
-        new Net.HttpResponseListener() {
-          @Override
-          public void handleHttpResponse(Net.HttpResponse httpResponse) {
-            final byte[] result = httpResponse.getResult();
-            Gdx.app.postRunnable(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    try {
-                      Pixmap pixmap = new Pixmap(result, 0, result.length);
-                      responseListener.downloadComplete(pixmap);
-                    } catch (Throwable t) {
-                      failed(t);
+        String url, final DownloadPixmapResponseListener responseListener) {
+      if (Gdx.net == null) {
+        responseListener.downloadFailed(new NullPointerException("Gdx.net is null"));
+        return;
+      }
+      Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
+      request.setUrl(url);
+      Gdx.net.sendHttpRequest(
+          request,
+          new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+              final byte[] result = httpResponse.getResult();
+              Gdx.app.postRunnable(
+                  new Runnable() {
+                    @Override
+                    public void run() {
+                      try {
+                        Pixmap pixmap = new Pixmap(result, 0, result.length);
+                        responseListener.downloadComplete(pixmap);
+                      } catch (Throwable t) {
+                        failed(t);
+                      }
                     }
-                  }
-                });
-          }
-
-          @Override
-          public void failed(Throwable t) {
-            responseListener.downloadFailed(t);
-          }
-
-          @Override
-          public void cancelled() {
-            // no way to cancel, will never get called
-          }
-        });
-  }
+                  });
+            }
+  
+            @Override
+            public void failed(Throwable t) {
+              responseListener.downloadFailed(t);
+            }
+  
+            @Override
+            public void cancelled() {
+              // no way to cancel, will never get called
+            }
+          });
+    }
 
   /**
    * Sets the color for the following drawing operations
