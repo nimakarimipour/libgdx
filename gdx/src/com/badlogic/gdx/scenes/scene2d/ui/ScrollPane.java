@@ -578,19 +578,21 @@ public class ScrollPane extends WidgetGroup {
   }
 
   private void updateActorPosition() {
-    // Calculate the actor's position depending on the scroll state and available actor area.
-    float x = actorArea.x - (scrollX ? (int) visualAmountX : 0);
-    float y = actorArea.y - (int) (scrollY ? maxY - visualAmountY : maxY);
-    actor.setPosition(x, y);
-
-    if (actor instanceof Cullable) {
-      actorCullingArea.x = actorArea.x - x;
-      actorCullingArea.y = actorArea.y - y;
-      actorCullingArea.width = actorArea.width;
-      actorCullingArea.height = actorArea.height;
-      ((Cullable) actor).setCullingArea(actorCullingArea);
+      if (actor == null) return;
+  
+      // Calculate the actor's position depending on the scroll state and available actor area.
+      float x = actorArea.x - (scrollX ? (int) visualAmountX : 0);
+      float y = actorArea.y - (int) (scrollY ? maxY - visualAmountY : maxY);
+      actor.setPosition(x, y);
+  
+      if (actor instanceof Cullable) {
+        actorCullingArea.x = actorArea.x - x;
+        actorCullingArea.y = actorArea.y - y;
+        actorCullingArea.width = actorArea.width;
+        actorCullingArea.height = actorArea.height;
+        ((Cullable) actor).setCullingArea(actorCullingArea);
+      }
     }
-  }
 
   public void draw(Batch batch, float parentAlpha) {
     if (actor == null) return;
