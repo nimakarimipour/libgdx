@@ -20,8 +20,10 @@ import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Pools;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.InputStream;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * A builder for {@link HttpRequest}s.
@@ -49,7 +51,7 @@ public class HttpRequestBuilder {
   /** Will be used for the object serialization in case {@link #jsonContent(Object)} is called. */
   public static Json json = new Json();
 
-  private HttpRequest httpRequest;
+  @Nullable private HttpRequest httpRequest;
 
   /** Initializes the builder and sets it up to build a new {@link HttpRequest} . */
   public HttpRequestBuilder newRequest() {
@@ -145,9 +147,12 @@ public class HttpRequestBuilder {
    */
   public HttpRequestBuilder formEncodedContent(Map<String, String> content) {
     validate();
-    httpRequest.setHeader(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
-    String formEncodedContent = HttpParametersUtils.convertHttpParameters(content);
-    httpRequest.setContent(formEncodedContent);
+    if (httpRequest != null) { // Added check to ensure httpRequest is not null
+      Nullability.castToNonnull(httpRequest, "validate check passed")
+          .setHeader(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
+      String formEncodedContent = HttpParametersUtils.convertHttpParameters(content);
+      httpRequest.setContent(formEncodedContent);
+    }
     return this;
   }
 
@@ -176,6 +181,7 @@ public class HttpRequestBuilder {
    * Returns the {@link HttpRequest} that has been setup by this builder so far. After using the
    * request, it should be returned to the pool via {@code Pools.free(request)}.
    */
+  @Nullable
   public HttpRequest build() {
     validate();
     HttpRequest request = httpRequest;
