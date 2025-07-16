@@ -38,6 +38,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.IntIntMap;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * @author Xoppa A BaseShader is a wrapper around a ShaderProgram that keeps track of the uniform
@@ -233,14 +234,14 @@ public abstract class BaseShader implements Shader {
   }
 
   @Initializer @Override
-  public void begin(Camera camera, RenderContext context) {
-    this.camera = camera;
-    this.context = context;
-    program.bind();
-    currentMesh = null;
-    for (int u, i = 0; i < globalUniforms.size; ++i)
-      if (setters.get(u = globalUniforms.get(i)) != null) setters.get(u).set(this, u, null, null);
-  }
+    public void begin(Camera camera, RenderContext context) {
+      this.camera = camera;
+      this.context = context;
+      program.bind();
+      currentMesh = null;
+      for (int u, i = 0; i < globalUniforms.size; ++i)
+        if (setters.get(u = globalUniforms.get(i)) != null) setters.get(u).set(this, u, Nullability.castToNonnull(null), Nullability.castToNonnull(null));
+    }
 
   private final IntArray tempArray = new IntArray();
 
