@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * This class is used by particle batches to sort the particles before rendering.
@@ -55,7 +56,7 @@ public abstract class ParticleSorter {
   /** This class will sort all the particles using the distance from camera. */
   public static class Distance extends ParticleSorter {
     private float[] distances;
-    private int[] particleIndices, particleOffsets;
+    @Nullable private int[] particleIndices, particleOffsets;
     private int currentSize = 0;
 
     @Override
@@ -68,89 +69,98 @@ public abstract class ParticleSorter {
       }
     }
 
-    @Override
-      public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
-        float[] val = camera.view.val;
-        float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
-        int count = 0, i = 0;
-        for (ParticleControllerRenderData data : renderData) {
-          if (data.positionChannel == null) {
-            throw new NullPointerException("positionChannel is null");
-          }
-          for (int k = 0, c = i + data.controller.particles.size;
-              i < c;
-              ++i, k += data.positionChannel.strideSize) {
-            distances[i] =
-                cx * data.positionChannel.data[k + ParticleChannels.XOffset]
+    @SuppressWarnings("NullAway") @Override
+          public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
+            if (camera == null || camera.view == null) {
+              throw new NullPointerException("camera or camera.view is null");
+            }
+        
+            ensureCapacity(renderData.size);
+        
+            float[] val = camera.view.val;
+            float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
+            int count = 0, i = 0;
+        
+            for (ParticleControllerRenderData data : renderData) {
+              if (data.positionChannel == null) {
+                throw new NullPointerException("positionChannel is null");
+              }
+        
+              for (int k = 0, c = i + data.controller.particles.size;
+                  i < c;
+                  ++i, k += data.positionChannel.strideSize) {
+                distances[i] =
+                    cx * data.positionChannel.data[k + ParticleChannels.XOffset]
                     + cy * data.positionChannel.data[k + ParticleChannels.YOffset]
                     + cz * data.positionChannel.data[k + ParticleChannels.ZOffset];
-            particleIndices[i] = i;
-          }
-          count += data.controller.particles.size;
-        }
-    
-        qsort(0, count - 1);
-    
-        for (i = 0; i < count; ++i) {
-          particleOffsets[particleIndices[i]] = i;
-        }
-        return particleOffsets;
-      }
+                particleIndices[i] = i;
+              }
+              count += data.controller.particles.size;
+            }
+        
+            qsort(0, count - 1);
+        
+            if (particleOffsets == null || particleOffsets.length < count) {
+              throw new IllegalStateException("particleOffsets array is not initialized or smaller than required.");
+            }
+            
+            for (i = 0; i < count; ++i) {
+              Nullability.castToNonnull(particleOffsets, "ensured by pre-check")[particleIndices[i]] = i;
+            }
+        
+            return particleOffsets;
+    }
 
     public void qsort(int si, int ei) {
-      // base case
-      if (si < ei) {
-        float tmp;
-        int tmpIndex, particlesPivotIndex;
-        // insertion
-        if (ei - si <= 8) {
-          for (int i = si; i <= ei; i++)
-            for (int j = i; j > si && distances[j - 1] > distances[j]; j--) {
-              tmp = distances[j];
-              distances[j] = distances[j - 1];
-              distances[j - 1] = tmp;
-
-              // Swap indices
-              tmpIndex = particleIndices[j];
-              particleIndices[j] = particleIndices[j - 1];
-              particleIndices[j - 1] = tmpIndex;
+            if (particleIndices == null || distances == null) {
+                throw new IllegalStateException("The arrays have not been initialized.");
             }
-          return;
-        }
-
-        // Quick
-        float pivot = distances[si];
-        int i = si + 1;
-        particlesPivotIndex = particleIndices[si];
-
-        // partition array
-        for (int j = si + 1; j <= ei; j++) {
-          if (pivot > distances[j]) {
-            if (j > i) {
-              // Swap distances
-              tmp = distances[j];
-              distances[j] = distances[i];
-              distances[i] = tmp;
-
-              // Swap indices
-              tmpIndex = particleIndices[j];
-              particleIndices[j] = particleIndices[i];
-              particleIndices[i] = tmpIndex;
+        
+            if (si < ei) {
+              float tmp;
+              int tmpIndex, particlesPivotIndex;
+              if (ei - si <= 8) {
+                for (int i = si; i <= ei; i++) {
+                  for (int j = i; j > si && distances[j - 1] > distances[j]; j--) {
+                    tmp = distances[j];
+                    distances[j] = distances[j - 1];
+                    distances[j - 1] = tmp;
+        
+                    tmpIndex = particleIndices[j];
+                    particleIndices[j] = particleIndices[j - 1];
+                    particleIndices[j - 1] = tmpIndex;
+                  }
+                }
+                return;
+              }
+        
+              float pivot = distances[si];
+              int i = si + 1;
+              particlesPivotIndex = Nullability.castToNonnull(particleIndices, "checked for initialization")[si];
+        
+              for (int j = si + 1; j <= ei; j++) {
+                if (pivot > distances[j]) {
+                  if (j > i) {
+                    tmp = distances[j];
+                    distances[j] = distances[i];
+                    distances[i] = tmp;
+        
+                    tmpIndex = particleIndices[j];
+                    particleIndices[j] = particleIndices[i];
+                    particleIndices[i] = tmpIndex;
+                  }
+                  i++;
+                }
+              }
+        
+              distances[si] = distances[i - 1];
+              distances[i - 1] = pivot;
+              particleIndices[si] = particleIndices[i - 1];
+              particleIndices[i - 1] = particlesPivotIndex;
+        
+              qsort(si, i - 2);
+              qsort(i, ei);
             }
-            i++;
-          }
-        }
-
-        // put pivot in right position
-        distances[si] = distances[i - 1];
-        distances[i - 1] = pivot;
-        particleIndices[si] = particleIndices[i - 1];
-        particleIndices[i - 1] = particlesPivotIndex;
-
-        // call qsort on right and left sides of pivot
-        qsort(si, i - 2);
-        qsort(i, ei);
-      }
     }
   }
 
