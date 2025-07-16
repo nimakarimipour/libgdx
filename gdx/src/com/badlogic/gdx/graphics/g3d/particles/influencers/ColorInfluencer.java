@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * It's an {@link Influencer} which controls particles color and transparency.
@@ -95,41 +96,49 @@ public abstract class ColorInfluencer extends Influencer {
     }
 
     @Override
-    public void activateParticles(int startIndex, int count) {
-      for (int i = startIndex * colorChannel.strideSize,
-              a = startIndex * alphaInterpolationChannel.strideSize,
-              l = startIndex * lifeChannel.strideSize + ParticleChannels.LifePercentOffset,
-              c = i + count * colorChannel.strideSize;
-          i < c;
-          i += colorChannel.strideSize, a += alphaInterpolationChannel.strideSize,
-              l += lifeChannel.strideSize) {
-        float alphaStart = alphaValue.newLowValue();
-        float alphaDiff = alphaValue.newHighValue() - alphaStart;
-        colorValue.getColor(0, colorChannel.data, i);
-        colorChannel.data[i + ParticleChannels.AlphaOffset] =
-            alphaStart + alphaDiff * alphaValue.getScale(lifeChannel.data[l]);
-        alphaInterpolationChannel.data[a + ParticleChannels.InterpolationStartOffset] = alphaStart;
-        alphaInterpolationChannel.data[a + ParticleChannels.InterpolationDiffOffset] = alphaDiff;
+        public void activateParticles(int startIndex, int count) {
+          if (colorChannel == null) {
+            throw new NullPointerException("colorChannel is null");
+          }
+      
+          for (int i = startIndex * colorChannel.strideSize,
+                  a = startIndex * alphaInterpolationChannel.strideSize,
+                  l = startIndex * lifeChannel.strideSize + ParticleChannels.LifePercentOffset,
+                  c = i + count * colorChannel.strideSize;
+              i < c;
+              i += colorChannel.strideSize, a += alphaInterpolationChannel.strideSize,
+                  l += lifeChannel.strideSize) {
+            float alphaStart = alphaValue.newLowValue();
+            float alphaDiff = alphaValue.newHighValue() - alphaStart;
+            colorValue.getColor(0, colorChannel.data, i);
+            colorChannel.data[i + ParticleChannels.AlphaOffset] =
+                alphaStart + alphaDiff * alphaValue.getScale(lifeChannel.data[l]);
+            alphaInterpolationChannel.data[a + ParticleChannels.InterpolationStartOffset] = alphaStart;
+            alphaInterpolationChannel.data[a + ParticleChannels.InterpolationDiffOffset] = alphaDiff;
+          }
       }
-    }
 
     @Override
-    public void update() {
-      for (int i = 0,
-              a = 0,
-              l = ParticleChannels.LifePercentOffset,
-              c = i + controller.particles.size * colorChannel.strideSize;
-          i < c;
-          i += colorChannel.strideSize, a += alphaInterpolationChannel.strideSize,
-              l += lifeChannel.strideSize) {
-
-        float lifePercent = lifeChannel.data[l];
-        colorValue.getColor(lifePercent, colorChannel.data, i);
-        colorChannel.data[i + ParticleChannels.AlphaOffset] =
-            alphaInterpolationChannel.data[a + ParticleChannels.InterpolationStartOffset]
-                + alphaInterpolationChannel.data[a + ParticleChannels.InterpolationDiffOffset]
-                    * alphaValue.getScale(lifePercent);
-      }
+          public void update() {
+            if (colorChannel == null) {
+              throw new NullPointerException("colorChannel is not initialized");
+            }
+        
+            for (int i = 0,
+                    a = 0,
+                    l = ParticleChannels.LifePercentOffset,
+                    c = i + controller.particles.size * Nullability.castToNonnull(colorChannel, "not null if checked").strideSize;
+                i < c;
+                i += colorChannel.strideSize, a += alphaInterpolationChannel.strideSize,
+                    l += lifeChannel.strideSize) {
+        
+              float lifePercent = lifeChannel.data[l];
+              colorValue.getColor(lifePercent, colorChannel.data, i);
+              colorChannel.data[i + ParticleChannels.AlphaOffset] =
+                  alphaInterpolationChannel.data[a + ParticleChannels.InterpolationStartOffset]
+                      + alphaInterpolationChannel.data[a + ParticleChannels.InterpolationDiffOffset]
+                          * alphaValue.getScale(lifePercent);
+            }
     }
 
     @Override
@@ -150,7 +159,7 @@ public abstract class ColorInfluencer extends Influencer {
     }
   }
 
-  FloatChannel colorChannel;
+  @Nullable FloatChannel colorChannel;
 
   @Override
   public void allocateChannels() {
