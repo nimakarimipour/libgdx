@@ -619,55 +619,55 @@ public class Skin implements Disposable {
         BitmapFont.class,
         new ReadOnlySerializer<BitmapFont>() {
           public BitmapFont read(Json json, JsonValue jsonData, @Nullable Class type) {
-            String path = json.readValue("file", String.class, jsonData);
-            int scaledSize = json.readValue("scaledSize", int.class, -1, jsonData);
-            Boolean flip = json.readValue("flip", Boolean.class, false, jsonData);
-            Boolean markupEnabled = json.readValue("markupEnabled", Boolean.class, false, jsonData);
-
-            FileHandle fontFile = skinFile.parent().child(path);
-            if (!fontFile.exists()) fontFile = Gdx.files.internal(path);
-            if (!fontFile.exists())
-              throw new SerializationException("Font file not found: " + fontFile);
-
-            // Use a region with the same name as the font, else use a PNG file in the same
-            // directory as the FNT file.
-            String regionName = fontFile.nameWithoutExtension();
-            try {
-              BitmapFont font;
-              Array<TextureRegion> regions = skin.getRegions(regionName);
-              if (regions != null)
-                font = new BitmapFont(new BitmapFontData(fontFile, flip), regions, true);
-              else {
-                TextureRegion region = skin.optional(regionName, TextureRegion.class);
-                if (region != null) font = new BitmapFont(fontFile, region, flip);
-                else {
-                  FileHandle imageFile = fontFile.parent().child(regionName + ".png");
-                  if (imageFile.exists()) font = new BitmapFont(fontFile, imageFile, flip);
-                  else font = new BitmapFont(fontFile, flip);
+                String path = json.readValue("file", String.class, jsonData);
+                int scaledSize = Nullability.castToNonnull(json.readValue("scaledSize", int.class, -1, jsonData));
+                Boolean flip = json.readValue("flip", Boolean.class, false, jsonData);
+                Boolean markupEnabled = json.readValue("markupEnabled", Boolean.class, false, jsonData);
+            
+                FileHandle fontFile = skinFile.parent().child(path);
+                if (!fontFile.exists()) fontFile = Gdx.files.internal(path);
+                if (!fontFile.exists())
+                    throw new SerializationException("Font file not found: " + fontFile);
+            
+                String regionName = fontFile.nameWithoutExtension();
+                try {
+                    BitmapFont font;
+                    Array<TextureRegion> regions = skin.getRegions(regionName);
+                    if (regions != null)
+                        font = new BitmapFont(new BitmapFontData(fontFile, Nullability.castToNonnull(flip)), regions, true);
+                    else {
+                        TextureRegion region = skin.optional(regionName, TextureRegion.class);
+                        if (region != null)
+                            font = new BitmapFont(fontFile, region, Nullability.castToNonnull(flip));
+                        else {
+                            FileHandle imageFile = fontFile.parent().child(regionName + ".png");
+                            if (imageFile.exists())
+                                font = new BitmapFont(fontFile, imageFile, Nullability.castToNonnull(flip));
+                            else
+                                font = new BitmapFont(fontFile, Nullability.castToNonnull(flip));
+                        }
+                    }
+                    font.getData().markupEnabled = Nullability.castToNonnull(markupEnabled);
+                    if (scaledSize != -1) font.getData().setScale(scaledSize / font.getCapHeight());
+                    return font;
+                } catch (RuntimeException ex) {
+                    throw new SerializationException("Error loading bitmap font: " + fontFile, ex);
                 }
-              }
-              font.getData().markupEnabled = markupEnabled;
-              // Scaled size is the desired cap height to scale the font to.
-              if (scaledSize != -1) font.getData().setScale(scaledSize / font.getCapHeight());
-              return font;
-            } catch (RuntimeException ex) {
-              throw new SerializationException("Error loading bitmap font: " + fontFile, ex);
             }
-          }
         });
 
     json.setSerializer(
         Color.class,
         new ReadOnlySerializer<Color>() {
           public Color read(Json json, JsonValue jsonData, @Nullable Class type) {
-            if (jsonData.isString()) return get(jsonData.asString(), Color.class);
-            String hex = json.readValue("hex", String.class, (String) null, jsonData);
-            if (hex != null) return Color.valueOf(hex);
-            float r = json.readValue("r", float.class, 0f, jsonData);
-            float g = json.readValue("g", float.class, 0f, jsonData);
-            float b = json.readValue("b", float.class, 0f, jsonData);
-            float a = json.readValue("a", float.class, 1f, jsonData);
-            return new Color(r, g, b, a);
+              if (jsonData.isString()) return get(jsonData.asString(), Color.class);
+              String hex = json.readValue("hex", String.class, (String) null, jsonData);
+              if (hex != null) return Color.valueOf(hex);
+              float r = Nullability.castToNonnull(json.readValue("r", float.class, 0f, jsonData));
+              float g = Nullability.castToNonnull(json.readValue("g", float.class, 0f, jsonData));
+              float b = Nullability.castToNonnull(json.readValue("b", float.class, 0f, jsonData));
+              float a = Nullability.castToNonnull(json.readValue("a", float.class, 1f, jsonData));
+              return new Color(r, g, b, a);
           }
         });
 

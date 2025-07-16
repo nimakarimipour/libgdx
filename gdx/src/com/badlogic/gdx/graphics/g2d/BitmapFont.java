@@ -653,7 +653,7 @@ public class BitmapFont implements Disposable {
      */
     public BitmapFontData() {}
 
-    public BitmapFontData(FileHandle fontFile, boolean flip) {
+    public BitmapFontData(FileHandle fontFile, @Nullable boolean flip) {
       this.fontFile = fontFile;
       this.flipped = flip;
       load(fontFile, flip);
