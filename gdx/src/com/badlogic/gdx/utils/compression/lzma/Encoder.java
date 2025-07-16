@@ -18,7 +18,6 @@ package com.badlogic.gdx.utils.compression.lzma;
 
 import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import javax.annotation.Nullable;
 
@@ -297,7 +296,7 @@ public class Encoder {
   ;
 
   Optimal[] _optimum = new Optimal[kNumOpts];
-  @Nullable com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
+  com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
   com.badlogic.gdx.utils.compression.rangecoder.Encoder _rangeEncoder =
       new com.badlogic.gdx.utils.compression.rangecoder.Encoder();
 
@@ -411,26 +410,23 @@ public class Encoder {
 
   int ReadMatchDistances() throws java.io.IOException {
     int lenRes = 0;
-    if (_matchFinder != null) {
-      _numDistancePairs =
-          Nullability.castToNonnull(_matchFinder, "checked for null").GetMatches(_matchDistances);
-      if (_numDistancePairs > 0) {
-        lenRes = _matchDistances[_numDistancePairs - 2];
-        if (lenRes == _numFastBytes)
-          lenRes +=
-              _matchFinder.GetMatchLen(
-                  (int) lenRes - 1,
-                  _matchDistances[_numDistancePairs - 1],
-                  Base.kMatchMaxLen - lenRes);
-      }
+    _numDistancePairs = _matchFinder.GetMatches(_matchDistances);
+    if (_numDistancePairs > 0) {
+      lenRes = _matchDistances[_numDistancePairs - 2];
+      if (lenRes == _numFastBytes)
+        lenRes +=
+            _matchFinder.GetMatchLen(
+                (int) lenRes - 1,
+                _matchDistances[_numDistancePairs - 1],
+                Base.kMatchMaxLen - lenRes);
     }
     _additionalOffset++;
     return lenRes;
   }
 
   void MovePos(int num) throws java.io.IOException {
-    if (num > 0 && _matchFinder != null) {
-      Nullability.castToNonnull(_matchFinder, "null check performed").Skip(num);
+    if (num > 0) {
+      _matchFinder.Skip(num);
       _additionalOffset += num;
     }
   }
@@ -530,9 +526,6 @@ public class Encoder {
     }
     numDistancePairs = _numDistancePairs;
 
-    if (_matchFinder == null) {
-      throw new IllegalStateException("_matchFinder is not initialized.");
-    }
     int numAvailableBytes = _matchFinder.GetNumAvailableBytes() + 1;
     if (numAvailableBytes < 2) {
       backRes = -1;
@@ -996,10 +989,7 @@ public class Encoder {
     finished[0] = true;
 
     if (_inStream != null) {
-      if (_matchFinder == null) {
-        throw new IllegalStateException("MatchFinder is not initialized");
-      }
-      Nullability.castToNonnull(_matchFinder, "not null before this").SetStream(_inStream);
+      _matchFinder.SetStream(_inStream);
       _matchFinder.Init();
       _needReleaseMFStream = true;
       _inStream = null;
@@ -1008,18 +998,9 @@ public class Encoder {
     if (_finished) return;
     _finished = true;
 
-    if (_matchFinder == null) {
-      Create();
-    }
-
-    if (_matchFinder == null) {
-      throw new IllegalStateException("MatchFinder is not initialized");
-    }
-
     long progressPosValuePrev = nowPos64;
     if (nowPos64 == 0) {
-      if (Nullability.castToNonnull(_matchFinder, "checked before use").GetNumAvailableBytes()
-          == 0) {
+      if (_matchFinder.GetNumAvailableBytes() == 0) {
         Flush((int) nowPos64);
         return;
       }
@@ -1034,7 +1015,7 @@ public class Encoder {
       _additionalOffset--;
       nowPos64++;
     }
-    if (Nullability.castToNonnull(_matchFinder, "checked before use").GetNumAvailableBytes() == 0) {
+    if (_matchFinder.GetNumAvailableBytes() == 0) {
       Flush((int) nowPos64);
       return;
     }
@@ -1117,12 +1098,12 @@ public class Encoder {
       _additionalOffset -= len;
       nowPos64 += len;
       if (_additionalOffset == 0) {
+        // if (!_fastMode)
         if (_matchPriceCount >= (1 << 7)) FillDistancesPrices();
         if (_alignPriceCount >= Base.kAlignTableSize) FillAlignPrices();
         inSize[0] = nowPos64;
         outSize[0] = _rangeEncoder.GetProcessedSizeAdd();
-        if (Nullability.castToNonnull(_matchFinder, "checked before use").GetNumAvailableBytes()
-            == 0) {
+        if (_matchFinder.GetNumAvailableBytes() == 0) {
           Flush((int) nowPos64);
           return;
         }
