@@ -37,7 +37,7 @@ public abstract class Value {
   /**
    * @param context May be null.
    */
-  public abstract float get(@Null Actor context);
+  public abstract float get(@Nullable @Null Actor context);
 
   /** A value that is always zero. */
   public static final Fixed zero = new Fixed(0);
