@@ -17,7 +17,6 @@
 package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import javax.annotation.Nullable;
@@ -550,7 +549,7 @@ public class Queue<T> implements Iterable<T> {
   public static class QueueIterable<T> implements Iterable<T> {
     private final Queue<T> queue;
     private final boolean allowRemove;
-    @Nullable private QueueIterator iterator1, iterator2;
+    private QueueIterator iterator1, iterator2;
 
     // java.io.StringWriter lastAcquire = new java.io.StringWriter();
 
@@ -568,18 +567,22 @@ public class Queue<T> implements Iterable<T> {
      */
     public Iterator<T> iterator() {
       if (Collections.allocateIterators) return new QueueIterator(queue, allowRemove);
+      // lastAcquire.getBuffer().setLength(0);
+      // new Throwable().printStackTrace(new java.io.PrintWriter(lastAcquire));
       if (iterator1 == null) {
         iterator1 = new QueueIterator(queue, allowRemove);
         iterator2 = new QueueIterator(queue, allowRemove);
+        // iterator1.iterable = this;
+        // iterator2.iterable = this;
       }
       if (!iterator1.valid) {
         iterator1.index = 0;
         iterator1.valid = true;
-        Nullability.castToNonnull(iterator2, "initialized together").valid = false;
+        iterator2.valid = false;
         return iterator1;
       }
-      Nullability.castToNonnull(iterator2, "initialized together").index = 0;
-      Nullability.castToNonnull(iterator2, "initialized together").valid = true;
+      iterator2.index = 0;
+      iterator2.valid = true;
       iterator1.valid = false;
       return iterator2;
     }
