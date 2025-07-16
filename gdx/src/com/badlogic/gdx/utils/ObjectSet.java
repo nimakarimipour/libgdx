@@ -17,7 +17,6 @@
 package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.math.MathUtils;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -73,7 +72,7 @@ public class ObjectSet<T> implements Iterable<T> {
    */
   protected int mask;
 
-  @Nullable private transient ObjectSetIterator iterator1, iterator2;
+  private transient ObjectSetIterator iterator1, iterator2;
 
   /** Creates a new set with an initial capacity of 51 and a load factor of 0.8. */
   public ObjectSet() {
@@ -378,11 +377,11 @@ public class ObjectSet<T> implements Iterable<T> {
     if (!iterator1.valid) {
       iterator1.reset();
       iterator1.valid = true;
-      Nullability.castToNonnull(iterator2, "initialized before use").valid = false;
+      iterator2.valid = false;
       return iterator1;
     }
-    Nullability.castToNonnull(iterator2, "initialized before use").reset();
-    Nullability.castToNonnull(iterator2, "initialized before use").valid = true;
+    iterator2.reset();
+    iterator2.valid = true;
     iterator1.valid = false;
     return iterator2;
   }
