@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -158,10 +159,13 @@ public class TextField extends Widget implements Disableable {
   }
 
   protected int letterUnderCursor(float x) {
+    if (style.font == null) {
+      throw new IllegalStateException("Font is not initialized.");
+    }
     x -=
         textOffset
             + fontOffset
-            - style.font.getData().cursorX
+            - Nullability.castToNonnull(style.font, "checked earlier").getData().cursorX
             - glyphPositions.get(visibleTextStart);
     Drawable background = getBackgroundDrawable();
     if (background != null) x -= style.background.getLeftWidth();
@@ -230,9 +234,12 @@ public class TextField extends Widget implements Disableable {
 
   public void setStyle(TextFieldStyle style) {
     if (style == null) throw new IllegalArgumentException("style cannot be null.");
+    if (style.font == null) throw new IllegalArgumentException("font in style cannot be null.");
     this.style = style;
 
-    textHeight = style.font.getCapHeight() - style.font.getDescent() * 2;
+    textHeight =
+        Nullability.castToNonnull(style.font, "style font non-nullable").getCapHeight()
+            - style.font.getDescent() * 2;
     if (text != null) updateDisplayText();
     invalidateHierarchy();
   }
@@ -308,7 +315,9 @@ public class TextField extends Widget implements Disableable {
               glyphPositions[maxIndex] - glyphPositions[visibleTextStart],
               visibleWidth - textOffset);
       selectionX = minX;
-      selectionWidth = maxX - minX - style.font.getData().cursorX;
+      if (style.font != null) {
+        selectionWidth = maxX - minX - style.font.getData().cursorX;
+      }
     }
   }
 
@@ -329,7 +338,13 @@ public class TextField extends Widget implements Disableable {
     } else if (!focused) //
     cursorOn = false;
 
-    final BitmapFont font = style.font;
+    final BitmapFont font;
+    if (style.font != null) {
+      font = style.font;
+    } else {
+      throw new NullPointerException("The font in style cannot be null.");
+    }
+
     final Color fontColor =
         (disabled && style.disabledFontColor != null)
             ? style.disabledFontColor
@@ -354,14 +369,15 @@ public class TextField extends Widget implements Disableable {
       bgRightWidth = background.getRightWidth();
     }
 
-    float textY = getTextY(font, background);
+    float textY = getTextY(Nullability.castToNonnull(font), background);
     calculateOffsets();
 
     if (focused && hasSelection && selection != null) {
-      drawSelection(selection, batch, font, x + bgLeftWidth, y + textY);
+      drawSelection(selection, batch, Nullability.castToNonnull(font), x + bgLeftWidth, y + textY);
     }
 
-    float yOffset = font.isFlipped() ? -textHeight : 0;
+    float yOffset =
+        Nullability.castToNonnull(font, "checked for null").isFlipped() ? -textHeight : 0;
     if (displayText.length() == 0) {
       if ((!focused || disabled) && messageText != null) {
         BitmapFont messageFont = style.messageFont != null ? style.messageFont : font;
@@ -444,8 +460,11 @@ public class TextField extends Widget implements Disableable {
   }
 
   void updateDisplayText() {
+    if (style.font == null) {
+      return;
+    }
     BitmapFont font = style.font;
-    BitmapFontData data = font.getData();
+    BitmapFontData data = Nullability.castToNonnull(font.getData(), "font is not null");
     String text = this.text;
     int textLength = text.length();
 
@@ -518,16 +537,18 @@ public class TextField extends Widget implements Disableable {
     StringBuilder buffer = new StringBuilder();
     int textLength = text.length();
     if (hasSelection) textLength -= Math.abs(cursor - selectionStart);
-    BitmapFontData data = style.font.getData();
-    for (int i = 0, n = content.length(); i < n; i++) {
-      if (!withinMaxLength(textLength + buffer.length())) break;
-      char c = content.charAt(i);
-      if (!(writeEnters && (c == NEWLINE || c == CARRIAGE_RETURN))) {
-        if (c == '\r' || c == '\n') continue;
-        if (onlyFontChars && !data.hasGlyph(c)) continue;
-        if (filter != null && !filter.acceptChar(this, c)) continue;
+    if (style.font != null) {
+      BitmapFontData data = Nullability.castToNonnull(style.font, "style.font not null").getData();
+      for (int i = 0, n = content.length(); i < n; i++) {
+        if (!withinMaxLength(textLength + buffer.length())) break;
+        char c = content.charAt(i);
+        if (!(writeEnters && (c == NEWLINE || c == CARRIAGE_RETURN))) {
+          if (c == '\r' || c == '\n') continue;
+          if (onlyFontChars && !data.hasGlyph(c)) continue;
+          if (filter != null && !filter.acceptChar(this, c)) continue;
+        }
+        buffer.append(c);
       }
-      buffer.append(c);
     }
     content = buffer.toString();
 
@@ -1144,8 +1165,6 @@ public class TextField extends Widget implements Disableable {
     public boolean keyTyped(InputEvent event, char character) {
       if (disabled) return false;
 
-      // Disallow "typing" most ASCII control characters, which would show up as a space when
-      // onlyFontChars is true.
       switch (character) {
         case BACKSPACE:
         case TAB:
@@ -1166,7 +1185,12 @@ public class TextField extends Widget implements Disableable {
         boolean delete = character == DELETE;
         boolean backspace = character == BACKSPACE;
         boolean add =
-            enter ? writeEnters : (!onlyFontChars || style.font.getData().hasGlyph(character));
+            enter
+                ? writeEnters
+                : (!onlyFontChars
+                    || Nullability.castToNonnull(style.font, "checked for null")
+                        .getData()
+                        .hasGlyph(character));
         boolean remove = backspace || delete;
         if (add || remove) {
           String oldText = text;
@@ -1184,7 +1208,6 @@ public class TextField extends Widget implements Disableable {
             }
           }
           if (add && !remove) {
-            // Character may be added to the text.
             if (!enter && filter != null && !filter.acceptChar(TextField.this, character))
               return true;
             if (!withinMaxLength(
@@ -1200,8 +1223,7 @@ public class TextField extends Widget implements Disableable {
             if (time - 750 > lastChangeTime) undoText = oldText;
             lastChangeTime = time;
             updateDisplayText();
-          } else if (!text.equals(oldText)) // Keep cursor movement if the text is the same.
-          cursor = oldCursor;
+          } else if (!text.equals(oldText)) cursor = oldCursor;
         }
       }
       if (listener != null) listener.keyTyped(TextField.this, character);
@@ -1216,7 +1238,7 @@ public class TextField extends Widget implements Disableable {
    * @author Nathan Sweet
    */
   public static class TextFieldStyle {
-    public BitmapFont font;
+    @Nullable public BitmapFont font;
     @Nullable public Color fontColor;
     @Nullable public @Null Color focusedFontColor, disabledFontColor;
     @Nullable
