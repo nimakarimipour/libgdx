@@ -316,8 +316,8 @@ public interface Net {
     }
 
     /** Returns the HTTP method of the HttpRequest. */
-    @Nullable
-    public String getMethod() {
+    
+    @Nullable public String getMethod() {
       return httpMethod;
     }
 
