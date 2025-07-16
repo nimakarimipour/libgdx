@@ -49,17 +49,17 @@ public class ReflectionPool<T> extends Pool<T> {
   }
 
   @Nullable private @Null Constructor findConstructor(Class<T> type) {
-      try {
-        return ClassReflection.getConstructor(type, (Class[]) null);
-      } catch (Exception ex1) {
         try {
-          Constructor constructor = ClassReflection.getDeclaredConstructor(type, Nullability.castToNonnull((Class[]) null));
-          constructor.setAccessible(true);
-          return constructor;
-        } catch (ReflectionException ex2) {
-          return null;
+          return ClassReflection.getConstructor(type, Nullability.castToNonnull((Class[]) null));
+        } catch (Exception ex1) {
+          try {
+            Constructor constructor = ClassReflection.getDeclaredConstructor(type, Nullability.castToNonnull((Class[]) null));
+            constructor.setAccessible(true);
+            return constructor;
+          } catch (ReflectionException ex2) {
+            return null;
+          }
         }
-      }
     }
 
   protected T newObject() {
