@@ -799,8 +799,12 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getMaxWidth() {
-    return maxWidth.get(actor);
-  }
+        if (actor != null) {
+            return maxWidth.get(actor);
+        }
+        // Handle the case when actor is null, returning a default value or throwing an exception
+        return 0f; // or throw new IllegalArgumentException("Actor cannot be null");
+    }
 
   /**
    * @return May be null if this cell is row defaults.
