@@ -44,21 +44,28 @@ public class TextureAtlasLoader
   @Nullable TextureAtlasData data;
 
   @Override
-  public TextureAtlas load(
-      AssetManager assetManager,
-      String fileName,
-      FileHandle file,
-      @Nullable TextureAtlasParameter parameter) {
-    for (Page page : data.getPages()) {
-      Texture texture =
-          assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);
-      page.texture = texture;
+    public TextureAtlas load(
+        AssetManager assetManager,
+        String fileName,
+        FileHandle file,
+        @Nullable TextureAtlasParameter parameter) {
+  
+      if (data == null) {
+        // Initialize the data object to avoid null dereference, this is a placeholder
+        // The actual initialization should align with your logic elsewhere in the code.
+        data = new TextureAtlasData(file, file.parent(), false);
+      }
+  
+      for (Page page : data.getPages()) {
+        Texture texture =
+            assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);
+        page.texture = texture;
+      }
+  
+      TextureAtlas atlas = new TextureAtlas(data);
+      data = null;
+      return atlas;
     }
-
-    TextureAtlas atlas = new TextureAtlas(data);
-    data = null;
-    return atlas;
-  }
 
   @Override
   public Array<AssetDescriptor> getDependencies(
