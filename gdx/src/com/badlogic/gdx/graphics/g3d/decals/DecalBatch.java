@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SortedIntList;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Renderer for {@link Decal} objects.
@@ -55,7 +56,7 @@ public class DecalBatch implements Disposable {
   private Mesh mesh;
 
   private final SortedIntList<Array<Decal>> groupList = new SortedIntList<Array<Decal>>();
-  private GroupStrategy groupStrategy;
+  @Nullable private GroupStrategy groupStrategy;
   private final Pool<Array<Decal>> groupPool =
       new Pool<Array<Decal>>(16) {
         @Override
@@ -144,16 +145,19 @@ public class DecalBatch implements Disposable {
    * @param decal Decal to add for rendering
    */
   public void add(Decal decal) {
-    int groupIndex = groupStrategy.decideGroup(decal);
-    Array<Decal> targetGroup = groupList.get(groupIndex);
-    if (targetGroup == null) {
-      targetGroup = groupPool.obtain();
-      targetGroup.clear();
-      usedGroups.add(targetGroup);
-      groupList.insert(groupIndex, targetGroup);
+        if (groupStrategy == null) {
+            throw new IllegalStateException("GroupStrategy must be set before adding decals.");
+        }
+        int groupIndex = groupStrategy.decideGroup(decal);
+        Array<Decal> targetGroup = groupList.get(groupIndex);
+        if (targetGroup == null) {
+          targetGroup = groupPool.obtain();
+          targetGroup.clear();
+          usedGroups.add(targetGroup);
+          groupList.insert(groupIndex, targetGroup);
+        }
+        targetGroup.add(decal);
     }
-    targetGroup.add(decal);
-  }
 
   /**
    * Flush this batch sending all contained decals to GL. After flushing the batch is empty once
@@ -166,14 +170,17 @@ public class DecalBatch implements Disposable {
 
   /** Renders all decals to the buffer and flushes the buffer to the GL when full/done */
   protected void render() {
-    groupStrategy.beforeGroups();
-    for (SortedIntList.Node<Array<Decal>> group : groupList) {
-      groupStrategy.beforeGroup(group.index, group.value);
-      ShaderProgram shader = groupStrategy.getGroupShader(group.index);
-      render(shader, group.value);
-      groupStrategy.afterGroup(group.index);
-    }
-    groupStrategy.afterGroups();
+      if (groupStrategy == null) {
+          throw new IllegalStateException("GroupStrategy is not set");
+      }
+      Nullability.castToNonnull(groupStrategy, "explicit null check").beforeGroups();
+      for (SortedIntList.Node<Array<Decal>> group : groupList) {
+        groupStrategy.beforeGroup(group.index, group.value);
+        ShaderProgram shader = groupStrategy.getGroupShader(group.index);
+        render(shader, group.value);
+        groupStrategy.afterGroup(group.index);
+      }
+      groupStrategy.afterGroups();
   }
 
   /**
