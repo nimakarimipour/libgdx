@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -134,6 +135,7 @@ public class Slider extends ProgressBar {
     return mouseOver;
   }
 
+  @Nullable
   protected @Null Drawable getBackgroundDrawable() {
     SliderStyle style = (SliderStyle) super.getStyle();
     if (disabled && style.disabledBackground != null) return style.disabledBackground;
@@ -174,6 +176,10 @@ public class Slider extends ProgressBar {
     Drawable knob = style.knob;
     Drawable bg = getBackgroundDrawable();
 
+    if (bg == null) {
+      return false;
+    }
+
     float value;
     float oldPosition = position;
 
@@ -181,7 +187,10 @@ public class Slider extends ProgressBar {
     float max = getMaxValue();
 
     if (vertical) {
-      float height = getHeight() - bg.getTopHeight() - bg.getBottomHeight();
+      float height =
+          getHeight()
+              - Nullability.castToNonnull(bg, "checked for null").getTopHeight()
+              - bg.getBottomHeight();
       float knobHeight = knob == null ? 0 : knob.getMinHeight();
       position = y - bg.getBottomHeight() - knobHeight * 0.5f;
       value =
