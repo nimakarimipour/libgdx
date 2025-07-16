@@ -21,6 +21,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,22 +75,28 @@ public class TextureArray extends GLTexture {
   }
 
   private void load(TextureArrayData data) {
-    if (this.data != null && data.isManaged() != this.data.isManaged())
+    if (this.data != null && data.isManaged() != this.data.isManaged()) {
       throw new GdxRuntimeException("New data must have the same managed status as the old data");
+    }
     this.data = data;
 
+    if (Gdx.gl30 == null) {
+      throw new GdxRuntimeException("GLES 3.0 is required");
+    }
+
     bind();
-    Gdx.gl30.glTexImage3D(
-        GL30.GL_TEXTURE_2D_ARRAY,
-        0,
-        data.getInternalFormat(),
-        data.getWidth(),
-        data.getHeight(),
-        data.getDepth(),
-        0,
-        data.getInternalFormat(),
-        data.getGLType(),
-        null);
+    Nullability.castToNonnull(Gdx.gl30, "checked for null")
+        .glTexImage3D(
+            GL30.GL_TEXTURE_2D_ARRAY,
+            0,
+            data.getInternalFormat(),
+            data.getWidth(),
+            data.getHeight(),
+            data.getDepth(),
+            0,
+            data.getInternalFormat(),
+            data.getGLType(),
+            null);
 
     if (!data.isPrepared()) data.prepare();
 
