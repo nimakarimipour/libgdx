@@ -54,15 +54,15 @@ public class ModelBatch implements Disposable {
     }
 
     @Override
-    public Renderable obtain() {
-      Renderable renderable = super.obtain();
-      renderable.environment = null;
-      renderable.material = null;
-      renderable.meshPart.set("", null, 0, 0, 0);
-      renderable.shader = null;
-      renderable.userData = null;
-      return renderable;
-    }
+      public Renderable obtain() {
+        Renderable renderable = super.obtain();
+        renderable.environment = null;
+        renderable.material = new Material(); // Provide a non-null default instance
+        renderable.meshPart.set("", null, 0, 0, 0);
+        renderable.shader = null;
+        renderable.userData = null;
+        return renderable;
+      }
   }
 
   @Nullable protected Camera camera;
