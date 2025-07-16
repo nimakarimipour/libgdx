@@ -28,7 +28,6 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import com.uber.nullaway.annotations.Initializer;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -241,26 +240,16 @@ public class ResourceData<T> implements Json.Serializable {
   @Override
   public void read(Json json, JsonValue jsonData) {
     uniqueData = json.readValue("unique", ObjectMap.class, jsonData);
-    if (uniqueData != null) {
-      for (Entry<String, SaveData> entry : uniqueData.entries()) {
-        if (entry.value != null) {
-          Nullability.castToNonnull(entry.value, "checked for null");
-          entry.value.resources = this;
-        }
-      }
+    for (Entry<String, SaveData> entry : uniqueData.entries()) {
+      entry.value.resources = this;
     }
 
     data = json.readValue("data", Array.class, SaveData.class, jsonData);
-    if (data != null) {
-      for (SaveData saveData : data) {
-        saveData.resources = this;
-      }
+    for (SaveData saveData : data) {
+      saveData.resources = this;
     }
 
-    Array<AssetData> readAssets = json.readValue("assets", Array.class, AssetData.class, jsonData);
-    if (readAssets != null) {
-      sharedAssets.addAll(readAssets);
-    }
+    sharedAssets.addAll(json.readValue("assets", Array.class, AssetData.class, jsonData));
     resource = json.readValue("resource", null, jsonData);
   }
 }
