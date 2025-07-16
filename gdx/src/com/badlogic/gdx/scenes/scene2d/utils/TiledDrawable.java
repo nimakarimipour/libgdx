@@ -47,11 +47,6 @@ public class TiledDrawable extends TextureRegionDrawable {
     batch.setColor(batch.getColor().mul(color));
 
     TextureRegion region = getRegion();
-    if (region == null) {
-      // Handle the null case, maybe log or return
-      return;
-    }
-
     float regionWidth = region.getRegionWidth() * scale,
         regionHeight = region.getRegionHeight() * scale;
     int fullX = (int) (width / regionWidth), fullY = (int) (height / regionHeight);
