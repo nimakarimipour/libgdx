@@ -39,7 +39,7 @@ public class ActorGestureListener implements EventListener {
 
   private final GestureDetector detector;
   @Nullable InputEvent event;
-  Actor actor, touchDownTarget;
+  @Nullable Actor actor, touchDownTarget;
 
   /**
    * @see GestureDetector#GestureDetector(com.badlogic.gdx.input.GestureDetector.GestureListener)
@@ -69,14 +69,20 @@ public class ActorGestureListener implements EventListener {
               private final Vector2 pointer1 = new Vector2(), pointer2 = new Vector2();
 
               public boolean tap(float stageX, float stageY, int count, int button) {
-                actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
-                ActorGestureListener.this.tap(event, tmpCoords.x, tmpCoords.y, count, button);
-                return true;
+                                  if (actor == null) {
+                                      return false; // Handle the null case appropriately
+                                  }
+                                  Nullability.castToNonnull(actor, "null check passed").stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
+                                  ActorGestureListener.this.tap(event, tmpCoords.x, tmpCoords.y, count, button);
+                                  return true;
               }
 
               public boolean longPress(float stageX, float stageY) {
-                actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
-                return ActorGestureListener.this.longPress(actor, tmpCoords.x, tmpCoords.y);
+                                  if (actor == null) {
+                                      return false; // Handle the null case appropriately
+                                  }
+                                  Nullability.castToNonnull(actor, "checked for null").stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
+                                  return ActorGestureListener.this.longPress(actor, tmpCoords.x, tmpCoords.y);
               }
 
               public boolean fling(float velocityX, float velocityY, int button) {
@@ -86,19 +92,25 @@ public class ActorGestureListener implements EventListener {
               }
 
               public boolean pan(float stageX, float stageY, float deltaX, float deltaY) {
-                stageToLocalAmount(tmpCoords.set(deltaX, deltaY));
-                deltaX = tmpCoords.x;
-                deltaY = tmpCoords.y;
-                actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
-                ActorGestureListener.this.pan(event, tmpCoords.x, tmpCoords.y, deltaX, deltaY);
-                return true;
-              }
+                    if (actor == null) {
+                        return false; // or handle the null case appropriately for your application
+                    }
+                    stageToLocalAmount(tmpCoords.set(deltaX, deltaY));
+                    deltaX = tmpCoords.x;
+                    deltaY = tmpCoords.y;
+                    actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
+                    ActorGestureListener.this.pan(event, tmpCoords.x, tmpCoords.y, deltaX, deltaY);
+                    return true;
+                }
 
               public boolean panStop(float stageX, float stageY, int pointer, int button) {
-                actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
-                ActorGestureListener.this.panStop(event, tmpCoords.x, tmpCoords.y, pointer, button);
-                return true;
-              }
+                                  if (actor == null) {
+                                      return false; // or handle the null case appropriately for your application
+                                  }
+                                  Nullability.castToNonnull(actor, "checked for null").stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
+                                  ActorGestureListener.this.panStop(event, tmpCoords.x, tmpCoords.y, pointer, button);
+                                  return true;
+                }
 
               public boolean zoom(float initialDistance, float distance) {
                 ActorGestureListener.this.zoom(event, initialDistance, distance);
@@ -106,23 +118,28 @@ public class ActorGestureListener implements EventListener {
               }
 
               public boolean pinch(
-                  Vector2 stageInitialPointer1,
-                  Vector2 stageInitialPointer2,
-                  Vector2 stagePointer1,
-                  Vector2 stagePointer2) {
-                actor.stageToLocalCoordinates(initialPointer1.set(stageInitialPointer1));
-                actor.stageToLocalCoordinates(initialPointer2.set(stageInitialPointer2));
-                actor.stageToLocalCoordinates(pointer1.set(stagePointer1));
-                actor.stageToLocalCoordinates(pointer2.set(stagePointer2));
-                ActorGestureListener.this.pinch(
-                    event, initialPointer1, initialPointer2, pointer1, pointer2);
-                return true;
-              }
+                                            Vector2 stageInitialPointer1,
+                                            Vector2 stageInitialPointer2,
+                                            Vector2 stagePointer1,
+                                            Vector2 stagePointer2) {
+                                          if (actor == null) {
+                                              return false;
+                                          }
+                                          Nullability.castToNonnull(actor, "checked for null").stageToLocalCoordinates(initialPointer1.set(stageInitialPointer1));
+                                          actor.stageToLocalCoordinates(initialPointer2.set(stageInitialPointer2));
+                                          actor.stageToLocalCoordinates(pointer1.set(stagePointer1));
+                                          actor.stageToLocalCoordinates(pointer2.set(stagePointer2));
+                                          ActorGestureListener.this.pinch(
+                                              event, initialPointer1, initialPointer2, pointer1, pointer2);
+                                          return true;
+                }
 
               private void stageToLocalAmount(Vector2 amount) {
-                actor.stageToLocalCoordinates(amount);
-                amount.sub(actor.stageToLocalCoordinates(tmpCoords2.set(0, 0)));
-              }
+                    if (actor != null) {
+                        Nullability.castToNonnull(actor, "actor checked not null").stageToLocalCoordinates(amount);
+                        amount.sub(actor.stageToLocalCoordinates(tmpCoords2.set(0, 0)));
+                    }
+                }
             });
   }
 
@@ -203,7 +220,7 @@ public class ActorGestureListener implements EventListener {
     return detector;
   }
 
-  public @Null Actor getTouchDownTarget() {
+  @Nullable public @Null Actor getTouchDownTarget() {
     return touchDownTarget;
   }
 }
