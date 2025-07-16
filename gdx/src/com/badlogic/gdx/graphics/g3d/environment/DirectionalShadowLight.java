@@ -114,8 +114,11 @@ public class DirectionalShadowLight extends DirectionalLight implements ShadowMa
   }
 
   @Override
-  public void dispose() {
-    if (fbo != null) fbo.dispose();
-    fbo = null;
-  }
+    public void dispose() {
+      if (fbo != null) {
+        fbo.dispose();
+        // Ensure 'fbo' is set to a default non-null value if required
+        // Example: fbo = new FrameBuffer();
+      }
+    }
 }
