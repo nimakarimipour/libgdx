@@ -30,7 +30,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -47,7 +46,7 @@ public class BitmapFontLoader
     super(resolver);
   }
 
-  @Nullable BitmapFontData data;
+  BitmapFontData data;
 
   @Override
   public Array<AssetDescriptor> getDependencies(
@@ -97,27 +96,14 @@ public class BitmapFontLoader
       @Nullable BitmapFontParameter parameter) {
     if (parameter != null && parameter.atlasName != null) {
       TextureAtlas atlas = manager.get(parameter.atlasName, TextureAtlas.class);
-
-      // Ensure 'data' is initialized before use
-      if (data == null) {
-        data = new BitmapFontData(file, parameter.flip);
-      }
-
-      String name =
-          file.sibling(Nullability.castToNonnull(data, "prior initialized").imagePaths[0])
-              .nameWithoutExtension()
-              .toString();
+      String name = file.sibling(data.imagePaths[0]).nameWithoutExtension().toString();
       AtlasRegion region = atlas.findRegion(name);
 
-      if (region == null) {
+      if (region == null)
         throw new GdxRuntimeException(
             "Could not find font region " + name + " in atlas " + parameter.atlasName);
-      }
       return new BitmapFont(file, region);
     } else {
-      if (data == null) {
-        data = new BitmapFontData(file, parameter != null && parameter.flip);
-      }
       int n = data.getImagePaths().length;
       Array<TextureRegion> regs = new Array(n);
       for (int i = 0; i < n; i++) {
