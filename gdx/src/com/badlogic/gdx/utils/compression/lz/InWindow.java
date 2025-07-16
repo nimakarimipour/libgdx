@@ -54,8 +54,8 @@ public class InWindow {
   }
 
   void Free() {
-    _bufferBase = null;
-  }
+      _bufferBase = new byte[0];
+    }
 
   public void Create(int keepSizeBefore, int keepSizeAfter, int keepSizeReserv) {
     _keepSizeBefore = keepSizeBefore;
