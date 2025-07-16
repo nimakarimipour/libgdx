@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A button with a child {@link Image} and {@link Label}.
@@ -51,22 +52,22 @@ public class ImageTextButton extends Button {
   }
 
   public ImageTextButton(@Null String text, ImageTextButtonStyle style) {
-    super(style);
-    this.style = style;
-
-    defaults().space(3);
-
-    image = newImage();
-
-    label = newLabel(text, new LabelStyle(style.font, style.fontColor));
-    label.setAlignment(Align.center);
-
-    add(image);
-    add(label);
-
-    setStyle(style);
-
-    setSize(getPrefWidth(), getPrefHeight());
+      super(style);
+      this.style = style;
+  
+      defaults().space(3);
+  
+      image = newImage();
+  
+      label = newLabel(text, new LabelStyle(Nullability.castToNonnull(style.font), style.fontColor));
+      label.setAlignment(Align.center);
+  
+      add(image);
+      add(label);
+  
+      setStyle(style);
+  
+      setSize(getPrefWidth(), getPrefHeight());
   }
 
   protected Image newImage() {

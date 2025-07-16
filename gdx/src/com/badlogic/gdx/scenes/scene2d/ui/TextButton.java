@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A button with a child {@link Label} to display text.
@@ -45,12 +46,12 @@ public class TextButton extends Button {
   }
 
   public TextButton(@Null String text, TextButtonStyle style) {
-    super();
-    setStyle(style);
-    label = newLabel(text, new LabelStyle(style.font, style.fontColor));
-    label.setAlignment(Align.center);
-    add(label).expand().fill();
-    setSize(getPrefWidth(), getPrefHeight());
+      super();
+      setStyle(style);
+      label = newLabel(text, new LabelStyle(Nullability.castToNonnull(style.font), style.fontColor));
+      label.setAlignment(Align.center);
+      add(label).expand().fill();
+      setSize(getPrefWidth(), getPrefHeight());
   }
 
   protected Label newLabel(String text, LabelStyle style) {
@@ -144,7 +145,7 @@ public class TextButton extends Button {
    * @author Nathan Sweet
    */
   public static class TextButtonStyle extends ButtonStyle {
-    public BitmapFont font;
+    @Nullable public BitmapFont font;
     @Nullable
     public @Null Color fontColor, downFontColor, overFontColor, focusedFontColor, disabledFontColor;
     @Nullable
