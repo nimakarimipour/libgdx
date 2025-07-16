@@ -96,37 +96,37 @@ public class TextureAtlas implements Disposable {
 
   /** Adds the textures and regions from the specified texture atlas data. */
   public void load(TextureAtlasData data) {
-    textures.ensureCapacity(data.pages.size);
-    for (Page page : data.pages) {
-      if (page.texture == null)
-        page.texture = new Texture(page.textureFile, page.format, page.useMipMaps);
-      page.texture.setFilter(page.minFilter, page.magFilter);
-      page.texture.setWrap(page.uWrap, page.vWrap);
-      textures.add(page.texture);
-    }
-
-    regions.ensureCapacity(data.regions.size);
-    for (Region region : data.regions) {
-      AtlasRegion atlasRegion =
-          new AtlasRegion(
-              region.page.texture,
-              region.left,
-              region.top, //
-              region.rotate ? region.height : region.width, //
-              region.rotate ? region.width : region.height);
-      atlasRegion.index = region.index;
-      atlasRegion.name = region.name;
-      atlasRegion.offsetX = region.offsetX;
-      atlasRegion.offsetY = region.offsetY;
-      atlasRegion.originalHeight = region.originalHeight;
-      atlasRegion.originalWidth = region.originalWidth;
-      atlasRegion.rotate = region.rotate;
-      atlasRegion.degrees = region.degrees;
-      atlasRegion.names = region.names;
-      atlasRegion.values = region.values;
-      if (region.flip) atlasRegion.flip(false, true);
-      regions.add(atlasRegion);
-    }
+      textures.ensureCapacity(data.pages.size);
+      for (Page page : data.pages) {
+        if (page.texture == null)
+          page.texture = new Texture(page.textureFile, page.format, page.useMipMaps);
+        page.texture.setFilter(page.minFilter, page.magFilter);
+        page.texture.setWrap(page.uWrap, page.vWrap);
+        textures.add(page.texture);
+      }
+  
+      regions.ensureCapacity(data.regions.size);
+      for (Region region : data.regions) {
+        AtlasRegion atlasRegion =
+            new AtlasRegion(
+                Nullability.castToNonnull(region.page, "always initialized").texture,
+                region.left,
+                region.top, //
+                region.rotate ? region.height : region.width, //
+                region.rotate ? region.width : region.height);
+        atlasRegion.index = region.index;
+        atlasRegion.name = region.name;
+        atlasRegion.offsetX = region.offsetX;
+        atlasRegion.offsetY = region.offsetY;
+        atlasRegion.originalHeight = region.originalHeight;
+        atlasRegion.originalWidth = region.originalWidth;
+        atlasRegion.rotate = region.rotate;
+        atlasRegion.degrees = region.degrees;
+        atlasRegion.names = region.names;
+        atlasRegion.values = region.values;
+        if (region.flip) atlasRegion.flip(false, true);
+        regions.add(atlasRegion);
+      }
   }
 
   /**
