@@ -31,11 +31,12 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import com.uber.nullaway.annotations.Initializer;
 
 /** A text input field with multiple lines. */
 public class TextArea extends TextField {
   /** Array storing lines breaks positions * */
-  IntArray linesBreak;
+  @SuppressWarnings("NullAway.Init") IntArray linesBreak;
 
   /**
    * Last text processed. This attribute is used to avoid unnecessary computations while calculating
@@ -72,7 +73,7 @@ public class TextArea extends TextField {
     super(text, style);
   }
 
-  protected void initialize() {
+  @Initializer protected void initialize() {
     super.initialize();
     writeEnters = true;
     linesBreak = new IntArray();
