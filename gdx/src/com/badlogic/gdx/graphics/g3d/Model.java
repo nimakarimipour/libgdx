@@ -463,19 +463,24 @@ public class Model implements Disposable {
    * @param ignoreCase whether to use case sensitivity when comparing the animation id.
    * @return The {@link Animation} with the specified id, or null if not available.
    */
-  @Nullable
-  public Animation getAnimation(final String id, boolean ignoreCase) {
-    final int n = animations.size;
-    Animation animation;
-    if (ignoreCase) {
-      for (int i = 0; i < n; i++)
-        if ((animation = animations.get(i)).id.equalsIgnoreCase(id)) return animation;
-    } else {
-      for (int i = 0; i < n; i++)
-        if ((animation = animations.get(i)).id.equals(id)) return animation;
+  @Nullable public Animation getAnimation(final String id, boolean ignoreCase) {
+        final int n = animations.size;
+        Animation animation;
+        if (ignoreCase) {
+            for (int i = 0; i < n; i++) {
+                animation = animations.get(i);
+                if (animation.id == null) return null;
+                if (animation.id.equalsIgnoreCase(id)) return animation;
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                animation = animations.get(i);
+                if (animation.id == null) return null;
+                if (animation.id.equals(id)) return animation;
+            }
+        }
+        return null;
     }
-    return null;
-  }
 
   /**
    * @param id The ID of the material to fetch.

@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
  */
 public class Animation {
   /** the unique id of the animation * */
-  public String id;
+  @Nullable public String id;
 
   /** the duration in seconds * */
   public float duration;
