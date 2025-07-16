@@ -45,7 +45,6 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -165,9 +164,7 @@ public class TextField extends Widget implements Disableable {
             - style.font.getData().cursorX
             - glyphPositions.get(visibleTextStart);
     Drawable background = getBackgroundDrawable();
-    if (background != null)
-      x -=
-          Nullability.castToNonnull(style.background, "background checked not null").getLeftWidth();
+    if (background != null) x -= style.background.getLeftWidth();
     int n = this.glyphPositions.size;
     float[] glyphPositions = this.glyphPositions.items;
     for (int i = 1; i < n; i++) {
