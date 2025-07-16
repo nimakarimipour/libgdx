@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Batches {@link Renderable} instances, fetches {@link Shader}s for them, sorts them and then
@@ -270,20 +271,20 @@ public class ModelBatch implements Disposable {
    * called after the call to {@link #begin(Camera)} and before the call to {@link #end()}.
    */
   public void flush() {
-    sorter.sort(camera, renderables);
-    Shader currentShader = null;
-    for (int i = 0; i < renderables.size; i++) {
-      final Renderable renderable = renderables.get(i);
-      if (currentShader != renderable.shader) {
-        if (currentShader != null) currentShader.end();
-        currentShader = renderable.shader;
-        currentShader.begin(camera, context);
+      sorter.sort(camera, renderables);
+      Shader currentShader = null;
+      for (int i = 0; i < renderables.size; i++) {
+        final Renderable renderable = renderables.get(i);
+        if (currentShader != renderable.shader) {
+          if (currentShader != null) currentShader.end();
+          currentShader = renderable.shader;
+          currentShader.begin(Nullability.castToNonnull(camera), context);
+        }
+        currentShader.render(renderable);
       }
-      currentShader.render(renderable);
-    }
-    if (currentShader != null) currentShader.end();
-    renderablesPool.flush();
-    renderables.clear();
+      if (currentShader != null) currentShader.end();
+      renderablesPool.flush();
+      renderables.clear();
   }
 
   /**
