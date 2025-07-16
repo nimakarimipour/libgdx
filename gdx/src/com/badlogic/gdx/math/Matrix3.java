@@ -401,18 +401,21 @@ public class Matrix3 implements Serializable {
    * @return This matrix for the purpose of chaining operations.
    */
   public Matrix3 set(@Nullable Matrix4 mat) {
-    float[] val = this.val;
-    val[M00] = mat.val[Matrix4.M00];
-    val[M10] = mat.val[Matrix4.M10];
-    val[M20] = mat.val[Matrix4.M20];
-    val[M01] = mat.val[Matrix4.M01];
-    val[M11] = mat.val[Matrix4.M11];
-    val[M21] = mat.val[Matrix4.M21];
-    val[M02] = mat.val[Matrix4.M02];
-    val[M12] = mat.val[Matrix4.M12];
-    val[M22] = mat.val[Matrix4.M22];
-    return this;
-  }
+      if (mat == null || mat.val == null) {
+        throw new IllegalArgumentException("Matrix4 or its internal array is null");
+      }
+      float[] val = this.val;
+      val[M00] = mat.val[Matrix4.M00];
+      val[M10] = mat.val[Matrix4.M10];
+      val[M20] = mat.val[Matrix4.M20];
+      val[M01] = mat.val[Matrix4.M01];
+      val[M11] = mat.val[Matrix4.M11];
+      val[M21] = mat.val[Matrix4.M21];
+      val[M02] = mat.val[Matrix4.M02];
+      val[M12] = mat.val[Matrix4.M12];
+      val[M22] = mat.val[Matrix4.M22];
+      return this;
+    }
 
   /**
    * Sets the matrix to the given matrix as a float array. The float array must have at least 9
