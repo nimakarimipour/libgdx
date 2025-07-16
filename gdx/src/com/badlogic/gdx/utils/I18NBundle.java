@@ -91,7 +91,7 @@ public class I18NBundle {
   private Locale locale;
 
   /** The properties for this bundle. */
-  private ObjectMap<String, String> properties;
+  @Nullable private ObjectMap<String, String> properties;
 
   /** The formatter used for argument replacement. */
   private TextFormatter formatter;
@@ -502,18 +502,21 @@ public class I18NBundle {
    *     and {@link #getExceptionOnMissingKey()} returns {@code false}
    */
   public String get(String key) {
-    String result = properties.get(key);
-    if (result == null) {
-      if (parent != null) result = parent.get(key);
-      if (result == null) {
-        if (exceptionOnMissingKey)
-          throw new MissingResourceException(
-              "Can't find bundle key " + key, this.getClass().getName(), key);
-        else return "???" + key + "???";
-      }
+        if (properties == null) {
+            throw new IllegalStateException("Properties not initialized");
+        }
+        String result = properties.get(key);
+        if (result == null) {
+          if (parent != null) result = parent.get(key);
+          if (result == null) {
+            if (exceptionOnMissingKey)
+              throw new MissingResourceException(
+                  "Can't find bundle key " + key, this.getClass().getName(), key);
+            else return "???" + key + "???";
+          }
+        }
+        return result;
     }
-    return result;
-  }
 
   /**
    * Gets the string with the specified key from this bundle or one of its parent after replacing
@@ -537,11 +540,13 @@ public class I18NBundle {
    * @param placeholder
    */
   public void debug(String placeholder) {
-    ObjectMap.Keys<String> keys = properties.keys();
-    if (keys == null) return;
-
-    for (String s : keys) {
-      properties.put(s, placeholder);
+        if (properties == null) return;
+  
+        ObjectMap.Keys<String> keys = properties.keys();
+        if (keys == null) return;
+  
+        for (String s : keys) {
+          properties.put(s, placeholder);
+        }
     }
-  }
 }
