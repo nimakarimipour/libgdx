@@ -39,7 +39,6 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
@@ -243,7 +242,6 @@ public class Mesh implements Disposable {
   public Mesh disableInstancedRendering() {
     if (isInstanced) {
       isInstanced = false;
-      Nullability.castToNonnull(instances, "instances set to null after");
       instances.dispose();
       instances = null;
     }
