@@ -1180,10 +1180,7 @@ public class DefaultShader extends BaseShader {
     if (lights != null && lights.shadowMap != null) {
       set(u_shadowMapProjViewTrans, lights.shadowMap.getProjViewTrans());
       set(u_shadowTexture, lights.shadowMap.getDepthMap());
-      Texture depthMapTexture = lights.shadowMap.getDepthMap().texture;
-      if (depthMapTexture != null) {
-        set(u_shadowPCFOffset, 1.f / (2f * depthMapTexture.getWidth()));
-      }
+      set(u_shadowPCFOffset, 1.f / (2f * lights.shadowMap.getDepthMap().texture.getWidth()));
     }
 
     lightsSet = true;

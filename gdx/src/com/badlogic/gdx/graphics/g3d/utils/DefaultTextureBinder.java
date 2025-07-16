@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GLTexture;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.nio.IntBuffer;
 import javax.annotation.Nullable;
 
@@ -123,10 +122,6 @@ public final class DefaultTextureBinder implements TextureBinder {
     final GLTexture texture = textureDesc.texture;
     reused = false;
 
-    if (texture == null) {
-      return -1;
-    }
-
     switch (method) {
       case ROUNDROBIN:
         result = offset + (idx = bindTextureRoundRobin(texture));
@@ -143,21 +138,14 @@ public final class DefaultTextureBinder implements TextureBinder {
       if (rebind) texture.bind(result);
       else Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0 + result);
     } else bindCount++;
-
-    Nullability.castToNonnull(texture, "checked for null previously")
-        .unsafeSetWrap(
-            textureDesc.uWrap != null ? textureDesc.uWrap : Texture.TextureWrap.Default,
-            textureDesc.vWrap != null ? textureDesc.vWrap : Texture.TextureWrap.Default);
-    texture.unsafeSetFilter(
-        textureDesc.minFilter != null ? textureDesc.minFilter : Texture.TextureFilter.Default,
-        textureDesc.magFilter != null ? textureDesc.magFilter : Texture.TextureFilter.Default);
-
+    texture.unsafeSetWrap(textureDesc.uWrap, textureDesc.vWrap);
+    texture.unsafeSetFilter(textureDesc.minFilter, textureDesc.magFilter);
     return result;
   }
 
   private int currentTexture = 0;
 
-  private final int bindTextureRoundRobin(@Nullable final GLTexture texture) {
+  private final int bindTextureRoundRobin(final GLTexture texture) {
     for (int i = 0; i < count; i++) {
       final int idx = (currentTexture + i) % count;
       if (textures[idx] == texture) {
@@ -171,7 +159,7 @@ public final class DefaultTextureBinder implements TextureBinder {
     return currentTexture;
   }
 
-  private final int bindTextureLRU(@Nullable final GLTexture texture) {
+  private final int bindTextureLRU(final GLTexture texture) {
     int i;
     for (i = 0; i < count; i++) {
       final int idx = unitsLRU[i];
