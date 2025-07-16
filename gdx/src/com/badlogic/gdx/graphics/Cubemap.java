@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
@@ -365,6 +366,6 @@ public class Cubemap extends GLTexture {
    * @return the number of managed cubemaps currently loaded
    */
   public static int getNumManagedCubemaps() {
-    return managedCubemaps.get(Gdx.app).size;
-  }
+        return Nullability.castToNonnull(managedCubemaps.get(Gdx.app)).size;
+    }
 }
