@@ -23,7 +23,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.uber.nullaway.annotations.Initializer;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
@@ -627,27 +626,20 @@ public class ParticleEmitter {
             particle.rotation + particle.rotationDiff * rotationValue.getScale(percent));
     }
 
-    float[] color = particle.tint;
-    if ((updateFlags & UPDATE_TINT) != 0) {
-      color = tintValue.getColor(percent);
-    } else {
-      if (color == null) particle.tint = color = new float[] {1, 1, 1};
-    }
+    float[] color;
+    if ((updateFlags & UPDATE_TINT) != 0) color = tintValue.getColor(percent);
+    else color = particle.tint;
 
     if (premultipliedAlpha) {
       float alphaMultiplier = additive ? 0 : 1;
       float a =
           particle.transparency + particle.transparencyDiff * transparencyValue.getScale(percent);
-      particle.setColor(
-          Nullability.castToNonnull(color, "ensured through fallback")[0] * a,
-          Nullability.castToNonnull(color, "ensured through fallback")[1] * a,
-          Nullability.castToNonnull(color, "ensured through fallback")[2] * a,
-          a * alphaMultiplier);
+      particle.setColor(color[0] * a, color[1] * a, color[2] * a, a * alphaMultiplier);
     } else {
       particle.setColor(
-          Nullability.castToNonnull(color, "ensured through fallback")[0],
-          Nullability.castToNonnull(color, "ensured through fallback")[1],
-          Nullability.castToNonnull(color, "ensured through fallback")[2],
+          color[0],
+          color[1],
+          color[2],
           particle.transparency + particle.transparencyDiff * transparencyValue.getScale(percent));
     }
 
@@ -1264,7 +1256,7 @@ public class ParticleEmitter {
     protected float transparency, transparencyDiff;
     protected float wind, windDiff;
     protected float gravity, gravityDiff;
-    @Nullable protected float[] tint;
+    protected float[] tint;
     protected int frame;
 
     public Particle(@Nullable Sprite sprite) {
