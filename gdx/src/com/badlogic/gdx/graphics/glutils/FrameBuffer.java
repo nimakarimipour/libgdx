@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover
@@ -80,19 +81,23 @@ public class FrameBuffer extends GLFrameBuffer<Texture> {
   }
 
   @Override
-  protected Texture createTexture(FrameBufferTextureAttachmentSpec attachmentSpec) {
-    GLOnlyTextureData data =
-        new GLOnlyTextureData(
-            bufferBuilder.width,
-            bufferBuilder.height,
-            0,
-            attachmentSpec.internalFormat,
-            attachmentSpec.format,
-            attachmentSpec.type);
-    Texture result = new Texture(data);
-    result.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-    result.setWrap(TextureWrap.ClampToEdge, TextureWrap.ClampToEdge);
-    return result;
+      protected Texture createTexture(FrameBufferTextureAttachmentSpec attachmentSpec) {
+        if (this.bufferBuilder == null) {
+            throw new IllegalStateException("bufferBuilder cannot be null");
+        }
+        
+        GLOnlyTextureData data =
+            new GLOnlyTextureData(
+                Nullability.castToNonnull(bufferBuilder, "checked before use").width,
+                bufferBuilder.height,
+                0,
+                attachmentSpec.internalFormat,
+                attachmentSpec.format,
+                attachmentSpec.type);
+        Texture result = new Texture(data);
+        result.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        result.setWrap(TextureWrap.ClampToEdge, TextureWrap.ClampToEdge);
+        return result;
   }
 
   @Override

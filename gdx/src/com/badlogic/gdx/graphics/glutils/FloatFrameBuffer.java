@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /** This is a {@link FrameBuffer} variant backed by a float texture. */
 public class FloatFrameBuffer extends FrameBuffer {
@@ -57,22 +58,26 @@ public class FloatFrameBuffer extends FrameBuffer {
   }
 
   @Override
-  protected Texture createTexture(FrameBufferTextureAttachmentSpec attachmentSpec) {
-    FloatTextureData data =
-        new FloatTextureData(
-            bufferBuilder.width,
-            bufferBuilder.height,
-            attachmentSpec.internalFormat,
-            attachmentSpec.format,
-            attachmentSpec.type,
-            attachmentSpec.isGpuOnly);
-    Texture result = new Texture(data);
-    if (Gdx.app.getType() == ApplicationType.Desktop || Gdx.app.getType() == ApplicationType.Applet)
-      result.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-    else
-      // no filtering for float textures in OpenGL ES
-      result.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-    result.setWrap(TextureWrap.ClampToEdge, TextureWrap.ClampToEdge);
-    return result;
+      protected Texture createTexture(FrameBufferTextureAttachmentSpec attachmentSpec) {
+        if (bufferBuilder == null) {
+          throw new IllegalStateException("bufferBuilder is not initialized");
+        }
+    
+        FloatTextureData data =
+            new FloatTextureData(
+                Nullability.castToNonnull(bufferBuilder, "execution past null check").width,
+                bufferBuilder.height,
+                attachmentSpec.internalFormat,
+                attachmentSpec.format,
+                attachmentSpec.type,
+                attachmentSpec.isGpuOnly);
+        Texture result = new Texture(data);
+        if (Gdx.app.getType() == ApplicationType.Desktop || Gdx.app.getType() == ApplicationType.Applet)
+          result.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        else
+          // no filtering for float textures in OpenGL ES
+          result.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+        result.setWrap(TextureWrap.ClampToEdge, TextureWrap.ClampToEdge);
+        return result;
   }
 }
