@@ -887,8 +887,11 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getPadTop() {
-    return padTop.get(actor);
-  }
+      if (actor == null) {
+          throw new IllegalArgumentException("Actor cannot be null");
+      }
+      return padTop.get(actor);
+    }
 
   /**
    * @return May be null if this value is not set.
