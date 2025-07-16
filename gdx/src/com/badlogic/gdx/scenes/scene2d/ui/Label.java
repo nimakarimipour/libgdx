@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A text label, with optional word wrapping.
@@ -183,63 +184,65 @@ public class Label extends Widget {
   }
 
   public void layout() {
-    BitmapFont font = cache.getFont();
-    float oldScaleX = font.getScaleX();
-    float oldScaleY = font.getScaleY();
-    if (fontScaleChanged) font.getData().setScale(fontScaleX, fontScaleY);
-
-    boolean wrap = this.wrap && ellipsis == null;
-    if (wrap) {
-      float prefHeight = getPrefHeight();
-      if (prefHeight != lastPrefHeight) {
-        lastPrefHeight = prefHeight;
-        invalidateHierarchy();
-      }
-    }
-
-    float width = getWidth(), height = getHeight();
-    Drawable background = style.background;
-    float x = 0, y = 0;
-    if (background != null) {
-      x = background.getLeftWidth();
-      y = background.getBottomHeight();
-      width -= background.getLeftWidth() + background.getRightWidth();
-      height -= background.getBottomHeight() + background.getTopHeight();
-    }
-
-    GlyphLayout layout = this.layout;
-    float textWidth, textHeight;
-    if (wrap || text.indexOf("\n") != -1) {
-      // If the text can span multiple lines, determine the text's actual size so it can be aligned
-      // within the label.
-      layout.setText(font, text, 0, text.length, Color.WHITE, width, lineAlign, wrap, ellipsis);
-      textWidth = layout.width;
-      textHeight = layout.height;
-
-      if ((labelAlign & Align.left) == 0) {
-        if ((labelAlign & Align.right) != 0) x += width - textWidth;
-        else x += (width - textWidth) / 2;
-      }
-    } else {
-      textWidth = width;
-      textHeight = font.getData().capHeight;
-    }
-
-    if ((labelAlign & Align.top) != 0) {
-      y += cache.getFont().isFlipped() ? 0 : height - textHeight;
-      y += style.font.getDescent();
-    } else if ((labelAlign & Align.bottom) != 0) {
-      y += cache.getFont().isFlipped() ? height - textHeight : 0;
-      y -= style.font.getDescent();
-    } else {
-      y += (height - textHeight) / 2;
-    }
-    if (!cache.getFont().isFlipped()) y += textHeight;
-
-    layout.setText(font, text, 0, text.length, Color.WHITE, textWidth, lineAlign, wrap, ellipsis);
-    cache.setText(layout, x, y);
-
-    if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
+          if (style == null || style.font == null) {
+              throw new IllegalStateException("Style or Style's font cannot be null.");
+          }
+      
+          BitmapFont font = cache.getFont();
+          float oldScaleX = font.getScaleX();
+          float oldScaleY = font.getScaleY();
+          if (fontScaleChanged) font.getData().setScale(fontScaleX, fontScaleY);
+      
+          boolean wrap = this.wrap && ellipsis == null;
+          if (wrap) {
+              float prefHeight = getPrefHeight();
+              if (prefHeight != lastPrefHeight) {
+                  lastPrefHeight = prefHeight;
+                  invalidateHierarchy();
+              }
+          }
+      
+          float width = getWidth(), height = getHeight();
+          Drawable background = style.background;
+          float x = 0, y = 0;
+          if (background != null) {
+              x = background.getLeftWidth();
+              y = background.getBottomHeight();
+              width -= background.getLeftWidth() + background.getRightWidth();
+              height -= background.getBottomHeight() + background.getTopHeight();
+          }
+      
+          GlyphLayout layout = this.layout;
+          float textWidth, textHeight;
+          if (wrap || text.indexOf("\n") != -1) {
+              layout.setText(font, text, 0, text.length, Color.WHITE, width, lineAlign, wrap, ellipsis);
+              textWidth = layout.width;
+              textHeight = layout.height;
+      
+              if ((labelAlign & Align.left) == 0) {
+                  if ((labelAlign & Align.right) != 0) x += width - textWidth;
+                  else x += (width - textWidth) / 2;
+              }
+          } else {
+              textWidth = width;
+              textHeight = font.getData().capHeight;
+          }
+      
+          if ((labelAlign & Align.top) != 0) {
+              y += cache.getFont().isFlipped() ? 0 : height - textHeight;
+              y += Nullability.castToNonnull(style.font, "checked before access").getDescent();
+          } else if ((labelAlign & Align.bottom) != 0) {
+              y += cache.getFont().isFlipped() ? height - textHeight : 0;
+              y -= Nullability.castToNonnull(style.font, "checked before access").getDescent();
+          } else {
+              y += (height - textHeight) / 2;
+          }
+          if (!cache.getFont().isFlipped()) y += textHeight;
+      
+          layout.setText(font, text, 0, text.length, Color.WHITE, textWidth, lineAlign, wrap, ellipsis);
+          cache.setText(layout, x, y);
+      
+          if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
   }
 
   public void draw(Batch batch, float parentAlpha) {
@@ -270,18 +273,23 @@ public class Label extends Widget {
   }
 
   public float getPrefHeight() {
-    if (prefSizeInvalid) scaleAndComputePrefSize();
-    float descentScaleCorrection = 1;
-    if (fontScaleChanged) descentScaleCorrection = fontScaleY / style.font.getScaleY();
-    float height = prefHeight - style.font.getDescent() * descentScaleCorrection * 2;
-    Drawable background = style.background;
-    if (background != null)
-      height =
-          Math.max(
-              height + background.getTopHeight() + background.getBottomHeight(),
-              background.getMinHeight());
-    return height;
-  }
+          if (prefSizeInvalid) scaleAndComputePrefSize();
+          float descentScaleCorrection = 1;
+          if (style == null || style.font == null) throw new IllegalArgumentException("style or style.font cannot be null.");
+          
+          if (fontScaleChanged) {
+              descentScaleCorrection = fontScaleY / Nullability.castToNonnull(style.font, "checks prevent nullity").getScaleY();
+          }
+          
+          float height = prefHeight - style.font.getDescent() * descentScaleCorrection * 2;
+          Drawable background = style.background;
+          if (background != null)
+            height =
+                Math.max(
+                    height + background.getTopHeight() + background.getBottomHeight(),
+                    background.getMinHeight());
+          return height;
+    }
 
   public GlyphLayout getGlyphLayout() {
     return layout;
@@ -402,7 +410,7 @@ public class Label extends Widget {
    * @author Nathan Sweet
    */
   public static class LabelStyle {
-    public BitmapFont font;
+    @Nullable public BitmapFont font;
     @Nullable public @Null Color fontColor;
     @Nullable public @Null Drawable background;
 
