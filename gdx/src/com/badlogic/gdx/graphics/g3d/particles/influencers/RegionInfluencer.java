@@ -27,7 +27,6 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.SaveData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -55,10 +54,6 @@ public abstract class RegionInfluencer extends Influencer {
 
     @Override
     public void init() {
-      // Ensure that regionChannel is initialized before use.
-      if (regionChannel == null) {
-        allocateChannels();
-      }
       AspectTextureRegion region = regions.items[0];
       for (int i = 0, c = controller.emitter.maxParticleCount * regionChannel.strideSize;
           i < c;
@@ -96,15 +91,7 @@ public abstract class RegionInfluencer extends Influencer {
 
     @Override
     public void activateParticles(int startIndex, int count) {
-      if (regionChannel == null) {
-        throw new IllegalStateException("regionChannel is not initialized");
-      }
-
-      for (int
-              i =
-                  startIndex
-                      * Nullability.castToNonnull(regionChannel, "not null when used").strideSize,
-              c = i + count * regionChannel.strideSize;
+      for (int i = startIndex * regionChannel.strideSize, c = i + count * regionChannel.strideSize;
           i < c;
           i += regionChannel.strideSize) {
         AspectTextureRegion region = regions.random();
@@ -152,14 +139,9 @@ public abstract class RegionInfluencer extends Influencer {
 
     @Override
     public void update() {
-      if (regionChannel == null) {
-        allocateChannels();
-      }
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
-              c =
-                  controller.particles.size
-                      * Nullability.castToNonnull(regionChannel, "allocated if null").strideSize;
+              c = controller.particles.size * regionChannel.strideSize;
           i < c;
           i += regionChannel.strideSize, l += lifeChannel.strideSize) {
         AspectTextureRegion region = regions.get((int) (lifeChannel.data[l] * (regions.size - 1)));
@@ -231,7 +213,7 @@ public abstract class RegionInfluencer extends Influencer {
   }
 
   public Array<AspectTextureRegion> regions;
-  @Nullable FloatChannel regionChannel;
+  FloatChannel regionChannel;
   @Nullable public String atlasName;
 
   public RegionInfluencer(int regionsCount) {
