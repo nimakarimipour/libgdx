@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A 3x3 grid of texture regions. Any of the regions may be omitted. Padding may be set as a hint on
@@ -209,35 +210,35 @@ public class NinePatch {
   }
 
   public NinePatch(NinePatch ninePatch, Color color) {
-    texture = ninePatch.texture;
-
-    bottomLeft = ninePatch.bottomLeft;
-    bottomCenter = ninePatch.bottomCenter;
-    bottomRight = ninePatch.bottomRight;
-    middleLeft = ninePatch.middleLeft;
-    middleCenter = ninePatch.middleCenter;
-    middleRight = ninePatch.middleRight;
-    topLeft = ninePatch.topLeft;
-    topCenter = ninePatch.topCenter;
-    topRight = ninePatch.topRight;
-
-    leftWidth = ninePatch.leftWidth;
-    rightWidth = ninePatch.rightWidth;
-    middleWidth = ninePatch.middleWidth;
-    middleHeight = ninePatch.middleHeight;
-    topHeight = ninePatch.topHeight;
-    bottomHeight = ninePatch.bottomHeight;
-
-    padLeft = ninePatch.padLeft;
-    padTop = ninePatch.padTop;
-    padBottom = ninePatch.padBottom;
-    padRight = ninePatch.padRight;
-
-    vertices = new float[ninePatch.vertices.length];
-    System.arraycopy(ninePatch.vertices, 0, vertices, 0, ninePatch.vertices.length);
-    idx = ninePatch.idx;
-    this.color.set(color);
-  }
+        texture = Nullability.castToNonnull(ninePatch).texture;
+  
+        bottomLeft = ninePatch.bottomLeft;
+        bottomCenter = ninePatch.bottomCenter;
+        bottomRight = ninePatch.bottomRight;
+        middleLeft = ninePatch.middleLeft;
+        middleCenter = ninePatch.middleCenter;
+        middleRight = ninePatch.middleRight;
+        topLeft = ninePatch.topLeft;
+        topCenter = ninePatch.topCenter;
+        topRight = ninePatch.topRight;
+  
+        leftWidth = ninePatch.leftWidth;
+        rightWidth = ninePatch.rightWidth;
+        middleWidth = ninePatch.middleWidth;
+        middleHeight = ninePatch.middleHeight;
+        topHeight = ninePatch.topHeight;
+        bottomHeight = ninePatch.bottomHeight;
+  
+        padLeft = ninePatch.padLeft;
+        padTop = ninePatch.padTop;
+        padBottom = ninePatch.padBottom;
+        padRight = ninePatch.padRight;
+  
+        vertices = new float[ninePatch.vertices.length];
+        System.arraycopy(ninePatch.vertices, 0, vertices, 0, ninePatch.vertices.length);
+        idx = ninePatch.idx;
+        this.color.set(color);
+    }
 
   private void load(TextureRegion[] patches) {
     if (patches[BOTTOM_LEFT] != null) {
