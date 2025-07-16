@@ -145,7 +145,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public abstract static class Angular extends Strength {
-    protected FloatChannel angularChannel;
+    @Nullable protected FloatChannel angularChannel;
 
     /** Polar angle, XZ plane */
     public ScaledNumericValue thetaValue;
@@ -174,29 +174,33 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-    public void activateParticles(int startIndex, int count) {
-      super.activateParticles(startIndex, count);
-      float start, diff;
-      for (int i = startIndex * angularChannel.strideSize,
-              c = i + count * angularChannel.strideSize;
-          i < c;
-          i += angularChannel.strideSize) {
-
-        // Theta
-        start = thetaValue.newLowValue();
-        diff = thetaValue.newHighValue();
-        if (!thetaValue.isRelative()) diff -= start;
-        angularChannel.data[i + ParticleChannels.VelocityThetaStartOffset] = start;
-        angularChannel.data[i + ParticleChannels.VelocityThetaDiffOffset] = diff;
-
-        // Phi
-        start = phiValue.newLowValue();
-        diff = phiValue.newHighValue();
-        if (!phiValue.isRelative()) diff -= start;
-        angularChannel.data[i + ParticleChannels.VelocityPhiStartOffset] = start;
-        angularChannel.data[i + ParticleChannels.VelocityPhiDiffOffset] = diff;
+      public void activateParticles(int startIndex, int count) {
+        super.activateParticles(startIndex, count);
+        
+        // Check if angularChannel is not null before proceeding
+        if (angularChannel != null) {
+          float start, diff;
+          for (int i = startIndex * angularChannel.strideSize,
+                  c = i + count * angularChannel.strideSize;
+              i < c;
+              i += angularChannel.strideSize) {
+      
+            // Theta
+            start = thetaValue.newLowValue();
+            diff = thetaValue.newHighValue();
+            if (!thetaValue.isRelative()) diff -= start;
+            angularChannel.data[i + ParticleChannels.VelocityThetaStartOffset] = start;
+            angularChannel.data[i + ParticleChannels.VelocityThetaDiffOffset] = diff;
+      
+            // Phi
+            start = phiValue.newLowValue();
+            diff = phiValue.newHighValue();
+            if (!phiValue.isRelative()) diff -= start;
+            angularChannel.data[i + ParticleChannels.VelocityPhiStartOffset] = start;
+            angularChannel.data[i + ParticleChannels.VelocityPhiDiffOffset] = diff;
+          }
+        }
       }
-    }
 
     @Override
     public void write(Json json) {
@@ -278,6 +282,9 @@ public abstract class DynamicsModifier extends Influencer {
             if (strengthChannel == null) {
                 throw new NullPointerException("strengthChannel must be initialized before use.");
             }
+            if (angularChannel == null) {
+                throw new NullPointerException("angularChannel must be initialized before use.");
+            }
         
             for (int i = 0,
                     l = ParticleChannels.LifePercentOffset,
@@ -294,7 +301,7 @@ public abstract class DynamicsModifier extends Influencer {
                           + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
                               * strengthValue.getScale(lifePercent),
                   phi =
-                      angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
+                      Nullability.castToNonnull(angularChannel, "execution proceeded past check").data[a + ParticleChannels.VelocityPhiStartOffset]
                           + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
                               * phiValue.getScale(lifePercent),
                   theta =
@@ -411,6 +418,10 @@ public abstract class DynamicsModifier extends Influencer {
             if (strengthChannel == null) {
               throw new IllegalStateException("StrengthChannel is not initialized");
             }
+            
+            if (angularChannel == null) {
+              throw new IllegalStateException("AngularChannel is not initialized");
+            }
         
             for (int i = 0,
                     l = ParticleChannels.LifePercentOffset,
@@ -427,7 +438,7 @@ public abstract class DynamicsModifier extends Influencer {
                           + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
                               * strengthValue.getScale(lifePercent),
                   phi =
-                      angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
+                      Nullability.castToNonnull(angularChannel, "explicit null check").data[a + ParticleChannels.VelocityPhiStartOffset]
                           + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
                               * phiValue.getScale(lifePercent),
                   theta =
@@ -483,6 +494,9 @@ public abstract class DynamicsModifier extends Influencer {
             if (strengthChannel == null) {
               throw new IllegalStateException("Strength channel is not initialized.");
             }
+            if (angularChannel == null) {
+              throw new IllegalStateException("Angular channel is not initialized.");
+            }
             for (int i = 0,
                     l = ParticleChannels.LifePercentOffset,
                     s = 0,
@@ -500,7 +514,7 @@ public abstract class DynamicsModifier extends Influencer {
                           + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
                               * strengthValue.getScale(lifePercent),
                   phi =
-                      angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
+                      Nullability.castToNonnull(angularChannel, "checked for null").data[a + ParticleChannels.VelocityPhiStartOffset]
                           + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
                               * phiValue.getScale(lifePercent),
                   theta =
