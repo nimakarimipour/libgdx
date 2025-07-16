@@ -37,12 +37,15 @@ public class OutWindow {
   }
 
   public void Flush() throws IOException {
-    int size = _pos - _streamPos;
-    if (size == 0) return;
-    _stream.write(_buffer, _streamPos, size);
-    if (_pos >= _windowSize) _pos = 0;
-    _streamPos = _pos;
-  }
+      if (_stream == null) {
+          throw new IOException("Stream is null");
+      }
+      int size = _pos - _streamPos;
+      if (size == 0) return;
+      _stream.write(_buffer, _streamPos, size);
+      if (_pos >= _windowSize) _pos = 0;
+      _streamPos = _pos;
+    }
 
   public void CopyBlock(int distance, int len) throws IOException {
     int pos = _pos - distance - 1;
