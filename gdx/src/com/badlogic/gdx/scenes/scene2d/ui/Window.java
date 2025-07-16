@@ -49,7 +49,7 @@ public class Window extends Table {
   private static final Vector2 tmpSize = new Vector2();
   private static final int MOVE = 1 << 5;
 
-  private WindowStyle style;
+  @Nullable private WindowStyle style;
   boolean isMovable = true, isModal, isResizable;
   int resizeBorder = 8;
   boolean keepWithinStage = true;
@@ -232,7 +232,7 @@ public class Window extends Table {
    * Returns the window's style. Modifying the returned style may not have an effect until {@link
    * #setStyle(WindowStyle)} is called.
    */
-  public WindowStyle getStyle() {
+  @Nullable public WindowStyle getStyle() {
     return style;
   }
 
@@ -276,33 +276,34 @@ public class Window extends Table {
   }
 
   public void draw(Batch batch, float parentAlpha) {
-    Stage stage = getStage();
-    if (stage != null) {
-      if (stage.getKeyboardFocus() == null) stage.setKeyboardFocus(this);
-
-      keepWithinStage();
-
-      if (style.stageBackground != null) {
-        stageToLocalCoordinates(tmpPosition.set(0, 0));
-        stageToLocalCoordinates(tmpSize.set(stage.getWidth(), stage.getHeight()));
-        drawStageBackground(
-            batch,
-            parentAlpha,
-            getX() + tmpPosition.x,
-            getY() + tmpPosition.y,
-            getX() + tmpSize.x,
-            getY() + tmpSize.y);
-      }
-    }
-    super.draw(batch, parentAlpha);
+          Stage stage = getStage();
+          if (stage != null && style != null) {
+            if (stage.getKeyboardFocus() == null) stage.setKeyboardFocus(this);
+    
+            keepWithinStage();
+    
+            if (Nullability.castToNonnull(style, "style not null here").stageBackground != null) {
+              stageToLocalCoordinates(tmpPosition.set(0, 0));
+              stageToLocalCoordinates(tmpSize.set(stage.getWidth(), stage.getHeight()));
+              drawStageBackground(
+                  batch,
+                  parentAlpha,
+                  getX() + tmpPosition.x,
+                  getY() + tmpPosition.y,
+                  getX() + tmpSize.x,
+                  getY() + tmpSize.y);
+            }
+          }
+          super.draw(batch, parentAlpha);
   }
 
   protected void drawStageBackground(
-      Batch batch, float parentAlpha, float x, float y, float width, float height) {
-    Color color = getColor();
-    batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-    style.stageBackground.draw(batch, x, y, width, height);
-  }
+        Batch batch, float parentAlpha, float x, float y, float width, float height) {
+      if (style == null) throw new IllegalArgumentException("style cannot be null.");
+      Color color = getColor();
+      batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+      style.stageBackground.draw(batch, x, y, width, height);
+    }
 
   protected void drawBackground(Batch batch, float parentAlpha, float x, float y) {
     super.drawBackground(batch, parentAlpha, x, y);
