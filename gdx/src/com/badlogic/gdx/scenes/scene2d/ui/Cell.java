@@ -1039,12 +1039,14 @@ public class Cell<T extends Actor> implements Poolable {
    * default} values.
    */
   public void reset() {
-    actor = null;
-    table = null;
-    endRow = false;
-    cellAboveIndex = -1;
-    set(defaults());
-  }
+      actor = null;
+      if (table != null) {
+        table.clear(); // Assuming clear() can reset the table to a default state
+      }
+      endRow = false;
+      cellAboveIndex = -1;
+      set(defaults());
+    }
 
   @Initializer
   void set(@Nullable Cell cell) {
