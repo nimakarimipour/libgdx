@@ -28,7 +28,7 @@ public class Cell<T extends Actor> implements Poolable {
   @Nullable private static Cell defaults;
 
   Value minWidth, minHeight;
-  @Nullable Value prefWidth, prefHeight;
+  Value prefWidth, prefHeight;
   Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
   Value padTop, padLeft, padBottom, padRight;
@@ -769,28 +769,22 @@ public class Cell<T extends Actor> implements Poolable {
   /**
    * @return May be null if this cell is row defaults.
    */
-  @Nullable
   public @Null Value getPrefWidthValue() {
     return prefWidth;
   }
 
   public float getPrefWidth() {
-    if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
-    if (prefWidth == null) throw new IllegalStateException("prefWidth cannot be null.");
     return prefWidth.get(actor);
   }
 
   /**
    * @return May be null if this cell is row defaults.
    */
-  @Nullable
   public @Null Value getPrefHeightValue() {
     return prefHeight;
   }
 
   public float getPrefHeight() {
-    if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
-    if (prefHeight == null) throw new IllegalStateException("prefHeight has not been set.");
     return prefHeight.get(actor);
   }
 
@@ -1024,7 +1018,6 @@ public class Cell<T extends Actor> implements Poolable {
 
   @Initializer
   void set(@Nullable Cell cell) {
-    if (cell == null) return;
     minWidth = cell.minWidth;
     minHeight = cell.minHeight;
     prefWidth = cell.prefWidth;
