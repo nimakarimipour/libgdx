@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRende
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -55,7 +56,7 @@ public abstract class ParticleSorter {
   /** This class will sort all the particles using the distance from camera. */
   public static class Distance extends ParticleSorter {
     private float[] distances;
-    private int[] particleIndices, particleOffsets;
+    @Nullable private int[] particleIndices, particleOffsets;
     private int currentSize = 0;
 
     @Override
@@ -68,38 +69,66 @@ public abstract class ParticleSorter {
       }
     }
 
+    @SuppressWarnings("NullAway")
     @Override
     public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
+      if (camera == null || camera.view == null || camera.view.val == null) {
+        throw new NullPointerException("Camera or its view or the matrix values are null");
+      }
       float[] val = camera.view.val;
       float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
       int count = 0, i = 0;
+
+      ensureCapacity(calculateRequiredCapacity(renderData));
+
+      if (particleIndices == null) {
+        throw new NullPointerException("particleIndices is null");
+      }
+
       for (ParticleControllerRenderData data : renderData) {
-        for (int k = 0, c = i + data.controller.particles.size;
-            i < c;
-            ++i, k += data.positionChannel.strideSize) {
+        for (int k = i + data.controller.particles.size; i < k; ++i) {
+          int offset = k - i;
           distances[i] =
-              cx * data.positionChannel.data[k + ParticleChannels.XOffset]
-                  + cy * data.positionChannel.data[k + ParticleChannels.YOffset]
-                  + cz * data.positionChannel.data[k + ParticleChannels.ZOffset];
-          particleIndices[i] = i;
+              cx * data.positionChannel.data[offset + ParticleChannels.XOffset]
+                  + cy * data.positionChannel.data[offset + ParticleChannels.YOffset]
+                  + cz * data.positionChannel.data[offset + ParticleChannels.ZOffset];
+          Nullability.castToNonnull(particleIndices, "null check performed")[i] = i;
         }
         count += data.controller.particles.size;
       }
 
       qsort(0, count - 1);
 
+      if (particleOffsets == null) {
+        throw new NullPointerException("particleOffsets is null");
+      }
+
       for (i = 0; i < count; ++i) {
-        particleOffsets[particleIndices[i]] = i;
+        Nullability.castToNonnull(particleOffsets, "null check performed")[particleIndices[i]] = i;
       }
       return particleOffsets;
     }
 
+    private <T extends ParticleControllerRenderData> int calculateRequiredCapacity(
+        Array<T> renderData) {
+      int capacity = 0;
+      for (ParticleControllerRenderData data : renderData) {
+        capacity += data.controller.particles.size;
+      }
+      return capacity;
+    }
+
     public void qsort(int si, int ei) {
-      // base case
       if (si < ei) {
         float tmp;
         int tmpIndex, particlesPivotIndex;
-        // insertion
+
+        ensureCapacity(ei + 1);
+
+        if (particleIndices == null) {
+          throw new NullPointerException("particleIndices is null");
+        }
+
         if (ei - si <= 8) {
           for (int i = si; i <= ei; i++)
             for (int j = i; j > si && distances[j - 1] > distances[j]; j--) {
@@ -107,7 +136,6 @@ public abstract class ParticleSorter {
               distances[j] = distances[j - 1];
               distances[j - 1] = tmp;
 
-              // Swap indices
               tmpIndex = particleIndices[j];
               particleIndices[j] = particleIndices[j - 1];
               particleIndices[j - 1] = tmpIndex;
@@ -115,21 +143,17 @@ public abstract class ParticleSorter {
           return;
         }
 
-        // Quick
         float pivot = distances[si];
         int i = si + 1;
-        particlesPivotIndex = particleIndices[si];
+        particlesPivotIndex = Nullability.castToNonnull(particleIndices, "explicit null check")[si];
 
-        // partition array
         for (int j = si + 1; j <= ei; j++) {
           if (pivot > distances[j]) {
             if (j > i) {
-              // Swap distances
               tmp = distances[j];
               distances[j] = distances[i];
               distances[i] = tmp;
 
-              // Swap indices
               tmpIndex = particleIndices[j];
               particleIndices[j] = particleIndices[i];
               particleIndices[i] = tmpIndex;
@@ -138,13 +162,11 @@ public abstract class ParticleSorter {
           }
         }
 
-        // put pivot in right position
         distances[si] = distances[i - 1];
         distances[i - 1] = pivot;
         particleIndices[si] = particleIndices[i - 1];
         particleIndices[i - 1] = particlesPivotIndex;
 
-        // call qsort on right and left sides of pivot
         qsort(si, i - 2);
         qsort(i, ei);
       }
