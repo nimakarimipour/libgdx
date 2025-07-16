@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * An Animation stores a list of objects representing an animated sequence, e.g. for running or
@@ -51,7 +52,7 @@ public class Animation<T> {
    * Length must not be modified without updating {@link #animationDuration}. See {@link
    * #setKeyFrames(T[])}.
    */
-  T[] keyFrames;
+  @Nullable T[] keyFrames;
 
   private float frameDuration;
   private float animationDuration;
@@ -135,8 +136,11 @@ public class Animation<T> {
    * @return the frame of animation for the given state time.
    */
   public T getKeyFrame(float stateTime) {
-    int frameNumber = getKeyFrameIndex(stateTime);
-    return keyFrames[frameNumber];
+          if (keyFrames == null) {
+              throw new NullPointerException("KeyFrames array is null");
+          }
+          int frameNumber = getKeyFrameIndex(stateTime);
+          return Nullability.castToNonnull(keyFrames, "checked for null")[frameNumber];
   }
 
   /**
@@ -146,43 +150,47 @@ public class Animation<T> {
    * @return current frame number
    */
   public int getKeyFrameIndex(float stateTime) {
-    if (keyFrames.length == 1) return 0;
-
-    int frameNumber = (int) (stateTime / frameDuration);
-    switch (playMode) {
-      case NORMAL:
-        frameNumber = Math.min(keyFrames.length - 1, frameNumber);
-        break;
-      case LOOP:
-        frameNumber = frameNumber % keyFrames.length;
-        break;
-      case LOOP_PINGPONG:
-        frameNumber = frameNumber % ((keyFrames.length * 2) - 2);
-        if (frameNumber >= keyFrames.length)
-          frameNumber = keyFrames.length - 2 - (frameNumber - keyFrames.length);
-        break;
-      case LOOP_RANDOM:
-        int lastFrameNumber = (int) ((lastStateTime) / frameDuration);
-        if (lastFrameNumber != frameNumber) {
-          frameNumber = MathUtils.random(keyFrames.length - 1);
-        } else {
-          frameNumber = this.lastFrameNumber;
-        }
-        break;
-      case REVERSED:
-        frameNumber = Math.max(keyFrames.length - frameNumber - 1, 0);
-        break;
-      case LOOP_REVERSED:
-        frameNumber = frameNumber % keyFrames.length;
-        frameNumber = keyFrames.length - frameNumber - 1;
-        break;
+          if (keyFrames == null || keyFrames.length == 0) {
+              throw new IllegalStateException("KeyFrames cannot be null or empty");
+          }
+    
+          if (Nullability.castToNonnull(keyFrames, "checked for null/empty").length == 1) return 0;
+    
+          int frameNumber = (int) (stateTime / frameDuration);
+          switch (playMode) {
+            case NORMAL:
+              frameNumber = Math.min(keyFrames.length - 1, frameNumber);
+              break;
+            case LOOP:
+              frameNumber = frameNumber % keyFrames.length;
+              break;
+            case LOOP_PINGPONG:
+              frameNumber = frameNumber % ((keyFrames.length * 2) - 2);
+              if (frameNumber >= keyFrames.length)
+                frameNumber = keyFrames.length - 2 - (frameNumber - keyFrames.length);
+              break;
+            case LOOP_RANDOM:
+              int lastFrameNumber = (int) ((lastStateTime) / frameDuration);
+              if (lastFrameNumber != frameNumber) {
+                frameNumber = MathUtils.random(keyFrames.length - 1);
+              } else {
+                frameNumber = this.lastFrameNumber;
+              }
+              break;
+            case REVERSED:
+              frameNumber = Math.max(keyFrames.length - frameNumber - 1, 0);
+              break;
+            case LOOP_REVERSED:
+              frameNumber = frameNumber % keyFrames.length;
+              frameNumber = keyFrames.length - frameNumber - 1;
+              break;
+          }
+    
+          lastFrameNumber = frameNumber;
+          lastStateTime = stateTime;
+    
+          return frameNumber;
     }
-
-    lastFrameNumber = frameNumber;
-    lastStateTime = stateTime;
-
-    return frameNumber;
-  }
 
   /**
    * Returns the keyframes[] array where all the frames of the animation are stored.
@@ -190,7 +198,7 @@ public class Animation<T> {
    * @return The keyframes[] field. This array is an Object[] if the animation was instantiated with
    *     an Array that was not type-aware.
    */
-  public T[] getKeyFrames() {
+  @Nullable public T[] getKeyFrames() {
     return keyFrames;
   }
 
@@ -221,9 +229,12 @@ public class Animation<T> {
    * @return whether the animation is finished.
    */
   public boolean isAnimationFinished(float stateTime) {
-    int frameNumber = (int) (stateTime / frameDuration);
-    return keyFrames.length - 1 < frameNumber;
-  }
+        if (keyFrames == null) {
+            throw new IllegalStateException("Key frames have not been set");
+        }
+        int frameNumber = (int) (stateTime / frameDuration);
+        return keyFrames.length - 1 < frameNumber;
+    }
 
   /**
    * Sets duration a frame will be displayed.
@@ -231,8 +242,10 @@ public class Animation<T> {
    * @param frameDuration in seconds
    */
   public void setFrameDuration(float frameDuration) {
-    this.frameDuration = frameDuration;
-    this.animationDuration = keyFrames.length * frameDuration;
+          this.frameDuration = frameDuration;
+          if (this.keyFrames != null) {
+              this.animationDuration = Nullability.castToNonnull(keyFrames, "checked for null before").length * frameDuration;
+          }
   }
 
   /**
