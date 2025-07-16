@@ -1180,15 +1180,17 @@ public class Table extends WidgetGroup {
       
             Float fillX = c.fillX, fillY = c.fillY;
             if (fillX != null && fillX > 0) {
-              c.actorWidth = Math.max(spannedCellWidth * fillX, c.minWidth.get(c.actor));
+              float actor = c.actor != null ? c.minWidth.get(c.actor) : 0;
+              c.actorWidth = Math.max(spannedCellWidth * fillX, actor);
               float maxWidth = c.maxWidth.get(c.actor);
               if (maxWidth > 0) c.actorWidth = Math.min(c.actorWidth, maxWidth);
             }
             if (fillY != null && fillY > 0) {
+              float actor = c.actor != null ? c.minHeight.get(c.actor) : 0;
               c.actorHeight =
                   Math.max(
                       rowHeight[c.row] * fillY - c.computedPadTop - c.computedPadBottom,
-                      c.minHeight.get(c.actor));
+                      actor);
               float maxHeight = c.maxHeight.get(c.actor);
               if (maxHeight > 0) c.actorHeight = Math.min(c.actorHeight, maxHeight);
             }
@@ -1231,7 +1233,7 @@ public class Table extends WidgetGroup {
           }
       
           if (debug != Debug.none) addDebugRects(x, y, tableWidth - hpadding, tableHeight - vpadding);
-    }
+  }
 
   private void addDebugRects(float currentX, float currentY, float width, float height) {
     clearDebugRects();
