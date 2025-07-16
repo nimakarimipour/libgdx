@@ -301,12 +301,11 @@ public class ParticleShader extends BaseShader {
   }
 
   @Override
-  public void init() {
-    final ShaderProgram program = this.program;
-    this.program = null;
-    init(program, renderable);
-    renderable = null;
-  }
+    public void init() {
+      final ShaderProgram program = this.program;
+      init(program, renderable);
+      renderable = null;
+    }
 
   public static String createPrefix(final Renderable renderable, final Config config) {
     String prefix = "";
