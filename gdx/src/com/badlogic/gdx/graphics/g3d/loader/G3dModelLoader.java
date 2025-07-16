@@ -65,16 +65,12 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 
   public ModelData parseModel(FileHandle handle) {
     JsonValue json = reader.parse(handle);
-    if (json == null) {
-      throw new NullPointerException("Parsed JsonValue is null");
-    }
     ModelData model = new ModelData();
     JsonValue version = json.require("version");
     model.version[0] = version.getShort(0);
     model.version[1] = version.getShort(1);
-    if (model.version[0] != VERSION_HI || model.version[1] != VERSION_LO) {
+    if (model.version[0] != VERSION_HI || model.version[1] != VERSION_LO)
       throw new GdxRuntimeException("Model version not supported");
-    }
 
     model.id = json.getString("id", "");
     parseMeshes(model, json);
