@@ -37,6 +37,7 @@ import com.badlogic.gdx.utils.IntArray;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Draws 2D images, optimized for geometry that does not change. Sprites and/or textures are cached
@@ -231,50 +232,54 @@ public class SpriteCache implements Disposable {
 
   /** Ends the definition of a cache, returning the cache ID to be used with {@link #draw(int)}. */
   public int endCache() {
-    if (currentCache == null)
-      throw new IllegalStateException("beginCache must be called before endCache.");
-    Cache cache = currentCache;
-    int cacheCount = mesh.getVerticesBuffer().position() - cache.offset;
-    if (cache.textures == null) {
-      // New cache.
-      cache.maxCount = cacheCount;
-      cache.textureCount = textures.size;
-      cache.textures = textures.toArray(Texture.class);
-      cache.counts = new int[cache.textureCount];
-      for (int i = 0, n = counts.size; i < n; i++) cache.counts[i] = counts.get(i);
-
-      ((Buffer) mesh.getVerticesBuffer()).flip();
-    } else {
-      // Redefine existing cache.
-      if (cacheCount > cache.maxCount) {
-        throw new GdxRuntimeException(
-            "If a cache is not the last created, it cannot be redefined with more entries than when it was first created: "
-                + cacheCount
-                + " ("
-                + cache.maxCount
-                + " max)");
-      }
-
-      cache.textureCount = textures.size;
-
-      if (cache.textures.length < cache.textureCount)
-        cache.textures = new Texture[cache.textureCount];
-      for (int i = 0, n = cache.textureCount; i < n; i++) cache.textures[i] = textures.get(i);
-
-      if (cache.counts.length < cache.textureCount) cache.counts = new int[cache.textureCount];
-      for (int i = 0, n = cache.textureCount; i < n; i++) cache.counts[i] = counts.get(i);
-
-      FloatBuffer vertices = mesh.getVerticesBuffer();
-      ((Buffer) vertices).position(0);
-      Cache lastCache = caches.get(caches.size - 1);
-      ((Buffer) vertices).limit(lastCache.offset + lastCache.maxCount);
-    }
-
-    currentCache = null;
-    textures.clear();
-    counts.clear();
-
-    return cache.id;
+          if (currentCache == null)
+              throw new IllegalStateException("beginCache must be called before endCache.");
+          Cache cache = currentCache;
+          int cacheCount = mesh.getVerticesBuffer().position() - cache.offset;
+          if (cache.textures == null) {
+              // New cache.
+              cache.maxCount = cacheCount;
+              cache.textureCount = textures.size;
+              cache.textures = textures.toArray(Texture.class);
+              cache.counts = new int[cache.textureCount];
+              for (int i = 0, n = counts.size; i < n; i++) cache.counts[i] = counts.get(i);
+    
+              ((Buffer) mesh.getVerticesBuffer()).flip();
+          } else {
+              // Redefine existing cache.
+              if (cacheCount > cache.maxCount) {
+                  throw new GdxRuntimeException(
+                      "If a cache is not the last created, it cannot be redefined with more entries than when it was first created: "
+                          + cacheCount
+                          + " ("
+                          + cache.maxCount
+                          + " max)");
+              }
+    
+              cache.textureCount = textures.size;
+    
+              if (cache.textures.length < cache.textureCount)
+                  cache.textures = new Texture[cache.textureCount];
+              for (int i = 0, n = cache.textureCount; i < n; i++) cache.textures[i] = textures.get(i);
+    
+              if (cache.counts == null || cache.counts.length < cache.textureCount) 
+                  cache.counts = new int[cache.textureCount];
+              for (int i = 0, n = cache.textureCount; i < n; i++) {
+                  Nullability.castToNonnull(cache.counts, "cache initialized");
+                  cache.counts[i] = counts.get(i);
+              }
+    
+              FloatBuffer vertices = mesh.getVerticesBuffer();
+              ((Buffer) vertices).position(0);
+              Cache lastCache = caches.get(caches.size - 1);
+              ((Buffer) vertices).limit(lastCache.offset + lastCache.maxCount);
+          }
+    
+          currentCache = null;
+          textures.clear();
+          counts.clear();
+    
+          return cache.id;
   }
 
   /** Invalidates all cache IDs and resets the SpriteCache so new caches can be added. */
@@ -981,23 +986,32 @@ public class SpriteCache implements Disposable {
 
   /** Draws all the images defined for the specified cache ID. */
   public void draw(int cacheID) {
-    if (!drawing) throw new IllegalStateException("SpriteCache.begin must be called before draw.");
-
-    Cache cache = caches.get(cacheID);
-    int verticesPerImage = mesh.getNumIndices() > 0 ? 4 : 6;
-    int offset = cache.offset / (verticesPerImage * VERTEX_SIZE) * 6;
-    Texture[] textures = cache.textures;
-    int[] counts = cache.counts;
-    int textureCount = cache.textureCount;
-    for (int i = 0; i < textureCount; i++) {
-      int count = counts[i];
-      textures[i].bind();
-      if (customShader != null) mesh.render(customShader, GL20.GL_TRIANGLES, offset, count);
-      else mesh.render(shader, GL20.GL_TRIANGLES, offset, count);
-      offset += count;
-    }
-    renderCalls += textureCount;
-    totalRenderCalls += textureCount;
+            if (!drawing) throw new IllegalStateException("SpriteCache.begin must be called before draw.");
+      
+            Cache cache = caches.get(cacheID);
+            int verticesPerImage = mesh.getNumIndices() > 0 ? 4 : 6;
+            int offset = cache.offset / (verticesPerImage * VERTEX_SIZE) * 6;
+            Texture[] textures = cache.textures;
+            int[] counts = cache.counts;
+            int textureCount = cache.textureCount;
+      
+            if (textures == null) {
+              throw new IllegalStateException("Cache textures should not be null.");
+            }
+    
+            if (counts == null) {
+              throw new IllegalStateException("Cache counts should not be null.");
+            }
+      
+            for (int i = 0; i < textureCount; i++) {
+              int count = Nullability.castToNonnull(counts, "checked to be nonnull")[i];
+              textures[i].bind();
+              if (customShader != null) mesh.render(customShader, GL20.GL_TRIANGLES, offset, count);
+              else mesh.render(shader, GL20.GL_TRIANGLES, offset, count);
+              offset += count;
+            }
+            renderCalls += textureCount;
+            totalRenderCalls += textureCount;
   }
 
   /**
@@ -1007,29 +1021,38 @@ public class SpriteCache implements Disposable {
    * @param length The number of images from the first image (inclusive) to render.
    */
   public void draw(int cacheID, int offset, int length) {
-    if (!drawing) throw new IllegalStateException("SpriteCache.begin must be called before draw.");
-
-    Cache cache = caches.get(cacheID);
-    int verticesPerImage = mesh.getNumIndices() > 0 ? 4 : 6;
-    offset = cache.offset / (verticesPerImage * VERTEX_SIZE) * 6 + offset * 6;
-    length *= 6;
-    Texture[] textures = cache.textures;
-    int[] counts = cache.counts;
-    int textureCount = cache.textureCount;
-    for (int i = 0; i < textureCount; i++) {
-      textures[i].bind();
-      int count = counts[i];
-      if (count > length) {
-        i = textureCount;
-        count = length;
-      } else length -= count;
-      if (customShader != null) mesh.render(customShader, GL20.GL_TRIANGLES, offset, count);
-      else mesh.render(shader, GL20.GL_TRIANGLES, offset, count);
-      offset += count;
+        if (!drawing) throw new IllegalStateException("SpriteCache.begin must be called before draw.");
+  
+        Cache cache = caches.get(cacheID);
+        if (cache.textures == null) {
+            throw new IllegalStateException("Cache textures must be initialized before draw.");
+        }
+        
+        int verticesPerImage = mesh.getNumIndices() > 0 ? 4 : 6;
+        offset = cache.offset / (verticesPerImage * VERTEX_SIZE) * 6 + offset * 6;
+        length *= 6;
+        Texture[] textures = cache.textures;
+        int[] counts = cache.counts;
+        int textureCount = cache.textureCount;
+  
+        // Ensure that counts is non-null before using it
+        if (counts == null) {
+            throw new IllegalStateException("Cache counts must be initialized before draw.");
+        }
+  
+        for (int i = 0; i < textureCount; i++) {
+            int count = counts[i];
+            if (count > length) {
+                i = textureCount;
+                count = length;
+            } else length -= count;
+            if (customShader != null) mesh.render(customShader, GL20.GL_TRIANGLES, offset, count);
+            else mesh.render(shader, GL20.GL_TRIANGLES, offset, count);
+            offset += count;
+        }
+        renderCalls += cache.textureCount;
+        totalRenderCalls += textureCount;
     }
-    renderCalls += cache.textureCount;
-    totalRenderCalls += textureCount;
-  }
 
   /** Releases all resources held by this SpriteCache. */
   public void dispose() {
@@ -1060,8 +1083,8 @@ public class SpriteCache implements Disposable {
     final int offset;
     int maxCount;
     int textureCount;
-    Texture[] textures;
-    int[] counts;
+    @Nullable Texture[] textures;
+    @Nullable int[] counts;
 
     public Cache(int id, int offset) {
       this.id = id;
