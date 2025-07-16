@@ -72,23 +72,23 @@ public class BitmapFontCache {
    *     artifacts.
    */
   public BitmapFontCache(BitmapFont font, boolean integer) {
-    this.font = font;
-    this.integer = integer;
-
-    int pageCount = font.regions.size;
-    if (pageCount == 0)
-      throw new IllegalArgumentException(
-          "The specified font must contain at least one texture page.");
-
-    pageVertices = new float[pageCount][];
-    idx = new int[pageCount];
-    if (pageCount > 1) {
-      // Contains the indices of the glyph in the cache as they are added.
+      this.font = font;
+      this.integer = integer;
+  
+      int pageCount = font.regions.size;
+      if (pageCount == 0)
+        throw new IllegalArgumentException(
+            "The specified font must contain at least one texture page.");
+  
+      pageVertices = new float[pageCount][];
+      idx = new int[pageCount];
+      // Initialize pageGlyphIndices unconditionally
       pageGlyphIndices = new IntArray[pageCount];
-      for (int i = 0, n = pageGlyphIndices.length; i < n; i++) pageGlyphIndices[i] = new IntArray();
+      if (pageCount > 1) {
+        for (int i = 0, n = pageGlyphIndices.length; i < n; i++) pageGlyphIndices[i] = new IntArray();
+      }
+      tempGlyphCount = new int[pageCount];
     }
-    tempGlyphCount = new int[pageCount];
-  }
 
   /**
    * Sets the position of the text, relative to the position when the cached text was created.
