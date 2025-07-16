@@ -582,13 +582,9 @@ public class SelectBox<T> extends Widget implements Disableable {
       Drawable scrollPaneBackground = getStyle().background;
       if (scrollPaneBackground != null)
         height += scrollPaneBackground.getTopHeight() + scrollPaneBackground.getBottomHeight();
-
-      ListStyle listStyle = list.getStyle();
-      if (listStyle != null) {
-        Drawable listBackground = listStyle.background;
-        if (listBackground != null)
-          height += listBackground.getTopHeight() + listBackground.getBottomHeight();
-      }
+      Drawable listBackground = list.getStyle().background;
+      if (listBackground != null)
+        height += listBackground.getTopHeight() + listBackground.getBottomHeight();
 
       float heightBelow = stagePosition.y;
       float heightAbove = stage.getHeight() - heightBelow - selectBox.getHeight();
