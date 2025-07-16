@@ -547,27 +547,29 @@ public class Skin implements Disposable {
           }
 
           public void readFields(Object object, JsonValue jsonMap) {
-            if (jsonMap.has(parentFieldName)) {
-              String parentName = readValue(parentFieldName, String.class, jsonMap);
-              Class parentType = object.getClass();
-              while (true) {
-                try {
-                  copyFields(get(parentName, parentType), object);
-                  break;
-                } catch (GdxRuntimeException ex) { // Parent resource doesn't exist.
-                  parentType = parentType.getSuperclass(); // Try resource for super class.
-                  if (parentType == Object.class) {
-                    SerializationException se =
-                        new SerializationException(
-                            "Unable to find parent resource with name: " + parentName);
-                    se.addTrace(jsonMap.child.trace());
-                    throw se;
-                  }
+                if (jsonMap.has(parentFieldName)) {
+                    String parentName = readValue(parentFieldName, String.class, jsonMap);
+                    Class parentType = object.getClass();
+                    while (true) {
+                        try {
+                            copyFields(get(parentName, parentType), object);
+                            break;
+                        } catch (GdxRuntimeException ex) { // Parent resource doesn't exist.
+                            parentType = parentType.getSuperclass(); // Try resource for super class.
+                            if (parentType == Object.class) {
+                                SerializationException se =
+                                    new SerializationException(
+                                        "Unable to find parent resource with name: " + parentName);
+                                if (jsonMap.child != null) {
+                                    se.addTrace(jsonMap.child.trace());
+                                }
+                                throw se;
+                            }
+                        }
+                    }
                 }
-              }
+                super.readFields(object, jsonMap);
             }
-            super.readFields(object, jsonMap);
-          }
         };
     json.setTypeName(null);
     json.setUsePrototypes(false);
