@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -29,7 +30,7 @@ public class Cell<T extends Actor> implements Poolable {
 
   Value minWidth, minHeight;
   Value prefWidth, prefHeight;
-  Value maxWidth, maxHeight;
+  @Nullable Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
   Value padTop, padLeft, padBottom, padRight;
   @Nullable Float fillX, fillY;
@@ -791,22 +792,29 @@ public class Cell<T extends Actor> implements Poolable {
   /**
    * @return May be null if this cell is row defaults.
    */
+  @Nullable
   public @Null Value getMaxWidthValue() {
     return maxWidth;
   }
 
   public float getMaxWidth() {
-    return maxWidth.get(actor);
+    if (maxWidth == null) throw new IllegalStateException("maxWidth cannot be null.");
+    if (actor == null) throw new IllegalStateException("actor cannot be null.");
+    return Nullability.castToNonnull(maxWidth, "checked for null").get(actor);
   }
 
   /**
    * @return May be null if this cell is row defaults.
    */
+  @Nullable
   public @Null Value getMaxHeightValue() {
     return maxHeight;
   }
 
   public float getMaxHeight() {
+    if (actor == null || maxHeight == null) {
+      return Float.MAX_VALUE; // or handle appropriately
+    }
     return maxHeight.get(actor);
   }
 
@@ -1018,6 +1026,7 @@ public class Cell<T extends Actor> implements Poolable {
 
   @Initializer
   void set(@Nullable Cell cell) {
+    if (cell == null) return;
     minWidth = cell.minWidth;
     minHeight = cell.minHeight;
     prefWidth = cell.prefWidth;
