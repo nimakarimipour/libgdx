@@ -148,14 +148,16 @@ public class SortedIntList<E> implements Iterable<SortedIntList.Node<E>> {
       return position != null;
     }
 
-    @Nullable
-    @Initializer
-    @Override
-    public Node<E> next() {
-      previousPosition = position;
-      position = position.n;
-      return previousPosition;
-    }
+    @Nullable @Initializer
+        @Override
+        public Node<E> next() {
+          if (position == null) {
+            return null;
+          }
+          previousPosition = position;
+          position = position.n;
+          return previousPosition;
+        }
 
     @Override
     public void remove() {
