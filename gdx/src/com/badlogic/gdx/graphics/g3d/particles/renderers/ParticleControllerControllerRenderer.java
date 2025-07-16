@@ -43,11 +43,15 @@ public class ParticleControllerControllerRenderer extends ParticleControllerRend
   }
 
   @Override
-  public void update() {
-    for (int i = 0, c = controller.particles.size; i < c; ++i) {
-      controllerChannel.data[i].draw();
+    public void update() {
+      if (controllerChannel == null) {
+        throw new GdxRuntimeException(
+            "ParticleController channel not initialized. Make sure to call init() before update().");
+      }
+      for (int i = 0, c = controller.particles.size; i < c; ++i) {
+        controllerChannel.data[i].draw();
+      }
     }
-  }
 
   @Override
   public ParticleControllerComponent copy() {
