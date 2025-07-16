@@ -27,12 +27,14 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover
@@ -82,7 +84,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
   /** if multiple texture attachments are present * */
   protected boolean isMRT;
 
-  protected GLFrameBufferBuilder<? extends GLFrameBuffer<T>> bufferBuilder;
+  @Nullable protected GLFrameBufferBuilder<? extends GLFrameBuffer<T>> bufferBuilder;
 
   GLFrameBuffer() {}
 
@@ -115,11 +117,14 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
   protected abstract void attachFrameBufferColorTexture(T texture);
 
   protected void build() {
+    if (bufferBuilder == null) {
+      throw new IllegalStateException("bufferBuilder must not be null");
+    }
+
     GL20 gl = Gdx.gl20;
 
     checkValidBuilder();
 
-    // iOS uses a different framebuffer handle! (not necessarily 0)
     if (!defaultFramebufferHandleInitialized) {
       defaultFramebufferHandleInitialized = true;
       if (Gdx.app.getType() == ApplicationType.iOS) {
@@ -137,7 +142,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
     framebufferHandle = gl.glGenFramebuffer();
     gl.glBindFramebuffer(GL20.GL_FRAMEBUFFER, framebufferHandle);
 
-    int width = bufferBuilder.width;
+    int width = Nullability.castToNonnull(bufferBuilder, "null check above").width;
     int height = bufferBuilder.height;
 
     if (bufferBuilder.hasDepthRenderBuffer) {
@@ -314,10 +319,15 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
   }
 
   private void checkValidBuilder() {
+    if (bufferBuilder == null) {
+      throw new NullPointerException("bufferBuilder is null");
+    }
+
     boolean runningGL30 = Gdx.graphics.isGL30Available();
 
     if (!runningGL30) {
-      if (bufferBuilder.hasPackedStencilDepthRenderBuffer) {
+      if (Nullability.castToNonnull(bufferBuilder, "null-checked here")
+          .hasPackedStencilDepthRenderBuffer) {
         throw new GdxRuntimeException(
             "Packed Stencil/Render render buffers are not available on GLES 2.0");
       }
@@ -352,8 +362,9 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 
     if (hasDepthStencilPackedBuffer) {
       gl.glDeleteRenderbuffer(depthStencilPackedBufferHandle);
-    } else {
-      if (bufferBuilder.hasDepthRenderBuffer) gl.glDeleteRenderbuffer(depthbufferHandle);
+    } else if (bufferBuilder != null) {
+      if (Nullability.castToNonnull(bufferBuilder, "checked before access").hasDepthRenderBuffer)
+        gl.glDeleteRenderbuffer(depthbufferHandle);
       if (bufferBuilder.hasStencilRenderBuffer) gl.glDeleteRenderbuffer(stencilbufferHandle);
     }
 
@@ -382,7 +393,14 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 
   /** Sets viewport to the dimensions of framebuffer. Called by {@link #begin()}. */
   protected void setFrameBufferViewport() {
-    Gdx.gl20.glViewport(0, 0, bufferBuilder.width, bufferBuilder.height);
+    if (bufferBuilder == null) {
+      throw new IllegalStateException("BufferBuilder is not initialized");
+    }
+    Gdx.gl20.glViewport(
+        0,
+        0,
+        Nullability.castToNonnull(bufferBuilder.width, "checked for null"),
+        Nullability.castToNonnull(bufferBuilder.height, "checked for null"));
   }
 
   /**
@@ -441,13 +459,19 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
    * @return the height of the framebuffer in pixels
    */
   public int getHeight() {
-    return bufferBuilder.height;
+    if (bufferBuilder == null) {
+      throw new NullPointerException("bufferBuilder is null");
+    }
+    return Nullability.castToNonnull(bufferBuilder, "never null when accessed").height;
   }
 
   /**
    * @return the width of the framebuffer in pixels
    */
   public int getWidth() {
+    if (bufferBuilder == null) {
+      throw new NullPointerException("bufferBuilder is null");
+    }
     return bufferBuilder.width;
   }
 

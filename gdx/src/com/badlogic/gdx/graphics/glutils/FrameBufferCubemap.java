@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -113,9 +114,12 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 
   @Override
   protected Cubemap createTexture(FrameBufferTextureAttachmentSpec attachmentSpec) {
+    if (this.bufferBuilder == null) {
+      throw new IllegalStateException("bufferBuilder cannot be null");
+    }
     GLOnlyTextureData data =
         new GLOnlyTextureData(
-            bufferBuilder.width,
+            Nullability.castToNonnull(bufferBuilder, "not nullable at use").width,
             bufferBuilder.height,
             0,
             attachmentSpec.internalFormat,
