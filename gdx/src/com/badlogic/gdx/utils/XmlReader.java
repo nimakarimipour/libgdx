@@ -457,8 +457,10 @@ public class XmlReader {
   }
 
   protected void attribute(@Nullable String name, @Nullable String value) {
-    current.setAttribute(name, value);
-  }
+        if (current != null) {
+            current.setAttribute(name, value);
+        }
+    }
 
   @Nullable
   protected @Null String entity(String name) {
@@ -473,9 +475,11 @@ public class XmlReader {
   }
 
   protected void text(@Nullable String text) {
-    String existing = current.getText();
-    current.setText(existing != null ? existing + text : text);
-  }
+        if (current != null) {
+            String existing = current.getText();
+            current.setText(existing != null ? existing + text : text);
+        }
+    }
 
   protected void close() {
     root = elements.pop();
