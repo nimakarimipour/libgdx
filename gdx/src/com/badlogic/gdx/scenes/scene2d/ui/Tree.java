@@ -99,38 +99,40 @@ public class Tree<N extends Node, V> extends WidgetGroup {
         clickListener =
             new ClickListener() {
               public void clicked(InputEvent event, float x, float y) {
-                N node = getNodeAt(y);
-                if (node == null) return;
-                if (node != getNodeAt(getTouchDownY())) return;
-                if (selection.getMultiple() && selection.notEmpty() && UIUtils.shift()) {
-                  // Select range (shift).
-                  if (rangeStart == null) rangeStart = node;
-                  N rangeStart = Tree.this.rangeStart;
-                  if (!UIUtils.ctrl()) selection.clear();
-                  float start = rangeStart.actor.getY(), end = node.actor.getY();
-                  if (start > end) selectNodes(rootNodes, end, start);
-                  else {
-                    selectNodes(rootNodes, start, end);
-                    selection.items().orderedItems().reverse();
-                  }
-
-                  selection.fireChangeEvent();
-                  Tree.this.rangeStart = rangeStart;
-                  return;
-                }
-                if (node.children.size > 0 && (!selection.getMultiple() || !UIUtils.ctrl())) {
-                  // Toggle expanded if left of icon.
-                  float rowX = node.actor.getX();
-                  if (node.icon != null) rowX -= iconSpacingRight + node.icon.getMinWidth();
-                  if (x < rowX) {
-                    node.setExpanded(!node.expanded);
+                  N node = getNodeAt(y);
+                  if (node == null) return;
+                  if (node != getNodeAt(getTouchDownY())) return;
+                  if (selection.getMultiple() && selection.notEmpty() && UIUtils.shift()) {
+                    // Select range (shift).
+                    if (rangeStart == null) rangeStart = node;
+                    N rangeStart = Tree.this.rangeStart;
+                    if (rangeStart != null) {
+                      if (!UIUtils.ctrl()) selection.clear();
+                      float start = rangeStart.actor.getY(), end = node.actor.getY();
+                      if (start > end) selectNodes(rootNodes, end, start);
+                      else {
+                        selectNodes(rootNodes, start, end);
+                        selection.items().orderedItems().reverse();
+                      }
+              
+                      selection.fireChangeEvent();
+                      Tree.this.rangeStart = rangeStart;
+                    }
                     return;
                   }
+                  if (node.children.size > 0 && (!selection.getMultiple() || !UIUtils.ctrl())) {
+                    // Toggle expanded if left of icon.
+                    float rowX = node.actor.getX();
+                    if (node.icon != null) rowX -= iconSpacingRight + node.icon.getMinWidth();
+                    if (x < rowX) {
+                      node.setExpanded(!node.expanded);
+                      return;
+                    }
+                  }
+                  if (!node.isSelectable()) return;
+                  selection.choose(node);
+                  if (!selection.isEmpty()) rangeStart = node;
                 }
-                if (!node.isSelectable()) return;
-                selection.choose(node);
-                if (!selection.isEmpty()) rangeStart = node;
-              }
 
               public boolean mouseMoved(InputEvent event, float x, float y) {
                 setOverNode(getNodeAt(y));
