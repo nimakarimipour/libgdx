@@ -49,12 +49,12 @@ public class TextTooltip extends Tooltip<Label> {
   }
 
   public TextTooltip(
-      @Null String text, @Nullable final TooltipManager manager, TextTooltipStyle style) {
-    super(null, manager);
-
-    container.setActor(newLabel(text, style.label));
-
-    setStyle(style);
+        @Null String text,  @Nullable final TooltipManager manager, TextTooltipStyle style) {
+      super(null, manager);
+  
+      container.setActor(newLabel(text, Nullability.castToNonnull(style.label)));
+  
+      setStyle(style);
   }
 
   protected Label newLabel(String text, LabelStyle style) {
