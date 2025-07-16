@@ -31,6 +31,7 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A PolygonSpriteBatch is used to draw 2D polygons that reference a texture (region). The class
@@ -1435,11 +1436,11 @@ public class PolygonSpriteBatch implements PolygonBatch {
     }
   }
 
-  private void switchTexture(@Nullable Texture texture) {
-    flush();
-    lastTexture = texture;
-    invTexWidth = 1.0f / texture.getWidth();
-    invTexHeight = 1.0f / texture.getHeight();
+  private void switchTexture( @Nullable Texture texture) {
+      flush();
+      lastTexture = texture;
+      invTexWidth = 1.0f / Nullability.castToNonnull(texture).getWidth();
+      invTexHeight = 1.0f / Nullability.castToNonnull(texture).getHeight();
   }
 
   @Override
