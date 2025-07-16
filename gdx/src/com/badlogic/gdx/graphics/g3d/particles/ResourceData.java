@@ -65,7 +65,7 @@ public class ResourceData<T> implements Json.Serializable {
     ObjectMap<String, Object> data;
     IntArray assets;
     private int loadIndex;
-    protected ResourceData resources;
+    @Nullable protected ResourceData resources;
 
     public SaveData() {
       data = new ObjectMap<String, Object>();
@@ -81,24 +81,30 @@ public class ResourceData<T> implements Json.Serializable {
     }
 
     public <K> void saveAsset(@Nullable String filename, Class<K> type) {
-      int i = resources.getAssetData(filename, type);
-      if (i == -1) {
-        resources.sharedAssets.add(new AssetData(filename, type));
-        i = resources.sharedAssets.size - 1;
+          if (resources == null) {
+              throw new IllegalStateException("Resources not initialized");
+          }
+    
+          int i = resources.getAssetData(filename, type);
+          if (i == -1) {
+              resources.sharedAssets.add(new AssetData(filename, type));
+              i = resources.sharedAssets.size - 1;
+          }
+          assets.add(i);
       }
-      assets.add(i);
-    }
 
     public void save(String key, Object value) {
       data.put(key, value);
     }
 
-    @Nullable
-    public AssetDescriptor loadAsset() {
-      if (loadIndex == assets.size) return null;
-      AssetData data = (AssetData) resources.sharedAssets.get(assets.get(loadIndex++));
-      return new AssetDescriptor(data.filename, data.type);
-    }
+    @Nullable public AssetDescriptor loadAsset() {
+          if (loadIndex == assets.size) return null;
+          if (resources == null) {
+              return null;
+          }
+          AssetData data = (AssetData) resources.sharedAssets.get(assets.get(loadIndex++));
+          return new AssetDescriptor(data.filename, data.type);
+      }
 
     public <K> K load(String key) {
       return (K) data.get(key);
