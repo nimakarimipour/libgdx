@@ -79,13 +79,16 @@ public class NetJavaServerSocketImpl implements ServerSocket {
   }
 
   @Override
-  public Socket accept(SocketHints hints) {
-    try {
-      return new NetJavaSocketImpl(server.accept(), hints);
-    } catch (Exception e) {
-      throw new GdxRuntimeException("Error accepting socket.", e);
+    public Socket accept(SocketHints hints) {
+      if (server == null) {
+        throw new GdxRuntimeException("Server is not initialized.");
+      }
+      try {
+        return new NetJavaSocketImpl(server.accept(), hints);
+      } catch (Exception e) {
+        throw new GdxRuntimeException("Error accepting socket.", e);
+      }
     }
-  }
 
   @Override
   public void dispose() {
