@@ -180,13 +180,13 @@ public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
    *
    * @param side The side to bind
    */
-  protected void bindSide(@Nullable final Cubemap.CubemapSide side) {
-    Gdx.gl20.glFramebufferTexture2D(
-        GL20.GL_FRAMEBUFFER,
-        GL20.GL_COLOR_ATTACHMENT0,
-        side.glEnum,
-        getColorBufferTexture().getTextureObjectHandle(),
-        0);
+  protected void bindSide( @Nullable final Cubemap.CubemapSide side) {
+      Gdx.gl20.glFramebufferTexture2D(
+          GL20.GL_FRAMEBUFFER,
+          GL20.GL_COLOR_ATTACHMENT0,
+          Nullability.castToNonnull(side).glEnum,
+          getColorBufferTexture().getTextureObjectHandle(),
+          0);
   }
 
   /** Get the currently bound side. */
