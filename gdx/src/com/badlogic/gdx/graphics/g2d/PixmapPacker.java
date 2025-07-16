@@ -605,8 +605,11 @@ public class PixmapPacker implements Disposable {
      * @see #updateTexture(TextureFilter, TextureFilter, boolean)
      */
     public Texture getTexture() {
-      return texture;
-    }
+        if (texture == null) {
+          throw new IllegalStateException("Texture has not been created.");
+        }
+        return texture;
+      }
 
     /**
      * Creates the texture if it has not been created, else reuploads the entire page pixmap to the
