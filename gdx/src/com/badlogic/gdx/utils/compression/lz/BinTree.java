@@ -2,7 +2,9 @@
 
 package com.badlogic.gdx.utils.compression.lz;
 
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 public class BinTree extends InWindow {
   int _cyclicBufferPos;
@@ -10,7 +12,7 @@ public class BinTree extends InWindow {
   int _matchMaxLen;
 
   int[] _son;
-  int[] _hash;
+  @Nullable int[] _hash;
 
   int _cutValue = 0xFF;
   int _hashMask;
@@ -45,6 +47,9 @@ public class BinTree extends InWindow {
 
   public void Init() throws IOException {
     super.Init();
+    if (_hash == null || _hash.length != _hashSizeSum) {
+      _hash = new int[_hashSizeSum];
+    }
     for (int i = 0; i < _hashSizeSum; i++) _hash[i] = kEmptyHashValue;
     _cyclicBufferPos = 0;
     ReduceOffsets(-1);
@@ -116,6 +121,11 @@ public class BinTree extends InWindow {
       hash3Value = temp & (kHash3Size - 1);
       hashValue = (temp ^ (CrcTable[_bufferBase[cur + 3] & 0xFF] << 5)) & _hashMask;
     } else hashValue = ((_bufferBase[cur] & 0xFF) ^ ((int) (_bufferBase[cur + 1] & 0xFF) << 8));
+
+    // Ensure _hash is not null before accessing it
+    if (_hash == null) {
+      throw new IllegalStateException("_hash array not initialized");
+    }
 
     int curMatch = _hash[kFixHashSize + hashValue];
     if (HASH_ARRAY) {
@@ -204,6 +214,9 @@ public class BinTree extends InWindow {
   }
 
   public void Skip(int num) throws IOException {
+    if (_hash == null) {
+      throw new IllegalStateException("_hash not initialized");
+    }
     do {
       int lenLimit;
       if (_pos + _matchMaxLen <= _streamPos) lenLimit = _matchMaxLen;
@@ -230,7 +243,11 @@ public class BinTree extends InWindow {
         hashValue = (temp ^ (CrcTable[_bufferBase[cur + 3] & 0xFF] << 5)) & _hashMask;
       } else hashValue = ((_bufferBase[cur] & 0xFF) ^ ((int) (_bufferBase[cur + 1] & 0xFF) << 8));
 
-      int curMatch = _hash[kFixHashSize + hashValue];
+      if (_hash == null) {
+        throw new IllegalStateException("_hash not initialized");
+      }
+      int curMatch =
+          Nullability.castToNonnull(_hash, "thrown if uninitialized")[kFixHashSize + hashValue];
       _hash[kFixHashSize + hashValue] = _pos;
 
       int ptr0 = (_cyclicBufferPos << 1) + 1;
@@ -291,6 +308,9 @@ public class BinTree extends InWindow {
   void Normalize() {
     int subValue = _pos - _cyclicBufferSize;
     NormalizeLinks(_son, _cyclicBufferSize * 2, subValue);
+    if (_hash == null) {
+      throw new NullPointerException("_hash is null");
+    }
     NormalizeLinks(_hash, _hashSizeSum, subValue);
     ReduceOffsets(subValue);
   }
