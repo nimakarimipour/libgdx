@@ -550,6 +550,9 @@ public abstract class DynamicsModifier extends Influencer {
     @Override
     public void update() {
       int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
+      if (accelerationChannel == null) {
+        throw new NullPointerException("accelerationChannel is not initialized.");
+      }
       for (int i = 0, c = controller.particles.size;
           i < c;
           ++i, strengthOffset += strengthChannel.strideSize,
