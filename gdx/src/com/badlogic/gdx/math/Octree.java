@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -178,7 +179,7 @@ public class Octree<T> {
     int level;
     final BoundingBox bounds = new BoundingBox();
     boolean leaf;
-    private Octree.OctreeNode[] children; // May be null when leaf is true.
+    @Nullable private Octree.OctreeNode[] children; // May be null when leaf is true.
     private final Array<T> geometries = new Array<T>(Math.min(16, maxItemsPerNode));
 
     private void split() {
@@ -252,9 +253,12 @@ public class Octree<T> {
     }
 
     private void clearChildren() {
+      if (children == null) return; // Ensure `children` is not null before proceeding
       for (int i = 0; i < 8; i++) {
-        children[i].free();
-        children[i] = null;
+        if (children[i] != null) { // Ensure each child is not null before dereferencing
+          children[i].free();
+          children[i] = null;
+        }
       }
     }
 
@@ -265,14 +269,21 @@ public class Octree<T> {
 
       // If is not leaf, check children
       if (!leaf) {
-        for (Octree.OctreeNode child : children) {
-          child.add(geometry);
+        if (children == null) children = new Octree.OctreeNode[8];
+        for (Octree.OctreeNode child :
+            Nullability.castToNonnull(children, "initialized when needed")) {
+          if (child != null) {
+            child.add(geometry);
+          }
         }
       } else {
         if (geometries.size >= maxItemsPerNode && level > 0) {
           split();
-          for (Octree.OctreeNode child : children) {
-            child.add(geometry);
+          for (Octree.OctreeNode child :
+              Nullability.castToNonnull(children, "initialized during split")) {
+            if (child != null) {
+              child.add(geometry);
+            }
           }
         } else {
           geometries.add(geometry);
@@ -283,13 +294,17 @@ public class Octree<T> {
     protected boolean remove(T object) {
       if (!leaf) {
         boolean removed = false;
-        for (Octree.OctreeNode node : children) {
+        if (children == null) {
+          children = new Octree.OctreeNode[8];
+        }
+        for (Octree.OctreeNode node : Nullability.castToNonnull(children, "initialized if null")) {
           removed |= node.remove(object);
         }
 
         if (removed) {
           ObjectSet<T> geometrySet = new ObjectSet<T>();
-          for (Octree.OctreeNode node : children) {
+          for (Octree.OctreeNode node :
+              Nullability.castToNonnull(children, "initialized if null")) {
             node.getAll(geometrySet);
           }
           if (geometrySet.size <= maxItemsPerNode) {
@@ -315,12 +330,14 @@ public class Octree<T> {
       }
 
       if (!leaf) {
-        for (Octree.OctreeNode node : children) {
-          node.query(aabb, result);
+        if (children == null) children = new Octree.OctreeNode[8];
+        for (Octree.OctreeNode node : Nullability.castToNonnull(children, "initialized if null")) {
+          if (node != null) {
+            node.query(aabb, result);
+          }
         }
       } else {
         for (T geometry : geometries) {
-          // Filter geometries using collider
           if (collider.intersects(bounds, geometry)) {
             result.add(geometry);
           }
@@ -333,12 +350,13 @@ public class Octree<T> {
         return;
       }
       if (!leaf) {
-        for (Octree.OctreeNode node : children) {
-          node.query(frustum, result);
+        if (children != null) { // Ensure children is not null
+          for (Octree.OctreeNode node : Nullability.castToNonnull(children, "checked for null")) {
+            node.query(frustum, result);
+          }
         }
       } else {
         for (T geometry : geometries) {
-          // Filter geometries using collider
           if (collider.intersects(frustum, geometry)) {
             result.add(geometry);
           }
@@ -347,7 +365,6 @@ public class Octree<T> {
     }
 
     protected void rayCast(Ray ray, RayCastResult<T> result) {
-      // Check intersection with node
       boolean intersect = Intersector.intersectRayBounds(ray, bounds, tmp);
       if (!intersect) {
         return;
@@ -358,14 +375,13 @@ public class Octree<T> {
         }
       }
 
-      // Check intersection with children
       if (!leaf) {
-        for (Octree.OctreeNode child : children) {
+        if (children == null) children = new Octree.OctreeNode[8];
+        for (Octree.OctreeNode child : Nullability.castToNonnull(children, "initialized if null")) {
           child.rayCast(ray, result);
         }
       } else {
         for (T geometry : geometries) {
-          // Check intersection with geometries
           float distance = collider.intersects(ray, geometry);
           if (result.geometry == null || distance < result.distance) {
             result.geometry = geometry;
@@ -382,8 +398,10 @@ public class Octree<T> {
      */
     protected void getAll(ObjectSet<T> resultSet) {
       if (!leaf) {
-        for (Octree.OctreeNode child : children) {
-          child.getAll(resultSet);
+        if (children != null) {
+          for (Octree.OctreeNode child : Nullability.castToNonnull(children, "checked for null")) {
+            child.getAll(resultSet);
+          }
         }
       }
       resultSet.addAll(geometries);
@@ -395,8 +413,9 @@ public class Octree<T> {
      * @param bounds
      */
     protected void getBoundingBox(ObjectSet<BoundingBox> bounds) {
-      if (!leaf) {
-        for (Octree.OctreeNode node : children) {
+      if (!leaf && children != null) {
+        for (Octree.OctreeNode node :
+            Nullability.castToNonnull(children, "checked to be non-null")) {
           node.getBoundingBox(bounds);
         }
       }
