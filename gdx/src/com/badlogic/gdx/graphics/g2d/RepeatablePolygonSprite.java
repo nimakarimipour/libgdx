@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ShortArray;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Renders polygon filled with a repeating TextureRegion with specified density Without causing an
@@ -30,7 +31,7 @@ import javax.annotation.Nullable;
  */
 public class RepeatablePolygonSprite {
 
-  private TextureRegion region;
+  @Nullable private TextureRegion region;
   private float density;
 
   private boolean dirty = true;
@@ -167,54 +168,63 @@ public class RepeatablePolygonSprite {
 
   /** Builds final vertices with vertex attributes like coordinates, color and region u/v */
   private void buildVertices() {
-    vertices.clear();
-    for (int i = 0; i < parts.size; i++) {
-      float verts[] = parts.get(i);
-      if (verts == null) continue;
-
-      float[] fullVerts = new float[5 * verts.length / 2];
-      int idx = 0;
-
-      int col = i / rows;
-      int row = i % rows;
-
-      for (int j = 0; j < verts.length; j += 2) {
-        fullVerts[idx++] = verts[j] + offset.x + x;
-        fullVerts[idx++] = verts[j + 1] + offset.y + y;
-
-        fullVerts[idx++] = color.toFloatBits();
-
-        float u = (verts[j] % gridWidth) / gridWidth;
-        float v = (verts[j + 1] % gridHeight) / gridHeight;
-        if (verts[j] == col * gridWidth) u = 0f;
-        if (verts[j] == (col + 1) * gridWidth) u = 1f;
-        if (verts[j + 1] == row * gridHeight) v = 0f;
-        if (verts[j + 1] == (row + 1) * gridHeight) v = 1f;
-        u = region.getU() + (region.getU2() - region.getU()) * u;
-        v = region.getV() + (region.getV2() - region.getV()) * v;
-        fullVerts[idx++] = u;
-        fullVerts[idx++] = v;
-      }
-      vertices.add(fullVerts);
-    }
-    dirty = false;
+          vertices.clear();
+          if (region == null) {
+              return;
+          }
+          for (int i = 0; i < parts.size; i++) {
+            float verts[] = parts.get(i);
+            if (verts == null) continue;
+    
+            float[] fullVerts = new float[5 * verts.length / 2];
+            int idx = 0;
+    
+            int col = i / rows;
+            int row = i % rows;
+    
+            for (int j = 0; j < verts.length; j += 2) {
+              fullVerts[idx++] = verts[j] + offset.x + x;
+              fullVerts[idx++] = verts[j + 1] + offset.y + y;
+    
+              fullVerts[idx++] = color.toFloatBits();
+    
+              float u = (verts[j] % gridWidth) / gridWidth;
+              float v = (verts[j + 1] % gridHeight) / gridHeight;
+              if (verts[j] == col * gridWidth) u = 0f;
+              if (verts[j] == (col + 1) * gridWidth) u = 1f;
+              if (verts[j + 1] == row * gridHeight) v = 0f;
+              if (verts[j + 1] == (row + 1) * gridHeight) v = 1f;
+              u = Nullability.castToNonnull(region, "region not null").getU() + 
+                  (Nullability.castToNonnull(region, "region not null").getU2() - 
+                   Nullability.castToNonnull(region, "region not null").getU()) * u;
+              v = region.getV() + (region.getV2() - region.getV()) * v;
+              fullVerts[idx++] = u;
+              fullVerts[idx++] = v;
+            }
+            vertices.add(fullVerts);
+          }
+          dirty = false;
   }
 
   public void draw(PolygonSpriteBatch batch) {
-    if (dirty) {
-      buildVertices();
+      if (region == null) {
+        throw new IllegalStateException("TextureRegion 'region' is null. Ensure it is set before drawing.");
+      }
+  
+      if (dirty) {
+        buildVertices();
+      }
+      for (int i = 0; i < vertices.size; i++) {
+        batch.draw(
+            region.getTexture(),
+            vertices.get(i),
+            0,
+            vertices.get(i).length,
+            indices.get(i),
+            0,
+            indices.get(i).length);
+      }
     }
-    for (int i = 0; i < vertices.size; i++) {
-      batch.draw(
-          region.getTexture(),
-          vertices.get(i),
-          0,
-          vertices.get(i).length,
-          indices.get(i),
-          0,
-          indices.get(i).length);
-    }
-  }
 
   /**
    * @param color - Tint color to be applied to entire polygon
