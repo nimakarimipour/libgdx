@@ -69,7 +69,6 @@ public class TextTooltip extends Tooltip<Label> {
     container.fill(wrap);
 
     Label label = container.getActor();
-    if (label == null) throw new NullPointerException("label cannot be null");
     label.setStyle(style.label);
     label.setWrap(wrap);
   }

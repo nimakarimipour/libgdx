@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -119,9 +118,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 
     container.setSize(manager.maxWidth, Integer.MAX_VALUE);
     container.validate();
-    container.width(
-        Nullability.castToNonnull(container.getActor(), "explicitly set in constructor")
-            .getWidth());
+    container.width(container.getActor().getWidth());
     container.pack();
 
     float offsetX = manager.offsetX, offsetY = manager.offsetY, dist = manager.edgeDistance;
