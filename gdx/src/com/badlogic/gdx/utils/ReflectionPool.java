@@ -64,14 +64,14 @@ public class ReflectionPool<T> extends Pool<T> {
   }
 
   protected T newObject() {
-          try {
-            if (constructor == null) {
-              throw new IllegalStateException("Constructor is not initialized.");
+            try {
+              if (constructor == null) {
+                throw new IllegalStateException("Constructor is not initialized.");
+              }
+              return (T) constructor.newInstance(Nullability.castToNonnull((Object[]) null));
+            } catch (Exception ex) {
+              String className = Nullability.castToNonnull(constructor, "checked before catch").getDeclaringClass().getName();
+              throw new GdxRuntimeException("Unable to create new instance: " + className, ex);
             }
-            return (T) constructor.newInstance((Object[]) null);
-          } catch (Exception ex) {
-            String className = Nullability.castToNonnull(constructor, "checked before catch").getDeclaringClass().getName();
-            throw new GdxRuntimeException("Unable to create new instance: " + className, ex);
-          }
   }
 }
