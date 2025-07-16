@@ -634,40 +634,41 @@ public class MeshBuilder implements MeshPartBuilder {
   private final Vector3 tmpNormal = new Vector3();
 
   @Override
-  public short vertex(
-      @Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
-    if (vindex > MAX_INDEX) throw new GdxRuntimeException("Too many vertices used");
-
-    vertex[posOffset] = pos.x;
-    if (posSize > 1) vertex[posOffset + 1] = pos.y;
-    if (posSize > 2) vertex[posOffset + 2] = pos.z;
-
-    if (norOffset >= 0) {
-      if (nor == null) nor = tmpNormal.set(pos).nor();
-      vertex[norOffset] = nor.x;
-      vertex[norOffset + 1] = nor.y;
-      vertex[norOffset + 2] = nor.z;
+    public short vertex(
+         @Nullable Vector3 pos, @Nullable Vector3 nor, @Nullable Color col, @Nullable Vector2 uv) {
+      if (vindex > MAX_INDEX) throw new GdxRuntimeException("Too many vertices used");
+      if (pos == null) throw new IllegalArgumentException("Position cannot be null");
+  
+      vertex[posOffset] = pos.x;
+      if (posSize > 1) vertex[posOffset + 1] = pos.y;
+      if (posSize > 2) vertex[posOffset + 2] = pos.z;
+  
+      if (norOffset >= 0) {
+        if (nor == null) nor = tmpNormal.set(pos).nor();
+        vertex[norOffset] = nor.x;
+        vertex[norOffset + 1] = nor.y;
+        vertex[norOffset + 2] = nor.z;
+      }
+  
+      if (colOffset >= 0) {
+        if (col == null) col = Color.WHITE;
+        vertex[colOffset] = col.r;
+        vertex[colOffset + 1] = col.g;
+        vertex[colOffset + 2] = col.b;
+        if (colSize > 3) vertex[colOffset + 3] = col.a;
+      } else if (cpOffset > 0) {
+        if (col == null) col = Color.WHITE;
+        vertex[cpOffset] = col.toFloatBits();
+      }
+  
+      if (uv != null && uvOffset >= 0) {
+        vertex[uvOffset] = uv.x;
+        vertex[uvOffset + 1] = uv.y;
+      }
+  
+      addVertex(vertex, 0);
+      return (short) lastIndex;
     }
-
-    if (colOffset >= 0) {
-      if (col == null) col = Color.WHITE;
-      vertex[colOffset] = col.r;
-      vertex[colOffset + 1] = col.g;
-      vertex[colOffset + 2] = col.b;
-      if (colSize > 3) vertex[colOffset + 3] = col.a;
-    } else if (cpOffset > 0) {
-      if (col == null) col = Color.WHITE;
-      vertex[cpOffset] = col.toFloatBits(); // FIXME cache packed color?
-    }
-
-    if (uv != null && uvOffset >= 0) {
-      vertex[uvOffset] = uv.x;
-      vertex[uvOffset + 1] = uv.y;
-    }
-
-    addVertex(vertex, 0);
-    return (short) lastIndex;
-  }
 
   @Override
   public short vertex(final float... values) {
