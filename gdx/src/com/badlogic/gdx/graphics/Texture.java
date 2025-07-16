@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A Texture wraps a standard OpenGL ES texture.
@@ -365,6 +366,6 @@ public class Texture extends GLTexture {
    * @return the number of managed textures currently loaded
    */
   public static int getNumManagedTextures() {
-    return managedTextures.get(Gdx.app).size;
-  }
+        return Nullability.castToNonnull(managedTextures.get(Gdx.app)).size;
+    }
 }
