@@ -44,6 +44,7 @@ import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A select box (aka a drop-down list) allows a user to choose one of a number of values from a
@@ -534,19 +535,20 @@ public class SelectBox<T> extends Widget implements Disableable {
               return false;
             }
 
-            public boolean keyDown(@Nullable InputEvent event, int keycode) {
-              switch (keycode) {
-                case Keys.NUMPAD_ENTER:
-                case Keys.ENTER:
-                  selectBox.selection.choose(list.getSelected());
-                  // Fall thru.
-                case Keys.ESCAPE:
-                  hide();
-                  event.stop();
-                  return true;
+            public boolean keyDown( @Nullable InputEvent event, int keycode) {
+                          switch (keycode) {
+                            case Keys.NUMPAD_ENTER:
+                            case Keys.ENTER:
+                              selectBox.selection.choose(list.getSelected());
+                              // Fall thru.
+                            case Keys.ESCAPE:
+                              hide();
+                              Nullability.castToNonnull(event, "expected non-null")
+                                         .stop();
+                              return true;
+                          }
+                          return false;
               }
-              return false;
-            }
           };
     }
 
