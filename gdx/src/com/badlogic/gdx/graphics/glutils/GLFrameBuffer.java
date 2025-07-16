@@ -203,7 +203,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
       gl.glBindTexture(texture.glTarget, texture.getTextureObjectHandle());
     }
 
-    if (isMRT && Gdx.gl30 != null) {
+    if (isMRT) {
       IntBuffer buffer = BufferUtils.newIntBuffer(colorTextureCounter);
       for (int i = 0; i < colorTextureCounter; i++) {
         buffer.put(GL30.GL_COLOR_ATTACHMENT0 + i);
