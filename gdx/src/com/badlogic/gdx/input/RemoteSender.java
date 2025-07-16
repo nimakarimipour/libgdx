@@ -60,30 +60,31 @@ public class RemoteSender implements InputProcessor {
   }
 
   public void sendUpdate() {
-    synchronized (this) {
-      if (!connected) return;
+      synchronized (this) {
+        if (!connected) return;
+      }
+      try {
+        out.writeInt(ACCEL);
+        out.writeFloat(Gdx.input.getAccelerometerX());
+        out.writeFloat(Gdx.input.getAccelerometerY());
+        out.writeFloat(Gdx.input.getAccelerometerZ());
+        out.writeInt(COMPASS);
+        out.writeFloat(Gdx.input.getAzimuth());
+        out.writeFloat(Gdx.input.getPitch());
+        out.writeFloat(Gdx.input.getRoll());
+        out.writeInt(SIZE);
+        out.writeFloat(Gdx.graphics.getWidth());
+        out.writeFloat(Gdx.graphics.getHeight());
+        out.writeInt(GYRO);
+        out.writeFloat(Gdx.input.getGyroscopeX());
+        out.writeFloat(Gdx.input.getGyroscopeY());
+        out.writeFloat(Gdx.input.getGyroscopeZ());
+      } catch (Throwable t) {
+        synchronized (this) {
+          connected = false;
+        }
+      }
     }
-    try {
-      out.writeInt(ACCEL);
-      out.writeFloat(Gdx.input.getAccelerometerX());
-      out.writeFloat(Gdx.input.getAccelerometerY());
-      out.writeFloat(Gdx.input.getAccelerometerZ());
-      out.writeInt(COMPASS);
-      out.writeFloat(Gdx.input.getAzimuth());
-      out.writeFloat(Gdx.input.getPitch());
-      out.writeFloat(Gdx.input.getRoll());
-      out.writeInt(SIZE);
-      out.writeFloat(Gdx.graphics.getWidth());
-      out.writeFloat(Gdx.graphics.getHeight());
-      out.writeInt(GYRO);
-      out.writeFloat(Gdx.input.getGyroscopeX());
-      out.writeFloat(Gdx.input.getGyroscopeY());
-      out.writeFloat(Gdx.input.getGyroscopeZ());
-    } catch (Throwable t) {
-      out = null;
-      connected = false;
-    }
-  }
 
   @Override
   public boolean keyDown(int keycode) {
