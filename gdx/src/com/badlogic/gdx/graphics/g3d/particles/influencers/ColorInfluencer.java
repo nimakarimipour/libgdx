@@ -44,6 +44,10 @@ public abstract class ColorInfluencer extends Influencer {
 
     @Override
     public void activateParticles(int startIndex, int count) {
+      if (colorChannel == null) {
+        throw new IllegalStateException(
+            "Color channel must be allocated before activating particles.");
+      }
       for (int i = startIndex * colorChannel.strideSize, c = i + count * colorChannel.strideSize;
           i < c;
           i += colorChannel.strideSize) {
