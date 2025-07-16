@@ -30,8 +30,8 @@ import com.badlogic.gdx.utils.Null;
 public abstract class Value {
   /** Calls {@link #get(Actor)} with null. */
   public float get() {
-    return get(null);
-  }
+      return get(new Actor());
+    }
 
   /**
    * @param context May be null.
