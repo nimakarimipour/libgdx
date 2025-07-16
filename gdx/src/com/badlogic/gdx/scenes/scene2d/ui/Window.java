@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -184,7 +185,10 @@ public class Window extends Table {
               float amountY = y - lastY - height;
               if (height + amountY < minHeight) amountY = minHeight - height;
               if (clampPosition && windowY + height + amountY > stage.getHeight())
-                amountY = stage.getHeight() - windowY - height;
+                amountY =
+                    Nullability.castToNonnull(stage, "clampPosition true").getHeight()
+                        - windowY
+                        - height;
               height += amountY;
             }
             setBounds(
