@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * It's the base class for any kind of influencer which operates on angular velocity and
@@ -226,19 +227,21 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-    public void update() {
-      for (int i = 0,
-              l = ParticleChannels.LifePercentOffset,
-              s = 0,
-              c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
-          i < c;
-          s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
-              l += lifeChannel.strideSize) {
-        rotationalVelocity2dChannel.data[i] +=
-            strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
-                + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
-                    * strengthValue.getScale(lifeChannel.data[l]);
-      }
+          public void update() {
+            if (lifeChannel != null) {
+              for (int i = 0,
+                      l = ParticleChannels.LifePercentOffset,
+                      s = 0,
+                      c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
+                  i < c;
+                  s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
+                      l += lifeChannel.strideSize) {
+                rotationalVelocity2dChannel.data[i] +=
+                    strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
+                        + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
+                            * strengthValue.getScale(Nullability.castToNonnull(lifeChannel, "already checked").data[l]);
+              }
+            }
     }
 
     @Override
@@ -265,69 +268,46 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-    public void update() {
-
-      // Matrix3 I_t = defined by the shape, it's the inertia tensor
-      // Vector3 r = position vector
-      // Vector3 L = r.cross(v.mul(m)), It's the angular momentum, where mv it's the linear momentum
-      // Inverse(I_t) = a diagonal matrix where the diagonal is IyIz, IxIz, IxIy
-      // Vector3 w = L/I_t = inverse(I_t)*L, It's the angular velocity
-      // Quaternion spin = 0.5f*Quaternion(w, 0)*currentRotation
-      // currentRotation += spin*dt
-      // normalize(currentRotation)
-
-      // Algorithm 1
-      // Consider a simple channel which represent an angular velocity w
-      // Sum each w for each rotation
-      // Update rotation
-
-      // Algorithm 2
-      // Consider a channel which represent a sort of angular momentum L (r, v)
-      // Sum each L for each rotation
-      // Multiply sum by constant quantity k = m*I_to(-1) , m could be optional while I is constant
-      // and can be calculated at
-      // start
-      // Update rotation
-
-      // Algorithm 3
-      // Consider a channel which represent a simple angular momentum L
-      // Proceed as Algorithm 2
-
-      for (int i = 0,
-              l = ParticleChannels.LifePercentOffset,
-              s = 0,
-              a = 0,
-              c = controller.particles.size * rotationalForceChannel.strideSize;
-          i < c;
-          s += strengthChannel.strideSize, i += rotationalForceChannel.strideSize,
-              a += angularChannel.strideSize, l += lifeChannel.strideSize) {
-
-        float lifePercent = lifeChannel.data[l],
-            strength =
-                strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
-                    + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
-                        * strengthValue.getScale(lifePercent),
-            phi =
-                angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
-                    + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
-                        * phiValue.getScale(lifePercent),
-            theta =
-                angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset]
-                    + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset]
-                        * thetaValue.getScale(lifePercent);
-
-        float cosTheta = MathUtils.cosDeg(theta),
-            sinTheta = MathUtils.sinDeg(theta),
-            cosPhi = MathUtils.cosDeg(phi),
-            sinPhi = MathUtils.sinDeg(phi);
-
-        TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi);
-        TMP_V3.scl(strength * MathUtils.degreesToRadians);
-
-        rotationalForceChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
-        rotationalForceChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
-        rotationalForceChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
-      }
+          public void update() {
+            if (lifeChannel == null) {
+                throw new NullPointerException("lifeChannel must be initialized before use.");
+            }
+        
+            for (int i = 0,
+                    l = ParticleChannels.LifePercentOffset,
+                    s = 0,
+                    a = 0,
+                    c = controller.particles.size * rotationalForceChannel.strideSize;
+                i < c;
+                s += strengthChannel.strideSize, i += rotationalForceChannel.strideSize,
+                    a += angularChannel.strideSize, l += lifeChannel.strideSize) {
+        
+              float lifePercent = Nullability.castToNonnull(lifeChannel, "execution proceeded past check").data[l],
+                  strength =
+                      strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
+                          + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
+                              * strengthValue.getScale(lifePercent),
+                  phi =
+                      angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
+                          + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
+                              * phiValue.getScale(lifePercent),
+                  theta =
+                      angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset]
+                          + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset]
+                              * thetaValue.getScale(lifePercent);
+        
+              float cosTheta = MathUtils.cosDeg(theta),
+                  sinTheta = MathUtils.sinDeg(theta),
+                  cosPhi = MathUtils.cosDeg(phi),
+                  sinPhi = MathUtils.sinDeg(phi);
+        
+              TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi);
+              TMP_V3.scl(strength * MathUtils.degreesToRadians);
+        
+              rotationalForceChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
+              rotationalForceChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
+              rotationalForceChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+            }
     }
 
     @Override
@@ -363,21 +343,25 @@ public abstract class DynamicsModifier extends Influencer {
         cy = val[Matrix4.M13];
         cz = val[Matrix4.M23];
       }
-
+    
+      if (lifeChannel == null) {
+        return; // Or handle the null case as appropriate
+      }
+    
       int lifeOffset = ParticleChannels.LifePercentOffset,
           strengthOffset = 0,
           positionOffset = 0,
           forceOffset = 0;
       for (int i = 0, c = controller.particles.size;
-          i < c;
-          ++i, positionOffset += positionChannel.strideSize,
-              strengthOffset += strengthChannel.strideSize,
-              forceOffset += accelerationChannel.strideSize, lifeOffset += lifeChannel.strideSize) {
-
+           i < c;
+           ++i, positionOffset += positionChannel.strideSize,
+               strengthOffset += strengthChannel.strideSize,
+               forceOffset += accelerationChannel.strideSize, lifeOffset += lifeChannel.strideSize) {
+    
         float strength =
             strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthStartOffset]
                 + strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
-                    * strengthValue.getScale(lifeChannel.data[lifeOffset]);
+                    * strengthValue.getScale(Nullability.castToNonnull(lifeChannel, "checked before use").data[lifeOffset]);
         TMP_V3
             .set(
                 positionChannel.data[positionOffset + ParticleChannels.XOffset] - cx,
@@ -413,46 +397,50 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-    public void update() {
-      for (int i = 0,
-              l = ParticleChannels.LifePercentOffset,
-              s = 0,
-              a = 0,
-              c = i + controller.particles.size * directionalVelocityChannel.strideSize;
-          i < c;
-          s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize,
-              a += angularChannel.strideSize, l += lifeChannel.strideSize) {
-
-        float lifePercent = lifeChannel.data[l],
-            strength =
-                strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
-                    + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
-                        * strengthValue.getScale(lifePercent),
-            phi =
-                angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
-                    + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
-                        * phiValue.getScale(lifePercent),
-            theta =
-                angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset]
-                    + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset]
-                        * thetaValue.getScale(lifePercent);
-
-        float cosTheta = MathUtils.cosDeg(theta),
-            sinTheta = MathUtils.sinDeg(theta),
-            cosPhi = MathUtils.cosDeg(phi),
-            sinPhi = MathUtils.sinDeg(phi);
-        TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi).nor().scl(strength);
-
-        if (!isGlobal) {
-          controller.transform.getRotation(TMP_Q, true);
-          TMP_V3.mul(TMP_Q);
+      public void update() {
+        if (lifeChannel == null) {
+          throw new IllegalStateException("LifeChannel is not initialized");
         }
-
-        directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
-        directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
-        directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+    
+        for (int i = 0,
+                l = ParticleChannels.LifePercentOffset,
+                s = 0,
+                a = 0,
+                c = i + controller.particles.size * directionalVelocityChannel.strideSize;
+            i < c;
+            s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize,
+                a += angularChannel.strideSize, l += lifeChannel.strideSize) {
+    
+          float lifePercent = lifeChannel.data[l],
+              strength =
+                  strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
+                      + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
+                          * strengthValue.getScale(lifePercent),
+              phi =
+                  angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
+                      + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
+                          * phiValue.getScale(lifePercent),
+              theta =
+                  angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset]
+                      + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset]
+                          * thetaValue.getScale(lifePercent);
+    
+          float cosTheta = MathUtils.cosDeg(theta),
+              sinTheta = MathUtils.sinDeg(theta),
+              cosPhi = MathUtils.cosDeg(phi),
+              sinPhi = MathUtils.sinDeg(phi);
+          TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi).nor().scl(strength);
+    
+          if (!isGlobal) {
+            controller.transform.getRotation(TMP_Q, true);
+            TMP_V3.mul(TMP_Q);
+          }
+    
+          directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
+          directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
+          directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+        }
       }
-    }
 
     @Override
     public PolarAcceleration copy() {
@@ -478,53 +466,56 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-    public void update() {
-      for (int i = 0,
-              l = ParticleChannels.LifePercentOffset,
-              s = 0,
-              a = 0,
-              positionOffset = 0,
-              c = i + controller.particles.size * directionalVelocityChannel.strideSize;
-          i < c;
-          s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize,
-              a += angularChannel.strideSize, l += lifeChannel.strideSize,
-              positionOffset += positionChannel.strideSize) {
-
-        float lifePercent = lifeChannel.data[l],
-            strength =
-                strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
-                    + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
-                        * strengthValue.getScale(lifePercent),
-            phi =
-                angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
-                    + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
-                        * phiValue.getScale(lifePercent),
-            theta =
-                angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset]
-                    + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset]
-                        * thetaValue.getScale(lifePercent);
-
-        float cosTheta = MathUtils.cosDeg(theta),
-            sinTheta = MathUtils.sinDeg(theta),
-            cosPhi = MathUtils.cosDeg(phi),
-            sinPhi = MathUtils.sinDeg(phi);
-        TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi);
-        TMP_V1.set(
-            positionChannel.data[positionOffset + ParticleChannels.XOffset],
-            positionChannel.data[positionOffset + ParticleChannels.YOffset],
-            positionChannel.data[positionOffset + ParticleChannels.ZOffset]);
-        if (!isGlobal) {
-          controller.transform.getTranslation(TMP_V2);
-          TMP_V1.sub(TMP_V2);
-          controller.transform.getRotation(TMP_Q, true);
-          TMP_V3.mul(TMP_Q);
+      public void update() {
+        if (lifeChannel == null) {
+          throw new IllegalStateException("Life channel is not initialized.");
         }
-        TMP_V3.crs(TMP_V1).nor().scl(strength);
-        directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
-        directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
-        directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+        for (int i = 0,
+                l = ParticleChannels.LifePercentOffset,
+                s = 0,
+                a = 0,
+                positionOffset = 0,
+                c = i + controller.particles.size * directionalVelocityChannel.strideSize;
+            i < c;
+            s += strengthChannel.strideSize, i += directionalVelocityChannel.strideSize,
+                a += angularChannel.strideSize, l += lifeChannel.strideSize,
+                positionOffset += positionChannel.strideSize) {
+    
+          float lifePercent = Nullability.castToNonnull(lifeChannel, "checked for null").data[l],
+              strength =
+                  strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
+                      + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
+                          * strengthValue.getScale(lifePercent),
+              phi =
+                  angularChannel.data[a + ParticleChannels.VelocityPhiStartOffset]
+                      + angularChannel.data[a + ParticleChannels.VelocityPhiDiffOffset]
+                          * phiValue.getScale(lifePercent),
+              theta =
+                  angularChannel.data[a + ParticleChannels.VelocityThetaStartOffset]
+                      + angularChannel.data[a + ParticleChannels.VelocityThetaDiffOffset]
+                          * thetaValue.getScale(lifePercent);
+    
+          float cosTheta = MathUtils.cosDeg(theta),
+              sinTheta = MathUtils.sinDeg(theta),
+              cosPhi = MathUtils.cosDeg(phi),
+              sinPhi = MathUtils.sinDeg(phi);
+          TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi);
+          TMP_V1.set(
+              positionChannel.data[positionOffset + ParticleChannels.XOffset],
+              positionChannel.data[positionOffset + ParticleChannels.YOffset],
+              positionChannel.data[positionOffset + ParticleChannels.ZOffset]);
+          if (!isGlobal) {
+            controller.transform.getTranslation(TMP_V2);
+            TMP_V1.sub(TMP_V2);
+            controller.transform.getRotation(TMP_Q, true);
+            TMP_V3.mul(TMP_Q);
+          }
+          TMP_V3.crs(TMP_V1).nor().scl(strength);
+          directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
+          directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
+          directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+        }
       }
-    }
 
     @Override
     public TangentialAcceleration copy() {
@@ -548,26 +539,29 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-    public void update() {
-      int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
-      for (int i = 0, c = controller.particles.size;
-          i < c;
-          ++i, strengthOffset += strengthChannel.strideSize,
-              forceOffset += accelerationChannel.strideSize, lifeOffset += lifeChannel.strideSize) {
-
-        float strength =
-            strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthStartOffset]
-                + strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
-                    * strengthValue.getScale(lifeChannel.data[lifeOffset]);
-        TMP_V3
-            .set(MathUtils.random(-1, 1f), MathUtils.random(-1, 1f), MathUtils.random(-1, 1f))
-            .nor()
-            .scl(strength);
-        accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
-        accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
-        accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
+      public void update() {
+          if (lifeChannel == null) {
+              throw new IllegalStateException("lifeChannel is not initialized");
+          }
+          int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
+          for (int i = 0, c = controller.particles.size;
+               i < c;
+               ++i, strengthOffset += strengthChannel.strideSize,
+               forceOffset += accelerationChannel.strideSize, lifeOffset += lifeChannel.strideSize) {
+    
+              float strength =
+                  strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthStartOffset]
+                      + strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
+                          * strengthValue.getScale(Nullability.castToNonnull(lifeChannel, "not null if updated").data[lifeOffset]);
+              TMP_V3
+                  .set(MathUtils.random(-1, 1f), MathUtils.random(-1, 1f), MathUtils.random(-1, 1f))
+                  .nor()
+                  .scl(strength);
+              accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
+              accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
+              accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
+          }
       }
-    }
 
     @Override
     public BrownianAcceleration copy() {
@@ -576,7 +570,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public boolean isGlobal = false;
-  protected FloatChannel lifeChannel;
+  @Nullable protected FloatChannel lifeChannel;
 
   public DynamicsModifier() {}
 
