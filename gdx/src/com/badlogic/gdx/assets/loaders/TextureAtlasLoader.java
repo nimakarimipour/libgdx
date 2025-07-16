@@ -44,21 +44,26 @@ public class TextureAtlasLoader
   @Nullable TextureAtlasData data;
 
   @Override
-  public TextureAtlas load(
-      AssetManager assetManager,
-      String fileName,
-      FileHandle file,
-      @Nullable TextureAtlasParameter parameter) {
-    for (Page page : data.getPages()) {
-      Texture texture =
-          assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);
-      page.texture = texture;
+    public TextureAtlas load(
+        AssetManager assetManager,
+        String fileName,
+        FileHandle file,
+        @Nullable TextureAtlasParameter parameter) {
+  
+      if (data == null) {
+        throw new IllegalStateException("Data must not be null before loading.");
+      }
+  
+      for (Page page : data.getPages()) {
+        Texture texture =
+            assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);
+        page.texture = texture;
+      }
+  
+      TextureAtlas atlas = new TextureAtlas(data);
+      data = null;
+      return atlas;
     }
-
-    TextureAtlas atlas = new TextureAtlas(data);
-    data = null;
-    return atlas;
-  }
 
   @Override
   public Array<AssetDescriptor> getDependencies(
