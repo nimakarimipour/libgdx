@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.utils.Array;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * {@link AssetLoader} for {@link Cubemap} instances. The pixel data is loaded asynchronously. The
@@ -43,7 +44,7 @@ public class CubemapLoader
     extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
   public static class CubemapLoaderInfo {
     @Nullable String filename;
-    CubemapData data;
+    @Nullable CubemapData data;
     @Nullable Cubemap cubemap;
   }
   ;
@@ -55,52 +56,62 @@ public class CubemapLoader
   }
 
   @Override
-  public void loadAsync(
-      AssetManager manager,
-      String fileName,
-      FileHandle file,
-      @Nullable CubemapParameter parameter) {
-    info.filename = fileName;
-    if (parameter == null || parameter.cubemapData == null) {
-      Format format = null;
-      boolean genMipMaps = false;
-      info.cubemap = null;
-
-      if (parameter != null) {
-        format = parameter.format;
+    public void loadAsync(
+        AssetManager manager,
+        String fileName,
+        FileHandle file,
+        @Nullable CubemapParameter parameter) {
+      info.filename = fileName;
+      if (parameter == null || parameter.cubemapData == null) {
+        Format format = null;
+        boolean genMipMaps = false;
+        info.cubemap = null;
+  
+        if (parameter != null) {
+          format = parameter.format;
+          info.cubemap = parameter.cubemap;
+        }
+  
+        if (fileName.contains(".ktx") || fileName.contains(".zktx")) {
+          info.data = new KTXTextureData(file, genMipMaps);
+        }
+      } else {
+        info.data = parameter.cubemapData;
         info.cubemap = parameter.cubemap;
       }
-
-      if (fileName.contains(".ktx") || fileName.contains(".zktx")) {
-        info.data = new KTXTextureData(file, genMipMaps);
+  
+      if (info.data != null && !info.data.isPrepared()) {
+        info.data.prepare();
       }
-    } else {
-      info.data = parameter.cubemapData;
-      info.cubemap = parameter.cubemap;
     }
-    if (!info.data.isPrepared()) info.data.prepare();
-  }
 
-  @Nullable
-  @Override
-  public Cubemap loadSync(
-      AssetManager manager,
-      String fileName,
-      FileHandle file,
-      @Nullable CubemapParameter parameter) {
-    if (info == null) return null;
-    Cubemap cubemap = info.cubemap;
-    if (cubemap != null) {
-      cubemap.load(info.data);
-    } else {
-      cubemap = new Cubemap(info.data);
+  @Nullable @Override
+    public Cubemap loadSync(
+        AssetManager manager,
+        String fileName,
+        FileHandle file,
+        @Nullable CubemapParameter parameter) {
+      if (info == null) return null;
+      Cubemap cubemap = info.cubemap;
+      if (cubemap != null) {
+        if (info.data != null) {
+          cubemap.load(info.data);
+        } else {
+          throw new NullPointerException("info.data is null");
+        }
+      } else {
+        if (info.data != null) {
+          cubemap = new Cubemap(info.data);
+        } else {
+          throw new NullPointerException("info.data is null");
+        }
+      }
+      if (parameter != null) {
+        cubemap.setFilter(parameter.minFilter, parameter.magFilter);
+        cubemap.setWrap(parameter.wrapU, parameter.wrapV);
+      }
+      return cubemap;
     }
-    if (parameter != null) {
-      cubemap.setFilter(parameter.minFilter, parameter.magFilter);
-      cubemap.setWrap(parameter.wrapU, parameter.wrapV);
-    }
-    return cubemap;
-  }
 
   @Nullable
   @Override
