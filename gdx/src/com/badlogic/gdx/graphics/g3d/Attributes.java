@@ -47,6 +47,7 @@ public class Attributes
    *
    * @return The attribute (which can safely be cast) if any, otherwise null
    */
+  @SuppressWarnings("NullAway")
   public final Attribute get(final long type) {
     if (has(type))
       for (int i = 0; i < attributes.size; i++)
