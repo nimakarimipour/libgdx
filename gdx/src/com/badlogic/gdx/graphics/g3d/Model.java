@@ -259,39 +259,42 @@ public class Model implements Disposable {
   }
 
   protected void convertMesh(ModelMesh modelMesh) {
-      if (modelMesh.attributes == null) {
-        throw new IllegalArgumentException("modelMesh.attributes cannot be null");
-      }
-      int numIndices = 0;
-      for (ModelMeshPart part : modelMesh.parts) {
-        numIndices += part.indices.length;
-      }
-      boolean hasIndices = numIndices > 0;
-      VertexAttributes attributes = new VertexAttributes(modelMesh.attributes);
-      int numVertices = modelMesh.vertices.length / (attributes.vertexSize / 4);
-  
-      Mesh mesh = new Mesh(true, numVertices, numIndices, attributes);
-      meshes.add(mesh);
-      disposables.add(mesh);
-  
-      BufferUtils.copy(modelMesh.vertices, mesh.getVerticesBuffer(), modelMesh.vertices.length, 0);
-      int offset = 0;
-      ((Buffer) mesh.getIndicesBuffer()).clear();
-      for (ModelMeshPart part : modelMesh.parts) {
-        MeshPart meshPart = new MeshPart();
-        meshPart.id = part.id;
-        meshPart.primitiveType = part.primitiveType;
-        meshPart.offset = offset;
-        meshPart.size = hasIndices ? part.indices.length : numVertices;
-        meshPart.mesh = mesh;
-        if (hasIndices) {
-          mesh.getIndicesBuffer().put(part.indices);
+        if (modelMesh.attributes == null) {
+          throw new IllegalArgumentException("modelMesh.attributes cannot be null");
         }
-        offset += meshPart.size;
-        meshParts.add(meshPart);
-      }
-      ((Buffer) mesh.getIndicesBuffer()).position(0);
-      for (MeshPart part : meshParts) part.update();
+        if (modelMesh.vertices == null) {
+          throw new IllegalArgumentException("modelMesh.vertices cannot be null");
+        }
+        int numIndices = 0;
+        for (ModelMeshPart part : modelMesh.parts) {
+          numIndices += part.indices.length;
+        }
+        boolean hasIndices = numIndices > 0;
+        VertexAttributes attributes = new VertexAttributes(modelMesh.attributes);
+        int numVertices = modelMesh.vertices.length / (attributes.vertexSize / 4);
+    
+        Mesh mesh = new Mesh(true, numVertices, numIndices, attributes);
+        meshes.add(mesh);
+        disposables.add(mesh);
+    
+        BufferUtils.copy(modelMesh.vertices, mesh.getVerticesBuffer(), modelMesh.vertices.length, 0);
+        int offset = 0;
+        ((Buffer) mesh.getIndicesBuffer()).clear();
+        for (ModelMeshPart part : modelMesh.parts) {
+          MeshPart meshPart = new MeshPart();
+          meshPart.id = part.id;
+          meshPart.primitiveType = part.primitiveType;
+          meshPart.offset = offset;
+          meshPart.size = hasIndices ? part.indices.length : numVertices;
+          meshPart.mesh = mesh;
+          if (hasIndices) {
+            mesh.getIndicesBuffer().put(part.indices);
+          }
+          offset += meshPart.size;
+          meshParts.add(meshPart);
+        }
+        ((Buffer) mesh.getIndicesBuffer()).position(0);
+        for (MeshPart part : meshParts) part.update();
     }
 
   protected void loadMaterials(
