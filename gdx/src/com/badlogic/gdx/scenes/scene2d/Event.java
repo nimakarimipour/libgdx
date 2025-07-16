@@ -104,8 +104,8 @@ public class Event implements Poolable {
 
   /** Returns the actor that this listener is attached to. */
   public Actor getListenerActor() {
-    return listenerActor;
-  }
+      return listenerActor != null ? listenerActor : new Actor();
+    }
 
   public void setListenerActor(@Nullable Actor listenerActor) {
     this.listenerActor = listenerActor;
