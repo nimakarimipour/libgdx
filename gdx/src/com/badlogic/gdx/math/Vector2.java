@@ -86,11 +86,14 @@ public class Vector2 implements Serializable, Vector<Vector2> {
   }
 
   @Override
-  public Vector2 set(@Nullable Vector2 v) {
-    x = v.x;
-    y = v.y;
-    return this;
-  }
+    public Vector2 set(@Nullable Vector2 v) {
+      if (v == null) {
+        throw new IllegalArgumentException("Vector2 argument cannot be null");
+      }
+      x = v.x;
+      y = v.y;
+      return this;
+    }
 
   /**
    * Sets the components of this vector
