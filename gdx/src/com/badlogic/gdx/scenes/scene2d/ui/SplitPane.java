@@ -29,7 +29,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Null;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -130,13 +129,9 @@ public class SplitPane extends WidgetGroup {
             if (pointer != draggingPointer) return;
 
             Drawable handle = style.handle;
-            if (handle == null) throw new IllegalStateException("Handle drawable cannot be null");
-
             if (!vertical) {
               float delta = x - lastPoint.x;
-              float availWidth =
-                  getWidth()
-                      - Nullability.castToNonnull(handle, "explicit null check").getMinWidth();
+              float availWidth = getWidth() - handle.getMinWidth();
               float dragX = handlePosition.x + delta;
               handlePosition.x = dragX;
               dragX = Math.max(0, dragX);
@@ -145,9 +140,7 @@ public class SplitPane extends WidgetGroup {
               lastPoint.set(x, y);
             } else {
               float delta = y - lastPoint.y;
-              float availHeight =
-                  getHeight()
-                      - Nullability.castToNonnull(handle, "explicit null check").getMinHeight();
+              float availHeight = getHeight() - handle.getMinHeight();
               float dragY = handlePosition.y + delta;
               handlePosition.y = dragY;
               dragY = Math.max(0, dragY);
@@ -219,12 +212,7 @@ public class SplitPane extends WidgetGroup {
                 ? ((Layout) secondWidget).getPrefWidth()
                 : secondWidget.getWidth());
     if (vertical) return Math.max(first, second);
-    if (style != null && style.handle != null) {
-      return first
-          + Nullability.castToNonnull(style.handle, "not null at usage").getMinWidth()
-          + second;
-    }
-    return first + second;
+    return first + style.handle.getMinWidth() + second;
   }
 
   public float getPrefHeight() {
@@ -241,31 +229,20 @@ public class SplitPane extends WidgetGroup {
                 ? ((Layout) secondWidget).getPrefHeight()
                 : secondWidget.getHeight());
     if (!vertical) return Math.max(first, second);
-    if (style == null || style.handle == null) {
-      throw new NullPointerException("Style or style.handle is null");
-    }
-    return first
-        + Nullability.castToNonnull(style.handle, "explicit null check").getMinHeight()
-        + second;
+    return first + style.handle.getMinHeight() + second;
   }
 
   public float getMinWidth() {
     float first = firstWidget instanceof Layout ? ((Layout) firstWidget).getMinWidth() : 0;
     float second = secondWidget instanceof Layout ? ((Layout) secondWidget).getMinWidth() : 0;
     if (vertical) return Math.max(first, second);
-    if (style != null && style.handle != null) {
-      return first
-          + Nullability.castToNonnull(style.handle, "checked not null").getMinWidth()
-          + second;
-    }
-    return first + second;
+    return first + style.handle.getMinWidth() + second;
   }
 
   public float getMinHeight() {
     float first = firstWidget instanceof Layout ? ((Layout) firstWidget).getMinHeight() : 0;
     float second = secondWidget instanceof Layout ? ((Layout) secondWidget).getMinHeight() : 0;
     if (!vertical) return Math.max(first, second);
-    if (style.handle == null) throw new IllegalStateException("Handle cannot be null");
     return first + style.handle.getMinHeight() + second;
   }
 
@@ -282,14 +259,9 @@ public class SplitPane extends WidgetGroup {
   private void calculateHorizBoundsAndPositions() {
     Drawable handle = style.handle;
 
-    if (handle == null) {
-      throw new IllegalStateException("Handle drawable cannot be null");
-    }
-
     float height = getHeight();
 
-    float availWidth =
-        getWidth() - Nullability.castToNonnull(handle, "handle not null").getMinWidth();
+    float availWidth = getWidth() - handle.getMinWidth();
     float leftAreaWidth = (int) (availWidth * splitAmount);
     float rightAreaWidth = availWidth - leftAreaWidth;
     float handleWidth = handle.getMinWidth();
@@ -300,17 +272,12 @@ public class SplitPane extends WidgetGroup {
   }
 
   private void calculateVertBoundsAndPositions() {
-    if (style == null || style.handle == null) {
-      throw new IllegalStateException("Style or handle is not initialized");
-    }
-
     Drawable handle = style.handle;
 
     float width = getWidth();
     float height = getHeight();
 
-    float availHeight =
-        height - Nullability.castToNonnull(handle, "already checked").getMinHeight();
+    float availHeight = height - handle.getMinHeight();
     float topAreaHeight = (int) (availHeight * splitAmount);
     float bottomAreaHeight = availHeight - topAreaHeight;
     float handleHeight = handle.getMinHeight();
@@ -349,10 +316,8 @@ public class SplitPane extends WidgetGroup {
       }
     }
     batch.setColor(color.r, color.g, color.b, alpha);
-    if (style.handle != null) {
-      style.handle.draw(
-          batch, handleBounds.x, handleBounds.y, handleBounds.width, handleBounds.height);
-    }
+    style.handle.draw(
+        batch, handleBounds.x, handleBounds.y, handleBounds.width, handleBounds.height);
     resetTransform(batch);
   }
 
@@ -378,13 +343,8 @@ public class SplitPane extends WidgetGroup {
   protected void clampSplitAmount() {
     float effectiveMinAmount = minAmount, effectiveMaxAmount = maxAmount;
 
-    if (style == null || style.handle == null) {
-      throw new IllegalStateException("Style or style handle is not initialized.");
-    }
-
     if (vertical) {
-      float availableHeight =
-          getHeight() - Nullability.castToNonnull(style.handle, "prior null check").getMinHeight();
+      float availableHeight = getHeight() - style.handle.getMinHeight();
       if (firstWidget instanceof Layout)
         effectiveMinAmount =
             Math.max(
@@ -396,9 +356,7 @@ public class SplitPane extends WidgetGroup {
                 effectiveMaxAmount,
                 1 - Math.min(((Layout) secondWidget).getMinHeight() / availableHeight, 1));
     } else {
-      float availableWidth =
-          getWidth()
-              - Nullability.castToNonnull(style.handle, "null check performed").getMinWidth();
+      float availableWidth = getWidth() - style.handle.getMinWidth();
       if (firstWidget instanceof Layout)
         effectiveMinAmount =
             Math.max(
@@ -523,7 +481,7 @@ public class SplitPane extends WidgetGroup {
    * @author Nathan Sweet
    */
   public static class SplitPaneStyle {
-    @Nullable public Drawable handle;
+    public Drawable handle;
 
     public SplitPaneStyle() {}
 
