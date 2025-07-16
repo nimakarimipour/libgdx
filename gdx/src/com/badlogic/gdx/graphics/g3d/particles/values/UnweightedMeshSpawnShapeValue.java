@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -45,11 +44,7 @@ public final class UnweightedMeshSpawnShapeValue extends MeshSpawnShapeValue {
   public void setMesh(Mesh mesh, @Nullable Model model) {
     super.setMesh(mesh, model);
     vertexSize = mesh.getVertexSize() / 4;
-    positionOffset =
-        Nullability.castToNonnull(
-                    mesh.getVertexAttribute(Usage.Position), "mandatory for rendering")
-                .offset
-            / 4;
+    positionOffset = mesh.getVertexAttribute(Usage.Position).offset / 4;
     int indicesCount = mesh.getNumIndices();
     if (indicesCount > 0) {
       indices = new short[indicesCount];
