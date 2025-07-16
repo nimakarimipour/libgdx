@@ -134,13 +134,14 @@ public class Slider extends ProgressBar {
     return mouseOver;
   }
 
-  protected @Null Drawable getBackgroundDrawable() {
-    SliderStyle style = (SliderStyle) super.getStyle();
-    if (disabled && style.disabledBackground != null) return style.disabledBackground;
-    if (isDragging() && style.backgroundDown != null) return style.backgroundDown;
-    if (mouseOver && style.backgroundOver != null) return style.backgroundOver;
-    return style.background;
-  }
+  protected Drawable getBackgroundDrawable() {
+      SliderStyle style = (SliderStyle) super.getStyle();
+      if (disabled && style.disabledBackground != null) return style.disabledBackground;
+      if (isDragging() && style.backgroundDown != null) return style.backgroundDown;
+      if (mouseOver && style.backgroundOver != null) return style.backgroundOver;
+      if (style.background != null) return style.background;
+      throw new IllegalStateException("Background drawable is null");
+    }
 
   @Nullable
   protected @Null Drawable getKnobDrawable() {
