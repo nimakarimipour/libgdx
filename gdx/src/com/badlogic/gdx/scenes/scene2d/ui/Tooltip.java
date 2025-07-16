@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A listener that shows a tooltip actor when the mouse is over another actor.
@@ -34,7 +35,7 @@ import javax.annotation.Nullable;
 public class Tooltip<T extends Actor> extends InputListener {
   static Vector2 tmp = new Vector2();
 
-  private final TooltipManager manager;
+  @Nullable private final TooltipManager manager;
   final Container<T> container;
   boolean instant, always, touchIndependent;
   @Nullable Actor targetActor;
@@ -62,7 +63,7 @@ public class Tooltip<T extends Actor> extends InputListener {
     container.setTouchable(Touchable.disabled);
   }
 
-  public TooltipManager getManager() {
+  @Nullable public TooltipManager getManager() {
     return manager;
   }
 
@@ -97,12 +98,14 @@ public class Tooltip<T extends Actor> extends InputListener {
   }
 
   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-    if (instant) {
-      container.toFront();
-      return false;
-    }
-    manager.touchDown(this);
-    return false;
+          if (instant) {
+              container.toFront();
+              return false;
+          }
+          if (manager != null) {
+              Nullability.castToNonnull(manager, "checked not null earlier").touchDown(this);
+          }
+          return false;
   }
 
   public boolean mouseMoved(InputEvent event, float x, float y) {
@@ -112,40 +115,42 @@ public class Tooltip<T extends Actor> extends InputListener {
   }
 
   private void setContainerPosition(Actor actor, float x, float y) {
-    this.targetActor = actor;
-    Stage stage = actor.getStage();
-    if (stage == null) return;
-
-    container.setSize(manager.maxWidth, Integer.MAX_VALUE);
-    container.validate();
-    container.width(container.getActor().getWidth());
-    container.pack();
-
-    float offsetX = manager.offsetX, offsetY = manager.offsetY, dist = manager.edgeDistance;
-    Vector2 point =
-        actor.localToStageCoordinates(tmp.set(x + offsetX, y - offsetY - container.getHeight()));
-    if (point.y < dist) point = actor.localToStageCoordinates(tmp.set(x + offsetX, y + offsetY));
-    if (point.x < dist) point.x = dist;
-    if (point.x + container.getWidth() > stage.getWidth() - dist)
-      point.x = stage.getWidth() - dist - container.getWidth();
-    if (point.y + container.getHeight() > stage.getHeight() - dist)
-      point.y = stage.getHeight() - dist - container.getHeight();
-    container.setPosition(point.x, point.y);
-
-    point = actor.localToStageCoordinates(tmp.set(actor.getWidth() / 2, actor.getHeight() / 2));
-    point.sub(container.getX(), container.getY());
-    container.setOrigin(point.x, point.y);
-  }
+          this.targetActor = actor;
+          Stage stage = actor.getStage();
+          if (stage == null || manager == null) return;
+    
+          container.setSize(Nullability.castToNonnull(manager, "checked before").maxWidth, Integer.MAX_VALUE);
+          container.validate();
+          container.width(container.getActor().getWidth());
+          container.pack();
+    
+          float offsetX = manager.offsetX, offsetY = manager.offsetY, dist = manager.edgeDistance;
+          Vector2 point =
+              actor.localToStageCoordinates(tmp.set(x + offsetX, y - offsetY - container.getHeight()));
+          if (point.y < dist) point = actor.localToStageCoordinates(tmp.set(x + offsetX, y + offsetY));
+          if (point.x < dist) point.x = dist;
+          if (point.x + container.getWidth() > stage.getWidth() - dist)
+            point.x = stage.getWidth() - dist - container.getWidth();
+          if (point.y + container.getHeight() > stage.getHeight() - dist)
+            point.y = stage.getHeight() - dist - container.getHeight();
+          container.setPosition(point.x, point.y);
+    
+          point = actor.localToStageCoordinates(tmp.set(actor.getWidth() / 2, actor.getHeight() / 2));
+          point.sub(container.getX(), container.getY());
+          container.setOrigin(point.x, point.y);
+    }
 
   public void enter(
-      InputEvent event, float x, float y, int pointer, @Nullable @Null Actor fromActor) {
-    if (pointer != -1) return;
-    if (touchIndependent && Gdx.input.isTouched()) return;
-    Actor actor = event.getListenerActor();
-    if (fromActor != null && fromActor.isDescendantOf(actor)) return;
-    setContainerPosition(actor, x, y);
-    manager.enter(this);
-  }
+          InputEvent event, float x, float y, int pointer,  @Nullable @Null Actor fromActor) {
+        if (pointer != -1) return;
+        if (touchIndependent && Gdx.input.isTouched()) return;
+        Actor actor = event.getListenerActor();
+        if (fromActor != null && fromActor.isDescendantOf(actor)) return;
+        setContainerPosition(actor, x, y);
+        if (manager != null) {
+            Nullability.castToNonnull(manager, "manager is not null").enter(this);
+        }
+    }
 
   public void exit(InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {
     if (toActor != null && toActor.isDescendantOf(event.getListenerActor())) return;
@@ -153,6 +158,8 @@ public class Tooltip<T extends Actor> extends InputListener {
   }
 
   public void hide() {
-    manager.hide(this);
-  }
+        if (manager != null) {
+            manager.hide(this);
+        }
+    }
 }
