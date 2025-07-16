@@ -16,7 +16,6 @@
 
 package com.badlogic.gdx.utils;
 
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.NoSuchElementException;
 import javax.annotation.Nullable;
 
@@ -197,12 +196,10 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
     if (!entries1.valid) {
       entries1.reset();
       entries1.valid = true;
-      entries2 = Nullability.castToNonnull(entries2, "both are initialized");
       entries2.valid = false;
       return entries1;
     }
-    Nullability.castToNonnull(entries2, "initialized with entries1").reset();
-    entries2 = Nullability.castToNonnull(entries2, "initialized with entries1");
+    entries2.reset();
     entries2.valid = true;
     entries1.valid = false;
     return entries2;
@@ -224,11 +221,11 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
     if (!values1.valid) {
       values1.reset();
       values1.valid = true;
-      Nullability.castToNonnull(values2, "initialized together").valid = false;
+      values2.valid = false;
       return values1;
     }
-    Nullability.castToNonnull(values2, "initialized together").reset();
-    Nullability.castToNonnull(values2, "initialized together").valid = true;
+    values2.reset();
+    values2.valid = true;
     values1.valid = false;
     return values2;
   }
@@ -249,11 +246,11 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
     if (!keys1.valid) {
       keys1.reset();
       keys1.valid = true;
-      Nullability.castToNonnull(keys2, "always initialized before use").valid = false;
+      keys2.valid = false;
       return keys1;
     }
-    Nullability.castToNonnull(keys2, "always initialized before use").reset();
-    Nullability.castToNonnull(keys2, "keys1 must be nonnull").valid = true;
+    keys2.reset();
+    keys2.valid = true;
     keys1.valid = false;
     return keys2;
   }
