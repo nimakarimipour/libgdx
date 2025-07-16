@@ -19,8 +19,6 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Null;
-import edu.ucr.cs.riple.annotator.util.Nullability;
-import javax.annotation.Nullable;
 
 /**
  * Sets the alpha for an actor's color (or a specified color), from the current alpha to the new
@@ -31,7 +29,7 @@ import javax.annotation.Nullable;
  */
 public class AlphaAction extends TemporalAction {
   private float start, end;
-  @Nullable private @Null Color color;
+  private @Null Color color;
 
   protected void begin() {
     if (color == null) color = target.getColor();
@@ -39,16 +37,9 @@ public class AlphaAction extends TemporalAction {
   }
 
   protected void update(float percent) {
-    if (color == null) {
-      color = target.getColor();
-    }
-    if (percent == 0) {
-      Nullability.castToNonnull(color, "always initialized").a = start;
-    } else if (percent == 1) {
-      color.a = end;
-    } else {
-      Nullability.castToNonnull(color, "always initialized").a = start + (end - start) * percent;
-    }
+    if (percent == 0) color.a = start;
+    else if (percent == 1) color.a = end;
+    else color.a = start + (end - start) * percent;
   }
 
   public void reset() {
@@ -56,7 +47,6 @@ public class AlphaAction extends TemporalAction {
     color = null;
   }
 
-  @Nullable
   public @Null Color getColor() {
     return color;
   }
