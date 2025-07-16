@@ -28,7 +28,7 @@ public class Cell<T extends Actor> implements Poolable {
   @Nullable private static Files files;
   @Nullable private static Cell defaults;
 
-  Value minWidth, minHeight;
+  @Nullable Value minWidth, minHeight;
   @Nullable Value prefWidth, prefHeight;
   @Nullable Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
@@ -748,24 +748,26 @@ public class Cell<T extends Actor> implements Poolable {
   /**
    * @return May be null if this cell is row defaults.
    */
-  public @Null Value getMinWidthValue() {
+  @Nullable public @Null Value getMinWidthValue() {
     return minWidth;
   }
 
   public float getMinWidth() {
-    return minWidth.get(actor);
-  }
+          if (minWidth == null) throw new IllegalStateException("minWidth cannot be null.");
+          return Nullability.castToNonnull(minWidth, "checked for null").get(actor);
+    }
 
   /**
    * @return May be null if this cell is row defaults.
    */
-  public @Null Value getMinHeightValue() {
+  @Nullable public @Null Value getMinHeightValue() {
     return minHeight;
   }
 
   public float getMinHeight() {
-    return minHeight.get(actor);
-  }
+        if (minHeight == null) throw new IllegalStateException("minHeight cannot be null.");
+        return minHeight.get(actor);
+    }
 
   /**
    * @return May be null if this cell is row defaults.
