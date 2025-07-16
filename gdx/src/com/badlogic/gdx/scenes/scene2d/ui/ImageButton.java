@@ -46,12 +46,16 @@ public class ImageButton extends Button {
   }
 
   public ImageButton(ImageButtonStyle style) {
-    super(style);
-    image = newImage();
-    add(image);
-    setStyle(style);
-    setSize(getPrefWidth(), getPrefHeight());
-  }
+      super(style);
+      image = newImage();
+      if (style == null) {
+        throw new IllegalArgumentException("style cannot be null");
+      }
+      this.style = style;
+      add(image);
+      setStyle(style);
+      setSize(getPrefWidth(), getPrefHeight());
+    }
 
   public ImageButton(@Null Drawable imageUp) {
     this(new ImageButtonStyle(null, null, null, imageUp, null, null));
