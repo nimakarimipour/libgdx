@@ -18,7 +18,6 @@ package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.uber.nullaway.annotations.Initializer;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
@@ -48,7 +47,7 @@ public class JsonValue implements Iterable<JsonValue> {
   private ValueType type;
 
   /** May be null. */
-  @Nullable private String stringValue;
+  private String stringValue;
 
   private double doubleValue;
   private long longValue;
@@ -243,7 +242,6 @@ public class JsonValue implements Iterable<JsonValue> {
    * @return May be null if this value is null.
    * @throws IllegalStateException if this an array or object.
    */
-  @Nullable
   public @Null String asString() {
     switch (type) {
       case stringValue:
@@ -344,8 +342,7 @@ public class JsonValue implements Iterable<JsonValue> {
   public boolean asBoolean() {
     switch (type) {
       case stringValue:
-        return Nullability.castToNonnull(stringValue, "checked to be nonnull")
-            .equalsIgnoreCase("true");
+        return stringValue.equalsIgnoreCase("true");
       case doubleValue:
         return doubleValue != 0;
       case longValue:
@@ -402,11 +399,7 @@ public class JsonValue implements Iterable<JsonValue> {
   public char asChar() {
     switch (type) {
       case stringValue:
-        if (stringValue == null)
-          throw new IllegalStateException("String value is null for type: " + type);
-        return Nullability.castToNonnull(stringValue.length(), "not possible to be null") == 0
-            ? 0
-            : Nullability.castToNonnull(stringValue.charAt(0), "not possible to be null");
+        return stringValue.length() == 0 ? 0 : stringValue.charAt(0);
       case doubleValue:
         return (char) doubleValue;
       case longValue:
@@ -689,10 +682,7 @@ public class JsonValue implements Iterable<JsonValue> {
       char v;
       switch (value.type) {
         case stringValue:
-          v =
-              (value.stringValue != null && value.stringValue.length() == 0)
-                  ? 0
-                  : value.stringValue.charAt(0);
+          v = value.stringValue.length() == 0 ? 0 : value.stringValue.charAt(0);
           break;
         case doubleValue:
           v = (char) value.doubleValue;
