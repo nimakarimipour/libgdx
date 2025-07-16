@@ -67,8 +67,13 @@ public class TextureRegion {
 
   /** Constructs a region with the same texture and coordinates of the specified region. */
   public TextureRegion(TextureRegion region) {
-    setRegion(region);
-  }
+      if (region.texture != null) {
+        this.texture = region.texture;
+        setRegion(region);
+      } else {
+        throw new IllegalArgumentException("Provided region must have a non-null texture");
+      }
+    }
 
   /**
    * Constructs a region with the same texture as the specified region and sets the coordinates
