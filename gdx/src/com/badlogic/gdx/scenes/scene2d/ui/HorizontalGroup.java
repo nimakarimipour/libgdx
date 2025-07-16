@@ -24,6 +24,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
+import edu.ucr.cs.riple.annotator.util.Nullability;
+import javax.annotation.Nullable;
 
 /**
  * A group that lays out its children side by side horizontally, with optional wrapping. This can be
@@ -44,7 +46,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 public class HorizontalGroup extends WidgetGroup {
   private float prefWidth, prefHeight, lastPrefHeight;
   private boolean sizeInvalid = true;
-  private FloatArray rowSizes; // row width, row height, ...
+  @Nullable private FloatArray rowSizes; // row width, row height, ...
 
   private int align = Align.left, rowAlign;
   private boolean reverse, round = true, wrap, wrapReverse, expand;
@@ -219,8 +221,12 @@ public class HorizontalGroup extends WidgetGroup {
     if ((align & Align.top) != 0) rowY += getHeight() - prefHeight;
     else if ((align & Align.bottom) == 0) // center
     rowY += (getHeight() - prefHeight) / 2;
+
+    FloatArray rowSizes = this.rowSizes;
+    if (rowSizes == null) rowSizes = new FloatArray();
+
     if (wrapReverse) {
-      rowY -= prefHeight + rowSizes.get(1);
+      rowY -= prefHeight + Nullability.castToNonnull(rowSizes, "initialized if null").get(1);
       rowDir = 1;
     }
 
@@ -231,7 +237,6 @@ public class HorizontalGroup extends WidgetGroup {
     groupWidth -= padRight;
     align = this.rowAlign;
 
-    FloatArray rowSizes = this.rowSizes;
     SnapshotArray<Actor> children = getChildren();
     int i = 0, n = children.size, incr = 1;
     if (reverse) {
@@ -255,11 +260,7 @@ public class HorizontalGroup extends WidgetGroup {
       }
 
       if (x + width > groupWidth || r == 0) {
-        r =
-            Math.min(
-                r,
-                rowSizes.size
-                    - 2); // In case an actor changed size without invalidating this layout.
+        r = Math.min(r, Nullability.castToNonnull(rowSizes, "initialized if null").size - 2);
         x = xStart;
         if ((align & Align.right) != 0) x += maxWidth - rowSizes.get(r);
         else if ((align & Align.left) == 0) // center
@@ -305,7 +306,15 @@ public class HorizontalGroup extends WidgetGroup {
 
   /** When wrapping is enabled, the number of rows may be > 1. */
   public int getRows() {
-    return wrap ? rowSizes.size >> 1 : 1;
+    if (wrap) {
+      if (rowSizes == null) {
+        // Handle the null case appropriately, possibly return a default value or throw an exception
+        return 0; // or handle as needed
+      }
+      return rowSizes.size >> 1;
+    } else {
+      return 1;
+    }
   }
 
   /** If true (the default), positions and sizes are rounded to integers. */
