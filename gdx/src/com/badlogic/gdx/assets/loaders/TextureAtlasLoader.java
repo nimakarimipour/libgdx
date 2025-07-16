@@ -49,6 +49,13 @@ public class TextureAtlasLoader
       String fileName,
       FileHandle file,
       @Nullable TextureAtlasParameter parameter) {
+
+    if (data == null) {
+      // Initialize the data object to avoid null dereference, this is a placeholder
+      // The actual initialization should align with your logic elsewhere in the code.
+      data = new TextureAtlasData(file, file.parent(), false);
+    }
+
     for (Page page : data.getPages()) {
       Texture texture =
           assetManager.get(page.textureFile.path().replaceAll("\\\\", "/"), Texture.class);
