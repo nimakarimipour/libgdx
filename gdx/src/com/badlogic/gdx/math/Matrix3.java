@@ -19,6 +19,7 @@ package com.badlogic.gdx.math;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.io.Serializable;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A 3x3 <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column major</a>
@@ -401,18 +402,19 @@ public class Matrix3 implements Serializable {
    * @return This matrix for the purpose of chaining operations.
    */
   public Matrix3 set(@Nullable Matrix4 mat) {
-    float[] val = this.val;
-    val[M00] = mat.val[Matrix4.M00];
-    val[M10] = mat.val[Matrix4.M10];
-    val[M20] = mat.val[Matrix4.M20];
-    val[M01] = mat.val[Matrix4.M01];
-    val[M11] = mat.val[Matrix4.M11];
-    val[M21] = mat.val[Matrix4.M21];
-    val[M02] = mat.val[Matrix4.M02];
-    val[M12] = mat.val[Matrix4.M12];
-    val[M22] = mat.val[Matrix4.M22];
-    return this;
-  }
+        mat = Nullability.castToNonnull(mat);
+        float[] val = this.val;
+        val[M00] = mat.val[Matrix4.M00];
+        val[M10] = mat.val[Matrix4.M10];
+        val[M20] = mat.val[Matrix4.M20];
+        val[M01] = mat.val[Matrix4.M01];
+        val[M11] = mat.val[Matrix4.M11];
+        val[M21] = mat.val[Matrix4.M21];
+        val[M02] = mat.val[Matrix4.M02];
+        val[M12] = mat.val[Matrix4.M12];
+        val[M22] = mat.val[Matrix4.M22];
+        return this;
+    }
 
   /**
    * Sets the matrix to the given matrix as a float array. The float array must have at least 9
