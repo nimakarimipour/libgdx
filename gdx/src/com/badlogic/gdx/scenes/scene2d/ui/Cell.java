@@ -30,7 +30,7 @@ public class Cell<T extends Actor> implements Poolable {
 
   Value minWidth, minHeight;
   @Nullable Value prefWidth, prefHeight;
-  Value maxWidth, maxHeight;
+  @Nullable Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
   @Nullable Value padTop, padLeft, padBottom, padRight;
   @Nullable Float fillX, fillY;
@@ -796,24 +796,28 @@ public class Cell<T extends Actor> implements Poolable {
   /**
    * @return May be null if this cell is row defaults.
    */
-  public @Null Value getMaxWidthValue() {
+  @Nullable public @Null Value getMaxWidthValue() {
     return maxWidth;
   }
 
   public float getMaxWidth() {
-    return maxWidth.get(actor);
-  }
+        if (maxWidth == null) {
+            throw new IllegalStateException("maxWidth is not initialized.");
+        }
+        return maxWidth.get(actor);
+    }
 
   /**
    * @return May be null if this cell is row defaults.
    */
-  public @Null Value getMaxHeightValue() {
+  @Nullable public @Null Value getMaxHeightValue() {
     return maxHeight;
   }
 
   public float getMaxHeight() {
-    return maxHeight.get(actor);
-  }
+        if (maxHeight == null) throw new IllegalStateException("maxHeight should not be null.");
+        return maxHeight.get(actor);
+    }
 
   /**
    * @return May be null if this value is not set.
