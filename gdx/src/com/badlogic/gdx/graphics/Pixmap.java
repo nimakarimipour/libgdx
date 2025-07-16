@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import javax.annotation.Nullable;
@@ -257,36 +258,37 @@ public class Pixmap implements Disposable {
       String url, final DownloadPixmapResponseListener responseListener) {
     Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
     request.setUrl(url);
-    Gdx.net.sendHttpRequest(
-        request,
-        new Net.HttpResponseListener() {
-          @Override
-          public void handleHttpResponse(Net.HttpResponse httpResponse) {
-            final byte[] result = httpResponse.getResult();
-            Gdx.app.postRunnable(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    try {
-                      Pixmap pixmap = new Pixmap(result, 0, result.length);
-                      responseListener.downloadComplete(pixmap);
-                    } catch (Throwable t) {
-                      failed(t);
-                    }
-                  }
-                });
-          }
+    Nullability.castToNonnull(Gdx.net, "correctly initialized")
+        .sendHttpRequest(
+            request,
+            new Net.HttpResponseListener() {
+              @Override
+              public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                final byte[] result = httpResponse.getResult();
+                Gdx.app.postRunnable(
+                    new Runnable() {
+                      @Override
+                      public void run() {
+                        try {
+                          Pixmap pixmap = new Pixmap(result, 0, result.length);
+                          responseListener.downloadComplete(pixmap);
+                        } catch (Throwable t) {
+                          failed(t);
+                        }
+                      }
+                    });
+              }
 
-          @Override
-          public void failed(Throwable t) {
-            responseListener.downloadFailed(t);
-          }
+              @Override
+              public void failed(Throwable t) {
+                responseListener.downloadFailed(t);
+              }
 
-          @Override
-          public void cancelled() {
-            // no way to cancel, will never get called
-          }
-        });
+              @Override
+              public void cancelled() {
+                // no way to cancel, will never get called
+              }
+            });
   }
 
   /**
