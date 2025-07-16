@@ -23,6 +23,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A {@link MapObject} with a {@link TiledMapTile}. Can be both {@link StaticTiledMapTile} or {@link
@@ -39,14 +40,14 @@ public class TiledMapTileMapObject extends TextureMapObject {
   @Nullable private TiledMapTile tile;
 
   public TiledMapTileMapObject(
-      @Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
-    this.flipHorizontally = flipHorizontally;
-    this.flipVertically = flipVertically;
-    this.tile = tile;
-
-    TextureRegion textureRegion = new TextureRegion(tile.getTextureRegion());
-    textureRegion.flip(flipHorizontally, flipVertically);
-    setTextureRegion(textureRegion);
+         @Nullable TiledMapTile tile, boolean flipHorizontally, boolean flipVertically) {
+      this.flipHorizontally = flipHorizontally;
+      this.flipVertically = flipVertically;
+      this.tile = tile;
+  
+      TextureRegion textureRegion = new TextureRegion(Nullability.castToNonnull(tile).getTextureRegion());
+      textureRegion.flip(flipHorizontally, flipVertically);
+      setTextureRegion(textureRegion);
   }
 
   public boolean isFlipHorizontally() {
