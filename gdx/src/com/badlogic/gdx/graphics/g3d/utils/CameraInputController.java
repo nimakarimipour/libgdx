@@ -129,13 +129,16 @@ public class CameraInputController extends GestureDetector {
     }
 
     @Override
-    public boolean zoom(float initialDistance, float distance) {
-      float newZoom = distance - initialDistance;
-      float amount = newZoom - previousZoom;
-      previousZoom = newZoom;
-      float w = Gdx.graphics.getWidth(), h = Gdx.graphics.getHeight();
-      return controller.pinchZoom(amount / ((w > h) ? h : w));
-    }
+      public boolean zoom(float initialDistance, float distance) {
+        if (controller == null) {
+          throw new NullPointerException("Controller is null");
+        }
+        float newZoom = distance - initialDistance;
+        float amount = newZoom - previousZoom;
+        previousZoom = newZoom;
+        float w = Gdx.graphics.getWidth(), h = Gdx.graphics.getHeight();
+        return controller.pinchZoom(amount / ((w > h) ? h : w));
+      }
 
     @Override
     public boolean pinch(
