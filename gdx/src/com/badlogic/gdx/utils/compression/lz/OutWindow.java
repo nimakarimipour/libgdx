@@ -4,9 +4,10 @@ package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 public class OutWindow {
-  byte[] _buffer;
+  @Nullable byte[] _buffer;
   int _pos;
   int _windowSize = 0;
   int _streamPos;
@@ -46,23 +47,32 @@ public class OutWindow {
     }
 
   public void CopyBlock(int distance, int len) throws IOException {
-    int pos = _pos - distance - 1;
-    if (pos < 0) pos += _windowSize;
-    for (; len != 0; len--) {
-      if (pos >= _windowSize) pos = 0;
-      _buffer[_pos++] = _buffer[pos++];
-      if (_pos >= _windowSize) Flush();
-    }
+            if (_buffer == null) {
+                throw new NullPointerException("Buffer is not initialized.");
+            }
+            int pos = _pos - distance - 1;
+            if (pos < 0) pos += _windowSize;
+            for (; len != 0; len--) {
+                if (pos >= _windowSize) pos = 0;
+                _buffer[Nullability.castToNonnull(_pos++, "checked at start")] = _buffer[Nullability.castToNonnull(pos++, "checked at start")];
+                if (_pos >= _windowSize) Flush();
+            }
   }
 
   public void PutByte(byte b) throws IOException {
-    _buffer[_pos++] = b;
-    if (_pos >= _windowSize) Flush();
-  }
+        if (_buffer == null) {
+            throw new IOException("Buffer not initialized");
+        }
+        Nullability.castToNonnull(_buffer, "null check performed")[_pos++] = b;
+        if (_pos >= _windowSize) Flush();
+    }
 
   public byte GetByte(int distance) {
-    int pos = _pos - distance - 1;
-    if (pos < 0) pos += _windowSize;
-    return _buffer[pos];
+          if (_buffer == null) {
+              throw new IllegalStateException("Buffer has not been initialized.");
+          }
+          int pos = _pos - distance - 1;
+          if (pos < 0) pos += _windowSize;
+          return Nullability.castToNonnull(_buffer, "checked for null")[pos];
   }
 }
