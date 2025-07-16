@@ -760,9 +760,11 @@ public class Array<T> implements Iterable<T> {
     }
 
     public ArrayIterable(Array<T> array, boolean allowRemove) {
-      this.array = array;
-      this.allowRemove = allowRemove;
-    }
+        this.array = array;
+        this.allowRemove = allowRemove;
+        this.iterator1 = new ArrayIterator<>(array, allowRemove);
+        this.iterator2 = new ArrayIterator<>(array, allowRemove);
+      }
 
     /**
      * @see Collections#allocateIterators
