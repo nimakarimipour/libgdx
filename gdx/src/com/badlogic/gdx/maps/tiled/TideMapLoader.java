@@ -37,7 +37,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import javax.annotation.Nullable;
@@ -114,7 +113,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
   private TiledMap loadMap(
       @Nullable Element root, FileHandle tmxFile, ImageResolver imageResolver) {
     TiledMap map = new TiledMap();
-    Element properties = Nullability.castToNonnull(root).getChildByName("Properties");
+    Element properties = root.getChildByName("Properties");
     if (properties != null) {
       loadProperties(map.getProperties(), properties);
     }
