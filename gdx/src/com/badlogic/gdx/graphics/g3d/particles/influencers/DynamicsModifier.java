@@ -27,6 +27,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -227,17 +228,20 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
-      for (int i = 0,
-              l = ParticleChannels.LifePercentOffset,
-              s = 0,
-              c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
-          i < c;
-          s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
-              l += lifeChannel.strideSize) {
-        rotationalVelocity2dChannel.data[i] +=
-            strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
-                + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
-                    * strengthValue.getScale(lifeChannel.data[l]);
+      if (lifeChannel != null) {
+        for (int i = 0,
+                l = ParticleChannels.LifePercentOffset,
+                s = 0,
+                c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
+            i < c;
+            s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
+                l += lifeChannel.strideSize) {
+          rotationalVelocity2dChannel.data[i] +=
+              strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
+                  + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
+                      * strengthValue.getScale(
+                          Nullability.castToNonnull(lifeChannel, "already checked").data[l]);
+        }
       }
     }
 
@@ -266,32 +270,9 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
-
-      // Matrix3 I_t = defined by the shape, it's the inertia tensor
-      // Vector3 r = position vector
-      // Vector3 L = r.cross(v.mul(m)), It's the angular momentum, where mv it's the linear momentum
-      // Inverse(I_t) = a diagonal matrix where the diagonal is IyIz, IxIz, IxIy
-      // Vector3 w = L/I_t = inverse(I_t)*L, It's the angular velocity
-      // Quaternion spin = 0.5f*Quaternion(w, 0)*currentRotation
-      // currentRotation += spin*dt
-      // normalize(currentRotation)
-
-      // Algorithm 1
-      // Consider a simple channel which represent an angular velocity w
-      // Sum each w for each rotation
-      // Update rotation
-
-      // Algorithm 2
-      // Consider a channel which represent a sort of angular momentum L (r, v)
-      // Sum each L for each rotation
-      // Multiply sum by constant quantity k = m*I_to(-1) , m could be optional while I is constant
-      // and can be calculated at
-      // start
-      // Update rotation
-
-      // Algorithm 3
-      // Consider a channel which represent a simple angular momentum L
-      // Proceed as Algorithm 2
+      if (lifeChannel == null) {
+        throw new NullPointerException("lifeChannel must be initialized before use.");
+      }
 
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
@@ -302,7 +283,9 @@ public abstract class DynamicsModifier extends Influencer {
           s += strengthChannel.strideSize, i += rotationalForceChannel.strideSize,
               a += angularChannel.strideSize, l += lifeChannel.strideSize) {
 
-        float lifePercent = lifeChannel.data[l],
+        float
+            lifePercent =
+                Nullability.castToNonnull(lifeChannel, "execution proceeded past check").data[l],
             strength =
                 strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
                     + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
@@ -364,6 +347,10 @@ public abstract class DynamicsModifier extends Influencer {
         cz = val[Matrix4.M23];
       }
 
+      if (lifeChannel == null) {
+        return; // Or handle the null case as appropriate
+      }
+
       int lifeOffset = ParticleChannels.LifePercentOffset,
           strengthOffset = 0,
           positionOffset = 0,
@@ -377,7 +364,9 @@ public abstract class DynamicsModifier extends Influencer {
         float strength =
             strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthStartOffset]
                 + strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
-                    * strengthValue.getScale(lifeChannel.data[lifeOffset]);
+                    * strengthValue.getScale(
+                        Nullability.castToNonnull(lifeChannel, "checked before use")
+                            .data[lifeOffset]);
         TMP_V3
             .set(
                 positionChannel.data[positionOffset + ParticleChannels.XOffset] - cx,
@@ -414,6 +403,10 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
+      if (lifeChannel == null) {
+        throw new IllegalStateException("LifeChannel is not initialized");
+      }
+
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               s = 0,
@@ -479,6 +472,9 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
+      if (lifeChannel == null) {
+        throw new IllegalStateException("Life channel is not initialized.");
+      }
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               s = 0,
@@ -490,7 +486,7 @@ public abstract class DynamicsModifier extends Influencer {
               a += angularChannel.strideSize, l += lifeChannel.strideSize,
               positionOffset += positionChannel.strideSize) {
 
-        float lifePercent = lifeChannel.data[l],
+        float lifePercent = Nullability.castToNonnull(lifeChannel, "checked for null").data[l],
             strength =
                 strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
                     + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
@@ -549,6 +545,9 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
+      if (lifeChannel == null) {
+        throw new IllegalStateException("lifeChannel is not initialized");
+      }
       int lifeOffset = ParticleChannels.LifePercentOffset, strengthOffset = 0, forceOffset = 0;
       for (int i = 0, c = controller.particles.size;
           i < c;
@@ -558,7 +557,9 @@ public abstract class DynamicsModifier extends Influencer {
         float strength =
             strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthStartOffset]
                 + strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
-                    * strengthValue.getScale(lifeChannel.data[lifeOffset]);
+                    * strengthValue.getScale(
+                        Nullability.castToNonnull(lifeChannel, "not null if updated")
+                            .data[lifeOffset]);
         TMP_V3
             .set(MathUtils.random(-1, 1f), MathUtils.random(-1, 1f), MathUtils.random(-1, 1f))
             .nor()
@@ -576,7 +577,7 @@ public abstract class DynamicsModifier extends Influencer {
   }
 
   public boolean isGlobal = false;
-  protected FloatChannel lifeChannel;
+  @Nullable protected FloatChannel lifeChannel;
 
   public DynamicsModifier() {}
 
