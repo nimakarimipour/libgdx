@@ -265,8 +265,11 @@ public class Model implements Disposable {
           }
     
           int numIndices = 0;
-          for (ModelMeshPart part : Nullability.castToNonnull(modelMesh.parts, "checked for null")) {
-              numIndices += part.indices.length;
+          for (ModelMeshPart part : modelMesh.parts) {
+              if (part.indices == null) {
+                  throw new NullPointerException("ModelMeshPart indices cannot be null");
+              }
+              numIndices += Nullability.castToNonnull(part.indices, "checked before").length;
           }
           boolean hasIndices = numIndices > 0;
           VertexAttributes attributes = new VertexAttributes(modelMesh.attributes);
@@ -279,7 +282,10 @@ public class Model implements Disposable {
           BufferUtils.copy(modelMesh.vertices, mesh.getVerticesBuffer(), modelMesh.vertices.length, 0);
           int offset = 0;
           ((Buffer) mesh.getIndicesBuffer()).clear();
-          for (ModelMeshPart part : Nullability.castToNonnull(modelMesh.parts, "checked for null")) {
+          for (ModelMeshPart part : modelMesh.parts) {
+              if (part.indices == null) {
+                  throw new NullPointerException("ModelMeshPart indices cannot be null");
+              }
               MeshPart meshPart = new MeshPart();
               meshPart.id = part.id;
               meshPart.primitiveType = part.primitiveType;
