@@ -21,6 +21,7 @@ import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.InputProcessor;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import javax.annotation.Nullable;
 
 /**
  * Sends all inputs from touch, key, accelerometer and compass to a {@link RemoteInput} at the given

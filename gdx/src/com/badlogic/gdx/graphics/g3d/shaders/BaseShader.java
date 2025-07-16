@@ -232,7 +232,7 @@ public abstract class BaseShader implements Shader {
     }
   }
 
-  @Override
+  @Initializer @Override
   public void begin(Camera camera, RenderContext context) {
     this.camera = camera;
     this.context = context;

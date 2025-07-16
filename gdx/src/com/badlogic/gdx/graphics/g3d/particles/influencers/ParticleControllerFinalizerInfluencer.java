@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.uber.nullaway.annotations.Initializer;
+import javax.annotation.Nullable;
 
 /**
  * It's an {@link Influencer} which updates the simulation of particles containing a {@link

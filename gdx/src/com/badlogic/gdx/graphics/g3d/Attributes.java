@@ -19,6 +19,7 @@ package com.badlogic.gdx.graphics.g3d;
 import com.badlogic.gdx.utils.Array;
 import java.util.Comparator;
 import java.util.Iterator;
+import javax.annotation.Nullable;
 
 public class Attributes
     implements Iterable<Attribute>, Comparator<Attribute>, Comparable<Attributes> {

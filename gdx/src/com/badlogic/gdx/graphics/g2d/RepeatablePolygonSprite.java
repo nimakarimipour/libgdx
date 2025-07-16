@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ShortArray;
+import javax.annotation.Nullable;
 
 /**
  * Renders polygon filled with a repeating TextureRegion with specified density Without causing an
