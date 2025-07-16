@@ -17,7 +17,6 @@
 package com.badlogic.gdx.graphics.g3d;
 
 import com.badlogic.gdx.utils.Array;
-import java.util.Objects;
 import javax.annotation.Nullable;
 
 public class Material extends Attributes {
@@ -65,7 +64,7 @@ public class Material extends Attributes {
   }
 
   /** Create a material which is an exact copy of the specified material */
-  public Material(@Nullable final String id, final Material copyFrom) {
+  public Material(final String id, final Material copyFrom) {
     this(id);
     for (Attribute attr : copyFrom) set(attr.copy());
   }
@@ -77,12 +76,12 @@ public class Material extends Attributes {
 
   @Override
   public int hashCode() {
-    return super.hashCode() + 3 * (id == null ? 1 : id.hashCode());
+    return super.hashCode() + 3 * id.hashCode();
   }
 
   @Override
   public boolean equals(Object other) {
     return (other instanceof Material)
-        && ((other == this) || (Objects.equals(((Material) other).id, id) && super.equals(other)));
+        && ((other == this) || ((((Material) other).id.equals(id)) && super.equals(other)));
   }
 }
