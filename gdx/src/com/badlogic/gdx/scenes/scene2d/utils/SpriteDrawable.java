@@ -43,17 +43,20 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
   }
 
   public void draw(Batch batch, float x, float y, float width, float height) {
-    Color spriteColor = sprite.getColor();
-    float oldColor = spriteColor.toFloatBits();
-    sprite.setColor(spriteColor.mul(batch.getColor()));
-
-    sprite.setRotation(0);
-    sprite.setScale(1, 1);
-    sprite.setBounds(x, y, width, height);
-    sprite.draw(batch);
-
-    sprite.setPackedColor(oldColor);
-  }
+      if (sprite == null) {
+        throw new IllegalStateException("Sprite is not set.");
+      }
+      Color spriteColor = sprite.getColor();
+      float oldColor = spriteColor.toFloatBits();
+      sprite.setColor(spriteColor.mul(batch.getColor()));
+  
+      sprite.setRotation(0);
+      sprite.setScale(1, 1);
+      sprite.setBounds(x, y, width, height);
+      sprite.draw(batch);
+  
+      sprite.setPackedColor(oldColor);
+    }
 
   public void draw(
       Batch batch,
