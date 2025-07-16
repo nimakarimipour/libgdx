@@ -25,7 +25,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pools;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
@@ -59,7 +58,7 @@ public class BitmapFontCache {
    * For each page, an array with a value for each glyph from that page, where the value is the
    * index of the character in the full text being cached.
    */
-  @Nullable private IntArray[] pageGlyphIndices;
+  private IntArray[] pageGlyphIndices;
 
   /** Used internally to ensure a correct capacity for multi-page font vertex data. */
   private int[] tempGlyphCount;
@@ -234,23 +233,21 @@ public class BitmapFontCache {
     int pageCount = pageVertices.length;
     for (int i = 0; i < pageCount; i++) {
       float[] vertices = pageVertices[i];
-      if (pageGlyphIndices != null) { // Check if pageGlyphIndices is not null
-        IntArray glyphIndices = pageGlyphIndices[i];
-        // Loop through the indices and determine whether the glyph is inside begin/end.
-        for (int j = 0, n = glyphIndices.size; j < n; j++) {
-          int glyphIndex = glyphIndices.items[j];
+      IntArray glyphIndices = pageGlyphIndices[i];
+      // Loop through the indices and determine whether the glyph is inside begin/end.
+      for (int j = 0, n = glyphIndices.size; j < n; j++) {
+        int glyphIndex = glyphIndices.items[j];
 
-          // Break early if the glyph is out of bounds.
-          if (glyphIndex >= end) break;
+        // Break early if the glyph is out of bounds.
+        if (glyphIndex >= end) break;
 
-          // If inside start and end, change its colour.
-          if (glyphIndex >= start) { // && glyphIndex < end
-            int offset = j * 20 + 2;
-            vertices[offset] = color;
-            vertices[offset + 5] = color;
-            vertices[offset + 10] = color;
-            vertices[offset + 15] = color;
-          }
+        // If inside start and end, change its colour.
+        if (glyphIndex >= start) { // && glyphIndex < end
+          int offset = j * 20 + 2;
+          vertices[offset] = color;
+          vertices[offset + 5] = color;
+          vertices[offset + 10] = color;
+          vertices[offset + 15] = color;
         }
       }
     }
@@ -303,22 +300,25 @@ public class BitmapFontCache {
     for (int i = 0, pageCount = pageVertices.length; i < pageCount; i++) {
       int offset = -1, count = 0;
 
-      if (pageGlyphIndices != null) { // Added null-check for pageGlyphIndices
-        IntArray glyphIndices =
-            Nullability.castToNonnull(pageGlyphIndices, "checked before usage")[i];
-        for (int ii = 0, n = glyphIndices.size; ii < n; ii++) {
-          int glyphIndex = glyphIndices.get(ii);
+      // For each set of glyph indices, determine where to begin within the start/end bounds.
+      IntArray glyphIndices = pageGlyphIndices[i];
+      for (int ii = 0, n = glyphIndices.size; ii < n; ii++) {
+        int glyphIndex = glyphIndices.get(ii);
 
-          if (glyphIndex >= end) break;
+        // Break early if the glyph is out of bounds.
+        if (glyphIndex >= end) break;
 
-          if (offset == -1 && glyphIndex >= start) offset = ii;
+        // Determine if this glyph is within bounds. Use the first match of that for the offset.
+        if (offset == -1 && glyphIndex >= start) offset = ii;
 
-          if (glyphIndex >= start) count++;
-        }
+        // Determine the vertex count by counting glyphs within bounds.
+        if (glyphIndex >= start) count++;
       }
 
+      // Page doesn't need to be rendered.
       if (offset == -1 || count == 0) continue;
 
+      // Render the page vertex data with the offset and count.
       spriteBatch.draw(regions.get(i).getTexture(), pageVertices[i], offset * 20, count * 20);
     }
   }
