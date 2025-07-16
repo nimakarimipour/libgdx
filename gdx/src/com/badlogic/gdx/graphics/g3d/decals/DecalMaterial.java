@@ -18,11 +18,12 @@ package com.badlogic.gdx.graphics.g3d.decals;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import javax.annotation.Nullable;
 
 /** Material used by the {@link Decal} class */
 public class DecalMaterial {
   public static final int NO_BLEND = -1;
-  protected TextureRegion textureRegion;
+  @Nullable protected TextureRegion textureRegion;
   protected int srcBlendFactor;
   protected int dstBlendFactor;
 
@@ -31,9 +32,11 @@ public class DecalMaterial {
    * used by it.
    */
   public void set() {
-    textureRegion.getTexture().bind(0);
-    if (!isOpaque()) {
-      Gdx.gl.glBlendFunc(srcBlendFactor, dstBlendFactor);
+    if (textureRegion != null) {
+      textureRegion.getTexture().bind(0);
+      if (!isOpaque()) {
+        Gdx.gl.glBlendFunc(srcBlendFactor, dstBlendFactor);
+      }
     }
   }
 
@@ -55,17 +58,26 @@ public class DecalMaterial {
 
   @Override
   public boolean equals(Object o) {
-    if (o == null) return false;
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
 
     DecalMaterial material = (DecalMaterial) o;
 
     return dstBlendFactor == material.dstBlendFactor
         && srcBlendFactor == material.srcBlendFactor
-        && textureRegion.getTexture() == material.textureRegion.getTexture();
+        && (textureRegion == null
+            ? material.textureRegion == null
+            : textureRegion
+                .getTexture()
+                .equals(
+                    material.textureRegion == null ? null : material.textureRegion.getTexture()));
   }
 
   @Override
   public int hashCode() {
+    if (textureRegion == null) {
+      return 0; // Or another default hash code value as desired
+    }
     int result = textureRegion.getTexture() != null ? textureRegion.getTexture().hashCode() : 0;
     result = 31 * result + srcBlendFactor;
     result = 31 * result + dstBlendFactor;
