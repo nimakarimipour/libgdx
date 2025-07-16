@@ -22,6 +22,7 @@ import com.badlogic.gdx.InputProcessor;
 import java.io.DataOutputStream;
 import java.net.Socket;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Sends all inputs from touch, key, accelerometer and compass to a {@link RemoteInput} at the given
@@ -30,7 +31,7 @@ import javax.annotation.Nullable;
  * @author mzechner
  */
 public class RemoteSender implements InputProcessor {
-  private DataOutputStream out;
+  @Nullable private DataOutputStream out;
   private boolean connected = false;
 
   public static final int KEY_DOWN = 0;
@@ -61,118 +62,121 @@ public class RemoteSender implements InputProcessor {
   }
 
   public void sendUpdate() {
-    synchronized (this) {
-      if (!connected) return;
+          synchronized (this) {
+              if (!connected || out == null) return;
+          }
+          try {
+              Nullability.castToNonnull(out, "synchronized null check").writeInt(ACCEL);
+              out.writeFloat(Gdx.input.getAccelerometerX());
+              out.writeFloat(Gdx.input.getAccelerometerY());
+              out.writeFloat(Gdx.input.getAccelerometerZ());
+              out.writeInt(COMPASS);
+              out.writeFloat(Gdx.input.getAzimuth());
+              out.writeFloat(Gdx.input.getPitch());
+              out.writeFloat(Gdx.input.getRoll());
+              out.writeInt(SIZE);
+              out.writeFloat(Gdx.graphics.getWidth());
+              out.writeFloat(Gdx.graphics.getHeight());
+              out.writeInt(GYRO);
+              out.writeFloat(Gdx.input.getGyroscopeX());
+              out.writeFloat(Gdx.input.getGyroscopeY());
+              out.writeFloat(Gdx.input.getGyroscopeZ());
+          } catch (Throwable t) {
+              out = null;
+              connected = false;
+          }
     }
-    try {
-      out.writeInt(ACCEL);
-      out.writeFloat(Gdx.input.getAccelerometerX());
-      out.writeFloat(Gdx.input.getAccelerometerY());
-      out.writeFloat(Gdx.input.getAccelerometerZ());
-      out.writeInt(COMPASS);
-      out.writeFloat(Gdx.input.getAzimuth());
-      out.writeFloat(Gdx.input.getPitch());
-      out.writeFloat(Gdx.input.getRoll());
-      out.writeInt(SIZE);
-      out.writeFloat(Gdx.graphics.getWidth());
-      out.writeFloat(Gdx.graphics.getHeight());
-      out.writeInt(GYRO);
-      out.writeFloat(Gdx.input.getGyroscopeX());
-      out.writeFloat(Gdx.input.getGyroscopeY());
-      out.writeFloat(Gdx.input.getGyroscopeZ());
-    } catch (Throwable t) {
-      out = null;
-      connected = false;
-    }
+
+  @Override
+      public boolean keyDown(int keycode) {
+        synchronized (this) {
+          if (!connected || out == null) return false;
+        }
+    
+        try {
+          Nullability.castToNonnull(out, "checked before usage").writeInt(KEY_DOWN);
+          out.writeInt(keycode);
+        } catch (Throwable t) {
+          synchronized (this) {
+            connected = false;
+          }
+        }
+        return false;
   }
 
   @Override
-  public boolean keyDown(int keycode) {
-    synchronized (this) {
-      if (!connected) return false;
-    }
-
-    try {
-      out.writeInt(KEY_DOWN);
-      out.writeInt(keycode);
-    } catch (Throwable t) {
-      synchronized (this) {
-        connected = false;
-      }
-    }
-    return false;
+      public boolean keyUp(int keycode) {
+        synchronized (this) {
+          if (!connected || out == null) return false;
+        }
+    
+        try {
+          Nullability.castToNonnull(out, "checked not null").writeInt(KEY_UP);
+          out.writeInt(keycode);
+        } catch (Throwable t) {
+          synchronized (this) {
+            connected = false;
+          }
+        }
+        return false;
   }
 
   @Override
-  public boolean keyUp(int keycode) {
-    synchronized (this) {
-      if (!connected) return false;
-    }
-
-    try {
-      out.writeInt(KEY_UP);
-      out.writeInt(keycode);
-    } catch (Throwable t) {
+    public boolean keyTyped(char character) {
       synchronized (this) {
-        connected = false;
+        if (!connected || out == null) return false;
       }
+  
+      try {
+        Nullability.castToNonnull(out, "synchronized block prevents null");
+        out.writeInt(KEY_TYPED);
+        out.writeChar(character);
+      } catch (Throwable t) {
+        synchronized (this) {
+          connected = false;
+        }
+      }
+      return false;
     }
-    return false;
-  }
 
   @Override
-  public boolean keyTyped(char character) {
-    synchronized (this) {
-      if (!connected) return false;
-    }
-
-    try {
-      out.writeInt(KEY_TYPED);
-      out.writeChar(character);
-    } catch (Throwable t) {
+    public boolean touchDown(int x, int y, int pointer, int button) {
       synchronized (this) {
-        connected = false;
+        if (!connected || out == null) return false;
       }
+  
+      try {
+        out.writeInt(TOUCH_DOWN);
+        out.writeInt(x);
+        out.writeInt(y);
+        out.writeInt(pointer);
+      } catch (Throwable t) {
+        synchronized (this) {
+          connected = false;
+        }
+      }
+      return false;
     }
-    return false;
-  }
 
   @Override
-  public boolean touchDown(int x, int y, int pointer, int button) {
-    synchronized (this) {
-      if (!connected) return false;
-    }
-
-    try {
-      out.writeInt(TOUCH_DOWN);
-      out.writeInt(x);
-      out.writeInt(y);
-      out.writeInt(pointer);
-    } catch (Throwable t) {
-      synchronized (this) {
-        connected = false;
-      }
-    }
-    return false;
-  }
-
-  @Override
-  public boolean touchUp(int x, int y, int pointer, int button) {
-    synchronized (this) {
-      if (!connected) return false;
-    }
-
-    try {
-      out.writeInt(TOUCH_UP);
-      out.writeInt(x);
-      out.writeInt(y);
-      out.writeInt(pointer);
-    } catch (Throwable t) {
-      synchronized (this) {
-        connected = false;
-      }
-    }
-    return false;
+      public boolean touchUp(int x, int y, int pointer, int button) {
+        synchronized (this) {
+          if (!connected) return false;
+        }
+    
+        try {
+          if (out != null) {
+            Nullability.castToNonnull(out, "if condition ensures non-null").writeInt(TOUCH_UP);
+            out.writeInt(x);
+            out.writeInt(y);
+            out.writeInt(pointer);
+          }
+        } catch (Throwable t) {
+          synchronized (this) {
+            connected = false;
+          }
+        }
+        return false;
   }
 
   @Override
@@ -181,22 +185,22 @@ public class RemoteSender implements InputProcessor {
   }
 
   @Override
-  public boolean touchDragged(int x, int y, int pointer) {
-    synchronized (this) {
-      if (!connected) return false;
-    }
-
-    try {
-      out.writeInt(TOUCH_DRAGGED);
-      out.writeInt(x);
-      out.writeInt(y);
-      out.writeInt(pointer);
-    } catch (Throwable t) {
-      synchronized (this) {
-        connected = false;
-      }
-    }
-    return false;
+      public boolean touchDragged(int x, int y, int pointer) {
+        synchronized (this) {
+          if (!connected || out == null) return false;
+        }
+    
+        try {
+          Nullability.castToNonnull(out, "synchronized block check").writeInt(TOUCH_DRAGGED);
+          out.writeInt(x);
+          out.writeInt(y);
+          out.writeInt(pointer);
+        } catch (Throwable t) {
+          synchronized (this) {
+            connected = false;
+          }
+        }
+        return false;
   }
 
   @Override
