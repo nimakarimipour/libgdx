@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Drawable for a {@link Sprite}.
@@ -80,11 +81,11 @@ public class SpriteDrawable extends BaseDrawable implements TransformDrawable {
     sprite.setPackedColor(oldColor);
   }
 
-  public void setSprite(@Nullable Sprite sprite) {
-    this.sprite = sprite;
-    setMinWidth(sprite.getWidth());
-    setMinHeight(sprite.getHeight());
-  }
+  public void setSprite( @Nullable Sprite sprite) {
+      this.sprite = sprite;
+      setMinWidth(Nullability.castToNonnull(sprite).getWidth());
+      setMinHeight(Nullability.castToNonnull(sprite).getHeight());
+    }
 
   @Nullable
   public Sprite getSprite() {
