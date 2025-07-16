@@ -389,20 +389,27 @@ public class Node {
    *     specified node.
    * @return The node with the specified id, or null if not found.
    */
-  @Nullable
-  public static Node getNode(
-      final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
-    final int n = nodes.size;
-    Node node;
-    if (ignoreCase) {
-      for (int i = 0; i < n; i++) if ((node = nodes.get(i)).id.equalsIgnoreCase(id)) return node;
-    } else {
-      for (int i = 0; i < n; i++) if ((node = nodes.get(i)).id.equals(id)) return node;
+  @Nullable public static Node getNode(
+        final Array<Node> nodes, @Nullable final String id, boolean recursive, boolean ignoreCase) {
+      final int n = nodes.size;
+      Node node;
+      if (ignoreCase) {
+        for (int i = 0; i < n; i++) {
+          node = nodes.get(i);
+          if (node.id != null && node.id.equalsIgnoreCase(id)) return node;
+        }
+      } else {
+        for (int i = 0; i < n; i++) {
+          node = nodes.get(i);
+          if (node.id != null && node.id.equals(id)) return node;
+        }
+      }
+      if (recursive) {
+        for (int i = 0; i < n; i++) {
+          node = getNode(nodes.get(i).children, id, true, ignoreCase);
+          if (node != null) return node;
+        }
+      }
+      return null;
     }
-    if (recursive) {
-      for (int i = 0; i < n; i++)
-        if ((node = getNode(nodes.get(i).children, id, true, ignoreCase)) != null) return node;
-    }
-    return null;
-  }
 }
