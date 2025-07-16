@@ -226,20 +226,26 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-    public void update() {
-      for (int i = 0,
-              l = ParticleChannels.LifePercentOffset,
-              s = 0,
-              c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
-          i < c;
-          s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
-              l += lifeChannel.strideSize) {
-        rotationalVelocity2dChannel.data[i] +=
-            strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
-                + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
-                    * strengthValue.getScale(lifeChannel.data[l]);
+      public void update() {
+        if (rotationalVelocity2dChannel == null) {
+          // Handle the case where rotationalVelocity2dChannel is not initialized.
+          // This might include returning early, throwing an exception, or any other logic appropriate for your application.
+          return;
+        }
+    
+        for (int i = 0,
+                l = ParticleChannels.LifePercentOffset,
+                s = 0,
+                c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
+            i < c;
+            s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
+                l += lifeChannel.strideSize) {
+          rotationalVelocity2dChannel.data[i] +=
+              strengthChannel.data[s + ParticleChannels.VelocityStrengthStartOffset]
+                  + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
+                      * strengthValue.getScale(lifeChannel.data[l]);
+        }
       }
-    }
 
     @Override
     public Rotational2D copy() {
