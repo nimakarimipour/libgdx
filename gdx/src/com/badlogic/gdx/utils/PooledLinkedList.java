@@ -136,37 +136,37 @@ public class PooledLinkedList<T> {
 
   /** Removes the current list item based on the iterator position. */
   public void remove() {
-      if (curr == null) return;
-  
-      size--;
-  
-      Item<T> c = curr;
-      Item<T> n = curr.next;
-      Item<T> p = curr.prev;
-      pool.free(curr);
-      curr = null;
-  
-      if (size == 0) {
-        head = null;
-        tail = null;
-        return;
-      }
-  
-      if (c == head) {
-        Nullability.castToNonnull(n, "c is not tail").prev = null;
-        head = n;
-        return;
-      }
-  
-      if (c == tail) {
-        p.next = null;
-        tail = p;
-        return;
-      }
-  
-      p.next = n;
-      n.prev = p;
-  }
+        if (curr == null) return;
+    
+        size--;
+    
+        Item<T> c = curr;
+        Item<T> n = curr.next;
+        Item<T> p = curr.prev;
+        pool.free(curr);
+        curr = null;
+    
+        if (size == 0) {
+          head = null;
+          tail = null;
+          return;
+        }
+    
+        if (c == head) {
+          Nullability.castToNonnull(n, "c is not tail").prev = null;
+          head = n;
+          return;
+        }
+    
+        if (c == tail) {
+          p.next = null;
+          tail = p;
+          return;
+        }
+    
+        p.next = n;
+        Nullability.castToNonnull(n, "p.next = n").prev = p;
+    }
 
   /** Removes the tail of the list regardless of iteration status */
   @Nullable
