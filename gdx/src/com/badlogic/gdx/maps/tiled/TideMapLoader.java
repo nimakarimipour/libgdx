@@ -245,22 +245,15 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
           String name = currentChild.getName();
           if (name.equals("TileSheet")) {
             currentTileSet = tilesets.getTileSet(currentChild.getAttribute("Ref"));
-            if (currentTileSet != null) {
-              Integer firstgidValue = currentTileSet.getProperties().get("firstgid", Integer.class);
-              if (firstgidValue != null) {
-                firstgid = firstgidValue;
-              }
-            }
+            firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
           } else if (name.equals("Null")) {
             x += currentChild.getIntAttribute("Count");
           } else if (name.equals("Static")) {
-            if (currentTileSet != null) {
-              Cell cell = new Cell();
-              cell.setTile(
-                  currentTileSet.getTile(firstgid + currentChild.getIntAttribute("Index")));
-              layer.setCell(x++, y, cell);
-            }
+            Cell cell = new Cell();
+            cell.setTile(currentTileSet.getTile(firstgid + currentChild.getIntAttribute("Index")));
+            layer.setCell(x++, y, cell);
           } else if (name.equals("Animated")) {
+            // Create an AnimatedTile
             int interval = currentChild.getInt("Interval");
             Element frames = currentChild.getChildByName("Frames");
             Array<StaticTiledMapTile> frameTiles = new Array<StaticTiledMapTile>();
@@ -271,19 +264,11 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
               String frameName = frame.getName();
               if (frameName.equals("TileSheet")) {
                 currentTileSet = tilesets.getTileSet(frame.getAttribute("Ref"));
-                if (currentTileSet != null) {
-                  Integer firstgidValue =
-                      currentTileSet.getProperties().get("firstgid", Integer.class);
-                  if (firstgidValue != null) {
-                    firstgid = firstgidValue;
-                  }
-                }
+                firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
               } else if (frameName.equals("Static")) {
-                if (currentTileSet != null) {
-                  frameTiles.add(
-                      (StaticTiledMapTile)
-                          currentTileSet.getTile(firstgid + frame.getIntAttribute("Index")));
-                }
+                frameTiles.add(
+                    (StaticTiledMapTile)
+                        currentTileSet.getTile(firstgid + frame.getIntAttribute("Index")));
               }
             }
             Cell cell = new Cell();
