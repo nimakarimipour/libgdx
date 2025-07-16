@@ -19,8 +19,10 @@ package com.badlogic.gdx.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.InputProcessor;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import javax.annotation.Nullable;
 
 /**
  * Sends all inputs from touch, key, accelerometer and compass to a {@link RemoteInput} at the given
@@ -29,7 +31,7 @@ import java.net.Socket;
  * @author mzechner
  */
 public class RemoteSender implements InputProcessor {
-  private DataOutputStream out;
+  @Nullable private DataOutputStream out;
   private boolean connected = false;
 
   public static final int KEY_DOWN = 0;
@@ -61,10 +63,10 @@ public class RemoteSender implements InputProcessor {
 
   public void sendUpdate() {
     synchronized (this) {
-      if (!connected) return;
+      if (!connected || out == null) return;
     }
     try {
-      out.writeInt(ACCEL);
+      Nullability.castToNonnull(out, "synchronized null check").writeInt(ACCEL);
       out.writeFloat(Gdx.input.getAccelerometerX());
       out.writeFloat(Gdx.input.getAccelerometerY());
       out.writeFloat(Gdx.input.getAccelerometerZ());
@@ -88,11 +90,11 @@ public class RemoteSender implements InputProcessor {
   @Override
   public boolean keyDown(int keycode) {
     synchronized (this) {
-      if (!connected) return false;
+      if (!connected || out == null) return false;
     }
 
     try {
-      out.writeInt(KEY_DOWN);
+      Nullability.castToNonnull(out, "checked before usage").writeInt(KEY_DOWN);
       out.writeInt(keycode);
     } catch (Throwable t) {
       synchronized (this) {
@@ -105,11 +107,11 @@ public class RemoteSender implements InputProcessor {
   @Override
   public boolean keyUp(int keycode) {
     synchronized (this) {
-      if (!connected) return false;
+      if (!connected || out == null) return false;
     }
 
     try {
-      out.writeInt(KEY_UP);
+      Nullability.castToNonnull(out, "checked not null").writeInt(KEY_UP);
       out.writeInt(keycode);
     } catch (Throwable t) {
       synchronized (this) {
@@ -122,10 +124,11 @@ public class RemoteSender implements InputProcessor {
   @Override
   public boolean keyTyped(char character) {
     synchronized (this) {
-      if (!connected) return false;
+      if (!connected || out == null) return false;
     }
 
     try {
+      Nullability.castToNonnull(out, "synchronized block prevents null");
       out.writeInt(KEY_TYPED);
       out.writeChar(character);
     } catch (Throwable t) {
@@ -139,7 +142,7 @@ public class RemoteSender implements InputProcessor {
   @Override
   public boolean touchDown(int x, int y, int pointer, int button) {
     synchronized (this) {
-      if (!connected) return false;
+      if (!connected || out == null) return false;
     }
 
     try {
@@ -162,10 +165,12 @@ public class RemoteSender implements InputProcessor {
     }
 
     try {
-      out.writeInt(TOUCH_UP);
-      out.writeInt(x);
-      out.writeInt(y);
-      out.writeInt(pointer);
+      if (out != null) {
+        Nullability.castToNonnull(out, "if condition ensures non-null").writeInt(TOUCH_UP);
+        out.writeInt(x);
+        out.writeInt(y);
+        out.writeInt(pointer);
+      }
     } catch (Throwable t) {
       synchronized (this) {
         connected = false;
@@ -182,11 +187,11 @@ public class RemoteSender implements InputProcessor {
   @Override
   public boolean touchDragged(int x, int y, int pointer) {
     synchronized (this) {
-      if (!connected) return false;
+      if (!connected || out == null) return false;
     }
 
     try {
-      out.writeInt(TOUCH_DRAGGED);
+      Nullability.castToNonnull(out, "synchronized block check").writeInt(TOUCH_DRAGGED);
       out.writeInt(x);
       out.writeInt(y);
       out.writeInt(pointer);
