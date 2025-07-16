@@ -1315,33 +1315,35 @@ public class PolygonSpriteBatch implements PolygonBatch {
   }
 
   @Override
-  public void flush() {
-    if (vertexIndex == 0) return;
-
-    renderCalls++;
-    totalRenderCalls++;
-    int trianglesInBatch = triangleIndex;
-    if (trianglesInBatch > maxTrianglesInBatch) maxTrianglesInBatch = trianglesInBatch;
-
-    lastTexture.bind();
-    Mesh mesh = this.mesh;
-    mesh.setVertices(vertices, 0, vertexIndex);
-    mesh.setIndices(triangles, 0, trianglesInBatch);
-    if (blendingDisabled) {
-      Gdx.gl.glDisable(GL20.GL_BLEND);
-    } else {
-      Gdx.gl.glEnable(GL20.GL_BLEND);
-      if (blendSrcFunc != -1)
-        Gdx.gl.glBlendFuncSeparate(
-            blendSrcFunc, blendDstFunc, blendSrcFuncAlpha, blendDstFuncAlpha);
+    public void flush() {
+      if (vertexIndex == 0) return;
+      
+      renderCalls++;
+      totalRenderCalls++;
+      int trianglesInBatch = triangleIndex;
+      if (trianglesInBatch > maxTrianglesInBatch) maxTrianglesInBatch = trianglesInBatch;
+      
+      if (lastTexture != null) {
+        lastTexture.bind();
+      }
+      Mesh mesh = this.mesh;
+      mesh.setVertices(vertices, 0, vertexIndex);
+      mesh.setIndices(triangles, 0, trianglesInBatch);
+      if (blendingDisabled) {
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+      } else {
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        if (blendSrcFunc != -1)
+          Gdx.gl.glBlendFuncSeparate(
+              blendSrcFunc, blendDstFunc, blendSrcFuncAlpha, blendDstFuncAlpha);
+      }
+          
+      mesh.render(
+          customShader != null ? customShader : shader, GL20.GL_TRIANGLES, 0, trianglesInBatch);
+      
+      vertexIndex = 0;
+      triangleIndex = 0;
     }
-
-    mesh.render(
-        customShader != null ? customShader : shader, GL20.GL_TRIANGLES, 0, trianglesInBatch);
-
-    vertexIndex = 0;
-    triangleIndex = 0;
-  }
 
   @Override
   public void disableBlending() {
