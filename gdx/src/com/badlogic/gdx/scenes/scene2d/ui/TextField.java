@@ -45,6 +45,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -570,7 +571,8 @@ public class TextField extends Widget implements Disableable {
     if (stage == null) return;
     TextField current = this;
     Vector2 currentCoords =
-        current.getParent().localToStageCoordinates(tmp2.set(current.getX(), current.getY()));
+        Nullability.castToNonnull(current.getParent(), "ensured non-null")
+            .localToStageCoordinates(tmp2.set(current.getX(), current.getY()));
     Vector2 bestCoords = tmp1;
     while (true) {
       TextField textField =
@@ -611,6 +613,7 @@ public class TextField extends Widget implements Disableable {
         TextField textField = (TextField) actor;
         if (textField.isDisabled() || !textField.focusTraversal || !textField.ascendantsVisible())
           continue;
+        if (actor.getParent() == null) return null;
         Vector2 actorCoords =
             actor.getParent().localToStageCoordinates(tmp3.set(actor.getX(), actor.getY()));
         boolean below = actorCoords.y != currentCoords.y && (actorCoords.y < currentCoords.y ^ up);
