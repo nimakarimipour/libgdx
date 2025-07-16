@@ -4,9 +4,10 @@ package com.badlogic.gdx.utils.compression.lz;
 
 import java.io.IOException;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 public class InWindow {
-  public byte[] _bufferBase; // pointer to buffer with data
+  @Nullable public byte[] _bufferBase; // pointer to buffer with data
   @Nullable java.io.InputStream _stream;
   int _posLimit; // offset (from _buffer) of first byte when new block reading must be done
   boolean _streamEndWasReached; // if (true) then _streamPos shows real end of stream
@@ -22,15 +23,18 @@ public class InWindow {
   public int _streamPos; // offset (from _buffer) of first not read byte from Stream
 
   public void MoveBlock() {
-    int offset = _bufferOffset + _pos - _keepSizeBefore;
-    // we need one additional byte, since MovePos moves on 1 byte.
-    if (offset > 0) offset--;
-
-    int numBytes = _bufferOffset + _streamPos - offset;
-
-    // check negative offset ????
-    for (int i = 0; i < numBytes; i++) _bufferBase[i] = _bufferBase[offset + i];
-    _bufferOffset -= offset;
+        if (_bufferBase == null) {
+            throw new IllegalStateException("Buffer base is not initialized.");
+        }
+        int offset = _bufferOffset + _pos - _keepSizeBefore;
+        if (offset > 0) offset--;
+    
+        int numBytes = _bufferOffset + _streamPos - offset;
+    
+        if (numBytes > 0) {
+            System.arraycopy(Nullability.castToNonnull(_bufferBase, "null check passed"), offset, Nullability.castToNonnull(_bufferBase, "null check passed"), 0, numBytes);
+        }
+        _bufferOffset -= offset;
   }
 
   public void ReadBlock() throws IOException {
@@ -95,21 +99,28 @@ public class InWindow {
   }
 
   public byte GetIndexByte(int index) {
-    return _bufferBase[_bufferOffset + _pos + index];
+          if (_bufferBase == null) {
+              throw new NullPointerException("Buffer base is null");
+          }
+          return Nullability.castToNonnull(_bufferBase, "checked for null")[ _bufferOffset + _pos + index];
   }
 
   // index + limit have not to exceed _keepSizeAfter;
   public int GetMatchLen(int index, int distance, int limit) {
-    if (_streamEndWasReached)
-      if ((_pos + index) + limit > _streamPos) limit = _streamPos - (_pos + index);
-    distance++;
-    // Byte *pby = _buffer + (size_t)_pos + index;
-    int pby = _bufferOffset + _pos + index;
-
-    int i;
-    for (i = 0; i < limit && _bufferBase[pby + i] == _bufferBase[pby + i - distance]; i++)
-      ;
-    return i;
+          if (_streamEndWasReached)
+              if ((_pos + index) + limit > _streamPos)
+                  limit = _streamPos - (_pos + index);
+          distance++;
+          int pby = _bufferOffset + _pos + index;
+    
+          int i;
+          if (_bufferBase != null) {
+              for (i = 0; i < limit && Nullability.castToNonnull(_bufferBase, "null check before loop")[pby + i] == Nullability.castToNonnull(_bufferBase, "null check before loop")[pby + i - distance]; i++)
+                  ;
+          } else {
+              i = 0;
+          }
+          return i;
   }
 
   public int GetNumAvailableBytes() {
