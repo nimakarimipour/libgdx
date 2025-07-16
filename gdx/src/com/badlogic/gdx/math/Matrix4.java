@@ -18,6 +18,7 @@ package com.badlogic.gdx.math;
 
 import java.io.Serializable;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Encapsulates a <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column
@@ -192,8 +193,8 @@ public class Matrix4 implements Serializable {
    * @return This matrix for the purpose of chaining methods together.
    */
   public Matrix4 set(@Nullable Matrix4 matrix) {
-    return set(matrix.val);
-  }
+        return set(Nullability.castToNonnull(matrix).val);
+    }
 
   /**
    * Sets the matrix to the given matrix as a float array. The float array must have at least 16
