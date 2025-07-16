@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRende
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -56,7 +55,7 @@ public abstract class ParticleSorter {
   /** This class will sort all the particles using the distance from camera. */
   public static class Distance extends ParticleSorter {
     private float[] distances;
-    @Nullable private int[] particleIndices, particleOffsets;
+    private int[] particleIndices, particleOffsets;
     private int currentSize = 0;
 
     @Override
@@ -69,25 +68,19 @@ public abstract class ParticleSorter {
       }
     }
 
-    @SuppressWarnings("NullAway")
     @Override
     public <T extends ParticleControllerRenderData> int[] sort(Array<T> renderData) {
-      if (camera == null || camera.view == null || camera.view.val == null) {
-        throw new NullPointerException("Camera or its view or the matrix values are null");
-      }
       float[] val = camera.view.val;
       float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
       int count = 0, i = 0;
-
-      ensureCapacity(calculateRequiredCapacity(renderData));
-
       for (ParticleControllerRenderData data : renderData) {
-        for (int k = i + data.controller.particles.size; i < k; ++i) {
-          int offset = k - i;
+        for (int k = 0, c = i + data.controller.particles.size;
+            i < c;
+            ++i, k += data.positionChannel.strideSize) {
           distances[i] =
-              cx * data.positionChannel.data[offset + ParticleChannels.XOffset]
-                  + cy * data.positionChannel.data[offset + ParticleChannels.YOffset]
-                  + cz * data.positionChannel.data[offset + ParticleChannels.ZOffset];
+              cx * data.positionChannel.data[k + ParticleChannels.XOffset]
+                  + cy * data.positionChannel.data[k + ParticleChannels.YOffset]
+                  + cz * data.positionChannel.data[k + ParticleChannels.ZOffset];
           particleIndices[i] = i;
         }
         count += data.controller.particles.size;
@@ -95,24 +88,10 @@ public abstract class ParticleSorter {
 
       qsort(0, count - 1);
 
-      if (particleOffsets == null || particleOffsets.length < count) {
-        particleOffsets = new int[count];
-      }
-
       for (i = 0; i < count; ++i) {
-        Nullability.castToNonnull(particleOffsets, "not null or insufficient")[particleIndices[i]] =
-            i;
+        particleOffsets[particleIndices[i]] = i;
       }
       return particleOffsets;
-    }
-
-    private <T extends ParticleControllerRenderData> int calculateRequiredCapacity(
-        Array<T> renderData) {
-      int capacity = 0;
-      for (ParticleControllerRenderData data : renderData) {
-        capacity += data.controller.particles.size;
-      }
-      return capacity;
     }
 
     public void qsort(int si, int ei) {
@@ -120,15 +99,6 @@ public abstract class ParticleSorter {
       if (si < ei) {
         float tmp;
         int tmpIndex, particlesPivotIndex;
-
-        // Ensure arrays are initialized
-        ensureCapacity(ei + 1);
-
-        // Check if particleIndices is not null
-        if (particleIndices == null) {
-          throw new NullPointerException("particleIndices is null");
-        }
-
         // insertion
         if (ei - si <= 8) {
           for (int i = si; i <= ei; i++)
