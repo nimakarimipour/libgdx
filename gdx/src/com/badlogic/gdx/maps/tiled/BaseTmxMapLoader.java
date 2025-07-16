@@ -399,54 +399,48 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
           TiledMapTileMapObject tiledMapTileMapObject =
               new TiledMapTileMapObject(tile, flipHorizontally, flipVertically);
           TextureRegion textureRegion = tiledMapTileMapObject.getTextureRegion();
-          if (textureRegion != null) {
-            tiledMapTileMapObject.getProperties().put("gid", id);
-            tiledMapTileMapObject.setX(x);
-            tiledMapTileMapObject.setY(flipY ? y : y - height);
-            float objectWidth = element.getFloatAttribute("width", textureRegion.getRegionWidth());
-            float objectHeight =
-                element.getFloatAttribute("height", textureRegion.getRegionHeight());
-            tiledMapTileMapObject.setScaleX(
-                scaleX * (objectWidth / textureRegion.getRegionWidth()));
-            tiledMapTileMapObject.setScaleY(
-                scaleY * (objectHeight / textureRegion.getRegionHeight()));
-            tiledMapTileMapObject.setRotation(element.getFloatAttribute("rotation", 0));
-            object = tiledMapTileMapObject;
-          }
+          tiledMapTileMapObject.getProperties().put("gid", id);
+          tiledMapTileMapObject.setX(x);
+          tiledMapTileMapObject.setY(flipY ? y : y - height);
+          float objectWidth = element.getFloatAttribute("width", textureRegion.getRegionWidth());
+          float objectHeight = element.getFloatAttribute("height", textureRegion.getRegionHeight());
+          tiledMapTileMapObject.setScaleX(scaleX * (objectWidth / textureRegion.getRegionWidth()));
+          tiledMapTileMapObject.setScaleY(
+              scaleY * (objectHeight / textureRegion.getRegionHeight()));
+          tiledMapTileMapObject.setRotation(element.getFloatAttribute("rotation", 0));
+          object = tiledMapTileMapObject;
         } else {
           object = new RectangleMapObject(x, flipY ? y - height : y, width, height);
         }
       }
-      if (object != null) {
-        object.setName(element.getAttribute("name", null));
-        String rotation = element.getAttribute("rotation", null);
-        if (rotation != null) {
-          object.getProperties().put("rotation", Float.parseFloat(rotation));
-        }
-        String type = element.getAttribute("type", null);
-        if (type != null) {
-          object.getProperties().put("type", type);
-        }
-        int id = element.getIntAttribute("id", 0);
-        if (id != 0) {
-          object.getProperties().put("id", id);
-        }
-        object.getProperties().put("x", x);
-
-        if (object instanceof TiledMapTileMapObject) {
-          object.getProperties().put("y", y);
-        } else {
-          object.getProperties().put("y", (flipY ? y - height : y));
-        }
-        object.getProperties().put("width", width);
-        object.getProperties().put("height", height);
-        object.setVisible(element.getIntAttribute("visible", 1) == 1);
-        Element properties = element.getChildByName("properties");
-        if (properties != null) {
-          loadProperties(object.getProperties(), properties);
-        }
-        objects.add(object);
+      object.setName(element.getAttribute("name", null));
+      String rotation = element.getAttribute("rotation", null);
+      if (rotation != null) {
+        object.getProperties().put("rotation", Float.parseFloat(rotation));
       }
+      String type = element.getAttribute("type", null);
+      if (type != null) {
+        object.getProperties().put("type", type);
+      }
+      int id = element.getIntAttribute("id", 0);
+      if (id != 0) {
+        object.getProperties().put("id", id);
+      }
+      object.getProperties().put("x", x);
+
+      if (object instanceof TiledMapTileMapObject) {
+        object.getProperties().put("y", y);
+      } else {
+        object.getProperties().put("y", (flipY ? y - height : y));
+      }
+      object.getProperties().put("width", width);
+      object.getProperties().put("height", height);
+      object.setVisible(element.getIntAttribute("visible", 1) == 1);
+      Element properties = element.getChildByName("properties");
+      if (properties != null) {
+        loadProperties(object.getProperties(), properties);
+      }
+      objects.add(object);
     }
   }
 
