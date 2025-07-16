@@ -24,6 +24,8 @@ import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FlushablePool;
+import edu.ucr.cs.riple.annotator.util.Nullability;
+import javax.annotation.Nullable;
 
 /**
  * RenderableShapeBuilder builds various properties of a renderable.
@@ -54,7 +56,7 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
     }
   }
 
-  private static short[] indices;
+  @Nullable private static short[] indices;
   private static float[] vertices;
   private static final RenderablePool renderablesPool = new RenderablePool();
   private static final Array<Renderable> renderables = new Array<Renderable>();
@@ -153,7 +155,11 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
     if (mesh.getNumIndices() > 0) {
       // Get min vertice to max vertice in indices array
       ensureIndicesCapacity(mesh.getNumIndices());
-      mesh.getIndices(renderable.meshPart.offset, renderable.meshPart.size, indices, 0);
+      mesh.getIndices(
+          renderable.meshPart.offset,
+          renderable.meshPart.size,
+          Nullability.castToNonnull(indices),
+          0);
 
       short minVertice = minVerticeInIndices();
       short maxVertice = maxVerticeInIndices();
@@ -236,14 +242,25 @@ public class RenderableShapeBuilder extends BaseShapeBuilder {
   }
 
   private static short minVerticeInIndices() {
+    if (indices == null || indices.length == 0) {
+      throw new IllegalStateException("Indices array is null or empty");
+    }
     short min = (short) 32767;
-    for (int i = 0; i < indices.length; i++) if (indices[i] < min) min = indices[i];
+    for (int i = 0; i < indices.length; i++) {
+      if (indices[i] < min) {
+        min = indices[i];
+      }
+    }
     return min;
   }
 
   private static short maxVerticeInIndices() {
+    if (indices == null) {
+      throw new NullPointerException("indices is null");
+    }
     short max = (short) -32768;
-    for (int i = 0; i < indices.length; i++) if (indices[i] > max) max = indices[i];
+    for (int i = 0; i < Nullability.castToNonnull(indices, "explicitly checked").length; i++)
+      if (indices[i] > max) max = indices[i];
     return max;
   }
 }
