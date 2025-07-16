@@ -309,27 +309,30 @@ public class BaseAnimationController {
    * bones.
    */
   protected static void applyAnimation(
-      @Nullable final ObjectMap<Node, Transform> out,
-      @Nullable final Pool<Transform> pool,
-      final float alpha,
-      final Animation animation,
-      final float time) {
-
-    if (out == null) {
-      for (final NodeAnimation nodeAnim : animation.nodeAnimations)
-        applyNodeAnimationDirectly(nodeAnim, time);
-    } else {
-      for (final Node node : out.keys()) node.isAnimated = false;
-      for (final NodeAnimation nodeAnim : animation.nodeAnimations)
-        applyNodeAnimationBlending(nodeAnim, out, pool, alpha, time);
-      for (final ObjectMap.Entry<Node, Transform> e : out.entries()) {
-        if (!e.key.isAnimated) {
-          e.key.isAnimated = true;
-          e.value.lerp(e.key.translation, e.key.rotation, e.key.scale, alpha);
+         @Nullable final ObjectMap<Node, Transform> out,
+         @Nullable final Pool<Transform> pool,
+        final float alpha,
+        final Animation animation,
+        final float time) {
+  
+      if (out == null) {
+        for (final NodeAnimation nodeAnim : animation.nodeAnimations)
+          applyNodeAnimationDirectly(nodeAnim, time);
+      } else {
+        if (pool == null) {
+          throw new IllegalArgumentException("Parameter 'pool' cannot be null");
+        }
+        for (final Node node : out.keys()) node.isAnimated = false;
+        for (final NodeAnimation nodeAnim : animation.nodeAnimations)
+          applyNodeAnimationBlending(nodeAnim, out, pool, alpha, time);
+        for (final ObjectMap.Entry<Node, Transform> e : out.entries()) {
+          if (!e.key.isAnimated) {
+            e.key.isAnimated = true;
+            e.value.lerp(e.key.translation, e.key.rotation, e.key.scale, alpha);
+          }
         }
       }
     }
-  }
 
   /**
    * Remove the specified animation, by marking the affected nodes as not animated. When switching
