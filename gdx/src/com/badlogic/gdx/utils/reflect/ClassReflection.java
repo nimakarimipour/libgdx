@@ -56,8 +56,11 @@ public final class ClassReflection {
    * Class parameter.
    */
   public static boolean isAssignableFrom(Class c1, @Nullable Class c2) {
-    return c1.isAssignableFrom(c2);
-  }
+      if (c2 == null) {
+        throw new IllegalArgumentException("Parameter 'c2' cannot be null");
+      }
+      return c1.isAssignableFrom(c2);
+    }
 
   /** Returns true if the class or interface represented by the supplied Class is a member class. */
   public static boolean isMemberClass(Class c) {
