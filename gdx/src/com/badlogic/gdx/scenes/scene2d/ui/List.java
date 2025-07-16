@@ -37,6 +37,7 @@ import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A list (aka list box) displays textual items and highlights the currently selected item.
@@ -183,100 +184,112 @@ public class List<T> extends Widget implements Cullable {
   }
 
   public void layout() {
-    BitmapFont font = style.font;
-    Drawable selectedDrawable = style.selection;
-
-    itemHeight = font.getCapHeight() - font.getDescent() * 2;
-    itemHeight += selectedDrawable.getTopHeight() + selectedDrawable.getBottomHeight();
-
-    prefWidth = 0;
-    Pool<GlyphLayout> layoutPool = Pools.get(GlyphLayout.class);
-    GlyphLayout layout = layoutPool.obtain();
-    for (int i = 0; i < items.size; i++) {
-      layout.setText(font, toString(items.get(i)));
-      prefWidth = Math.max(layout.width, prefWidth);
+        if (style == null || style.font == null || style.selection == null) {
+            throw new IllegalArgumentException("Style, font, and selection cannot be null");
+        }
+        
+        BitmapFont font = style.font;
+        Drawable selectedDrawable = style.selection;
+    
+        itemHeight = font.getCapHeight() - font.getDescent() * 2;
+        itemHeight += selectedDrawable.getTopHeight() + selectedDrawable.getBottomHeight();
+    
+        prefWidth = 0;
+        Pool<GlyphLayout> layoutPool = Pools.get(GlyphLayout.class);
+        GlyphLayout layout = layoutPool.obtain();
+        for (int i = 0; i < items.size; i++) {
+            layout.setText(font, toString(items.get(i)));
+            prefWidth = Math.max(layout.width, prefWidth);
+        }
+        layoutPool.free(layout);
+        prefWidth += selectedDrawable.getLeftWidth() + selectedDrawable.getRightWidth();
+        prefHeight = items.size * itemHeight;
+    
+        Drawable background = style.background;
+        if (background != null) {
+            prefWidth =
+                Math.max(
+                    prefWidth + background.getLeftWidth() + background.getRightWidth(),
+                    background.getMinWidth());
+            prefHeight =
+                Math.max(
+                    prefHeight + background.getTopHeight() + background.getBottomHeight(),
+                    background.getMinHeight());
+        }
     }
-    layoutPool.free(layout);
-    prefWidth += selectedDrawable.getLeftWidth() + selectedDrawable.getRightWidth();
-    prefHeight = items.size * itemHeight;
-
-    Drawable background = style.background;
-    if (background != null) {
-      prefWidth =
-          Math.max(
-              prefWidth + background.getLeftWidth() + background.getRightWidth(),
-              background.getMinWidth());
-      prefHeight =
-          Math.max(
-              prefHeight + background.getTopHeight() + background.getBottomHeight(),
-              background.getMinHeight());
-    }
-  }
 
   public void draw(Batch batch, float parentAlpha) {
-    validate();
-
-    drawBackground(batch, parentAlpha);
-
-    BitmapFont font = style.font;
-    Drawable selectedDrawable = style.selection;
-    Color fontColorSelected = style.fontColorSelected;
-    Color fontColorUnselected = style.fontColorUnselected;
-
-    Color color = getColor();
-    batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-
-    float x = getX(), y = getY(), width = getWidth(), height = getHeight();
-    float itemY = height;
-
-    Drawable background = style.background;
-    if (background != null) {
-      float leftWidth = background.getLeftWidth();
-      x += leftWidth;
-      itemY -= background.getTopHeight();
-      width -= leftWidth + background.getRightWidth();
+            validate();
+    
+            drawBackground(batch, parentAlpha);
+    
+            BitmapFont font = style.font;
+            Drawable selectedDrawable = style.selection;
+            Color fontColorSelected = style.fontColorSelected;
+            Color fontColorUnselected = style.fontColorUnselected;
+    
+            if (font == null) {
+                throw new NullPointerException("Font in style cannot be null.");
+            }
+    
+            if (selectedDrawable == null) {
+                throw new NullPointerException("Selection drawable in style cannot be null.");
+            }
+    
+            Color color = getColor();
+            batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+    
+            float x = getX(), y = getY(), width = getWidth(), height = getHeight();
+            float itemY = height;
+    
+            Drawable background = style.background;
+            if (background != null) {
+              float leftWidth = background.getLeftWidth();
+              x += leftWidth;
+              itemY -= background.getTopHeight();
+              width -= leftWidth + background.getRightWidth();
+            }
+    
+            float textOffsetX = Nullability.castToNonnull(selectedDrawable, "null checked already").getLeftWidth(),
+                textWidth = width - textOffsetX - selectedDrawable.getRightWidth();
+            float textOffsetY = selectedDrawable.getTopHeight() - font.getDescent();
+    
+            font.setColor(
+                fontColorUnselected.r,
+                fontColorUnselected.g,
+                fontColorUnselected.b,
+                fontColorUnselected.a * parentAlpha);
+            for (int i = 0; i < items.size; i++) {
+              if (cullingArea == null
+                  || (itemY - itemHeight <= cullingArea.y + cullingArea.height && itemY >= cullingArea.y)) {
+                T item = items.get(i);
+                boolean selected = selection.contains(item);
+                Drawable drawable = null;
+                if (pressedIndex == i && style.down != null) drawable = style.down;
+                else if (selected) {
+                  drawable = selectedDrawable;
+                  font.setColor(
+                      fontColorSelected.r,
+                      fontColorSelected.g,
+                      fontColorSelected.b,
+                      fontColorSelected.a * parentAlpha);
+                } else if (overIndex == i && style.over != null) //
+                drawable = style.over;
+                drawSelection(batch, drawable, x, y + itemY - itemHeight, width, itemHeight);
+                drawItem(batch, font, i, item, x + textOffsetX, y + itemY - textOffsetY, textWidth);
+                if (selected) {
+                  font.setColor(
+                      fontColorUnselected.r,
+                      fontColorUnselected.g,
+                      fontColorUnselected.b,
+                      fontColorUnselected.a * parentAlpha);
+                }
+              } else if (itemY < cullingArea.y) {
+                break;
+              }
+              itemY -= itemHeight;
+            }
     }
-
-    float textOffsetX = selectedDrawable.getLeftWidth(),
-        textWidth = width - textOffsetX - selectedDrawable.getRightWidth();
-    float textOffsetY = selectedDrawable.getTopHeight() - font.getDescent();
-
-    font.setColor(
-        fontColorUnselected.r,
-        fontColorUnselected.g,
-        fontColorUnselected.b,
-        fontColorUnselected.a * parentAlpha);
-    for (int i = 0; i < items.size; i++) {
-      if (cullingArea == null
-          || (itemY - itemHeight <= cullingArea.y + cullingArea.height && itemY >= cullingArea.y)) {
-        T item = items.get(i);
-        boolean selected = selection.contains(item);
-        Drawable drawable = null;
-        if (pressedIndex == i && style.down != null) drawable = style.down;
-        else if (selected) {
-          drawable = selectedDrawable;
-          font.setColor(
-              fontColorSelected.r,
-              fontColorSelected.g,
-              fontColorSelected.b,
-              fontColorSelected.a * parentAlpha);
-        } else if (overIndex == i && style.over != null) //
-        drawable = style.over;
-        drawSelection(batch, drawable, x, y + itemY - itemHeight, width, itemHeight);
-        drawItem(batch, font, i, item, x + textOffsetX, y + itemY - textOffsetY, textWidth);
-        if (selected) {
-          font.setColor(
-              fontColorUnselected.r,
-              fontColorUnselected.g,
-              fontColorUnselected.b,
-              fontColorUnselected.a * parentAlpha);
-        }
-      } else if (itemY < cullingArea.y) {
-        break;
-      }
-      itemY -= itemHeight;
-    }
-  }
 
   protected void drawSelection(
       Batch batch, @Nullable @Null Drawable drawable, float x, float y, float width, float height) {
@@ -499,10 +512,10 @@ public class List<T> extends Widget implements Cullable {
    * @author Nathan Sweet
    */
   public static class ListStyle {
-    public BitmapFont font;
+    @Nullable public BitmapFont font;
     public Color fontColorSelected = new Color(1, 1, 1, 1);
     public Color fontColorUnselected = new Color(1, 1, 1, 1);
-    public Drawable selection;
+    @Nullable public Drawable selection;
     @Nullable public @Null Drawable down, over, background;
 
     public ListStyle() {}

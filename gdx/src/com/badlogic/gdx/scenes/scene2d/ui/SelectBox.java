@@ -201,60 +201,64 @@ public class SelectBox<T> extends Widget implements Disableable {
   }
 
   public void layout() {
-    Drawable bg = style.background;
-    BitmapFont font = style.font;
-
-    if (bg != null) {
-      prefHeight =
-          Math.max(
-              bg.getTopHeight()
-                  + bg.getBottomHeight()
-                  + font.getCapHeight()
-                  - font.getDescent() * 2,
-              bg.getMinHeight());
-    } else prefHeight = font.getCapHeight() - font.getDescent() * 2;
-
-    Pool<GlyphLayout> layoutPool = Pools.get(GlyphLayout.class);
-    GlyphLayout layout = layoutPool.obtain();
-    if (selectedPrefWidth) {
-      prefWidth = 0;
-      if (bg != null) prefWidth = bg.getLeftWidth() + bg.getRightWidth();
-      T selected = getSelected();
-      if (selected != null) {
-        layout.setText(font, toString(selected));
-        prefWidth += layout.width;
-      }
-    } else {
-      float maxItemWidth = 0;
-      for (int i = 0; i < items.size; i++) {
-        layout.setText(font, toString(items.get(i)));
-        maxItemWidth = Math.max(layout.width, maxItemWidth);
-      }
-
-      prefWidth = maxItemWidth;
-      if (bg != null)
-        prefWidth = Math.max(prefWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
-
-      ListStyle listStyle = style.listStyle;
-      ScrollPaneStyle scrollStyle = style.scrollStyle;
-      float scrollWidth =
-          maxItemWidth + listStyle.selection.getLeftWidth() + listStyle.selection.getRightWidth();
-      bg = scrollStyle.background;
-      if (bg != null)
-        scrollWidth =
-            Math.max(scrollWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
-      if (scrollPane == null || !scrollPane.disableY) {
-        scrollWidth +=
+      Drawable bg = style.background;
+      BitmapFont font = style.font;
+  
+      if (bg != null) {
+        prefHeight =
             Math.max(
-                style.scrollStyle.vScroll != null ? style.scrollStyle.vScroll.getMinWidth() : 0,
-                style.scrollStyle.vScrollKnob != null
-                    ? style.scrollStyle.vScrollKnob.getMinWidth()
-                    : 0);
+                bg.getTopHeight()
+                    + bg.getBottomHeight()
+                    + font.getCapHeight()
+                    - font.getDescent() * 2,
+                bg.getMinHeight());
+      } else prefHeight = font.getCapHeight() - font.getDescent() * 2;
+  
+      Pool<GlyphLayout> layoutPool = Pools.get(GlyphLayout.class);
+      GlyphLayout layout = layoutPool.obtain();
+      if (selectedPrefWidth) {
+        prefWidth = 0;
+        if (bg != null) prefWidth = bg.getLeftWidth() + bg.getRightWidth();
+        T selected = getSelected();
+        if (selected != null) {
+          layout.setText(font, toString(selected));
+          prefWidth += layout.width;
+        }
+      } else {
+        float maxItemWidth = 0;
+        for (int i = 0; i < items.size; i++) {
+          layout.setText(font, toString(items.get(i)));
+          maxItemWidth = Math.max(layout.width, maxItemWidth);
+        }
+  
+        prefWidth = maxItemWidth;
+        if (bg != null)
+          prefWidth = Math.max(prefWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
+  
+        ListStyle listStyle = style.listStyle;
+  
+        // Added null check to avoid NullPointerException
+        if (listStyle.selection != null) {
+          ScrollPaneStyle scrollStyle = style.scrollStyle;
+          float scrollWidth =
+              maxItemWidth + listStyle.selection.getLeftWidth() + listStyle.selection.getRightWidth();
+          bg = scrollStyle.background;
+          if (bg != null)
+            scrollWidth =
+                Math.max(scrollWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
+          if (scrollPane == null || !scrollPane.disableY) {
+            scrollWidth +=
+                Math.max(
+                    style.scrollStyle.vScroll != null ? style.scrollStyle.vScroll.getMinWidth() : 0,
+                    style.scrollStyle.vScrollKnob != null
+                        ? style.scrollStyle.vScrollKnob.getMinWidth()
+                        : 0);
+          }
+          prefWidth = Math.max(prefWidth, scrollWidth);
+        }
       }
-      prefWidth = Math.max(prefWidth, scrollWidth);
+      layoutPool.free(layout);
     }
-    layoutPool.free(layout);
-  }
 
   /**
    * Returns appropriate background drawable from the style based on the current select box state.
