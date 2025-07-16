@@ -31,7 +31,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -122,50 +121,48 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
   protected Array<FileHandle> getDependencyFileHandles(FileHandle tmxFile) {
     Array<FileHandle> fileHandles = new Array<FileHandle>();
 
-    if (root != null) { // Check if root is not null before dereferencing
-      for (Element tileset :
-          Nullability.castToNonnull(root, "root is not null").getChildrenByName("tileset")) {
-        String source = tileset.getAttribute("source", null);
-        if (source != null) {
-          FileHandle tsxFile = getRelativeFileHandle(tmxFile, source);
-          tileset = xml.parse(tsxFile);
-          Element imageElement =
-              Nullability.castToNonnull(tileset, "root children iterated").getChildByName("image");
-          if (imageElement != null) {
-            String imageSource = tileset.getChildByName("image").getAttribute("source");
+    // TileSet descriptors
+    for (Element tileset : root.getChildrenByName("tileset")) {
+      String source = tileset.getAttribute("source", null);
+      if (source != null) {
+        FileHandle tsxFile = getRelativeFileHandle(tmxFile, source);
+        tileset = xml.parse(tsxFile);
+        Element imageElement = tileset.getChildByName("image");
+        if (imageElement != null) {
+          String imageSource = tileset.getChildByName("image").getAttribute("source");
+          FileHandle image = getRelativeFileHandle(tsxFile, imageSource);
+          fileHandles.add(image);
+        } else {
+          for (Element tile : tileset.getChildrenByName("tile")) {
+            String imageSource = tile.getChildByName("image").getAttribute("source");
             FileHandle image = getRelativeFileHandle(tsxFile, imageSource);
             fileHandles.add(image);
-          } else {
-            for (Element tile : tileset.getChildrenByName("tile")) {
-              String imageSource = tile.getChildByName("image").getAttribute("source");
-              FileHandle image = getRelativeFileHandle(tsxFile, imageSource);
-              fileHandles.add(image);
-            }
           }
+        }
+      } else {
+        Element imageElement = tileset.getChildByName("image");
+        if (imageElement != null) {
+          String imageSource = tileset.getChildByName("image").getAttribute("source");
+          FileHandle image = getRelativeFileHandle(tmxFile, imageSource);
+          fileHandles.add(image);
         } else {
-          Element imageElement =
-              Nullability.castToNonnull(tileset, "root children iterated").getChildByName("image");
-          if (imageElement != null) {
-            String imageSource = tileset.getChildByName("image").getAttribute("source");
+          for (Element tile : tileset.getChildrenByName("tile")) {
+            String imageSource = tile.getChildByName("image").getAttribute("source");
             FileHandle image = getRelativeFileHandle(tmxFile, imageSource);
             fileHandles.add(image);
-          } else {
-            for (Element tile : tileset.getChildrenByName("tile")) {
-              String imageSource = tile.getChildByName("image").getAttribute("source");
-              FileHandle image = getRelativeFileHandle(tmxFile, imageSource);
-              fileHandles.add(image);
-            }
           }
         }
       }
+    }
 
-      for (Element imageLayer : root.getChildrenByName("imagelayer")) {
-        Element image = imageLayer.getChildByName("image");
-        String source = image.getAttribute("source", null);
-        if (source != null) {
-          FileHandle handle = getRelativeFileHandle(tmxFile, source);
-          fileHandles.add(handle);
-        }
+    // ImageLayer descriptors
+    for (Element imageLayer : root.getChildrenByName("imagelayer")) {
+      Element image = imageLayer.getChildByName("image");
+      String source = image.getAttribute("source", null);
+
+      if (source != null) {
+        FileHandle handle = getRelativeFileHandle(tmxFile, source);
+        fileHandles.add(handle);
       }
     }
 

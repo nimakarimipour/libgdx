@@ -22,7 +22,6 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -64,7 +63,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
   protected static final int MASK_CLEAR = 0xE0000000;
 
   protected XmlReader xml = new XmlReader();
-  @Nullable protected Element root;
+  protected Element root;
   protected boolean convertObjectToTileSpace;
   protected boolean flipY = true;
 
@@ -117,10 +116,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
       this.flipY = true;
     }
 
-    this.root = xml.parse(tmxFile);
-
-    String mapOrientation =
-        Nullability.castToNonnull(root, "assigned before use").getAttribute("orientation", null);
+    String mapOrientation = root.getAttribute("orientation", null);
     int mapWidth = root.getIntAttribute("width", 0);
     int mapHeight = root.getIntAttribute("height", 0);
     int tileWidth = root.getIntAttribute("tilewidth", 0);
@@ -605,7 +601,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
         FileHandle tsx = getRelativeFileHandle(tmxFile, source);
         try {
           element = xml.parse(tsx);
-          Element imageElement = Nullability.castToNonnull(element.getChildByName("image"));
+          Element imageElement = element.getChildByName("image");
           if (imageElement != null) {
             imageSource = imageElement.getAttribute("source");
             imageWidth = imageElement.getIntAttribute("width", 0);
@@ -616,7 +612,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
           throw new GdxRuntimeException("Error parsing external tileset.");
         }
       } else {
-        Element imageElement = Nullability.castToNonnull(element.getChildByName("image"));
+        Element imageElement = element.getChildByName("image");
         if (imageElement != null) {
           imageSource = imageElement.getAttribute("source");
           imageWidth = imageElement.getIntAttribute("width", 0);
