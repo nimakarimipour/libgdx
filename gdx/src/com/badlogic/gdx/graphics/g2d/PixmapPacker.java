@@ -603,7 +603,7 @@ public class PixmapPacker implements Disposable {
      *
      * @see #updateTexture(TextureFilter, TextureFilter, boolean)
      */
-    public Texture getTexture() {
+    @Nullable public Texture getTexture() {
       return texture;
     }
 
