@@ -39,6 +39,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
@@ -798,6 +799,7 @@ public class Mesh implements Disposable {
    * @param usage the Usage.
    * @return the VertexAttribute or null if no attribute with that usage was found.
    */
+  @Nullable
   public VertexAttribute getVertexAttribute(int usage) {
     VertexAttributes attributes = vertices.getAttributes();
     int len = attributes.size();
@@ -847,7 +849,7 @@ public class Mesh implements Disposable {
     final FloatBuffer verts = vertices.getBuffer();
     bbox.inf();
     final VertexAttribute posAttrib = getVertexAttribute(Usage.Position);
-    final int offset = posAttrib.offset / 4;
+    final int offset = Nullability.castToNonnull(posAttrib, "enforced by framework").offset / 4;
     final int vertexSize = vertices.getAttributes().vertexSize / 4;
     int idx = offset;
 
@@ -932,6 +934,9 @@ public class Mesh implements Disposable {
     final FloatBuffer verts = vertices.getBuffer();
     final ShortBuffer index = indices.getBuffer();
     final VertexAttribute posAttrib = getVertexAttribute(Usage.Position);
+    if (posAttrib == null) {
+      throw new GdxRuntimeException("Mesh vertices must have Usage.Position");
+    }
     final int posoff = posAttrib.offset / 4;
     final int vertexSize = vertices.getAttributes().vertexSize / 4;
     final int end = offset + count;
@@ -1017,7 +1022,8 @@ public class Mesh implements Disposable {
     final FloatBuffer verts = vertices.getBuffer();
     final ShortBuffer index = indices.getBuffer();
     final VertexAttribute posAttrib = getVertexAttribute(Usage.Position);
-    final int posoff = posAttrib.offset / 4;
+    final int posoff =
+        Nullability.castToNonnull(posAttrib, "safeguards ensure non-null").offset / 4;
     final int vertexSize = vertices.getAttributes().vertexSize / 4;
     final int end = offset + count;
 
@@ -1201,6 +1207,9 @@ public class Mesh implements Disposable {
    */
   public void scale(float scaleX, float scaleY, float scaleZ) {
     final VertexAttribute posAttr = getVertexAttribute(Usage.Position);
+    if (posAttr == null) {
+      throw new RuntimeException("VertexAttribute with Usage.Position is required");
+    }
     final int offset = posAttr.offset / 4;
     final int numComponents = posAttr.numComponents;
     final int numVertices = getNumVertices();
@@ -1251,16 +1260,14 @@ public class Mesh implements Disposable {
   // TODO: Protected for now, because transforming a portion works but still copies all vertices
   public void transform(final Matrix4 matrix, final int start, final int count) {
     final VertexAttribute posAttr = getVertexAttribute(Usage.Position);
-    final int posOffset = posAttr.offset / 4;
+    final int posOffset = Nullability.castToNonnull(posAttr, "guaranteed not null").offset / 4;
     final int stride = getVertexSize() / 4;
     final int numComponents = posAttr.numComponents;
     final int numVertices = getNumVertices();
 
     final float[] vertices = new float[count * stride];
     getVertices(start * stride, count * stride, vertices);
-    // getVertices(0, vertices.length, vertices);
     transform(matrix, vertices, stride, posOffset, numComponents, 0, count);
-    // setVertices(vertices, 0, vertices.length);
     updateVertices(start * stride, vertices);
   }
 
@@ -1341,6 +1348,10 @@ public class Mesh implements Disposable {
   // TODO: Protected for now, because transforming a portion works but still copies all vertices
   protected void transformUV(final Matrix3 matrix, final int start, final int count) {
     final VertexAttribute posAttr = getVertexAttribute(Usage.TextureCoordinates);
+    if (posAttr == null) {
+      throw new GdxRuntimeException(
+          "Vertex attribute with Usage.TextureCoordinates must be present");
+    }
     final int offset = posAttr.offset / 4;
     final int vertexSize = getVertexSize() / 4;
     final int numVertices = getNumVertices();
@@ -1404,9 +1415,6 @@ public class Mesh implements Disposable {
    * @return the copy of this mesh
    */
   public Mesh copy(boolean isStatic, boolean removeDuplicates, @Nullable final int[] usage) {
-    // TODO move this to a copy constructor?
-    // TODO duplicate the buffers without double copying the data if possible.
-    // TODO perhaps move this code to JNI if it turns out being too slow.
     final int vertexSize = getVertexSize() / 4;
     int numVertices = getNumVertices();
     float[] vertices = new float[numVertices * vertexSize];
@@ -1419,7 +1427,9 @@ public class Mesh implements Disposable {
       int as = 0;
       for (int i = 0; i < usage.length; i++)
         if (getVertexAttribute(usage[i]) != null) {
-          size += getVertexAttribute(usage[i]).numComponents;
+          size +=
+              Nullability.castToNonnull(getVertexAttribute(usage[i]), "checked not null")
+                  .numComponents;
           as++;
         }
       if (size > 0) {
