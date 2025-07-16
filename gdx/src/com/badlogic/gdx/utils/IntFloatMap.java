@@ -18,9 +18,11 @@ package com.badlogic.gdx.utils;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import javax.annotation.Nullable;
 
 /**
  * An unordered map where the keys are unboxed ints and values are unboxed floats. No allocation is
@@ -76,9 +78,9 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
    */
   protected int mask;
 
-  private transient Entries entries1, entries2;
-  private transient Values values1, values2;
-  private transient Keys keys1, keys2;
+  @Nullable private transient Entries entries1, entries2;
+  @Nullable private transient Values values1, values2;
+  @Nullable private transient Keys keys1, keys2;
 
   /** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
   public IntFloatMap() {
@@ -521,11 +523,11 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
     if (!entries1.valid) {
       entries1.reset();
       entries1.valid = true;
-      entries2.valid = false;
+      Nullability.castToNonnull(entries2, "initialized with entries1").valid = false;
       return entries1;
     }
-    entries2.reset();
-    entries2.valid = true;
+    Nullability.castToNonnull(entries2, "initialized with entries1").reset();
+    Nullability.castToNonnull(entries2, "initialized with entries1").valid = true;
     entries1.valid = false;
     return entries2;
   }
@@ -546,11 +548,11 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
     if (!values1.valid) {
       values1.reset();
       values1.valid = true;
-      values2.valid = false;
+      Nullability.castToNonnull(values2, "initialized before usage").valid = false;
       return values1;
     }
-    values2.reset();
-    values2.valid = true;
+    Nullability.castToNonnull(values2, "initialized before usage").reset();
+    Nullability.castToNonnull(values2, "values1 has same lifecycle").valid = true;
     values1.valid = false;
     return values2;
   }
@@ -571,11 +573,11 @@ public class IntFloatMap implements Iterable<IntFloatMap.Entry> {
     if (!keys1.valid) {
       keys1.reset();
       keys1.valid = true;
-      keys2.valid = false;
+      Nullability.castToNonnull(keys2, "initialized with keys1").valid = false;
       return keys1;
     }
-    keys2.reset();
-    keys2.valid = true;
+    Nullability.castToNonnull(keys2, "initialized with keys1").reset();
+    Nullability.castToNonnull(keys2, "initialized with keys1").valid = true;
     keys1.valid = false;
     return keys2;
   }
