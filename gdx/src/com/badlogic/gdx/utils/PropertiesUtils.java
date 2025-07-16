@@ -251,7 +251,9 @@ public final class PropertiesUtils {
     for (Entry<String, String> entry : properties.entries()) {
       dumpString(sb, entry.key, true, escapeUnicode);
       sb.append('=');
-      dumpString(sb, entry.value, false, escapeUnicode);
+      if (entry.value != null) {
+        dumpString(sb, entry.value, false, escapeUnicode);
+      }
       writer.write(LINE_SEPARATOR);
       writer.write(sb.toString());
       sb.setLength(0);
