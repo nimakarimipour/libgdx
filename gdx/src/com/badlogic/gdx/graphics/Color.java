@@ -17,7 +17,6 @@
 package com.badlogic.gdx.graphics;
 
 import com.badlogic.gdx.utils.NumberUtils;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -116,7 +115,7 @@ public class Color {
    * @param color the Color
    */
   public Color set(@Nullable Color color) {
-    this.r = Nullability.castToNonnull(color).r;
+    this.r = color.r;
     this.g = color.g;
     this.b = color.b;
     this.a = color.a;
