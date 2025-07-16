@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.SnapshotArray;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A group that lays out its children top to bottom vertically, with optional wrapping. {@link
@@ -45,7 +46,7 @@ import javax.annotation.Nullable;
 public class VerticalGroup extends WidgetGroup {
   private float prefWidth, prefHeight, lastPrefWidth;
   private boolean sizeInvalid = true;
-  private FloatArray columnSizes; // column height, column width, ...
+  @Nullable private FloatArray columnSizes; // column height, column width, ...
 
   private int align = Align.top, columnAlign;
   private boolean reverse, round = true, wrap, expand;
@@ -205,91 +206,94 @@ public class VerticalGroup extends WidgetGroup {
   }
 
   private void layoutWrapped() {
-    float prefWidth = getPrefWidth();
-    if (prefWidth != lastPrefWidth) {
-      lastPrefWidth = prefWidth;
-      invalidateHierarchy();
-    }
-
-    int align = this.align;
-    boolean round = this.round;
-    float space = this.space, padLeft = this.padLeft, fill = this.fill, wrapSpace = this.wrapSpace;
-    float maxHeight = prefHeight - padTop - padBottom;
-    float columnX = padLeft, groupHeight = getHeight();
-    float yStart = prefHeight - padTop + space, y = 0, columnWidth = 0;
-
-    if ((align & Align.right) != 0) columnX += getWidth() - prefWidth;
-    else if ((align & Align.left) == 0) // center
-    columnX += (getWidth() - prefWidth) / 2;
-
-    if ((align & Align.top) != 0) yStart += groupHeight - prefHeight;
-    else if ((align & Align.bottom) == 0) // center
-    yStart += (groupHeight - prefHeight) / 2;
-
-    groupHeight -= padTop;
-    align = columnAlign;
-
-    FloatArray columnSizes = this.columnSizes;
-    SnapshotArray<Actor> children = getChildren();
-    int i = 0, n = children.size, incr = 1;
-    if (reverse) {
-      i = n - 1;
-      n = -1;
-      incr = -1;
-    }
-    for (int r = 0; i != n; i += incr) {
-      Actor child = children.get(i);
-
-      float width, height;
-      Layout layout = null;
-      if (child instanceof Layout) {
-        layout = (Layout) child;
-        width = layout.getPrefWidth();
-        height = layout.getPrefHeight();
-        if (height > groupHeight) height = Math.max(groupHeight, layout.getMinHeight());
-      } else {
-        width = child.getWidth();
-        height = child.getHeight();
-      }
-
-      if (y - height - space < padBottom || r == 0) {
-        r =
-            Math.min(
-                r,
-                columnSizes.size
-                    - 2); // In case an actor changed size without invalidating this layout.
-        y = yStart;
-        if ((align & Align.bottom) != 0) y -= maxHeight - columnSizes.get(r);
-        else if ((align & Align.top) == 0) // center
-        y -= (maxHeight - columnSizes.get(r)) / 2;
-        if (r > 0) {
-          columnX += wrapSpace;
-          columnX += columnWidth;
+        float prefWidth = getPrefWidth();
+        if (prefWidth != lastPrefWidth) {
+          lastPrefWidth = prefWidth;
+          invalidateHierarchy();
         }
-        columnWidth = columnSizes.get(r + 1);
-        r += 2;
-      }
-
-      if (fill > 0) width = columnWidth * fill;
-
-      if (layout != null) {
-        width = Math.max(width, layout.getMinWidth());
-        float maxWidth = layout.getMaxWidth();
-        if (maxWidth > 0 && width > maxWidth) width = maxWidth;
-      }
-
-      float x = columnX;
-      if ((align & Align.right) != 0) x += columnWidth - width;
-      else if ((align & Align.left) == 0) // center
-      x += (columnWidth - width) / 2;
-
-      y -= height + space;
-      if (round)
-        child.setBounds(Math.round(x), Math.round(y), Math.round(width), Math.round(height));
-      else child.setBounds(x, y, width, height);
-
-      if (layout != null) layout.validate();
-    }
+    
+        int align = this.align;
+        boolean round = this.round;
+        float space = this.space, padLeft = this.padLeft, fill = this.fill, wrapSpace = this.wrapSpace;
+        float maxHeight = prefHeight - padTop - padBottom;
+        float columnX = padLeft, groupHeight = getHeight();
+        float yStart = prefHeight - padTop + space, y = 0, columnWidth = 0;
+    
+        if ((align & Align.right) != 0) columnX += getWidth() - prefWidth;
+        else if ((align & Align.left) == 0) // center
+        columnX += (getWidth() - prefWidth) / 2;
+    
+        if ((align & Align.top) != 0) yStart += groupHeight - prefHeight;
+        else if ((align & Align.bottom) == 0) // center
+        yStart += (groupHeight - prefHeight) / 2;
+    
+        groupHeight -= padTop;
+        align = columnAlign;
+    
+        // Ensure columnSizes is initialized
+        if (columnSizes == null) columnSizes = new FloatArray();
+        FloatArray columnSizes = this.columnSizes;
+    
+        SnapshotArray<Actor> children = getChildren();
+        int i = 0, n = children.size, incr = 1;
+        if (reverse) {
+          i = n - 1;
+          n = -1;
+          incr = -1;
+        }
+        for (int r = 0; i != n; i += incr) {
+          Actor child = children.get(i);
+    
+          float width, height;
+          Layout layout = null;
+          if (child instanceof Layout) {
+            layout = (Layout) child;
+            width = layout.getPrefWidth();
+            height = layout.getPrefHeight();
+            if (height > groupHeight) height = Math.max(groupHeight, layout.getMinHeight());
+          } else {
+            width = child.getWidth();
+            height = child.getHeight();
+          }
+    
+          if (y - height - space < padBottom || r == 0) {
+            r =
+                Math.min(
+                    r,
+                    Nullability.castToNonnull(columnSizes, "always initialized before use").size
+                        - 2); // In case an actor changed size without invalidating this layout.
+            y = yStart;
+            if ((align & Align.bottom) != 0) y -= maxHeight - columnSizes.get(r);
+            else if ((align & Align.top) == 0) // center
+            y -= (maxHeight - columnSizes.get(r)) / 2;
+            if (r > 0) {
+              columnX += wrapSpace;
+              columnX += columnWidth;
+            }
+            columnWidth = columnSizes.get(r + 1);
+            r += 2;
+          }
+    
+          if (fill > 0) width = columnWidth * fill;
+    
+          if (layout != null) {
+            width = Math.max(width, layout.getMinWidth());
+            float maxWidth = layout.getMaxWidth();
+            if (maxWidth > 0 && width > maxWidth) width = maxWidth;
+          }
+    
+          float x = columnX;
+          if ((align & Align.right) != 0) x += columnWidth - width;
+          else if ((align & Align.left) == 0) // center
+          x += (columnWidth - width) / 2;
+    
+          y -= height + space;
+          if (round)
+            child.setBounds(Math.round(x), Math.round(y), Math.round(width), Math.round(height));
+          else child.setBounds(x, y, width, height);
+    
+          if (layout != null) layout.validate();
+        }
   }
 
   public float getPrefWidth() {
@@ -305,8 +309,14 @@ public class VerticalGroup extends WidgetGroup {
 
   /** When wrapping is enabled, the number of columns may be > 1. */
   public int getColumns() {
-    return wrap ? columnSizes.size >> 1 : 1;
-  }
+          if (wrap) {
+              if (columnSizes == null) {
+                  columnSizes = new FloatArray();
+              }
+              return columnSizes.size >> 1;
+          }
+          return 1;
+      }
 
   /** If true (the default), positions and sizes are rounded to integers. */
   public void setRound(boolean round) {
