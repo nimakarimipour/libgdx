@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.compression.ICodeProgress;
 import com.badlogic.gdx.utils.compression.rangecoder.BitTreeEncoder;
 import java.io.IOException;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 public class Encoder {
   public static final int EMatchFinderTypeBT2 = 0;
@@ -296,7 +297,7 @@ public class Encoder {
   ;
 
   Optimal[] _optimum = new Optimal[kNumOpts];
-  com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
+  @Nullable com.badlogic.gdx.utils.compression.lz.BinTree _matchFinder = null;
   com.badlogic.gdx.utils.compression.rangecoder.Encoder _rangeEncoder =
       new com.badlogic.gdx.utils.compression.rangecoder.Encoder();
 
@@ -409,26 +410,28 @@ public class Encoder {
   }
 
   int ReadMatchDistances() throws java.io.IOException {
-    int lenRes = 0;
-    _numDistancePairs = _matchFinder.GetMatches(_matchDistances);
-    if (_numDistancePairs > 0) {
-      lenRes = _matchDistances[_numDistancePairs - 2];
-      if (lenRes == _numFastBytes)
-        lenRes +=
-            _matchFinder.GetMatchLen(
-                (int) lenRes - 1,
-                _matchDistances[_numDistancePairs - 1],
-                Base.kMatchMaxLen - lenRes);
-    }
-    _additionalOffset++;
-    return lenRes;
+          int lenRes = 0;
+          if (_matchFinder != null) {
+              _numDistancePairs = Nullability.castToNonnull(_matchFinder, "checked for null").GetMatches(_matchDistances);
+              if (_numDistancePairs > 0) {
+                  lenRes = _matchDistances[_numDistancePairs - 2];
+                  if (lenRes == _numFastBytes)
+                      lenRes +=
+                          _matchFinder.GetMatchLen(
+                              (int) lenRes - 1,
+                              _matchDistances[_numDistancePairs - 1],
+                              Base.kMatchMaxLen - lenRes);
+              }
+          }
+          _additionalOffset++;
+          return lenRes;
   }
 
   void MovePos(int num) throws java.io.IOException {
-    if (num > 0) {
-      _matchFinder.Skip(num);
-      _additionalOffset += num;
-    }
+          if (num > 0 && _matchFinder != null) {
+              Nullability.castToNonnull(_matchFinder, "null check performed").Skip(num);
+              _additionalOffset += num;
+          }
   }
 
   int GetRepLen1Price(int state, int posState) {
@@ -509,415 +512,338 @@ public class Encoder {
   int backRes;
 
   int GetOptimum(int position) throws IOException {
-    if (_optimumEndIndex != _optimumCurrentIndex) {
-      int lenRes = _optimum[_optimumCurrentIndex].PosPrev - _optimumCurrentIndex;
-      backRes = _optimum[_optimumCurrentIndex].BackPrev;
-      _optimumCurrentIndex = _optimum[_optimumCurrentIndex].PosPrev;
-      return lenRes;
-    }
-    _optimumCurrentIndex = _optimumEndIndex = 0;
-
-    int lenMain, numDistancePairs;
-    if (!_longestMatchWasFound) {
-      lenMain = ReadMatchDistances();
-    } else {
-      lenMain = _longestMatchLength;
-      _longestMatchWasFound = false;
-    }
-    numDistancePairs = _numDistancePairs;
-
-    int numAvailableBytes = _matchFinder.GetNumAvailableBytes() + 1;
-    if (numAvailableBytes < 2) {
-      backRes = -1;
-      return 1;
-    }
-    if (numAvailableBytes > Base.kMatchMaxLen) numAvailableBytes = Base.kMatchMaxLen;
-
-    int repMaxIndex = 0;
-    int i;
-    for (i = 0; i < Base.kNumRepDistances; i++) {
-      reps[i] = _repDistances[i];
-      repLens[i] = _matchFinder.GetMatchLen(0 - 1, reps[i], Base.kMatchMaxLen);
-      if (repLens[i] > repLens[repMaxIndex]) repMaxIndex = i;
-    }
-    if (repLens[repMaxIndex] >= _numFastBytes) {
-      backRes = repMaxIndex;
-      int lenRes = repLens[repMaxIndex];
-      MovePos(lenRes - 1);
-      return lenRes;
-    }
-
-    if (lenMain >= _numFastBytes) {
-      backRes = _matchDistances[numDistancePairs - 1] + Base.kNumRepDistances;
-      MovePos(lenMain - 1);
-      return lenMain;
-    }
-
-    byte currentByte = _matchFinder.GetIndexByte(0 - 1);
-    byte matchByte = _matchFinder.GetIndexByte(0 - _repDistances[0] - 1 - 1);
-
-    if (lenMain < 2 && currentByte != matchByte && repLens[repMaxIndex] < 2) {
-      backRes = -1;
-      return 1;
-    }
-
-    _optimum[0].State = _state;
-
-    int posState = (position & _posStateMask);
-
-    _optimum[1].Price =
-        com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(
-                _isMatch[(_state << Base.kNumPosStatesBitsMax) + posState])
-            + _literalEncoder
-                .GetSubCoder(position, _previousByte)
-                .GetPrice(!Base.StateIsCharState(_state), matchByte, currentByte);
-    _optimum[1].MakeAsChar();
-
-    int matchPrice =
-        com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
-            _isMatch[(_state << Base.kNumPosStatesBitsMax) + posState]);
-    int repMatchPrice =
-        matchPrice
-            + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(_isRep[_state]);
-
-    if (matchByte == currentByte) {
-      int shortRepPrice = repMatchPrice + GetRepLen1Price(_state, posState);
-      if (shortRepPrice < _optimum[1].Price) {
-        _optimum[1].Price = shortRepPrice;
-        _optimum[1].MakeAsShortRep();
-      }
-    }
-
-    int lenEnd = ((lenMain >= repLens[repMaxIndex]) ? lenMain : repLens[repMaxIndex]);
-
-    if (lenEnd < 2) {
-      backRes = _optimum[1].BackPrev;
-      return 1;
-    }
-
-    _optimum[1].PosPrev = 0;
-
-    _optimum[0].Backs0 = reps[0];
-    _optimum[0].Backs1 = reps[1];
-    _optimum[0].Backs2 = reps[2];
-    _optimum[0].Backs3 = reps[3];
-
-    int len = lenEnd;
-    do _optimum[len--].Price = kIfinityPrice;
-    while (len >= 2);
-
-    for (i = 0; i < Base.kNumRepDistances; i++) {
-      int repLen = repLens[i];
-      if (repLen < 2) continue;
-      int price = repMatchPrice + GetPureRepPrice(i, _state, posState);
-      do {
-        int curAndLenPrice = price + _repMatchLenEncoder.GetPrice(repLen - 2, posState);
-        Optimal optimum = _optimum[repLen];
-        if (curAndLenPrice < optimum.Price) {
-          optimum.Price = curAndLenPrice;
-          optimum.PosPrev = 0;
-          optimum.BackPrev = i;
-          optimum.Prev1IsChar = false;
+        if (_optimumEndIndex != _optimumCurrentIndex) {
+          int lenRes = _optimum[_optimumCurrentIndex].PosPrev - _optimumCurrentIndex;
+          backRes = _optimum[_optimumCurrentIndex].BackPrev;
+          _optimumCurrentIndex = _optimum[_optimumCurrentIndex].PosPrev;
+          return lenRes;
         }
-      } while (--repLen >= 2);
-    }
-
-    int normalMatchPrice =
-        matchPrice
-            + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(_isRep[_state]);
-
-    len = ((repLens[0] >= 2) ? repLens[0] + 1 : 2);
-    if (len <= lenMain) {
-      int offs = 0;
-      while (len > _matchDistances[offs]) offs += 2;
-      for (; ; len++) {
-        int distance = _matchDistances[offs + 1];
-        int curAndLenPrice = normalMatchPrice + GetPosLenPrice(distance, len, posState);
-        Optimal optimum = _optimum[len];
-        if (curAndLenPrice < optimum.Price) {
-          optimum.Price = curAndLenPrice;
-          optimum.PosPrev = 0;
-          optimum.BackPrev = distance + Base.kNumRepDistances;
-          optimum.Prev1IsChar = false;
-        }
-        if (len == _matchDistances[offs]) {
-          offs += 2;
-          if (offs == numDistancePairs) break;
-        }
-      }
-    }
-
-    int cur = 0;
-
-    while (true) {
-      cur++;
-      if (cur == lenEnd) return Backward(cur);
-      int newLen = ReadMatchDistances();
-      numDistancePairs = _numDistancePairs;
-      if (newLen >= _numFastBytes) {
-
-        _longestMatchLength = newLen;
-        _longestMatchWasFound = true;
-        return Backward(cur);
-      }
-      position++;
-      int posPrev = _optimum[cur].PosPrev;
-      int state;
-      if (_optimum[cur].Prev1IsChar) {
-        posPrev--;
-        if (_optimum[cur].Prev2) {
-          state = _optimum[_optimum[cur].PosPrev2].State;
-          if (_optimum[cur].BackPrev2 < Base.kNumRepDistances) state = Base.StateUpdateRep(state);
-          else state = Base.StateUpdateMatch(state);
-        } else state = _optimum[posPrev].State;
-        state = Base.StateUpdateChar(state);
-      } else state = _optimum[posPrev].State;
-      if (posPrev == cur - 1) {
-        if (_optimum[cur].IsShortRep()) state = Base.StateUpdateShortRep(state);
-        else state = Base.StateUpdateChar(state);
-      } else {
-        int pos;
-        if (_optimum[cur].Prev1IsChar && _optimum[cur].Prev2) {
-          posPrev = _optimum[cur].PosPrev2;
-          pos = _optimum[cur].BackPrev2;
-          state = Base.StateUpdateRep(state);
+        _optimumCurrentIndex = _optimumEndIndex = 0;
+  
+        int lenMain, numDistancePairs;
+        if (!_longestMatchWasFound) {
+          lenMain = ReadMatchDistances();
         } else {
-          pos = _optimum[cur].BackPrev;
-          if (pos < Base.kNumRepDistances) state = Base.StateUpdateRep(state);
-          else state = Base.StateUpdateMatch(state);
+          lenMain = _longestMatchLength;
+          _longestMatchWasFound = false;
         }
-        Optimal opt = _optimum[posPrev];
-        if (pos < Base.kNumRepDistances) {
-          if (pos == 0) {
-            reps[0] = opt.Backs0;
-            reps[1] = opt.Backs1;
-            reps[2] = opt.Backs2;
-            reps[3] = opt.Backs3;
-          } else if (pos == 1) {
-            reps[0] = opt.Backs1;
-            reps[1] = opt.Backs0;
-            reps[2] = opt.Backs2;
-            reps[3] = opt.Backs3;
-          } else if (pos == 2) {
-            reps[0] = opt.Backs2;
-            reps[1] = opt.Backs0;
-            reps[2] = opt.Backs1;
-            reps[3] = opt.Backs3;
-          } else {
-            reps[0] = opt.Backs3;
-            reps[1] = opt.Backs0;
-            reps[2] = opt.Backs1;
-            reps[3] = opt.Backs2;
+        numDistancePairs = _numDistancePairs;
+  
+        if (_matchFinder == null) {
+          throw new IllegalStateException("_matchFinder is not initialized.");
+        }
+        int numAvailableBytes = _matchFinder.GetNumAvailableBytes() + 1;
+        if (numAvailableBytes < 2) {
+          backRes = -1;
+          return 1;
+        }
+        if (numAvailableBytes > Base.kMatchMaxLen) numAvailableBytes = Base.kMatchMaxLen;
+  
+        int repMaxIndex = 0;
+        int i;
+        for (i = 0; i < Base.kNumRepDistances; i++) {
+          reps[i] = _repDistances[i];
+          repLens[i] = _matchFinder.GetMatchLen(0 - 1, reps[i], Base.kMatchMaxLen);
+          if (repLens[i] > repLens[repMaxIndex]) repMaxIndex = i;
+        }
+        if (repLens[repMaxIndex] >= _numFastBytes) {
+          backRes = repMaxIndex;
+          int lenRes = repLens[repMaxIndex];
+          MovePos(lenRes - 1);
+          return lenRes;
+        }
+  
+        if (lenMain >= _numFastBytes) {
+          backRes = _matchDistances[numDistancePairs - 1] + Base.kNumRepDistances;
+          MovePos(lenMain - 1);
+          return lenMain;
+        }
+  
+        byte currentByte = _matchFinder.GetIndexByte(0 - 1);
+        byte matchByte = _matchFinder.GetIndexByte(0 - _repDistances[0] - 1 - 1);
+  
+        if (lenMain < 2 && currentByte != matchByte && repLens[repMaxIndex] < 2) {
+          backRes = -1;
+          return 1;
+        }
+  
+        _optimum[0].State = _state;
+  
+        int posState = (position & _posStateMask);
+  
+        _optimum[1].Price =
+            com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(
+                    _isMatch[(_state << Base.kNumPosStatesBitsMax) + posState])
+                + _literalEncoder
+                    .GetSubCoder(position, _previousByte)
+                    .GetPrice(!Base.StateIsCharState(_state), matchByte, currentByte);
+        _optimum[1].MakeAsChar();
+  
+        int matchPrice =
+            com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
+                _isMatch[(_state << Base.kNumPosStatesBitsMax) + posState]);
+        int repMatchPrice =
+            matchPrice
+                + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(_isRep[_state]);
+  
+        if (matchByte == currentByte) {
+          int shortRepPrice = repMatchPrice + GetRepLen1Price(_state, posState);
+          if (shortRepPrice < _optimum[1].Price) {
+            _optimum[1].Price = shortRepPrice;
+            _optimum[1].MakeAsShortRep();
           }
-        } else {
-          reps[0] = (pos - Base.kNumRepDistances);
-          reps[1] = opt.Backs0;
-          reps[2] = opt.Backs1;
-          reps[3] = opt.Backs2;
         }
-      }
-      _optimum[cur].State = state;
-      _optimum[cur].Backs0 = reps[0];
-      _optimum[cur].Backs1 = reps[1];
-      _optimum[cur].Backs2 = reps[2];
-      _optimum[cur].Backs3 = reps[3];
-      int curPrice = _optimum[cur].Price;
-
-      currentByte = _matchFinder.GetIndexByte(0 - 1);
-      matchByte = _matchFinder.GetIndexByte(0 - reps[0] - 1 - 1);
-
-      posState = (position & _posStateMask);
-
-      int curAnd1Price =
-          curPrice
-              + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(
-                  _isMatch[(state << Base.kNumPosStatesBitsMax) + posState])
-              + _literalEncoder
-                  .GetSubCoder(position, _matchFinder.GetIndexByte(0 - 2))
-                  .GetPrice(!Base.StateIsCharState(state), matchByte, currentByte);
-
-      Optimal nextOptimum = _optimum[cur + 1];
-
-      boolean nextIsChar = false;
-      if (curAnd1Price < nextOptimum.Price) {
-        nextOptimum.Price = curAnd1Price;
-        nextOptimum.PosPrev = cur;
-        nextOptimum.MakeAsChar();
-        nextIsChar = true;
-      }
-
-      matchPrice =
-          curPrice
-              + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
-                  _isMatch[(state << Base.kNumPosStatesBitsMax) + posState]);
-      repMatchPrice =
-          matchPrice
-              + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(_isRep[state]);
-
-      if (matchByte == currentByte && !(nextOptimum.PosPrev < cur && nextOptimum.BackPrev == 0)) {
-        int shortRepPrice = repMatchPrice + GetRepLen1Price(state, posState);
-        if (shortRepPrice <= nextOptimum.Price) {
-          nextOptimum.Price = shortRepPrice;
-          nextOptimum.PosPrev = cur;
-          nextOptimum.MakeAsShortRep();
-          nextIsChar = true;
+  
+        int lenEnd = ((lenMain >= repLens[repMaxIndex]) ? lenMain : repLens[repMaxIndex]);
+  
+        if (lenEnd < 2) {
+          backRes = _optimum[1].BackPrev;
+          return 1;
         }
-      }
-
-      int numAvailableBytesFull = _matchFinder.GetNumAvailableBytes() + 1;
-      numAvailableBytesFull = Math.min(kNumOpts - 1 - cur, numAvailableBytesFull);
-      numAvailableBytes = numAvailableBytesFull;
-
-      if (numAvailableBytes < 2) continue;
-      if (numAvailableBytes > _numFastBytes) numAvailableBytes = _numFastBytes;
-      if (!nextIsChar && matchByte != currentByte) {
-        // try Literal + rep0
-        int t = Math.min(numAvailableBytesFull - 1, _numFastBytes);
-        int lenTest2 = _matchFinder.GetMatchLen(0, reps[0], t);
-        if (lenTest2 >= 2) {
-          int state2 = Base.StateUpdateChar(state);
-
-          int posStateNext = (position + 1) & _posStateMask;
-          int nextRepMatchPrice =
-              curAnd1Price
-                  + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
-                      _isMatch[(state2 << Base.kNumPosStatesBitsMax) + posStateNext])
-                  + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(_isRep[state2]);
-          {
-            int offset = cur + 1 + lenTest2;
-            while (lenEnd < offset) _optimum[++lenEnd].Price = kIfinityPrice;
-            int curAndLenPrice = nextRepMatchPrice + GetRepPrice(0, lenTest2, state2, posStateNext);
-            Optimal optimum = _optimum[offset];
+  
+        _optimum[1].PosPrev = 0;
+  
+        _optimum[0].Backs0 = reps[0];
+        _optimum[0].Backs1 = reps[1];
+        _optimum[0].Backs2 = reps[2];
+        _optimum[0].Backs3 = reps[3];
+  
+        int len = lenEnd;
+        do _optimum[len--].Price = kIfinityPrice;
+        while (len >= 2);
+  
+        for (i = 0; i < Base.kNumRepDistances; i++) {
+          int repLen = repLens[i];
+          if (repLen < 2) continue;
+          int price = repMatchPrice + GetPureRepPrice(i, _state, posState);
+          do {
+            int curAndLenPrice = price + _repMatchLenEncoder.GetPrice(repLen - 2, posState);
+            Optimal optimum = _optimum[repLen];
             if (curAndLenPrice < optimum.Price) {
               optimum.Price = curAndLenPrice;
-              optimum.PosPrev = cur + 1;
-              optimum.BackPrev = 0;
-              optimum.Prev1IsChar = true;
-              optimum.Prev2 = false;
+              optimum.PosPrev = 0;
+              optimum.BackPrev = i;
+              optimum.Prev1IsChar = false;
+            }
+          } while (--repLen >= 2);
+        }
+  
+        int normalMatchPrice =
+            matchPrice
+                + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(_isRep[_state]);
+  
+        len = ((repLens[0] >= 2) ? repLens[0] + 1 : 2);
+        if (len <= lenMain) {
+          int offs = 0;
+          while (len > _matchDistances[offs]) offs += 2;
+          for (; ; len++) {
+            int distance = _matchDistances[offs + 1];
+            int curAndLenPrice = normalMatchPrice + GetPosLenPrice(distance, len, posState);
+            Optimal optimum = _optimum[len];
+            if (curAndLenPrice < optimum.Price) {
+              optimum.Price = curAndLenPrice;
+              optimum.PosPrev = 0;
+              optimum.BackPrev = distance + Base.kNumRepDistances;
+              optimum.Prev1IsChar = false;
+            }
+            if (len == _matchDistances[offs]) {
+              offs += 2;
+              if (offs == numDistancePairs) break;
             }
           }
         }
-      }
-
-      int startLen = 2; // speed optimization
-
-      for (int repIndex = 0; repIndex < Base.kNumRepDistances; repIndex++) {
-        int lenTest = _matchFinder.GetMatchLen(0 - 1, reps[repIndex], numAvailableBytes);
-        if (lenTest < 2) continue;
-        int lenTestTemp = lenTest;
-        do {
-          while (lenEnd < cur + lenTest) _optimum[++lenEnd].Price = kIfinityPrice;
-          int curAndLenPrice = repMatchPrice + GetRepPrice(repIndex, lenTest, state, posState);
-          Optimal optimum = _optimum[cur + lenTest];
-          if (curAndLenPrice < optimum.Price) {
-            optimum.Price = curAndLenPrice;
-            optimum.PosPrev = cur;
-            optimum.BackPrev = repIndex;
-            optimum.Prev1IsChar = false;
+  
+        int cur = 0;
+  
+        while (true) {
+          cur++;
+          if (cur == lenEnd) return Backward(cur);
+          int newLen = ReadMatchDistances();
+          numDistancePairs = _numDistancePairs;
+          if (newLen >= _numFastBytes) {
+  
+            _longestMatchLength = newLen;
+            _longestMatchWasFound = true;
+            return Backward(cur);
           }
-        } while (--lenTest >= 2);
-        lenTest = lenTestTemp;
-
-        if (repIndex == 0) startLen = lenTest + 1;
-
-        // if (_maxMode)
-        if (lenTest < numAvailableBytesFull) {
-          int t = Math.min(numAvailableBytesFull - 1 - lenTest, _numFastBytes);
-          int lenTest2 = _matchFinder.GetMatchLen(lenTest, reps[repIndex], t);
-          if (lenTest2 >= 2) {
-            int state2 = Base.StateUpdateRep(state);
-
-            int posStateNext = (position + lenTest) & _posStateMask;
-            int curAndLenCharPrice =
-                repMatchPrice
-                    + GetRepPrice(repIndex, lenTest, state, posState)
-                    + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(
-                        _isMatch[(state2 << Base.kNumPosStatesBitsMax) + posStateNext])
-                    + _literalEncoder
-                        .GetSubCoder(position + lenTest, _matchFinder.GetIndexByte(lenTest - 1 - 1))
-                        .GetPrice(
-                            true,
-                            _matchFinder.GetIndexByte(lenTest - 1 - (reps[repIndex] + 1)),
-                            _matchFinder.GetIndexByte(lenTest - 1));
-            state2 = Base.StateUpdateChar(state2);
-            posStateNext = (position + lenTest + 1) & _posStateMask;
-            int nextMatchPrice =
-                curAndLenCharPrice
-                    + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
-                        _isMatch[(state2 << Base.kNumPosStatesBitsMax) + posStateNext]);
-            int nextRepMatchPrice =
-                nextMatchPrice
-                    + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
-                        _isRep[state2]);
-
-            // for(; lenTest2 >= 2; lenTest2--)
-            {
-              int offset = lenTest + 1 + lenTest2;
-              while (lenEnd < cur + offset) _optimum[++lenEnd].Price = kIfinityPrice;
-              int curAndLenPrice =
-                  nextRepMatchPrice + GetRepPrice(0, lenTest2, state2, posStateNext);
-              Optimal optimum = _optimum[cur + offset];
-              if (curAndLenPrice < optimum.Price) {
-                optimum.Price = curAndLenPrice;
-                optimum.PosPrev = cur + lenTest + 1;
-                optimum.BackPrev = 0;
-                optimum.Prev1IsChar = true;
-                optimum.Prev2 = true;
-                optimum.PosPrev2 = cur;
-                optimum.BackPrev2 = repIndex;
+          position++;
+          int posPrev = _optimum[cur].PosPrev;
+          int state;
+          if (_optimum[cur].Prev1IsChar) {
+            posPrev--;
+            if (_optimum[cur].Prev2) {
+              state = _optimum[_optimum[cur].PosPrev2].State;
+              if (_optimum[cur].BackPrev2 < Base.kNumRepDistances) state = Base.StateUpdateRep(state);
+              else state = Base.StateUpdateMatch(state);
+            } else state = _optimum[posPrev].State;
+            state = Base.StateUpdateChar(state);
+          } else state = _optimum[posPrev].State;
+          if (posPrev == cur - 1) {
+            if (_optimum[cur].IsShortRep()) state = Base.StateUpdateShortRep(state);
+            else state = Base.StateUpdateChar(state);
+          } else {
+            int pos;
+            if (_optimum[cur].Prev1IsChar && _optimum[cur].Prev2) {
+              posPrev = _optimum[cur].PosPrev2;
+              pos = _optimum[cur].BackPrev2;
+              state = Base.StateUpdateRep(state);
+            } else {
+              pos = _optimum[cur].BackPrev;
+              if (pos < Base.kNumRepDistances) state = Base.StateUpdateRep(state);
+              else state = Base.StateUpdateMatch(state);
+            }
+            Optimal opt = _optimum[posPrev];
+            if (pos < Base.kNumRepDistances) {
+              if (pos == 0) {
+                reps[0] = opt.Backs0;
+                reps[1] = opt.Backs1;
+                reps[2] = opt.Backs2;
+                reps[3] = opt.Backs3;
+              } else if (pos == 1) {
+                reps[0] = opt.Backs1;
+                reps[1] = opt.Backs0;
+                reps[2] = opt.Backs2;
+                reps[3] = opt.Backs3;
+              } else if (pos == 2) {
+                reps[0] = opt.Backs2;
+                reps[1] = opt.Backs0;
+                reps[2] = opt.Backs1;
+                reps[3] = opt.Backs3;
+              } else {
+                reps[0] = opt.Backs3;
+                reps[1] = opt.Backs0;
+                reps[2] = opt.Backs1;
+                reps[3] = opt.Backs2;
+              }
+            } else {
+              reps[0] = (pos - Base.kNumRepDistances);
+              reps[1] = opt.Backs0;
+              reps[2] = opt.Backs1;
+              reps[3] = opt.Backs2;
+            }
+          }
+          _optimum[cur].State = state;
+          _optimum[cur].Backs0 = reps[0];
+          _optimum[cur].Backs1 = reps[1];
+          _optimum[cur].Backs2 = reps[2];
+          _optimum[cur].Backs3 = reps[3];
+          int curPrice = _optimum[cur].Price;
+  
+          currentByte = _matchFinder.GetIndexByte(0 - 1);
+          matchByte = _matchFinder.GetIndexByte(0 - reps[0] - 1 - 1);
+  
+          posState = (position & _posStateMask);
+  
+          int curAnd1Price =
+              curPrice
+                  + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(
+                      _isMatch[(state << Base.kNumPosStatesBitsMax) + posState])
+                  + _literalEncoder
+                      .GetSubCoder(position, _matchFinder.GetIndexByte(0 - 2))
+                      .GetPrice(!Base.StateIsCharState(state), matchByte, currentByte);
+  
+          Optimal nextOptimum = _optimum[cur + 1];
+  
+          boolean nextIsChar = false;
+          if (curAnd1Price < nextOptimum.Price) {
+            nextOptimum.Price = curAnd1Price;
+            nextOptimum.PosPrev = cur;
+            nextOptimum.MakeAsChar();
+            nextIsChar = true;
+          }
+  
+          matchPrice =
+              curPrice
+                  + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
+                      _isMatch[(state << Base.kNumPosStatesBitsMax) + posState]);
+          repMatchPrice =
+              matchPrice
+                  + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(_isRep[state]);
+  
+          if (matchByte == currentByte && !(nextOptimum.PosPrev < cur && nextOptimum.BackPrev == 0)) {
+            int shortRepPrice = repMatchPrice + GetRepLen1Price(state, posState);
+            if (shortRepPrice <= nextOptimum.Price) {
+              nextOptimum.Price = shortRepPrice;
+              nextOptimum.PosPrev = cur;
+              nextOptimum.MakeAsShortRep();
+              nextIsChar = true;
+            }
+          }
+  
+          int numAvailableBytesFull = _matchFinder.GetNumAvailableBytes() + 1;
+          numAvailableBytesFull = Math.min(kNumOpts - 1 - cur, numAvailableBytesFull);
+          numAvailableBytes = numAvailableBytesFull;
+  
+          if (numAvailableBytes < 2) continue;
+          if (numAvailableBytes > _numFastBytes) numAvailableBytes = _numFastBytes;
+          if (!nextIsChar && matchByte != currentByte) {
+            // try Literal + rep0
+            int t = Math.min(numAvailableBytesFull - 1, _numFastBytes);
+            int lenTest2 = _matchFinder.GetMatchLen(0, reps[0], t);
+            if (lenTest2 >= 2) {
+              int state2 = Base.StateUpdateChar(state);
+  
+              int posStateNext = (position + 1) & _posStateMask;
+              int nextRepMatchPrice =
+                  curAnd1Price
+                      + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
+                          _isMatch[(state2 << Base.kNumPosStatesBitsMax) + posStateNext])
+                      + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(_isRep[state2]);
+              {
+                int offset = cur + 1 + lenTest2;
+                while (lenEnd < offset) _optimum[++lenEnd].Price = kIfinityPrice;
+                int curAndLenPrice = nextRepMatchPrice + GetRepPrice(0, lenTest2, state2, posStateNext);
+                Optimal optimum = _optimum[offset];
+                if (curAndLenPrice < optimum.Price) {
+                  optimum.Price = curAndLenPrice;
+                  optimum.PosPrev = cur + 1;
+                  optimum.BackPrev = 0;
+                  optimum.Prev1IsChar = true;
+                  optimum.Prev2 = false;
+                }
               }
             }
           }
-        }
-      }
-
-      if (newLen > numAvailableBytes) {
-        newLen = numAvailableBytes;
-        for (numDistancePairs = 0;
-            newLen > _matchDistances[numDistancePairs];
-            numDistancePairs += 2)
-          ;
-        _matchDistances[numDistancePairs] = newLen;
-        numDistancePairs += 2;
-      }
-      if (newLen >= startLen) {
-        normalMatchPrice =
-            matchPrice
-                + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(_isRep[state]);
-        while (lenEnd < cur + newLen) _optimum[++lenEnd].Price = kIfinityPrice;
-
-        int offs = 0;
-        while (startLen > _matchDistances[offs]) offs += 2;
-
-        for (int lenTest = startLen; ; lenTest++) {
-          int curBack = _matchDistances[offs + 1];
-          int curAndLenPrice = normalMatchPrice + GetPosLenPrice(curBack, lenTest, posState);
-          Optimal optimum = _optimum[cur + lenTest];
-          if (curAndLenPrice < optimum.Price) {
-            optimum.Price = curAndLenPrice;
-            optimum.PosPrev = cur;
-            optimum.BackPrev = curBack + Base.kNumRepDistances;
-            optimum.Prev1IsChar = false;
-          }
-
-          if (lenTest == _matchDistances[offs]) {
+  
+          int startLen = 2; // speed optimization
+  
+          for (int repIndex = 0; repIndex < Base.kNumRepDistances; repIndex++) {
+            int lenTest = _matchFinder.GetMatchLen(0 - 1, reps[repIndex], numAvailableBytes);
+            if (lenTest < 2) continue;
+            int lenTestTemp = lenTest;
+            do {
+              while (lenEnd < cur + lenTest) _optimum[++lenEnd].Price = kIfinityPrice;
+              int curAndLenPrice = repMatchPrice + GetRepPrice(repIndex, lenTest, state, posState);
+              Optimal optimum = _optimum[cur + lenTest];
+              if (curAndLenPrice < optimum.Price) {
+                optimum.Price = curAndLenPrice;
+                optimum.PosPrev = cur;
+                optimum.BackPrev = repIndex;
+                optimum.Prev1IsChar = false;
+              }
+            } while (--lenTest >= 2);
+            lenTest = lenTestTemp;
+  
+            if (repIndex == 0) startLen = lenTest + 1;
+  
+            // if (_maxMode)
             if (lenTest < numAvailableBytesFull) {
               int t = Math.min(numAvailableBytesFull - 1 - lenTest, _numFastBytes);
-              int lenTest2 = _matchFinder.GetMatchLen(lenTest, curBack, t);
+              int lenTest2 = _matchFinder.GetMatchLen(lenTest, reps[repIndex], t);
               if (lenTest2 >= 2) {
-                int state2 = Base.StateUpdateMatch(state);
-
+                int state2 = Base.StateUpdateRep(state);
+  
                 int posStateNext = (position + lenTest) & _posStateMask;
                 int curAndLenCharPrice =
-                    curAndLenPrice
+                    repMatchPrice
+                        + GetRepPrice(repIndex, lenTest, state, posState)
                         + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(
                             _isMatch[(state2 << Base.kNumPosStatesBitsMax) + posStateNext])
                         + _literalEncoder
-                            .GetSubCoder(
-                                position + lenTest, _matchFinder.GetIndexByte(lenTest - 1 - 1))
+                            .GetSubCoder(position + lenTest, _matchFinder.GetIndexByte(lenTest - 1 - 1))
                             .GetPrice(
                                 true,
-                                _matchFinder.GetIndexByte(lenTest - (curBack + 1) - 1),
+                                _matchFinder.GetIndexByte(lenTest - 1 - (reps[repIndex] + 1)),
                                 _matchFinder.GetIndexByte(lenTest - 1));
                 state2 = Base.StateUpdateChar(state2);
                 posStateNext = (position + lenTest + 1) & _posStateMask;
@@ -929,29 +855,109 @@ public class Encoder {
                     nextMatchPrice
                         + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
                             _isRep[state2]);
-
-                int offset = lenTest + 1 + lenTest2;
-                while (lenEnd < cur + offset) _optimum[++lenEnd].Price = kIfinityPrice;
-                curAndLenPrice = nextRepMatchPrice + GetRepPrice(0, lenTest2, state2, posStateNext);
-                optimum = _optimum[cur + offset];
-                if (curAndLenPrice < optimum.Price) {
-                  optimum.Price = curAndLenPrice;
-                  optimum.PosPrev = cur + lenTest + 1;
-                  optimum.BackPrev = 0;
-                  optimum.Prev1IsChar = true;
-                  optimum.Prev2 = true;
-                  optimum.PosPrev2 = cur;
-                  optimum.BackPrev2 = curBack + Base.kNumRepDistances;
+  
+                // for(; lenTest2 >= 2; lenTest2--)
+                {
+                  int offset = lenTest + 1 + lenTest2;
+                  while (lenEnd < cur + offset) _optimum[++lenEnd].Price = kIfinityPrice;
+                  int curAndLenPrice =
+                      nextRepMatchPrice + GetRepPrice(0, lenTest2, state2, posStateNext);
+                  Optimal optimum = _optimum[cur + offset];
+                  if (curAndLenPrice < optimum.Price) {
+                    optimum.Price = curAndLenPrice;
+                    optimum.PosPrev = cur + lenTest + 1;
+                    optimum.BackPrev = 0;
+                    optimum.Prev1IsChar = true;
+                    optimum.Prev2 = true;
+                    optimum.PosPrev2 = cur;
+                    optimum.BackPrev2 = repIndex;
+                  }
                 }
               }
             }
-            offs += 2;
-            if (offs == numDistancePairs) break;
+          }
+  
+          if (newLen > numAvailableBytes) {
+            newLen = numAvailableBytes;
+            for (numDistancePairs = 0;
+                newLen > _matchDistances[numDistancePairs];
+                numDistancePairs += 2)
+              ;
+            _matchDistances[numDistancePairs] = newLen;
+            numDistancePairs += 2;
+          }
+          if (newLen >= startLen) {
+            normalMatchPrice =
+                matchPrice
+                    + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(_isRep[state]);
+            while (lenEnd < cur + newLen) _optimum[++lenEnd].Price = kIfinityPrice;
+  
+            int offs = 0;
+            while (startLen > _matchDistances[offs]) offs += 2;
+  
+            for (int lenTest = startLen; ; lenTest++) {
+              int curBack = _matchDistances[offs + 1];
+              int curAndLenPrice = normalMatchPrice + GetPosLenPrice(curBack, lenTest, posState);
+              Optimal optimum = _optimum[cur + lenTest];
+              if (curAndLenPrice < optimum.Price) {
+                optimum.Price = curAndLenPrice;
+                optimum.PosPrev = cur;
+                optimum.BackPrev = curBack + Base.kNumRepDistances;
+                optimum.Prev1IsChar = false;
+              }
+  
+              if (lenTest == _matchDistances[offs]) {
+                if (lenTest < numAvailableBytesFull) {
+                  int t = Math.min(numAvailableBytesFull - 1 - lenTest, _numFastBytes);
+                  int lenTest2 = _matchFinder.GetMatchLen(lenTest, curBack, t);
+                  if (lenTest2 >= 2) {
+                    int state2 = Base.StateUpdateMatch(state);
+  
+                    int posStateNext = (position + lenTest) & _posStateMask;
+                    int curAndLenCharPrice =
+                        curAndLenPrice
+                            + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice0(
+                                _isMatch[(state2 << Base.kNumPosStatesBitsMax) + posStateNext])
+                            + _literalEncoder
+                                .GetSubCoder(
+                                    position + lenTest, _matchFinder.GetIndexByte(lenTest - 1 - 1))
+                                .GetPrice(
+                                    true,
+                                    _matchFinder.GetIndexByte(lenTest - (curBack + 1) - 1),
+                                    _matchFinder.GetIndexByte(lenTest - 1));
+                    state2 = Base.StateUpdateChar(state2);
+                    posStateNext = (position + lenTest + 1) & _posStateMask;
+                    int nextMatchPrice =
+                        curAndLenCharPrice
+                            + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
+                                _isMatch[(state2 << Base.kNumPosStatesBitsMax) + posStateNext]);
+                    int nextRepMatchPrice =
+                        nextMatchPrice
+                            + com.badlogic.gdx.utils.compression.rangecoder.Encoder.GetPrice1(
+                                _isRep[state2]);
+  
+                    int offset = lenTest + 1 + lenTest2;
+                    while (lenEnd < cur + offset) _optimum[++lenEnd].Price = kIfinityPrice;
+                    curAndLenPrice = nextRepMatchPrice + GetRepPrice(0, lenTest2, state2, posStateNext);
+                    optimum = _optimum[cur + offset];
+                    if (curAndLenPrice < optimum.Price) {
+                      optimum.Price = curAndLenPrice;
+                      optimum.PosPrev = cur + lenTest + 1;
+                      optimum.BackPrev = 0;
+                      optimum.Prev1IsChar = true;
+                      optimum.Prev2 = true;
+                      optimum.PosPrev2 = cur;
+                      optimum.BackPrev2 = curBack + Base.kNumRepDistances;
+                    }
+                  }
+                }
+                offs += 2;
+                if (offs == numDistancePairs) break;
+              }
+            }
           }
         }
-      }
     }
-  }
 
   boolean ChangePair(int smallDist, int bigDist) {
     int kDif = 7;
@@ -984,138 +990,149 @@ public class Encoder {
   }
 
   public void CodeOneBlock(long[] inSize, long[] outSize, boolean[] finished) throws IOException {
-    inSize[0] = 0;
-    outSize[0] = 0;
-    finished[0] = true;
-
-    if (_inStream != null) {
-      _matchFinder.SetStream(_inStream);
-      _matchFinder.Init();
-      _needReleaseMFStream = true;
-      _inStream = null;
+                inSize[0] = 0;
+                outSize[0] = 0;
+                finished[0] = true;
+            
+                if (_inStream != null) {
+                  if (_matchFinder == null) {
+                    throw new IllegalStateException("MatchFinder is not initialized");
+                  }
+                  Nullability.castToNonnull(_matchFinder, "not null before this")
+                      .SetStream(_inStream);
+                  _matchFinder.Init();
+                  _needReleaseMFStream = true;
+                  _inStream = null;
+                }
+            
+                if (_finished) return;
+                _finished = true;
+        
+                if (_matchFinder == null) {
+                  Create();
+                }
+        
+                if (_matchFinder == null) {
+                  throw new IllegalStateException("MatchFinder is not initialized");
+                }
+            
+                long progressPosValuePrev = nowPos64;
+                if (nowPos64 == 0) {
+                  if (Nullability.castToNonnull(_matchFinder, "checked before use").GetNumAvailableBytes() == 0) {
+                    Flush((int) nowPos64);
+                    return;
+                  }
+            
+                  ReadMatchDistances();
+                  int posState = (int) (nowPos64) & _posStateMask;
+                  _rangeEncoder.Encode(_isMatch, (_state << Base.kNumPosStatesBitsMax) + posState, 0);
+                  _state = Base.StateUpdateChar(_state);
+                  byte curByte = _matchFinder.GetIndexByte(0 - _additionalOffset);
+                  _literalEncoder.GetSubCoder((int) (nowPos64), _previousByte).Encode(_rangeEncoder, curByte);
+                  _previousByte = curByte;
+                  _additionalOffset--;
+                  nowPos64++;
+                }
+                if (Nullability.castToNonnull(_matchFinder, "checked before use").GetNumAvailableBytes() == 0) {
+                  Flush((int) nowPos64);
+                  return;
+                }
+                while (true) {
+            
+                  int len = GetOptimum((int) nowPos64);
+                  int pos = backRes;
+                  int posState = ((int) nowPos64) & _posStateMask;
+                  int complexState = (_state << Base.kNumPosStatesBitsMax) + posState;
+                  if (len == 1 && pos == -1) {
+                    _rangeEncoder.Encode(_isMatch, complexState, 0);
+                    byte curByte = _matchFinder.GetIndexByte((int) (0 - _additionalOffset));
+                    LiteralEncoder.Encoder2 subCoder =
+                        _literalEncoder.GetSubCoder((int) nowPos64, _previousByte);
+                    if (!Base.StateIsCharState(_state)) {
+                      byte matchByte =
+                          _matchFinder.GetIndexByte((int) (0 - _repDistances[0] - 1 - _additionalOffset));
+                      subCoder.EncodeMatched(_rangeEncoder, matchByte, curByte);
+                    } else subCoder.Encode(_rangeEncoder, curByte);
+                    _previousByte = curByte;
+                    _state = Base.StateUpdateChar(_state);
+                  } else {
+                    _rangeEncoder.Encode(_isMatch, complexState, 1);
+                    if (pos < Base.kNumRepDistances) {
+                      _rangeEncoder.Encode(_isRep, _state, 1);
+                      if (pos == 0) {
+                        _rangeEncoder.Encode(_isRepG0, _state, 0);
+                        if (len == 1) _rangeEncoder.Encode(_isRep0Long, complexState, 0);
+                        else _rangeEncoder.Encode(_isRep0Long, complexState, 1);
+                      } else {
+                        _rangeEncoder.Encode(_isRepG0, _state, 1);
+                        if (pos == 1) _rangeEncoder.Encode(_isRepG1, _state, 0);
+                        else {
+                          _rangeEncoder.Encode(_isRepG1, _state, 1);
+                          _rangeEncoder.Encode(_isRepG2, _state, pos - 2);
+                        }
+                      }
+                      if (len == 1) _state = Base.StateUpdateShortRep(_state);
+                      else {
+                        _repMatchLenEncoder.Encode(_rangeEncoder, len - Base.kMatchMinLen, posState);
+                        _state = Base.StateUpdateRep(_state);
+                      }
+                      int distance = _repDistances[pos];
+                      if (pos != 0) {
+                        for (int i = pos; i >= 1; i--) _repDistances[i] = _repDistances[i - 1];
+                        _repDistances[0] = distance;
+                      }
+                    } else {
+                      _rangeEncoder.Encode(_isRep, _state, 0);
+                      _state = Base.StateUpdateMatch(_state);
+                      _lenEncoder.Encode(_rangeEncoder, len - Base.kMatchMinLen, posState);
+                      pos -= Base.kNumRepDistances;
+                      int posSlot = GetPosSlot(pos);
+                      int lenToPosState = Base.GetLenToPosState(len);
+                      _posSlotEncoder[lenToPosState].Encode(_rangeEncoder, posSlot);
+            
+                      if (posSlot >= Base.kStartPosModelIndex) {
+                        int footerBits = (int) ((posSlot >> 1) - 1);
+                        int baseVal = ((2 | (posSlot & 1)) << footerBits);
+                        int posReduced = pos - baseVal;
+            
+                        if (posSlot < Base.kEndPosModelIndex)
+                          BitTreeEncoder.ReverseEncode(
+                              _posEncoders, baseVal - posSlot - 1, _rangeEncoder, footerBits, posReduced);
+                        else {
+                          _rangeEncoder.EncodeDirectBits(
+                              posReduced >> Base.kNumAlignBits, footerBits - Base.kNumAlignBits);
+                          _posAlignEncoder.ReverseEncode(_rangeEncoder, posReduced & Base.kAlignMask);
+                          _alignPriceCount++;
+                        }
+                      }
+                      int distance = pos;
+                      for (int i = Base.kNumRepDistances - 1; i >= 1; i--)
+                        _repDistances[i] = _repDistances[i - 1];
+                      _repDistances[0] = distance;
+                      _matchPriceCount++;
+                    }
+                    _previousByte = _matchFinder.GetIndexByte(len - 1 - _additionalOffset);
+                  }
+                  _additionalOffset -= len;
+                  nowPos64 += len;
+                  if (_additionalOffset == 0) {
+                    if (_matchPriceCount >= (1 << 7)) FillDistancesPrices();
+                    if (_alignPriceCount >= Base.kAlignTableSize) FillAlignPrices();
+                    inSize[0] = nowPos64;
+                    outSize[0] = _rangeEncoder.GetProcessedSizeAdd();
+                    if (Nullability.castToNonnull(_matchFinder, "checked before use").GetNumAvailableBytes() == 0) {
+                      Flush((int) nowPos64);
+                      return;
+                    }
+            
+                    if (nowPos64 - progressPosValuePrev >= (1 << 12)) {
+                      _finished = false;
+                      finished[0] = false;
+                      return;
+                    }
+                  }
+                }
     }
-
-    if (_finished) return;
-    _finished = true;
-
-    long progressPosValuePrev = nowPos64;
-    if (nowPos64 == 0) {
-      if (_matchFinder.GetNumAvailableBytes() == 0) {
-        Flush((int) nowPos64);
-        return;
-      }
-
-      ReadMatchDistances();
-      int posState = (int) (nowPos64) & _posStateMask;
-      _rangeEncoder.Encode(_isMatch, (_state << Base.kNumPosStatesBitsMax) + posState, 0);
-      _state = Base.StateUpdateChar(_state);
-      byte curByte = _matchFinder.GetIndexByte(0 - _additionalOffset);
-      _literalEncoder.GetSubCoder((int) (nowPos64), _previousByte).Encode(_rangeEncoder, curByte);
-      _previousByte = curByte;
-      _additionalOffset--;
-      nowPos64++;
-    }
-    if (_matchFinder.GetNumAvailableBytes() == 0) {
-      Flush((int) nowPos64);
-      return;
-    }
-    while (true) {
-
-      int len = GetOptimum((int) nowPos64);
-      int pos = backRes;
-      int posState = ((int) nowPos64) & _posStateMask;
-      int complexState = (_state << Base.kNumPosStatesBitsMax) + posState;
-      if (len == 1 && pos == -1) {
-        _rangeEncoder.Encode(_isMatch, complexState, 0);
-        byte curByte = _matchFinder.GetIndexByte((int) (0 - _additionalOffset));
-        LiteralEncoder.Encoder2 subCoder =
-            _literalEncoder.GetSubCoder((int) nowPos64, _previousByte);
-        if (!Base.StateIsCharState(_state)) {
-          byte matchByte =
-              _matchFinder.GetIndexByte((int) (0 - _repDistances[0] - 1 - _additionalOffset));
-          subCoder.EncodeMatched(_rangeEncoder, matchByte, curByte);
-        } else subCoder.Encode(_rangeEncoder, curByte);
-        _previousByte = curByte;
-        _state = Base.StateUpdateChar(_state);
-      } else {
-        _rangeEncoder.Encode(_isMatch, complexState, 1);
-        if (pos < Base.kNumRepDistances) {
-          _rangeEncoder.Encode(_isRep, _state, 1);
-          if (pos == 0) {
-            _rangeEncoder.Encode(_isRepG0, _state, 0);
-            if (len == 1) _rangeEncoder.Encode(_isRep0Long, complexState, 0);
-            else _rangeEncoder.Encode(_isRep0Long, complexState, 1);
-          } else {
-            _rangeEncoder.Encode(_isRepG0, _state, 1);
-            if (pos == 1) _rangeEncoder.Encode(_isRepG1, _state, 0);
-            else {
-              _rangeEncoder.Encode(_isRepG1, _state, 1);
-              _rangeEncoder.Encode(_isRepG2, _state, pos - 2);
-            }
-          }
-          if (len == 1) _state = Base.StateUpdateShortRep(_state);
-          else {
-            _repMatchLenEncoder.Encode(_rangeEncoder, len - Base.kMatchMinLen, posState);
-            _state = Base.StateUpdateRep(_state);
-          }
-          int distance = _repDistances[pos];
-          if (pos != 0) {
-            for (int i = pos; i >= 1; i--) _repDistances[i] = _repDistances[i - 1];
-            _repDistances[0] = distance;
-          }
-        } else {
-          _rangeEncoder.Encode(_isRep, _state, 0);
-          _state = Base.StateUpdateMatch(_state);
-          _lenEncoder.Encode(_rangeEncoder, len - Base.kMatchMinLen, posState);
-          pos -= Base.kNumRepDistances;
-          int posSlot = GetPosSlot(pos);
-          int lenToPosState = Base.GetLenToPosState(len);
-          _posSlotEncoder[lenToPosState].Encode(_rangeEncoder, posSlot);
-
-          if (posSlot >= Base.kStartPosModelIndex) {
-            int footerBits = (int) ((posSlot >> 1) - 1);
-            int baseVal = ((2 | (posSlot & 1)) << footerBits);
-            int posReduced = pos - baseVal;
-
-            if (posSlot < Base.kEndPosModelIndex)
-              BitTreeEncoder.ReverseEncode(
-                  _posEncoders, baseVal - posSlot - 1, _rangeEncoder, footerBits, posReduced);
-            else {
-              _rangeEncoder.EncodeDirectBits(
-                  posReduced >> Base.kNumAlignBits, footerBits - Base.kNumAlignBits);
-              _posAlignEncoder.ReverseEncode(_rangeEncoder, posReduced & Base.kAlignMask);
-              _alignPriceCount++;
-            }
-          }
-          int distance = pos;
-          for (int i = Base.kNumRepDistances - 1; i >= 1; i--)
-            _repDistances[i] = _repDistances[i - 1];
-          _repDistances[0] = distance;
-          _matchPriceCount++;
-        }
-        _previousByte = _matchFinder.GetIndexByte(len - 1 - _additionalOffset);
-      }
-      _additionalOffset -= len;
-      nowPos64 += len;
-      if (_additionalOffset == 0) {
-        // if (!_fastMode)
-        if (_matchPriceCount >= (1 << 7)) FillDistancesPrices();
-        if (_alignPriceCount >= Base.kAlignTableSize) FillAlignPrices();
-        inSize[0] = nowPos64;
-        outSize[0] = _rangeEncoder.GetProcessedSizeAdd();
-        if (_matchFinder.GetNumAvailableBytes() == 0) {
-          Flush((int) nowPos64);
-          return;
-        }
-
-        if (nowPos64 - progressPosValuePrev >= (1 << 12)) {
-          _finished = false;
-          finished[0] = false;
-          return;
-        }
-      }
-    }
-  }
 
   void ReleaseMFStream() {
     if (_matchFinder != null && _needReleaseMFStream) {
