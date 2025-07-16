@@ -1,0 +1,23 @@
+====================
+Type='NONNULL_FIELD_READ_BEFORE_INIT', message='read of @NonNull field curLineBytes before initialization'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/PixmapIO.java:279
+        curLine = curLineBytes.ensureCapacity(lineLen);
+Log:
+00:23:19.077 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+==============================
+00:23:19.077 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.COUNT = 0
+00:23:19.077 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+CHATGPT.PROMPTS SIZE = 0
+00:23:19.078 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+Both set to 0 and cleared 0
+00:23:19.078 TRACE edu.ucr.cs.riple.core.checkers.nullaway.NullAway.lambda$resolveRemainingErrors$19
+74 : TOP LEVEL CALL TO FIX ERROR: Type='NONNULL_FIELD_READ_BEFORE_INIT', message='read of @NonNull field curLineBytes before initialization'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/PixmapIO.java:279
+        curLine = curLineBytes.ensureCapacity(lineLen);
+00:23:23.814 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.AdvancedNullAwayCodeFix.fix
+Fixing error: Type='NONNULL_FIELD_READ_BEFORE_INIT', message='read of @NonNull field curLineBytes before initialization'
+/home/nima/Developer/nullness-benchmarks/libgdx/gdx/src/com/badlogic/gdx/graphics/PixmapIO.java:279
+        curLine = curLineBytes.ensureCapacity(lineLen);
+00:23:23.814 TRACE edu.ucr.cs.riple.core.checkers.nullaway.codefix.AdvancedNullAwayCodeFix.fix
+Error type not recognized: NONNULL_FIELD_READ_BEFORE_INIT
