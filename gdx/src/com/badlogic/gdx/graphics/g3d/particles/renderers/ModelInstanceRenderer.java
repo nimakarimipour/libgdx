@@ -77,7 +77,7 @@ public class ModelInstanceRenderer
         for (int i = 0, positionOffset = 0, c = controller.particles.size;
             i < c;
             ++i, positionOffset += renderData.positionChannel.strideSize) {
-          ModelInstance instance = Nullability.castToNonnull(renderData, "checked to be nonnull").modelInstanceChannel.data[i];
+          ModelInstance instance = Nullability.castToNonnull(renderData.modelInstanceChannel, "explicitly checked nonnull").data[i];
           float scale = hasScale ? renderData.scaleChannel.data[i] : 1;
           float qx = 0, qy = 0, qz = 0, qw = 1;
           if (hasRotation) {
@@ -117,7 +117,7 @@ public class ModelInstanceRenderer
           }
         }
         super.update();
-  }
+    }
 
   @Override
   public ParticleControllerComponent copy() {
