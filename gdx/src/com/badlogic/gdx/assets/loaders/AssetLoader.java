@@ -50,8 +50,11 @@ public abstract class AssetLoader<T, P extends AssetLoaderParameters<T>> {
    * @return handle to the file, as resolved by the {@link FileHandleResolver} set on the loader
    */
   public FileHandle resolve(String fileName) {
-    return resolver.resolve(fileName);
-  }
+      if (resolver == null) {
+        throw new IllegalStateException("FileHandleResolver is not initialized");
+      }
+      return resolver.resolve(fileName);
+    }
 
   /**
    * Returns the assets this asset requires to be loaded first. This method may be called on a
