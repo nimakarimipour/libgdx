@@ -242,10 +242,8 @@ public class Mesh implements Disposable {
   public Mesh disableInstancedRendering() {
     if (isInstanced) {
       isInstanced = false;
-      if (instances != null) {
-        instances.dispose();
-        instances = null;
-      }
+      instances.dispose();
+      instances = null;
     }
     return this;
   }
@@ -337,12 +335,7 @@ public class Mesh implements Disposable {
    * @param count the number of floats to update
    */
   public Mesh updateInstanceData(int targetOffset, float[] source, int sourceOffset, int count) {
-    if (instances != null) {
-      this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
-    } else {
-      throw new GdxRuntimeException(
-          "An InstanceBufferObject must be set before updating instance data!");
-    }
+    this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
     return this;
   }
 
@@ -366,12 +359,7 @@ public class Mesh implements Disposable {
    */
   public Mesh updateInstanceData(
       int targetOffset, FloatBuffer source, int sourceOffset, int count) {
-    if (instances != null) {
-      this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
-    } else {
-      throw new GdxRuntimeException(
-          "An InstanceBufferObject must be set before updating instance data!");
-    }
+    this.instances.updateInstanceData(targetOffset, source, sourceOffset, count);
     return this;
   }
 
@@ -764,14 +752,7 @@ public class Mesh implements Disposable {
       }
     } else {
       int numInstances = 0;
-      if (isInstanced) {
-        if (instances != null) {
-          numInstances = instances.getNumInstances();
-        } else {
-          throw new GdxRuntimeException(
-              "An InstanceBufferObject must be set before rendering with instancing!");
-        }
-      }
+      if (isInstanced) numInstances = instances.getNumInstances();
 
       if (indices.getNumIndices() > 0) {
         if (count + offset > indices.getNumMaxIndices()) {
