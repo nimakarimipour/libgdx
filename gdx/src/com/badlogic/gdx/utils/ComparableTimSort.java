@@ -13,9 +13,6 @@
 
 package com.badlogic.gdx.utils;
 
-import edu.ucr.cs.riple.annotator.util.Nullability;
-import javax.annotation.Nullable;
-
 /**
  * This is a near duplicate of {@link TimSort}, modified for use with arrays of objects that
  * implement {@link Comparable}, instead of using explicit comparators.
@@ -43,7 +40,7 @@ class ComparableTimSort {
   private static final int MIN_MERGE = 32;
 
   /** The array being sorted. */
-  @Nullable private Object[] a;
+  private Object[] a;
 
   /**
    * When we get into galloping mode, we stay there until both runs win less often than MIN_GALLOP
@@ -426,10 +423,6 @@ class ComparableTimSort {
     if (DEBUG) assert i >= 0;
     if (DEBUG) assert i == stackSize - 2 || i == stackSize - 3;
 
-    if (a == null) {
-      throw new NullPointerException("Array 'a' is null.");
-    }
-
     int base1 = runBase[i];
     int len1 = runLen[i];
     int base2 = runBase[i + 1];
@@ -437,6 +430,10 @@ class ComparableTimSort {
     if (DEBUG) assert len1 > 0 && len2 > 0;
     if (DEBUG) assert base1 + len1 == base2;
 
+    /*
+     * Record the length of the combined runs; if i is the 3rd-last run now, also slide over the last run (which isn't involved
+     * in this merge). The current run (i+1) goes away in any case.
+     */
     runLen[i] = len1 + len2;
     if (i == stackSize - 3) {
       runBase[i + 1] = runBase[i + 2];
@@ -444,22 +441,25 @@ class ComparableTimSort {
     }
     stackSize--;
 
-    int k =
-        gallopRight(
-            (Comparable<Object>) Nullability.castToNonnull(a, "not null checked"),
-            a,
-            base1,
-            len1,
-            0);
+    /*
+     * Find where the first element of run2 goes in run1. Prior elements in run1 can be ignored (because they're already in
+     * place).
+     */
+    int k = gallopRight((Comparable<Object>) a[base2], a, base1, len1, 0);
     if (DEBUG) assert k >= 0;
     base1 += k;
     len1 -= k;
     if (len1 == 0) return;
 
+    /*
+     * Find where the last element of run1 goes in run2. Subsequent elements in run2 can be ignored (because they're already in
+     * place).
+     */
     len2 = gallopLeft((Comparable<Object>) a[base1 + len1 - 1], a, base2, len2, len2 - 1);
     if (DEBUG) assert len2 >= 0;
     if (len2 == 0) return;
 
+    // Merge remaining runs, using tmp array with min(len1, len2) elements
     if (len1 <= len2) mergeLo(base1, len1, base2, len2);
     else mergeHi(base1, len1, base2, len2);
   }
@@ -612,34 +612,36 @@ class ComparableTimSort {
   private void mergeLo(int base1, int len1, int base2, int len2) {
     if (DEBUG) assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
-    Object[] a = this.a;
-    if (a == null) {
-      throw new NullPointerException("The array 'a' is null");
-    }
+    // Copy first run into temp array
+    Object[] a = this.a; // For performance
     Object[] tmp = ensureCapacity(len1);
     System.arraycopy(a, base1, tmp, 0, len1);
 
-    int cursor1 = 0;
-    int cursor2 = base2;
-    int dest = base1;
+    int cursor1 = 0; // Indexes into tmp array
+    int cursor2 = base2; // Indexes int a
+    int dest = base1; // Indexes int a
 
-    a[dest++] = Nullability.castToNonnull(a, "explicit null check")[cursor2++];
+    // Move first element of second run and deal with degenerate cases
+    a[dest++] = a[cursor2++];
     if (--len2 == 0) {
       System.arraycopy(tmp, cursor1, a, dest, len1);
       return;
     }
     if (len1 == 1) {
       System.arraycopy(a, cursor2, a, dest, len2);
-      a[dest + len2] = tmp[cursor1];
+      a[dest + len2] = tmp[cursor1]; // Last elt of run 1 to end of merge
       return;
     }
 
-    int minGallop = this.minGallop;
+    int minGallop = this.minGallop; // Use local variable for performance
     outer:
     while (true) {
-      int count1 = 0;
-      int count2 = 0;
+      int count1 = 0; // Number of times in a row that first run won
+      int count2 = 0; // Number of times in a row that second run won
 
+      /*
+       * Do the straightforward thing until (if ever) one run starts winning consistently.
+       */
       do {
         if (DEBUG) assert len1 > 1 && len2 > 0;
         if (((Comparable) a[cursor2]).compareTo(tmp[cursor1]) < 0) {
@@ -655,6 +657,10 @@ class ComparableTimSort {
         }
       } while ((count1 | count2) < minGallop);
 
+      /*
+       * One run is winning so consistently that galloping may be a huge win. So try that, and continue galloping until (if
+       * ever) neither run appears to be winning consistently anymore.
+       */
       do {
         if (DEBUG) assert len1 > 1 && len2 > 0;
         count1 = gallopRight((Comparable) a[cursor2], tmp, cursor1, len1, 0);
@@ -663,7 +669,8 @@ class ComparableTimSort {
           dest += count1;
           cursor1 += count1;
           len1 -= count1;
-          if (len1 <= 1) break outer;
+          if (len1 <= 1) // len1 == 1 || len1 == 0
+          break outer;
         }
         a[dest++] = a[cursor2++];
         if (--len2 == 0) break outer;
@@ -681,14 +688,14 @@ class ComparableTimSort {
         minGallop--;
       } while (count1 >= MIN_GALLOP | count2 >= MIN_GALLOP);
       if (minGallop < 0) minGallop = 0;
-      minGallop += 2;
-    }
-    this.minGallop = minGallop < 1 ? 1 : minGallop;
+      minGallop += 2; // Penalize for leaving gallop mode
+    } // End of "outer" loop
+    this.minGallop = minGallop < 1 ? 1 : minGallop; // Write back to field
 
     if (len1 == 1) {
       if (DEBUG) assert len2 > 0;
       System.arraycopy(a, cursor2, a, dest, len2);
-      a[dest + len2] = tmp[cursor1];
+      a[dest + len2] = tmp[cursor1]; // Last elt of run 1 to end of merge
     } else if (len1 == 0) {
       throw new IllegalArgumentException("Comparison method violates its general contract!");
     } else {
@@ -711,13 +718,8 @@ class ComparableTimSort {
   private void mergeHi(int base1, int len1, int base2, int len2) {
     if (DEBUG) assert len1 > 0 && len2 > 0 && base1 + len1 == base2;
 
-    // Check if 'a' is null to avoid Null Pointer Exception
-    if (this.a == null) {
-      throw new NullPointerException("Array 'a' is null");
-    }
-
     // Copy second run into temp array
-    Object[] a = this.a; // Safely assign after null check
+    Object[] a = this.a; // For performance
     Object[] tmp = ensureCapacity(len2);
     System.arraycopy(a, base2, tmp, 0, len2);
 
@@ -745,6 +747,9 @@ class ComparableTimSort {
       int count1 = 0; // Number of times in a row that first run won
       int count2 = 0; // Number of times in a row that second run won
 
+      /*
+       * Do the straightforward thing until (if ever) one run appears to win consistently.
+       */
       do {
         if (DEBUG) assert len1 > 0 && len2 > 1;
         if (((Comparable) tmp[cursor2]).compareTo(a[cursor1]) < 0) {
@@ -760,6 +765,10 @@ class ComparableTimSort {
         }
       } while ((count1 | count2) < minGallop);
 
+      /*
+       * One run is winning so consistently that galloping may be a huge win. So try that, and continue galloping until (if
+       * ever) neither run appears to be winning consistently anymore.
+       */
       do {
         if (DEBUG) assert len1 > 0 && len2 > 1;
         count1 = len1 - gallopRight((Comparable) tmp[cursor2], a, base1, len1, len1 - 1);
@@ -787,15 +796,15 @@ class ComparableTimSort {
       } while (count1 >= MIN_GALLOP | count2 >= MIN_GALLOP);
       if (minGallop < 0) minGallop = 0;
       minGallop += 2; // Penalize for leaving gallop mode
-    }
-    this.minGallop = minGallop < 1 ? 1 : minGallop;
+    } // End of "outer" loop
+    this.minGallop = minGallop < 1 ? 1 : minGallop; // Write back to field
 
     if (len2 == 1) {
       if (DEBUG) assert len1 > 0;
       dest -= len1;
       cursor1 -= len1;
       System.arraycopy(a, cursor1 + 1, a, dest + 1, len1);
-      a[dest] = tmp[cursor2];
+      a[dest] = tmp[cursor2]; // Move first elt of run2 to front of merge
     } else if (len2 == 0) {
       throw new IllegalArgumentException("Comparison method violates its general contract!");
     } else {
@@ -814,11 +823,6 @@ class ComparableTimSort {
    * @return tmp, whether or not it grew
    */
   private Object[] ensureCapacity(int minCapacity) {
-    // Ensure 'a' is not null before using it (pattern used from provided examples)
-    if (a == null) {
-      throw new IllegalStateException("Array 'a' should not be null.");
-    }
-
     tmpCount = Math.max(tmpCount, minCapacity);
     if (tmp.length < minCapacity) {
       // Compute smallest power of 2 > minCapacity
