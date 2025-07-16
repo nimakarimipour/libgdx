@@ -355,24 +355,26 @@ public class ModelInstance implements RenderableProvider {
    * array.
    */
   private void invalidate(Node node) {
-    for (int i = 0, n = node.parts.size; i < n; ++i) {
-      NodePart part = node.parts.get(i);
-      ArrayMap<Node, Matrix4> bindPose = part.invBoneBindTransforms;
-      if (bindPose != null) {
-        for (int j = 0; j < bindPose.size; ++j) {
-          bindPose.keys[j] = getNode(bindPose.keys[j].id);
+      for (int i = 0, n = node.parts.size; i < n; ++i) {
+        NodePart part = node.parts.get(i);
+        ArrayMap<Node, Matrix4> bindPose = part.invBoneBindTransforms;
+        if (bindPose != null) {
+          for (int j = 0; j < bindPose.size; ++j) {
+            if (bindPose.keys[j] != null && bindPose.keys[j].id != null) {
+              bindPose.keys[j] = getNode(bindPose.keys[j].id);
+            }
+          }
+        }
+        if (!materials.contains(part.material, true)) {
+          final int midx = materials.indexOf(part.material, false);
+          if (midx < 0) materials.add(part.material = part.material.copy());
+          else part.material = materials.get(midx);
         }
       }
-      if (!materials.contains(part.material, true)) {
-        final int midx = materials.indexOf(part.material, false);
-        if (midx < 0) materials.add(part.material = part.material.copy());
-        else part.material = materials.get(midx);
+      for (int i = 0, n = node.getChildCount(); i < n; ++i) {
+        invalidate(node.getChild(i));
       }
     }
-    for (int i = 0, n = node.getChildCount(); i < n; ++i) {
-      invalidate(node.getChild(i));
-    }
-  }
 
   /**
    * Makes sure that each {@link NodePart} of each {@link Node} doesn't reference a node outside
