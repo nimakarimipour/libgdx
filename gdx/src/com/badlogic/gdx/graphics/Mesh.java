@@ -45,6 +45,7 @@ import java.nio.ShortBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A Mesh holds vertices composed of attributes specified by a {@link VertexAttributes} instance.
@@ -707,9 +708,9 @@ public class Mesh implements Disposable {
    * @param offset the offset into the vertex or index buffer
    * @param count number of vertices or indices to use
    */
-  public void render(@Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
-    render(shader, primitiveType, offset, count, autoBind);
-  }
+  public void render( @Nullable ShaderProgram shader, int primitiveType, int offset, int count) {
+        render(Nullability.castToNonnull(shader), primitiveType, offset, count, autoBind);
+    }
 
   /**
    * Renders the mesh using the given primitive type. offset specifies the offset into either the
