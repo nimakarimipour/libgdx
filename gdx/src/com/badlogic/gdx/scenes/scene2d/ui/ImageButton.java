@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A button with a child {@link Image} to display an image. This is useful when the button must be
@@ -33,7 +34,7 @@ import javax.annotation.Nullable;
  */
 public class ImageButton extends Button {
   private final Image image;
-  private ImageButtonStyle style;
+  @Nullable private ImageButtonStyle style;
 
   public ImageButton(Skin skin) {
     this(skin.get(ImageButtonStyle.class));
@@ -79,31 +80,31 @@ public class ImageButton extends Button {
     if (image != null) updateImage();
   }
 
-  public ImageButtonStyle getStyle() {
+  @Nullable public ImageButtonStyle getStyle() {
     return style;
   }
 
   /** Returns the appropriate image drawable from the style based on the current button state. */
-  @Nullable
-  protected @Null Drawable getImageDrawable() {
-    if (isDisabled() && style.imageDisabled != null) return style.imageDisabled;
-    if (isPressed()) {
-      if (isChecked() && style.imageCheckedDown != null) return style.imageCheckedDown;
-      if (style.imageDown != null) return style.imageDown;
+  @Nullable protected @Null Drawable getImageDrawable() {
+            if (style == null) return null;
+            if (isDisabled() && style.imageDisabled != null) return style.imageDisabled;
+            if (isPressed()) {
+              if (isChecked() && Nullability.castToNonnull(style, "style non-null").imageCheckedDown != null) return style.imageCheckedDown;
+              if (Nullability.castToNonnull(style, "style non-null").imageDown != null) return style.imageDown;
+            }
+            if (isOver()) {
+              if (isChecked()) {
+                if (Nullability.castToNonnull(style, "checked upfront").imageCheckedOver != null) return style.imageCheckedOver;
+              } else {
+                if (Nullability.castToNonnull(style, "style is non-null").imageOver != null) return style.imageOver;
+              }
+            }
+            if (isChecked()) {
+              if (style.imageChecked != null) return Nullability.castToNonnull(style, "checked upfront").imageChecked;
+              if (isOver() && style.imageOver != null) return style.imageOver;
+            }
+            return Nullability.castToNonnull(style, "checked for nullity upfront").imageUp;
     }
-    if (isOver()) {
-      if (isChecked()) {
-        if (style.imageCheckedOver != null) return style.imageCheckedOver;
-      } else {
-        if (style.imageOver != null) return style.imageOver;
-      }
-    }
-    if (isChecked()) {
-      if (style.imageChecked != null) return style.imageChecked;
-      if (isOver() && style.imageOver != null) return style.imageOver;
-    }
-    return style.imageUp;
-  }
 
   /**
    * Sets the image drawable based on the current button state. The default implementation sets the
