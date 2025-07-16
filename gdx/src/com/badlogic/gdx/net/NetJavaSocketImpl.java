@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Socket implementation using java.net.Socket.
@@ -31,7 +32,7 @@ import javax.annotation.Nullable;
 public class NetJavaSocketImpl implements Socket {
 
   /** Our socket or null for disposed, aka closed. */
-  private java.net.Socket socket;
+  @Nullable private java.net.Socket socket;
 
   public NetJavaSocketImpl(Protocol protocol, String host, int port, SocketHints hints) {
     try {
@@ -57,24 +58,24 @@ public class NetJavaSocketImpl implements Socket {
   }
 
   private void applyHints(SocketHints hints) {
-    if (hints != null) {
-      try {
-        socket.setPerformancePreferences(
-            hints.performancePrefConnectionTime,
-            hints.performancePrefLatency,
-            hints.performancePrefBandwidth);
-        socket.setTrafficClass(hints.trafficClass);
-        socket.setTcpNoDelay(hints.tcpNoDelay);
-        socket.setKeepAlive(hints.keepAlive);
-        socket.setSendBufferSize(hints.sendBufferSize);
-        socket.setReceiveBufferSize(hints.receiveBufferSize);
-        socket.setSoLinger(hints.linger, hints.lingerDuration);
-        socket.setSoTimeout(hints.socketTimeout);
-      } catch (Exception e) {
-        throw new GdxRuntimeException("Error setting socket hints.", e);
+      if (socket != null && hints != null) {
+        try {
+          socket.setPerformancePreferences(
+              hints.performancePrefConnectionTime,
+              hints.performancePrefLatency,
+              hints.performancePrefBandwidth);
+          socket.setTrafficClass(hints.trafficClass);
+          socket.setTcpNoDelay(hints.tcpNoDelay);
+          socket.setKeepAlive(hints.keepAlive);
+          socket.setSendBufferSize(hints.sendBufferSize);
+          socket.setReceiveBufferSize(hints.receiveBufferSize);
+          socket.setSoLinger(hints.linger, hints.lingerDuration);
+          socket.setSoTimeout(hints.socketTimeout);
+        } catch (Exception e) {
+          throw new GdxRuntimeException("Error setting socket hints.", e);
+        }
       }
     }
-  }
 
   @Override
   public boolean isConnected() {
@@ -86,27 +87,39 @@ public class NetJavaSocketImpl implements Socket {
   }
 
   @Override
-  public InputStream getInputStream() {
-    try {
-      return socket.getInputStream();
-    } catch (Exception e) {
-      throw new GdxRuntimeException("Error getting input stream from socket.", e);
+      public InputStream getInputStream() {
+        if (socket != null) {
+          try {
+            return Nullability.castToNonnull(socket.getInputStream(), "checked not null");
+          } catch (Exception e) {
+            throw new GdxRuntimeException("Error getting input stream from socket.", e);
+          }
+        } else {
+          throw new GdxRuntimeException("Socket is null, cannot get input stream.");
+        }
     }
-  }
 
   @Override
-  public OutputStream getOutputStream() {
-    try {
-      return socket.getOutputStream();
-    } catch (Exception e) {
-      throw new GdxRuntimeException("Error getting output stream from socket.", e);
-    }
-  }
+      public OutputStream getOutputStream() {
+        if (socket != null) {
+          try {
+            return Nullability.castToNonnull(socket, "checked if not null").getOutputStream();
+          } catch (Exception e) {
+            throw new GdxRuntimeException("Error getting output stream from socket.", e);
+          }
+        } else {
+          throw new GdxRuntimeException("Socket is null, cannot get output stream.");
+        }
+      }
 
   @Override
-  public String getRemoteAddress() {
-    return socket.getRemoteSocketAddress().toString();
-  }
+    public String getRemoteAddress() {
+      if (socket != null) {
+        return socket.getRemoteSocketAddress().toString();
+      } else {
+        return "Socket is null";
+      }
+    }
 
   @Override
   public void dispose() {
