@@ -19,7 +19,6 @@ package com.badlogic.gdx.utils;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -41,9 +40,9 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
   public int size;
   public boolean ordered;
 
-  @Nullable private transient Entries entries1, entries2;
-  @Nullable private transient Values values1, values2;
-  @Nullable private transient Keys keys1, keys2;
+  private transient Entries entries1, entries2;
+  private transient Values values1, values2;
+  private transient Keys keys1, keys2;
 
   /** Creates an ordered map with a capacity of 16. */
   public ArrayMap() {
@@ -535,11 +534,11 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     if (!entries1.valid) {
       entries1.index = 0;
       entries1.valid = true;
-      Nullability.castToNonnull(entries2, "always initialized").valid = false;
+      entries2.valid = false;
       return entries1;
     }
-    Nullability.castToNonnull(entries2, "always initialized").index = 0;
-    Nullability.castToNonnull(entries2, "always initialized").valid = true;
+    entries2.index = 0;
+    entries2.valid = true;
     entries1.valid = false;
     return entries2;
   }
@@ -562,11 +561,11 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     if (!values1.valid) {
       values1.index = 0;
       values1.valid = true;
-      Nullability.castToNonnull(values2, "initialized alongside values1").valid = false;
+      values2.valid = false;
       return values1;
     }
-    Nullability.castToNonnull(values2, "initialized alongside values1").index = 0;
-    Nullability.castToNonnull(values2, "initialized alongside values1").valid = true;
+    values2.index = 0;
+    values2.valid = true;
     values1.valid = false;
     return values2;
   }
@@ -589,11 +588,11 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     if (!keys1.valid) {
       keys1.index = 0;
       keys1.valid = true;
-      Nullability.castToNonnull(keys2, "initialized with keys1").valid = false;
+      keys2.valid = false;
       return keys1;
     }
-    Nullability.castToNonnull(keys2, "initialized with keys1").index = 0;
-    Nullability.castToNonnull(keys2, "initialized with keys1").valid = true;
+    keys2.index = 0;
+    keys2.valid = true;
     keys1.valid = false;
     return keys2;
   }
