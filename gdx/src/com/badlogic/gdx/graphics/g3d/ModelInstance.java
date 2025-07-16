@@ -568,14 +568,13 @@ public class ModelInstance implements RenderableProvider {
   @Nullable
   public Animation getAnimation(final String id, boolean ignoreCase) {
     final int n = animations.size;
-    for (int i = 0; i < n; i++) {
-      Animation animation = animations.get(i);
-      if (animation == null || animation.id == null) continue;
-      if (ignoreCase) {
-        if (animation.id.equalsIgnoreCase(id)) return animation;
-      } else {
-        if (animation.id.equals(id)) return animation;
-      }
+    Animation animation;
+    if (ignoreCase) {
+      for (int i = 0; i < n; i++)
+        if ((animation = animations.get(i)).id.equalsIgnoreCase(id)) return animation;
+    } else {
+      for (int i = 0; i < n; i++)
+        if ((animation = animations.get(i)).id.equals(id)) return animation;
     }
     return null;
   }
