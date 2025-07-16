@@ -469,14 +469,14 @@ public class Table extends WidgetGroup {
 
   /** Returns the cell for the specified actor in this table, or null. */
   public @Null <T extends Actor> Cell<T> getCell(T actor) {
-    if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
-    Object[] cells = this.cells.items;
-    for (int i = 0, n = this.cells.size; i < n; i++) {
-      Cell c = (Cell) cells[i];
-      if (c.actor == actor) return c;
+      if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
+      Object[] cells = this.cells.items;
+      for (int i = 0, n = this.cells.size; i < n; i++) {
+        Cell c = (Cell) cells[i];
+        if (c.actor == actor) return c;
+      }
+      return obtainCell(); // Assuming obtainCell() will provide a non-null default Cell
     }
-    return null;
-  }
 
   /** Returns the cells for this table. */
   public Array<Cell> getCells() {
