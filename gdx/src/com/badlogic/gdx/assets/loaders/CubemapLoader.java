@@ -43,7 +43,7 @@ public class CubemapLoader
     extends AsynchronousAssetLoader<Cubemap, CubemapLoader.CubemapParameter> {
   public static class CubemapLoaderInfo {
     @Nullable String filename;
-    @Nullable CubemapData data;
+    CubemapData data;
     @Nullable Cubemap cubemap;
   }
   ;
@@ -78,10 +78,7 @@ public class CubemapLoader
       info.data = parameter.cubemapData;
       info.cubemap = parameter.cubemap;
     }
-
-    if (info.data != null && !info.data.isPrepared()) {
-      info.data.prepare();
-    }
+    if (!info.data.isPrepared()) info.data.prepare();
   }
 
   @Nullable
@@ -94,17 +91,9 @@ public class CubemapLoader
     if (info == null) return null;
     Cubemap cubemap = info.cubemap;
     if (cubemap != null) {
-      if (info.data != null) {
-        cubemap.load(info.data);
-      } else {
-        throw new NullPointerException("info.data is null");
-      }
+      cubemap.load(info.data);
     } else {
-      if (info.data != null) {
-        cubemap = new Cubemap(info.data);
-      } else {
-        throw new NullPointerException("info.data is null");
-      }
+      cubemap = new Cubemap(info.data);
     }
     if (parameter != null) {
       cubemap.setFilter(parameter.minFilter, parameter.magFilter);
