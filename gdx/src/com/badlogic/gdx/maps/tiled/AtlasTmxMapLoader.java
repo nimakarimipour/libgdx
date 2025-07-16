@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A TiledMap Loader which loads tiles from a TextureAtlas instead of separate images.
@@ -138,7 +139,7 @@ public class AtlasTmxMapLoader
     this.map = loadTiledMap(tmxFile, parameter, atlasResolver);
   }
 
-  @Override
+  @Nullable @Override
   public TiledMap loadSync(
       AssetManager manager,
       String fileName,
@@ -234,28 +235,32 @@ public class AtlasTmxMapLoader
   }
 
   protected FileHandle getAtlasFileHandle(FileHandle tmxFile) {
-    Element properties = root.getChildByName("properties");
-
-    String atlasFilePath = null;
-    if (properties != null) {
-      for (Element property : properties.getChildrenByName("property")) {
-        String name = property.getAttribute("name");
-        if (name.startsWith("atlas")) {
-          atlasFilePath = property.getAttribute("value");
-          break;
-        }
-      }
-    }
-    if (atlasFilePath == null) {
-      throw new GdxRuntimeException("The map is missing the 'atlas' property");
-    } else {
-      final FileHandle fileHandle = getRelativeFileHandle(tmxFile, atlasFilePath);
-      if (!fileHandle.exists()) {
-        throw new GdxRuntimeException(
-            "The 'atlas' file could not be found: '" + atlasFilePath + "'");
-      }
-      return fileHandle;
-    }
+          if (root == null) {
+              throw new IllegalStateException("Root element is null. Ensure root is initialized before calling this method.");
+          }
+          
+          Element properties = Nullability.castToNonnull(root, "checked for null").getChildByName("properties");
+    
+          String atlasFilePath = null;
+          if (properties != null) {
+            for (Element property : properties.getChildrenByName("property")) {
+              String name = property.getAttribute("name");
+              if (name.startsWith("atlas")) {
+                atlasFilePath = property.getAttribute("value");
+                break;
+              }
+            }
+          }
+          if (atlasFilePath == null) {
+            throw new GdxRuntimeException("The map is missing the 'atlas' property");
+          } else {
+            final FileHandle fileHandle = getRelativeFileHandle(tmxFile, atlasFilePath);
+            if (!fileHandle.exists()) {
+              throw new GdxRuntimeException(
+                  "The 'atlas' file could not be found: '" + atlasFilePath + "'");
+            }
+            return fileHandle;
+          }
   }
 
   protected void setTextureFilters(Texture.TextureFilter min, Texture.TextureFilter mag) {

@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * @brief synchronous loader for TMX maps created with the Tiled tool
@@ -99,7 +100,7 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
     this.map = loadTiledMap(tmxFile, parameter, new AssetManagerImageResolver(manager));
   }
 
-  @Override
+  @Nullable @Override
   public TiledMap loadSync(
       AssetManager manager, String fileName, FileHandle file, @Nullable Parameters parameter) {
     return map;
@@ -119,55 +120,57 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
   }
 
   protected Array<FileHandle> getDependencyFileHandles(FileHandle tmxFile) {
-    Array<FileHandle> fileHandles = new Array<FileHandle>();
-
-    // TileSet descriptors
-    for (Element tileset : root.getChildrenByName("tileset")) {
-      String source = tileset.getAttribute("source", null);
-      if (source != null) {
-        FileHandle tsxFile = getRelativeFileHandle(tmxFile, source);
-        tileset = xml.parse(tsxFile);
-        Element imageElement = tileset.getChildByName("image");
-        if (imageElement != null) {
-          String imageSource = tileset.getChildByName("image").getAttribute("source");
-          FileHandle image = getRelativeFileHandle(tsxFile, imageSource);
-          fileHandles.add(image);
-        } else {
-          for (Element tile : tileset.getChildrenByName("tile")) {
-            String imageSource = tile.getChildByName("image").getAttribute("source");
-            FileHandle image = getRelativeFileHandle(tsxFile, imageSource);
-            fileHandles.add(image);
+        if (root == null) {
+          throw new IllegalStateException("Root element is not initialized.");
+        }
+    
+        Array<FileHandle> fileHandles = new Array<FileHandle>();
+    
+        for (Element tileset : Nullability.castToNonnull(root, "exception not thrown").getChildrenByName("tileset")) {
+          String source = tileset.getAttribute("source", null);
+          if (source != null) {
+            FileHandle tsxFile = getRelativeFileHandle(tmxFile, source);
+            tileset = xml.parse(tsxFile);
+            Element imageElement = tileset.getChildByName("image");
+            if (imageElement != null) {
+              String imageSource = tileset.getChildByName("image").getAttribute("source");
+              FileHandle image = getRelativeFileHandle(tsxFile, imageSource);
+              fileHandles.add(image);
+            } else {
+              for (Element tile : tileset.getChildrenByName("tile")) {
+                String imageSource = tile.getChildByName("image").getAttribute("source");
+                FileHandle image = getRelativeFileHandle(tsxFile, imageSource);
+                fileHandles.add(image);
+              }
+            }
+          } else {
+            Element imageElement = tileset.getChildByName("image");
+            if (imageElement != null) {
+              String imageSource = tileset.getChildByName("image").getAttribute("source");
+              FileHandle image = getRelativeFileHandle(tmxFile, imageSource);
+              fileHandles.add(image);
+            } else {
+              for (Element tile : tileset.getChildrenByName("tile")) {
+                String imageSource = tile.getChildByName("image").getAttribute("source");
+                FileHandle image = getRelativeFileHandle(tmxFile, imageSource);
+                fileHandles.add(image);
+              }
+            }
           }
         }
-      } else {
-        Element imageElement = tileset.getChildByName("image");
-        if (imageElement != null) {
-          String imageSource = tileset.getChildByName("image").getAttribute("source");
-          FileHandle image = getRelativeFileHandle(tmxFile, imageSource);
-          fileHandles.add(image);
-        } else {
-          for (Element tile : tileset.getChildrenByName("tile")) {
-            String imageSource = tile.getChildByName("image").getAttribute("source");
-            FileHandle image = getRelativeFileHandle(tmxFile, imageSource);
-            fileHandles.add(image);
+    
+        for (Element imageLayer : root.getChildrenByName("imagelayer")) {
+          Element image = imageLayer.getChildByName("image");
+          String source = image.getAttribute("source", null);
+    
+          if (source != null) {
+            FileHandle handle = getRelativeFileHandle(tmxFile, source);
+            fileHandles.add(handle);
           }
         }
-      }
+    
+        return fileHandles;
     }
-
-    // ImageLayer descriptors
-    for (Element imageLayer : root.getChildrenByName("imagelayer")) {
-      Element image = imageLayer.getChildByName("image");
-      String source = image.getAttribute("source", null);
-
-      if (source != null) {
-        FileHandle handle = getRelativeFileHandle(tmxFile, source);
-        fileHandles.add(handle);
-      }
-    }
-
-    return fileHandles;
-  }
 
   @Override
   protected void addStaticTiles(
