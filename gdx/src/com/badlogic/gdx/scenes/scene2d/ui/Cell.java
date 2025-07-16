@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -31,7 +32,7 @@ public class Cell<T extends Actor> implements Poolable {
   Value prefWidth, prefHeight;
   Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
-  Value padTop, padLeft, padBottom, padRight;
+  @Nullable Value padTop, padLeft, padBottom, padRight;
   @Nullable Float fillX, fillY;
   @Nullable Integer align;
   Integer expandX, expandY;
@@ -857,54 +858,96 @@ public class Cell<T extends Actor> implements Poolable {
   /**
    * @return May be null if this value is not set.
    */
+  @Nullable
   public @Null Value getPadTopValue() {
     return padTop;
   }
 
   public float getPadTop() {
-    return padTop.get(actor);
+    if (padTop == null) throw new IllegalStateException("padTop cannot be null.");
+    return Nullability.castToNonnull(padTop, "explicit null check").get(actor);
   }
 
   /**
    * @return May be null if this value is not set.
    */
+  @Nullable
   public @Null Value getPadLeftValue() {
     return padLeft;
   }
 
   public float getPadLeft() {
+    if (padLeft == null) {
+      throw new IllegalStateException("padLeft cannot be null.");
+    }
+    // Ensure that actor is checked for null to avoid Null Pointer Exception
+    if (actor == null) {
+      throw new IllegalArgumentException("actor cannot be null.");
+    }
     return padLeft.get(actor);
   }
 
   /**
    * @return May be null if this value is not set.
    */
+  @Nullable
   public @Null Value getPadBottomValue() {
     return padBottom;
   }
 
   public float getPadBottom() {
-    return padBottom.get(actor);
+    if (padBottom == null) {
+      throw new IllegalArgumentException("padBottom cannot be null.");
+    }
+    Actor actor = this.actor;
+    if (actor == null) {
+      throw new IllegalStateException("actor cannot be null.");
+    }
+    return Nullability.castToNonnull(padBottom, "verified not null").get(actor);
   }
 
   /**
    * @return May be null if this value is not set.
    */
+  @Nullable
   public @Null Value getPadRightValue() {
     return padRight;
   }
 
   public float getPadRight() {
+    if (padRight == null) {
+      throw new IllegalStateException("padRight cannot be null.");
+    }
+    if (actor == null) {
+      throw new IllegalArgumentException("actor cannot be null.");
+    }
     return padRight.get(actor);
   }
 
   /** Returns {@link #getPadLeft()} plus {@link #getPadRight()}. */
   public float getPadX() {
-    return padLeft.get(actor) + padRight.get(actor);
+    if (actor == null) {
+      throw new IllegalArgumentException("actor cannot be null.");
+    }
+    if (padLeft != null && padRight != null) {
+      float padLeftValue = padLeft.get(actor) != null ? padLeft.get(actor) : 0;
+      float padRightValue = padRight.get(actor) != null ? padRight.get(actor) : 0;
+      return Nullability.castToNonnull(padLeft, "not null at use").get(actor) + padRight.get(actor);
+    }
+    throw new IllegalStateException("padLeft and padRight cannot be null.");
   }
 
   /** Returns {@link #getPadTop()} plus {@link #getPadBottom()}. */
   public float getPadY() {
+    if (padTop == null) {
+      throw new IllegalArgumentException("padTop cannot be null.");
+    }
+    if (padBottom == null) {
+      throw new IllegalArgumentException("padBottom cannot be null.");
+    }
+    if (actor == null) {
+      throw new IllegalArgumentException("actor cannot be null.");
+    }
     return padTop.get(actor) + padBottom.get(actor);
   }
 
@@ -1018,6 +1061,7 @@ public class Cell<T extends Actor> implements Poolable {
 
   @Initializer
   void set(@Nullable Cell cell) {
+    if (cell == null) return;
     minWidth = cell.minWidth;
     minHeight = cell.minHeight;
     prefWidth = cell.prefWidth;
