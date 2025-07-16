@@ -18,7 +18,6 @@ package com.badlogic.gdx.graphics;
 
 import com.badlogic.gdx.utils.Collections;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import javax.annotation.Nullable;
@@ -259,7 +258,7 @@ public final class VertexAttributes
 
   private static class ReadonlyIterable<T> implements Iterable<T> {
     private final T[] array;
-    @Nullable private ReadonlyIterator iterator1, iterator2;
+    private ReadonlyIterator iterator1, iterator2;
 
     public ReadonlyIterable(T[] array) {
       this.array = array;
@@ -275,13 +274,13 @@ public final class VertexAttributes
       if (!iterator1.valid) {
         iterator1.index = 0;
         iterator1.valid = true;
-        Nullability.castToNonnull(iterator2, "initialized before access").valid = false;
+        iterator2.valid = false;
         return iterator1;
       }
-      Nullability.castToNonnull(iterator2, "always initialized first").index = 0;
-      Nullability.castToNonnull(iterator2, "always initialized first").valid = true;
+      iterator2.index = 0;
+      iterator2.valid = true;
       iterator1.valid = false;
-      return Nullability.castToNonnull(iterator2, "always initialized first");
+      return iterator2;
     }
   }
 }
