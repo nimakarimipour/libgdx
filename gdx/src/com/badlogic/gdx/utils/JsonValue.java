@@ -1067,8 +1067,11 @@ public class JsonValue implements Iterable<JsonValue> {
    * @param name May be null.
    */
   public void setName(@Nullable @Null String name) {
-    this.name = name;
-  }
+      if (name == null) {
+        throw new IllegalArgumentException("name cannot be null");
+      }
+      this.name = name;
+    }
 
   /**
    * Returns the parent for this value.
