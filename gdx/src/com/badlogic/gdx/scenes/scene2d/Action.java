@@ -109,11 +109,10 @@ public abstract class Action implements Poolable {
    * optional state.
    */
   public void reset() {
-    actor = null;
-    target = null;
-    pool = null;
-    restart();
-  }
+      actor = null;
+      pool = null;
+      restart();
+    }
 
   @Nullable
   public @Null Pool getPool() {
