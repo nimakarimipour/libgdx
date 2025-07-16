@@ -234,6 +234,11 @@ public class AtlasTmxMapLoader
   }
 
   protected FileHandle getAtlasFileHandle(FileHandle tmxFile) {
+    if (root == null) {
+      throw new IllegalStateException(
+          "Root element is null. Ensure root is initialized before calling this method.");
+    }
+
     Element properties = root.getChildByName("properties");
 
     String atlasFilePath = null;
