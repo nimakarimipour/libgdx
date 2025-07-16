@@ -234,21 +234,21 @@ public abstract class DynamicsModifier extends Influencer {
     }
 
     @Override
-          public void update() {
-            if (lifeChannel != null && strengthChannel != null) {
-              for (int i = 0,
-                      l = ParticleChannels.LifePercentOffset,
-                      s = 0,
-                      c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
-                  i < c;
-                  s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
-                      l += lifeChannel.strideSize) {
-                rotationalVelocity2dChannel.data[i] +=
-                    Nullability.castToNonnull(strengthChannel, "already checked").data[s + ParticleChannels.VelocityStrengthStartOffset]
-                        + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
-                            * strengthValue.getScale(Nullability.castToNonnull(lifeChannel, "already checked").data[l]);
-              }
-            }
+      public void update() {
+        if (lifeChannel != null && strengthChannel != null && rotationalVelocity2dChannel != null) {
+          for (int i = 0,
+                  l = ParticleChannels.LifePercentOffset,
+                  s = 0,
+                  c = i + controller.particles.size * rotationalVelocity2dChannel.strideSize;
+              i < c;
+              s += strengthChannel.strideSize, i += rotationalVelocity2dChannel.strideSize,
+                  l += lifeChannel.strideSize) {
+            rotationalVelocity2dChannel.data[i] +=
+                Nullability.castToNonnull(strengthChannel, "already checked").data[s + ParticleChannels.VelocityStrengthStartOffset]
+                    + strengthChannel.data[s + ParticleChannels.VelocityStrengthDiffOffset]
+                        * strengthValue.getScale(Nullability.castToNonnull(lifeChannel, "already checked").data[l]);
+          }
+        }
       }
 
     @Override
