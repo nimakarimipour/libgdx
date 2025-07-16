@@ -31,7 +31,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -139,7 +138,6 @@ public class AtlasTmxMapLoader
     this.map = loadTiledMap(tmxFile, parameter, atlasResolver);
   }
 
-  @Nullable
   @Override
   public TiledMap loadSync(
       AssetManager manager,
@@ -236,13 +234,7 @@ public class AtlasTmxMapLoader
   }
 
   protected FileHandle getAtlasFileHandle(FileHandle tmxFile) {
-    if (root == null) {
-      throw new IllegalStateException(
-          "Root element is null. Ensure root is initialized before calling this method.");
-    }
-
-    Element properties =
-        Nullability.castToNonnull(root, "checked for null").getChildByName("properties");
+    Element properties = root.getChildByName("properties");
 
     String atlasFilePath = null;
     if (properties != null) {

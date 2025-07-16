@@ -31,7 +31,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -100,7 +99,6 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
     this.map = loadTiledMap(tmxFile, parameter, new AssetManagerImageResolver(manager));
   }
 
-  @Nullable
   @Override
   public TiledMap loadSync(
       AssetManager manager, String fileName, FileHandle file, @Nullable Parameters parameter) {
@@ -121,14 +119,10 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
   }
 
   protected Array<FileHandle> getDependencyFileHandles(FileHandle tmxFile) {
-    if (root == null) {
-      throw new IllegalStateException("Root element is not initialized.");
-    }
-
     Array<FileHandle> fileHandles = new Array<FileHandle>();
 
-    for (Element tileset :
-        Nullability.castToNonnull(root, "exception not thrown").getChildrenByName("tileset")) {
+    // TileSet descriptors
+    for (Element tileset : root.getChildrenByName("tileset")) {
       String source = tileset.getAttribute("source", null);
       if (source != null) {
         FileHandle tsxFile = getRelativeFileHandle(tmxFile, source);
@@ -161,6 +155,7 @@ public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
       }
     }
 
+    // ImageLayer descriptors
     for (Element imageLayer : root.getChildrenByName("imagelayer")) {
       Element image = imageLayer.getChildByName("image");
       String source = image.getAttribute("source", null);
