@@ -515,7 +515,7 @@ public class XmlReader {
       return value;
     }
 
-    @Nullable
+    @SuppressWarnings("NullAway")
     public String getAttribute(String name, @Nullable String defaultValue) {
       if (attributes == null) return defaultValue;
       String value = attributes.get(name);
