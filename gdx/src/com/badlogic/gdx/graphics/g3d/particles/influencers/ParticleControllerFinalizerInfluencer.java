@@ -22,6 +22,8 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
+import javax.annotation.Nullable;
 
 /**
  * It's an {@link Influencer} which updates the simulation of particles containing a {@link
@@ -31,7 +33,7 @@ import com.uber.nullaway.annotations.Initializer;
  * @author Inferno
  */
 public class ParticleControllerFinalizerInfluencer extends Influencer {
-  FloatChannel positionChannel, scaleChannel, rotationChannel;
+  @Nullable FloatChannel positionChannel, scaleChannel, rotationChannel;
   ObjectChannel<ParticleController> controllerChannel;
   boolean hasScale, hasRotation;
 
@@ -57,14 +59,27 @@ public class ParticleControllerFinalizerInfluencer extends Influencer {
 
   @Override
   public void update() {
+    if (positionChannel == null) {
+      throw new IllegalStateException("positionChannel has not been initialized");
+    }
+
+    if (hasScale && scaleChannel == null) {
+      throw new IllegalStateException("scaleChannel has not been initialized");
+    }
+
+    if (hasRotation && rotationChannel == null) {
+      throw new IllegalStateException("rotationChannel has not been initialized");
+    }
+
     for (int i = 0, positionOffset = 0, c = controller.particles.size;
         i < c;
         ++i, positionOffset += positionChannel.strideSize) {
       ParticleController particleController = controllerChannel.data[i];
-      float scale = hasScale ? scaleChannel.data[i] : 1;
+      float scale = hasScale ? Nullability.castToNonnull(scaleChannel, "not null here").data[i] : 1;
       float qx = 0, qy = 0, qz = 0, qw = 1;
       if (hasRotation) {
-        int rotationOffset = i * rotationChannel.strideSize;
+        int rotationOffset =
+            i * Nullability.castToNonnull(rotationChannel, "not null when used").strideSize;
         qx = rotationChannel.data[rotationOffset + ParticleChannels.XOffset];
         qy = rotationChannel.data[rotationOffset + ParticleChannels.YOffset];
         qz = rotationChannel.data[rotationOffset + ParticleChannels.ZOffset];
