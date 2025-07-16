@@ -2,14 +2,16 @@
 
 package com.badlogic.gdx.utils.compression.lz;
 
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
+import javax.annotation.Nullable;
 
 public class BinTree extends InWindow {
   int _cyclicBufferPos;
   int _cyclicBufferSize = 0;
   int _matchMaxLen;
 
-  int[] _son;
+  @Nullable int[] _son;
   int[] _hash;
 
   int _cutValue = 0xFF;
@@ -106,7 +108,7 @@ public class BinTree extends InWindow {
     int offset = 0;
     int matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
     int cur = _bufferOffset + _pos;
-    int maxLen = kStartMaxLen; // to avoid items for len < hashSize;
+    int maxLen = kStartMaxLen;
     int hashValue, hash2Value = 0, hash3Value = 0;
 
     if (HASH_ARRAY) {
@@ -149,6 +151,10 @@ public class BinTree extends InWindow {
     int len0, len1;
     len0 = len1 = kNumHashDirectBytes;
 
+    if (_son == null || _son.length != _cyclicBufferSize * 2) {
+      _son = new int[_cyclicBufferSize * 2];
+    }
+
     if (kNumHashDirectBytes != 0) {
       if (curMatch > matchMinPos) {
         if (_bufferBase[_bufferOffset + curMatch + kNumHashDirectBytes]
@@ -163,7 +169,8 @@ public class BinTree extends InWindow {
 
     while (true) {
       if (curMatch <= matchMinPos || count-- == 0) {
-        _son[ptr0] = _son[ptr1] = kEmptyHashValue;
+        Nullability.castToNonnull(_son, "checked for nullity")[ptr0] =
+            Nullability.castToNonnull(_son, "checked for nullity")[ptr1] = kEmptyHashValue;
         break;
       }
       int delta = _pos - curMatch;
@@ -181,8 +188,9 @@ public class BinTree extends InWindow {
           distances[offset++] = maxLen = len;
           distances[offset++] = delta - 1;
           if (len == lenLimit) {
-            _son[ptr1] = _son[cyclicPos];
-            _son[ptr0] = _son[cyclicPos + 1];
+            Nullability.castToNonnull(_son, "checked for nullity")[ptr1] =
+                Nullability.castToNonnull(_son, "checked for nullity")[cyclicPos];
+            _son[ptr0] = Nullability.castToNonnull(_son, "checked for nullity")[cyclicPos + 1];
             break;
           }
         }
@@ -204,6 +212,10 @@ public class BinTree extends InWindow {
   }
 
   public void Skip(int num) throws IOException {
+    if (_son == null) {
+      throw new NullPointerException("_son array is not initialized.");
+    }
+
     do {
       int lenLimit;
       if (_pos + _matchMaxLen <= _streamPos) lenLimit = _matchMaxLen;
@@ -228,7 +240,9 @@ public class BinTree extends InWindow {
         int hash3Value = temp & (kHash3Size - 1);
         _hash[kHash3Offset + hash3Value] = _pos;
         hashValue = (temp ^ (CrcTable[_bufferBase[cur + 3] & 0xFF] << 5)) & _hashMask;
-      } else hashValue = ((_bufferBase[cur] & 0xFF) ^ ((int) (_bufferBase[cur + 1] & 0xFF) << 8));
+      } else {
+        hashValue = ((_bufferBase[cur] & 0xFF) ^ ((int) (_bufferBase[cur + 1] & 0xFF) << 8));
+      }
 
       int curMatch = _hash[kFixHashSize + hashValue];
       _hash[kFixHashSize + hashValue] = _pos;
@@ -242,7 +256,8 @@ public class BinTree extends InWindow {
       int count = _cutValue;
       while (true) {
         if (curMatch <= matchMinPos || count-- == 0) {
-          _son[ptr0] = _son[ptr1] = kEmptyHashValue;
+          Nullability.castToNonnull(_son, "null check passed")[ptr0] =
+              Nullability.castToNonnull(_son, "null check passed")[ptr1] = kEmptyHashValue;
           break;
         }
 
@@ -258,18 +273,18 @@ public class BinTree extends InWindow {
         if (_bufferBase[pby1 + len] == _bufferBase[cur + len]) {
           while (++len != lenLimit) if (_bufferBase[pby1 + len] != _bufferBase[cur + len]) break;
           if (len == lenLimit) {
-            _son[ptr1] = _son[cyclicPos];
-            _son[ptr0] = _son[cyclicPos + 1];
+            Nullability.castToNonnull(_son, "null check passed")[ptr1] = _son[cyclicPos];
+            Nullability.castToNonnull(_son, "null check passed")[ptr0] = _son[cyclicPos + 1];
             break;
           }
         }
         if ((_bufferBase[pby1 + len] & 0xFF) < (_bufferBase[cur + len] & 0xFF)) {
-          _son[ptr1] = curMatch;
+          Nullability.castToNonnull(_son, "null check passed")[ptr1] = curMatch;
           ptr1 = cyclicPos + 1;
           curMatch = _son[ptr1];
           len1 = len;
         } else {
-          _son[ptr0] = curMatch;
+          Nullability.castToNonnull(_son, "null check passed")[ptr0] = curMatch;
           ptr0 = cyclicPos;
           curMatch = _son[ptr0];
           len0 = len;
@@ -290,7 +305,12 @@ public class BinTree extends InWindow {
 
   void Normalize() {
     int subValue = _pos - _cyclicBufferSize;
-    NormalizeLinks(_son, _cyclicBufferSize * 2, subValue);
+
+    if (_son == null) {
+      _son = new int[_cyclicBufferSize * 2];
+    }
+
+    NormalizeLinks(Nullability.castToNonnull(_son), _cyclicBufferSize * 2, subValue);
     NormalizeLinks(_hash, _hashSizeSum, subValue);
     ReduceOffsets(subValue);
   }
