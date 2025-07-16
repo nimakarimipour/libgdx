@@ -1323,7 +1323,11 @@ public class PolygonSpriteBatch implements PolygonBatch {
     int trianglesInBatch = triangleIndex;
     if (trianglesInBatch > maxTrianglesInBatch) maxTrianglesInBatch = trianglesInBatch;
 
-    lastTexture.bind();
+    // Ensure lastTexture is not null before using it
+    if (lastTexture != null) {
+      lastTexture.bind();
+    }
+
     Mesh mesh = this.mesh;
     mesh.setVertices(vertices, 0, vertexIndex);
     mesh.setIndices(triangles, 0, trianglesInBatch);
@@ -1438,8 +1442,10 @@ public class PolygonSpriteBatch implements PolygonBatch {
   private void switchTexture(@Nullable Texture texture) {
     flush();
     lastTexture = texture;
-    invTexWidth = 1.0f / texture.getWidth();
-    invTexHeight = 1.0f / texture.getHeight();
+    if (texture != null) {
+      invTexWidth = 1.0f / texture.getWidth();
+      invTexHeight = 1.0f / texture.getHeight();
+    }
   }
 
   @Override
