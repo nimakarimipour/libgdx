@@ -169,29 +169,28 @@ public class PooledLinkedList<T> {
     }
 
   /** Removes the tail of the list regardless of iteration status */
-  @Nullable
-  public @Null T removeLast() {
-    if (tail == null) {
-      return null;
+  @Nullable public @Null T removeLast() {
+      if (tail == null) {
+        return null;
+      }
+  
+      T payload = tail.payload;
+  
+      size--;
+  
+      Item<T> p = tail.prev;
+      pool.free(tail);
+  
+      if (size == 0) {
+        head = null;
+        tail = null;
+      } else {
+        tail = p;
+        Nullability.castToNonnull(tail, "size greater than zero").next = null;
+      }
+  
+      return payload;
     }
-
-    T payload = tail.payload;
-
-    size--;
-
-    Item<T> p = tail.prev;
-    pool.free(tail);
-
-    if (size == 0) {
-      head = null;
-      tail = null;
-    } else {
-      tail = p;
-      tail.next = null;
-    }
-
-    return payload;
-  }
 
   public void clear() {
     iter();
