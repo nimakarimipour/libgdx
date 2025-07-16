@@ -43,6 +43,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -139,8 +140,11 @@ public class SelectBox<T> extends Widget implements Disableable {
     this.style = style;
 
     if (scrollPane != null) {
-      scrollPane.setStyle(style.scrollStyle);
-      scrollPane.list.setStyle(style.listStyle);
+      if (style.scrollStyle == null)
+        throw new IllegalArgumentException("scrollStyle cannot be null.");
+      scrollPane.setStyle(Nullability.castToNonnull(style.scrollStyle));
+      if (style.listStyle == null) throw new IllegalArgumentException("listStyle cannot be null.");
+      scrollPane.list.setStyle(Nullability.castToNonnull(style.listStyle));
     }
     invalidateHierarchy();
   }
@@ -203,6 +207,10 @@ public class SelectBox<T> extends Widget implements Disableable {
     Drawable bg = style.background;
     BitmapFont font = style.font;
 
+    if (font == null) {
+      throw new IllegalStateException("Font in style cannot be null");
+    }
+
     if (bg != null) {
       prefHeight =
           Math.max(
@@ -211,7 +219,11 @@ public class SelectBox<T> extends Widget implements Disableable {
                   + font.getCapHeight()
                   - font.getDescent() * 2,
               bg.getMinHeight());
-    } else prefHeight = font.getCapHeight() - font.getDescent() * 2;
+    } else {
+      prefHeight =
+          Nullability.castToNonnull(font, "checked for null").getCapHeight()
+              - font.getDescent() * 2;
+    }
 
     Pool<GlyphLayout> layoutPool = Pools.get(GlyphLayout.class);
     GlyphLayout layout = layoutPool.obtain();
@@ -236,21 +248,23 @@ public class SelectBox<T> extends Widget implements Disableable {
 
       ListStyle listStyle = style.listStyle;
       ScrollPaneStyle scrollStyle = style.scrollStyle;
-      float scrollWidth =
-          maxItemWidth + listStyle.selection.getLeftWidth() + listStyle.selection.getRightWidth();
-      bg = scrollStyle.background;
-      if (bg != null)
-        scrollWidth =
-            Math.max(scrollWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
-      if (scrollPane == null || !scrollPane.disableY) {
-        scrollWidth +=
-            Math.max(
-                style.scrollStyle.vScroll != null ? style.scrollStyle.vScroll.getMinWidth() : 0,
-                style.scrollStyle.vScrollKnob != null
-                    ? style.scrollStyle.vScrollKnob.getMinWidth()
-                    : 0);
+      if (scrollStyle != null && listStyle != null) {
+        float scrollWidth =
+            maxItemWidth + listStyle.selection.getLeftWidth() + listStyle.selection.getRightWidth();
+        bg = scrollStyle.background;
+        if (bg != null)
+          scrollWidth =
+              Math.max(scrollWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
+        if (scrollPane == null || !scrollPane.disableY) {
+          scrollWidth +=
+              Math.max(
+                  Nullability.castToNonnull(style.scrollStyle, "not null").vScroll != null
+                      ? style.scrollStyle.vScroll.getMinWidth()
+                      : 0,
+                  scrollStyle.vScrollKnob != null ? scrollStyle.vScrollKnob.getMinWidth() : 0);
+        }
+        prefWidth = Math.max(prefWidth, scrollWidth);
       }
-      prefWidth = Math.max(prefWidth, scrollWidth);
     }
     layoutPool.free(layout);
   }
@@ -281,6 +295,10 @@ public class SelectBox<T> extends Widget implements Disableable {
     Color fontColor = getFontColor();
     BitmapFont font = style.font;
 
+    if (font == null) {
+      return;
+    }
+
     Color color = getColor();
     float x = getX(), y = getY();
     float width = getWidth(), height = getHeight();
@@ -294,9 +312,18 @@ public class SelectBox<T> extends Widget implements Disableable {
         width -= background.getLeftWidth() + background.getRightWidth();
         height -= background.getBottomHeight() + background.getTopHeight();
         x += background.getLeftWidth();
-        y += (int) (height / 2 + background.getBottomHeight() + font.getData().capHeight / 2);
+        y +=
+            (int)
+                (height / 2
+                    + background.getBottomHeight()
+                    + Nullability.castToNonnull(font, "font nonnullable here").getData().capHeight
+                        / 2);
       } else {
-        y += (int) (height / 2 + font.getData().capHeight / 2);
+        y +=
+            (int)
+                (height / 2
+                    + Nullability.castToNonnull(font, "font nonnullable here").getData().capHeight
+                        / 2);
       }
       font.setColor(fontColor.r, fontColor.g, fontColor.b, fontColor.a * parentAlpha);
       drawItem(batch, font, selected, x, y, width);
@@ -379,8 +406,10 @@ public class SelectBox<T> extends Widget implements Disableable {
     GlyphLayout layout = layoutPool.obtain();
     float width = 0;
     for (int i = 0; i < items.size; i++) {
-      layout.setText(style.font, toString(items.get(i)));
-      width = Math.max(layout.width, width);
+      if (style.font != null) {
+        layout.setText(Nullability.castToNonnull(style.font), toString(items.get(i)));
+        width = Math.max(layout.width, width);
+      }
     }
     Drawable bg = style.background;
     if (bg != null)
@@ -484,7 +513,9 @@ public class SelectBox<T> extends Widget implements Disableable {
     @Nullable private Actor previousScrollFocus;
 
     public SelectBoxScrollPane(final SelectBox<T> selectBox) {
-      super(null, selectBox.style.scrollStyle);
+      super(
+          null,
+          selectBox.style != null ? Nullability.castToNonnull(selectBox.style.scrollStyle) : null);
       this.selectBox = selectBox;
 
       setOverscroll(false, false);
@@ -515,8 +546,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 
       addListener(
           new InputListener() {
-            public void exit(
-                InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {
+            public void exit(InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
               if (toActor == null || !isAscendantOf(toActor)) {
                 T selected = selectBox.getSelected();
                 if (selected != null) list.selection.set(selected);
@@ -534,7 +564,7 @@ public class SelectBox<T> extends Widget implements Disableable {
               return false;
             }
 
-            public boolean keyDown(@Nullable InputEvent event, int keycode) {
+            public boolean keyDown(InputEvent event, int keycode) {
               switch (keycode) {
                 case Keys.NUMPAD_ENTER:
                 case Keys.ENTER:
@@ -555,7 +585,10 @@ public class SelectBox<T> extends Widget implements Disableable {
      * that delegates {@link List#toString(Object)} to {@link SelectBox#toString(Object)}.
      */
     protected List<T> newList() {
-      return new List<T>(selectBox.style.listStyle) {
+      if (selectBox.style.listStyle == null) {
+        throw new NullPointerException("listStyle is null");
+      }
+      return new List<T>(Nullability.castToNonnull(selectBox.style.listStyle)) {
         public String toString(T obj) {
           return selectBox.toString(obj);
         }
@@ -679,12 +712,12 @@ public class SelectBox<T> extends Widget implements Disableable {
    * @author Nathan Sweet
    */
   public static class SelectBoxStyle {
-    public BitmapFont font;
+    @Nullable public BitmapFont font;
     public Color fontColor = new Color(1, 1, 1, 1);
     @Nullable public @Null Color overFontColor, disabledFontColor;
     @Nullable public @Null Drawable background;
-    public ScrollPaneStyle scrollStyle;
-    public ListStyle listStyle;
+    @Nullable public ScrollPaneStyle scrollStyle;
+    @Nullable public ListStyle listStyle;
     @Nullable public @Null Drawable backgroundOver, backgroundOpen, backgroundDisabled;
 
     public SelectBoxStyle() {}
@@ -710,8 +743,16 @@ public class SelectBox<T> extends Widget implements Disableable {
       if (style.disabledFontColor != null) disabledFontColor = new Color(style.disabledFontColor);
 
       background = style.background;
-      scrollStyle = new ScrollPaneStyle(style.scrollStyle);
-      listStyle = new ListStyle(style.listStyle);
+      if (style.scrollStyle != null) {
+        scrollStyle = new ScrollPaneStyle(style.scrollStyle);
+      } else {
+        scrollStyle = null; // Or handle as necessary
+      }
+      if (style.listStyle != null) {
+        listStyle = new ListStyle(Nullability.castToNonnull(style.listStyle));
+      } else {
+        listStyle = null; // Or handle as necessary
+      }
 
       backgroundOver = style.backgroundOver;
       backgroundOpen = style.backgroundOpen;
