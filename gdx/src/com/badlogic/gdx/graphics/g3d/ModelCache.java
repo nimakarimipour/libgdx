@@ -27,7 +27,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Comparator;
 import javax.annotation.Nullable;
 
@@ -174,13 +173,11 @@ public class ModelCache implements Disposable, RenderableProvider {
       final VertexAttributes va1 = arg1.meshPart.mesh.getVertexAttributes();
       final int vc = va0.compareTo(va1);
       if (vc == 0) {
-        final int materialComparison =
-            (Nullability.castToNonnull(arg0.material, "ensured before compare"))
-                .compareTo(arg1.material != null ? arg1.material : new Material());
-        if (materialComparison == 0) {
+        final int mc = arg0.material.compareTo(arg1.material);
+        if (mc == 0) {
           return arg0.meshPart.primitiveType - arg1.meshPart.primitiveType;
         }
-        return materialComparison;
+        return mc;
       }
       return vc;
     }
@@ -265,7 +262,7 @@ public class ModelCache implements Disposable, RenderableProvider {
     meshPool.flush();
   }
 
-  private Renderable obtainRenderable(@Nullable Material material, int primitiveType) {
+  private Renderable obtainRenderable(Material material, int primitiveType) {
     Renderable result = renderablesPool.obtain();
     result.bones = null;
     result.environment = null;
@@ -307,10 +304,7 @@ public class ModelCache implements Disposable, RenderableProvider {
 
     meshBuilder.begin(vertexAttributes);
     MeshPart part = meshBuilder.part("", primitiveType, meshPartPool.obtain());
-
-    if (material != null) {
-      renderables.add(obtainRenderable(material, primitiveType));
-    }
+    renderables.add(obtainRenderable(material, primitiveType));
 
     for (int i = 0, n = items.size; i < n; ++i) {
       final Renderable renderable = items.get(i);
@@ -325,11 +319,7 @@ public class ModelCache implements Disposable, RenderableProvider {
       final boolean canHoldVertices =
           meshBuilder.getNumVertices() + verticesToAdd <= MeshBuilder.MAX_VERTICES;
       final boolean sameMesh = sameAttributes && canHoldVertices;
-
-      final boolean samePart =
-          sameMesh
-              && mat != null
-              && Nullability.castToNonnull(mat, "check mat is not null").same(material, true);
+      final boolean samePart = sameMesh && pt == primitiveType && mat.same(material, true);
 
       if (!samePart) {
         if (!sameMesh) {
@@ -347,14 +337,9 @@ public class ModelCache implements Disposable, RenderableProvider {
         previous.meshPart.size = part.size;
         part = newPart;
 
-        if (mat != null) {
-          renderables.add(obtainRenderable(material = mat, primitiveType = pt));
-        }
+        renderables.add(obtainRenderable(material = mat, primitiveType = pt));
       }
 
-      if (mat != null) {
-        material = mat;
-      }
       meshBuilder.setVertexTransform(renderable.worldTransform);
       meshBuilder.addMesh(
           renderable.meshPart.mesh, renderable.meshPart.offset, renderable.meshPart.size);
