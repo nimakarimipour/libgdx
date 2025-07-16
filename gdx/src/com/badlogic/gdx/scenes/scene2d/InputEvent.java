@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  * @see InputListener
  */
 public class InputEvent extends Event {
-  private Type type;
+  @Nullable private Type type;
   private float stageX, stageY, scrollAmountX, scrollAmountY;
   private int pointer, button, keyCode;
   private char character;
@@ -66,7 +66,7 @@ public class InputEvent extends Event {
   }
 
   /** The type of input event. */
-  public Type getType() {
+  @Nullable public Type getType() {
     return type;
   }
 
@@ -180,8 +180,8 @@ public class InputEvent extends Event {
   }
 
   public String toString() {
-    return type.toString();
-  }
+      return type == null ? "null" : type.toString();
+    }
 
   /** Types of low-level input events supported by scene2d. */
   public static enum Type {

@@ -19,6 +19,7 @@ package com.badlogic.gdx.scenes.scene2d;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Null;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * EventListener for low-level input events. Unpacks {@link InputEvent}s and calls the appropriate
@@ -51,54 +52,54 @@ public class InputListener implements EventListener {
    * receive all touch dragged events until the next touch up event.
    */
   public boolean handle(Event e) {
-    if (!(e instanceof InputEvent)) return false;
-    InputEvent event = (InputEvent) e;
-
-    switch (event.getType()) {
-      case keyDown:
-        return keyDown(event, event.getKeyCode());
-      case keyUp:
-        return keyUp(event, event.getKeyCode());
-      case keyTyped:
-        return keyTyped(event, event.getCharacter());
-    }
-
-    event.toCoordinates(event.getListenerActor(), tmpCoords);
-
-    switch (event.getType()) {
-      case touchDown:
-        boolean handled =
-            touchDown(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
-        if (handled && event.getTouchFocus()) {
-          event
-              .getStage()
-              .addTouchFocus(
-                  this,
-                  event.getListenerActor(),
-                  event.getTarget(),
-                  event.getPointer(),
-                  event.getButton());
+        if (!(e instanceof InputEvent)) return false;
+        InputEvent event = (InputEvent) e;
+    
+        switch (Nullability.castToNonnull(event.getType())) {
+          case keyDown:
+            return keyDown(event, event.getKeyCode());
+          case keyUp:
+            return keyUp(event, event.getKeyCode());
+          case keyTyped:
+            return keyTyped(event, event.getCharacter());
         }
-        return handled;
-      case touchUp:
-        touchUp(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
-        return true;
-      case touchDragged:
-        touchDragged(event, tmpCoords.x, tmpCoords.y, event.getPointer());
-        return true;
-      case mouseMoved:
-        return mouseMoved(event, tmpCoords.x, tmpCoords.y);
-      case scrolled:
-        return scrolled(
-            event, tmpCoords.x, tmpCoords.y, event.getScrollAmountX(), event.getScrollAmountY());
-      case enter:
-        enter(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getRelatedActor());
+    
+        event.toCoordinates(event.getListenerActor(), tmpCoords);
+    
+        switch (Nullability.castToNonnull(event.getType())) {
+          case touchDown:
+            boolean handled =
+                touchDown(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
+            if (handled && event.getTouchFocus()) {
+              event
+                  .getStage()
+                  .addTouchFocus(
+                      this,
+                      event.getListenerActor(),
+                      event.getTarget(),
+                      event.getPointer(),
+                      event.getButton());
+            }
+            return handled;
+          case touchUp:
+            touchUp(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
+            return true;
+          case touchDragged:
+            touchDragged(event, tmpCoords.x, tmpCoords.y, event.getPointer());
+            return true;
+          case mouseMoved:
+            return mouseMoved(event, tmpCoords.x, tmpCoords.y);
+          case scrolled:
+            return scrolled(
+                event, tmpCoords.x, tmpCoords.y, event.getScrollAmountX(), event.getScrollAmountY());
+          case enter:
+            enter(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getRelatedActor());
+            return false;
+          case exit:
+            exit(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getRelatedActor());
+            return false;
+        }
         return false;
-      case exit:
-        exit(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getRelatedActor());
-        return false;
-    }
-    return false;
   }
 
   /**
