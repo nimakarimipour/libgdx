@@ -17,6 +17,7 @@
 package com.badlogic.gdx;
 
 import com.badlogic.gdx.utils.ObjectIntMap;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -637,7 +638,7 @@ public interface Input {
      */
     public static int valueOf(String keyname) {
       if (keyNames == null) initializeKeyNames();
-      return keyNames.get(keyname, -1);
+      return Nullability.castToNonnull(keyNames, "initialized if null").get(keyname, -1);
     }
 
     /** lazily intialized in {@link Keys#valueOf(String)} */
