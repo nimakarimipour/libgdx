@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -96,6 +97,10 @@ public abstract class ColorInfluencer extends Influencer {
 
     @Override
     public void activateParticles(int startIndex, int count) {
+      if (colorChannel == null) {
+        throw new NullPointerException("colorChannel is null");
+      }
+
       for (int i = startIndex * colorChannel.strideSize,
               a = startIndex * alphaInterpolationChannel.strideSize,
               l = startIndex * lifeChannel.strideSize + ParticleChannels.LifePercentOffset,
@@ -115,10 +120,18 @@ public abstract class ColorInfluencer extends Influencer {
 
     @Override
     public void update() {
+      if (colorChannel == null) {
+        throw new NullPointerException("colorChannel is not initialized");
+      }
+
       for (int i = 0,
               a = 0,
               l = ParticleChannels.LifePercentOffset,
-              c = i + controller.particles.size * colorChannel.strideSize;
+              c =
+                  i
+                      + controller.particles.size
+                          * Nullability.castToNonnull(colorChannel, "not null if checked")
+                              .strideSize;
           i < c;
           i += colorChannel.strideSize, a += alphaInterpolationChannel.strideSize,
               l += lifeChannel.strideSize) {
@@ -150,7 +163,7 @@ public abstract class ColorInfluencer extends Influencer {
     }
   }
 
-  FloatChannel colorChannel;
+  @Nullable FloatChannel colorChannel;
 
   @Override
   public void allocateChannels() {
