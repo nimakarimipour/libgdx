@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * This class represents an group of elements like an array, but the properties of the elements are
@@ -200,8 +201,8 @@ public class ParallelArray {
    * same id already exists, no allocation is performed and that channel is returned.
    */
   public <T extends Channel> T addChannel(@Nullable ChannelDescriptor channelDescriptor) {
-    return addChannel(channelDescriptor, null);
-  }
+        return addChannel(Nullability.castToNonnull(channelDescriptor), null);
+    }
 
   /**
    * Adds and returns a channel described by the channel descriptor parameter. If a channel with the
