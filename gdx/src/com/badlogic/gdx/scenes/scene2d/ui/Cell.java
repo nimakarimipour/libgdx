@@ -763,8 +763,11 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   public float getMinHeight() {
-    return minHeight.get(actor);
-  }
+        if (actor == null) {
+            throw new IllegalArgumentException("actor cannot be null");
+        }
+        return minHeight.get(actor);
+    }
 
   /**
    * @return May be null if this cell is row defaults.
