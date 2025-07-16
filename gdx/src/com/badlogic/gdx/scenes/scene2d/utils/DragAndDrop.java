@@ -26,7 +26,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -84,8 +83,8 @@ public class DragAndDrop {
             source.drag(event, x, y, pointer);
 
             Stage stage = event.getStage();
-            if (stage == null) return;
 
+            // Move the drag actor away, so it cannot be hit.
             Actor oldDragActor = dragActor;
             float oldDragActorX = 0, oldDragActorY = 0;
             if (oldDragActor != null) {
@@ -96,12 +95,12 @@ public class DragAndDrop {
 
             float stageX = event.getStageX() + touchOffsetX,
                 stageY = event.getStageY() + touchOffsetY;
-            Actor hit =
-                Nullability.castToNonnull(stage, "ensure not null").hit(stageX, stageY, true);
-            if (hit == null) hit = stage.hit(stageX, stageY, false);
+            Actor hit = event.getStage().hit(stageX, stageY, true); // Prefer touchable actors.
+            if (hit == null) hit = event.getStage().hit(stageX, stageY, false);
 
             if (oldDragActor != null) oldDragActor.setPosition(oldDragActorX, oldDragActorY);
 
+            // Find target.
             Target newTarget = null;
             isValidTarget = false;
             if (hit != null) {
@@ -114,14 +113,18 @@ public class DragAndDrop {
               }
             }
 
+            // If over a new target, notify the former target that it's being left behind.
             if (newTarget != target) {
               if (target != null) target.reset(source, payload);
               target = newTarget;
             }
 
+            // Notify new target of drag.
             if (newTarget != null)
               isValidTarget = newTarget.drag(source, payload, tmpVector.x, tmpVector.y, pointer);
 
+            // Determine the drag actor, remove the old one if it was added by DragAndDrop, and add
+            // the new one.
             Actor actor = null;
             if (target != null)
               actor = isValidTarget ? payload.validDragActor : payload.invalidDragActor;
@@ -129,12 +132,13 @@ public class DragAndDrop {
             if (actor != oldDragActor) {
               if (oldDragActor != null && removeDragActor) oldDragActor.remove();
               dragActor = actor;
-              removeDragActor = actor.getStage() == null;
-              if (removeDragActor)
-                Nullability.castToNonnull(stage, "ensure not null").addActor(actor);
+              removeDragActor =
+                  actor.getStage() == null; // Only remove later if not already in the stage now.
+              if (removeDragActor) stage.addActor(actor);
             }
             if (actor == null) return;
 
+            // Position the drag actor.
             float actorX = event.getStageX() - actor.getWidth() + dragActorX;
             float actorY = event.getStageY() + dragActorY;
             if (keepWithinStage) {

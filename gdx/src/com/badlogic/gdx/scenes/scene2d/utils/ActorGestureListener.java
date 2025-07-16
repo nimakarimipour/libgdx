@@ -129,8 +129,6 @@ public class ActorGestureListener implements EventListener {
     if (!(e instanceof InputEvent)) return false;
     InputEvent event = (InputEvent) e;
 
-    if (event.getStage() == null) event.setStage(getStage());
-
     switch (event.getType()) {
       case touchDown:
         actor = event.getListenerActor();

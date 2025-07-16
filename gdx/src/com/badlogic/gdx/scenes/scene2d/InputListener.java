@@ -69,7 +69,7 @@ public class InputListener implements EventListener {
       case touchDown:
         boolean handled =
             touchDown(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
-        if (handled && event.getTouchFocus() && event.getStage() != null) {
+        if (handled && event.getTouchFocus()) {
           event
               .getStage()
               .addTouchFocus(
