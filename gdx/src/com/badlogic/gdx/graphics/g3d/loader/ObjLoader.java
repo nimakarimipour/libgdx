@@ -422,7 +422,11 @@ class MtlLoader {
   }
 
   public ModelMaterial getMaterial(final String name) {
-    for (final ModelMaterial m : materials) if (m.id.equals(name)) return m;
+    for (final ModelMaterial m : materials) {
+      if (m.id != null && m.id.equals(name)) {
+        return m;
+      }
+    }
     ModelMaterial mat = new ModelMaterial();
     mat.id = name;
     mat.diffuse = new Color(Color.WHITE);

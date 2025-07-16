@@ -494,12 +494,14 @@ public class Model implements Disposable {
   @Nullable
   public Material getMaterial(final String id, boolean ignoreCase) {
     final int n = materials.size;
-    Material material;
-    if (ignoreCase) {
-      for (int i = 0; i < n; i++)
-        if ((material = materials.get(i)).id.equalsIgnoreCase(id)) return material;
-    } else {
-      for (int i = 0; i < n; i++) if ((material = materials.get(i)).id.equals(id)) return material;
+    for (int i = 0; i < n; i++) {
+      Material material = materials.get(i);
+      if (material.id == null) return null;
+      if (ignoreCase) {
+        if (material.id.equalsIgnoreCase(id)) return material;
+      } else {
+        if (material.id.equals(id)) return material;
+      }
     }
     return null;
   }
