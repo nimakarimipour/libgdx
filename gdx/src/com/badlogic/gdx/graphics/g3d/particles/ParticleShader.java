@@ -36,7 +36,6 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -281,9 +280,7 @@ public class ParticleShader extends BaseShader {
     this.config = config;
     this.program = shaderProgram;
     this.renderable = renderable;
-    materialMask =
-        Nullability.castToNonnull(renderable.material, "not null before access").getMask()
-            | optionalAttributes;
+    materialMask = renderable.material.getMask() | optionalAttributes;
     vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMask();
 
     if (!config.ignoreUnimplemented && (implementedFlags & materialMask) != materialMask)
@@ -292,7 +289,7 @@ public class ParticleShader extends BaseShader {
     // Global uniforms
     register(DefaultShader.Inputs.viewTrans, DefaultShader.Setters.viewTrans);
     register(DefaultShader.Inputs.projViewTrans, DefaultShader.Setters.projViewTrans);
-    register(DefaultShader.Inputs.projTrans, Setters.projTrans);
+    register(DefaultShader.Inputs.projTrans, DefaultShader.Setters.projTrans);
     register(Inputs.screenWidth, Setters.screenWidth);
     register(DefaultShader.Inputs.cameraUp, Setters.cameraUp);
     register(Inputs.cameraRight, Setters.cameraRight);
@@ -327,10 +324,7 @@ public class ParticleShader extends BaseShader {
 
   @Override
   public boolean canRender(final Renderable renderable) {
-    return (renderable.material != null
-            && materialMask
-                == (Nullability.castToNonnull(renderable.material, "checked for null").getMask()
-                    | optionalAttributes))
+    return (materialMask == (renderable.material.getMask() | optionalAttributes))
         && (vertexMask == renderable.meshPart.mesh.getVertexAttributes().getMask());
   }
 
@@ -357,7 +351,7 @@ public class ParticleShader extends BaseShader {
 
   @Override
   public void render(final Renderable renderable) {
-    if (renderable.material != null && !renderable.material.has(BlendingAttribute.Type))
+    if (!renderable.material.has(BlendingAttribute.Type))
       context.setBlending(false, GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     bindMaterial(renderable);
     super.render(renderable);
@@ -381,24 +375,21 @@ public class ParticleShader extends BaseShader {
     boolean depthMask = true;
 
     currentMaterial = renderable.material;
-    if (currentMaterial != null) {
-      for (final Attribute attr :
-          Nullability.castToNonnull(currentMaterial, "checked before loop")) {
-        final long t = attr.type;
-        if (BlendingAttribute.is(t)) {
-          context.setBlending(
-              true,
-              ((BlendingAttribute) attr).sourceFunction,
-              ((BlendingAttribute) attr).destFunction);
-        } else if ((t & DepthTestAttribute.Type) == DepthTestAttribute.Type) {
-          DepthTestAttribute dta = (DepthTestAttribute) attr;
-          depthFunc = dta.depthFunc;
-          depthRangeNear = dta.depthRangeNear;
-          depthRangeFar = dta.depthRangeFar;
-          depthMask = dta.depthMask;
-        } else if (!config.ignoreUnimplemented)
-          throw new GdxRuntimeException("Unknown material attribute: " + attr.toString());
-      }
+    for (final Attribute attr : currentMaterial) {
+      final long t = attr.type;
+      if (BlendingAttribute.is(t)) {
+        context.setBlending(
+            true,
+            ((BlendingAttribute) attr).sourceFunction,
+            ((BlendingAttribute) attr).destFunction);
+      } else if ((t & DepthTestAttribute.Type) == DepthTestAttribute.Type) {
+        DepthTestAttribute dta = (DepthTestAttribute) attr;
+        depthFunc = dta.depthFunc;
+        depthRangeNear = dta.depthRangeNear;
+        depthRangeFar = dta.depthRangeFar;
+        depthMask = dta.depthMask;
+      } else if (!config.ignoreUnimplemented)
+        throw new GdxRuntimeException("Unknown material attribute: " + attr.toString());
     }
 
     context.setCullFace(cullFace);
