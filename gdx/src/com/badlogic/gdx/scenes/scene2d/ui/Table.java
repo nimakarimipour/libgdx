@@ -33,6 +33,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
@@ -893,7 +894,7 @@ public class Table extends WidgetGroup {
       // Spacing between actors isn't additive, the larger is used. Also, no spacing around edges.
       c.computedPadLeft =
           c.padLeft.get(a) + (column == 0 ? 0 : Math.max(0, c.spaceLeft.get(a) - spaceRightLast));
-      c.computedPadTop = c.padTop.get(a);
+      c.computedPadTop = c.padTop.get(Nullability.castToNonnull(a));
       if (c.cellAboveIndex != -1) {
         Cell above = (Cell) cells[c.cellAboveIndex];
         c.computedPadTop += Math.max(0, c.spaceTop.get(a) - above.spaceBottom.get(a));
