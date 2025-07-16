@@ -26,7 +26,6 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Constructor;
 import com.badlogic.gdx.utils.reflect.Field;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -1058,16 +1057,12 @@ public class Json {
   }
 
   public void readFields(Object object, JsonValue jsonMap) {
-    if (jsonMap == null) {
-      throw new IllegalArgumentException("jsonMap cannot be null.");
-    }
     Class type = object.getClass();
     OrderedMap<String, FieldMetadata> fields = getFields(type);
     for (JsonValue child = jsonMap.child; child != null; child = child.next) {
-      if (child.name == null) continue; // Skip if child name is null
-      FieldMetadata metadata = fields.get(child.name.replace(" ", "_"));
+      FieldMetadata metadata = fields.get(child.name().replace(" ", "_"));
       if (metadata == null) {
-        if (Nullability.castToNonnull(child.name, "null check above").equals(typeName)) continue;
+        if (child.name.equals(typeName)) continue;
         if (ignoreUnknownFields || ignoreUnknownField(type, child.name)) {
           if (debug)
             System.out.println(
@@ -1241,23 +1236,20 @@ public class Json {
         // JSON object special cases.
         if (object instanceof ObjectMap) {
           ObjectMap result = (ObjectMap) object;
-          for (JsonValue child = jsonData.child; child != null; child = child.next) {
-            if (child.name != null) result.put(child.name, readValue(elementType, null, child));
-          }
+          for (JsonValue child = jsonData.child; child != null; child = child.next)
+            result.put(child.name, readValue(elementType, null, child));
           return (T) result;
         }
         if (object instanceof ObjectIntMap) {
           ObjectIntMap result = (ObjectIntMap) object;
-          for (JsonValue child = jsonData.child; child != null; child = child.next) {
-            if (child.name != null) result.put(child.name, readValue(Integer.class, null, child));
-          }
+          for (JsonValue child = jsonData.child; child != null; child = child.next)
+            result.put(child.name, readValue(Integer.class, null, child));
           return (T) result;
         }
         if (object instanceof ObjectFloatMap) {
           ObjectFloatMap result = (ObjectFloatMap) object;
-          for (JsonValue child = jsonData.child; child != null; child = child.next) {
-            if (child.name != null) result.put(child.name, readValue(Float.class, null, child));
-          }
+          for (JsonValue child = jsonData.child; child != null; child = child.next)
+            result.put(child.name, readValue(Float.class, null, child));
           return (T) result;
         }
         if (object instanceof ObjectSet) {
@@ -1268,18 +1260,14 @@ public class Json {
         }
         if (object instanceof IntMap) {
           IntMap result = (IntMap) object;
-          for (JsonValue child = jsonData.child; child != null; child = child.next) {
-            if (child.name != null)
-              result.put(Integer.parseInt(child.name), readValue(elementType, null, child));
-          }
+          for (JsonValue child = jsonData.child; child != null; child = child.next)
+            result.put(Integer.parseInt(child.name), readValue(elementType, null, child));
           return (T) result;
         }
         if (object instanceof LongMap) {
           LongMap result = (LongMap) object;
-          for (JsonValue child = jsonData.child; child != null; child = child.next) {
-            if (child.name != null)
-              result.put(Long.parseLong(child.name), readValue(elementType, null, child));
-          }
+          for (JsonValue child = jsonData.child; child != null; child = child.next)
+            result.put(Long.parseLong(child.name), readValue(elementType, null, child));
           return (T) result;
         }
         if (object instanceof IntSet) {
@@ -1290,16 +1278,15 @@ public class Json {
         }
         if (object instanceof ArrayMap) {
           ArrayMap result = (ArrayMap) object;
-          for (JsonValue child = jsonData.child; child != null; child = child.next) {
-            if (child.name != null) result.put(child.name, readValue(elementType, null, child));
-          }
+          for (JsonValue child = jsonData.child; child != null; child = child.next)
+            result.put(child.name, readValue(elementType, null, child));
           return (T) result;
         }
         if (object instanceof Map) {
           Map result = (Map) object;
           for (JsonValue child = jsonData.child; child != null; child = child.next) {
-            if (child.name != null && !child.name.equals(typeName))
-              result.put(child.name, readValue(elementType, null, child));
+            if (child.name.equals(typeName)) continue;
+            result.put(child.name, readValue(elementType, null, child));
           }
           return (T) result;
         }

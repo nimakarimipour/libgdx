@@ -18,7 +18,6 @@ package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.uber.nullaway.annotations.Initializer;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
@@ -53,7 +52,7 @@ public class JsonValue implements Iterable<JsonValue> {
   private double doubleValue;
   private long longValue;
 
-  @Nullable public String name;
+  public String name;
 
   /** May be null. */
   @Nullable public JsonValue child, parent;
@@ -1060,7 +1059,6 @@ public class JsonValue implements Iterable<JsonValue> {
    *
    * @return May be null.
    */
-  @Nullable
   public @Null String name() {
     return name;
   }
@@ -1213,12 +1211,10 @@ public class JsonValue implements Iterable<JsonValue> {
           buffer.append('{');
           int i = 0;
           for (JsonValue child = object.child; child != null; child = child.next) {
-            if (child.name != null) {
-              buffer.append(outputType.quoteName(child.name));
-              buffer.append(':');
-              json(child, buffer, outputType);
-              if (child.next != null) buffer.append(',');
-            }
+            buffer.append(outputType.quoteName(child.name));
+            buffer.append(':');
+            json(child, buffer, outputType);
+            if (child.next != null) buffer.append(',');
           }
           break;
         }
@@ -1283,11 +1279,8 @@ public class JsonValue implements Iterable<JsonValue> {
           break;
         }
       }
-    } else if (Nullability.castToNonnull(name, "checked for nullity").indexOf('.') != -1) {
-      trace = ".\"" + name.replace("\"", "\\\"") + "\"";
-    } else {
-      trace = '.' + (name != null ? name : "");
-    }
+    } else if (name.indexOf('.') != -1) trace = ".\"" + name.replace("\"", "\\\"") + "\"";
+    else trace = '.' + name;
     return parent.trace() + trace;
   }
 
@@ -1317,7 +1310,6 @@ public class JsonValue implements Iterable<JsonValue> {
           buffer.append(newLines ? "{\n" : "{ ");
           int i = 0;
           for (JsonValue child = object.child; child != null; child = child.next) {
-            if (child.name == null) throw new IllegalArgumentException("Child name is null");
             if (newLines) indent(indent, buffer);
             buffer.append(outputType.quoteName(child.name));
             buffer.append(": ");
@@ -1400,13 +1392,7 @@ public class JsonValue implements Iterable<JsonValue> {
         int i = 0;
         for (JsonValue child = object.child; child != null; child = child.next) {
           if (newLines) indent(indent, writer);
-          // Check if child.name is null and handle appropriately
-          if (child.name != null) {
-            writer.append(outputType.quoteName(child.name));
-          } else {
-            // Handle the case where child.name is null, maybe skip or append a default value
-            writer.append(outputType.quoteName("null"));
-          }
+          writer.append(outputType.quoteName(child.name));
           writer.append(": ");
           prettyPrint(child, writer, indent + 1, settings);
           if ((!newLines || outputType != OutputType.minimal) && child.next != null)
