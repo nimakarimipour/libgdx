@@ -585,17 +585,13 @@ public class TextureAtlas implements Disposable {
       public boolean rotate;
       public int index = -1;
       @Nullable public @Null String[] names;
-      @Nullable public @Null int[][] values;
+      public @Null int[][] values;
       public boolean flip;
 
       @Nullable
       public @Null int[] findValue(String name) {
-        if (names != null && values != null) {
-          for (int i = 0, n = names.length; i < n; i++) {
-            if (name.equals(names[i])) {
-              return values[i];
-            }
-          }
+        if (names != null) {
+          for (int i = 0, n = names.length; i < n; i++) if (name.equals(names[i])) return values[i];
         }
         return null;
       }
@@ -671,7 +667,7 @@ public class TextureAtlas implements Disposable {
      * Values for name/value pairs other than the fields provided on this class, each entry
      * corresponding to {@link #names}.
      */
-    @Nullable public @Null int[][] values;
+    public @Null int[][] values;
 
     public AtlasRegion(@Nullable Texture texture, int x, int y, int width, int height) {
       super(texture, x, y, width, height);
@@ -734,12 +730,8 @@ public class TextureAtlas implements Disposable {
 
     @Nullable
     public @Null int[] findValue(String name) {
-      if (names != null && values != null) {
-        for (int i = 0, n = names.length; i < n; i++) {
-          if (name.equals(names[i])) {
-            return values[i];
-          }
-        }
+      if (names != null) {
+        for (int i = 0, n = names.length; i < n; i++) if (name.equals(names[i])) return values[i];
       }
       return null;
     }
