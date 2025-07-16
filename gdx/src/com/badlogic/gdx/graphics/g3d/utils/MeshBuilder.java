@@ -281,35 +281,35 @@ public class MeshBuilder implements MeshPartBuilder {
    *     and must be big enough to hold the data, any existing data will be overwritten.
    */
   public Mesh end(Mesh mesh) {
-    endpart();
-
-    if (attributes == null) throw new GdxRuntimeException("Call begin() first");
-    if (!attributes.equals(mesh.getVertexAttributes()))
-      throw new GdxRuntimeException("Mesh attributes don't match");
-    if ((mesh.getMaxVertices() * stride) < vertices.size)
-      throw new GdxRuntimeException(
-          "Mesh can't hold enough vertices: "
-              + mesh.getMaxVertices()
-              + " * "
-              + stride
-              + " < "
-              + vertices.size);
-    if (mesh.getMaxIndices() < indices.size)
-      throw new GdxRuntimeException(
-          "Mesh can't hold enough indices: " + mesh.getMaxIndices() + " < " + indices.size);
-
-    mesh.setVertices(vertices.items, 0, vertices.size);
-    mesh.setIndices(indices.items, 0, indices.size);
-
-    for (MeshPart p : parts) p.mesh = mesh;
-    parts.clear();
-
-    attributes = null;
-    vertices.clear();
-    indices.clear();
-
-    return mesh;
-  }
+      endpart();
+  
+      if (attributes == null) throw new GdxRuntimeException("Call begin() first");
+      if (!attributes.equals(mesh.getVertexAttributes()))
+        throw new GdxRuntimeException("Mesh attributes don't match");
+      if ((mesh.getMaxVertices() * stride) < vertices.size)
+        throw new GdxRuntimeException(
+            "Mesh can't hold enough vertices: "
+                + mesh.getMaxVertices()
+                + " * "
+                + stride
+                + " < "
+                + vertices.size);
+      if (mesh.getMaxIndices() < indices.size)
+        throw new GdxRuntimeException(
+            "Mesh can't hold enough indices: " + mesh.getMaxIndices() + " < " + indices.size);
+  
+      mesh.setVertices(vertices.items, 0, vertices.size);
+      mesh.setIndices(indices.items, 0, indices.size);
+  
+      for (MeshPart p : parts) p.mesh = mesh;
+      parts.clear();
+  
+      attributes = new VertexAttributes(); // Assign a default non-null value instead of null
+      vertices.clear();
+      indices.clear();
+  
+      return mesh;
+    }
 
   /** End building the mesh and returns the mesh */
   public Mesh end() {
