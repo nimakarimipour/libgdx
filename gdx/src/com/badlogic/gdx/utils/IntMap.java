@@ -18,7 +18,6 @@ package com.badlogic.gdx.utils;
 
 import static com.badlogic.gdx.utils.ObjectSet.tableSize;
 
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -78,9 +77,9 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
    */
   protected int mask;
 
-  @Nullable private transient Entries entries1, entries2;
-  @Nullable private transient Values values1, values2;
-  @Nullable private transient Keys keys1, keys2;
+  private transient Entries entries1, entries2;
+  private transient Values values1, values2;
+  private transient Keys keys1, keys2;
 
   /** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
   public IntMap() {
@@ -503,11 +502,11 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
     if (!entries1.valid) {
       entries1.reset();
       entries1.valid = true;
-      Nullability.castToNonnull(entries2, "initialized if entries1 null").valid = false;
+      entries2.valid = false;
       return entries1;
     }
-    Nullability.castToNonnull(entries2, "previously initialized").reset();
-    Nullability.castToNonnull(entries2, "previously initialized").valid = true;
+    entries2.reset();
+    entries2.valid = true;
     entries1.valid = false;
     return entries2;
   }
@@ -528,11 +527,11 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
     if (!values1.valid) {
       values1.reset();
       values1.valid = true;
-      Nullability.castToNonnull(values2, "initialized when both null").valid = false;
+      values2.valid = false;
       return values1;
     }
-    Nullability.castToNonnull(values2, "always initialized together").reset();
-    Nullability.castToNonnull(values2, "always initialized together").valid = true;
+    values2.reset();
+    values2.valid = true;
     values1.valid = false;
     return values2;
   }
@@ -553,11 +552,11 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
     if (!keys1.valid) {
       keys1.reset();
       keys1.valid = true;
-      Nullability.castToNonnull(keys2, "initialized with keys1").valid = false;
+      keys2.valid = false;
       return keys1;
     }
-    Nullability.castToNonnull(keys2, "initialized with keys1").reset();
-    Nullability.castToNonnull(keys2, "initialized with keys1").valid = true;
+    keys2.reset();
+    keys2.valid = true;
     keys1.valid = false;
     return keys2;
   }
