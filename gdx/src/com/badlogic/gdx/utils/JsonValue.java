@@ -1474,15 +1474,18 @@ public class JsonValue implements Iterable<JsonValue> {
     }
 
     public void remove() {
-      if (current.prev == null) {
-        child = current.next;
-        if (child != null) child.prev = null;
-      } else {
-        current.prev.next = current.next;
-        if (current.next != null) current.next.prev = current.prev;
+        if (current == null) {
+          throw new IllegalStateException("No current element to remove");
+        }
+        if (current.prev == null) {
+          child = current.next;
+          if (child != null) child.prev = null;
+        } else {
+          current.prev.next = current.next;
+          if (current.next != null) current.next.prev = current.prev;
+        }
+        size--;
       }
-      size--;
-    }
 
     public Iterator<JsonValue> iterator() {
       return this;
