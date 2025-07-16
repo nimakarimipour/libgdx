@@ -63,7 +63,6 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.badlogic.gdx.utils.async.ThreadUtils;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -400,10 +399,7 @@ public class AssetManager implements Disposable {
     AssetLoader result = null;
     int length = -1;
     for (Entry<String, AssetLoader> entry : loaders.entries()) {
-      if (entry.key != null
-          && Nullability.castToNonnull(entry.key, "explicitly checked nonnull").length() > length
-          && fileName.endsWith(
-              Nullability.castToNonnull(entry.key, "explicitly checked nonnull"))) {
+      if (entry.key.length() > length && fileName.endsWith(entry.key)) {
         result = entry.value;
         length = entry.key.length();
       }
@@ -929,25 +925,16 @@ public class AssetManager implements Disposable {
       buffer.append(", ");
       buffer.append(ClassReflection.getSimpleName(type));
       buffer.append(", refs: ");
+      buffer.append(assets.get(type).get(fileName).refCount);
 
-      if (fileName != null) {
-        Map<String, RefCountedContainer> typeAssets = assets.get(type);
-        if (typeAssets != null) {
-          RefCountedContainer asset = typeAssets.get(Nullability.castToNonnull(fileName));
-          if (asset != null) {
-            buffer.append(asset.refCount);
-          }
+      Array<String> dependencies = assetDependencies.get(fileName);
+      if (dependencies != null) {
+        buffer.append(", deps: [");
+        for (String dep : dependencies) {
+          buffer.append(dep);
+          buffer.append(',');
         }
-
-        Array<String> dependencies = assetDependencies.get(Nullability.castToNonnull(fileName));
-        if (dependencies != null) {
-          buffer.append(", deps: [");
-          for (String dep : dependencies) {
-            buffer.append(dep);
-            buffer.append(',');
-          }
-          buffer.append(']');
-        }
+        buffer.append(']');
       }
     }
     return buffer.toString();
