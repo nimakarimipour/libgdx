@@ -22,7 +22,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.TimeUtils;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -135,7 +134,7 @@ public class ClickListener extends InputListener {
    * Returns true if the specified position is over the specified actor or within the tap square.
    */
   public boolean isOver(Actor actor, float x, float y) {
-    Actor hit = Nullability.castToNonnull(actor).hit(x, y, true);
+    Actor hit = actor.hit(x, y, true);
     if (hit == null || !hit.isDescendantOf(actor)) return inTapSquare(x, y);
     return true;
   }

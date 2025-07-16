@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -114,7 +113,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 
   private void setContainerPosition(Actor actor, float x, float y) {
     this.targetActor = actor;
-    Stage stage = Nullability.castToNonnull(actor.getStage());
+    Stage stage = actor.getStage();
     if (stage == null) return;
 
     container.setSize(manager.maxWidth, Integer.MAX_VALUE);
@@ -143,7 +142,7 @@ public class Tooltip<T extends Actor> extends InputListener {
     if (pointer != -1) return;
     if (touchIndependent && Gdx.input.isTouched()) return;
     Actor actor = event.getListenerActor();
-    if (fromActor != null && fromActor.isDescendantOf(Nullability.castToNonnull(actor))) return;
+    if (fromActor != null && fromActor.isDescendantOf(actor)) return;
     setContainerPosition(actor, x, y);
     manager.enter(this);
   }
