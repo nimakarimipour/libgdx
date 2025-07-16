@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -48,7 +49,7 @@ public class Window extends Table {
   private static final Vector2 tmpSize = new Vector2();
   private static final int MOVE = 1 << 5;
 
-  private WindowStyle style;
+  @Nullable private WindowStyle style;
   boolean isMovable = true, isModal, isResizable;
   int resizeBorder = 8;
   boolean keepWithinStage = true;
@@ -231,6 +232,7 @@ public class Window extends Table {
    * Returns the window's style. Modifying the returned style may not have an effect until {@link
    * #setStyle(WindowStyle)} is called.
    */
+  @Nullable
   public WindowStyle getStyle() {
     return style;
   }
@@ -281,7 +283,8 @@ public class Window extends Table {
 
       keepWithinStage();
 
-      if (style.stageBackground != null) {
+      // Ensure style is not null to avoid Null Pointer Exception
+      if (Nullability.castToNonnull(style, "style checked").stageBackground != null) {
         stageToLocalCoordinates(tmpPosition.set(0, 0));
         stageToLocalCoordinates(tmpSize.set(stage.getWidth(), stage.getHeight()));
         drawStageBackground(
@@ -300,7 +303,9 @@ public class Window extends Table {
       Batch batch, float parentAlpha, float x, float y, float width, float height) {
     Color color = getColor();
     batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-    style.stageBackground.draw(batch, x, y, width, height);
+    if (style != null && style.stageBackground != null) {
+      style.stageBackground.draw(batch, x, y, width, height);
+    }
   }
 
   protected void drawBackground(Batch batch, float parentAlpha, float x, float y) {
