@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -32,7 +33,7 @@ import javax.annotation.Nullable;
  */
 public class TextButton extends Button {
   private Label label;
-  private TextButtonStyle style;
+  @Nullable private TextButtonStyle style;
 
   public TextButton(@Null String text, Skin skin) {
     this(text, skin.get(TextButtonStyle.class));
@@ -73,6 +74,7 @@ public class TextButton extends Button {
     }
   }
 
+  @Nullable
   public TextButtonStyle getStyle() {
     return style;
   }
@@ -80,26 +82,34 @@ public class TextButton extends Button {
   /** Returns the appropriate label font color from the style based on the current button state. */
   @Nullable
   protected @Null Color getFontColor() {
-    if (isDisabled() && style.disabledFontColor != null) return style.disabledFontColor;
+    if (isDisabled()
+        && Nullability.castToNonnull(style, "style is checked").disabledFontColor != null)
+      return style.disabledFontColor;
     if (isPressed()) {
-      if (isChecked() && style.checkedDownFontColor != null) return style.checkedDownFontColor;
-      if (style.downFontColor != null) return style.downFontColor;
+      if (style != null && isChecked() && style.checkedDownFontColor != null)
+        return style.checkedDownFontColor;
+      if (Nullability.castToNonnull(style, "style is checked").downFontColor != null)
+        return style.downFontColor;
     }
     if (isOver()) {
       if (isChecked()) {
-        if (style.checkedOverFontColor != null) return style.checkedOverFontColor;
+        if (style != null && style.checkedOverFontColor != null)
+          return Nullability.castToNonnull(style, "checked to be nonnull").checkedOverFontColor;
       } else {
-        if (style.overFontColor != null) return style.overFontColor;
+        if (style != null && style.overFontColor != null) return style.overFontColor;
       }
     }
     boolean focused = hasKeyboardFocus();
     if (isChecked()) {
-      if (focused && style.checkedFocusedFontColor != null) return style.checkedFocusedFontColor;
-      if (style.checkedFontColor != null) return style.checkedFontColor;
-      if (isOver() && style.overFontColor != null) return style.overFontColor;
+      if (focused && style != null && style.checkedFocusedFontColor != null)
+        return Nullability.castToNonnull(style, "checked to be nonnull").checkedFocusedFontColor;
+      if (style != null && style.checkedFontColor != null)
+        return Nullability.castToNonnull(style, "style is checked").checkedFontColor;
+      if (isOver() && style != null && style.overFontColor != null) return style.overFontColor;
     }
-    if (focused && style.focusedFontColor != null) return style.focusedFontColor;
-    return style.fontColor;
+    if (focused && style != null && style.focusedFontColor != null)
+      return Nullability.castToNonnull(style, "style is checked").focusedFontColor;
+    return style != null ? style.fontColor : null;
   }
 
   public void draw(Batch batch, float parentAlpha) {
