@@ -37,11 +37,14 @@ public class ModelData {
   public final Array<ModelAnimation> animations = new Array<ModelAnimation>();
 
   public void addMesh(ModelMesh mesh) {
-    for (ModelMesh other : meshes) {
-      if (other.id.equals(mesh.id)) {
-        throw new GdxRuntimeException("Mesh with id '" + other.id + "' already in model");
+      if (mesh.id == null) {
+        throw new GdxRuntimeException("Mesh id must not be null");
       }
+      for (ModelMesh other : meshes) {
+        if (other.id != null && other.id.equals(mesh.id)) {
+          throw new GdxRuntimeException("Mesh with id '" + other.id + "' already in model");
+        }
+      }
+      meshes.add(mesh);
     }
-    meshes.add(mesh);
-  }
 }
