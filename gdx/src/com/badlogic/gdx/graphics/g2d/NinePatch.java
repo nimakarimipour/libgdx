@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -210,7 +209,7 @@ public class NinePatch {
   }
 
   public NinePatch(NinePatch ninePatch, Color color) {
-    texture = Nullability.castToNonnull(ninePatch).texture;
+    texture = ninePatch.texture;
 
     bottomLeft = ninePatch.bottomLeft;
     bottomCenter = ninePatch.bottomCenter;
