@@ -28,9 +28,12 @@ public abstract class PluggableGroupStrategy implements GroupStrategy {
   private IntMap<GroupPlug> plugs = new IntMap<GroupPlug>();
 
   @Override
-  public void beforeGroup(int group, Array<Decal> contents) {
-    plugs.get(group).beforeGroup(contents);
-  }
+    public void beforeGroup(int group, Array<Decal> contents) {
+      GroupPlug plug = plugs.get(group);
+      if (plug != null) {
+        plug.beforeGroup(contents);
+      }
+    }
 
   @Override
   public void afterGroup(int group) {
