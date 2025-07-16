@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * It's a generic use {@link Emitter} which fits most of the particles simulation scenarios.
@@ -54,7 +55,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
   private boolean continuous;
   private EmissionMode emissionMode;
 
-  private FloatChannel lifeChannel;
+  @Nullable private FloatChannel lifeChannel;
 
   public RegularEmitter() {
     delayValue = new RangedNumericValue();
@@ -109,80 +110,85 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
   }
 
   public void activateParticles(int startIndex, int count) {
-    int currentTotaLife = life + (int) (lifeDiff * lifeValue.getScale(percent)),
-        currentLife = currentTotaLife;
-    int offsetTime = (int) (lifeOffset + lifeOffsetDiff * lifeOffsetValue.getScale(percent));
-    if (offsetTime > 0) {
-      if (offsetTime >= currentLife) offsetTime = currentLife - 1;
-      currentLife -= offsetTime;
-    }
-    float lifePercent = 1 - currentLife / (float) currentTotaLife;
-
-    for (int i = startIndex * lifeChannel.strideSize, c = i + count * lifeChannel.strideSize;
-        i < c;
-        i += lifeChannel.strideSize) {
-      lifeChannel.data[i + ParticleChannels.CurrentLifeOffset] = currentLife;
-      lifeChannel.data[i + ParticleChannels.TotalLifeOffset] = currentTotaLife;
-      lifeChannel.data[i + ParticleChannels.LifePercentOffset] = lifePercent;
-    }
+          if (lifeChannel == null) {
+              throw new IllegalStateException("lifeChannel is not initialized.");
+          }
+          int currentTotaLife = life + (int) (lifeDiff * lifeValue.getScale(percent)),
+              currentLife = currentTotaLife;
+          int offsetTime = (int) (lifeOffset + lifeOffsetDiff * lifeOffsetValue.getScale(percent));
+          if (offsetTime > 0) {
+            if (offsetTime >= currentLife) offsetTime = currentLife - 1;
+            currentLife -= offsetTime;
+          }
+          float lifePercent = 1 - currentLife / (float) currentTotaLife;
+    
+          for (int i = startIndex * Nullability.castToNonnull(lifeChannel, "null check passed").strideSize, c = i + count * Nullability.castToNonnull(lifeChannel, "null check passed").strideSize;
+              i < c;
+              i += Nullability.castToNonnull(lifeChannel, "null check passed").strideSize) {
+            lifeChannel.data[i + ParticleChannels.CurrentLifeOffset] = currentLife;
+            lifeChannel.data[i + ParticleChannels.TotalLifeOffset] = currentTotaLife;
+            lifeChannel.data[i + ParticleChannels.LifePercentOffset] = lifePercent;
+          }
   }
 
   public void update() {
-    float deltaMillis = controller.deltaTime * 1000;
-
-    if (delayTimer < delay) {
-      delayTimer += deltaMillis;
-    } else {
-      boolean emit = emissionMode != EmissionMode.Disabled;
-      // End check
-      if (durationTimer < duration) {
-        durationTimer += deltaMillis;
-        percent = durationTimer / (float) duration;
-      } else {
-        if (continuous && emit && emissionMode == EmissionMode.Enabled) controller.start();
-        else emit = false;
-      }
-
-      if (emit) {
-        // Emit particles
-        emissionDelta += deltaMillis;
-        float emissionTime = emission + emissionDiff * emissionValue.getScale(percent);
-        if (emissionTime > 0) {
-          emissionTime = 1000 / emissionTime;
-          if (emissionDelta >= emissionTime) {
-            int emitCount = (int) (emissionDelta / emissionTime);
-            emitCount = Math.min(emitCount, maxParticleCount - controller.particles.size);
-            emissionDelta -= emitCount * emissionTime;
-            emissionDelta %= emissionTime;
-            addParticles(emitCount);
+        float deltaMillis = controller.deltaTime * 1000;
+  
+        if (delayTimer < delay) {
+          delayTimer += deltaMillis;
+        } else {
+          boolean emit = emissionMode != EmissionMode.Disabled;
+          // End check
+          if (durationTimer < duration) {
+            durationTimer += deltaMillis;
+            percent = durationTimer / (float) duration;
+          } else {
+            if (continuous && emit && emissionMode == EmissionMode.Enabled) controller.start();
+            else emit = false;
+          }
+  
+          if (emit) {
+            // Emit particles
+            emissionDelta += deltaMillis;
+            float emissionTime = emission + emissionDiff * emissionValue.getScale(percent);
+            if (emissionTime > 0) {
+              emissionTime = 1000 / emissionTime;
+              if (emissionDelta >= emissionTime) {
+                int emitCount = (int) (emissionDelta / emissionTime);
+                emitCount = Math.min(emitCount, maxParticleCount - controller.particles.size);
+                emissionDelta -= emitCount * emissionTime;
+                emissionDelta %= emissionTime;
+                addParticles(emitCount);
+              }
+            }
+            if (controller.particles.size < minParticleCount)
+              addParticles(minParticleCount - controller.particles.size);
           }
         }
-        if (controller.particles.size < minParticleCount)
-          addParticles(minParticleCount - controller.particles.size);
-      }
+  
+        // Update particles
+        if (lifeChannel != null) {
+          int activeParticles = controller.particles.size;
+          for (int i = 0, k = 0; i < controller.particles.size; ) {
+            if ((lifeChannel.data[k + ParticleChannels.CurrentLifeOffset] -= deltaMillis) <= 0) {
+              controller.particles.removeElement(i);
+              continue;
+            } else {
+              lifeChannel.data[k + ParticleChannels.LifePercentOffset] =
+                  1
+                      - lifeChannel.data[k + ParticleChannels.CurrentLifeOffset]
+                          / lifeChannel.data[k + ParticleChannels.TotalLifeOffset];
+            }
+            ++i;
+            k += lifeChannel.strideSize;
+          }
+  
+          if (controller.particles.size < activeParticles) {
+            controller.killParticles(
+                controller.particles.size, activeParticles - controller.particles.size);
+          }
+        }
     }
-
-    // Update particles
-    int activeParticles = controller.particles.size;
-    for (int i = 0, k = 0; i < controller.particles.size; ) {
-      if ((lifeChannel.data[k + ParticleChannels.CurrentLifeOffset] -= deltaMillis) <= 0) {
-        controller.particles.removeElement(i);
-        continue;
-      } else {
-        lifeChannel.data[k + ParticleChannels.LifePercentOffset] =
-            1
-                - lifeChannel.data[k + ParticleChannels.CurrentLifeOffset]
-                    / lifeChannel.data[k + ParticleChannels.TotalLifeOffset];
-      }
-      ++i;
-      k += lifeChannel.strideSize;
-    }
-
-    if (controller.particles.size < activeParticles) {
-      controller.killParticles(
-          controller.particles.size, activeParticles - controller.particles.size);
-    }
-  }
 
   private void addParticles(int count) {
     count = Math.min(count, maxParticleCount - controller.particles.size);
