@@ -1064,9 +1064,11 @@ public class SpriteCache implements Disposable {
     int[] counts;
 
     public Cache(int id, int offset) {
-      this.id = id;
-      this.offset = offset;
-    }
+          this.id = id;
+          this.offset = offset;
+          this.textures = new Texture[0]; // Initialize with an empty array or appropriate default
+          this.counts = new int[0]; // Initialize with an empty array or appropriate default
+        }
   }
 
   static ShaderProgram createDefaultShader() {
