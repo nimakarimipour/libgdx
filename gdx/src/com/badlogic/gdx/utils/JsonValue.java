@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
@@ -1300,6 +1301,9 @@ public class JsonValue implements Iterable<JsonValue> {
   private void prettyPrint(
       JsonValue object, StringBuilder buffer, int indent, PrettyPrintSettings settings) {
     OutputType outputType = settings.outputType;
+    if (outputType == null) {
+      throw new IllegalArgumentException("OutputType cannot be null");
+    }
     if (object.isObject()) {
       if (object.child == null) buffer.append("{}");
       else {
@@ -1311,7 +1315,8 @@ public class JsonValue implements Iterable<JsonValue> {
           int i = 0;
           for (JsonValue child = object.child; child != null; child = child.next) {
             if (newLines) indent(indent, buffer);
-            buffer.append(outputType.quoteName(child.name));
+            buffer.append(
+                Nullability.castToNonnull(outputType, "not null when used").quoteName(child.name));
             buffer.append(": ");
             prettyPrint(child, buffer, indent + 1, settings);
             if ((!newLines || outputType != OutputType.minimal) && child.next != null)
@@ -1355,7 +1360,9 @@ public class JsonValue implements Iterable<JsonValue> {
         buffer.append(']');
       }
     } else if (object.isString()) {
-      buffer.append(outputType.quoteValue(object.asString()));
+      buffer.append(
+          Nullability.castToNonnull(outputType, "not null when used")
+              .quoteValue(object.asString()));
     } else if (object.isDouble()) {
       double doubleValue = object.asDouble();
       long longValue = object.asLong();
@@ -1383,6 +1390,9 @@ public class JsonValue implements Iterable<JsonValue> {
   private void prettyPrint(
       JsonValue object, Writer writer, int indent, PrettyPrintSettings settings)
       throws IOException {
+    if (settings == null || settings.outputType == null) {
+      throw new NullPointerException("OutputType is null in PrettyPrintSettings");
+    }
     OutputType outputType = settings.outputType;
     if (object.isObject()) {
       if (object.child == null) writer.append("{}");
@@ -1419,7 +1429,8 @@ public class JsonValue implements Iterable<JsonValue> {
         writer.append(']');
       }
     } else if (object.isString()) {
-      writer.append(outputType.quoteValue(object.asString()));
+      writer.append(
+          Nullability.castToNonnull(outputType, "checked above").quoteValue(object.asString()));
     } else if (object.isDouble()) {
       double doubleValue = object.asDouble();
       long longValue = object.asLong();
@@ -1495,7 +1506,7 @@ public class JsonValue implements Iterable<JsonValue> {
   }
 
   public static class PrettyPrintSettings {
-    public OutputType outputType;
+    @Nullable public OutputType outputType;
 
     /** If an object on a single line fits this many columns, it won't wrap. */
     public int singleLineColumns;
