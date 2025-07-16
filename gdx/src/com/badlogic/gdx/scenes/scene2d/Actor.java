@@ -304,11 +304,12 @@ public class Actor {
   }
 
   public void addAction(@Nullable Action action) {
-    action.setActor(this);
-    actions.add(action);
-
-    if (stage != null && stage.getActionsRequestRendering()) Gdx.graphics.requestRendering();
-  }
+      if (action == null) return;
+      action.setActor(this);
+      actions.add(action);
+  
+      if (stage != null && stage.getActionsRequestRendering()) Gdx.graphics.requestRendering();
+    }
 
   /**
    * @param action May be null, in which case nothing is done.
