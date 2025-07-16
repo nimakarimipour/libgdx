@@ -23,7 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -110,7 +109,7 @@ public class TextButton extends Button {
 
   public void setLabel(Label label) {
     if (label == null) throw new IllegalArgumentException("label cannot be null.");
-    Nullability.castToNonnull(getLabelCell(), "label non-null checked").setActor(label);
+    getLabelCell().setActor(label);
     this.label = label;
   }
 
