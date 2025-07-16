@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Class to control one or more {@link Animation}s on a {@link ModelInstance}. Use the {@link
@@ -74,7 +75,7 @@ public class AnimationController extends BaseAnimationController {
     @Nullable public AnimationListener listener;
 
     /** The animation to be applied. */
-    public Animation animation;
+    @Nullable public Animation animation;
 
     /** The speed at which to play the animation (can be negative), 1.0 for normal speed. */
     public float speed;
@@ -214,11 +215,10 @@ public class AnimationController extends BaseAnimationController {
     return obtain(anim, offset, duration, loopCount, speed, listener);
   }
 
-  @Nullable
-  private AnimationDesc obtain(final AnimationDesc anim) {
-    return obtain(
-        anim.animation, anim.offset, anim.duration, anim.loopCount, anim.speed, anim.listener);
-  }
+  @Nullable private AnimationDesc obtain(final AnimationDesc anim) {
+      return obtain(
+          Nullability.castToNonnull(anim.animation), anim.offset, anim.duration, anim.loopCount, anim.speed, anim.listener);
+    }
 
   /**
    * Update any animations currently being played.
@@ -227,34 +227,34 @@ public class AnimationController extends BaseAnimationController {
    *     negative).
    */
   public void update(float delta) {
-    if (paused) return;
-    if (previous != null && ((transitionCurrentTime += delta) >= transitionTargetTime)) {
-      removeAnimation(previous.animation);
-      justChangedAnimation = true;
-      animationPool.free(previous);
-      previous = null;
-    }
-    if (justChangedAnimation) {
-      target.calculateTransforms();
-      justChangedAnimation = false;
-    }
-    if (current == null || current.loopCount == 0 || current.animation == null) return;
-    final float remain = current.update(delta);
-    if (remain >= 0f && queued != null) {
-      inAction = false;
-      animate(queued, queuedTransitionTime);
-      queued = null;
-      if (remain > 0f) update(remain);
-      return;
-    }
-    if (previous != null)
-      applyAnimations(
-          previous.animation,
-          previous.offset + previous.time,
-          current.animation,
-          current.offset + current.time,
-          transitionCurrentTime / transitionTargetTime);
-    else applyAnimation(current.animation, current.offset + current.time);
+          if (paused) return;
+          if (previous != null && ((transitionCurrentTime += delta) >= transitionTargetTime)) {
+            removeAnimation(Nullability.castToNonnull(previous.animation));
+            justChangedAnimation = true;
+            animationPool.free(previous);
+            previous = null;
+          }
+          if (justChangedAnimation) {
+            target.calculateTransforms();
+            justChangedAnimation = false;
+          }
+          if (current == null || current.loopCount == 0 || current.animation == null) return;
+          final float remain = current.update(delta);
+          if (remain >= 0f && queued != null) {
+            inAction = false;
+            animate(queued, queuedTransitionTime);
+            queued = null;
+            if (remain > 0f) update(remain);
+            return;
+          }
+          if (previous != null)
+            applyAnimations(
+                Nullability.castToNonnull(previous.animation),
+                previous.offset + previous.time,
+                current.animation,
+                current.offset + current.time,
+                transitionCurrentTime / transitionTargetTime);
+          else applyAnimation(current.animation, current.offset + current.time);
   }
 
   /**
@@ -377,19 +377,18 @@ public class AnimationController extends BaseAnimationController {
   }
 
   /** Set the active animation, replacing any current animation. */
-  @Nullable
-  protected AnimationDesc setAnimation(@Nullable final AnimationDesc anim) {
-    if (current == null) current = anim;
-    else {
-      if (!allowSameAnimation && anim != null && current.animation == anim.animation)
-        anim.time = current.time;
-      else removeAnimation(current.animation);
-      animationPool.free(current);
-      current = anim;
+  @Nullable protected AnimationDesc setAnimation(@Nullable final AnimationDesc anim) {
+      if (current == null) current = anim;
+      else {
+        if (!allowSameAnimation && anim != null && current.animation == anim.animation)
+          anim.time = current.time;
+        else removeAnimation(Nullability.castToNonnull(current.animation));
+        animationPool.free(current);
+        current = anim;
+      }
+      justChangedAnimation = true;
+      return anim;
     }
-    justChangedAnimation = true;
-    return anim;
-  }
 
   /**
    * Changes the current animation by blending the new on top of the old during the transition time.
@@ -518,26 +517,25 @@ public class AnimationController extends BaseAnimationController {
   /**
    * Changes the current animation by blending the new on top of the old during the transition time.
    */
-  @Nullable
-  protected AnimationDesc animate(@Nullable final AnimationDesc anim, float transitionTime) {
-    if (current == null || current.loopCount == 0) current = anim;
-    else if (inAction) queue(anim, transitionTime);
-    else if (!allowSameAnimation && anim != null && current.animation == anim.animation) {
-      anim.time = current.time;
-      animationPool.free(current);
-      current = anim;
-    } else {
-      if (previous != null) {
-        removeAnimation(previous.animation);
-        animationPool.free(previous);
+  @Nullable protected AnimationDesc animate( @Nullable final AnimationDesc anim, float transitionTime) {
+      if (current == null || current.loopCount == 0) current = anim;
+      else if (inAction) queue(anim, transitionTime);
+      else if (!allowSameAnimation && anim != null && current.animation == anim.animation) {
+        anim.time = current.time;
+        animationPool.free(current);
+        current = anim;
+      } else {
+        if (previous != null) {
+          removeAnimation(Nullability.castToNonnull(previous.animation));
+          animationPool.free(previous);
+        }
+        previous = current;
+        current = anim;
+        transitionCurrentTime = 0f;
+        transitionTargetTime = transitionTime;
       }
-      previous = current;
-      current = anim;
-      transitionCurrentTime = 0f;
-      transitionTargetTime = transitionTime;
+      return anim;
     }
-    return anim;
-  }
 
   /**
    * Queue an animation to be applied when the {@link #current} animation is finished. If the
