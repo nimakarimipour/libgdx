@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Null;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -35,7 +34,7 @@ import javax.annotation.Nullable;
 public class Tooltip<T extends Actor> extends InputListener {
   static Vector2 tmp = new Vector2();
 
-  @Nullable private final TooltipManager manager;
+  private final TooltipManager manager;
   final Container<T> container;
   boolean instant, always, touchIndependent;
   @Nullable Actor targetActor;
@@ -63,7 +62,6 @@ public class Tooltip<T extends Actor> extends InputListener {
     container.setTouchable(Touchable.disabled);
   }
 
-  @Nullable
   public TooltipManager getManager() {
     return manager;
   }
@@ -103,9 +101,7 @@ public class Tooltip<T extends Actor> extends InputListener {
       container.toFront();
       return false;
     }
-    if (manager != null) {
-      Nullability.castToNonnull(manager, "checked not null earlier").touchDown(this);
-    }
+    manager.touchDown(this);
     return false;
   }
 
@@ -118,10 +114,9 @@ public class Tooltip<T extends Actor> extends InputListener {
   private void setContainerPosition(Actor actor, float x, float y) {
     this.targetActor = actor;
     Stage stage = actor.getStage();
-    if (stage == null || manager == null) return;
+    if (stage == null) return;
 
-    container.setSize(
-        Nullability.castToNonnull(manager, "checked before").maxWidth, Integer.MAX_VALUE);
+    container.setSize(manager.maxWidth, Integer.MAX_VALUE);
     container.validate();
     container.width(container.getActor().getWidth());
     container.pack();
@@ -149,9 +144,7 @@ public class Tooltip<T extends Actor> extends InputListener {
     Actor actor = event.getListenerActor();
     if (fromActor != null && fromActor.isDescendantOf(actor)) return;
     setContainerPosition(actor, x, y);
-    if (manager != null) {
-      Nullability.castToNonnull(manager, "manager is not null").enter(this);
-    }
+    manager.enter(this);
   }
 
   public void exit(InputEvent event, float x, float y, int pointer, @Nullable @Null Actor toActor) {
@@ -160,8 +153,6 @@ public class Tooltip<T extends Actor> extends InputListener {
   }
 
   public void hide() {
-    if (manager != null) {
-      manager.hide(this);
-    }
+    manager.hide(this);
   }
 }
