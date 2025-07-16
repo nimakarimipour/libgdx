@@ -1177,12 +1177,16 @@ public class JsonValue implements Iterable<JsonValue> {
    *     (eg, no leading zeros).
    */
   @Initializer
-  public void set(double value, @Nullable @Null String stringValue) {
-    doubleValue = value;
-    longValue = (long) value;
-    this.stringValue = stringValue;
-    type = ValueType.doubleValue;
-  }
+    public void set(double value, @Nullable @Null String stringValue) {
+      doubleValue = value;
+      longValue = (long) value;
+      if (stringValue != null) {
+        this.stringValue = stringValue;
+      } else {
+        this.stringValue = String.valueOf(value);
+      }
+      type = ValueType.doubleValue;
+    }
 
   /**
    * @param stringValue May be null if the string representation is the string value of the long
