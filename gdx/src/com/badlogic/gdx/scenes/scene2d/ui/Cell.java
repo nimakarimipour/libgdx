@@ -28,7 +28,7 @@ public class Cell<T extends Actor> implements Poolable {
   @Nullable private static Cell defaults;
 
   Value minWidth, minHeight;
-  Value prefWidth, prefHeight;
+  @Nullable Value prefWidth, prefHeight;
   Value maxWidth, maxHeight;
   Value spaceTop, spaceLeft, spaceBottom, spaceRight;
   Value padTop, padLeft, padBottom, padRight;
@@ -769,24 +769,28 @@ public class Cell<T extends Actor> implements Poolable {
   /**
    * @return May be null if this cell is row defaults.
    */
-  public @Null Value getPrefWidthValue() {
+  @Nullable public @Null Value getPrefWidthValue() {
     return prefWidth;
   }
 
   public float getPrefWidth() {
-    return prefWidth.get(actor);
-  }
+        if (prefWidth == null) {
+            throw new IllegalStateException("prefWidth cannot be null.");
+        }
+        return prefWidth.get(actor);
+    }
 
   /**
    * @return May be null if this cell is row defaults.
    */
-  public @Null Value getPrefHeightValue() {
+  @Nullable public @Null Value getPrefHeightValue() {
     return prefHeight;
   }
 
   public float getPrefHeight() {
-    return prefHeight.get(actor);
-  }
+        if (prefHeight == null) throw new IllegalStateException("prefHeight cannot be null.");
+        return prefHeight.get(actor);
+    }
 
   /**
    * @return May be null if this cell is row defaults.
@@ -1017,30 +1021,31 @@ public class Cell<T extends Actor> implements Poolable {
   }
 
   @Initializer
-  void set(@Nullable Cell cell) {
-    minWidth = cell.minWidth;
-    minHeight = cell.minHeight;
-    prefWidth = cell.prefWidth;
-    prefHeight = cell.prefHeight;
-    maxWidth = cell.maxWidth;
-    maxHeight = cell.maxHeight;
-    spaceTop = cell.spaceTop;
-    spaceLeft = cell.spaceLeft;
-    spaceBottom = cell.spaceBottom;
-    spaceRight = cell.spaceRight;
-    padTop = cell.padTop;
-    padLeft = cell.padLeft;
-    padBottom = cell.padBottom;
-    padRight = cell.padRight;
-    fillX = cell.fillX;
-    fillY = cell.fillY;
-    align = cell.align;
-    expandX = cell.expandX;
-    expandY = cell.expandY;
-    colspan = cell.colspan;
-    uniformX = cell.uniformX;
-    uniformY = cell.uniformY;
-  }
+    void set(@Nullable Cell cell) {
+        if (cell == null) return;
+        minWidth = cell.minWidth;
+        minHeight = cell.minHeight;
+        prefWidth = cell.prefWidth;
+        prefHeight = cell.prefHeight;
+        maxWidth = cell.maxWidth;
+        maxHeight = cell.maxHeight;
+        spaceTop = cell.spaceTop;
+        spaceLeft = cell.spaceLeft;
+        spaceBottom = cell.spaceBottom;
+        spaceRight = cell.spaceRight;
+        padTop = cell.padTop;
+        padLeft = cell.padLeft;
+        padBottom = cell.padBottom;
+        padRight = cell.padRight;
+        fillX = cell.fillX;
+        fillY = cell.fillY;
+        align = cell.align;
+        expandX = cell.expandX;
+        expandY = cell.expandY;
+        colspan = cell.colspan;
+        uniformX = cell.uniformX;
+        uniformY = cell.uniformY;
+    }
 
   void merge(@Nullable @Null Cell cell) {
     if (cell == null) return;
