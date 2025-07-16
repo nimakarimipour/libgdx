@@ -46,6 +46,7 @@ import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A single-line text input field.
@@ -158,22 +159,22 @@ public class TextField extends Widget implements Disableable {
   }
 
   protected int letterUnderCursor(float x) {
-    x -=
-        textOffset
-            + fontOffset
-            - style.font.getData().cursorX
-            - glyphPositions.get(visibleTextStart);
-    Drawable background = getBackgroundDrawable();
-    if (background != null) x -= style.background.getLeftWidth();
-    int n = this.glyphPositions.size;
-    float[] glyphPositions = this.glyphPositions.items;
-    for (int i = 1; i < n; i++) {
-      if (glyphPositions[i] > x) {
-        if (glyphPositions[i] - x <= x - glyphPositions[i - 1]) return i;
-        return i - 1;
+      x -=
+          textOffset
+              + fontOffset
+              - style.font.getData().cursorX
+              - glyphPositions.get(visibleTextStart);
+      Drawable background = getBackgroundDrawable();
+      if (background != null) x -= Nullability.castToNonnull(style.background, "background checked not null").getLeftWidth();
+      int n = this.glyphPositions.size;
+      float[] glyphPositions = this.glyphPositions.items;
+      for (int i = 1; i < n; i++) {
+        if (glyphPositions[i] > x) {
+          if (glyphPositions[i] - x <= x - glyphPositions[i - 1]) return i;
+          return i - 1;
+        }
       }
-    }
-    return n - 1;
+      return n - 1;
   }
 
   protected boolean isWordCharacter(char c) {
