@@ -1282,11 +1282,12 @@ public class Table extends WidgetGroup {
   }
 
   private void addDebugRect(float x, float y, float w, float h, Color color) {
-    DebugRect rect = DebugRect.pool.obtain();
-    rect.color = color;
-    rect.set(x, y, w, h);
-    debugRects.add(rect);
-  }
+      if (debugRects == null) debugRects = new Array();
+      DebugRect rect = DebugRect.pool.obtain();
+      rect.color = color;
+      rect.set(x, y, w, h);
+      debugRects.add(rect);
+    }
 
   public void drawDebug(ShapeRenderer shapes) {
     if (isTransform()) {
