@@ -28,7 +28,6 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Pool;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -214,8 +213,7 @@ public class ModelInstance implements RenderableProvider {
       copy.rotation.idt();
       copy.scale.set(1, 1, 1);
     } else if (parentTransform && copy.hasParent())
-      this.transform.mul(
-          Nullability.castToNonnull(node.getParent(), "parent exists").globalTransform);
+      this.transform.mul(node.getParent().globalTransform);
     invalidate();
     copyAnimations(model.animations, shareKeyframes);
     calculateTransforms();
