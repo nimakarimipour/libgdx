@@ -192,8 +192,11 @@ public class Matrix4 implements Serializable {
    * @return This matrix for the purpose of chaining methods together.
    */
   public Matrix4 set(@Nullable Matrix4 matrix) {
-    return set(matrix.val);
-  }
+      if (matrix == null) {
+        throw new NullPointerException("Matrix cannot be null");
+      }
+      return set(matrix.val);
+    }
 
   /**
    * Sets the matrix to the given matrix as a float array. The float array must have at least 16
