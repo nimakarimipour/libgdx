@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SortedIntList;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -55,7 +56,7 @@ public class DecalBatch implements Disposable {
   private Mesh mesh;
 
   private final SortedIntList<Array<Decal>> groupList = new SortedIntList<Array<Decal>>();
-  private GroupStrategy groupStrategy;
+  @Nullable private GroupStrategy groupStrategy;
   private final Pool<Array<Decal>> groupPool =
       new Pool<Array<Decal>>(16) {
         @Override
@@ -144,6 +145,9 @@ public class DecalBatch implements Disposable {
    * @param decal Decal to add for rendering
    */
   public void add(Decal decal) {
+    if (groupStrategy == null) {
+      throw new IllegalStateException("GroupStrategy must be set before adding decals.");
+    }
     int groupIndex = groupStrategy.decideGroup(decal);
     Array<Decal> targetGroup = groupList.get(groupIndex);
     if (targetGroup == null) {
@@ -166,7 +170,10 @@ public class DecalBatch implements Disposable {
 
   /** Renders all decals to the buffer and flushes the buffer to the GL when full/done */
   protected void render() {
-    groupStrategy.beforeGroups();
+    if (groupStrategy == null) {
+      throw new IllegalStateException("GroupStrategy is not set");
+    }
+    Nullability.castToNonnull(groupStrategy, "explicit null check").beforeGroups();
     for (SortedIntList.Node<Array<Decal>> group : groupList) {
       groupStrategy.beforeGroup(group.index, group.value);
       ShaderProgram shader = groupStrategy.getGroupShader(group.index);
