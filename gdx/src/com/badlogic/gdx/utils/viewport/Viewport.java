@@ -27,8 +27,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
-import edu.ucr.cs.riple.annotator.util.Nullability;
-import javax.annotation.Nullable;
 
 /**
  * Manages a {@link Camera} and determines how world coordinates are mapped to and from the screen.
@@ -37,7 +35,7 @@ import javax.annotation.Nullable;
  * @author Nathan Sweet
  */
 public abstract class Viewport {
-  @Nullable private Camera camera;
+  private Camera camera;
   private float worldWidth, worldHeight;
   private int screenX, screenY, screenWidth, screenHeight;
 
@@ -54,13 +52,11 @@ public abstract class Viewport {
    * @param centerCamera If true, the camera position is set to the center of the world.
    */
   public void apply(boolean centerCamera) {
-    if (camera != null) {
-      HdpiUtils.glViewport(screenX, screenY, screenWidth, screenHeight);
-      Nullability.castToNonnull(camera, "camera not null").viewportWidth = worldWidth;
-      camera.viewportHeight = worldHeight;
-      if (centerCamera) camera.position.set(worldWidth / 2, worldHeight / 2, 0);
-      camera.update();
-    }
+    HdpiUtils.glViewport(screenX, screenY, screenWidth, screenHeight);
+    camera.viewportWidth = worldWidth;
+    camera.viewportHeight = worldHeight;
+    if (centerCamera) camera.position.set(worldWidth / 2, worldHeight / 2, 0);
+    camera.update();
   }
 
   /** Calls {@link #update(int, int, boolean)} with false. */
@@ -86,12 +82,9 @@ public abstract class Viewport {
    * @see Camera#unproject(Vector3)
    */
   public Vector2 unproject(Vector2 screenCoords) {
-    if (camera != null) {
-      tmp.set(screenCoords.x, screenCoords.y, 1);
-      Nullability.castToNonnull(camera, "checked for null")
-          .unproject(tmp, screenX, screenY, screenWidth, screenHeight);
-      screenCoords.set(tmp.x, tmp.y);
-    }
+    tmp.set(screenCoords.x, screenCoords.y, 1);
+    camera.unproject(tmp, screenX, screenY, screenWidth, screenHeight);
+    screenCoords.set(tmp.x, tmp.y);
     return screenCoords;
   }
 
@@ -102,12 +95,8 @@ public abstract class Viewport {
    * @see Camera#project(Vector3)
    */
   public Vector2 project(Vector2 worldCoords) {
-    if (camera == null) {
-      throw new IllegalStateException("Camera is not set");
-    }
     tmp.set(worldCoords.x, worldCoords.y, 1);
-    Nullability.castToNonnull(camera, "checked before use")
-        .project(tmp, screenX, screenY, screenWidth, screenHeight);
+    camera.project(tmp, screenX, screenY, screenWidth, screenHeight);
     worldCoords.set(tmp.x, tmp.y);
     return worldCoords;
   }
@@ -119,9 +108,7 @@ public abstract class Viewport {
    * @see Camera#unproject(Vector3)
    */
   public Vector3 unproject(Vector3 screenCoords) {
-    if (camera != null) {
-      camera.unproject(screenCoords, screenX, screenY, screenWidth, screenHeight);
-    }
+    camera.unproject(screenCoords, screenX, screenY, screenWidth, screenHeight);
     return screenCoords;
   }
 
@@ -132,11 +119,7 @@ public abstract class Viewport {
    * @see Camera#project(Vector3)
    */
   public Vector3 project(Vector3 worldCoords) {
-    if (camera == null) {
-      throw new IllegalStateException("Camera is not set");
-    }
-    Nullability.castToNonnull(camera, "check before usage")
-        .project(worldCoords, screenX, screenY, screenWidth, screenHeight);
+    camera.project(worldCoords, screenX, screenY, screenWidth, screenHeight);
     return worldCoords;
   }
 
@@ -144,11 +127,8 @@ public abstract class Viewport {
    * @see Camera#getPickRay(float, float, float, float, float, float)
    */
   public Ray getPickRay(float screenX, float screenY) {
-    if (camera == null) {
-      throw new IllegalStateException("Camera is not set");
-    }
-    return Nullability.castToNonnull(camera, "checked before use")
-        .getPickRay(screenX, screenY, this.screenX, this.screenY, screenWidth, screenHeight);
+    return camera.getPickRay(
+        screenX, screenY, this.screenX, this.screenY, screenWidth, screenHeight);
   }
 
   /**
@@ -156,18 +136,8 @@ public abstract class Viewport {
    *     Rectangle)
    */
   public void calculateScissors(Matrix4 batchTransform, Rectangle area, Rectangle scissor) {
-    if (camera == null) {
-      throw new NullPointerException("Camera should not be null");
-    }
     ScissorStack.calculateScissors(
-        Nullability.castToNonnull(camera),
-        screenX,
-        screenY,
-        screenWidth,
-        screenHeight,
-        batchTransform,
-        area,
-        scissor);
+        camera, screenX, screenY, screenWidth, screenHeight, batchTransform, area, scissor);
   }
 
   /**
@@ -175,20 +145,15 @@ public abstract class Viewport {
    * where the origin is in the top left and the the y-axis is pointing downwards.
    */
   public Vector2 toScreenCoordinates(Vector2 worldCoords, Matrix4 transformMatrix) {
-    if (camera == null) {
-      throw new IllegalStateException("Camera must be set before calling toScreenCoordinates.");
-    }
     tmp.set(worldCoords.x, worldCoords.y, 0);
     tmp.mul(transformMatrix);
-    Nullability.castToNonnull(camera, "checked not null")
-        .project(tmp, screenX, screenY, screenWidth, screenHeight);
+    camera.project(tmp, screenX, screenY, screenWidth, screenHeight);
     tmp.y = Gdx.graphics.getHeight() - tmp.y;
     worldCoords.x = tmp.x;
     worldCoords.y = tmp.y;
     return worldCoords;
   }
 
-  @Nullable
   public Camera getCamera() {
     return camera;
   }

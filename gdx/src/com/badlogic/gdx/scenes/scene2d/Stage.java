@@ -137,18 +137,17 @@ public class Stage extends InputAdapter implements Disposable {
 
   public void draw() {
     Camera camera = viewport.getCamera();
-    if (camera != null) {
-      camera.update();
-      if (!root.isVisible()) return;
+    camera.update();
 
-      Batch batch = this.batch;
-      batch.setProjectionMatrix(camera.combined);
-      batch.begin();
-      root.draw(batch, 1);
-      batch.end();
+    if (!root.isVisible()) return;
 
-      if (debug) drawDebug();
-    }
+    Batch batch = this.batch;
+    batch.setProjectionMatrix(camera.combined);
+    batch.begin();
+    root.draw(batch, 1);
+    batch.end();
+
+    if (debug) drawDebug();
   }
 
   private void drawDebug() {
@@ -182,10 +181,7 @@ public class Stage extends InputAdapter implements Disposable {
     }
 
     Gdx.gl.glEnable(GL20.GL_BLEND);
-    Camera camera = viewport.getCamera();
-    if (camera != null) {
-      debugShapes.setProjectionMatrix(camera.combined);
-    }
+    debugShapes.setProjectionMatrix(viewport.getCamera().combined);
     debugShapes.begin();
     root.drawDebug(debugShapes);
     debugShapes.end();
