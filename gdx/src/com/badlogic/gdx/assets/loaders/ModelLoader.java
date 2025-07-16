@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.g3d.utils.TextureProvider;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Iterator;
 import javax.annotation.Nullable;
 
@@ -127,16 +128,17 @@ public abstract class ModelLoader<P extends ModelLoader.ModelParameters>
     ModelData data = null;
     synchronized (items) {
       for (int i = 0; i < items.size; i++) {
-        if (items.get(i).key.equals(fileName)) {
-          data = items.get(i).value;
+        ObjectMap.Entry<String, ModelData> entry = items.get(i);
+        if (entry.key != null
+            && Nullability.castToNonnull(items.get(i).key, "entry.key checked").equals(fileName)) {
+          data = entry.value;
           items.removeIndex(i);
+          break; // Exit the loop early once the match is found
         }
       }
     }
     if (data == null) return null;
     final Model result = new Model(data, new TextureProvider.AssetTextureProvider(manager));
-    // need to remove the textures from the managed disposables, or else ref counting
-    // doesn't work!
     Iterator<Disposable> disposables = result.getManagedDisposables().iterator();
     while (disposables.hasNext()) {
       Disposable disposable = disposables.next();
