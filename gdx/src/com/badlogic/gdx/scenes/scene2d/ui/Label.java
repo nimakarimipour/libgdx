@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.uber.nullaway.annotations.Initializer;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -183,6 +184,10 @@ public class Label extends Widget {
   }
 
   public void layout() {
+    if (style == null || style.font == null) {
+      throw new IllegalStateException("Style or Style's font cannot be null.");
+    }
+
     BitmapFont font = cache.getFont();
     float oldScaleX = font.getScaleX();
     float oldScaleY = font.getScaleY();
@@ -210,8 +215,6 @@ public class Label extends Widget {
     GlyphLayout layout = this.layout;
     float textWidth, textHeight;
     if (wrap || text.indexOf("\n") != -1) {
-      // If the text can span multiple lines, determine the text's actual size so it can be aligned
-      // within the label.
       layout.setText(font, text, 0, text.length, Color.WHITE, width, lineAlign, wrap, ellipsis);
       textWidth = layout.width;
       textHeight = layout.height;
@@ -227,10 +230,10 @@ public class Label extends Widget {
 
     if ((labelAlign & Align.top) != 0) {
       y += cache.getFont().isFlipped() ? 0 : height - textHeight;
-      y += style.font.getDescent();
+      y += Nullability.castToNonnull(style.font, "not null after check").getDescent();
     } else if ((labelAlign & Align.bottom) != 0) {
       y += cache.getFont().isFlipped() ? height - textHeight : 0;
-      y -= style.font.getDescent();
+      y -= Nullability.castToNonnull(style.font, "not null after check").getDescent();
     } else {
       y += (height - textHeight) / 2;
     }
@@ -272,8 +275,19 @@ public class Label extends Widget {
   public float getPrefHeight() {
     if (prefSizeInvalid) scaleAndComputePrefSize();
     float descentScaleCorrection = 1;
-    if (fontScaleChanged) descentScaleCorrection = fontScaleY / style.font.getScaleY();
-    float height = prefHeight - style.font.getDescent() * descentScaleCorrection * 2;
+    if (style == null || style.font == null)
+      throw new IllegalArgumentException("style or style.font cannot be null.");
+
+    if (fontScaleChanged) {
+      descentScaleCorrection =
+          fontScaleY / Nullability.castToNonnull(style.font, "checks prevent nullity").getScaleY();
+    }
+
+    float height =
+        prefHeight
+            - Nullability.castToNonnull(style.font, "checks prevent nullity").getDescent()
+                * descentScaleCorrection
+                * 2;
     Drawable background = style.background;
     if (background != null)
       height =
@@ -402,7 +416,7 @@ public class Label extends Widget {
    * @author Nathan Sweet
    */
   public static class LabelStyle {
-    public BitmapFont font;
+    @Nullable public BitmapFont font;
     @Nullable public @Null Color fontColor;
     @Nullable public @Null Drawable background;
 
