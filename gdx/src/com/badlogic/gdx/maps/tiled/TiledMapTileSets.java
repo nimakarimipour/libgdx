@@ -45,13 +45,13 @@ public class TiledMapTileSets implements Iterable<TiledMapTileSet> {
    * @return tileset with matching name, null if it doesn't exist
    */
   public TiledMapTileSet getTileSet(String name) {
-    for (TiledMapTileSet tileset : tilesets) {
-      if (name.equals(tileset.getName())) {
-        return tileset;
+      for (TiledMapTileSet tileset : tilesets) {
+        if (name.equals(tileset.getName())) {
+          return tileset;
+        }
       }
+      throw new RuntimeException("TileSet with name " + name + " does not exist");
     }
-    return null;
-  }
 
   /**
    * @param tileset set to be added to the collection
