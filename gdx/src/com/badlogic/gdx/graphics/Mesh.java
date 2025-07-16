@@ -240,13 +240,13 @@ public class Mesh implements Disposable {
   }
 
   public Mesh disableInstancedRendering() {
-    if (isInstanced) {
-      isInstanced = false;
-      instances.dispose();
-      instances = null;
+      if (isInstanced && instances != null) {
+        isInstanced = false;
+        instances.dispose();
+        instances = null;
+      }
+      return this;
     }
-    return this;
-  }
 
   /**
    * Sets the instance data of this Mesh. The attributes are assumed to be given in float format.
