@@ -55,11 +55,11 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 
   /** */
   public void end() {
-    if (bufferedParticlesCount > 0) {
-      ensureCapacity(bufferedParticlesCount);
-      flush(sorter.sort(renderData));
+        if (bufferedParticlesCount > 0) {
+            ensureCapacity(bufferedParticlesCount);
+            flush(Nullability.castToNonnull(sorter.sort(renderData)));
+        }
     }
-  }
 
   /** Ensure the batch can contain the passed in amount of particles */
   public void ensureCapacity(int capacity) {
