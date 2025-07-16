@@ -206,17 +206,22 @@ public class ModelInstance implements RenderableProvider {
     this.model = model;
     this.transform = transform == null ? new Matrix4() : transform;
     Node copy, node = model.getNode(nodeId, recursive);
-    this.nodes.add(copy = node.copy());
-    if (mergeTransform) {
-      this.transform.mul(parentTransform ? node.globalTransform : node.localTransform);
-      copy.translation.set(0, 0, 0);
-      copy.rotation.idt();
-      copy.scale.set(1, 1, 1);
-    } else if (parentTransform && copy.hasParent())
-      this.transform.mul(node.getParent().globalTransform);
-    invalidate();
-    copyAnimations(model.animations, shareKeyframes);
-    calculateTransforms();
+    if (node != null) {
+      this.nodes.add(copy = node.copy());
+      if (mergeTransform) {
+        this.transform.mul(parentTransform ? node.globalTransform : node.localTransform);
+        copy.translation.set(0, 0, 0);
+        copy.rotation.idt();
+        copy.scale.set(1, 1, 1);
+      } else if (parentTransform && copy.hasParent()) {
+        this.transform.mul(node.getParent().globalTransform);
+      }
+      invalidate();
+      copyAnimations(model.animations, shareKeyframes);
+      calculateTransforms();
+    } else {
+      // Handle the case where node is null, possibly throw an exception or log an error
+    }
   }
 
   /**
