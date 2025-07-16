@@ -18,6 +18,7 @@ package com.badlogic.gdx;
 
 import com.badlogic.gdx.utils.ObjectIntMap;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Interface to the input facilities. This allows polling the state of the keyboard, the touch
@@ -636,8 +637,8 @@ public interface Input {
      * @return the int keycode
      */
     public static int valueOf(String keyname) {
-      if (keyNames == null) initializeKeyNames();
-      return keyNames.get(keyname, -1);
+          if (keyNames == null) initializeKeyNames();
+          return Nullability.castToNonnull(keyNames, "initialized if null").get(keyname, -1);
     }
 
     /** lazily intialized in {@link Keys#valueOf(String)} */
