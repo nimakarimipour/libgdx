@@ -23,7 +23,6 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ModelInstanceParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -48,17 +47,12 @@ public class ModelInstanceRenderer
 
   @Override
   public void allocateChannels() {
-    if (renderData != null) {
-      renderData.positionChannel = controller.particles.addChannel(ParticleChannels.Position);
-    }
+    renderData.positionChannel = controller.particles.addChannel(ParticleChannels.Position);
   }
 
   @Override
   public void init() {
-    if (renderData == null) {
-      throw new IllegalStateException("renderData cannot be null");
-    }
-    Nullability.castToNonnull(renderData, "throw if null").modelInstanceChannel =
+    renderData.modelInstanceChannel =
         controller.particles.getChannel(ParticleChannels.ModelInstance);
     renderData.colorChannel = controller.particles.getChannel(ParticleChannels.Color);
     renderData.scaleChannel = controller.particles.getChannel(ParticleChannels.Scale);
@@ -70,9 +64,6 @@ public class ModelInstanceRenderer
 
   @Override
   public void update() {
-    if (renderData == null) {
-      return; // or throw an exception
-    }
     for (int i = 0, positionOffset = 0, c = controller.particles.size;
         i < c;
         ++i, positionOffset += renderData.positionChannel.strideSize) {
