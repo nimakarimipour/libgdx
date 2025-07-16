@@ -48,6 +48,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Method;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A skin stores resources for UI widgets to use (texture regions, ninepatches, fonts, colors, etc).
@@ -123,15 +124,18 @@ public class Skin implements Disposable {
    * when the skin is disposed.
    */
   public void addRegions(TextureAtlas atlas) {
-    Array<AtlasRegion> regions = atlas.getRegions();
-    for (int i = 0, n = regions.size; i < n; i++) {
-      AtlasRegion region = regions.get(i);
-      String name = region.name;
-      if (region.index != -1) {
-        name += "_" + region.index;
-      }
-      add(name, region, TextureRegion.class);
-    }
+        Array<AtlasRegion> regions = atlas.getRegions();
+        for (int i = 0, n = regions.size; i < n; i++) {
+          AtlasRegion region = regions.get(i);
+          String name = region.name;
+          if (name == null) {
+            continue;
+          }
+          if (region.index != -1) {
+            name += "_" + region.index;
+          }
+          add(Nullability.castToNonnull(name), region, TextureRegion.class);
+        }
   }
 
   public void add(String name, Object resource) {
