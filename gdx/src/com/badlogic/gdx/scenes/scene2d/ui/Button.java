@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pools;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A button is a {@link Table} with a checked state and additional {@link ButtonStyle style} fields
@@ -47,7 +48,7 @@ import javax.annotation.Nullable;
  * @author Nathan Sweet
  */
 public class Button extends Table implements Disableable {
-  private ButtonStyle style;
+  @Nullable private ButtonStyle style;
   boolean isChecked, isDisabled;
   @Nullable ButtonGroup buttonGroup;
   private ClickListener clickListener;
@@ -193,7 +194,7 @@ public class Button extends Table implements Disableable {
    * Returns the button's style. Modifying the returned style may not have an effect until {@link
    * #setStyle(ButtonStyle)} is called.
    */
-  public ButtonStyle getStyle() {
+  @Nullable public ButtonStyle getStyle() {
     return style;
   }
 
@@ -206,77 +207,84 @@ public class Button extends Table implements Disableable {
   }
 
   /** Returns appropriate background drawable from the style based on the current button state. */
-  @Nullable
-  protected @Null Drawable getBackgroundDrawable() {
-    if (isDisabled() && style.disabled != null) return style.disabled;
-    if (isPressed()) {
-      if (isChecked() && style.checkedDown != null) return style.checkedDown;
-      if (style.down != null) return style.down;
+  @Nullable protected @Null Drawable getBackgroundDrawable() {
+        if (style == null) throw new IllegalArgumentException("style cannot be null.");
+        if (isDisabled() && Nullability.castToNonnull(style, "checked for null").disabled != null) return style.disabled;
+        if (isPressed()) {
+            if (isChecked() && Nullability.castToNonnull(style, "cannot be null").checkedDown != null) return style.checkedDown;
+            if (Nullability.castToNonnull(style, "style checked").down != null) return style.down;
+        }
+        if (isOver()) {
+            if (isChecked()) {
+                if (Nullability.castToNonnull(style, "checked not null").checkedOver != null) return style.checkedOver;
+            } else {
+                if (Nullability.castToNonnull(style, "null checked").over != null) return style.over;
+            }
+        }
+        boolean focused = hasKeyboardFocus();
+        if (isChecked()) {
+            if (focused && Nullability.castToNonnull(style, "cannot be null").checkedFocused != null) return style.checkedFocused;
+            if (Nullability.castToNonnull(style, "null initially checked").checked != null) return style.checked;
+            if (isOver() && style.over != null) return style.over;
+        }
+        if (focused && style.focused != null) return style.focused;
+        return Nullability.castToNonnull(style, "cannot be null").up;
     }
-    if (isOver()) {
-      if (isChecked()) {
-        if (style.checkedOver != null) return style.checkedOver;
-      } else {
-        if (style.over != null) return style.over;
-      }
-    }
-    boolean focused = hasKeyboardFocus();
-    if (isChecked()) {
-      if (focused && style.checkedFocused != null) return style.checkedFocused;
-      if (style.checked != null) return style.checked;
-      if (isOver() && style.over != null) return style.over;
-    }
-    if (focused && style.focused != null) return style.focused;
-    return style.up;
-  }
 
   public void draw(Batch batch, float parentAlpha) {
-    validate();
-
-    setBackground(getBackgroundDrawable());
-
-    float offsetX = 0, offsetY = 0;
-    if (isPressed() && !isDisabled()) {
-      offsetX = style.pressedOffsetX;
-      offsetY = style.pressedOffsetY;
-    } else if (isChecked() && !isDisabled()) {
-      offsetX = style.checkedOffsetX;
-      offsetY = style.checkedOffsetY;
-    } else {
-      offsetX = style.unpressedOffsetX;
-      offsetY = style.unpressedOffsetY;
-    }
-    boolean offset = offsetX != 0 || offsetY != 0;
-
-    Array<Actor> children = getChildren();
-    if (offset) {
-      for (int i = 0; i < children.size; i++) children.get(i).moveBy(offsetX, offsetY);
-    }
-    super.draw(batch, parentAlpha);
-    if (offset) {
-      for (int i = 0; i < children.size; i++) children.get(i).moveBy(-offsetX, -offsetY);
-    }
-
-    Stage stage = getStage();
-    if (stage != null
-        && stage.getActionsRequestRendering()
-        && isPressed() != clickListener.isPressed()) Gdx.graphics.requestRendering();
-  }
+              validate();
+          
+              setBackground(getBackgroundDrawable());
+              
+              if (style == null) throw new IllegalStateException("Style cannot be null.");
+          
+              float offsetX = 0, offsetY = 0;
+              if (isPressed() && !isDisabled()) {
+                  offsetX = Nullability.castToNonnull(style, "check before access").pressedOffsetX;
+                  offsetY = style.pressedOffsetY;
+              } else if (isChecked() && !isDisabled()) {
+                  offsetX = style.checkedOffsetX;
+                  offsetY = style.checkedOffsetY;
+              } else {
+                  offsetX = Nullability.castToNonnull(style, "check before access").unpressedOffsetX;
+                  offsetY = style.unpressedOffsetY;
+              }
+          
+              boolean offset = offsetX != 0 || offsetY != 0;
+          
+              Array<Actor> children = getChildren();
+              if (offset) {
+                  for (int i = 0; i < children.size; i++) children.get(i).moveBy(offsetX, offsetY);
+              }
+              super.draw(batch, parentAlpha);
+              if (offset) {
+                  for (int i = 0; i < children.size; i++) children.get(i).moveBy(-offsetX, -offsetY);
+              }
+          
+              Stage stage = getStage();
+              if (stage != null
+                  && stage.getActionsRequestRendering()
+                  && isPressed() != clickListener.isPressed()) Gdx.graphics.requestRendering();
+          }
 
   public float getPrefWidth() {
-    float width = super.getPrefWidth();
-    if (style.up != null) width = Math.max(width, style.up.getMinWidth());
-    if (style.down != null) width = Math.max(width, style.down.getMinWidth());
-    if (style.checked != null) width = Math.max(width, style.checked.getMinWidth());
-    return width;
-  }
+          float width = super.getPrefWidth();
+          if (style != null) {
+              if (Nullability.castToNonnull(style, "style not null").up != null)
+                  width = Math.max(width, style.up.getMinWidth());
+              if (style.down != null) width = Math.max(width, style.down.getMinWidth());
+              if (style.checked != null) width = Math.max(width, style.checked.getMinWidth());
+          }
+          return width;
+    }
 
   public float getPrefHeight() {
-    float height = super.getPrefHeight();
-    if (style.up != null) height = Math.max(height, style.up.getMinHeight());
-    if (style.down != null) height = Math.max(height, style.down.getMinHeight());
-    if (style.checked != null) height = Math.max(height, style.checked.getMinHeight());
-    return height;
+      if (style == null) throw new IllegalStateException("style cannot be null.");
+      float height = super.getPrefHeight();
+      if (Nullability.castToNonnull(style, "null check performed").up != null) height = Math.max(height, style.up.getMinHeight());
+      if (style.down != null) height = Math.max(height, style.down.getMinHeight());
+      if (style.checked != null) height = Math.max(height, style.checked.getMinHeight());
+      return height;
   }
 
   public float getMinWidth() {
