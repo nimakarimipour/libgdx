@@ -1179,6 +1179,7 @@ public class Json {
    * @param elementType May be null if the type is unknown.
    * @return May be null.
    */
+  @SuppressWarnings("NullAway")
   public @Null <T> T readValue(
       @Nullable @Null Class<T> type,
       @Nullable @Null Class elementType,
