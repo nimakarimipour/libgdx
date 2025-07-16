@@ -29,18 +29,19 @@ import javax.annotation.Nullable;
  */
 public abstract class FocusListener implements EventListener {
   public boolean handle(Event event) {
-    if (!(event instanceof FocusEvent)) return false;
-    FocusEvent focusEvent = (FocusEvent) event;
-    switch (focusEvent.getType()) {
-      case keyboard:
-        keyboardFocusChanged(focusEvent, event.getTarget(), focusEvent.isFocused());
-        break;
-      case scroll:
-        scrollFocusChanged(focusEvent, event.getTarget(), focusEvent.isFocused());
-        break;
+      if (!(event instanceof FocusEvent)) return false;
+      FocusEvent focusEvent = (FocusEvent) event;
+      if (focusEvent.getType() == null) return false;
+      switch (focusEvent.getType()) {
+        case keyboard:
+          keyboardFocusChanged(focusEvent, event.getTarget(), focusEvent.isFocused());
+          break;
+        case scroll:
+          scrollFocusChanged(focusEvent, event.getTarget(), focusEvent.isFocused());
+          break;
+      }
+      return false;
     }
-    return false;
-  }
 
   /**
    * @param actor The event target, which is the actor that emitted the focus event.
