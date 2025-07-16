@@ -18,6 +18,7 @@ package com.badlogic.gdx.utils;
 
 import com.uber.nullaway.annotations.Initializer;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * A simple linked list that pools its nodes.
@@ -135,36 +136,36 @@ public class PooledLinkedList<T> {
 
   /** Removes the current list item based on the iterator position. */
   public void remove() {
-    if (curr == null) return;
-
-    size--;
-
-    Item<T> c = curr;
-    Item<T> n = curr.next;
-    Item<T> p = curr.prev;
-    pool.free(curr);
-    curr = null;
-
-    if (size == 0) {
-      head = null;
-      tail = null;
-      return;
-    }
-
-    if (c == head) {
-      n.prev = null;
-      head = n;
-      return;
-    }
-
-    if (c == tail) {
-      p.next = null;
-      tail = p;
-      return;
-    }
-
-    p.next = n;
-    n.prev = p;
+      if (curr == null) return;
+  
+      size--;
+  
+      Item<T> c = curr;
+      Item<T> n = curr.next;
+      Item<T> p = curr.prev;
+      pool.free(curr);
+      curr = null;
+  
+      if (size == 0) {
+        head = null;
+        tail = null;
+        return;
+      }
+  
+      if (c == head) {
+        Nullability.castToNonnull(n, "c is not tail").prev = null;
+        head = n;
+        return;
+      }
+  
+      if (c == tail) {
+        p.next = null;
+        tail = p;
+        return;
+      }
+  
+      p.next = n;
+      n.prev = p;
   }
 
   /** Removes the tail of the list regardless of iteration status */
