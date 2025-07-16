@@ -1042,10 +1042,6 @@ public class SpriteBatch implements Batch {
     if (spritesInBatch > maxSpritesInBatch) maxSpritesInBatch = spritesInBatch;
     int count = spritesInBatch * 6;
 
-    if (lastTexture == null) {
-      throw new IllegalStateException("No texture bound.");
-    }
-
     lastTexture.bind();
     Mesh mesh = this.mesh;
     mesh.setVertices(vertices, 0, idx);
@@ -1161,9 +1157,6 @@ public class SpriteBatch implements Batch {
   }
 
   protected void switchTexture(@Nullable Texture texture) {
-    if (texture == null) {
-      throw new IllegalArgumentException("Texture cannot be null");
-    }
     flush();
     lastTexture = texture;
     invTexWidth = 1.0f / texture.getWidth();
