@@ -65,15 +65,15 @@ public abstract class Action implements Poolable {
    * TemporalAction}, use TemporalAction#begin().
    */
   public void setActor(@Nullable Actor actor) {
-    this.actor = actor;
-    if (target == null) setTarget(actor);
-    if (actor == null) {
-      if (pool != null) {
-        pool.free(this);
-        pool = null;
+      this.actor = actor;
+      if (target == null && actor != null) setTarget(actor);
+      if (actor == null) {
+        if (pool != null) {
+          pool.free(this);
+          pool = null;
+        }
       }
     }
-  }
 
   /**
    * @return null if the action is not attached to an actor.
