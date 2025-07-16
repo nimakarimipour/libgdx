@@ -95,9 +95,13 @@ public class TextTooltip extends Tooltip<Label> {
     }
 
     public TextTooltipStyle(TextTooltipStyle style) {
-      label = new LabelStyle(style.label);
-      background = style.background;
-      wrapWidth = style.wrapWidth;
-    }
+          if (style.label != null) {
+              label = new LabelStyle(style.label);
+          } else {
+              label = null; // Or set a default LabelStyle if needed
+          }
+          background = style.background;
+          wrapWidth = style.wrapWidth;
+      }
   }
 }
