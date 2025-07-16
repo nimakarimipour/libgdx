@@ -22,7 +22,6 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ModelInstanceControllerRenderData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /*** This class is used to render particles having a model instance channel.
  * @author Inferno */
@@ -38,14 +37,8 @@ public class ModelInstanceParticleBatch
   @Override
   public void getRenderables(Array<Renderable> renderables, Pool<Renderable> pool) {
     for (ModelInstanceControllerRenderData data : controllersRenderData) {
-      if (data.controller != null) {
-        for (int i = 0,
-                count =
-                    Nullability.castToNonnull(data.controller, "checked for null").particles.size;
-            i < count;
-            ++i) {
-          data.modelInstanceChannel.data[i].getRenderables(renderables, pool);
-        }
+      for (int i = 0, count = data.controller.particles.size; i < count; ++i) {
+        data.modelInstanceChannel.data[i].getRenderables(renderables, pool);
       }
     }
   }
@@ -65,11 +58,8 @@ public class ModelInstanceParticleBatch
 
   @Override
   public void draw(ModelInstanceControllerRenderData data) {
-    if (data.controller != null && data.controller.particles != null) {
-      controllersRenderData.add(data);
-      bufferedParticlesCount +=
-          Nullability.castToNonnull(data.controller, "checked before accessing").particles.size;
-    }
+    controllersRenderData.add(data);
+    bufferedParticlesCount += data.controller.particles.size;
   }
 
   @Override

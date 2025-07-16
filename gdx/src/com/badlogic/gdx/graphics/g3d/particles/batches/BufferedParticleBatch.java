@@ -20,7 +20,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderData;
 import com.badlogic.gdx.utils.Array;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Base class of all the batches requiring to buffer {@link ParticleControllerRenderData}
@@ -46,9 +45,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 
   @Override
   public void draw(T data) {
-    if (data != null
-        && data.controller != null
-        && Nullability.castToNonnull(data.controller, "checked for null").particles.size > 0) {
+    if (data.controller.particles.size > 0) {
       renderData.add(data);
       bufferedParticlesCount += data.controller.particles.size;
     }

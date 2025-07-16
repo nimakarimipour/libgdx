@@ -21,7 +21,6 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRende
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -75,23 +74,16 @@ public abstract class ParticleSorter {
       float cx = val[Matrix4.M20], cy = val[Matrix4.M21], cz = val[Matrix4.M22];
       int count = 0, i = 0;
       for (ParticleControllerRenderData data : renderData) {
-        if (data.controller != null) {
-          for (int k = 0,
-                  c =
-                      i
-                          + Nullability.castToNonnull(data.controller, "checked not null")
-                              .particles
-                              .size;
-              i < c;
-              ++i, k += data.positionChannel.strideSize) {
-            distances[i] =
-                cx * data.positionChannel.data[k + ParticleChannels.XOffset]
-                    + cy * data.positionChannel.data[k + ParticleChannels.YOffset]
-                    + cz * data.positionChannel.data[k + ParticleChannels.ZOffset];
-            particleIndices[i] = i;
-          }
-          count += data.controller.particles.size;
+        for (int k = 0, c = i + data.controller.particles.size;
+            i < c;
+            ++i, k += data.positionChannel.strideSize) {
+          distances[i] =
+              cx * data.positionChannel.data[k + ParticleChannels.XOffset]
+                  + cy * data.positionChannel.data[k + ParticleChannels.YOffset]
+                  + cz * data.positionChannel.data[k + ParticleChannels.ZOffset];
+          particleIndices[i] = i;
         }
+        count += data.controller.particles.size;
       }
 
       qsort(0, count - 1);
