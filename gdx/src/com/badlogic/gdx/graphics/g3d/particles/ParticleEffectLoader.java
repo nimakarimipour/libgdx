@@ -122,34 +122,38 @@ public class ParticleEffectLoader
   }
 
   @Override
-  public ParticleEffect loadSync(
-      AssetManager manager,
-      String fileName,
-      FileHandle file,
-      @Nullable ParticleEffectLoadParameter parameter) {
-    ResourceData<ParticleEffect> effectData = null;
-    synchronized (items) {
-      for (int i = 0; i < items.size; ++i) {
-        ObjectMap.Entry<String, ResourceData<ParticleEffect>> entry = items.get(i);
-        if (entry.key.equals(fileName)) {
-          effectData = entry.value;
-          items.removeIndex(i);
-          break;
+    public ParticleEffect loadSync(
+        AssetManager manager,
+        String fileName,
+        FileHandle file,
+        @Nullable ParticleEffectLoadParameter parameter) {
+      ResourceData<ParticleEffect> effectData = null;
+      synchronized (items) {
+        for (int i = 0; i < items.size; ++i) {
+          ObjectMap.Entry<String, ResourceData<ParticleEffect>> entry = items.get(i);
+          if (entry.key.equals(fileName)) {
+            effectData = entry.value;
+            items.removeIndex(i);
+            break;
+          }
         }
       }
-    }
-
-    effectData.resource.load(manager, effectData);
-    if (parameter != null) {
-      if (parameter.batches != null) {
-        for (ParticleBatch<?> batch : parameter.batches) {
-          batch.load(manager, effectData);
-        }
+  
+      if (effectData == null || effectData.resource == null) {
+        throw new NullPointerException("EffectData or resource is null");
       }
-      effectData.resource.setBatch(parameter.batches);
+  
+      effectData.resource.load(manager, effectData);
+      if (parameter != null) {
+        if (parameter.batches != null) {
+          for (ParticleBatch<?> batch : parameter.batches) {
+            batch.load(manager, effectData);
+          }
+        }
+        effectData.resource.setBatch(parameter.batches);
+      }
+      return effectData.resource;
     }
-    return effectData.resource;
-  }
 
   @Nullable
   private <T> T find(Array<?> array, Class<T> type) {
