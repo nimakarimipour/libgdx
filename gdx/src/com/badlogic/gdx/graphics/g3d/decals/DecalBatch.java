@@ -170,17 +170,17 @@ public class DecalBatch implements Disposable {
 
   /** Renders all decals to the buffer and flushes the buffer to the GL when full/done */
   protected void render() {
-      if (groupStrategy == null) {
-          throw new IllegalStateException("GroupStrategy is not set");
-      }
-      Nullability.castToNonnull(groupStrategy, "explicit null check").beforeGroups();
-      for (SortedIntList.Node<Array<Decal>> group : groupList) {
-        groupStrategy.beforeGroup(group.index, group.value);
-        ShaderProgram shader = groupStrategy.getGroupShader(group.index);
-        render(shader, group.value);
-        groupStrategy.afterGroup(group.index);
-      }
-      groupStrategy.afterGroups();
+          if (groupStrategy == null) {
+              throw new IllegalStateException("GroupStrategy is not set");
+          }
+          Nullability.castToNonnull(groupStrategy, "explicit null check").beforeGroups();
+          for (SortedIntList.Node<Array<Decal>> group : groupList) {
+            groupStrategy.beforeGroup(group.index, Nullability.castToNonnull(group.value));
+            ShaderProgram shader = groupStrategy.getGroupShader(group.index);
+            render(shader, Nullability.castToNonnull(group.value));
+            groupStrategy.afterGroup(group.index);
+          }
+          groupStrategy.afterGroups();
   }
 
   /**
