@@ -54,7 +54,6 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.nio.Buffer;
 import javax.annotation.Nullable;
 
@@ -315,14 +314,15 @@ public class Model implements Disposable {
 
     ObjectMap<String, Texture> textures = new ObjectMap<String, Texture>();
 
+    // FIXME uvScaling/uvTranslation totally ignored
     if (mtl.textures != null) {
       for (ModelTexture tex : mtl.textures) {
         Texture texture;
-        if (textures.containsKey(Nullability.castToNonnull(tex.fileName))) {
-          texture = textures.get(Nullability.castToNonnull(tex.fileName));
+        if (textures.containsKey(tex.fileName)) {
+          texture = textures.get(tex.fileName);
         } else {
-          texture = textureProvider.load(Nullability.castToNonnull(tex.fileName));
-          textures.put(Nullability.castToNonnull(tex.fileName), texture);
+          texture = textureProvider.load(tex.fileName);
+          textures.put(tex.fileName, texture);
           disposables.add(texture);
         }
 
