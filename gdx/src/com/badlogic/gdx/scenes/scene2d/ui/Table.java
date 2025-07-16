@@ -33,7 +33,6 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.uber.nullaway.annotations.Initializer;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
@@ -901,9 +900,7 @@ public class Table extends WidgetGroup {
       }
       float spaceRight = c.spaceRight.get(a);
       c.computedPadRight = c.padRight.get(a) + ((column + colspan) == columns ? 0 : spaceRight);
-      c.computedPadBottom =
-          c.padBottom.get(a)
-              + (row == rows - 1 ? 0 : c.spaceBottom.get(Nullability.castToNonnull(a)));
+      c.computedPadBottom = c.padBottom.get(a) + (row == rows - 1 ? 0 : c.spaceBottom.get(a));
       spaceRightLast = spaceRight;
 
       // Determine minimum and preferred cell sizes.
