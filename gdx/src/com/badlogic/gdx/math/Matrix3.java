@@ -17,7 +17,6 @@
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.Serializable;
 import javax.annotation.Nullable;
 
@@ -402,7 +401,6 @@ public class Matrix3 implements Serializable {
    * @return This matrix for the purpose of chaining operations.
    */
   public Matrix3 set(@Nullable Matrix4 mat) {
-    mat = Nullability.castToNonnull(mat);
     float[] val = this.val;
     val[M00] = mat.val[Matrix4.M00];
     val[M10] = mat.val[Matrix4.M10];
