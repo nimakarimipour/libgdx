@@ -414,6 +414,11 @@ public abstract class DynamicsModifier extends Influencer {
 
     @Override
     public void update() {
+      // Ensure directionalVelocityChannel is not null before using it
+      if (directionalVelocityChannel == null) {
+        throw new IllegalStateException("directionalVelocityChannel must not be null");
+      }
+
       for (int i = 0,
               l = ParticleChannels.LifePercentOffset,
               s = 0,
