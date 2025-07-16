@@ -23,6 +23,7 @@ import java.io.Writer;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Container for a JSON object, array, string, double, long, boolean, or null.
@@ -1298,76 +1299,79 @@ public class JsonValue implements Iterable<JsonValue> {
   }
 
   private void prettyPrint(
-      JsonValue object, StringBuilder buffer, int indent, PrettyPrintSettings settings) {
-    OutputType outputType = settings.outputType;
-    if (object.isObject()) {
-      if (object.child == null) buffer.append("{}");
-      else {
-        boolean newLines = !isFlat(object);
-        int start = buffer.length();
-        outer:
-        while (true) {
-          buffer.append(newLines ? "{\n" : "{ ");
-          int i = 0;
-          for (JsonValue child = object.child; child != null; child = child.next) {
-            if (newLines) indent(indent, buffer);
-            buffer.append(outputType.quoteName(child.name));
-            buffer.append(": ");
-            prettyPrint(child, buffer, indent + 1, settings);
-            if ((!newLines || outputType != OutputType.minimal) && child.next != null)
-              buffer.append(',');
-            buffer.append(newLines ? '\n' : ' ');
-            if (!newLines && buffer.length() - start > settings.singleLineColumns) {
-              buffer.setLength(start);
-              newLines = true;
-              continue outer;
-            }
-          }
-          break;
+          JsonValue object, StringBuilder buffer, int indent, PrettyPrintSettings settings) {
+        OutputType outputType = settings.outputType;
+        if (outputType == null) {
+          throw new IllegalArgumentException("OutputType cannot be null");
         }
-        if (newLines) indent(indent - 1, buffer);
-        buffer.append('}');
-      }
-    } else if (object.isArray()) {
-      if (object.child == null) buffer.append("[]");
-      else {
-        boolean newLines = !isFlat(object);
-        boolean wrap = settings.wrapNumericArrays || !isNumeric(object);
-        int start = buffer.length();
-        outer:
-        while (true) {
-          buffer.append(newLines ? "[\n" : "[ ");
-          for (JsonValue child = object.child; child != null; child = child.next) {
-            if (newLines) indent(indent, buffer);
-            prettyPrint(child, buffer, indent + 1, settings);
-            if ((!newLines || outputType != OutputType.minimal) && child.next != null)
-              buffer.append(',');
-            buffer.append(newLines ? '\n' : ' ');
-            if (wrap && !newLines && buffer.length() - start > settings.singleLineColumns) {
-              buffer.setLength(start);
-              newLines = true;
-              continue outer;
+        if (object.isObject()) {
+          if (object.child == null) buffer.append("{}");
+          else {
+            boolean newLines = !isFlat(object);
+            int start = buffer.length();
+            outer:
+            while (true) {
+              buffer.append(newLines ? "{\n" : "{ ");
+              int i = 0;
+              for (JsonValue child = object.child; child != null; child = child.next) {
+                if (newLines) indent(indent, buffer);
+                buffer.append(Nullability.castToNonnull(outputType, "not null when used").quoteName(child.name));
+                buffer.append(": ");
+                prettyPrint(child, buffer, indent + 1, settings);
+                if ((!newLines || outputType != OutputType.minimal) && child.next != null)
+                  buffer.append(',');
+                buffer.append(newLines ? '\n' : ' ');
+                if (!newLines && buffer.length() - start > settings.singleLineColumns) {
+                  buffer.setLength(start);
+                  newLines = true;
+                  continue outer;
+                }
+              }
+              break;
             }
+            if (newLines) indent(indent - 1, buffer);
+            buffer.append('}');
           }
-          break;
-        }
-        if (newLines) indent(indent - 1, buffer);
-        buffer.append(']');
-      }
-    } else if (object.isString()) {
-      buffer.append(outputType.quoteValue(object.asString()));
-    } else if (object.isDouble()) {
-      double doubleValue = object.asDouble();
-      long longValue = object.asLong();
-      buffer.append(doubleValue == longValue ? longValue : doubleValue);
-    } else if (object.isLong()) {
-      buffer.append(object.asLong());
-    } else if (object.isBoolean()) {
-      buffer.append(object.asBoolean());
-    } else if (object.isNull()) {
-      buffer.append("null");
-    } else throw new SerializationException("Unknown object type: " + object);
-  }
+        } else if (object.isArray()) {
+          if (object.child == null) buffer.append("[]");
+          else {
+            boolean newLines = !isFlat(object);
+            boolean wrap = settings.wrapNumericArrays || !isNumeric(object);
+            int start = buffer.length();
+            outer:
+            while (true) {
+              buffer.append(newLines ? "[\n" : "[ ");
+              for (JsonValue child = object.child; child != null; child = child.next) {
+                if (newLines) indent(indent, buffer);
+                prettyPrint(child, buffer, indent + 1, settings);
+                if ((!newLines || outputType != OutputType.minimal) && child.next != null)
+                  buffer.append(',');
+                buffer.append(newLines ? '\n' : ' ');
+                if (wrap && !newLines && buffer.length() - start > settings.singleLineColumns) {
+                  buffer.setLength(start);
+                  newLines = true;
+                  continue outer;
+                }
+              }
+              break;
+            }
+            if (newLines) indent(indent - 1, buffer);
+            buffer.append(']');
+          }
+        } else if (object.isString()) {
+          buffer.append(Nullability.castToNonnull(outputType, "not null when used").quoteValue(object.asString()));
+        } else if (object.isDouble()) {
+          double doubleValue = object.asDouble();
+          long longValue = object.asLong();
+          buffer.append(doubleValue == longValue ? longValue : doubleValue);
+        } else if (object.isLong()) {
+          buffer.append(object.asLong());
+        } else if (object.isBoolean()) {
+          buffer.append(object.asBoolean());
+        } else if (object.isNull()) {
+          buffer.append("null");
+        } else throw new SerializationException("Unknown object type: " + object);
+    }
 
   /**
    * More efficient than {@link #prettyPrint(PrettyPrintSettings)} but {@link
@@ -1381,56 +1385,59 @@ public class JsonValue implements Iterable<JsonValue> {
   }
 
   private void prettyPrint(
-      JsonValue object, Writer writer, int indent, PrettyPrintSettings settings)
-      throws IOException {
-    OutputType outputType = settings.outputType;
-    if (object.isObject()) {
-      if (object.child == null) writer.append("{}");
-      else {
-        boolean newLines = !isFlat(object) || object.size > 6;
-        writer.append(newLines ? "{\n" : "{ ");
-        int i = 0;
-        for (JsonValue child = object.child; child != null; child = child.next) {
-          if (newLines) indent(indent, writer);
-          writer.append(outputType.quoteName(child.name));
-          writer.append(": ");
-          prettyPrint(child, writer, indent + 1, settings);
-          if ((!newLines || outputType != OutputType.minimal) && child.next != null)
-            writer.append(',');
-          writer.append(newLines ? '\n' : ' ');
-        }
-        if (newLines) indent(indent - 1, writer);
-        writer.append('}');
-      }
-    } else if (object.isArray()) {
-      if (object.child == null) writer.append("[]");
-      else {
-        boolean newLines = !isFlat(object);
-        writer.append(newLines ? "[\n" : "[ ");
-        int i = 0;
-        for (JsonValue child = object.child; child != null; child = child.next) {
-          if (newLines) indent(indent, writer);
-          prettyPrint(child, writer, indent + 1, settings);
-          if ((!newLines || outputType != OutputType.minimal) && child.next != null)
-            writer.append(',');
-          writer.append(newLines ? '\n' : ' ');
-        }
-        if (newLines) indent(indent - 1, writer);
-        writer.append(']');
-      }
-    } else if (object.isString()) {
-      writer.append(outputType.quoteValue(object.asString()));
-    } else if (object.isDouble()) {
-      double doubleValue = object.asDouble();
-      long longValue = object.asLong();
-      writer.append(Double.toString(doubleValue == longValue ? longValue : doubleValue));
-    } else if (object.isLong()) {
-      writer.append(Long.toString(object.asLong()));
-    } else if (object.isBoolean()) {
-      writer.append(Boolean.toString(object.asBoolean()));
-    } else if (object.isNull()) {
-      writer.append("null");
-    } else throw new SerializationException("Unknown object type: " + object);
+            JsonValue object, Writer writer, int indent, PrettyPrintSettings settings)
+            throws IOException {
+          if (settings == null || settings.outputType == null) {
+              throw new NullPointerException("OutputType is null in PrettyPrintSettings");
+          }
+          OutputType outputType = settings.outputType;
+          if (object.isObject()) {
+            if (object.child == null) writer.append("{}");
+            else {
+              boolean newLines = !isFlat(object) || object.size > 6;
+              writer.append(newLines ? "{\n" : "{ ");
+              int i = 0;
+              for (JsonValue child = object.child; child != null; child = child.next) {
+                if (newLines) indent(indent, writer);
+                writer.append(outputType.quoteName(child.name));
+                writer.append(": ");
+                prettyPrint(child, writer, indent + 1, settings);
+                if ((!newLines || outputType != OutputType.minimal) && child.next != null)
+                  writer.append(',');
+                writer.append(newLines ? '\n' : ' ');
+              }
+              if (newLines) indent(indent - 1, writer);
+              writer.append('}');
+            }
+          } else if (object.isArray()) {
+            if (object.child == null) writer.append("[]");
+            else {
+              boolean newLines = !isFlat(object);
+              writer.append(newLines ? "[\n" : "[ ");
+              int i = 0;
+              for (JsonValue child = object.child; child != null; child = child.next) {
+                if (newLines) indent(indent, writer);
+                prettyPrint(child, writer, indent + 1, settings);
+                if ((!newLines || outputType != OutputType.minimal) && child.next != null)
+                  writer.append(',');
+                writer.append(newLines ? '\n' : ' ');
+              }
+              if (newLines) indent(indent - 1, writer);
+              writer.append(']');
+            }
+          } else if (object.isString()) {
+            writer.append(Nullability.castToNonnull(outputType, "checked above").quoteValue(object.asString()));
+          } else if (object.isDouble()) {
+            double doubleValue = object.asDouble();
+            long longValue = object.asLong();
+            writer.append(Double.toString(doubleValue == longValue ? longValue : doubleValue));
+          } else if (object.isLong()) {
+            writer.append(Long.toString(object.asLong()));
+          } else if (object.isBoolean()) {
+            writer.append(Boolean.toString(object.asBoolean()));
+          } else if (object.isNull()) {
+            writer.append("null");
+          } else throw new SerializationException("Unknown object type: " + object);
   }
 
   private static boolean isFlat(JsonValue object) {
@@ -1496,7 +1503,7 @@ public class JsonValue implements Iterable<JsonValue> {
   }
 
   public static class PrettyPrintSettings {
-    public OutputType outputType;
+    @Nullable public OutputType outputType;
 
     /** If an object on a single line fits this many columns, it won't wrap. */
     public int singleLineColumns;
