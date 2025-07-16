@@ -287,15 +287,17 @@ public abstract class BaseShader implements Shader {
   }
 
   @Override
-  public void dispose() {
-    program = null;
-    uniforms.clear();
-    validators.clear();
-    setters.clear();
-    localUniforms.clear();
-    globalUniforms.clear();
-    locations = null;
-  }
+    public void dispose() {
+      if (program != null) {
+          program.dispose(); // Assuming there is a dispose method to clean up resources
+      }
+      uniforms.clear();
+      validators.clear();
+      setters.clear();
+      localUniforms.clear();
+      globalUniforms.clear();
+      locations = null;
+    }
 
   /**
    * Whether this Shader instance implements the specified uniform, only valid after a call to
