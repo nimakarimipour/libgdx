@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.NumberUtils;
 import com.badlogic.gdx.utils.Pools;
 import java.util.Arrays;
 import javax.annotation.Nullable;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 
 /**
  * Caches glyph geometry for a BitmapFont, providing a fast way to render static text. This saves
@@ -58,7 +59,7 @@ public class BitmapFontCache {
    * For each page, an array with a value for each glyph from that page, where the value is the
    * index of the character in the full text being cached.
    */
-  private IntArray[] pageGlyphIndices;
+  @Nullable private IntArray[] pageGlyphIndices;
 
   /** Used internally to ensure a correct capacity for multi-page font vertex data. */
   private int[] tempGlyphCount;
@@ -223,35 +224,37 @@ public class BitmapFontCache {
    * #setText(CharSequence, float, float)} and is reset every time setText is called.
    */
   public void setColors(float color, int start, int end) {
-    if (pageVertices.length == 1) { // One page.
-      float[] vertices = pageVertices[0];
-      for (int i = start * 20 + 2, n = Math.min(end * 20, idx[0]); i < n; i += 5)
-        vertices[i] = color;
-      return;
-    }
-
-    int pageCount = pageVertices.length;
-    for (int i = 0; i < pageCount; i++) {
-      float[] vertices = pageVertices[i];
-      IntArray glyphIndices = pageGlyphIndices[i];
-      // Loop through the indices and determine whether the glyph is inside begin/end.
-      for (int j = 0, n = glyphIndices.size; j < n; j++) {
-        int glyphIndex = glyphIndices.items[j];
-
-        // Break early if the glyph is out of bounds.
-        if (glyphIndex >= end) break;
-
-        // If inside start and end, change its colour.
-        if (glyphIndex >= start) { // && glyphIndex < end
-          int offset = j * 20 + 2;
-          vertices[offset] = color;
-          vertices[offset + 5] = color;
-          vertices[offset + 10] = color;
-          vertices[offset + 15] = color;
+        if (pageVertices.length == 1) { // One page.
+          float[] vertices = pageVertices[0];
+          for (int i = start * 20 + 2, n = Math.min(end * 20, idx[0]); i < n; i += 5)
+            vertices[i] = color;
+          return;
         }
-      }
+  
+        int pageCount = pageVertices.length;
+        for (int i = 0; i < pageCount; i++) {
+          float[] vertices = pageVertices[i];
+          if (pageGlyphIndices != null) { // Check if pageGlyphIndices is not null
+            IntArray glyphIndices = pageGlyphIndices[i];
+            // Loop through the indices and determine whether the glyph is inside begin/end.
+            for (int j = 0, n = glyphIndices.size; j < n; j++) {
+              int glyphIndex = glyphIndices.items[j];
+  
+              // Break early if the glyph is out of bounds.
+              if (glyphIndex >= end) break;
+  
+              // If inside start and end, change its colour.
+              if (glyphIndex >= start) { // && glyphIndex < end
+                int offset = j * 20 + 2;
+                vertices[offset] = color;
+                vertices[offset + 5] = color;
+                vertices[offset + 10] = color;
+                vertices[offset + 15] = color;
+              }
+            }
+          }
+        }
     }
-  }
 
   /**
    * Returns the color used for subsequently added text. Modifying the color affects text
@@ -288,40 +291,36 @@ public class BitmapFontCache {
   }
 
   public void draw(Batch spriteBatch, int start, int end) {
-    if (pageVertices.length == 1) { // 1 page.
-      spriteBatch.draw(
-          font.getRegion().getTexture(), pageVertices[0], start * 20, (end - start) * 20);
-      return;
+          if (pageVertices.length == 1) { // 1 page.
+            spriteBatch.draw(
+                font.getRegion().getTexture(), pageVertices[0], start * 20, (end - start) * 20);
+            return;
+          }
+      
+          // Determine vertex offset and count to render for each page. Some pages might not need to be
+          // rendered at all.
+          Array<TextureRegion> regions = font.getRegions();
+          for (int i = 0, pageCount = pageVertices.length; i < pageCount; i++) {
+            int offset = -1, count = 0;
+            
+            if (pageGlyphIndices != null) { // Added null-check for pageGlyphIndices
+              IntArray glyphIndices = Nullability.castToNonnull(pageGlyphIndices, "checked before usage")[i];
+              for (int ii = 0, n = glyphIndices.size; ii < n; ii++) {
+                int glyphIndex = glyphIndices.get(ii);
+      
+                if (glyphIndex >= end) break;
+      
+                if (offset == -1 && glyphIndex >= start) offset = ii;
+      
+                if (glyphIndex >= start) count++;
+              }
+            }
+      
+            if (offset == -1 || count == 0) continue;
+      
+            spriteBatch.draw(regions.get(i).getTexture(), pageVertices[i], offset * 20, count * 20);
+          }
     }
-
-    // Determine vertex offset and count to render for each page. Some pages might not need to be
-    // rendered at all.
-    Array<TextureRegion> regions = font.getRegions();
-    for (int i = 0, pageCount = pageVertices.length; i < pageCount; i++) {
-      int offset = -1, count = 0;
-
-      // For each set of glyph indices, determine where to begin within the start/end bounds.
-      IntArray glyphIndices = pageGlyphIndices[i];
-      for (int ii = 0, n = glyphIndices.size; ii < n; ii++) {
-        int glyphIndex = glyphIndices.get(ii);
-
-        // Break early if the glyph is out of bounds.
-        if (glyphIndex >= end) break;
-
-        // Determine if this glyph is within bounds. Use the first match of that for the offset.
-        if (offset == -1 && glyphIndex >= start) offset = ii;
-
-        // Determine the vertex count by counting glyphs within bounds.
-        if (glyphIndex >= start) count++;
-      }
-
-      // Page doesn't need to be rendered.
-      if (offset == -1 || count == 0) continue;
-
-      // Render the page vertex data with the offset and count.
-      spriteBatch.draw(regions.get(i).getTexture(), pageVertices[i], offset * 20, count * 20);
-    }
-  }
 
   public void draw(Batch spriteBatch, float alphaModulation) {
     if (alphaModulation == 1) {
