@@ -22,7 +22,6 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -455,13 +454,12 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
         if (value == null) {
           value = property.getText();
         }
-        Object castValue = castProperty(name, Nullability.castToNonnull(value), type);
+        Object castValue = castProperty(name, value, type);
         properties.put(name, castValue);
       }
     }
   }
 
-  @Nullable
   protected Object castProperty(@Nullable String name, String value, @Nullable String type) {
     if (type == null) {
       return value;
@@ -472,8 +470,9 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
     } else if (type.equals("bool")) {
       return Boolean.valueOf(value);
     } else if (type.equals("color")) {
-      String opaqueColor = Nullability.castToNonnull(value).substring(3);
-      String alpha = Nullability.castToNonnull(value).substring(1, 3);
+      // Tiled uses the format #AARRGGBB
+      String opaqueColor = value.substring(3);
+      String alpha = value.substring(1, 3);
       return Color.valueOf(opaqueColor + alpha);
     } else {
       throw new GdxRuntimeException(
@@ -510,25 +509,20 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
   public static int[] getTileIds(Element element, int width, int height) {
     Element data = element.getChildByName("data");
     String encoding = data.getAttribute("encoding", null);
-    if (encoding == null) {
+    if (encoding == null) { // no 'encoding' attribute means that the encoding is XML
       throw new GdxRuntimeException("Unsupported encoding (XML) for TMX Layer Data");
     }
     int[] ids = new int[width * height];
     if (encoding.equals("csv")) {
-      String text = Nullability.castToNonnull(data.getText(), "guards against null");
-      String[] array = text.split(",");
+      String[] array = data.getText().split(",");
       for (int i = 0; i < array.length; i++) ids[i] = (int) Long.parseLong(array[i].trim());
     } else {
       if (true)
         if (encoding.equals("base64")) {
           InputStream is = null;
           try {
-            String text = data.getText();
-            if (text == null) {
-              throw new GdxRuntimeException("Data text is null for Base64 encoding");
-            }
             String compression = data.getAttribute("compression", null);
-            byte[] bytes = Base64Coder.decode(text);
+            byte[] bytes = Base64Coder.decode(data.getText());
             if (compression == null) is = new ByteArrayInputStream(bytes);
             else if (compression.equals("gzip"))
               is =
@@ -567,6 +561,9 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
             StreamUtils.closeQuietly(is);
           }
         } else {
+          // any other value of 'encoding' is one we're not aware of, probably a feature of a future
+          // version of Tiled
+          // or another editor
           throw new GdxRuntimeException(
               "Unrecognised encoding (" + encoding + ") for TMX Layer Data");
         }
