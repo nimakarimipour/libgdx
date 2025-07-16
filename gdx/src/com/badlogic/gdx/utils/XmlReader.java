@@ -473,9 +473,11 @@ public class XmlReader {
   }
 
   protected void text(@Nullable String text) {
-    String existing = current.getText();
-    current.setText(existing != null ? existing + text : text);
-  }
+      if (current != null) {
+        String existing = current.getText();
+        current.setText(existing != null ? existing + text : text);
+      }
+    }
 
   protected void close() {
     root = elements.pop();
