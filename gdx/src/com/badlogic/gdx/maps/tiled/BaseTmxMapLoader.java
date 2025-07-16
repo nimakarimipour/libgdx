@@ -75,8 +75,10 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters>
   protected TiledMap map;
 
   public BaseTmxMapLoader(FileHandleResolver resolver) {
-    super(resolver);
-  }
+      super(resolver);
+      this.root = new Element("root", null);
+      this.map = new TiledMap();
+    }
 
   @Override
   public Array<AssetDescriptor> getDependencies(
