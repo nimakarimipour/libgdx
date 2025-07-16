@@ -50,10 +50,14 @@ public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.Musi
   }
 
   @Override
-  public void loadAsync(
-      AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
-    music = Gdx.audio.newMusic(file);
-  }
+    public void loadAsync(
+        AssetManager manager, String fileName, FileHandle file, @Nullable MusicParameter parameter) {
+      if (Gdx.audio != null) {
+        music = Gdx.audio.newMusic(file);
+      } else {
+        // Handle the case when Gdx.audio is null, e.g., log a warning or throw an exception
+      }
+    }
 
   @Nullable
   @Override
