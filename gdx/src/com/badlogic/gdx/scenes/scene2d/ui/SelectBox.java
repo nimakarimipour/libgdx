@@ -235,22 +235,26 @@ public class SelectBox<T> extends Widget implements Disableable {
         prefWidth = Math.max(prefWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
 
       ListStyle listStyle = style.listStyle;
-      ScrollPaneStyle scrollStyle = style.scrollStyle;
-      float scrollWidth =
-          maxItemWidth + listStyle.selection.getLeftWidth() + listStyle.selection.getRightWidth();
-      bg = scrollStyle.background;
-      if (bg != null)
-        scrollWidth =
-            Math.max(scrollWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
-      if (scrollPane == null || !scrollPane.disableY) {
-        scrollWidth +=
-            Math.max(
-                style.scrollStyle.vScroll != null ? style.scrollStyle.vScroll.getMinWidth() : 0,
-                style.scrollStyle.vScrollKnob != null
-                    ? style.scrollStyle.vScrollKnob.getMinWidth()
-                    : 0);
+
+      // Added null check to avoid NullPointerException
+      if (listStyle.selection != null) {
+        ScrollPaneStyle scrollStyle = style.scrollStyle;
+        float scrollWidth =
+            maxItemWidth + listStyle.selection.getLeftWidth() + listStyle.selection.getRightWidth();
+        bg = scrollStyle.background;
+        if (bg != null)
+          scrollWidth =
+              Math.max(scrollWidth + bg.getLeftWidth() + bg.getRightWidth(), bg.getMinWidth());
+        if (scrollPane == null || !scrollPane.disableY) {
+          scrollWidth +=
+              Math.max(
+                  style.scrollStyle.vScroll != null ? style.scrollStyle.vScroll.getMinWidth() : 0,
+                  style.scrollStyle.vScrollKnob != null
+                      ? style.scrollStyle.vScrollKnob.getMinWidth()
+                      : 0);
+        }
+        prefWidth = Math.max(prefWidth, scrollWidth);
       }
-      prefWidth = Math.max(prefWidth, scrollWidth);
     }
     layoutPool.free(layout);
   }

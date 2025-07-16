@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -183,6 +184,10 @@ public class List<T> extends Widget implements Cullable {
   }
 
   public void layout() {
+    if (style == null || style.font == null || style.selection == null) {
+      throw new IllegalArgumentException("Style, font, and selection cannot be null");
+    }
+
     BitmapFont font = style.font;
     Drawable selectedDrawable = style.selection;
 
@@ -223,6 +228,14 @@ public class List<T> extends Widget implements Cullable {
     Color fontColorSelected = style.fontColorSelected;
     Color fontColorUnselected = style.fontColorUnselected;
 
+    if (font == null) {
+      throw new NullPointerException("Font in style cannot be null.");
+    }
+
+    if (selectedDrawable == null) {
+      throw new NullPointerException("Selection drawable in style cannot be null.");
+    }
+
     Color color = getColor();
     batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
@@ -237,7 +250,9 @@ public class List<T> extends Widget implements Cullable {
       width -= leftWidth + background.getRightWidth();
     }
 
-    float textOffsetX = selectedDrawable.getLeftWidth(),
+    float
+        textOffsetX =
+            Nullability.castToNonnull(selectedDrawable, "null checked already").getLeftWidth(),
         textWidth = width - textOffsetX - selectedDrawable.getRightWidth();
     float textOffsetY = selectedDrawable.getTopHeight() - font.getDescent();
 
@@ -499,10 +514,10 @@ public class List<T> extends Widget implements Cullable {
    * @author Nathan Sweet
    */
   public static class ListStyle {
-    public BitmapFont font;
+    @Nullable public BitmapFont font;
     public Color fontColorSelected = new Color(1, 1, 1, 1);
     public Color fontColorUnselected = new Color(1, 1, 1, 1);
-    public Drawable selection;
+    @Nullable public Drawable selection;
     @Nullable public @Null Drawable down, over, background;
 
     public ListStyle() {}
