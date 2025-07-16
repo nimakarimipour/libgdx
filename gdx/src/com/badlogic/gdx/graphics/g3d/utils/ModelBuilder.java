@@ -117,11 +117,12 @@ public class ModelBuilder {
    * @return The node being created.
    */
   public Node node() {
-    final Node node = new Node();
-    node(node);
-    node.id = "node" + model.nodes.size;
-    return node;
-  }
+        if (model == null) throw new GdxRuntimeException("Call begin() first");
+        final Node node = new Node();
+        node(node);
+        node.id = "node" + model.nodes.size;
+        return node;
+    }
 
   /**
    * Adds the nodes of the specified model to a new node of the model being build. After this method
