@@ -1264,8 +1264,9 @@ public class ParticleEmitter {
     protected int frame;
 
     public Particle(@Nullable Sprite sprite) {
-      super(sprite);
-    }
+          super(sprite);
+          this.tint = new float[3]; // Initialize tint to avoid NullAway warning
+      }
   }
 
   public static class ParticleValue {
