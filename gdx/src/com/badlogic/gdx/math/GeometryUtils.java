@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.math;
 
+import edu.ucr.cs.riple.annotator.util.Nullability;
+
 /**
  * @author Nathan Sweet
  */
@@ -224,7 +226,8 @@ public final class GeometryUtils {
 
     float area = 0, x = 0, y = 0;
     int last = offset + count - 2;
-    float x1 = polygon[last], y1 = polygon[last + 1];
+    float x1 = Nullability.castToNonnull(polygon)[last],
+        y1 = Nullability.castToNonnull(polygon)[last + 1];
     for (int i = offset; i <= last; i += 2) {
       float x2 = polygon[i], y2 = polygon[i + 1];
       float a = x1 * y2 - x2 * y1;
@@ -249,7 +252,8 @@ public final class GeometryUtils {
   public static float polygonArea(float[] polygon, int offset, int count) {
     float area = 0;
     int last = offset + count - 2;
-    float x1 = polygon[last], y1 = polygon[last + 1];
+    float x1 = Nullability.castToNonnull(polygon)[last],
+        y1 = Nullability.castToNonnull(polygon)[last + 1];
     for (int i = offset; i <= last; i += 2) {
       float x2 = polygon[i], y2 = polygon[i + 1];
       area += x1 * y2 - x2 * y1;

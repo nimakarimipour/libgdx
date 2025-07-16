@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.math;
 
+import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -63,6 +64,7 @@ public class Polygon implements Shape2D {
    *
    * @return vertices scaled, rotated, and offset by the polygon position.
    */
+  @Nullable
   public float[] getTransformedVertices() {
     if (!dirty) return worldVertices;
     dirty = false;
@@ -193,7 +195,8 @@ public class Polygon implements Shape2D {
   /** Returns the area contained within the polygon. */
   public float area() {
     float[] vertices = getTransformedVertices();
-    return GeometryUtils.polygonArea(vertices, 0, vertices.length);
+    return GeometryUtils.polygonArea(
+        Nullability.castToNonnull(vertices, "ensures non-null"), 0, vertices.length);
   }
 
   public int getVertexCount() {
@@ -206,13 +209,19 @@ public class Polygon implements Shape2D {
   public Vector2 getVertex(int vertexNum, Vector2 pos) {
     if (vertexNum < 0 || vertexNum > getVertexCount())
       throw new IllegalArgumentException("the vertex " + vertexNum + " doesn't exist");
-    float[] vertices = this.getTransformedVertices();
+    float[] vertices =
+        Nullability.castToNonnull(
+            this.getTransformedVertices(), "always initialized before return");
     return pos.set(vertices[2 * vertexNum], vertices[2 * vertexNum + 1]);
   }
 
   public Vector2 getCentroid(Vector2 centroid) {
     float[] vertices = getTransformedVertices();
-    return GeometryUtils.polygonCentroid(vertices, 0, vertices.length, centroid);
+    return GeometryUtils.polygonCentroid(
+        Nullability.castToNonnull(vertices, "always initialized before use"),
+        0,
+        vertices.length,
+        centroid);
   }
 
   /**
@@ -226,7 +235,7 @@ public class Polygon implements Shape2D {
   public Rectangle getBoundingRectangle() {
     float[] vertices = getTransformedVertices();
 
-    float minX = vertices[0];
+    float minX = Nullability.castToNonnull(vertices, "always initialized if null")[0];
     float minY = vertices[1];
     float maxX = vertices[0];
     float maxY = vertices[1];
@@ -252,7 +261,8 @@ public class Polygon implements Shape2D {
   @Override
   public boolean contains(float x, float y) {
     final float[] vertices = getTransformedVertices();
-    final int numFloats = vertices.length;
+    final int numFloats =
+        Nullability.castToNonnull(vertices, "always initialized before used").length;
     int intersects = 0;
 
     for (int i = 0; i < numFloats; i += 2) {
