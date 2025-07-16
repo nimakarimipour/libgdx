@@ -524,8 +524,8 @@ public class Model implements Disposable {
    *     specified node.
    * @return The {@link Node} with the specified id, or null if not found.
    */
-  @Nullable
-  public Node getNode(@Nullable final String id, boolean recursive) {
+  
+  @Nullable public Node getNode(@Nullable final String id, boolean recursive) {
     return getNode(id, recursive, false);
   }
 
