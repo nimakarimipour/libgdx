@@ -95,43 +95,45 @@ public class TextureAtlas implements Disposable {
 
   /** Adds the textures and regions from the specified texture atlas data. */
   public void load(TextureAtlasData data) {
-      textures.ensureCapacity(data.pages.size);
-      for (Page page : data.pages) {
-        if (page.texture == null)
-          page.texture = new Texture(page.textureFile, page.format, page.useMipMaps);
-        page.texture.setFilter(page.minFilter, page.magFilter);
-        page.texture.setWrap(page.uWrap, page.vWrap);
-        textures.add(page.texture);
-      }
-  
-      regions.ensureCapacity(data.regions.size);
-      for (Region region : data.regions) {
-        AtlasRegion atlasRegion =
-            new AtlasRegion(
-                region.page.texture,
-                region.left,
-                region.top, //
-                region.rotate ? region.height : region.width, //
-                region.rotate ? region.width : region.height);
-        atlasRegion.index = region.index;
-        if (region.name != null) {
-          atlasRegion.name = region.name;
-        } else {
-          // Provide a default name or handle the situation where region.name is null
-          atlasRegion.name = "defaultName";
+        textures.ensureCapacity(data.pages.size);
+        for (Page page : data.pages) {
+          if (page.texture == null)
+            page.texture = new Texture(page.textureFile, page.format, page.useMipMaps);
+          page.texture.setFilter(page.minFilter, page.magFilter);
+          page.texture.setWrap(page.uWrap, page.vWrap);
+          textures.add(page.texture);
         }
-        atlasRegion.offsetX = region.offsetX;
-        atlasRegion.offsetY = region.offsetY;
-        atlasRegion.originalHeight = region.originalHeight;
-        atlasRegion.originalWidth = region.originalWidth;
-        atlasRegion.rotate = region.rotate;
-        atlasRegion.degrees = region.degrees;
-        atlasRegion.names = region.names;
-        atlasRegion.values = region.values;
-        if (region.flip) atlasRegion.flip(false, true);
-        regions.add(atlasRegion);
+    
+        regions.ensureCapacity(data.regions.size);
+        for (Region region : data.regions) {
+          if (region.page == null || region.page.texture == null) {
+            continue; // Skip processing this region if its page or texture is null
+          }
+          AtlasRegion atlasRegion =
+              new AtlasRegion(
+                  region.page.texture,
+                  region.left,
+                  region.top, //
+                  region.rotate ? region.height : region.width, //
+                  region.rotate ? region.width : region.height);
+          atlasRegion.index = region.index;
+          if (region.name != null) {
+            atlasRegion.name = region.name;
+          } else {
+            atlasRegion.name = "defaultName";
+          }
+          atlasRegion.offsetX = region.offsetX;
+          atlasRegion.offsetY = region.offsetY;
+          atlasRegion.originalHeight = region.originalHeight;
+          atlasRegion.originalWidth = region.originalWidth;
+          atlasRegion.rotate = region.rotate;
+          atlasRegion.degrees = region.degrees;
+          atlasRegion.names = region.names;
+          atlasRegion.values = region.values;
+          if (region.flip) atlasRegion.flip(false, true);
+          regions.add(atlasRegion);
+        }
       }
-    }
 
   /**
    * Adds a region to the atlas. The specified texture will be disposed when the atlas is disposed.
