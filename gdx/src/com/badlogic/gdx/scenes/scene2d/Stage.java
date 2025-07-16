@@ -47,7 +47,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import edu.ucr.cs.riple.annotator.util.Nullability;
 import javax.annotation.Nullable;
 
 /**
@@ -345,12 +344,10 @@ public class Stage extends InputAdapter implements Disposable {
     for (int i = 0, n = touchFocuses.size; i < n; i++) {
       TouchFocus focus = focuses[i];
       if (focus.pointer != pointer) continue;
-      if (!touchFocuses.contains(focus, true)) continue;
-      if (focus.listener == null) continue;
+      if (!touchFocuses.contains(focus, true)) continue; // Touch focus already gone.
       event.setTarget(focus.target);
       event.setListenerActor(focus.listenerActor);
-      if (Nullability.castToNonnull(focus.listener, "ensured non-null listener").handle(event))
-        event.handle();
+      if (focus.listener.handle(event)) event.handle();
     }
     touchFocuses.end();
 
@@ -386,12 +383,10 @@ public class Stage extends InputAdapter implements Disposable {
     for (int i = 0, n = touchFocuses.size; i < n; i++) {
       TouchFocus focus = focuses[i];
       if (focus.pointer != pointer || focus.button != button) continue;
-      if (!touchFocuses.removeValue(focus, true)) continue;
+      if (!touchFocuses.removeValue(focus, true)) continue; // Touch focus already gone.
       event.setTarget(focus.target);
       event.setListenerActor(focus.listenerActor);
-      if (focus.listener != null
-          && Nullability.castToNonnull(focus.listener, "null check pass").handle(event))
-        event.handle();
+      if (focus.listener.handle(event)) event.handle();
       Pools.free(focus);
     }
     touchFocuses.end();
@@ -547,13 +542,16 @@ public class Stage extends InputAdapter implements Disposable {
    * @see #cancelTouchFocus()
    */
   public void cancelTouchFocus(Actor listenerActor) {
+    // Cancel all current touch focuses for the specified listener, allowing for concurrent
+    // modification, and never cancel the
+    // same focus twice.
     InputEvent event = null;
     SnapshotArray<TouchFocus> touchFocuses = this.touchFocuses;
     TouchFocus[] items = touchFocuses.begin();
     for (int i = 0, n = touchFocuses.size; i < n; i++) {
       TouchFocus focus = items[i];
-      if (focus.listenerActor != listenerActor || focus.listener == null) continue;
-      if (!touchFocuses.removeValue(focus, true)) continue;
+      if (focus.listenerActor != listenerActor) continue;
+      if (!touchFocuses.removeValue(focus, true)) continue; // Touch focus already gone.
 
       if (event == null) {
         event = Pools.obtain(InputEvent.class);
@@ -567,9 +565,9 @@ public class Stage extends InputAdapter implements Disposable {
       event.setListenerActor(focus.listenerActor);
       event.setPointer(focus.pointer);
       event.setButton(focus.button);
-      if (focus.listener != null) {
-        Nullability.castToNonnull(focus.listener, "checked to be nonnull").handle(event);
-      }
+      focus.listener.handle(event);
+      // Cannot return TouchFocus to pool, as it may still be in use (eg if cancelTouchFocus is
+      // called from touchDragged).
     }
     touchFocuses.end();
 
@@ -600,20 +598,19 @@ public class Stage extends InputAdapter implements Disposable {
     event.setStageY(Integer.MIN_VALUE);
 
     // Cancel all current touch focuses except for the specified listener, allowing for concurrent
-    // modification, and never cancel the same focus twice.
+    // modification, and never
+    // cancel the same focus twice.
     SnapshotArray<TouchFocus> touchFocuses = this.touchFocuses;
     TouchFocus[] items = touchFocuses.begin();
     for (int i = 0, n = touchFocuses.size; i < n; i++) {
       TouchFocus focus = items[i];
       if (focus.listener == exceptListener && focus.listenerActor == exceptActor) continue;
       if (!touchFocuses.removeValue(focus, true)) continue; // Touch focus already gone.
-      if (focus.listener != null) { // Added null check
-        event.setTarget(focus.target);
-        event.setListenerActor(focus.listenerActor);
-        event.setPointer(focus.pointer);
-        event.setButton(focus.button);
-        focus.listener.handle(event);
-      }
+      event.setTarget(focus.target);
+      event.setListenerActor(focus.listenerActor);
+      event.setPointer(focus.pointer);
+      event.setButton(focus.button);
+      focus.listener.handle(event);
       // Cannot return TouchFocus to pool, as it may still be in use (eg if cancelTouchFocus is
       // called from touchDragged).
     }
@@ -1016,7 +1013,7 @@ public class Stage extends InputAdapter implements Disposable {
    * @author Nathan Sweet
    */
   public static final class TouchFocus implements Poolable {
-    @Nullable EventListener listener;
+    EventListener listener;
     @Nullable Actor listenerActor, target;
     int pointer, button;
 
