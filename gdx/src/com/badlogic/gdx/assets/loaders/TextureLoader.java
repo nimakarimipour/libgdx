@@ -53,51 +53,51 @@ public class TextureLoader
   }
 
   @Override
-  public void loadAsync(
-      AssetManager manager,
-      String fileName,
-      FileHandle file,
-      @Nullable TextureParameter parameter) {
-    info.filename = fileName;
-    if (parameter == null || parameter.textureData == null) {
-      Format format = null;
-      boolean genMipMaps = false;
-      info.texture = null;
-
-      if (parameter != null) {
-        format = parameter.format;
-        genMipMaps = parameter.genMipMaps;
+    public void loadAsync(
+        AssetManager manager,
+        String fileName,
+        FileHandle file,
+        @Nullable TextureParameter parameter) {
+      info.filename = fileName;
+      if (parameter == null || parameter.textureData == null) {
+        Format format = null;
+        boolean genMipMaps = false;
+        info.texture = null;
+  
+        if (parameter != null) {
+          format = parameter.format;
+          genMipMaps = parameter.genMipMaps;
+          info.texture = parameter.texture;
+        }
+  
+        info.data = TextureData.Factory.loadFromFile(file, format, genMipMaps);
+      } else {
+        info.data = parameter.textureData;
         info.texture = parameter.texture;
       }
+      
+      if (info.data != null && !info.data.isPrepared()) info.data.prepare();
+    }
 
-      info.data = TextureData.Factory.loadFromFile(file, format, genMipMaps);
-    } else {
-      info.data = parameter.textureData;
-      info.texture = parameter.texture;
+  @Nullable @Override
+    public Texture loadSync(
+        AssetManager manager,
+        String fileName,
+        FileHandle file,
+         @Nullable TextureParameter parameter) {
+      if (info == null || info.data == null) return null;
+      Texture texture = info.texture;
+      if (texture != null) {
+        texture.load(info.data);
+      } else {
+        texture = new Texture(info.data);
+      }
+      if (parameter != null) {
+        texture.setFilter(parameter.minFilter, parameter.magFilter);
+        texture.setWrap(parameter.wrapU, parameter.wrapV);
+      }
+      return texture;
     }
-    if (!info.data.isPrepared()) info.data.prepare();
-  }
-
-  @Nullable
-  @Override
-  public Texture loadSync(
-      AssetManager manager,
-      String fileName,
-      FileHandle file,
-      @Nullable TextureParameter parameter) {
-    if (info == null) return null;
-    Texture texture = info.texture;
-    if (texture != null) {
-      texture.load(info.data);
-    } else {
-      texture = new Texture(info.data);
-    }
-    if (parameter != null) {
-      texture.setFilter(parameter.minFilter, parameter.magFilter);
-      texture.setWrap(parameter.wrapU, parameter.wrapV);
-    }
-    return texture;
-  }
 
   @Nullable
   @Override
