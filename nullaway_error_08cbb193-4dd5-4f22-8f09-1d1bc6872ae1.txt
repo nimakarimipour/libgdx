@@ -1,0 +1,4 @@
+/home/nima/Desktop/auto-fix-test/libgdx/gdx/src/com/badlogic/gdx/utils/Json.java:260: warning: [removal] AccessControlException in java.security has been deprecated and marked for removal
+        } catch (AccessControlException ex) {
+                 ^
+Note: Some input files use or override a deprecated API.

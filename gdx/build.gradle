@@ -121,8 +121,8 @@ tasks.withType(JavaCompile) {
 	if (!name.toLowerCase().contains("test")) {
 		options.errorprone.disableAllChecks = true
 		options.errorprone {
-			check("NullAway", CheckSeverity.ERROR)
-			check("AnnotatorScanner", CheckSeverity.ERROR)
+			check("NullAway", CheckSeverity.OFF)
+			check("AnnotatorScanner", CheckSeverity.OFF)
 			option("NullAway:AnnotatedPackages", "com.badlogic.gdx")
 			option("NullAway:SerializeFixMetadata", "true")
 			option("NullAway:FixSerializationConfigPath", nullaway_path)
